@@ -1,12 +1,12 @@
 import "server-only";
 
-import { defaultRun, reviewRun } from "../../../../.claude/scripts/management/lib/review-cadence.mjs";
+import { defaultRun, reviewRun } from "@stats47/ops/management/review-cadence.mjs";
 import { projectRoot } from "./project-root";
 import { wrap } from "./state-io";
 
 /**
  * 週次・月次レビューと計画の期限・本文の契約・申し送りの振り分け・配線 (読み取り専用)。
- * ★判定は自前で持たず `.claude/scripts/management/lib/review-cadence.mjs` を共有する。check-review-cadence.mjs・
+ * ★判定は自前で持たず `packages/ops/src/management/review-cadence.mjs` を共有する。check-review-cadence.mjs・
  *   docs:check (DG084)・review-cadence-guard.yml・週次メトリクス Issue と同じ実体なので、画面と CI の判定がずれない。
  * 正本は .claude/config/review-wiring.json。
  */

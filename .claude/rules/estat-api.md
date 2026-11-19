@@ -17,7 +17,7 @@ paths:
   - 全年度取得→メモリフィルタの方がキャッシュヒット率が高く、API 呼び出し回数を最小化できる
 - **`cdArea`（地域コード指定）を使わない。** 全都道府県を一括取得し、`areaCode` でフィルタする。理由は同上（47都道府県でキャッシュを共有）
   - 例外: 表の写し (`estat-table-snapshot.ts`) は、地域と年以外の軸で最も細かく分けても 1 ファイル 5 万行を超える表に限り、都道府県を割らない `cdAreaFrom`/`cdAreaTo` の範囲で要求を分ける (2026-11-15 オーナー決定。範囲は `planTablePartitions` の `areaRanges` が決め、キーは `area=<from>-<to>`)
-- **地域コードは5桁（`01000`〜`47000`）に統一。** 2桁→5桁の正規化は不要な設計とする
+- **地域コードは5桁（`01000`〜`47000`）に統一。** 2桁→5桁の正規化は不要な設計とする。変換・判定・全国コード・県の数が要るときは `@stats47/area` の正本 (`packages/area/src/utils/area-code.ts`: `to5DigitPrefCode`・`to2DigitPrefCode`・`isPrefectureAreaCode`・`NATIONAL_AREA_CODE`・`PREFECTURE_COUNT` など) を使い、`slice(0, 2)`・`` `${pref}000` ``・`"00000"`・`47` を書かない (`check-area-year-entrypoint.mjs` が数える)
 
 ## e-Stat に「無い」データ（再調査防止・2026-06 確認）
 

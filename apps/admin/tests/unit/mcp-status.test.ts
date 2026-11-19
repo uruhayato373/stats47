@@ -4,6 +4,7 @@ import path from "node:path";
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
 /**
@@ -15,6 +16,10 @@ import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
 const REPO_ROOT = path.resolve(__dirname, "../../../..");
 const SECRET = "sk-SECRET-VALUE";
+const SETTINGS = datasetPath("agent.settings");
+const SETTINGS_LOCAL = datasetPath("agent.settings-local");
+const MCP_LEDGER = datasetPath("agent.mcp-servers");
+const EXAMPLE_RULE = `${datasetDir("agent.rules")}/example.md`;
 
 async function load(root: string) {
   process.env.STATS47_PROJECT_ROOT = root;
@@ -50,10 +55,10 @@ function fixture() {
           shadowed: { type: "stdio", command: "npx", args: ["project-definition"] },
         },
       }),
-      ".claude/settings.json": JSON.stringify({ enabledMcpjsonServers: ["approved", "rejected", "shadowed"] }),
-      ".claude/settings.local.json": JSON.stringify({ disabledMcpjsonServers: ["rejected"] }),
-      ".claude/config/mcp-servers.json": JSON.stringify({
-        servers: { approved: { purpose: "確認用の用途", usedBy: [".claude/rules/example.md"] } },
+      [SETTINGS]: JSON.stringify({ enabledMcpjsonServers: ["approved", "rejected", "shadowed"] }),
+      [SETTINGS_LOCAL]: JSON.stringify({ disabledMcpjsonServers: ["rejected"] }),
+      [MCP_LEDGER]: JSON.stringify({
+        servers: { approved: { purpose: "確認用の用途", usedBy: [EXAMPLE_RULE] } },
       }),
     },
   });
@@ -92,11 +97,11 @@ describe("mcpServerRows (設定ファイルから読む一覧)", () => {
     const f = fixture();
     const { mcpServerRows } = await load(f.root);
     const state = Object.fromEntries(mcpServerRows({ home: f.home }).map((r) => [r.name, [r.state, r.stateSource]]));
-    expect(state.approved).toEqual(["enabled", ".claude/settings.json の enabledMcpjsonServers"]);
+    expect(state.approved).toEqual(["enabled", `${SETTINGS} の enabledMcpjsonServers`]);
     // .mcp.json にあるが、どの設定ファイルも承認していない
     expect(state.waiting).toEqual(["pending", "どの設定ファイルの enabledMcpjsonServers にも無い"]);
     // 承認があっても、この PC の settings.local.json の拒否が勝つ
-    expect(state.rejected).toEqual(["rejected", ".claude/settings.local.json の disabledMcpjsonServers"]);
+    expect(state.rejected).toEqual(["rejected", `${SETTINGS_LOCAL} の disabledMcpjsonServers`]);
     // user の定義は承認が要らない
     expect(state.docs).toEqual(["enabled", "~/.claude.json の定義 (承認は要らない)"]);
     // /mcp でこのプロジェクトだけ切ったもの
@@ -105,10 +110,10 @@ describe("mcpServerRows (設定ファイルから読む一覧)", () => {
 
   it("enableAllProjectMcpServers が true なら .mcp.json の全部を承認済みにする", async () => {
     const f = fixture();
-    fs.writeFileSync(path.join(f.root, ".claude/settings.local.json"), JSON.stringify({ enableAllProjectMcpServers: true }));
+    fs.writeFileSync(path.join(f.root, SETTINGS_LOCAL), JSON.stringify({ enableAllProjectMcpServers: true }));
     const { mcpServerRows } = await load(f.root);
     const waiting = mcpServerRows({ home: f.home }).find((r) => r.name === "waiting");
-    expect(waiting).toMatchObject({ state: "enabled", stateSource: ".claude/settings.local.json の enableAllProjectMcpServers" });
+    expect(waiting).toMatchObject({ state: "enabled", stateSource: `${SETTINGS_LOCAL} の enableAllProjectMcpServers` });
   });
 
   it("認証方式とトークンの有無を返すが、値は 1 つも返さない (引数・URL の query・ヘッダー・環境変数)", async () => {
@@ -136,7 +141,7 @@ describe("mcpServerRows (設定ファイルから読む一覧)", () => {
     const f = fixture();
     const { mcpServerRows } = await load(f.root);
     const by = Object.fromEntries(mcpServerRows({ home: f.home }).map((r) => [r.name, r]));
-    expect(by.approved).toMatchObject({ purpose: "確認用の用途", usedBy: [".claude/rules/example.md"] });
+    expect(by.approved).toMatchObject({ purpose: "確認用の用途", usedBy: [EXAMPLE_RULE] });
     expect(by.docs).toMatchObject({ purpose: null, usedBy: [] });
   });
 
@@ -144,7 +149,7 @@ describe("mcpServerRows (設定ファイルから読む一覧)", () => {
     root = makeFixtureRoot({
       stateFiles: {
         ".mcp.json": JSON.stringify({ mcpServers: { only: { type: "stdio", command: "node", args: ["a.mjs"] } } }),
-        ".claude/settings.json": JSON.stringify({ enabledMcpjsonServers: ["only"] }),
+        [SETTINGS]: JSON.stringify({ enabledMcpjsonServers: ["only"] }),
       },
     });
     home = makeHome(null);
@@ -225,7 +230,7 @@ describe("mcpStatus (一覧 + 接続確認)", () => {
 });
 
 describe("正本 .claude/config/mcp-servers.json (用途と使う場所)", () => {
-  const ledger = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, ".claude/config/mcp-servers.json"), "utf8")) as {
+  const ledger = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, MCP_LEDGER), "utf8")) as {
     servers: Record<string, { purpose: string; usedBy: string[] }>;
   };
 

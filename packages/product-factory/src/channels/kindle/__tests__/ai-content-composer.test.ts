@@ -6,7 +6,7 @@
  *   ② 実データの範囲外・漢数字は**採用しない** (捏造を書籍に載せない)
  *   ②が無いと「全フィールド採用」を返すだけの無検査コンポーザに化ける。
  *
- * 判定は `.claude/scripts/ai-content/lib/number-audit.mjs` を import して
+ * 判定は `packages/ai-content/src/audit/number-audit.mjs` を import して
  * ai-content 側とまったく同じ規則を使う。ここで独自の閾値を作らない。
  */
 import { describe, it, expect } from "vitest";

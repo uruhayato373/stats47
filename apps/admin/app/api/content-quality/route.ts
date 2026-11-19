@@ -3,7 +3,7 @@ import { qualityOverview } from '@/lib/server/content-quality';
 import { projectRoot } from '@/lib/server/project-root';
 import { jsonResponse } from '@/lib/server/http';
 import { workspaceJson, workspaceError } from '@/lib/server/workspace-request';
-import { saveReview } from '../../../../../.claude/scripts/media/lib/workspace.mjs';
+import { saveReview } from '@stats47/ops/media/workspace.mjs';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 const check = z.enum(['unchecked', 'pass', 'issue', 'na']);

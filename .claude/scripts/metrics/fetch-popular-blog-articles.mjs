@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url";
 
 import { datasetDir } from "../../../config/datasets.mjs";
 import { PROJECT_ROOT } from "./lib/auth.mjs";
-import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient } from "../lib/google-client.cjs";
 
 export const POPULAR_ARTICLES_PATH = `${datasetDir("blog.operations")}/popular-articles.json`;

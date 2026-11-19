@@ -19,7 +19,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { datasetPath } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 export const RAKUTEN_RESULTS_PATH = datasetPath("rakuten.results");

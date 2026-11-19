@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { SITE_ORIGIN } from "../../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";
 import { noteInboundUrl } from "../../../../config/inbound-utm.mjs";
 
 const LIB_DIR = dirname(fileURLToPath(import.meta.url));

@@ -25,7 +25,7 @@ import { fileURLToPath } from "node:url";
 
 import { KAKEI_ANALYSES } from "@stats47/data-configs";
 
-import { readMetricGrains } from "../../../../.claude/scripts/issues/issue-data-grains.mjs";
+import { readMetricGrains } from "@stats47/ops/issues/issue-data-grains.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { METRIC_DEFINITIONS_DIR } from "../../../../config/paths.mjs";
 import { isClaudeCliAlias, type ClaudeCliAlias } from "../services/claude-cli-output";

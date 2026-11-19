@@ -12,7 +12,7 @@ primary_agent: affiliate-manager
 > - **ベースライン期間**: 再開後 4 週 (2026-W42〜W45 = 10-11〜11-07) は配置を変えない。表示の不具合 (0 幅・TagError 等) の修正だけ行う。
 >   最初の判定は W45 の週次計測 (2026-11-13 実行) のあとで、施策 ID は `ADSENSE-PLACEMENT-01`。
 >   2026-10-13 に改善台帳 `improvements.md` へ登録済み (デプロイ日 2026-10-11)。週次 workflow の前後比較 (`impact-LATEST.md`) がこの行を読む。
-> - **主指標**: KPI `ad-yield` = AdSense 確定 7 日 × 4 週の収益 ÷ GA4 Japan PV 28 日 × 1,000 (`.claude/scripts/metrics/lib/adsense-revenue.mjs`)。
+> - **主指標**: KPI `ad-yield` = AdSense 確定 7 日 × 4 週の収益 ÷ GA4 Japan PV 28 日 × 1,000 (`packages/ops/src/metrics/adsense-revenue.mjs`)。
 >   AdSense 自身の page views を分母にしない (GA4 の 54〜78% しか数えていない)。配置の判断はユニット別の収益・視認率 (`history-units.csv`) で行う。
 > - **週次収益 (NSM)**: 週次 Issue の「週次収益 (NSM)」節が AdSense の確定 7 日を出す。再開後に行が無い週は「判定不能」と書き、0 円にしない。
 > - **旧記録との比較**: 2026-08-29 以前の snapshot と improvement-log の旧施策は、旧アカウント・自動広告ありの時期のもの。手動枠だけの今とは条件が違うので、

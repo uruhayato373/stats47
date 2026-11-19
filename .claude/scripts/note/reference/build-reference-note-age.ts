@@ -3,7 +3,7 @@
 import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../../packages/estat-api/src/ingest.js";
 import { extractYearCode } from "@stats47/estat-api/api";
 // Compatibility: malformed time prefixes retain the previous slice result.
-import { rankingR2Key } from '../../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「世帯主の年齢によって家計がどう違うか」を問うもの (kakei-marketing a04-02) を、
  * 家計調査の世帯主の年齢階級別 (全国・二人以上の世帯・e-Stat 金額 0003348238 / 数量 0003348237) から
@@ -16,9 +16,9 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
 import { writeReferenceFigure } from './lib/figure-files';
-import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL } from '../../../../packages/types/mirror/site-config.cjs';
 const ESTAT_STATS_DATA_URL = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
-import { loadAnalyses } from '../../source-vault/lib/reference-expansion.mjs';
+import { loadAnalyses } from '../../../../packages/ops/src/source-vault/lib/reference-expansion.mjs';
 import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
 
 const ROOT = path.resolve(__dirname, '../../../..');

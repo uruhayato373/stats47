@@ -12,7 +12,7 @@ tags: [search-growth, weekly, gsc, ga4, measurement]
 
 横断的な技術改善は「計測 → 診断 → 承認 → 実行 → 14/28/56日判定」、キーワード順位の改善は末尾の確定7日サイクルで回す。順位差を因果的なeffectラベルへ自動変換しない。
 
-- 期間導出の機械SSOT: `.claude/scripts/metrics/lib/periods.mjs`
+- 期間導出の機械SSOT: `packages/ops/src/metrics/periods.mjs`
 - 集計・履歴・LATEST描画: `.claude/scripts/metrics/lib/weekly-summary.mjs`
 - candidate・承認操作: `.claude/scripts/search-growth/lib/triage.mjs`
 - 運用入口: `../SKILL.md`

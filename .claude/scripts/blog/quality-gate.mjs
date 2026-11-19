@@ -38,9 +38,9 @@ import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
 import { lintRelatedLinkNames } from '../lib/related-link-lint.mjs';
 import { lintFigureYearMention } from '../lib/figure-year-lint.mjs';
 import { lintUnregisteredTags } from '../lib/blog-tag-lint.mjs';
-import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
+import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../../../apps/web/scripts/lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
-import { chartSourceShapeErrors } from '../lib/chart-source-schema.mjs';
+import { chartSourceShapeErrors } from '../../../packages/svg-builder/src/lint/chart-source-schema.mjs';
 import { lintMixedYearTitle } from '../lib/title-year-lint.mjs';
 import { lintRegionClaims } from '../lib/region-claim-lint.mjs';
 import { TITLE_PROMISE_WARNING_RULES, lintTitlePromises } from '../lib/title-promise-lint.mjs';
@@ -59,7 +59,7 @@ import {
   lintScatterQuality,
   lintTileGridQuality,
   lintDarkPair,
-} from '../lib/svg-lint.mjs';
+} from '../../../packages/svg-builder/src/lint/svg-lint.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

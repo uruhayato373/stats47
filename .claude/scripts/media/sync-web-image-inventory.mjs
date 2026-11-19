@@ -1,16 +1,16 @@
 #!/usr/bin/env node
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /** Rebuild the image index from published page catalogs, exact generation manifests and article references. */
 import fs from 'node:fs';
 import path from 'node:path';
 import { datasetDir } from '../../../config/datasets.mjs';
-import { ROOT,sha,safeName } from './lib/workspace.mjs';
-import { MATERIAL_ROOTS,readWebInventory,writeWebInventory,publicRef,imageReferences,inlineSvgReferences,sourceReferences } from './lib/web-inventory.mjs';
-import { SVG_TEMPLATE } from './lib/catalog.mjs';
-import { classify,inspectSvg } from '../lib/svg-classify.mjs';
-import { PREF_SILHOUETTE_VARIANTS,OGP_TABS } from '../lib/gallery-collectors.mjs';
-import { fetchPublicMediaSource } from '../note/lib/cover-storage.mjs';
-import { R2_PUBLIC_BASE_URL as R2,SITE_ORIGIN as SITE } from '../lib/site-config.cjs';
+import { ROOT,sha,safeName } from '../../../packages/ops/src/media/workspace.mjs';
+import { MATERIAL_ROOTS,readWebInventory,writeWebInventory,publicRef,imageReferences,inlineSvgReferences,sourceReferences } from '../../../packages/ops/src/media/web-inventory.mjs';
+import { SVG_TEMPLATE } from '../../../packages/ops/src/media/catalog.mjs';
+import { classify,inspectSvg } from '../../../packages/ops/src/media/svg-classify.mjs';
+import { PREF_SILHOUETTE_VARIANTS,OGP_TABS } from '../../../packages/ops/src/media/gallery-collectors.mjs';
+import { fetchPublicMediaSource } from '../../../packages/ops/src/note/cover-storage.mjs';
+import { R2_PUBLIC_BASE_URL as R2,SITE_ORIGIN as SITE } from '../../../packages/types/mirror/site-config.cjs';
 const args=process.argv.slice(2);
 if(args.some(a=>!['--apply','--refresh','--all'].includes(a)))throw Error('Use --all [--refresh] [--apply]');
 if(!args.includes('--all'))throw Error('--all is required; this inventory never silently samples.');

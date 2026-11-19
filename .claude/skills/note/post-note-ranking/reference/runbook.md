@@ -450,7 +450,7 @@ docs/31 は git に何も置かない作業場で、`save` が読み戻した SH
 # 1. 台帳に下書きレコードを足す (vertical は stats47-note。書き込みは article-ledger.mjs 経由。
 #    magazine は data/note/magazines.json の s47-* カテゴリマガジンのキー)
 node --input-type=module -e '
-import { updateArticleLedger } from "./.claude/scripts/note/lib/article-ledger.mjs";
+import { updateArticleLedger } from "./packages/ops/src/note/article-ledger.mjs";
 updateArticleLedger((l) => { l.articles.push({ key: "a-<RANKING_KEY>", vertical: "stats47-note", series: "A",
   title: "<title>", magazine: "<s47-マガジン>", isPaid: false, status: "draft",
   r2Path: "note/stats47-note/a-<RANKING_KEY>", body: { store: "r2-public", manifest: null } }); });'

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Official prefectural public-property stock; only --write-local stages canonical values. */
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -13,7 +13,7 @@ const root = process.cwd();
 const requireRepo = createRequire(resolve(root, "package.json"));
 const ExcelJS = requireRepo("exceljs");
 const { parse: parseCsv } = requireRepo("csv-parse/sync");
-const prefs = requireRepo("./.claude/scripts/lib/prefectures.cjs").PREFECTURES;
+const prefs = requireRepo("./packages/area/mirror/prefectures.cjs").PREFECTURES;
 const sum = (xs) => xs.reduce((a, b) => a + b, 0);
 export const sha = (body) => createHash("sha256").update(body).digest("hex");
 export const HEADERS = [

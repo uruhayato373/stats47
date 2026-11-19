@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { datasetDir } from "../../../../config/datasets.mjs";
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
 /**
@@ -164,7 +165,7 @@ describe("todo server (v3-unified)", () => {
       ["WAIT-TIME-01", "2026-11", "2026-11-20", ["時期"]],
       ["WAIT-OBS-01", "2026-12", "2026-12-15", ["観測"]],
     ]);
-    expect(annual[0]).toMatchObject({ tier: null, layerLabel: "年間計画", path: ".claude/todo/annual.md" });
+    expect(annual[0]).toMatchObject({ tier: null, layerLabel: "年間計画", path: `${datasetDir("agent.todo")}/annual.md` });
     expect(annual[0].line).toBe(ANNUAL_MD.split("\n").indexOf("### [WAIT-TIME-01] 公表を待つ") + 1);
     const layer = b.layers.find((l) => l.id === "annual");
     expect(layer).toMatchObject({ exists: true, count: 2, updated: "2026-11-14" });

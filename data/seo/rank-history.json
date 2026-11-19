@@ -290,6 +290,11 @@
       "date": "2026-11-13",
       "file": "data/seo/rank-history/2026-11-13.json",
       "sha256": "ad37944d2972829546710f715541e44f5f265139dd9b3d66d02b864adca6d13f"
+    },
+    {
+      "date": "2026-11-19",
+      "file": "data/seo/rank-history/2026-11-19.json",
+      "sha256": "83bb0fa463e50c27c45f2923c20b556ac1199b65b2270c3c3ac00c05b1c2921e"
     }
   ]
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
@@ -7,7 +7,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PREF_NAMES, PREF_AREA_CODES } from "../lib/prefectures.cjs";
+import { PREF_NAMES, PREF_AREA_CODES } from "../../../packages/area/mirror/prefectures.cjs";
 import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
 const PDF_URL = "https://www.mext.go.jp/content/20260525-mxt_kyokoku-000049811_03.pdf";

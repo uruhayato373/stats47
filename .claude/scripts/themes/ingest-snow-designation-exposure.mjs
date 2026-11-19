@@ -4,7 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
-import { PREF_AREA_CODES } from '../lib/prefectures.cjs';
+import { PREF_AREA_CODES } from '../../../packages/area/mirror/prefectures.cjs';
 
 const args = process.argv.slice(2),
   flag = (key) => args.includes(key),

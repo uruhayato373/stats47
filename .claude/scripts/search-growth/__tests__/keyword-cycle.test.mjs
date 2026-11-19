@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { jstDateOf, resolvePeriods, addDays } from '../../metrics/lib/periods.mjs';
+import { jstDateOf, resolvePeriods, addDays } from '../../../../packages/ops/src/metrics/periods.mjs';
 import { reviewDue, selectKeyword, recordDeployment, validateSnapshot } from '../lib/keyword-cycle.mjs';
 import { appendHistory, runCycle, pageFragment, editableFile } from '../keyword-cycle.mjs';
 import { applyTextPatches, validateReview } from '../keyword-review.mjs';

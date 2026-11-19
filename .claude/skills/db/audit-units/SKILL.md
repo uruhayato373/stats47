@@ -109,6 +109,6 @@ npx tsx .claude/scripts/blog/regenerate-tile-maps.ts   # dry-run。matchRate が
 ## 関連
 
 - 正典: `.claude/rules/unit-semantics-standards.md`
-- 実装: `packages/data-configs/src/unit/unit-semantics.ts` (正典) / `.claude/scripts/lib/unit-semantics.mjs` (鏡)
+- 実装: `packages/data-configs/src/unit/unit-semantics.ts` (正典) / `packages/data-configs/mirror/unit-semantics.mjs` (鏡)
 - 数値の書き方 (本文側): `.claude/rules/blog-quality-standards.md`
 - 実証ベース判定: `.claude/rules/evidence-based-judgment.md`

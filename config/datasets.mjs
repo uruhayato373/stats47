@@ -12,12 +12,15 @@
  *   domain  data/business/domains.json の領域 id
  *   target  本来の置き場 (TARGETS)。path の現在地と食い違う行が、data/ への移行 (手順 2) の対象
  *   opts    schema: 形状契約 (JSON Schema) のパス。kind が master / ledger / config で path が .json の行は必須。それ以外の kind も
- *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も .claude/scripts/lib/dataset-shape.mjs で書く前に検証)
+ *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も packages/ops/src/datasets/dataset-shape.mjs で書く前に検証)
  *           retain: 日付付きファイルの寿命 (.claude/scripts/lib/prune-state-snapshots.mjs の RETENTION_POLICIES の名前。
  *                   数値はそちらだけに置く) / planned: まだ 1 件も無い (追跡ファイルができたら外す。check-datasets が落とす)
  *           transient: CI が消費して消す依頼・公開待ちの outbox。普段は 0 件で push の直後だけある (件数を問わない。planned と併用しない)
  *           r2State: 正本は private R2 のこの prefix。手元は git 管理外の live/ に置く (npm run media:state:pull / push)。
  *                    git の追跡ファイルに当たらなくてよい (2026-10-18 オーナー判断: 画像まわりの派生データは R2)
+ *           external: GOVERNED の外にある .claude の運用資産 (todo・memory・agents・skills・設定)。管理画面が表示のために読む置き場を
+ *                   id で引けるようにする行。追跡ファイルへの当たり (1 件以上) だけ検査する。kind は agent-asset
+ *           untracked: external のうち端末ごとの git 管理外ファイル (settings.local.json)。当たりを要求しない
  *           refs:   この台帳の ID が指す先 (外部キー相当。2026-10-26)。下の「REFS の書き方」
  *
  * 検査は `npm run check-datasets` (.claude/scripts/lib/check-datasets.mjs)。GOVERNED に当たる追跡ファイルは
@@ -41,6 +44,7 @@ export const KINDS = {
   evidence: "根拠 (一回きりの調査・作業の記録)",
   asset: "素材の原本 (画像と、その生成の説明・マニフェスト)",
   outbox: "公開待ちの原稿 (公開後に CI が消す。公開した記事の正本は R2)",
+  "agent-asset": "エージェント運用の資産 (作業カード・記憶・手順・設定)。DB ではなく、管理画面は external の行を id で引いて表示のために読むだけ",
 };
 
 /** 本来の置き場。path がこの dir で始まらない行は移行対象 */
@@ -50,6 +54,7 @@ export const TARGETS = {
   state: { dir: ".claude/state/", label: "エージェントの作業状態" },
   "agent-config": { dir: ".claude/config/", label: "品質ゲートの基準・閾値" },
   assets: { dir: "assets/", label: "画像などの素材の原本" },
+  "agent-ops": { dir: ".claude/", label: "エージェント運用の資産 (作業カード・記憶・手順・設定)" },
   contents: { dir: "contents/", label: "公開待ちの原稿" },
 };
 
@@ -294,7 +299,7 @@ export const DATASETS = [
   d("note.magazines-schema", "data/note/magazines.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.paid-landing", "data/note/paid-landing/{name}.json", "ledger", "product", "data", "公開済み有料記事の無料部分の文言 (patch-note-paid-landing.mjs の入力)", { schema: "data/note/paid-landing.schema.json" }),
   d("note.paid-landing-schema", "data/note/paid-landing.schema.json", "schema", "product", "data", "上の文言の JSON Schema"),
-  d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの台帳の正本 (記事ごとに、どの版が候補・採用・公開かの参照と公開の観測)。制作内容と版の記録は note.cover-records に分けて持ち、読み書きは .claude/scripts/note/lib/cover-assets.mjs だけが 2 つを結ぶ", { schema: "data/note/cover-assets.schema.json" }),
+  d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの台帳の正本 (記事ごとに、どの版が候補・採用・公開かの参照と公開の観測)。制作内容と版の記録は note.cover-records に分けて持ち、読み書きは packages/ops/src/note/cover-assets.mjs だけが 2 つを結ぶ", { schema: "data/note/cover-assets.schema.json" }),
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.cover-records", "data/note/cover-records/{name}.json", "ledger", "product", "data", "note カバーの記事ごとの記録 (1 記事 1 ファイル。ファイル名は記事 key。制作 ID・方針・コピー・題材・根拠と、版の保存先・SHA・レビュー・生成元を登録順に持つ。正本 note.cover-assets の候補版・採用版・公開版の参照が指す先)", {
     schema: "data/note/cover-records.schema.json",
@@ -1224,6 +1229,24 @@ export const DATASETS = [
   d("agent.consistency", ".claude/state/consistency/audited.json", "state", "ops", "state", "整合性監査の印 (Stop hook が読む)"),
   d("agent.triggers", ".claude/state/triggers.json", "state", "ops", "state", "RemoteTrigger の記録"),
   d("agent.mail-inbox", ".claude/state/inbox/mail-events.json", "state", "ops", "state", "obsidian の mail-triage がメールから拾ったイベント (売上の正本ではない。正本は各スクレイパーのログ)"),
+
+  // ── .claude の運用資産 (external)。管理画面が表示のために読む置き場。コードは .claude を直書きせず datasetPath / datasetDir で引く ──
+  d("agent.todo", ".claude/todo/{name}.md", "agent-asset", "ops", "agent-ops", "作業カードの台帳 (backlog・improvements・annual などの置き場)", { external: true }),
+  d("agent.todo-backlog", ".claude/todo/backlog.md", "agent-asset", "ops", "agent-ops", "バックログ (v3 のカード形式)", { external: true }),
+  d("agent.todo-improvements", ".claude/todo/improvements.md", "agent-asset", "ops", "agent-ops", "改善施策の TODO 真実源", { external: true }),
+  d("agent.rules", ".claude/rules/{name}.md", "agent-asset", "ops", "agent-ops", "規約 (rules)。事業計画の管理画面が文書の更新日を読む", { external: true }),
+  d("agent.memory", ".claude/memory/{name}.md", "agent-asset", "ops", "agent-ops", "プロジェクト固有の恒常事実 (auto memory の正典)", { external: true }),
+  d("agent.definitions", ".claude/agents/{name}.md", "agent-asset", "ops", "agent-ops", "エージェント定義 (frontmatter の model・domain を管理画面が読む)", { external: true }),
+  d("agent.skills", ".claude/skills/{**}", "agent-asset", "ops", "agent-ops", "スキル (SKILL.md の frontmatter を管理画面が読む)", { external: true }),
+  d("agent.scripts", ".claude/scripts/{**}", "agent-asset", "ops", "agent-ops", "エージェント用スクリプトの置き場 (管理画面は検索範囲の指定とテストの写しにだけ使う)", { external: true }),
+  d("agent.backlog-parser", ".claude/scripts/backlog-loop/parse-backlog-core.cjs", "agent-asset", "ops", "agent-ops", "バックログのパーサ (管理画面のテストが実物を写す)", { external: true }),
+  d("agent.shared-policy", ".claude/shared-policy/{name}", "agent-asset", "ops", "agent-ops", "共通事業方針の写し (正本は Obsidian vault。手編集しない)", { external: true }),
+  d("agent.auth-credentials", ".claude/config/auth-credentials.json", "agent-asset", "ops", "agent-ops", "ログインと資格情報の登録 (パスワードは置かない)", { external: true }),
+  d("agent.mcp-servers", ".claude/config/mcp-servers.json", "agent-asset", "ops", "agent-ops", "MCP サーバーの用途と使う場所", { external: true }),
+  d("agent.backlog-routing-policy", ".claude/config/backlog-routing-policy.json", "agent-asset", "ops", "agent-ops", "バックログ処理のモデル振り分け方針", { external: true }),
+  d("agent.review-wiring", ".claude/config/review-wiring.json", "agent-asset", "ops", "agent-ops", "週次・月次レビューの配線", { external: true }),
+  d("agent.settings", ".claude/settings.json", "agent-asset", "ops", "agent-ops", "Claude Code のプロジェクト設定 (共有)。ホームの同名ファイルも同じ相対パスで読む", { external: true }),
+  d("agent.settings-local", ".claude/settings.local.json", "agent-asset", "ops", "agent-ops", "Claude Code の端末ごとの設定 (git 管理外)", { external: true, untracked: true }),
 
   // ── assets/ : 画像などの素材の原本 ──
   d("blog.outbox", "contents/blog/{**}", "outbox", "site", "contents", "ブログの公開待ち原稿 (develop への push で blog-auto-publish が R2 へ公開し、公開した slug を消す)"),

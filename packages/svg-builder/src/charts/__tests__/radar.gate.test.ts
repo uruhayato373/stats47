@@ -5,7 +5,7 @@
 import { describe, expect, it } from 'vitest';
 
 // @ts-expect-error — .claude 配下の決定的ゲート (型定義を持たない .mjs)
-import { lintSvgContent, lintSvgSize } from '../../../../../.claude/scripts/lib/svg-lint.mjs';
+import { lintSvgContent, lintSvgSize } from '../../lint/svg-lint.mjs';
 import { generateRadarSvg, type RadarSeries } from '../radar';
 
 const axes = [

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import { PanelGrid, SectionCard } from '@stats47/components';
 import { geoPath } from 'd3-geo';
 import { ListOrdered } from 'lucide-react';
@@ -203,7 +204,7 @@ export function InfraHistoryExplorer({
   const last = years[years.length - 1];
   const playback = useYearPlayback(first, last);
   const { year } = playback;
-  const { map, failed } = useInfraMap(topologyUrl, boundaryUrl, municipalityUrl, prefCodes, prefCodes.length === 47, geometry);
+  const { map, failed } = useInfraMap(topologyUrl, boundaryUrl, municipalityUrl, prefCodes, prefCodes.length === PREFECTURE_COUNT, geometry);
 
 
   const colorOf = useMemo(

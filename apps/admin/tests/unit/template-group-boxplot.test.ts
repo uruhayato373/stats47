@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { renderGroupBoxplotChart, type GroupBoxplotChart } from '@/lib/template-group-boxplot';
 

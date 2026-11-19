@@ -50,10 +50,12 @@ const interactiveSurfaceClass =
 
 /**
  * ポータルカード (注目ランキング・ブログ・知りたいこと) の画像枠の比率。
+ * ブログのサムネイル (640×336) と記事カード (apps/web の BLOG_THUMBNAIL_ASPECT_CLASS) と同じ 40:21 にそろえる
+ * (2026-11-19。16:9 の枠ではサムネイルの左右が切れ、ランキングの地図カードとも比率がずれていた)。
  * カード全体の比率は固定しない (中身の高さで伸ばす。2026-10-28 に固定比率 1.47:1 をやめた。
  * 390px で値と地図が潰れ、ブログ画像が帯になっていた)。
  */
-export const PORTAL_CARD_ASPECT_CLASS = "aspect-video";
+export const PORTAL_CARD_ASPECT_CLASS = "aspect-40/21";
 
 /** ポータルカードの内側余白。テンプレートの CardContent / KPI セルと同じ p-4。 */
 export const PORTAL_CARD_PADDING_CLASS = "p-4";

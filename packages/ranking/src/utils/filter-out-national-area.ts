@@ -1,4 +1,4 @@
-import { NATIONAL_AREA_CODE } from "@stats47/area";
+import { isCityAreaCode, isPrefectureAreaCode } from "@stats47/area";
 
 /**
  * 全国データと市区町村データを除外し、都道府県データのみ残す
@@ -18,10 +18,7 @@ export function filterOutNationalArea<T extends { areaCode: string }>(data: T[])
       return code !== "00";
     }
     // 後方互換: 5桁で XX000 形式の場合も都道府県として扱う
-    if (/^\d{2}000$/.test(code)) {
-      return code !== NATIONAL_AREA_CODE;
-    }
-    return false;
+    return isPrefectureAreaCode(code);
   });
 }
 
@@ -38,9 +35,6 @@ export function filterToCityArea<T extends { areaCode: string }>(data: T[]): T[]
   return data.filter((item) => {
     const code = item.areaCode;
     // 5桁の市区町村コード（XX000 以外）のみ残す
-    if (/^\d{5}$/.test(code)) {
-      return !code.endsWith("000");
-    }
-    return false;
+    return isCityAreaCode(code);
   });
 }

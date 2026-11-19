@@ -23,7 +23,7 @@ import {
   structuredOutput,
   validateReview,
 } from "./lib/ui-report";
-import type { Violation } from "./types";
+import type { Violation } from "../../../packages/ops/src/page-quality/types";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
 
 const CI_DIR = ".local/ci/page-quality";

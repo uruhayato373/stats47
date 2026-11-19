@@ -6,7 +6,7 @@ import path from "node:path";
 import { projectRoot, localSnsDir, R2_BASE } from "./project-root";
 import { query as queryPosts } from "./posts-store";
 import { datasetDir } from "../../../../config/datasets.mjs";
-import { readTemplates } from "../../../../.claude/scripts/media/lib/workspace.mjs";
+import { readTemplates } from "@stats47/ops/media/workspace.mjs";
 import { imageTypeOfBuzzMap } from "@/lib/image-template-basics";
 
 /**

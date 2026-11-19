@@ -71,7 +71,7 @@ function metricsStore(): MetricsStore {
   // sns-metrics-store.cjs は保存先を process.cwd() 基準で決める。管理画面の cwd は apps/admin なので、
   // 既存の上書き口 SNS_METRICS_REPO_ROOT で repo root を指す (未設定のときだけ)
   process.env.SNS_METRICS_REPO_ROOT ??= projectRoot();
-  const abs = path.join(projectRoot(), ".claude/scripts/lib/sns-metrics-store.cjs");
+  const abs = path.join(projectRoot(), "packages/ops/src/sns/sns-metrics-store.cjs");
   const nativeRequire = eval("require") as NodeRequire;
   cachedMetrics = nativeRequire(abs) as MetricsStore;
   return cachedMetrics;

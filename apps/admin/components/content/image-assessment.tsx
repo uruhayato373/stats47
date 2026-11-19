@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type {
   ImageView,
   VisualReview,
-} from '../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 import { Section } from '@/components/layout-primitives';
 import { Button, Textarea } from '@stats47/components';
 

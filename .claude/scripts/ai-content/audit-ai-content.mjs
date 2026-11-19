@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { R2_PUBLIC_ORIGIN, RANKING_R2_PREFIX } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN, RANKING_R2_PREFIX } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * ai-content 決定的監査ゲート (ranking ページの 考察/地域傾向/FAQ/県別解説)
  *
@@ -42,7 +42,7 @@ import {
   buildValueContext,
   findOutOfRangeNumbers,
   findPrefectureMismatches,
-} from "./lib/number-audit.mjs";
+} from "../../../packages/ai-content/src/audit/number-audit.mjs";
 
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_ORIGIN;
 

@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
-import { assertMinimalChartCopy } from "../../../../../../.claude/scripts/media/lib/image-copy.mjs";
+import { assertMinimalChartCopy } from "@stats47/ops/media/image-copy.mjs";
 import { IgSeriesFrame } from "../IgSeriesFrame";
 import { IgSeriesReelFrame } from "../IgSeriesReelFrame";
 import { IG_SERIES_IDS } from "../tokens";

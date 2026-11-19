@@ -324,3 +324,25 @@ test("turbo.json が無いリポジトリは検査しない (turbo 不在は静�
   const result = run(item);
   assert.deepEqual(result.output.findings, []);
 });
+
+// node:test で書いたテストのパッケージ (2026-11-19 に .claude/scripts から移した packages/ops など) は vitest に登録しない。
+// root の npm script か workflow がテストをすべてパス・glob で呼んでいれば登録済みとして扱い、1 本でも漏れれば検出する
+test("vitest 未登録でも、テストが root の npm script か workflow からすべて呼ばれていれば検出しない", (t) => {
+  const item = fixture(
+    { "packages/a": { name: "@stats47/a", main: "./src/index.ts" }, "packages/b": { name: "@stats47/b", main: "./src/index.ts" } },
+    { testFilesIn: ["packages/b"], registered: ["packages/a"] },
+  );
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  fs.writeFileSync(path.join(item.root, "package.json"), JSON.stringify({ scripts: { "b:test": "node --test packages/b/src/*.test.ts" } }));
+  const wired = run(item);
+  assert.equal(wired.output.findings.filter((f) => f.code === "UNWIRED_TEST_SUITE").length, 0);
+  // 呼ばれていないテストが 1 本増えたら検出する
+  fs.writeFileSync(path.join(item.root, "packages/b/extra.test.ts"), "export {};\n");
+  const unwired = run(item);
+  assert.equal(unwired.output.findings.filter((f) => f.code === "UNWIRED_TEST_SUITE").length, 1);
+  // workflow から直接呼ばれていても登録済みとして扱う
+  fs.mkdirSync(path.join(item.root, ".github/workflows"), { recursive: true });
+  fs.writeFileSync(path.join(item.root, ".github/workflows/ci.yml"), "jobs:\n  t:\n    steps:\n      - run: node --test packages/b/extra.test.ts\n");
+  const viaWorkflow = run(item);
+  assert.equal(viaWorkflow.output.findings.filter((f) => f.code === "UNWIRED_TEST_SUITE").length, 0);
+});

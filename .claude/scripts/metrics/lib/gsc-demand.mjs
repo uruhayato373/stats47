@@ -25,9 +25,9 @@ import { join } from "node:path";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { parseCsv } from "./measurement-cycle.mjs";
 import { classifyPageType } from "./page-type.mjs";
-import { addDays, isoWeekOf, isoWeekRange } from "./periods.mjs";
+import { addDays, isoWeekOf, isoWeekRange } from "../../../../packages/ops/src/metrics/periods.mjs";
 import { toCsv } from "./auth.mjs";
-import { SITE_ORIGIN } from "../../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";
 
 export const DEMAND_HISTORY_FILE = "demand-history.csv";
 export const DEMAND_WEEKLY_FILE = "demand-weekly.csv";

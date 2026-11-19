@@ -22,13 +22,13 @@
  */
 
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 import { join } from "node:path";
 import {
   fetchWeeklyNsmMetrics,
   formatNsmSection,
 } from "../lib/metrics-reader.mjs";
-import { jstDateOf, isoWeekOf } from "./lib/periods.mjs";
+import { jstDateOf, isoWeekOf } from "../../../packages/ops/src/metrics/periods.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const OUT_DIR =

@@ -106,7 +106,7 @@ GSC 表示のあるランキングは全キーの ~40% で、imp の大半は He
 
 プロンプトは「括弧による数値挿入」を全面禁止するが、**FAQ の answer は実値必須・insights は倍率や
 構成比を書く仕様**なので「数値を書かせない」ことでは捏造を防げない。括弧外の裸の数値を実データ
-(`app/ranking/<key>/values.json`) と突き合わせる。実装は `.claude/scripts/ai-content/lib/number-audit.mjs`
+(`app/ranking/<key>/values.json`) と突き合わせる。実装は `packages/ai-content/src/audit/number-audit.mjs`
 (純関数 + `__tests__/`)、配線は `audit-ai-content.mjs`。
 
 | 対象 | 判定 | level |

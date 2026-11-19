@@ -6,9 +6,9 @@ import { execFileSync } from 'node:child_process';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import ts from 'typescript';
-import { jstDateOf } from '../metrics/lib/periods.mjs';
+import { jstDateOf } from '../../../packages/ops/src/metrics/periods.mjs';
 import { hash, validateSnapshot, validateLog, reviewDue, selectKeyword, rankingMovements, recordDeployment } from './lib/keyword-cycle.mjs';
-import { SITE_ORIGIN } from '../lib/site-config.cjs';
+import { SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { METRIC_DEFINITIONS_DIR } from "../../../config/paths.mjs";
 

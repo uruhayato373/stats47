@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 import JSZip from "jszip";
 import { datasetPath } from "../../../config/datasets.mjs";
 import { KDP_LISTINGS, KDP_LISTING_COPY } from "../../../config/paths.mjs";
-import { auditListingCopy, hasCurrentReview, previousEditionDisclaimer, renderListingDescription } from "./lib/kdp-listing-copy.mjs";
+import { auditListingCopy, hasCurrentReview, previousEditionDisclaimer, renderListingDescription } from "../../../packages/product-factory/src/channels/kindle/kdp-listing-copy.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const readJson = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8"));

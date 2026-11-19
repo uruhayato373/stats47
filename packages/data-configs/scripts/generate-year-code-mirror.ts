@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
 const source = new URL('../../estat-api/src/stats-data/utils/extract-year-code.ts', import.meta.url);
-const output = new URL('../../../.claude/scripts/lib/year-code.mjs', import.meta.url);
+const output = new URL('../../estat-api/mirror/year-code.mjs', import.meta.url);
 const header = '// Generated from packages/estat-api/src/stats-data/utils/extract-year-code.ts.\n' +
   '// Regenerate: node --import tsx packages/data-configs/scripts/generate-year-code-mirror.ts\n';
 const mirror = header + ts.transpileModule(readFileSync(source, 'utf8'), {

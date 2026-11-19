@@ -27,8 +27,8 @@ import {
   pathOfUrl,
   sumTraffic,
   validateIssueGraph,
-} from "../issue-graph-core.mjs";
-import { grainsOfMetricSource } from "../issue-data-grains.mjs";
+} from "../../../../packages/ops/src/issues/issue-graph-core.mjs";
+import { grainsOfMetricSource } from "../../../../packages/ops/src/issues/issue-data-grains.mjs";
 
 const page = (id, extra = {}) => {
   const [kind, key] = id.split(":");

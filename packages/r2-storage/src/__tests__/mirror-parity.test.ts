@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 // @ts-expect-error Generated plain-node mirror has no declaration file.
-import * as mirror from "../../../../.claude/scripts/lib/r2-keys.mjs";
+import * as mirror from "../../mirror/r2-keys.mjs";
 import * as canonical from "../keys";
 
 describe("R2 key mirror parity", () => {

@@ -184,7 +184,7 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/lib/gallery-collectors.mjs": {
+    "packages/ops/src/media/gallery-collectors.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
@@ -198,7 +198,7 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/media/__tests__/workspace.test.mjs": {
+    "packages/ops/src/media/__tests__/workspace.test.mjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 8,
@@ -240,14 +240,14 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/page-quality/__tests__/templates.test.mjs": {
+    "packages/ops/src/page-quality/__tests__/templates.test.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
       "s3Client": 0,
       "reason": "キー・URL契約を検査するテストの固定入力・期待値"
     },
-    ".claude/scripts/page-quality/templates.ts": {
+    "packages/ops/src/page-quality/templates.ts": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,

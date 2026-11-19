@@ -25,7 +25,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const store = require("../lib/sns-posts-store.cjs");
+const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
 const { decideLedgerAction, parsePostedLog } = require("../lib/ig-ledger-core.cjs");
 const { datasetPath } = require("../../../config/datasets.mjs");
 

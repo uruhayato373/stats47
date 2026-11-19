@@ -2,8 +2,8 @@
 
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { R2_PUBLIC_BASE_URL } from '../../../../scripts/lib/site-config.cjs';
-import { rankingR2Key, statsR2Key } from '../../../../scripts/lib/r2-keys.mjs';
+import { R2_PUBLIC_BASE_URL } from '../../../../../packages/types/mirror/site-config.cjs';
+import { rankingR2Key, statsR2Key } from '../../../../../packages/r2-storage/mirror/r2-keys.mjs';
 import { datasetPath } from "../../../../../config/datasets.mjs";
 import { NOTE_RANKING_IMAGES } from '../../../../scripts/note/lib/note-render-spec.mjs';
 

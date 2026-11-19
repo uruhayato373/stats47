@@ -9,7 +9,7 @@ import {
   readProfileCookies, runPreflight, sessionDefinitions, writePreflight, PREFLIGHT_FILE,
 } from '../session-preflight.mjs';
 import { LOGIN } from '../refresh-session.mjs';
-import { credentialServices } from '../credential-store.mjs';
+import { credentialServices } from '../../../../packages/ops/src/measurement/credential-store.mjs';
 
 const NOW = Date.parse('2026-11-14T00:00:00Z');
 const DAY = 86400000;

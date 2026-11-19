@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
+import { to2DigitPrefCode } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { INFRA_SCOPE_REGIONS } from '@stats47/gis/infra-history';
 import { geoPath } from 'd3-geo';
@@ -55,7 +56,7 @@ export function QuestionMap({ title, unitOfArea, groups, areas, names, points }:
         const toShape = (f: Feature<Geometry, Record<string, string>>) => {
           const code = String(f.properties[CODE_PROPERTY]);
           // 県の地図の行政コードは 2 桁 (県コード) に揃える
-          return { d: path(f) ?? '', code: prefCodes.length === 0 ? code.slice(0, 2) : code };
+          return { d: path(f) ?? '', code: prefCodes.length === 0 ? to2DigitPrefCode(code) : code };
         };
         setLoaded({
           key: requestKey,

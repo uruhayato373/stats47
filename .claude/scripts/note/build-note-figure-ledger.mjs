@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { rankingR2Key, statsR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key, statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * build-note-figure-ledger.mjs — 公開済み note 記事の本文の図を台帳にし、今の R2 の値と照らす。
  *
@@ -24,10 +24,10 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import dotenv from 'dotenv';
 import os from 'node:os';
 import { checkArticleFactual } from '../lib/article-factual-check.mjs';
-import { R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetPath } from '../../../config/datasets.mjs';
-import { readArticleLedger } from './lib/article-ledger.mjs';
-import { createR2Store, fetchNoteDetail } from './lib/cover-storage.mjs';
+import { readArticleLedger } from '../../../packages/ops/src/note/article-ledger.mjs';
+import { createR2Store, fetchNoteDetail } from '../../../packages/ops/src/note/cover-storage.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const LEDGER = path.join(ROOT, datasetPath('note.body-figures'));

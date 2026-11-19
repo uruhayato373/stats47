@@ -1,4 +1,4 @@
-import { prefectureNameOf, prefectureShortName } from "@stats47/area";
+import { prefectureNameOf, prefectureShortName, to2DigitPrefCode } from "@stats47/area";
 import {
   resolveColorEncoding,
   resolveNumericDomain,
@@ -195,7 +195,7 @@ const TILE_GRID: Record<string, readonly [number, number, number, number]> = Obj
  * コードから決定的に引く。未知コードは呼び元の name にフォールバック。
  */
 function fullNameOf(item: ChoroplethItem): string {
-  return prefectureNameOf(item.code.slice(0, 2).padStart(2, "0")) ?? item.name;
+  return prefectureNameOf(to2DigitPrefCode(item.code)) ?? item.name;
 }
 
 /**
@@ -206,7 +206,7 @@ function fullNameOf(item: ChoroplethItem): string {
  * `@stats47/area` の `prefectureShortName` (北海道は落とさない) の単一実装に従う。
  */
 function shortNameOf(item: ChoroplethItem): string {
-  const full = prefectureNameOf(item.code.slice(0, 2).padStart(2, "0"));
+  const full = prefectureNameOf(to2DigitPrefCode(item.code));
   return full ? prefectureShortName(full) : item.name;
 }
 
@@ -534,7 +534,7 @@ export function generateChoroplethSvg(
 
   // コードを 2 桁に正規化（"01000" → "01"）
   const byCode = new Map(
-    items.map((d) => [d.code.slice(0, 2).padStart(2, "0"), d]),
+    items.map((d) => [to2DigitPrefCode(d.code), d]),
   );
 
   const values = items.map((d) => d.value);
@@ -604,7 +604,7 @@ export function generateChoroplethSvg(
   // (存在しないタイルへ枠だけ描くと空中に浮いた線になるため)。
   let highlightOverlay = "";
   if (highlightCode) {
-    const hCode = String(highlightCode).slice(0, 2).padStart(2, "0");
+    const hCode = to2DigitPrefCode(highlightCode);
     const grid = TILE_GRID[hCode];
     if (grid && byCode.has(hCode)) {
       const [col, row, cs, rs] = grid;

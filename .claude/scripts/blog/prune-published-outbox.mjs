@@ -37,7 +37,7 @@ import {
   getPublished,
   normalizeBody,
 } from "./lib/outbox-r2.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = resolve(import.meta.dirname, "../../..");
 const OUTBOX_REL = "contents/blog";

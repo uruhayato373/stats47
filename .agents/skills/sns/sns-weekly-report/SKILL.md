@@ -24,7 +24,7 @@ primary_agent: sns-metrics-sync
 ## 前提
 
 - `data/sns/metric-snapshots/` に `/update-sns-metrics` でデータが蓄積済み
-- ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`（`readByRange(start, end)` / `readByDate(date)` / `countAll()` / `maxFetchedAt()`）
+- ヘルパ: `packages/ops/src/sns/sns-metrics-store.cjs`（`readByRange(start, end)` / `readByDate(date)` / `countAll()` / `maxFetchedAt()`）
 
 ## 手順
 
@@ -36,7 +36,7 @@ primary_agent: sns-metrics-sync
 
 ```bash
 cat > /tmp/sns-weekly-agg.js << 'JSEOF'
-const store = require(process.cwd() + "/.claude/scripts/lib/sns-metrics-store.cjs");
+const store = require(process.cwd() + "/packages/ops/src/sns/sns-metrics-store.cjs");
 const [start, end] = process.argv.slice(2);       // 例: 2026-04-07 2026-04-13
 const rows = store.readByRange(start, end);
 
@@ -99,7 +99,7 @@ status: active
 
 ## 参照
 
-- `.claude/scripts/lib/sns-metrics-store.cjs` — CSV スナップショット I/O ヘルパ
+- `packages/ops/src/sns/sns-metrics-store.cjs` — CSV スナップショット I/O ヘルパ
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット + improvement-log
-- `data/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs` 経由）— 投稿台帳 SSOT。投稿実績・メトリクスキャッシュはここから集計（完全DBレス。旧 D1 sns_posts は廃止）
+- `data/sns/posts.json`（`packages/ops/src/sns/sns-posts-store.cjs` 経由）— 投稿台帳 SSOT。投稿実績・メトリクスキャッシュはここから集計（完全DBレス。旧 D1 sns_posts は廃止）
 - `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）

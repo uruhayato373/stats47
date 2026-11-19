@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { PREFECTURES } from "../lib/prefectures.cjs";
-import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
+import { PREFECTURES } from "../../../packages/area/mirror/prefectures.cjs";
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * 遊技店密度 (ぱちんこ店舗数 人口1万人あたり) の投入スクリプト。
  *

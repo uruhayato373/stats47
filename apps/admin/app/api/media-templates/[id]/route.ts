@@ -3,7 +3,7 @@ import {
   saveTemplate,
   readTemplates,
   sha,
-} from '../../../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 import { workspaceJson, workspaceError } from '@/lib/server/workspace-request';
 import { projectRoot } from '@/lib/server/project-root';
 import { jsonResponse } from '@/lib/server/http';

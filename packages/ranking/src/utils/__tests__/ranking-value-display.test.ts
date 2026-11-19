@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { deriveFeaturedTopList } from "../../exporters/home-featured";
-import { applyRankingValueDisplay, formatFeaturedValueDisplay, resolveRankingValueDisplay } from "../ranking-value-display";
+import { buildFeaturedTopRows, formatFeaturedValueDisplay, resolveRankingValueDisplay } from "../ranking-value-display";
 
 const INCOME = [639_356, 528_073, 396_090];
 const BUSINESS_TAX = [1_544_976_077, 117_028_009, 14_040_236];
@@ -31,26 +30,6 @@ describe("the display unit a ranking is shown in, resolved once", () => {
   });
 });
 
-describe("cards that carry formatted values use the same display unit as the page", () => {
-  const rows = [
-    { areaCode: "11000", areaName: "埼玉県", value: 639_356, rank: 1 },
-    { areaCode: "13000", areaName: "東京都", value: 631_827, rank: 2 },
-    { areaCode: "47000", areaName: "沖縄県", value: null, rank: null },
-  ];
-
-  it("converts the values and keeps the ranks given to the stored values", () => {
-    const display = resolveRankingValueDisplay({ unit: "円", valueDisplay: AUTHORED_MAN_YEN }, rows.map((r) => r.value));
-    expect(deriveFeaturedTopList(applyRankingValueDisplay(rows, display), 3)).toEqual([
-      { rank: 1, areaName: "埼玉県", value: "63.9" },
-      { rank: 2, areaName: "東京都", value: "63.2" },
-    ]);
-  });
-
-  it("leaves rows alone when no display unit applies", () => {
-    expect(applyRankingValueDisplay(rows, null)).toEqual(rows);
-  });
-});
-
 // 注目カードと一覧の「1 位」の列は、R2 に焼いた整形済みの値 (「656,171,677」) を持つ。2026-11-14 までは
 // 「656,171,677千円」「59,314,388百万円」とそのまま書いていた (UNIT-NOTATION-FORMAT-01)
 describe("a baked top value is written in the display unit", () => {
@@ -70,5 +49,47 @@ describe("a baked top value is written in the display unit", () => {
 
   it("does not guess when the text is not a number", () => {
     expect(formatFeaturedValueDisplay({ unit: "千円", valueDisplay: null }, "—")).toEqual({ value: "—", unit: "千円" });
+  });
+});
+
+describe("buildFeaturedTopRows: the top rows a featured card and the blog card show", () => {
+  const row = (rank: number, areaCode: string, areaName: string, value: number | null) => ({ rank, areaCode, areaName, value });
+
+  it("keeps every tie up to rank 3 and writes the values with the table's precision (171.0, not 171)", () => {
+    const top = buildFeaturedTopRows({ unit: "cm", valueDisplay: null }, [
+      row(1, "15000", "新潟県", 171.0),
+      row(1, "18000", "福井県", 171.0),
+      row(3, "02000", "青森県", 170.9),
+      row(3, "05000", "秋田県", 170.9),
+      row(5, "06000", "山形県", 170.6),
+    ]);
+    expect(top).toEqual({
+      unit: "cm",
+      rows: [
+        { rank: 1, areaName: "新潟県", value: "171.0" },
+        { rank: 1, areaName: "福井県", value: "171.0" },
+        { rank: 3, areaName: "青森県", value: "170.9" },
+        { rank: 3, areaName: "秋田県", value: "170.9" },
+      ],
+    });
+  });
+
+  it("resolves the display unit from all values once, the same as the ranking page (事業税: 千円 → 億円)", () => {
+    const top = buildFeaturedTopRows({ unit: "千円", valueDisplay: { conversionFactor: 1, decimalPlaces: 0 } }, [
+      row(1, "13000", "東京都", BUSINESS_TAX[0]),
+      row(2, "27000", "大阪府", BUSINESS_TAX[1]),
+      row(3, "23000", "愛知県", BUSINESS_TAX[2]),
+    ]);
+    expect(top?.unit).toBe("億円");
+    expect(top?.rows[0].value).toBe("15,450");
+  });
+
+  it("names the capital city for a capital-city metric (家計調査)", () => {
+    const top = buildFeaturedTopRows({ unit: "円", valueDisplay: null }, [row(1, "07000", "福島県", 100)], { capitalCities: true });
+    expect(top?.rows[0].areaName).toBe("福島市");
+  });
+
+  it("returns null when no row has a value and a rank", () => {
+    expect(buildFeaturedTopRows({ unit: "人", valueDisplay: null }, [row(1, "13000", "東京都", null)])).toBeNull();
   });
 });

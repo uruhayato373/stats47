@@ -33,8 +33,8 @@
 
 const path = require("node:path");
 const fs = require("node:fs");
-const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
-const { PREF_AREA_CODES } = require("../lib/prefectures.cjs");
+const { GSC_PROPERTY, SITE_ORIGIN } = require("../../../packages/types/mirror/site-config.cjs");
+const { PREF_AREA_CODES } = require("../../../packages/area/mirror/prefectures.cjs");
 const { createSearchConsoleClient } = require("../lib/google-client.cjs");
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
@@ -362,8 +362,8 @@ async function inspect(searchconsole, inspectionUrl) {
 }
 
 function isoWeek(date) {
-  // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
-  const { isoWeekOf, jstDateOf } = require("../metrics/lib/periods.mjs");
+  // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  const { isoWeekOf, jstDateOf } = require("../../../packages/ops/src/metrics/periods.mjs");
   return isoWeekOf(jstDateOf(date));
 }
 

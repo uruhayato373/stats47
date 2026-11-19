@@ -127,11 +127,11 @@
       "lastFailedAt": "2026-11-18",
       "firstFailedAt": "2026-11-16"
     },
-    "fishery-species-catch-mackerel": {
-      "failCount": 2,
+    "specific-health-checkup-participation-rate": {
+      "failCount": 1,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-18",
-      "firstFailedAt": "2026-11-17"
+      "lastFailedAt": "2026-11-19",
+      "firstFailedAt": "2026-11-19"
     }
   }
 }

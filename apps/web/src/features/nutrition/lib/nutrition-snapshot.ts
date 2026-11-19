@@ -1,4 +1,5 @@
 import { lookupArea, NATIONAL_OR_PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT, isNationalAreaCode } from '@stats47/area/area-code';
 import { NUTRITION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -28,7 +29,7 @@ const point = z.object({
   if (!(row.lower95 <= row.mean && row.mean <= row.upper95)) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: '平均と信頼区間の大小関係を確認する' });
   }
-  const expectedName = row.areaCode === '00000' ? '全国' : lookupArea(row.areaCode)?.areaName;
+  const expectedName = isNationalAreaCode(row.areaCode) ? '全国' : lookupArea(row.areaCode)?.areaName;
   if (row.areaName !== expectedName) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: '地域コードと県名を照合する' });
   }
@@ -47,12 +48,12 @@ export const nutritionSnapshotSchema = z.object({
     if (keys.has(key)) ctx.addIssue({ code: z.ZodIssueCode.custom, message: '県と指標の重複を拒否する' });
     keys.add(key);
   }
-  if (snapshot.rows.some(row => row.areaCode === '00000') || snapshot.national.some(row => row.areaCode !== '00000')) {
+  if (snapshot.rows.some(row => isNationalAreaCode(row.areaCode)) || snapshot.national.some(row => !isNationalAreaCode(row.areaCode))) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: '公式全国行と47県の行を分離する' });
   }
   for (const national of snapshot.national) {
     const rows = snapshot.rows.filter(row => row.metricKey === national.metricKey);
-    if (rows.length !== 47 || rows.reduce((sum, row) => sum + row.sampleSize, 0) !== national.sampleSize) {
+    if (rows.length !== PREFECTURE_COUNT || rows.reduce((sum, row) => sum + row.sampleSize, 0) !== national.sampleSize) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: '47県の集計人数を公式全国行と照合する' });
     }
   }

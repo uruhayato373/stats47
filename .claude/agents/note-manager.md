@@ -23,7 +23,7 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 
 > **記事台帳の保守は note-manager の担当（2026-07-15〜）**: note コーパス全体の editorial メタと
 > マガジン設計を `data/note/articles.json` と `data/note/magazines.json`（各 JSON Schema 付き）で一元管理する。
-> 書き込みは `.claude/scripts/note/lib/article-ledger.mjs` の `updateArticleLedger` / `writeArticleLedger` だけを使う。
+> 書き込みは `packages/ops/src/note/article-ledger.mjs` の `updateArticleLedger` / `writeArticleLedger` だけを使う。
 > 編集フロー: 台帳を編集 → `npm run note:catalog:validate` で整合確認 → `npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply`
 > で派生インデックス反映。マガジン化（類似記事の束ね）は記事の `magazine` フィールド設定で行う。
 
@@ -106,7 +106,7 @@ npm run audit:content-operations
 
 ```bash
 # 公開・ドラフト状態をSSOTから確認
-npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; for (const a of NOTE_ARTICLES) console.log(a.status,a.vertical,a.key,a.noteUrl??"-")'
+npx tsx -e 'import {NOTE_ARTICLES} from "./packages/ops/src/note/catalog/index.ts"; for (const a of NOTE_ARTICLES) console.log(a.status,a.vertical,a.key,a.noteUrl??"-")'
 
 # 管理画面（SSOT監査を含む）
 npm run admin  # http://127.0.0.1:4747/content/note

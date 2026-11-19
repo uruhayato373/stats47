@@ -42,7 +42,7 @@ async function runSvgLint(slugDir, slug) {
     return { id: "svg-lint", ok: false, detail: "data/*.svg が1件も無い" };
   }
   try {
-    const { lintSvgContent } = await import("../lib/svg-lint.mjs");
+    const { lintSvgContent } = await import("../../../packages/svg-builder/src/lint/svg-lint.mjs");
     const problems = [];
     for (const f of svgFiles) {
       const content = fs.readFileSync(path.join(dataDir, f), "utf8");

@@ -136,7 +136,7 @@ const path = require("path");
 const fs = require("fs");
 
 const PROJECT_ROOT = process.cwd();
-const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
+const store = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"));
 
 (async () => {
 const media = JSON.parse(fs.readFileSync("/tmp/ig-media.json", "utf8"));
@@ -149,7 +149,7 @@ const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
 const snap = await (await fetch(R2 + "/app/ranking-items/all.json")).json();
 const rankings = (snap.items || []).map((r) => ({ ranking_key: r.rankingKey, ranking_name: r.rankingName || r.title }));
 
-const snsStore = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-metrics-store.cjs"));
+const snsStore = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-metrics-store.cjs"));
 const fetchedAt = new Date().toISOString();
 
 // 投稿台帳 posts.json のキャッシュ列マッピング（IG のメトリクス → レコード列）:

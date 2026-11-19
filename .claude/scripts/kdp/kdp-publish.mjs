@@ -26,7 +26,7 @@ import {
 import { ensureDraft, verifyDraft, publishDraft } from "./lib/kdp-flow.mjs";
 import { assertKindleReleaseReady } from "./lib/kdp-release-gate.mjs";
 import { runKdpPreflight, validateKdpListingMetadata } from "./lib/kdp-preflight.mjs";
-import { publicationCopyIssues } from "./lib/kdp-listing-copy.mjs";
+import { publicationCopyIssues } from "../../../packages/product-factory/src/channels/kindle/kdp-listing-copy.mjs";
 import { coverThumbnailIssues } from "./lib/kdp-cover-thumbnail.mjs";
 
 const argv = process.argv.slice(2);

@@ -26,7 +26,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
-import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
+import { lintInternalLinks } from "../../../apps/web/scripts/lib/internal-link-lint.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

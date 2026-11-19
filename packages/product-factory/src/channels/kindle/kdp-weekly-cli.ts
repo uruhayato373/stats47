@@ -1,4 +1,4 @@
-import { isoWeekOf, jstDateOf } from "../../../../../.claude/scripts/metrics/lib/periods.mjs";
+import { isoWeekOf, jstDateOf } from "@stats47/ops/metrics/periods.mjs";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -18,7 +18,7 @@ function arg(name: string): string | null {
 }
 
 function currentIsoWeek(now: Date): string {
-  return isoWeekOf(jstDateOf(now)); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return isoWeekOf(jstDateOf(now)); // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 const now = new Date();

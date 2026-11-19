@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('../../../../', import.meta.url));
-const STORE = '.claude/scripts/measurement/credential-store.mjs';
+const STORE = 'packages/ops/src/measurement/credential-store.mjs';
 
 function trackedScripts() {
   return execFileSync('git', ['ls-files', '-z', '--', '.claude/scripts', 'scripts', 'packages', 'apps'], { cwd: ROOT, encoding: 'utf8' })

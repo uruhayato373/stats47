@@ -1,5 +1,5 @@
 import { isPrefectureAreaCode } from "@stats47/area";
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * audit-metric-denominator.ts — 人口当たりを名乗る指標が、実数のままになっていないかを値で確かめる。
  *
@@ -16,7 +16,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { datasetDir } from '../../../config/datasets.mjs';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { METRICS_REGISTRY } from '../../../packages/data-configs/src/registry';
 import { metricDenominatorOf } from '../../../packages/data-configs/src/metric-denominator';
 

@@ -36,7 +36,7 @@ import {
   toAreaCarouselItem,
   validateGroup,
 } from "./lib/ig-area-props.ts";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;

@@ -8,7 +8,6 @@
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
-import { getMetricConfig } from '@stats47/data-configs';
 import { getCategoryDescription } from '@stats47/data-configs/categories';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
@@ -246,6 +245,7 @@ export default async function CategoryPage({ params }: PageProps) {
     const model = buildFeaturedRankingCardModel({
       rankingKey: item.rankingKey,
       title,
+      unit: item.unit,
       values: valuesResult.data,
     });
     if (!model) return [];
@@ -255,8 +255,6 @@ export default async function CategoryPage({ params }: PageProps) {
         rankingKey: item.rankingKey,
         title,
         latestYear,
-        unit: item.unit,
-        valueDisplay: getMetricConfig(item.rankingKey)?.display,
         model,
       },
     ];
@@ -344,8 +342,6 @@ export default async function CategoryPage({ params }: PageProps) {
                   key={item.rankingKey}
                   rankingKey={item.rankingKey}
                   year={item.latestYear}
-                  unit={item.unit}
-                  valueDisplay={item.valueDisplay}
                   model={item.model}
                 />
               ))}

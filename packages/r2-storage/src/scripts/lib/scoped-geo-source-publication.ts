@@ -1,3 +1,4 @@
+import { to5DigitPrefCode } from '@stats47/area';
 import { createHash } from 'node:crypto';
 
 import { LANDSLIDE_EXPOSURE_SOURCE as LANDSLIDE } from '../../../../data-configs/src/theme-catalog/landslide-exposure-source';
@@ -28,7 +29,7 @@ export function scopedGeoSourcePin(key: string): ScopedGeoSourcePin {
   if (landslideMatch) {
     const pref = landslideMatch[1];
     const source = LANDSLIDE.prefectures.find(
-      (entry) => entry.areaCode === `${pref}000`
+      (entry) => entry.areaCode === to5DigitPrefCode(pref)
     );
     if (
       source &&

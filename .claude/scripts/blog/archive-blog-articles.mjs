@@ -25,12 +25,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { config } from "dotenv";
 
-import { createR2Store } from "../note/lib/cover-storage.mjs";
+import { createR2Store } from "../../../packages/ops/src/note/cover-storage.mjs";
 
 const require = createRequire(import.meta.url);
 // 手元では .env.local の S3 認証情報で書く (無ければ createR2Store が wrangler login に落ちる)。CI は env で渡す
 config({ path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..", ".env.local"), quiet: true });
-const { R2_BUCKET, R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL } = require("../lib/site-config.cjs");
+const { R2_BUCKET, R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL } = require("../../../packages/types/mirror/site-config.cjs");
 
 export const ARCHIVE_PREFIX = "blog-archive";
 // S3 経由の同時数。wrangler 経由 (S3 認証情報が無いとき) は Cloudflare API の流量制限 (HTTP 429) に当たりうる

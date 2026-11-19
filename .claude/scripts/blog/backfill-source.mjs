@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * backfill-source.mjs — source-backfill 復元: 既存 data/<base>.json があり source.json が無い SVG に
  * 出典 manifest (source.json) を後付けする (1画像=1設定ファイルの徹底, §1.7)。
@@ -16,7 +16,7 @@ import { rankingR2Key } from '../lib/r2-keys.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");

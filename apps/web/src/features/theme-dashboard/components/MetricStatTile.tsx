@@ -66,9 +66,9 @@ export function MetricStatTile({
     .filter(Boolean)
     .join('・');
 
-  const tile = (
+  return (
     <StatTile
-      className={cn('h-full', toggle?.pressed && 'bg-muted/50!')}
+      className={cn('h-full', toggle && 'relative', toggle?.pressed && 'bg-muted/50!')}
       label={
         toggle ? (
           <span className="flex items-center gap-2">
@@ -104,27 +104,24 @@ export function MetricStatTile({
       }
     >
       {children}
+      {toggle && (
+        // タイルの中の文字は読めるまま、上に全面のボタンを重ねる (button の中に dl を入れない)。
+        // ボタンはカードの内側に置く。外側の div で包むとカードが格子 (PanelGrid) の直下から外れ、
+        // カード自身の枠が残って線が 2 重になる (2026-11-18 line_grid_issues の outside-grid)
+        <button
+          type="button"
+          aria-pressed={toggle.pressed}
+          aria-disabled={toggle.disabledReason ? true : undefined}
+          aria-label={`${typeof label === 'string' ? label : metric.title}をグラフに表示`}
+          title={toggle.disabledReason}
+          onClick={toggle.onToggle}
+          className={cn(
+            'absolute inset-0 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
+            !toggle.pressed && 'hover:bg-muted/30',
+            toggle.disabledReason && 'cursor-not-allowed'
+          )}
+        />
+      )}
     </StatTile>
-  );
-  if (!toggle) return tile;
-
-  // タイルの中の文字は読めるまま、上に全面のボタンを重ねる (button の中に dl を入れない)
-  return (
-    <div className="relative h-full">
-      {tile}
-      <button
-        type="button"
-        aria-pressed={toggle.pressed}
-        aria-disabled={toggle.disabledReason ? true : undefined}
-        aria-label={`${typeof label === 'string' ? label : metric.title}をグラフに表示`}
-        title={toggle.disabledReason}
-        onClick={toggle.onToggle}
-        className={cn(
-          'absolute inset-0 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
-          !toggle.pressed && 'hover:bg-muted/30',
-          toggle.disabledReason && 'cursor-not-allowed'
-        )}
-      />
-    </div>
   );
 }

@@ -1,4 +1,5 @@
 import { TSUNAMI_EXPOSURE_SOURCE as source } from './tsunami-exposure-source';
+import { PREFECTURE_COUNT, to2DigitPrefCode } from '@stats47/area';
 export type TsunamiBandKey = string;
 export function tsunamiBands(
   areaCode: string
@@ -229,7 +230,7 @@ export function assertTsunamiManifest(
   value.intermediates.forEach((r, i) => {
     ref(
       r,
-      `${source.r2Root}/pref/${source.scenarios[i].areaCode.slice(0, 2)}.json`,
+      `${source.r2Root}/pref/${to2DigitPrefCode(source.scenarios[i].areaCode)}.json`,
       ['areaCode']
     );
     demand(
@@ -325,7 +326,7 @@ export function assertTsunamiVerification(
   );
   demand(
     value.checkedCounties === source.scenarios.length &&
-      value.unavailableCounties === 47 - source.scenarios.length,
+      value.unavailableCounties === PREFECTURE_COUNT - source.scenarios.length,
     'False complete coverage'
   );
   demand(

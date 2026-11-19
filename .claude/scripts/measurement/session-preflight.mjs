@@ -21,7 +21,7 @@ import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { datasetPath } from '../../../config/datasets.mjs';
-import { ALERT_STATES, PREFLIGHT_DIR, PREFLIGHT_FILE, STATE_LABELS, formatJst } from './session-states.mjs';
+import { ALERT_STATES, PREFLIGHT_DIR, PREFLIGHT_FILE, STATE_LABELS, formatJst } from '../../../packages/ops/src/measurement/session-states.mjs';
 
 export { ALERT_STATES, PREFLIGHT_DIR, PREFLIGHT_FILE, STATE_LABELS, formatJst };
 

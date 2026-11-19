@@ -1,4 +1,4 @@
-import { R2_PUBLIC_ORIGIN } from '../lib/r2-keys.mjs';
+import { R2_PUBLIC_ORIGIN } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /** Restore the malformed description of one previously published article; preserve all body bytes. */
 import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';

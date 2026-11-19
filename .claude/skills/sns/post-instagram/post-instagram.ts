@@ -24,8 +24,8 @@ import * as path from "path";
 import * as fs from "fs";
 import * as dotenv from "dotenv";
 import { execFileSync } from "child_process";
-import store from "../../../scripts/lib/sns-posts-store.cjs";
-import { R2_PUBLIC_BASE_URL } from "../../../scripts/lib/site-config.cjs";
+import store from "../../../../packages/ops/src/sns/sns-posts-store.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../../packages/types/mirror/site-config.cjs";
 import { datasetPath } from "../../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");

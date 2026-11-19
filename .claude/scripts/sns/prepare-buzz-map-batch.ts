@@ -41,12 +41,12 @@ import {
   captionComplete,
   buildCandidatePlan,
 } from './lib/buzz-map-batch-core.mjs';
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 // posts.json は read-only 参照 (dedup)。書込は insert のみ・--apply --to draft でだけ呼ぶ。
-const snsPostsStore = require('../lib/sns-posts-store.cjs') as {
+const snsPostsStore = require('../../../packages/ops/src/sns/sns-posts-store.cjs') as {
   query: (
     p: (r: Record<string, unknown>) => boolean
   ) => Array<Record<string, unknown>>;

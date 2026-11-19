@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 import { buildPreviewEntry, parseFrontmatter } from "./lib/preview-draft-core.mjs";
 
 const ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
-const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../lib/site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../../../packages/types/mirror/site-config.cjs");
 const UPSTREAM = process.platform === "win32" ? "http://127.0.0.1:4777" : R2_PUBLIC_BASE_URL;
 const PORT = 4780;
 const TYPES = { ".md": "text/markdown; charset=utf-8", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp" };

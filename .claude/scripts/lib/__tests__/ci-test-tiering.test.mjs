@@ -5,10 +5,10 @@ import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { classifyPrQualityPaths } from '../plan-pr-quality.mjs';
+import { classifyPrQualityPaths } from '../../../../packages/ops/src/ci/plan-pr-quality.mjs';
 
 test('article/image ledgers and shared writers run the admin gates', () => {
-  for (const file of ['.claude/scripts/media/lib/workspace.mjs','data/content-operations/quality.json','data/content-operations/image-templates.json']) {
+  for (const file of ['packages/ops/src/media/workspace.mjs','data/content-operations/quality.json','data/content-operations/image-templates.json']) {
     assert.equal(classifyPrQualityPaths([file]).admin, true);
   }
 });
@@ -88,7 +88,7 @@ test('CI本体変更は全jobを自己検証する', () => {
 test('GitのNUL区切り差分をGitHub Actions outputへ変換する', () => {
   const output = execFileSync(
     process.execPath,
-    [path.join(ROOT, '.claude/scripts/lib/plan-pr-quality.mjs'), '--stdin0'],
+    [path.join(ROOT, 'packages/ops/src/ci/plan-pr-quality.mjs'), '--stdin0'],
     {
       input: Buffer.from('apps/admin/app/page.tsx\0docs/example.md\0'),
       encoding: 'utf8',

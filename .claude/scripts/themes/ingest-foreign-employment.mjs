@@ -1,4 +1,4 @@
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -10,7 +10,7 @@ import { execFile } from 'node:child_process';
 
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs');
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const { METRICS_REGISTRY } = require('../../../packages/data-configs/src/registry.ts');
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const { parseStatsValuesPayload } = require('../../../packages/stats-r2/src/schemas.ts');

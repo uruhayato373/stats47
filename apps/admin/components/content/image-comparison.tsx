@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type {
   ImageView,
   ComparisonPlan,
-} from '../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 import {
   comparisonGroups,
   comparisonTopic,

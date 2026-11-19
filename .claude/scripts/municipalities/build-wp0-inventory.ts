@@ -1,4 +1,4 @@
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * build-wp0-inventory — 市区町村スコープ分離 WP0 の read-only 棚卸し (doc 44 §WP0)
  * ---------------------------------------------------------------------------
@@ -23,7 +23,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { createRequire } from "node:module";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");

@@ -1,8 +1,8 @@
 /** One keyword per run; ranking observations never imply causation. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { addDays, jstDateOf, resolvePeriods } from '../../metrics/lib/periods.mjs';
-import { GSC_PROPERTY, SITE_ORIGIN } from '../../lib/site-config.cjs';
+import { addDays, jstDateOf, resolvePeriods } from '../../../../packages/ops/src/metrics/periods.mjs';
+import { GSC_PROPERTY, SITE_ORIGIN } from '../../../../packages/types/mirror/site-config.cjs';
 
 export const METHODS = ['title', 'description', 'intro', 'faq', 'content', 'internal-links', 'data'];
 export const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');

@@ -14,6 +14,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { PREFECTURE_COUNT } from "@stats47/area";
 
 import { AREA_DATABOOK_TEMPLATE } from "../src/area-databook/template";
 import { templateToPageComponentsJson } from "../src/area-databook/transform";
@@ -37,8 +38,8 @@ function listAreaCodes(): string[] {
     prefCode: string;
   }>;
   const codes = rows.map((r) => r.prefCode);
-  if (codes.length !== 47) {
-    throw new Error(`prefectures.json が 47 件ではない (${codes.length} 件)`);
+  if (codes.length !== PREFECTURE_COUNT) {
+    throw new Error(`prefectures.json が ${PREFECTURE_COUNT} 件ではない (${codes.length} 件)`);
   }
   return codes;
 }

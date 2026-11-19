@@ -171,7 +171,7 @@ export default async function MunicipalityPrefectureRankingPage({
         stats={`${snapshot.yearName}・${ranking.rows.length.toLocaleString('ja-JP')}${areaLabel}`}
       />
 
-      <section aria-label="要点" className="border border-border p-4 text-sm leading-relaxed">
+      <section aria-label="要点" className="text-sm leading-relaxed">
         {summary.map((sentence) => (
           <p key={sentence}>{sentence}</p>
         ))}
@@ -183,7 +183,7 @@ export default async function MunicipalityPrefectureRankingPage({
       </section>
 
       {dataProduct && (
-        <section aria-label="この指標のデータ集" className="mt-5 border border-border p-4">
+        <section aria-label="この指標のデータ集">
           <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
           <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_pref_product" />
         </section>
@@ -204,6 +204,8 @@ export default async function MunicipalityPrefectureRankingPage({
         <SectionHeader title={`${prefecture.prefName}の順位`} hideRule className="mb-2" />
         <div className="overflow-x-auto border border-border">
           <ValueTable
+            // 上位 10 件だけ見せ、残りは「全件を見る」で開く (畳んだ行も HTML に残る)
+            fold={{ head: 10, tail: 0 }}
             columns={[
               { key: 'prefRank', header: '県内順位', className: 'w-20' },
               { key: 'area', header: areaLabel, rowHeader: true, align: 'left' },

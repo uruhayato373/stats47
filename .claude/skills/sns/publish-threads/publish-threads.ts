@@ -37,7 +37,7 @@ import { execFileSync } from "node:child_process";
 
 const require = createRequire(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../../../..");
-const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
+const store = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"));
 
 const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-threads-profile");
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-threads-debug");
@@ -265,7 +265,7 @@ async function publishOne(page: Page, item: QueueItem, dryRun: boolean, noLedger
       // .local/r2/sns は期限で消える。無ければ台帳に保全済みの private R2 の版を戻す (2026-11-08)
       if (!fs.existsSync(item.mediaPath)) {
         const row = store.loadAll().find((p: any) => p.id === item.id);
-        const { ensureSnsImageLocal } = await import("../../../scripts/media/lib/storage.mjs");
+        const { ensureSnsImageLocal } = await import("@stats47/ops/media/storage.mjs");
         const restored = row ? await ensureSnsImageLocal(row, PROJECT_ROOT) : null;
         if (restored) item.mediaPath = restored;
       }

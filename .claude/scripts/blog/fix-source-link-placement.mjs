@@ -31,7 +31,7 @@ import fs from "node:fs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const METRICS_DIR = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));

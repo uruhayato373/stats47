@@ -4,7 +4,7 @@ import siteJson from './site.json';
  * stats47 のサイト識別子 (サイト名・ドメイン・R2・GSC/GA4 の ID)。
  *
  * 値の正本は同じディレクトリの site.json。Node スクリプト (.mjs/.cjs) は
- * `.claude/scripts/lib/site-config.cjs` 経由で同じ JSON を読む。
+ * `packages/types/mirror/site-config.cjs` 経由で同じ JSON を読む。
  * 環境変数で上書きする箇所は、各呼び出し元で `process.env.X || SITE.y` の形を保つ。
  */
 export const SITE = {

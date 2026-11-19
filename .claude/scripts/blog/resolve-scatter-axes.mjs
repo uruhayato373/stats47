@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * resolve-scatter-axes.mjs — scatter の x/y 軸を SSOT key へ明示対応づけし、値照合(≥0.95)で
  * 確定した時だけ kind:scatter の source.json を書く (1画像=1設定ファイルの徹底, §1.7)。
@@ -16,7 +16,7 @@ import { rankingR2Key } from '../lib/r2-keys.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;

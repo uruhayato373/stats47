@@ -1,3 +1,4 @@
+import { PREFECTURE_COUNT } from '@stats47/area';
 import { createHash } from 'node:crypto';
 
 import { JSDOM } from 'jsdom';
@@ -32,8 +33,8 @@ export function verifyCounts(
   total: number,
   zeroCodes: readonly string[]
 ) {
-  if (counts.size !== 47 || PREF_CODES.some((code) => !counts.has(code)))
-    throw new Error('Expected exactly 47 prefectures');
+  if (counts.size !== PREFECTURE_COUNT || PREF_CODES.some((code) => !counts.has(code)))
+    throw new Error(`Expected exactly ${PREFECTURE_COUNT} prefectures`);
   let sum = 0;
   for (const [code, value] of counts) {
     if (!PREF_CODES.includes(code) || !Number.isSafeInteger(value) || value < 0)

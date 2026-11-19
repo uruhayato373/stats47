@@ -63,7 +63,7 @@ test("全レイアウトで出典・年・単位を維持し、メタデータ�
 });
 
 test("全レイアウトの可視テキストは画像コピーの共通契約を満たし、発行元を入れない", async () => {
-  const { assertMinimalChartCopy } = await import("../../media/lib/image-copy.mjs");
+  const { assertMinimalChartCopy } = await import("../../../../packages/ops/src/media/image-copy.mjs");
   for (const layout of STORY_LAYOUTS) {
     const svg = renderRankingStoryCard(entries, { ...options, layout });
     assertMinimalChartCopy(svg);

@@ -10,7 +10,7 @@ import {
   lintScatterData,
   lintScatterParity,
   lintScatterQuality,
-} from '../svg-lint.mjs';
+} from '../../../../packages/svg-builder/src/lint/svg-lint.mjs';
 
 const NAME = 'sample-scatter.svg';
 

@@ -18,7 +18,7 @@ export const DRIVE_COVER_FOLDER = "Kindle表紙";
 
 /** stats47 folder 直下の `Kindle表紙/<bookId>/candidates`。Drive のマウントが無い PC では例外 (黙って別の場所へ落とさない) */
 export async function coverCandidatesDir(bookId: string, options: { create?: boolean } = {}): Promise<string> {
-  const vault = await import(pathToFileURL(resolve(REPO_ROOT, ".claude/scripts/source-vault/source-vault.mjs")).href);
+  const vault = await import(pathToFileURL(resolve(REPO_ROOT, "packages/ops/src/source-vault/source-vault.mjs")).href);
   const { root } = vault.resolveVaultRoot();
   const dir = resolve(root, DRIVE_COVER_FOLDER, bookId, "candidates");
   if (options.create) mkdirSync(dir, { recursive: true });

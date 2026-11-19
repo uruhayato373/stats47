@@ -7,12 +7,13 @@ import type { MetricPresentation } from '../../../packages/types/src/metric-pres
 import { scopeAttributes, type AreaChart } from './template-area-scope';
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
 import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, mixColor, outlineAttrs, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
+import { PREFECTURE_AREA_CODE_RE, PREFECTURE_COUNT, isPrefectureAreaCode } from '@stats47/area';
 
 export const RANKING_BAR_SAMPLE_ID = 'maximum-temperature-bars';
 export const RANKING_BAR_FRAME = { width: 1080, height: 1350 } as const;
 const rowSchema = z.object({
   rank: z.number().int().min(1).max(47),
-  area_code: z.string().regex(/^\d{2}000$/),
+  area_code: z.string().regex(PREFECTURE_AREA_CODE_RE),
   area_name: z.string().min(1).max(10),
   year: z.literal(RANKING_SAMPLE_YEAR),
   value: z.number().finite(),
@@ -20,12 +21,12 @@ const rowSchema = z.object({
 const inputSchema = z.object({
   _meta: z.object({ rankingKey: z.literal(RANKING_SAMPLE_METRIC.key), year: z.literal(Number(RANKING_SAMPLE_YEAR)) }),
   unit: z.literal(RANKING_SAMPLE_METRIC.unit),
-  data: z.array(rowSchema).length(47),
+  data: z.array(rowSchema).length(PREFECTURE_COUNT),
 }).superRefine(({ data }, ctx) => {
   const sorted = [...data].sort((a, b) => a.rank - b.rank);
-  if (new Set(data.map((r) => r.area_code)).size !== 47 ||
+  if (new Set(data.map((r) => r.area_code)).size !== PREFECTURE_COUNT ||
       sorted.some((r, i) => r.rank !== sorted.findIndex((other) => other.value === r.value) + 1 ||
-        Number(r.area_code.slice(0, 2)) < 1 || Number(r.area_code.slice(0, 2)) > 47 ||
+        !isPrefectureAreaCode(r.area_code) ||
         (i > 0 && r.value > sorted[i - 1].value)))
     ctx.addIssue({ code: 'custom', message: '47都道府県の順位と値の順序を確認してください。' });
 });

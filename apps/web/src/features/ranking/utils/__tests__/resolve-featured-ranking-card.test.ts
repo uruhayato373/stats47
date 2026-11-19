@@ -10,15 +10,15 @@ import {
   resolveFeaturedRankingCardModel,
 } from "../resolve-featured-ranking-card";
 
-const TOP = { rank: 1, areaName: "東京都", value: "1,064" };
+const TOP = { unit: "人", rows: [{ rank: 1, areaName: "東京都", value: "1,064" }] };
 const GEOGRAPHIC_SVG =
-  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v1"/>';
+  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v2"/>';
 /** compact 化前の世代: 回転済みだが path が未簡略化で 1 枚 1.7MB あった。 */
 const LEGACY_UNCOMPACTED_SVG =
   '<svg data-map-rotation="clockwise-32" data-okinawa="excluded"/>';
 /** marker はあるが実サイズが予算超過 (将来の退行検知用)。 */
 const OVERSIZED_SVG =
-  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v1">' +
+  '<svg data-map-rotation="clockwise-32" data-okinawa="excluded" data-map-format="compact-v2">' +
   'x'.repeat(100_001) +
   '</svg>';
 
@@ -33,12 +33,12 @@ describe("resolveFeaturedRankingCardModel", () => {
     expect(getFeaturedRankingCardDefinition("unknown")).toBeNull();
   });
 
-  it("1位と地理地図から唯一のmodelを返す", () => {
+  it("上位の行と地理地図から唯一のmodelを返す", () => {
     expect(
       resolveFeaturedRankingCardModel(
         {
           definition: { hook: "人口が最も多い県は？" },
-          featuredTop: TOP,
+          featuredTopRows: TOP,
           tileMapSvg: GEOGRAPHIC_SVG,
         },
         "総人口",
@@ -53,22 +53,22 @@ describe("resolveFeaturedRankingCardModel", () => {
   it("未登録rankingは正式titleをhookに使う", () => {
     expect(
       resolveFeaturedRankingCardModel(
-        { featuredTop: TOP, tileMapSvg: GEOGRAPHIC_SVG },
+        { featuredTopRows: TOP, tileMapSvg: GEOGRAPHIC_SVG },
         "年間日照時間",
       )?.hook,
     ).toBe("年間日照時間");
   });
 
-  it("1位または地図がなければ別variantへfallbackせずnullを返す", () => {
+  it("上位の行または地図がなければ別variantへfallbackせずnullを返す", () => {
     expect(
       resolveFeaturedRankingCardModel(
-        { featuredTop: null, tileMapSvg: GEOGRAPHIC_SVG },
+        { featuredTopRows: null, tileMapSvg: GEOGRAPHIC_SVG },
         "人口",
       ),
     ).toBeNull();
     expect(
       resolveFeaturedRankingCardModel(
-        { featuredTop: TOP, tileMapSvg: null },
+        { featuredTopRows: TOP, tileMapSvg: null },
         "人口",
       ),
     ).toBeNull();
@@ -76,10 +76,10 @@ describe("resolveFeaturedRankingCardModel", () => {
 });
 
 describe("needsHomeFeaturedValuesFetch", () => {
-  it("新しい地理地図と1位が揃えば追加fetchしない", () => {
+  it("新しい地理地図と上位の行が揃えば追加fetchしない", () => {
     const fields = {
       homeFeatured: { order: 1, hook: "テスト用のフックです？" },
-      featuredTop: TOP,
+      featuredTopRows: TOP,
       tileMapSvg: GEOGRAPHIC_SVG,
     };
     expect(needsHomeFeaturedValuesFetch(fields)).toBe(false);
@@ -88,15 +88,15 @@ describe("needsHomeFeaturedValuesFetch", () => {
   it("旧タイル地図は地理地図へ移行するため追加fetchする", () => {
     expect(
       needsHomeFeaturedValuesFetch(
-        { featuredTop: TOP, tileMapSvg: "<svg/>" },
+        { featuredTopRows: TOP, tileMapSvg: "<svg/>" },
       ),
     ).toBe(true);
   });
 
-  it("1位欠損も補完する", () => {
+  it("上位の行が無い旧 snapshot も補完する", () => {
     expect(
       needsHomeFeaturedValuesFetch(
-        { featuredTop: null, tileMapSvg: GEOGRAPHIC_SVG },
+        { featuredTopRows: null, tileMapSvg: GEOGRAPHIC_SVG },
       ),
     ).toBe(true);
   });
@@ -104,7 +104,7 @@ describe("needsHomeFeaturedValuesFetch", () => {
   it("compact化前の巨大SVGは追加fetchして再生成する", () => {
     expect(
       needsHomeFeaturedValuesFetch({
-        featuredTop: TOP,
+        featuredTopRows: TOP,
         tileMapSvg: LEGACY_UNCOMPACTED_SVG,
       }),
     ).toBe(true);
@@ -113,7 +113,7 @@ describe("needsHomeFeaturedValuesFetch", () => {
   it("marker付きでも予算超過なら追加fetchする", () => {
     expect(
       needsHomeFeaturedValuesFetch({
-        featuredTop: TOP,
+        featuredTopRows: TOP,
         tileMapSvg: OVERSIZED_SVG,
       }),
     ).toBe(true);
@@ -131,7 +131,7 @@ describe("isCurrentHomeFeaturedMapSvg", () => {
       null,
     ];
     for (const svg of cases) {
-      expect(needsHomeFeaturedValuesFetch({ featuredTop: TOP, tileMapSvg: svg })).toBe(
+      expect(needsHomeFeaturedValuesFetch({ featuredTopRows: TOP, tileMapSvg: svg })).toBe(
         !isCurrentHomeFeaturedMapSvg(svg),
       );
     }

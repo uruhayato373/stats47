@@ -2,6 +2,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 
 import { KAKEI_ANALYSES } from "@stats47/data-configs";
 
@@ -93,7 +94,7 @@ export function selectKakeiAxisRows(
   const labels = new Map(classRows.map((row: { "@code": string; "@name": string }) => [row["@code"], row["@name"]]));
   return spec.axisCodes.map(code => {
     const matches = values.filter((row: Record<string, string>) =>
-      row["@area"] === "00000" && row[`@${axisDim}`] === code &&
+      row["@area"] === NATIONAL_AREA_CODE && row[`@${axisDim}`] === code &&
       (axisDim === "time" || row["@time"] === "2025000000") &&
       Object.entries(filters).every(([key, val]) => row[`@${key.slice(2).toLowerCase()}`] === val));
     if (matches.length !== 1) throw new Error(`${spec.id}: ${code} has ${matches.length} matching 2025 rows`);
@@ -123,7 +124,7 @@ async function householdComparison(): Promise<KakeiAxisChart> {
     const raw = await fetchEstatRaw(sourceId, { cdCat01: "010110001", cdCat02: group.code });
     const values = raw.GET_STATS_DATA.STATISTICAL_DATA.DATA_INF.VALUE;
     const matches = (Array.isArray(values) ? values : [values]).filter(row =>
-      row?.["@area"] === "00000" && row?.["@time"] === "2025000000" &&
+      row?.["@area"] === NATIONAL_AREA_CODE && row?.["@time"] === "2025000000" &&
       row?.["@cat01"] === "010110001" && row?.["@cat02"] === group.code);
     if (matches.length !== 1 || matches[0]["@unit"] !== "円") throw new Error(`household comparison ${sourceId}: invalid 2025 rice row`);
     const value = Number(matches[0].$);
@@ -135,7 +136,7 @@ async function householdComparison(): Promise<KakeiAxisChart> {
     id: "rice-household-type", themeSlug: "household-food-spending", title: "米への支出と世帯類型",
     description: "2025年・全国の1世帯当たり年間支出。総世帯には二人以上世帯と単身世帯が含まれます。人数当たりの比較ではありません。",
     sourceId: sourceIds[0], sourceIds, household: "総世帯・二人以上世帯・単身世帯", axis: "世帯区分",
-    period: "annual-total", unit: "円", filters: { cdCat01: "010110001", cdArea: "00000", cdTime: "2025000000" }, rows,
+    period: "annual-total", unit: "円", filters: { cdCat01: "010110001", cdArea: NATIONAL_AREA_CODE, cdTime: "2025000000" }, rows,
   };
 }
 
@@ -148,7 +149,7 @@ export async function generateKakeiAxisCharts(write = false) {
     const rows = selectKakeiAxisRows(raw, spec, filters);
     charts.push({ id: spec.id, themeSlug: spec.themeSlug, title: spec.title, description: spec.description,
       sourceId, household: spec.household ?? "二人以上世帯", axis: spec.axis, period: spec.period, unit: spec.expectedUnit,
-      filters: { ...filters, ...(spec.axisDim === "time" ? {} : { cdTime: "2025000000" }), cdArea: "00000" }, rows });
+      filters: { ...filters, ...(spec.axisDim === "time" ? {} : { cdTime: "2025000000" }), cdArea: NATIONAL_AREA_CODE }, rows });
     console.log(`${spec.id}: ${rows.length} rows, ${sourceId}`);
   }
   charts.push(await householdComparison());

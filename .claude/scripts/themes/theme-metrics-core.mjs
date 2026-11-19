@@ -1,4 +1,4 @@
-import { addDays } from "../metrics/lib/periods.mjs";
+import { addDays } from "../../../packages/ops/src/metrics/periods.mjs";
 
 function validReport(report) {
   try {

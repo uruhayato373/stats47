@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetPath } from "../../../config/datasets.mjs";
-import { findLedgerArticle, updateArticleLedger, readArticleLedger } from "./lib/article-ledger.mjs";
+import { findLedgerArticle, updateArticleLedger, readArticleLedger } from "../../../packages/ops/src/note/article-ledger.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 import { liveProblems, plannedChanges, preflightProblems } from "./lib/price-change.mjs";
 import { noteKeyFromUrl, splitPublishedBody } from "./patch-note-paid-landing.mjs";

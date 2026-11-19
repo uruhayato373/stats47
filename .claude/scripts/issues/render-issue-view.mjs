@@ -12,8 +12,8 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { classifyCoverage, computeReach, indexPages, parentIdOf, parseCsv, READ_THRESHOLD, sumTraffic } from "./issue-graph-core.mjs";
-import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { classifyCoverage, computeReach, indexPages, parentIdOf, parseCsv, READ_THRESHOLD, sumTraffic } from "../../../packages/ops/src/issues/issue-graph-core.mjs";
+import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
 const SITE = SITE_ORIGIN;

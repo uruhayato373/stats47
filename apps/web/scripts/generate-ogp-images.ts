@@ -46,7 +46,7 @@ import { rankingR2Key, RANKING_R2_PREFIX } from '@stats47/r2-storage/keys';
 import { SITE as SITE_IDENTITY } from '@stats47/types';
 import { config as loadEnv } from 'dotenv';
 
-import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { assertCoverGenerationType } from '@stats47/ops/note/cover-assets.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";
 import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
 import { ALL_THEMES } from '../src/features/theme-dashboard/config/all-themes';
@@ -445,7 +445,7 @@ async function main() {
     ]);
     // 有料記事 (r2_access: private) の本文は公開 R2 に置かないので、公開 URL から入力を取れず生成できない。
     // 入力取得の 404 で自己修復全体が止まり、公開記事のカバーまで生成されなくなっていた (2026-10-01)。
-    // 除外の範囲は .claude/scripts/lib/gallery-collectors.mjs (欠落の監査) と同じ (契約テストで固定)。
+    // 除外の範囲は packages/ops/src/media/gallery-collectors.mjs (欠落の監査) と同じ (契約テストで固定)。
     noteEntries = (await listNoteEntries()).filter(
       (n) => !BESPOKE_COVER_VERTICALS.has(n.vertical) && !n.isPrivate
     );

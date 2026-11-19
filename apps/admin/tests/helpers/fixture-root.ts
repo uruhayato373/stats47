@@ -3,11 +3,13 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+
 /**
  * テスト用の隔離 project root を構築するヘルパ。
  *
  * project-root.ts は `<root>/package.json` の name === "stats47-monorepo" を検証し、
- * posts-store.ts は `<root>/.claude/scripts/lib/sns-posts-store.cjs` を実行時 require する。
+ * posts-store.ts は `<root>/packages/ops/src/sns/sns-posts-store.cjs` を実行時 require する。
  * → fixture root にこの 2 つを用意すれば、全ての読み書きが fixture 配下に閉じ、
  *   実 SSOT (data/sns/posts.json 等) には一切触れない。
  *
@@ -23,15 +25,16 @@ import path from "node:path";
 // 実物の store をコピーする (fixture の posts.json に読み書きさせる)。
 const REAL_STORE = path.resolve(
   __dirname,
-  "../../../../.claude/scripts/lib/sns-posts-store.cjs",
+  "../../../../packages/ops/src/sns/sns-posts-store.cjs",
 );
 const REAL_PARSE_CORE = path.resolve(
   __dirname,
-  "../../../../.claude/scripts/backlog-loop/parse-backlog-core.cjs",
+  "../../../..",
+  datasetPath("agent.backlog-parser"),
 );
 const REAL_BACKLOG_LIB = path.resolve(
   __dirname,
-  "../../../../.claude/scripts/lib/backlog-lib.cjs",
+  "../../../../packages/ops/src/management/backlog-lib.cjs",
 );
 // store は置き場を台帳 (config/datasets.mjs) から引くので、台帳と台帳が読む config/paths.mjs も実物をコピーする
 const REAL_CONFIG_FILES = ["datasets.mjs", "paths.mjs"].map((name) =>
@@ -81,7 +84,8 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
   );
 
   // 2) 実物 sns-posts-store.cjs をコピー
-  const libDir = path.join(root, ".claude/scripts/lib");
+  // 2026-11-19 に packages/ops へ移した。管理画面は projectRoot() からこの場所を読む
+  const libDir = path.join(root, "packages/ops/src/sns");
   fs.mkdirSync(libDir, { recursive: true });
   fs.copyFileSync(REAL_STORE, path.join(libDir, "sns-posts-store.cjs"));
   const configDir = path.join(root, "config");
@@ -125,16 +129,19 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
 
   // 7) TODO 台帳 (.claude/todo) と実物パーサ
   if (opts.todoFiles) {
-    const todoDir = path.join(root, ".claude/todo");
+    const todoDir = path.join(root, datasetDir("agent.todo"));
     fs.mkdirSync(todoDir, { recursive: true });
     for (const [name, body] of Object.entries(opts.todoFiles)) {
       fs.writeFileSync(path.join(todoDir, name), body);
     }
     // ★パーサは実物をコピーする。テスト用に別実装を置くと「テストは通るが本番は違う解釈」になる
-    const coreDir = path.join(root, ".claude/scripts/backlog-loop");
+    const coreDir = path.join(root, path.dirname(datasetPath("agent.backlog-parser")));
     fs.mkdirSync(coreDir, { recursive: true });
     fs.copyFileSync(REAL_PARSE_CORE, path.join(coreDir, "parse-backlog-core.cjs"));
-    fs.copyFileSync(REAL_BACKLOG_LIB, path.join(libDir, "backlog-lib.cjs"));
+    // backlog-lib は 2026-11-19 に packages/ops へ移した。管理画面は projectRoot() からこの場所を読む
+    const opsManagementDir = path.join(root, "packages/ops/src/management");
+    fs.mkdirSync(opsManagementDir, { recursive: true });
+    fs.copyFileSync(REAL_BACKLOG_LIB, path.join(opsManagementDir, "backlog-lib.cjs"));
   }
 
   // 8) 任意のファイル (state など。パスは root 相対)

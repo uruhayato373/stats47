@@ -241,7 +241,7 @@ async function replaceReviewedCovers() {
       await page.getByRole('button',{name:'更新',exact:true}).click();
       await page.getByRole('button',{name:'更新',exact:true}).waitFor({state:'visible',timeout:45000});
       const after=await verifyWithRetry(()=>live(m),v=>v.cover!==before.cover&&v.name===before.name&&v.description===before.description);
-      const {fetchCoverSource}=await import('./lib/cover-storage.mjs');
+      const {fetchCoverSource}=await import('../../../packages/ops/src/note/cover-storage.mjs');
       const published=await fetchCoverSource(after.cover);
       const sharp=(await import('sharp')).default;
       const dimensions=await sharp(published).metadata();

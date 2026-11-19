@@ -63,7 +63,7 @@ const { getAffinity } = require("../lib/x-catalog.cjs") as {
   getAffinity: () => Record<string, Record<string, string>>;
 };
 // posts.json は read-only 参照 (draft 継承)。書込は store 経由のみ・ここでは query しか使わない。
-const snsPostsStore = require("../lib/sns-posts-store.cjs") as {
+const snsPostsStore = require("../../../packages/ops/src/sns/sns-posts-store.cjs") as {
   query: (predicate: (p: Record<string, unknown>) => boolean) => Array<Record<string, unknown>>;
 };
 

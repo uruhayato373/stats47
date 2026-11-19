@@ -32,7 +32,7 @@ const {
   pivot,
   shortName,
 } = require("./lib/affiliate-ga4-reports-core.cjs");
-const { GA4_PROPERTY_ID } = require("../lib/site-config.cjs");
+const { GA4_PROPERTY_ID } = require("../../../packages/types/mirror/site-config.cjs");
 const { createGa4DataClient } = require("../lib/google-client.cjs");
 const { datasetDir } = require("../../../config/datasets.mjs");
 

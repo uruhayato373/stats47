@@ -6,6 +6,7 @@ import sharp from 'sharp';
 import { z } from 'zod';
 import type { GeometryCollection, Topology } from 'topojson-specification';
 import { interpolateBlues } from 'd3-scale-chromatic';
+import { isOkinawaAreaCode } from '../../../packages/area/src/utils/prefecture-code';
 import { generateBarChartSvg, generateMobileMapSvg, generateMobileScatterSvg } from '../../../packages/svg-builder/src';
 import { computeChoroplethPaths } from '../../../apps/remotion/src/shared/utils/choropleth';
 
@@ -32,9 +33,9 @@ const rendererFiles = [
 ];
 
 async function main() {
-  const { ROOT, sha, imageById, inputKey, candidateKey, storeVerified, safeName } = await import('./lib/workspace.mjs');
-  const { mediaStore } = await import('./lib/storage.mjs');
-  const { assertStaticSvg } = await import('./lib/svg-safety.mjs');
+  const { ROOT, sha, imageById, inputKey, candidateKey, storeVerified, safeName } = await import('../../../packages/ops/src/media/workspace.mjs');
+  const { mediaStore } = await import('../../../packages/ops/src/media/storage.mjs');
+  const { assertStaticSvg } = await import('../../../packages/ops/src/media/svg-safety.mjs');
   for (const sample of samples) {
     const current = imageById(ROOT, sample.id);
     if (current.kind === 'cover') throw Error('Cover images use their dedicated workflow.');
@@ -76,7 +77,7 @@ async function main() {
         const topology: Topology<{ pref: GeometryCollection<{ N03_007: string }> }> = JSON.parse(geoBytes.toString('utf8'));
         geometry = { path: geoPath, sha256: sha(geoBytes), json: topology };
         const values = rows.map(r => ({ areaCode: r.area_code, value: r.value }));
-        const part = (okinawa: boolean) => ({ ...topology, objects: { pref: { ...topology.objects.pref, geometries: topology.objects.pref.geometries.filter(g => (g.properties && 'N03_007' in g.properties && g.properties.N03_007 === '47') === okinawa) } } });
+        const part = (okinawa: boolean) => ({ ...topology, objects: { pref: { ...topology.objects.pref, geometries: topology.objects.pref.geometries.filter(g => (g.properties && 'N03_007' in g.properties && isOkinawaAreaCode(g.properties.N03_007)) === okinawa) } } });
         const paths = [
           ...computeChoroplethPaths(part(false), values, { width: 592, height: 500, padding: 6, offsetX: 24, offsetY: 144 }),
           ...computeChoroplethPaths(part(true), values, { width: 164, height: 80, padding: 4, offsetX: 32, offsetY: 560 }),

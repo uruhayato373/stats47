@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * fetch-ranking-data-r2.mjs (完全DBレス版データ接地)
  *
@@ -29,7 +29,7 @@ import { rankingR2Key } from '../lib/r2-keys.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { yearLabelOf } from "./lib/ranking-year-label.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

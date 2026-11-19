@@ -10,6 +10,8 @@ import type {
 } from "@stats47/data-configs";
 import type { AreaType } from "@stats47/types";
 
+import type { FeaturedTopRows } from "../utils/ranking-value-display";
+
 /**
  * ランキング項目のタグ情報
  */
@@ -240,6 +242,8 @@ export interface FeaturedValue {
 export interface FeaturedRankingItem extends RankingItem {
   /** ビルド時に焼き込む「1 位」表示 (都道府県名 + ロケール整形済み値文字列)。null = 値なし */
   featuredTop?: FeaturedValue | null;
+  /** ビルド時に焼き込む上位の行 (buildFeaturedTopRows。ランキングの表と同じ単位・桁)。旧 snapshot には無い */
+  featuredTopRows?: FeaturedTopRows | null;
   /** ビルド時に焼き込む都道府県地図 SVG 文字列 */
   tileMapSvg?: string | null;
   /** ホーム専用編集設定 (git TS HOME_FEATURED_RANKINGS 由来) */

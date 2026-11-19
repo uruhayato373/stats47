@@ -31,7 +31,7 @@ import {
   isoWeekToDateRange,
   toCsv,
 } from "./lib/auth.mjs";
-import { resolvePeriods } from "./lib/periods.mjs";
+import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
 import { buildGa4Summary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
 
 import {
@@ -44,7 +44,7 @@ import {
   MEASUREMENT_REPORTS,
   measurementRow,
 } from "./lib/journey-ga4-reports.mjs";
-import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient } from "../lib/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

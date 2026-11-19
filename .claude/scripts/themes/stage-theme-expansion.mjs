@@ -1,6 +1,6 @@
-import { extractYearCode } from "../lib/year-code.mjs";
+import { extractYearCode } from "../../../packages/estat-api/mirror/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
-import { R2_PUBLIC_ORIGIN, rankingR2Key, statsR2Key } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN, rankingR2Key, statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';

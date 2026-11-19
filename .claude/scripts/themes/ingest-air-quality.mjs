@@ -1,4 +1,4 @@
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs, promisify } from 'node:util';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const run = promisify(execFile);
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');

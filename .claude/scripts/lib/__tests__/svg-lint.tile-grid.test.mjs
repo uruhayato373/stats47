@@ -20,7 +20,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { lintTileGridQuality } from "../svg-lint.mjs";
+import { lintTileGridQuality } from "../../../../packages/svg-builder/src/lint/svg-lint.mjs";
 
 const NAME = "sample-tile-grid.svg";
 

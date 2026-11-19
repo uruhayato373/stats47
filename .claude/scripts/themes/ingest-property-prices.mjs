@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Recompute public CSV inputs before writing four series and their distribution. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';

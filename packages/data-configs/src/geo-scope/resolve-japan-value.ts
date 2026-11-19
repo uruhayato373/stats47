@@ -1,3 +1,4 @@
+import { PREFECTURE_COUNT } from "@stats47/area";
 import { JAPAN_NATIONAL_AREA_CODE, PREFECTURE_AREA_CODE_RE, type JapanAvailability } from "./types";
 
 /** 集約前の1行 (areaCode + 値)。R2 正典 / e-Stat 応答どちらの最小共通形も満たす。 */
@@ -42,10 +43,10 @@ export function resolveJapanValue(
     case "derived-additive": {
       const prefRows = rows.filter((r) => PREFECTURE_AREA_CODE_RE.test(r.areaCode));
       const finite = prefRows.filter((r) => isFiniteNumber(r.value));
-      if (finite.length !== 47) {
+      if (finite.length !== PREFECTURE_COUNT) {
         return {
           ok: false,
-          reason: `derived-additive (${availability.recipeKey}) は47県全件が必要 (${finite.length}/47 のみ有効)`,
+          reason: `derived-additive (${availability.recipeKey}) は${PREFECTURE_COUNT}県全件が必要 (${finite.length}/${PREFECTURE_COUNT} のみ有効)`,
         };
       }
       const sum = finite.reduce((acc, r) => acc + (r.value as number), 0);

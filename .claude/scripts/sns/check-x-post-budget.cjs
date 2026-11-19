@@ -22,7 +22,7 @@
  */
 
 const path = require("node:path");
-const store = require(path.resolve(__dirname, "../lib/sns-posts-store.cjs"));
+const store = require(path.resolve(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
 const catalog = require(path.resolve(__dirname, "../lib/x-catalog.cjs"));
 
 /** post の JST カレンダー日付 ("YYYY-MM-DD")。scheduled_at(ISO) 優先、無ければ posted_at。 */
@@ -65,8 +65,8 @@ function dayCount(dateStr) {
 
 /** dateStr を含む週の月曜 (JST) を "YYYY-MM-DD" で返す。 */
 function isoWeekStart(dateStr) {
-  // dateStr は JST の日付。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
-  const { isoWeekOf, isoWeekRange } = require("../metrics/lib/periods.mjs");
+  // dateStr は JST の日付。正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  const { isoWeekOf, isoWeekRange } = require("../../../packages/ops/src/metrics/periods.mjs");
   return isoWeekRange(isoWeekOf(dateStr)).monday;
 }
 

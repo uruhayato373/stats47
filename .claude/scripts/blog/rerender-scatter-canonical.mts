@@ -1,7 +1,7 @@
 #!/usr/bin/env -S npx tsx
 // Keep the existing response/error handling; the shared JSON client redacts response fields.
 import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../packages/estat-api/src/ingest.js";
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * rerender-scatter-canonical.mts — scatter カタログの正方形・単色統一 (720×720)。
  *
@@ -28,14 +28,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateScatterSvg } from '../../../packages/svg-builder/src/charts/scatter.ts';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { stripProvenance, withProvenance } from '../lib/svg-provenance.mjs';
 import {
   imageTemplateOf,
   lintScatterData,
   lintScatterParity,
   lintScatterQuality,
-} from '../lib/svg-lint.mjs';
+} from '../../../packages/svg-builder/src/lint/svg-lint.mjs';
 
 const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),

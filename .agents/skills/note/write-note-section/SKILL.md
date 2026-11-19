@@ -212,7 +212,7 @@ docs/31 は git に何も置かない作業場で、本文と画像の正本は 
 # 1. 台帳に下書きレコードを足す (書き込みは article-ledger.mjs 経由。項目と制約は data/note/articles.schema.json。
 #    magazine は data/note/magazines.json の登録キー。有料記事は isPaid: true・priceJpy・body.store: "r2-private")
 node --input-type=module -e '
-import { updateArticleLedger } from "./.claude/scripts/note/lib/article-ledger.mjs";
+import { updateArticleLedger } from "./packages/ops/src/note/article-ledger.mjs";
 updateArticleLedger((l) => { l.articles.push({ key: "<slug>", vertical: "<vertical>", title: "<title>",
   magazine: "<magazine>", isPaid: false, status: "draft", r2Path: "note/<vertical>/<slug>",
   body: { store: "r2-public", manifest: null } }); });'

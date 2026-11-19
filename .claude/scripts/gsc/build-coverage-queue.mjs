@@ -65,7 +65,7 @@ import {
   summarizeCoverageQueue,
   upsertTotalsHistoryRow,
 } from "./lib/coverage-queue-state.mjs";
-import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

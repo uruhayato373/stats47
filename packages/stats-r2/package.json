@@ -30,6 +30,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@stats47/area": "*",
     "@stats47/data-configs": "*",
     "@stats47/estat-api": "*",
     "@stats47/r2-storage": "*",

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanupFixtureRoot, makeFixtureRoot } from '../helpers/fixture-root';
-import { readDraftStates } from '../../../../.claude/scripts/issues/issue-draft-state.mjs';
+import { readDraftStates } from '@stats47/ops/issues/issue-draft-state.mjs';
 
 let root: string;
 afterEach(() => { if (root) cleanupFixtureRoot(root); vi.unstubAllEnvs(); });

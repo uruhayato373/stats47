@@ -5,7 +5,7 @@
  *
  * ## v3-unified への移行 (2026-08-18)
  *
- * カード構文のパースは **`.claude/scripts/lib/backlog-lib.cjs` が唯一の実装**
+ * カード構文のパースは **`packages/ops/src/management/backlog-lib.cjs` が唯一の実装**
  * (doboku-note と統一のスキーマ。正典 `.claude/rules/todo-standards.md`)。
  * ここは backlog-loop 向けの薄い adapter で、固有に持つのは:
  *   - `sourceFile` の付与 (報告・verify 用)
@@ -21,7 +21,7 @@
  * 正典: `.claude/rules/backlog-loop.md`
  */
 
-const { parseBacklog } = require('../lib/backlog-lib.cjs');
+const { parseBacklog } = require('../../../packages/ops/src/management/backlog-lib.cjs');
 
 /**
  * バックログ (backlog.md) をカード配列として解析する。

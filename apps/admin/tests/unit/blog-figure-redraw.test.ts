@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { itemBarChartFromArticleData, rankingChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
-import { PREF_NAMES } from '../../../../.claude/scripts/lib/prefectures.cjs';
-import { TEMPLATE_MIN_FONT_SIZE as LINT_MIN_FONT_SIZE, findImageTypeCopyDefects, findTemplateFontFloorDefects } from '../../../../.claude/scripts/lib/svg-lint.mjs';
+import { itemBarChartFromArticleData, rankingChartFromArticleData } from '../../lib/type-chart-input';
+import { fetchPrefectures } from '@stats47/area';
+import { TEMPLATE_MIN_FONT_SIZE as LINT_MIN_FONT_SIZE, findImageTypeCopyDefects, findTemplateFontFloorDefects } from '@stats47/svg-builder/lint/svg-lint.mjs';
 import { TEMPLATE_MIN_FONT_SIZE } from '../../../remotion/src/features/data-cards/chart-theme';
 import { renderDistributionMapChart } from '@/lib/template-distribution-map';
 import { renderRankingBarsChart } from '@/lib/template-ranking-bars';
 import { renderTileMapChart } from '@/lib/template-ranking-tile-map';
 
 // 2026-11-03 の全記事の描き直しで出た型の不具合 (出典欄が空・題の右端が切れる・年度が「年」) を型の側で止める。
-const names = PREF_NAMES as string[];
+const names = fetchPrefectures().map((prefecture) => prefecture.prefName);
 const opts = { prefCodeOf: (n: string) => String(names.indexOf(n) + 1).padStart(2, '0'), prefNameOf: (c: string) => names[Number(c) - 1] };
 const article = (over: Record<string, unknown> = {}) => ({
   title: '財政力指数', subtitle: '2022年', year: '2022', unit: '%',

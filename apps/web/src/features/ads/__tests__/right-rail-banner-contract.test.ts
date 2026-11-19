@@ -17,7 +17,7 @@ function runPlacementGuard(blogPage: string) {
   const exit = {};
   let status = 0;
   try {
-    runInNewContext(source(".claude/scripts/lib/check-ad-placement.cjs"), {
+    runInNewContext(source("apps/web/scripts/lib/check-ad-placement.cjs"), {
       require: (id: string) => id === "fs" ? {
         ...require("node:fs"),
         readFileSync: (path: string, encoding: BufferEncoding) =>

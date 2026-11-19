@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PREFECTURE_COUNT } from '@stats47/area';
 
 import {
   BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE,
@@ -61,8 +62,8 @@ const items = BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE.map((content) => {
       fs.readFileSync(manifestPath, 'utf8')
     ) as EvidenceManifest;
     if (
-      manifest.quality.detailAreas !== 47 ||
-      manifest.quality.conservationChecks !== 47
+      manifest.quality.detailAreas !== PREFECTURE_COUNT ||
+      manifest.quality.conservationChecks !== PREFECTURE_COUNT
     ) {
       throw new Error(
         `evidence gate failed: ${analysis.slug} detail=${manifest.quality.detailAreas} conservation=${manifest.quality.conservationChecks}`

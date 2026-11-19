@@ -17,7 +17,7 @@ import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { findLatestPsiBatch } from "../../psi/lib/latest-batch.mjs";
-import { addDays, isoWeekRange } from '../../metrics/lib/periods.mjs';
+import { addDays, isoWeekRange } from '../../../../packages/ops/src/metrics/periods.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -58,7 +58,7 @@ function splitCsvLine(line) {
 
 /** ISO 週文字列 "2026-W29" の日曜 (週末) の ISO date を返す。データ鮮度の基準。 */
 function isoWeekEndDate(week) {
-  try { return isoWeekRange(week).sunday; } catch { return null; } // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  try { return isoWeekRange(week).sunday; } catch { return null; } // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 function latestWeekDir(dir) {

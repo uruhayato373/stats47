@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "stats47 note cover records",
-  "description": "data/note/cover-records/<articleKey>.json の形の契約。1 記事 1 ファイルで、その記事のカバーの制作内容 (production: 制作 ID・方針・コピー・題材・根拠) と版の記録 (revisions: 候補・公開画像の保全・旧 R2 の保全を登録順に) を持つ。ファイル名と articleKey は一致し、正本 data/note/cover-assets.json に同じ記事の行がある。制作内容も版も無い記事はファイルを作らない。読み書きは .claude/scripts/note/lib/cover-assets.mjs だけが行う。",
+  "description": "data/note/cover-records/<articleKey>.json の形の契約。1 記事 1 ファイルで、その記事のカバーの制作内容 (production: 制作 ID・方針・コピー・題材・根拠) と版の記録 (revisions: 候補・公開画像の保全・旧 R2 の保全を登録順に) を持つ。ファイル名と articleKey は一致し、正本 data/note/cover-assets.json に同じ記事の行がある。制作内容も版も無い記事はファイルを作らない。読み書きは packages/ops/src/note/cover-assets.mjs だけが行う。",
   "type": "object",
   "additionalProperties": false,
   "required": [

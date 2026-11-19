@@ -13,7 +13,7 @@
 import { describe, expect, it } from "vitest";
 
 // @ts-expect-error — .claude 配下の決定的ゲート (型定義を持たない .mjs)
-import { findChartTextIssues } from "../../../../../.claude/scripts/lib/svg-lint.mjs";
+import { findChartTextIssues } from "../../lint/svg-lint.mjs";
 import { generateBarChartSvg } from "../bar-chart";
 import { generateChoroplethSvg } from "../choropleth";
 import { generateFindingsCardSvg } from "../findings-card";

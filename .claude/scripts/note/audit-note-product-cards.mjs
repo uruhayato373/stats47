@@ -33,7 +33,7 @@ import { chromium } from 'playwright';
 import { resolveProductCardText } from "./lib/navigation-footer.mjs";
 import { inspectPaidProductCard, resolvePaidProduct } from './lib/product-cards.mjs';
 import { applyPlanBody, buildPlans } from './update-published-navigation.mjs';
-import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");

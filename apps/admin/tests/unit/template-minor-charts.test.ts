@@ -3,7 +3,7 @@ import sharp from 'sharp';
 import { renderCompositionHeatmap, renderCompositionPie, renderDistributionBoxplot, renderDonutChart } from '@/lib/template-minor-charts';
 import { RANKING_SAMPLE_METRIC } from '@/lib/template-ranking-data';
 import { resolveMetricColor } from '../../../remotion/src/features/data-cards/tile-scale';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 
 // Synthetic values check the renderer contracts; the live samples use the SHA-verified R2 inputs.
 const labels = ['ビール', '発泡酒', 'リキュール・その他の醸造酒等', '焼酎', '清酒', '果実酒', 'ウイスキー・ブランデー', 'その他'];

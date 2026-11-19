@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
-import { rankingChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
-import { PREF_NAMES } from '../../../../.claude/scripts/lib/prefectures.cjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
+import { rankingChartFromArticleData } from '../../lib/type-chart-input';
+import { fetchPrefectures } from '@stats47/area';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { prefectureChordNodes, regionChordNodes, renderChordChart, type MigrationPair } from '@/lib/template-chord';
 import { renderTileMapChart } from '@/lib/template-ranking-tile-map';
@@ -10,7 +10,7 @@ const code = (i: number) => `${String(i + 1).padStart(2, '0')}000`;
 const pairs: MigrationPair[] = Array.from({ length: 47 }, (_, a) => Array.from({ length: 47 }, (_, b) => ({ fromPrefCode: code(a), toPrefCode: code(b), inflow: a === b ? 0 : (a + 1) * 10 + b })))
   .flat().filter((p) => p.fromPrefCode !== p.toPrefCode);
 const head = { title: '人の移動', meta: '2025年 · 単位：人', source: '住民基本台帳人口移動報告' };
-const names = PREF_NAMES as string[];
+const names = fetchPrefectures().map((prefecture) => prefecture.prefName);
 
 describe('コード図の型', () => {
   it('地方別は地方をまたぐ移動だけを足し、合計が県別の該当分と一致する', () => {

@@ -12,7 +12,7 @@ import { parseArgs } from "node:util";
 import { STOREFRONT_PRODUCTS } from "../../../apps/web/src/features/products/storefront.generated";
 import { productEditions } from "../../../apps/web/src/features/products/editions";
 import type { StorefrontProduct } from "../../../apps/web/src/features/products/types";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const OUTPUT_DIRECTORY = path.join(PROJECT_ROOT, ".local/product-portfolio/note-landings");

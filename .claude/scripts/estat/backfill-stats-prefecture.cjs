@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { isPrefectureAreaCode } = require("../lib/prefectures.cjs");
+const { isPrefectureAreaCode } = require("../../../packages/area/mirror/prefectures.cjs");
 /**
  * 既存 metric の D1 stats_prefecture を e-Stat から全年度バックフィル。
  *

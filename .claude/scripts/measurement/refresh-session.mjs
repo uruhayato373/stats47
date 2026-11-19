@@ -36,7 +36,7 @@ import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { scopedState } from './sources.mjs';
-import { readCredential, totpCode } from './credential-store.mjs';
+import { readCredential, totpCode } from '../../../packages/ops/src/measurement/credential-store.mjs';
 
 export const LOGIN = {
   a8: {

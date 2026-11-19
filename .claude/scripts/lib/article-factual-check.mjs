@@ -1,4 +1,4 @@
-import { PREF_NAMES as OFFICIAL_PREF_NAMES } from "./prefectures.cjs";
+import { PREF_NAMES as OFFICIAL_PREF_NAMES } from "../../../packages/area/mirror/prefectures.cjs";
 /**
  * article-factual-check.mjs
  *
@@ -10,7 +10,7 @@ import { PREF_NAMES as OFFICIAL_PREF_NAMES } from "./prefectures.cjs";
  * draft-from-trend 等) で共有可能な library として切り出し。
  *
  * Usage:
- *   import { checkArticleFactual, buildGroundTruth, PREF_NAMES } from "../lib/article-factual-check.mjs";
+ *   import { checkArticleFactual, buildGroundTruth, PREF_NAMES } from "./article-factual-check.mjs";
  *
  *   const result = checkArticleFactual(articleContent, dataDir);
  *   // result: { blockers: string[], warnings: string[], groundTruthPrefCount, isPerCapitaArticle }

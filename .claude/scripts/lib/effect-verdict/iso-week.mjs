@@ -5,7 +5,7 @@
  * 同じ計算が別実装で 3 つあったのを 1 箇所に集約する。snapshot ディレクトリ名・
  * history.csv の `week` 列がこの形式なので、比較と差分はここだけで行う。
  */
-import { isoWeekOf as periodsIsoWeekOf, isoWeekRange, jstDateOf } from "../../metrics/lib/periods.mjs";
+import { isoWeekOf as periodsIsoWeekOf, isoWeekRange, jstDateOf } from "../../../../packages/ops/src/metrics/periods.mjs";
 
 const WEEK_RE = /^(\d{4})-W(\d{2})$/;
 
@@ -15,7 +15,7 @@ const WEEK_RE = /^(\d{4})-W(\d{2})$/;
  * @returns {string} 例 "2026-W31"
  */
 export function isoWeekOf(input) {
-  // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)。Date は JST の暦日に直してから数える
+  // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)。Date は JST の暦日に直してから数える
   const label = input instanceof Date ? (Number.isNaN(input.getTime()) ? "" : jstDateOf(input)) : String(input).slice(0, 10);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(label) || Number.isNaN(Date.parse(`${label}T00:00:00Z`))) {
     throw new Error(`isoWeekOf: 日付として解釈できない: ${input}`);

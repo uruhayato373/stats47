@@ -3,7 +3,7 @@
  *
  * Usage: npx tsx .claude/scripts/note/catalog/dump-circulation-json.ts
  */
-import { NOTE_ARTICLES, NOTE_MAGAZINES } from "./index";
+import { NOTE_ARTICLES, NOTE_MAGAZINES } from "../../../../packages/ops/src/note/catalog/index";
 import { NOTE_PRODUCT_MAPPINGS } from "../../../../packages/product-factory/src/channels/note/product-note-mapping";
 
 const articles = NOTE_ARTICLES.filter(

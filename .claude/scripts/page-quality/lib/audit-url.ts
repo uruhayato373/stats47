@@ -1,4 +1,4 @@
-import type { PageAuditResult, PageTemplateKey } from "../types";
+import type { PageAuditResult, PageTemplateKey } from "../../../../packages/ops/src/page-quality/types";
 import { analyzeHtml, fetchHtml, fetchRscBytes } from "./measure-static";
 import {
   measureBrowserMetrics,

@@ -32,10 +32,10 @@ import { renderLineChart } from '../lib/template-trend-line';
 import { regionNetSteps, renderWaterfallChart } from '../lib/template-waterfall';
 import { CHART_THEMES } from '../../remotion/src/features/data-cards/chart-theme';
 import { datasetPath } from '../../../config/datasets.mjs';
-import { chartSourceName, groupedBarChartFromArticleData, itemBarChartFromArticleData, lineChartFromArticleData, rankingChartFromArticleData, stackedChartFromArticleData } from '../../../.claude/scripts/blog/lib/type-chart-input';
-import { PREF_NAMES } from '../../../.claude/scripts/lib/prefectures.cjs';
-import { assertMinimalChartCopy } from '../../../.claude/scripts/media/lib/image-copy.mjs';
-import { R2_PUBLIC_BASE_URL } from '../../../.claude/scripts/lib/site-config.cjs';
+import { chartSourceName, groupedBarChartFromArticleData, itemBarChartFromArticleData, lineChartFromArticleData, rankingChartFromArticleData, stackedChartFromArticleData } from '../lib/type-chart-input';
+import { fetchPrefectures, to2DigitPrefCode } from '@stats47/area';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
+import { SITE } from '@stats47/types';
 import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
 import { fetchMunicipalityTopologyForWardMode } from '../../../packages/gis/src/mlit/fetch-ward-mode-topology';
@@ -46,7 +46,7 @@ import type { Topology } from 'topojson-specification';
 
 const ROOT = path.resolve(__dirname, '../../..');
 const OUT = path.join(ROOT, '.local/template-review');
-const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
+const R2 = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 type Sample = ReviewSample;
 
@@ -137,9 +137,9 @@ function datasetCsvPreview(): FilePreview {
   };
 }
 async function baseTileSample(id: string, label: string, slug: string, base: string) {
-  const names = PREF_NAMES as string[];
+  const names = fetchPrefectures().map((prefecture) => prefecture.prefName);
   const chart = rankingChartFromArticleData(await json(blog(slug, base)), {
-    allowBaseArea: true, prefCodeOf: (name) => String(names.indexOf(name) + 1).padStart(2, '0'), prefNameOf: (code) => names[Number(code) - 1],
+    allowBaseArea: true, prefCodeOf: (name) => to2DigitPrefCode(names.indexOf(name) + 1), prefNameOf: (code) => names[Number(code) - 1],
   });
   if ('skip' in chart) throw Error(`${base}: ${chart.skip}`);
   return both(id, label, (theme) => renderTileMapChart(chart, theme));
@@ -226,7 +226,7 @@ async function main() {
     'grouped-bar': [await groupedSample('grouped-month', '12 か月 × 3 年', 'beer-peak-month-july-to-december', 'beer-months-by-year-timeseries')],
     chord: [
         both('chord-region', '地方別', (theme) => renderChordChart({ title: '地方のあいだの人の移動', ...chordHead, ...regionChordNodes(pairs) }, theme)),
-        both('chord-pref', '都道府県別', (theme) => renderChordChart({ title: '都道府県のあいだの人の移動', ...chordHead, ...prefectureChordNodes(pairs, PREF_NAMES as string[]) }, theme)),
+        both('chord-pref', '都道府県別', (theme) => renderChordChart({ title: '都道府県のあいだの人の移動', ...chordHead, ...prefectureChordNodes(pairs, fetchPrefectures().map((prefecture) => prefecture.prefName)) }, theme)),
     ],
     radar: [
         await radarSample('radar-two', '2 県と中央値', 'tokyo-kyoto-radar'),

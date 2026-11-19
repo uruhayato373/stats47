@@ -22,8 +22,8 @@ import path from "node:path";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const store = require("../lib/sns-posts-store.cjs");
-const metricsStore = require("../lib/sns-metrics-store.cjs");
+const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
+const metricsStore = require("../../../packages/ops/src/sns/sns-metrics-store.cjs");
 
 const APPLY = process.argv.includes("--apply");
 const SKIP_NETWORK = process.argv.includes("--skip-network");

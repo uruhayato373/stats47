@@ -1,3 +1,7 @@
+import {
+  MINI_PREFECTURE_MAP_HEIGHT,
+  MINI_PREFECTURE_MAP_WIDTH,
+} from '@stats47/visualization/server';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -54,6 +58,21 @@ describe('RankingLinkCard', () => {
     expect(screen.getByText('大阪府')).toBeInTheDocument();
     expect(screen.getByTestId('mini-map')).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledWith('/api/ranking-card/happoshu-consumption-expenditure');
+  });
+
+  it('地図の枠の比率はサムネイル SVG の viewBox (40:21) と一致する', async () => {
+    mockFetch(DATA);
+    const { container } = renderCard();
+
+    await screen.findByText('高知県');
+    // Tailwind は動的クラスを拾えないので、比率は文字列リテラルで書き、定数との一致をここで固定する。
+    const frame = screen.getByTestId('mini-map').parentElement;
+    const divisor = (a: number, b: number): number => (b === 0 ? a : divisor(b, a % b));
+    const gcd = divisor(MINI_PREFECTURE_MAP_WIDTH, MINI_PREFECTURE_MAP_HEIGHT);
+    const ratioClass = `aspect-${MINI_PREFECTURE_MAP_WIDTH / gcd}/${MINI_PREFECTURE_MAP_HEIGHT / gcd}`;
+    expect(ratioClass).toBe('aspect-40/21');
+    expect(frame).toHaveClass(ratioClass);
+    expect(container.querySelector('[class*="aspect-320/190"]')).toBeNull();
   });
 
   it('データが無い指標では地図と上位欄を畳み、リンクだけを残す', async () => {

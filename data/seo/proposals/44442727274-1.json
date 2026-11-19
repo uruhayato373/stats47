@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "44442727274-1",
+  "status": "implementation-needed",
+  "keyword": "阿波市 人口",
+  "targetPath": "/areas/36000/cities/36206",
+  "needs": "徳島県阿波市の「今の人口は何人か」を知りたい人が検索している。人数の桁まで確認でき、国勢調査か住民基本台帳かの基準も分かる回答が求められている。",
+  "gap": "対象ページ（平均掲載順位7.06・表示714回・クリック0）のtitleとdescriptionは「3.2万人（2025年）」と万人単位に丸めた値だけを示し、数値の基準は書かれていない。比較ページは34,188人（住民基本台帳2025年）や34,713人（2020年国勢調査）と人数を桁まで出し、基準を明記している。本文の31,527人（2025年）の出典は、今回取得した本文からは確認できなかった。",
+  "done": "editableFileがnullで、title・descriptionは全市区町村共通のテンプレート関数buildCityPageMeta（packages/ranking/src/municipalities/municipality-page-meta.ts）が生成するため、文字列の置換では直せない。関数内のコメントによると、現行titleは効果判定中（MUNI-PAGE-SEO-01、判定日2026-11-21）で、整形変更はMUNI-TITLE-MAGNITUDE-01として判定後に行う計画になっている。判定後に同カードで、titleの人口を万人丸めからformatMunicipalityValueTextによる桁まで出した人数へ変え、出典の種類を添える。完了条件は、city-databook.test.tsの更新と、全市区町村のtitle長の確認。",
+  "method": "title",
+  "competitors": [
+    {
+      "url": "https://www.seikatsu-guide.com/info/36/36206/1/",
+      "findings": "阿波市の人口を国勢調査2020年の34,713人（世帯12,989）と住民基本台帳2025年1月1日の34,188人で併記している。人数は桁まで示し、年齢3区分の割合、2050年までの将来推計、増減比率、出生・死亡数も載せる。出典と基準日は明記されている。"
+    },
+    {
+      "url": "https://opengov-jp.pages.dev/en/population/estimates/tokushima/awa/",
+      "findings": "住民基本台帳の2025年の人数34,188人（前年比585人減）、男女別、年齢3区分、高齢化率39.2%を示す。2006〜2025年の推移グラフと表がある。出典は総務省の住民基本台帳とし、国勢調査には触れていない。"
+    },
+    {
+      "url": "https://stats47.jp/areas/36000/cities/36206",
+      "findings": "本文は総人口31,527人（2025年・県内7位）、5年間で−9.18%、年齢別割合、世帯、出生・死亡、転入超過など幅広い。人口の出典と基準日は本文からは明記を確認できなかった。titleとdescriptionは「3.2万人」の丸め表記のみ。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/areas/36000/cities/36206",
+      "status": 200,
+      "fetchedAt": "2026-11-19T02:15:15.960Z",
+      "inputHash": "7ea4bccd3a359851a72f93f482667df0fdfee6cf44e70c2ad6c7ae14585a4461",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "8289db36f522630cc25c2d700e5d4948eec8eff1755af6cecb289a0fd245663d",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "aae470e466cbdb7abef0c6b7958f6c3f310586d8b02d400abd6a8ac094377160"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "阿波市 人口"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/areas/36000/cities/36206"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.seikatsu-guide.com/info/36/36206/1/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://opengov-jp.pages.dev/en/population/estimates/tokushima/awa/"
+      }
+    ]
+  },
+  "selectedAt": "2026-11-19",
+  "inputHash": "7ea4bccd3a359851a72f93f482667df0fdfee6cf44e70c2ad6c7ae14585a4461",
+  "methods": [],
+  "files": []
+}

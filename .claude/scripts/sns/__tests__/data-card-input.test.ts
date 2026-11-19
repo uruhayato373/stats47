@@ -14,7 +14,7 @@ import {
   rankDirection,
   type RankingRow,
   type ReadJson,
-} from '../lib/data-card-input';
+} from '../../../../apps/remotion/src/features/data-cards/data-card-input';
 import { rankLabelPositions } from '../../../../apps/remotion/src/features/data-cards/model';
 
 // Deliberately synthetic fixtures; no network and no publication output.

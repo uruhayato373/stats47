@@ -1,6 +1,6 @@
 import 'server-only';
 import { ZodError } from 'zod';
-import { WorkspaceError } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import { WorkspaceError } from '@stats47/ops/media/workspace.mjs';
 import { errorResponse } from './http';
 export function assertWorkspaceMutation(req: Request, json = true) {
   const url = new URL(req.url),

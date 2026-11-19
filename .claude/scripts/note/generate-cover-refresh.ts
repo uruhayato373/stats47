@@ -1,4 +1,4 @@
-import { rankingR2Key, statsR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key, statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /** 公開カバーの棚卸し入力から、既存GIS+検証済みデータで派生画像を制作する。note書込なし。 */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -29,16 +29,16 @@ import {
 } from './catalog/cover-designs';
 import { RANKING_STORY_COVER_COPY } from './catalog/ranking-story-cover-copy';
 import { neutralJapanMap, swatchPanel, figureImage, choroplethPanel } from './lib/cover-visuals';
-import { NOTE_ARTICLES } from './catalog';
+import { NOTE_ARTICLES } from '../../../packages/ops/src/note/catalog';
 import { noteCoverCategory } from './catalog/cover-categories';
 import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from './lib/question-cover-data.mjs';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
-import { assertCoverGenerationType } from './lib/cover-assets.mjs';
+import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
+import { assertCoverGenerationType } from '../../../packages/ops/src/note/cover-assets.mjs';
 import { topologyFeatures, fittedMercator, heightFittedMercator, largestPolygon } from '../../../packages/gis/src/map/geometry.mjs';
 async function main() {
   assertCoverGenerationType('note-covers');
-  const { fetchCoverSource, createCoverStore } = await import('./lib/cover-storage.mjs');
-  const { registerCoverCandidate } = await import('./lib/cover-ingest.mjs');
+  const { fetchCoverSource, createCoverStore } = await import('../../../packages/ops/src/note/cover-storage.mjs');
+  const { registerCoverCandidate } = await import('../../../packages/ops/src/note/cover-ingest.mjs');
   const ROOT = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
     '../../..'

@@ -1,5 +1,11 @@
+import {
+  extractPrefectureCode,
+  isOkinawaAreaCode,
+  prefCodeFromTopoProperties,
+  to2DigitPrefCode,
+} from '@stats47/area/area-code';
 import { DEFAULT_SEQUENTIAL_SCHEME, d3KeyOfColorScheme } from '@stats47/types';
-import { geoCentroid, type GeoProjection } from 'd3-geo';
+import { geoPath, type GeoProjection } from 'd3-geo';
 import * as d3chromatic from 'd3-scale-chromatic';
 import type {
   Feature,
@@ -10,7 +16,15 @@ import type {
 import type { Topology } from 'topojson-specification';
 
 import prefectureTopology from './prefecture-topology.generated.json';
-import { topologyFeatures, fittedMercator, mercator } from '../../../gis/src/map/geometry.mjs';
+import {
+  dropSmallIslands,
+  fittedMercator,
+  isMainlandPolygon,
+  MAINLAND_BBOX,
+  mercator,
+  type LonLatBox,
+  topologyFeatures,
+} from '../../../gis/src/map/geometry.mjs';
 
 /**
  * 配色を解決する。語彙とd3の実名は `@stats47/types` のカタログが SSOT (2026-07-31)。
@@ -29,9 +43,20 @@ function resolveInterpolator(colorScheme?: string): (t: number) => string {
   return d3chromatic.interpolateBlues;
 }
 
-const WIDTH = 320;
-const HEIGHT = 190;
+/** home の都道府県入口 (overview) の枠。ランキングのサムネイルとは別の寸法。 */
+const OVERVIEW_WIDTH = 320;
+const OVERVIEW_HEIGHT = 190;
 const MAP_PADDING = 4;
+/**
+ * overview が本土として描く範囲。屋久島・種子島を含む既存の見た目を保つため、
+ * 共通の MAINLAND_BBOX (buzz-map と同じ範囲) より広く取る。サムネイルは共通の範囲を読む。
+ */
+const OVERVIEW_MAINLAND_BBOX: LonLatBox = {
+  west: 128,
+  east: 146,
+  south: 30,
+  north: 46,
+};
 const OVERVIEW_MAINLAND_LEFT = 48;
 const OVERVIEW_OKINAWA_INSET = {
   x: 4,
@@ -39,6 +64,20 @@ const OVERVIEW_OKINAWA_INSET = {
   width: 56,
   height: 56,
 } as const;
+/**
+ * ランキングのサムネイルの枠 (viewBox)。40:21 で、カード側の比率 (`aspect-40/21`) と一致させる。
+ * 小さな島を外して本土を大きく描くため、横長の枠に余白を詰めて収める。
+ */
+export const MINI_PREFECTURE_MAP_WIDTH = 320;
+export const MINI_PREFECTURE_MAP_HEIGHT = 168;
+/** サムネイルの外周の余白 (viewBox 単位)。 */
+const MINI_MAP_PADDING = 2;
+/**
+ * 小さな島を外す面積の下限 (km²)。各県の最大の多角形は常に残す。
+ * 佐渡 (855)・淡路 (592)・福江島 (326)・対馬 (2 島とも 200 超) は残り、
+ * 小豆島 (154)・利尻 (181)・奥尻 (143)・伊豆諸島・小笠原は外れる。
+ */
+export const MINI_PREFECTURE_MIN_ISLAND_AREA_KM2 = 200;
 export const MINI_PREFECTURE_THUMBNAIL_LAYOUT = {
   mainlandClockwiseRotationDegrees: 32,
   okinawa: 'excluded',
@@ -48,11 +87,10 @@ export const MINI_PREFECTURE_THUMBNAIL_LAYOUT = {
  * どうかを消費側 (home featured) が判定するための非表示 marker。
  * 表現を非互換に変えるときだけ番号を上げる。
  */
-export const MINI_PREFECTURE_MAP_FORMAT = 'compact-v1';
+export const MINI_PREFECTURE_MAP_FORMAT = 'compact-v2';
 const T_MIN = 0.18;
 const T_MAX = 0.95;
 const NO_DATA_COLOR = '#e5e7eb';
-const TOP_RING_COLOR = '#f59e0b';
 const OVERVIEW_REGION_OPACITY = [
   0.24, 0.3, 0.38, 0.46, 0.54, 0.42, 0.34, 0.5, 0.58,
 ] as const;
@@ -66,9 +104,9 @@ type ScreenPoint = readonly [number, number];
 
 let prefectureFeaturesCache: Feature[] | null = null;
 
-function normalizePrefCode(value: unknown): number | null {
-  const code = String(value ?? '').match(/\d{2}/)?.[0];
-  return code ? Number(code) : null;
+/** 2 桁の都道府県コード (正本の関数が返す) を数値にする。取れなければ null。 */
+function toPrefNumber(code: string | null): number | null {
+  return code === null ? null : Number(code);
 }
 
 export function readPrefectureFeatures(): Feature[] {
@@ -83,7 +121,10 @@ export function readPrefectureFeatures(): Feature[] {
   return prefectureFeaturesCache;
 }
 
-function keepMainlandPolygons(featureItem: Feature): Feature | null {
+function keepMainlandPolygons(
+  featureItem: Feature,
+  bbox: LonLatBox = MAINLAND_BBOX
+): Feature | null {
   if (
     featureItem.geometry.type !== 'Polygon' &&
     featureItem.geometry.type !== 'MultiPolygon'
@@ -95,10 +136,9 @@ function keepMainlandPolygons(featureItem: Feature): Feature | null {
     featureItem.geometry.type === 'Polygon'
       ? [featureItem.geometry.coordinates]
       : featureItem.geometry.coordinates;
-  const mainlandPolygons = polygons.filter((coordinates) => {
-    const [lon, lat] = geoCentroid({ type: 'Polygon', coordinates });
-    return lon >= 128 && lon <= 146 && lat >= 30 && lat <= 46;
-  });
+  const mainlandPolygons = polygons.filter((coordinates) =>
+    isMainlandPolygon(coordinates, bbox)
+  );
   if (mainlandPolygons.length === 0) return null;
 
   return {
@@ -266,7 +306,7 @@ let miniMainlandGeometryCache: MiniMainlandShape[] | null = null;
  * mini thumbnail の本土形状を1回だけ投影・簡略化して保持する。
  *
  * projection と地理形状は引数 (順位・配色) に依存しないため、カードごとに
- * 再投影・再文字列化する必要がない。順位由来の fill と1位リングは呼び出しごとに
+ * 再投影・再文字列化する必要がない。順位由来の fill は呼び出しごとに
  * 計算するので、色を含む完成SVGはここで cache しない。
  */
 function readMiniMainlandGeometry(): MiniMainlandShape[] {
@@ -274,10 +314,14 @@ function readMiniMainlandGeometry(): MiniMainlandShape[] {
 
   const mainlandFeatures = readPrefectureFeatures()
     .filter(
-      (prefecture) => normalizePrefCode(prefecture.properties?.N03_007) !== 47
+      (prefecture) => !isOkinawaAreaCode(prefecture.properties?.N03_007 ?? '')
     )
-    .map(keepMainlandPolygons)
-    .filter((prefecture): prefecture is Feature => prefecture !== null);
+    .map((prefecture) => keepMainlandPolygons(prefecture))
+    .filter((prefecture): prefecture is Feature => prefecture !== null)
+    // 小さな島は縮小したサムネイルでは点にもならず輪郭だけを重くする。overview は外さない。
+    .map((prefecture) =>
+      dropSmallIslands(prefecture, MINI_PREFECTURE_MIN_ISLAND_AREA_KM2)
+    );
   const mainlandCollection: FeatureCollection = {
     type: 'FeatureCollection',
     features: mainlandFeatures,
@@ -287,18 +331,29 @@ function readMiniMainlandGeometry(): MiniMainlandShape[] {
     .angle(-MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees)
     .fitExtent(
       [
-        [MAP_PADDING, MAP_PADDING],
-        [WIDTH - MAP_PADDING, HEIGHT - MAP_PADDING],
+        [MINI_MAP_PADDING, MINI_MAP_PADDING],
+        [
+          MINI_PREFECTURE_MAP_WIDTH - MINI_MAP_PADDING,
+          MINI_PREFECTURE_MAP_HEIGHT - MINI_MAP_PADDING,
+        ],
       ],
       mainlandCollection
     );
+  // 本土は横長で枠の幅いっぱいになり、縦に余りが出る。余りは上に寄せ、本土を枠の右下に置く。
+  // 左上 (日本海側) に上位 3 県の文字を重ねる空きができる。
+  const [, [, mainlandBottom]] = geoPath(mainlandProjection).bounds(
+    mainlandCollection
+  );
+  const [translateX, translateY] = mainlandProjection.translate();
+  mainlandProjection.translate([
+    translateX,
+    translateY + (MINI_PREFECTURE_MAP_HEIGHT - MINI_MAP_PADDING - mainlandBottom),
+  ]);
 
   miniMainlandGeometryCache = mainlandFeatures.map((prefecture) => {
     const properties = prefecture.properties ?? {};
     return {
-      prefCode: normalizePrefCode(
-        properties.N03_007 ?? properties.prefCode ?? properties.code
-      ),
+      prefCode: toPrefNumber(prefCodeFromTopoProperties(properties)),
       path: compactProjectedPath(prefecture, mainlandProjection),
     };
   });
@@ -321,12 +376,14 @@ export function generatePrefectureOverviewSvg(): string {
   const prefectureFeatures = readPrefectureFeatures();
   const mainlandFeatures = prefectureFeatures
     .filter(
-      (prefecture) => normalizePrefCode(prefecture.properties?.N03_007) !== 47
+      (prefecture) => !isOkinawaAreaCode(prefecture.properties?.N03_007 ?? '')
     )
-    .map(keepMainlandPolygons)
+    .map((prefecture) =>
+      keepMainlandPolygons(prefecture, OVERVIEW_MAINLAND_BBOX)
+    )
     .filter((prefecture): prefecture is Feature => prefecture !== null);
   const okinawa = prefectureFeatures.find(
-    (prefecture) => normalizePrefCode(prefecture.properties?.N03_007) === 47
+    (prefecture) => isOkinawaAreaCode(prefecture.properties?.N03_007 ?? '')
   );
   const mainlandCollection: FeatureCollection = {
     type: 'FeatureCollection',
@@ -335,7 +392,7 @@ export function generatePrefectureOverviewSvg(): string {
   const mainlandProjection = fittedMercator(
     [
       [OVERVIEW_MAINLAND_LEFT, MAP_PADDING],
-      [WIDTH - MAP_PADDING, HEIGHT - MAP_PADDING],
+      [OVERVIEW_WIDTH - MAP_PADDING, OVERVIEW_HEIGHT - MAP_PADDING],
     ],
     mainlandCollection
   );
@@ -360,7 +417,7 @@ export function generatePrefectureOverviewSvg(): string {
     : null;
 
   const renderShape = (prefecture: Feature, pathValue: string) => {
-    const prefCode = normalizePrefCode(prefecture.properties?.N03_007);
+    const prefCode = toPrefNumber(prefCodeFromTopoProperties(prefecture.properties));
     if (prefCode === null) return '';
     return `<path data-pref-code="${String(prefCode).padStart(2, '0')}" d="${pathValue}" fill="${overviewFill(prefCode)}" fill-rule="evenodd" stroke="hsl(var(--background))" stroke-width="0.85" stroke-linejoin="round"/>`;
   };
@@ -376,7 +433,7 @@ export function generatePrefectureOverviewSvg(): string {
       : '';
 
   prefectureOverviewSvgCache = [
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-layout="prefecture-overview" data-map-rotation="none" data-okinawa="inset">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${OVERVIEW_WIDTH} ${OVERVIEW_HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-layout="prefecture-overview" data-map-rotation="none" data-okinawa="inset">`,
     `<rect x="${OVERVIEW_OKINAWA_INSET.x}" y="${OVERVIEW_OKINAWA_INSET.y}" width="${OVERVIEW_OKINAWA_INSET.width}" height="${OVERVIEW_OKINAWA_INSET.height}" fill="none" stroke="hsl(var(--border))" stroke-width="0.8"/>`,
     mainlandShapes.join(''),
     okinawaShape,
@@ -402,16 +459,16 @@ export function generateMiniPrefectureSvg(
     isReversed ? a.value - b.value : b.value - a.value
   );
   const derivedRank = new Map(
-    sorted.map((row, index) => [row.areaCode.slice(0, 2), index + 1])
+    sorted.map((row, index) => [to2DigitPrefCode(row.areaCode), index + 1])
   );
   const rankByCode = new Map<number, number>();
 
   for (const row of data) {
-    const prefCode = normalizePrefCode(row.areaCode);
+    const prefCode = toPrefNumber(extractPrefectureCode(row.areaCode));
     if (prefCode === null) continue;
     rankByCode.set(
       prefCode,
-      row.rank ?? derivedRank.get(row.areaCode.slice(0, 2)) ?? data.length
+      row.rank ?? derivedRank.get(to2DigitPrefCode(row.areaCode)) ?? data.length
     );
   }
 
@@ -426,12 +483,12 @@ export function generateMiniPrefectureSvg(
       rank === undefined
         ? NO_DATA_COLOR
         : interpolator(T_MIN + rankT * (T_MAX - T_MIN));
-    const isTop = rank === 1;
-    return `<path d="${path}" fill="${fill}" stroke="${isTop ? TOP_RING_COLOR : '#fff'}" stroke-width="${isTop ? 2.2 : 0.75}" stroke-linejoin="round"/>`;
+    // 1 位の県を線で囲まない。凡例が無く意味が伝わらず、同率 1 位で 2 県に付くと誤読される (2026-11-19 オーナー判断)
+    return `<path d="${path}" fill="${fill}" stroke="#fff" stroke-width="0.75" stroke-linejoin="round"/>`;
   });
 
   return [
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WIDTH} ${HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-rotation="clockwise-${MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees}" data-okinawa="${MINI_PREFECTURE_THUMBNAIL_LAYOUT.okinawa}" data-map-format="${MINI_PREFECTURE_MAP_FORMAT}">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MINI_PREFECTURE_MAP_WIDTH} ${MINI_PREFECTURE_MAP_HEIGHT}" preserveAspectRatio="xMidYMid meet" data-map-rotation="clockwise-${MINI_PREFECTURE_THUMBNAIL_LAYOUT.mainlandClockwiseRotationDegrees}" data-okinawa="${MINI_PREFECTURE_THUMBNAIL_LAYOUT.okinawa}" data-map-format="${MINI_PREFECTURE_MAP_FORMAT}">`,
     shapes.join(''),
     '</svg>',
   ].join('');

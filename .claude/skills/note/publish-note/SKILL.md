@@ -336,7 +336,7 @@ PUBLISHED_AT="YYYY-MM-DD"
 
 # 2. 記事台帳の該当レコードに公開記録を書く
 NOTE_URL="$NOTE_URL" SLUG="$SLUG" PUBLISHED_AT="$PUBLISHED_AT" node --input-type=module -e '
-import { updateArticleLedger, findLedgerArticle } from "./.claude/scripts/note/lib/article-ledger.mjs";
+import { updateArticleLedger, findLedgerArticle } from "./packages/ops/src/note/article-ledger.mjs";
 updateArticleLedger((l) => Object.assign(findLedgerArticle(l, process.env.SLUG),
   { status: "published", noteUrl: process.env.NOTE_URL, publishedAt: process.env.PUBLISHED_AT }));'
 

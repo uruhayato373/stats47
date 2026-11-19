@@ -1,4 +1,4 @@
-import { R2_PUBLIC_ORIGIN } from "../../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN } from "../../../../packages/r2-storage/mirror/r2-keys.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -17,7 +17,7 @@ import {
 } from "../lib/ui-findings.ts";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog } = require("../../lib/backlog-lib.cjs");
+const { parseBacklog } = require("../../../../packages/ops/src/management/backlog-lib.cjs");
 
 const AUDIT_AT = "2026-10-03T18:40:00.000Z";
 const violation = (over = {}) => ({

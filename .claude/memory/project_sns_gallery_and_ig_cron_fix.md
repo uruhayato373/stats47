@@ -13,7 +13,7 @@ SNS 投稿ギャラリー管理画面 + IG cron 修正 + R2 コスト対策 (fea
 - 起動: `npm run admin` → http://127.0.0.1:4747/ (skill `/admin-console`。`PORT=` で上書き可)
 - **実装は独立 Next.js アプリ `apps/admin`** (App Router・127.0.0.1 bind 固定。**2026-07-16 に旧 node:http + vanilla JS 実装 `.claude/scripts/gallery/` から完全移管・旧実装と `sns:gallery` alias は削除**。構成・安全ガードは `apps/admin/README.md`)
 - **主要画面**: `/` ホーム(件数サマリ) / `/sns` SNS投稿 / `/ops/image-library` 画像ライブラリ (OGP・リンクカード・note・SNS・ブログ SVG。旧 `/assets`・`/svg` は 2026-10-27 に廃止)
-- **共有 collector**: `.claude/scripts/lib/gallery-collectors.mjs`(列挙 buildTab/note-image/video)+`svg-classify.mjs`(分類)を CI 静的ギャラリー `ogp/build-image-gallery.mjs`(--audit 週次ゲート)と共用。R2 list 不可 → sitemap/all.json/note state/archive-manifest 起点+HEAD probe
+- **共有 collector**: `packages/ops/src/media/gallery-collectors.mjs`(列挙 buildTab/note-image/video)+`svg-classify.mjs`(分類)を CI 静的ギャラリー `ogp/build-image-gallery.mjs`(--audit 週次ゲート)と共用。R2 list 不可 → sitemap/all.json/note state/archive-manifest 起点+HEAD probe
 - SNS: `/sns` は投稿ID台帳。画像一覧/表、ID・本文検索、型/状態フィルタ、予約順・JST表示、Drive保全素材のプレビュー。2026-10-11 オーナー指示で下書き本文編集を追加。保存時は版を検査し承認待ちへ戻す。操作契約は `apps/admin/README.md`「SNSのID台帳」「安全ガード」
 - 管理画面の書込は下書き本文だけ。予約・投稿・生成はowner agent/skillが担う。予約済み・公開済みの本文は閲覧用
 - SNS素材は投稿IDに紐づくDrive保全素材を優先し、ローカル/R2へフォールバック。家計レシート・県図鑑・順位乗換も一覧と型フィルタに対応
@@ -39,6 +39,6 @@ SNS 投稿ギャラリー管理画面 + IG cron 修正 + R2 コスト対策 (fea
 
 ## 画像台帳の初回保存 (2026-10-27)
 - **問題**: 全画像の取得後、未作成の `data/content-operations/live/` 配下にロックを開いて ENOENT で保存に失敗した。
-- **原因・対策**: `.claude/scripts/media/lib/web-inventory.mjs` は親ディレクトリ作成をロック取得より先に行う。既存台帳のある環境だけで検証せず、`workspace.test.mjs` の空の一時rootへの初回保存・再読込テストを通す。
+- **原因・対策**: `packages/ops/src/media/web-inventory.mjs` は親ディレクトリ作成をロック取得より先に行う。既存台帳のある環境だけで検証せず、`workspace.test.mjs` の空の一時rootへの初回保存・再読込テストを通す。
 
 [[project_sns_reorg_2026_07]] [[feedback_shared_working_copy_git_race]]

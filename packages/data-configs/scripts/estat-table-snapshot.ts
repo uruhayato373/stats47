@@ -54,7 +54,7 @@ export async function loadTableMetadata(statsDataId: string, transport: typeof f
   const table = object(meta.TABLE_INF);
   if (table["@id"] !== statsDataId) throw new Error("Catalog table ID mismatch");
   const axes = readAxes(object(meta.CLASS_INF).CLASS_OBJ);
-  const url = new URL("../../../.claude/scripts/lib/estat-catalog/normalize.mjs", import.meta.url);
+  const url = new URL("../../estat-api/src/catalog/normalize.mjs", import.meta.url);
   const { summarizeMeta } = await import(url.href) as { summarizeMeta: (value: unknown) => { has47Pref: boolean; prefDim: string | null } };
   const summary = summarizeMeta(api);
   const { METRICS_REGISTRY } = await import("../src/registry.js");
@@ -227,7 +227,7 @@ export async function readSnapshotForPush(statsDataId: string, outDir: string) {
 
 type SnapshotLedger = { schemaVersion: number; tables: { statsDataId: string; manifestSha256: string; status: string }[] };
 async function checkedLedger(manifestBytes: Buffer, ledgerPath: string) {
-  const { assertDatasetShape } = await import(new URL("../../../.claude/scripts/lib/dataset-shape.mjs", import.meta.url).href) as {
+  const { assertDatasetShape } = await import("@stats47/ops/datasets/dataset-shape.mjs") as {
     assertDatasetShape: (id: string, value: unknown) => void;
   };
   const ledger = JSON.parse(await readFile(ledgerPath, "utf8")) as SnapshotLedger;
@@ -253,7 +253,7 @@ export async function markSnapshotPushed(manifestBytes: Buffer, ledgerPath: stri
 
 /** Register each complete table immediately, so interrupted multi-table runs can resume. */
 export async function registerLocalSnapshot(manifestBytes: Buffer, ledgerPath: string) {
-  const { assertDatasetShape } = await import(new URL("../../../.claude/scripts/lib/dataset-shape.mjs", import.meta.url).href) as {
+  const { assertDatasetShape } = await import("@stats47/ops/datasets/dataset-shape.mjs") as {
     assertDatasetShape: (id: string, value: unknown) => void;
   };
   const ledger = JSON.parse(await readFile(ledgerPath, "utf8")) as SnapshotLedger;

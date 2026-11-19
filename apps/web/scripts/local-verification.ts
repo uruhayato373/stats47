@@ -8,9 +8,9 @@ import process from "node:process";
 import { rm } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
-import { changedFilesSince } from "../../../.claude/scripts/page-quality/lib/git-diff";
-import { affectedTemplates } from "../../../.claude/scripts/page-quality/templates";
-import { classifyPrQualityPaths } from "../../../.claude/scripts/lib/plan-pr-quality.mjs";
+import { changedFilesSince } from "@stats47/ops/page-quality/lib/git-diff";
+import { affectedTemplates } from "@stats47/ops/page-quality/templates";
+import { classifyPrQualityPaths } from "@stats47/ops/ci/plan-pr-quality.mjs";
 import { SITE } from "@stats47/types";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));

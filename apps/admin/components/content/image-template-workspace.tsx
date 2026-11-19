@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import type { Template } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import type { Template } from '@stats47/ops/media/workspace.mjs';
 import { TemplateGallery } from './image-template-gallery';
 import type { StatisticalSampleView } from '@/lib/image-template-basics';
 

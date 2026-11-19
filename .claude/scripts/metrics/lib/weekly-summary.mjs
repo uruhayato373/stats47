@@ -13,7 +13,7 @@
  * テスト: .claude/scripts/metrics/__tests__/weekly-summary.test.mjs
  */
 
-import { resolvePeriods, assessDailyCoverage, periodMetadata } from "./periods.mjs";
+import { resolvePeriods, assessDailyCoverage, periodMetadata } from "../../../../packages/ops/src/metrics/periods.mjs";
 
 export const SUMMARY_SCHEMA_VERSION = 2;
 export const SUMMARY_FILE = "summary.json";

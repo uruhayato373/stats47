@@ -1,5 +1,6 @@
 'use client';
 
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { GRADUATION_PATHS_SOURCE } from '@stats47/data-configs/theme-catalog';
 
@@ -31,7 +32,7 @@ export function ThemeGraduationPathsClient({
       </ChartPanel>
     );
   const areaLabel =
-    view.areaCode === '00000' ? '全国（公式集計）' : view.areaName;
+    isNationalAreaCode(view.areaCode) ? '全国（公式集計）' : view.areaName;
   return (
     <div
       className="min-w-0"

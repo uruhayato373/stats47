@@ -22,7 +22,7 @@
  *
  * 散文の一般的な数値 (「全国平均を上回る県は21」等) は見ない。文脈が閉じており
  * 何と比べるべきかが機械には決まらないため。値の網羅的な照合は
- * `.claude/scripts/ai-content/lib/number-audit.mjs` が ai-content 側で担う。
+ * `packages/ai-content/src/audit/number-audit.mjs` が ai-content 側で担う。
  *
  * ## 年は 2 通りの見方をする
  *

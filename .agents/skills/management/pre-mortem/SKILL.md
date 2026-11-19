@@ -35,7 +35,7 @@ echo "articles:         $(curl -s "$R2/app/blog/all.json" | jq '.articles | leng
 # 相関ペア総数
 echo "correlations:     $(curl -s "$R2/app/correlation/stats.json" | jq '.total')"
 # SNS 投稿件数は投稿台帳 posts.json から:
-node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");console.log("sns_posts:",s.loadAll().length)'
+node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");console.log("sns_posts:",s.loadAll().length)'
 # area_profiles は Derived（エフェメラル計算 → R2 app/areas/<code>/profile.json、47 都道府県分）
 # 全 metric 定義（inactive 含む）を数えるなら git TS: ls data/metrics/*.ts | wc -l
 ```

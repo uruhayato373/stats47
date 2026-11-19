@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Keep single-attempt HTTP handling and the unmodified API error payload.
 import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
-import { extractYearCode } from "../lib/year-code.mjs";
+import { extractYearCode } from "../../../packages/estat-api/mirror/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * fetch-kakei-monthly.mjs — 家計調査 (全国・二人以上の世帯) の月次品目データと消費者物価指数 (CPI) から

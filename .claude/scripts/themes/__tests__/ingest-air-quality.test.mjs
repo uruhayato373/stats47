@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { extractAirQualityTable, verifyAirSource } from '../ingest-air-quality.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 
 // Synthetic distribution with the independently published national margins.
 // Deliberately make total/valid/compliant different so swapped columns cannot pass.

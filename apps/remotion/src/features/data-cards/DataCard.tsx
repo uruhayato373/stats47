@@ -9,6 +9,7 @@ import {
   type DataCard as Card,
   type DataCardProps,
 } from './model';
+import { to2DigitPrefCode } from '@stats47/area/area-code';
 
 const fmt = (v: number) =>
   v.toLocaleString('ja-JP', { maximumFractionDigits: 6 });
@@ -178,7 +179,7 @@ function Receipt({
 function Atlas({ card }: { card: Extract<Card, { kind: 'area-atlas' }> }) {
   return (
     <Shell background={C.paper}>
-      <Header tag={`地域のデータアトラス / ${card.areaCode.slice(0, 2)}`} />
+      <Header tag={`地域のデータアトラス / ${to2DigitPrefCode(card.areaCode)}`} />
       <div style={{ position: 'absolute', left: 64, top: 192 }}>
         <div style={{ fontSize: 26, letterSpacing: 6, color: C.primary }}>
           PREFECTURE FILE

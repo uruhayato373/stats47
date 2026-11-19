@@ -1,3 +1,4 @@
+import { isNationalAreaCode } from '@stats47/area/area-code';
 import { GRADUATION_PATHS_SOURCE } from '@stats47/data-configs/theme-catalog';
 
 import type { GraduationPathsSnapshot } from './graduation-paths-snapshot';
@@ -8,7 +9,7 @@ export function selectGraduationPathsView(
   areaCode: string | null
 ) {
   const area =
-    areaCode === null || areaCode === '00000'
+    areaCode === null || isNationalAreaCode(areaCode)
       ? snapshot.national
       : snapshot.rows.find((row) => row.areaCode === areaCode);
   if (!area) return null;

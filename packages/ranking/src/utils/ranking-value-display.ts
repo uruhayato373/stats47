@@ -1,4 +1,6 @@
+import { PREFECTURE_CAPITAL_CITY_NAMES } from "@stats47/area";
 import { formatChartValue, formatUnitForDisplay, resolveMetricDisplayScale } from "@stats47/data-configs/unit";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
 import type { RankingItem } from "../types/ranking-item";
 
@@ -32,15 +34,6 @@ export function resolveRankingValueDisplay(
 }
 
 /**
- * 値を整形済みの文字で持つ面 (ブログ本文のランキングカードの上位 3 県) のために、行の値を表示単位へ直す。
- * 順位は元の値で付いたものをそのまま使う。表示単位が無ければ行をそのまま返す。
- */
-export function applyRankingValueDisplay<T extends { value: number | null }>(rows: readonly T[], display: RankingValueDisplay | null): T[] {
-  if (!display) return [...rows];
-  return rows.map((row) => (row.value === null ? row : { ...row, value: Number((row.value * display.factor).toFixed(display.precision)) }));
-}
-
-/**
  * 整形済みの文字で届く 1 つの値 (R2 に焼いた 1 位の値「656,171,677」) を、表示単位で書き直す
  * (注目カードと一覧の「1 位」の列。UNIT-NOTATION-FORMAT-01)。「656,171,677千円」を「6,562億円」と書く。
  * 決め方はランキングのページと同じ `resolveRankingValueDisplay` で、定義の表示単位があればそれ、無ければ図の規則。
@@ -58,4 +51,70 @@ export function formatFeaturedValueDisplay(
   const display = resolveRankingValueDisplay(item, [number]);
   if (!display) return unchanged;
   return { value: formatChartValue(number, { factor: display.factor, decimals: display.precision }), unit: display.unit };
+}
+
+/**
+ * ランキングの値を 1 つ書く。ランキングのページの表・ヘッダーと同じ書き方 (表示単位への換算と小数桁)。
+ * precision と factor は `resolveRankingValueDisplay` か `resolveValuePrecision` で、データセット全体から 1 回決める。
+ * 換算するときは単位の正典の `formatChartValue` で書き、0 でないのに 0 に丸まる値を「0.1未満」にする。
+ */
+export function formatRankingValue(value: number, precision = 1, factor = 1): string {
+  if (factor !== 1) return formatChartValue(value, { factor, decimals: precision });
+  return formatValueWithPrecision(value, precision);
+}
+
+/** 上位の行 1 つ (順位・地域名・表示単位で書いた値) */
+export interface FeaturedTopRow {
+  rank: number;
+  areaName: string;
+  value: string;
+}
+
+/** カードに並べる上位の行と、その単位 */
+export interface FeaturedTopRows {
+  unit: string;
+  rows: FeaturedTopRow[];
+}
+
+/** 上位の行を作る入力の最小形 (values.json の行) */
+interface FeaturedTopValueRow {
+  areaCode: string;
+  areaName: string;
+  value: number | null;
+  rank: number | null;
+}
+
+/** 注目のランキングのカードに並べる順位の上限 (同率で上限の順位に並ぶ行も入れる) */
+export const FEATURED_TOP_RANK_LIMIT = 3;
+/** 同率で行が増えても、カードに入れる行はここまで (図の型の台帳の上位 3 県と同じく 3 + 1) */
+const FEATURED_TOP_MAX_ROWS = FEATURED_TOP_RANK_LIMIT + 1;
+
+/**
+ * 注目のランキングのカード (ホーム・カテゴリ・調査) とブログ本文のランキングカードが並べる上位の行を作る唯一の関数。
+ * 単位と小数桁はランキングのページの表と同じく全値から 1 回決め、値はその桁で書く (末尾の 0 も残す)。
+ * 順位は values の rank をそのまま使い、上限の順位までの同率をすべて入れる (最大 4 行)。
+ * 県庁所在市の値の指標 (家計調査など) は、県名を市の名前に替える。
+ */
+export function buildFeaturedTopRows(
+  item: Pick<RankingItem, "unit" | "valueDisplay">,
+  values: readonly FeaturedTopValueRow[],
+  options: { capitalCities?: boolean } = {},
+): FeaturedTopRows | null {
+  const ranked = values
+    .filter((row): row is FeaturedTopValueRow & { value: number; rank: number } => row.value !== null && row.rank !== null)
+    .sort((a, b) => a.rank - b.rank);
+  if (ranked.length === 0) return null;
+  const all = ranked.map((row) => row.value);
+  const display = resolveRankingValueDisplay(item, all);
+  const precision = display?.precision ?? resolveValuePrecision(all);
+  const factor = display?.factor ?? 1;
+  const rows = ranked
+    .filter((row) => row.rank <= FEATURED_TOP_RANK_LIMIT)
+    .slice(0, FEATURED_TOP_MAX_ROWS)
+    .map((row) => ({
+      rank: row.rank,
+      areaName: (options.capitalCities ? PREFECTURE_CAPITAL_CITY_NAMES[row.areaCode] : undefined) ?? row.areaName,
+      value: formatRankingValue(row.value, precision, factor),
+    }));
+  return { unit: display?.unit ?? formatUnitForDisplay(item.unit), rows };
 }

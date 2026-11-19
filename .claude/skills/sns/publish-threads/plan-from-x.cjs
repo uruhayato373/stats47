@@ -20,7 +20,7 @@
  */
 
 const path = require("node:path");
-const store = require(path.join(__dirname, "../../../scripts/lib/sns-posts-store.cjs"));
+const store = require(path.join(__dirname, "../../../../packages/ops/src/sns/sns-posts-store.cjs"));
 
 const MAX_CHARS = 500;
 // 同じ時刻に固定しないよう日ごとにずらす

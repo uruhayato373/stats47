@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-import type { AuditRun, MetricKey, PageAuditResult, ScreenshotRecord, Violation } from "../types";
+import type { AuditRun, MetricKey, PageAuditResult, ScreenshotRecord, Violation } from "../../../../packages/ops/src/page-quality/types";
 
 /** UI 検査の指標。新規発生の通知対象 (肥大化・重複の既存指標は page-quality-alert が扱う)。 */
 export const UI_METRIC_KEYS: MetricKey[] = [

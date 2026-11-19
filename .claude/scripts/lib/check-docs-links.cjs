@@ -150,7 +150,7 @@ function extractRelativeLinks(text, relativePath) {
     if (/^[a-z][a-z0-9+.-]*:/i.test(target) || target.startsWith("/") || target.startsWith("//")) continue;
     try { target = decodeURI(target); } catch { /* そのまま使う */ }
     const resolved = path.posix.normalize(path.posix.join(baseDir, target));
-    if (resolved.startsWith("../") || resolved === "..") continue; // リポジトリ外
+    if (resolved.startsWith("..") || resolved === "..") continue; // リポジトリ外
     if (isPlaceholder(resolved)) continue;
     refs.push(resolved);
   }

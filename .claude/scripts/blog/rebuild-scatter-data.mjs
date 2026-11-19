@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * rebuild-scatter-data.mjs — 点データ (json) を失った散布図を、指標と年の指定から R2 の観測値で作り直す。
  *
@@ -21,7 +21,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)('../lib/site-config.cjs');
+const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)('../../../packages/types/mirror/site-config.cjs');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const TOOL = '.claude/scripts/blog/rebuild-scatter-data.mjs';
 const sha256 = (text) => crypto.createHash('sha256').update(text).digest('hex');

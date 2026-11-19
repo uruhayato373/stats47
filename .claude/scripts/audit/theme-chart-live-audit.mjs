@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * theme-chart-live-audit — テーマページの全チャート依存を R2 配信値で live 実測する。
  *
@@ -49,8 +49,8 @@ export { classifyNational, isFiniteEstatValue } from "./theme-chart-live-audit-c
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 const DEPENDENCY_MIRROR = path.join(
-  import.meta.dirname,
-  "theme-chart-dependencies.generated.json",
+  PROJECT_ROOT,
+  "packages/data-configs/mirror/theme-chart-dependencies.generated.json",
 );
 
 /**

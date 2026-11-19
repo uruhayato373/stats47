@@ -17,7 +17,7 @@ import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, find
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 import { CONFIG_MOVE_PENDING, DATA_README_PENDING, OUTSIDE_DATA, SYSTEM_CONFIG } from "../../../../config/datasets.mjs";
 import { buildEr, checkDataReadmes, checkOutsideData, checkPlacement } from "../check-datasets.mjs";
-import { assertDatasetShape } from "../dataset-shape.mjs";
+import { assertDatasetShape } from "../../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
 const domainIds = new Set(JSON.parse(readFileSync(resolve(ROOT, DOMAINS), "utf8")).domains.map((x) => x.id));
@@ -167,6 +167,14 @@ test("transient の行 (CI が消費して消す依頼・公開待ち) は 0 件
   assert.deepEqual(run([ds("a", "data/x-requests.json", { transient: true })], []).errors, []);
   assert.deepEqual(run([ds("a", "data/x/{**}", { transient: true })], ["data/x/1.json", "data/x/2.json"]).errors, []);
   assert.match(run([ds("a", "data/x/{**}", { transient: true, planned: true })], []).errors.join(), /transient と planned は同時に付けない/);
+});
+
+test("external の行は GOVERNED の外の追跡ファイルに当たれば通り、重なりを数えず、無ければ落ちる (untracked は通す)", () => {
+  const ext = (id, path, opts = {}) => ds(id, path, { kind: "agent-asset", target: "agent-ops", external: true, ...opts });
+  // GOVERNED の data/ と同じ場所に当たっても「重なり」にしない。.claude/todo は GOVERNED の外だが当たりを数える
+  assert.deepEqual(run([ext("t", ".claude/todo/{name}.md"), ext("b", ".claude/todo/backlog.md")], [".claude/todo/backlog.md", ".claude/todo/annual.md"]).errors, []);
+  assert.deepEqual(run([ext("t", ".claude/todo/{name}.md")], []).errors, ["どのファイルにも当たらない: t (.claude/todo/{name}.md)"]);
+  assert.deepEqual(run([ext("l", ".claude/settings.local.json", { untracked: true })], []).errors, []);
 });
 
 test("語彙外の kind / target / 領域と id の重複は落ちる", () => {

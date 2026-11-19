@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * 中学部活動 100人あたり部員数 (競技別) の投入スクリプト。
  *
@@ -30,7 +30,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import os from "node:os";
 import { execFileSync } from "node:child_process";
-import { PREF_NAMES, PREF_AREA_CODES } from "../lib/prefectures.cjs";
+import { PREF_NAMES, PREF_AREA_CODES } from "../../../packages/area/mirror/prefectures.cjs";
 import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
 
 const PDF_BASE =

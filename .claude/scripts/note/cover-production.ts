@@ -3,13 +3,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import sharp from 'sharp';
-import { NOTE_ARTICLES } from './catalog';
+import { NOTE_ARTICLES } from '../../../packages/ops/src/note/catalog';
 import { NOTE_COVER_CATEGORIES, noteCoverCategory } from './catalog/cover-categories';
-import { COVER_ROOT, coverSha, readCoverLedger, updateCoverLedger, validateCoverLedger } from './lib/cover-assets.mjs';
-import { assertCoverPlan, buildCoverPlan, coverProductionView, readCoverPolicies, seedCoverProduction, validateCoverPolicies } from './lib/cover-production.mjs';
-import { renderPopCover } from './lib/pop-cover-render';
-import { prepareGeneratedCover } from './lib/generated-cover.mjs';
-import { renderCoverReference } from './lib/cover-geography.mjs';
+import { COVER_ROOT, coverSha, readCoverLedger, updateCoverLedger, validateCoverLedger } from '../../../packages/ops/src/note/cover-assets.mjs';
+import { assertCoverPlan, buildCoverPlan, coverProductionView, readCoverPolicies, seedCoverProduction, validateCoverPolicies } from '../../../packages/ops/src/note/cover-production.mjs';
+import { renderPopCover } from '../../../packages/ops/src/note/pop-cover-render';
+import { prepareGeneratedCover } from '../../../packages/ops/src/note/generated-cover.mjs';
+import { renderCoverReference } from '../../../packages/ops/src/note/cover-geography.mjs';
 
 async function main() {
 const args = process.argv.slice(2);

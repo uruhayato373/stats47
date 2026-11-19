@@ -78,7 +78,7 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 | dashboard                | state JSON / metrics CSV / docs md                                                                                       | 読み取り専用ミラー (`lib/server/dashboard.ts`)                                                                                   |
 | 調査カタログ             | `data/themes/research/public-dashboards.json`                                    | 読み取り専用ミラー (`lib/server/dashboard-catalog.ts`)                                                                           |
 | 事業計画                 | `packages/data-configs/src/business-plan/` + `data/business-plan/latest.json`                                            | authored SSOTとderived運用stateの読み取り専用ミラー (`lib/server/business-plan.ts`)                                              |
-| 資産列挙                 | `.claude/scripts/lib/gallery-collectors.mjs` + `svg-classify.mjs`                                                        | **CI 静的ギャラリーと共有 — 削除禁止**。`lib/server/collectors.ts` (+ .d.ts) 経由で import                                       |
+| 資産列挙                 | `packages/ops/src/media/gallery-collectors.mjs` + `svg-classify.mjs`                                                        | **CI 静的ギャラリーと共有 — 削除禁止**。`lib/server/collectors.ts` (+ .d.ts) 経由で import                                       |
 
 ## SNSのID台帳
 
@@ -98,7 +98,7 @@ note家計の媒体展開は同じ投稿IDの`production.input`で固定数値�
 ## 安全ガード
 
 - APIは原則GET。保存の例外は `PATCH /api/posts/:id/caption` の下書き本文と `PATCH /api/note-covers/:key/production` の制作内容・確認結果 (2026-10-14 オーナー指示)。同一origin・loopback・JSON限定、ID/内容/版を検査し、古い画面からの更新を拒否する。SNSの予約/公開/削除済み投稿は編集できない
-- writerを呼べるのは `posts-store.ts` の `saveDraftCaption` と `note-cover-production.ts` の `saveCoverProduction`。後者は元画像/入力の実在確認と正確な候補版の照合を行い、コピー/方針変更で採用を解除する。noteへの反映は制作側の既存公開工程で行う。品質改善の限定writerは `content-quality.ts` と共有 `media/lib/workspace.mjs`。その他の書込・子プロセス起動は `tests/unit/read-only-contract.test.ts` が拒否する
+- writerを呼べるのは `posts-store.ts` の `saveDraftCaption` と `note-cover-production.ts` の `saveCoverProduction`。後者は元画像/入力の実在確認と正確な候補版の照合を行い、コピー/方針変更で採用を解除する。noteへの反映は制作側の既存公開工程で行う。品質改善の限定writerは `content-quality.ts` と共有 `packages/ops/src/media/workspace.mjs`。その他の書込・子プロセス起動は `tests/unit/read-only-contract.test.ts` が拒否する
 - **ファイル配信**: decode → resolve → relative 検査 → **realpath 後再検査** (symlink 脱出拒否) → regular file のみ。Range 200/206/416
 - 個別制作物をTODOへ二重登録しない。`audit:content-operations` が `K-Sx-xx` / `NOTE-ARTICLE-*` /
   `SNS-POST-*` 等の個別カードを拒否し、システム課題・自動化・横断意思決定だけをbacklogに残す
@@ -125,7 +125,7 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 
 ## 記事・画像の改善管理
 
-統計画像の文言は4媒体共通の[画像内テキスト規約](../../.claude/rules/chart-image-copy.md)に従う。管理画面の共通ルールには `media/lib/image-copy.mjs` の同じ方針を表示し、ランキング見本のPNG生成前に定型説明の再混入を検査する。詳細な定義・制作条件・出典記録は保持し、画像内には必要な条件を短く1回だけ示す。
+統計画像の文言は4媒体共通の[画像内テキスト規約](../../.claude/rules/chart-image-copy.md)に従う。管理画面の共通ルールには `packages/ops/src/media/image-copy.mjs` の同じ方針を表示し、ランキング見本のPNG生成前に定型説明の再混入を検査する。詳細な定義・制作条件・出典記録は保持し、画像内には必要な条件を短く1回だけ示す。
 
 - 型の基本形 (`/ops/image-templates`): 左側は「目的 → 図の形」の二階層だけを選ぶ。右側は型ごとに固定した代表統計を使い、note・サイト・X・Instagramの4媒体を並べて確認する。「比較する題材」や記事の大量選択は置かない。共通ルールは見本の下へ、編集はshadcn標準Sheetへまとめる。未保存の編集は分類切り替えで保持し、ページ移動・再読込では警告する。
 - 画像ライブラリ (`/ops/image-library`): 型の画面の「この型の使用先」から同じ型・目的で絞り込み、記事・投稿の実画像、原本、固定入力、旧新比較、確認結果、候補・採用履歴を管理する。カバーは既存の専用制作画面で扱う。
@@ -167,10 +167,10 @@ cd apps/admin && npx playwright test       # desktop/mobile E2E。参考文献�
 | 項目 | 正本・責務 |
 |---|---|
 | 使用箇所（本文/noteカバー/OGP/SNS等） | 元記事・投稿・画像索引の `usage`。配置先の事実 |
-| 役割（統計図/表紙/出典/案内等）と図・画像の型 | 共通契約 `media/lib/classification.mjs`。手動確認は `quality.images[IMG].classification` と `templateId` |
+| 役割（統計図/表紙/出典/案内等）と図・画像の型 | 共通契約 `packages/ops/src/media/classification.mjs`。手動確認は `quality.images[IMG].classification` と `templateId` |
 | 確認の根拠と履歴 | `classification` の原本基準SHA・理由・確認日時と `classificationHistory`。元画像が変われば `stale` |
 | 個別の改善方針・現画像の維持判断 | 同じ画像レコードの `policy` / `assessment`。現画像の確認は原寸・320px・内容の照合と理由を必須化 |
-| 共通の制作方針・媒体別方針 | `image-templates.json`。見た目の型・旧名対応・目的・構成の語彙は `media/lib/taxonomy.mjs`、カード・素材の既定定義は `catalog.mjs`。SVG生成方法は型の分類軸にしない。noteカバーは既存カバー方針のみ |
+| 共通の制作方針・媒体別方針 | `image-templates.json`。見た目の型・旧名対応・目的・構成の語彙は `packages/ops/src/media/taxonomy.mjs`、カード・素材の既定定義は `catalog.mjs`。SVG生成方法は型の分類軸にしない。noteカバーは既存カバー方針のみ |
 | 候補・採用 | 同じ画像レコードの `revisions` / `candidateId` / `approvedId` とprivate R2。採用と公開は別の状態 |
 | 改善キュー・分類件数・棚卸し不足 | 正本を結合して毎回派生。件数や残件を別の手書き台帳へ複製しない |
 

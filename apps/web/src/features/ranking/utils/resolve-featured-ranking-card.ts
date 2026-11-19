@@ -1,6 +1,7 @@
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
+import { MINI_PREFECTURE_MAP_FORMAT } from "@stats47/visualization/server";
 
-import type { FeaturedValue } from "@stats47/ranking";
+import type { FeaturedTopRows, FeaturedValue } from "@stats47/ranking";
 
 export interface HomeFeaturedSnapshotFields {
   homeFeatured?: {
@@ -8,6 +9,7 @@ export interface HomeFeaturedSnapshotFields {
     hook: string;
   } | null;
   featuredTop?: FeaturedValue | null;
+  featuredTopRows?: FeaturedTopRows | null;
   tileMapSvg?: string | null;
 }
 
@@ -17,18 +19,16 @@ export interface FeaturedRankingCardDefinition {
 
 export interface FeaturedRankingCardFields {
   definition?: FeaturedRankingCardDefinition | null;
-  featuredTop?: FeaturedValue | null;
+  /** 上位の行 (`buildFeaturedTopRows`。ランキングの表と同じ単位・桁で書いた文字) */
+  featuredTopRows?: FeaturedTopRows | null;
   tileMapSvg?: string | null;
 }
 
 /** home / category / survey が共用する唯一のカードmodel。 */
 export interface FeaturedRankingCardModel {
   hook: string;
-  top: {
-    rank?: number;
-    areaName: string;
-    value: string;
-  };
+  /** 上位の行と単位 (上位 3 位まで。同率は同じ順位で並ぶ) */
+  top: FeaturedTopRows;
   mapSvg: string;
 }
 
@@ -54,24 +54,13 @@ export function resolveFeaturedRankingCardModel(
   item: FeaturedRankingCardFields,
   fallbackHook: string,
 ): FeaturedRankingCardModel | null {
-  const top = item.featuredTop ?? null;
   const mapSvg = item.tileMapSvg ?? null;
-  if (
-    top === null ||
-    top.areaName.trim().length === 0 ||
-    top.value === null ||
-    !mapSvg
-  ) {
-    return null;
-  }
+  const top = item.featuredTopRows ?? null;
+  if (!top || top.rows.length === 0 || !mapSvg) return null;
 
   return {
     hook: item.definition?.hook ?? fallbackHook,
-    top: {
-      rank: top.rank,
-      areaName: top.areaName,
-      value: top.value,
-    },
+    top,
     mapSvg,
   };
 }
@@ -100,18 +89,17 @@ export function isCurrentHomeFeaturedMapSvg(
 ): svg is string {
   if (!svg) return false;
   if (!svg.includes('data-map-rotation="clockwise-')) return false;
-  if (!svg.includes('data-map-format="compact-v1"')) return false;
+  if (!svg.includes(`data-map-format="${MINI_PREFECTURE_MAP_FORMAT}"`)) return false;
   return !exceedsTileMapSvgBudget(svg);
 }
 
 /**
  * home snapshotの表示にvalues.jsonの追加fetchが必要か。
- * 地理地図または1位が不足している旧snapshotだけを補完する。
+ * 地理地図または上位の行が不足している旧snapshotだけを補完する。
  */
 export function needsHomeFeaturedValuesFetch(
   item: HomeFeaturedSnapshotFields,
 ): boolean {
   if (!isCurrentHomeFeaturedMapSvg(item.tileMapSvg)) return true;
-  const top = item.featuredTop;
-  return top == null || top.value == null || top.areaName.trim().length === 0;
+  return !item.featuredTopRows || item.featuredTopRows.rows.length === 0;
 }

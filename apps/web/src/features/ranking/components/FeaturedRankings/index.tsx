@@ -1,6 +1,6 @@
 
 import { HOME_FEATURED_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
-import { buildRankingDisplayInfo, deriveFeaturedTop } from "@stats47/ranking";
+import { buildFeaturedTopRows, buildRankingDisplayInfo } from "@stats47/ranking";
 import { readRankingValuesFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { generateRankingThumbnailMapSvg } from "@stats47/visualization/server";
@@ -79,7 +79,7 @@ export async function FeaturedRankings({
                 (devDef
                   ? { order: devDef.order, hook: devDef.hook }
                   : item.homeFeatured ?? null),
-              featuredTop: item.featuredTop ?? null,
+              featuredTopRows: item.featuredTopRows ?? null,
               tileMapSvg,
             },
           ];
@@ -113,8 +113,9 @@ export async function FeaturedRankings({
         const valuesResult = fallbackValues.get(item.rankingKey);
         if (valuesResult && isOk(valuesResult) && valuesResult.data.length > 0) {
           // 旧snapshotのin-memory補完。R2へは書かない。
-          fields.featuredTop =
-            fields.featuredTop ?? deriveFeaturedTop(valuesResult.data);
+          // ホームの注目には県庁所在市の値の指標が無い (焼き込みは市の名前に替える)。ここは registry を読まない
+          fields.featuredTopRows =
+            fields.featuredTopRows ?? buildFeaturedTopRows(item, valuesResult.data);
           if (tileMapSvg == null) {
             tileMapSvg = generateRankingThumbnailMapSvg(
               valuesResult.data.flatMap((v) => v.value !== null ? [{ areaCode: v.areaCode, value: v.value, rank: v.rank ?? undefined }] : []),
@@ -131,7 +132,7 @@ export async function FeaturedRankings({
         const model = resolveFeaturedRankingCardModel(
           {
             definition: fields.homeFeatured,
-            featuredTop: fields.featuredTop,
+            featuredTopRows: fields.featuredTopRows,
             tileMapSvg: fields.tileMapSvg,
           },
           displayInfo.title,
@@ -141,8 +142,6 @@ export async function FeaturedRankings({
         return [{
           rankingKey: item.rankingKey,
           latestYear,
-          unit: displayInfo.unit,
-          valueDisplay: item.valueDisplay,
           model,
         }];
       });

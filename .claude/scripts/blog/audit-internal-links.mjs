@@ -2,7 +2,7 @@
 /**
  * audit-internal-links.mjs — 公開ブログ全記事の内部リンクを live で実測し、リンク切れを洗い出す
  *
- * オフライン lint (`.claude/scripts/lib/internal-link-lint.mjs`) が判定できるのは
+ * オフライン lint (`apps/web/scripts/lib/internal-link-lint.mjs`) が判定できるのは
  * repo 内に key 集合がある型 (ranking / category / areas / blog の GONE) だけ。本スクリプトは
  * themes / tag / survey / blog の実在も含めて **live の応答で確定** させる全量監査。
  *
@@ -22,8 +22,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { extractInternalLinks } from "../lib/internal-link-lint.mjs";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { extractInternalLinks } from "../../../apps/web/scripts/lib/internal-link-lint.mjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const SITE_BASE = process.env.SITE_ORIGIN || SITE_ORIGIN;

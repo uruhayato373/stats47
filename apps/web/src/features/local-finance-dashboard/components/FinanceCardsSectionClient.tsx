@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 
 
 import { PREFECTURE_LIST_2DIGIT as PREFECTURES } from '@stats47/area';
+import { to2DigitPrefCode } from '@stats47/area/area-code';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { LOCAL_FINANCE_RATIO_METRICS } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -75,7 +76,7 @@ const RATIO_METRICS = LOCAL_FINANCE_RATIO_METRICS satisfies readonly RatioMeta[]
  */
 export function FinanceCardsSectionClient({ cards, part }: Props) {
   const { selectedPrefectureCode } = useThemePrefecture();
-  const prefCode = selectedPrefectureCode?.slice(0, 2) ?? null;
+  const prefCode = selectedPrefectureCode ? to2DigitPrefCode(selectedPrefectureCode) : null;
   const { years, latestYear } = cards;
   const prefCard = prefCode ? cards.cards[prefCode] : undefined;
   const prefName =

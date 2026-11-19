@@ -10,7 +10,7 @@ import { rankingR2Key } from "@stats47/r2-storage/keys";
  *
  * ★捏造を通さないための設計
  *   ai-content は生成時に監査済みだが、**採用前にもう一度ここで数値を突合する**。
- *   監査は `.claude/scripts/ai-content/lib/number-audit.mjs` を直接 import して
+ *   監査は `packages/ai-content/src/audit/number-audit.mjs` を直接 import して
  *   ai-content 側とまったく同じ判定を使う (書籍側に別実装を作らない = 二重実装の禁止)。
  *   判定は**フィールド単位**で、落ちたフィールドだけ捨てる。キーごと捨てると使える解説まで失う。
  *
@@ -21,7 +21,7 @@ import { rankingR2Key } from "@stats47/r2-storage/keys";
 import {
   buildValueContext,
   findOutOfRangeNumbers,
-} from "../../../../../.claude/scripts/ai-content/lib/number-audit.mjs";
+} from "@stats47/ai-content/audit/number-audit.mjs";
 import { convertKanjiNumerals, extractKanjiClaims } from "../../text/kanji-numeral";
 import { SITE } from "@stats47/data-configs";
 

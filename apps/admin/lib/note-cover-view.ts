@@ -1,5 +1,5 @@
 import type { NoteCoverReview, NoteCoverRow } from '@/lib/server/note-covers';
-import type { ProductionStage } from '../../../.claude/scripts/note/lib/cover-production.mjs';
+import type { ProductionStage } from '@stats47/ops/note/cover-production.mjs';
 
 export const COVER_PRODUCTION_STAGES: { key: ProductionStage; label: string }[] = [
   { key: 'unplanned', label: '未登録' }, { key: 'brief', label: '内容入力待ち' },

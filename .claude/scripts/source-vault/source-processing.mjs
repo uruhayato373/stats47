@@ -22,7 +22,7 @@ const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const SCRIPT_DIR = path.dirname(SCRIPT_PATH);
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
 const CONFIG_PATH = path.join(PROJECT_ROOT, SOURCE_VAULT);
-const VAULT_SCRIPT = path.join(SCRIPT_DIR, 'source-vault.mjs');
+const VAULT_SCRIPT = path.join(PROJECT_ROOT, 'packages/ops/src/source-vault/source-vault.mjs');
 const TEMP_VAULT_ROOT = path.join(tmpdir(), 'stats47-source-vault');
 const BOOLEAN_OPTIONS = new Set(['force', 'contract-only', 'allow-all-pages', 'check']);
 const MD_PAGE_KINDS = new Set(['text', 'figure', 'table', 'mixed', 'blank']);
@@ -1345,7 +1345,7 @@ async function stage(options) {
     copies,
     figures,
     auxiliary,
-    next: `node .claude/scripts/source-vault/source-vault.mjs create --profile ${workspace.profile} --manifest ${profile.manifestPath} --force && node .claude/scripts/source-vault/source-vault.mjs upload --profile ${workspace.profile} --manifest ${profile.manifestPath}`,
+    next: `node packages/ops/src/source-vault/source-vault.mjs create --profile ${workspace.profile} --manifest ${profile.manifestPath} --force && node packages/ops/src/source-vault/source-vault.mjs upload --profile ${workspace.profile} --manifest ${profile.manifestPath}`,
   };
 }
 

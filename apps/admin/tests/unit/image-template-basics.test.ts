@@ -6,7 +6,7 @@ import {
   templateCatalog,
   templateGroup,
 } from '@/lib/image-template-basics';
-import { readTemplates } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import { readTemplates } from '@stats47/ops/media/workspace.mjs';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { TemplateStatisticalPreview } from '@/components/content/template-statistical-preview';

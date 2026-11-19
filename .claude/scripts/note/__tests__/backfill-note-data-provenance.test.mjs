@@ -11,10 +11,10 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { backfillArticle, PROVENANCE_FILE } from '../catalog/backfill-note-data-provenance.mjs';
-import { buildManifest, manifestKey, readLocalFiles, saveArticleFiles, workingDir } from '../lib/article-store.mjs';
+import { buildManifest, manifestKey, readLocalFiles, saveArticleFiles, workingDir } from '../../../../packages/ops/src/note/article-store.mjs';
 
 const require = createRequire(import.meta.url);
-const { R2_BUCKET, R2_PRIVATE_BUCKET } = require('../../lib/site-config.cjs');
+const { R2_BUCKET, R2_PRIVATE_BUCKET } = require('../../../../packages/types/mirror/site-config.cjs');
 const SCRIPT = path.join(path.dirname(fileURLToPath(import.meta.url)), '../catalog/backfill-note-data-provenance.mjs');
 
 /** R2 の代わり。読んだキーと書き込みを記録する。 */

@@ -9,9 +9,9 @@
  * 正典: `.claude/rules/todo-standards.md` §3 `[待ち:X]`・§5・§7
  */
 
-const backlogLib = require('../lib/backlog-lib.cjs');
+const backlogLib = require('../../../packages/ops/src/management/backlog-lib.cjs');
 const { isIsoDate, isUntriagedStale } = require('../lib/check-docs-governance.cjs');
-const { addDays, isoWeekOf, isoWeekRange, jstDateOf } = require('../metrics/lib/periods.mjs');
+const { addDays, isoWeekOf, isoWeekRange, jstDateOf } = require('../../../packages/ops/src/metrics/periods.mjs');
 
 /** 承認の表で「何を承認するか」として本文から抜き出す行の目印 */
 const APPROVAL_LINE = /承認|停止条件|残り/;

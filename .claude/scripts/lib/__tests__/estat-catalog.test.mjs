@@ -39,7 +39,7 @@ import {
   normalizeTableRow,
   PREFECTURE_CODES,
   summarizeMeta,
-} from "../estat-catalog/normalize.mjs";
+} from "../../../../packages/estat-api/src/catalog/normalize.mjs";
 import {
   buildPlan,
   checkListCompleteness,

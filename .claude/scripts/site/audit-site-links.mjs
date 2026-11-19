@@ -33,7 +33,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const ORIGIN = (process.env.SITE_ORIGIN ?? SITE_ORIGIN).replace(/\/$/, "");

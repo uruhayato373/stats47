@@ -7,7 +7,7 @@ import {
   imageLibrary,
   FILES,
   type ImageView,
-} from '../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 import {
   STATISTICAL_SAMPLES,
   type StatisticalSampleView,

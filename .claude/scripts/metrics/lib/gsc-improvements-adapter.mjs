@@ -16,7 +16,7 @@ import { parseBacklog } from "../../lib/scan-pending-improvements.mjs";
 import { DEFAULT_THRESHOLDS } from "../../lib/effect-verdict/thresholds.mjs";
 import { parseCsv } from "./measurement-cycle.mjs";
 import { PROJECT_ROOT } from "./auth.mjs";
-import { resolvePeriods } from "./periods.mjs";
+import { resolvePeriods } from "../../../../packages/ops/src/metrics/periods.mjs";
 import { datasetDir } from "../../../../config/datasets.mjs";
 
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);

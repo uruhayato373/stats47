@@ -111,7 +111,7 @@ export async function GeoCrossAnalysisArticle({
       {config.hazardMapUrl ? (
         <div
           role="note"
-          className="mb-6 border border-destructive/40 bg-destructive/5 p-4 text-sm leading-relaxed"
+          className="bg-destructive/5 text-sm leading-relaxed"
         >
           <strong>
             この分析は避難判断や個別地点の安全確認には使えません。

@@ -16,7 +16,7 @@ import { assertBookVersion } from "./build-book";
 import { authoredBookSha256 } from "./revision-evidence";
 import { KDP_LISTING_COPY, KDP_LISTINGS } from "../../../../../config/paths.mjs";
 import { datasetPath } from "../../../../../config/datasets.mjs";
-import { renderListingDescription } from "../../../../../.claude/scripts/kdp/lib/kdp-listing-copy.mjs";
+import { renderListingDescription } from "./kdp-listing-copy.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const OUT = join(REPO_ROOT, KDP_LISTINGS);

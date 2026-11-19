@@ -1,0 +1,154 @@
+/**
+ * 週次収益 (NSM) の ASP 別の行と商品の行を作る (純関数)。
+ *
+ * 収益化戦略 §1 は「週次収益 = AdSense 確定額 + アフィリエイト発生額 + 商品の実売額」と定めるが、
+ * 週次 Issue は GA4 の表示・クリックしか出さず、ASP の成果を読んでいなかった (2026-09-25 NSM-ASP-REVENUE-01)。
+ *
+ * 入力と意味:
+ * - `authLatest`  … 認証付き収集の最新結果 (`data/authenticated/latest.json`)。
+ *                   ASP ごとの成否・認証切れ・観測日時の正典
+ * - `a8Results`   … A8 の月別記録 (`data/affiliate/a8-results.json`)。
+ *                   件数は発生 (`conversions`)・確定 (`approved`)、金額は確定額 (`revenueYen`) だけを持つ
+ * - もしも・afb は 2026-10-19 に A8・楽天へ集約して計測から外した (ASP-CONSOLIDATE-A8-RAKUTEN-01)。行を出さない
+ * - `rakutenResults` … 楽天アフィリエイトの月別記録 (`rakuten-results.json`)。管理画面の値を週次レビューで手入力する
+ *
+ * 欠測・認証切れ・古い観測は 0 円にしない。「判定不能」と理由を書く (`project_monetization_contract`)。
+ */
+
+/** 観測をこの日数より古いものは判定に使わない (週次の報告なので 1 週と数日の余裕) */
+export const ASP_OBSERVATION_MAX_AGE_DAYS = 10;
+
+import { describeChannel, weeklyProductRevenue } from "./product-revenue.mjs";
+
+const yen = (value) => `¥${Number(value ?? 0).toLocaleString("ja-JP")}`;
+
+function ageDays(isoDate, asOf) {
+  const at = new Date(isoDate);
+  if (Number.isNaN(at.getTime())) return null;
+  return Math.floor((asOf.getTime() - at.getTime()) / 86_400_000);
+}
+
+function findSource(authLatest, name) {
+  return Array.isArray(authLatest?.sources) ? authLatest.sources.find((s) => s?.source === name) ?? null : null;
+}
+
+/** 収集の成否から「使えない理由」を返す。使えるなら null */
+function unusableReason(source, asOf) {
+  if (!source) return "認証付き収集の結果に記録が無い";
+  if (source.status !== "pass") {
+    const since = source.recovery?.blockedSince ? `（${source.recovery.blockedSince.slice(0, 10)} から）` : "";
+    return source.code === "auth_required" ? `認証切れ${since}。再ログインが必要` : `収集失敗 ${source.code ?? "理由不明"}`;
+  }
+  const age = ageDays(source.observedAt, asOf);
+  if (age == null) return "観測日時が読めない";
+  if (age > ASP_OBSERVATION_MAX_AGE_DAYS) return `最終観測 ${source.observedAt.slice(0, 10)} が ${age} 日前 (上限 ${ASP_OBSERVATION_MAX_AGE_DAYS} 日)`;
+  return null;
+}
+
+/**
+ * A8 の月累計 (構造化)。週次 Issue の行と、KPI ツリー・管理画面の内訳 (lib/weekly-revenue.mjs) が同じ値を使う。
+ * @returns {{status:"unmeasurable", reason:string} | {status:"ok", month:string, observedAt:string, conversions:number, approved:number, confirmedYen:number}}
+ */
+export function a8Result({ authLatest, a8Results, asOf }) {
+  if (!authLatest) return { status: "unmeasurable", reason: "認証付き収集の結果 latest.json が無い" };
+  const source = findSource(authLatest, "a8");
+  const reason = unusableReason(source, asOf);
+  if (reason) return { status: "unmeasurable", reason };
+  const records = Array.isArray(a8Results?.records) ? a8Results.records : null;
+  if (!records || records.length === 0) return { status: "unmeasurable", reason: "a8-results.json に記録が無い" };
+  const month = records.map((r) => r.month).filter(Boolean).sort().at(-1);
+  const rows = records.filter((r) => r.month === month);
+  const sum = (key) => rows.reduce((total, r) => total + (Number(r[key]) || 0), 0);
+  return { status: "ok", month, observedAt: source.observedAt.slice(0, 10), conversions: sum("conversions"), approved: sum("approved"), confirmedYen: sum("revenueYen") };
+}
+
+function a8Line(authLatest, a8Results, asOf) {
+  const r = a8Result({ authLatest, a8Results, asOf });
+  if (r.status !== "ok") return `- A8: **判定不能**（${r.reason}）`;
+  return `- A8 (${r.month} 月累計・観測 ${r.observedAt}): 発生 **${r.conversions} 件** / 確定 **${r.approved} 件・${yen(r.confirmedYen)}**（A8 の記録は発生額を持たない）`;
+}
+
+/**
+ * @param {{ authLatest: object|null, a8Results: object|null, rakutenResults?: object|null, asOf: Date }} input
+ * @returns {string[]} ASP ごとの行 (A8 / 楽天の順)
+ */
+export function aspRevenueLines({ authLatest, a8Results, rakutenResults = null, asOf }) {
+  const rakuten = rakutenLine(rakutenResults, asOf);
+  if (!authLatest) return ["- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）", rakuten];
+  return [
+    a8Line(authLatest, a8Results, asOf),
+    rakuten,
+  ];
+}
+
+/**
+ * 楽天アフィリエイトの行。成果 API が無いので、週次レビューでオーナーが管理画面を見て
+ * `record-rakuten-results.mjs` で記録した月別の値 (`rakuten-results.json`) を読む。
+ * 記録が無い・最後の記録が古いときは判定不能 (記録し忘れた週を 0 円にしない)。
+ */
+export function rakutenLine(rakutenResults, asOf) {
+  const r = rakutenResult(rakutenResults, asOf);
+  if (r.status !== "ok") return `- 楽天: **判定不能**（${r.reason}）`;
+  const confirmed = r.confirmedYen == null ? "未確定" : yen(r.confirmedYen);
+  return `- 楽天 (${r.month} 月累計・記録 ${r.observedAt}・${r.how}): 発生 **${r.orders} 件・${yen(r.estimatedYen)}** / 確定 **${confirmed}**（確定はその月に確定した額）`;
+}
+
+/**
+ * 楽天の月累計 (構造化)。`rakutenLine` と lib/weekly-revenue.mjs が同じ値を使う。
+ * @returns {{status:"unmeasurable", reason:string} | {status:"ok", month:string, observedAt:string, how:string, orders:number, estimatedYen:number, confirmedYen:number|null}}
+ */
+export function rakutenResult(rakutenResults, asOf) {
+  const records = Array.isArray(rakutenResults?.records) ? rakutenResults.records : [];
+  if (records.length === 0) return { status: "unmeasurable", reason: "未記録。認証付き収集の rakuten が未成功。急ぐときは管理画面を見て npm run rakuten:record で記録する" };
+  const latest = records.reduce((a, b) => (String(b.observedAt) > String(a.observedAt) ? b : a));
+  const age = ageDays(latest.observedAt, asOf);
+  if (age == null) return { status: "unmeasurable", reason: "記録日時が読めない" };
+  if (age > ASP_OBSERVATION_MAX_AGE_DAYS) {
+    return { status: "unmeasurable", reason: `最終記録 ${latest.observedAt.slice(0, 10)} が ${age} 日前 (上限 ${ASP_OBSERVATION_MAX_AGE_DAYS} 日)。週次レビューで記録する` };
+  }
+  const month = records.map((r) => r.month).sort().at(-1);
+  const r = records.find((x) => x.month === month);
+  return {
+    status: "ok",
+    month,
+    observedAt: String(r.observedAt).slice(0, 10),
+    how: String(r.source ?? "").startsWith("collector:") ? "自動収集" : "管理画面の手入力",
+    orders: r.orders,
+    estimatedYen: r.estimatedYen,
+    confirmedYen: r.confirmedYen ?? null,
+  };
+}
+
+/**
+ * 商品の実売の行。実売台帳 (`data/products/sales-ledger.json`) は CLI で証拠付きの記録を足す形で、
+ * KDP の売上を自動で取り込む経路はまだ無い。よって台帳が空でも、販売中の商品があれば ¥0 ではなく未計測。
+ * 以前は台帳が空なら「¥0」と書き、記録があっても存在しない `date` / `amountYen` を読んで常に ¥0 になっていた (2026-09-25)。
+ *
+ * @param {{ ledger: any, liveProductCount: number|null, weekStart: string, weekEnd: string, revenueHistory?: object|null }} input
+ *   liveProductCount … 販売中と分かっている商品の数 (KDP の `kdp-weekly-publication.json` の s1Live + pilotLive)。
+ *                      S1 シリーズと試行分だけなので全体の数ではなく下限。読めなければ null
+ *   weekStart / weekEnd … 週の月曜・日曜 (YYYY-MM-DD)
+ */
+export function productRevenueLine({ ledger, liveProductCount, weekStart, weekEnd, revenueHistory = null }) {
+  const observations = Array.isArray(ledger?.observations) ? ledger.observations : null;
+  if (observations == null) return "- 商品: **判定不能**（sales-ledger.json が無いか observations 配列が無い）";
+  const inWeek = observations.filter(
+    (o) => typeof o?.periodEnd === "string" && o.periodEnd >= weekStart && o.periodEnd <= weekEnd,
+  );
+  if (inWeek.length > 0) {
+    const total = inWeek.reduce((sum, o) => sum + (Number(o.netRevenueYen) || 0), 0);
+    return `- 商品: **${yen(total)}**（期間末が今週の実売記録 ${inWeek.length} 件の手取り合計）`;
+  }
+  // 台帳に手入力の記録が無い週は、認証付き収集の日次履歴 (revenue-history.json) から出す。
+  if (revenueHistory) {
+    const week = weeklyProductRevenue({ revenueHistory, weekStart, weekEnd });
+    const detail = Object.entries(week.channels).map(([name, r]) => describeChannel(name, r)).join(" / ");
+    return week.status === "ok" ? `- 商品: **${yen(week.yen)}**（${detail}）` : `- 商品: **判定不能**（${detail}）`;
+  }
+  if (liveProductCount == null) return "- 商品: **判定不能**（今週の実売記録 0 件で、販売中の商品数も読めない）";
+  if (liveProductCount === 0) return "- 商品: **¥0**（販売中の商品なし）";
+  return (
+    `- 商品: **判定不能**（販売中が少なくとも ${liveProductCount} 点あるのに、今週の実売記録 0 件。` +
+    "売上を台帳へ自動で入れる経路が無いので 0 円とは限らない）"
+  );
+}

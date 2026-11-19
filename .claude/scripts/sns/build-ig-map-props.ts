@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * build-ig-map-props.ts — 1つの rankingKey から、Instagram「地図」カルーセル
  * (日枠。正典 .claude/rules/sns-content-standards.md §2-3c「地図カード / テーマ」) の
@@ -33,7 +33,7 @@ import {
   computeTopBottom,
   validateMapData,
 } from "./lib/ig-map-props.ts";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;

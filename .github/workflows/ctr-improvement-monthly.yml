@@ -80,7 +80,7 @@ jobs:
         run: cat /tmp/ctr/issue.md >> "$GITHUB_STEP_SUMMARY"
 
       # 月次レビューがファイルから「走ったか・何が出たか」を判定できるよう、結果を state に残す (2026-10-01)。
-      # 失敗した回も failed として残す。読み手: .claude/scripts/management/lib/review-cadence.mjs
+      # 失敗した回も failed として残す。読み手: packages/ops/src/management/review-cadence.mjs
       - name: 🗂️ Record monthly job result
         if: always()
         run: |

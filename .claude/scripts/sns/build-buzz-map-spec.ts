@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * build-buzz-map-spec.ts — R2 観測値から buzz-map 型A (静止画・二値/少区分マップ) の
  * spec JSON を決定的に生成する。
@@ -32,7 +32,7 @@ import { dirname, join } from "node:path";
 import { getMetricConfig } from "@stats47/data-configs";
 
 import { toBuzzMapAreaCode } from "./lib/buzz-map-area-code";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");

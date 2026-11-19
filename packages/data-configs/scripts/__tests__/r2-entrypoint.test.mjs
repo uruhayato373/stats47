@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { auditSources, isSource, literalCounts } from "../../../r2-storage/scripts/check-r2-entrypoint.mjs";
+import { auditSources, followRenames, isSource, literalCounts } from "../../../r2-storage/scripts/check-r2-entrypoint.mjs";
 
 const literals = {
   stats: ["app", "stats", "x"].join("/"),
@@ -55,7 +55,7 @@ test("source inventory excludes credentials, prose, recorded data and dependency
 test("only the five exact entry files are exempt", () => {
   for (const path of [
     "packages/r2-storage/src/keys.ts",
-    ".claude/scripts/lib/r2-keys.mjs",
+    "packages/r2-storage/mirror/r2-keys.mjs",
     "packages/r2-storage/src/scripts/r2-key-classes.ts",
     "packages/r2-storage/src/lib/clients/private-r2-store.mjs",
     "packages/r2-storage/src/lib/clients/get-s3-client.ts",
@@ -63,4 +63,13 @@ test("only the five exact entry files are exempt", () => {
     assert.deepEqual(auditSources([{ path, text }], {}), []);
     assert.ok(auditSources([{ path: `other/${path}`, text }], {}).length);
   }
+});
+
+test("改名したファイルの行は、元のパスの行を引き継いで縮小専用の比較をする", () => {
+  const previous = { "old/a.mjs": { stats: 1 } };
+  const followed = followRenames(previous, [["old/a.mjs", "new/a.mjs"]]);
+  assert.deepEqual(followed["new/a.mjs"], { stats: 1 });
+  // 引き継ぐのは元の行がある改名だけ。元に無いパスへは何も足さない
+  assert.equal(followRenames(previous, [["old/b.mjs", "new/b.mjs"]])["new/b.mjs"], undefined);
+  assert.equal(followRenames(undefined, [["old/a.mjs", "new/a.mjs"]]), undefined);
 });

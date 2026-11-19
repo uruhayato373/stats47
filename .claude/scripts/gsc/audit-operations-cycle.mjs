@@ -12,7 +12,7 @@
  *   --verdict /tmp/reassessment.json は明示検証用。既定は原本hash・week・契約・日時が
  *   一致するappend-only再評価を採用し、それが無ければ元の週次verdictを読む。
  */
-import { isoWeekRange } from '../metrics/lib/periods.mjs';
+import { isoWeekRange } from '../../../packages/ops/src/metrics/periods.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { assessmentForSubject, hasBaselineAssessment, isMissingEffectTarget, observeAdsenseBaseline } from '../metrics/lib/adsense-measurement-contract.mjs';
 import { selectReassessment } from '../lib/effect-verdict/reassessment.mjs';
 import { isoWeekOf } from '../lib/effect-verdict/iso-week.mjs';
-import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../management/lib/review-cadence.mjs';
+import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../../../packages/ops/src/management/review-cadence.mjs';
 import { loadClosedWaveIds } from '../blog/measure-gsc-impact.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
@@ -127,7 +127,7 @@ function ageDays(observedAt, now) {
 
 function mondayOfIsoWeek(week) {
   if (!/^\d{4}-W\d{2}$/.test(week ?? '')) throw new Error(`ISO week ではない: ${week}`);
-  return new Date(`${isoWeekRange(week).monday}T00:00:00Z`); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return new Date(`${isoWeekRange(week).monday}T00:00:00Z`); // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 export function addIsoWeeks(week, delta) {

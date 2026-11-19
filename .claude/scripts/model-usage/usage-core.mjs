@@ -15,7 +15,7 @@
  *
  * 保存するのは集計値だけで、prompt・本文・agent への依頼文は持たない。
  */
-import { isoWeekOf, jstDateOf } from '../metrics/lib/periods.mjs';
+import { isoWeekOf, jstDateOf } from '../../../packages/ops/src/metrics/periods.mjs';
 
 export const TOKEN_KEYS = ['input', 'output', 'cacheWrite5m', 'cacheWrite1h', 'cacheRead'];
 
@@ -55,7 +55,7 @@ export function costOf(tokens, model, pricing) {
   return TOKEN_KEYS.reduce((sum, k) => sum + (tokens[k] ?? 0) * (p[k] ?? 0), 0) / 1e6;
 }
 
-/** ISO 日時 → ISO 週 (`2026-W40`)。週次の窓を他の計測 state と揃える。正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01) */
+/** ISO 日時 → ISO 週 (`2026-W40`)。週次の窓を他の計測 state と揃える。正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01) */
 export function isoWeek(iso) {
   const ms = Date.parse(iso);
   return Number.isNaN(ms) ? null : isoWeekOf(jstDateOf(ms));

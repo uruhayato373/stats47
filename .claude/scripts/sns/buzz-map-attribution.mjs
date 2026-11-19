@@ -28,7 +28,7 @@ import {
   computeKpis,
   buildScoreFeedback,
 } from "./lib/buzz-map-attribution-core.mjs";
-import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient, findServiceAccountCredentials } from "../lib/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
@@ -37,7 +37,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
 
-const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
+const store = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"));
 
 /** posts.json の buzz-map 投稿から ideaId → { impressions, attribution } を作る (SNS CTR 分母判定用)。 */
 function impByIdeaFromPosts() {

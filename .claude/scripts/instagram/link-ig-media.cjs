@@ -15,8 +15,8 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const store = require(path.join(__dirname, "../lib/sns-posts-store.cjs"));
-const metricsStore = require(path.join(__dirname, "../lib/sns-metrics-store.cjs"));
+const store = require(path.join(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
+const metricsStore = require(path.join(__dirname, "../../../packages/ops/src/sns/sns-metrics-store.cjs"));
 const { matchIgMediaToLedger } = require(path.join(__dirname, "../lib/ig-ledger-core.cjs"));
 
 const args = process.argv.slice(2);

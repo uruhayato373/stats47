@@ -28,7 +28,7 @@ import { createRequire } from "node:module";
 import { require as tsxRequire } from "tsx/cjs/api";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);

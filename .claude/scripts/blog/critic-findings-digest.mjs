@@ -21,7 +21,7 @@ import { insertCards } from "../gsc/lib/coverage-backlog.mjs";
 import { aggregateByType, LEDGER_DIRNAME, planPatternCards, readLedgerRows, renderLatest } from "./lib/critic-findings.mjs";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog } = require("../lib/backlog-lib.cjs");
+const { parseBacklog } = require("../../../packages/ops/src/management/backlog-lib.cjs");
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const BLOG_DIR = datasetDir("blog.operations");

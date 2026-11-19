@@ -16,7 +16,7 @@ import { KAKEI_ANALYSES } from "@stats47/data-configs";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 import {
   buildKakeiLedger,
   checkKakeiLedger,

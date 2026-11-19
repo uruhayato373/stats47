@@ -1,4 +1,4 @@
-import { to2DigitPrefCode, isPrefectureAreaCode } from "@stats47/area";
+import { isPrefectureAreaCode, to5DigitPrefCode } from "@stats47/area";
 
 /**
  * 都道府県データのフィルタリング（全国除外）
@@ -12,7 +12,6 @@ export function filterToPrefectures<T extends { areaCode: string }>(
   data: T[]
 ): T[] {
   return data.filter((item) => {
-    const areaCodeNum = parseInt(to2DigitPrefCode(item.areaCode), 10);
-    return isPrefectureAreaCode(String(areaCodeNum).padStart(2, "0") + "000");
+    return isPrefectureAreaCode(to5DigitPrefCode(item.areaCode));
   });
 }

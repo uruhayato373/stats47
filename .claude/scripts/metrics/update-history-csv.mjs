@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
-import { resolvePeriods } from "./lib/periods.mjs";
+import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
 import {
   SUMMARY_FILE,
   buildGscSummary,

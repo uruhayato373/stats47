@@ -2,7 +2,7 @@
  * 文字幅の概算 (グリフ実測ではなくヒューリスティック)。
  *
  * 半角 (ASCII・半角カナ) ≈ 0.55em / 全角 ≈ 1.0em。公開ゲートの文字配置 lint
- * (`.claude/scripts/lib/svg-lint.mjs` の `findChartTextIssues`) と**同じ式**なので、
+ * (`packages/svg-builder/src/lint/svg-lint.mjs` の `findChartTextIssues`) と**同じ式**なので、
  * 生成側でこの幅に収めれば lint も通る。式を変えるときは両方を同時に変える。
  */
 

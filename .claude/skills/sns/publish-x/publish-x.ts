@@ -35,7 +35,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { execFileSync } from "child_process";
 // 完全DBレス (doc12 Phase E): sns_posts は共有ストア (data/sns/posts.json) 経由で読み書きする。
-import store from "../../../scripts/lib/sns-posts-store.cjs";
+import store from "../../../../packages/ops/src/sns/sns-posts-store.cjs";
 import directLedger from "../../../scripts/sns/lib/x-direct-ledger.cjs";
 
 const { planDirectLedgerWrite } = directLedger;
@@ -1000,7 +1000,7 @@ async function restoreArchivedMedia(post: PostConfig): Promise<void> {
   const row = store.loadAll().find((p: Record<string, unknown>) => p.id === post.recordId);
   if (!row) return;
   try {
-    const { ensureSnsImageLocal } = await import("../../../scripts/media/lib/storage.mjs");
+    const { ensureSnsImageLocal } = await import("@stats47/ops/media/storage.mjs");
     const restored = await ensureSnsImageLocal(row, PROJECT_ROOT);
     if (restored) {
       post.imagePaths = [restored];

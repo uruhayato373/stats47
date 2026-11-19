@@ -34,7 +34,7 @@ import {
   waitForLogin,
   isLoginUrl,
 } from "../google-admin/browser-context.mjs";
-import { GSC_PROPERTY } from "../lib/site-config.cjs";
+import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROPERTY = GSC_PROPERTY;
 const INDEX_URL = `https://search.google.com/search-console/index?resource_id=${encodeURIComponent(PROPERTY)}`;

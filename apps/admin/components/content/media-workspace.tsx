@@ -3,7 +3,7 @@ import {
   IMAGE_PURPOSES,
   IMAGE_SELECTIONS,
   selectionAllowed,
-} from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
+} from '@stats47/ops/media/taxonomy.mjs';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ActualImage } from './media-image';
@@ -13,13 +13,13 @@ import { ImageComparison } from './image-comparison';
 import { originalUrl, candidateUrl } from '@/lib/media-template-examples';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { IMAGE_USES } from '../../../../.claude/scripts/media/lib/catalog.mjs';
+import { IMAGE_USES } from '@stats47/ops/media/catalog.mjs';
 import {
   IMAGE_ROLES,
   CLASSIFICATION_STATES,
   IMAGE_QUEUES,
   roleForTemplate,
-} from '../../../../.claude/scripts/media/lib/classification.mjs';
+} from '@stats47/ops/media/classification.mjs';
 import {
   PanelCard,
   StatusBadge,
@@ -35,7 +35,7 @@ import type {
   CheckName,
   CheckState,
   Template,
-} from '../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 
 export interface WorkspaceData {
   items: ItemView[];

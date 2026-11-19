@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { S3Client } from '@aws-sdk/client-s3';
-import { createR2Store } from '../lib/cover-storage.mjs';
+import { createR2Store } from '../../../../packages/ops/src/note/cover-storage.mjs';
 
 test('R2 readers retain the cover limit, while fixed delivery archives explicitly permit their recorded size', async () => {
   const previous = Object.fromEntries(['R2_S3_ENDPOINT', 'R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY'].map((key) => [key, process.env[key]]));

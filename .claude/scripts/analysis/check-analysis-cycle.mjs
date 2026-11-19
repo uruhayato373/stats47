@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../config/datasets.mjs";
 import { resolveDarkChartSource } from "../../../apps/web/src/features/blog/lib/responsive-chart.ts";
-import { analysisCycleErrors, reviewedArticleText } from "./analysis-cycle-core.mjs";
+import { analysisCycleErrors, reviewedArticleText } from "../../../packages/ops/src/analysis/analysis-cycle-core.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const readJson = (path) => JSON.parse(readFileSync(join(ROOT, path), "utf8"));

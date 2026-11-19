@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** 2025 final raw-milk annual production; never writes remotely. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs');
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

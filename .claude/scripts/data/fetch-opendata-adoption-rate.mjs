@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { R2_PUBLIC_ORIGIN, statsR2Key } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN, statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * オープンデータ取組済み市区町村の割合 (都道府県別) の投入スクリプト。
  *

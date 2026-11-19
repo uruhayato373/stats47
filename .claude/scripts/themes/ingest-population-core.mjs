@@ -1,6 +1,6 @@
 // Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
 import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, realpath } from 'node:fs/promises';
@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { parseArgs } from 'node:util';
 import { SOURCES, EXPECTED_CONFIGS } from './population-core-pins.mjs';
-import { PREF_AREA_CODES } from '../lib/prefectures.cjs';
+import { PREF_AREA_CODES } from '../../../packages/area/mirror/prefectures.cjs';
 export { SOURCES, EXPECTED_CONFIGS };
 export const PREFS = [...PREF_AREA_CODES];
 const AREAS = ['00000', ...PREFS],
@@ -537,7 +537,7 @@ async function main() {
       },
     },
   });
-  const prefectures = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES,
+  const prefectures = require('./packages/area/mirror/prefectures.cjs').PREFECTURES,
     names = Object.fromEntries(
       prefectures.map((p) => [p.prefCode, p.prefName])
     );

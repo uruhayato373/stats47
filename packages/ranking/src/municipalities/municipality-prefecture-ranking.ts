@@ -1,4 +1,5 @@
 
+import { prefectureAreaCodeOf } from '@stats47/area';
 import {
   municipalityLeafName,
   municipalityRankingDisplayTitle,
@@ -81,7 +82,7 @@ export function municipalityAbsenceNote(
   if (absentValueReason) {
     const present = new Set(values.map((row) => row.areaCode));
     const inScope = [...comparableCodes].filter(
-      (code) => !prefectureCode || `${code.slice(0, 2)}000` === prefectureCode
+      (code) => !prefectureCode || prefectureAreaCodeOf(code) === prefectureCode
     );
     const absent = inScope.filter((code) => !present.has(code)).length;
     if (absent === 0) return null;

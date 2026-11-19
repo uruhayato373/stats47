@@ -10,7 +10,7 @@ import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 // 期日の読み方 (範囲内・超過の境界) は月次・週次計画が期日で引く cardsDueWithin と同じ partitionByDue を使う
-const { parseAnnual, parseBacklog, partitionByDue } = require("../../lib/backlog-lib.cjs");
+const { parseAnnual, parseBacklog, partitionByDue } = require("../../../../packages/ops/src/management/backlog-lib.cjs");
 // Must の読み取り・連続未達の閾値・🔴 の上限は docs:check (DG081/082) と同じ実装を使う
 const strategyLanes = require("../../lib/strategy-lanes.cjs");
 // 起票と完了の流れ・総枚数の目安は npm run backlog:waits -- flow と同じ実装を使う
@@ -19,7 +19,7 @@ const { buildFlow } = require("../../backlog-loop/backlog-waits-core.cjs");
 import { CARD_ACTIONS as GSC_CARD_ACTIONS, CARD_PREFIX as GSC_PREFIX } from "../../gsc/lib/coverage-backlog.mjs";
 import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "../../data/lib/year-coverage-backlog.mjs";
 // 振り返りの段 (週次・月次レビューの期限と申し送りの振り分け) は check-review-cadence.mjs と同じ実装を読む
-import { handoffSummary, reviewCadence } from "../../management/lib/review-cadence.mjs";
+import { handoffSummary, reviewCadence } from "../../../../packages/ops/src/management/review-cadence.mjs";
 
 const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
 /** 年間計画 (月見出しの下のカード)。無い間は空として読む */

@@ -10,7 +10,7 @@ import {
 } from "../lib/coverage-backlog.mjs";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog, ID_PATTERN, EXECUTORS, KINDS } = require("../../lib/backlog-lib.cjs");
+const { parseBacklog, ID_PATTERN, EXECUTORS, KINDS } = require("../../../../packages/ops/src/management/backlog-lib.cjs");
 
 const entry = (url, action, status = "pending") => ({
   url,

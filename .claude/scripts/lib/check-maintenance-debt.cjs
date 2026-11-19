@@ -119,7 +119,7 @@ function sectionHasCondition(lines, lineIndex) {
 
 // サイト識別子 (R2 公開 URL・本番 origin・GSC プロパティ・GA4 プロパティ ID) の直書き (2026-10-06)。
 // 値の正本は packages/types/src/site.json。TS は @stats47/types の SITE、Node スクリプトは
-// .claude/scripts/lib/site-config.cjs から読む。散在していた 200 箇所超を寄せた後の再発止め。
+// packages/types/mirror/site-config.cjs から読む。散在していた 200 箇所超を寄せた後の再発止め。
 // パスを付けない URL / ID そのものの文字列リテラルだけを数え、"https://stats47.jp/ranking/x" の
 // ようなパス付き URL・コメント・文書・設定ファイル (toml/yml/sh) は対象外にする。
 const SITE_IDENTITY_LITERAL_RE = /(["'`])(?:https:\/\/storage\.stats47\.jp|https:\/\/stats47\.jp|sc-domain:stats47\.jp|463218070)\1/;
@@ -129,13 +129,13 @@ const SITE_IDENTITY_ALLOWED = new Map([
   ["apps/web/scripts/generate-geo-source-thumbnails.ts", "画像生成器の rendererSources に含まれ、編集すると描画ハッシュが変わって既存画像が全て再生成対象になる"],
 ]);
 
-// ISO 週・週の月曜の自前計算 (2026-10-21 SCRIPT-ISO-WEEK-UNIFY-01)。正本は .claude/scripts/metrics/lib/periods.mjs
+// ISO 週・週の月曜の自前計算 (2026-10-21 SCRIPT-ISO-WEEK-UNIFY-01)。正本は packages/ops/src/metrics/periods.mjs
 // (JST の暦日で数える isoWeekOf / isoWeekRange / jstDateOf)。22 ファイル 27 か所の自前実装が UTC・実行マシンの時刻・JST で
 // まちまちに数え、月曜 0〜9 時 (JST) に前の週を返していたのを寄せた後の再発止め。1 月 4 日を基準にする計算・日曜を 7 とする計算・
 // 月曜を 0 とする計算のどれかを、正本の外のコードに書いたら止める。週以外の用途で要るときは理由を書いて ISO_WEEK_ALLOWED に足す。
 const ISO_WEEK_LOCAL_RE = /Date\.UTC\([^,()]+,\s*0,\s*4\)|get(?:UTC)?Day\(\)\s*\|\|\s*7|\(\s*[\w.]+\.get(?:UTC)?Day\(\)\s*\+\s*6\s*\)\s*%\s*7/;
 const ISO_WEEK_ALLOWED = new Map([
-  [".claude/scripts/metrics/lib/periods.mjs", "ISO 週・JST の暦日の正本"],
+  ["packages/ops/src/metrics/periods.mjs", "ISO 週・JST の暦日の正本"],
 ]);
 
 // Google API の認証・クライアント生成の自前実装 (2026-10-21 SCRIPT-GOOGLE-CLIENT-UNIFY-01)。正本は .claude/scripts/lib/google-client.cjs
@@ -169,7 +169,7 @@ function inspect(file) {
       lineForDebt = comment ? comment[1] : "";
     }
     // 大文字のみ検出 (debt コメント規約は大文字)。case-insensitive だと識別子・DOM id・パス
-    // (`const todo` / `section#todo` / `../../todo/`) を誤検知する (2026-07-17 精緻化・legacy 用語除外と同方針)
+    // (`const todo` / `section#todo` / `../../todo`) を誤検知する (2026-07-17 精緻化・legacy 用語除外と同方針)
     // debt markerの構文は `TODO:` / `TODO (Phase N):` / `TODO #123:`。
     // 単なる「TODO台帳」「TODO ID」やtodo-ran固有名詞を負債として数えない。
     const debt = lineForDebt.match(
@@ -236,7 +236,7 @@ function inspect(file) {
     if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !ISO_WEEK_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && ISO_WEEK_LOCAL_RE.test(line))
       results.push(finding("ISO_WEEK_LOCAL", file, number,
-        "ISO 週・週の月曜の自前計算。.claude/scripts/metrics/lib/periods.mjs の isoWeekOf / isoWeekRange / jstDateOf を使う", line));
+        "ISO 週・週の月曜の自前計算。packages/ops/src/metrics/periods.mjs の isoWeekOf / isoWeekRange / jstDateOf を使う", line));
 
     if (!isTest && (/\.[cm]?[jt]sx?$/.test(relative) || GOOGLE_AUTH_DOC_RE.test(relative)) && !GOOGLE_AUTH_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && GOOGLE_AUTH_LOCAL_RE.test(line))
@@ -246,7 +246,7 @@ function inspect(file) {
     if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !SITE_IDENTITY_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && SITE_IDENTITY_LITERAL_RE.test(line))
       results.push(finding("SITE_IDENTITY_LITERAL", file, number,
-        "サイト識別子の直書き。@stats47/types の SITE か .claude/scripts/lib/site-config.cjs を参照する", line));
+        "サイト識別子の直書き。@stats47/types の SITE か packages/types/mirror/site-config.cjs を参照する", line));
   });
   return results;
 }

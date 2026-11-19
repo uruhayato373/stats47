@@ -10,7 +10,7 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
 
-const { parseAnnual, parseBacklog } = require('../../lib/backlog-lib.cjs');
+const { parseAnnual, parseBacklog } = require('../../../../packages/ops/src/management/backlog-lib.cjs');
 const core = require('../backlog-waits-core.cjs');
 
 const BACKLOG = [

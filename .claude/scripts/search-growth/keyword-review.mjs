@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { hash, METHODS } from './lib/keyword-cycle.mjs';
 import { editableFile, readJson, writeJson, surveyEntry } from './keyword-cycle.mjs';
 import { validatePageEvidence } from './keyword-page.mjs';
-import { SITE_ORIGIN } from '../lib/site-config.cjs';
+import { SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const COPY_PROPERTIES = new Set(['seoTitle', 'seoDescription', 'title', 'description', 'intro', 'summary', 'question', 'answer']);

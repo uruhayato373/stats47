@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT,readInventory,readQuality,readTemplates,sourceItems,imageLibrary,safeName } from './lib/workspace.mjs';
-import { readWebInventory,publicUrlAllowed } from './lib/web-inventory.mjs';
-import { auditClassification, IMAGE_ROLES } from './lib/classification.mjs';
-import { canonicalTemplate, RETIRED_TEMPLATES, IMAGE_PURPOSES, IMAGE_SELECTIONS } from './lib/taxonomy.mjs';
+import { ROOT,readInventory,readQuality,readTemplates,sourceItems,imageLibrary,safeName } from '../../../packages/ops/src/media/workspace.mjs';
+import { readWebInventory,publicUrlAllowed } from '../../../packages/ops/src/media/web-inventory.mjs';
+import { auditClassification, IMAGE_ROLES } from '../../../packages/ops/src/media/classification.mjs';
+import { canonicalTemplate, RETIRED_TEMPLATES, IMAGE_PURPOSES, IMAGE_SELECTIONS } from '../../../packages/ops/src/media/taxonomy.mjs';
 import schema from '../../../data/content-operations/quality.schema.json' with {type:'json'};
 const quality=readQuality(ROOT),templates=readTemplates(ROOT),items=sourceItems(ROOT),images=imageLibrary(ROOT).images;
 const owners=new Set(items.map(i=>i.id)),ids=new Set(images.map(i=>i.id)),types=new Set(templates.templates.map(t=>t.id));

@@ -9,7 +9,7 @@ import ExcelJS from 'exceljs';
 import JSZip from 'jszip';
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities, PREFECTURE_AREA_CODES } from '@stats47/area';
 import { datasetDir } from '../../../config/datasets.mjs';
-import { assertDatasetShape } from '../lib/dataset-shape.mjs';
+import { assertDatasetShape } from '../../../packages/ops/src/datasets/dataset-shape.mjs';
 import { type AnalysisObservation } from '../../../packages/product-factory/src/analysis/fetch-estat';
 import { computeAnalyses, describeAnalysis } from '../../../packages/product-factory/src/analysis/compute';
 import { resolveAnalysisRevision, type AuthoredAnalysisRevision, type ResolvedSource } from '../../../packages/product-factory/src/analysis/catalog';

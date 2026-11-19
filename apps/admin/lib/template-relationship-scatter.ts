@@ -12,6 +12,7 @@ import { SAMPLE_FRAME, escapeXml, sampleBodyTop, sampleFrame } from './template-
 import { resolveMetricColor } from '../../remotion/src/features/data-cards/tile-scale';
 import { LIGHT_THEME, TEMPLATE_MIN_FONT_SIZE, mixColor, toHex, type ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import type { MetricPresentation } from '../../../packages/types/src/metric-presentation';
+import { PREFECTURE_COUNT } from '@stats47/area';
 
 export const RELATIONSHIP_SAMPLE_ID = 'temperature-kerosene';
 export const RELATIONSHIP_SAMPLE_YEAR = '2024';
@@ -50,7 +51,7 @@ function yearRows(raw: unknown, metric: typeof averageTemperature) {
   if (input.metricKey !== metric.key || input.entityKind !== 'prefecture')
     throw Error('散布図見本の指標・地域単位が一致しません。');
   const rows = input.rows.filter((row) => row.yearCode === RELATIONSHIP_SAMPLE_YEAR);
-  if (rows.length !== 47 || new Set(rows.map((row) => row.areaCode)).size !== 47 ||
+  if (rows.length !== PREFECTURE_COUNT || new Set(rows.map((row) => row.areaCode)).size !== PREFECTURE_COUNT ||
     rows.some((row) => row.unit !== metric.unit || row.value === null || !Number.isFinite(row.value)))
     throw Error('散布図見本は全47都道府県の値・単位が必要です。');
   return new Map(rows.map((row) => [row.areaCode, { name: row.areaName, value: row.value! }]));
@@ -112,9 +113,9 @@ export function renderRelationshipScatter(raw: unknown, theme: ChartTheme = LIGH
 export function renderRelationshipScatterChart(chart: ScatterChart, theme: ChartTheme = LIGHT_THEME) {
   const points = chart.logAxes ? chart.points.map((p) => ({ ...p, x: Math.log10(p.x), y: Math.log10(p.y) })) : chart.points;
   const municipal = chart.level === 'municipality';
-  const expected = municipal ? points.length : 47 - (chart.excludedCount ?? 0);
+  const expected = municipal ? points.length : PREFECTURE_COUNT - (chart.excludedCount ?? 0);
   const areaCount = municipal ? `${expected.toLocaleString('ja-JP')}市区町村` : `${expected}都道府県`;
-  const everyPrefecture = !municipal && expected === 47;
+  const everyPrefecture = !municipal && expected === PREFECTURE_COUNT;
   const dotR = municipal ? MUNICIPAL_DOT_R : DOT_R, namedDotR = municipal ? MUNICIPAL_NAMED_DOT_R : NAMED_DOT_R;
   if (!expected || points.length !== expected || new Set(points.map((p) => p.code)).size !== expected ||
     points.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)))

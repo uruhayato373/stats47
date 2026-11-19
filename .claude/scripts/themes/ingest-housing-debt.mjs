@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** 2019 household housing/land debt, table 4-1. No regional averaging. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -9,7 +9,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 const require = createRequire(import.meta.url);
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

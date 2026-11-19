@@ -14,7 +14,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)('../lib/site-config.cjs');
+const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)('../../../packages/types/mirror/site-config.cjs');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const CONCURRENCY = 16;
 const sha = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');

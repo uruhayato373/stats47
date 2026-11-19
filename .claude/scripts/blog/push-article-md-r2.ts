@@ -30,7 +30,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { assertR2WriteAllowed } from "../../../packages/r2-storage/src/scripts/_assert-ci-write";
-import { R2_BUCKET } from "../lib/site-config.cjs";
+import { R2_BUCKET } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 config({ path: path.join(PROJECT_ROOT, ".env.local") });

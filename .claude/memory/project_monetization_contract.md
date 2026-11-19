@@ -14,7 +14,7 @@
   権限が無い (GA4 プロパティ 463218070 の管理者は別アカウント)。2026-10-13 に stats47 アカウントを GA4 の管理者に足し、GA4 と新 AdSense をリンクした (GA4 は作り直していない)。週次取得の API は Variable `GOOGLE_ADSENSE_ACCOUNT_ID` を 2026-10-13 に新 ID へ替えたが、refresh token も 2026-10-13 に stats47 アカウントで再発行して Secret を差し替えた。
 - **改善サイクル (2026-10-13 凍結解除)**: 再開後も NSM が「恒久停止で ¥0」固定、KPI `ad-yield` 未接続、`/adsense-improvement` 凍結、
   週次計画が AdSense 候補を不採用のままだった。同日に全部戻した (backlog `ADSENSE-RESTART-01`)。`ad-yield` は AdSense 確定 7 日 × 4 週 ÷
-  GA4 Japan PV 28 日 × 1,000 (`.claude/scripts/metrics/lib/adsense-revenue.mjs`)、最初の値は 2026-W45。W42〜W45 はベースラインで配置を変えない。
+  GA4 Japan PV 28 日 × 1,000 (`packages/ops/src/metrics/adsense-revenue.mjs`)、最初の値は 2026-W45。W42〜W45 はベースラインで配置を変えない。
   **再開・停止を変えるときは、表示スイッチだけでなく NSM・KPI・skill・週次計画の前提も同じ差分で直す** (今回は 2 日ずれた)。
 - **見込みの注意**: AdSense の「ページ RPM ¥37」は AdSense 自身が数えた PV (GA4 の 54〜78%) が分母。GA4 の PV で割り直すと
   停止前 W30〜W33 は 1,000 PV あたり ¥22、W31 の手動枠分だけなら ¥6.7。GA4 の PV 目標の換算に ¥37 を使わない

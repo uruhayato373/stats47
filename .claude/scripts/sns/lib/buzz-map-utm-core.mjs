@@ -10,7 +10,7 @@
  */
 
 import { createRequire } from "node:module";
-import { SITE_ORIGIN } from "../../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";
 
 const require = createRequire(import.meta.url);
 const snsUtm = require("../../lib/sns-utm.cjs");

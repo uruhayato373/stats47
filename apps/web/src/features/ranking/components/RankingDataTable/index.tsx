@@ -5,6 +5,7 @@
 import { useMemo } from "react";
 
 
+import { isPrefectureAreaCode } from "@stats47/area/area-code";
 import { DataTable, cn, ChartPanel } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
@@ -28,7 +29,6 @@ import { buildRankingRows, type RankingDataRow } from "./ranking-rows";
 import type { StatsSchema } from "@stats47/types";
 
 
-const PREFECTURE_CODE_PATTERN = /^\d{2}000$/;
 
 
 interface Props {
@@ -99,7 +99,7 @@ export function RankingDataTable({
         meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.rank}px` },
         cell: ({ row }) => {
           const { areaCode, areaName } = row.original;
-          if (onSelectArea && PREFECTURE_CODE_PATTERN.test(areaCode)) {
+          if (onSelectArea && isPrefectureAreaCode(areaCode)) {
             return (
               <button
                 type="button"
@@ -123,7 +123,7 @@ export function RankingDataTable({
         meta: { width: `${RANKING_TABLE_COLUMN_WIDTHS.areaName}px` },
         cell: ({ row }) => {
           const { areaCode, areaName } = row.original;
-          if (PREFECTURE_CODE_PATTERN.test(areaCode)) {
+          if (isPrefectureAreaCode(areaCode)) {
             return (
               <Link
                 {...navSurfaceProps("ranking_table")}
@@ -192,7 +192,7 @@ export function RankingDataTable({
         onRowClick={
           onSelectArea
             ? (row) => {
-                if (PREFECTURE_CODE_PATTERN.test(row.areaCode)) onSelectArea(row.areaCode);
+                if (isPrefectureAreaCode(row.areaCode)) onSelectArea(row.areaCode);
               }
             : undefined
         }
@@ -200,7 +200,7 @@ export function RankingDataTable({
           onSelectArea
             ? (row) =>
                 cn(
-                  PREFECTURE_CODE_PATTERN.test(row.areaCode) && "cursor-pointer",
+                  isPrefectureAreaCode(row.areaCode) && "cursor-pointer",
                   row.areaCode === selectedAreaCode && "bg-muted",
                 )
             : undefined

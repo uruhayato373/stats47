@@ -12,7 +12,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { resolveVaultRoot } from '../source-vault/source-vault.mjs';
+import { resolveVaultRoot } from '../../../packages/ops/src/source-vault/source-vault.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 

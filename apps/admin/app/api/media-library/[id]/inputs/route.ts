@@ -1,8 +1,8 @@
 import {
   imageById,
   WorkspaceError,
-} from '../../../../../../../.claude/scripts/media/lib/workspace.mjs';
-import { readMediaObject } from '../../../../../../../.claude/scripts/media/lib/storage.mjs';
+} from '@stats47/ops/media/workspace.mjs';
+import { readMediaObject } from '@stats47/ops/media/storage.mjs';
 import { projectRoot } from '@/lib/server/project-root';
 import { workspaceError } from '@/lib/server/workspace-request';
 export const runtime = 'nodejs';

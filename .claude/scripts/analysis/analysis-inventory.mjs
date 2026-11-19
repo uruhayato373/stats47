@@ -10,7 +10,7 @@
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_ORIGIN, STATS_R2_PREFIX } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN, STATS_R2_PREFIX } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 import { parseArgs } from "node:util";
 
 import { datasetDir } from "../../../config/datasets.mjs";

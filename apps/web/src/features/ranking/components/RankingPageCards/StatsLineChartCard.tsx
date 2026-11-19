@@ -1,3 +1,4 @@
+import { NATIONAL_AREA_CODE } from "@stats47/area/area-code";
 import { ChartPanel } from "@stats47/components";
 import { resolveAttribution } from "@stats47/data-configs";
 import { buildEstatTableUrl } from "@stats47/data-configs/data-source";
@@ -26,7 +27,7 @@ export async function StatsLineChartCard({
   const { statParams, unit, lineParams, labels, description } = props;
 
   // 1. 全国最新値を取得
-  const statResult = await fetchEstatData("00000", statParams);
+  const statResult = await fetchEstatData(NATIONAL_AREA_CODE, statParams);
   const statData =
     "data" in statResult ? toKpiCardData(statResult.data) : null;
 
@@ -34,7 +35,7 @@ export async function StatsLineChartCard({
   const paramsList = Array.isArray(lineParams) ? lineParams : [lineParams];
   const rawDataList = await Promise.all(
     paramsList.map(async (p) => {
-      const result = await fetchEstatData("00000", p);
+      const result = await fetchEstatData(NATIONAL_AREA_CODE, p);
       return "data" in result ? result.data : [];
     })
   );

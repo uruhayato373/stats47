@@ -32,6 +32,7 @@ import { ErrorNote, Freshness } from "@/components/ops/primitives";
 import { localSiteHref } from "@/lib/local-site";
 import { businessPlanAdminData, businessPlanLabels } from "@/lib/server/business-plan";
 import { hasError } from "@/lib/server/state-io";
+import { PREFECTURE_COUNT } from "@stats47/area";
 
 const LINK = "text-xs font-medium underline-offset-4 hover:underline";
 
@@ -229,7 +230,7 @@ export function GeoAnalyses({ data }: { data: BusinessPlanData }) {
               {analysis.evidenceManifestReady ? (
                 <div className="flex flex-col gap-1 text-xs text-muted-foreground">
                   <div>
-                    <StatusBadge tone={analysis.conservationChecks === 47 ? "good" : "bad"}>
+                    <StatusBadge tone={analysis.conservationChecks === PREFECTURE_COUNT ? "good" : "bad"}>
                       {analysis.detailAreas}県 / 保存則{analysis.conservationChecks}件
                     </StatusBadge>
                   </div>

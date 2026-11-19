@@ -4,7 +4,7 @@
  */
 import type { Tone } from "@/components/admin-ui";
 
-import { isoWeekRange } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
+import { isoWeekRange } from "@stats47/ops/metrics/periods.mjs";
 
 export function num(n: number | null | undefined): string {
   return (n ?? 0).toLocaleString("ja-JP");
@@ -48,7 +48,7 @@ export function dueKey(due: string | null | undefined): string {
   const s = String(due ?? "").trim();
   if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
   if (/^\d{4}-W\d{2}$/.test(s)) {
-    try { return isoWeekRange(s).monday; } catch { return "9999-12-31"; } // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+    try { return isoWeekRange(s).monday; } catch { return "9999-12-31"; } // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
   }
   return "9999-12-31";
 }

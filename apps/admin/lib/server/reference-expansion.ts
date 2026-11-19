@@ -8,7 +8,7 @@ import {
   validateExpansion,
   type ExpansionChannel,
   type ExpansionState,
-} from "../../../../.claude/scripts/source-vault/lib/reference-expansion.mjs";
+} from "@stats47/ops/source-vault/lib/reference-expansion.mjs";
 import { projectRoot } from "./project-root";
 
 /** 展開先の担当 (正典 .claude/rules/reference-source-standards.md §5「分析企画の展開」) */

@@ -4,16 +4,16 @@ import path from 'node:path';
 import sharp from 'sharp';
 import { datasetPath } from '../../../../config/datasets.mjs';
 import { z } from 'zod';
-import { NOTE_ARTICLES } from '../../../../.claude/scripts/note/catalog';
+import { NOTE_ARTICLES } from '@stats47/ops/note/catalog';
 import {
   createArticleStores,
   readManifest,
-} from '../../../../.claude/scripts/note/lib/article-store.mjs';
+} from '@stats47/ops/note/article-store.mjs';
 import {
   readVerified,
   mediaStore,
   readMediaObject,
-} from '../../../../.claude/scripts/media/lib/storage.mjs';
+} from '@stats47/ops/media/storage.mjs';
 import {
   CHECKS,
   FILES,
@@ -30,11 +30,11 @@ import {
   workspaceItems,
   readTemplates,
   type VisualReview,
-} from '../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 import { projectRoot } from './project-root';
 import { getById } from './posts-store';
-import { readWebInventory } from '../../../../.claude/scripts/media/lib/web-inventory.mjs';
-import { assertStaticSvg } from '../../../../.claude/scripts/media/lib/svg-safety.mjs';
+import { readWebInventory } from '@stats47/ops/media/web-inventory.mjs';
+import { assertStaticSvg } from '@stats47/ops/media/svg-safety.mjs';
 
 export function qualityOverview() {
   const library = imageLibrary(projectRoot());

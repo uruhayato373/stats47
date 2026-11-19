@@ -8,7 +8,7 @@ import type { PostPlanning } from "../contracts/types";
 import { projectRoot } from "./project-root";
 
 /**
- * SNS 投稿台帳ストア (.claude/scripts/lib/sns-posts-store.cjs) への typed adapter。
+ * SNS 投稿台帳ストア (packages/ops/src/sns/sns-posts-store.cjs) への typed adapter。
  *
  * ★ webpack にバンドルさせない: `.cjs` は `__dirname` 相対で STORE_PATH
  * (data/sns/posts.json) を解決するため、bundle されると __dirname が
@@ -97,7 +97,7 @@ interface Store {
 let cachedStore: Store | null = null;
 function store(): Store {
   if (cachedStore) return cachedStore;
-  const abs = path.join(projectRoot(), ".claude/scripts/lib/sns-posts-store.cjs");
+  const abs = path.join(projectRoot(), "packages/ops/src/sns/sns-posts-store.cjs");
   const nativeRequire = eval("require") as NodeRequire;
   cachedStore = nativeRequire(abs) as Store;
   if (!cachedStore) throw new Error(`sns-posts-store.cjs を読み込めません: ${abs}`);

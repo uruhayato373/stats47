@@ -9,7 +9,7 @@ import { QUESTIONS, archiveMemberOf, assertConfigMatches, extractQuestion } from
  * (止まる側が無いと、検査が何も見ていなくても全部通ってしまう)。
  */
 const require = createRequire(import.meta.url);
-const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 
 const AGE_CLASSES = ['40～44歳', '45～49歳', '50～54歳', '55～59歳', '60～64歳', '65～69歳', '70～74歳'];
 const NAMES = [...prefectures.map((p) => p.prefName), '都道府県判別不可'];

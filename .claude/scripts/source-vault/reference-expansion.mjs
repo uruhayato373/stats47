@@ -18,7 +18,7 @@ import path from 'node:path';
 import { datasetPath } from '../../../config/datasets.mjs';
 import {
   CHANNELS, EXPANSION_ROOT, checkRecord, expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion, suggestTargets, validateExpansion,
-} from './lib/reference-expansion.mjs';
+} from '../../../packages/ops/src/source-vault/lib/reference-expansion.mjs';
 
 const [command, ...rest] = process.argv.slice(2);
 const option = (name) => (rest.includes(name) ? rest[rest.indexOf(name) + 1] : null);

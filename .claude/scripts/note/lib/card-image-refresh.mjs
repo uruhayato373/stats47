@@ -1,9 +1,9 @@
 import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
 import sharp from 'sharp';
-import { SITE_ORIGIN } from '../../lib/site-config.cjs';
+import { SITE_ORIGIN } from '../../../../packages/types/mirror/site-config.cjs';
 import { readLinkCardLedger } from '../../ogp/lib/link-card-ledger.mjs';
-import { fetchCoverSource } from './cover-storage.mjs';
+import { fetchCoverSource } from '../../../../packages/ops/src/note/cover-storage.mjs';
 
 export function readApprovedCardImageRefresh(file) {
   const rollout = readLinkCardLedger(file);

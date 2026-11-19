@@ -17,7 +17,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

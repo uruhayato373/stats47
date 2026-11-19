@@ -15,9 +15,9 @@ import {
   NOTE_MAGAZINES,
   NOTE_MAGAZINE_KEYS,
   getMagazine,
-} from "./index";
+} from "../../../../packages/ops/src/note/catalog/index";
 import { NOTE_PRODUCT_MAPPINGS } from "../../../../packages/product-factory/src/channels/note/product-note-mapping";
-import { NOTE_URL_PATTERN } from "../../lib/dataset-shape.mjs";
+import { NOTE_URL_PATTERN } from "../../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");

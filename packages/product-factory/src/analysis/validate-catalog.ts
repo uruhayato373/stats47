@@ -1,4 +1,5 @@
 import type { MetricConfig } from '@stats47/data-configs';
+import { to5DigitPrefCode } from '@stats47/area';
 import { resolveProductThemeReferences, type ProductThemeReference } from './theme-references';
 import { resolveAnalysisReuse, type AnalysisReuse } from './reuse';
 import { assertAnalysisAxes } from './coverage';
@@ -109,7 +110,7 @@ export function validateAnalysisCatalog(products: readonly AnalysisCatalogProduc
       unique(areas, `${label}/areas`);
       for (const code of areas) check(context.areaCodes[source.grain].has(code), `${label}: 対象地域にないコード ${code}`);
       if (recipe.within) check(source.grain === 'municipality' && (recipe.within.kind === 'nation' ||
-        (recipe.within.kind === 'prefecture' && context.areaCodes.prefecture.has(`${recipe.within.prefCode}000`))), `${label}: 市区町村の表示範囲が不正です`);
+        (recipe.within.kind === 'prefecture' && context.areaCodes.prefecture.has(to5DigitPrefCode(recipe.within.prefCode)))), `${label}: 市区町村の表示範囲が不正です`);
       if (recipe.presentationMetricKey) check(Boolean(context.registry[recipe.presentationMetricKey]), `${label}: 配色の参照指標がありません`);
       if (recipe.template === 'bar' || recipe.template === 'choropleth') {
         check(Boolean(recipe.presentationMetricKey), `${label}: 地域比較の配色参照がありません`);

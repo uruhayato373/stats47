@@ -7,10 +7,10 @@ import { fileURLToPath } from 'node:url';
 import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import sharp from 'sharp';
-import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision, renameCoverFile } from './lib/cover-assets.mjs';
-import { readStoredCover, readStoredCoverInput, createCoverStore, fetchNoteDetail, fetchCoverSource } from './lib/cover-storage.mjs';
+import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision, renameCoverFile } from '../../../packages/ops/src/note/cover-assets.mjs';
+import { readStoredCover, readStoredCoverInput, createCoverStore, fetchNoteDetail, fetchCoverSource } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { launchContext, assertAccount, pruneProfileCaches } from './lib/note-session.mjs';
-import { assertCurrentCoverCandidate } from './lib/cover-production.mjs';
+import { assertCurrentCoverCandidate } from '../../../packages/ops/src/note/cover-production.mjs';
 import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
 import {
   sha256,

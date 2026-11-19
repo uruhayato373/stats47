@@ -2,9 +2,9 @@
 /** Read exact note manifests and index file metadata. Never fetch/persist article text in Git. */
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, FILES, atomicUpdate, safeName } from './lib/workspace.mjs';
-import { readArticleLedger } from '../note/lib/article-ledger.mjs';
-import { createArticleStores, readManifest, bodyBucket } from '../note/lib/article-store.mjs';
+import { ROOT, FILES, atomicUpdate, safeName } from '../../../packages/ops/src/media/workspace.mjs';
+import { readArticleLedger } from '../../../packages/ops/src/note/article-ledger.mjs';
+import { createArticleStores, readManifest, bodyBucket } from '../../../packages/ops/src/note/article-store.mjs';
 const args = process.argv.slice(2);
 if (args.some(a => !['--apply','--all','--keys'].includes(a) && (args[args.indexOf(a)-1] !== '--keys'))) throw Error('Unknown argument');
 const keys = args.includes('--keys') ? args[args.indexOf('--keys')+1]?.split(',') : null;

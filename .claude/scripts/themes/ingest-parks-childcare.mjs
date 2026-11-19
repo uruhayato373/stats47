@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Official ENV/CFA county series. Run from repository root; only --write-local stages canonical values. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -12,7 +12,7 @@ import { parseArgs } from 'node:util';
 const root = process.cwd();
 const requireRepo = createRequire(resolve(root, 'package.json'));
 const ExcelJS = requireRepo('exceljs');
-const prefs = requireRepo('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
+const prefs = requireRepo('./packages/area/mirror/prefectures.cjs').PREFECTURES;
 const sum = (values) => values.reduce((a, b) => a + b, 0);
 const clean = (v) =>
   String(v ?? '')

@@ -5,7 +5,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, REPORT_DIR, assertSha, readJson, sha256, validateDocument, writeJson } from './contracts.mjs';
 import { entryFiles, loadSnapshot, localKey, snapshotPath, verifyEntry } from './archive.mjs';
-import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
+import { R2_PRIVATE_BUCKET } from '../../../../packages/types/mirror/site-config.cjs';
 
 export async function publishPlan({ root = ROOT, plan, store, publish }) {
   if (!Array.isArray(plan.files) || !Array.isArray(plan.snapshots)) throw Error('Invalid upload plan');

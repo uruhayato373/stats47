@@ -5,7 +5,7 @@ import { Grid } from "@/components/layout-primitives";
 import { ErrorNote, Unmeasured } from "@/components/ops/primitives";
 import { loadAll, type Post } from "@/lib/server/posts-store";
 import { hasError, wrap } from "@/lib/server/state-io";
-import { isoWeekOf, jstDateOf } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
+import { isoWeekOf, jstDateOf } from "@stats47/ops/metrics/periods.mjs";
 
 const NUM = new Intl.NumberFormat("ja-JP");
 

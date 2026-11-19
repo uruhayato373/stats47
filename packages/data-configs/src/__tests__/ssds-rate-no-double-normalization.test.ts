@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 // 率の判定は指標の生成器と同じ部品を使う (手で同期する二重管理にしない)
 // @ts-expect-error — 素の node 用の JS (型定義なし)。mirror-parity.test.ts と同じ形で意図的に import する
-import { isOfficialRate } from "../../../../.claude/scripts/estat/lib/ssds-rate-name.mjs";
+import { isOfficialRate } from "../estat/ssds-rate-name.mjs";
 import { METRICS_REGISTRY } from "../registry";
 
 const REPO_ROOT = resolve(__dirname, "../../../..");

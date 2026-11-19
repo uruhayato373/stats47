@@ -8,7 +8,7 @@ import { dirname, join, resolve } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { datasetDir } from '../../../../config/datasets.mjs';
-import { assertDatasetShape } from '../../lib/dataset-shape.mjs';
+import { assertDatasetShape } from '../../../../packages/ops/src/datasets/dataset-shape.mjs';
 import { readSourceDefinition } from '../ingest-bridge-inspection-age.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));

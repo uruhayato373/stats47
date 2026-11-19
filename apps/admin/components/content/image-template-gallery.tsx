@@ -2,9 +2,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import type { Template } from '../../../../.claude/scripts/media/lib/workspace.mjs';
-import { IMAGE_PURPOSES } from '../../../../.claude/scripts/media/lib/taxonomy.mjs';
-import { CHART_IMAGE_COPY_POLICY } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import type { Template } from '@stats47/ops/media/workspace.mjs';
+import { IMAGE_PURPOSES } from '@stats47/ops/media/taxonomy.mjs';
+import { CHART_IMAGE_COPY_POLICY } from '@stats47/ops/media/image-copy.mjs';
 import {
   basicTemplateQuery,
   templateCatalog,

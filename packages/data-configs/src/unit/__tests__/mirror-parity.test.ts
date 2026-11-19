@@ -10,7 +10,7 @@
  */
 import { describe, expect, it } from "vitest";
 // @ts-expect-error — 生成された鏡 (JS・型定義なし)。パリティ確認のため意図的に import する
-import * as mirror from "../../../../../.claude/scripts/lib/unit-semantics.mjs";
+import * as mirror from "../../../mirror/unit-semantics.mjs";
 import { KNOWN_UNIT_SAMPLES, conversionFactor, parseUnit, sameDimension } from "../unit-semantics";
 
 /** 両実装に流す入力。実測語彙 + 解釈できない形 + 境界を混ぜる。 */

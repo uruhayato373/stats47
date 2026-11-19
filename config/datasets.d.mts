@@ -7,6 +7,10 @@ export interface Dataset {
   description: string;
   retain?: string;
   planned?: boolean;
+  /** GOVERNED の外の .claude 運用資産 (追跡ファイルへの当たりだけ検査) */
+  external?: boolean;
+  /** external のうち git 管理外の端末ごとのファイル */
+  untracked?: boolean;
   /** 形状契約 (JSON Schema) のパス */
   schema?: string;
   /** 正本を置く private R2 の prefix */

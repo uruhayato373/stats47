@@ -18,8 +18,7 @@ import { THEME_CATALOGS } from "../index";
  */
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = resolve(HERE, "../../../../..");
-const MIRROR = resolve(REPO_ROOT, ".claude/scripts/audit/theme-chart-dependencies.generated.json");
+const MIRROR = resolve(HERE, "../../../mirror/theme-chart-dependencies.generated.json");
 
 describe("theme dependency mirror — 監査母集団の鏡が正典と一致 (drift guard)", () => {
   it("committed ミラーが live collector 出力と一致 (陳腐化したら --check で落とす)", () => {

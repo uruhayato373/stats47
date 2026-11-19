@@ -34,7 +34,7 @@
     },
     "implementation": [
       {
-        "source": ".claude/scripts/note/lib/article-store.mjs",
+        "source": "packages/ops/src/note/article-store.mjs",
         "finding": "R2 article file manifests, read-back hashes, and private historical blobs support restoring saved files."
       },
       {
@@ -54,7 +54,7 @@
         "finding": "This entry point reads current R2 ranking values/item and writes source.json with source key, year and restore command. That source manifest itself does not contain the fixed numeric input values."
       },
       {
-        "source": ".claude/scripts/sns/lib/sns-drive-assets.mjs",
+        "source": "packages/ops/src/sns/sns-drive-assets.mjs",
         "finding": "SNS completed media are archived to Drive with a hash; the standard asset archiver handles media files, not a universal package of renderer and numeric inputs."
       }
     ],

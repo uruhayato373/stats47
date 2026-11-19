@@ -86,13 +86,12 @@ describe('classifyR2Key: 未登録と bucket の取り違え', () => {
   });
 });
 
-/** workflow と sync-snapshots の run.sh から、diff-push-r2 / push-exact-r2-assets が書く prefix を拾う */
+/** workflow から (sync-snapshots の run.sh は .claude/scripts/lib/__tests__/r2-key-classes-run-sh.test.ts が検査する)、diff-push-r2 / push-exact-r2-assets が書く prefix を拾う */
 function collectWorkflowWritePrefixes(): { source: string; value: string }[] {
   const workflowDir = join(REPO_ROOT, '.github', 'workflows');
   const files = readdirSync(workflowDir)
     .filter((name) => name.endsWith('.yml') || name.endsWith('.yaml'))
     .map((name) => join(workflowDir, name));
-  files.push(join(REPO_ROOT, '.claude', 'skills', 'db', 'sync-snapshots', 'run.sh'));
 
   const found: { source: string; value: string }[] = [];
   for (const file of files) {

@@ -9,15 +9,15 @@
  *   1 = error違反あり
  *   2 = 入力不備・実行時エラー
  */
-import { affectedTemplates, PAGE_TEMPLATES } from "./templates";
+import { affectedTemplates, PAGE_TEMPLATES } from "../../../packages/ops/src/page-quality/templates";
 import { auditUrl } from "./lib/audit-url";
 import { checkImages } from "./lib/check-images";
 import { checkSvgText } from "./lib/check-svg-text";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
-import { changedFilesSince, currentCommitSha } from "./lib/git-diff";
-import { evaluateAll, loadBudgets } from "./lib/thresholds";
+import { changedFilesSince, currentCommitSha } from "../../../packages/ops/src/page-quality/lib/git-diff";
+import { evaluateAll, loadBudgets } from "../../../packages/ops/src/page-quality/lib/thresholds";
 import { appendHistory, readPreviousValue, writeLatestJson, writeLatestMarkdown } from "./lib/storage";
-import type { AuditRun, MetricKey, PageAuditResult } from "./types";
+import type { AuditRun, MetricKey, PageAuditResult } from "../../../packages/ops/src/page-quality/types";
 
 function parseArgs() {
   const args = process.argv.slice(2);

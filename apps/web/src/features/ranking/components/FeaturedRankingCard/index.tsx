@@ -1,92 +1,62 @@
-import { cn } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { formatFeaturedValueDisplay, type RankingItem } from "@stats47/ranking";
 
-import { PORTAL_CARD_PADDING_CLASS, PORTAL_CARD_TITLE_CLASS, SurfaceLinkCard, PORTAL_CARD_CELL_CLASS } from "@/components/surface";
+import {
+  PORTAL_CARD_ASPECT_CLASS,
+  PORTAL_CARD_CELL_CLASS,
+  PORTAL_CARD_PADDING_CLASS,
+  PORTAL_CARD_TITLE_CLASS,
+  SurfaceLinkCard,
+} from "@/components/surface";
 
 import type { FeaturedRankingCardModel } from "../../utils/resolve-featured-ranking-card";
 
 export interface FeaturedRankingCardProps {
   rankingKey: string;
   year: string;
-  unit: string;
-  /** 指標の定義の表示単位 (item.valueDisplay)。渡せば定義の単位、無ければ図の規則で桁を寄せる */
-  valueDisplay?: RankingItem["valueDisplay"];
   model: FeaturedRankingCardModel;
-}
-
-/**
- * 値と単位の文字の大きさ。値は省略しないので、桁が多いほど段階で小さくする
- * (セルの幅は xl で約 170px。「58,021,789百万円」でも 1 行に収める)。
- */
-export function featuredValueSizeClass(valueWithUnit: string): string {
-  const length = [...valueWithUnit].length;
-  if (length <= 8) return "text-xl";
-  if (length <= 11) return "text-lg";
-  return "text-base";
 }
 
 /**
  * home / category / survey共通の注目ランキングカード。
  * 余白・文字階層・地理地図配置をこの1形式だけで管理する。
  *
- * 高さは中身で決める (固定比率を持たない)。上から 問い → 1 位の県 → 値 → 年 → 地図 の順に縦に積む。
- * 問いと値は省略しない (2026-10-28 3 巡目。値が「58,021,…」と切れて単位も消え、問いが語の途中で切れていた)。
- * 値と単位は折り返さない 1 塊にし、桁の多い値は文字を段階で小さくする。
- * 値はランキングのページと同じ表示単位で書く (「58,021,789百万円」でなく「58.0兆円」。2026-11-14)。
- * 地図はセルの下に全幅で置き、高さは地図の SVG と同じ縦横比 (320:190) で幅から決める。
- * 高さ 96px 固定では 3 列のカード (幅約 300px) で地図が小さく、小さな県の色が読めなかった (2026-11-03)。
- * カルーセルのカード見出しの下では枠を外したセルになる (PORTAL_CARD_CELL_CLASS)。
+ * 形はブログのカード (PortalBlogCard) と同じ「画像が上・題名が下」(2026-11-19 オーナー判断)。
+ * 画像はサムネイルと同じ 40:21 の枠の地図で、上位 3 位までを左上 (日本海側の空き) に重ねる。
+ * 並びは図の型の台帳「地図（実際の形）」の web の決まり (data/content-operations/image-templates.json)。
+ * 上位の行は正本の関数 `buildFeaturedTopRows` (@stats47/ranking) が、ランキングのページの表と同じ単位・桁で書いた文字で、
+ * カードは整形し直さない。地図の SVG はブログのカードと API でも使うので、文字は SVG に焼かず HTML で重ねる。
+ * 問いは省略しない。カルーセルのカード見出しの下では枠を外したセルになる (PORTAL_CARD_CELL_CLASS)。
  */
-export function FeaturedRankingCard({
-  rankingKey,
-  year,
-  unit,
-  valueDisplay,
-  model,
-}: FeaturedRankingCardProps) {
-  const { value: displayValue, unit: displayUnit } = formatFeaturedValueDisplay({ unit, valueDisplay }, model.top.value);
+export function FeaturedRankingCard({ rankingKey, year, model }: FeaturedRankingCardProps) {
+  const { unit, rows } = model.top;
   return (
     <SurfaceLinkCard
       href={hrefFor("ranking", { rankingKey: rankingKey })}
       // 線の格子 (CardGrid) はカード (data-slot="card") を余白なしのセルとして扱う。記事カードと同じ印 (2026-11-03)
       data-slot="card"
-      className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full flex-col gap-2`}
+      className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full flex-col gap-2 overflow-hidden`}
     >
+      <span className={`relative block ${PORTAL_CARD_ASPECT_CLASS} w-full overflow-hidden rounded-sm bg-muted`}>
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 [&>svg]:h-full [&>svg]:w-full"
+          dangerouslySetInnerHTML={{ __html: model.mapSvg }}
+        />
+        <ol aria-label="上位" className="absolute top-2 left-2 flex flex-col gap-0.5 text-xs leading-tight">
+          {rows.map((row) => (
+            <li key={`${row.rank}-${row.areaName}`} className="flex items-baseline gap-1.5 whitespace-nowrap">
+              <span className="w-3 text-right font-semibold tabular-nums text-muted-foreground">{row.rank}</span>
+              <span className="font-semibold text-foreground">{row.areaName}</span>
+              <span className="font-semibold tabular-nums text-foreground">
+                {row.value}
+                {unit && <span className="ml-0.5 font-medium text-muted-foreground">{unit}</span>}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </span>
       <span className={PORTAL_CARD_TITLE_CLASS}>{model.hook}</span>
-      <div className="min-w-0">
-        {/* 「N位」と都道府県名は改行せず baseline 揃えで1行に置く */}
-        <p className="flex items-baseline gap-1 leading-none">
-          <span className="text-xs text-muted-foreground">
-            {model.top.rank ?? 1}位
-          </span>
-          <span className="text-sm font-semibold text-foreground">
-            {model.top.areaName}
-          </span>
-        </p>
-        <p
-          className={cn(
-            "mt-1 whitespace-nowrap font-semibold leading-tight tabular-nums text-foreground",
-            featuredValueSizeClass(`${displayValue}${displayUnit}`),
-          )}
-        >
-          {displayValue}
-          {displayUnit && (
-            <span className="ml-0.5 text-xs font-medium text-muted-foreground">
-              {displayUnit}
-            </span>
-          )}
-        </p>
-        <span className="mt-1 block text-xs leading-none text-muted-foreground">
-          {year}年
-        </span>
-      </div>
-      {/* 1 位の値と地図は別の領域に置く。値の背後に地図を敷くと数字が地図に重なって読みにくい。 */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none mt-auto aspect-[320/190] w-full [&>svg]:h-full [&>svg]:w-full"
-        dangerouslySetInnerHTML={{ __html: model.mapSvg }}
-      />
+      <span className="mt-auto block text-xs leading-none text-muted-foreground">{year}年</span>
     </SurfaceLinkCard>
   );
 }

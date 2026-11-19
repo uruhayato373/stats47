@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
-import { assertDatasetShape } from '../lib/dataset-shape.mjs';
+import { assertDatasetShape } from '../../../packages/ops/src/datasets/dataset-shape.mjs';
 
 /**
  * 出典の固定を読む。提案 (--proposal-dir) は台帳 themes.sources と同じ名前・同じ形の JSON で、

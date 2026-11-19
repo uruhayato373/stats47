@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { createHash } from 'node:crypto';
 import { findMaterialPost, materialKey, prepareMaterial } from './lib/material-reconciliation.mjs';
-import { archiveFile, resolveDriveRoot, verifyArchivedAssets } from './lib/sns-drive-assets.mjs';
+import { archiveFile, resolveDriveRoot, verifyArchivedAssets } from '../../../packages/ops/src/sns/sns-drive-assets.mjs';
 
 const { values } = parseArgs({ options: {
   input: { type: 'string' }, root: { type: 'string' }, report: { type: 'string' },
@@ -16,7 +16,7 @@ const { values } = parseArgs({ options: {
 if (!values.input) throw new Error('--input <JSON配列> が必要です。platform/domain/content_key/batch と任意の title/caption/origin/note');
 const root = path.resolve(values.root ?? path.join(path.dirname(fileURLToPath(import.meta.url)), '../../..'));
 const require = createRequire(import.meta.url);
-const store = require(path.join(root, '.claude/scripts/lib/sns-posts-store.cjs'));
+const store = require(path.join(root, 'packages/ops/src/sns/sns-posts-store.cjs'));
 const input = JSON.parse(fs.readFileSync(values.input, 'utf8'));
 if (!Array.isArray(input) || input.some(m => !/^\d{4}-\d{2}-\d{2}$/.test(m.batch))) throw new Error('input は batch (YYYY-MM-DD) を持つ配列にしてください');
 if (new Set(input.map(materialKey)).size !== input.length) throw new Error('入力の素材キーが重複しています');

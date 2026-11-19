@@ -15,11 +15,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
-import { LEDGER_ROOT, findLedgerArticle, readArticleLedger, updateArticleLedger } from './lib/article-ledger.mjs';
+import { LEDGER_ROOT, findLedgerArticle, readArticleLedger, updateArticleLedger } from '../../../packages/ops/src/note/article-ledger.mjs';
 import {
   buildManifest, createArticleStores, listRemoteFiles, loadArticleFiles, readLocalFiles, saveArticleFiles,
   verifyArticleStorage, workingDir,
-} from './lib/article-store.mjs';
+} from '../../../packages/ops/src/note/article-store.mjs';
 import { validateRankingArticleFiles } from './lib/image-assets-audit.mjs';
 
 dotenv.config({ path: path.join(LEDGER_ROOT, '.env.local'), quiet: true });

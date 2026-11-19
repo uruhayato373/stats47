@@ -1,0 +1,296 @@
+/**
+ * SNS 投稿台帳ストア (完全DBレス doc12 Phase E)。
+ *
+ * sns_posts は「書込専用の運用ログ」(投稿のたびに append、指標を後から UPDATE) であり、
+ * authored config と性質が違うため git TS ではなく **エージェント用 state** として
+ * `data/sns/posts.json` に置く (doc12 §3 / data-storage.md の `.claude/` カテゴリ)。
+ * 永続/リモート D1・ローカル SQLite は使わない。
+ *
+ * 全 SNS 自動化スクリプト (publish-x / post-instagram / generate-schedule / delete-* /
+ * weekly-report / metrics 等) はこのストア経由で読み書きする。直接 SQLite を開かない。
+ *
+ * レコードは snake_case (旧 sns_posts カラム名と同一): id / platform / post_type / domain /
+ * content_key / caption / post_url / quote_url / media_path / thumbnail_path / has_link /
+ * utm_url / status / scheduled_at / posted_at / impressions / likes / reposts / replies /
+ * bookmarks / metrics_updated_at / deleted_at / template / metric_keys / parent_post_id /
+ * source_timecode / survey_ids / provenance_urls / created_at / updated_at
+ *
+ * 1 投稿 = 1 行 = 1 id。id から台本 (caption / script_path)・状態 (status)・承認 (approval)・
+ * 外部 ID (externalIdOf)・素材 (assets[] → Google Drive)・観測値 (metric-snapshots の sns_post_id)・
+ * 確認画面 (管理画面 /sns/<id>) をたどる。形の契約は data/sns/posts.schema.json、
+ * 検査は .claude/scripts/sns/check-post-trace.mjs。
+ */
+
+const fs = require("node:fs");
+const path = require("node:path");
+const { datasetPath } = require("../../../../config/datasets.mjs");
+
+// 投稿台帳は記録なので data/sns/ (台帳 id は sns.posts / sns.post-log)。テストがこのファイルを別の root へコピーして
+// 使うので、自分の場所からの相対パスで引く
+const ROOT = path.resolve(__dirname, "../../../..");
+const STORE_PATH = path.join(ROOT, datasetPath("sns.posts"));
+const LOG_PATH = path.join(ROOT, datasetPath("sns.post-log"));
+const CONTENT_TYPES_FILE = path.join(ROOT, datasetPath("content.types"));
+
+const STATUSES = ["draft", "scheduled", "posted", "deleted"];
+// unrecorded = 承認の記録を始める前の行。承認された証拠が無いので approved に読み替えない
+const APPROVAL_STATES = ["pending", "approved", "rejected", "unrecorded"];
+
+const PLATFORM_LABEL = {
+  instagram: "📸 Instagram",
+  x: "𝕏 X",
+  youtube: "▶️ YouTube",
+  tiktok: "🎵 TikTok",
+  note: "📝 note",
+  threads: "🧵 Threads",
+};
+
+function regenerateLog(posts) {
+  const posted = posts
+    .filter((p) => p.status === "posted")
+    .sort((a, b) => (b.posted_at || "").localeCompare(a.posted_at || ""));
+  const latestDate = posted[0]?.posted_at?.slice(0, 10) ?? "—";
+  const rows = posted.map((p) => {
+    const date = (p.posted_at || "").slice(0, 10) || "—";
+    const platform = PLATFORM_LABEL[p.platform] || p.platform || "—";
+    const topic = `${p.domain || ""}/${p.content_key || ""}`;
+    const cap = (p.caption || "").replace(/\n/g, " ").replace(/\|/g, "｜").slice(0, 60) +
+      ((p.caption || "").length > 60 ? "…" : "");
+    const url = p.post_url ? `[🔗](${p.post_url})` : "—";
+    return `| ${date} | ${platform} | ${topic} | ${cap} | ${url} |`;
+  });
+  const md = [
+    "# SNS 投稿ログ\n",
+    "投稿済み全件。`posted_at` 降順。",
+    "スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。\n",
+    `**${posted.length} 件** (最終更新: ${latestDate})\n`,
+    "| 日付 | 媒体 | コンテンツ | キャプション | URL |",
+    "|---|---|---|---|---|",
+    ...rows,
+  ].join("\n");
+  fs.writeFileSync(LOG_PATH, md + "\n");
+}
+
+function maxId(posts) {
+  return posts.reduce((m, p) => Math.max(m, p.id || 0), 0);
+}
+
+function isVerifiedXPostUrl(postUrl) {
+  return /^https:\/\/(?:x\.com|twitter\.com)\/[A-Za-z0-9_]+\/status\/\d+(?:[/?#]|$)/.test(
+    postUrl || "",
+  );
+}
+
+/** Threads の投稿 permalink (threads.net / threads.com の /@user/post/<code>) か。 */
+function isVerifiedThreadsPostUrl(postUrl) {
+  return /^https:\/\/(?:www\.)?threads\.(?:net|com)\/@[A-Za-z0-9._]+\/post\/[A-Za-z0-9_-]+(?:[/?#]|$)/.test(
+    postUrl || "",
+  );
+}
+
+function assertRecordIntegrity(record) {
+  if (!STATUSES.includes(record.status)) {
+    throw new Error(`status は ${STATUSES.join(" / ")} のいずれかです (id=${record.id ?? "new"}, status=${record.status})`);
+  }
+  if (record.approval !== undefined && !APPROVAL_STATES.includes(record.approval?.state)) {
+    throw new Error(
+      `approval.state は ${APPROVAL_STATES.join(" / ")} のいずれかです (id=${record.id ?? "new"})`,
+    );
+  }
+  if (
+    record.platform === "x" &&
+    record.status === "posted" &&
+    !record.deleted_at &&
+    !isVerifiedXPostUrl(record.post_url)
+  ) {
+    throw new Error(
+      `X の posted レコードには確認済み post_url が必要です (id=${record.id ?? "new"})`,
+    );
+  }
+  // Threads も X と同じく「API が返した permalink がある行だけを posted にする」
+  // (予約時刻からの推定で posted にしない)
+  if (
+    record.platform === "threads" &&
+    record.status === "posted" &&
+    !record.deleted_at &&
+    !isVerifiedThreadsPostUrl(record.post_url)
+  ) {
+    throw new Error(
+      `Threads の posted レコードには確認済み post_url が必要です (id=${record.id ?? "new"})`,
+    );
+  }
+}
+
+/**
+ * 新しい投稿は 4 型のどれかに決まる domain でなければ足せない (正典 content-type-standards.md)。
+ * ブログ・note を指す投稿は指している先の型を継ぐので、ここでは行き先の有無だけを見る。
+ */
+function assertContentTypeDecided(record) {
+  // 投稿済みの記録は落とさない。実際に出た投稿の記録を失うほうが害が大きく、検査は content-types:check が担う
+  if (!record.domain || record.status === "posted") return;
+  const { rules, assignments } = JSON.parse(fs.readFileSync(CONTENT_TYPES_FILE, "utf8"));
+  const inherits = (record.domain === "blog" || record.domain === "note") && record.content_key;
+  if (inherits || rules.snsDomains[record.domain] || assignments.some((a) => a.id === `sns:${record.id}`)) return;
+  throw new Error(`投稿の domain=${record.domain} に型が決まっていません。4 型の台帳 (content.types) の rules.snsDomains に足してください (id=${record.id})`);
+}
+
+function read() {
+  try {
+    const data = JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
+    if (!Array.isArray(data.posts)) data.posts = [];
+    if (!data._meta) data._meta = {};
+    return data;
+  } catch (e) {
+    if (e && e.code === "ENOENT") return { _meta: { nextId: 1 }, posts: [] };
+    throw e;
+  }
+}
+
+function write(data) {
+  // 旧形式の最上位 nextId / total_count は誰も読まず、_meta と食い違ったまま残っていた
+  delete data.nextId;
+  delete data.total_count;
+  data._meta = data._meta || {};
+  data._meta.count = data.posts.length;
+  data._meta.nextId = Math.max(data._meta.nextId || 1, maxId(data.posts) + 1);
+  fs.mkdirSync(path.dirname(STORE_PATH), { recursive: true });
+  const tmp = `${STORE_PATH}.tmp`;
+  fs.writeFileSync(tmp, `${JSON.stringify(data, null, 2)}\n`);
+  fs.renameSync(tmp, STORE_PATH);
+  regenerateLog(data.posts); // post-log.md を常に最新に保つ
+}
+
+/** 全レコード (配列)。呼び出し側で JS フィルタする。 */
+function loadAll() {
+  return read().posts;
+}
+
+/** predicate でフィルタした配列を返す。 */
+function query(predicate) {
+  return read().posts.filter(predicate);
+}
+
+/** id で 1 件取得 (無ければ null)。 */
+function getById(id) {
+  return read().posts.find((p) => p.id === id) ?? null;
+}
+
+/**
+ * 新規レコードを追加し、採番した id 付きで返す (旧 INSERT INTO sns_posts 相当)。
+ * created_at / updated_at が未指定なら現在時刻 (UTC ISO) を補完する。
+ */
+function insert(record) {
+  const data = read();
+  // _meta.nextId が stale (store 非経由の直接編集等) でも既存 id と衝突しないよう
+  // maxId+1 との大きい方を採番する (2026-07-07: nextId=575 固着で id 575 重複が実発生)
+  const id = Math.max(data._meta.nextId || 1, maxId(data.posts) + 1);
+  const now = new Date().toISOString();
+  const row = {
+    id,
+    status: "draft",
+    approval: { state: "pending" },
+    created_at: now,
+    updated_at: now,
+    ...record,
+  };
+  assertRecordIntegrity(row);
+  assertContentTypeDecided(row);
+  data.posts.push(row);
+  data._meta.nextId = id + 1;
+  write(data);
+  return row;
+}
+
+/**
+ * id で 1 件更新 (旧 UPDATE sns_posts SET ... WHERE id=? 相当)。patch をマージし
+ * updated_at を補完。更新後レコードを返す (無ければ null)。
+ */
+function updateById(id, patch) {
+  const data = read();
+  const row = data.posts.find((p) => p.id === id);
+  if (!row) return null;
+  const next = {
+    ...row,
+    ...patch,
+    updated_at: patch.updated_at ?? new Date().toISOString(),
+  };
+  assertRecordIntegrity(next);
+  Object.assign(row, next);
+  write(data);
+  return row;
+}
+
+/**
+ * 複数行を 1 回の書込で更新する (backfill・一括承認用)。patches は [{ id, patch }]。
+ * 1 件でも id が無い・検査に落ちる場合は何も書かずに例外を出す。更新後の行を返す。
+ */
+function updateMany(patches) {
+  const data = read();
+  const now = new Date().toISOString();
+  const byId = new Map(data.posts.map((p) => [p.id, p]));
+  const nextRows = patches.map(({ id, patch }) => {
+    const row = byId.get(id);
+    if (!row) throw new Error(`updateMany: id=${id} の行がありません`);
+    const next = { ...row, ...patch, updated_at: patch.updated_at ?? now };
+    assertRecordIntegrity(next);
+    return [row, next];
+  });
+  for (const [row, next] of nextRows) Object.assign(row, next);
+  write(data);
+  return nextRows.map(([row]) => row);
+}
+
+/**
+ * 予約・投稿を外部へ出す直前に呼ぶ。承認済みでなければ例外 (2026-10-09 オーナー決定: 新規投稿は承認必須)。
+ * scheduled → posted (実際に出たことの記録) には使わない。
+ */
+function assertApprovedForPublish(row) {
+  const state = row?.approval?.state ?? "pending";
+  if (state !== "approved") {
+    throw new Error(
+      `未承認の投稿は予約・投稿できません (id=${row?.id}, approval=${state})。` +
+        "承認は node .claude/scripts/sns/approve-posts.cjs --ids <id>",
+    );
+  }
+}
+
+function isApproved(row) {
+  return row?.approval?.state === "approved";
+}
+
+const EXTERNAL_ID_PATTERNS = {
+  x: /\/status\/(\d+)/,
+  threads: /\/post\/([A-Za-z0-9_-]+)/,
+  youtube: /(?:[?&]v=|youtu\.be\/|\/shorts\/)([A-Za-z0-9_-]{11})/,
+  tiktok: /\/video\/(\d+)/,
+  note: /\/n\/([A-Za-z0-9]+)/,
+};
+
+/**
+ * 外部 (各媒体側) の投稿 ID。post_url から導出できる媒体は導出し (二重保存しない)、
+ * 導出できない Instagram の media_id だけ行の external_id を返す。無ければ null。
+ */
+function externalIdOf(row) {
+  if (row.platform === "instagram") return row.external_id ?? null;
+  const pattern = EXTERNAL_ID_PATTERNS[row.platform];
+  const match = pattern && (row.post_url || "").match(pattern);
+  return match ? match[1] : null;
+}
+
+module.exports = {
+  STORE_PATH,
+  STATUSES,
+  APPROVAL_STATES,
+  loadAll,
+  query,
+  getById,
+  isVerifiedXPostUrl,
+  isVerifiedThreadsPostUrl,
+  assertRecordIntegrity,
+  assertApprovedForPublish,
+  isApproved,
+  externalIdOf,
+  insert,
+  updateById,
+  updateMany,
+};

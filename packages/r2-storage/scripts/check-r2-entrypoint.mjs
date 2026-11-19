@@ -13,7 +13,7 @@ const ROOT = fileURLToPath(new URL("../../../", import.meta.url));
 const ALLOWLIST = ".claude/config/r2-entrypoint-baseline.json";
 const ENTRY = new Set([
   "packages/r2-storage/src/keys.ts",
-  ".claude/scripts/lib/r2-keys.mjs",
+  "packages/r2-storage/mirror/r2-keys.mjs",
   "packages/r2-storage/src/scripts/r2-key-classes.ts",
   "packages/r2-storage/src/lib/clients/private-r2-store.mjs", "packages/r2-storage/src/lib/clients/r2-s3-client.mjs",
   "packages/r2-storage/src/lib/clients/get-s3-client.ts",
@@ -38,6 +38,29 @@ export function literalCounts(text) {
     origin: [...text.matchAll(/storage\.stats47\.jp/gi)].length,
     s3Client: [...text.matchAll(/\bnew\s+S3Client\s*\(/g)].length,
   };
+}
+
+/**
+ * 比べる元の基準を、元の commit から今の作業ツリーまでの改名 (git の -M 判定) に合わせて読み替える。
+ * 改名したファイルの行は、新しいパスの「追加」ではなく元のパスの行の引き継ぎとして比べる (2026-11-19 に部品を packages へ移したとき、
+ * 改名が追加とみなされて縮小専用の比較が落ちた)。
+ */
+export function followRenames(previous, renames) {
+  if (!previous) return previous;
+  const next = { ...previous };
+  for (const [from, to] of renames) {
+    if (next[from] && !next[to]) next[to] = next[from];
+  }
+  return next;
+}
+
+function renamesSince(git, base) {
+  try {
+    return git(["diff", "--name-status", "-M", base, "--"]).split("\n")
+      .map((line) => line.split("\t"))
+      .filter((cols) => cols.length === 3 && cols[0].startsWith("R"))
+      .map((cols) => [cols[1], cols[2]]);
+  } catch { return []; }
 }
 
 export function auditSources(files, exceptions, previous) {
@@ -104,9 +127,9 @@ export function main(args = process.argv.slice(2)) {
   for (const base of bases) {
     // First introduction has no prior manifest. Once present, malformed baselines fail closed.
     try { git(["cat-file", "-e", `${base}:${ALLOWLIST}`]); } catch { continue; }
-    previous.push(JSON.parse(git(["show", `${base}:${ALLOWLIST}`])).exceptions);
+    previous.push(followRenames(JSON.parse(git(["show", `${base}:${ALLOWLIST}`])).exceptions, renamesSince(git, base)));
   }
-  if (args.length) previous.push(JSON.parse(git(["show", `${args[1]}:${ALLOWLIST}`])).exceptions);
+  if (args.length) previous.push(followRenames(JSON.parse(git(["show", `${args[1]}:${ALLOWLIST}`])).exceptions, renamesSince(git, args[1])));
   const files = sourceInventory();
   const errors = [...new Set([undefined, ...previous].flatMap((baseline) => auditSources(files, exceptions, baseline)))];
   if (errors.length) { console.error(errors.join("\n")); process.exitCode = 1; }

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Pinned official welfare consultation sources. R2 writes require --write-local. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -586,7 +586,7 @@ export const PROVIDER_ROSTER = [
 ];
 const require = createRequire(import.meta.url);
 const { parse: csvParse } = require('csv-parse/sync');
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

@@ -1,7 +1,7 @@
 ---
 paths:
   - ".claude/todo/**"
-  - ".claude/scripts/lib/backlog-lib.cjs"
+  - "packages/ops/src/management/backlog-lib.cjs"
   - ".claude/scripts/backlog-loop/**"
   - "apps/admin/app/todo/**"
   - ".claude/agents/{todo-curator,backlog-processor,improvement-triage}.md"
@@ -11,7 +11,7 @@ paths:
 `.claude/todo/` の層構成・カード構文・タグ語彙の**単一ソース (SSOT)**。
 **この規約は doboku-note と stats47 で共通** (同文コピーを doboku-note
 `.claude/knowledge/reference/todo-standards.md` に置く。改訂は両リポへ同じ差分を当てる)。
-パーサの単一実装は stats47 = `.claude/scripts/lib/backlog-lib.cjs` /
+パーサの単一実装は stats47 = `packages/ops/src/management/backlog-lib.cjs` /
 doboku-note = `scripts/lib/backlog-lib.mjs` (admin・CI・検査はすべてこれを使う。別実装を作らない)。
 
 > 背景 (2026-08-18 統一): stats47 は `### [ID]` + `- **status**:` フィールド行、doboku-note は
@@ -143,7 +143,7 @@ vault の `.claude/scripts/todo/setup-todo-links.mjs` で張る。SSOT は常に
 
 ## 関連
 
-- パーサ: `.claude/scripts/lib/backlog-lib.cjs` (+ `__tests__/backlog-lib.test.cjs`)
+- パーサ: `packages/ops/src/management/backlog-lib.cjs` (+ `__tests__/backlog-lib.test.cjs`)
 - 自動処理 (行削除・gate): `.claude/rules/backlog-loop.md`
 - 文書ガバナンス (検査コード DG050/055-059): `.claude/rules/docs-vs-issues.md` /
   `.claude/scripts/lib/check-docs-governance.cjs`

@@ -1,0 +1,23 @@
+{
+  "name": "@stats47/ops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "運用の部品 (画像の制作・note・計測・課題・コンテンツの型・計画とレビュー・CI の範囲・ページ品質・参考文献)。アプリとエージェントのスクリプトが共用する。アプリは @stats47/ops/<領域>/<ファイル> で読み、.claude/scripts は相対パスで読む (依存を入れない CI の job でも動かすため)。",
+  "exports": {
+    "./ads/ad-layout-ledger": "./src/ads/ad-layout-ledger.ts",
+    "./note/catalog": "./src/note/catalog/index.ts",
+    "./note/catalog/types": "./src/note/catalog/types.ts",
+    "./note/pop-cover-render": "./src/note/pop-cover-render.ts",
+    "./page-quality/lib/git-diff": "./src/page-quality/lib/git-diff.ts",
+    "./page-quality/templates": "./src/page-quality/templates.ts",
+    "./*": "./src/*"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.checkjs.json",
+    "test": "node --import tsx --test \"src/**/__tests__/*.test.mjs\" \"src/**/__tests__/*.test.cjs\""
+  },
+  "dependencies": {
+    "ajv": "^6.15.0",
+    "zod": "4.6.7"
+  }
+}

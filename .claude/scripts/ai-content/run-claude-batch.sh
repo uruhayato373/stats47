@@ -153,7 +153,7 @@ GEN=(--model "$MODEL" --critic "$CRITIC" --concurrency "$CONCURRENCY" --retries 
      --keys "$KEYS" --outbox --report "$REPORT")
 [ "$DRY_RUN" = 1 ] && GEN+=(--dry-run)
 GEN_STATUS=success
-NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL="$(node --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from "./.claude/scripts/lib/r2-keys.mjs"; process.stdout.write(R2_PUBLIC_ORIGIN)')" \
+NODE_OPTIONS='--conditions react-server' R2_PUBLIC_FETCH_URL="$(node --input-type=module -e 'import { R2_PUBLIC_ORIGIN } from "./packages/r2-storage/mirror/r2-keys.mjs"; process.stdout.write(R2_PUBLIC_ORIGIN)')" \
   npm run ai:gen --workspace @stats47/ai-content -- "${GEN[@]}" ${EXTRA_GEN[@]+"${EXTRA_GEN[@]}"} \
   || GEN_STATUS=failure
 [ -f "$REPORT" ] || die "run report が無い ($REPORT)。生成が起動前に落ちている"

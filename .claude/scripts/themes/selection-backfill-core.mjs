@@ -29,7 +29,7 @@ import {
 } from "../../../packages/data-configs/src/theme-catalog/types.ts";
 import { METRICS_REGISTRY } from "../../../packages/data-configs/src/registry.ts";
 import { loadPulled } from "../lib/estat-catalog/pulled.mjs";
-import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 export const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");

@@ -15,7 +15,7 @@
  *   node .claude/scripts/sns/sns-weekly-report.mjs --dry-run
  */
 
-import { addDays, isoWeekOf, isoWeekRange, jstDateOf } from "../metrics/lib/periods.mjs";
+import { addDays, isoWeekOf, isoWeekRange, jstDateOf } from "../../../packages/ops/src/metrics/periods.mjs";
 import { writeFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
@@ -26,14 +26,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const require = createRequire(import.meta.url);
-const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-metrics-store.cjs"));
+const store = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-metrics-store.cjs"));
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes("--dry-run");
 const WEEK_ARG = args.find((a) => /^\d{4}-W\d{2}$/.test(a));
 
 function isoWeekToDates(weekId) {
-  return isoWeekRange(weekId); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return isoWeekRange(weekId); // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 function getPreviousWeekId() {

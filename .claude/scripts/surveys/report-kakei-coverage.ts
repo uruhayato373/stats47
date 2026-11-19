@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const OUT_PATH = resolve(ROOT, datasetDir("surveys.portfolio"), "kakei-coverage.json");

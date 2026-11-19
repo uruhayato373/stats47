@@ -1,3 +1,4 @@
+import { to2DigitPrefCode, to5DigitPrefCode } from "@stats47/area/area-code";
 import { ChartPanel } from "@stats47/components";
 import { resolveAttribution } from "@stats47/data-configs";
 import { logger } from "@stats47/logger";
@@ -19,8 +20,8 @@ import type { StatsSchema } from "@stats47/types";
  * 工業統計調査 H29 以降は 2 桁プレフィックスが +areaCodeOffset になっている
  */
 function mapAreaCode(jisCode: string, offset: number): string {
-  const prefix = parseInt(jisCode.slice(0, 2), 10);
-  return String(prefix + offset).padStart(2, "0") + "000";
+  const prefix = parseInt(to2DigitPrefCode(jisCode), 10);
+  return to5DigitPrefCode(prefix + offset);
 }
 
 export const CompositionChartDashboard = async ({

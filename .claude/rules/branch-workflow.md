@@ -25,7 +25,7 @@ push から本番まで約 40 分 (PR 検査 11.7 分・デプロイ 22.4 分・
 
 ### デプロイの要否
 
-main への push は `deploy-workers.yml` の `scope` job が差分から判定する (`.claude/scripts/lib/plan-deploy-scope.mjs`)。本番に関係しないと確かめたパスだけの push は Deploy job を skip する。一覧に無いパスと、差分を読めないときは必ずデプロイする。手動実行は常にデプロイする。
+main への push は `deploy-workers.yml` の `scope` job が差分から判定する (`packages/ops/src/ci/plan-deploy-scope.mjs`)。本番に関係しないと確かめたパスだけの push は Deploy job を skip する。一覧に無いパスと、差分を読めないときは必ずデプロイする。手動実行は常にデプロイする。
 
 - skip でも workflow は success で終わるので、`workflow_run` で続く Post-Deploy Smoke などは動く。
 - 一覧へ足す前に、Worker の build の import と Deploy job の生成工程が読まないことを確かめる。Worker は実行時に git のファイルを読めない。
@@ -69,7 +69,7 @@ develop→main の PR を開く / 既に開いていると、その commit を h
 | `workflow-dispatch-proxy.yml` の request 消費 | proxy で sync-snapshots 等を代理起動した直後 (PR #733) |
 | `blog-auto-publish.yml` の contents/blog outbox 掃除 | 記事を公開した直後 (PR #734) |
 | 週次のキーワード観測の記録 (`chore(seo): record seven-day keyword observations`) | PR を開いた後に自動で積まれ、開いている PR の先頭を奪う (PR #1147・2026-10-18。auto-merge が BLOCKED のまま止まった)。`seo-keyword-cycle-daily.yml` 自体を変えて develop へ push しても、その push で動いて先頭を奪う (PR #1215・2026-11-04)。この workflow を変えるときは、後続の実コミットを続けて push する |
-| AI 解説の日次出力 (`chore(ai-content): Gemini daily outputs and metrics`) | 日次の生成が develop へ書き戻し、開いている PR の先頭を奪う (PR #1282・2026-11-17。checks は全件 pass なのに先頭の SHA に必須の Code Quality Check が無く BLOCKED。手の dispatch は success でも解けず、後続の実コミットの push で解消) |
+| AI 解説の日次出力 (`chore(ai-content): Gemini daily outputs and metrics`) | 日次の生成が develop へ書き戻し、開いている PR の先頭を奪う (PR #1282・2026-11-17。checks は全件 pass なのに先頭の SHA に必須の Code Quality Check が無く BLOCKED。手の dispatch は success でも解けず、後続の実コミットの push で解消。2026-11-19 の PR #1288 では、同じ生成の後に続く outbox の掃除 (`chore(ai-content): remove published staging from outbox`) が先頭を奪い、同じく BLOCKED になった) |
 | 認証付き計測の記録 (`chore(metrics): authenticated measurement status`) | 計測スクリプトや `authenticated-measurement.yml` を変えて develop へ push すると push で計測が走り、記録を書き戻して開いている PR の先頭を奪う (PR #1161・2026-10-20。checks は全件 pass なのに必須の Code Quality Check が走らず BLOCKED。この workflow は同日に撤去した) |
 
 **自動の手当て (2026-10-20〜)**: `pr-skip-ci-head-guard.yml` が `pull_request_target` (これは `[skip ci]` で止まらない) で PR の更新を受け、先頭コミットが `[skip ci]` 系なら `pr-quality-check.yml` を `workflow_dispatch` で develop に起動する (PR 番号と base SHA を inputs で渡す。GITHUB_TOKEN でも workflow_dispatch は run を作れる)。必須チェック「Code Quality Check」が先頭の SHA に付くので、手で push し直す必要は無い。`pull_request_target` は main の定義で動くので、**この見張り役は main にマージされてから効く**。契約テストは `pr-skip-ci-head-guard.test.cjs`。仕様の出典: [Skipping workflow runs](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)・[GITHUB_TOKEN](https://docs.github.com/en/actions/concepts/security/github_token) (2026-10-20 確認)。

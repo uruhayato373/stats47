@@ -1,6 +1,10 @@
 export {
   generateMiniPrefectureSvg,
   generatePrefectureOverviewSvg,
+  MINI_PREFECTURE_MAP_FORMAT,
+  MINI_PREFECTURE_MAP_HEIGHT,
+  MINI_PREFECTURE_MAP_WIDTH,
+  MINI_PREFECTURE_MIN_ISLAND_AREA_KM2,
   MINI_PREFECTURE_THUMBNAIL_LAYOUT,
   readPrefectureFeatures,
 } from './generate-mini-prefecture-svg';

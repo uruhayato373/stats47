@@ -2,8 +2,8 @@
 /** Verify ledger-owned private bytes and public cover identity. No local manifest or image dependency. */
 import fs from 'node:fs';
 import path from 'node:path';
-import { COVER_ROOT, readCoverLedger, updateCoverLedger, recordCoverObservation, coverUrlPath } from './lib/cover-assets.mjs';
-import { readStoredCover, createCoverStore, fetchNoteDetail } from './lib/cover-storage.mjs';
+import { COVER_ROOT, readCoverLedger, updateCoverLedger, recordCoverObservation, coverUrlPath } from '../../../packages/ops/src/note/cover-assets.mjs';
+import { readStoredCover, createCoverStore, fetchNoteDetail } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const args = process.argv.slice(2);

@@ -1,9 +1,9 @@
 import 'server-only';
-import { NOTE_ARTICLES } from '../../../../.claude/scripts/note/catalog';
-import { noteCoverCategory } from '../../../../.claude/scripts/note/catalog/cover-categories';
-import { readCoverLedger, reviewCoverRevision, updateCoverLedger, type CoverBrief } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
-import { assertCurrentCoverCandidate, coverProductionToken, coverProductionView, readCoverPolicies, latestCoverPolicy } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
-import { readStoredCover, readStoredCoverInput } from '../../../../.claude/scripts/note/lib/cover-storage.mjs';
+import { NOTE_ARTICLES } from '@stats47/ops/note/catalog';
+import { noteCoverCategory } from '@stats47/ops/note/catalog/cover-categories.mjs';
+import { readCoverLedger, reviewCoverRevision, updateCoverLedger, type CoverBrief } from '@stats47/ops/note/cover-assets.mjs';
+import { assertCurrentCoverCandidate, coverProductionToken, coverProductionView, readCoverPolicies, latestCoverPolicy } from '@stats47/ops/note/cover-production.mjs';
+import { readStoredCover, readStoredCoverInput } from '@stats47/ops/note/cover-storage.mjs';
 import { projectRoot } from './project-root';
 
 export class CoverEditError extends Error {

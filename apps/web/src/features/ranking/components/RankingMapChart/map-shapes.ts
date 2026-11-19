@@ -1,3 +1,4 @@
+import { isOkinawaAreaCode, prefCodeFromTopoProperties, to5DigitPrefCode } from "@stats47/area/area-code";
 import { geoCentroid, geoMercator, geoPath } from "d3-geo";
 
 import { fitGeoSvgMercator, topologyFeatures } from "@/components/charts/geo-topology";
@@ -19,21 +20,17 @@ export interface MapShapes {
   insetLine?: { x1: number; y1: number; x2: number; y2: number };
 }
 
-const OKINAWA = "47";
 /** 全国の地図に置く沖縄の範囲 (沖縄本島周辺)。色は県や市町村で見るので本島が見えれば足りる */
 const OKINAWA_MAIN_LONGITUDE = [126.5, 128.5];
 /** 沖縄を置く場所。日本海側の海の上 */
 const INSET = { x: 22, y: 76, width: 92, height: 92 };
 const INSET_LINE = { x1: 192, y1: 76, x2: 56, y2: 212 };
 
-const prefectureOf = (properties: AreaProperties) => {
-  const raw = String(properties.N03_007 ?? "");
-  return raw.length <= 2 ? raw.padStart(2, "0") : raw.padStart(5, "0").slice(0, 2);
-};
+const prefectureOf = (properties: AreaProperties) => prefCodeFromTopoProperties(properties) ?? "";
 
 const areaOf = (properties: AreaProperties, level: "prefecture" | "city") =>
   level === "prefecture"
-    ? { code: `${prefectureOf(properties)}000`, name: String(properties.N03_001 ?? "") }
+    ? { code: to5DigitPrefCode(prefectureOf(properties)), name: String(properties.N03_001 ?? "") }
     : {
         code: String(properties.N03_007 ?? properties.cityCode ?? properties.areaCode ?? ""),
         name: String(properties.cityName ?? properties.N03_004 ?? properties.N03_003 ?? properties.name ?? ""),
@@ -56,7 +53,7 @@ export function buildMapShapes(
 
   if (!national) return { shapes: toShapes(features, geoPath(fitGeoSvgMercator(features))) };
 
-  const isOkinawa = (feature: Feature<Geometry, AreaProperties>) => prefectureOf(feature.properties) === OKINAWA;
+  const isOkinawa = (feature: Feature<Geometry, AreaProperties>) => isOkinawaAreaCode(prefectureOf(feature.properties));
   const mainland = features.filter((feature) => !isOkinawa(feature));
   const okinawa = features.filter((feature) => {
     if (!isOkinawa(feature)) return false;

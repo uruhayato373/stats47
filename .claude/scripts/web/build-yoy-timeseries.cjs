@@ -41,7 +41,7 @@ function parseArgs() {
 }
 
 async function buildOne({ metricKey, output }) {
-  const { rankingR2Key } = await import('../lib/r2-keys.mjs');
+  const { rankingR2Key } = await import('../../../packages/r2-storage/mirror/r2-keys.mjs');
   const sourcePath = path.join(
     PROJECT_ROOT,
     `.local/r2/${rankingR2Key(metricKey, "values")}`,

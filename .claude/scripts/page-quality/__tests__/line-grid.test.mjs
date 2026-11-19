@@ -8,8 +8,8 @@ import { chromium } from "playwright";
 import { evaluateLineGridIssues } from "../lib/line-grid-probe.mjs";
 import { UI_METRIC_KEYS } from "../lib/ui-report.ts";
 import { lineGridFixGuide } from "../lib/ui-findings.ts";
-import { browserPages } from "../templates.ts";
-import { evaluateResult } from "../lib/thresholds.ts";
+import { browserPages } from "../../../../packages/ops/src/page-quality/templates.ts";
+import { evaluateResult } from "../../../../packages/ops/src/page-quality/lib/thresholds.ts";
 import { probeUi } from "../lib/ui-probe.ts";
 
 // 実物と同じく、本文の列 (shell-main を含む格子) は本文とレールを並べる外側の格子の中にある
@@ -35,6 +35,18 @@ async function withPage(t, html, fn) {
     await browser.close();
   }
 }
+
+test("格子の段が自分でも枠を持つと own-border として数え、段の内側に余白を空けた枠付きの表は数えない", async (t) => {
+  // 2026-11-18 の実例: 「分布の要点」の section が border を持ち、格子の線と 2 重になっていた
+  const ownBorder = `<section aria-label="分布の要点" style="border:1px solid #e5e5e5"><p>最小</p></section>`;
+  const insetTable = `<section style="padding:16px"><div style="border:1px solid #e5e5e5"><table><tr><td>1位</td></tr></table></div></section>`;
+  const underline = `<div style="border-bottom:1px solid #e5e5e5"><p>下線だけの段</p></div>`;
+  await withPage(t, column(ownBorder + insetTable + underline), async (page) => {
+    const { issues } = await evaluateLineGridIssues(page);
+    assert.equal(issues.length, 1, JSON.stringify(issues));
+    assert.ok(issues[0].startsWith("own-border") && issues[0].includes("最小"), issues[0]);
+  });
+});
 
 test("格子の直下に並んだパネルは違反に数えない", async (t) => {
   await withPage(t, column(card("人口") + card("面積")), async (page) => {
@@ -112,7 +124,7 @@ test("週次の配線: 指標が UI 指摘キューの対象で、予算が 0 �
 });
 
 test("手元の検査 (npm run ui-theme:line-grid) の既定の画面は、週次が見るページと同じ一覧を使い、検索・固定ページを含む", () => {
-  const script = readFileSync(new URL("../../../../.claude/scripts/ui/check-line-grid.mjs", import.meta.url), "utf8");
+  const script = readFileSync(new URL("../../ui/check-line-grid.mjs", import.meta.url), "utf8");
   assert.match(script, /browserPages\(\)/, "既定の一覧を手書きに戻すと週次と食い違う");
   assert.match(script, /line-grid-probe\.mjs/, "判定を手元の検査に複製しない");
   const urls = browserPages().map((p) => p.url);

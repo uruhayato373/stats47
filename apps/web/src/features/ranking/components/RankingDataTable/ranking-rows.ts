@@ -1,3 +1,4 @@
+import { isNationalAreaCode } from "@stats47/area/area-code";
 import {
   computeRankingStats,
   rankByValue,
@@ -20,7 +21,7 @@ export function buildRankingRows(rankingValues: (StatsSchema | RankingValue)[] |
 
   const validItems: StatsSchema[] = [];
   for (const item of rankingValues) {
-    if (item.areaCode !== "00000") {
+    if (!isNationalAreaCode(item.areaCode)) {
       validItems.push(item);
     }
   }

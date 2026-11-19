@@ -1,11 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import { coverSha, emptyCoverArticle, coverAssetKey, coverInputKey } from '../lib/cover-assets.mjs';
-import { readCoverPolicies, validateCoverPolicies, latestCoverPolicy, seedCoverProduction, buildCoverPlan, coverProductionView } from '../lib/cover-production.mjs';
-import { prefectureCoverReference, renderCoverReference } from '../lib/cover-geography.mjs';
-import { expectedCoverText, expectedCoverChecks, prepareGeneratedCover } from '../lib/generated-cover.mjs';
-import { readStoredCoverInput } from '../lib/cover-storage.mjs';
+import { coverSha, emptyCoverArticle, coverAssetKey, coverInputKey } from '../../../../packages/ops/src/note/cover-assets.mjs';
+import { readCoverPolicies, validateCoverPolicies, latestCoverPolicy, seedCoverProduction, buildCoverPlan, coverProductionView } from '../../../../packages/ops/src/note/cover-production.mjs';
+import { prefectureCoverReference, renderCoverReference } from '../../../../packages/ops/src/note/cover-geography.mjs';
+import { expectedCoverText, expectedCoverChecks, prepareGeneratedCover } from '../../../../packages/ops/src/note/generated-cover.mjs';
+import { readStoredCoverInput } from '../../../../packages/ops/src/note/cover-storage.mjs';
 
 function fixture() {
   const article = { key: 'a-kakei-yamanashi', title: '甲府市の家計', category: 'household', noteUrl: 'https://note.com/stats47/n/n123' };

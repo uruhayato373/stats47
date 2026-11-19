@@ -5,15 +5,11 @@ import { FeaturedRankingCard } from '../FeaturedRankingCard';
 import { TrackedFeaturedRankingCard } from './TrackedFeaturedRankingCard';
 
 import type { FeaturedRankingCardModel } from '../../utils/resolve-featured-ranking-card';
-import type { RankingItem } from '@stats47/ranking';
 
 export interface FeaturedRankingGridItem {
   rankingKey: string;
   /** データ年度 (yearCode) */
   latestYear: string;
-  unit: string;
-  /** 指標の定義の表示単位。カードの 1 位の値をランキングのページと同じ単位で書く */
-  valueDisplay?: RankingItem['valueDisplay'];
   model: FeaturedRankingCardModel;
 }
 
@@ -41,8 +37,6 @@ export function FeaturedRankingGrid({
       <FeaturedRankingCard
         rankingKey={item.rankingKey}
         year={item.latestYear}
-        unit={item.unit}
-        valueDisplay={item.valueDisplay}
         model={item.model}
       />
     );

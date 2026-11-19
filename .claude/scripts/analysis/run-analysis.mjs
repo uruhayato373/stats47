@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../config/datasets.mjs";
 import { MAX_ROUNDS, buildWriterPacket, draftBlockers, nextStep, reviewMode } from "./analysis-run-core.mjs";
-import { reviewedArticleText } from "./analysis-cycle-core.mjs";
+import { reviewedArticleText } from "../../../packages/ops/src/analysis/analysis-cycle-core.mjs";
 import { checkAnalyses } from "./check-analysis-cycle.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");

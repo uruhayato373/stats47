@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { renderRankingTable } from '@/lib/template-ranking-table';
 

@@ -1,3 +1,4 @@
+import { isCityAreaCode, PREFECTURE_AREA_CODES, PREFECTURE_COUNT } from '@stats47/area';
 import { TSUNAMI_EXPOSURE_SOURCE } from '../../../../data-configs/src/theme-catalog/tsunami-exposure-source';
 import { assertTsunamiManifest, assertTsunamiSnapshot } from '../../../../data-configs/src/theme-catalog/tsunami-exposure-schema';
 import { assertScopedGeoSourcePublication, isScopedGeoSourceKey } from './scoped-geo-source-publication';
@@ -128,13 +129,13 @@ export function assertKsjPublicAssetsAllowed(
     const evidence = payload.meta?.source;
     const rows = payload.rows;
     const expectedYear = String(input.dataDate).slice(0, 4);
-    const expectedCodes = Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, '0')}000`);
+    const expectedCodes = PREFECTURE_AREA_CODES;
     if (
       payload.metricKey !== metric.key ||
       payload.meta?.recipe?.configHash !== buildRecipe(metric).configHash ||
       evidence?.sourceSha256 !== input.sourceSha256 || evidence?.sha256 !== input.sourceSha256 ||
       evidence?.dataDate !== input.dataDate || evidence?.nationalTotal !== input.nationalTotal ||
-      !Array.isArray(rows) || rows.length !== 47 ||
+      !Array.isArray(rows) || rows.length !== PREFECTURE_COUNT ||
       expectedCodes.some((code) => rows.filter((row) => row.areaCode === code).length !== 1) ||
       rows.some((row) => row.yearCode !== expectedYear || !Number.isSafeInteger(row.value) || row.value < 0) ||
       rows.reduce((sum, row) => sum + row.value, 0) !== input.nationalTotal
@@ -166,7 +167,7 @@ function assertManualCitySnapshot(
     evidence?.dataDate !== input.dataDate ||
     !Array.isArray(rows) || rows.length === 0 || payload.meta?.rowCount !== rows.length ||
     new Set(rows.map((row) => row.areaCode)).size !== rows.length ||
-    rows.some((row) => !/^\d{5}$/.test(row.areaCode) || row.areaCode.endsWith('000') ||
+    rows.some((row) => !isCityAreaCode(row.areaCode) ||
       row.yearCode !== expectedYear ||
       (row.value !== null && (!Number.isFinite(row.value) || row.value < 0)))
   ) {

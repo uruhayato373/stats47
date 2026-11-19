@@ -13,8 +13,8 @@ import { execFileSync } from "node:child_process";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DOCS31, auditBackgroundPresence, auditImageAssets, auditR2BodyPresence, isRankingArticleSlug } from "./lib/image-assets-audit.mjs";
-import { readArticleLedger } from "./lib/article-ledger.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { readArticleLedger } from "../../../packages/ops/src/note/article-ledger.mjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const ROOT = process.env.STATS47_SCAN_ROOT || resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = new Set(process.argv.slice(2));

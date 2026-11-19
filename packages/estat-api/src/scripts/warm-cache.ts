@@ -25,7 +25,7 @@ import { SITE } from "@stats47/types";
 
 const DB_PATH = path.resolve(
   __dirname,
-  "../../../../packages/database/.data/stats47.sqlite"
+  "../../../database/.data/stats47.sqlite"
 );
 
 function parseArgs() {

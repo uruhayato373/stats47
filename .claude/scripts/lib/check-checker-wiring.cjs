@@ -337,7 +337,7 @@ function commandTarget(command) {
   if (tokens.length === 0) return null;
   if (tokens[0] === "npm" && tokens[1] === "run") return { kind: "npm", value: tokens[2] };
   const scriptIndex = tokens.findIndex((token, index) => index > 0 && (
-    SCRIPT_EXTENSIONS.has(path.extname(token)) || token.startsWith("./") || token.startsWith(".claude/")
+    SCRIPT_EXTENSIONS.has(path.extname(token)) || token.startsWith(".") || token.startsWith(".claude/")
   ));
   return scriptIndex === -1 ? null : { kind: "file", value: tokens[scriptIndex] };
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "stats47 note cover asset ledger",
-  "description": "data/note/cover-assets.json の形の契約。記事ごとに、どの版が候補・採用・公開かの参照と公開の観測だけを持つ正本。制作内容 (production) と版の記録 (revisions: 保存先・SHA・レビュー・生成元) は記事ごとの data/note/cover-records/<articleKey>.json (cover-records.schema.json) に置き、candidateRevisionId・approvedRevisionId・published.revisionId はその版の id を指す。読み書きは .claude/scripts/note/lib/cover-assets.mjs だけが 2 つを結んで行う (このファイルだけを読んでも制作内容と版は分からない)。",
+  "description": "data/note/cover-assets.json の形の契約。記事ごとに、どの版が候補・採用・公開かの参照と公開の観測だけを持つ正本。制作内容 (production) と版の記録 (revisions: 保存先・SHA・レビュー・生成元) は記事ごとの data/note/cover-records/<articleKey>.json (cover-records.schema.json) に置き、candidateRevisionId・approvedRevisionId・published.revisionId はその版の id を指す。読み書きは packages/ops/src/note/cover-assets.mjs だけが 2 つを結んで行う (このファイルだけを読んでも制作内容と版は分からない)。",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -1,7 +1,7 @@
 import { createR2S3Client } from "../../../packages/r2-storage/src/lib/clients/r2-s3-client.mjs";
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto';
 import { GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
-import { R2_PRIVATE_BUCKET } from '../lib/site-config.cjs';
+import { R2_PRIVATE_BUCKET } from '../../../packages/types/mirror/site-config.cjs';
 
 export const BUCKET = R2_PRIVATE_BUCKET;
 const PREFIX = 'operations/authenticated-measurement';

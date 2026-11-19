@@ -2,7 +2,7 @@ import { KDP_LISTINGS, METRIC_DEFINITIONS_DIR } from '../../../../config/paths.m
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { NOTE_ARTICLES } from '../../../../.claude/scripts/note/catalog';
+import { NOTE_ARTICLES } from '@stats47/ops/note/catalog';
 import {
   JAPAN_ZUE_MASTER_CONTENT,
   JAPAN_ZUE_PILOT_ITEMS,
@@ -43,7 +43,7 @@ import {
 } from './reference';
 import { referenceExpansionPlans } from '../server/reference-expansion-plans';
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
-import { readCoverLedger } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { readCoverLedger } from '@stats47/ops/note/cover-assets.mjs';
 
 function areaDatabookMetricKeys(): string[] {
   return AREA_DATABOOK_TEMPLATE.sections.flatMap((section) =>
@@ -575,8 +575,8 @@ export function loadContentOperations(
     noteCoverProductionIds: Object.fromEntries(
       noteCoverAssets.articles.flatMap((article) => article.production?.id ? [[article.articleKey, article.production.id]] : [])
     ),
-    backlogText: fs.existsSync(path.join(root, '.claude/todo/backlog.md'))
-      ? fs.readFileSync(path.join(root, '.claude/todo/backlog.md'), 'utf8')
+    backlogText: fs.existsSync(path.join(root, datasetPath('agent.todo-backlog')))
+      ? fs.readFileSync(path.join(root, datasetPath('agent.todo-backlog')), 'utf8')
       : '',
     kdpPolicy: KDP_PORTFOLIO_POLICY,
     references,

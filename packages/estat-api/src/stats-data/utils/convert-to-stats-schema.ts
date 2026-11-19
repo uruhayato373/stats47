@@ -1,7 +1,7 @@
 
 import { FormattedValue } from "../types";
-import { extractYearCode } from "../utils/extract-year-code";
-import { extractYearName } from "../utils/generate-year-name"; // generate-year-name.tsからextractYearNameをインポート
+import { extractYearCode } from "./extract-year-code";
+import { extractYearName } from "./generate-year-name"; // generate-year-name.tsからextractYearNameをインポート
 
 import type { StatsSchema } from "@stats47/types";
 

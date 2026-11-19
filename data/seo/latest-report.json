@@ -1,127 +1,116 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-13",
+  "date": "2026-11-19",
   "period": {
-    "periodStart": "2026-11-04",
-    "periodEnd": "2026-11-10",
+    "periodStart": "2026-11-10",
+    "periodEnd": "2026-11-16",
     "windowDays": 7
   },
-  "inputHash": "95eb5dc8f0b626182c666773c59b634e6887ba8e54ab83ee03a8b262041334d6",
+  "inputHash": "7ea4bccd3a359851a72f93f482667df0fdfee6cf44e70c2ad6c7ae14585a4461",
   "movements": [
     {
-      "keyword": "福島 市 人口",
-      "targetPath": "/areas/07000/cities/07201",
-      "before": 9,
-      "after": 96,
+      "keyword": "津山 人口",
+      "targetPath": "/areas/33000/cities/33203",
+      "before": 5,
+      "after": 91,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": -87
+      "change": -86
     },
     {
-      "keyword": "佐賀 市 人口",
-      "targetPath": "/areas/41000/cities/41201",
-      "before": 10,
-      "after": 77,
+      "keyword": "佐賀 平均年収",
+      "targetPath": "/areas/41000/labor-wages",
+      "before": 92,
+      "after": 8,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": -67
+      "change": 84
     },
     {
-      "keyword": "宮古島人口",
-      "targetPath": "/areas/47000/cities/47214",
-      "before": 6,
-      "after": 70,
+      "keyword": "広島県 人口",
+      "targetPath": "/areas/34000/population-dynamics",
+      "before": 92,
+      "after": 9.5,
       "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -64
+      "impressions": 2,
+      "change": 82.5
     },
     {
-      "keyword": "離婚率 日本",
-      "targetPath": "/blog/divorces-per-total-population",
-      "before": 21.333333333333332,
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-property",
+      "before": 96,
+      "after": 17.166666666666668,
+      "beforeImpressions": 1,
+      "impressions": 6,
+      "change": 78.83333333333333
+    },
+    {
+      "keyword": "県庁 公務員 年収",
+      "targetPath": "/blog/avg-salary-admin-prefecture-prefecture-gap",
+      "before": 15,
+      "after": 91,
+      "beforeImpressions": 3,
+      "impressions": 1,
+      "change": -76
+    },
+    {
+      "keyword": "神奈川県平均年収",
+      "targetPath": "/areas/14000/labor-wages",
+      "before": 84.5,
+      "after": 10,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": 74.5
+    },
+    {
+      "keyword": "静岡 市 人口",
+      "targetPath": "/areas/22000/cities/22100",
+      "before": 8.666666666666668,
       "after": 83,
       "beforeImpressions": 3,
-      "impressions": 2,
-      "change": -61.66666666666667
+      "impressions": 1,
+      "change": -74.33333333333333
     },
     {
-      "keyword": "松本 市 人口",
-      "targetPath": "/areas/20000/cities/20202",
-      "before": 10.5,
-      "after": 68.5,
-      "beforeImpressions": 2,
+      "keyword": "広島県 人口",
+      "targetPath": "/areas/34000/cities/34100",
+      "before": 81,
+      "after": 9,
+      "beforeImpressions": 1,
       "impressions": 2,
-      "change": -58
+      "change": 72
     },
     {
-      "keyword": "岐阜 市 人口",
-      "targetPath": "/areas/21000/cities/21201",
-      "before": 8.6,
-      "after": 66.5,
-      "beforeImpressions": 5,
-      "impressions": 2,
-      "change": -57.9
-    },
-    {
-      "keyword": "富士 市 人口",
-      "targetPath": "/areas/22000/cities/22210",
-      "before": 61,
-      "after": 7,
+      "keyword": "鳥取県 人口",
+      "targetPath": "/areas/31000/population-dynamics",
+      "before": 81,
+      "after": 9,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 54
+      "change": 72
     },
     {
-      "keyword": "離婚 率 日本",
-      "targetPath": "/blog/divorces-per-total-population",
-      "before": 34.5,
-      "after": 83,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -48.5
-    },
-    {
-      "keyword": "四国の高速道路",
-      "targetPath": "/geo/history/expressway/shikoku",
-      "before": 83,
-      "after": 38,
+      "keyword": "群馬県人口",
+      "targetPath": "/areas/10000/population-dynamics",
+      "before": 97,
+      "after": 28,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": 45
-    },
-    {
-      "keyword": "兵庫県津波",
-      "targetPath": "/areas/28000/tsunami-exposure",
-      "before": 54,
-      "after": 10,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 44
+      "change": 69
     }
   ],
-  "verdicts": [
-    {
-      "keyword": "40代 未婚 割合 日本 国勢調査",
-      "status": "observing",
-      "reason": "query-page-not-reported"
-    }
-  ],
+  "verdicts": [],
   "selected": {
     "keyword": "阿波市 人口",
     "targetPath": "/areas/36000/cities/36206",
-    "rank": 6.940711462450593,
-    "impressions": 759,
+    "rank": 7.061624649859944,
+    "impressions": 714,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
   },
-  "observing": [
-    {
-      "keyword": "40代 未婚 割合 日本 国勢調査",
-      "nextReviewDate": "2026-09-20"
-    }
-  ],
+  "observing": [],
   "pendingPublication": [
     {
       "keyword": "外国人",

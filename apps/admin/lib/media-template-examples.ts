@@ -1,9 +1,9 @@
-import type { ImageView } from '../../../.claude/scripts/media/lib/workspace.mjs';
+import type { ImageView } from '@stats47/ops/media/workspace.mjs';
 import {
   canonicalTemplate,
   IMAGE_PURPOSES,
   selectionAllowed,
-} from '../../../.claude/scripts/media/lib/taxonomy.mjs';
+} from '@stats47/ops/media/taxonomy.mjs';
 
 export function originalUrl(image: ImageView) {
   if (image.kind === 'cover') return image.coverUrl ?? null;

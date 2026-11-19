@@ -1,5 +1,6 @@
 'use client';
 
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { NUTRITION_SOURCE } from '@stats47/data-configs/theme-catalog';
 
@@ -19,7 +20,7 @@ export function ThemeNutritionClient({ snapshot }: { snapshot: NutritionSnapshot
     : snapshot.national;
   const area = selectedPrefectureCode ? selectedAreaName : '全国（公式集計）';
 
-  return <div data-theme-component-key="nutrition" data-data-state="ready" data-area-code={selectedPrefectureCode ?? '00000'}>
+  return <div data-theme-component-key="nutrition" data-data-state="ready" data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}>
     <ChartPanel title="栄養摂取量と推計の幅" description={`2024年 · ${area} · 20歳以上、男女とも59歳に年齢調整`}
       contentClassName="min-w-0 space-y-4"
       footer={<ChartFooter source={NUTRITION_SOURCE.title} sourceLink={NUTRITION_SOURCE.url} />}>

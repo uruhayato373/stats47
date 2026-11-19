@@ -1,9 +1,9 @@
-const { R2_PUBLIC_BASE_URL } = require("../site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = require("../../../../packages/types/mirror/site-config.cjs");
 const assert = require("node:assert/strict");
 const test = require("node:test");
 
 const core = require("../threads-core.cjs");
-const { assertRecordIntegrity } = require("../sns-posts-store.cjs");
+const { assertRecordIntegrity } = require("../../../../packages/ops/src/sns/sns-posts-store.cjs");
 
 const UTM =
   "https://stats47.jp/ranking/vacant-housing-rate?utm_source=threads&utm_medium=social&utm_campaign=vacant-housing-rate&utm_content=shock";

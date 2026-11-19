@@ -1,4 +1,4 @@
-import { R2_PUBLIC_ORIGIN, rankingR2Key } from '../../lib/r2-keys.mjs';
+import { R2_PUBLIC_ORIGIN, rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';

@@ -2,17 +2,17 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey, coverLedgerFiles, emptyCoverArticle, readCoverLedger, type CoverLedger, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
-import { readCoverPolicies, seedCoverProduction, buildCoverPlan, assertCoverPlan } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
+import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey, coverLedgerFiles, emptyCoverArticle, readCoverLedger, type CoverLedger, type CoverRevision } from '@stats47/ops/note/cover-assets.mjs';
+import { readCoverPolicies, seedCoverProduction, buildCoverPlan, assertCoverPlan } from '@stats47/ops/note/cover-production.mjs';
 
 const fixture = vi.hoisted(() => ({ root: '' }));
 const articles = vi.hoisted(() => [{ key: 'pinned-intro', title: '統計サイトの紹介', vertical: 'stats47-note', status: 'published', noteUrl: 'https://note.com/stats47/n/n123' }]);
 vi.mock('@/lib/server/project-root', () => ({ projectRoot: () => fixture.root }));
-vi.mock('../../../../.claude/scripts/note/catalog', () => ({ NOTE_ARTICLES: articles }));
-vi.mock('../../../../.claude/scripts/note/lib/cover-storage.mjs', () => ({ readStoredCover: vi.fn(async () => Buffer.from('image')), readStoredCoverInput: vi.fn(async () => Buffer.from('input')) }));
+vi.mock('@stats47/ops/note/catalog', () => ({ NOTE_ARTICLES: articles }));
+vi.mock('@stats47/ops/note/cover-storage.mjs', () => ({ readStoredCover: vi.fn(async () => Buffer.from('image')), readStoredCoverInput: vi.fn(async () => Buffer.from('input')) }));
 import { PATCH } from '@/app/api/note-covers/[key]/production/route';
 import { noteCoverManagement } from '@/lib/server/note-covers';
-import { readStoredCover } from '../../../../.claude/scripts/note/lib/cover-storage.mjs';
+import { readStoredCover } from '@stats47/ops/note/cover-storage.mjs';
 
 const brief = { headline: '地域の違いを知る', subline: '', subject: 'ノートと案内役', evidence: '自己紹介記事の活動内容' };
 const file = () => path.join(fixture.root, 'data/note/cover-assets.json');

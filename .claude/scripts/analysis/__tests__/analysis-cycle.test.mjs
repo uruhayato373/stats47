@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 
-import { analysisCycleErrors, ANALYSIS_STAGES, reviewedArticleText } from "../analysis-cycle-core.mjs";
+import { analysisCycleErrors, ANALYSIS_STAGES, reviewedArticleText } from "../../../../packages/ops/src/analysis/analysis-cycle-core.mjs";
 
 const ROOT = join(import.meta.dirname, "../../../..");
 const { layers } = JSON.parse(readFileSync(join(ROOT, "data/content/analysis-viewpoints.json"), "utf8"));

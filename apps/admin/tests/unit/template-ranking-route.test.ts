@@ -1,7 +1,7 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import sharp from 'sharp';
 const storage = vi.hoisted(() => ({ read: vi.fn() }));
-vi.mock('../../../../.claude/scripts/media/lib/storage.mjs', () => ({ readVerified: storage.read }));
+vi.mock('@stats47/ops/media/storage.mjs', () => ({ readVerified: storage.read }));
 import { GET } from '@/app/api/template-samples/[id]/route';
 import { RANKING_SAMPLE_ASSETS } from '@/lib/template-ranking-assets';
 import { TREND_SAMPLE_ASSETS } from '@/lib/template-trend-assets';

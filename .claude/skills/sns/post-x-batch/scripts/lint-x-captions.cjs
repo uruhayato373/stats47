@@ -29,7 +29,7 @@ const catalog = require(
   path.join(PROJECT_ROOT, ".claude/scripts/lib/x-catalog.cjs"),
 );
 const store = require(
-  path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"),
+  path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"),
 );
 const { MAX_WEIGHTED_LENGTH, weightedLength } = require(
   path.join(PROJECT_ROOT, ".claude/scripts/lib/x-weighted-length.cjs"),

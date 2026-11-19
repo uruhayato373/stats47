@@ -1,6 +1,7 @@
 'use client';
 
 import { lookupArea } from '@stats47/area';
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { AIRPORT_TRAFFIC_SOURCE } from '@stats47/data-configs/theme-catalog';
 
@@ -32,7 +33,7 @@ export function ThemeAirportTrafficClient({
       data-data-state={
         !validArea ? 'unavailable' : rows.length ? 'ready' : 'no-airports'
       }
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
     >
       <ChartPanel
         title="空港別の旅客と貨物"

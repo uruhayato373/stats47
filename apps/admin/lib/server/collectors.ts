@@ -1,15 +1,15 @@
 import "server-only";
-import type { CoverArticle } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
+import type { CoverArticle } from '@stats47/ops/note/cover-assets.mjs';
 
 /**
- * 共有 collector (.claude/scripts/lib/gallery-collectors.mjs / svg-classify.mjs) への adapter。
+ * 共有 collector (packages/ops/src/media/gallery-collectors.mjs / svg-classify.mjs) への adapter。
  *
  * これらは ESM・__dirname 非依存の純関数で、CI 静的ギャラリー (build-image-gallery.mjs /
  * build-svg-gallery-tabbed.mjs) と共用のため削除・変更禁止。
  *
  * apps/admin/lib/server から monorepo root は 4 階層上 ("../../../.."):
  *   apps/admin/lib/server/collectors.ts → apps → gallery → lib → server の逆で
- *   ../ ×4 で monorepo root。そこから .claude/scripts/lib/*.mjs を参照する。
+ *   ../ ×4 で monorepo root。部品は @stats47/ops (packages/ops/src) から読む (2026-11-19 に .claude/scripts から移した)。
  *
  * まず相対静的 import を試す (ambient .d.ts で型付け)。webpack が .mjs 取り込みで失敗する
  * 場合は下の lazyImport fallback (webpackIgnore + pathToFileURL) に切り替える。
@@ -24,12 +24,12 @@ import {
   pMap as _pMap,
   fetchText as _fetchText,
   readJsonSafe as _readJsonSafe,
-} from "../../../../.claude/scripts/lib/gallery-collectors.mjs";
+} from "@stats47/ops/media/gallery-collectors.mjs";
 import {
   CATALOGS as _CATALOGS,
   classify as _classify,
   inspectSvg as _inspectSvg,
-} from "../../../../.claude/scripts/lib/svg-classify.mjs";
+} from "@stats47/ops/media/svg-classify.mjs";
 
 export interface AssetImage {
   variant: string;

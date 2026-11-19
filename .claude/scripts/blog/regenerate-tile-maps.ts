@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * regenerate-tile-maps.ts
  *
@@ -32,10 +32,10 @@ import { fileURLToPath } from "node:url";
 
 import { yearLabelOf } from "./lib/ranking-year-label.mjs";
 import { renderTileMapChart } from "../../../apps/admin/lib/template-ranking-tile-map";
-import { rankingChartFromArticleData } from "./lib/type-chart-input";
+import { rankingChartFromArticleData } from "../../../apps/admin/lib/type-chart-input";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
 import { matchRate, parseMapDisplay } from "../lib/map-value-match.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

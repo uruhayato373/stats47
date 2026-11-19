@@ -1,6 +1,7 @@
 /**
  * 県・市区町村の「特徴」を 1 系統に保つ契約 (AREA-HIGHLIGHTS-SSOT-01 step 5)。
  *
+ * (SNS 素材の .claude/scripts 側は .claude/scripts/lib/__tests__/claude-scripts-consumer-contracts.test.mjs が検査する)
  * 選定関数 (select-area-highlights.ts) 以外で、次のことをしていないかをソースから検査する。
  *  - strengths / weaknesses の直接切り出し (slice / filter / 添字)
  *  - databook.json の highlight メタの直接参照 (選定を経ずに並べる)
@@ -21,8 +22,6 @@ const CONSUMER_ROOTS = [
   "apps/web/src/features/ogp/AreaOgp.tsx",
   "apps/web/src/app/areas/[areaCode]/page.tsx",
   "apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
-  ".claude/scripts/sns/lib/ig-area-props.ts",
-  ".claude/scripts/sns/build-ig-area-props.ts",
 ];
 
 function listFiles(rel: string): string[] {

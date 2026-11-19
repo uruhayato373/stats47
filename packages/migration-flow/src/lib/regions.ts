@@ -1,34 +1,20 @@
-/** 全国 8〜10 地方区分。遠方県を地方ラベルに集約するために使う。 */
+import { REGIONS as AREA_REGIONS, to5DigitPrefCode } from "@stats47/area";
 
-export const REGIONS = [
-  "北海道",
-  "東北",
-  "関東",
-  "北陸甲信越",
-  "東海",
-  "近畿",
-  "中国",
-  "四国",
-  "九州",
-  "沖縄",
-] as const;
+/**
+ * 地図の外の県をまとめる地方の名前。正本 `@stats47/area` の 7 区分 (北海道・東北 / 関東 / 中部 / 近畿 / 中国 / 四国 / 九州・沖縄) を使う。
+ * 2026-11-19 までは独自の 10 区分 (北陸甲信越・東海・沖縄を分ける) を県コードの表で持っていた。オーナー判断で正本に寄せた。
+ */
+export type Region = (typeof AREA_REGIONS)[number]["regionName"];
 
-export type Region = (typeof REGIONS)[number];
+export const REGIONS: readonly Region[] = AREA_REGIONS.map((region) => region.regionName);
 
-/** 2 桁県コード → 地方 */
-const REGION_BY_CODE: Record<string, Region> = {
-  "01": "北海道",
-  "02": "東北", "03": "東北", "04": "東北", "05": "東北", "06": "東北", "07": "東北",
-  "08": "関東", "09": "関東", "10": "関東", "11": "関東", "12": "関東", "13": "関東", "14": "関東",
-  "15": "北陸甲信越", "16": "北陸甲信越", "17": "北陸甲信越", "18": "北陸甲信越", "19": "北陸甲信越", "20": "北陸甲信越",
-  "21": "東海", "22": "東海", "23": "東海", "24": "東海",
-  "25": "近畿", "26": "近畿", "27": "近畿", "28": "近畿", "29": "近畿", "30": "近畿",
-  "31": "中国", "32": "中国", "33": "中国", "34": "中国", "35": "中国",
-  "36": "四国", "37": "四国", "38": "四国", "39": "四国",
-  "40": "九州", "41": "九州", "42": "九州", "43": "九州", "44": "九州", "45": "九州", "46": "九州",
-  "47": "沖縄",
-};
+const REGION_BY_PREF_CODE = new Map<string, Region>(
+  AREA_REGIONS.flatMap((region) => region.prefectures.map((code) => [code, region.regionName] as const)),
+);
 
+/** 県コード (2 桁・5 桁・市区町村コード) の地方。県でないコードは例外にする (黙って別の地方に寄せない)。 */
 export function regionOf(prefCode: string): Region {
-  return REGION_BY_CODE[prefCode.slice(0, 2)] ?? "関東";
+  const region = REGION_BY_PREF_CODE.get(to5DigitPrefCode(prefCode));
+  if (!region) throw new Error(`地方を決められない地域コード: ${prefCode}`);
+  return region;
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * refresh-article-data-years.mjs — 公開記事の図のデータを、指標の最新年で取り直す。
  *
@@ -33,7 +33,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import {
   findYearMentions,
   latestPartition,

@@ -104,7 +104,7 @@ function readR2Freshness(): OpsSummary["r2Freshness"] {
 
 function readUsage(): OpsSummary["usage"] {
   return wrap(() => {
-    const rel = ".claude/state/metrics/claude-usage/history.csv";
+    const rel = `${datasetDir("claude.usage")}/history.csv`;
     if (!fileExists(rel)) throw new Error("history.csv が無い");
     const rows = readCsv(rel) as unknown as ClaudeUsageRow[];
     const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
@@ -174,7 +174,7 @@ export function opsSummary(): OpsSummary {
     r2Freshness: readR2Freshness(),
     usage: readUsage(),
     memories: wrap(() =>
-      toEntries(listMarkdown(".claude/memory"), (fm) => ({ type: fm.type })).filter(
+      toEntries(listMarkdown(datasetDir("agent.memory")), (fm) => ({ type: fm.type })).filter(
         (e) => e.name !== "MEMORY",
       ),
     ),

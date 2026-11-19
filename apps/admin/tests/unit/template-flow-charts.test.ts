@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
-import { itemBarChartFromArticleData, radarChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
+import { itemBarChartFromArticleData, radarChartFromArticleData } from '../../lib/type-chart-input';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { renderRadarChart, type RadarChart } from '@/lib/template-radar';
 import { renderItemBarsChart } from '@/lib/template-ranking-bars';

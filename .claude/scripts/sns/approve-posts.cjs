@@ -19,7 +19,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
+const store = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"));
 
 const argv = process.argv.slice(2);
 const value = (name) => (argv.includes(name) ? argv[argv.indexOf(name) + 1] : null);

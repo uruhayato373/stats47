@@ -1,4 +1,5 @@
 import { PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+import { PREFECTURE_COUNT } from '@stats47/area/area-code';
 import {
   validatePublicFacilityDetail,
   type GeoAnalysisSnapshotRow,
@@ -64,8 +65,8 @@ export function validPublicFacilityRows(
 ): boolean {
   try {
     if (
-      rows.length !== 47 ||
-      new Set(rows.map((row) => row.areaCode)).size !== 47
+      rows.length !== PREFECTURE_COUNT ||
+      new Set(rows.map((row) => row.areaCode)).size !== PREFECTURE_COUNT
     )
       return false;
     for (const row of rows)

@@ -43,7 +43,7 @@ import type { Feature, Geometry, Position } from "geojson";
 import { feature } from "topojson-client";
 import type { Topology, GeometryCollection } from "topojson-specification";
 import { assertKsjPublicKeysAllowed } from "../../../packages/r2-storage/src/scripts/lib/ksj-publication-guard";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");

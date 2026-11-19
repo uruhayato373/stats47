@@ -9,7 +9,7 @@
  */
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
-import type { AuditRun, PageAuditResult, Violation } from "./types";
+import type { AuditRun, PageAuditResult, Violation } from "../../../packages/ops/src/page-quality/types";
 import { LATEST_JSON } from "./lib/storage";
 
 export interface ValidationError {

@@ -18,3 +18,5 @@ tsc が本体の checkout の node_modules (別の版) を読んで型エラー�
 - Workflow で worktree を使うときは、prompt の冒頭に「最初に `git checkout -B <branch名> <起点 SHA>` を実行する」と起点 SHA を書く
 - 依存は `node_modules` を丸ごと本体へ張らず、`@stats47/*` だけを worktree の packages へ張り直す ([[feedback-worktree-symlinked-node-modules-resolve-main]])。張る手順を prompt に書く
 - 取り込みは agent のコミットを cherry-pick する。終わったら symlink を外してから worktree を消す (rm -rf で本体を消さない)
+- 並行する agent に一時ファイルの名前を決めさせない。2026-11-19 に 3 体が同じ `/tmp/commitmsg.txt` を使い、別の agent のメッセージでコミットしかけた (pre-commit の失敗で止まった)。prompt で「コミットメッセージは `git commit -F -` の heredoc で渡す」か、agent ごとの scratchpad のパスを指定する
+- Agent tool の `isolation: "worktree"` でも同じ: 起点は古いことがある (2026-11-19 は 6e97f19a5 から切られた)。prompt に「最初に `git merge --ff-only <SHA>`」と書くと揃う。取り込みは `git merge --no-ff` でも衝突なく済んだ

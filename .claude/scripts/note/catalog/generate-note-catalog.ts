@@ -14,7 +14,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { execFileSync } from 'node:child_process';
-import { NOTE_ARTICLES } from "./index";
+import { NOTE_ARTICLES } from "../../../../packages/ops/src/note/catalog/index";
 import { datasetPath } from "../../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

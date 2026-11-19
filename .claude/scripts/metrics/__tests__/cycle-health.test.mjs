@@ -33,7 +33,7 @@ test("分類漏れと期日超過を数える (期日当日は超過にしない
 
 test("期日超過の数え方は計画が期日で引く cardsDueWithin と同じ (読めない日付は数えない)", async () => {
   const { createRequire } = await import("node:module");
-  const { cardsDueWithin, parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../lib/backlog-lib.cjs");
+  const { cardsDueWithin, parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../../../packages/ops/src/management/backlog-lib.cjs");
   const backlogText = [
     "## 🔴 高",
     "### [A-01] 超過",
@@ -70,7 +70,7 @@ test("残件があるのにカードが開いていない検出器を、起票�
 
 test("起票と閉じた数は today を含む週だけを数え、backlog の総枚数を目安と比べる (backlog:waits flow と同じ数)", async () => {
   const { createRequire } = await import("node:module");
-  const { parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../lib/backlog-lib.cjs");
+  const { parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../../../packages/ops/src/management/backlog-lib.cjs");
   const backlogCards = parseBacklog([
     "## 🟡 中",
     "### [NEW-01] 今週起票",

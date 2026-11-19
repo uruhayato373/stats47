@@ -64,7 +64,7 @@ node .claude/scripts/metrics/snapshot-weekly-metrics.mjs [YYYY-Www]
 - 投稿台帳 `data/sns/posts.json` から投稿実績を集計 (完全DBレス。旧 D1 sns_posts は廃止):
   ```bash
   # 今週の投稿数 / 投稿待ち / 全体概況 (<monday> は ISO 文字列)
-  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const M="<monday>";
+  node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");const M="<monday>";
     const posted=s.query(p=>p.status==="posted"&&(p.posted_at||"")>=M);
     const pending=s.query(p=>p.status==="draft"||p.status==="scheduled");
     const cnt=(a,f)=>{const o={};for(const p of a){const k=f(p);o[k]=(o[k]||0)+1}return o};
@@ -102,7 +102,7 @@ node .claude/scripts/metrics/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 2. SNS 投稿実績（投稿台帳 `data/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
    ```bash
-   node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const M="<monday>";
+   node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");const M="<monday>";
      const cnt=(a,f)=>{const o={};for(const p of a){const k=f(p);o[k]=(o[k]||0)+1}return o};
      console.log(JSON.stringify({概況:cnt(s.loadAll(),p=>p.platform+"/"+p.status),
        今週posted:cnt(s.query(p=>p.status==="posted"&&(p.posted_at||"")>=M),p=>p.platform)},null,2))'
@@ -206,7 +206,7 @@ node .claude/scripts/metrics/snapshot-weekly-metrics.mjs [YYYY-Www]
 5. SNS パフォーマンス指標
    - **最新値（プラットフォーム別集計）** は投稿台帳 posts.json のキャッシュカラム（`impressions / likes / reposts / replies / bookmarks / metrics_updated_at`）から取得（旧 D1 sns_posts は廃止）:
      ```bash
-     node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+     node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");
        const posted=s.query(p=>p.status==="posted");
        const acc={};for(const p of posted){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,comments:0,reposts:0};
          a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.comments+=p.replies||0;a.reposts+=p.reposts||0}
@@ -218,7 +218,7 @@ node .claude/scripts/metrics/snapshot-weekly-metrics.mjs [YYYY-Www]
    - **時系列履歴（週次トレンド）** は `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` から:
      ```bash
      # 直近 14 日分の snapshot を合算（sns-metrics-store.cjs の readByRange を使うと手軽）
-     node -e "const s=require('./.claude/scripts/lib/sns-metrics-store.cjs'); const d=new Date(); const end=d.toISOString().slice(0,10); d.setDate(d.getDate()-14); const start=d.toISOString().slice(0,10); console.log(JSON.stringify(s.readByRange(start,end).length+' rows'))"
+     node -e "const s=require('./packages/ops/src/sns/sns-metrics-store.cjs'); const d=new Date(); const end=d.toISOString().slice(0,10); d.setDate(d.getDate()-14); const start=d.toISOString().slice(0,10); console.log(JSON.stringify(s.readByRange(start,end).length+' rows'))"
      ```
 
 6. SNS メトリクスのレビュー本文への埋め込み

@@ -109,7 +109,32 @@ updated: 2026-11-01
 - **停止条件**: KDP への反映はオーナー承認の後。題名は公開後に変えられない (KDP ヘルプ)。
 - **完了条件**: 14 冊の紹介文とキーワードが KDP に反映され (`reflected`)、2026-11-13 を基準にした検索順位と 4 週の注文が記録された。
 
+### [HOME-FEATURED-RESYNC-01] 次のリリースの後、ホームの注目のランキングの snapshot を作り直す
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
+
+- **起点 (2026-11-19 オーナー判断「次のリリース後」)**: 注目のランキングのカードを、地図が上 (40:21)・オレンジの線なし・上位 3 県の形に替えた (develop 83d759331・930952999)。カテゴリ・調査・ランキング一覧は表示のたびに作るのですぐ出るが、ホームは R2 の `home/featured.json` に焼いた地図と 1 位を読むので、作り直すまで「1 県だけ・オレンジの線あり」が残る。
+- **次**: main へのリリースを確かめた後、sync-snapshots で `home/featured.json` だけを作り直す (R2 の正本の上書き。対象と範囲を示してオーナーの承認を取ってから実行する)。
+- **完了条件**: 本番の `/` で、注目のランキングのカードの `path[stroke="#f59e0b"]` が 0 本、各カードの `ol > li` が 3 行。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [SCRIPTS-TO-PACKAGES-01] apps・packages に残る .claude の読み 13 ファイルを片付け、移動をリリースして定期実行を確かめる
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
+
+- **済み (2026-11-19・develop のローカル、未 push)**: アプリと packages が読む `.claude/scripts` の部品 69 を packages へ移した (運用の部品は新しい `@stats47/ops`、鏡は正本と同じパッケージの `mirror/`)。管理画面の `.claude` のデータの読みは置き場の台帳 (`config/datasets.mjs` の `agent.*` 16 行) から `datasetPath` で引く形にし、テストが `.claude` の道具を読む 15 本は `.claude/scripts/**/__tests__/` へ移した。決まりは `.claude/rules/skill-code-placement.md`「依存の向き」、止めは `check-claude-boundary.mjs` (PR の検査・縮小専用の基準 `.claude/config/claude-boundary-baseline.json`)。
+- **次 1 (リリース)**: develop への push と main へのリリースを同じ日に続けて行う (定期実行は main の workflow の定義で動き、develop だけ先に変わると古いパスを呼んで落ちる)。リリースの後、push からマージまでに動いた run を一覧し、落ちた run は workflow を手動で起動し直して新しいパスで通ることを確かめる (`data-storage.md`「置き場を移す手順」の 4)。
+- **次 2 (残りの 13 ファイル)**: 基準の理由が「減らす対象」の行。① `apps/admin/lib/server/strategy-lanes.ts` が `.claude/scripts/lib/strategy-lanes.cjs` を実行時に読む (部品が効果の判定のエンジンなど 10 部品を連れてくるので、まとめて `packages/ops` へ移す)。② パッケージのスクリプトが `.claude/scripts` の道具を呼ぶ 12 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/product-factory/src/channels/note/build/build-revision.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。
+- **停止条件**: 管理画面 (`npm run admin`) の主な画面と、移した部品を使う週次の workflow を、移すたびに動かして確かめる。
+- **完了条件**: リリースの後の run がすべて通り、基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
+
+### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
+タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
+
+- **起点 (2026-11-19 オーナー指摘「サムネイルを生成するルールも冗長になっていないか」)**: 注目のランキングのカードの地図を直したとき、地図の画像の経路 12 本を棚卸しした。本土の範囲・沖縄の判定・枠の比率は同じ作業でまとめた。次の 2 つは残っている (県コードの検査の穴は 2026-11-19 に `check-area-year-entrypoint.mjs` を広げて解消した)。
+- **次**: ① 配色の解決が 3 通りある。サムネイル (`packages/visualization/src/server/generate-mini-prefecture-svg.ts`) は順位で塗る。台帳の型 (`apps/remotion/src/features/data-cards/tile-scale.ts` の `resolveTileScale`) は値で塗る (`packages/types/src/color-policy.ts`)。Remotion のコロプレス (`apps/remotion/src/shared/utils/choropleth.ts` の `getInterpolator`) は配色の名前をカタログ (`d3KeyOfColorScheme`) と照らさず、知らない名前で黙って青に落ちる。どれに寄せるかを決めて 1 つにする (サムネイルを値で塗ると、外れ値の多い指標で色がつぶれるかを先に確かめる)。② `apps/web/src/features/ogp/JapanMapSvg.tsx` (手書きの多角形)・`RankingOgp`・`AreaOgp` の使い手を確かめ、無ければ消す。③ 地域コードの写しを止める検査 `packages/area/scripts/check-area-year-entrypoint.mjs` は決まった関数名と 47 県名の配列しか見ず、地図の部品が `"47"` を直書きしたり TopoJSON の `N03_007` を自前で正規化したりしても通る。止める形を足す (縮小専用の baseline で)。
+- **停止条件**: 配色を変えると全媒体の画像が変わる。① は見本の画像 (管理画面の型の見本) で前後を比べ、オーナーの確認を取ってから入れる。
+- **完了条件**: 配色の解決が 1 つの関数を通り、使われていない地図の部品が消える。
+
 
 ### [GIT-PUSH-SSH-TIMEOUT-01] 会社の Windows PC で、push の前の検査が通った後に git が exit 141 で止まり push が届かない
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-16] [領域:管理]
@@ -137,7 +162,7 @@ updated: 2026-11-01
 - **完了条件**: `theme-thumbnails.ts status` が元画像・配信画像とも 56 / 56 で、テーマのカードに出ていることを localhost で確認済み。
 
 ### [NSM-REVENUE-INPUTS-01] 収益を日 × 商品の明細で持ち、土曜の週次レビューをスケジュール済みタスクで自動実行する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/metrics/__tests__/revenue-rollup.test.mjs] [起票:2026-11-14] [領域:管理] [進行中]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test packages/ops/src/metrics/__tests__/revenue-rollup.test.mjs] [起票:2026-11-14] [領域:管理] [進行中]
 
 - **方針 (2026-11-14 オーナー決定)**: 売上は販売元のレポートの粒度のまま、日 × 商品 × 種類の明細を `data/revenue/daily/<チャネル>-<年月>.json` (台帳 `revenue.daily`・Schema 付き) に持ち、週・月・年は `revenue-rollup.mjs` の集計で作る。明細も git に置く。週次レビューはこの Mac のスケジュール済みタスク (X 返信の承認リストと同じ方式) にし、最後まで自動で進める。計画の全文は `~/.claude/plans/gentle-strolling-tide.md`。
 - **済み**: 明細の Schema・カタログの行・集計の関数。Kindle の書籍別の行を取得結果から明細へ書く経路 (`collect.mjs` → `summarize.mjs`)。週次収益の計算は、週の 7 日が明細に入っているチャネルを明細から出し、入っていないチャネルは従来の記録から出す。
@@ -394,9 +419,9 @@ updated: 2026-11-01
 
 - **済み (2026-11-14・f911a9ae9)**: 人の移動の動画の workflow 3 本の削除と参照の修正、Cloudflare の権限の出典、afb・もしもの分岐の削除、計測・収益化・その他の文書のずれの修正は終わった。
 - **残り**: `browser-session.mjs` と `rakuten-report.mjs` は、refreshed.json と `.verified` の印を書くが、`collect.mjs` はどちらも読まない。この書き込みを消し、`markMeasurementAuthenticated` の呼び出し元 (note-sales・marketplace-status・fetch-note-metrics・update-note-covers) とそのテスト (`kdp-monthly.test.mjs` 123 行) を合わせて直す。
-- **残り**: 常に null の `relogin` と `recovery` の欄を消す。対象は `config/schema/revenue.authenticated.schema.json`、`data/authenticated/latest.json`、`summarize.mjs` 46〜50 行、`health.mjs` の `awaitingReauthentication`、`.claude/scripts/metrics/nsm-revenue-lines.mjs` 39 行とそのテストの fixture である。`sources.mjs` 38 行の api 系の失敗コードも、api の取得元が無いので一緒に消す。
+- **残り**: 常に null の `relogin` と `recovery` の欄を消す。対象は `config/schema/revenue.authenticated.schema.json`、`data/authenticated/latest.json`、`summarize.mjs` 46〜50 行、`health.mjs` の `awaitingReauthentication`、`packages/ops/src/metrics/nsm-revenue-lines.mjs` 39 行とそのテストの fixture である。`sources.mjs` 38 行の api 系の失敗コードも、api の取得元が無いので一緒に消す。
 - **追補 (2026-11-14)**: `.claude/skills/sns/find-quote-rt/SKILL.md` (31・199〜209・253 行) と `publish-x/SKILL.md` (101〜105 行) が、撤去した駅の乗降・人の移動の動画を `--with-media` で添える手順を残していて、sns-content-standards.md §2-4 と食い違う。backlog に無い ADSENSE-RESTART-01 を参照する箇所が、このカードの 3 か所のほかに 8 か所ある。
-- **完了条件**: `MEASUREMENT_BROWSER_OUTPUT_STATE_PATH` と `relogin`・`recovery` を git grep しても、生きたコードと schema に当たらない。`node --test .claude/scripts/measurement/__tests__/*.test.mjs .claude/scripts/metrics/__tests__/nsm-revenue-lines.test.mjs`、`npm run check-datasets` と、両方の `.claude/scripts` の tsc が通る。
+- **完了条件**: `MEASUREMENT_BROWSER_OUTPUT_STATE_PATH` と `relogin`・`recovery` を git grep しても、生きたコードと schema に当たらない。`node --test .claude/scripts/measurement/__tests__/*.test.mjs packages/ops/src/metrics/__tests__/nsm-revenue-lines.test.mjs`、`npm run check-datasets` と、両方の `.claude/scripts` の tsc が通る。
 
 ### [DIR-PLACEMENT-CLEANUP-01] 置き場の規則から外れたスクリプト・データ・設定を正しい置き場へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:管理]
@@ -563,7 +588,7 @@ updated: 2026-11-01
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-10] [領域:管理]
 
 - **証拠 (2026-11-10)**: `apps/web/scripts/lib/__tests__/blog-fullbleed-cli.test.ts` の 2 件が、パス区切り (`\`) を `/` の正規表現で照合して落ちる
-- **証拠 (2026-11-10)**: `.claude/scripts/lib/unit-semantics.mjs` は `eol=lf` の属性が無く、作業ツリーで CRLF になって `preflight:pr` の Unit Semantics Mirror が落ちる (`git ls-files --eol` が `i/lf w/crlf`)
+- **証拠 (2026-11-10)**: `packages/data-configs/mirror/unit-semantics.mjs` は `eol=lf` の属性が無く、作業ツリーで CRLF になって `preflight:pr` の Unit Semantics Mirror が落ちる (`git ls-files --eol` が `i/lf w/crlf`)
 - **証拠 (2026-11-10)**: `apps/admin/tests/unit/agent-models.test.ts` が、期待値 `.claude/agents/broken.md` に対して区切りが逆のパスを返されて落ちる。admin の vitest の 3 件 (`reference-content-read-model`・`draft-caption`・`reference-blog-source`) は 5 秒の時間切れで落ち、時間切れを延ばすと通る
 - **証拠 (2026-11-11)**: テーマの `evaluate-theme-experiments` の CLI テスト 7 件が、`--import` に Windows の絶対パスを渡して `ERR_UNSUPPORTED_ESM_URL_SCHEME` で落ちる (file URL にする必要がある)。`npm run theme:quality:test` は 551 件中 8 件が失敗し、残り 1 件は preview ゲートウェイの 502 のテスト
 - **証拠 (2026-11-11)**: `.claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs` が、`spawnSync` で `node_modules/.bin/tsx` を起動できず `status: null` で落ちる
@@ -1331,7 +1356,7 @@ updated: 2026-11-01
 - **判断待ち (2026-11-14)**: 公開 R2 が不調のとき、固定データを読む 2 テスト (`license-exclusion`・`delivery-integrity`) をどう扱うかをオーナーが決める。(a) skip を許す (品質の例外台帳に test-skip 2 件を足す。定期監査は `PACK_SNAPSHOTS_STRICT=1` で従来どおり止める) / (b) skip を許さず、CI の固定データを `actions/cache` で持ち越す / (c) 2 テストを別ジョブへ分けて必須チェックから外す。
 - **なぜ手元で決められないか**: (a) は `quality-exceptions` の検査が例外の追加を禁じており、「固定データが取れなければ止まる」という現在の方針 (`0f754efda`) を緩める判断になる。固定データを fixture にする案は、テストが実データの件数 (P-12 は 2,491 指標など) を固定していて、13 パックで数千指標になるので採れない。
 - **観測 (2026-11-14)**: `R2_PUBLIC_FETCH_URL=http://127.0.0.1:9` で、Unit Tests の前処理が `packages/product-factory` の全 55 テストファイルを巻き込んで落ちることを再現した。
-- **再観測 (2026-11-15・別の原因)**: 公開 R2 の中身が変わっても同じ 2 テストが落ちる。develop の Unit Tests (packages) が run 43685432330 (ff44de49e) と 43690534376 (926faa6b2) で失敗: P-12 の指標数 2,496 (期待 2,491)・除外件数 73 (期待 74)。手元の固定データを消して作り直すと再現する (`packages/product-factory/src/data/pack-snapshots/` を退避して `npx vitest run --project @stats47/product-factory tests/delivery-integrity.test.ts tests/license-exclusion.test.ts`)。P-12 に公開された 6 指標 (annual-clear-days・annual-snow-days・bamboo-production・factory-industrial-park-rate・factory-location-area-annual・flood-damage-road) が加わり、convenience-store-sales の値が 11-15 の作り直しで変わった。テストが「公開中の R2 の件数」を固定しているので、指標の公開や作り直しのたびに落ちる。2026-11-15 にオーナー了承で期待値を更新した (P-12 2,491 → 2,496・P-08 74 → 73。P-08 の減少はコンビニの販売額を年計に直して `convenience-store-sales-monthly` と同じ値になり 1 列にまとまったため)。公開中の件数を固定する作りは残るので、次の公開でまた落ちる。 再観測 (2026-11-18・Mac): 手元の `vitest run packages/product-factory` で同じ 2 件が 2,491 (期待 2,496)・74 (期待 73) で落ちた。期待値は更新済みで、手元の固定データが 11-15 より古いまま (globalSetup が既存ファイルを作り直さない)。
+- **再観測 (2026-11-15・別の原因)**: 公開 R2 の中身が変わっても同じ 2 テストが落ちる。develop の Unit Tests (packages) が run 43685432330 (ff44de49e) と 43690534376 (926faa6b2) で失敗: P-12 の指標数 2,496 (期待 2,491)・除外件数 73 (期待 74)。手元の固定データを消して作り直すと再現する (`packages/product-factory/src/data/pack-snapshots/` を退避して `npx vitest run --project @stats47/product-factory tests/delivery-integrity.test.ts tests/license-exclusion.test.ts`)。P-12 に公開された 6 指標 (annual-clear-days・annual-snow-days・bamboo-production・factory-industrial-park-rate・factory-location-area-annual・flood-damage-road) が加わり、convenience-store-sales の値が 11-15 の作り直しで変わった。テストが「公開中の R2 の件数」を固定しているので、指標の公開や作り直しのたびに落ちる。2026-11-15 にオーナー了承で期待値を更新した (P-12 2,491 → 2,496・P-08 74 → 73。P-08 の減少はコンビニの販売額を年計に直して `convenience-store-sales-monthly` と同じ値になり 1 列にまとまったため)。公開中の件数を固定する作りは残るので、次の公開でまた落ちる。 再観測 (2026-11-18・Mac): 手元の `vitest run packages/product-factory` で同じ 2 件が 2,491 (期待 2,496)・74 (期待 73) で落ちた。期待値は更新済みで、手元の固定データが 11-15 より古いまま (globalSetup が既存ファイルを作り直さない)。 再観測 (2026-11-19・Mac): 地域コードの集約の取り込み後に同じ 2 件 (2,491・74) が落ち、取り込み前の中身に戻しても同じだった (今回の変更とは無関係)。
 - **次**: 判断の後、前処理に取得失敗の許容を足し、2 テストに固定データの有無の判定を入れる (約 1 時間)。Build Check の R2 読み取り件数と所要の測定は未着手。
 - **完了条件**: 公開 R2 が不調でも、関係の無い PR の必須チェックが落ちない。
 
@@ -1348,8 +1373,8 @@ updated: 2026-11-01
 ### [WEEKLY-COLLECT-NODE20-FAIL-01] 週次の取得で GSC 画面の取得とサイト内リンク監査がスクリプトの例外で落ちる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:管理]
 
-- **観測 (2026-11-14)**: `npm run weekly:collect` の 2 か所が、ログインと無関係の例外で落ちた。① 認証付き計測の GSC: `{"source":"gsc","status":"failed","step":"bootstrap","message":"Node.js v20.19.0"}` (12:31 と取り直しの 13:44 の 2 回とも。`~/Library/Logs/stats47/measurement-collect-local.log`)。message には例外の末尾の行しか残っておらず、例外の本体は読めない。② 週次監査の internal-links: `Error [ERR_REQUIRE_CYCLE_MODULE]: Cannot require() ES Module …/stats47-measurement/config/datasets.mjs in a cycle. (from …/.claude/scripts/lib/prefectures.cjs)` (`.local/weekly-audits/2026-11-14/internal-links.log`)。対話のシェルの Node は v22.23.3、取得の専用 clone で動いた Node は v20.19.0。同じ日の `npm run measurement:status` は gsc を「切れている (認証 cookie が無い)」と表示し、復旧に `node .claude/scripts/google-admin/cli.mjs login` を示している。GSC の失敗が例外なのかログイン切れなのかは、例外の本体が残っていないので切り分けられていない。
-- **[仮説]** 2 件とも、専用 clone が Node v20 で動き、CJS から `config/datasets.mjs` を require する経路が v20 で通らない。検証コマンド: `cd ~/stats47-measurement && node -v && node -e "require('./.claude/scripts/lib/prefectures.cjs')"` を v20 と v22 で実行して比べる。検証期日: 2026-11-21 (次の週次の取得の前)。v22 で通り v20 で落ちれば仮説を支持、両方で落ちれば循環 import そのものを直す。
+- **観測 (2026-11-14)**: `npm run weekly:collect` の 2 か所が、ログインと無関係の例外で落ちた。① 認証付き計測の GSC: `{"source":"gsc","status":"failed","step":"bootstrap","message":"Node.js v20.19.0"}` (12:31 と取り直しの 13:44 の 2 回とも。`~/Library/Logs/stats47/measurement-collect-local.log`)。message には例外の末尾の行しか残っておらず、例外の本体は読めない。② 週次監査の internal-links: `Error [ERR_REQUIRE_CYCLE_MODULE]: Cannot require() ES Module …/stats47-measurement/config/datasets.mjs in a cycle. (from …/packages/area/mirror/prefectures.cjs)` (`.local/weekly-audits/2026-11-14/internal-links.log`)。対話のシェルの Node は v22.23.3、取得の専用 clone で動いた Node は v20.19.0。同じ日の `npm run measurement:status` は gsc を「切れている (認証 cookie が無い)」と表示し、復旧に `node .claude/scripts/google-admin/cli.mjs login` を示している。GSC の失敗が例外なのかログイン切れなのかは、例外の本体が残っていないので切り分けられていない。
+- **[仮説]** 2 件とも、専用 clone が Node v20 で動き、CJS から `config/datasets.mjs` を require する経路が v20 で通らない。検証コマンド: `cd ~/stats47-measurement && node -v && node -e "require('./packages/area/mirror/prefectures.cjs')"` を v20 と v22 で実行して比べる。検証期日: 2026-11-21 (次の週次の取得の前)。v22 で通り v20 で落ちれば仮説を支持、両方で落ちれば循環 import そのものを直す。
 - **影響**: GSC の除外理由の内訳はその時点の書き出しなので、W46 の土曜の分は後から取り直せない。サイト内リンク監査は 132 ページを走査した時点の結果しか無い。
 - **次**: ① 上の検証 ② 取得の失敗時に例外の本体 (末尾の行でなく最初の行) を `message` に残す ③ 専用 clone の Node の版を対話のシェルと揃えるか、require の経路を直す。
 - **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
@@ -2283,6 +2308,9 @@ updated: 2026-11-01
 - **完了条件**: geo の 3 件の warning が消えるか、残す理由が台帳に書いてある。Worker 全体の Total Upload の実測値と上限の比較が、このカードに書いてある。
 - **追補 (2026-11-14)**: `.claude/scripts/page-quality/__tests__/ui-findings.test.mjs` は `node --test` だけでは `lib/ui-report` を解決できずに落ち、`node --import tsx --test` なら通る。どの入口で回す前提かをファイルの冒頭に書くか、tsx 無しで動く import に直す。`push-r2-wrangler.ts` には diff-push-r2 の止め (一覧失敗・正本の上書き・読み戻し) が無いのに、`.claude/scripts/blog/` の 4 スクリプト (backfill-source・resolve-scatter-axes・rerender-ranking-columns・restore-findings-from-svg) と `push-article-md-r2.ts` の冒頭がローカルからの反映の経路として案内している。案内を workflow に直すか、同じ止めを通す。
 - **追補 (2026-11-14)**: `apps/web` の `ranking-header-density-contract.test.ts` は `process.cwd()` に頼っていて、リポジトリのルートから vitest を走らせると ENOENT で落ちる (apps/web からなら 5 件通る)。
+- **追補 (2026-11-19)**: `.claude/scripts/lib/__tests__/lib-tests-wiring.test.cjs` は `.ts` の lib テストを配線の検査の対象にしていない (`dataset-registries.test.ts`・`r2-key-classes-run-sh.test.ts` は手で `test:claude-lib-contracts` に入れた)。`.ts` も対象に足す。
+- **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。 ほかに 2 つの写しが残っている。`packages/area-profile/src/highlights/select-area-highlights.ts` の `PREFECTURE_COUNT = 47` は、SNS のスクリプトが相対パスで直接読む「パッケージの外を import しない」契約のため残した (契約を見直すか、`@stats47/area/area-code` だけは読んでよいことにする)。`packages/data-configs/src/open-data-catalog/normalized-table.ts` と `src/area-axis.ts` は `@stats47/area` ではなく `../../../area/src/constants/prefecture-codes` を相対パスで読んでいる (出口 `@stats47/area/area-code` に替えられるか確かめる)。
+- **追補 (2026-11-19)**: `npm run preflight:pr` は workspace の CI 契約 (`.claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`) を回さない。PR #1288 で `ops`・`ui-theme` にテストを移したのに `testPolicy` が `none` のままで、手元の preflight は通り CI の Static Gates で初めて落ちた。再現: `node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`。preflight の一覧に足すかを決める。
 - **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
@@ -3451,7 +3479,7 @@ updated: 2026-11-01
 - **統合 (2026-10-26 オーナー判断): `NOTE-MAGAZINE-REORG-01`** note既存投稿のマガジン再編成 + 新規投稿の増産
   - **本文の欠け (2026-11-13 確認)**: この統合のコミットで、元カード 34 行のうち 30 行 (字下げした続きの行と番号付きの手順) が落ちた。着手の前に `git show 47aa651d1^:.claude/todo/backlog.md` で `[NOTE-MAGAZINE-REORG-01]` の全文を読み、今の実装と突き合わせて残りを決める。
   - **残り**:
-  - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./.claude/scripts/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
+  - **残 36本** (resume): catalog で `status:"draft"` の stats47-note 27 + koumuin-claude-code 9。`npx tsx -e 'import {NOTE_ARTICLES} from "./packages/ops/src/note/catalog/index.ts"; console.log(NOTE_ARTICLES.filter(a=>a.status==="draft"&&a.r2Body!==false&&a.vertical!=="product-sales").map(a=>a.vertical+"/"+a.key).join("\n"))'` で残スラッグを列挙。1本 ~5分・実 Chrome 占有・Bash 10分上限で1回2本程度。resume 可 (published は skip)。
   - **完了条件**: 公開済み記事が note.com 上でマガジンに束ねられ、新規投稿が catalog のカテゴリマガジンに自動で割り当たること。記事一括変更しない (1 マガジンずつ実証)。
   - **停止条件 / 承認境界**: note.com への実反映 (マガジン作成・記事割当・新規公開) は outward-facing。オーナー承認を経てから (操作は保存済みセッションで agent が行う)。SSOT は catalog git TS、note.com は反映先。
 
@@ -3460,7 +3488,7 @@ updated: 2026-11-01
 タグ: [種類:改善] [実行:対話] [起票:2026-11-10] [領域:コンテンツ]
 
 - **owner**: Claude Code (`/manage-issue-ledger`)
-- **正典**: 軸の書き方は `docs/01_技術設計/03_情報設計.md`「問いの台帳」、規則は `.claude/scripts/issues/issue-graph-core.mjs` の `resolveAxesFigure`。確認は `npm run issues:check -- --axes`
+- **正典**: 軸の書き方は `docs/01_技術設計/03_情報設計.md`「問いの台帳」、規則は `packages/ops/src/issues/issue-graph-core.mjs` の `resolveAxesFigure`。確認は `npm run issues:check -- --axes`
 - **済み (2026-11-10)**: active な問い 291 件すべてに軸を付けた (headless `label-issue-axes.ts` の下書き、API 換算 計 $0.57)。図の型が 1 つに決まったのは 156 件 (散布図 119・タイル地図 109・折れ線 31・棒 26・積み上げ棒 5・滝の図 1。件数は主図の数え方の都合で重複なし)。下書きの見直しで、時間を説明側にした誤り・県の食卓の書き方の揺れ・内訳を説明側に置いた J13 を手で直した。対応表は Fable 5.1 のレビューで「図の型の台帳 (purposes・renderer) から引く」形にし、群の区分は `group: true` で明示する形にした (指標が無いことを区分と読み替えると、量の指標が棒グラフに回るため)
 - **済み (2026-11-10 追記)**: 軸のデータを参照の形 (`data`: `{metric, grain?}` / `{series}`) にし、実在を `check-datasets` の refs、粒度を `issues:check` が見るようにした。県の値しか無い指標を市区町村・全国の問いが指していた 50 参照は `grain` を明示し、「図が決まる」は 156 → 139 件、「別粒度」35 件になった
 - **残り**: ⓪ 「別粒度」33 件。市区町村の問い 27 件は、同じ意味の市区町村の指標が無い (率と件数の違い・年齢と性別の絞り込みの違いを含む。A12・C04 だけ置き換えた)。全国の問い 6 件 (K03-1・K03-2・K04-1・K05・K05-2・K08-1) は、使う品目の全国の時系列が家計の分析単位 (`kakei-analysis-catalog.ts`) に無い。どちらも指標か分析単位を足すまで「別粒度」のまま残す (e-Stat の値の確認が要る) ① 「未検証」133 件は `npx tsx packages/ai-content/src/scripts/label-issue-axes.ts --fill` を端末で実行して下書きし、見てから `--apply` する (2026-11-10 の空実行で候補のある問い 118 件・候補 0 件 15 件。データの無い側にだけ足す)

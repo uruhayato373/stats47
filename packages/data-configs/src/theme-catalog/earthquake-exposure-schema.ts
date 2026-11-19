@@ -1,5 +1,5 @@
 import { EARTHQUAKE_EXPOSURE_SOURCE as source } from './earthquake-exposure-source';
-import { NATIONAL_AREA_CODE } from '@stats47/area';
+import { NATIONAL_AREA_CODE, PREFECTURE_COUNT, to2DigitPrefCode } from '@stats47/area';
 
 export type EarthquakeBandKey = (typeof source.bands)[number]['key'];
 export interface EarthquakePopulationCounts {
@@ -215,7 +215,7 @@ export function assertEarthquakePopulationSnapshot(
   ]);
   header(value);
   requireCondition(
-    Array.isArray(value.rows) && value.rows.length === 47,
+    Array.isArray(value.rows) && value.rows.length === PREFECTURE_COUNT,
     'Require 47 prefectures'
   );
   const codes = new Set<string>();
@@ -375,7 +375,7 @@ export function assertEarthquakeManifest(
     ids.add(pin.id);
   }
   requireCondition(
-    Array.isArray(value.intermediates) && value.intermediates.length === 47,
+    Array.isArray(value.intermediates) && value.intermediates.length === PREFECTURE_COUNT,
     'Missing prefecture intermediate'
   );
   const areas = new Set<string>();
@@ -391,7 +391,7 @@ export function assertEarthquakeManifest(
     areas.add(ref.areaCode);
     artifact(
       { key: ref.key, sha256: ref.sha256, bytes: ref.bytes },
-      `${source.r2Root}/pref/${ref.areaCode.slice(0, 2)}.json`
+      `${source.r2Root}/pref/${to2DigitPrefCode(ref.areaCode)}.json`
     );
   }
   artifact(value.aggregate, `${source.r2Root}/item.json`);
@@ -448,7 +448,7 @@ export function assertEarthquakeVerification(
   requireCondition(
     value.status === 'PASS' &&
       value.sourceFiles === 48 &&
-      value.checkedPrefectures === 47 &&
+      value.checkedPrefectures === PREFECTURE_COUNT &&
       value.invalidPopulationValues === 0 &&
       value.duplicatePopulationIdentities === 0 &&
       value.missingHazardValues === 0 &&

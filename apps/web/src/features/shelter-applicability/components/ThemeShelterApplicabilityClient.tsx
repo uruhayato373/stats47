@@ -1,6 +1,7 @@
 'use client';
 
 
+import { NATIONAL_AREA_CODE } from '@stats47/area/area-code';
 import { ChartPanel } from '@stats47/components';
 import { SHELTER_APPLICABILITY_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 
@@ -27,7 +28,7 @@ export function ThemeShelterApplicabilityClient({
       className="min-w-0"
       data-theme-component-key="shelter-applicability"
       data-data-state={row ? 'ready' : 'unavailable'}
-      data-area-code={selectedPrefectureCode ?? '00000'}
+      data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}
     >
       <ChartPanel
         title="災害の種類と指定緊急避難場所"

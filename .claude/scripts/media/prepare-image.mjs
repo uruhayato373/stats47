@@ -3,8 +3,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import { ROOT,imageById,readTemplates,safeName,sha } from './lib/workspace.mjs';
-import { readMediaObject } from './lib/storage.mjs';
+import { ROOT,imageById,readTemplates,safeName,sha } from '../../../packages/ops/src/media/workspace.mjs';
+import { readMediaObject } from '../../../packages/ops/src/media/storage.mjs';
 const args=process.argv.slice(2);
 if(args.length!==2||args[0]!=='--id')throw Error('Usage: npm run media:prepare -- --id IMG-...');
 const image=imageById(ROOT,args[1]);

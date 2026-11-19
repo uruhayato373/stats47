@@ -11,7 +11,7 @@ import {
   saveImagePlan,
   saveImagePolicy,
   saveImageComparison,
-} from '../../../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export async function GET(
@@ -103,7 +103,7 @@ export async function PATCH(
       saveImagePlan(projectRoot(), id, body.revision, {
         templateId: body.templateId,
         policy: body.policy,
-        role: body.role as import('../../../../../../.claude/scripts/media/lib/classification.mjs').ImageRole,
+        role: body.role as import('@stats47/ops/media/classification.mjs').ImageRole,
         reason: body.reason,
         purpose: body.purpose,
         selection: body.selection,

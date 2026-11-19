@@ -19,7 +19,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const backlogLib = require('./backlog-lib.cjs');
+const backlogLib = require('../../../packages/ops/src/management/backlog-lib.cjs');
 const { assessmentForSubject } = require('../metrics/lib/adsense-measurement-contract.mjs');
 const { DOMAINS } = require('../../../config/paths.mjs');
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");

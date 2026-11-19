@@ -20,7 +20,7 @@
  */
 
 import { readFileSync } from "node:fs";
-import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../../packages/types/mirror/site-config.cjs";
 
 export const DEFAULT_R2_BASE = R2_PUBLIC_BASE_URL;
 

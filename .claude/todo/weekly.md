@@ -140,7 +140,7 @@ KDP の販売台帳 (`KDP-LEDGER-AUTO-01`) は W45・W46 と Should で 2 週続
 
 - [ ] **週次の取得で GSC 画面の取得と internal-links が例外で落ちる件を直す** [S] — `WEEKLY-COLLECT-NODE20-FAIL-01`（管理領域・不具合・KPI `measurement-freshness`）。
   ガードレールの計測の鮮度が 11/11 から 10/11 に下がった。GSC の除外理由の内訳はその時点の書き出しなので、落ちた週の分は後から取れない。
-  ① カードの仮説を検証する: `cd ~/stats47-measurement && node -v && node -e "require('./.claude/scripts/lib/prefectures.cjs')"` を v20 と v22 で実行して比べる
+  ① カードの仮説を検証する: `cd ~/stats47-measurement && node -v && node -e "require('./packages/area/mirror/prefectures.cjs')"` を v20 と v22 で実行して比べる
   ② 取得の失敗時に例外の本体 (最初の行) を `message` に残す
   ③ ① の結果に従い、専用 clone の Node の版を揃えるか require の経路を直す。直したら専用 clone で internal-links だけを手で回して例外が出ないことを確かめる。
   ①〜③ は 11-20（金）までに済ませる。完了条件: 11-21（土）の `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。GSC がログイン切れで落ちた場合は、例外ではないことが ② の記録で分かれば Must は完了とし、ログインはオーナー作業に回す。

@@ -21,7 +21,7 @@ import {
   auditBlogAffiliatePolicyCatalog,
   auditBlogAffiliateRelevance,
 } from "./lib/affiliate-relevance-core.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const args = new Set(process.argv.slice(2));

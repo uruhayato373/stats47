@@ -16,7 +16,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { updateArticleLedger } from '../lib/article-ledger.mjs';
+import { updateArticleLedger } from '../../../../packages/ops/src/note/article-ledger.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 const WORK_ROOT = path.join(ROOT, 'docs/31_note記事原稿');

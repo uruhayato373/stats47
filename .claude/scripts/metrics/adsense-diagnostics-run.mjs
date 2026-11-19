@@ -15,7 +15,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { PROJECT_ROOT, parseWeekArg } from "./lib/auth.mjs";
 import { readCsv } from "./update-history-csv.mjs";
-import { resolvePeriods } from "./lib/periods.mjs";
+import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
 import { buildAdsenseCandidates, MAX_CANDIDATES, ADSENSE_ACTIVE_WIP_LIMIT, ADSENSE_WEEKLY_ADOPTION_LIMIT } from "./lib/adsense-diagnostics.mjs";
 import { MANIFEST_FILE } from "./lib/adsense-report-contract.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";

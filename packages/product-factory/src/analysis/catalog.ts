@@ -5,6 +5,7 @@ import { isCapitalCityValueMetric, resolveAttribution } from '@stats47/data-conf
 import { getMunicipalityMetricAvailability } from '@stats47/data-configs/geo-scope';
 import { parseUnit } from '@stats47/data-configs/unit';
 import type { MetricConfig } from '@stats47/data-configs';
+import { PREFECTURE_CODE_2DIGIT_RE } from '@stats47/area';
 import type { AnalysisRevision } from './compute';
 import type { AnalysisAxis } from './coverage';
 
@@ -122,7 +123,7 @@ export function resolveAnalysisRevision(plan: AuthoredAnalysisRevision, variants
     if (recipe.template === 'choropleth' &&
         (sources.find(source => source.id === recipe.sourceId)?.grain !== 'municipality' ||
          !recipe.within || !['nation', 'prefecture'].includes(recipe.within.kind) ||
-         (recipe.within.kind === 'prefecture' && !/^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(recipe.within.prefCode)) ||
+         (recipe.within.kind === 'prefecture' && !PREFECTURE_CODE_2DIGIT_RE.test(recipe.within.prefCode)) ||
          recipe.areaCode || recipe.areaCodes || !recipe.presentationMetricKey))
       throw Error(`市区町村地図は指標の配色と全国または県内全域を指定してください: ${recipe.id}`);
   }

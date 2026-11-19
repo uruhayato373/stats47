@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { rankingR2Key, statsR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key, statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * generate-article-charts.ts
  *
@@ -35,7 +35,7 @@ import { rankingR2Key, statsR2Key } from '../lib/r2-keys.mjs';
 import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -48,7 +48,7 @@ import {
   lintSvgContent,
   lintSvgSize,
   extractInlineSvgs,
-} from '../lib/svg-lint.mjs';
+} from '../../../packages/svg-builder/src/lint/svg-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import { observedOnly } from '../lib/blog-observed-values.mjs';
 import { buildProvenanceLine } from '../lib/svg-provenance.mjs';
@@ -65,7 +65,7 @@ import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-til
 import { renderLineChart } from '../../../apps/admin/lib/template-trend-line';
 import { renderRelationshipScatterChart, unitLabel, type ScatterChart } from '../../../apps/admin/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../apps/remotion/src/features/data-cards/chart-theme';
-import { chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, itemBarChartFromArticleData, lineChartFromArticleData, matchScatterAxis, metricKeysInSource, prefecturesNamedNear, radarChartFromArticleData, type ChartAxisRecord, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf, stackedAreaChartFromArticleData, stackedChartFromArticleData, stackedFormOf } from './lib/type-chart-input';
+import { chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, itemBarChartFromArticleData, lineChartFromArticleData, matchScatterAxis, metricKeysInSource, prefecturesNamedNear, radarChartFromArticleData, type ChartAxisRecord, rankingChartFromArticleData, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf, stackedAreaChartFromArticleData, stackedChartFromArticleData, stackedFormOf } from '../../../apps/admin/lib/type-chart-input';
 
 const __filename = fileURLToPath(import.meta.url);
 const TEMPLATE_IDS = new Set(
@@ -233,7 +233,7 @@ function genStubSvg(chartType, name) {
 }
 
 // ---------- SVG lint (共有ライブラリ) ----------
-// lint ロジックは .claude/scripts/lib/svg-lint.mjs に集約 (audit-chart-quality.mjs と共有)。
+// lint ロジックは packages/svg-builder/src/lint/svg-lint.mjs に集約 (audit-chart-quality.mjs と共有)。
 
 /** ファイルパスから SVG を読んで lint する */
 /** A statistical chart must come from a template in the ledger. Only the charts the ledger leaves out pass. */

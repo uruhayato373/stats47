@@ -1,3 +1,5 @@
+import { isNationalAreaCode } from '@stats47/area/area-code';
+
 import type {
   MigrationDemographicsProfile,
   SingleHouseholdsProfile,
@@ -25,7 +27,7 @@ function selectedArea<T extends { areaCode: string }>(
   snapshot: { areas: T[]; national: T },
   code: string | null
 ): T | null {
-  if (code === null || code === '00000') return snapshot.national;
+  if (code === null || isNationalAreaCode(code)) return snapshot.national;
   return snapshot.areas.find((area) => area.areaCode === code) ?? null;
 }
 function sexValue(values: number[][], sex: PopulationSex, age: number): number {
@@ -50,7 +52,7 @@ export function selectMigrationView(
   const area = selectedArea(snapshot, areaCode);
   const ageIndex = snapshot.ages.findIndex((age) => age.code === ageCode);
   if (!area || ageIndex < 0 || !isPopulationSex(sex)) return null;
-  const isNational = area.areaCode === '00000';
+  const isNational = isNationalAreaCode(area.areaCode);
   const partners = snapshot.areas.filter(
     (partner) => partner.areaCode !== area.areaCode
   );
