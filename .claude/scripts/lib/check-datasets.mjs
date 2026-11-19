@@ -488,12 +488,18 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
 
   const governedFiles = files.filter((f) => governed.some((re) => re.test(f)) && !ignoredNames.has(f.split("/").pop()));
   for (const file of governedFiles) {
-    const matched = compiled.filter((c) => c.re.test(file));
+    const matched = compiled.filter((c) => !c.ds.external && c.re.test(file));
     if (matched.length === 0) errors.push(`未宣言: ${file}`);
     if (matched.length > 1) errors.push(`重なり: ${file} ← ${matched.map((c) => c.ds.id).join(", ")}`);
     for (const c of matched) c.hits += 1;
   }
+  // external の行は GOVERNED の外 (管理画面が読むだけのエージェント運用の資産) なので、全追跡ファイルに対して当たりを数える。
+  // untracked は端末ごとの git 管理外ファイル (settings.local.json など) で、当たりを要求しない
   for (const c of compiled) {
+    if (c.ds.external) c.hits = files.filter((f) => c.re.test(f)).length;
+  }
+  for (const c of compiled) {
+    if (c.ds.external && c.ds.untracked) continue;
     // transient の行 (CI が消費して消す依頼・公開待ちの outbox) は普段 0 件で、push の直後だけ 1 件以上ある。件数を問わない
     if (c.ds.transient && c.ds.planned) errors.push(`transient と planned は同時に付けない: ${c.ds.id} (${c.ds.path})`);
     if (c.ds.transient) continue;

@@ -3,6 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
+import { datasetDir } from "../../../../config/datasets.mjs";
 import { projectRoot } from "./project-root";
 
 /** 配布された共有 SSOT 1 本（`.claude/shared-policy/<name>`）。 */
@@ -38,7 +39,7 @@ interface Manifest {
 }
 
 function dir() {
-  return path.join(projectRoot(), ".claude/shared-policy");
+  return path.join(projectRoot(), datasetDir("agent.shared-policy"));
 }
 
 function manifest(): Manifest | null {

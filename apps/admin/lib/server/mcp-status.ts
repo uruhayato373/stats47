@@ -4,6 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import { datasetPath } from "../../../../config/datasets.mjs";
 import { projectRoot } from "./project-root";
 import { wrap, type Wrapped } from "./state-io";
 
@@ -192,12 +193,12 @@ function loadConfig(home: string) {
   const project = readJsonIfExists<{ mcpServers?: Record<string, ServerDef> }>(path.join(root, ".mcp.json"));
   const user = readJsonIfExists<UserConfig>(path.join(home, ".claude.json"));
   const here = Object.entries(user?.projects ?? {}).find(([p]) => samePath(p, root))?.[1];
-  const ledger = readJsonIfExists<Ledger>(path.join(root, ".claude/config/mcp-servers.json"));
+  const ledger = readJsonIfExists<Ledger>(path.join(root, datasetPath("agent.mcp-servers")));
   // 承認を探す順 = 設定の優先順 (この PC だけの設定が先)
   const files: SettingsFile[] = [
-    { label: ".claude/settings.local.json", settings: readJsonIfExists<McpSettings>(path.join(root, ".claude/settings.local.json")) },
-    { label: ".claude/settings.json", settings: readJsonIfExists<McpSettings>(path.join(root, ".claude/settings.json")) },
-    { label: "~/.claude/settings.json", settings: readJsonIfExists<McpSettings>(path.join(home, ".claude/settings.json")) },
+    { label: datasetPath("agent.settings-local"), settings: readJsonIfExists<McpSettings>(path.join(root, datasetPath("agent.settings-local"))) },
+    { label: datasetPath("agent.settings"), settings: readJsonIfExists<McpSettings>(path.join(root, datasetPath("agent.settings"))) },
+    { label: `~/${datasetPath("agent.settings")}`, settings: readJsonIfExists<McpSettings>(path.join(home, datasetPath("agent.settings"))) },
     // 公式文書に無いが、この Mac の ~/.claude.json のプロジェクトの下に同じ 2 つの key があった (2026-11-14 実測・どちらも空)
     { label: "~/.claude.json (このプロジェクト)", settings: here ?? null },
   ];

@@ -6,6 +6,7 @@ import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { authCredentialRows, type AuthCredentialRow } from "@/lib/server/auth-credentials";
 import { sessionPreflight, type SessionPreflightView, type SessionState } from "@/lib/server/session-preflight";
 import { hasError, type Wrapped } from "@/lib/server/state-io";
+import { datasetPath } from "../../../../../config/datasets.mjs";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "ログインと資格情報 — stats47 admin" };
@@ -94,7 +95,7 @@ export default function AuthCredentialsPage() {
   if (hasError(v)) {
     return (
       <>
-        <PageHeading title="ログインと資格情報" source=".claude/config/auth-credentials.json" />
+        <PageHeading title="ログインと資格情報" source={datasetPath("agent.auth-credentials")} />
         <ErrorNote error={v.error} />
       </>
     );
@@ -107,7 +108,7 @@ export default function AuthCredentialsPage() {
 
   return (
     <>
-      <PageHeading title="ログインと資格情報" source=".claude/config/auth-credentials.json" />
+      <PageHeading title="ログインと資格情報" source={datasetPath("agent.auth-credentials")} />
       <Grid min="sm">
         <StatCard label="この PC の登録" icon={<LaptopIcon />} value={`${v.rows.length - unregistered.length}/${v.rows.length}`} />
         <StatCard label="要対応" icon={<ShieldAlertIcon />} value={todo.length} tone={todo.length > 0 ? "warn" : "good"} />

@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { storedAccounts } from "@stats47/ops/measurement/credential-store.mjs";
+import { datasetPath } from "../../../../config/datasets.mjs";
 import { projectRoot } from "./project-root";
 import { wrap } from "./state-io";
 
@@ -36,7 +37,7 @@ interface ServiceSpec {
 
 export function authCredentialRows() {
   return wrap(() => {
-    const config = path.join(projectRoot(), ".claude/config/auth-credentials.json");
+    const config = path.join(projectRoot(), datasetPath("agent.auth-credentials"));
     const services = (JSON.parse(fs.readFileSync(config, "utf8")) as { services: Record<string, ServiceSpec> }).services;
     const local = storedAccounts(Object.values(services).map((s) => s.storeItem)) as
       | Record<string, { stored: boolean; user: string | null }>

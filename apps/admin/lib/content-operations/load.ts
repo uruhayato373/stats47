@@ -575,8 +575,8 @@ export function loadContentOperations(
     noteCoverProductionIds: Object.fromEntries(
       noteCoverAssets.articles.flatMap((article) => article.production?.id ? [[article.articleKey, article.production.id]] : [])
     ),
-    backlogText: fs.existsSync(path.join(root, '.claude/todo/backlog.md'))
-      ? fs.readFileSync(path.join(root, '.claude/todo/backlog.md'), 'utf8')
+    backlogText: fs.existsSync(path.join(root, datasetPath('agent.todo-backlog')))
+      ? fs.readFileSync(path.join(root, datasetPath('agent.todo-backlog')), 'utf8')
       : '',
     kdpPolicy: KDP_PORTFOLIO_POLICY,
     references,
