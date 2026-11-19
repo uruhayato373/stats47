@@ -138,7 +138,7 @@ updated: 2026-11-01
   - Cloudflare (`cloudflare-monthly-snapshot`・`cloudflare-threshold-check`)。本体が `.claude/config/budgets/` の予算を直接読む。予算のパスを入口から渡す形に直してから移す。
   - `blog/quality-gate.mjs` を子プロセスで確かめる 5 本 (`quality-gate.*`) と `chart-recurrence-guards`・`internal-link-geo`・`related-link-lint.mjs`。`blog` 領域と一緒に扱う。`ig-post-from-schedule` (Graph API へ投稿する CLI)・`revenue-guards` も残っている。
 - **次 ②**: workflow からの参照が多い順 (`blog`・`ads`・`search-growth`・`gsc`・`metrics`・`themes`・`note`) に進める。移すたびに基準を縮める。
-- **移すときの注意 (第 1 回で分かったこと)**: `node --test` は存在しないパスを黙って読み飛ばす (`lib-tests-wiring` が止める)。元のパスに薄い入口を残すと git は改名と見なさないので、基準を持つ検査は `-B` で拾う形に直してある (`check-r2-entrypoint`・`check-area-year-entrypoint`・`check-claude-boundary`。`check-estat-entrypoint` は改名を追わない)。移す前から型検査の外だったファイルは、型エラーを直すまで ops の `tsconfig.checkjs.json` に足さない (`build-kakei-classification.mjs` に 2 件)。
+- **移すときの注意 (第 1 回で分かったこと)**: `node --test` は存在しないパスを黙って読み飛ばす (`lib-tests-wiring` が止める)。`node:test` のテストを vitest の project を持つパッケージへ移すときは、その vitest が拾わないことを `npx vitest run --project <名前>` で確かめる (対象の指定が無いパッケージは `*.test.cjs`・`*.test.mjs` も拾う。`packages/area` で develop の検査を 1 回落とした。`packages/ops` は vitest の project が無い)。元のパスに薄い入口を残すと git は改名と見なさないので、基準を持つ検査は `-B` で拾う形に直してある (`check-r2-entrypoint`・`check-area-year-entrypoint`・`check-claude-boundary`。`check-estat-entrypoint` は改名を追わない)。移す前から型検査の外だったファイルは、型エラーを直すまで ops の `tsconfig.checkjs.json` に足さない (`build-kakei-classification.mjs` に 2 件)。
 - **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む決まりを守る。テストだけを packages へ移さない (packages が `.claude` を読むことになる)。
 - **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
 
