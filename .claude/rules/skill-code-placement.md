@@ -4,6 +4,7 @@ paths:
   - ".claude/skills/**/scripts/**"
   - "scripts/**"
   - ".claude/skills/dev/create-skill/**"
+  - "packages/ops/**"
 ---
 # スキル利用コードの配置原則
 
@@ -18,6 +19,22 @@ paths:
 | スキルが参照するデータ・テンプレ（非実行） | `.claude/skills/<skill>/reference/` |
 | launchd 等の OS 統合用シェルラッパー | `scripts/scheduled/`（唯一の例外、`.claude/` 外でよい） |
 | アプリのビルド・デプロイ用スクリプト | `packages/*/scripts/` or `apps/*/scripts/` |
+| **アプリ (管理画面など) と packages も読む部品** | `packages/` (運用の部品は `packages/ops/src/<領域>/`、領域が合えば既存のパッケージ)。`.claude/scripts` には置かない |
+| スクリプト用の鏡 (TS の正本の JS の写し) | 正本と同じパッケージの `mirror/` (`packages/r2-storage/mirror/r2-keys.mjs` など) |
+
+### 依存の向き (2026-11-19 オーナー判断)
+
+**apps と packages は、本番コードもテストも `.claude` を import せず、ファイルとしても読まない。** アプリと
+エージェントの両方が使う部品は `packages/` に置き、`.claude/scripts` はそれを読む側にだけなる。例外は、
+管理画面の本番コードが運用の状態 (todo・state・memory など) を表示のためにデータとして読むものと、品質のゲートの
+基準 (`.claude/config`) を検査が読むものだけ。管理画面はパスを書かず、置き場の台帳 (`config/datasets.mjs`) の id で引く。
+
+- 読み方: アプリと packages はパッケージ名 (`@stats47/ops/media/workspace.mjs`) で、`.claude/scripts` と依存を入れない
+  CI の job (デプロイの範囲・PR の検査の振り分け・レビューの期限など) は相対パス (`../../../packages/ops/src/...`) で読む。
+- `.claude/scripts` の部品をアプリが読みたくなったら、先に `packages/` へ移す。テストが `.claude/scripts` の道具を
+  確かめたいときは、テストを `.claude/scripts/<領域>/__tests__/` に置く。
+- 機械の止め: `node .claude/scripts/lib/check-claude-boundary.mjs` (PR の検査。縮小専用の基準
+  `.claude/config/claude-boundary-baseline.json` と、行ごとの理由)。
 
 ## 判断フロー
 
