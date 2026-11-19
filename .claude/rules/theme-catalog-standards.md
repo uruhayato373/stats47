@@ -245,7 +245,7 @@ validator が error にする: `[selection-code-mismatch]` (`#A03503` 等のコ�
 adoptionCriteria の有無に関わらず) / `[selection-boilerplate]` (`SELECTION_BOILERPLATE_PHRASES` の定型文が残る) /
 `[selection-source-required]` (https の sourceUrl と ISO 日付の surveyedAt が無い) / `[selection-criteria-all]` (5 基準全部)。
 URL の到達性・引用の実在 (`evidenceQuote` が本文にあるか) は network が要るので validator では見ず、
-backfill の gate (`.claude/scripts/themes/selection-backfill-core.mjs gateEntries`) が書き込み前に見る。
+backfill の gate (`packages/ops/src/themes/selection-backfill-core.mjs gateEntries`) が書き込み前に見る。
 定型文で埋めるくらいなら未記入のまま残す (`[no-adoption-criteria]` warn は warning ratchet で減少専用)。
 運用: skill `/backfill-theme-selection` (対話) / `run-selection-backfill.sh` (夜間無人)。
 

@@ -2,10 +2,10 @@
 paths:
   - "apps/web/src/features/tsunami-exposure/**"
   - "packages/data-configs/src/theme-catalog/tsunami-exposure-*.ts"
-  - ".claude/scripts/themes/{ingest-tsunami-exposure.mjs,lib/tsunami-*.mjs,__tests__/tsunami-*.test.mjs}"
+  - "packages/ops/src/themes/{ingest-tsunami-exposure.mjs,lib/tsunami-*.mjs,__tests__/tsunami-*.test.mjs}"
   - "apps/web/src/features/earthquake-exposure/**"
   - "packages/data-configs/src/theme-catalog/earthquake-exposure-*.ts"
-  - ".claude/scripts/themes/{ingest-earthquake-exposure.mjs,lib/earthquake-dbf.mjs,__tests__/earthquake-exposure.test.mjs}"
+  - "packages/ops/src/themes/{ingest-earthquake-exposure.mjs,lib/earthquake-dbf.mjs,__tests__/earthquake-exposure.test.mjs}"
   - "apps/web/src/{app/geo,features/geo-analysis}/**"
   - "apps/remotion/src/features/geo-x/**"
   - "packages/gis/src/geo-analysis/**"
@@ -63,7 +63,7 @@ J-SHIS利用規約§5により、原典そのまま・形式変換だけの再�
 J-SHIS原図のブラウザ再現、県平均ハザード、安全順位、住宅曝露の完了扱いはしない。
 この限定契約を既存のrank必須Geo snapshotへ偽の順位で押し込まない。
 地図主体の汎用Geo契約への追加は、別途原典利用条件と再現可能な表示範囲を審査する。
-正準取込は`node --import tsx .claude/scripts/themes/ingest-earthquake-exposure.mjs`。
+正準取込は`node --import tsx packages/ops/src/themes/ingest-earthquake-exposure.mjs`。
 `--write-local`は50個の検証済み公開集計artifactだけをlocal R2へ書き、外部書込みを行わない。
 
 ### 津波想定のファイル単位・部分地域契約

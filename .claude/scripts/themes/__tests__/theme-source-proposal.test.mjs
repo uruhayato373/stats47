@@ -9,7 +9,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { datasetDir } from '../../../../config/datasets.mjs';
 import { assertDatasetShape } from '../../../../packages/ops/src/datasets/dataset-shape.mjs';
-import { readSourceDefinition } from '../ingest-bridge-inspection-age.mjs';
+import { readSourceDefinition } from '../../../../packages/ops/src/themes/ingest-bridge-inspection-age.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '../../../..');

@@ -117,8 +117,8 @@ Agent tool 経路 (2026-09-16 aging-society: 1 テーマ 19 分・285K トーク
 
 ## 関連
 
-- core: `.claude/scripts/themes/selection-backfill-core.mjs` / CLI: `.claude/scripts/themes/selection-backfill.mjs` /
+- core: `packages/ops/src/themes/selection-backfill-core.mjs` / CLI: `.claude/scripts/themes/selection-backfill.mjs` /
   driver: `.claude/scripts/themes/run-selection-backfill.sh`
-- test: `node --import tsx --test .claude/scripts/themes/__tests__/selection-backfill-core.test.mjs`
+- test: `node --import tsx --test packages/ops/src/themes/__tests__/selection-backfill-core.test.mjs`
 - validator: `packages/data-configs/scripts/validate-theme-catalog.ts` (`validateSelectionEvidence`)
 - 置き場: `data/themes/catalogs/<key>.json` の各 metric の `selection`

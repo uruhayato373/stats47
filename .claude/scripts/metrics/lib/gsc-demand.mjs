@@ -24,7 +24,7 @@ import { join } from "node:path";
 
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { parseCsv } from "./measurement-cycle.mjs";
-import { classifyPageType } from "./page-type.mjs";
+import { classifyPageType } from "../../../../packages/ops/src/metrics/page-type.mjs";
 import { addDays, isoWeekOf, isoWeekRange } from "../../../../packages/ops/src/metrics/periods.mjs";
 import { toCsv } from "./auth.mjs";
 import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";

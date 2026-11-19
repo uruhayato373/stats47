@@ -296,7 +296,7 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/themes/__tests__/verify-external-ingest.test.mjs": {
+    "packages/ops/src/themes/__tests__/verify-external-ingest.test.mjs": {
       "stats": 3,
       "ranking": 1,
       "origin": 0,

@@ -570,7 +570,7 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 > 空ページのまま sitemap 掲載されていた。「isActive:true + item.json だけで公開完了」とも思い込まないこと。
 >
 > **手動投入 metric (`fetcherKey:"manual"`) の値を R2 へ上げる経路 (2026-11-13)**: `data-refresh.yml` は e-Stat の指標しか扱わない。
-> 省庁の xlsx / CSV / PDF から作る指標は、取り込みスクリプト (`.claude/scripts/themes/ingest-*.mjs`) を
+> 省庁の xlsx / CSV / PDF から作る指標は、取り込みスクリプト (`packages/ops/src/themes/ingest-*.mjs`。テストの無い古いものは `.claude/scripts/themes/ingest-*.mjs`) を
 > `external-metric-ingest.yml` に登録し、CI の中で原典から取り直して `app/stats/<key>/values.json` へ上げる (既定は dry run)。
 > 順序は「指標定義を `isActive: false` で main へ入れる → workflow で値を上げる → `isActive: true` にする」。
 > 先に公開にすると、値の無いランキングページが配信される。

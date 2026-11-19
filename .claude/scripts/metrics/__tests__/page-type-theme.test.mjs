@@ -4,7 +4,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync } from "node:fs";
 
-import { classifyPageType, themeOfPath } from "../lib/page-type.mjs";
+import { classifyPageType, themeOfPath } from "../../../../packages/ops/src/metrics/page-type.mjs";
 
 const slug = readdirSync(new URL("../../../../data/themes/catalogs/", import.meta.url)).find((f) => f.endsWith(".json")).slice(0, -5);
 

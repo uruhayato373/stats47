@@ -37,7 +37,7 @@ const { LANDSLIDE_EXPOSURE_SOURCE: S } = await load(
 assert.equal(sha(JSON.stringify(D)), LANDSLIDE_EXPOSURE_DEFINITION_SHA256);
 const { readPopulationZip } = await import(
   pathToFileURL(
-    path.join(repo, '.claude/scripts/themes/lib/earthquake-dbf.mjs')
+    path.join(repo, 'packages/ops/src/themes/lib/earthquake-dbf.mjs')
   )
 );
 const put = (file, value, pretty = false) => {

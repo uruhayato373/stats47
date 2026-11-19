@@ -6,7 +6,7 @@ import YAML from 'yaml';
 import { datasetPath } from '../../../../config/datasets.mjs';
 import { PREFECTURES } from '../../../../packages/area/mirror/prefectures.cjs';
 import { statsR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
-import { verifyIngestReport } from '../../themes/verify-external-ingest.mjs';
+import { verifyIngestReport } from '../../../../packages/ops/src/themes/verify-external-ingest.mjs';
 import { buildMetricPayload, ingestMetrics, pendingMetricKeys, selectCandidate, METRIC_KEYS } from '../ingest-metric.mjs';
 import { ROOT, loadCatalog, sha256, writeJson } from '../lib/contracts.mjs';
 import { archiveRecipe, loadSnapshot } from '../lib/archive.mjs';

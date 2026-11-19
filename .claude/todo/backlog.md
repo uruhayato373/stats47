@@ -140,7 +140,8 @@ updated: 2026-11-01
 - **起点 (2026-11-19 オーナー判断「テストは基本的に .claude に置かない」)**: テストが要るロジックは packages に置く決まり (`.claude/rules/skill-code-placement.md`「テストは `.claude` に置かない」) と、領域ごとのテスト数の縮小専用の基準 `.claude/config/claude-scripts-test-baseline.json`。
 - **済み (2026-11-19・第 1 回と第 2 回)**: `lib` を 132 → 5 本にした。基盤のテスト 75 本は基準の `harness` に登録済み。SNS の台帳・e-Stat・記事の lint とブログの品質ゲート・Google 接続・state の同期・製品の品質ゲートの検査 10 本・Cloudflare・効果判定のエンジン・`strategy-lanes` を `packages/ops/src/` へ移した。CLI は元のパスに本体の `main` を呼ぶ薄い入口を残している。
 - **次 ① (`lib` の残り 5 本)**: `write-past-effects` と `effect-verdict-cli` (`cli.mjs`・`scan-pending-improvements`・`triage-matrix`・`write-past-effects` を起動する。`write-past-effects` が `search-growth/lib` の部品を読むので search-growth の領域と一緒に動かす)、`chart-recurrence-guards` (`blog` の 4 スクリプトと workflow の手順の順番を同時に確かめている。分けてから移す)、`revenue-guards` (本体が `metrics` にあり `.claude/config/revenue-guards.json` の実物を読む)、`quality-gate.q-numbers` (fixture に `.claude/scripts/blog/` のパスを使う 1 ケースだけ残した)。
-- **次 ②**: workflow からの参照が多い領域から進める (`themes` 45・`ads` 37・`note` 36・`metrics` 22・`sns` 22・`blog` 17)。
+- **次 ②**: workflow からの参照が多い領域から進める (`ads` 37・`note` 36・`metrics` 22・`sns` 22・`blog` 17)。`themes` は 2026-11-19 に本体 44・テスト 39 を移した。
+- **次 ③ (themes の残り)**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラーが 76 件 (28 ファイル。取り込みの CLI の大半・`selection-backfill-core`・`theme-quality-state`・`lib/tsunami-*`) 出る。移す前も型検査の範囲外だったので足していない。JSDoc の型注釈で直して範囲に入れる (挙動は変えない)。取り込みの CLI のうち `ingest-bridge-inspection-age.mjs:33` と `ingest-shelter-applicability.mjs:38` は ROOT を `process.cwd()` で決めていて、リポジトリ直下以外から起動すると読む場所がずれる (ほかの 4 本は移すときにファイルの位置から求める形に直した)。
 - **進め方 (2 回で固まった型)**:
   - 妨げは構文木で数える (`.claude` を含む文字列の数)。Explore で調べない。
   - 移動は `npm run claude:scripts:move -- <表.json> --apply`。`git mv`・相対パスの読み・旧パスの言及を機械的に付け替え、判断が要る行だけを一覧に出す。移したあと `node .claude/scripts/lib/check-claude-scripts-tests.mjs --shrink`。

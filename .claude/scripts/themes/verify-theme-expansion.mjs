@@ -7,7 +7,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { explicitIndicatorCodes, summarizeSeries, validateDecisions, validateImplementationPlan, PREFECTURES, numericValue } from './theme-expansion-core.mjs';
+import { explicitIndicatorCodes, summarizeSeries, validateDecisions, validateImplementationPlan, PREFECTURES, numericValue } from '../../../packages/ops/src/themes/theme-expansion-core.mjs';
 import { ESTAT_API_BASE_URL } from '../../../packages/ops/src/estat/catalog-endpoints.cjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 

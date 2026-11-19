@@ -8,7 +8,7 @@ import {
   planFollowup,
   summarizeFollowup,
   needsEvidenceReview,
-} from './theme-followup-core.mjs';
+} from '../../../packages/ops/src/themes/theme-followup-core.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(

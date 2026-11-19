@@ -40,7 +40,7 @@ const {
 } = await load('packages/gis/src/geo-analysis/snow-designation.ts');
 const { readPopulationZip } = await import(
   pathToFileURL(
-    path.join(repo, '.claude/scripts/themes/lib/earthquake-dbf.mjs')
+    path.join(repo, 'packages/ops/src/themes/lib/earthquake-dbf.mjs')
   ).href
 );
 const { assertKsjPublicStructuredOutputAllowed } = await import(
