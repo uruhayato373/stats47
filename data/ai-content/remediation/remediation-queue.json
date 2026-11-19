@@ -1,18 +1,17 @@
 {
-  "generatedAt": "2026-11-18T03:45:43.422Z",
+  "generatedAt": "2026-11-19T03:26:59.511Z",
   "gscSnapshot": "2026-W45",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
     "total": 2624,
-    "done": 1360,
-    "needsRegen": 1264,
+    "done": 1359,
+    "needsRegen": 1265,
     "needsByReason": {
-      "stale-year": 804,
+      "stale-year": 806,
       "missing": 458,
-      "incomplete": 1,
-      "fetch-error:TypeError: fetch failed": 1
+      "incomplete": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
@@ -31336,10 +31335,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "warns": [],
+      "lastModified": "Sun, 27 Sep 2026 21:45:42 GMT",
+      "updatedAt": "2026-09-27T21:38:19.000Z"
     },
     {
       "rankingKey": "media-avg-time-unemployed-male",
@@ -32770,12 +32771,15 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [],
       "lastModified": "Sun, 06 Sep 2026 23:12:20 GMT",
-      "updatedAt": "2026-09-06T23:09:31.052Z"
+      "updatedAt": "2026-09-06T23:09:31.052Z",
+      "contentYear": "2024",
+      "dataYear": "2025",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "other-utilities-consumption-expenditure",
@@ -33876,15 +33880,18 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [
         "causal-insights",
         "length-short"
       ],
       "lastModified": "Sun, 06 Sep 2026 21:23:25 GMT",
-      "updatedAt": "2026-09-06T14:12:34.477Z"
+      "updatedAt": "2026-09-06T14:12:34.477Z",
+      "contentYear": "2024",
+      "dataYear": "2025",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "public-junior-high-school-gym-installation-rate",
