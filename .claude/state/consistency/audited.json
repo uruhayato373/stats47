@@ -1,25 +1,11 @@
 {
-  "hash": "cf4c7594d00896f82522c5da007f00be84b1928acf3dfd2f3151b2a3e1bb8f7c",
-  "audited_at": "2026-11-19T12:08:51",
+  "hash": "3949d522dad2faa01ee17ce27dd5d7475cfce0d50bc91cad5af9afbbad480e9b",
+  "audited_at": "2026-11-19T12:22:55",
   "files": [
-    ".claude/scripts/cloudflare/monthly-snapshot.mjs",
-    ".claude/scripts/cloudflare/threshold-check.mjs",
-    ".claude/scripts/estat/audit-time-coverage.cjs",
-    ".claude/scripts/estat/gen-ssds-configs.mjs",
-    ".claude/scripts/instagram/post-from-schedule.cjs",
-    ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs",
-    ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs",
-    ".claude/scripts/lib/check-accessibility-static.cjs",
-    ".claude/scripts/lib/check-asset-policy.cjs",
-    ".claude/scripts/lib/check-image-generation-routes.mjs",
-    ".claude/scripts/lib/check-money-unit-audit.cjs",
-    ".claude/scripts/lib/check-next-support-window.cjs",
-    ".claude/scripts/lib/check-r2-route-ssg.cjs",
-    ".claude/scripts/lib/check-route-contract.cjs",
-    ".claude/scripts/lib/check-static-assets.cjs",
-    ".claude/scripts/lib/check-value-format.cjs",
-    ".claude/scripts/lib/check-web-estat-imports.cjs",
-    ".claude/scripts/lib/move-script.mjs",
-    ".claude/scripts/metrics/build-measurement-cycle.mjs"
+    ".claude/scripts/analysis/check-analysis-cycle.mjs",
+    ".claude/scripts/analysis/check-article-numbers.mjs",
+    ".claude/scripts/analysis/run-analysis.mjs",
+    ".claude/scripts/blog/quality-gate.mjs",
+    ".claude/scripts/lib/__tests__/quality-gate.q-numbers.test.mjs"
   ]
 }

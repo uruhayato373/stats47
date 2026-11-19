@@ -1,6 +1,6 @@
 /**
  * 本文×図の data JSON 照合 gate (2026-10-26 追加) の回帰テスト。
- * 実行: node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs
+ * 実行: node --test packages/ops/src/blog/__tests__/quality-gate.claim-gates.test.mjs
  *
  * - BLOG-SEOTITLE-MIXED-YEAR-01: 年の違う図を並べた記事で title/seoTitle に年が 1 つだけ
  * - BLOG-METRIC-NAME-GATE-01 ①: 図「スルメイカ漁獲量」の値を本文が「イカ類」と呼ぶ
@@ -22,14 +22,14 @@ import {
   extractChartYears,
   extractTitleYears,
   lintMixedYearTitle,
-} from '../../../../packages/ops/src/blog/lint/title-year-lint.mjs';
+} from '../lint/title-year-lint.mjs';
 import {
   lintExtremeBaseYear,
   lintHypernymMetricNames,
-} from '../../../../packages/ops/src/blog/lint/metric-name-lint.mjs';
+} from '../lint/metric-name-lint.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const GATE = path.resolve(__dirname, '../../blog/quality-gate.mjs');
+const GATE = path.resolve(__dirname, '../quality-gate.mjs');
 
 const article = ({ title, seoTitle, body }) => `---
 title: "${title}"

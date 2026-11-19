@@ -1,6 +1,6 @@
 /**
  * critic が書き直しで繰り返し REVISE にした型の gate (BLOG-REVISE-PATTERNS-01、2026-11-14 追加) の回帰テスト。
- * 実行: node --test .claude/scripts/lib/__tests__/quality-gate.revise-patterns.test.mjs
+ * 実行: node --test packages/ops/src/blog/__tests__/quality-gate.revise-patterns.test.mjs
  *
  * - related-link: 関連記事の紹介の表示名が、リンク先の現在の題と無関係 / 旧題のまま
  * - year: 節の本文が語る年と、貼った図の年が 1 つも重ならず、断りも無い
@@ -17,12 +17,12 @@ import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { lintFigureYearMention } from '../../../../packages/ops/src/blog/lint/figure-year-lint.mjs';
-import { lintRelatedLinkNames } from '../related-link-lint.mjs';
+import { lintFigureYearMention } from '../lint/figure-year-lint.mjs';
+import { lintRelatedLinkNames } from '../lint/related-link-lint.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
-const GATE = path.resolve(__dirname, '../../blog/quality-gate.mjs');
+const ROOT = path.resolve(__dirname, '..', '..', '..', '..', '..');
+const GATE = path.resolve(__dirname, '../quality-gate.mjs');
 
 // ---------------------------------------------------------------- related-link
 const TITLES = {

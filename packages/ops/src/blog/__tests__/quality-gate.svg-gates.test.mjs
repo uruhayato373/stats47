@@ -1,6 +1,6 @@
 /**
  * quality-gate.mjs に 2026-07-31 で追加した 5 つの gate の回帰テスト。
- * 実行: node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
+ * 実行: node packages/ops/src/blog/__tests__/quality-gate.svg-gates.test.mjs
  *
  * ★全 PASS は「ゲートが何も見ていない」状態と区別がつかない (blog-quality-standards.md
  * 「ルール ↔ 機械チェック 対応表」)。そこで正常データで発火しないことと、違反を 1 つだけ
@@ -16,7 +16,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const GATE = path.resolve(__dirname, '../../blog/quality-gate.mjs');
+const GATE = path.resolve(__dirname, '../quality-gate.mjs');
 
 const GOOD_SVG =
   '<svg viewBox="0 0 960 404" width="960" height="404">' +

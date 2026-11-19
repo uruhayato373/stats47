@@ -1,6 +1,6 @@
 /**
  * quality-gate.mjs の NG_PATTERN「title 「N位」だけで終わる」の回帰テスト (BLOG-TUTORIAL-GATE-GAPS-01)。
- * 実行: node --test .claude/scripts/lib/__tests__/quality-gate.title-ng.test.mjs
+ * 実行: node --test packages/ops/src/blog/__tests__/quality-gate.title-ng.test.mjs
  *
  * 旧実装は「N位」を含む引用符つきタイトルをすべて止め、名前 (「N位」で終わる) と判定がずれていた。
  * 「4位なのに空き家は37位」のように、対比 (curiosity gap) を持つタイトルまで止まっていた。
@@ -15,7 +15,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const GATE = path.resolve(__dirname, '../../blog/quality-gate.mjs');
+const GATE = path.resolve(__dirname, '../quality-gate.mjs');
 const NG_NAME = 'NG_PATTERN: title 「N位」だけで終わる';
 
 function titleBlocked(title) {
