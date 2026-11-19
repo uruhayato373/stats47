@@ -159,6 +159,7 @@ test("ISO 週・週の月曜の自前計算を ISO_WEEK_LOCAL として検出す
 test("正本の periods.mjs・コメント・テストの週の計算は検出しない", (t) => {
   const root = fixture("// 旧実装は d.getUTCDay() || 7 で数えていた\n");
   fs.mkdirSync(path.join(root, ".claude/scripts/metrics/lib/__tests__"), { recursive: true });
+  fs.mkdirSync(path.join(root, "packages/ops/src/metrics"), { recursive: true });
   fs.writeFileSync(path.join(root, "packages/ops/src/metrics/periods.mjs"), "const dayNum = d.getUTCDay() || 7;\n");
   fs.writeFileSync(path.join(root, ".claude/scripts/metrics/lib/__tests__/periods.test.mjs"), "const jan4 = new Date(Date.UTC(y, 0, 4));\n");
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
