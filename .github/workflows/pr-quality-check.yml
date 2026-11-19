@@ -936,6 +936,8 @@ jobs:
           node packages/area/scripts/check-area-year-entrypoint.mjs
           # apps・packages・config が .claude を読まない (本番コードもテストも。例外は管理画面が運用の状態をデータとして読むものだけ。縮小専用)
           node .claude/scripts/lib/check-claude-boundary.mjs
+          # .claude/scripts にテストを増やさない (テストが要るロジックは packages へ。例外はエージェント基盤だけ。縮小専用)
+          node .claude/scripts/lib/check-claude-scripts-tests.mjs
         continue-on-error: false
 
       - name: 🎨 Colorscheme Policy Gate

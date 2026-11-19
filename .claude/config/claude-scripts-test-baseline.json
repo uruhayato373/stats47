@@ -1,0 +1,136 @@
+{
+  "policy": "縮小専用。テストが要るロジックは packages に置く。.claude/scripts に新しいテストを置けるのはエージェント基盤 (harness) だけ",
+  "harnessDomains": [
+    "audit",
+    "backlog-loop",
+    "ci",
+    "lib",
+    "management",
+    "model-usage"
+  ],
+  "harness": {
+    ".claude/scripts/lib/__tests__/check-claude-scripts-tests.test.mjs": "この検査 (品質のゲート) 自身のテスト"
+  },
+  "domains": {
+    "admin-ui": {
+      "count": 1,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "ads": {
+      "count": 37,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "ai-content": {
+      "count": 6,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "analysis": {
+      "count": 7,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "audit": {
+      "count": 2,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "backlog-loop": {
+      "count": 9,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "blog": {
+      "count": 17,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "content-types": {
+      "count": 1,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "data": {
+      "count": 3,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "google-admin": {
+      "count": 3,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "gsc": {
+      "count": 9,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "issues": {
+      "count": 1,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "kdp": {
+      "count": 7,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "lib": {
+      "count": 132,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "management": {
+      "count": 3,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "measurement": {
+      "count": 10,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "metrics": {
+      "count": 22,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "model-usage": {
+      "count": 1,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "note": {
+      "count": 36,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "ogp": {
+      "count": 1,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "open-data": {
+      "count": 9,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "page-quality": {
+      "count": 10,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "products": {
+      "count": 5,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "provenance": {
+      "count": 1,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "psi": {
+      "count": 2,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "search-growth": {
+      "count": 9,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "sns": {
+      "count": 22,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "source-vault": {
+      "count": 2,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "surveys": {
+      "count": 1,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    },
+    "themes": {
+      "count": 45,
+      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
+    }
+  }
+}

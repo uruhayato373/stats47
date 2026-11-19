@@ -9,6 +9,8 @@ paths:
 # スキル利用コードの配置原則
 
 **スキル（SKILL.md）から呼ばれるユーティリティ・ヘルパースクリプトは `.claude/` 配下に置く**。`scripts/` 直下には置かない。
+**ただし、テストが要るほどのロジック (判定・変換・集計・台帳の読み書き) は誰が呼ぶかに関係なく `packages/` に置き、
+テストもそこに置く。`.claude/scripts` はそれを呼ぶ薄い入口になる** (2026-11-19 オーナー判断)。
 
 ## 配置ルール
 
@@ -19,6 +21,7 @@ paths:
 | スキルが参照するデータ・テンプレ（非実行） | `.claude/skills/<skill>/reference/` |
 | launchd 等の OS 統合用シェルラッパー | `scripts/scheduled/`（唯一の例外、`.claude/` 外でよい） |
 | アプリのビルド・デプロイ用スクリプト | `packages/*/scripts/` or `apps/*/scripts/` |
+| **テストが要るロジック** (判定・変換・集計・台帳の読み書き) とそのテスト | `packages/` (領域が合う既存のパッケージ、運用の部品は `packages/ops/src/<領域>/`)。`.claude/scripts` には呼ぶ入口だけを置く |
 | **アプリ (管理画面など) と packages も読む部品** | `packages/` (運用の部品は `packages/ops/src/<領域>/`、領域が合えば既存のパッケージ)。`.claude/scripts` には置かない |
 | スクリプト用の鏡 (TS の正本の JS の写し) | 正本と同じパッケージの `mirror/` (`packages/r2-storage/mirror/r2-keys.mjs` など) |
 
@@ -31,15 +34,32 @@ paths:
 
 - 読み方: アプリと packages はパッケージ名 (`@stats47/ops/media/workspace.mjs`) で、`.claude/scripts` と依存を入れない
   CI の job (デプロイの範囲・PR の検査の振り分け・レビューの期限など) は相対パス (`../../../packages/ops/src/...`) で読む。
-- `.claude/scripts` の部品をアプリが読みたくなったら、先に `packages/` へ移す。テストが `.claude/scripts` の道具を
-  確かめたいときは、テストを `.claude/scripts/<領域>/__tests__/` に置く。
+- `.claude/scripts` の部品をアプリが読みたくなったら、先に `packages/` へ移す。
 - 機械の止め: `node .claude/scripts/lib/check-claude-boundary.mjs` (PR の検査。縮小専用の基準
   `.claude/config/claude-boundary-baseline.json` と、行ごとの理由)。
+
+### テストは `.claude` に置かない (2026-11-19 オーナー判断)
+
+テストを書きたくなったら、先に対象のロジックを `packages/` へ移し、テストもそこに置く。テストだけを packages へ
+移さない (packages が `.claude` を読むことになり、上の依存の向きに反する)。
+
+- `.claude/scripts` に新しいテストを置けるのは、エージェントが居るから存在する基盤 (hook・セッションの検知・
+  agent/skill の整合検査・backlog-loop・モデル利用量・CI の契約の検査) だけ。基準の `harness` に理由付きで 1 行足す。
+  置ける領域は基準の `harnessDomains` に限る。
+- 既存のテストは、その領域を触るときに対象のロジックごと packages へ移し、基準を縮める (SCRIPTS-TO-PACKAGES-02)。
+  移すときは下の「拡張子」の注意 (packages は `"type": "module"` を持たない) と、依存を入れない CI の job は
+  相対パスで読む決まりに従う。
+- 機械の止め: `node .claude/scripts/lib/check-claude-scripts-tests.mjs` (PR の検査。領域ごとのテスト数の縮小専用の基準
+  `.claude/config/claude-scripts-test-baseline.json`)。
 
 ## 判断フロー
 
 ```
 スクリプトを新規作成する
+  ↓
+テストが要るロジック (判定・変換・集計・台帳の読み書き) か？
+  ├─ YES → packages/ (テストもそこ)。.claude/scripts には呼ぶ入口だけ
+  └─ NO
   ↓
 SKILL.md から `node <path>` で呼ばれる？
   ├─ YES → .claude/scripts/<domain>/ または .claude/skills/<skill>/scripts/

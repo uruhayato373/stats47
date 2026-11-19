@@ -126,6 +126,14 @@ updated: 2026-11-01
 - **停止条件**: 管理画面 (`npm run admin`) の主な画面と、移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
+### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 414 本を、対象のロジックごと packages へ移す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
+
+- **起点 (2026-11-19 オーナー判断「テストは基本的に .claude に置かない」)**: テストが要るロジックは packages に置く決まりにし、`.claude/scripts` の領域ごとのテスト数を縮小専用の基準 `.claude/config/claude-scripts-test-baseline.json` で止めた (`.claude/rules/skill-code-placement.md`「テストは `.claude` に置かない」)。既存の 30 領域・414 本は基準に残っている。
+- **次**: ① `lib/` (132 本) を業務のロジックとエージェント基盤に分ける。業務のロジック (家計調査の分類・SSDS の年の形式・効果判定のエンジン・指標の公開の順・IG と SNS の台帳など) は領域の合う packages へコードごと移し、基盤 (hook・セッションの検知・整合検査・CI の契約の検査) のテストは基準の `harness` へ理由付きで移す。② 続けて workflow からの参照が多い順 (`blog`・`ads`・`search-growth`・`gsc`・`metrics`・`themes`・`note`) に進める。移すたびに基準を縮める。
+- **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む決まりを守る。テストだけを packages へ移さない (packages が `.claude` を読むことになる)。
+- **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
+
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 

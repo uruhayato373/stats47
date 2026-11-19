@@ -1,7 +1,9 @@
 {
-  "hash": "1782d20f94217ca72ce47b005c90d4ff89585ea493f3ed75bdf63ab4dba92f99",
-  "audited_at": "2026-11-19T01:27:12",
+  "hash": "a069767968a5741a86dfdaf2d9c38fbd4f28670fa14da2b7962b1c8e1e84933d",
+  "audited_at": "2026-11-19T10:30:24",
   "files": [
-    ".claude/rules/skill-code-placement.md"
+    ".claude/rules/skill-code-placement.md",
+    ".claude/scripts/lib/__tests__/check-claude-scripts-tests.test.mjs",
+    ".claude/scripts/lib/check-claude-scripts-tests.mjs"
   ]
 }
