@@ -16,6 +16,7 @@
     "src/media/svg-classify.mjs",
     "src/measurement/**/*.mjs",
     "src/metrics/**/*.mjs",
+    "src/blog/lint/**/*.mjs",
     "src/estat/build-monthly-ledger.mjs",
     "src/estat/catalog-index.mjs",
     "src/estat/catalog-pulled.mjs",

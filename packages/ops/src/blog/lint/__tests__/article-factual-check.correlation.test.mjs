@@ -1,6 +1,6 @@
 /**
  * 本文の相関係数を散布図の接地物と照合する検査 (BLOG-TOPIC-PAIR-PER-CAPITA-01)。
- * 実行: node --test .claude/scripts/lib/__tests__/article-factual-check.correlation.test.mjs
+ * 実行: node --test packages/ops/src/blog/lint/__tests__/article-factual-check.correlation.test.mjs
  *
  * 型B の prompt は `*-scatter.source.json` の pearsonR を小数第 2 位で渡すので、本文の値は
  * 同じファイルと一致するはず。発火すること (誤値) と発火しないこと (正しい値・偏相関) の両方を固定する。

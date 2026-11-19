@@ -286,7 +286,7 @@ provenance 付き 9 枚だけが恒久的に rerender 判定になっており�
 (当時の日次 `blog-remediation-daily.yml`。今は週次レビューの `weekly:audits`) がそれを上書きすると **provenance が消えて劣化する**構図だった
 （gate の役目は「点や軸が変わったか」= 内容ドリフトの検出なので metadata は比較対象外）。
 
-扱いは `.claude/scripts/lib/svg-provenance.mjs` に一本化する（`stripProvenance` /
+扱いは `packages/ops/src/blog/lint/svg-provenance.mjs` に一本化する（`stripProvenance` /
 `sameSvgContent` / `withProvenance`）。テスト `__tests__/svg-provenance.test.mjs` が
 ①provenance 差は無視 ②**内容差は必ず検出**（座標・点数・キャンバス・色）の両方向を固定する
 — ①だけ入れると「全部 already-canonical」を返す無検査 gate に化けるため。

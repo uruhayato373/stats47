@@ -1,6 +1,6 @@
 /**
  * stats-table-id-lint のテスト (vitest 基盤外のため node 直接実行)。
- * 実行: node .claude/scripts/lib/__tests__/stats-table-id-lint.test.mjs
+ * 実行: node packages/ops/src/blog/lint/__tests__/stats-table-id-lint.test.mjs
  *
  * 2026-10-07 に critic の目視でしか見つからなかった取り違えを、決定的に止めることを固定する。
  * 逆に、統計名を書いていない ID や、隣の ID の名前・社会・人口統計体系の元の調査名では止めない

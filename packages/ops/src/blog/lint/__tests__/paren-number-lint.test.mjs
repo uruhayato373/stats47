@@ -1,6 +1,6 @@
 /**
  * paren-number-lint のテスト (vitest 基盤外のため node 直接実行)。
- * 実行: node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
+ * 実行: node packages/ops/src/blog/lint/__tests__/paren-number-lint.test.mjs
  *
  * ★検出条件は規約の原文「都道府県名の直後に括弧で値・順位を入れてはならない」に忠実であること。
  * 「括弧に数字があれば違反」と広げると公開済み記事の 97.6% が該当し、単位・対象・出典の

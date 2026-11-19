@@ -17,7 +17,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { lintFigureYearMention } from '../figure-year-lint.mjs';
+import { lintFigureYearMention } from '../../../../packages/ops/src/blog/lint/figure-year-lint.mjs';
 import { lintRelatedLinkNames } from '../related-link-lint.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

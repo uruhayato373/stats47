@@ -1,6 +1,6 @@
 /**
  * value 照合の **検出力** テスト (mutation testing)。
- * 実行: node --test .claude/scripts/lib/__tests__/article-factual-check.detection.test.mjs
+ * 実行: node --test packages/ops/src/blog/lint/__tests__/article-factual-check.detection.test.mjs
  *
  * ★既存の value.test.mjs は全ケースが「警告 0 件 = 正」を固定しており、
  *   **誤りを検出できるか**を一度も測っていなかった。その結果、検出力ゼロの状態が

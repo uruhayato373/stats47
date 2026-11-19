@@ -12,9 +12,9 @@ import { fileURLToPath } from "node:url";
 
 import yaml from "js-yaml";
 
-import { datasetPath } from "../../../config/datasets.mjs";
+import { datasetPath } from "../../../../../config/datasets.mjs";
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
 
 /** タグ台帳から、タグとして受け付ける値の集合を作る。 */
 export function loadRegisteredTagValues(file = path.join(PROJECT_ROOT, datasetPath("content.tags"))) {

@@ -82,7 +82,7 @@ npx tsx packages/product-factory/scripts/audit-book-facts.mts --book K-S1-01   #
 タイルマップの再生成時に `map-value-match.mjs` が SSOT と突合する。
 
 ```bash
-node --test .claude/scripts/lib/__tests__/map-value-match.test.mjs
+node --test packages/ops/src/blog/lint/__tests__/map-value-match.test.mjs
 npx tsx .claude/scripts/blog/regenerate-tile-maps.ts   # dry-run。matchRate が落ちた地図が出る
 ```
 

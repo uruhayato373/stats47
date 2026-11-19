@@ -1,6 +1,6 @@
 /**
  * checkValueClaims の standalone テスト (vitest 基盤外のため node 直接実行)。
- * 実行: node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
+ * 実行: node packages/ops/src/blog/lint/__tests__/article-factual-check.value.test.mjs
  */
 import assert from "node:assert";
 import fs from "node:fs";

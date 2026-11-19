@@ -178,7 +178,7 @@ jobs:
           node --import tsx --input-type=module <<'NODE'
           import fs from 'node:fs';
           import path from 'node:path';
-          import { inspectChartSourceManifest } from './.claude/scripts/lib/chart-provenance.mjs';
+          import { inspectChartSourceManifest } from './packages/ops/src/blog/lint/chart-provenance.mjs';
           import {
             parseSourceRepairPayload,
             resolveCasJsonWrite,

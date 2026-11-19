@@ -11,7 +11,7 @@
  *
  * 1 つでも blocker があれば exit 1。
  *
- * Factual cross-check は `.claude/scripts/lib/article-factual-check.mjs` に切り出し済み。
+ * Factual cross-check は `packages/ops/src/blog/lint/article-factual-check.mjs` に切り出し済み (CLI の入口は .claude/scripts/lib/article-factual-check.mjs)。
  * 他 skill (publish-article / draft-from-trend 等) からも同 library が利用可能。
  *
  * Usage:
@@ -31,20 +31,20 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { buildGroundTruth, checkArticleFactual } from '../lib/article-factual-check.mjs';
-import { lintConsecutiveCallouts, lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
-import { lintParenNumbers } from '../lib/paren-number-lint.mjs';
-import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
+import { buildGroundTruth, checkArticleFactual } from '../../../packages/ops/src/blog/lint/article-factual-check.mjs';
+import { lintConsecutiveCallouts, lintSourceLinkPlacement } from '../../../packages/ops/src/blog/lint/article-structure-lint.mjs';
+import { lintParenNumbers } from '../../../packages/ops/src/blog/lint/paren-number-lint.mjs';
+import { lintStatsTableIds } from '../../../packages/ops/src/blog/lint/stats-table-id-lint.mjs';
 import { lintRelatedLinkNames } from '../lib/related-link-lint.mjs';
-import { lintFigureYearMention } from '../lib/figure-year-lint.mjs';
-import { lintUnregisteredTags } from '../lib/blog-tag-lint.mjs';
+import { lintFigureYearMention } from '../../../packages/ops/src/blog/lint/figure-year-lint.mjs';
+import { lintUnregisteredTags } from '../../../packages/ops/src/blog/lint/blog-tag-lint.mjs';
 import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../../../apps/web/scripts/lib/internal-link-lint.mjs';
-import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { inspectChartSourceManifest } from '../../../packages/ops/src/blog/lint/chart-provenance.mjs';
 import { chartSourceShapeErrors } from '../../../packages/svg-builder/src/lint/chart-source-schema.mjs';
-import { lintMixedYearTitle } from '../lib/title-year-lint.mjs';
-import { lintRegionClaims } from '../lib/region-claim-lint.mjs';
-import { TITLE_PROMISE_WARNING_RULES, lintTitlePromises } from '../lib/title-promise-lint.mjs';
-import { lintHypernymMetricNames, lintExtremeBaseYear } from '../lib/metric-name-lint.mjs';
+import { lintMixedYearTitle } from '../../../packages/ops/src/blog/lint/title-year-lint.mjs';
+import { lintRegionClaims } from '../../../packages/ops/src/blog/lint/region-claim-lint.mjs';
+import { TITLE_PROMISE_WARNING_RULES, lintTitlePromises } from '../../../packages/ops/src/blog/lint/title-promise-lint.mjs';
+import { lintHypernymMetricNames, lintExtremeBaseYear } from '../../../packages/ops/src/blog/lint/metric-name-lint.mjs';
 import { lintBlogContentType } from '../content-types/blog-type-lint.mjs';
 import { checkAnalyses } from '../analysis/check-analysis-cycle.mjs';
 import { checkArticleNumbers } from '../analysis/article-numbers-core.mjs';

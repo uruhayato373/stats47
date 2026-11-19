@@ -34,6 +34,24 @@ test(".claude/scripts/lib/__tests__ のテストは全部、workflow・package.j
   assert.deepEqual(unwired(testFiles, wiringText()), [], "test:claude-lib-contracts の一覧に足す");
 });
 
+/** 走らせる口に名前で書かれたテストのパス (glob は除く) のうち、実在しないもの */
+function missingTestPaths(text, exists) {
+  const paths = new Set();
+  for (const match of text.matchAll(/(?:^|[\s"'`=])((?:\.claude|\.github|apps|packages)\/[\w./-]+\.test\.[cm]?[jt]sx?)(?=$|[\s"'`\\])/gm)) paths.add(match[1]);
+  return [...paths].filter((file) => !exists(file)).sort();
+}
+
+test("workflow・package.json・.husky が名前で走らせるテストのパスは実在する", () => {
+  // node --test は存在しないパスを警告なしで読み飛ばす。テストを移したのに走らせる口のパスを直し忘れると、
+  // そのテストは誰にも実行されないまま緑が続く (2026-11-19 に test:claude-lib-contracts の 8 本で起きた)。
+  assert.deepEqual(missingTestPaths(wiringText(), (file) => fs.existsSync(path.join(ROOT, file))), [], "走らせる口のパスを移した先に直す");
+});
+
+test("[mutation] 実在しないテストのパスを見逃さない", () => {
+  const text = 'run: node --test packages/ops/src/x/__tests__/gone.test.mjs .claude/scripts/lib/__tests__/kept.test.cjs\n"a": "node --test \\"src/**/__tests__/*.test.mjs\\""';
+  assert.deepEqual(missingTestPaths(text, (file) => file.includes("kept")), ["packages/ops/src/x/__tests__/gone.test.mjs"]);
+});
+
 test("test:claude-lib-contracts は PR の workflow が実行する", () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8"));
   assert.match(pkg.scripts["test:claude-lib-contracts"], /^node --test /);

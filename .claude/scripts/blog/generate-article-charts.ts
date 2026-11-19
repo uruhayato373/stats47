@@ -49,9 +49,9 @@ import {
   lintSvgSize,
   extractInlineSvgs,
 } from '../../../packages/svg-builder/src/lint/svg-lint.mjs';
-import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
-import { observedOnly } from '../lib/blog-observed-values.mjs';
-import { buildProvenanceLine } from '../lib/svg-provenance.mjs';
+import { inspectChartSourceManifest } from '../../../packages/ops/src/blog/lint/chart-provenance.mjs';
+import { observedOnly } from '../../../packages/ops/src/blog/lint/blog-observed-values.mjs';
+import { buildProvenanceLine } from '../../../packages/ops/src/blog/lint/svg-provenance.mjs';
 // 統計の図は型 (apps/admin/lib/template-*.ts) だけで描く。svg-builder に残すのは型の台帳に無い要点カードだけ。
 import { generateFindingsCardSvg } from '../../../packages/svg-builder/src/charts/index.ts';
 import { datasetPath } from '../../../config/datasets.mjs';

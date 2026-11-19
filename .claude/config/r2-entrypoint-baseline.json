@@ -121,7 +121,7 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/lib/__tests__/chart-provenance.test.mjs": {
+    "packages/ops/src/blog/lint/__tests__/chart-provenance.test.mjs": {
       "stats": 13,
       "ranking": 2,
       "origin": 0,

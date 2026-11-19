@@ -12,7 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { checkArticleFactual } from "../lib/article-factual-check.mjs";
+import { checkArticleFactual } from "../../../packages/ops/src/blog/lint/article-factual-check.mjs";
 
 const slug = process.argv[2];
 if (!slug) {

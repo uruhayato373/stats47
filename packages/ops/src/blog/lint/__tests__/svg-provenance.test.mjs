@@ -1,6 +1,6 @@
 /**
  * provenance 比較の検出力テスト。
- * 実行: node --test .claude/scripts/lib/__tests__/svg-provenance.test.mjs
+ * 実行: node --test packages/ops/src/blog/lint/__tests__/svg-provenance.test.mjs
  *
  * ★ここで固定したいのは 2 つの逆方向:
  *   ① provenance だけの差は「同じ」と判定する (誤検知を消す)

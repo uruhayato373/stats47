@@ -47,7 +47,7 @@ import { fileURLToPath } from 'node:url';
 import {
   extractChartSourceReferences,
   inspectChartSourceManifest,
-} from '../lib/chart-provenance.mjs';
+} from '../../../packages/ops/src/blog/lint/chart-provenance.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { ESTAT_META_INFO_URL } from '../lib/estat-catalog/endpoints.cjs';
 import { datasetDir } from "../../../config/datasets.mjs";
@@ -399,7 +399,7 @@ ${byVerdict.map(([v, n]) => `- \`${v}\`: **${n}**${DEFECTS.has(v) ? ' ← 欠陥
 - \`dead-reference\` — 参照している rankingKey が R2 に存在しない (指標の廃止/改名)
 - \`dead-r2-reference\` — source が指す R2 object が存在しない
 - \`dead-estat-reference\` — 参照している statsDataId が e-Stat API で取得できない
-- \`unknown-kind\` — 語彙のドリフト。\`.claude/scripts/lib/chart-provenance.mjs\` の共有定義に追加する
+- \`unknown-kind\` — 語彙のドリフト。\`packages/ops/src/blog/lint/chart-provenance.mjs\` の共有定義に追加する
 
 ## 欠陥一覧
 ${defects.length === 0 ? 'なし' : defects.map((d) => `- \`${d.verdict}\` ${d.slug}/${d.base} (kind=${d.kind}) — ${String(d.detail).slice(0, 100)}`).join('\n')}

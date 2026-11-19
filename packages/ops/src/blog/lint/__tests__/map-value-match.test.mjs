@@ -1,6 +1,6 @@
 /**
  * 地図表示値 ↔ SSOT 照合の対照テスト。
- * 実行: node --test .claude/scripts/lib/__tests__/map-value-match.test.mjs
+ * 実行: node --test packages/ops/src/blog/lint/__tests__/map-value-match.test.mjs
  *
  * ★背景 (2026-08-11 実測): 「13,326千円」の「千」をスケール接頭辞と誤読して ×1000 で
  * 照合していたため、単位が千円/万円系の指標は**値が完全一致しているのに**一致率 0% になり

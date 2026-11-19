@@ -641,12 +641,12 @@ jobs:
         # 従来これらは手動実行しか経路が無く、gate が黙って効かなくなっても誰も気づけなかった。
         # 正典: .claude/rules/blog-quality-standards.md「ルール ↔ 機械チェック 対応表」
         run: |
-          node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
-          node .claude/scripts/lib/__tests__/stats-table-id-lint.test.mjs
+          node packages/ops/src/blog/lint/__tests__/paren-number-lint.test.mjs
+          node packages/ops/src/blog/lint/__tests__/stats-table-id-lint.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
           node --test .claude/scripts/blog/__tests__/audit-chart-provenance-cli.test.mjs
-          node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
-          node --test .claude/scripts/lib/__tests__/article-factual-check.correlation.test.mjs
+          node packages/ops/src/blog/lint/__tests__/article-factual-check.value.test.mjs
+          node --test packages/ops/src/blog/lint/__tests__/article-factual-check.correlation.test.mjs
           node --test .claude/scripts/blog/__tests__/archive-blog-articles.test.mjs
           # topic-queue 型B の件数×件数の除外と、生成済みキューに件数×件数の組が無いこと
           node --test .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs
@@ -654,7 +654,7 @@ jobs:
           node --test .claude/scripts/lib/__tests__/quality-gate.claim-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/quality-gate.revise-patterns.test.mjs
           node --test .claude/scripts/lib/__tests__/quality-gate.q-numbers.test.mjs
-          node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
+          node --test packages/ops/src/blog/lint/__tests__/chart-provenance.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/stale-data-years.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/release-calendar.test.mjs

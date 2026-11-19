@@ -427,7 +427,7 @@ e-Stat のメタ情報の控え (`data/estat/meta/<ID>.json` の `statName`) と
 ↑ 紅茶のカードは前の節と重複、緑茶・コーヒーは直上の図と無関係。読者には「関係ないリンク」に見える。
 図に対応する 1 枚だけカードで残し、他は `あわせて見る: [緑茶消費支出額ランキング](/ranking/green-tea-consumption-expenditure) / [コーヒー消費支出額ランキング](/ranking/coffee-consumption-expenditure)` にする。
 
-検査 (決定的 lint・**blocker**): `.claude/scripts/lib/article-structure-lint.mjs` が
+検査 (決定的 lint・**blocker**): `packages/ops/src/blog/lint/article-structure-lint.mjs` が
 `dup-ranking-link` / `adjacent-cluster` / `no-figure-section` / `tail-cluster` を検出する
 (`offtopic-link` = 指標名が節の本文に出てこない、は warning)。配線先は `quality-gate.mjs`
 (pre-commit + publish-blog.yml で公開前ブロック) / `audit-article-structure.mjs` (バッチ) /

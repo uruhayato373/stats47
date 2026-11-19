@@ -647,7 +647,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/article-factual-check.mjs": {
+    "packages/ops/src/blog/lint/article-factual-check.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

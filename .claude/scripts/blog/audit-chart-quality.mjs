@@ -32,7 +32,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { inspectChartSourceManifest } from '../../../packages/ops/src/blog/lint/chart-provenance.mjs';
 import {
   lintSvgContent,
   extractInlineSvgs,

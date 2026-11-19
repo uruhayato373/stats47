@@ -32,12 +32,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 
 const METRICS_DIR = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
-  "../../..",
+  "../../../../..",
   datasetDir("metrics.definitions"),
 );
 

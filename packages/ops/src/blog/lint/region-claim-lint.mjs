@@ -29,9 +29,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { PREF_NAMES, normalizePref } from './article-factual-check.mjs';
-import { datasetPath } from '../../../config/datasets.mjs';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..', '..');
 
 /** どの図でも順位が取れない主張は照らさない。県の網羅が足りない図は端の判定に使わない */
 const MIN_TABLE_PREFS = 40;

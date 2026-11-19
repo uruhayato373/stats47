@@ -22,11 +22,11 @@ import {
   extractChartYears,
   extractTitleYears,
   lintMixedYearTitle,
-} from '../title-year-lint.mjs';
+} from '../../../../packages/ops/src/blog/lint/title-year-lint.mjs';
 import {
   lintExtremeBaseYear,
   lintHypernymMetricNames,
-} from '../metric-name-lint.mjs';
+} from '../../../../packages/ops/src/blog/lint/metric-name-lint.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const GATE = path.resolve(__dirname, '../../blog/quality-gate.mjs');

@@ -25,9 +25,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..", "..");
 const META_DIR = datasetDir("estat.meta");
 
 /** e-Stat の統計表 ID は 10 桁で、現行の表はすべて 000 で始まる。 */

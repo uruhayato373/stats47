@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { test } from 'node:test';
 
-import { CHART_SOURCE_KIND_SPECS } from '../chart-provenance.mjs';
+import { CHART_SOURCE_KIND_SPECS } from '../../../../packages/ops/src/blog/lint/chart-provenance.mjs';
 import { CHART_SOURCE_SCHEMA, chartSourceShapeErrors } from '../../../../packages/svg-builder/src/lint/chart-source-schema.mjs';
 import { lintImageTypeSvg } from '../../../../packages/svg-builder/src/lint/svg-lint.mjs';
 import { chartDataFilesOf, chartDataKey } from '../../blog/archive-blog-articles.mjs';

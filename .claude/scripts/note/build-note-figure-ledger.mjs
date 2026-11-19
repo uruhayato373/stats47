@@ -23,7 +23,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import dotenv from 'dotenv';
 import os from 'node:os';
-import { checkArticleFactual } from '../lib/article-factual-check.mjs';
+import { checkArticleFactual } from '../../../packages/ops/src/blog/lint/article-factual-check.mjs';
 import { R2_PRIVATE_BUCKET, R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetPath } from '../../../config/datasets.mjs';
 import { readArticleLedger } from '../../../packages/ops/src/note/article-ledger.mjs';
