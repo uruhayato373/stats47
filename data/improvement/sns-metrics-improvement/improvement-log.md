@@ -30,7 +30,7 @@ X / YouTube / Instagram / TikTok の投稿パフォーマンス（impressions / 
 
 - 時系列履歴: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`
 - 最新値（cache）: 投稿台帳 `.claude/state/sns/posts.json` のレコード列 `impressions / likes / reposts / replies / bookmarks / metrics_updated_at`（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）
-- 書き込みヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`
+- 書き込みヘルパ: `packages/ops/src/sns/sns-metrics-store.cjs`
 - 取得スキル: `/update-sns-metrics`
 
 ## 指標の意味（プラットフォーム別）
@@ -66,7 +66,7 @@ X / YouTube / Instagram / TikTok の投稿パフォーマンス（impressions / 
 
 - 旧 D1 テーブル `sns_metrics` を `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に移行
 - 理由: 「計測蓄積は .claude/ 配下のファイル」という記録先統一原則（.claude/rules/data-storage.md）を徹底。sns_metrics だけ D1 に残す例外を解消
-- 書き込みヘルパ `.claude/scripts/lib/sns-metrics-store.cjs` を新設（`/update-sns-metrics` の各プラットフォーム reference から require）
+- 書き込みヘルパ `packages/ops/src/sns/sns-metrics-store.cjs` を新設（`/update-sns-metrics` の各プラットフォーム reference から require）
 - 最新値キャッシュ用の `sns_posts.impressions / likes / reposts / replies / bookmarks / metrics_updated_at` カラムはそのまま D1 に残す（運用データ）
 - 既存 275 行のデータは日付別 CSV に移行済み
 - コミット: (本コミットで確定)

@@ -81,7 +81,7 @@ Node.js スクリプトをファイルに書き出して実行する。投稿台
 ```bash
 cat > /tmp/x-match-db.js << 'JSEOF'
 const fs = require("fs");
-const store = require("./.claude/scripts/lib/sns-posts-store.cjs");
+const store = require("./packages/ops/src/sns/sns-posts-store.cjs");
 
 (async () => {
 const tweets = JSON.parse(fs.readFileSync("/tmp/x-tweets-all.json", "utf8"));
@@ -105,7 +105,7 @@ function parseEng(label) {
 }
 
 // 時系列履歴は .claude/ 配下のファイルに蓄積（.claude/rules/data-storage.md）
-const snsStore = require("./.claude/scripts/lib/sns-metrics-store.cjs");
+const snsStore = require("./packages/ops/src/sns/sns-metrics-store.cjs");
 
 const fetchedAt = new Date().toISOString();
 // 最新値キャッシュは投稿台帳 posts.json のレコード列に updateById で書く

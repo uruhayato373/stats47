@@ -12,14 +12,14 @@ import { DOMAINS } from "../../../../config/paths.mjs";
 import { needsDocsCheck, selectNodeTests, selectVitestSources } from "../pre-push-tests.mjs";
 
 /** 守る意図: 2026-11-06 に data/business/domains.json を変えて check-domains のテストを走らせず、PR の CI で 12 分待った失敗を push 前に止める */
-const tests = [".claude/scripts/lib/__tests__/check-domains.test.cjs", ".claude/scripts/lib/__tests__/check-datasets.test.mjs", ".claude/scripts/lib/__tests__/sns-posts-store.test.cjs"];
+const tests = ["packages/ops/src/management/__tests__/check-domains.test.cjs", ".claude/scripts/lib/__tests__/check-datasets.test.mjs", "packages/ops/src/sns/__tests__/sns-posts-store.test.cjs"];
 
 test("設定ファイルの変更から、名前の重なるテストを選ぶ", () => {
   assert.deepEqual(selectNodeTests([DOMAINS], tests), [tests[0]]);
 });
 
 test("スクリプトの変更から、同じ名前のテストを選ぶ", () => {
-  assert.deepEqual(selectNodeTests([".claude/scripts/lib/sns-posts-store.cjs"], tests), [tests[2]]);
+  assert.deepEqual(selectNodeTests(["packages/ops/src/sns/sns-posts-store.cjs"], tests), [tests[2]]);
 });
 
 test("変更したテスト自身を選ぶ", () => {

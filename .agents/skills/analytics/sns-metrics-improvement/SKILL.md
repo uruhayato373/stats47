@@ -15,7 +15,7 @@ X / YouTube / Instagram の投稿メトリクス（impressions / views / likes /
 |---|---|
 | 週次メトリクス CSV | `snapshots/YYYY-MM-DD/metrics.csv` |
 | 改善施策ログ（append-only） | `data/improvement/sns-metrics-improvement/improvement-log.md` |
-| 書き込みスクリプト | `.claude/scripts/lib/sns-metrics-store.cjs` |
+| 書き込みスクリプト | `packages/ops/src/sns/sns-metrics-store.cjs` |
 
 ## スナップショット収集
 

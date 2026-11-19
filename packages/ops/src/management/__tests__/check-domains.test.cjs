@@ -2,11 +2,11 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const { DOMAINS } = require("../../../../config/paths.mjs");
+const { DOMAINS } = require("../../../../../config/paths.mjs");
 
 const { checkDomains, checkOwners, checkDocuments, documentDomain, frontmatterDomain } = require("../check-domains.cjs");
 
-const ROOT = path.resolve(__dirname, "../../../..");
+const ROOT = path.resolve(__dirname, "../../../../..");
 const always = { pageExists: () => true, pathExists: () => true };
 const kinds = { navKinds: { actions: "要対応", results: "成果" } };
 const domain = (over = {}) => ({ id: "plan", label: "計画", role: "決める", nav: [{ label: "今週", href: "/todo?f=weekly", kind: "actions" }], ...over });

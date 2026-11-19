@@ -12,7 +12,7 @@
 cat > /tmp/caption-backfill.js << JSEOF
 const fs = require("fs");
 const path = require("path");
-const store = require("${PROJECT_ROOT}/.claude/scripts/lib/sns-posts-store.cjs");
+const store = require("${PROJECT_ROOT}/packages/ops/src/sns/sns-posts-store.cjs");
 
 // caption が空のレコードを取得
 const nullCaptions = store.query((p) => !p.caption);

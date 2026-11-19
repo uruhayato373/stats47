@@ -29,7 +29,7 @@ import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const require = createRequire(import.meta.url);
-const store = require("../lib/sns-posts-store.cjs");
+const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
 const { R2_PUBLIC_BASE_URL: R2 } = require("../../../packages/types/mirror/site-config.cjs");
 
 const argv = process.argv.slice(2);

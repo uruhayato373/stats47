@@ -108,7 +108,7 @@ function buildOperations(week, asOf, pending) {
     }))
     : [];
   const { startDate, endDate } = isoWeekToDateRange(week);
-  const snsStore = createRequire(import.meta.url)("../lib/sns-metrics-store.cjs");
+  const snsStore = createRequire(import.meta.url)("../../../packages/ops/src/sns/sns-metrics-store.cjs");
   return {
     psi: psiRows ? summarizePsi(psiRows, asOf) : null,
     cloudflare: cfRows ? summarizeCloudflare(cfRows, evaluated, asOf) : null,

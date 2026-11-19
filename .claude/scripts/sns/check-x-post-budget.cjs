@@ -22,7 +22,7 @@
  */
 
 const path = require("node:path");
-const store = require(path.resolve(__dirname, "../lib/sns-posts-store.cjs"));
+const store = require(path.resolve(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
 const catalog = require(path.resolve(__dirname, "../lib/x-catalog.cjs"));
 
 /** post の JST カレンダー日付 ("YYYY-MM-DD")。scheduled_at(ISO) 優先、無ければ posted_at。 */

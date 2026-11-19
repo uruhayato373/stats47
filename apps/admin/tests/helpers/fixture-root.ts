@@ -7,7 +7,7 @@ import path from "node:path";
  * テスト用の隔離 project root を構築するヘルパ。
  *
  * project-root.ts は `<root>/package.json` の name === "stats47-monorepo" を検証し、
- * posts-store.ts は `<root>/.claude/scripts/lib/sns-posts-store.cjs` を実行時 require する。
+ * posts-store.ts は `<root>/packages/ops/src/sns/sns-posts-store.cjs` を実行時 require する。
  * → fixture root にこの 2 つを用意すれば、全ての読み書きが fixture 配下に閉じ、
  *   実 SSOT (data/sns/posts.json 等) には一切触れない。
  *
@@ -23,7 +23,7 @@ import path from "node:path";
 // 実物の store をコピーする (fixture の posts.json に読み書きさせる)。
 const REAL_STORE = path.resolve(
   __dirname,
-  "../../../../.claude/scripts/lib/sns-posts-store.cjs",
+  "../../../../packages/ops/src/sns/sns-posts-store.cjs",
 );
 const REAL_PARSE_CORE = path.resolve(
   __dirname,
@@ -81,7 +81,8 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
   );
 
   // 2) 実物 sns-posts-store.cjs をコピー
-  const libDir = path.join(root, ".claude/scripts/lib");
+  // 2026-11-19 に packages/ops へ移した。管理画面は projectRoot() からこの場所を読む
+  const libDir = path.join(root, "packages/ops/src/sns");
   fs.mkdirSync(libDir, { recursive: true });
   fs.copyFileSync(REAL_STORE, path.join(libDir, "sns-posts-store.cjs"));
   const configDir = path.join(root, "config");

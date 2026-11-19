@@ -24,7 +24,7 @@
 
 const path = require("node:path");
 const { chromium } = require("playwright");
-const store = require(path.join(__dirname, "../lib/sns-posts-store.cjs"));
+const store = require(path.join(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
 const core = require(path.join(__dirname, "../lib/sns-posted-core.cjs"));
 const fs = require("node:fs");
 

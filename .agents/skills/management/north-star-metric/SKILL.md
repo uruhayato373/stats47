@@ -70,7 +70,7 @@ stats47 はコンテンツメディアとして主に **Attention ゲーム** �
 - 公開記事数: `curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'`
 - ランキング数: `curl -s "https://storage.stats47.jp/app/ranking-items/all.json" | jq '.count'`
 - SNS 指標（最新値）: 投稿台帳 `data/sns/posts.json` から集計（旧 D1 sns_posts は廃止）:
-  `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={impressions:0,likes:0};a.impressions+=p.impressions||0;a.likes+=p.likes||0}console.log(JSON.stringify(acc,null,2))'`
+  `node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={impressions:0,likes:0};a.impressions+=p.impressions||0;a.likes+=p.likes||0}console.log(JSON.stringify(acc,null,2))'`
 - SNS 指標（時系列）: `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 

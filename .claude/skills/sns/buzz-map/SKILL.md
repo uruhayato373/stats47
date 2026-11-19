@@ -77,7 +77,7 @@ ALLOW_LOCAL_R2_WRITE=1 npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts -
 curl -s -o /dev/null -w "%{http_code}\n" https://storage.stats47.jp/sns/buzz-map/<id>/instagram/stills/slide-1-cover-1080x1350.png
 ```
 
-- draft 登録は `.claude/scripts/lib/sns-posts-store.cjs` の `insert()`（platform=instagram / domain=buzz-map / content_key=<id> / media_path=R2キー / caption / `template=buzzmap-<型>` / status=draft）。**予約/投稿はせず draft 止まり**が既定（投稿タイミングは instagram-strategist / 人間が判断）。
+- draft 登録は `packages/ops/src/sns/sns-posts-store.cjs` の `insert()`（platform=instagram / domain=buzz-map / content_key=<id> / media_path=R2キー / caption / `template=buzzmap-<型>` / status=draft）。**予約/投稿はせず draft 止まり**が既定（投稿タイミングは instagram-strategist / 人間が判断）。
 - リールの content-type が `application/octet-stream` になる場合、IG Reels API が弾く可能性があるため投稿前に確認する。
 
 ### spec 自動生成（step 1 のデータ接地）

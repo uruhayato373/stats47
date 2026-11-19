@@ -11,7 +11,7 @@
  */
 
 const path = require("node:path");
-const store = require(path.resolve(__dirname, "../lib/sns-posts-store.cjs"));
+const store = require(path.resolve(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
 
 function jstDate(iso) {
   const d = new Date(iso);

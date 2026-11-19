@@ -24,7 +24,7 @@ type CheckDomainsLib = {
 let cachedLib: CheckDomainsLib | null = null;
 function lib(): CheckDomainsLib {
   if (cachedLib) return cachedLib;
-  const abs = path.join(projectRoot(), ".claude/scripts/lib/check-domains.cjs");
+  const abs = path.join(projectRoot(), "packages/ops/src/management/check-domains.cjs");
   const nativeRequire = eval("require") as NodeRequire;
   cachedLib = nativeRequire(abs) as CheckDomainsLib;
   return cachedLib;

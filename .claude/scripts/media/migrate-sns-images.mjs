@@ -9,7 +9,7 @@ import { resolveDriveRoot,driveAbsolutePath } from '../../../packages/ops/src/sn
 import { createR2Store,fetchCoverSource } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { R2_BUCKET,R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetPath } from '../../../config/datasets.mjs';
-const require=createRequire(import.meta.url),store=require('../lib/sns-posts-store.cjs');
+const require=createRequire(import.meta.url),store=require('../../../packages/ops/src/sns/sns-posts-store.cjs');
 const args=process.argv.slice(2);
 if(args.some(a=>!['--apply','--all','--ids','--verify-existing'].includes(a)&&args[args.indexOf(a)-1]!=='--ids'))throw Error('Unknown argument');
 const ids=args.includes('--ids')?args[args.indexOf('--ids')+1].split(',').map(Number):null;

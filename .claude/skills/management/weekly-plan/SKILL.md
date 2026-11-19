@@ -43,7 +43,7 @@ primary_agent: strategy-advisor
 調査項目:
 - 投稿台帳 `data/sns/posts.json` からステータス別集計 (完全DBレス。旧 D1 sns_posts は廃止):
   ```bash
-  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
+  node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
 - .local/r2/blog/ 配下の記事数（公開済み / 下書き）
 - ブログ記事の未実行企画（`ls docs/22_YouTube企画/backlog/ docs/30_note記事企画/backlog/ 2>/dev/null | head -20` 件数）
@@ -64,14 +64,14 @@ primary_agent: strategy-advisor
 
 - SNS 投稿実績（投稿台帳 `data/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
   ```bash
-  node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
+  node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
   - **SNS 週次運用の入口は `/sns-weekly-plan`**（先週計測→題材→IG/X 生成予約→消化チェック）。正典 `.claude/rules/sns-content-standards.md`
 
 - SNS パフォーマンス
   - **最新値**: 投稿台帳 posts.json の impressions/likes/replies キャッシュから集計（`/update-sns-metrics` 実行後に更新済み）
     ```bash
-    node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,replies:0};a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.replies+=p.replies||0}console.log(JSON.stringify(acc,null,2))'
+    node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,replies:0};a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.replies+=p.replies||0}console.log(JSON.stringify(acc,null,2))'
     ```
   - **時系列履歴**: `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
 

@@ -88,7 +88,7 @@ PORT=5000 npm run admin    # ポート変更
 - 実装: `apps/admin/` (Next.js App Router。app/=18画面+API、lib/content-operations/=正規化・監査、README に構成・ガード詳細)
 - 共有 collector: `packages/ops/src/media/gallery-collectors.mjs` / SVG 分類: `packages/ops/src/media/svg-classify.mjs`
 - CI 静的ギャラリー (collector 共用): `.claude/scripts/ogp/build-image-gallery.mjs` (`--audit` 週次ゲート)
-- 台帳ストア (admin外のwriter用): `.claude/scripts/lib/sns-posts-store.cjs`
+- 台帳ストア (admin外のwriter用): `packages/ops/src/sns/sns-posts-store.cjs`
 - R2 削除: `packages/r2-storage/src/scripts/cleanup-posted-sns-videos.ts` + `.github/workflows/cleanup-r2-sns-videos.yml`
 - X 投稿: `.claude/skills/sns/publish-x/` / IG cron: `.claude/scripts/instagram/post-from-schedule.cjs`
 

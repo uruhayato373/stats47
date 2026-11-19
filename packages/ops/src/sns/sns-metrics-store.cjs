@@ -12,7 +12,7 @@
  * CommonJS で提供するのは、/tmp/*.js 経由で require() される既存パターンとの互換のため。
  *
  * 使い方（/tmp/xxx.js の中から）:
- *   const store = require(`${PROJECT_ROOT}/.claude/scripts/lib/sns-metrics-store.cjs`);
+ *   const store = require(`${PROJECT_ROOT}/packages/ops/src/sns/sns-metrics-store.cjs`);
  *   store.upsertMetric({
  *     sns_post_id: 42, platform: "x", domain: "ranking", content_key: "pop-density",
  *     fetched_at: new Date().toISOString(),
@@ -25,7 +25,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const { datasetDir } = require("../../../config/datasets.mjs");
+const { datasetDir } = require("../../../../config/datasets.mjs");
 
 const REPO_ROOT = process.env.SNS_METRICS_REPO_ROOT || process.cwd();
 const BASE_DIR = path.join(

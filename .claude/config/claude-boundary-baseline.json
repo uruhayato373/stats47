@@ -1,0 +1,305 @@
+{
+  "policy": "縮小専用。apps・packages・config は .claude を読まない。例外は管理画面の本番コードが運用の状態をデータとして読むものだけ",
+  "files": {
+    "apps/admin/app/ops/auth/page.tsx": {
+      "count": 2,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "apps/admin/app/page.tsx": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "apps/admin/app/strategy/reviews/review-parts.tsx": {
+      "count": 1,
+      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/app/todo/page.tsx": {
+      "count": 2,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "apps/admin/lib/content-operations/load.ts": {
+      "count": 2,
+      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/lib/server/agent-models.ts": {
+      "count": 5,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "apps/admin/lib/server/auth-credentials.ts": {
+      "count": 1,
+      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/lib/server/dashboard.ts": {
+      "count": 2,
+      "reason": "管理画面が .claude/scripts の部品を実行時に読む。部品を packages/ops へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/lib/server/domains.ts": {
+      "count": 2,
+      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/lib/server/mcp-status.ts": {
+      "count": 7,
+      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/lib/server/media-unification.ts": {
+      "count": 3,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "apps/admin/lib/server/ops-ledger.ts": {
+      "count": 2,
+      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/lib/server/shared-policy.ts": {
+      "count": 1,
+      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/lib/server/strategy-lanes.ts": {
+      "count": 1,
+      "reason": "管理画面が .claude/scripts の部品を実行時に読む。部品を packages/ops へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/tests/helpers/fixture-root.ts": {
+      "count": 3,
+      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
+    },
+    "apps/admin/tests/unit/agent-models.test.ts": {
+      "count": 7,
+      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
+    },
+    "apps/admin/tests/unit/business-plan.test.ts": {
+      "count": 3,
+      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
+    },
+    "apps/admin/tests/unit/domains.test.ts": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "apps/admin/tests/unit/materialize-note-cover.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/tests/unit/mcp-status.test.ts": {
+      "count": 11,
+      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
+    },
+    "apps/admin/tests/unit/ops-pages.test.ts": {
+      "count": 1,
+      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
+    },
+    "apps/admin/tests/unit/template-regional-boxplot.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/tests/unit/template-relationship-scatter.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/admin/tests/unit/todo.test.ts": {
+      "count": 1,
+      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
+    },
+    "apps/web/scripts/export-yoy-timeseries.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/web/scripts/lib/__tests__/blog-background-gate.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/web/scripts/lib/__tests__/image-pipeline-source-policy.test.ts": {
+      "count": 2,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/web/scripts/lib/__tests__/product-analysis-release.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/web/scripts/lib/internal-link-lint.mjs": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "apps/web/src/config/__tests__/gone-blog-publication.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/web/src/features/survey/survey-editorial-validator.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "apps/web/vitest.config.mts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "config/datasets.mjs": {
+      "count": 136,
+      "reason": "置き場の台帳 (カタログ)。.claude の置き場を宣言する唯一の場所で、ほかのコードは id で引く。恒久の例外"
+    },
+    "packages/ai-content/src/scripts/generate-blog-article.ts": {
+      "count": 4,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/ai-content/src/scripts/generate-parallel.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/ai-content/src/scripts/write-blog-batch.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/ai-content/src/scripts/write-blog-headless.ts": {
+      "count": 4,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/area-profile/src/highlights/__tests__/area-highlights-contract.test.ts": {
+      "count": 2,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/area/scripts/check-area-year-entrypoint.mjs": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/area/src/utils/__tests__/prefecture-short-name-single-impl.test.ts": {
+      "count": 3,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/data-configs/scripts/__tests__/r2-entrypoint.test.mjs": {
+      "count": 2,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/data-configs/scripts/build-estat-availability.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/data-configs/scripts/check-estat-entrypoint.mjs": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/data-configs/scripts/evidence/japan-zue.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/data-configs/scripts/generate-theme-dependency-mirror.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/data-configs/scripts/update-theme-catalog-baseline.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/data-configs/scripts/validate-business-plan.ts": {
+      "count": 2,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/data-configs/src/__tests__/shape-gate.test.ts": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/data-configs/src/theme-catalog/__tests__/baseline-collector.test.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/data-configs/src/theme-catalog/__tests__/chart-dependencies.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/data-configs/src/theme-catalog/__tests__/chart-description.test.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/data-configs/src/theme-catalog/__tests__/series-ref-migration-contract.test.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/data-configs/src/theme-catalog/__tests__/theme-dependency-mirror.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/data-configs/src/theme-catalog/__tests__/theme-metric-content.test.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/data-configs/vitest.config.mts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/gis/src/map/__tests__/geometry.test.ts": {
+      "count": 2,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/ops/src/ci/__tests__/plan-deploy-scope.test.mjs": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/ops/src/management/backlog-lib.cjs": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/ops/src/management/check-domains.cjs": {
+      "count": 3,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/ops/src/management/review-cadence.mjs": {
+      "count": 6,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/ops/src/measurement/credential-store.mjs": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/ops/src/page-quality/lib/thresholds.ts": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/ops/src/source-vault/source-vault.mjs": {
+      "count": 2,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/product-factory/src/channels/kindle/kdp-publishing-policy.ts": {
+      "count": 1,
+      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
+    },
+    "packages/product-factory/src/channels/note/build/build-revision.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/product-factory/tests/dataset-registries.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/r2-storage/scripts/check-r2-entrypoint.mjs": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/r2-storage/src/lib/operations/__tests__/r2-reader-contracts.test.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/r2-storage/src/scripts/__tests__/r2-key-classes.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/r2-storage/src/scripts/r2-key-classes.ts": {
+      "count": 6,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/r2-storage/vitest.config.mts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/ranking/src/scripts/audit-survey-taxonomy.ts": {
+      "count": 1,
+      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/ranking/src/survey/__tests__/geo-article-source-contract.test.ts": {
+      "count": 1,
+      "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
+    },
+    "packages/ranking/src/survey/__tests__/licensed-retirement-ratchet.test.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    },
+    "packages/ranking/src/survey/__tests__/theme-redesign-ratchet.test.ts": {
+      "count": 1,
+      "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
+    }
+  }
+}

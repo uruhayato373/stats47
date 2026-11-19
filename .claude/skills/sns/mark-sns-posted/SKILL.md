@@ -67,7 +67,7 @@ contentType に応じたディレクトリを確認する:
 記録後 `post-log.md` が自動再生成されるので、内容を目視確認すること。
 
 ```js
-const store = require('.claude/scripts/lib/sns-posts-store.cjs');
+const store = require('packages/ops/src/sns/sns-posts-store.cjs');
 const now = new Date().toISOString();
 
 // 既存レコードがなければ新規 INSERT
@@ -130,5 +130,5 @@ head -20 data/sns/post-log.md
 
 - SSOT: `data/sns/posts.json`
 - 視覚確認: `data/sns/post-log.md`（自動生成）
-- ストア: `.claude/scripts/lib/sns-posts-store.cjs`
+- ストア: `packages/ops/src/sns/sns-posts-store.cjs`
 - R2 削除: `packages/r2-storage/src/scripts/delete-r2-prefix.ts`

@@ -44,7 +44,7 @@ subagent は起動しない:
 #### Track B: コンテンツ資産
 ```
 - 投稿台帳 `data/sns/posts.json` から投稿状況を集計（完全DBレス。旧 D1 sns_posts は廃止）:
-  `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'`
+  `node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'`
 - .local/r2/sns/ の生成済みコンテンツ
 - ブログ記事の企画状況（`.claude/todo/backlog.md` と `topic-queue.json`）
 ```

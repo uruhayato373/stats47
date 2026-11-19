@@ -35,7 +35,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { execFileSync } from "child_process";
 // 完全DBレス (doc12 Phase E): sns_posts は共有ストア (data/sns/posts.json) 経由で読み書きする。
-import store from "../../../scripts/lib/sns-posts-store.cjs";
+import store from "../../../../packages/ops/src/sns/sns-posts-store.cjs";
 import directLedger from "../../../scripts/sns/lib/x-direct-ledger.cjs";
 
 const { planDirectLedgerWrite } = directLedger;

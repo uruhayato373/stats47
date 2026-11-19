@@ -19,8 +19,8 @@ import { datasetPath } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const require = createRequire(import.meta.url);
-const store = require("../lib/sns-posts-store.cjs");
-const metricsStore = require("../lib/sns-metrics-store.cjs");
+const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
+const metricsStore = require("../../../packages/ops/src/sns/sns-metrics-store.cjs");
 
 const args = new Set(process.argv.slice(2));
 

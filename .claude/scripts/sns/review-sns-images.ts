@@ -19,7 +19,7 @@ import { basename, join, resolve } from "node:path";
 
 import sharp from "sharp";
 
-import store from "../lib/sns-posts-store.cjs";
+import store from "../../../packages/ops/src/sns/sns-posts-store.cjs";
 import {
   buildSnsReport,
   itemsFromIgSchedule,

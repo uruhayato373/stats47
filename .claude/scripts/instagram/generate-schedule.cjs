@@ -22,7 +22,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const store = require("../lib/sns-posts-store.cjs");
+const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");

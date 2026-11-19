@@ -56,7 +56,7 @@ done
 投稿台帳 `posts.json` から直近2件の quote_rt の `content_key` を取得し、その category_key と同じ候補を避ける（完全DBレス。旧 D1 sns_posts は廃止）:
 
 ```bash
-node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");
   const recent=s.query(p=>p.post_type==="quote_rt"&&p.platform==="x")
     .sort((a,b)=>(b.posted_at||"").localeCompare(a.posted_at||"")).slice(0,2)
     .map(p=>p.content_key);
@@ -70,7 +70,7 @@ node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
 - **同一 content_key の7日制約**: 同じ ranking_key は7日以内に再利用しない
 
 ```bash
-node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
+node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");
   const cut=new Date(Date.now()-7*864e5).toISOString();
   console.log(JSON.stringify([...new Set(s.query(p=>p.post_type==="quote_rt"&&(p.posted_at||"")>cut).map(p=>p.content_key))]))'
 ```

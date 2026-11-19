@@ -11,7 +11,7 @@ co_agents: [x-strategist, instagram-strategist]
 各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `data/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、X は browser-use CLI を使用する。YouTube pilot は公開14日後に Studio から views / 30秒維持率 / 平均視聴率 / 平均視聴時間を手動取得し、GA4 の `utm_source=youtube` と合わせて EXP-006 に記録する。pilot 成功までは YouTube OAuth/API を再構築しない。
 
 **記録先の統一原則（.claude/rules/data-storage.md）**:
-- 時系列履歴 → `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
+- 時系列履歴 → `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `packages/ops/src/sns/sns-metrics-store.cjs`）
 - 運用データ（最新値キャッシュ） → 投稿台帳 `data/sns/posts.json` の cache カラム（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）
 - 旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み
 
@@ -38,7 +38,7 @@ co_agents: [x-strategist, instagram-strategist]
 ```bash
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
 PROJECT_ROOT="$(pwd)"
-# 投稿台帳は完全DBレス: 読み書きは `.claude/scripts/lib/sns-posts-store.cjs`（posts.json）経由。旧 D1/SQLite は使わない
+# 投稿台帳は完全DBレス: 読み書きは `packages/ops/src/sns/sns-posts-store.cjs`（posts.json）経由。旧 D1/SQLite は使わない
 
 # 開始時: 残存プロセスをクリーンアップ
 bash .claude/scripts/lib/cleanup-browser.sh --force 2>/dev/null
@@ -48,7 +48,7 @@ bash .claude/scripts/lib/cleanup-browser.sh --force 2>/dev/null
 - `browser-use` コマンドは毎回フルで記述する（`$BU` 変数展開しない。zsh が解釈に失敗する）
 - JS はファイルに書き出してから `eval "$(cat /tmp/xxx.js)"` で渡す。インラインの複雑な JS はクォート問題で壊れる
 - Node.js スクリプトも `/tmp/*.js` にファイル書き出してから `node /tmp/xxx.js` で実行する
-- **投稿台帳ストア（`sns-posts-store.cjs`）は `PROJECT_ROOT` からの相対 `require("./.claude/scripts/lib/sns-posts-store.cjs")` で読む**（リポジトリルートで実行）。`/tmp/*.js` の heredoc で絶対パスを使う場合は `require("${PROJECT_ROOT}/.claude/scripts/lib/sns-posts-store.cjs")`
+- **投稿台帳ストア（`sns-posts-store.cjs`）は `PROJECT_ROOT` からの相対 `require("./packages/ops/src/sns/sns-posts-store.cjs")` で読む**（リポジトリルートで実行）。`/tmp/*.js` の heredoc で絶対パスを使う場合は `require("${PROJECT_ROOT}/packages/ops/src/sns/sns-posts-store.cjs")`
 
 ## マッチング優先順位（全プラットフォーム共通）
 
@@ -96,8 +96,8 @@ bash .claude/scripts/lib/cleanup-browser.sh --force 2>/dev/null
 
 ```bash
 node -e '
-const posts = require("./.claude/scripts/lib/sns-posts-store.cjs");
-const snsStore = require("./.claude/scripts/lib/sns-metrics-store.cjs");
+const posts = require("./packages/ops/src/sns/sns-posts-store.cjs");
+const snsStore = require("./packages/ops/src/sns/sns-metrics-store.cjs");
 const all = posts.loadAll();
 const hourAgo = new Date(Date.now() - 3600e3).toISOString();
 const acc = {};
@@ -138,8 +138,8 @@ bash .claude/scripts/lib/cleanup-browser.sh 2>/dev/null
 - `references/phase0-caption-backfill.md` — Phase 0 Caption Backfill スクリプト
 - `references/platform-x.md` — X (Twitter) メトリクス取得手順（X-1〜X-5）
 - `references/platform-instagram.md` — Instagram メトリクス取得手順（IG-1〜IG-5）
-- `.claude/scripts/lib/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
+- `packages/ops/src/sns/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット蓄積先 + improvement-log
-- `data/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs`）— 投稿台帳 SSOT。最新値キャッシュの書込先（完全DBレス。旧 D1 sns_posts は廃止）
+- `data/sns/posts.json`（`packages/ops/src/sns/sns-posts-store.cjs`）— 投稿台帳 SSOT。最新値キャッシュの書込先（完全DBレス。旧 D1 sns_posts は廃止）
 - `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）
 - `.claude/skills/sns/find-quote-rt/SKILL.md` — X タイムライン DOM 抽出パターンの原典

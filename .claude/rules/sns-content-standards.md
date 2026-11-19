@@ -547,7 +547,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 ## 6. 関連
 
 - 人間向け戦略: `docs/10_SNS戦略/01_SNSコンテンツ設計.md` / `05_SNSプロフィール.md`
-- 投稿台帳ストア: `.claude/scripts/lib/sns-posts-store.cjs`
+- 投稿台帳ストア: `packages/ops/src/sns/sns-posts-store.cjs`
 - **X 量産カタログ API**: `.claude/scripts/lib/x-catalog.cjs` (台帳 `sns.x-catalog` の quota / templates / affinity / imageKinds を読む)
 - **X 量産スキル**: `.claude/skills/sns/post-x-batch/` (候補選定 `select-candidates.cjs` / lint `lint-x-captions.cjs` / 登録 `register-drafts.cjs`)
 - **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`

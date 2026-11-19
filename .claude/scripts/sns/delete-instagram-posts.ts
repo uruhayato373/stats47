@@ -12,7 +12,7 @@
  */
 import * as path from "path";
 import { chromium, type Page } from "playwright";
-import store from "../lib/sns-posts-store.cjs";
+import store from "../../../packages/ops/src/sns/sns-posts-store.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 // ログインプロファイルはメインチェックアウト固定で共有する（worktree 実行時の再ログイン防止）。

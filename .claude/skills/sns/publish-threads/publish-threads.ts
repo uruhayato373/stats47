@@ -37,7 +37,7 @@ import { execFileSync } from "node:child_process";
 
 const require = createRequire(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../../../..");
-const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
+const store = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"));
 
 const PROFILE_DIR = path.join(PROJECT_ROOT, ".local/playwright-threads-profile");
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-threads-debug");

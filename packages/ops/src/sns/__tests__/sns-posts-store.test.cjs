@@ -72,16 +72,16 @@ const {
 /** 実物の store と config を一時 root へ写し、seed した台帳で動かす (本物の台帳を書かない) */
 function storeInTempRoot(seed) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'sns-store-'));
-  const repo = path.resolve(__dirname, '../../../..');
-  fs.mkdirSync(path.join(root, '.claude/scripts/lib'), { recursive: true });
-  fs.copyFileSync(path.join(repo, '.claude/scripts/lib/sns-posts-store.cjs'), path.join(root, '.claude/scripts/lib/sns-posts-store.cjs'));
+  const repo = path.resolve(__dirname, '../../../../..');
+  fs.mkdirSync(path.join(root, 'packages/ops/src/sns'), { recursive: true });
+  fs.copyFileSync(path.join(repo, 'packages/ops/src/sns/sns-posts-store.cjs'), path.join(root, 'packages/ops/src/sns/sns-posts-store.cjs'));
   fs.mkdirSync(path.join(root, 'config'), { recursive: true });
   for (const f of ['datasets.mjs', 'paths.mjs']) fs.copyFileSync(path.join(repo, 'config', f), path.join(root, 'config', f));
   fs.mkdirSync(path.join(root, 'data/sns'), { recursive: true });
   fs.mkdirSync(path.join(root, 'data/content'), { recursive: true });
   fs.writeFileSync(path.join(root, 'data/content/content-types.json'), JSON.stringify({ rules: { snsDomains: { ranking: 'type:reference' } }, assignments: [] }));
   fs.writeFileSync(path.join(root, 'data/sns/posts.json'), JSON.stringify(seed));
-  const store = require(path.join(root, '.claude/scripts/lib/sns-posts-store.cjs'));
+  const store = require(path.join(root, 'packages/ops/src/sns/sns-posts-store.cjs'));
   const read = () => JSON.parse(fs.readFileSync(path.join(root, 'data/sns/posts.json'), 'utf8'));
   return { store, read };
 }

@@ -134,7 +134,7 @@ jobs:
         # 新しいchecker自身のmutation testと、週次監査がIssue更新後に失敗を伝播する契約も固定する。
         run: |
           node --test \
-            .claude/scripts/lib/__tests__/check-domains.test.cjs \
+            packages/ops/src/management/__tests__/check-domains.test.cjs \
             .claude/scripts/lib/__tests__/check-datasets.test.mjs \
             .claude/scripts/sns/__tests__/x-direct-ledger.test.cjs \
             .claude/scripts/lib/__tests__/x-catalog.test.cjs \
@@ -929,6 +929,8 @@ jobs:
           node packages/r2-storage/scripts/check-r2-entrypoint.mjs
           node --import tsx packages/data-configs/scripts/generate-year-code-mirror.ts --check
           node packages/area/scripts/check-area-year-entrypoint.mjs
+          # apps・packages・config が .claude を読まない (本番コードもテストも。例外は管理画面が運用の状態をデータとして読むものだけ。縮小専用)
+          node .claude/scripts/lib/check-claude-boundary.mjs
         continue-on-error: false
 
       - name: 🎨 Colorscheme Policy Gate

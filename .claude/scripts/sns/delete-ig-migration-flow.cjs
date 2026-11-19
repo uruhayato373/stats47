@@ -15,7 +15,7 @@
  */
 
 const path = require("path");
-const store = require("../lib/sns-posts-store.cjs");
+const store = require("../../../packages/ops/src/sns/sns-posts-store.cjs");
 require("dotenv").config({ path: path.join(__dirname, "../../../.env.local") });
 
 const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
