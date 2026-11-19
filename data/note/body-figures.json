@@ -6,13 +6,12 @@
     "byValueCheck": {
       "no-data-figure": 261,
       "unmapped": 1,
-      "match": 40,
-      "body-match": 117,
+      "match": 41,
+      "body-match": 118,
       "year-gone": 1,
       "no-year": 1,
       "product-sample": 2,
-      "product-untyped": 14,
-      "body-differs": 2
+      "product-untyped": 14
     }
   },
   "articles": [
@@ -7697,11 +7696,7 @@
           "kind": "ranking-boxplot"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "TITLE_EXTREME_MISMATCH: 題名「東京…最下位」 → data の最下位は 愛知"
-      ]
+      "valueCheck": "match"
     },
     {
       "key": "recovered-n51f946877627",
@@ -9579,11 +9574,7 @@
           "kind": "ranking-bar"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 1,
-      "bodyIssueSample": [
-        "TITLE_EXTREME_MISMATCH: 題名「青森…最下位」 → data の最下位は 東京・三重・大分"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "sunshine-solar-housing",
