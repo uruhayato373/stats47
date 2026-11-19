@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { datasetDir } from "../../../../config/datasets.mjs";
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
 /**
@@ -225,7 +226,7 @@ describe("ops-ledger server", () => {
             { workflow: "warn.yml", unhealthy: true, failureStreak: 2, everSucceeded: true },
           ],
         }),
-        ".claude/memory/alpha.md":
+        [`${datasetDir("agent.memory")}/alpha.md`]:
           "---\nname: alpha\ndescription: A の記憶\nmetadata:\n  type: project\n---\n\n" + "本文".repeat(5000),
       },
     });

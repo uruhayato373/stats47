@@ -3,6 +3,7 @@ import path from "node:path";
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { datasetDir } from "../../../../config/datasets.mjs";
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
 /**
@@ -11,6 +12,9 @@ import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
  *   skill 側の表示も追従することを固定する (写しを持たない契約)。
  * ★CI の --model は Claude 以外 (gemini-api) を拾わない。
  */
+
+const AGENTS = datasetDir("agent.definitions");
+const SKILLS = datasetDir("agent.skills");
 
 let root: string | null = null;
 afterEach(() => {
@@ -74,11 +78,11 @@ describe("parseCiRuns", async () => {
 describe("agentModelCatalog", () => {
   it("skill の担当モデルは primary_agent の frontmatter から引き、担当数を数える", async () => {
     root = makeFixtureRoot();
-    write(".claude/agents/writer.md", "---\nname: writer\ndescription: 書く。詳細\nmodel: opus\n---\n");
-    write(".claude/agents/README.md", "# index");
-    write(".claude/skills/blog/publish/SKILL.md", "---\nname: publish\ndomain: blog\ndescription: d\nprimary_agent: writer\nco_agents: [ghost]\n---\n");
-    write(".claude/skills/blog/publish/reference/SKILL.md", "---\nname: not-a-skill\n---\n");
-    write(".claude/skills/misc/orphan/SKILL.md", "---\nname: orphan\ndescription: d\nprimary_agent: missing\n---\n");
+    write(`${AGENTS}/writer.md`, "---\nname: writer\ndescription: 書く。詳細\nmodel: opus\n---\n");
+    write(`${AGENTS}/README.md`, "# index");
+    write(`${SKILLS}/blog/publish/SKILL.md`, "---\nname: publish\ndomain: blog\ndescription: d\nprimary_agent: writer\nco_agents: [ghost]\n---\n");
+    write(`${SKILLS}/blog/publish/reference/SKILL.md`, "---\nname: not-a-skill\n---\n");
+    write(`${SKILLS}/misc/orphan/SKILL.md`, "---\nname: orphan\ndescription: d\nprimary_agent: missing\n---\n");
 
     const { agentModelCatalog } = await load();
     const v = agentModelCatalog();
@@ -95,10 +99,10 @@ describe("agentModelCatalog", () => {
 
   it("frontmatter の無いファイルは画面を落とさず errors に載せる", async () => {
     root = makeFixtureRoot();
-    write(".claude/agents/broken.md", "# no frontmatter");
+    write(`${AGENTS}/broken.md`, "# no frontmatter");
     const { agentModelCatalog } = await load();
     const v = agentModelCatalog();
     if ("error" in v) throw new Error(v.error);
-    expect(v.errors).toEqual([{ file: ".claude/agents/broken.md", error: "frontmatter が無い" }]);
+    expect(v.errors).toEqual([{ file: `${AGENTS}/broken.md`, error: "frontmatter が無い" }]);
   });
 });

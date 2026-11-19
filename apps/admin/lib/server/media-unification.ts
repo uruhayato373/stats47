@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { datasetDir } from '../../../../config/datasets.mjs';
 import { projectRoot } from './project-root';
 
 /**
@@ -15,8 +16,8 @@ const DRAWS_TILE = /renderTileMapBody|renderAll47TileSvg|TileGridMapScene|TILE_L
 const THIS_FILE = 'apps/admin/lib/server/media-unification.ts';
 const LEDGER_COLOR = /resolveTileScale|resolveMetricColor|resolveColorEncoding|metricPresentation|applyColorPolicy|joinColorPolicy/;
 const THEME = /chart-theme|COLOR_SCHEMES|CHART_THEMES/;
-const MAP_ROOTS = ['apps/remotion/src', 'apps/admin/lib', '.claude/scripts/note', '.claude/scripts/sns', 'packages/migration-flow/src', 'packages/station-passengers/src', 'packages/visualization/src/server'];
-const PIPELINES = ['apps/remotion/scripts', '.claude/scripts/sns'];
+const MAP_ROOTS = ['apps/remotion/src', 'apps/admin/lib', `${datasetDir('agent.scripts')}/note`, `${datasetDir('agent.scripts')}/sns`, 'packages/migration-flow/src', 'packages/station-passengers/src', 'packages/visualization/src/server'];
+const PIPELINES = ['apps/remotion/scripts', `${datasetDir('agent.scripts')}/sns`];
 const SOURCE = /\.(ts|tsx|mjs)$/;
 const NOT_SOURCE = /__tests__|\.test\.|\.d\.m?ts$/;
 const STILL_FRAMES = '1';

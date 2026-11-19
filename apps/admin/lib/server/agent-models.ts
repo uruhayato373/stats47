@@ -3,6 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { projectRoot } from "./project-root";
 import { wrap } from "./state-io";
 
@@ -64,7 +65,7 @@ export interface UsageReport {
   proposals: Array<{ id: string; kind: string; agent: string; current: string; suggested: string; costUsd: number | null; savingUsd?: number | null; runs: number; evidence: string; canary?: string; next: string }>;
 }
 
-export const USAGE_REPORT = ".claude/state/metrics/model-usage/latest.json";
+export const USAGE_REPORT = `${datasetDir("claude.model-usage")}/latest.json`;
 
 export interface AgentModelCatalog {
   usage: UsageReport | null;
@@ -75,7 +76,7 @@ export interface AgentModelCatalog {
   errors: Array<{ file: string; error: string }>;
 }
 
-export const AGENT_MODEL_SOURCES = ".claude/agents/*.md + .claude/skills/**/SKILL.md + .github/workflows/*.yml + .claude/config/backlog-routing-policy.json";
+export const AGENT_MODEL_SOURCES = `${datasetDir("agent.definitions")}/*.md + ${datasetDir("agent.skills")}/**/SKILL.md + .github/workflows/*.yml + ${datasetPath("agent.backlog-routing-policy")}`;
 
 type Frontmatter = Record<string, string | string[]>;
 
@@ -150,7 +151,7 @@ export function agentModelCatalog() {
     const errors: AgentModelCatalog["errors"] = [];
     const rel = (p: string) => path.relative(root, p);
 
-    const agentsDir = path.join(root, ".claude/agents");
+    const agentsDir = path.join(root, datasetDir("agent.definitions"));
     const agents: AgentEntry[] = [];
     for (const f of fs.existsSync(agentsDir) ? fs.readdirSync(agentsDir).sort() : []) {
       if (!f.endsWith(".md") || f === "README.md") continue;
@@ -174,7 +175,7 @@ export function agentModelCatalog() {
     const byName = new Map(agents.map((a) => [a.name, a]));
 
     const skills: SkillEntry[] = [];
-    for (const p of walkSkillFiles(path.join(root, ".claude/skills")).sort()) {
+    for (const p of walkSkillFiles(path.join(root, datasetDir("agent.skills"))).sort()) {
       const fm = parseFrontmatter(fs.readFileSync(p, "utf8"));
       if (!fm) {
         errors.push({ file: rel(p), error: "frontmatter が無い" });
@@ -209,7 +210,7 @@ export function agentModelCatalog() {
     }
 
     let routing: AgentModelCatalog["routing"] = null;
-    const policyPath = path.join(root, ".claude/config/backlog-routing-policy.json");
+    const policyPath = path.join(root, datasetPath("agent.backlog-routing-policy"));
     if (fs.existsSync(policyPath)) {
       try {
         const policy = JSON.parse(fs.readFileSync(policyPath, "utf8")) as {

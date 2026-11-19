@@ -3,6 +3,8 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+
 /**
  * テスト用の隔離 project root を構築するヘルパ。
  *
@@ -27,7 +29,8 @@ const REAL_STORE = path.resolve(
 );
 const REAL_PARSE_CORE = path.resolve(
   __dirname,
-  "../../../../.claude/scripts/backlog-loop/parse-backlog-core.cjs",
+  "../../../..",
+  datasetPath("agent.backlog-parser"),
 );
 const REAL_BACKLOG_LIB = path.resolve(
   __dirname,
@@ -126,13 +129,13 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
 
   // 7) TODO 台帳 (.claude/todo) と実物パーサ
   if (opts.todoFiles) {
-    const todoDir = path.join(root, ".claude/todo");
+    const todoDir = path.join(root, datasetDir("agent.todo"));
     fs.mkdirSync(todoDir, { recursive: true });
     for (const [name, body] of Object.entries(opts.todoFiles)) {
       fs.writeFileSync(path.join(todoDir, name), body);
     }
     // ★パーサは実物をコピーする。テスト用に別実装を置くと「テストは通るが本番は違う解釈」になる
-    const coreDir = path.join(root, ".claude/scripts/backlog-loop");
+    const coreDir = path.join(root, path.dirname(datasetPath("agent.backlog-parser")));
     fs.mkdirSync(coreDir, { recursive: true });
     fs.copyFileSync(REAL_PARSE_CORE, path.join(coreDir, "parse-backlog-core.cjs"));
     // backlog-lib は 2026-11-19 に packages/ops へ移した。管理画面は projectRoot() からこの場所を読む

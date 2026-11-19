@@ -265,7 +265,7 @@ export function readGscCoverage(root: string) {
 // ─── TODO 表 (.claude/todo/improvements.md — 6 列 pipe テーブル) ──
 export function parseBacklogMd(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, ".claude/todo/improvements.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, datasetPath("agent.todo-improvements")), "utf8");
     const lines = md.split(/\r?\n/);
     let tier: string | null = null;
     const rows: Array<{
@@ -339,7 +339,7 @@ export function parseFeatureBacklogMd(root: string) {
         filed: string | null;
       }>;
     };
-    const md = fs.readFileSync(path.join(root, ".claude/todo/backlog.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, datasetPath("agent.todo-backlog")), "utf8");
     const rows: FeatureBacklogRow[] = lib.parseBacklog(md).map((c) => {
       let title = c.title;
       if (title.length > TITLE_TRUNC) title = `${title.slice(0, TITLE_TRUNC)}…`;

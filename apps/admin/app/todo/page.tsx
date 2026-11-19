@@ -7,6 +7,7 @@ import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { Button, buttonVariants, Collapsible, CollapsibleContent, CollapsibleTrigger } from "@stats47/components";
 import { todoBoard, type ImprovementRow, type LayerId, type Tier, type TodoCard } from "@/lib/server/todo";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -266,7 +267,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
   if (board.error) {
     return (
       <>
-        <PageHeading title="TODO ボード" source=".claude/todo/" />
+        <PageHeading title="TODO ボード" source={`${datasetDir("agent.todo")}/`} />
         <ErrorNote error={board.error} />
       </>
     );
@@ -313,7 +314,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
 
   return (
     <>
-      <PageHeading title="TODO ボード" source=".claude/todo/ (構文の正典: todo-standards.md・doboku-note と統一)" accessLabel="読み取り専用。編集はタイトルのリンクからエディタで開く" />
+      <PageHeading title="TODO ボード" source={`${datasetDir("agent.todo")}/ (構文の正典: todo-standards.md・doboku-note と統一)`} accessLabel="読み取り専用。編集はタイトルのリンクからエディタで開く" />
 
       <Section
         title={LAYER_TITLES[layer]}

@@ -1,73 +1,9 @@
 {
   "policy": "縮小専用。apps・packages・config は .claude を読まない。例外は管理画面の本番コードが運用の状態をデータとして読むものだけ",
   "files": {
-    "apps/admin/app/ops/auth/page.tsx": {
-      "count": 2,
-      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
-    },
-    "apps/admin/app/page.tsx": {
-      "count": 1,
-      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
-    },
-    "apps/admin/app/strategy/reviews/review-parts.tsx": {
-      "count": 1,
-      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/app/todo/page.tsx": {
-      "count": 2,
-      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
-    },
-    "apps/admin/lib/content-operations/load.ts": {
-      "count": 2,
-      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/lib/server/agent-models.ts": {
-      "count": 5,
-      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
-    },
-    "apps/admin/lib/server/auth-credentials.ts": {
-      "count": 1,
-      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/lib/server/dashboard.ts": {
-      "count": 2,
-      "reason": "管理画面が .claude/scripts の部品を実行時に読む。部品を packages/ops へ移す (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/lib/server/domains.ts": {
-      "count": 2,
-      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/lib/server/mcp-status.ts": {
-      "count": 7,
-      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/lib/server/media-unification.ts": {
-      "count": 3,
-      "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
-    },
-    "apps/admin/lib/server/ops-ledger.ts": {
-      "count": 2,
-      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/lib/server/shared-policy.ts": {
-      "count": 1,
-      "reason": "管理画面の本番コードが運用の状態 (todo・state・memory・agents・config) を表示のために読む。決まりの例外。パスの直書きをカタログ (datasetPath) から引く形に替える (SCRIPTS-TO-PACKAGES-01)"
-    },
     "apps/admin/lib/server/strategy-lanes.ts": {
       "count": 1,
       "reason": "管理画面が .claude/scripts の部品を実行時に読む。部品を packages/ops へ移す (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/tests/helpers/fixture-root.ts": {
-      "count": 3,
-      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
-    },
-    "apps/admin/tests/unit/agent-models.test.ts": {
-      "count": 7,
-      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
-    },
-    "apps/admin/tests/unit/business-plan.test.ts": {
-      "count": 3,
-      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
     },
     "apps/admin/tests/unit/domains.test.ts": {
       "count": 1,
@@ -77,14 +13,6 @@
       "count": 1,
       "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
     },
-    "apps/admin/tests/unit/mcp-status.test.ts": {
-      "count": 11,
-      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
-    },
-    "apps/admin/tests/unit/ops-pages.test.ts": {
-      "count": 1,
-      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
-    },
     "apps/admin/tests/unit/template-regional-boxplot.test.ts": {
       "count": 1,
       "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
@@ -92,10 +20,6 @@
     "apps/admin/tests/unit/template-relationship-scatter.test.ts": {
       "count": 1,
       "reason": "テストが .claude/scripts の道具を読む・実行する。テストを .claude/scripts 側へ移すか、部品を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
-    },
-    "apps/admin/tests/unit/todo.test.ts": {
-      "count": 1,
-      "reason": "管理画面のテストが一時ディレクトリに運用の状態の写しを作る (本番の読み方と同じパス)。本番の読み方をカタログ経由にしたら合わせる"
     },
     "apps/web/scripts/export-yoy-timeseries.ts": {
       "count": 1,

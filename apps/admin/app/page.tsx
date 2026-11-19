@@ -71,7 +71,7 @@ const SECTIONS = [
   {
     href: "/todo",
     title: "TODO",
-    desc: ".claude/todo を実行バックログ・計画・効果測定の役割で俯瞰",
+    desc: `${datasetDir("agent.todo")} を実行バックログ・計画・効果測定の役割で俯瞰`,
   },
 ] as const;
 

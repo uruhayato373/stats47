@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import domainsConfig from "../../../../data/business/domains.json";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 import { projectRoot } from "./project-root";
 import { resolveSafe } from "./safe-local-file";
@@ -131,7 +132,7 @@ function scanOwners(): (DomainOwner & { domainId: string | string[] | null })[] 
   const root = projectRoot();
   const { frontmatterDomain } = lib();
   const out: (DomainOwner & { domainId: string | string[] | null })[] = [];
-  const agentsDir = path.join(root, ".claude/agents");
+  const agentsDir = path.join(root, datasetDir("agent.definitions"));
   for (const f of fs.existsSync(agentsDir) ? fs.readdirSync(agentsDir).sort() : []) {
     if (!f.endsWith(".md") || f === "README.md") continue;
     const text = fs.readFileSync(path.join(agentsDir, f), "utf8");
@@ -146,7 +147,7 @@ function scanOwners(): (DomainOwner & { domainId: string | string[] | null })[] 
       else if (e.name === "SKILL.md") skills.push(p);
     }
   };
-  walkSkills(path.join(root, ".claude/skills"));
+  walkSkills(path.join(root, datasetDir("agent.skills")));
   for (const p of skills.sort()) {
     const text = fs.readFileSync(p, "utf8");
     out.push({ name: frontmatterValue(text, "name") ?? path.basename(path.dirname(p)), kind: "スキル", description: frontmatterValue(text, "description") ?? "", domainId: frontmatterDomain(text) });
