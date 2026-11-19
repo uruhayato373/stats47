@@ -1,48 +1,60 @@
 {
   "schemaVersion": 1,
-  "id": "42960578131-1",
+  "id": "44442727274-1",
   "status": "implementation-needed",
-  "keyword": "金沢市 人口",
-  "targetPath": "/areas/17000/cities/17201",
-  "needs": "金沢市の現在の人口を知りたい人が検索している。人数と、それが国勢調査か住民基本台帳かという基準が分かれば足りる。他の市との比較や推移は次に見たい情報になる。",
-  "gap": "タイトルと説明文には「45.4万人（2025年）」と2020年からの2.1%減が入っており、人数、推移、順位は競合より厚い。不足は2点ある。リード文に出典と基準日がなく、同じ2025年でも住民基本台帳（443,123人）とは違う値なのに違いが分からない。また1万人単位の丸めのため、人数を探す人に453,605人という実数が先頭に出ない。7.06位で462表示・0クリックだが、この数字だけでは原因を断定できない。",
-  "done": "今日は文字列を置換しない。editableFileがnullで、title・descriptionは packages/ranking/src/municipalities/municipality-page-meta.ts の buildCityPageMeta が生成している。同関数のtitleは効果判定MUNI-PAGE-SEO-01（2026-11-21判定）の対象で、いま変えると判定が混ざる。残る実装は、判定後にMUNI-TITLE-MAGNITUDE-01の整形へ替えて実数を出すことと、2025年の値の出典と基準日を一次資料で確認し、リードへ1語足すこと。完了条件は、確認した出典・基準日と、実数表示のtitleが生成テストで固定されること。",
+  "keyword": "阿波市 人口",
+  "targetPath": "/areas/36000/cities/36206",
+  "needs": "徳島県阿波市の「今の人口は何人か」を知りたい人が検索している。人数の桁まで確認でき、国勢調査か住民基本台帳かの基準も分かる回答が求められている。",
+  "gap": "対象ページ（平均掲載順位7.06・表示714回・クリック0）のtitleとdescriptionは「3.2万人（2025年）」と万人単位に丸めた値だけを示し、数値の基準は書かれていない。比較ページは34,188人（住民基本台帳2025年）や34,713人（2020年国勢調査）と人数を桁まで出し、基準を明記している。本文の31,527人（2025年）の出典は、今回取得した本文からは確認できなかった。",
+  "done": "editableFileがnullで、title・descriptionは全市区町村共通のテンプレート関数buildCityPageMeta（packages/ranking/src/municipalities/municipality-page-meta.ts）が生成するため、文字列の置換では直せない。関数内のコメントによると、現行titleは効果判定中（MUNI-PAGE-SEO-01、判定日2026-11-21）で、整形変更はMUNI-TITLE-MAGNITUDE-01として判定後に行う計画になっている。判定後に同カードで、titleの人口を万人丸めからformatMunicipalityValueTextによる桁まで出した人数へ変え、出典の種類を添える。完了条件は、city-databook.test.tsの更新と、全市区町村のtitle長の確認。",
   "method": "title",
   "competitors": [
     {
-      "url": "https://www.seikatsu-guide.com/keyword/1500/17/17201/",
-      "findings": "WebFetchで読めた。金沢市の人口を出典別の表で答えている。国勢調査2020年の463,254人（全国42位）と、住民基本台帳2025年1月1日の443,123人を併記し、年齢3区分の率、世帯数、外国人人口、増減率も載せる。人口の年次推移は2005〜2020年の増減比率だけで、実数の時系列は無い。2つの値の違いは説明されていない。対象は金沢市（市区）単位で、近隣4市との比較ページがある。"
+      "url": "https://www.seikatsu-guide.com/info/36/36206/1/",
+      "findings": "阿波市の人口を国勢調査2020年の34,713人（世帯12,989）と住民基本台帳2025年1月1日の34,188人で併記している。人数は桁まで示し、年齢3区分の割合、2050年までの将来推計、増減比率、出生・死亡数も載せる。出典と基準日は明記されている。"
+    },
+    {
+      "url": "https://opengov-jp.pages.dev/en/population/estimates/tokushima/awa/",
+      "findings": "住民基本台帳の2025年の人数34,188人（前年比585人減）、男女別、年齢3区分、高齢化率39.2%を示す。2006〜2025年の推移グラフと表がある。出典は総務省の住民基本台帳とし、国勢調査には触れていない。"
+    },
+    {
+      "url": "https://stats47.jp/areas/36000/cities/36206",
+      "findings": "本文は総人口31,527人（2025年・県内7位）、5年間で−9.18%、年齢別割合、世帯、出生・死亡、転入超過など幅広い。人口の出典と基準日は本文からは明記を確認できなかった。titleとdescriptionは「3.2万人」の丸め表記のみ。"
     }
   ],
   "patches": [],
   "research": {
     "targetPage": {
-      "url": "https://stats47.jp/areas/17000/cities/17201",
+      "url": "https://stats47.jp/areas/36000/cities/36206",
       "status": 200,
-      "fetchedAt": "2026-11-11T04:40:36.945Z",
-      "inputHash": "09046934d4f40a8fe72c53004745d7c7e1afbba9150ea9c01a8ab73d8c029b83",
+      "fetchedAt": "2026-11-19T02:15:15.960Z",
+      "inputHash": "7ea4bccd3a359851a72f93f482667df0fdfee6cf44e70c2ad6c7ae14585a4461",
       "htmlFile": ".local/seo-rank-watch/target-page.html",
-      "htmlSha256": "89c355972a927eb24cf21361b2e6d17ac1e297705bc570be2ed6a430eb3a0652",
+      "htmlSha256": "8289db36f522630cc25c2d700e5d4948eec8eff1755af6cecb289a0fd245663d",
       "textFile": ".local/seo-rank-watch/target-page.txt",
-      "textSha256": "8ef5c81975cba3b428a12f97afde1ca038c9fb4991e8a649dbcf6713551b3351"
+      "textSha256": "aae470e466cbdb7abef0c6b7958f6c3f310586d8b02d400abd6a8ac094377160"
     },
     "toolCalls": [
       {
         "name": "WebSearch",
-        "target": "金沢市 人口"
+        "target": "阿波市 人口"
       },
       {
         "name": "WebFetch",
-        "target": "https://stats47.jp/areas/17000/cities/17201"
+        "target": "https://stats47.jp/areas/36000/cities/36206"
       },
       {
         "name": "WebFetch",
-        "target": "https://www.seikatsu-guide.com/keyword/1500/17/17201/"
+        "target": "https://www.seikatsu-guide.com/info/36/36206/1/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://opengov-jp.pages.dev/en/population/estimates/tokushima/awa/"
       }
     ]
   },
-  "selectedAt": "2026-11-11",
-  "inputHash": "09046934d4f40a8fe72c53004745d7c7e1afbba9150ea9c01a8ab73d8c029b83",
+  "selectedAt": "2026-11-19",
+  "inputHash": "7ea4bccd3a359851a72f93f482667df0fdfee6cf44e70c2ad6c7ae14585a4461",
   "methods": [],
   "files": []
 }
