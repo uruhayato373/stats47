@@ -28,7 +28,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { assessmentForSubject } from "../../metrics/lib/adsense-measurement-contract.mjs";
+import { assessmentForSubject } from "../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs";
 import { ASSESSMENT_CONTRACT_VERSION, reassessmentProvenance } from "./reassessment.mjs";
 import { decideVerdict } from "./engine.mjs";
 import { DEFAULT_THRESHOLDS } from "./thresholds.mjs";

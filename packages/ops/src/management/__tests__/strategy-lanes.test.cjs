@@ -173,8 +173,8 @@ test('週次の項目から節・ID・完了状態を取る', () => {
 // 意図: 領域の正本は台帳 business.domain-stances。実物が壊れているか、領域のマスタと過不足があれば
 // 月次の重点・週次 Must・backlog の領域タグの検査が全部止まるので、実物で確かめる。
 test('実リポジトリの領域の台帳は壊れておらず、領域のマスタの全領域を 1 行ずつ持つ', () => {
-  const root = path.resolve(__dirname, '..', '..', '..', '..');
-  const { DOMAINS } = require('../../../../config/paths.mjs');
+  const root = path.resolve(__dirname, '..', '..', '..', '..', '..');
+  const { DOMAINS } = require('../../../../../config/paths.mjs');
   const board = laneBoard(root);
   assert.notStrictEqual(board.skipped, true, '領域の台帳が無いと検査が黙って飛ぶ');
   assert.deepStrictEqual(board.issues.filter((i) => i.level === 'error'), []);
@@ -246,7 +246,7 @@ test('KPI ツリーが未生成なら検査せず warning だけにする (fixtu
 });
 
 test('実リポジトリの台帳・領域表は KPI ツリーに配線されている (DG079 error 0)', () => {
-  const root = path.resolve(__dirname, '../../../..');
+  const root = path.resolve(__dirname, '../../../../..');
   const board = laneBoard(root);
   assert.ok(board.kpiNodes && board.kpiNodes.length > 0, 'kpi-tree.json が無い');
   assert.deepStrictEqual(board.issues.filter((i) => i.code === 'DG079' && i.level === 'error').map((i) => i.message), []);

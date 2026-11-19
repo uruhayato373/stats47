@@ -20,7 +20,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const backlogLib = require("../../../packages/ops/src/management/backlog-lib.cjs");
-const strategyLanes = require("./strategy-lanes.cjs");
+const strategyLanes = require("../../../packages/ops/src/management/strategy-lanes.cjs");
 
 const DEFAULT_ROOT =
   process.env.DOCS_GOVERNANCE_ROOT ||

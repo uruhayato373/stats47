@@ -49,7 +49,7 @@ import {
 import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
 import { isoWeekOf, isoWeekEnd, weekIndex, weekDiff } from "../lib/effect-verdict/iso-week.mjs";
 import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
-import { ADSENSE_BASELINE, assessmentForSubject, isCurrentAccountRow, observeAdsenseBaseline } from "./lib/adsense-measurement-contract.mjs";
+import { ADSENSE_BASELINE, assessmentForSubject, isCurrentAccountRow, observeAdsenseBaseline } from "../../../packages/ops/src/metrics/adsense-measurement-contract.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

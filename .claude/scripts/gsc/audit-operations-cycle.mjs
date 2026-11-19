@@ -17,7 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { assessmentForSubject, hasBaselineAssessment, isMissingEffectTarget, observeAdsenseBaseline } from '../metrics/lib/adsense-measurement-contract.mjs';
+import { assessmentForSubject, hasBaselineAssessment, isMissingEffectTarget, observeAdsenseBaseline } from '../../../packages/ops/src/metrics/adsense-measurement-contract.mjs';
 import { selectReassessment } from '../lib/effect-verdict/reassessment.mjs';
 import { isoWeekOf } from '../lib/effect-verdict/iso-week.mjs';
 import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../../../packages/ops/src/management/review-cadence.mjs';

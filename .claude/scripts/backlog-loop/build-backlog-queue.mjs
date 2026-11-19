@@ -30,7 +30,7 @@ const require = createRequire(import.meta.url);
 const { parseHeadingEntries } = require('./parse-backlog-core.cjs');
 const { buildQueue } = require('./queue-core.cjs');
 const { emptyLedger, normalizeLedger, quarantinedIds } = require('./ledger-core.cjs');
-const { parseFocusLanes, readLanes } = require('../lib/strategy-lanes.cjs');
+const { parseFocusLanes, readLanes } = require('../../../packages/ops/src/management/strategy-lanes.cjs');
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../../..');

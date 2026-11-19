@@ -8,7 +8,7 @@ import { projectRoot } from "./project-root";
 /**
  * 領域と構え (台帳 business.domain-stances) と、月次・週次・バックログの配線状態。**読み取り専用**。
  *
- * ★判定は自前で持たず `.claude/scripts/lib/strategy-lanes.cjs` を共有する。docs:check (DG073〜078) と
+ * ★判定は自前で持たず `packages/ops/src/management/strategy-lanes.cjs` を共有する。docs:check (DG073〜078) と
  *   同じ実体なので、画面の警告と CI の警告がずれない。.cjs の読み込みは todo.ts と同じ eval("require")。
  */
 
@@ -71,7 +71,7 @@ type StrategyLanesLib = {
 let cachedLib: StrategyLanesLib | null = null;
 function lib(): StrategyLanesLib {
   if (cachedLib) return cachedLib;
-  const abs = path.join(projectRoot(), ".claude/scripts/lib/strategy-lanes.cjs");
+  const abs = path.join(projectRoot(), "packages/ops/src/management/strategy-lanes.cjs");
   const nativeRequire = eval("require") as NodeRequire;
   cachedLib = nativeRequire(abs) as StrategyLanesLib;
   if (!cachedLib) throw new Error(`strategy-lanes.cjs を読み込めません: ${abs}`);

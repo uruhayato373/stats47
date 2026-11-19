@@ -473,7 +473,7 @@ test("window不足でもeffect実験の真のtarget欠落を独立して記録�
 
 test("baselineは差分や事後targetを作らず4週の充足だけを記録する", async () => {
   const { runAdapter } = await import('../effect-verdict/cli.mjs');
-  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../metrics/lib/adsense-measurement-contract.mjs');
+  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs');
   const rows = ADSENSE_BASELINE.weeks.map(week => ({ week, earnings: 25, accountId: ADSENSE_BASELINE.accountId }));
   const fake = {
     domainId: 'adsense', logPath: '/tmp/test.md',
@@ -496,7 +496,7 @@ test("baselineは差分や事後targetを作らず4週の充足だけを記録�
 
 test("AdSense adapterは新旧口座と明示的な不一致口座の比較を拒否する", async () => {
   const { resolveAdsenseWindows } = await import('../../metrics/measure-adsense-impact.mjs');
-  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../metrics/lib/adsense-measurement-contract.mjs');
+  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs');
   const rows = [
     { week: '2026-W34', earnings: 100 },
     { week: '2026-W42', earnings: 200, accountId: 'pub-wrong' },

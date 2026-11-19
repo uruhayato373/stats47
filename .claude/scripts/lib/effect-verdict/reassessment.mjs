@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { hasBaselineAssessment } from '../../metrics/lib/adsense-measurement-contract.mjs';
+import { hasBaselineAssessment } from '../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs';
 
 export const ASSESSMENT_CONTRACT_VERSION = 1;
 export const sha256 = text => createHash('sha256').update(text).digest('hex');

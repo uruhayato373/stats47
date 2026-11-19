@@ -28,7 +28,7 @@ import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
 import { summarizeWeeklyRevenue } from "../../../packages/ops/src/metrics/weekly-revenue.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
-const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
+const strategyLanes = createRequire(import.meta.url)("../../../packages/ops/src/management/strategy-lanes.cjs");
 
 const AUTHENTICATED_LATEST = `${datasetDir("revenue.authenticated")}/latest.json`;
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);

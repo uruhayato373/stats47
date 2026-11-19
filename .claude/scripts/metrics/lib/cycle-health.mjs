@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 // 期日の読み方 (範囲内・超過の境界) は月次・週次計画が期日で引く cardsDueWithin と同じ partitionByDue を使う
 const { parseAnnual, parseBacklog, partitionByDue } = require("../../../../packages/ops/src/management/backlog-lib.cjs");
 // Must の読み取り・連続未達の閾値・🔴 の上限は docs:check (DG081/082) と同じ実装を使う
-const strategyLanes = require("../../lib/strategy-lanes.cjs");
+const strategyLanes = require("../../../../packages/ops/src/management/strategy-lanes.cjs");
 // 起票と完了の流れ・総枚数の目安は npm run backlog:waits -- flow と同じ実装を使う
 const { buildFlow } = require("../../backlog-loop/backlog-waits-core.cjs");
 

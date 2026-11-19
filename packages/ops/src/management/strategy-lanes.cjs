@@ -19,14 +19,18 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const backlogLib = require('../../../packages/ops/src/management/backlog-lib.cjs');
-const { assessmentForSubject } = require('../metrics/lib/adsense-measurement-contract.mjs');
-const { DOMAINS } = require('../../../config/paths.mjs');
-const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
+const backlogLib = require('./backlog-lib.cjs');
+const { assessmentForSubject } = require('../metrics/adsense-measurement-contract.mjs');
+const { DOMAINS } = require('../../../../config/paths.mjs');
+const { datasetDir, datasetPath } = require("../../../../config/datasets.mjs");
 // 「効果判定エンジン対象外: <理由>」の記法は計測サイクルと同じ判定を使う (別に正規表現を書くと片方だけ変わる)
-const { OUT_OF_SCOPE_MARKER } = require("../metrics/lib/gsc-improvements-adapter.mjs");
+const { OUT_OF_SCOPE_MARKER } = require("./improvement-markers.mjs");
 
 const LANES_LEDGER = datasetPath("business.domain-stances");
+// 作業カードの台帳の置き場は、置き場の台帳 (config/datasets.mjs) から引く
+const TODO_DIR = datasetDir("agent.todo");
+const TODO_BACKLOG = datasetPath("agent.todo-backlog");
+const TODO_IMPROVEMENTS = datasetPath("agent.todo-improvements");
 const STANCES = ['攻める', '維持', '凍結'];
 const ATTACK = '攻める';
 const FROZEN = '凍結';
@@ -337,10 +341,10 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
 function auditLaneAlignment({ stances, domains = null, backlogText, annualText = '', improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {} }) {
   const f = {
     lanes: LANES_LEDGER,
-    backlog: '.claude/todo/backlog.md',
-    monthly: '.claude/todo/monthly.md',
-    weekly: '.claude/todo/weekly.md',
-    improvements: '.claude/todo/improvements.md',
+    backlog: TODO_BACKLOG,
+    monthly: `${TODO_DIR}/monthly.md`,
+    weekly: `${TODO_DIR}/weekly.md`,
+    improvements: TODO_IMPROVEMENTS,
     ...files,
   };
   const issues = [];
@@ -491,11 +495,11 @@ function laneBoard(root, today = new Date().toISOString().slice(0, 10)) {
   return auditLaneAlignment({
     stances: readStances(root),
     domains: readDomains(root),
-    backlogText: read('.claude/todo/backlog.md'),
-    annualText: read('.claude/todo/annual.md'),
-    improvementsText: read('.claude/todo/improvements.md'),
-    monthlyText: read('.claude/todo/monthly.md'),
-    weeklyText: read('.claude/todo/weekly.md'),
+    backlogText: read(TODO_BACKLOG),
+    annualText: read(`${TODO_DIR}/annual.md`),
+    improvementsText: read(TODO_IMPROVEMENTS),
+    monthlyText: read(`${TODO_DIR}/monthly.md`),
+    weeklyText: read(`${TODO_DIR}/weekly.md`),
     kpiNodes: readKpiNodes(root),
     reviews: readReviews(root),
     today,

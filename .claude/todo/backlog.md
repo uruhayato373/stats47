@@ -118,19 +118,27 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [SCRIPTS-TO-PACKAGES-01] apps・packages に残る .claude の読み 13 ファイルを片付ける
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
+### [SCRIPTS-TO-PACKAGES-01] パッケージのスクリプトが .claude/scripts の道具を呼ぶ 12 ファイルを片付ける
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-boundary.mjs] [起票:2026-11-19] [領域:サイト]
 
-- **済み (2026-11-19 リリース)**: アプリと packages が読む `.claude/scripts` の部品 69 を packages へ移した (運用の部品は新しい `@stats47/ops`、鏡は正本と同じパッケージの `mirror/`)。管理画面の `.claude` のデータの読みは置き場の台帳 (`config/datasets.mjs` の `agent.*`) から `datasetPath` で引く。決まりは `.claude/rules/skill-code-placement.md`「依存の向き」、止めは `check-claude-boundary.mjs`。PR #1288 を main へマージ (4cc41d66c)、本番デプロイ成功。push からマージまでに落ちた run は修正前の PR の検査 3 本と、通信の切断 (ECONNRESET) で落ちた Data ledgers 1 本で、後者は develop で起動し直して成功した (run 44481306345)。
-- **次 (残りの 13 ファイル)**: 基準の理由が「減らす対象」の行。① `apps/admin/lib/server/strategy-lanes.ts` が `.claude/scripts/lib/strategy-lanes.cjs` を実行時に読む (部品が効果の判定のエンジンなど 10 部品を連れてくるので、まとめて `packages/ops` へ移す)。② パッケージのスクリプトが `.claude/scripts` の道具を呼ぶ 12 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/product-factory/src/channels/note/build/build-revision.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。
-- **停止条件**: 管理画面 (`npm run admin`) の主な画面と、移した部品を使う週次の workflow を、移すたびに動かして確かめる。
+- **済み**: アプリと packages が読む `.claude/scripts` の部品 69 を packages へ移した (2026-11-19 リリース・PR #1288)。管理画面が実行時に読んでいた `strategy-lanes.cjs` も `packages/ops/src/management/` へ移し、境界の基準からその行を消した (同日・develop)。
+- **次**: 基準 `.claude/config/claude-boundary-baseline.json` の理由が「減らす対象」の 12 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/product-factory/src/channels/note/build/build-revision.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。記事の lint・e-Stat の API 層・Google 接続は SCRIPTS-TO-PACKAGES-02 で packages/ops へ移したので、それを呼んでいた行は import を書き換えるだけで消せるものがある。
+- **停止条件**: 移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
-### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 414 本を、対象のロジックごと packages へ移す
+### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 315 本を、対象のロジックごと packages へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19 オーナー判断「テストは基本的に .claude に置かない」)**: テストが要るロジックは packages に置く決まりにし、`.claude/scripts` の領域ごとのテスト数を縮小専用の基準 `.claude/config/claude-scripts-test-baseline.json` で止めた (`.claude/rules/skill-code-placement.md`「テストは `.claude` に置かない」)。既存の 30 領域・414 本は基準に残っている。
-- **次**: ① `lib/` (132 本) を業務のロジックとエージェント基盤に分ける。業務のロジック (家計調査の分類・SSDS の年の形式・効果判定のエンジン・指標の公開の順・IG と SNS の台帳など) は領域の合う packages へコードごと移し、基盤 (hook・セッションの検知・整合検査・CI の契約の検査) のテストは基準の `harness` へ理由付きで移す。② 続けて workflow からの参照が多い順 (`blog`・`ads`・`search-growth`・`gsc`・`metrics`・`themes`・`note`) に進める。移すたびに基準を縮める。
+- **起点 (2026-11-19 オーナー判断「テストは基本的に .claude に置かない」)**: テストが要るロジックは packages に置く決まり (`.claude/rules/skill-code-placement.md`「テストは `.claude` に置かない」) と、領域ごとのテスト数の縮小専用の基準 `.claude/config/claude-scripts-test-baseline.json`。
+- **済み (第 1 回・2026-11-19・develop)**: `lib` を 132 → 33 本にした。基盤のテスト 66 本を基準の `harness` に登録し、SNS の台帳・e-Stat と調査の純関数・記事の lint 14 本・Google 接続・state の同期・e-Stat の API 層・`strategy-lanes` を `packages/ops/src/{sns,estat,surveys,ranking,blog/lint,google,datasets,ci,cloudflare,management,metrics}/` へ移した。CLI は元のパスに本体の `main` を呼ぶ薄い入口を残している。
+- **次 ① (`lib` の残り 33 本。移すための条件つき)**:
+  - 製品の品質ゲートの検査 12 本 (`check-accessibility-static`・`check-asset-policy`・`check-datasets`・`check-image-generation-routes`・`check-money-unit-audit`・`check-next-support-window`・`check-r2-route-ssg`・`check-route-contract`・`check-static-assets`・`check-value-format`・`check-web-estat-imports`・`prune-state-snapshots`) と契約のテスト 3 本 (`dataset-registries`・`claude-scripts-consumer-contracts`・`sync-snapshots-run-contract`)。検査の本体を packages へ移し、品質ゲートの台帳・preflight・pre-commit の配線を 1 本ずつ直す。
+  - `.claude` のファイルを読むので残したテスト 5 本 (`x-catalog` は規則の文言、`ssds-year-format` は `gen-ssds-configs.mjs` の起動、`latest-partition` は agent の定義、`estat-catalog/api.test.mjs` は `audit-time-coverage.cjs`、`estat-catalog` は改名を追えない基準 `estat-entrypoint-baseline.json` に載っている)。`.claude` を確かめる部分を別のテストに分ければ、残りを移せる。
+  - 効果判定 (`effect-verdict`・`write-past-effects`)。テストが `.claude/scripts` の CLI を子プロセスで起動する。`scan-pending-improvements`・`write-past-effects`・adapter 2 本は `.claude/todo/improvements.md` と再現コマンドのパスを文字列で持つ (台帳の id `agent.todo-improvements` で引く形に直す)。エンジンは判定の出力に自分のパス (`thresholdsPath`) を書くので、移すと週次の判定の出力が変わる。
+  - Cloudflare (`cloudflare-monthly-snapshot`・`cloudflare-threshold-check`)。本体が `.claude/config/budgets/` の予算を直接読む。予算のパスを入口から渡す形に直してから移す。
+  - `blog/quality-gate.mjs` を子プロセスで確かめる 5 本 (`quality-gate.*`) と `chart-recurrence-guards`・`internal-link-geo`・`related-link-lint.mjs`。`blog` 領域と一緒に扱う。`ig-post-from-schedule` (Graph API へ投稿する CLI)・`revenue-guards` も残っている。
+- **次 ②**: workflow からの参照が多い順 (`blog`・`ads`・`search-growth`・`gsc`・`metrics`・`themes`・`note`) に進める。移すたびに基準を縮める。
+- **移すときの注意 (第 1 回で分かったこと)**: `node --test` は存在しないパスを黙って読み飛ばす (`lib-tests-wiring` が止める)。元のパスに薄い入口を残すと git は改名と見なさないので、基準を持つ検査は `-B` で拾う形に直してある (`check-r2-entrypoint`・`check-area-year-entrypoint`・`check-claude-boundary`。`check-estat-entrypoint` は改名を追わない)。移す前から型検査の外だったファイルは、型エラーを直すまで ops の `tsconfig.checkjs.json` に足さない (`build-kakei-classification.mjs` に 2 件)。
 - **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む決まりを守る。テストだけを packages へ移さない (packages が `.claude` を読むことになる)。
 - **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
 
