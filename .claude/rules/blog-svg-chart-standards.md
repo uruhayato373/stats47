@@ -383,7 +383,7 @@ flag は個別に metric→key を特定する必要があり、**SVG の絵か�
 
 恒久テストは 2 本。`contents/blog` は公開後に自動削除される ephemeral outbox なので、実ファイルに依存させない:
 
-- `.claude/scripts/lib/__tests__/svg-lint.tile-grid.test.mjs` — 不変量ごとに 1 つだけ壊した合成検体で
+- `packages/svg-builder/src/lint/__tests__/svg-lint.tile-grid.test.mjs` — 不変量ごとに 1 つだけ壊した合成検体で
   **ゲートの感度**を固定（mutation testing）。検査自体も検証済み（見出しチェックを 1 つ無効化すると落ちる）
 - `packages/svg-builder/src/charts/__tests__/choropleth.gate.test.ts` — 生成器の**実出力**がゲートを通ることを
   固定（**配線**）。片方だけ更新すると「生成した瞬間に公開できない SVG」ができる
@@ -448,7 +448,7 @@ flag は個別に metric→key を特定する必要があり、**SVG の絵か�
 公開後は 週次レビューの `npm run weekly:audits` (blog-remediation) の `rerender-scatter-canonical.mts --probe-only
 --require-canonical --verify-sources` が全件を再生成して公開 SVG との完全一致を要求する。
 既知7件は一次ソースから点集合も再計算する。ゲートの感度は
-`.claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs` と
+`packages/svg-builder/src/lint/__tests__/svg-lint.scatter.test.mjs` と
 `quality-gate.svg-gates.test.mjs`、生成器との配線は
 `packages/svg-builder/src/charts/__tests__/scatter.gate.test.ts` で固定する。
 

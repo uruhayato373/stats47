@@ -1,6 +1,6 @@
 /**
  * lintTileGridQuality の対照テスト (mutation testing)。
- * 実行: node --test .claude/scripts/lib/__tests__/svg-lint.tile-grid.test.mjs
+ * 実行: node --test packages/svg-builder/src/lint/__tests__/svg-lint.tile-grid.test.mjs
  *
  * ★全 PASS は「ゲートが何も見ていない」状態と区別がつかない。不変量ごとに
  * **1 つだけ壊した検体**を作り、その不変量が実際に発火することを固定する。
@@ -20,7 +20,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { lintTileGridQuality } from "../../../../packages/svg-builder/src/lint/svg-lint.mjs";
+import { lintTileGridQuality } from "../svg-lint.mjs";
 
 const NAME = "sample-tile-grid.svg";
 

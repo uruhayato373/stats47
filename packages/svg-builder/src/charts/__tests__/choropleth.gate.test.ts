@@ -2,7 +2,7 @@
  * generateChoroplethSvg の**実出力**が公開ゲート (`lintTileGridQuality`) を通ることを固定する。
  *
  * ゲート側の感度 (不変量ごとに壊すと落ちるか) は
- * `.claude/scripts/lib/__tests__/svg-lint.tile-grid.test.mjs` が担保する。こちらは
+ * `packages/svg-builder/src/lint/__tests__/svg-lint.tile-grid.test.mjs` が担保する。こちらは
  * **生成器とゲートが同じデザインを指しているか** (配線) を見る。
  *
  * 2026-07-31 にタイルマップを 720×720 へ改訂した際、生成器とゲートを別々に更新して

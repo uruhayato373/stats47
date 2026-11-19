@@ -30,7 +30,7 @@ function unwired(testFiles, text) {
 
 test(".claude/scripts/lib/__tests__ のテストは全部、workflow・package.json・.husky のどこかが名前で走らせる", () => {
   const testFiles = fs.readdirSync(path.join(ROOT, TEST_DIR)).filter((name) => /\.test\.(?:c|m)?js$/.test(name)).sort();
-  assert.ok(testFiles.length >= 100, `テストを ${testFiles.length} 本しか読めていない`);
+  assert.ok(testFiles.length >= 50, `テストを ${testFiles.length} 本しか読めていない`);
   assert.deepEqual(unwired(testFiles, wiringText()), [], "test:claude-lib-contracts の一覧に足す");
 });
 

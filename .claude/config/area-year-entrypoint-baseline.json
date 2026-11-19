@@ -617,7 +617,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/__tests__/svg-lint.image-type.test.mjs": {
+    "packages/svg-builder/src/lint/__tests__/svg-lint.image-type.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -632,7 +632,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs": {
+    "packages/svg-builder/src/lint/__tests__/svg-lint.scatter.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

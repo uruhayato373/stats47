@@ -1,6 +1,6 @@
 /**
  * lintSvgContent の「XML コメント違法性」検査の対照テスト (mutation testing)。
- * 実行: node --test .claude/scripts/lib/__tests__/svg-lint.xml-comment.test.mjs
+ * 実行: node --test packages/svg-builder/src/lint/__tests__/svg-lint.xml-comment.test.mjs
  *
  * ★背景 (2026-08-13): 相関 scatter 7 枚が、先頭 provenance コメントに焼かれた
  *   ファイル名の "--" (2 ranking key の連結子) で不正 XML になり、<img> で
@@ -15,7 +15,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { lintSvgContent } from "../../../../packages/svg-builder/src/lint/svg-lint.mjs";
+import { lintSvgContent } from "../svg-lint.mjs";
 
 const BODY =
   '<svg viewBox="0 0 720 720" width="720" height="720" xmlns="http://www.w3.org/2000/svg">' +

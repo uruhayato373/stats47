@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { lintResponsiveBarPair, lintSvgSize } from '../../../../packages/svg-builder/src/lint/svg-lint.mjs';
+import { lintResponsiveBarPair, lintSvgSize } from '../svg-lint.mjs';
 
 const desktop = '<svg width="960" height="404" viewBox="0 0 960 404"><text font-size="13">東京都</text></svg>';
 const mobile = '<svg width="640" height="960" viewBox="0 0 640 960"><text font-size="20">東京都</text></svg>';

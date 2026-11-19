@@ -1,6 +1,6 @@
 /**
  * lintScatterQuality の対照テスト (mutation testing)。
- * 実行: node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
+ * 実行: node --test packages/svg-builder/src/lint/__tests__/svg-lint.scatter.test.mjs
  */
 
 import assert from 'node:assert/strict';
@@ -10,7 +10,7 @@ import {
   lintScatterData,
   lintScatterParity,
   lintScatterQuality,
-} from '../../../../packages/svg-builder/src/lint/svg-lint.mjs';
+} from '../svg-lint.mjs';
 
 const NAME = 'sample-scatter.svg';
 
