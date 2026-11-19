@@ -49,8 +49,8 @@ export { classifyNational, isFiniteEstatValue } from "./theme-chart-live-audit-c
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 const DEPENDENCY_MIRROR = path.join(
-  import.meta.dirname,
-  "theme-chart-dependencies.generated.json",
+  PROJECT_ROOT,
+  "packages/data-configs/mirror/theme-chart-dependencies.generated.json",
 );
 
 /**

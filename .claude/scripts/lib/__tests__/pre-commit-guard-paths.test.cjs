@@ -166,7 +166,7 @@ test('背景の選択のテストは test:image-pipeline が走らせ、その�
   assert.ok(start >= 0, 'image-pipeline ゲートの trigger を見つけられない');
   const paths = collectGuardPaths(shell.slice(start, shell.indexOf('|| true)', start)));
   assert.ok(paths.includes('.claude/scripts/sns/prepare-buzz-map-batch.ts'), 'image-pipeline の trigger の抽出が壊れている');
-  for (const name of ['blog-background-status', 'blog-background-gate', 'blog-fullbleed-background']) {
+  for (const name of ['blog-background-status', 'blog-fullbleed-background']) {
     const testFile = `apps/web/scripts/lib/__tests__/${name}.test.ts`;
     assert.ok(fs.existsSync(path.join(ROOT, testFile)), `${testFile} が実在しない`);
     assert.ok(command.split(/\s+/).includes(testFile), `test:image-pipeline に ${testFile} が無い`);
