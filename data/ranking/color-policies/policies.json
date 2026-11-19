@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "rows": 3951,
-    "continuous": 1684,
-    "stepped": 2267,
+    "rows": 3979,
+    "continuous": 1711,
+    "stepped": 2268,
     "diverging": 108,
     "skipped": 12
   },
@@ -14408,6 +14408,16 @@
       }
     },
     {
+      "metricKey": "health-checkup-blood-pressure-medication-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
       "metricKey": "health-checkup-breakfast-skipping-rate",
       "grain": "prefecture",
       "year": "2023",
@@ -14429,6 +14439,66 @@
       }
     },
     {
+      "metricKey": "health-checkup-daily-activity-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-daily-drinking-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-daily-snacking-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-exercise-habit-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-fast-eating-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-fast-walking-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
       "metricKey": "health-checkup-late-dinner-rate",
       "grain": "prefecture",
       "year": "2023",
@@ -14442,6 +14512,36 @@
       "metricKey": "health-checkup-recipients",
       "grain": "prefecture",
       "year": "2020",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-smoking-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-sufficient-sleep-rate",
+      "grain": "prefecture",
+      "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "health-checkup-weight-gain-10kg-rate",
+      "grain": "prefecture",
+      "year": "2023",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -14611,6 +14711,16 @@
       "classification": {
         "method": "quantile",
         "classes": 5
+      }
+    },
+    {
+      "metricKey": "heatstroke-emergency-transports-per-100k",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
       }
     },
     {
@@ -21610,7 +21720,67 @@
       }
     },
     {
+      "metricKey": "national-assessment-elementary-friendship-satisfaction-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-elementary-future-goal-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-elementary-japanese-correct-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-elementary-mathematics-correct-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
       "metricKey": "national-assessment-elementary-reading-like-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-elementary-school-enjoyment-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-elementary-self-esteem-rate",
       "grain": "prefecture",
       "year": "2025",
       "areaCount": 47,
@@ -21631,6 +21801,66 @@
     },
     {
       "metricKey": "national-assessment-elementary-tutoring-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-junior-high-friendship-satisfaction-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-junior-high-future-goal-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-junior-high-japanese-correct-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-junior-high-mathematics-correct-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-junior-high-school-enjoyment-rate",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "national-assessment-junior-high-self-esteem-rate",
       "grain": "prefecture",
       "year": "2025",
       "areaCount": 47,
@@ -33812,6 +34042,16 @@
       }
     },
     {
+      "metricKey": "road-heavy-vehicle-share",
+      "grain": "prefecture",
+      "year": "2021",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
       "metricKey": "road-length-per-km2",
       "grain": "prefecture",
       "year": "2023",
@@ -33844,6 +34084,16 @@
       }
     },
     {
+      "metricKey": "road-peak-travel-speed",
+      "grain": "prefecture",
+      "year": "2021",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
       "metricKey": "road-prefectural-route-length",
       "grain": "prefecture",
       "year": "2023",
@@ -33868,6 +34118,16 @@
       "metricKey": "road-total-length-with-expressway",
       "grain": "prefecture",
       "year": "2023",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "road-traffic-congestion",
+      "grain": "prefecture",
+      "year": "2021",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -36048,6 +36308,17 @@
       "colorSchemeType": "sequential",
       "classification": {
         "method": "continuous"
+      }
+    },
+    {
+      "metricKey": "snow-weather-traffic-accidents-per-100k",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "quantile",
+        "classes": 5
       }
     },
     {
@@ -38923,6 +39194,16 @@
       "classification": {
         "method": "quantile",
         "classes": 5
+      }
+    },
+    {
+      "metricKey": "traffic-accidents-party-a-age-75-plus-per-100k",
+      "grain": "prefecture",
+      "year": "2025",
+      "areaCount": 47,
+      "colorSchemeType": "sequential",
+      "classification": {
+        "method": "continuous"
       }
     },
     {
