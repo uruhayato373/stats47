@@ -1,7 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import { REGIONS } from '../../../../packages/area/src/constants/regions';
-import { rankingChartFromNoteData, rasterSafeSvg } from '../../../../.claude/scripts/note/build-ranking-type-images';
+import { getMetricConfig } from '../../../../packages/data-configs/src/registry';
+import { rankingChartFromArticleData } from '../../lib/type-chart-input';
 import { renderRegionalBoxplotChart } from '../../lib/template-regional-boxplot';
+
+// note の入力 (chart-data.json) と同じ形で型の入力を作る。note 側の変換は .claude/scripts/note/__tests__ で検査する
+const rankingChartFromNoteData = (chartData: ReturnType<typeof noteData>) => {
+  const metric = getMetricConfig(chartData._meta.rankingKey);
+  const chart = rankingChartFromArticleData({
+    title: metric?.title ?? chartData.copy.canonicalTitle, year: String(chartData._meta.year), unit: chartData.unit, source: '',
+    rankingKey: chartData._meta.rankingKey, data: chartData.data.map((row) => ({ areaCode: row.area_code, value: row.value })),
+  }, { metric, prefCodeOf: () => '', prefNameOf: (code) => chartData.data.find((row) => row.area_code.startsWith(code))?.area_name ?? code });
+  if ('skip' in chart) throw new Error(chart.skip);
+  return chart;
+};
 
 const codes = Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, '0')}000`);
 const noteData = (valueOf: (code: string, i: number) => number = (_, i) => 20 + i / 10) => ({
@@ -27,21 +39,5 @@ describe('地方別の箱ひげの型', () => {
     const sorted = region.prefectures.map((_, i) => 10 + i);
     const mid = (sorted[Math.floor((sorted.length - 1) / 2)] + sorted[Math.ceil((sorted.length - 1) / 2)]) / 2;
     expect(svg).toContain(`data-median="${mid}"`);
-  });
-});
-
-describe('note の入力', () => {
-  it('固定コピーの通し番号ではなく、同値を同順位にする', () => {
-    const chart = rankingChartFromNoteData(noteData((_, i) => (i < 2 ? 40 : 30 - i / 10)));
-    expect(chart.rows.slice(0, 3).map((row) => row.rank)).toEqual([1, 1, 3]);
-  });
-
-  it('47 県がそろわない指標は止める', () => {
-    const data = noteData();
-    expect(() => rankingChartFromNoteData({ ...data, data: data.data.slice(0, 46) })).toThrow(/47都道府県/);
-  });
-
-  it('PNG に焼くときだけ °C を 1 文字にする', () => {
-    expect(rasterSafeSvg('<text>36.2°C</text>')).toBe('<text>36.2℃</text>');
   });
 });

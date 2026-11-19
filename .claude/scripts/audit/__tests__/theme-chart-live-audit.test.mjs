@@ -36,7 +36,7 @@ import {
 const row = (area, value) => ({ "@area": area, $: value });
 
 test("CLIはR2指標の部分監査をJSONへ出力し、未検査の指標を成功扱いにしない", async () => {
-  const mirror = JSON.parse(readFileSync(new URL("../theme-chart-dependencies.generated.json", import.meta.url), "utf8"));
+  const mirror = JSON.parse(readFileSync(new URL("../../../../packages/data-configs/mirror/theme-chart-dependencies.generated.json", import.meta.url), "utf8"));
   const metric = mirror.metrics[0];
   const payload = {
     metricKey: metric.metricKey,
@@ -323,7 +323,7 @@ test("推移の図の一覧が無い・最低点数が不正な依存ミラー�
 });
 
 test("コミット済みの依存ミラーは推移の図を持ち、最低点数は 5 以上 (現物)", () => {
-  const mirror = JSON.parse(readFileSync(new URL("../theme-chart-dependencies.generated.json", import.meta.url), "utf8"));
+  const mirror = JSON.parse(readFileSync(new URL("../../../../packages/data-configs/mirror/theme-chart-dependencies.generated.json", import.meta.url), "utf8"));
   const { trendCharts, minTrendYears } = parseTrendChartMirror(mirror);
   assert.ok(trendCharts.length >= 20, `推移の図が ${trendCharts.length} 件しかない`);
   assert.ok(minTrendYears >= 5);

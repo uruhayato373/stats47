@@ -24,7 +24,7 @@ describe('Theme charts depend exclusively on registered metric IDs', () => {
  });
  it('generates a fresh audit mirror with authoritative units and recipe hashes', () => {
   const mirror = buildThemeDependencyMirror(THEME_CATALOGS);
-  const stored = JSON.parse(readFileSync(new URL('../../../../../.claude/scripts/audit/theme-chart-dependencies.generated.json', import.meta.url), 'utf8'));
+  const stored = JSON.parse(readFileSync(new URL('../../../mirror/theme-chart-dependencies.generated.json', import.meta.url), 'utf8'));
   expect(stored).toEqual(mirror); expect(mirror).not.toHaveProperty('requests');
   for (const ref of mirror.metrics) { const metric = getMetricConfig(ref.metricKey)!; expect(ref.expectedUnit).toBe(metric.unit); expect(ref.expectedConfigHash).toBe(buildRecipe(metric).configHash); }
  });

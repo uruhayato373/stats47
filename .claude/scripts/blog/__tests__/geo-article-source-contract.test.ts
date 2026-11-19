@@ -5,11 +5,11 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 import ts from 'typescript';
-import { test } from 'vitest';
+import { test } from 'node:test';
 
-import { resolveBlogChartSurveyTaxonomy } from '../survey-taxonomy';
+import { resolveBlogChartSurveyTaxonomy } from '../../../../packages/ranking/src/survey/survey-taxonomy';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 
 interface SourceManifest {
   kind: string;

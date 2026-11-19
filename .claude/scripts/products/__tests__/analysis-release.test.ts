@@ -1,14 +1,14 @@
-// @vitest-environment node
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { createHash } from 'node:crypto';
 import JSZip from 'jszip';
-import { afterEach, expect, it } from 'vitest';
-import { inspectAnalysisRelease, prepareAnalysisDelivery, publishAnalysisDelivery, verifyAnalysisNote, type AnalysisNoteVerification } from '../../../../../.claude/scripts/products/release-analysis-pack';
-import { readProductLanding } from '../product-landing';
+import assert from 'node:assert/strict';
+import { afterEach, it } from 'node:test';
+import { inspectAnalysisRelease, prepareAnalysisDelivery, publishAnalysisDelivery, verifyAnalysisNote, type AnalysisNoteVerification } from '../release-analysis-pack';
+import { readProductLanding } from '../../../../apps/web/scripts/lib/product-landing';
 
-const root = path.resolve(__dirname, '../../../../..');
+const root = path.resolve(import.meta.dirname, '../../../..');
 const hash = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');
 const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const temporaries: string[] = [];
@@ -52,37 +52,37 @@ it('dry-runは台帳・公開画像・非公開ZIPへ書かず、note確認後�
   const setup = await fixture();
   const original = fs.readFileSync(path.join(setup.directory, 'data/products/landing-evidence/p-01.json'), 'utf8');
   const dry = await prepareAnalysisDelivery(setup.directory, 'P-01');
-  expect(dry.warnings).toEqual([]);
-  expect(dry.committed).toBe(false);
-  expect(fs.existsSync(path.join(setup.directory, '.local/r2'))).toBe(false);
-  expect(fs.readFileSync(path.join(setup.directory, 'data/products/landing-evidence/p-01.json'), 'utf8')).toBe(original);
+  assert.deepEqual(dry.warnings, []);
+  assert.equal(dry.committed, false);
+  assert.equal(fs.existsSync(path.join(setup.directory, '.local/r2')), false);
+  assert.equal(fs.readFileSync(path.join(setup.directory, 'data/products/landing-evidence/p-01.json'), 'utf8'), original);
   const objects = new Map<string, Buffer>();
   const store = { get: async (key: string) => objects.get(key) ?? null, put: async (key: string, bytes: Buffer) => { if (objects.has(key)) throw Error('write once'); objects.set(key, bytes); } };
   const prepared = await prepareAnalysisDelivery(setup.directory, 'P-01', { commit: true, store });
-  expect(prepared.delivery.status).toBe('prepared');
-  expect(objects.size).toBe(1);
-  expect(readProductLanding(setup.directory, 'P-01', setup.landing.articleKey).included).not.toContain('追加CSV');
+  assert.equal(prepared.delivery.status, 'prepared');
+  assert.equal(objects.size, 1);
+  assert.ok(!readProductLanding(setup.directory, 'P-01', setup.landing.articleKey).included.includes('追加CSV'));
   const article = JSON.parse(fs.readFileSync(path.join(setup.directory, 'data/note/articles.json'), 'utf8')).articles.find((item: {key: string}) => item.key === setup.landing.articleKey);
   const delivery = prepared.delivery;
   const verification: AnalysisNoteVerification = { productId: 'P-01', version: delivery.version, sourceManifestSha256: delivery.sourceManifestSha256,
     planSha256: delivery.planSha256, archiveSha256: delivery.archive.sha256, noteUrl: article.noteUrl, priceYen: article.priceJpy,
     verifiedAt: new Date().toISOString(), attachmentName: delivery.attachmentName, paidBodySha256: 'b'.repeat(64) };
   for (const changed of [{ productId: 'P-02' }, { sourceManifestSha256: 'c'.repeat(64) }, { archiveSha256: 'c'.repeat(64) }, { priceYen: 1 }]) {
-    expect(() => verifyAnalysisNote(delivery, { ...verification, ...changed }, { id: 'P-01', externalUrl: article.noteUrl, priceYen: article.priceJpy })).toThrow('一致');
+    assert.throws(() => verifyAnalysisNote(delivery, { ...verification, ...changed }, { id: 'P-01', externalUrl: article.noteUrl, priceYen: article.priceJpy }), /一致/);
   }
-  expect(() => verifyAnalysisNote(delivery, { ...verification, unexpected: true } as AnalysisNoteVerification, { id: 'P-01', externalUrl: article.noteUrl, priceYen: article.priceJpy })).toThrow('shape');
+  assert.throws(() => verifyAnalysisNote(delivery, { ...verification, unexpected: true } as AnalysisNoteVerification, { id: 'P-01', externalUrl: article.noteUrl, priceYen: article.priceJpy }), /shape/);
   await publishAnalysisDelivery(setup.directory, 'P-01', verification, { commit: true, store });
-  expect(readProductLanding(setup.directory, 'P-01', setup.landing.articleKey).included).toContain('追加CSV');
-  expect(fs.readdirSync(path.join(setup.directory, '.local/r2/app/products/data-p-01/showcase'))).toEqual([`${delivery.version}-extra.png`]);
+  assert.ok(readProductLanding(setup.directory, 'P-01', setup.landing.articleKey).included.includes('追加CSV'));
+  assert.deepEqual(fs.readdirSync(path.join(setup.directory, '.local/r2/app/products/data-p-01/showcase')), [`${delivery.version}-extra.png`]);
 });
 
 it('manifest変更・重複・商品ID不一致を停止する', async () => {
   const setup = await fixture();
   const file = `${setup.archiveDirectory}/manifest.json`;
   setup.write(file, json({ ...setup.evidence.analysisRevision, productId: 'P-02' }));
-  await expect(inspectAnalysisRelease(setup.directory, 'P-01')).rejects.toThrow('manifest');
+  await assert.rejects(inspectAnalysisRelease(setup.directory, 'P-01'), /manifest/);
   const duplicate = { ...setup.evidence.analysisRevision, files: [...setup.evidence.analysisRevision.files, setup.evidence.analysisRevision.files[0]] };
   setup.write(file, json(duplicate));
   setup.write('data/products/landing-evidence/p-01.json', json({ ...setup.evidence, analysisRevision: duplicate }));
-  await expect(inspectAnalysisRelease(setup.directory, 'P-01')).rejects.toThrow('重複');
+  await assert.rejects(inspectAnalysisRelease(setup.directory, 'P-01'), /重複/);
 });

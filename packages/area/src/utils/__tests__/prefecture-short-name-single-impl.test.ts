@@ -9,17 +9,15 @@ import { describe, expect, it } from "vitest";
  *
  * KNOWN_LOCAL_IMPLEMENTATIONS は移行が済んでいない既存箇所 (縮小専用)。移行したら行を消す。
  * 検出はリテラルの正規表現形だけを見る (別の書き方は拾えない)。対象は TypeScript (`@stats47/area` を import できる層) で、
- * 素の node で動く `.claude/scripts` 配下の `.mjs` は TS を import できないため対象外 (同種の実装が残る。backlog 起票対象)。
+ * `.claude/scripts` の走査は .claude/scripts/lib/__tests__/claude-scripts-consumer-contracts.test.mjs が持つ (packages のテストは `.claude` を読まない)。
  */
 const REPO_ROOT = resolve(__dirname, "../../../../..");
-const SCAN_ROOTS = ["apps", "packages", ".claude/scripts"];
+const SCAN_ROOTS = ["apps", "packages"];
 const SKIP_DIRS = new Set(["node_modules", "dist", ".next", ".open-next", "__tests__", "public", "out", ".turbo"]);
 const LOCAL_SHORT_NAME_RE = /replace\(\s*\/(?:\[都道?府県\]|\(都\|(?:道\|)?府\|県\))\$\//;
 
 const SINGLE_IMPL = "packages/area/src/utils/prefecture-short-name.ts";
 const KNOWN_LOCAL_IMPLEMENTATIONS: readonly string[] = [
-  ".claude/scripts/blog/generate-article-charts.ts",
-  ".claude/scripts/blog/regenerate-tile-maps.ts",
   "apps/web/src/features/ads/constants/furusato-nozei.ts",
   "packages/product-factory/src/channels/kindle/ai-content-composer.ts",
   "packages/product-factory/src/text/fact-claims.ts",

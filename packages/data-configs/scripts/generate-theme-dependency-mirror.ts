@@ -27,8 +27,7 @@ import { buildThemeDependencyMirror } from "../src/theme-catalog/chart-dependenc
 import { THEME_CATALOGS } from "../src/theme-catalog/index";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = resolve(HERE, "../../..");
-const OUT = resolve(REPO_ROOT, ".claude/scripts/audit/theme-chart-dependencies.generated.json");
+const OUT = resolve(HERE, "../mirror/theme-chart-dependencies.generated.json");
 
 /** 決定的にシリアライズする (末尾改行つき)。 */
 function serialize(): string {

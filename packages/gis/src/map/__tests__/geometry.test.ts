@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { MAINLAND_BBOX, dropSmallIslands, fittedMercator, inMainlandBox, isMainlandFeature, isMainlandPolygon, largestPolygon, polygonAreaKm2, topologyFeatures } from '../geometry.mjs';
 
 const ROOT = path.resolve(__dirname, '../../../../..');
-const SCANNED = ['apps/remotion/src', 'apps/admin/lib', 'apps/admin/scripts', '.claude/scripts', 'packages'];
+const SCANNED = ['apps/remotion/src', 'apps/admin/lib', 'apps/admin/scripts', 'packages'];
 const SKIPPED_DIRECTORIES = new Set(['node_modules', '.local', '__tests__', 'dist']);
 // Interactive d3 on the site and a KML export: neither draws a static image or a video frame.
 const OWN_PROJECTION = new Set([
@@ -32,7 +32,6 @@ describe('地図の土台', () => {
   it('対象の検索が実際に地図の処理を見ている', () => {
     const files = new Set(SCANNED.flatMap(sourceFiles));
     expect(files.has('apps/remotion/src/features/buzz-map/geo.ts')).toBe(true);
-    expect(files.has('.claude/scripts/note/lib/cover-visuals.ts')).toBe(true);
   });
 
   it('対象の名前の無い topology は最初の object を読み、object が無ければ空にする', () => {
