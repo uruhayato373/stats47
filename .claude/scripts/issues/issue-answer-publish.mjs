@@ -39,7 +39,7 @@ function readBookAnalyses() {
       .flatMap((file) => readJson(file).analyses ?? []));
 }
 const require = createRequire(import.meta.url);
-const { R2_PUBLIC_BASE_URL } = require("../lib/site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = require("../../../packages/types/mirror/site-config.cjs");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const REASON = (issue) => `問い ${issue} に答える下書き。公開後に issue-links の answers を足したら、この行を消して導出に任せる`;
 const REASON_RE = /^問い (issue:[A-Z]\d{2}(?:-\d+)?) に答える下書き。/;

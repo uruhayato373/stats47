@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { extractYearCode } = require("../lib/year-code.mjs");
+const { extractYearCode } = require("../../../packages/estat-api/mirror/year-code.mjs");
 // Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * e-Stat 候補 metric の年度カバレッジを実 API で確認する。

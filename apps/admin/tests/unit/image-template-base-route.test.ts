@@ -21,7 +21,7 @@ import {
   FILES,
   readTemplates,
   sha,
-} from '../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 describe('basic-form route does not require articles or image inventory', () => {
   beforeEach(() => {
     fixture.root = fs.mkdtempSync(

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** 2023 housing census, final table 34-1. Preserve rounded estimates. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { require as tsxRequire } from 'tsx/cjs/api';
 const require = createRequire(import.meta.url);
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 // .ts は tsx 経由で読む (素の node は index.ts の拡張子なし import を解決できない)
 const { buildRecipe } = tsxRequire(
   '../../../packages/data-configs/src/recipe.ts',

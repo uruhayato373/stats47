@@ -4,7 +4,7 @@ import {
   assertWorkspaceMutation,
   workspaceError,
 } from '@/lib/server/workspace-request';
-import { WorkspaceError } from '../../../../../../../.claude/scripts/media/lib/workspace.mjs';
+import { WorkspaceError } from '@stats47/ops/media/workspace.mjs';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export async function POST(

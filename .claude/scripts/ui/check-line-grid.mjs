@@ -8,7 +8,7 @@ import { chromium } from "../../../node_modules/playwright/index.mjs";
 import fs from "node:fs";
 
 import { evaluateLineGridIssues } from "../page-quality/lib/line-grid-probe.mjs";
-import { browserPages } from "../page-quality/templates.ts";
+import { browserPages } from "../../../packages/ops/src/page-quality/templates.ts";
 
 const DEFAULT_PAGES = browserPages().map(({ key, url }) => ({ name: key, url }));
 

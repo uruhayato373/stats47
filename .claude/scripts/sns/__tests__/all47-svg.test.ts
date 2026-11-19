@@ -49,7 +49,7 @@ test('県庁所在市の値を県全体と誤認させず都市名で表示す�
   assert.ok(svg.includes('県庁所在市'));
 });
 test('発行元・宣伝文・読み方の注記を画像に入れない (chart-image-copy.md)', async () => {
-  const { assertMinimalChartCopy } = await import('../../media/lib/image-copy.mjs');
+  const { assertMinimalChartCopy } = await import('../../../../packages/ops/src/media/image-copy.mjs');
   for (const capitalCities of [false, true]) {
     const svg = renderAll47TileSvg(rows, { ...opts, capitalCities });
     assertMinimalChartCopy(svg);

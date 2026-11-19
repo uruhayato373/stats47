@@ -20,7 +20,7 @@ const REQUIRED_INCLUDE = [
 const SCOPE_DIRS = [".claude/scripts/lib", ".claude/scripts/measurement", ".claude/scripts/metrics/lib"];
 // 範囲内で型検査を外してよいファイル。理由の無い追加はしない。
 const NOCHECK_ALLOWED = new Map([
-  [".claude/scripts/lib/unit-semantics.mjs", "自動生成の鏡。型は正典 packages/data-configs/src/unit/unit-semantics.ts が検査する"],
+  ["packages/data-configs/mirror/unit-semantics.mjs", "自動生成の鏡。型は正典 packages/data-configs/src/unit/unit-semantics.ts が検査する"],
 ]);
 
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), "utf8");

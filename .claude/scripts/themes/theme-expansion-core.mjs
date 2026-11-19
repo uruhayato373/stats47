@@ -1,5 +1,5 @@
 import { createRequire } from 'node:module';
-import { PREF_AREA_CODES } from '../lib/prefectures.cjs';
+import { PREF_AREA_CODES } from '../../../packages/area/mirror/prefectures.cjs';
 
 const require = createRequire(import.meta.url);
 const { extractYearCode } = require('../../../packages/estat-api/src/stats-data/utils/extract-year-code.ts');

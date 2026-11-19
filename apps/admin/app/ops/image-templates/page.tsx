@@ -2,7 +2,7 @@ import { ImageTemplateWorkspace } from '@/components/content/image-template-work
 import {
   readTemplates,
   sha,
-} from '../../../../../.claude/scripts/media/lib/workspace.mjs';
+} from '@stats47/ops/media/workspace.mjs';
 import { projectRoot } from '@/lib/server/project-root';
 import {
   templateCatalog,
@@ -11,7 +11,7 @@ import {
 import Link from 'next/link';
 import { buttonVariants } from '@stats47/components';
 import { redirect } from 'next/navigation';
-import { taxonomyQuery } from '../../../../../.claude/scripts/media/lib/taxonomy.mjs';
+import { taxonomyQuery } from '@stats47/ops/media/taxonomy.mjs';
 import { loadStatisticalSamples } from '@/lib/server/template-statistical-samples';
 import { PageHeading } from '@/components/ops/primitives';
 import { datasetPath } from '../../../../../config/datasets.mjs';

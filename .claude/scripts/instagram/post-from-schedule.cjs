@@ -38,7 +38,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const { R2_PUBLIC_BASE_URL } = require("../lib/site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = require("../../../packages/types/mirror/site-config.cjs");
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 const store = require("../lib/sns-posts-store.cjs");
 

@@ -7,7 +7,7 @@ paths:
 ---
 # 統計画像内のテキスト（4媒体共通）
 
-note・サイト・X・Instagramの統計図は、[画像コピー共通契約](../scripts/media/lib/image-copy.mjs) の `CHART_IMAGE_COPY_POLICY` を適用する。2026-10-19のオーナー再指示で固定。
+note・サイト・X・Instagramの統計図は、[画像コピー共通契約](../../packages/ops/src/media/image-copy.mjs) の `CHART_IMAGE_COPY_POLICY` を適用する。2026-10-19のオーナー再指示で固定。
 
 - **発行元（stats47・stats47.jp・ブランド行・透かし）は画像に入れない（2026-11-02 オーナー決定）。** 発行元は記事本文・投稿文で示し、画像は指標と図の印象だけで勝負する。`assertMinimalChartCopy` が `stats47` を含む可視テキストを拒否する。既存の生成経路（SNS の Remotion・quick-still・バズマップ）は共通化の移行時に外す（`IMAGE-PUBLISHER-REMOVAL-01`）。
 - 画像内に残すのは指標名・年・単位・短い出典・凡例と、誤読を防ぐ必須条件だけ。母数・比較基準・抜粋範囲・統計定義は必要なものを1回だけ短く示す。

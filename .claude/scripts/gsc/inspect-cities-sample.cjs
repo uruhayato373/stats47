@@ -19,7 +19,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
+const { GSC_PROPERTY, SITE_ORIGIN } = require("../../../packages/types/mirror/site-config.cjs");
 const { createSearchConsoleClient } = require("../lib/google-client.cjs");
 const { datasetDir } = require("../../../config/datasets.mjs");
 

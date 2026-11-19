@@ -30,7 +30,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { DATASETS, datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { rankingR2Key, statsR2Key } from '../../lib/r2-keys.mjs';
+import { rankingR2Key, statsR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * 教材 (参考文献) の分析企画 1 件から、note 記事の作業コピー一式を R2 の観測値だけで決定的に作る。
  * 規約: .claude/rules/reference-source-standards.md「分析企画の展開」・.claude/scripts/note/catalog/README.md
@@ -22,11 +22,11 @@ import { rankingR2Key, statsR2Key } from '../../lib/r2-keys.mjs';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { PREF_CAPITAL_COORDS } from '../../../../packages/migration-flow/src/lib/pref-capitals';
-import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL } from '../../../../packages/types/mirror/site-config.cjs';
 import {
   type ExpansionRecord, type ReferenceAnalysis, checkRecord, expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion, validateExpansion,
-} from '../../source-vault/lib/reference-expansion.mjs';
-import { readArticleLedger, updateArticleLedger } from '../lib/article-ledger.mjs';
+} from '../../../../packages/ops/src/source-vault/lib/reference-expansion.mjs';
+import { readArticleLedger, updateArticleLedger } from '../../../../packages/ops/src/note/article-ledger.mjs';
 import { qualifyLabel } from './lib/estat-denominator';
 import SSDS_PROVENANCE from '../../../../packages/data-configs/src/ssds/ssds-provenance.generated.json';
 import { datasetPath } from '../../../../config/datasets.mjs';

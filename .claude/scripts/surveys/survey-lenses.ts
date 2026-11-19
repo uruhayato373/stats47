@@ -13,9 +13,9 @@ import path from "node:path";
 import { KAKEI_ANALYSES } from "@stats47/data-configs";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 import { checkLensLedgers, lensStatus, type LensLedger } from "../lib/survey-lenses.mjs";
-import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from "../source-vault/lib/reference-expansion.mjs";
+import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from "../../../packages/ops/src/source-vault/lib/reference-expansion.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 /** 表の実在を確かめられる調査の台帳 (statsDataId の一覧を持つもの) */

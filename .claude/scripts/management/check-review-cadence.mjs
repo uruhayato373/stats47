@@ -18,7 +18,7 @@ import { appendFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { formatCadence, reviewCadence } from "./lib/review-cadence.mjs";
+import { formatCadence, reviewCadence } from "../../../packages/ops/src/management/review-cadence.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = process.argv.slice(2);

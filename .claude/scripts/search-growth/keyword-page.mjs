@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
 import { hash } from './lib/keyword-cycle.mjs';
 import { readJson, writeJson } from './keyword-cycle.mjs';
-import { SITE_ORIGIN } from '../lib/site-config.cjs';
+import { SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const DIR = '.local/seo-rank-watch';

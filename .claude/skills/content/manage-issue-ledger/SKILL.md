@@ -11,7 +11,7 @@ primary_agent: blog-seo-strategist
 
 問いの台帳を読み書きするスキル。記事は書かない。記事の生産は既存のスキルへ渡し、ここは問いの追加・配線・見送りと、渡す相手の判断だけを持つ。
 
-正典は `docs/01_技術設計/03_情報設計.md`「問いの台帳」、機械の規則は `.claude/scripts/issues/issue-graph-core.mjs`。ここに規則を写さない。
+正典は `docs/01_技術設計/03_情報設計.md`「問いの台帳」、機械の規則は `packages/ops/src/issues/issue-graph-core.mjs`。ここに規則を写さない。
 
 **禁止**: 問いを分類軸にしない (URL・ナビ・タグを作らない)。台帳の写しを別ファイルに作らない。
 

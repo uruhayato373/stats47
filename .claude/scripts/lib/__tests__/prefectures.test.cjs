@@ -8,7 +8,7 @@ const path = require("node:path");
 const test = require("node:test");
 const vm = require("node:vm");
 
-const filename = path.resolve(__dirname, "../prefectures.cjs");
+const filename = path.resolve(__dirname, "../../../../packages/area/mirror/prefectures.cjs");
 const source = fs.readFileSync(filename, "utf8");
 const root = path.resolve(__dirname, "../../../..");
 

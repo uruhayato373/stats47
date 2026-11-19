@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { taxonomyQuery } from '../../../../../.claude/scripts/media/lib/taxonomy.mjs';
+import { taxonomyQuery } from '@stats47/ops/media/taxonomy.mjs';
 import { mediaViewRedirect } from '@/lib/media-workspace-navigation';
 import { MediaWorkspace } from '@/components/content/media-workspace';
 import { PageHeading } from '@/components/ops/primitives';

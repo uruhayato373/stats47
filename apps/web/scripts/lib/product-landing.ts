@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { assertDatasetShape } from "../../../../.claude/scripts/lib/dataset-shape.mjs";
+import { assertDatasetShape } from "@stats47/ops/datasets/dataset-shape.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { resolveProductThemeReferences, type ProductThemeReference } from "../../../../packages/product-factory/src/analysis/theme-references";
 

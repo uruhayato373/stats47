@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 // .claude/scripts/note/ → 3 階層上がリポジトリ root
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const DOCS = path.join(ROOT, "docs/31_note記事原稿");
-import { readArticleLedger, writeArticleLedger } from "./lib/article-ledger.mjs";
+import { readArticleLedger, writeArticleLedger } from "../../../packages/ops/src/note/article-ledger.mjs";
 
 const slugs = fs.readdirSync(DOCS).filter((d) => /^(a-kakei-|b-kakei-|d-kakei-)/.test(d)).sort();
 const ledger = readArticleLedger();

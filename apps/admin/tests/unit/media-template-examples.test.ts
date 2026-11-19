@@ -12,7 +12,7 @@ import {
   comparisonTopic,
   TEMPLATE_CHANNELS,
 } from '@/lib/media-template-examples';
-import type { ImageView } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import type { ImageView } from '@stats47/ops/media/workspace.mjs';
 
 function image(id: string, patch: Partial<ImageView> = {}): ImageView {
   return {

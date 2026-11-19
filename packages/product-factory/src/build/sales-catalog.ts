@@ -11,7 +11,7 @@ import { FREE_SAMPLE_STATE, readFreeSampleDelivery } from "./free-sample-deliver
 import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 // note の公開 URL の形は config/schema/common.schema.json の noteUrl が唯一の定義
-import { NOTE_URL_PATTERN } from "../../../../.claude/scripts/lib/dataset-shape.mjs";
+import { NOTE_URL_PATTERN } from "@stats47/ops/datasets/dataset-shape.mjs";
 
 type Obj = Record<string, unknown>;
 const obj = (v: unknown): Obj => v !== null && typeof v === "object" && !Array.isArray(v) ? v as Obj : {};
@@ -35,10 +35,10 @@ export interface SalesOffer {
 export function localPath(root: string, path: string): string {
   if (!path || isAbsolute(path)) throw new Error("relative evidence path required");
   const full = resolve(root, path), rel = relative(resolve(root), full);
-  if (!rel || rel === ".." || rel.startsWith("../") || rel.startsWith("..\\") || isAbsolute(rel)) throw new Error("unsafe evidence path");
+  if (!rel || rel === ".." || rel.startsWith("..") || rel.startsWith("..\\") || isAbsolute(rel)) throw new Error("unsafe evidence path");
   if (existsSync(full)) {
     const real = relative(realpathSync(root), realpathSync(full));
-    if (!real || real === ".." || real.startsWith("../") || isAbsolute(real)) throw new Error("unsafe symlink evidence path");
+    if (!real || real === ".." || real.startsWith("..") || isAbsolute(real)) throw new Error("unsafe symlink evidence path");
   }
   return full;
 }

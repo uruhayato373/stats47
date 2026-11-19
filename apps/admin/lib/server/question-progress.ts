@@ -5,11 +5,11 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
-import { classifyAll } from "../../../../.claude/scripts/content-types/classify-core.mjs";
-import { readClassifyInputs } from "../../../../.claude/scripts/content-types/content-types-io.mjs";
-import { analysisCycleErrors, reviewedArticleText } from "../../../../.claude/scripts/analysis/analysis-cycle-core.mjs";
-import { readDraftStates } from "../../../../.claude/scripts/issues/issue-draft-state.mjs";
-import { indexPages } from "../../../../.claude/scripts/issues/issue-graph-core.mjs";
+import { classifyAll } from "@stats47/ops/content-types/classify-core.mjs";
+import { readClassifyInputs } from "@stats47/ops/content-types/content-types-io.mjs";
+import { analysisCycleErrors, reviewedArticleText } from "@stats47/ops/analysis/analysis-cycle-core.mjs";
+import { readDraftStates } from "@stats47/ops/issues/issue-draft-state.mjs";
+import { indexPages } from "@stats47/ops/issues/issue-graph-core.mjs";
 import { analysisInputs, articleFigures, frontmatterValue, outlineOf, verdictOf, viewpointRows, type AnalysisInput, type AnalysisViewpoint, type ViewpointLayer, type ViewpointRow } from "../question-detail";
 import { buildQuestionProgress, type ExternalLink, type QuestionAnalysis, type QuestionDestination, type QuestionFigure, type QuestionIssue, type QuestionLink, type QuestionProgress } from "../question-progress";
 import { projectRoot } from "./project-root";

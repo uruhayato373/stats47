@@ -8,7 +8,7 @@ import { projectRoot } from "./project-root";
 /**
  * TODO 台帳 (.claude/todo/*.md) の読み取り。**読み取り専用**で書き込み経路を持たない。
  *
- * ★パーサは自前で持たず `.claude/scripts/lib/backlog-lib.cjs` (v3-unified の単一実装。
+ * ★パーサは自前で持たず `packages/ops/src/management/backlog-lib.cjs` (v3-unified の単一実装。
  *   doboku-note と統一のカード構文) を共有する。backlog-loop (CI)・docs-governance・
  *   管理画面が同じ実体を使うので、画面で見えている件数と loop が処理する件数がずれない。
  *   .cjs の読み込みは posts-store.ts と同じ eval("require") — webpack の静的解析を避ける。
@@ -54,7 +54,7 @@ type BacklogLib = {
 let cachedLib: BacklogLib | null = null;
 function lib(): BacklogLib {
   if (cachedLib) return cachedLib;
-  const abs = path.join(projectRoot(), ".claude/scripts/lib/backlog-lib.cjs");
+  const abs = path.join(projectRoot(), "packages/ops/src/management/backlog-lib.cjs");
   const nativeRequire = eval("require") as NodeRequire;
   cachedLib = nativeRequire(abs) as BacklogLib;
   if (!cachedLib) throw new Error(`backlog-lib.cjs を読み込めません: ${abs}`);

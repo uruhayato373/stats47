@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { renderDistributionMap } from '@/lib/template-distribution-map';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 
 // Synthetic values check code-to-shape colouring; live data stays in the SHA-verified R2 snapshot.
 const fixture = () => ({

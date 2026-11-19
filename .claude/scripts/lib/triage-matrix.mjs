@@ -23,7 +23,7 @@
  *   .claude/skills/management/triage-improvement-log/SKILL.md (UX レイヤー)
  */
 
-import { isoWeekRange } from "../metrics/lib/periods.mjs";
+import { isoWeekRange } from "../../../packages/ops/src/metrics/periods.mjs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -74,7 +74,7 @@ function addDays(d, n) {
  * ISO 8601 は月曜始まり → その週の日曜は (月曜 + 6 日)。
  */
 function isoWeekToSunday(isoWeek) {
-  return new Date(`${isoWeekRange(isoWeek).sunday}T00:00:00Z`); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return new Date(`${isoWeekRange(isoWeek).sunday}T00:00:00Z`); // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 /**

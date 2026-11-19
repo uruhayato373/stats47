@@ -33,9 +33,9 @@ const rendererFiles = [
 ];
 
 async function main() {
-  const { ROOT, sha, imageById, inputKey, candidateKey, storeVerified, safeName } = await import('./lib/workspace.mjs');
-  const { mediaStore } = await import('./lib/storage.mjs');
-  const { assertStaticSvg } = await import('./lib/svg-safety.mjs');
+  const { ROOT, sha, imageById, inputKey, candidateKey, storeVerified, safeName } = await import('../../../packages/ops/src/media/workspace.mjs');
+  const { mediaStore } = await import('../../../packages/ops/src/media/storage.mjs');
+  const { assertStaticSvg } = await import('../../../packages/ops/src/media/svg-safety.mjs');
   for (const sample of samples) {
     const current = imageById(ROOT, sample.id);
     if (current.kind === 'cover') throw Error('Cover images use their dedicated workflow.');

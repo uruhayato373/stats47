@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import type { Page } from "playwright";
 
-import type { MetricValue } from "../types";
+import type { MetricValue } from "../../../../packages/ops/src/page-quality/types";
 import { evaluateLineGridIssues } from "./line-grid-probe.mjs";
 
 export const MAX_UI_FINDINGS = 10;

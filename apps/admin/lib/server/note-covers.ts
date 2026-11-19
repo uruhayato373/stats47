@@ -1,9 +1,9 @@
 import 'server-only';
-import { readCoverLedger, validateCoverLedger, coverDisplayState, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
-import { NOTE_COVER_CATEGORIES, noteCoverCategory, type NoteCoverCategory } from '../../../../.claude/scripts/note/catalog/cover-categories';
-import { NOTE_ARTICLES } from '../../../../.claude/scripts/note/catalog';
+import { readCoverLedger, validateCoverLedger, coverDisplayState, type CoverRevision } from '@stats47/ops/note/cover-assets.mjs';
+import { NOTE_COVER_CATEGORIES, noteCoverCategory, type NoteCoverCategory } from '@stats47/ops/note/catalog/cover-categories.mjs';
+import { NOTE_ARTICLES } from '@stats47/ops/note/catalog';
 import { projectRoot } from './project-root';
-import { coverProductionView, readCoverPolicies, validateCoverPolicies, type CoverProductionView } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
+import { coverProductionView, readCoverPolicies, validateCoverPolicies, type CoverProductionView } from '@stats47/ops/note/cover-production.mjs';
 
 export { NOTE_COVER_CATEGORIES };
 export type { NoteCoverCategory };

@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { test } from "node:test";
 
 import { appendRun } from "../../metrics/record-monthly-job.mjs";
-import { classifyRoute, handoffPlanWeek, loadIdIndex, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../lib/review-cadence.mjs";
+import { classifyRoute, handoffPlanWeek, loadIdIndex, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../../../../packages/ops/src/management/review-cadence.mjs";
 
 // 実リポジトリの state に依存しないよう、配線の正本と台帳を持つ小さなリポジトリを毎回組み立てる。
 const WEEKLY_SECTIONS = ["サマリー", "計画 vs 実績", "来週への申し送り"];

@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../types";
-import { PROJECT_ROOT } from "./thresholds";
+import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../../../../packages/ops/src/page-quality/types";
+import { PROJECT_ROOT } from "../../../../packages/ops/src/page-quality/lib/thresholds";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
 import { datasetDir } from "../../../../config/datasets.mjs";
 

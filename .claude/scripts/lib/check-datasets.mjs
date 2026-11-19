@@ -45,7 +45,7 @@ import {
   REGISTRIES, REGISTRY_REFS, RETIRED, SLOTS, SYSTEM_CONFIG, TARGETS,
 } from "../../../config/datasets.mjs";
 import { DOMAINS } from "../../../config/paths.mjs";
-import { addCommonSchema } from "./dataset-shape.mjs";
+import { addCommonSchema } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 import { RETENTION_POLICIES } from "./prune-state-snapshots.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url)));

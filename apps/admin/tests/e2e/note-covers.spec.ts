@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
-import { NOTE_ARTICLES } from '../../../../.claude/scripts/note/catalog';
-import { readCoverLedger } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
-import { coverProductionView, readCoverPolicies } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
+import { NOTE_ARTICLES } from '@stats47/ops/note/catalog';
+import { readCoverLedger } from '@stats47/ops/note/cover-assets.mjs';
+import { coverProductionView, readCoverPolicies } from '@stats47/ops/note/cover-production.mjs';
 import type { NoteCoverRow } from '../../lib/server/note-covers';
 
 async function filter(page: Page, action: () => Promise<unknown>) {

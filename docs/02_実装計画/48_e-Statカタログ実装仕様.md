@@ -66,7 +66,7 @@ estat-catalog/
   (都道府県の値を持っていても集計地域区分が「全国」や「該当なし」の表がある)。shardは調査コード`statCode`のみ、collectAreaとmeta由来の`areaKind`はfield
 - **47県判定は全dimを走査する**。都道府県が`area`でなく`cat01/cat02`に入る表があるため、
   01000〜47000 (または47件一致) を持つdimを`prefDim`として記録する
-  (実装: `.claude/scripts/lib/estat-catalog/normalize.mjs` `summarizeMeta`)
+  (実装: `packages/estat-api/src/catalog/normalize.mjs` `summarizeMeta`)
 - **timeはrangeに潰さない**。`extractYearCode`
   (`packages/estat-api/src/stats-data/utils/extract-year-code.ts`) で4桁年listを保持し、
   コードの`@name`から`timeKind` (calendar-year/fiscal-year/month/other) を付ける

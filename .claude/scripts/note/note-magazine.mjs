@@ -22,7 +22,7 @@ import { fileURLToPath } from "node:url";
 import { launchContext, assertAccount, UA } from "./lib/note-session.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const MAGAZINES_TS = join(ROOT, ".claude/scripts/note/catalog/magazines.ts");
+const MAGAZINES_TS = join(ROOT, "packages/ops/src/note/catalog/magazines.ts");
 const NEW_URL = "https://note.com/magazines/new";
 const NAME_MAX = 30;
 

@@ -16,14 +16,14 @@
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
 
-import { isoWeekRange } from "./lib/periods.mjs";
+import { isoWeekRange } from "../../../packages/ops/src/metrics/periods.mjs";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
-import { aspRevenueLines, productRevenueLine } from './nsm-revenue-lines.mjs';
-import { adsenseRevenueLine } from './lib/adsense-revenue.mjs';
+import { aspRevenueLines, productRevenueLine } from '../../../packages/ops/src/metrics/nsm-revenue-lines.mjs';
+import { adsenseRevenueLine } from '../../../packages/ops/src/metrics/adsense-revenue.mjs';
 import { formatCycleHealth, readCycleHealth } from './lib/cycle-health.mjs';
 import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
 
@@ -111,7 +111,7 @@ function pctDelta(cur, prv) {
 }
 
 function monOfWeek(week) {
-  return new Date(`${isoWeekRange(week).monday}T00:00:00Z`); // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return new Date(`${isoWeekRange(week).monday}T00:00:00Z`); // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
 }
 
 // ★引数は配列で渡す (execFileSync)。テンプレート文字列 + execSync だと引数がシェルとして

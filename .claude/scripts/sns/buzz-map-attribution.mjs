@@ -28,7 +28,7 @@ import {
   computeKpis,
   buildScoreFeedback,
 } from "./lib/buzz-map-attribution-core.mjs";
-import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient, findServiceAccountCredentials } from "../lib/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

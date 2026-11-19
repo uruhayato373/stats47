@@ -21,7 +21,7 @@
  *                       例 コンビニ店舗数×歳入決算総額 r=0.95・郵便局数×老人福祉費 (BLOG-TOPIC-PAIR-SCALE-01)。
  *                       count-pair と同じ理由で |r| に関係なく除外する
  */
-import { parseUnit } from "../../lib/unit-semantics.mjs";
+import { parseUnit } from "../../../../packages/data-configs/mirror/unit-semantics.mjs";
 
 const RATIO_UNIT_RE = /[%％‰倍]|ポイント/u;
 const DERIVED_KEY_RE =

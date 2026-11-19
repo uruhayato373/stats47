@@ -141,7 +141,7 @@ Static gateは常に実行する。その他は変更パスを決定的に分類
 
 **トリガー**: `main` ブランチへのPush、または手動実行（`workflow_dispatch`。コード変更なしで buildId を更新したいとき）
 
-最初に `Plan deploy` job が、この push が本番に関係するパスを含むかを `.claude/scripts/lib/plan-deploy-scope.mjs` で判定する。
+最初に `Plan deploy` job が、この push が本番に関係するパスを含むかを `packages/ops/src/ci/plan-deploy-scope.mjs` で判定する。
 関係しないパスだけの push はデプロイせず、判断できないときと手動実行はデプロイする
 （正典: `.claude/rules/branch-workflow.md`「デプロイの要否」）。
 

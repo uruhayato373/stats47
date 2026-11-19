@@ -26,8 +26,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { readArticleLedger, writeArticleLedger } from "./lib/article-ledger.mjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
+import { readArticleLedger, writeArticleLedger } from "../../../packages/ops/src/note/article-ledger.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const DOCS = path.join(ROOT, "docs/31_note記事原稿");

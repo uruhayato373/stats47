@@ -13,7 +13,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PREF_NAMES, PREF_AREA_CODES } from "../../lib/prefectures.cjs";
+import { PREF_NAMES, PREF_AREA_CODES } from "../../../../packages/area/mirror/prefectures.cjs";
 
 export const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
 export { PREF_NAMES, PREF_AREA_CODES };

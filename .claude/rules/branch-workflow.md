@@ -25,7 +25,7 @@ push から本番まで約 40 分 (PR 検査 11.7 分・デプロイ 22.4 分・
 
 ### デプロイの要否
 
-main への push は `deploy-workers.yml` の `scope` job が差分から判定する (`.claude/scripts/lib/plan-deploy-scope.mjs`)。本番に関係しないと確かめたパスだけの push は Deploy job を skip する。一覧に無いパスと、差分を読めないときは必ずデプロイする。手動実行は常にデプロイする。
+main への push は `deploy-workers.yml` の `scope` job が差分から判定する (`packages/ops/src/ci/plan-deploy-scope.mjs`)。本番に関係しないと確かめたパスだけの push は Deploy job を skip する。一覧に無いパスと、差分を読めないときは必ずデプロイする。手動実行は常にデプロイする。
 
 - skip でも workflow は success で終わるので、`workflow_run` で続く Post-Deploy Smoke などは動く。
 - 一覧へ足す前に、Worker の build の import と Deploy job の生成工程が読まないことを確かめる。Worker は実行時に git のファイルを読めない。

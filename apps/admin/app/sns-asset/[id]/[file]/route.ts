@@ -4,8 +4,8 @@ import { Readable } from "node:stream";
 
 import { getById } from "@/lib/server/posts-store";
 import { mimeFor } from "@/lib/server/safe-local-file";
-import { driveAbsolutePath, resolveDriveRoot } from "../../../../../../.claude/scripts/sns/lib/sns-drive-assets.mjs";
-import { readVerified } from "../../../../../../.claude/scripts/media/lib/storage.mjs";
+import { driveAbsolutePath, resolveDriveRoot } from "@stats47/ops/sns/sns-drive-assets.mjs";
+import { readVerified } from "@stats47/ops/media/storage.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

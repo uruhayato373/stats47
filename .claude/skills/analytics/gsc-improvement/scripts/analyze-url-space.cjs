@@ -18,7 +18,7 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const { URL } = require("url");
-const { SITE_ORIGIN } = require("../../../../scripts/lib/site-config.cjs");
+const { SITE_ORIGIN } = require("../../../../../packages/types/mirror/site-config.cjs");
 const { datasetDir } = require("../../../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");

@@ -29,7 +29,7 @@ import {
   type ReviewItem,
   validateAgentReview,
 } from "./lib/sns-image-review";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const { MAX_WEIGHTED_LENGTH, weightedLength } = require("../lib/x-weighted-length.cjs") as {
@@ -95,7 +95,7 @@ async function resolveImage(source: string, mediaDir: string): Promise<{ source:
         // .local/r2/sns は期限で消える。台帳に保全済みの private R2 の版があれば照合つきで戻す (2026-11-08)
         const row = store.loadAll().find((p: Record<string, unknown>) => p.media_path === source && Array.isArray(p.assets));
         if (row) {
-          const { ensureSnsImageLocal } = await import("../media/lib/storage.mjs");
+          const { ensureSnsImageLocal } = await import("../../../packages/ops/src/media/storage.mjs");
           path = (await ensureSnsImageLocal(row, PROJECT_ROOT).catch(() => null)) ?? undefined;
         }
       }

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { renderPopCover } from '../../../../.claude/scripts/note/lib/pop-cover-render';
-import { buildCoverPlan, readCoverPolicies, seedCoverProduction } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
-import { emptyCoverArticle, type CoverLedger } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { buildCoverPlan, readCoverPolicies, seedCoverProduction } from '@stats47/ops/note/cover-production.mjs';
+import { emptyCoverArticle, type CoverLedger } from '@stats47/ops/note/cover-assets.mjs';
 
 function plan() {
   const article = { key: 'pinned-intro', title: '紹介', category: 'intro' };

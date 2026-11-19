@@ -8,8 +8,8 @@
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { classifyAll, findStaleAssignments } from "./classify-core.mjs";
-import { readClassifyInputs } from "./content-types-io.mjs";
+import { classifyAll, findStaleAssignments } from "../../../packages/ops/src/content-types/classify-core.mjs";
+import { readClassifyInputs } from "../../../packages/ops/src/content-types/content-types-io.mjs";
 
 const ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
 const inputs = readClassifyInputs(ROOT);

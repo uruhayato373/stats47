@@ -13,7 +13,7 @@ ARGS=(--week "$WEEK")
 # GA4 Admin の監査は GA4_PROPERTY_ID を必須にする (CI では既定値に頼らず設定漏れで止める)。Mac のレビューでは
 # .env.local に置いていないので、CI の外に限って site-config.cjs の値を使う。
 if [ -z "${GA4_PROPERTY_ID:-}" ] && [ -z "${CI:-}" ]; then
-  GA4_PROPERTY_ID=$(node -e 'process.stdout.write(String(require("./.claude/scripts/lib/site-config.cjs").GA4_PROPERTY_ID))')
+  GA4_PROPERTY_ID=$(node -e 'process.stdout.write(String(require("./packages/types/mirror/site-config.cjs").GA4_PROPERTY_ID))')
   export GA4_PROPERTY_ID
 fi
 if ! node .claude/scripts/google-admin/cli.mjs audit-api > /tmp/google-admin-audit.txt 2>&1; then

@@ -6,7 +6,7 @@ import { config } from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { R2_BUCKET } from "../site-config.cjs";
+import { R2_BUCKET } from "../../../../packages/types/mirror/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..", "..");

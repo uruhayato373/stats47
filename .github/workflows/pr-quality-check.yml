@@ -66,7 +66,7 @@ jobs:
         id: plan
         run: |
           git diff --name-only -z "${{ github.event.pull_request.base.sha || inputs.base_sha }}" "${{ github.event.pull_request.head.sha || github.sha }}" \
-            | node .claude/scripts/lib/plan-pr-quality.mjs --stdin0 >> "$GITHUB_OUTPUT"
+            | node packages/ops/src/ci/plan-pr-quality.mjs --stdin0 >> "$GITHUB_OUTPUT"
 
   static-gates:
     name: Static Gates
@@ -225,7 +225,7 @@ jobs:
         # 書き込み漏れの検査本体 (--check) を直に呼ぶ。台帳 lyra-inline の checker として配線が辿れる
         run: |
           npm run ui-theme:lyra:test
-          node --import tsx .claude/scripts/ui/inline-lyra.mjs --check
+          node --import tsx packages/ui-theme/scripts/inline-lyra.mjs --check
         continue-on-error: false
 
       - name: 🃏 Card Census Guard
@@ -864,7 +864,7 @@ jobs:
 
       - name: 🔎 Analysis Cycle Gate
         run: |
-          # 問いの分析の工程。視点の結果・根拠・問いの語が揃うまで止める (.claude/scripts/analysis/analysis-cycle-core.mjs)
+          # 問いの分析の工程。視点の結果・根拠・問いの語が揃うまで止める (packages/ops/src/analysis/analysis-cycle-core.mjs)
           node .claude/scripts/analysis/check-analysis-cycle.mjs
         continue-on-error: false
 
@@ -914,7 +914,7 @@ jobs:
       - name: 📏 Unit Semantics Mirror Gate
         run: |
           # 単位の解釈は packages/data-configs/src/unit/unit-semantics.ts が正典で、
-          # .claude/scripts/lib/unit-semantics.mjs はそこからの自動生成 (素の node 実行用)。
+          # packages/data-configs/mirror/unit-semantics.mjs はそこからの自動生成 (素の node 実行用)。
           # 手写しの二重実装はドリフトする — それが単位解釈 44 箇所の独立実装を生み、
           # 「千円 SSOT × 円 本文」の桁ずれ誤検出を招いた (2026-08-12)。鏡の陳腐化を止める。
           # 規約: .claude/rules/unit-semantics-standards.md
@@ -923,7 +923,7 @@ jobs:
 
       - name: 🗝️ R2 Keys Mirror Gate
         run: |
-          # R2 のキーの正典は packages/r2-storage/src/keys.ts。.claude/scripts/lib/r2-keys.mjs はその自動生成 (素の node 実行用)。
+          # R2 のキーの正典は packages/r2-storage/src/keys.ts。packages/r2-storage/mirror/r2-keys.mjs はその自動生成 (素の node 実行用)。
           npx tsx packages/r2-storage/scripts/generate-r2-keys-mirror.ts --check
           # 入口 (keys.ts・鏡・r2-key-classes・接続の部品) の外での R2 のキー・公開 URL・S3 クライアントの直書きを止める (縮小専用)
           node packages/r2-storage/scripts/check-r2-entrypoint.mjs

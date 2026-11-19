@@ -8,7 +8,7 @@
  *
  * CLI: .claude/scripts/page-quality/ui-findings.ts
  */
-import type { AuditRun } from "../types";
+import type { AuditRun } from "../../../../packages/ops/src/page-quality/types";
 import { UI_METRIC_KEYS } from "./ui-report";
 import { datasetDir } from "../../../../config/datasets.mjs";
 

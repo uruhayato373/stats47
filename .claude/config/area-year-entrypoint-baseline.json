@@ -317,7 +317,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/type-chart-input.ts": {
+    "apps/admin/lib/type-chart-input.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -662,7 +662,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/estat-catalog/normalize.mjs": {
+    "packages/estat-api/src/catalog/normalize.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -677,7 +677,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/gallery-collectors.mjs": {
+    "packages/ops/src/media/gallery-collectors.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -812,7 +812,7 @@
       "topoPrefCode": 9,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/lib/cover-geography.mjs": {
+    "packages/ops/src/note/cover-geography.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1202,7 +1202,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/data-card-input.ts": {
+    "apps/remotion/src/features/data-cards/data-card-input.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

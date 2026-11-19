@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { renderFilePreview, type FilePreview } from '@/lib/template-file-preview';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 
 const columns: FilePreview['columns'] = [
   { label: '自治体コード', align: 'start' }, { label: '都道府県', align: 'start' }, { label: '自治体名', align: 'start' },

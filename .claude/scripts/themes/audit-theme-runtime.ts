@@ -10,7 +10,7 @@ import {
   expectedSectionPanels,
   withinDeadline,
 } from './theme-followup-core.mjs';
-import { SITE_ORIGIN } from '../lib/site-config.cjs';
+import { SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 
 async function main() {
   const ROOT = path.resolve(

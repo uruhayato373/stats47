@@ -6,12 +6,12 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { COVER_ROOT, readCoverLedger, validateCoverLedger, emptyCoverArticle, updateCoverLedger,
-  recordCoverObservation, addCoverRevision, reviewCoverRevision, coverSha, adoptedCoverRevision } from './lib/cover-assets.mjs';
-import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, readStoredCover, readStoredCoverInput } from './lib/cover-storage.mjs';
+  recordCoverObservation, addCoverRevision, reviewCoverRevision, coverSha, adoptedCoverRevision } from '../../../packages/ops/src/note/cover-assets.mjs';
+import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, readStoredCover, readStoredCoverInput } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { comparePublicCover, publishedRevisionAfterArchive } from './lib/cover-update.mjs';
 import { registerCoverCandidate } from './lib/cover-ingest.mjs';
-import { enumerateNoteBodies } from '../lib/gallery-collectors.mjs';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { enumerateNoteBodies } from '../../../packages/ops/src/media/gallery-collectors.mjs';
+import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const command = process.argv[2];
@@ -200,7 +200,7 @@ if (command === 'seed') {
 } else if (command === 'review') {
   if (keys.size !== 1 || !options.revision || !options.status || !options.reason) throw Error('review requires one --keys, --revision, --status and --reason');
   const articleKey = [...keys][0];
-  const { assertCurrentCoverCandidate } = await import('./lib/cover-production.mjs');
+  const { assertCurrentCoverCandidate } = await import('../../../packages/ops/src/note/cover-production.mjs');
   const row = readCoverLedger().articles.find((a) => a.articleKey === articleKey);
   const revision = row?.revisions.find((r) => r.id === options.revision);
   if (!revision) throw Error('unknown revision');

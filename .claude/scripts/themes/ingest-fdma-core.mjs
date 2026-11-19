@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Official FDMA/Cabinet Office tables. Only --write-local stages canonical values. Requires pdftotext. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -12,7 +12,7 @@ import { parseArgs } from 'node:util';
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs');
 const { parse: parseCsv } = require('csv-parse/sync');
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

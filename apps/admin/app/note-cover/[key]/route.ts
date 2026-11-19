@@ -1,6 +1,6 @@
-import { NOTE_ARTICLES } from '../../../../../.claude/scripts/note/catalog';
-import { readCoverLedger, validateCoverLedger } from '../../../../../.claude/scripts/note/lib/cover-assets.mjs';
-import { readStoredCover } from '../../../../../.claude/scripts/note/lib/cover-storage.mjs';
+import { NOTE_ARTICLES } from '@stats47/ops/note/catalog';
+import { readCoverLedger, validateCoverLedger } from '@stats47/ops/note/cover-assets.mjs';
+import { readStoredCover } from '@stats47/ops/note/cover-storage.mjs';
 import { projectRoot } from '@/lib/server/project-root';
 
 /** cover-storage.mjs の固定文 (認証情報を含まない) の形。ここに当たらない文は理由として返さない */

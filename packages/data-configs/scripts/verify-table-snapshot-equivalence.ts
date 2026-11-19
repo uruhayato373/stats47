@@ -8,7 +8,7 @@ import { mkdirSync, readFileSync, writeFileSync, renameSync, rmSync } from "node
 import { resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { datasetPath } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../../../.claude/scripts/lib/dataset-shape.mjs";
+import { assertDatasetShape } from "@stats47/ops/datasets/dataset-shape.mjs";
 import { fileURLToPath } from "node:url";
 import { isDeepStrictEqual } from "node:util";
 import { SITE } from "@stats47/types";

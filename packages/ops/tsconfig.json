@@ -1,0 +1,20 @@
+{
+  // .claude/scripts/tsconfig.json と同じ設定 (2026-11-19 にそこから移した部品の TypeScript を検査する)
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+    "noImplicitAny": false,
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "lib": ["es2023", "dom"],
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.mts"],
+  "exclude": ["node_modules"]
+}

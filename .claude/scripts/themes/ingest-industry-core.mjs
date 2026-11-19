@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
 import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
-import { extractYearCode } from "../lib/year-code.mjs";
+import { extractYearCode } from "../../../packages/estat-api/mirror/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Official sources -> canonical R2 payloads. No remote writes. All local R2 writes require --write-local. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -15,7 +15,7 @@ import {parseArgs} from 'node:util';
 import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const require=createRequire(import.meta.url);
 const ExcelJS=require('exceljs');
-const prefectures=require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures=require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const {buildRecipe}=require('../../../packages/data-configs/src/recipe.ts');
 const {parseStatsValuesPayload}=require('../../../packages/stats-r2/src/schemas.ts');
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');

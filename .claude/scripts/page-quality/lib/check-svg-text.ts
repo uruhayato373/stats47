@@ -1,4 +1,4 @@
-import type { PageAuditResult } from "../types";
+import type { PageAuditResult } from "../../../../packages/ops/src/page-quality/types";
 import { findChartTextIssues } from "../../lib/svg-lint.mjs";
 import { resolveDispatcher } from "./http-dispatcher";
 

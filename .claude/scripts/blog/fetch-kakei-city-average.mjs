@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { extractYearCode } from "../lib/year-code.mjs";
+import { extractYearCode } from "../../../packages/estat-api/mirror/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
 /**
  * 家計調査の品目別「都市ランキング」(県庁所在市と政令指定都市の 52 市・複数年の平均) を e-Stat から作り、

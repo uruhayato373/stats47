@@ -12,7 +12,7 @@
  *   domain  data/business/domains.json の領域 id
  *   target  本来の置き場 (TARGETS)。path の現在地と食い違う行が、data/ への移行 (手順 2) の対象
  *   opts    schema: 形状契約 (JSON Schema) のパス。kind が master / ledger / config で path が .json の行は必須。それ以外の kind も
- *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も .claude/scripts/lib/dataset-shape.mjs で書く前に検証)
+ *                   宣言すれば検証する (check-datasets。判断に使う記録は書き手も packages/ops/src/datasets/dataset-shape.mjs で書く前に検証)
  *           retain: 日付付きファイルの寿命 (.claude/scripts/lib/prune-state-snapshots.mjs の RETENTION_POLICIES の名前。
  *                   数値はそちらだけに置く) / planned: まだ 1 件も無い (追跡ファイルができたら外す。check-datasets が落とす)
  *           transient: CI が消費して消す依頼・公開待ちの outbox。普段は 0 件で push の直後だけある (件数を問わない。planned と併用しない)
@@ -294,7 +294,7 @@ export const DATASETS = [
   d("note.magazines-schema", "data/note/magazines.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.paid-landing", "data/note/paid-landing/{name}.json", "ledger", "product", "data", "公開済み有料記事の無料部分の文言 (patch-note-paid-landing.mjs の入力)", { schema: "data/note/paid-landing.schema.json" }),
   d("note.paid-landing-schema", "data/note/paid-landing.schema.json", "schema", "product", "data", "上の文言の JSON Schema"),
-  d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの台帳の正本 (記事ごとに、どの版が候補・採用・公開かの参照と公開の観測)。制作内容と版の記録は note.cover-records に分けて持ち、読み書きは .claude/scripts/note/lib/cover-assets.mjs だけが 2 つを結ぶ", { schema: "data/note/cover-assets.schema.json" }),
+  d("note.cover-assets", "data/note/cover-assets.json", "ledger", "product", "data", "note カバーの台帳の正本 (記事ごとに、どの版が候補・採用・公開かの参照と公開の観測)。制作内容と版の記録は note.cover-records に分けて持ち、読み書きは packages/ops/src/note/cover-assets.mjs だけが 2 つを結ぶ", { schema: "data/note/cover-assets.schema.json" }),
   d("note.cover-assets-schema", "data/note/cover-assets.schema.json", "schema", "product", "data", "上の台帳の JSON Schema"),
   d("note.cover-records", "data/note/cover-records/{name}.json", "ledger", "product", "data", "note カバーの記事ごとの記録 (1 記事 1 ファイル。ファイル名は記事 key。制作 ID・方針・コピー・題材・根拠と、版の保存先・SHA・レビュー・生成元を登録順に持つ。正本 note.cover-assets の候補版・採用版・公開版の参照が指す先)", {
     schema: "data/note/cover-records.schema.json",

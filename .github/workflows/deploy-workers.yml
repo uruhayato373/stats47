@@ -37,7 +37,7 @@ jobs:
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
             echo "deploy=true" >> "$GITHUB_OUTPUT"
           else
-            node .claude/scripts/lib/plan-deploy-scope.mjs "${{ github.event.before }}" "$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+            node packages/ops/src/ci/plan-deploy-scope.mjs "${{ github.event.before }}" "$GITHUB_SHA" >> "$GITHUB_OUTPUT"
           fi
 
   deploy:

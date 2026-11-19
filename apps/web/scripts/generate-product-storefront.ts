@@ -12,8 +12,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { assertDatasetShape } from "../../../.claude/scripts/lib/dataset-shape.mjs";
-import { readArticleLedger } from "../../../.claude/scripts/note/lib/article-ledger.mjs";
+import { assertDatasetShape } from "@stats47/ops/datasets/dataset-shape.mjs";
+import { readArticleLedger } from "@stats47/ops/note/article-ledger.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 import { KDP_LISTINGS } from "../../../config/paths.mjs";
 import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/products";
@@ -23,7 +23,7 @@ import { NOTE_PRODUCT_MAPPINGS } from "../../../packages/product-factory/src/cha
 import { buildKindleStorefrontContent, selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";
 import { readProductLanding } from "./lib/product-landing";
 
-import type { NoteArticle } from "../../../.claude/scripts/note/catalog/types";
+import type { NoteArticle } from "@stats47/ops/note/catalog/types";
 import type { StorefrontProduct } from "../src/features/products/types";
 
 const ROOT = path.resolve(__dirname, "../../..");

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "収益の明細 (日 × 商品 × 種類)",
-  "description": "data/revenue/daily/<channel>-<YYYY-MM>.json の形状契約 (2026-11-14 オーナー決定)。販売元のレポートの粒度のまま 1 行 = 日付 × 商品 × 種類で持ち、週・月・年は .claude/scripts/metrics/lib/revenue-rollup.mjs が集計する。取得のたびに直近の期間を取り直し、(date, productId, kind, marketplace) をキーに上書きする。coverage に入っている日で行が無いものは 0、coverage の外は未計測と読む (欠測を 0 にしない)。項目を足すときは先にここへ足す。",
+  "description": "data/revenue/daily/<channel>-<YYYY-MM>.json の形状契約 (2026-11-14 オーナー決定)。販売元のレポートの粒度のまま 1 行 = 日付 × 商品 × 種類で持ち、週・月・年は packages/ops/src/metrics/revenue-rollup.mjs が集計する。取得のたびに直近の期間を取り直し、(date, productId, kind, marketplace) をキーに上書きする。coverage に入っている日で行が無いものは 0、coverage の外は未計測と読む (欠測を 0 にしない)。項目を足すときは先にここへ足す。",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "channel", "month", "coverage", "rows"],

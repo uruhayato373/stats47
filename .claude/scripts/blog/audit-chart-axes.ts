@@ -1,4 +1,4 @@
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * audit-chart-axes.ts — 公開中のブログ散布図を「値」で検査する。
  *
@@ -24,10 +24,10 @@ import path from 'node:path';
 
 import { datasetDir } from '../../../config/datasets.mjs';
 import { prefectureShortName } from '../../../packages/area/src/utils/prefecture-short-name';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { chartSourceShapeErrors } from '../lib/chart-source-schema.mjs';
-import { PREF_NAMES } from '../lib/prefectures.cjs';
-import { matchScatterAxis, type ChartAxisRecord } from './lib/type-chart-input';
+import { PREF_NAMES } from '../../../packages/area/mirror/prefectures.cjs';
+import { matchScatterAxis, type ChartAxisRecord } from '../../../apps/admin/lib/type-chart-input';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;

@@ -42,7 +42,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - `.claude/rules/estat-api.md` — 全年度取得 + メモリフィルタ、5 桁地域コード
 - `.claude/rules/metric-config-standards.md` — MetricConfig フィールド役割 / category 17 軸 / 量産後 validate:config
 - `.claude/rules/unit-semantics-standards.md` — **単位 (円/千円/％/人口10万対/月額年額) の解釈・換算の正典を所有する**。
-  自前のスケール表を書かず `packages/data-configs/src/unit/` を使う (`.claude/scripts/lib/unit-semantics.mjs` は
+  自前のスケール表を書かず `packages/data-configs/src/unit/` を使う (`packages/data-configs/mirror/unit-semantics.mjs` は
   自動生成の鏡・直接編集禁止)。`validate:config` の `[unit-vocab]` warn に出た未解釈 unit は、
   語彙に足すか単位表記を直すかを判断する (推測で語彙を増やすと誤換算が生まれる)。横断監査は `/audit-units`。
   **金額 metric は §2.5 の `valueScale` を宣言する** — e-Stat は倍率を単位文字列に埋め込むので、

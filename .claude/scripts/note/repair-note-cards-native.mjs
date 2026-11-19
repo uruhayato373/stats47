@@ -11,7 +11,7 @@ import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs
 import { createCardImageRefresh, imageRefreshAlreadyApplied, readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
 import { readLinkCardLedger } from '../ogp/lib/link-card-ledger.mjs';
 import { datasetDir } from '../../../config/datasets.mjs';
-import { SITE_ORIGIN } from '../lib/site-config.cjs';
+import { SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const args = process.argv.slice(2);

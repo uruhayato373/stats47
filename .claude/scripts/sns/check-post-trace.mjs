@@ -14,7 +14,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { checkPostTrace } from "./lib/post-trace-core.mjs";
-import { verifyArchivedAssets } from "./lib/sns-drive-assets.mjs";
+import { verifyArchivedAssets } from "../../../packages/ops/src/sns/sns-drive-assets.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");

@@ -13,8 +13,8 @@ import {
   FILES,
   imageLibrary,
   readQuality,
-} from '../../../../.claude/scripts/media/lib/workspace.mjs';
-import { COVER_RECORDS_DIR } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
+} from '@stats47/ops/media/workspace.mjs';
+import { COVER_RECORDS_DIR } from '@stats47/ops/note/cover-assets.mjs';
 
 describe('image classification route uses the shared ledger', () => {
   beforeEach(() => {

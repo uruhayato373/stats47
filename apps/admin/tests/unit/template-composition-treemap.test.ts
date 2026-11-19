@@ -3,7 +3,7 @@ import sharp from 'sharp';
 import { renderTreemapChart, squarify } from '@/lib/template-composition-treemap';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
 import { RANKING_SAMPLE_PRESENTATION } from '@/lib/template-ranking-data';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 
 const items = [
   { label: '豊田市', value: 20527151 },

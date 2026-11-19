@@ -14,7 +14,7 @@
  */
 import { toCsv } from "./lib/auth.mjs";
 import { buildGscQuery } from "./lib/gsc-query.mjs";
-import { GSC_PROPERTY } from "../lib/site-config.cjs";
+import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
 import { createSearchConsoleClient } from "../lib/google-client.cjs";
 
 const SITE_URL = GSC_PROPERTY;

@@ -1,4 +1,4 @@
-import { isPrefectureAreaCode } from "../lib/prefectures.cjs";
+import { isPrefectureAreaCode } from "../../../packages/area/mirror/prefectures.cjs";
 /**
  * 外部指標の取り込みスクリプトが手元に書いた値 (観測値の置き場) を、R2 へ上げる前に検査する。
  * external-metric-ingest.yml が、取り込みの直後・R2 への反映の直前に呼ぶ。

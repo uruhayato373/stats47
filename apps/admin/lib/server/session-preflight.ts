@@ -5,7 +5,7 @@ import {
   PREFLIGHT_FILE,
   STATE_LABELS,
   formatJst,
-} from "../../../../.claude/scripts/measurement/session-states.mjs";
+} from "@stats47/ops/measurement/session-states.mjs";
 import { fileExists, readJson, wrap } from "./state-io";
 
 /**

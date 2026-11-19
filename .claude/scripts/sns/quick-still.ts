@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * quick-still.ts
  *
@@ -39,7 +39,7 @@ import { PREF_CAPITAL_COORDS } from '../../../packages/migration-flow/src/lib/pr
 import { renderAll47TileSvg } from "../../../apps/remotion/src/features/data-cards/all47-svg";
 import { resolveTileScale, type TileValueDisplay } from "../../../apps/remotion/src/features/data-cards/tile-scale";
 import { STORY_LAYOUTS, renderRankingStoryCard } from "./lib/ranking-story-card.ts";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -1,11 +1,11 @@
 import sharp from 'sharp';
-import { addCoverRevision, coverSha, updateCoverLedger } from './cover-assets.mjs';
-import { createCoverStore, storeCoverBytes, storeCoverInput } from './cover-storage.mjs';
-import { readCoverLedger } from './cover-assets.mjs';
-import { readArticleLedger } from './article-ledger.mjs';
-import { assertCoverPlan, readCoverPolicies } from './cover-production.mjs';
-import { prepareGeneratedCover } from './generated-cover.mjs';
-import { noteCoverCategory } from '../catalog/cover-categories.mjs';
+import { addCoverRevision, coverSha, updateCoverLedger } from '../../../../packages/ops/src/note/cover-assets.mjs';
+import { createCoverStore, storeCoverBytes, storeCoverInput } from '../../../../packages/ops/src/note/cover-storage.mjs';
+import { readCoverLedger } from '../../../../packages/ops/src/note/cover-assets.mjs';
+import { readArticleLedger } from '../../../../packages/ops/src/note/article-ledger.mjs';
+import { assertCoverPlan, readCoverPolicies } from '../../../../packages/ops/src/note/cover-production.mjs';
+import { prepareGeneratedCover } from '../../../../packages/ops/src/note/generated-cover.mjs';
+import { noteCoverCategory } from '../../../../packages/ops/src/note/catalog/cover-categories.mjs';
 
 function productionReference(row, evidence) {
   if (!row.production?.brief || evidence.production?.renderer !== 'note-imagegen-cover-v1')

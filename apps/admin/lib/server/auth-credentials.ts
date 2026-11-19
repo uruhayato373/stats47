@@ -3,7 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
-import { storedAccounts } from "../../../../.claude/scripts/measurement/credential-store.mjs";
+import { storedAccounts } from "@stats47/ops/measurement/credential-store.mjs";
 import { projectRoot } from "./project-root";
 import { wrap } from "./state-io";
 

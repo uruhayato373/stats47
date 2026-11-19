@@ -30,7 +30,7 @@ import { chartValueLabels, type RankingChartRow } from '../../../apps/admin/lib/
 import { resolveAreaChart, type AreaChartInput } from '../../../apps/admin/lib/template-area-scope';
 import { fetchMunicipalityTopologyForWardMode } from '../../../packages/gis/src/mlit/fetch-ward-mode-topology';
 import type { Topology } from 'topojson-specification';
-import { assertMinimalChartCopy } from '../media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '../../../packages/ops/src/media/image-copy.mjs';
 import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = path.resolve(__dirname, '../../..');

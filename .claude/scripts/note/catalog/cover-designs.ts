@@ -1,4 +1,4 @@
-import { statsR2Key } from '../../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
 import { REFERENCE_COVER_EXTRA, REFERENCE_COVER_HEADLINES } from './reference-cover-copy';
 import { REFERENCE_COVER_FIGURES } from './reference-cover-figures';
 /** noteカバーの制作判断。実測値は入力JSON、地図は既存GIS、画像は派生物。 */

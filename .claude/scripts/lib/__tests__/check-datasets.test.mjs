@@ -17,7 +17,7 @@ import { checkDatasets, checkRefs, checkSchemas, dataLiteralHits, dataTops, find
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 import { CONFIG_MOVE_PENDING, DATA_README_PENDING, OUTSIDE_DATA, SYSTEM_CONFIG } from "../../../../config/datasets.mjs";
 import { buildEr, checkDataReadmes, checkOutsideData, checkPlacement } from "../check-datasets.mjs";
-import { assertDatasetShape } from "../dataset-shape.mjs";
+import { assertDatasetShape } from "../../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
 const domainIds = new Set(JSON.parse(readFileSync(resolve(ROOT, DOMAINS), "utf8")).domains.map((x) => x.id));

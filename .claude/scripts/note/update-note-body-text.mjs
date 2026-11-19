@@ -14,8 +14,8 @@
  */
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { findLedgerArticle, readArticleLedger } from './lib/article-ledger.mjs';
-import { fetchNoteDetail } from './lib/cover-storage.mjs';
+import { findLedgerArticle, readArticleLedger } from '../../../packages/ops/src/note/article-ledger.mjs';
+import { fetchNoteDetail } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { assertAccount, launchContext } from './lib/note-session.mjs';
 import { fetchOwnerNote, noteKeyFromUrl, publishEditedBody } from './patch-note-paid-landing.mjs';
 

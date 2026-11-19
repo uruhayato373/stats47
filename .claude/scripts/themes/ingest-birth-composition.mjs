@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Pinned 2024 vital statistics: mother's age and birth order. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 const root = process.cwd(),
   require = createRequire(resolve(root, 'package.json'));
-const prefectures = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('./packages/area/mirror/prefectures.cjs').PREFECTURES;
 const sha = (b) => createHash('sha256').update(b).digest('hex');
 export const SOURCES = {
   age: {

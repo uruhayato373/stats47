@@ -1,10 +1,10 @@
-import { addDays, isoWeekOf, isoWeekRange, jstDateOf } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
+import { addDays, isoWeekOf, isoWeekRange, jstDateOf } from "@stats47/ops/metrics/periods.mjs";
 import "server-only";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { describeChannel, weeklyProductRevenue } from "../../../../.claude/scripts/metrics/lib/product-revenue.mjs";
-import { summarizeWeeklyRevenue, weeklyRevenueNode } from "../../../../.claude/scripts/metrics/lib/weekly-revenue.mjs";
+import { describeChannel, weeklyProductRevenue } from "@stats47/ops/metrics/product-revenue.mjs";
+import { summarizeWeeklyRevenue, weeklyRevenueNode } from "@stats47/ops/metrics/weekly-revenue.mjs";
 
 import { cached, fileExists, hasError, readCsv, readJson, statePath, TTL, wrap, type Wrapped } from "./state-io";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
@@ -159,7 +159,7 @@ export interface WeeklyProductRevenue {
 
 /** 直近の月曜〜日曜 (JST) を返す。今週はまだ終わっていないので、終わった直近の週を使う。 */
 function lastCompletedWeek(now = new Date()): { weekStart: string; weekEnd: string } {
-  const thisMonday = isoWeekRange(isoWeekOf(jstDateOf(now))).monday; // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  const thisMonday = isoWeekRange(isoWeekOf(jstDateOf(now))).monday; // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
   return { weekStart: addDays(thisMonday, -7), weekEnd: addDays(thisMonday, -1) };
 }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * note の公開記事を全件、公開ページの実物から機械採点する read-only 監査。note へは書かない。ログインも要らない。
  * 判定は lib/published-audit.mjs。既存のカード監査・本文の図の台帳の結果も記事ごとの点数へまとめる。
@@ -22,7 +22,7 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { auditArticle, buildQueue, checkBaseline, noteIdOf, parseBody, pngSize, rankingKeysOf, summarize } from './lib/published-audit.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
-const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)('../lib/site-config.cjs');
+const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)('../../../packages/types/mirror/site-config.cjs');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 // 採点結果とカード監査の結果は、note の最新の検査結果の置き場 (note.cover-rollout) に並ぶ
 const LATEST_DIR = datasetDir('note.cover-rollout');

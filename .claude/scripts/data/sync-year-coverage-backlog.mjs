@@ -20,7 +20,7 @@ import { BATCH_DIR, BY_DESIGN_PATH, CARD_PREFIX, batchPath, planYearCoverageCard
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog } = require("../lib/backlog-lib.cjs");
+const { parseBacklog } = require("../../../packages/ops/src/management/backlog-lib.cjs");
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("estat.year-coverage")}/queue.json`);

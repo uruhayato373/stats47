@@ -16,12 +16,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import dotenv from 'dotenv';
-import { createR2Store } from '../note/lib/cover-storage.mjs';
+import { createR2Store } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 dotenv.config({ path: path.join(ROOT, '.env.local'), quiet: true });
-const { R2_PRIVATE_BUCKET } = createRequire(import.meta.url)('../lib/site-config.cjs');
+const { R2_PRIVATE_BUCKET } = createRequire(import.meta.url)('../../../packages/types/mirror/site-config.cjs');
 // live/ は台帳の r2State 行 (在庫索引) の置き場から引く
 const LIVE = path.join(ROOT, path.dirname(datasetPath('content.image-inventory')));
 const PREFIX = 'state/content-operations/';

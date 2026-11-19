@@ -2,8 +2,8 @@ import { createElement as h } from 'react';
 import satori from 'satori';
 import sharp from 'sharp';
 import { loadFonts } from '../../../../apps/web/scripts/lib/satori-image-render';
-import { COVER_ROOT, coverSha } from './cover-assets.mjs';
-import type { CoverPlan } from './cover-production.mjs';
+import { COVER_ROOT, coverSha } from '../../../../packages/ops/src/note/cover-assets.mjs';
+import type { CoverPlan } from '../../../../packages/ops/src/note/cover-production.mjs';
 
 /** Generated art is decorative. Copy is drawn from the saved production request. */
 export async function renderPopCover(plan: CoverPlan, background: Buffer) {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
-import { extractYearCode } from "../lib/year-code.mjs";
+import { extractYearCode } from "../../../packages/estat-api/mirror/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
 import fs from 'node:fs';
 import path from 'node:path';

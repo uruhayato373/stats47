@@ -2,7 +2,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import { datasetPath } from '../../../config/datasets.mjs';
-import { assertDatasetShape } from '../lib/dataset-shape.mjs';
+import { assertDatasetShape } from '../../../packages/ops/src/datasets/dataset-shape.mjs';
 import { readAnalysisCatalog } from '../../../packages/product-factory/src/analysis/catalog-files';
 import { validateAnalysisCatalog } from '../../../packages/product-factory/src/analysis/validate-catalog';
 import { recipeShowcaseMetadata, resolveAnalysisReuse } from '../../../packages/product-factory/src/analysis/reuse';

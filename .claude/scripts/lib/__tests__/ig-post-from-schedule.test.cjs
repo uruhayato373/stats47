@@ -3,7 +3,7 @@ const test = require("node:test");
 
 const { carouselUrlsFor, ledgerPostTypeFor } = require("../../instagram/post-from-schedule.cjs");
 
-const { R2_PUBLIC_BASE_URL: R2 } = require("../site-config.cjs");
+const { R2_PUBLIC_BASE_URL: R2 } = require("../../../../packages/types/mirror/site-config.cjs");
 const slides = [
   "slide-1-question-1080x1350.png",
   "slide-2-hint-1080x1350.png",

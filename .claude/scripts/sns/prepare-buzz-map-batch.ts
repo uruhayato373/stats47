@@ -41,7 +41,7 @@ import {
   captionComplete,
   buildCandidatePlan,
 } from './lib/buzz-map-batch-core.mjs';
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);

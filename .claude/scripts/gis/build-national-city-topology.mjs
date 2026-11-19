@@ -16,7 +16,7 @@ import { quantize } from "topojson-client";
 import { presimplify, quantile, simplify } from "topojson-simplify";
 
 const ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
-const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../lib/site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../../../packages/types/mirror/site-config.cjs");
 const SOURCE = `${R2_PUBLIC_BASE_URL}/gis/mlit/20240101/jp_city_dc.topojson`;
 const OUT = "apps/web/public/municipalities.topojson";
 /** 残す点の割合。2026-11-06 に 0.05 で 722KB (gzip 183KB)、全 1,731 自治体が残ることを確かめた */

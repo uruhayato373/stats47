@@ -1,4 +1,4 @@
-import { R2_PUBLIC_ORIGIN } from "../../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN } from "../../../../packages/r2-storage/mirror/r2-keys.mjs";
 // 表示の意味の検査 (SITE-DISPLAY-SEMANTICS-AUDIT-01 層 2・層 3)。
 import test from "node:test";
 import assert from "node:assert/strict";

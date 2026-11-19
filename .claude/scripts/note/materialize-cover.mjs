@@ -3,9 +3,9 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { readCoverLedger } from './lib/cover-assets.mjs';
-import { readStoredCover, readStoredCoverInput } from './lib/cover-storage.mjs';
-import { assertCurrentCoverCandidate } from './lib/cover-production.mjs';
+import { readCoverLedger } from '../../../packages/ops/src/note/cover-assets.mjs';
+import { readStoredCover, readStoredCoverInput } from '../../../packages/ops/src/note/cover-storage.mjs';
+import { assertCurrentCoverCandidate } from '../../../packages/ops/src/note/cover-production.mjs';
 const key = process.argv[2];
 if (process.argv.length !== 3 || !key) throw Error('Usage: materialize-cover.mjs <articleKey>');
 const row = readCoverLedger().articles.find(a => a.articleKey === key);

@@ -8,7 +8,7 @@
  *
  * 呼び出し側で `code.slice(0, 2)`・`` `${pref}000` ``・`/^\d{2}000$/`・`"00000"`・`47` を書かない。
  * 写しは `packages/area/scripts/check-area-year-entrypoint.mjs` が数える。
- * Node のスクリプト用の鏡は `.claude/scripts/lib/prefectures.cjs` (同じ入力で結果が一致することをテストで固定)。
+ * Node のスクリプト用の鏡は `packages/area/mirror/prefectures.cjs` (同じ入力で結果が一致することをテストで固定)。
  */
 
 /** e-Stat の全国行 areaCode。 */

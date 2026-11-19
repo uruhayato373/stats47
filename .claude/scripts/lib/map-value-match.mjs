@@ -9,7 +9,7 @@
 import {
   isScalePrefixPartOfUnit,
   scalePrefixMultiplier,
-} from './unit-semantics.mjs';
+} from '../../../packages/data-configs/mirror/unit-semantics.mjs';
 
 /**
  * 日本語の短縮スケール接頭辞。

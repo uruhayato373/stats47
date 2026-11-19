@@ -1,4 +1,4 @@
-import { statsR2Key } from '../../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * note 記事の画像・データ資産の契約を検査する純関数。
  *

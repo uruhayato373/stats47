@@ -1,6 +1,6 @@
 "use strict";
 
-const { R2_PUBLIC_BASE_URL } = require("./site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = require("../../../packages/types/mirror/site-config.cjs");
 
 /**
  * Threads 予約投稿の判定ロジック (純粋関数)。IO は .claude/scripts/threads/post-from-schedule.cjs が持つ。

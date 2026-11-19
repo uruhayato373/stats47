@@ -12,7 +12,7 @@ export const DRIVE_NOTE_FOLDER = "note画像";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 
 export async function noteCandidatesDir(slug, { create = false } = {}) {
-  const { resolveVaultRoot } = await import(join(ROOT, ".claude/scripts/source-vault/source-vault.mjs"));
+  const { resolveVaultRoot } = await import(join(ROOT, "packages/ops/src/source-vault/source-vault.mjs"));
   const { root } = resolveVaultRoot();
   const dir = join(root, DRIVE_NOTE_FOLDER, slug, "candidates");
   if (create) mkdirSync(dir, { recursive: true });

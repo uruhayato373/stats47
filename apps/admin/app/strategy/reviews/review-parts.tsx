@@ -11,7 +11,7 @@ import { hasError } from "@/lib/server/state-io";
 /**
  * 戦略 ＞ レビュー ＞ 週次・月次 の共通部品 (doboku-note の metrics/business/review-parts を移植)。
  * 回を選ぶと、その回の実施状況・手順 (計測 → 記録 → 振り返り → 起票 → 計画) ・判断 (サマリーと申し送り) が出る。
- * 判定は `.claude/scripts/management/lib/review-cadence.mjs` (CI・docs:check DG084 と同じ実体)、正本は review-wiring.json。
+ * 判定は `packages/ops/src/management/review-cadence.mjs` (CI・docs:check DG084 と同じ実体)、正本は review-wiring.json。
  */
 
 const SOURCE = ".claude/config/review-wiring.json";

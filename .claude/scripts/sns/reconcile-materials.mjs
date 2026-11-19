@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { createHash } from 'node:crypto';
 import { findMaterialPost, materialKey, prepareMaterial } from './lib/material-reconciliation.mjs';
-import { archiveFile, resolveDriveRoot, verifyArchivedAssets } from './lib/sns-drive-assets.mjs';
+import { archiveFile, resolveDriveRoot, verifyArchivedAssets } from '../../../packages/ops/src/sns/sns-drive-assets.mjs';
 
 const { values } = parseArgs({ options: {
   input: { type: 'string' }, root: { type: 'string' }, report: { type: 'string' },

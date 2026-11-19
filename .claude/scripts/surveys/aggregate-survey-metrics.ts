@@ -25,7 +25,7 @@
  *
  * 実行後は必ず validate-survey-portfolio.ts を通すこと。
  */
-import { addDays, isoWeekOf, isoWeekRange } from "../metrics/lib/periods.mjs";
+import { addDays, isoWeekOf, isoWeekRange } from "../../../packages/ops/src/metrics/periods.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -50,7 +50,7 @@ function pickWeeks(): [string, string] {
   }
   const weeks = fs.readdirSync(GSC_SNAP).filter((d) => /^\d{4}-W\d{2}$/.test(d)).sort();
   const latest = weeks[weeks.length - 1];
-  // 4 週前。週番号の引き算は 53 週の年でずれるので、月曜の 28 日前の週にする (正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01))
+  // 4 週前。週番号の引き算は 53 週の年でずれるので、月曜の 28 日前の週にする (正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01))
   const prev = isoWeekOf(addDays(isoWeekRange(latest).monday, -28));
   if (!weeks.includes(prev)) throw new Error(`非重複窓 ${prev} の snapshot が無い (在庫: ${weeks.join(",")})`);
   return [latest, prev];

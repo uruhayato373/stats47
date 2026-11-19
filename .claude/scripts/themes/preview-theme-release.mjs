@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { R2_PUBLIC_ORIGIN } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 
 // A localhost read-only gateway lets the real R2 readers preview an exact release manifest.
 const { values: options } = parseArgs({ options: {

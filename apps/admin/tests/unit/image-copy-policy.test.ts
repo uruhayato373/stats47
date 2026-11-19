@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 import { renderRankingBars } from '@/lib/template-ranking-bars';
 import { renderRankingTable } from '@/lib/template-ranking-table';
 import { renderRankingTileMap } from '@/lib/template-ranking-tile-map';

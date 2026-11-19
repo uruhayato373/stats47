@@ -28,9 +28,9 @@ import {
   resolveAllAxes,
   sumTraffic,
   validateIssueGraph,
-} from "./issue-graph-core.mjs";
-import { readMetricGrains, readSeriesIds } from "./issue-data-grains.mjs";
-import { readDraftStates } from "./issue-draft-state.mjs";
+} from "../../../packages/ops/src/issues/issue-graph-core.mjs";
+import { readMetricGrains, readSeriesIds } from "../../../packages/ops/src/issues/issue-data-grains.mjs";
+import { readDraftStates } from "../../../packages/ops/src/issues/issue-draft-state.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
 const readJson = (rel) => JSON.parse(readFileSync(join(PROJECT_ROOT, rel), "utf8"));

@@ -8988,7 +8988,7 @@
             "commands": [
               "npm run type-check",
               "node --test .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/card-image-refresh.test.mjs .claude/scripts/note/__tests__/native-cards.test.mjs",
-              "node --test .claude/scripts/media/__tests__/workspace.test.mjs",
+              "node --test packages/ops/src/media/__tests__/workspace.test.mjs",
               "node C:/tmp/stats47-link-card-design-20261026/finalize-current-web-inventory.mjs"
             ],
             "pass": true
@@ -9011,7 +9011,7 @@
             "commands": [
               "npm run type-check",
               "node --test .claude/scripts/note/__tests__/product-cards.test.mjs .claude/scripts/note/__tests__/card-image-refresh.test.mjs .claude/scripts/note/__tests__/native-cards.test.mjs",
-              "node --test .claude/scripts/media/__tests__/workspace.test.mjs",
+              "node --test packages/ops/src/media/__tests__/workspace.test.mjs",
               "npm run docs:check"
             ],
             "pass": true
@@ -10728,7 +10728,7 @@
           "costUsd": null,
           "gate": {
             "commands": [
-              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs .claude/scripts/lib/__tests__/workflow-node-version.test.cjs .claude/scripts/lib/__tests__/plan-deploy-scope.test.mjs .claude/scripts/lib/__tests__/audit-workflow-policy.test.cjs",
+              "node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs .claude/scripts/lib/__tests__/workflow-node-version.test.cjs packages/ops/src/ci/__tests__/plan-deploy-scope.test.mjs .claude/scripts/lib/__tests__/audit-workflow-policy.test.cjs",
               "cd apps/web && npx vitest run src/__tests__/workers-cache-contract.test.ts",
               "node .claude/scripts/lib/audit-workflow-policy.cjs --strict",
               "npx tsc -p .claude/scripts/tsconfig.checkjs.json --noEmit",
@@ -11220,8 +11220,8 @@
           "gate": {
             "commands": [
               "node .claude/scripts/lib/check-repo-hygiene.cjs --baseline",
-              "node --test .claude/scripts/note/__tests__/cover-update.test.mjs .claude/scripts/note/__tests__/cover-assets.test.mjs",
-              "node --test .claude/scripts/note/__tests__/*.test.mjs .claude/scripts/media/__tests__/*.test.mjs .claude/scripts/lib/__tests__/gallery-collectors.test.mjs",
+              "node --test .claude/scripts/note/__tests__/cover-update.test.mjs packages/ops/src/note/__tests__/cover-assets.test.mjs",
+              "node --test .claude/scripts/note/__tests__/*.test.mjs .claude/scripts/media/__tests__/*.test.mjs packages/ops/src/media/__tests__/gallery-collectors.test.mjs",
               "node --test .claude/scripts/lib/__tests__/check-datasets.test.mjs .claude/scripts/lib/__tests__/check-repo-hygiene.test.cjs",
               "npm run note:assets:validate",
               "npm run check-datasets",
@@ -11888,7 +11888,7 @@
               "npm run note:covers:test",
               "npm run note:images:test",
               "npm run note:circulation:test",
-              "node --test .claude/scripts/lib/__tests__/gallery-collectors.test.mjs .claude/scripts/media/__tests__/workspace.test.mjs",
+              "node --test packages/ops/src/media/__tests__/gallery-collectors.test.mjs packages/ops/src/media/__tests__/workspace.test.mjs",
               "cd apps/admin && npx vitest run tests/integration/content-route.test.ts tests/integration/note-cover-production.test.ts tests/unit/media-classification-route.test.ts tests/unit/note-covers.test.ts",
               "npm run preflight:pr"
             ],

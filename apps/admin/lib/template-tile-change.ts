@@ -1,5 +1,5 @@
 import { rankingR2Key } from '@stats47/r2-storage/keys';
-import { buildDataCard } from '../../../.claude/scripts/sns/lib/data-card-input';
+import { buildDataCard } from '../../remotion/src/features/data-cards/data-card-input';
 import type { ChartTheme } from '../../remotion/src/features/data-cards/chart-theme';
 import { renderTileChangeSvg } from '../../remotion/src/features/data-cards/TileChange';
 

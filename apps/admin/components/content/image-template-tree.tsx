@@ -1,7 +1,7 @@
 'use client';
 import { useState, type ReactNode } from 'react';
 import { ChevronRight } from 'lucide-react';
-import type { Template } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import type { Template } from '@stats47/ops/media/workspace.mjs';
 import { TEMPLATE_GROUPS, templateGroup } from '@/lib/image-template-basics';
 import { Button, Collapsible, CollapsibleContent, CollapsibleTrigger } from '@stats47/components';
 

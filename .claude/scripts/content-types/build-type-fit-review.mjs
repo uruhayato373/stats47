@@ -9,13 +9,13 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { parseCsv, pathOfUrl } from "../issues/issue-graph-core.mjs";
-import { classifyAll } from "./classify-core.mjs";
-import { readClassifyInputs } from "./content-types-io.mjs";
-import { isoWeekRange } from "../metrics/lib/periods.mjs";
+import { parseCsv, pathOfUrl } from "../../../packages/ops/src/issues/issue-graph-core.mjs";
+import { classifyAll } from "../../../packages/ops/src/content-types/classify-core.mjs";
+import { readClassifyInputs } from "../../../packages/ops/src/content-types/content-types-io.mjs";
+import { isoWeekRange } from "../../../packages/ops/src/metrics/periods.mjs";
 import { findMergePairs, isObservable, proposeAction, publishedDateOf } from "./type-fit-core.mjs";
 
-const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../lib/site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../../../packages/types/mirror/site-config.cjs");
 const ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
 const BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const OUT = join(ROOT, datasetPath("content.type-fit-review"));

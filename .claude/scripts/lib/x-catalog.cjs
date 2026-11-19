@@ -26,7 +26,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const { datasetPath } = require("../../../config/datasets.mjs");
-const { assertDatasetShape } = require("./dataset-shape.mjs");
+const { assertDatasetShape } = require("../../../packages/ops/src/datasets/dataset-shape.mjs");
 
 const DATASET_ID = "sns.x-catalog";
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");

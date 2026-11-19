@@ -19,7 +19,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const backlogLib = require("./backlog-lib.cjs");
+const backlogLib = require("../../../packages/ops/src/management/backlog-lib.cjs");
 const strategyLanes = require("./strategy-lanes.cjs");
 
 const DEFAULT_ROOT =
@@ -148,8 +148,8 @@ function isIsoDate(value) {
 }
 
 function isoWeek(dateText) {
-  // 正本は .claude/scripts/metrics/lib/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
-  return require("../metrics/lib/periods.mjs").isoWeekOf(dateText);
+  // 正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
+  return require("../../../packages/ops/src/metrics/periods.mjs").isoWeekOf(dateText);
 }
 
 /**
@@ -158,7 +158,7 @@ function isoWeek(dateText) {
  * 2026-10-10 に土曜へ変えたとき、ここだけ日曜固定のまま残っていた (土曜に書いた来週の計画を DG032 が警告した)。
  */
 function acceptedWeeklyPlanWeeks(dateText, root = DEFAULT_ROOT) {
-  const { acceptedWeeklyPlanWeeks: accepted } = require("../management/lib/review-cadence.mjs");
+  const { acceptedWeeklyPlanWeeks: accepted } = require("../../../packages/ops/src/management/review-cadence.mjs");
   let planConf = {};
   try {
     planConf = JSON.parse(fs.readFileSync(path.join(root, ".claude/config/review-wiring.json"), "utf8")).plans?.weekly ?? {};

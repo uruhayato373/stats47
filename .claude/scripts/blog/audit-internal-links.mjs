@@ -23,7 +23,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { extractInternalLinks } from "../lib/internal-link-lint.mjs";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const SITE_BASE = process.env.SITE_ORIGIN || SITE_ORIGIN;

@@ -11,7 +11,7 @@
  * 設計方針 (CLAUDE.md 原則 5): SVG 品質判定は決定的なのでコードで一律検査する。
  * 関連: packages/svg-builder (描画) / .claude/scripts/blog/generate-article-charts.mjs
  */
-import { PREF_NAMES } from './prefectures.cjs';
+import { PREF_NAMES } from '../../../packages/area/mirror/prefectures.cjs';
 
 // theme 依存色 = ダークモードで追従させるべき背景・文字・グリッド色。
 // これらが inline fill/stroke で直書きされていると <img> 埋め込み時に dark mode で

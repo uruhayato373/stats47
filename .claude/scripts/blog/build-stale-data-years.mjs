@@ -26,7 +26,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { findReleaseDue } from "./lib/release-calendar.mjs";
 import { findStaleDataYears } from "./lib/stale-data-years.mjs";
 

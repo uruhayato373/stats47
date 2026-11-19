@@ -31,7 +31,7 @@ import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 
 import { datasetDir } from "../../../config/datasets.mjs";
-import siteConfig from "../lib/site-config.cjs";
+import siteConfig from "../../../packages/types/mirror/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 

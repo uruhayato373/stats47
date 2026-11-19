@@ -1,5 +1,5 @@
 /** Pure observations and comparison rules for the theme quality audit. */
-import { PREF_AREA_CODES } from "../lib/prefectures.cjs";
+import { PREF_AREA_CODES } from "../../../packages/area/mirror/prefectures.cjs";
 
 const PREFECTURE_CODES = PREF_AREA_CODES;
 const PREFECTURES = new Set(PREFECTURE_CODES);

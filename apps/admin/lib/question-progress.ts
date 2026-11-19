@@ -1,4 +1,4 @@
-import { listFigureDestinations } from "../../../.claude/scripts/issues/issue-graph-core.mjs";
+import { listFigureDestinations } from "@stats47/ops/issues/issue-graph-core.mjs";
 
 /**
  * 問いの進み具合: 社会の問いの台帳 (data/content/issues.json) を起点に、ページ・分析・図・配信先の状態を 1 行に集める。

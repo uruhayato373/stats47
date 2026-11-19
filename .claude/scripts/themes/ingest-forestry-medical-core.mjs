@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
 import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Official forestry/medical sources -> canonical payloads. Remote writes are unsupported. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -14,7 +14,7 @@ import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs'),
   { parse: parseCsv } = require('csv-parse/sync');
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const {
   parseStatsValuesPayload,

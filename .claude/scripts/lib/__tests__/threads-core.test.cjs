@@ -1,4 +1,4 @@
-const { R2_PUBLIC_BASE_URL } = require("../site-config.cjs");
+const { R2_PUBLIC_BASE_URL } = require("../../../../packages/types/mirror/site-config.cjs");
 const assert = require("node:assert/strict");
 const test = require("node:test");
 

@@ -1,5 +1,5 @@
-import type { Template } from '../../../.claude/scripts/media/lib/workspace.mjs';
-import { taxonomyQuery } from '../../../.claude/scripts/media/lib/taxonomy.mjs';
+import type { Template } from '@stats47/ops/media/workspace.mjs';
+import { taxonomyQuery } from '@stats47/ops/media/taxonomy.mjs';
 import type { MetricPresentation } from '@stats47/types';
 
 /**

@@ -2,7 +2,7 @@
  * マガジン + 所属記事数を JSON で dump (note-operator CLI が読む)。
  * 実行: npx tsx .claude/scripts/note/catalog/dump-magazines-json.ts
  */
-import { NOTE_MAGAZINES, NOTE_ARTICLES } from "./index";
+import { NOTE_MAGAZINES, NOTE_ARTICLES } from "../../../../packages/ops/src/note/catalog/index";
 
 const out = NOTE_MAGAZINES.map((m) => {
   const members = NOTE_ARTICLES.filter((a) => a.magazine === m.key);

@@ -1,0 +1,103 @@
+import process from 'node:process';
+import { pathToFileURL } from 'node:url';
+
+import { needsMetricMetadata } from './plan-deploy-scope.mjs';
+
+const CODE_EXTENSION = /\.(?:cjs|cts|js|jsx|json|mjs|mts|ts|tsx|ya?ml)$/;
+const ROOT_BUILD_FILES = new Set([
+  'package.json',
+  'package-lock.json',
+  'turbo.json',
+  'tsconfig.json',
+  'vitest.config.mts',
+]);
+
+function matchesAny(path, patterns) {
+  return patterns.some((pattern) => pattern.test(path));
+}
+
+/** PR差分を、独立jobを実行すべき範囲へ決定的に分類する。 */
+export function classifyPrQualityPaths(inputPaths) {
+  const paths = [...new Set(inputPaths.map((path) => path.trim()).filter(Boolean))];
+  const ciCore = paths.some(
+    (path) =>
+      ROOT_BUILD_FILES.has(path) ||
+      path === '.github/workflows/pr-quality-check.yml' ||
+      path === 'packages/ops/src/ci/plan-pr-quality.mjs'
+  );
+  const source = paths.some(
+    (path) =>
+      CODE_EXTENSION.test(path) &&
+      !matchesAny(path, [/^docs\//, /^contents\//, /^\.claude\/(?:state|todo)\//])
+  );
+  // data/themes・data/ads・data/categories・data/surveys/{master,analysis-units,editorial}・data/site/url-history・data/geo/{ksj,analyses,source-pages,infra-history}・data/open-data・data/municipalities/catalog・data/areas・data/products/{packs,kindle}・data/note/series.json・data/affiliate/ledger・data/business-plan/plan・data/source-inventory/{policies,japan-zue/*.json}・data/ranking/hooks・data/data-quality/allowlists は packages と apps が import する定義 (テーマの表示・カテゴリとトピック・調査マスタ・家計の分析単位・調査ハブの本文・URL の転送と 410・国土数値情報の台帳と利用条件と区分・交通網の変遷・Geo 分析と層と公開計画・原典ページ・公開データの提供元と県の統計ポータル・県と市区町村と港湾のマスタ・県データブックのテンプレートと県の本文・商品のパックとライセンス・Kindle の企画と校訂・note のシリーズ・アフィリエイトの広告と案件と直貼りと意図軸の対応表・事業計画のカタログと M1・参考文献の解決方針と日本国勢図会の試行・問いかけコピーの上書き・0 件の許可) なので、packages の変更と同じ扱いにする
+  const themeDefinitions = paths.some((path) => /^data\/(?:themes|categories|ads|metrics|metric-sources|surveys\/(?:master|analysis-units|editorial)|site\/url-history|geo\/(?:ksj|analyses|source-pages|infra-history)|open-data|municipalities\/catalog|areas|products\/(?:packs|kindle)|affiliate\/ledger|business-plan\/plan|source-inventory\/policies|ranking\/hooks|data-quality\/allowlists)\/|^data\/note\/series\.json$|^data\/source-inventory\/japan-zue\/[^/]+\.json$/.test(path));
+  const packageSource = themeDefinitions || paths.some((path) => /^packages\/[^/]+\//.test(path));
+  const webSource = paths.some((path) => /^apps\/web\//.test(path));
+  const adminSource = paths.some((path) => /^apps\/admin\//.test(path) ||
+    /^\.claude\/scripts\/media\//.test(path) || /^packages\/ops\/src\/media\//.test(path) || /^data\/content-operations\/(?:quality|image-)/.test(path));
+  const remotionSource = paths.some((path) => /^apps\/remotion\//.test(path));
+  const sharedAdmin = themeDefinitions || paths.some((path) =>
+    /^packages\/(?:components|data-configs|types)\//.test(path)
+  );
+  const sharedRemotion = themeDefinitions || paths.some((path) =>
+    /^packages\/(?:area|migration-flow|ranking|station-passengers|types|utils)\//.test(path)
+  );
+  const chartSource = paths.some((path) =>
+    matchesAny(path, [
+      /^packages\/visualization\//,
+      /^apps\/web\/src\/components\/(?:charts|stat-charts)\//,
+      /^\.claude\/rules\/chart-component-standards\.md$/,
+    ])
+  );
+  // sync-snapshots / generate-ogp-images の bash step をシム付きで実行する重い契約 (69 test・実測 76 秒)。
+  // 依存は workflow YAML とテスト自身だけなので、それらが変わった PR だけ走らせる。
+  const workflowContracts = paths.some((path) =>
+    matchesAny(path, [
+      /^\.github\/workflows\/[^/]+\.ya?ml$/,
+      // workflow の step が呼ぶ CI 用スクリプト (例: PR の E2E の R2 読み取り中継)
+      /^\.github\/scripts\//,
+      /^\.claude\/scripts\/lib\/__tests__\/(?:[^/]*scoped-workflow|r2-overlay-server)\.test\.mjs$/,
+    ])
+  );
+  const remoteAssets = paths.some((path) =>
+    matchesAny(path, [
+      /^apps\/web\/scripts\/.*(?:image|ogp|thumbnail)/,
+      /^apps\/web\/src\/features\/ogp\//,
+      /^contents\/blog\/.*\/images\//,
+      /^packages\/(?:r2-storage|svg-builder)\//,
+    ])
+  );
+
+  return {
+    type_check: ciCore || source,
+    tests: ciCore || source,
+    packages: ciCore || packageSource,
+    web: ciCore || webSource || packageSource,
+    admin: ciCore || adminSource || sharedAdmin,
+    remotion: ciCore || remotionSource || sharedRemotion,
+    visualization: ciCore || chartSource,
+    remote_assets: ciCore || remoteAssets,
+    workflow_contracts: ciCore || workflowContracts,
+    metric_metadata: needsMetricMetadata(paths),
+  };
+}
+
+async function readStdin() {
+  const chunks = [];
+  for await (const chunk of process.stdin) chunks.push(chunk);
+  return Buffer.concat(chunks).toString('utf8');
+}
+
+async function main() {
+  const raw = await readStdin();
+  const separator = process.argv.includes('--stdin0') ? '\0' : /\r?\n/;
+  const result = classifyPrQualityPaths(raw.split(separator));
+  for (const [key, value] of Object.entries(result)) {
+    process.stdout.write(`${key}=${value}\n`);
+  }
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  void main();
+}

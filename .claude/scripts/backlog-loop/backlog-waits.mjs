@@ -20,10 +20,10 @@ import { createRequire } from 'node:module';
 import { parseArgs } from 'node:util';
 import { fileURLToPath } from 'node:url';
 
-import { jstDateOf } from '../metrics/lib/periods.mjs';
+import { jstDateOf } from '../../../packages/ops/src/metrics/periods.mjs';
 
 const require = createRequire(import.meta.url);
-const { parseAnnual, parseBacklog } = require('../lib/backlog-lib.cjs');
+const { parseAnnual, parseBacklog } = require('../../../packages/ops/src/management/backlog-lib.cjs');
 const core = require('./backlog-waits-core.cjs');
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');

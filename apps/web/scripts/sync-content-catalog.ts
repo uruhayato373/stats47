@@ -31,8 +31,8 @@ import { listThemeCatalogs } from '@stats47/data-configs/theme-catalog';
 import { municipalityRankingDisplayTitle } from '@stats47/ranking';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 
-import { assertDatasetShape } from '../../../.claude/scripts/lib/dataset-shape.mjs';
-import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
+import { assertDatasetShape } from '@stats47/ops/datasets/dataset-shape.mjs';
+import { NOTE_ARTICLES } from '@stats47/ops/note/catalog';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
 import cities from '../../../data/areas/master/cities.json';
 import prefectures from '../../../data/areas/master/prefectures.json';

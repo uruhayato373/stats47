@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { LOGIN } from '../refresh-session.mjs';
-import { credentialServices, parseCmdkeyList, readCredential, storedAccounts } from '../credential-store.mjs';
+import { credentialServices, parseCmdkeyList, readCredential, storedAccounts } from '../../../../packages/ops/src/measurement/credential-store.mjs';
 
 const ROOT = fileURLToPath(new URL('../../../../', import.meta.url));
 const services = credentialServices();

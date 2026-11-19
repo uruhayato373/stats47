@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Intended: .claude/scripts/themes/ingest-water-pipe-maintenance.mjs. */
 import assert from 'node:assert/strict';
 import { realpathSync } from 'node:fs';
@@ -13,7 +13,7 @@ import { parseArgs } from 'node:util';
 const root = process.cwd();
 const require = createRequire(resolve(root, 'package.json'));
 const { parse } = require('csv-parse/sync');
-const prefectures = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('./packages/area/mirror/prefectures.cjs').PREFECTURES;
 export const SOURCE = {
   file: 'water-digital-long.zip',
   member: '2024.csv',

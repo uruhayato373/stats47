@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 全ブログ SVG を取得し構造シグネチャで分類する（共通化候補の発見）
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const R2 = R2_PUBLIC_BASE_URL;
 

@@ -4,9 +4,9 @@ import { datasetDir } from "../../../../config/datasets.mjs";
 
 import {
   AFFILIATE_ADS,
-} from "../../../../apps/web/scripts/affiliate-ads-data";
-import { AFFILIATE_DIRECT_PLACEMENTS } from "../../../../apps/web/scripts/affiliate-direct-placements-data";
-import { isAffiliateActive } from "../../../../apps/web/src/features/ads/constants/affiliate-delivery-policy";
+} from "../../../web/scripts/affiliate-ads-data";
+import { AFFILIATE_DIRECT_PLACEMENTS } from "../../../web/scripts/affiliate-direct-placements-data";
+import { isAffiliateActive } from "../../../web/src/features/ads/constants/affiliate-delivery-policy";
 import { cached, fileExists, readCsv, readJson, TTL, wrap, type Wrapped } from "./state-io";
 
 /**

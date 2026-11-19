@@ -4,8 +4,8 @@
  */
 import { relative, sep } from "node:path";
 
-import { classifyBlog } from "./classify-core.mjs";
-import { readAnswerPages, readContentTypesLedger } from "./content-types-io.mjs";
+import { classifyBlog } from "../../../packages/ops/src/content-types/classify-core.mjs";
+import { readAnswerPages, readContentTypesLedger } from "../../../packages/ops/src/content-types/content-types-io.mjs";
 
 export function lintBlogContentType(root, slug, articlePath) {
   if (relative(root, articlePath).startsWith(`..${sep}`)) return { type: null, blockers: [] };

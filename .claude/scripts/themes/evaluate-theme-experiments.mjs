@@ -31,7 +31,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { addDays, jstDateOf } from "../metrics/lib/periods.mjs";
+import { addDays, jstDateOf } from "../../../packages/ops/src/metrics/periods.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 import { themeStatePath } from "./theme-state-path.mjs";
 

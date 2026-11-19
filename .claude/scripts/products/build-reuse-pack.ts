@@ -5,7 +5,7 @@ import os from 'node:os';
 import { createHash } from 'node:crypto';
 import JSZip from 'jszip';
 import { datasetDir } from '../../../config/datasets.mjs';
-import { assertDatasetShape } from '../lib/dataset-shape.mjs';
+import { assertDatasetShape } from '../../../packages/ops/src/datasets/dataset-shape.mjs';
 import { resolveAnalysisReuse } from '../../../packages/product-factory/src/analysis/reuse';
 import type { AnalysisCatalogProduct } from '../../../packages/product-factory/src/analysis/validate-catalog';
 import { assertAnalysisAxes } from '../../../packages/product-factory/src/analysis/coverage';

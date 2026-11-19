@@ -4,8 +4,8 @@ import { join, dirname } from 'node:path';
 import { SOURCES } from './sources.mjs';
 import { mergeSalesCoverage, mergeSalesObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
-import { dailyFileName, mergeDaily, partitionByMonth } from "../metrics/lib/revenue-rollup.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
+import { dailyFileName, mergeDaily, partitionByMonth } from "../../../packages/ops/src/metrics/revenue-rollup.mjs";
 
 const input = process.argv[2] || '.local/authenticated-ci-public';
 const output = `${datasetDir("revenue.authenticated")}/latest.json`;

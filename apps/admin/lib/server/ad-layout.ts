@@ -3,7 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
-import { adsenseUnitNames, unitOfEntry } from "../../../../.claude/scripts/ads/lib/ad-layout-ledger";
+import { adsenseUnitNames, unitOfEntry } from "@stats47/ops/ads/ad-layout-ledger";
 
 import { ADS_PLACEMENTS } from "../../../../config/paths.mjs";
 import { projectRoot } from "./project-root";

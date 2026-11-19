@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { renderRelationshipScatter, renderRelationshipScatterChart, relationshipPoints, unitLabel } from '@/lib/template-relationship-scatter';
 import { CHART_THEMES } from '../../../remotion/src/features/data-cards/chart-theme';
-import { matchScatterAxis, matchScatterYear, metricKeysInSource, prefecturesNamedNear, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from '../../../../.claude/scripts/blog/lib/type-chart-input';
+import { matchScatterAxis, matchScatterYear, metricKeysInSource, prefecturesNamedNear, scatterChartFromArticleData, sourceAxisYear, sourceNamesOf } from '../../lib/type-chart-input';
 import { reproducesValues } from '../../../../.claude/scripts/blog/audit-chart-axes';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 
 // Synthetic values check the join and frame; live data stays in the SHA-verified R2 snapshots.
 const payload = (metricKey: string, unit: string, valueAt: (i: number) => number, year = '2024') => ({

@@ -9,9 +9,9 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { evaluateAll, loadBudgets } from "./lib/thresholds";
+import { evaluateAll, loadBudgets } from "../../../packages/ops/src/page-quality/lib/thresholds";
 import { LATEST_JSON, LIVE_DIR, readPreviousValue, writeLatestJson, writeLatestMarkdown } from "./lib/storage";
-import type { AuditRun, MetricKey } from "./types";
+import type { AuditRun, MetricKey } from "../../../packages/ops/src/page-quality/types";
 
 /** 週次全件の結果は R2 にある (`npm run state:pull -- page-quality` で live/ へ)。無ければ git の代表URL結果。 */
 function defaultInputPath(): string {

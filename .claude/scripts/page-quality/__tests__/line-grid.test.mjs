@@ -8,8 +8,8 @@ import { chromium } from "playwright";
 import { evaluateLineGridIssues } from "../lib/line-grid-probe.mjs";
 import { UI_METRIC_KEYS } from "../lib/ui-report.ts";
 import { lineGridFixGuide } from "../lib/ui-findings.ts";
-import { browserPages } from "../templates.ts";
-import { evaluateResult } from "../lib/thresholds.ts";
+import { browserPages } from "../../../../packages/ops/src/page-quality/templates.ts";
+import { evaluateResult } from "../../../../packages/ops/src/page-quality/lib/thresholds.ts";
 import { probeUi } from "../lib/ui-probe.ts";
 
 // 実物と同じく、本文の列 (shell-main を含む格子) は本文とレールを並べる外側の格子の中にある
@@ -124,7 +124,7 @@ test("週次の配線: 指標が UI 指摘キューの対象で、予算が 0 �
 });
 
 test("手元の検査 (npm run ui-theme:line-grid) の既定の画面は、週次が見るページと同じ一覧を使い、検索・固定ページを含む", () => {
-  const script = readFileSync(new URL("../../../../.claude/scripts/ui/check-line-grid.mjs", import.meta.url), "utf8");
+  const script = readFileSync(new URL("../../ui/check-line-grid.mjs", import.meta.url), "utf8");
   assert.match(script, /browserPages\(\)/, "既定の一覧を手書きに戻すと週次と食い違う");
   assert.match(script, /line-grid-probe\.mjs/, "判定を手元の検査に複製しない");
   const urls = browserPages().map((p) => p.url);

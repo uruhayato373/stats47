@@ -664,7 +664,7 @@ function auditFile(file) {
     }
     for (const step of job.steps || []) {
       if (!step?.uses || typeof step.uses !== 'string') continue;
-      if (step.uses.startsWith('./') || step.uses.startsWith('docker://'))
+      if (step.uses.startsWith('.') || step.uses.startsWith('docker://'))
         continue;
       const revision = step.uses.split('@')[1] || '';
       if (!/^[0-9a-f]{40}$/.test(revision)) {

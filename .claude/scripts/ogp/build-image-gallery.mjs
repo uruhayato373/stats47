@@ -8,7 +8,7 @@
  * (https://storage.stats47.jp) を <img loading="lazy"> で直参照し、画像をローカルへ
  * 落とさない (read-only)。クラウドの Claude セッションでは生成 HTML を Artifact 化して閲覧する。
  *
- * 列挙 collector は .claude/scripts/lib/gallery-collectors.mjs に共有化 (統合メディア
+ * 列挙 collector は packages/ops/src/media/gallery-collectors.mjs に共有化 (統合メディア
  * コンソール server.mjs と共用)。本スクリプトは CLI / HTML / 棚卸し / CI ゲート (exit code)
  * を担う。正典: .claude/rules/ogp-image-standards.md / skill: /audit-ogp-images
  *
@@ -32,8 +32,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { OGP_TABS, buildTab, esc, pMap, probe } from "../lib/gallery-collectors.mjs";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { OGP_TABS, buildTab, esc, pMap, probe } from "../../../packages/ops/src/media/gallery-collectors.mjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

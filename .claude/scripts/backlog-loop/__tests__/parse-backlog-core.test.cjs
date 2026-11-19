@@ -7,7 +7,7 @@
  * 「カードを取りこぼして永久に処理しない」のどちらかをやる。実データ相手の
  * 件数だけでなく、**削除が対象 1 件にしか効かないこと**を両方向で固定する。
  *
- * カード構文そのもののテストは `.claude/scripts/lib/__tests__/backlog-lib.test.cjs`
+ * カード構文そのもののテストは `packages/ops/src/management/__tests__/backlog-lib.test.cjs`
  * (単一実装)。ここは adapter (sourceFile 付与・表・行削除) を見る。
  */
 

@@ -48,7 +48,7 @@ import {
 import { repoRoot } from "./lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const REPO_ROOT = repoRoot();
 const RAW_STATE_DIR = join(REPO_ROOT, ".local/a8-ui");

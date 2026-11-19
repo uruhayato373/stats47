@@ -13,7 +13,7 @@ import {
   effectWindows,
   expectedDates,
   assessDailyCoverage,
-} from "../lib/periods.mjs";
+} from "../../../../packages/ops/src/metrics/periods.mjs";
 
 const NOW_W30_SUNDAY = "2026-07-26T11:00:00Z"; // JST 20:00 日曜 (cron 実行時刻)
 

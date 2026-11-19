@@ -14,7 +14,7 @@ import { renderRegionalBoxplotChart } from '../../../apps/admin/lib/template-reg
 import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-tile-map';
 import type { RankingChart } from '../../../apps/admin/lib/template-ranking-data';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
-import { rankingChartFromArticleData } from '../blog/lib/type-chart-input';
+import { rankingChartFromArticleData } from '../../../apps/admin/lib/type-chart-input';
 import { NOTE_RANKING_IMAGES } from './lib/note-render-spec.mjs';
 
 const RENDERERS: Record<string, (chart: RankingChart) => string> = {

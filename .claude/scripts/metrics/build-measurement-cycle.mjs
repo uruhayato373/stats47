@@ -12,7 +12,7 @@
  * CI は /tmp へ退避したものを渡し、ここでは登録済みパラメータ名だけを使う。
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
@@ -25,7 +25,7 @@ import {
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
 import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
-import { summarizeWeeklyRevenue } from "./lib/weekly-revenue.mjs";
+import { summarizeWeeklyRevenue } from "../../../packages/ops/src/metrics/weekly-revenue.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");

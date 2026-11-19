@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { weeklyProductRevenue } from "../lib/product-revenue.mjs";
-import { productRevenueLine } from "../nsm-revenue-lines.mjs";
+import { weeklyProductRevenue } from "../../../../packages/ops/src/metrics/product-revenue.mjs";
+import { productRevenueLine } from "../../../../packages/ops/src/metrics/nsm-revenue-lines.mjs";
 
 /**
  * 商品の週次実売 (2026-09-30)。守りたいのは「欠測を ¥0 にしない」「KDP の見積りを合計に入れない」

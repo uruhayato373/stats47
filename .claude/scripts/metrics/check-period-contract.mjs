@@ -19,7 +19,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { PROJECT_ROOT, parseWeekArg } from "./lib/auth.mjs";
-import { jstDateOf, isoWeekOf, addDays } from "./lib/periods.mjs";
+import { jstDateOf, isoWeekOf, addDays } from "../../../packages/ops/src/metrics/periods.mjs";
 import { SUMMARY_FILE } from "./lib/weekly-summary.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

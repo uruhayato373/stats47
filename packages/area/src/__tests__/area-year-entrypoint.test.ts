@@ -5,8 +5,8 @@ import { isCityAreaCode, isPrefectureAreaCode } from '../index';
 import { extractYearCode } from '../../../estat-api/src/stats-data/utils/extract-year-code';
 
 const require = createRequire(import.meta.url);
-const nodeArea = require('../../../../.claude/scripts/lib/prefectures.cjs');
-const nodeYear = require('../../../../.claude/scripts/lib/year-code.mjs');
+const nodeArea = require('../../mirror/prefectures.cjs');
+const nodeYear = require('../../../estat-api/mirror/year-code.mjs');
 
 describe('area entrypoints', () => {
   it('preserves the previous predicates for every five-digit code', () => {
@@ -172,5 +172,14 @@ describe('entrypoint checker', () => {
       const grown = { path: 'apps/example/src/b.ts', text: 'function to4(x) { return x; }' };
       expect(checker.auditSources([grown], { [grown.path]: { ...zero, yearCheck: 1, reason: 'fixture' } }, {}, 1)).not.toEqual([]);
     });
+  });
+});
+
+describe('改名の引き継ぎ', () => {
+  it('改名したファイルの行は、元のパスの行を引き継いで縮小専用の比較をする', async () => {
+    const { followRenames } = await import('../../scripts/check-area-year-entrypoint.mjs');
+    const previous = { 'old/a.mjs': { prefSlice: 1 } };
+    expect(followRenames(previous, [['old/a.mjs', 'new/a.mjs']])['new/a.mjs']).toEqual({ prefSlice: 1 });
+    expect(followRenames(previous, [['old/b.mjs', 'new/b.mjs']])['new/b.mjs']).toBeUndefined();
   });
 });

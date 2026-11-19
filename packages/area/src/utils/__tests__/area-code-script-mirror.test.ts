@@ -4,9 +4,9 @@ import { describe, expect, it } from "vitest";
 
 import * as areaCode from "../area-code";
 
-// Node のスクリプトは TS を読めないので、同じ変換を .claude/scripts/lib/prefectures.cjs に鏡として持つ。
+// Node のスクリプトは TS を読めないので、同じ変換を packages/area/mirror/prefectures.cjs に鏡として持つ。
 // 片方だけ直すと、スクリプトとアプリで同じコードの読み方が食い違う。同じ入力で結果が一致することを固定する。
-const mirror = createRequire(import.meta.url)("../../../../../.claude/scripts/lib/prefectures.cjs") as {
+const mirror = createRequire(import.meta.url)("../../../../../packages/area/mirror/prefectures.cjs") as {
   NATIONAL_AREA_CODE: string;
   PREFECTURE_COUNT: number;
   to2DigitPrefCode(code: string | number): string;

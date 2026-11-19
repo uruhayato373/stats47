@@ -1,4 +1,4 @@
-import { rankingR2Key } from "../../../lib/r2-keys.mjs";
+import { rankingR2Key } from "../../../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * 年度の指標の図に「2021年」と書かないことを固定する (BLOG-FETCH-RANKING-FISCAL-01)。
  * 実行: node --test .claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs

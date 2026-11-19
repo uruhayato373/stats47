@@ -27,7 +27,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
 import { createAdsenseClient } from "../lib/google-client.cjs";
-import { resolvePeriods, addDays, expectedDates, assessDailyCoverage } from "./lib/periods.mjs";
+import { resolvePeriods, addDays, expectedDates, assessDailyCoverage } from "../../../packages/ops/src/metrics/periods.mjs";
 import {
   REPORT_JOBS,
   buildJobManifest,

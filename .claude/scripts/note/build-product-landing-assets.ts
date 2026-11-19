@@ -13,7 +13,7 @@ import { isCapitalCityValueMetric } from '../../../packages/data-configs/src/pro
 import { PREFECTURE_CAPITAL_CITY_NAMES } from '../../../packages/area/src/constants/capital-cities';
 import { formatYearName } from '../../../packages/types/src/year-format';
 import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
-import { assertDatasetShape } from '../lib/dataset-shape.mjs';
+import { assertDatasetShape } from '../../../packages/ops/src/datasets/dataset-shape.mjs';
 
 const ROOT = path.resolve(__dirname, '../../..');
 const readJson = (file: string) => JSON.parse(fs.readFileSync(path.join(ROOT, file), 'utf8'));
@@ -35,7 +35,7 @@ export async function buildProductLandingAssets(productId: string, archiveCache?
     throw Error('固定納品版とZIP参照が一致しません');
   const cached = archiveCache && path.join(archiveCache, `${productId}.zip`);
   const bytes = cached && fs.existsSync(cached) ? fs.readFileSync(cached)
-    : await (await import('./lib/cover-storage.mjs')).createR2Store({ bucket: archive.bucket, maxBytes: archive.bytes }).get(archive.key);
+    : await (await import('../../../packages/ops/src/note/cover-storage.mjs')).createR2Store({ bucket: archive.bucket, maxBytes: archive.bytes }).get(archive.key);
   if (!bytes) throw Error('固定納品ZIPが見つかりません');
   const source = await inspectLandingArchive(bytes, archive, delivery);
   if (source.files.includes('product.xlsx') !== delivery.hasXlsx) throw Error('固定納品Excelの有無が台帳と一致しません');

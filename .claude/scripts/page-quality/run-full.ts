@@ -26,11 +26,11 @@ import { checkImages } from "./lib/check-images";
 import { checkSvgText } from "./lib/check-svg-text";
 import { createScreenshotSession, responsiveFindings, SCREENSHOT_PREFIX } from "./lib/screenshots";
 import { applyTitleChanges, buildReviewInput, newUiViolations } from "./lib/ui-report";
-import { browserPages, reviewPageKeys, type BrowserPage } from "./templates";
+import { browserPages, reviewPageKeys, type BrowserPage } from "../../../packages/ops/src/page-quality/templates";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
-import { currentCommitSha } from "./lib/git-diff";
+import { currentCommitSha } from "../../../packages/ops/src/page-quality/lib/git-diff";
 import { enumerateAllUrls } from "./lib/enumerate-urls";
-import { evaluateAll, loadBudgets } from "./lib/thresholds";
+import { evaluateAll, loadBudgets } from "../../../packages/ops/src/page-quality/lib/thresholds";
 import {
   appendWeeklySummary,
   pullFullState,
@@ -39,7 +39,7 @@ import {
   writeFullState,
   writeLatestMarkdown,
 } from "./lib/storage";
-import type { AuditRun, MetricKey, PageAuditResult } from "./types";
+import type { AuditRun, MetricKey, PageAuditResult } from "../../../packages/ops/src/page-quality/types";
 
 function parseArgs() {
   const args = process.argv.slice(2);

@@ -18,10 +18,10 @@
  *   node .claude/scripts/lib/metrics-reader.mjs [--json]
  */
 
-import { resolvePeriods, DATA_DELAY_DAYS } from "../metrics/lib/periods.mjs";
-import { assessDailyCoverage } from "../metrics/lib/periods.mjs";
+import { resolvePeriods, DATA_DELAY_DAYS } from "../../../packages/ops/src/metrics/periods.mjs";
+import { assessDailyCoverage } from "../../../packages/ops/src/metrics/periods.mjs";
 import { pathToFileURL } from "node:url";
-import { GA4_PROPERTY_ID, GSC_PROPERTY, SITE_ORIGIN } from "./site-config.cjs";
+import { GA4_PROPERTY_ID, GSC_PROPERTY, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient, createSearchConsoleClient } from "./google-client.cjs";
 
 const GSC_SITE_URL = GSC_PROPERTY;

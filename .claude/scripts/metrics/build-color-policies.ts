@@ -1,5 +1,5 @@
 import { isPrefectureAreaCode } from "@stats47/area";
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * 配色の台帳。指標 × 粒度ごとに、連続か 5 段階か・一方向か発散かを R2 の値から決めて持つ。
  * 指標定義は人が決める色相と基準値、この台帳は値が決める段階 (正規化。結合は metricPresentation)。
@@ -16,7 +16,7 @@ import { datasetPath } from '../../../config/datasets.mjs';
 import { buildMunicipalityEntityPolicy, resolveWardModeAreas } from '../../../packages/area/src/municipalities';
 import { listAllMetrics } from '../../../packages/data-configs/src/registry';
 import { COLOR_GRAINS, colorPolicyRow, type ColorGrain, type ColorPolicyRow, type ColorPolicySkip } from '../../../packages/types/src/color-policy';
-import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { summaryOf, type Ledger } from './check-color-policies';
 
 const ROOT = path.resolve(__dirname, '../../..');

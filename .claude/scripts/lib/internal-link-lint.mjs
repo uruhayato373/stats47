@@ -1,4 +1,4 @@
-import { isPrefectureAreaCode } from "./prefectures.cjs";
+import { isPrefectureAreaCode } from "../../../packages/area/mirror/prefectures.cjs";
 /**
  * internal-link-lint — 記事内部リンクの「リンク先が実在するか」を決定的に検査する
  *
@@ -27,7 +27,7 @@ import { isPrefectureAreaCode } from "./prefectures.cjs";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PREF_AREA_CODES } from "./prefectures.cjs";
+import { PREF_AREA_CODES } from "../../../packages/area/mirror/prefectures.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 /**

@@ -24,13 +24,13 @@ import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
-import { archiveFile, mimeOf, resolveDriveRoot } from "./lib/sns-drive-assets.mjs";
+import { archiveFile, mimeOf, resolveDriveRoot } from "../../../packages/ops/src/sns/sns-drive-assets.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const require = createRequire(import.meta.url);
 const store = require("../lib/sns-posts-store.cjs");
-const { R2_PUBLIC_BASE_URL: R2 } = require("../lib/site-config.cjs");
+const { R2_PUBLIC_BASE_URL: R2 } = require("../../../packages/types/mirror/site-config.cjs");
 
 const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(name);

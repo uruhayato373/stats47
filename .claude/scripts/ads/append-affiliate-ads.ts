@@ -25,7 +25,7 @@ import { createRequire } from "module";
 
 import { AFFILIATE_OFFER_PROFILES } from "../../../apps/web/scripts/affiliate-offer-profiles-data";
 import { datasetPath } from "../../../config/datasets.mjs";
-import { assertDatasetShape } from "../lib/dataset-shape.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const require = createRequire(import.meta.url);
 const core = require("./lib/a8-scout-core.mjs");

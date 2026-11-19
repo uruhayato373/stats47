@@ -48,7 +48,7 @@
             "minLength": 5
           },
           "stage": {
-            "description": "工程。判定は .claude/scripts/analysis/analysis-cycle-core.mjs",
+            "description": "工程。判定は packages/ops/src/analysis/analysis-cycle-core.mjs",
             "enum": ["framed", "viewpoints", "figures", "draft", "reviewed", "approved", "published", "evaluated"]
           },
           "inventoryTerms": {

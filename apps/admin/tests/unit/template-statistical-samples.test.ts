@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { ImageView } from '../../../../.claude/scripts/media/lib/workspace.mjs';
+import type { ImageView } from '@stats47/ops/media/workspace.mjs';
 import { resolveStatisticalSamples } from '@/lib/server/template-statistical-samples';
 
 function household(channel: string, patch: Partial<ImageView> = {}): ImageView {

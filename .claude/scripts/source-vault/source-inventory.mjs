@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { PREFECTURES as MASTER_PREFECTURES } from "../lib/prefectures.cjs";
+import { PREFECTURES as MASTER_PREFECTURES } from "../../../packages/area/mirror/prefectures.cjs";
 
 import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';

@@ -163,7 +163,7 @@ RDB の考え方で読む。
 - 新しい記録・素材は、先にカタログへ 1 行足してから書く。JSON のマスタ・台帳・設定は `schema` (JSON Schema) を宣言する。
   共通の型は `config/schema/common.schema.json` を `$ref` で使う
 - コードは置き場を直書きせず、カタログの id で引く (`datasetPath(id)` / `datasetDir(id)`)。`config/` の設定は `config/paths.mjs` の定数を import する
-- 判断に使う記録の書き手は、`.claude/scripts/lib/dataset-shape.mjs` の `assertDatasetShape(id, doc)` で書く前に形を確かめる
+- 判断に使う記録の書き手は、`packages/ops/src/datasets/dataset-shape.mjs` の `assertDatasetShape(id, doc)` で書く前に形を確かめる
 - 日付付きファイルの寿命は `prune-state-snapshots.mjs` の `RETENTION_POLICIES` だけが数値を持ち、カタログは名前で参照する
 - テストの fixture が実物のスクリプトを一時ディレクトリへコピーして動かすときは、`config/datasets.mjs` と `config/paths.mjs` もコピーする
   (`apps/admin/tests/helpers/fixture-root.ts`)

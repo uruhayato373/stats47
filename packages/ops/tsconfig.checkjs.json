@@ -1,0 +1,21 @@
+{
+  // JavaScript の部品を型検査する。.claude/scripts/tsconfig.checkjs.json と同じ設定で、
+  // 2026-11-19 にそこの検査の範囲 (lib・measurement・metrics/lib) から移した部品を、範囲を縮めずに引き継ぐ。
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "checkJs": true,
+    "strict": false,
+    "lib": ["es2023", "dom", "dom.iterable"]
+  },
+  "include": [
+    "src/ci/**/*.mjs",
+    "src/datasets/**/*.mjs",
+    "src/management/**/*.mjs",
+    "src/management/**/*.cjs",
+    "src/media/gallery-collectors.mjs",
+    "src/media/svg-classify.mjs",
+    "src/measurement/**/*.mjs",
+    "src/metrics/**/*.mjs"
+  ],
+  "exclude": ["node_modules", "**/__tests__/**"]
+}

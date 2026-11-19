@@ -3,7 +3,7 @@ import "server-only";
 import fs from "node:fs";
 
 import { KDP_LISTINGS } from "../../../../config/paths.mjs";
-import { isoWeekRange } from "../../../../.claude/scripts/metrics/lib/periods.mjs";
+import { isoWeekRange } from "@stats47/ops/metrics/periods.mjs";
 
 import {
   cached,

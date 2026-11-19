@@ -4,7 +4,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { computeWeekRanges } from "../../lib/metrics-reader.mjs";
-import { resolvePeriods } from "../lib/periods.mjs";
+import { resolvePeriods } from "../../../../packages/ops/src/metrics/periods.mjs";
 import { markdownAdsense } from "../update-history-csv.mjs";
 
 const NOW = Date.parse("2026-11-14T00:00:00Z");

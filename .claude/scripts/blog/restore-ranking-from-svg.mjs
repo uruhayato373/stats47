@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * restore-ranking-from-svg.mjs — neither(json/source.json 消失=絵だけ) の ranking SVG を
  * SSOT(R2 app/ranking) から再生成して 3点セット(json/source.json/columns+portrait svg)に戻す。
@@ -32,8 +32,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { PREF_NAMES } from "../lib/prefectures.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
+import { PREF_NAMES } from "../../../packages/area/mirror/prefectures.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

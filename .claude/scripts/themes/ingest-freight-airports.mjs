@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { execFileSync } from 'node:child_process';
 const require = createRequire(import.meta.url);
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const {
   FREIGHT_OD_SOURCE: freightSource,
 } = require('../../../packages/data-configs/src/theme-catalog/freight-od-source.ts');

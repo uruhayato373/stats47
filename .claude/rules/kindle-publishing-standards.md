@@ -206,7 +206,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
 | 書き下ろしの執筆ブリーフ | `scripts/build-fresh-briefs.mts` (実データ 30 指標を焼き込む) |
 | 書き下ろしの検証 | `scripts/verify-fresh.mts` |
 
-**捏造を通さない設計**: 採用前に `.claude/scripts/ai-content/lib/number-audit.mjs` を
+**捏造を通さない設計**: 採用前に `packages/ai-content/src/audit/number-audit.mjs` を
 **import して** ai-content 側とまったく同じ判定で数値を突合する (書籍側に別実装を作らない =
 「サイトでは通るが書籍では落ちる」二重基準を作らない)。判定は**フィールド単位**で、
 落ちたものだけ理由付きで捨てる (キーごと捨てると使える解説まで失う)。

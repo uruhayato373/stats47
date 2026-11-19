@@ -3,7 +3,8 @@ paths:
   - "data/metrics/**"
   - "packages/data-configs/src/unit/**"
   - "packages/data-configs/src/money-unit.ts"
-  - ".claude/scripts/lib/{unit-semantics,article-factual-check}.mjs"
+  - "packages/data-configs/mirror/unit-semantics.mjs"
+  - ".claude/scripts/lib/article-factual-check.mjs"
   - ".claude/skills/db/audit-units/**"
   - ".claude/agents/data-ingester.md"
 ---
@@ -65,7 +66,7 @@ paths:
 packages/data-configs/src/unit/unit-semantics.ts   ← 正典 (ここだけ編集する)
         │  npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts
         ▼
-.claude/scripts/lib/unit-semantics.mjs             ← 鏡 (自動生成・直接編集禁止)
+packages/data-configs/mirror/unit-semantics.mjs             ← 鏡 (自動生成・直接編集禁止)
 ```
 
 **手写しの二重実装をしない。** それが 44 箇所の独立実装を生んだ原因そのもの。
@@ -160,7 +161,7 @@ Instagram の型の画像) は、**図ごとに 1 つ**の表示単位を選び�
 | 画面で `display.conversionFactor` や `resolveChartDisplayScale` を直接掛ける (二重換算のもと) | `resolveMetricDisplayScale` / `resolveRankingValueDisplay` で 1 回決める (§2.7) |
 | 新しいスケール表 (`{ 千: 1e3, 万: 1e4 }` 等) をファイル内に書く | `unit-semantics` の `scalePrefixMultiplier` / `conversionFactor` を呼ぶ |
 | 換算不能を 1 倍にフォールバックする | `null` を返して呼び出し側に比較を諦めさせる |
-| 鏡 (`.claude/scripts/lib/unit-semantics.mjs`) を直接編集 | 正典を編集して再生成 |
+| 鏡 (`packages/data-configs/mirror/unit-semantics.mjs`) を直接編集 | 正典を編集して再生成 |
 | 「千」を無条件にスケール接頭辞とみなす | `isScalePrefixPartOfUnit(prefix, ssotUnit)` で判定 |
 | 検証器を作って「全 PASS」で満足する | 誤値を注入して**発火することを実測**する (§5) |
 | **金額族以外の unit に `valueScale` を付ける** | 金額族のみ。lint `[value-scale]` が error で弾く (§2.5) |
@@ -283,7 +284,7 @@ blog の data json も同じ形で、`label: 人口10万人あたり外国人数
 
 ## 関連
 
-- 正典: `packages/data-configs/src/unit/unit-semantics.ts` / 鏡: `.claude/scripts/lib/unit-semantics.mjs`
+- 正典: `packages/data-configs/src/unit/unit-semantics.ts` / 鏡: `packages/data-configs/mirror/unit-semantics.mjs`
 - 生成器: `packages/data-configs/scripts/generate-unit-semantics-mirror.ts`
 - **金額族の換算 (§2.5)**: 判定 `packages/data-configs/src/money-unit.ts`
   (`checkMoneyUnitScale` / `resolvePinnedSourceUnit` / `applyValueScale`) /

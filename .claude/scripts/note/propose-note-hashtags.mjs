@@ -14,7 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { fetchNoteDetail } from './lib/cover-storage.mjs';
+import { fetchNoteDetail } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { plainText, sourceSha256, readHashtagTable, writeHashtagRecord, HASHTAG_MODEL } from './lib/note-hashtags.mjs';
 import { proposeHashtags } from './lib/note-hashtags-propose.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";

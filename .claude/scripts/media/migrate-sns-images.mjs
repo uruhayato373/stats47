@@ -3,11 +3,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { ROOT,sha } from './lib/workspace.mjs';
-import { archiveSnsImage,mediaStore,readVerified } from './lib/storage.mjs';
-import { resolveDriveRoot,driveAbsolutePath } from '../sns/lib/sns-drive-assets.mjs';
-import { createR2Store,fetchCoverSource } from '../note/lib/cover-storage.mjs';
-import { R2_BUCKET,R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { ROOT,sha } from '../../../packages/ops/src/media/workspace.mjs';
+import { archiveSnsImage,mediaStore,readVerified } from '../../../packages/ops/src/media/storage.mjs';
+import { resolveDriveRoot,driveAbsolutePath } from '../../../packages/ops/src/sns/sns-drive-assets.mjs';
+import { createR2Store,fetchCoverSource } from '../../../packages/ops/src/note/cover-storage.mjs';
+import { R2_BUCKET,R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetPath } from '../../../config/datasets.mjs';
 const require=createRequire(import.meta.url),store=require('../lib/sns-posts-store.cjs');
 const args=process.argv.slice(2);

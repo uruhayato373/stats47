@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import ts from "typescript";
 
 const SRC = fileURLToPath(new URL("../src/keys.ts", import.meta.url));
-const OUT = fileURLToPath(new URL("../../../.claude/scripts/lib/r2-keys.mjs", import.meta.url));
+const OUT = fileURLToPath(new URL("../../../packages/r2-storage/mirror/r2-keys.mjs", import.meta.url));
 const HEADER = `// generated, do not edit
 // Source: packages/r2-storage/src/keys.ts
 // Generate: npm run r2-keys:mirror
@@ -18,7 +18,7 @@ function main(): void {
   if (!source.includes(siteImport)) throw new Error("Update mirror generator for the SITE import");
   // Keep the shared site.json live through the existing Node adapter, without copying the host.
   const { outputText } = ts.transpileModule(
-    source.replace(siteImport, 'import { SITE } from "./site-config.cjs";'),
+    source.replace(siteImport, 'import { SITE } from "../../types/mirror/site-config.cjs";'),
     { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } },
   );
   const mirror = HEADER + outputText;

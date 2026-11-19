@@ -1,4 +1,4 @@
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * 第 11 回 NDB オープンデータ「特定健診 標準的な質問票」の都道府県別表から、設問ごとの回答割合を取り込む。
  *
@@ -30,7 +30,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');

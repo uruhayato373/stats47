@@ -17,7 +17,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { formatTriage, triageAlerts } from "./lib/alert-triage.mjs";
-import { loadIdIndex, loadWiring } from "./lib/review-cadence.mjs";
+import { loadIdIndex, loadWiring } from "../../../packages/ops/src/management/review-cadence.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = process.argv.slice(2);

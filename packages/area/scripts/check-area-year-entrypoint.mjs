@@ -5,7 +5,7 @@
  * Credential files are excluded before reading the git tracked/nonignored source inventory.
  */
 import ts from "typescript";
-import { PREF_NAMES } from "../../../.claude/scripts/lib/prefectures.cjs";
+import { PREF_NAMES } from "../mirror/prefectures.cjs";
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, existsSync, lstatSync } from "node:fs";
 import { resolve, basename } from "node:path";
@@ -15,9 +15,9 @@ const ROOT = fileURLToPath(new URL("../../../", import.meta.url));
 const ALLOWLIST = ".claude/config/area-year-entrypoint-baseline.json";
 const ENTRY = new Set([
   "packages/area/src/index.ts",
-  ".claude/scripts/lib/prefectures.cjs",
+  "packages/area/mirror/prefectures.cjs",
   "packages/estat-api/src/stats-data/utils/extract-year-code.ts",
-  ".claude/scripts/lib/year-code.mjs",
+  "packages/estat-api/mirror/year-code.mjs",
   "packages/area/src/utils/area-code.ts",
   // この検査の定義と固定用の入力 (違反の形を書いた文字列を持つので数えない)
   "packages/area/scripts/check-area-year-entrypoint.mjs",
@@ -123,6 +123,29 @@ export function literalHits(text, path = "source.ts") {
   return hits;
 }
 
+/**
+ * 比べる元の基準を、元の commit から今の作業ツリーまでの改名 (git の -M 判定) に合わせて読み替える。
+ * 改名したファイルの行は、新しいパスの「追加」ではなく元のパスの行の引き継ぎとして比べる (2026-11-19 に部品を packages へ移したとき、
+ * 改名が追加とみなされて縮小専用の比較が落ちた)。
+ */
+export function followRenames(previous, renames) {
+  if (!previous) return previous;
+  const next = { ...previous };
+  for (const [from, to] of renames) {
+    if (next[from] && !next[to]) next[to] = next[from];
+  }
+  return next;
+}
+
+function renamesSince(git, base) {
+  try {
+    return git(["diff", "--name-status", "-M", base, "--"]).split("\n")
+      .map((line) => line.split("\t"))
+      .filter((cols) => cols.length === 3 && cols[0].startsWith("R"))
+      .map((cols) => [cols[1], cols[2]]);
+  } catch { return []; }
+}
+
 export function auditSources(files, exceptions, previous, previousVersion = VERSION) {
   const errors = [];
   if (previous) {
@@ -191,9 +214,13 @@ export function main(args = process.argv.slice(2)) {
   for (const base of bases) {
     // First introduction has no prior manifest. Once present, malformed baselines fail closed.
     try { git(["cat-file", "-e", `${base}:${ALLOWLIST}`]); } catch { continue; }
-    previous.push(JSON.parse(git(["show", `${base}:${ALLOWLIST}`])));
+    const doc = JSON.parse(git(["show", `${base}:${ALLOWLIST}`]));
+    previous.push({ ...doc, exceptions: followRenames(doc.exceptions, renamesSince(git, base)) });
   }
-  if (args.length) previous.push(JSON.parse(git(["show", `${args[1]}:${ALLOWLIST}`])));
+  if (args.length) {
+    const doc = JSON.parse(git(["show", `${args[1]}:${ALLOWLIST}`]));
+    previous.push({ ...doc, exceptions: followRenames(doc.exceptions, renamesSince(git, args[1])) });
+  }
   const files = sourceInventory();
   const errors = [...new Set([undefined, ...previous].flatMap((baseline) =>
     auditSources(files, exceptions, baseline?.exceptions, baseline?.version ?? 1)))];

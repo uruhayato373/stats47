@@ -303,12 +303,12 @@ function main() {
     const source = `${item.relative}/package.json`;
     for (const field of ["main", "types"]) {
       const target = item.manifest[field];
-      if (typeof target === "string" && target.startsWith("./") && !fs.existsSync(path.resolve(item.directory, target))) {
+      if (typeof target === "string" && target.startsWith(".") && !fs.existsSync(path.resolve(item.directory, target))) {
         findings.push({ code: "MISSING_ENTRYPOINT", file: source, message: `${field} points to missing ${target}` });
       }
     }
     for (const target of exportTargets(item.manifest.exports)) {
-      if (target.startsWith("./") && !target.includes("*") && !fs.existsSync(path.resolve(item.directory, target))) {
+      if (target.startsWith(".") && !target.includes("*") && !fs.existsSync(path.resolve(item.directory, target))) {
         findings.push({ code: "MISSING_EXPORT", file: source, message: `exports points to missing ${target}` });
       }
     }

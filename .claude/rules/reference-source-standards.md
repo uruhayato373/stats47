@@ -215,7 +215,7 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 観測値の出典: `.claude/rules/data-provenance-standards.md`
 - 文書配置: `.claude/rules/docs-vs-issues.md`
 - source vault 設定: `config/source-vault.json`
-- source vault CLI: `.claude/scripts/source-vault/source-vault.mjs`
+- source vault CLI: `packages/ops/src/source-vault/source-vault.mjs`
 - OCR / page / crop / stage CLI: `.claude/scripts/source-vault/source-processing.mjs`
 - 段階運用 skill: `.claude/skills/db/process-reference-source/SKILL.md` (`/process-reference-source`、owner `open-data-curator`)
 - evidence inventory CLI: `.claude/scripts/source-vault/source-inventory.mjs`

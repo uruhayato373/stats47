@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { rankingR2Key } from '../../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * 教材の分析企画のうち「地方ごとに各県の全体像を組み立てられるか」を問うもの (prefecture-ranking-consumption の a47〜a52) を、
  * R2 の県データブック (app/areas/<code>/databook.json) から note 記事の作業コピーにする。
@@ -12,8 +12,8 @@ import { rankingR2Key } from '../../lib/r2-keys.mjs';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { selectAreaHighlights, type AreaHighlight } from '../../../../packages/area-profile/src/highlights/select-area-highlights.ts';
-import { R2_PUBLIC_BASE_URL } from '../../lib/site-config.cjs';
-import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from '../../source-vault/lib/reference-expansion.mjs';
+import { R2_PUBLIC_BASE_URL } from '../../../../packages/types/mirror/site-config.cjs';
+import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from '../../../../packages/ops/src/source-vault/lib/reference-expansion.mjs';
 import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
 import { qualifyLabel } from './lib/estat-denominator';
 

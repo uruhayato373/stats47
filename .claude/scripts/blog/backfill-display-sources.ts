@@ -17,7 +17,7 @@
  */
 import * as fs from "fs";
 import * as path from "path";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
 const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL).replace(/\/+$/, "");

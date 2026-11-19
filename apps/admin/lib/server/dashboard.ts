@@ -328,7 +328,7 @@ export function parseFeatureBacklogMd(root: string) {
     // パーサは backlog-lib (v3-unified の単一実装) を共有する。eval("require") は
     // webpack の静的解析を避けるための既存パターン (todo.ts / posts-store.ts と同じ)
     const nativeRequire = eval("require") as NodeRequire;
-    const lib = nativeRequire(path.join(root, ".claude/scripts/lib/backlog-lib.cjs")) as {
+    const lib = nativeRequire(path.join(root, "packages/ops/src/management/backlog-lib.cjs")) as {
       parseBacklog: (text: string) => Array<{
         id: string | null;
         title: string;

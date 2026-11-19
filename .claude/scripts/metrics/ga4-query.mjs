@@ -15,7 +15,7 @@
  */
 import { toCsv } from "./lib/auth.mjs";
 import { buildQuery } from "./lib/ga4-query.mjs";
-import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient } from "../lib/google-client.cjs";
 
 const DEFAULT_PROPERTY_ID = GA4_PROPERTY_ID;

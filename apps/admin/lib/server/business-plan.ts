@@ -6,7 +6,7 @@ import {
   type BusinessPlanMeasurementStatus,
   type BusinessPlanWorkStatus,
 } from "@stats47/data-configs/business-plan";
-import { NOTE_ARTICLES } from "../../../../.claude/scripts/note/catalog";
+import { NOTE_ARTICLES } from "@stats47/ops/note/catalog";
 
 import {
   fileExists,

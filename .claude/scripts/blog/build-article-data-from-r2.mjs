@@ -1,4 +1,4 @@
-import { statsR2Key } from '../lib/r2-keys.mjs';
+import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * build-article-data-from-r2.mjs
  *
@@ -19,7 +19,7 @@ import { statsR2Key } from '../lib/r2-keys.mjs';
 import fs from "fs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import path from "path";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { observedOnly } from "../lib/blog-observed-values.mjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");

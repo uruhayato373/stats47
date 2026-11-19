@@ -30,7 +30,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./"),
+      "@": path.resolve(__dirname, "."),
       "@stats47/types": path.resolve(__dirname, "../../packages/types/src/index.ts"),
       "@stats47/data-configs/business-plan": path.resolve(
         __dirname,

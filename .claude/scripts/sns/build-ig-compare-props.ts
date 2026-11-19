@@ -1,5 +1,5 @@
 #!/usr/bin/env tsx
-import { rankingR2Key } from '../lib/r2-keys.mjs';
+import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * build-ig-compare-props.ts — 2都道府県の候補プールから、Instagram「県どうしの比較」
  * カルーセル (金枠。正典 .claude/rules/sns-content-standards.md §2-3c「県どうしの比較」) の
@@ -45,7 +45,7 @@ import {
   MAX_DUEL_ITEMS,
   MIN_DUEL_ITEMS,
 } from "./lib/ig-compare-props.ts";
-import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;

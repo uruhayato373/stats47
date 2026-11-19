@@ -1,7 +1,7 @@
 import "server-only";
 
 import { datasetPath } from "../../../../config/datasets.mjs";
-import { readClassifyInputs } from "../../../../.claude/scripts/content-types/content-types-io.mjs";
+import { readClassifyInputs } from "@stats47/ops/content-types/content-types-io.mjs";
 import { buildMetricDetail, buildMetricRows, type MetricDetail, type MetricExternalPage, type MetricLink, type MetricRow } from "../reference-metrics";
 import { projectRoot } from "./project-root";
 import { readJson, type Wrapped } from "./state-io";

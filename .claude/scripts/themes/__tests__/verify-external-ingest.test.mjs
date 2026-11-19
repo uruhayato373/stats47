@@ -9,7 +9,7 @@ import { verifyIngestReport } from '../verify-external-ingest.mjs';
  * この検査が素通りすると、取り込みの報告は PASS のまま、47 県そろわない値や別の場所のファイルが本番の R2 に出る。
  */
 const require = createRequire(import.meta.url);
-const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const sha = (text) => createHash('sha256').update(text).digest('hex');
 
 const KEY = 'app/stats/health-checkup-smoking-rate/values.json';

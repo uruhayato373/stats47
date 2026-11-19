@@ -41,7 +41,7 @@ import {
   extractLegacySourceSection,
   restoreBookSourceSection,
 } from "../../../packages/product-factory/src/channels/kindle/fetch-content";
-import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 /** Kindle 書籍の章として本文を使う blog slug。本文を変えると書籍の校正指示が外れる。 */
 const KINDLE_PINNED_SLUGS = new Set(

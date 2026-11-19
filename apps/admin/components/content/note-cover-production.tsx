@@ -6,8 +6,8 @@ import { Button, buttonVariants, Label, Input, Textarea, Collapsible, Collapsibl
 import { COVER_PRODUCTION_STAGES } from '@/lib/note-cover-view';
 import { NoteCoverImage } from './note-cover-image';
 import type { NoteCoverRow } from '@/lib/server/note-covers';
-import type { CoverBrief } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
-import type { CoverPolicy } from '../../../../.claude/scripts/note/lib/cover-production.mjs';
+import type { CoverBrief } from '@stats47/ops/note/cover-assets.mjs';
+import type { CoverPolicy } from '@stats47/ops/note/cover-production.mjs';
 
 export function CoverPolicyDetails({ policy }: { policy: CoverPolicy }) {
   return <Stack gap="sm">

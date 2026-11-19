@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
 import { compositionSampleRows, renderCompositionStacked, renderStackedAreaChart, type StackedChart } from '@/lib/template-composition-stacked';
-import { stackedAreaChartFromArticleData, stackedFormOf } from '../../../../.claude/scripts/blog/lib/type-chart-input';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { stackedAreaChartFromArticleData, stackedFormOf } from '../../lib/type-chart-input';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 
 const labels = ['ビール', '発泡酒', 'リキュール・その他の醸造酒等', '焼酎', '清酒', '果実酒', 'ウイスキー・ブランデー', 'その他'];
 const fixture = () => ({

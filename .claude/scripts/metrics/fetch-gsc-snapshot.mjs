@@ -26,10 +26,10 @@ import {
   parseWeekArg,
   toCsv,
 } from "./lib/auth.mjs";
-import { resolvePeriods } from "./lib/periods.mjs";
+import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
 import { buildGscSummary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
 import { PAGES_FINALIZED_FILE, QUERIES_FINALIZED_FILE, detailCoverage } from "./lib/gsc-demand.mjs";
-import { GSC_PROPERTY } from "../lib/site-config.cjs";
+import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
 import { createSearchConsoleClient } from "../lib/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

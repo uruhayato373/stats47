@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import type {ImageGenerationPublishPlan} from '@stats47/types';
 import { LINK_CARD_DESIGN, MAGAZINE_CARD_DESIGNS, magazineCardPrompt } from '../../../apps/web/scripts/data/link-card-design';
-import site from '../lib/site-config.cjs';
+import site from '../../../packages/types/mirror/site-config.cjs';
 import {datasetDir,datasetPath} from '../../../config/datasets.mjs';
 import {readLinkCardLedger,writeLinkCardLedger} from './lib/link-card-ledger.mjs';
 import {publishedBlogSlugsFromIndex} from '../../../apps/web/scripts/lib/blog-image-generation';
@@ -51,7 +51,7 @@ function target(id: string) { const entry=ledger.entries.find((v:Entry)=>v.id===
 function summary() { const counts:Record<string,number>={}; for(const e of ledger.entries)counts[e.status]=(counts[e.status]??0)+1; console.log(JSON.stringify({targets:ledger.entries.length,counts})); }
 
 async function main() {
-  const { createR2Store, fetchPublicMediaSource } = await import('../note/lib/cover-storage.mjs');
+  const { createR2Store, fetchPublicMediaSource } = await import('../../../packages/ops/src/note/cover-storage.mjs');
   if (command==='sync') {
     const magazines=read(path.join(root,datasetPath('note.magazines'))).magazines;
     for(const m of magazines) {
@@ -196,7 +196,7 @@ async function main() {
 
   if(command==='verify-live') {
     const {launchContext}=await import('../note/lib/note-session.mjs');
-    const {fetchCoverSource}=await import('../note/lib/cover-storage.mjs');
+    const {fetchCoverSource}=await import('../../../packages/ops/src/note/cover-storage.mjs');
     const ctx=await launchContext({headless:true});
     try {
       const page=ctx.pages()[0]||await ctx.newPage();

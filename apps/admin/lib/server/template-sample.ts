@@ -1,5 +1,5 @@
 import 'server-only';
-import { readVerified } from '../../../../.claude/scripts/media/lib/storage.mjs';
+import { readVerified } from '@stats47/ops/media/storage.mjs';
 import { RANKING_SAMPLE_ASSETS } from '@/lib/template-ranking-assets';
 import { TREND_SAMPLE_ASSETS } from '@/lib/template-trend-assets';
 import { COMPOSITION_SAMPLE_ASSETS } from '@/lib/template-composition-assets';

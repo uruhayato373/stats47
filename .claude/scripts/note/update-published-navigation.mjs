@@ -31,7 +31,7 @@ import {
   datasetCardLead,
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
-import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';

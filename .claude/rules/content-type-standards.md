@@ -14,7 +14,7 @@ paths:
 # コンテンツの 4 型
 
 **すべてのコンテンツは参照型・教科書型・論文型・ノウハウ型のどれか 1 つに属する (2026-11-06 オーナー決定)。** 未分類のまま作らない・公開しない。
-正本は `data/content/content-types.json` で、型の定義・振り分けの規則・個別の指定を持つ。判定の実装は `.claude/scripts/content-types/classify-core.mjs` の 1 つだけである。
+正本は `data/content/content-types.json` で、型の定義・振り分けの規則・個別の指定を持つ。判定の実装は `packages/ops/src/content-types/classify-core.mjs` の 1 つだけである。
 
 ## 型の約束
 

@@ -15,8 +15,8 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { createRequire } from "node:module";
 import { join } from "node:path";
 
-import type { AuditRun } from "./types";
-import { PROJECT_ROOT } from "./lib/thresholds";
+import type { AuditRun } from "../../../packages/ops/src/page-quality/types";
+import { PROJECT_ROOT } from "../../../packages/ops/src/page-quality/lib/thresholds";
 import {
   type AgentFinding,
   BATCH_DIR,
@@ -34,7 +34,7 @@ import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(join(PROJECT_ROOT, "package.json"));
-const { parseBacklog } = require("./.claude/scripts/lib/backlog-lib.cjs") as {
+const { parseBacklog } = require("./packages/ops/src/management/backlog-lib.cjs") as {
   parseBacklog: (text: string) => Array<{ id?: string }>;
 };
 

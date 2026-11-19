@@ -13,7 +13,7 @@
  *   決定的な文字列 (property ID / sc-domain:stats47.jp) の有無で判定する。
  */
 import { isLoginUrl, waitForLogin } from "./browser-context.mjs";
-import { GA4_PROPERTY_ID as SITE_GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { GA4_PROPERTY_ID as SITE_GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 
 export const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || SITE_GA4_PROPERTY_ID;
 export const GA4_HOME = `https://analytics.google.com/analytics/web/#/p${GA4_PROPERTY_ID}/reports/intelligenthome`;

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Verify the existing series against official 2024 data and preserve its history. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -72,7 +72,7 @@ for (const r of rows) {
   assert.equal(r['@unit'], '人');
   assert.match(r.$, /^\d+$/);
 }
-const prefs = require('./.claude/scripts/lib/prefectures.cjs').PREFECTURES;
+const prefs = require('./packages/area/mirror/prefectures.cjs').PREFECTURES;
 const historical = docs.values;
 assert.equal(historical.metricKey, key);
 assert.equal(historical.entityKind, 'prefecture');

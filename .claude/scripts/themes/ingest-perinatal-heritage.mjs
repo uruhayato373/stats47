@@ -1,7 +1,7 @@
 // Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
 import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
 import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
-import { statsR2Key } from "../lib/r2-keys.mjs";
+import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs, promisify } from 'node:util';
 import { execFile } from 'node:child_process';
 const require = createRequire(import.meta.url);
-const prefectures = require('../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const { METRICS_REGISTRY } = require('../../../packages/data-configs/src/registry.ts');
 const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
 const { parseStatsValuesPayload } = require('../../../packages/stats-r2/src/schemas.ts');

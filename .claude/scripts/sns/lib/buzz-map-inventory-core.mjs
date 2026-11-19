@@ -10,7 +10,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
-import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
+import { R2_PUBLIC_BASE_URL } from "../../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

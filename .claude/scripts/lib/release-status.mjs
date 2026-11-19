@@ -8,7 +8,7 @@ import { execFileSync } from "node:child_process";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 
-import { changedPaths, SITE_INDEPENDENT } from "./plan-deploy-scope.mjs";
+import { changedPaths, SITE_INDEPENDENT } from "../../../packages/ops/src/ci/plan-deploy-scope.mjs";
 
 /** @returns {{ action: "wait" | "ask-owner" | "none", reason: string }} */
 export function recommendRelease({ sitePaths, otherPaths, deploysToday, openPr }) {

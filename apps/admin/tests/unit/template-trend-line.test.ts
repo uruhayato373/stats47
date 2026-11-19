@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 import { resolveNumericDomain } from '../../../../packages/types/src/metric-presentation';
 import { renderLineChart, renderTrendLine, trendSampleRows, TREND_SAMPLE_METRIC } from '@/lib/template-trend-line';
 import { metricPresentation } from '../../../../packages/data-configs/src/color-policy';

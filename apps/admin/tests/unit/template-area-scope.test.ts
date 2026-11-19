@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { chartSourceShapeErrors } from '../../../../.claude/scripts/lib/chart-source-schema.mjs';
 import { lintImageTypeSvg } from '../../../../.claude/scripts/lib/svg-lint.mjs';
-import { areaChartFromArticleData, chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, lineChartFromArticleData, stackedChartFromArticleData } from '../../../../.claude/scripts/blog/lib/type-chart-input';
-import { assertMinimalChartCopy } from '../../../../.claude/scripts/media/lib/image-copy.mjs';
+import { areaChartFromArticleData, chartSourceName, groupedBarChartFromArticleData, hasCyclicAxis, lineChartFromArticleData, stackedChartFromArticleData } from '../../lib/type-chart-input';
+import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 import { areasOf, resolveAreaChart, type AreaScope, type AreaValue } from '@/lib/template-area-scope';
 import { applyColorPolicy, colorPolicyOf, colorPolicyRow, joinColorPolicy, signedThresholds } from '../../../../packages/types/src/color-policy';
 import { renderGroupedBarsChart } from '@/lib/template-grouped-bars';

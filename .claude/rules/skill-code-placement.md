@@ -33,7 +33,7 @@ SKILL.md から `node <path>` で呼ばれる？
 
 `.claude/scripts/<domain>/` に置くスクリプトから project root を参照するときは `require("path").resolve(__dirname, "../../..")` を `PROJECT_ROOT` として冒頭で宣言する。
 
-素の node のスクリプトは、R2 のキー (`lib/r2-keys.mjs`)・都道府県の名前と地域コードの判定と変換 (`lib/prefectures.cjs`。2 桁⇄5 桁・全国コード・県の数・沖縄の判定も含む。正本は `packages/area/src/utils/area-code.ts`)・e-Stat の時間コードから年 (`lib/year-code.mjs`) を共通の部品から読み、自前の表や判定を書かない (TS の正典から生成した鏡。`check-r2-entrypoint.mjs`・`check-area-year-entrypoint.mjs` が新しい写しを止める)。
+素の node のスクリプトは、R2 のキー (`packages/r2-storage/mirror/r2-keys.mjs`)・都道府県の名前と地域コードの判定と変換 (`packages/area/mirror/prefectures.cjs`。2 桁⇄5 桁・全国コード・県の数・沖縄の判定も含む。正本は `packages/area/src/utils/area-code.ts`)・e-Stat の時間コードから年 (`packages/estat-api/mirror/year-code.mjs`) を共通の部品から読み、自前の表や判定を書かない (TS の正典から生成した鏡。`check-r2-entrypoint.mjs`・`check-area-year-entrypoint.mjs` が新しい写しを止める)。
 
 ## 拡張子: TypeScript は `.ts` にする (`.mts` にしない)
 

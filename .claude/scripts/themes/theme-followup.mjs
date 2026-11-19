@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { createHash } from 'node:crypto';
-import { jstDateOf } from '../metrics/lib/periods.mjs';
+import { jstDateOf } from '../../../packages/ops/src/metrics/periods.mjs';
 import {
   planFollowup,
   summarizeFollowup,

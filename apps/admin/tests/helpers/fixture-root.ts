@@ -31,7 +31,7 @@ const REAL_PARSE_CORE = path.resolve(
 );
 const REAL_BACKLOG_LIB = path.resolve(
   __dirname,
-  "../../../../.claude/scripts/lib/backlog-lib.cjs",
+  "../../../../packages/ops/src/management/backlog-lib.cjs",
 );
 // store は置き場を台帳 (config/datasets.mjs) から引くので、台帳と台帳が読む config/paths.mjs も実物をコピーする
 const REAL_CONFIG_FILES = ["datasets.mjs", "paths.mjs"].map((name) =>
@@ -134,7 +134,10 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
     const coreDir = path.join(root, ".claude/scripts/backlog-loop");
     fs.mkdirSync(coreDir, { recursive: true });
     fs.copyFileSync(REAL_PARSE_CORE, path.join(coreDir, "parse-backlog-core.cjs"));
-    fs.copyFileSync(REAL_BACKLOG_LIB, path.join(libDir, "backlog-lib.cjs"));
+    // backlog-lib は 2026-11-19 に packages/ops へ移した。管理画面は projectRoot() からこの場所を読む
+    const opsManagementDir = path.join(root, "packages/ops/src/management");
+    fs.mkdirSync(opsManagementDir, { recursive: true });
+    fs.copyFileSync(REAL_BACKLOG_LIB, path.join(opsManagementDir, "backlog-lib.cjs"));
   }
 
   // 8) 任意のファイル (state など。パスは root 相対)

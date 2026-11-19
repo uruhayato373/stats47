@@ -1,4 +1,4 @@
-import type { PageAuditResult } from "../types";
+import type { PageAuditResult } from "../../../../packages/ops/src/page-quality/types";
 import { resolveDispatcher } from "./http-dispatcher";
 
 export type ImageStatus = { ok: true } | { ok: false; status: number } | { ok: null; reason: string };

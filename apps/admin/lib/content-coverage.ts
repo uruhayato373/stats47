@@ -6,7 +6,7 @@
 
 
 import { localSiteHref } from "./local-site";
-import { classifyAll, classifyBlog, classifyNote, classifyPost } from "../../../.claude/scripts/content-types/classify-core.mjs";
+import { classifyAll, classifyBlog, classifyNote, classifyPost } from "@stats47/ops/content-types/classify-core.mjs";
 
 export const COVERAGE_CHANNELS = [
   { id: "site", label: "サイト" },

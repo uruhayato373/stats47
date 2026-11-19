@@ -17,7 +17,7 @@
   "sources": {
     "list": "https://note.com/api/v2/creators/stats47/contents?kind=note&page={page}",
     "detail": "https://note.com/api/v3/notes/{noteKey}",
-    "catalog": ".claude/scripts/note/catalog/index.ts",
+    "catalog": "packages/ops/src/note/catalog/index.ts",
     "images": "GET of each published eyecatch URL; successful HTTP status and image content-type required",
     "missingAssetChecks": "docs/31_note記事原稿 article directories and catalog r2Path/images/cover-1280x670.png via public GET; other storage locations not inspected",
     "classification": "Article-detail eyecatch only; creator-list image and HTTP image health are not cover-setting evidence."

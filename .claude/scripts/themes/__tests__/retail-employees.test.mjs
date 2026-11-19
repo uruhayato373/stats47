@@ -9,7 +9,7 @@ import {
 } from '../ingest-retail-employees.mjs';
 
 const require = createRequire(import.meta.url);
-const prefectures = require('../../lib/prefectures.cjs').PREFECTURES;
+const prefectures = require('../../../../packages/area/mirror/prefectures.cjs').PREFECTURES;
 const {
   retailEmployees,
 } = require('../../../../data/metrics/retail-employees.ts');

@@ -1,4 +1,4 @@
-import { addDays } from '../metrics/lib/periods.mjs';
+import { addDays } from '../../../packages/ops/src/metrics/periods.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";
 
 export function planFollowup(experiments, today, force = false) {

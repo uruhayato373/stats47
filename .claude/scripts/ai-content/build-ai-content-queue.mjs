@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { R2_PUBLIC_ORIGIN, RANKING_R2_PREFIX } from "../lib/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN, RANKING_R2_PREFIX } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * build-ai-content-queue.mjs — ranking ai-content 是正キュー (状態付き SSOT) を R2 + GSC から再導出する。
  *

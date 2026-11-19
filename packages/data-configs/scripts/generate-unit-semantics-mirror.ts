@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, "../../..");
 const SRC = resolve(REPO_ROOT, "packages/data-configs/src/unit/unit-semantics.ts");
-const OUT = resolve(REPO_ROOT, ".claude/scripts/lib/unit-semantics.mjs");
+const OUT = resolve(REPO_ROOT, "packages/data-configs/mirror/unit-semantics.mjs");
 
 // 鏡は型注釈を落とすので型検査 (.claude/scripts/tsconfig.checkjs.json) の対象から外す。型は正典の TS が検査する。
 const HEADER = `// @ts-nocheck — 自動生成の鏡。型は正典 packages/data-configs/src/unit/unit-semantics.ts が検査する。
@@ -99,7 +99,7 @@ function main(): void {
       console.error(
         `単位セマンティクスの鏡が正典とずれている。\n` +
           `  正典: packages/data-configs/src/unit/unit-semantics.ts\n` +
-          `  鏡  : .claude/scripts/lib/unit-semantics.mjs\n` +
+          `  鏡  : packages/data-configs/mirror/unit-semantics.mjs\n` +
           `  再生成: npx tsx packages/data-configs/scripts/generate-unit-semantics-mirror.ts`,
       );
       process.exit(1);

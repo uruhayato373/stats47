@@ -14,6 +14,11 @@
       "types": "./src/server.ts",
       "import": "./src/server.ts",
       "require": "./src/server.ts"
+    },
+    "./audit/number-audit.mjs": {
+      "types": "./src/audit/number-audit.d.mts",
+      "import": "./src/audit/number-audit.mjs",
+      "default": "./src/audit/number-audit.mjs"
     }
   },
   "scripts": {

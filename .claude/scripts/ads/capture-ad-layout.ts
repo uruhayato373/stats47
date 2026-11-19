@@ -31,7 +31,7 @@ import { VIEWPORTS, type ViewportSpec } from "../page-quality/lib/screenshots";
 import { scrollThroughPage } from "../page-quality/lib/ui-probe";
 
 import { ADS_PLACEMENTS } from "../../../config/paths.mjs";
-import { adsenseUnitNames, unitOfEntry } from "./lib/ad-layout-ledger";
+import { adsenseUnitNames, unitOfEntry } from "../../../packages/ops/src/ads/ad-layout-ledger";
 import {
   AD_TRAFFIC_CONTEXT_OPTIONS,
   createAdTrafficTally,
@@ -62,7 +62,7 @@ const NAVIGATION_RETRIES = 3;
 
 /**
  * ページの種類ごとの代表 URL (台帳の pages のキーと 1 対 1)。page-quality の代表 URL
- * (.claude/scripts/page-quality/templates.ts) を優先し、無い種類は route から実在する URL を選んだ。
+ * (packages/ops/src/page-quality/templates.ts) を優先し、無い種類は route から実在する URL を選んだ。
  */
 /** ページの種類の中の地域の単位 (テーマの全国・県別・日本・市区町村)。単位ごとに代表 URL を 1 つ撮る */
 interface PageScope {

@@ -9,9 +9,9 @@ import { createHash } from 'node:crypto';
 import dotenv from 'dotenv';
 import JSZip from 'jszip';
 import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
-import { assertDatasetShape } from '../lib/dataset-shape.mjs';
-import { R2_PRIVATE_BUCKET } from '../lib/site-config.cjs';
-import type { CoverStore } from '../note/lib/cover-storage.mjs';
+import { assertDatasetShape } from '../../../packages/ops/src/datasets/dataset-shape.mjs';
+import { R2_PRIVATE_BUCKET } from '../../../packages/types/mirror/site-config.cjs';
+import type { CoverStore } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { assertPublishedAnalysisCopy, readProductLanding, type AnalysisDelivery } from '../../../apps/web/scripts/lib/product-landing';
 import type { StorefrontProduct } from '../../../apps/web/src/features/products/types';
 
@@ -140,7 +140,7 @@ export async function prepareAnalysisDelivery(root: string, id: string, options:
   if (options.check && !previous) throw Error('分析追加版のprepared台帳がありません');
   if (!options.commit) return { delivery: previous ?? delivery, warnings, committed: false };
   if (warnings.length) throw Error(warnings.join('\n'));
-  await verifyPrivateArchive(delivery, options.store ?? (await import('../note/lib/cover-storage.mjs')).createR2Store({ bucket: R2_PRIVATE_BUCKET, writeOnce: true, maxBytes: delivery.archive.bytes }), inspected.archiveBytes);
+  await verifyPrivateArchive(delivery, options.store ?? (await import('../../../packages/ops/src/note/cover-storage.mjs')).createR2Store({ bucket: R2_PRIVATE_BUCKET, writeOnce: true, maxBytes: delivery.archive.bytes }), inspected.archiveBytes);
   const imageDirectory = path.join(root, '.local/r2/app/products', `data-${id.toLowerCase()}`, 'showcase');
   fs.mkdirSync(imageDirectory, { recursive: true });
   for (const figure of delivery.snapshot.showcase.flatMap(section => section.figures)) {
@@ -183,7 +183,7 @@ export async function publishAnalysisDelivery(root: string, id: string, verifica
   assertPublishedAnalysisCopy(published.snapshot);
   if (!options.commit) return { delivery: published, committed: false };
   if (previous.status === 'published' && JSON.stringify(previous) !== JSON.stringify(published)) throw Error('公開済みのnote確認記録は変更できません');
-  await verifyPrivateArchive(published, options.store ?? (await import('../note/lib/cover-storage.mjs')).createR2Store({ bucket: R2_PRIVATE_BUCKET, writeOnce: true, maxBytes: published.archive.bytes }));
+  await verifyPrivateArchive(published, options.store ?? (await import('../../../packages/ops/src/note/cover-storage.mjs')).createR2Store({ bucket: R2_PRIVATE_BUCKET, writeOnce: true, maxBytes: published.archive.bytes }));
   // Exercise the same merge used by the storefront, before changing publication status.
   readProductLanding(root, id, inspected.landing.articleKey, { includePreparedAnalysis: true });
   fs.writeFileSync(inspected.files.evidence, json(next));
