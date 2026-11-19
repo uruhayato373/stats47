@@ -118,14 +118,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [SCRIPTS-TO-PACKAGES-01] apps・packages に残る .claude の読み 13 ファイルを片付け、移動をリリースして定期実行を確かめる
+### [SCRIPTS-TO-PACKAGES-01] apps・packages に残る .claude の読み 13 ファイルを片付ける
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
-- **済み (2026-11-19・develop のローカル、未 push)**: アプリと packages が読む `.claude/scripts` の部品 69 を packages へ移した (運用の部品は新しい `@stats47/ops`、鏡は正本と同じパッケージの `mirror/`)。管理画面の `.claude` のデータの読みは置き場の台帳 (`config/datasets.mjs` の `agent.*` 16 行) から `datasetPath` で引く形にし、テストが `.claude` の道具を読む 15 本は `.claude/scripts/**/__tests__/` へ移した。決まりは `.claude/rules/skill-code-placement.md`「依存の向き」、止めは `check-claude-boundary.mjs` (PR の検査・縮小専用の基準 `.claude/config/claude-boundary-baseline.json`)。
-- **次 1 (リリース)**: develop への push と main へのリリースを同じ日に続けて行う (定期実行は main の workflow の定義で動き、develop だけ先に変わると古いパスを呼んで落ちる)。リリースの後、push からマージまでに動いた run を一覧し、落ちた run は workflow を手動で起動し直して新しいパスで通ることを確かめる (`data-storage.md`「置き場を移す手順」の 4)。
-- **次 2 (残りの 13 ファイル)**: 基準の理由が「減らす対象」の行。① `apps/admin/lib/server/strategy-lanes.ts` が `.claude/scripts/lib/strategy-lanes.cjs` を実行時に読む (部品が効果の判定のエンジンなど 10 部品を連れてくるので、まとめて `packages/ops` へ移す)。② パッケージのスクリプトが `.claude/scripts` の道具を呼ぶ 12 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/product-factory/src/channels/note/build/build-revision.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。
+- **済み (2026-11-19 リリース)**: アプリと packages が読む `.claude/scripts` の部品 69 を packages へ移した (運用の部品は新しい `@stats47/ops`、鏡は正本と同じパッケージの `mirror/`)。管理画面の `.claude` のデータの読みは置き場の台帳 (`config/datasets.mjs` の `agent.*`) から `datasetPath` で引く。決まりは `.claude/rules/skill-code-placement.md`「依存の向き」、止めは `check-claude-boundary.mjs`。PR #1288 を main へマージ (4cc41d66c)、本番デプロイ成功。push からマージまでに落ちた run は修正前の PR の検査 3 本と、通信の切断 (ECONNRESET) で落ちた Data ledgers 1 本で、後者は develop で起動し直して成功した (run 44481306345)。
+- **次 (残りの 13 ファイル)**: 基準の理由が「減らす対象」の行。① `apps/admin/lib/server/strategy-lanes.ts` が `.claude/scripts/lib/strategy-lanes.cjs` を実行時に読む (部品が効果の判定のエンジンなど 10 部品を連れてくるので、まとめて `packages/ops` へ移す)。② パッケージのスクリプトが `.claude/scripts` の道具を呼ぶ 12 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/product-factory/src/channels/note/build/build-revision.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。
 - **停止条件**: 管理画面 (`npm run admin`) の主な画面と、移した部品を使う週次の workflow を、移すたびに動かして確かめる。
-- **完了条件**: リリースの後の run がすべて通り、基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
+- **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
