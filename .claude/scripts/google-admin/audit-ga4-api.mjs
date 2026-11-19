@@ -15,7 +15,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";
-import { SCOPES, createAnalyticsAdminEditClient, createAnalyticsAdminReadClients } from "../lib/google-client.cjs";
+import { SCOPES, createAnalyticsAdminEditClient, createAnalyticsAdminReadClients } from "../../../packages/ops/src/google/google-client.cjs";
 import { auditGscProperty, GSC_PROPERTY } from "./audit-gsc.mjs";
 import { auditAdSenseAccount, auditAdUnits, expectedAdSenseAccount } from "./audit-adsense.mjs";
 import { loadCodeAdSlots } from "../metrics/lib/code-ad-slots.mjs";

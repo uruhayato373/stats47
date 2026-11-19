@@ -41,7 +41,7 @@ Phase 1 の生 API 呼び出しへ進む。
 
 ```bash
 node --input-type=module - <statsDataId> <<'JS'
-import { fetchMetaInfo } from "./.claude/scripts/lib/estat-catalog/api.mjs";
+import { fetchMetaInfo } from "./packages/ops/src/estat/catalog-api.mjs";
 const json = await fetchMetaInfo(process.argv[2]);
 for (const obj of [].concat(json.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ)) {
   const classes = [].concat(obj.CLASS);

@@ -8,7 +8,7 @@
  * 純粋集計は lib/buzz-map-attribution-core.mjs、GA4 fetch はここ (既存 fetch-affiliate-ga4 の流儀に準拠)。
  *
  * 前提 (クラウド/CI では鍵が無いため degrade):
- *   1. GA4 サービスアカウント鍵 (env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。../lib/google-client.cjs が読む)
+ *   1. GA4 サービスアカウント鍵 (env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。../../../packages/ops/src/google/google-client.cjs が読む)
  *   2. cta_click custom dimension (content_id / target_type) 登録済みなら deep-click も取れる。未登録は session のみ。
  *
  * 実行: node .claude/scripts/sns/buzz-map-attribution.mjs [days]   (既定 28)
@@ -29,7 +29,7 @@ import {
   buildScoreFeedback,
 } from "./lib/buzz-map-attribution-core.mjs";
 import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
-import { createGa4DataClient, findServiceAccountCredentials } from "../lib/google-client.cjs";
+import { createGa4DataClient, findServiceAccountCredentials } from "../../../packages/ops/src/google/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);

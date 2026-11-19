@@ -1,5 +1,5 @@
 // e-Stat カタログの純粋関数群 (getStatsList / getMetaInfo 生レスポンス → 索引行)。
-// ネットワーク・fs に触れない。テスト: .claude/scripts/lib/__tests__/estat-catalog.test.mjs
+// ネットワーク・fs に触れない。テスト: packages/ops/src/estat/__tests__/estat-catalog.test.mjs
 import { extractYearCode } from "../stats-data/utils/extract-year-code.ts";
 import { PREF_AREA_CODES } from "../../../area/mirror/prefectures.cjs";
 

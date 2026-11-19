@@ -63,7 +63,7 @@ cat .claude/skills/estat/references/README.md   # 分野別索引（社会・人
 node --import tsx --input-type=module <<'JS'
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-const api = pathToFileURL(path.resolve(process.cwd(), ".claude/scripts/lib/estat-catalog/api.mjs")).href;
+const api = pathToFileURL(path.resolve(process.cwd(), "packages/ops/src/estat/catalog-api.mjs")).href;
 const { getAppId } = await import(api);
 getAppId(); // import 前に NEXT_PUBLIC_ESTAT_APP_ID を解決する。値は表示しない
 

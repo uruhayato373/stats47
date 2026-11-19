@@ -7,7 +7,7 @@
  * /affiliate-improvement の observe モードのデータ源。
  *
  * 前提 (★クラウド実行環境では鍵が無いため未テスト。ローカル / CI で実行):
- *   1. GA4 サービスアカウント鍵 (env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。../lib/google-client.cjs が読む)
+ *   1. GA4 サービスアカウント鍵 (env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。../../../packages/ops/src/google/google-client.cjs が読む)
  *   2. GA4 管理画面で カスタムディメンション `affiliate_category` / `link_position`
  *      (イベントスコープ) を登録済み。未登録なら eventName 単位の総数のみ取得しフォールバック。
  *
@@ -33,7 +33,7 @@ const {
   shortName,
 } = require("./lib/affiliate-ga4-reports-core.cjs");
 const { GA4_PROPERTY_ID } = require("../../../packages/types/mirror/site-config.cjs");
-const { createGa4DataClient } = require("../lib/google-client.cjs");
+const { createGa4DataClient } = require("../../../packages/ops/src/google/google-client.cjs");
 const { datasetDir } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");

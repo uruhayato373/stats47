@@ -1,5 +1,5 @@
 // e-Stat カタログの差分 plan・索引 upsert・manifest 更新 (純粋関数)。
-// ネットワーク・fs に触れない。テスト: .claude/scripts/lib/__tests__/estat-catalog.test.mjs
+// ネットワーク・fs に触れない。テスト: packages/ops/src/estat/__tests__/estat-catalog.test.mjs
 
 /** manifest.failed の再試行上限。到達したら quarantined へ移す */
 export const MAX_ATTEMPTS = 5;

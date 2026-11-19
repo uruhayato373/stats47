@@ -10,12 +10,12 @@
  *
  * フィルタ記法は lib/gsc-query.mjs。GSC は取得遅延が約 3 日あるので、期間は週次 snapshot と同じ
  * lib/periods.mjs の窓 (例: rolling28d) に合わせると比較できる。
- * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env をメモリで渡す・一時ファイルに書かない、または stats47-*.json)。
+ * 認証: ../../../packages/ops/src/google/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env をメモリで渡す・一時ファイルに書かない、または stats47-*.json)。
  */
 import { toCsv } from "./lib/auth.mjs";
 import { buildGscQuery } from "./lib/gsc-query.mjs";
 import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
-import { createSearchConsoleClient } from "../lib/google-client.cjs";
+import { createSearchConsoleClient } from "../../../packages/ops/src/google/google-client.cjs";
 
 const SITE_URL = GSC_PROPERTY;
 const METRICS = ["clicks", "impressions", "ctr", "position"];

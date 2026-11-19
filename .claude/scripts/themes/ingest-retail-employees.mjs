@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { ESTAT_STATS_DATA_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
 import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** SSDS C350302 only. Raw source is private; only --write-local writes canonical values. */
 import assert from 'node:assert/strict';

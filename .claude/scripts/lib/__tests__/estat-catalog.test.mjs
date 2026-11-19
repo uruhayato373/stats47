@@ -13,7 +13,7 @@ test("getAppId は共通入口で CI の注入値を使う", () => {
   delete env.NEXT_PUBLIC_ESTAT_APP_ID;
   const probe = (environment, expression) => spawnSync(process.execPath, [
     "--input-type=module", "-e",
-    `import { getAppId } from "./.claude/scripts/lib/estat-catalog/api.mjs"; if (!(${expression})) process.exit(1);`,
+    `import { getAppId } from "./packages/ops/src/estat/catalog-api.mjs"; if (!(${expression})) process.exit(1);`,
   ], { cwd: root, env: environment, encoding: "utf8" });
 
   // Never read developer credential files in tests; fallback parsing has isolated entry tests.

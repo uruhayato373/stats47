@@ -1,6 +1,6 @@
 // Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
-import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
-import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { resolveEstatAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
+import { ESTAT_STATS_DATA_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
 import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';

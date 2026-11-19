@@ -20,7 +20,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { fetchStatsData } from "../lib/estat-catalog/api.mjs";
+import { fetchStatsData } from "../../../packages/ops/src/estat/catalog-api.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const TABLES = { amount: "0004023605", quantity: "0004023606" };

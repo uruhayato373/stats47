@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { resolveEstatAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { isPrefectureAreaCode } from "../../../packages/area/mirror/prefectures.cjs";
 // 1 つ以上の e-Stat candidate を recipe (query/prefSource) ベースで取得・登録する。
 // SKILL.md (.claude/skills/management/expand-indicators/SKILL.md) から呼ばれる。
@@ -30,7 +30,7 @@ import path from "path";
 import fs from "fs";
 import { ProxyAgent } from "undici";
 import BetterSqlite3 from "better-sqlite3";
-import { ESTAT_STATS_DATA_URL, ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { ESTAT_STATS_DATA_URL, ESTAT_META_INFO_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
 import { PREF_NAMES } from "../../../packages/area/mirror/prefectures.cjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");

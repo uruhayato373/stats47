@@ -17,7 +17,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
-import { fetchStatsData } from "../lib/estat-catalog/api.mjs";
+import { fetchStatsData } from "../../../packages/ops/src/estat/catalog-api.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const CACHE_DIR = path.join(ROOT, ".local/estat-cache");

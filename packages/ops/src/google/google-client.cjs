@@ -18,7 +18,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { google } = require("googleapis");
 
-const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
+const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 
 const SCOPES = Object.freeze({
   GA4_READ: "https://www.googleapis.com/auth/analytics.readonly",

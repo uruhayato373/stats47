@@ -20,7 +20,7 @@
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { createAdsenseClient } from "../lib/google-client.cjs";
+import { createAdsenseClient } from "../../../packages/ops/src/google/google-client.cjs";
 // PROJECT_ROOT は auth.mjs から取る (browser-context.mjs 経由だと playwright を巻き込み、
 // API-only の read 経路が browser 依存になるため)。
 import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";

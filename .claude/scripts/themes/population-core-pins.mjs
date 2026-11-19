@@ -1,4 +1,4 @@
-import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { ESTAT_STATS_DATA_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
 export const SOURCES = [
   {
     kind: 'getStatsData',

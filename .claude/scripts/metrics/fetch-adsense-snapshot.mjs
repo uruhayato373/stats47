@@ -9,7 +9,7 @@
  *   - overview/daily/devices/units/formats-platforms/placements-platforms/
  *     bid-types-platforms/traffic-sources/countries/pages.csv
  *   - manifest.json … job 別の期間 metadata・status・limitations
- * 認証: OAuth 2.0 (env: GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN。クライアント生成は ../lib/google-client.cjs)
+ * 認証: OAuth 2.0 (env: GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN。クライアント生成は ../../../packages/ops/src/google/google-client.cjs)
  * AdSense account: env GOOGLE_ADSENSE_ACCOUNT_ID (例 pub-7995274743017484)
  *
  * 期間契約 (periods.mjs /
@@ -26,7 +26,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
-import { createAdsenseClient } from "../lib/google-client.cjs";
+import { createAdsenseClient } from "../../../packages/ops/src/google/google-client.cjs";
 import { resolvePeriods, addDays, expectedDates, assessDailyCoverage } from "../../../packages/ops/src/metrics/periods.mjs";
 import {
   REPORT_JOBS,

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
-import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { resolveEstatAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
 /** Pinned official e-Stat sources -> six canonical metrics. Run from repository root. No remote writes. */
 import assert from 'node:assert/strict';
@@ -10,7 +10,7 @@ import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
+import { ESTAT_STATS_DATA_URL } from '../../../packages/ops/src/estat/catalog-endpoints.cjs';
 const root = process.cwd(),
   requireRepo = createRequire(resolve(root, 'package.json'));
 const prefs = requireRepo('./packages/area/mirror/prefectures.cjs').PREFECTURES;

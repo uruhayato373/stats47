@@ -8,7 +8,7 @@
  *
  * Usage:
  *   node .claude/scripts/metrics/fetch-popular-blog-articles.mjs [--dry-run]
- * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)。Property: env GA4_PROPERTY_ID。
+ * 認証: ../../../packages/ops/src/google/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)。Property: env GA4_PROPERTY_ID。
  */
 import { writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { PROJECT_ROOT } from "./lib/auth.mjs";
 import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
-import { createGa4DataClient } from "../lib/google-client.cjs";
+import { createGa4DataClient } from "../../../packages/ops/src/google/google-client.cjs";
 
 export const POPULAR_ARTICLES_PATH = `${datasetDir("blog.operations")}/popular-articles.json`;
 export const POPULAR_ARTICLES_COUNT = 10;

@@ -15,7 +15,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-import { evaluateFreshness, formatFreshnessReport } from "../lib/r2-freshness-core.mjs";
+import { evaluateFreshness, formatFreshnessReport } from "../../../packages/ops/src/ci/r2-freshness-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

@@ -1,7 +1,7 @@
 /**
  * 計測スクリプトの共通ヘルパー (リポジトリルート・週の引数・CSV)。
  *
- * Google API の認証とクライアント生成は ../../lib/google-client.cjs が持つ (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。
+ * Google API の認証とクライアント生成は ../../../../packages/ops/src/google/google-client.cjs が持つ (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。
  */
 
 import { resolve } from "node:path";

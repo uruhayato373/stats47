@@ -26,7 +26,7 @@
  *   node .claude/scripts/gsc/url-inspection-daily.cjs --dry-run     # URL リストだけ表示
  *   node .claude/scripts/gsc/url-inspection-daily.cjs --limit 5     # 5 URL だけ inspect
  *
- * 認証: ../lib/google-client.cjs (サービスアカウント鍵。env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json)
+ * 認証: ../../../packages/ops/src/google/google-client.cjs (サービスアカウント鍵。env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json)
  * scope: https://www.googleapis.com/auth/webmasters.readonly
  * 一時的な 408 / 429 / 5xx は共通クライアントが最大 3 回再試行してから ERROR 行にする。
  */
@@ -35,7 +35,7 @@ const path = require("node:path");
 const fs = require("node:fs");
 const { GSC_PROPERTY, SITE_ORIGIN } = require("../../../packages/types/mirror/site-config.cjs");
 const { PREF_AREA_CODES } = require("../../../packages/area/mirror/prefectures.cjs");
-const { createSearchConsoleClient } = require("../lib/google-client.cjs");
+const { createSearchConsoleClient } = require("../../../packages/ops/src/google/google-client.cjs");
 const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");

@@ -43,7 +43,7 @@ node -e "require('googleapis')" 2>/dev/null && echo OK || npm install -D googlea
 
 ```bash
 node -e "$(cat <<'JS'
-const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
+const { createSearchConsoleClient } = require('./packages/ops/src/google/google-client.cjs');
 const SITE_URL = 'sc-domain:stats47.jp';
 const TARGET = process.argv[1];
 if (!TARGET) throw new Error('URL 引数が必須: /inspect-url <url>');

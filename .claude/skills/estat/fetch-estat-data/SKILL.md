@@ -39,7 +39,7 @@ e-Stat API から指定カテゴリのランキングデータを取得する。
 
 ```bash
 node --input-type=module - '{"statsDataId":"<ID>","cdCat01":"<CODE>","cdTime":"<TIME>"}' <<'JS'
-import { fetchStatsData } from "./.claude/scripts/lib/estat-catalog/api.mjs";
+import { fetchStatsData } from "./packages/ops/src/estat/catalog-api.mjs";
 const json = await fetchStatsData(JSON.parse(process.argv[2]));
 const stat = json.GET_STATS_DATA.STATISTICAL_DATA;
 const values = [].concat(stat.DATA_INF.VALUE);

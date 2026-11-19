@@ -37,7 +37,7 @@ $ARGUMENTS — [期間] [ディメンション] [フィルタ] [snapshot YYYY-Ww
 
 ## 前提
 
-- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json`（gitignore 済み）。読むのは共通モジュール `.claude/scripts/lib/google-client.cjs`
+- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json`（gitignore 済み）。読むのは共通モジュール `packages/ops/src/google/google-client.cjs`
 - サービスアカウント: 鍵ファイル内の `client_email` を参照（Mac: `ststs47-mac@stats47.iam.gserviceaccount.com`、Windows: `stats47-windows@stats47.iam.gserviceaccount.com`）
 - サイト: `sc-domain:stats47.jp`（Search Console にドメインプロパティとして登録済み・サービスアカウントにアクセス権付与済み）
 - npm パッケージ: `googleapis`（未インストールの場合は `npm install -D googleapis` を実行）
@@ -63,10 +63,10 @@ npm install -D googleapis
 
 ### Step 2: データ取得スクリプト実行（ad hoc モード）
 
-ページ×検索語などの単発の照会は、まず `node .claude/scripts/metrics/gsc-query.mjs --start <startDate> --end <endDate> --dims <dim1>` を使う (フィルタ記法・CSV 出力つき)。それで足りないときだけ、プロジェクトルートで次を実行する。認証とクライアントは共通モジュール `.claude/scripts/lib/google-client.cjs` が作る (鍵の探し方・一時的な失敗の再試行を自前で書かない)。
+ページ×検索語などの単発の照会は、まず `node .claude/scripts/metrics/gsc-query.mjs --start <startDate> --end <endDate> --dims <dim1>` を使う (フィルタ記法・CSV 出力つき)。それで足りないときだけ、プロジェクトルートで次を実行する。認証とクライアントは共通モジュール `packages/ops/src/google/google-client.cjs` が作る (鍵の探し方・一時的な失敗の再試行を自前で書かない)。
 
 ```javascript
-const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
+const { createSearchConsoleClient } = require('./packages/ops/src/google/google-client.cjs');
 const SITE_URL = 'sc-domain:stats47.jp';
 
 async function main() {
@@ -159,7 +159,7 @@ main();
 ```javascript
 const path = require('path');
 const fs = require('fs');
-const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
+const { createSearchConsoleClient } = require('./packages/ops/src/google/google-client.cjs');
 
 const SITE_URL = 'sc-domain:stats47.jp';
 

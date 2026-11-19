@@ -11,7 +11,7 @@
  * 定義は `docs/00_プロジェクト管理/02_収益化戦略.md` を参照。
  *
  * 必要な資源:
- *   - サービスアカウント鍵（env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。google-client.cjs が読む）
+ *   - サービスアカウント鍵（env GOOGLE_SERVICE_ACCOUNT_KEY_JSON かリポジトリルートの stats47-*.json。packages/ops/src/google/google-client.cjs が読む）
  *   - PSI_API_KEY env（任意、指定すれば PSI を取得）
  *
  * CLI 使用:
@@ -22,7 +22,7 @@ import { resolvePeriods, DATA_DELAY_DAYS } from "../../../packages/ops/src/metri
 import { assessDailyCoverage } from "../../../packages/ops/src/metrics/periods.mjs";
 import { pathToFileURL } from "node:url";
 import { GA4_PROPERTY_ID, GSC_PROPERTY, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
-import { createGa4DataClient, createSearchConsoleClient } from "./google-client.cjs";
+import { createGa4DataClient, createSearchConsoleClient } from "../../../packages/ops/src/google/google-client.cjs";
 
 const GSC_SITE_URL = GSC_PROPERTY;
 const PSI_TARGET_URL = `${SITE_ORIGIN}/`;

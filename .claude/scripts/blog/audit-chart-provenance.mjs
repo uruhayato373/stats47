@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Keep the three-attempt/20s probe and its true/false fallback semantics.
-import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { resolveEstatAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { rankingR2Key, statsR2Key, STATS_R2_PREFIX } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * audit-chart-provenance.mjs — ブログチャートの出典 (source.json) が
@@ -49,7 +49,7 @@ import {
   inspectChartSourceManifest,
 } from '../../../packages/ops/src/blog/lint/chart-provenance.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
-import { ESTAT_META_INFO_URL } from '../lib/estat-catalog/endpoints.cjs';
+import { ESTAT_META_INFO_URL } from '../../../packages/ops/src/estat/catalog-endpoints.cjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(

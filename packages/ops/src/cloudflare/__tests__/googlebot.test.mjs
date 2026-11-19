@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { aggregateGooglebot, classifyPath, unavailableGooglebot } from "../../cloudflare/lib/googlebot.mjs";
+import { aggregateGooglebot, classifyPath, unavailableGooglebot } from "../googlebot.mjs";
 
 const row = (count, bytes, host, method, ct, path) => ({
   count,
