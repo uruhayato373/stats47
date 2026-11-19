@@ -118,15 +118,14 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [SCRIPTS-TO-PACKAGES-01] 本番コードが読む `.claude/scripts` の部品を `packages/` へ移す
+### [SCRIPTS-TO-PACKAGES-01] apps・packages に残る .claude の読み 13 ファイルを片付け、移動をリリースして定期実行を確かめる
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19 オーナー指摘「.claude/scripts のうち、他にも packages/ に移すべきものがあるのでは」)**: 地域コードの集約の計画中に数えた。apps・packages・config から `.claude/scripts` への import は 207 行、テストを除くと約 120 行ある (管理画面 `apps/admin` 94・`apps/web/scripts` 11・`packages/data-configs/scripts` 7・`packages/product-factory/src` 4・ほか 3)。アプリと packages が、エージェントの道具の置き場 (`skill-code-placement.md`) のコードに頼っている。
-- **読まれている部品**: `media/lib/` (workspace・image-copy・taxonomy・storage など約 60 回)、`note/lib/` と `note/catalog` (約 40 回)、`blog/lib/type-chart-input`・`lib/svg-lint.mjs` (16)、`metrics/lib/periods.mjs` ほか (8)、`issues/`・`content-types/` (9)、`lib/dataset-shape.mjs`・`lib/prefectures.cjs` (10)。数え直し: `grep -rnE "['\"][./]*(\.\./)+\.claude/scripts/" apps packages config --include="*.ts" --include="*.tsx" --include="*.mjs" --include="*.cjs" | grep -v node_modules`
-- **次**: ① 領域ごとの移す先と順を決める (画像の制作・note・図の検査・期間の計算)。② 新しい逆向きの依存を止める検査を先に入れる (今の件数を縮小専用の基準に載せる)。③ 領域ごとに移し、スクリプト側は package から読む。
-- **停止条件**: 管理画面 (`npm run admin`) の全画面と、移した部品を使う週次の workflow を、移すたびに動かして確かめる。workflow は main の定義で動くので、置き場を変える回は `data-storage.md`「置き場を移す手順」の 4 と同じく develop と main の差を短くする。
-- **完了条件**: apps と packages の src から `.claude/scripts` への import が 0 (テストと、理由つきの例外を除く) で、検査が新しい import を注入したテストで止まる。
-
+- **済み (2026-11-19・develop のローカル、未 push)**: アプリと packages が読む `.claude/scripts` の部品 69 を packages へ移した (運用の部品は新しい `@stats47/ops`、鏡は正本と同じパッケージの `mirror/`)。管理画面の `.claude` のデータの読みは置き場の台帳 (`config/datasets.mjs` の `agent.*` 16 行) から `datasetPath` で引く形にし、テストが `.claude` の道具を読む 15 本は `.claude/scripts/**/__tests__/` へ移した。決まりは `.claude/rules/skill-code-placement.md`「依存の向き」、止めは `check-claude-boundary.mjs` (PR の検査・縮小専用の基準 `.claude/config/claude-boundary-baseline.json`)。
+- **次 1 (リリース)**: develop への push と main へのリリースを同じ日に続けて行う (定期実行は main の workflow の定義で動き、develop だけ先に変わると古いパスを呼んで落ちる)。リリースの後、push からマージまでに動いた run を一覧し、落ちた run は workflow を手動で起動し直して新しいパスで通ることを確かめる (`data-storage.md`「置き場を移す手順」の 4)。
+- **次 2 (残りの 13 ファイル)**: 基準の理由が「減らす対象」の行。① `apps/admin/lib/server/strategy-lanes.ts` が `.claude/scripts/lib/strategy-lanes.cjs` を実行時に読む (部品が効果の判定のエンジンなど 10 部品を連れてくるので、まとめて `packages/ops` へ移す)。② パッケージのスクリプトが `.claude/scripts` の道具を呼ぶ 12 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/product-factory/src/channels/note/build/build-revision.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。
+- **停止条件**: 管理画面 (`npm run admin`) の主な画面と、移した部品を使う週次の workflow を、移すたびに動かして確かめる。
+- **完了条件**: リリースの後の run がすべて通り、基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
@@ -2309,6 +2308,7 @@ updated: 2026-11-01
 - **完了条件**: geo の 3 件の warning が消えるか、残す理由が台帳に書いてある。Worker 全体の Total Upload の実測値と上限の比較が、このカードに書いてある。
 - **追補 (2026-11-14)**: `.claude/scripts/page-quality/__tests__/ui-findings.test.mjs` は `node --test` だけでは `lib/ui-report` を解決できずに落ち、`node --import tsx --test` なら通る。どの入口で回す前提かをファイルの冒頭に書くか、tsx 無しで動く import に直す。`push-r2-wrangler.ts` には diff-push-r2 の止め (一覧失敗・正本の上書き・読み戻し) が無いのに、`.claude/scripts/blog/` の 4 スクリプト (backfill-source・resolve-scatter-axes・rerender-ranking-columns・restore-findings-from-svg) と `push-article-md-r2.ts` の冒頭がローカルからの反映の経路として案内している。案内を workflow に直すか、同じ止めを通す。
 - **追補 (2026-11-14)**: `apps/web` の `ranking-header-density-contract.test.ts` は `process.cwd()` に頼っていて、リポジトリのルートから vitest を走らせると ENOENT で落ちる (apps/web からなら 5 件通る)。
+- **追補 (2026-11-19)**: `.claude/scripts/lib/__tests__/lib-tests-wiring.test.cjs` は `.ts` の lib テストを配線の検査の対象にしていない (`dataset-registries.test.ts`・`r2-key-classes-run-sh.test.ts` は手で `test:claude-lib-contracts` に入れた)。`.ts` も対象に足す。
 - **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。 ほかに 2 つの写しが残っている。`packages/area-profile/src/highlights/select-area-highlights.ts` の `PREFECTURE_COUNT = 47` は、SNS のスクリプトが相対パスで直接読む「パッケージの外を import しない」契約のため残した (契約を見直すか、`@stats47/area/area-code` だけは読んでよいことにする)。`packages/data-configs/src/open-data-catalog/normalized-table.ts` と `src/area-axis.ts` は `@stats47/area` ではなく `../../../area/src/constants/prefecture-codes` を相対パスで読んでいる (出口 `@stats47/area/area-code` に替えられるか確かめる)。
 - **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
 
