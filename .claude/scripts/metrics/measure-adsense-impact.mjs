@@ -13,7 +13,7 @@
  *   （方針: .claude/rules/evidence-based-judgment.md）
  *
  * ★2026-07-30 追加: 閾値エンジンの 2 つ目の adapter になった。
- *   - 交絡検出と deploy 日抽出は `.claude/scripts/lib/effect-verdict/engine.mjs` へ移設し import する
+ *   - 交絡検出と deploy 日抽出は `packages/ops/src/effect-verdict/engine.mjs` へ移設し import する
  *     （measure-gsc-impact / scan-pending-improvements と同一実装を共有する）
  *   - `--upsert-log` を付けたときだけ improvement-log に `### 判定` を upsert する（既定 off）
  *   - backlog の status 書き換えは行わない（improvement-triage の排他 write を侵さない）
@@ -45,10 +45,10 @@ import {
   extractDeployDate,
   extractTarget,
   formatVerdictSection,
-} from "../lib/effect-verdict/engine.mjs";
-import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
-import { isoWeekOf, isoWeekEnd, weekIndex, weekDiff } from "../lib/effect-verdict/iso-week.mjs";
-import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
+} from "../../../packages/ops/src/effect-verdict/engine.mjs";
+import { DEFAULT_THRESHOLDS } from "../../../packages/ops/src/effect-verdict/thresholds.mjs";
+import { isoWeekOf, isoWeekEnd, weekIndex, weekDiff } from "../../../packages/ops/src/effect-verdict/iso-week.mjs";
+import { upsertSection } from "../../../packages/ops/src/effect-verdict/section-upsert.mjs";
 import { ADSENSE_BASELINE, assessmentForSubject, isCurrentAccountRow, observeAdsenseBaseline } from "../../../packages/ops/src/metrics/adsense-measurement-contract.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

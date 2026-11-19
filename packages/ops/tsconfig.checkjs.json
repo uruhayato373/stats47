@@ -15,6 +15,7 @@
     "src/media/gallery-collectors.mjs",
     "src/media/svg-classify.mjs",
     "src/measurement/**/*.mjs",
+    "src/effect-verdict/**/*.mjs",
     "src/metrics/**/*.mjs",
     "src/blog/lint/**/*.mjs",
     "src/cloudflare/googlebot.mjs",

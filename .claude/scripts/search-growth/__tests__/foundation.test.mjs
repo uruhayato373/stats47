@@ -5,7 +5,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createObservation, validateObservation } from "../lib/contracts.mjs";
-import { daysBetween, classifyAge, freshnessForSource, worstFreshness } from "../lib/freshness.mjs";
+import { daysBetween, classifyAge, freshnessForSource, worstFreshness } from "../../../../packages/ops/src/metrics/freshness.mjs";
 import { hashQuery, redactString, redactUrl, redactObject } from "../lib/redaction.mjs";
 import { toPathKey, toCanonicalUrl, isAllowedUrl, stripTrackingParams } from "../lib/join-url.mjs";
 

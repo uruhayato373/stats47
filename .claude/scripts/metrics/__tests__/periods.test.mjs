@@ -151,7 +151,7 @@ test("週のラベルを作る関数は、どれも JST の暦日で数える (�
   const { isoWeek } = await import("../../model-usage/usage-core.mjs");
   const { isoWeekOfDate } = await import("../../search-growth/lib/triage.mjs");
   const { currentIsoWeek } = await import("../../search-growth/lib/state.mjs");
-  const effect = await import("../../lib/effect-verdict/iso-week.mjs");
+  const effect = await import("../../../../packages/ops/src/effect-verdict/iso-week.mjs");
   const cases = [
     ["2026-10-18T16:30:00Z", "2026-W43"], // 月曜 01:30 JST (UTC ではまだ日曜)
     ["2026-10-18T14:30:00Z", "2026-W42"], // 日曜 23:30 JST

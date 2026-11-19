@@ -126,20 +126,22 @@ updated: 2026-11-01
 - **停止条件**: 移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
-### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 315 本を、対象のロジックごと packages へ移す
+### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 286 本を、対象のロジックごと packages へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
 
 - **起点 (2026-11-19 オーナー判断「テストは基本的に .claude に置かない」)**: テストが要るロジックは packages に置く決まり (`.claude/rules/skill-code-placement.md`「テストは `.claude` に置かない」) と、領域ごとのテスト数の縮小専用の基準 `.claude/config/claude-scripts-test-baseline.json`。
-- **済み (第 1 回・2026-11-19・develop)**: `lib` を 132 → 33 本にした。基盤のテスト 66 本を基準の `harness` に登録し、SNS の台帳・e-Stat と調査の純関数・記事の lint 14 本・Google 接続・state の同期・e-Stat の API 層・`strategy-lanes` を `packages/ops/src/{sns,estat,surveys,ranking,blog/lint,google,datasets,ci,cloudflare,management,metrics}/` へ移した。CLI は元のパスに本体の `main` を呼ぶ薄い入口を残している。
-- **次 ① (`lib` の残り 33 本。移すための条件つき)**:
-  - 製品の品質ゲートの検査 12 本 (`check-accessibility-static`・`check-asset-policy`・`check-datasets`・`check-image-generation-routes`・`check-money-unit-audit`・`check-next-support-window`・`check-r2-route-ssg`・`check-route-contract`・`check-static-assets`・`check-value-format`・`check-web-estat-imports`・`prune-state-snapshots`) と契約のテスト 3 本 (`dataset-registries`・`claude-scripts-consumer-contracts`・`sync-snapshots-run-contract`)。検査の本体を packages へ移し、品質ゲートの台帳・preflight・pre-commit の配線を 1 本ずつ直す。
-  - `.claude` のファイルを読むので残したテスト 5 本 (`x-catalog` は規則の文言、`ssds-year-format` は `gen-ssds-configs.mjs` の起動、`latest-partition` は agent の定義、`estat-catalog/api.test.mjs` は `audit-time-coverage.cjs`、`estat-catalog` は改名を追えない基準 `estat-entrypoint-baseline.json` に載っている)。`.claude` を確かめる部分を別のテストに分ければ、残りを移せる。
-  - 効果判定 (`effect-verdict`・`write-past-effects`)。テストが `.claude/scripts` の CLI を子プロセスで起動する。`scan-pending-improvements`・`write-past-effects`・adapter 2 本は `.claude/todo/improvements.md` と再現コマンドのパスを文字列で持つ (台帳の id `agent.todo-improvements` で引く形に直す)。エンジンは判定の出力に自分のパス (`thresholdsPath`) を書くので、移すと週次の判定の出力が変わる。
-  - Cloudflare (`cloudflare-monthly-snapshot`・`cloudflare-threshold-check`)。本体が `.claude/config/budgets/` の予算を直接読む。予算のパスを入口から渡す形に直してから移す。
-  - `blog/quality-gate.mjs` を子プロセスで確かめる 5 本 (`quality-gate.*`) と `chart-recurrence-guards`・`internal-link-geo`・`related-link-lint.mjs`。`blog` 領域と一緒に扱う。`ig-post-from-schedule` (Graph API へ投稿する CLI)・`revenue-guards` も残っている。
-- **次 ②**: workflow からの参照が多い順 (`blog`・`ads`・`search-growth`・`gsc`・`metrics`・`themes`・`note`) に進める。移すたびに基準を縮める。
-- **移すときの注意 (第 1 回で分かったこと)**: `node --test` は存在しないパスを黙って読み飛ばす (`lib-tests-wiring` が止める)。`node:test` のテストを vitest の project を持つパッケージへ移すときは、その vitest が拾わないことを `npx vitest run --project <名前>` で確かめる (対象の指定が無いパッケージは `*.test.cjs`・`*.test.mjs` も拾う。`packages/area` で develop の検査を 1 回落とした。`packages/ops` は vitest の project が無い)。元のパスに薄い入口を残すと git は改名と見なさないので、基準を持つ検査は `-B` で拾う形に直してある (`check-r2-entrypoint`・`check-area-year-entrypoint`・`check-claude-boundary`。`check-estat-entrypoint` は改名を追わない)。移す前から型検査の外だったファイルは、型エラーを直すまで ops の `tsconfig.checkjs.json` に足さない (`build-kakei-classification.mjs` に 2 件)。
-- **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む決まりを守る。テストだけを packages へ移さない (packages が `.claude` を読むことになる)。
+- **済み (2026-11-19・第 1 回と第 2 回)**: `lib` を 132 → 5 本にした。基盤のテスト 75 本は基準の `harness` に登録済み。SNS の台帳・e-Stat・記事の lint とブログの品質ゲート・Google 接続・state の同期・製品の品質ゲートの検査 10 本・Cloudflare・効果判定のエンジン・`strategy-lanes` を `packages/ops/src/` へ移した。CLI は元のパスに本体の `main` を呼ぶ薄い入口を残している。
+- **次 ① (`lib` の残り 5 本)**: `write-past-effects` と `effect-verdict-cli` (`cli.mjs`・`scan-pending-improvements`・`triage-matrix`・`write-past-effects` を起動する。`write-past-effects` が `search-growth/lib` の部品を読むので search-growth の領域と一緒に動かす)、`chart-recurrence-guards` (`blog` の 4 スクリプトと workflow の手順の順番を同時に確かめている。分けてから移す)、`revenue-guards` (本体が `metrics` にあり `.claude/config/revenue-guards.json` の実物を読む)、`quality-gate.q-numbers` (fixture に `.claude/scripts/blog/` のパスを使う 1 ケースだけ残した)。
+- **次 ②**: workflow からの参照が多い領域から進める (`themes` 45・`ads` 37・`note` 36・`metrics` 22・`sns` 22・`blog` 17)。
+- **進め方 (2 回で固まった型)**:
+  - 妨げは構文木で数える (`.claude` を含む文字列の数)。Explore で調べない。
+  - 移動は `npm run claude:scripts:move -- <表.json> --apply`。`git mv`・相対パスの読み・旧パスの言及を機械的に付け替え、判断が要る行だけを一覧に出す。移したあと `node .claude/scripts/lib/check-claude-scripts-tests.mjs --shrink`。
+  - `.claude/config` の基準を読む検査は、基準の場所を入口が環境変数で渡す。予算と作業カードは置き場の台帳の id で引く。`.claude` という文字列を組み立てて境界の検査を避けない (比較元の旧パスが要るときは git の改名の記録から引く)。
+  - 確かめる対象そのものが `.claude` の中身のテスト (置き場の規則・スクリプトの契約・スキルの run.sh) は移さず `harness` に登録する。一部だけが `.claude` を確かめるテストは、その部分を小さな基盤のテストに分ける。
+  - 合否は移す前後の出力の一致で決める (品質ゲートは記事 122 ケース、検査は品質ゲートの台帳の command)。
+  - `node:test` のテストを vitest の project を持つパッケージへ移すときは、その vitest が拾わないことを確かめる (`packages/ops` には無い)。移す前から JS の型検査の外だったファイルは、型エラーを直すまで ops の `tsconfig.checkjs.json` に足さない。
+- **分業の実績 (Sonnet。トークン / 所要 / 移した本体とテスト)**: 第 1 回は道具なしで medium 15.1 万 / 3.2 分 / 14+8、high 16.1 万 / 8.0 分 / 14+13、medium 15.8 万 / 3.5 分 / 8+5、加えて調査の Explore 3 本で 35.4 万。第 2 回は道具ありで medium 20.5 万 / 10.5 分 / 15+19、medium 14.7 万 / 12.1 分 / 5+6 (記事 122 ケースの比較を含む)、high 15.7 万 / 4.5 分 / 6+テストの分割、調査は構文木のスクリプトだけ。判断が要るのは入口の切り分けとテストの分割で、型どおりの移動は medium で足りる。
+- **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む決まりを守る。テストだけを packages へ移さない。
 - **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
 
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる

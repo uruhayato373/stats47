@@ -436,7 +436,7 @@ test('baseline新契約はtarget不要、effect実験のtarget欠落は引き続
 
 test('既定監査は原本を変えず、hash・週・契約・日時が一致する新再評価を採用する', async () => {
   const { ADSENSE_BASELINE } = await import('../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs');
-  const { reassessmentProvenance, selectReassessment, ASSESSMENT_CONTRACT_VERSION } = await import('../../lib/effect-verdict/reassessment.mjs');
+  const { reassessmentProvenance, selectReassessment, ASSESSMENT_CONTRACT_VERSION } = await import('../../../../packages/ops/src/effect-verdict/reassessment.mjs');
   const root = fixture();
   const original = path.join(root, 'data/effect-verdict/verdicts-2026-W34.json');
   write(root, 'data/effect-verdict/verdicts-2026-W34.json', {

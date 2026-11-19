@@ -209,7 +209,7 @@
     "kdp:test": "node --test .claude/scripts/kdp/lib/__tests__/*.test.mjs packages/product-factory/src/channels/kindle/__tests__/*.test.mjs",
     "review-cadence:test": "node --test .claude/scripts/management/__tests__/*.test.mjs",
     "effect-verdict": "node .claude/scripts/lib/effect-verdict/cli.mjs",
-    "effect-verdict:test": "node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs .claude/scripts/lib/__tests__/write-past-effects.test.mjs",
+    "effect-verdict:test": "node --test packages/ops/src/effect-verdict/__tests__/effect-verdict.test.mjs .claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs .claude/scripts/lib/__tests__/write-past-effects.test.mjs",
     "metrics:check-adsense-units": "node .claude/scripts/metrics/check-adsense-unit-mapping.mjs",
     "google-admin:audit-api": "node .claude/scripts/google-admin/cli.mjs audit-api",
     "google-admin:audit-ui": "node .claude/scripts/google-admin/cli.mjs audit-ui",

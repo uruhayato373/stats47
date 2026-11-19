@@ -18,7 +18,7 @@ import {
   MACHINE_VIEWPOINT_IDS,
 } from "../../../packages/data-configs/src/theme-catalog/selection-viewpoints";
 import { datasetPath } from "../../../config/datasets.mjs";
-import { isoWeekOf } from "../lib/effect-verdict/iso-week.mjs";
+import { isoWeekOf } from "../../../packages/ops/src/effect-verdict/iso-week.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const HEADER = "week,rule,hits,themes";

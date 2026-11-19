@@ -26,7 +26,7 @@ effect ラベルは、下記 3 条件を**すべて**満たす場合に限り機
 この経路では要求しない。事故の原因は「判定が自動だったこと」ではなく「外部システムの仕様を出典なしに
 断定したこと」なので、状況 2（仕様主張）と状況 3（原因推定）は人間・機械どちらにも無条件で適用し続ける。
 
-1. **境界が SSOT にある** — 判定に使う数値は `.claude/scripts/lib/effect-verdict/thresholds.mjs`
+1. **境界が SSOT にある** — 判定に使う数値は `packages/ops/src/effect-verdict/thresholds.mjs`
    だけに置く。engine 側にリテラルを書かない（テストが直書きを検出して落ちる）
 2. **根拠が残る** — `data/effect-verdict/verdicts-<week>.json` に `before` / `after` /
    `target` / `attainment` / `sources[{name,observedAt,freshness}]` / `guards` /
@@ -199,7 +199,7 @@ GSC（URL Inspection API）/ GA4 / PSI・CrUX / Googlebot UA での HTTP 確認 
 | NG ワードを使っていないか | engine の出力は実測値と閾値の引用のみ（テストで NG ワード非混入を固定） |
 
 閾値エンジンの入口: `node .claude/scripts/lib/effect-verdict/cli.mjs`（週次 cron で自動実行）。
-閾値 SSOT: `.claude/scripts/lib/effect-verdict/thresholds.mjs`。
+閾値 SSOT: `packages/ops/src/effect-verdict/thresholds.mjs`。
 
 ---
 
@@ -243,6 +243,6 @@ grep -rn "$NG" \
 - 過去施策の判定が「実証ベースで再評価」されたログ: 各 improvement-log の冒頭に rewrite サインがあるもの
 - 親方針: `CLAUDE.md` の行動原則 12「失敗を隠さない — 未検証部分・スキップ箇所は『完了』と言わず明示する」
 - 既存実装: `.claude/scripts/gsc/url-inspection-daily.cjs`（URL Inspection API の参照実装）
-- 閾値エンジン: `.claude/scripts/lib/effect-verdict/`（`thresholds.mjs` = 閾値 SSOT / `engine.mjs` = 判定純粋関数 / `cli.mjs` = 週次ランナー）
-- テスト: `node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs`（群 A 正常系 + 群 B mutation。閾値を動かすと判定が変わることを固定）
+- 閾値エンジン: `packages/ops/src/effect-verdict/`（`thresholds.mjs` = 閾値 SSOT / `engine.mjs` = 判定純粋関数）と `.claude/scripts/lib/effect-verdict/cli.mjs`（週次ランナー）
+- テスト: `node --test packages/ops/src/effect-verdict/__tests__/effect-verdict.test.mjs`（エンジン。CLI は `.claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs`。群 A 正常系 + 群 B mutation。閾値を動かすと判定が変わることを固定）
 - 抑制台帳 writer: `.claude/scripts/lib/write-past-effects.mjs`（effect/none|adverse → candidate の confidence 抑制）

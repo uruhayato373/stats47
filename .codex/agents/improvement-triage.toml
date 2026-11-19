@@ -82,7 +82,7 @@ KPI ごとの今週の値とぶら下がる施策は `data/measurement-cycle/LAT
 ```bash
 node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run   # 今週の確定/保留を確認
 npm run effect-verdict:test                                 # 閾値ゲートの回帰テスト
-# = node --test .claude/scripts/lib/__tests__/effect-verdict.test.mjs
+# = node --test packages/ops/src/effect-verdict/__tests__/effect-verdict.test.mjs (engine) + .claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs (CLI) + write-past-effects.test.mjs
 #          .claude/scripts/lib/__tests__/write-past-effects.test.mjs
 ```
 

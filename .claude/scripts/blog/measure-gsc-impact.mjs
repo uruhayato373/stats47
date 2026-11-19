@@ -32,10 +32,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { decideVerdict, formatVerdictSection, extractTarget } from "../lib/effect-verdict/engine.mjs";
-import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
-import { isoWeekOf, isoWeekEnd, weekDiff, weekLt } from "../lib/effect-verdict/iso-week.mjs";
-import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
+import { decideVerdict, formatVerdictSection, extractTarget } from "../../../packages/ops/src/effect-verdict/engine.mjs";
+import { DEFAULT_THRESHOLDS } from "../../../packages/ops/src/effect-verdict/thresholds.mjs";
+import { isoWeekOf, isoWeekEnd, weekDiff, weekLt } from "../../../packages/ops/src/effect-verdict/iso-week.mjs";
+import { upsertSection } from "../../../packages/ops/src/effect-verdict/section-upsert.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

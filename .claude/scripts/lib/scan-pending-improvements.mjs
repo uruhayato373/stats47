@@ -35,7 +35,7 @@
  *   ]
  *
  * deployed_at / overdue_days は `triage-matrix.mjs` の「超過」バケットが参照する。
- * 抽出は `.claude/scripts/lib/effect-verdict/engine.mjs` の `extractDeployDate` に一本化
+ * 抽出は `packages/ops/src/effect-verdict/engine.mjs` の `extractDeployDate` に一本化
  * (measure-adsense-impact.mjs と同じ正規表現。未デプロイ表現は null になる)。
  */
 
@@ -43,12 +43,13 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { extractDeployDate } from "./effect-verdict/engine.mjs";
+import { extractDeployDate } from "../../../packages/ops/src/effect-verdict/engine.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const BACKLOG_REL = ".claude/todo/improvements.md";
+const BACKLOG_REL = datasetPath("agent.todo-improvements");
 const BACKLOG_PATH =
   process.env.IMPROVEMENT_BACKLOG_PATH || path.join(PROJECT_ROOT, BACKLOG_REL);
 

@@ -5,7 +5,7 @@
  * 同じ計算が別実装で 3 つあったのを 1 箇所に集約する。snapshot ディレクトリ名・
  * history.csv の `week` 列がこの形式なので、比較と差分はここだけで行う。
  */
-import { isoWeekOf as periodsIsoWeekOf, isoWeekRange, jstDateOf } from "../../../../packages/ops/src/metrics/periods.mjs";
+import { isoWeekOf as periodsIsoWeekOf, isoWeekRange, jstDateOf } from "../metrics/periods.mjs";
 
 const WEEK_RE = /^(\d{4})-W(\d{2})$/;
 

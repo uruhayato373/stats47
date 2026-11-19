@@ -18,8 +18,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { assessmentForSubject, hasBaselineAssessment, isMissingEffectTarget, observeAdsenseBaseline } from '../../../packages/ops/src/metrics/adsense-measurement-contract.mjs';
-import { selectReassessment } from '../lib/effect-verdict/reassessment.mjs';
-import { isoWeekOf } from '../lib/effect-verdict/iso-week.mjs';
+import { selectReassessment } from '../../../packages/ops/src/effect-verdict/reassessment.mjs';
+import { isoWeekOf } from '../../../packages/ops/src/effect-verdict/iso-week.mjs';
 import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../../../packages/ops/src/management/review-cadence.mjs';
 import { loadClosedWaveIds } from '../blog/measure-gsc-impact.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";

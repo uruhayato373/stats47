@@ -13,7 +13,7 @@
  */
 
 import { DEFAULT_THRESHOLDS } from "./thresholds.mjs";
-import { classifyAge, worstFreshness } from "../../search-growth/lib/freshness.mjs";
+import { classifyAge, worstFreshness } from "../metrics/freshness.mjs";
 import { weekDiff, weekIndex } from "./iso-week.mjs";
 
 /** 確定ラベルと保留ラベル。improvement-log / backlog の status 語彙と一致させる。 */
@@ -276,7 +276,7 @@ export function formatVerdictSection(v, { subjectId, metricLabel = "指標", rep
     `- **[根拠データ]** ${metricLabel} ${fmtNum(e.before.value)}→${fmtNum(e.after.value)} (delta ${signed(e.delta)}` +
       `${e.relativeDelta == null ? "" : ` / 相対 ${fmtPct(e.relativeDelta)}`} / ${targetText})` +
       ` / window ${e.window.beforeWeek ?? "?"}→${e.window.afterWeek ?? "?"} (${e.window.elapsedWeeks ?? "?"} 週)`,
-    `- **[閾値 SSOT]** \`.claude/scripts/lib/effect-verdict/thresholds.mjs\` v${v.thresholdsVersion}` +
+    `- **[閾値 SSOT]** \`packages/ops/src/effect-verdict/thresholds.mjs\` v${v.thresholdsVersion}` +
       ` (full ≥ ${fmtPct(b.attainmentFull)} / partial ≥ ${fmtPct(b.attainmentPartial)} / adverse ≤ ${fmtPct(b.adverseRelativeDrop)})`,
     `- **[ガード]** ${guardText}`,
     `- **[再現コマンド]** \`${reproduceCommand}\``,

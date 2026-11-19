@@ -1,5 +1,5 @@
 /**
- * effect-verdict engine のテスト。
+ * effect-verdict engine のテスト (エンジンだけ。CLI を使う部分は .claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs)。
  *
  * 群 A (正常系): 想定 +100 に対する実測で full / partial / none / adverse が出ること。
  * 群 B (mutation): thresholds を動かすと判定が**変わること**。
@@ -12,9 +12,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 import {
@@ -25,14 +23,14 @@ import {
   formatVerdictSection,
   LABELS,
   GUARD_CODES,
-} from "../effect-verdict/engine.mjs";
-import { DEFAULT_THRESHOLDS, mergeThresholds, THRESHOLDS_VERSION } from "../effect-verdict/thresholds.mjs";
-import { isoWeekOf, weekDiff, weekLt, weekIndex } from "../effect-verdict/iso-week.mjs";
-import { upsertSection } from "../effect-verdict/section-upsert.mjs";
-import { classifyAge } from "../../search-growth/lib/freshness.mjs";
+} from "../engine.mjs";
+import { DEFAULT_THRESHOLDS, mergeThresholds, THRESHOLDS_VERSION } from "../thresholds.mjs";
+import { isoWeekOf, weekDiff, weekLt, weekIndex } from "../iso-week.mjs";
+import { upsertSection } from "../section-upsert.mjs";
+import { classifyAge } from "../../metrics/freshness.mjs";
 
-// __tests__ → lib → scripts → .claude → repo root
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
+// __tests__ → effect-verdict → src → ops → packages → repo root
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..", "..");
 
 /** 群 A 共通: before 20 (imp 500) / after 20+delta (imp 500) / 想定 +100 / 判定窓 4 週 / fresh source。 */
 function subject(delta, over = {}) {
@@ -249,7 +247,7 @@ test("mergeThresholds は元を壊さず新しい frozen セットを返す", ()
 
 test("engine の閾値リテラル直書きが無い (数値は thresholds.mjs だけに置く)", () => {
   const src = fs.readFileSync(
-    path.join(PROJECT_ROOT, ".claude/scripts/lib/effect-verdict/engine.mjs"),
+    path.join(PROJECT_ROOT, "packages/ops/src/effect-verdict/engine.mjs"),
     "utf8",
   );
   for (const lit of ["0.8", "0.3", "-0.1", "100"]) {
@@ -376,82 +374,6 @@ test("formatVerdictSection: 判定 / 根拠データ / 閾値 SSOT / ガード /
   assert.ok(md.includes("なし (全ガード通過)"));
 });
 
-// ── verdict CLI (adapter 横断ランナー) ───────────────────────────────
-
-test("runAdapter: adapter 契約経由で確定ラベルが verdict 行になる", async () => {
-  const { runAdapter } = await import("../effect-verdict/cli.mjs");
-  const fake = {
-    domainId: "fake",
-    logPath: "/tmp/fake-log.md",
-    headerPrefix: "FAKE-",
-    listSubjects: () => [{ id: "FAKE-01", subjectId: "FAKE-01" }],
-    resolveWindow: () => ({
-      beforeWeek: "2026-W26",
-      afterWeek: "2026-W30",
-      elapsedWeeks: 4,
-      notDue: false,
-    }),
-    measure: (_s, week) =>
-      week === "2026-W26" ? { value: 20, impressions: 500 } : { value: 115, impressions: 500 },
-    targetOf: () => 100,
-    sourcesOf: () => [{ name: "fake", freshness: "fresh", observedAt: "2026-07-26" }],
-    confoundersOf: () => ({ coDeployed: [], laterContaminators: [] }),
-    pastEffectKeys: () => ["/blog/x"],
-    reproduceCommand: () => "node fake.mjs",
-  };
-  const rows = runAdapter(fake);
-  assert.equal(rows.length, 1);
-  assert.equal(rows[0].label, LABELS.full);
-  assert.equal(rows[0].attainment, 0.95);
-  assert.deepEqual(rows[0].pastEffectKeys, ["/blog/x"]);
-  assert.equal(rows[0].reproduceCommand, "node fake.mjs");
-  assert.equal(rows[0].skipped, false);
-});
-
-test("runAdapter: 計測窓が解決できない subject は pending として記録する (黙って落とさない)", async () => {
-  const { runAdapter } = await import("../effect-verdict/cli.mjs");
-  const rows = runAdapter({
-    domainId: "fake",
-    logPath: "/tmp/x.md",
-    headerPrefix: "",
-    listSubjects: () => [{ id: "NOWINDOW-01" }],
-    resolveWindow: () => ({ beforeWeek: null, afterWeek: null, elapsedWeeks: null, notDue: true }),
-    measure: () => ({ value: 0, impressions: 0 }),
-    targetOf: () => null,
-  });
-  assert.equal(rows[0].label, LABELS.pending);
-  assert.equal(rows[0].skipped, true);
-});
-
-test("CLI: verdict JSON を書き、summary と thresholdsVersion を含む", () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "verdict-cli-"));
-  const out = path.join(dir, "verdicts.json");
-  try {
-    execFileSync(
-      "node",
-      [path.join(PROJECT_ROOT, ".claude/scripts/lib/effect-verdict/cli.mjs"), "--week", "2026-W31", "--out", out],
-      // 判定不能のまま終了した wave (closed-waves.json) は対象外になる。ここでは空の台帳を指して実データの wave を測る
-      { encoding: "utf-8", env: { ...process.env, EFFECT_VERDICT_CLOSED_WAVES: path.join(dir, "no-closures.json") } },
-    );
-    const j = JSON.parse(fs.readFileSync(out, "utf8"));
-    assert.equal(j.schemaVersion, 1);
-    assert.equal(j.week, "2026-W31");
-    assert.equal(j.thresholdsVersion, THRESHOLDS_VERSION);
-    assert.equal(j.thresholdsPath, ".claude/scripts/lib/effect-verdict/thresholds.mjs");
-    assert.ok(j.verdicts.length > 0, "実データで verdict が 1 件も出ていない");
-    assert.equal(j.summary.total, j.verdicts.length);
-    for (const v of j.verdicts) {
-      assert.ok(v.subjectId && v.label && v.domainId);
-      assert.ok(Object.prototype.hasOwnProperty.call(v, "guards"));
-      assert.ok(Object.prototype.hasOwnProperty.call(v, "sources"));
-      assert.ok(Object.prototype.hasOwnProperty.call(v, "before"));
-      assert.ok(Object.prototype.hasOwnProperty.call(v, "after"));
-    }
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
-});
-
 test("formatVerdictSection: 原因・外部仕様を出力しない (engine の制約)", () => {
   const v = decideVerdict(subject(-30));
   const md = formatVerdictSection(v, {
@@ -469,41 +391,4 @@ test("window不足でもeffect実験の真のtarget欠落を独立して記録�
   assert.equal(v.label, LABELS.pending);
   assert.ok(v.guards.some(g => g.code === 'insufficient-window'));
   assert.ok(v.guards.some(g => g.code === 'insufficient-target'));
-});
-
-test("baselineは差分や事後targetを作らず4週の充足だけを記録する", async () => {
-  const { runAdapter } = await import('../effect-verdict/cli.mjs');
-  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs');
-  const rows = ADSENSE_BASELINE.weeks.map(week => ({ week, earnings: 25, accountId: ADSENSE_BASELINE.accountId }));
-  const fake = {
-    domainId: 'adsense', logPath: '/tmp/test.md',
-    listSubjects: () => [{ id: ADSENSE_BASELINE.subjectId }],
-    observeBaseline: () => observeAdsenseBaseline(rows.slice(0, 1), '2026-10-17'),
-    baselineSources: () => [{ name: 'fixture' }], reproduceCommand: () => 'fixture',
-    measure: () => { throw new Error('baseline must not compare'); },
-  };
-  const [v] = runAdapter(fake);
-  assert.equal(v.assessment.kind, 'baseline-observation');
-  assert.equal(v.observation.status, 'pending');
-  assert.equal(v.guards[0].code, 'insufficient-window');
-  assert.equal(v.before, null);
-  assert.equal(v.after, null);
-  assert.equal(v.target, null);
-  assert.equal(v.label, LABELS.pending);
-  assert.equal(observeAdsenseBaseline(rows, '2026-11-13').status, 'ready');
-  assert.equal(observeAdsenseBaseline(rows.slice(0, 1), '2026-11-13').overdue, true);
-});
-
-test("AdSense adapterは新旧口座と明示的な不一致口座の比較を拒否する", async () => {
-  const { resolveAdsenseWindows } = await import('../../metrics/measure-adsense-impact.mjs');
-  const { ADSENSE_BASELINE, observeAdsenseBaseline } = await import('../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs');
-  const rows = [
-    { week: '2026-W34', earnings: 100 },
-    { week: '2026-W42', earnings: 200, accountId: 'pub-wrong' },
-    { week: '2026-W43', earnings: 50, accountId: ADSENSE_BASELINE.accountId },
-  ];
-  assert.equal(resolveAdsenseWindows('2026-W41', rows).before, null);
-  assert.equal(resolveAdsenseWindows('2026-W41', rows).after, '2026-W43');
-  assert.equal(resolveAdsenseWindows('2026-W33', rows).after, '2026-W34');
-  assert.deepEqual(observeAdsenseBaseline(rows).observedWeeks, ['2026-W43']);
 });

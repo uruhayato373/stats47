@@ -10,7 +10,7 @@
  */
 import { NORMALIZE_SOURCES, ALL_SOURCES, PROJECT_ROOT } from "./lib/sources.mjs";
 import { validateObservation } from "./lib/contracts.mjs";
-import { worstFreshness } from "./lib/freshness.mjs";
+import { worstFreshness } from "../../../packages/ops/src/metrics/freshness.mjs";
 import { redactString } from "./lib/redaction.mjs";
 import { PATHS, writeJson, currentIsoWeek } from "./lib/state.mjs";
 import { pathToFileURL } from "node:url";
