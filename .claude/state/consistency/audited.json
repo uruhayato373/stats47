@@ -1,26 +1,11 @@
 {
-  "hash": "7f8d33a29bfe818930074da7f9bc44e8774eb8974de05c8f12b77e922475b91e",
-  "audited_at": "2026-11-19T12:29:48",
+  "hash": "29ee216228ebbb1c1e07a5207b42aa6c335754ef89bd52bc87e80ce4b9b6b4a0",
+  "audited_at": "2026-11-19T12:46:56",
   "files": [
-    ".claude/agents/improvement-triage.md",
-    ".claude/rules/evidence-based-judgment.md",
-    ".claude/scripts/blog/measure-gsc-impact.mjs",
-    ".claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs",
-    ".claude/scripts/gsc/audit-operations-cycle.mjs",
-    ".claude/scripts/gsc/lib/coverage-source-freshness.mjs",
-    ".claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs",
-    ".claude/scripts/lib/effect-verdict/cli.mjs",
-    ".claude/scripts/lib/scan-pending-improvements.mjs",
-    ".claude/scripts/metrics/__tests__/ga4-improvements-adapter.test.mjs",
-    ".claude/scripts/metrics/__tests__/gsc-improvements-adapter.test.mjs",
-    ".claude/scripts/metrics/__tests__/periods.test.mjs",
-    ".claude/scripts/metrics/lib/ga4-improvements-adapter.mjs",
-    ".claude/scripts/metrics/lib/gsc-improvements-adapter.mjs",
-    ".claude/scripts/metrics/measure-adsense-impact.mjs",
-    ".claude/scripts/search-growth/__tests__/foundation.test.mjs",
-    ".claude/scripts/search-growth/lib/sources.mjs",
-    ".claude/scripts/search-growth/normalize.mjs",
-    ".claude/scripts/themes/record-theme-viewpoints.ts",
-    "CLAUDE.md"
+    ".claude/scripts/lib/__tests__/move-script.test.mjs",
+    ".claude/scripts/lib/__tests__/sns-posted-core.test.cjs",
+    ".claude/scripts/lib/__tests__/threads-core.test.cjs",
+    ".claude/scripts/lib/chart-provenance.mjs",
+    ".claude/scripts/lib/move-script.mjs"
   ]
 }

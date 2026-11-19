@@ -9,8 +9,6 @@
     "model-usage"
   ],
   "harness": {
-    ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs": "規則の文言が台帳の id を指すことの検査のテスト",
-    ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs": "agent の定義とスクリプトが最新年の選び方の部品を使うことの検査のテスト",
     ".claude/scripts/lib/__tests__/admin-ci-contract.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/audit-workflow-policy.test.cjs": "workflow の YAML の契約のテスト",
@@ -51,6 +49,7 @@
     ".claude/scripts/lib/__tests__/dataset-registries.test.ts": "置き場の規則の検査のテスト (台帳の参照の読み方を check-datasets と突き合わせる)",
     ".claude/scripts/lib/__tests__/dependency-security-contract.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/husky-worktree-hook.test.cjs": "Claude Code と git の hook のテスト",
+    ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs": "agent の定義とスクリプトが最新年の選び方の部品を使うことの検査のテスト",
     ".claude/scripts/lib/__tests__/lib-tests-wiring.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/local-resources.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
     ".claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
@@ -76,14 +75,17 @@
     ".claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/session-guard.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/setup-memory-symlink.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
+    ".claude/scripts/lib/__tests__/sns-posted-core.test.cjs": "橋渡し: main の workflow の定義が旧パスを名指しする間だけ置く。次の main へのリリースのあと消す (SCRIPTS-TO-PACKAGES-BRIDGE-01)",
     ".claude/scripts/lib/__tests__/stop-docs-cache.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs": "モデルの利用量の計測のテスト",
     ".claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs": "スキルの run.sh と workflow の契約のテスト",
     ".claude/scripts/lib/__tests__/test-packages-ci.test.mjs": "CI の検査の配線と範囲の契約のテスト",
+    ".claude/scripts/lib/__tests__/threads-core.test.cjs": "橋渡し: main の workflow の定義が旧パスを名指しする間だけ置く。次の main へのリリースのあと消す (SCRIPTS-TO-PACKAGES-BRIDGE-01)",
     ".claude/scripts/lib/__tests__/workflow-commit-back.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/workflow-health-core.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/workflow-node-version.test.cjs": "workflow の YAML の契約のテスト",
-    ".claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト"
+    ".claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
+    ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs": "規則の文言が台帳の id を指すことの検査のテスト"
   },
   "domains": {
     "admin-ui": {

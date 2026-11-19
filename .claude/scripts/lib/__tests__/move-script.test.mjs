@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { replaceRepoPaths, reviewLines, rewriteRelative } from "../move-script.mjs";
+import { blockedByMainWorkflows, replaceRepoPaths, reviewLines, rewriteRelative } from "../move-script.mjs";
 
 const OLD = ".claude/scripts/lib/x-lint.mjs";
 const NEW = "packages/ops/src/blog/lint/x-lint.mjs";
@@ -61,4 +61,17 @@ test("人が確かめる行: ROOT を求める式 (複数行に分かれてい�
     `const ok = "packages/ops";`,
   ].join("\n");
   assert.deepEqual(reviewLines(text).map((line) => Number(line.split(":")[0])), [2, 4, 6]);
+});
+
+test("main の workflow の定義が名指しするパスは、入口か橋渡しを指定しない限り移さない", () => {
+  const main = "run: node --test .claude/scripts/lib/__tests__/a.test.cjs\nimport x from './.claude/scripts/lib/b.mjs'";
+  const moves = [
+    { from: ".claude/scripts/lib/__tests__/a.test.cjs", to: "packages/ops/src/__tests__/a.test.cjs" },
+    { from: ".claude/scripts/lib/b.mjs", to: "packages/ops/src/b.mjs", bridge: true },
+    { from: ".claude/scripts/lib/c.mjs", to: "packages/ops/src/c.mjs" },
+  ];
+  const blocked = blockedByMainWorkflows(moves, main);
+  assert.equal(blocked.length, 1);
+  assert.match(blocked[0], /^\.claude\/scripts\/lib\/__tests__\/a\.test\.cjs: origin\/main の workflow/);
+  assert.deepEqual(blockedByMainWorkflows([{ ...moves[0], keepEntry: true }], main), []);
 });

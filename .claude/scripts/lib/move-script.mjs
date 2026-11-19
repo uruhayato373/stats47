@@ -6,7 +6,10 @@
  *   node .claude/scripts/lib/move-script.mjs <map.json> --apply  # 実際に移す
  *
  * map.json: { "moves": [ { "from": ".claude/scripts/lib/x.mjs", "to": "packages/ops/src/a/x.mjs", "keepEntry": false } ] }
- *   keepEntry: 元のパスに薄い入口を置き直す予定のファイル (workflow・スキルが名指しするパスは変えない)。
+ *   keepEntry: 元のパスに薄い入口を置き直す予定のファイル (workflow・品質ゲートの台帳が名指しするパスは変えない)。
+ *   bridge:    元のパスに 1 行の橋渡し (テストの require・部品の再エクスポート) を置き直す予定のファイル。
+ *              main の workflow の定義が名指しする間だけ置き、リリース後に消す。旧パスの言及は書き換える。
+ *   origin/main の workflow が名指しするパスは、keepEntry か bridge を付けない限り移さない (定期実行は main の定義で動く)。
  *              旧パスの言及は書き換えず、基準の JSON のキーだけを新しいパスへ移す。入口のファイル自体は作らない。
  *
  * やること (どれも決定的。判断が要る箇所は最後の一覧に出すだけで、触らない):
@@ -97,6 +100,28 @@ function trackedFiles(root) {
   });
 }
 
+/**
+ * 定期実行の workflow は main の定義で動き、中で develop のコードを使う。main の定義が旧パスを名指ししている
+ * ファイルを入口も橋渡しも置かずに移すと、次のリリースまで定期実行が落ちる (2026-11-19 に 3 本で起きた)。
+ * @param {{ from: string, keepEntry?: boolean, bridge?: boolean }[]} moves
+ * @param {string} mainWorkflowText  origin/main の .github/workflows/ を連結した本文
+ * @returns {string[]} 止める理由 (空なら移してよい)
+ */
+export function blockedByMainWorkflows(moves, mainWorkflowText) {
+  return moves
+    .filter(({ from, keepEntry, bridge }) => !keepEntry && !bridge && mainWorkflowText.includes(from))
+    .map(({ from }) => `${from}: origin/main の workflow が名指ししている。keepEntry: true (本体に入口を置く) か bridge: true (テスト・部品に 1 行の橋渡しを置く) を指定する`);
+}
+
+function mainWorkflowText(root) {
+  try {
+    const names = execFileSync("git", ["ls-tree", "--name-only", "origin/main", ".github/workflows/"], { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean);
+    return names.map((name) => execFileSync("git", ["show", `origin/main:${name}`], { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })).join("\n");
+  } catch {
+    throw new Error("origin/main の workflow を読めない。git fetch origin main をしてから実行する");
+  }
+}
+
 export function main(args = process.argv.slice(2)) {
   const rootFlag = args.indexOf("--root");
   const root = rootFlag >= 0 ? path.resolve(args[rootFlag + 1]) : fileURLToPath(new URL("../../../", import.meta.url));
@@ -108,6 +133,8 @@ export function main(args = process.argv.slice(2)) {
     if (!existsSync(path.join(root, from))) throw new Error(`移す元が無い: ${from}`);
     if (existsSync(path.join(root, to))) throw new Error(`移す先に既にある: ${to}`);
   }
+  const blocked = blockedByMainWorkflows(moves, mainWorkflowText(root));
+  if (blocked.length) throw new Error(`main の定義が名指しするパスを移そうとしている:\n${blocked.join("\n")}`);
   const moved = new Map(moves.map(({ from, to }) => [posix(from), posix(to)]));
   const exists = (repoPath) => existsSync(path.join(root, repoPath));
   const files = trackedFiles(root);
