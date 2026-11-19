@@ -1,8 +1,7 @@
 {
-  "hash": "e6a2bb7011fa6dba401677c95a3cc59ababc484970d6aed70cc2b38c9097a7c6",
-  "audited_at": "2026-11-17T01:04:06",
+  "hash": "1782d20f94217ca72ce47b005c90d4ff89585ea493f3ed75bdf63ab4dba92f99",
+  "audited_at": "2026-11-19T01:27:12",
   "files": [
-    ".claude/scripts/open-data/__tests__/ingest-metric.test.mjs",
-    ".claude/scripts/open-data/ingest-metric.mjs"
+    ".claude/rules/skill-code-placement.md"
   ]
 }
