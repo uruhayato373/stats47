@@ -1,17 +1,11 @@
 {
-  "hash": "9b0ef5346c51df5156dd96df96d77a5e3ea048534a1ea1e27a9494766e5a6f0b",
-  "audited_at": "2026-11-19T11:27:56",
+  "hash": "6ee3dcd070b48c40447e23deed0939e9570e8d8ce8eeb22dd106961d6cd63ae8",
+  "audited_at": "2026-11-19T11:55:22",
   "files": [
-    ".claude/scripts/backlog-loop/build-backlog-queue.mjs",
-    ".claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs",
-    ".claude/scripts/gsc/audit-operations-cycle.mjs",
-    ".claude/scripts/lib/__tests__/effect-verdict.test.mjs",
-    ".claude/scripts/lib/check-docs-governance.cjs",
-    ".claude/scripts/lib/effect-verdict/cli.mjs",
-    ".claude/scripts/lib/effect-verdict/reassessment.mjs",
-    ".claude/scripts/metrics/build-measurement-cycle.mjs",
-    ".claude/scripts/metrics/lib/cycle-health.mjs",
-    ".claude/scripts/metrics/lib/gsc-improvements-adapter.mjs",
-    ".claude/scripts/metrics/measure-adsense-impact.mjs"
+    ".claude/rules/skill-code-placement.md",
+    ".claude/scripts/lib/__tests__/check-claude-scripts-tests.test.mjs",
+    ".claude/scripts/lib/__tests__/move-script.test.mjs",
+    ".claude/scripts/lib/check-claude-scripts-tests.mjs",
+    ".claude/scripts/lib/move-script.mjs"
   ]
 }

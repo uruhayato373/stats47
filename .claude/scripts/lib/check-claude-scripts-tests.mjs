@@ -11,7 +11,7 @@
  *   - domains: 領域ごとの上限。縮小専用で、HEAD・親 commit・origin/develop との merge-base より増えたら失敗する。
  *   - harness: エージェント基盤のテスト (path → 理由)。領域の本数に数えない。行は足せるが、置ける領域は
  *     harnessDomains だけ。
- * --init は基準が無いときだけ作る。
+ * --init は基準が無いときだけ作る。--shrink は、テストを移して減った分だけ基準を縮める (増やす書き換えはしない)。
  */
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
@@ -74,6 +74,19 @@ export function audit(paths, baseline, previous) {
   return errors;
 }
 
+/** 減った分だけ基準を縮める。増えた領域と新しい領域はそのまま残し、検査に落とさせる */
+export function shrink(paths, baseline) {
+  const present = new Set(paths);
+  const harness = Object.fromEntries(Object.entries(baseline.harness ?? {}).filter(([path]) => present.has(path)));
+  const counts = countByDomain(paths, harness);
+  const domains = {};
+  for (const [domain, rule] of Object.entries(baseline.domains ?? {})) {
+    const count = Math.min(rule.count, counts[domain] ?? 0);
+    if (count > 0) domains[domain] = { ...rule, count };
+  }
+  return { ...baseline, harness, domains };
+}
+
 function testPaths() {
   const out = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", ".claude/scripts"], { cwd: ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   return [...new Set(out.split("\0").filter(Boolean))].filter((path) => testDomain(path) && existsSync(resolve(ROOT, path)));
@@ -97,7 +110,9 @@ export function main(args = process.argv.slice(2)) {
     console.log(`基準を作った: ${Object.keys(domains).length} 領域`);
     return;
   }
-  const baseline = JSON.parse(readFileSync(resolve(ROOT, BASELINE), "utf8"));
+  const loaded = JSON.parse(readFileSync(resolve(ROOT, BASELINE), "utf8"));
+  const baseline = args[0] === "--shrink" ? shrink(paths, loaded) : loaded;
+  if (args[0] === "--shrink") writeFileSync(resolve(ROOT, BASELINE), JSON.stringify(baseline, null, 2) + "\n");
   const git = (a) => execFileSync("git", a, { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
   const bases = new Set(["HEAD", "HEAD^"]);
   try { bases.add(git(["merge-base", "HEAD", "origin/develop"])); } catch { /* remote の無い checkout */ }

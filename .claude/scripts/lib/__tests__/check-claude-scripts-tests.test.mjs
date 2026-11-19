@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { audit, countByDomain, testDomain } from "../check-claude-scripts-tests.mjs";
+import { audit, countByDomain, shrink, testDomain } from "../check-claude-scripts-tests.mjs";
 
 const REASON = "対象のロジックを packages へ移して減らす";
 const HARNESS_TEST = ".claude/scripts/lib/__tests__/session-guard.test.cjs";
@@ -93,4 +93,20 @@ test("基盤の領域に新しい基盤のテストを足すのは通る", () =>
   const hookTest = ".claude/scripts/lib/__tests__/new-hook.test.cjs";
   added.harness[hookTest] = "新しい Stop hook のテスト";
   assert.deepEqual(audit([...paths, hookTest], added, baseline()), []);
+});
+
+test("--shrink は減った分だけ縮め、増えた分は基準に入れない (検査に落とさせる)", () => {
+  const moved = paths.filter((path) => !path.endsWith("b.test.mjs") && path !== HARNESS_TEST);
+  const grown = [...moved, ".claude/scripts/lib/__tests__/extra.test.mjs", ".claude/scripts/gsc/__tests__/a.test.mjs"];
+  const next = shrink(grown, baseline());
+  assert.equal(next.domains.note.count, 1);
+  // lib は 1 → 2 に増えているが、基準は 1 のまま。新しい領域 gsc も足さない
+  assert.equal(next.domains.lib.count, 1);
+  assert.equal(next.domains.gsc, undefined);
+  // 消えた基盤のテストの行は外す
+  assert.deepEqual(next.harness, {});
+  assert.match(audit(grown, next, baseline()).join("\n"), /lib: テストが増えた/);
+
+  const gone = shrink(paths.filter((path) => !path.includes("/note/")), baseline());
+  assert.equal(gone.domains.note, undefined);
 });

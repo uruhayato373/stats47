@@ -51,6 +51,13 @@ paths:
   相対パスで読む決まりに従う。
 - 機械の止め: `node .claude/scripts/lib/check-claude-scripts-tests.mjs` (PR の検査。領域ごとのテスト数の縮小専用の基準
   `.claude/config/claude-scripts-test-baseline.json`)。
+- 移すときは道具を使う: `npm run claude:scripts:move -- <表.json> [--apply]` (`.claude/scripts/lib/move-script.mjs`)。`git mv`・
+  相対パスの読みの付け替え・`package.json` と workflow と基準のキーと文書の旧パスの置き換えを機械的に行い、判断が要る行
+  (ROOT を求める式・`.claude` の文字列・残った言及) を一覧に出す。CLI は元のパスに本体の `main` を呼ぶ薄い入口を置き直し
+  (表で `keepEntry: true`)、名指しされているパスを変えない。移したあと `node .claude/scripts/lib/check-claude-scripts-tests.mjs --shrink`
+  で基準を縮める。
+- 移す先に vitest の project があるときは、`node:test` のテストをその vitest が拾わないことを確かめる (`packages/ops` には無い)。
+  `.claude` のパスを文字列で持つ本体は、基準や予算の場所を入口から渡すか、置き場の台帳の id で引く形に直してから移す。
 
 ## 判断フロー
 
