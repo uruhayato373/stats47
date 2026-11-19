@@ -1,4 +1,4 @@
-import { R2_PUBLIC_ORIGIN } from "../../../../packages/r2-storage/mirror/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN } from "../../../../r2-storage/mirror/r2-keys.mjs";
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';

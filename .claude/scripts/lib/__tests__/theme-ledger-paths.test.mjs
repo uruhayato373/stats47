@@ -35,9 +35,10 @@ test('テーマの台帳を読むコードに、カタログが持つファイ�
   const names = fixedThemeFiles.filter((ds) => dirname(ds.path) === 'data/themes').map((ds) => basename(ds.path));
   assert.ok(names.includes('portfolio.json') && names.includes('viewpoint-history.csv'), `対象のファイル名が引けていない: ${names}`);
   const literal = new RegExp(`["'\`/](?:${names.map((n) => n.replace(/\./g, '\\.')).join('|')})["'\`#]`);
-  const dir = join(ROOT, '.claude/scripts/themes');
+  // テーマのスクリプトは 2026-11-19 に大半を packages/ops/src/themes へ移した。テストの無い古いものは元の場所に残る
+  const dirs = [join(ROOT, '.claude/scripts/themes'), join(ROOT, 'packages/ops/src/themes')];
   const files = [
-    ...readdirSync(dir).filter((f) => /\.(?:mjs|ts)$/.test(f)).map((f) => join(dir, f)),
+    ...dirs.flatMap((dir) => readdirSync(dir).filter((f) => /\.(?:mjs|ts)$/.test(f)).map((f) => join(dir, f))),
     join(ROOT, 'apps/admin/lib/server/theme-viewpoints.ts'),
   ];
   const offenders = files.flatMap((file) =>

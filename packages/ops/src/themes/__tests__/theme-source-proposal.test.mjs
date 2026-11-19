@@ -7,12 +7,12 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { datasetDir } from '../../../../config/datasets.mjs';
-import { assertDatasetShape } from '../../../../packages/ops/src/datasets/dataset-shape.mjs';
-import { readSourceDefinition } from '../../../../packages/ops/src/themes/ingest-bridge-inspection-age.mjs';
+import { datasetDir } from '../../../../../config/datasets.mjs';
+import { assertDatasetShape } from '../../datasets/dataset-shape.mjs';
+import { readSourceDefinition } from '../ingest-bridge-inspection-age.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(HERE, '../../../..');
+const ROOT = resolve(HERE, '../../../../..');
 const ledgerFile = (name) => join(ROOT, datasetDir('themes.sources'), `${name}.json`);
 
 function withTempDir(run) {

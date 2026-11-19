@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
+import { statsR2Key } from "../../../r2-storage/mirror/r2-keys.mjs";
 /** Recompute public CSV inputs before writing four series and their distribution. */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -10,24 +10,24 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 const require = createRequire(import.meta.url);
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
-const { PROPERTY_PRICE_DISTRIBUTION_SOURCE: source } = require('../../../packages/data-configs/src/theme-catalog/property-price-distribution-source.ts');
-const { parsePropertyPriceDistributionSnapshot } = require('../../../apps/web/src/features/property-price-distribution/lib/property-price-distribution-snapshot.ts');
-const { parseStatsValuesPayload } = require('../../../packages/stats-r2/src/schemas.ts');
-const { buildRecipe } = require('../../../packages/data-configs/src/recipe.ts');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
+const { PROPERTY_PRICE_DISTRIBUTION_SOURCE: source } = require('../../../data-configs/src/theme-catalog/property-price-distribution-source.ts');
+const { parsePropertyPriceDistributionSnapshot } = require('../../../../apps/web/src/features/property-price-distribution/lib/property-price-distribution-snapshot.ts');
+const { parseStatsValuesPayload } = require('../../../stats-r2/src/schemas.ts');
+const { buildRecipe } = require('../../../data-configs/src/recipe.ts');
 const sha = v => createHash('sha256').update(v).digest('hex');
 export async function main() {
   const { values: o } = parseArgs({ options: { 'write-local': { type: 'boolean', default: false }, 'source-dir': { type: 'string', default: resolve(root, '.local/verification/themes/property-market-source') }, out: { type: 'string', default: resolve(root, '.local/verification/themes/property-prices-source.json') } } });
   // The committed parser regenerates from 47 transaction ZIPs and official
   // CSV/GeoJSON, checking receipt hashes, filters and row conservation.
-  execFileSync('python3', [resolve(root, '.claude/scripts/themes/property-prices/build-property-profile.py'), '--source-dir', o['source-dir']], { stdio: 'pipe' });
+  execFileSync('python3', [resolve(root, 'packages/ops/src/themes/property-prices/build-property-profile.py'), '--source-dir', o['source-dir']], { stdio: 'pipe' });
   const manifestBytes = await readFile(resolve(o['source-dir'], 'source-manifest.json'));
   assert.equal(sha(manifestBytes), source.sourceManifestSha256, 'original source manifest');
   const profileBytes = await readFile(resolve(o['source-dir'], 'property-prices.json'));
   const profile = parsePropertyPriceDistributionSnapshot(JSON.parse(profileBytes));
   const observations = JSON.parse(await readFile(resolve(o['source-dir'], 'metric-values.json'), 'utf8'));
   assert.equal(observations.length, 4);assert.equal(new Set(observations.map(r => r.metricKey)).size, 4);
-  const registry = require('../../../packages/data-configs/src/registry.ts').METRICS_REGISTRY;
+  const registry = require('../../../data-configs/src/registry.ts').METRICS_REGISTRY;
   const generatedAt = new Date().toISOString();
   const files = source.metrics.map(metric => {
     const config = registry[metric.key];assert.ok(config?.isActive);

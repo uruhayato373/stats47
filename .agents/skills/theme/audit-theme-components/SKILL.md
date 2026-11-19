@@ -47,7 +47,7 @@ node --env-file=apps/web/.env.development --import tsx .claude/scripts/themes/in
 node --import tsx .claude/scripts/themes/ingest-housing-debt.mjs --write-local              # 住宅・土地の負債
 node --env-file=apps/web/.env.development --import tsx .claude/scripts/themes/ingest-population-core.mjs --write-local   # 人口の年齢区分・世帯 (population-core)
 node --import tsx .claude/scripts/themes/ingest-traffic-elderly.mjs --write-local           # 高齢者の交通事故死傷者
-node --import tsx .claude/scripts/themes/ingest-property-prices.mjs --source-dir <取得済みの原典> --write-local   # 地価・取引価格の分布 (原典は private)
+node --import tsx packages/ops/src/themes/ingest-property-prices.mjs --source-dir <取得済みの原典> --write-local   # 地価・取引価格の分布 (原典は private)
 node --import tsx --test packages/ops/src/themes/__tests__/official-theme-sources.test.mjs
 ```
 

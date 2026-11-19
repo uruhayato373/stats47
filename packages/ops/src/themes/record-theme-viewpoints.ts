@@ -5,22 +5,22 @@
  * 見るため、週次のテーマ監査 (`run-theme-portfolio-audit.sh`) がこれを呼び、同じ週の行は上書きする
  * (1 週 1 規則 1 行)。判定は data-configs の selection-viewpoints.ts を使い、ここでは数を書くだけ。
  *
- *   node --import tsx .claude/scripts/themes/record-theme-viewpoints.ts [--date YYYY-MM-DD]
+ *   node --import tsx packages/ops/src/themes/record-theme-viewpoints.ts [--date YYYY-MM-DD]
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { METRICS_REGISTRY } from "../../../packages/data-configs/src/registry";
-import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
+import { METRICS_REGISTRY } from "../../../data-configs/src/registry";
+import { THEME_CATALOGS } from "../../../data-configs/src/theme-catalog/index";
 import {
   evaluateSelectionViewpoints,
   MACHINE_VIEWPOINT_IDS,
-} from "../../../packages/data-configs/src/theme-catalog/selection-viewpoints";
-import { datasetPath } from "../../../config/datasets.mjs";
-import { isoWeekOf } from "../../../packages/ops/src/effect-verdict/iso-week.mjs";
+} from "../../../data-configs/src/theme-catalog/selection-viewpoints";
+import { datasetPath } from "../../../../config/datasets.mjs";
+import { isoWeekOf } from "../effect-verdict/iso-week.mjs";
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
 const HEADER = "week,rule,hits,themes";
 
 export interface ViewpointHistoryRow {
