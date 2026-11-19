@@ -10,6 +10,7 @@
  *   bridge:    元のパスに 1 行の橋渡し (テストの require・部品の再エクスポート) を置き直す予定のファイル。
  *              main の workflow の定義が名指しする間だけ置き、リリース後に消す。旧パスの言及は書き換える。
  *   origin/main の workflow が名指しするパスは、keepEntry か bridge を付けない限り移さない (定期実行は main の定義で動く)。
+ *              見るのは main の定義で動く起動 (schedule・手動・workflow_run) を持つ workflow の jobs だけ。
  *              旧パスの言及は書き換えず、基準の JSON のキーだけを新しいパスへ移す。入口のファイル自体は作らない。
  *
  * やること (どれも決定的。判断が要る箇所は最後の一覧に出すだけで、触らない):
@@ -23,6 +24,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync, lstatSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import yaml from "js-yaml";
 
 const CODE = /\.(?:[cm]?[jt]sx?|sh)$/;
 const TEXT = /\.(?:[cm]?[jt]sx?|sh|json|ya?ml|md|toml)$/;
@@ -113,10 +115,30 @@ export function blockedByMainWorkflows(moves, mainWorkflowText) {
     .map(({ from }) => `${from}: origin/main の workflow が名指ししている。keepEntry: true (本体に入口を置く) か bridge: true (テスト・部品に 1 行の橋渡しを置く) を指定する`);
 }
 
+/** main の定義のまま動く起動の仕方。pull_request は PR のマージ commit の定義で、develop への push は develop の定義で動く */
+const MAIN_DEFINITION_TRIGGERS = ["schedule", "workflow_dispatch", "workflow_run", "repository_dispatch"];
+
+/**
+ * main の定義で動き、中で develop を checkout する workflow の jobs の本文だけを返す。main のコードを checkout するなら
+ * 定義とコードが同じ版で食い違わない。起動の条件 (`on:` の paths など) は実行しないので見ない
+ * (2026-11-20 に、PR の時だけ動く pr-quality-check と push の paths: の名指しで要らない橋渡しを置いた)。
+ * @param {string[]} texts  workflow の YAML の本文
+ */
+export function mainDefinitionJobsText(texts) {
+  return texts.flatMap((text) => {
+    let doc;
+    try { doc = yaml.load(text); } catch { return [text]; } // 読めない YAML は全文を見る (止める側に倒す)
+    const on = doc?.on ?? doc?.true;
+    const triggers = typeof on === "string" ? [on] : Array.isArray(on) ? on : Object.keys(on ?? {});
+    const jobs = yaml.dump(doc.jobs ?? {}, { lineWidth: -1 });
+    return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*['"]?develop\b/.test(jobs) ? [jobs] : [];
+  }).join("\n");
+}
+
 function mainWorkflowText(root) {
   try {
     const names = execFileSync("git", ["ls-tree", "--name-only", "origin/main", ".github/workflows/"], { cwd: root, encoding: "utf8" }).split("\n").filter(Boolean);
-    return names.map((name) => execFileSync("git", ["show", `origin/main:${name}`], { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })).join("\n");
+    return mainDefinitionJobsText(names.map((name) => execFileSync("git", ["show", `origin/main:${name}`], { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })));
   } catch {
     throw new Error("origin/main の workflow を読めない。git fetch origin main をしてから実行する");
   }

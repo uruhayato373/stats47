@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { blockedByMainWorkflows, replaceRepoPaths, reviewLines, rewriteRelative } from "../move-script.mjs";
+import { blockedByMainWorkflows, mainDefinitionJobsText, replaceRepoPaths, reviewLines, rewriteRelative } from "../move-script.mjs";
 
 const OLD = ".claude/scripts/lib/x-lint.mjs";
 const NEW = "packages/ops/src/blog/lint/x-lint.mjs";
@@ -74,4 +74,17 @@ test("main の workflow の定義が名指しするパスは、入口か橋渡�
   assert.equal(blocked.length, 1);
   assert.match(blocked[0], /^\.claude\/scripts\/lib\/__tests__\/a\.test\.cjs: origin\/main の workflow/);
   assert.deepEqual(blockedByMainWorkflows([{ ...moves[0], keepEntry: true }], main), []);
+});
+
+test("main の定義で動き develop を checkout する workflow の jobs だけを見る (PR の検査・起動の条件の paths:・main を checkout する定期実行は見ない)", () => {
+  const scheduled = "on:\n  schedule:\n    - cron: '0 0 * * *'\n  push:\n    paths:\n      - '.claude/scripts/x/only-in-paths.mjs'\njobs:\n  a:\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: develop\n      - run: node .claude/scripts/x/run-step.mjs";
+  const pullRequest = "on:\n  pull_request:\n    branches: [main]\njobs:\n  b:\n    steps:\n      - run: node --test .claude/scripts/x/pr-only.test.mjs";
+  const dispatchOnly = "on: workflow_dispatch\njobs:\n  c:\n    steps:\n      - uses: actions/checkout@v4\n        with: { ref: develop }\n      - run: node .claude/scripts/x/manual.mjs";
+  const mainCode = "on:\n  schedule:\n    - cron: '0 0 * * *'\njobs:\n  d:\n    steps:\n      - uses: actions/checkout@v4\n      - run: node .claude/scripts/x/main-code.mjs";
+  const text = mainDefinitionJobsText([scheduled, pullRequest, dispatchOnly, mainCode]);
+  assert.match(text, /run-step\.mjs/);
+  assert.match(text, /manual\.mjs/);
+  assert.doesNotMatch(text, /only-in-paths|pr-only|main-code/);
+  // 読めない YAML は全文を見る (止める側に倒す)
+  assert.match(mainDefinitionJobsText(["on: [\n broken .claude/scripts/x/y.mjs"]), /y\.mjs/);
 });

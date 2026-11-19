@@ -126,12 +126,12 @@ updated: 2026-11-01
 - **停止条件**: 移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
-### [SCRIPTS-TO-PACKAGES-BRIDGE-01] 次の main へのリリースのあと、旧パスの橋渡し 4 ファイルを消す
+### [SCRIPTS-TO-PACKAGES-BRIDGE-01] 次の main へのリリースのあと、旧パスの橋渡し 3 ファイルを消す
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19)**: 定期実行の workflow は main の定義で動き、中で develop のコードを使う。SCRIPTS-TO-PACKAGES-02 で移したファイルのうち 3 つを main の workflow の定義が旧パスで名指ししていたので、旧パスに 1 行の橋渡しを置いた: `.claude/scripts/lib/__tests__/sns-posted-core.test.cjs` (`sns-verify-threads-posted.yml`・毎日 23:50 JST)、`.claude/scripts/lib/__tests__/threads-core.test.cjs` (`post-threads-scheduled.yml`)、`.claude/scripts/lib/chart-provenance.mjs` (`regenerate-blog-svgs.yml` のインラインの import)。2026-11-20 に `.claude/scripts/ads/lib/affiliate-relevance-core.mjs` (`affiliate-dashboard-refresh.yml` の push の `paths:`。実行はしないが移動の道具の止めに掛かるため置いた) を足した。
-- **次**: develop → main のリリースが済んだら、`git grep -n "<上の 4 つのパス>" origin/main -- .github/workflows` が 0 件であることを確かめ、4 ファイルと、基準 `.claude/config/claude-scripts-test-baseline.json` の `harness` の 2 行と、`package.json` の `test:claude-lib-contracts` の 2 つの名前を消す。
-- **完了条件**: 4 ファイルが無く、`node .claude/scripts/lib/check-claude-scripts-tests.mjs` と `lib-tests-wiring` が通る。
+- **起点 (2026-11-19)**: 定期実行の workflow は main の定義で動き、中で develop のコードを使う。SCRIPTS-TO-PACKAGES-02 で移したファイルのうち 3 つを main の workflow の定義が旧パスで名指ししていたので、旧パスに 1 行の橋渡しを置いた: `.claude/scripts/lib/__tests__/sns-posted-core.test.cjs` (`sns-verify-threads-posted.yml`・毎日 23:50 JST)、`.claude/scripts/lib/__tests__/threads-core.test.cjs` (`post-threads-scheduled.yml`)、`.claude/scripts/lib/chart-provenance.mjs` (`regenerate-blog-svgs.yml` のインラインの import)。移動の道具の止め (`blockedByMainWorkflows`) は、main の定義で動き (schedule・手動・workflow_run) 中で develop を checkout する workflow の jobs だけを見る (2026-11-20。PR の検査と起動の条件の `paths:` は旧パスでも壊れない)。
+- **次**: develop → main のリリースが済んだら、`git grep -n "<上の 3 つのパス>" origin/main -- .github/workflows` が 0 件であることを確かめ、3 ファイルと、基準 `.claude/config/claude-scripts-test-baseline.json` の `harness` の 2 行と、`package.json` の `test:claude-lib-contracts` の 2 つの名前を消す。
+- **完了条件**: 3 ファイルが無く、`node .claude/scripts/lib/check-claude-scripts-tests.mjs` と `lib-tests-wiring` が通る。
 - **関連の既存の壊れた参照 (同じ形の穴。今回の移動とは別)**: main と develop の `blog-data-source-migration.yml` が `.claude/scripts/blog/data/display-sources-backfill.js` を名指しするが、ファイルが無い (2026-11-19 確認)。workflow を消すか、パスを直す。
 
 ### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 286 本を、対象のロジックごと packages へ移す
