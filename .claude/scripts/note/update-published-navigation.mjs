@@ -30,12 +30,12 @@ import {
   resolveProductCardText,
   datasetCardLead,
 } from "./lib/navigation-footer.mjs";
-import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
+import { assertAccount, launchContext, UA } from "../../../packages/ops/src/note/lib/note-session.mjs";
 import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
-import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
+import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from '../../../packages/ops/src/note/lib/native-cards.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
-import { readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
+import { readApprovedCardImageRefresh } from '../../../packages/ops/src/note/lib/card-image-refresh.mjs';
 import { indexEnabled, preservePublishedIndex } from './lib/publish-card-body.mjs';
 
 // --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する

@@ -310,7 +310,7 @@ jobs:
         # docs/31 (note 記事の作業場) に git の追跡ファイルを置かない。本文・画像の正本は R2、
         # 所在は data/note/articles.json。契約: .claude/rules/note-image-assets.md
         run: |
-          node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
+          node --test packages/ops/src/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
           node .claude/scripts/note/audit-note-image-assets.mjs
           npm run note:assets:validate
           npm run note:assets:test

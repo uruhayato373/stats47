@@ -19,7 +19,7 @@ import { tableSvg, estimateWidth } from "./lib/sample-table-svg.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const require = createRequire(import.meta.url);
-const { svgDirToPng } = require(path.join(ROOT, ".claude/scripts/lib/svg-to-png.cjs"));
+const { svgDirToPng } = require(path.join(ROOT, "packages/ops/src/media/svg-to-png.cjs"));
 
 const args = process.argv.slice(2);
 const opt = (name, fallback = null) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : fallback; };

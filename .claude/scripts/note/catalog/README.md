@@ -212,7 +212,7 @@ note ランキング記事の**リライトを楽にする**ため、記事ご�
 チャート再生成・数値検算ができる。
 
 - **新規記事**: `post-note-ranking` の Step 7.5 が作業コピーに `data-provenance.json` を生成し、`note:article save` で R2 へ保存する。
-- **既存記事の backfill**: `node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]`
+- **既存記事の backfill**: `node packages/ops/src/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]`
   - 対象は記事台帳の stats47-note。記事のファイル一覧は台帳の `body.manifest` が指す private R2 のマニフェスト
     (`note-archive/manifests/<key>/<sha>.json`) から、`draft.md` は台帳の `body.store` のバケットから読む (R2 の認証が要る。`note:article checkout` と同じ)。
   - slug (`a-<key>`) + draft.md の `stats47.jp/ranking/<key>` リンク + values.json の rank1/47 値照合で

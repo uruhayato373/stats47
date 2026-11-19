@@ -6,8 +6,8 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync, rmSync 
 import { dirname, join, resolve } from "node:path";
 import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
-import { extractDashboardDom, collectDashboardPages } from "./lib/dashboard-dom.mjs";
-import { buildDashboardSnapshot, buildCoverMetricsReport, coverMetricsCsv, defaultPeriod, validatePeriod } from "./lib/dashboard-metrics.mjs";
+import { extractDashboardDom, collectDashboardPages } from "../../../packages/ops/src/note/lib/dashboard-dom.mjs";
+import { buildDashboardSnapshot, buildCoverMetricsReport, coverMetricsCsv, defaultPeriod, validatePeriod } from "../../../packages/ops/src/note/lib/dashboard-metrics.mjs";
 import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
 import { acceptedNoteGap, noteMetricsExitCode } from '../measurement/note-inventory.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";

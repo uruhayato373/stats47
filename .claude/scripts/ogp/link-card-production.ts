@@ -8,7 +8,7 @@ import type {ImageGenerationPublishPlan} from '@stats47/types';
 import { LINK_CARD_DESIGN, MAGAZINE_CARD_DESIGNS, magazineCardPrompt } from '../../../apps/web/scripts/data/link-card-design';
 import site from '../../../packages/types/mirror/site-config.cjs';
 import {datasetDir,datasetPath} from '../../../config/datasets.mjs';
-import {readLinkCardLedger,writeLinkCardLedger} from './lib/link-card-ledger.mjs';
+import {readLinkCardLedger,writeLinkCardLedger} from '../../../packages/ops/src/ogp/lib/link-card-ledger.mjs';
 import {publishedBlogSlugsFromIndex} from '../../../apps/web/scripts/lib/blog-image-generation';
 
 interface StoredImage {key:string;sha256:string;bytes:number}
@@ -195,7 +195,7 @@ async function main() {
   if(command==='status'){summary();return;}
 
   if(command==='verify-live') {
-    const {launchContext}=await import('../note/lib/note-session.mjs');
+    const {launchContext}=await import('../../../packages/ops/src/note/lib/note-session.mjs');
     const {fetchCoverSource}=await import('../../../packages/ops/src/note/cover-storage.mjs');
     const ctx=await launchContext({headless:true});
     try {

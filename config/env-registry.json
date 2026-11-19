@@ -116,6 +116,22 @@
       ]
     },
     {
+      "name": "NOTE_FIGURE_BASELINE",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "note 本文の図の上限 (縮小専用) の基準 JSON のパス。入口 .claude/scripts/note/build-note-figure-ledger.mjs が渡す"
+    },
+    {
+      "name": "NOTE_RENDER_RANKING_IMAGES",
+      "visibility": "server",
+      "contexts": [
+        "process"
+      ],
+      "note": "ランキング画像の描画スクリプト render-ranking-images.mjs のパス。入口 .claude/scripts/note/ensure-note-images.mjs が渡す"
+    },
+    {
       "name": "AD_SLOT_PREVIEW",
       "visibility": "server",
       "contexts": [

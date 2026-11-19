@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const { test } = require('node:test');
 const { JSDOM } = require('jsdom');
-const { buildExpression } = require('../attachment-dom.cjs');
+const { buildExpression } = require('../../../../packages/ops/src/note/attachment-dom.cjs');
 
 const heading = '商品ファイルのダウンロード';
 const filename = 'product.zip';

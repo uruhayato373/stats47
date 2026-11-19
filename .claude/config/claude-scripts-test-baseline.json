@@ -164,11 +164,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "note": {
-      "count": 36,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "ogp": {
-      "count": 1,
+      "count": 16,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "open-data": {

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
  * docs/31 の派生 PNG を SVG から再生成する (git に PNG を置かないための復元口)。
- * 変換は共通実装 .claude/scripts/lib/svg-to-png.cjs に一本化されている。
+ * 変換は共通実装 packages/ops/src/media/svg-to-png.cjs に一本化されている。
  *
- *   node .claude/scripts/note/regen-derived-png.mjs --slug <記事ディレクトリ名>   # 無い PNG だけ作る
- *   node .claude/scripts/note/regen-derived-png.mjs --all                        # 全記事
- *   node .claude/scripts/note/regen-derived-png.mjs --slug <s> --force           # 既存も作り直す
- *   node .claude/scripts/note/regen-derived-png.mjs --all --check                # 作らず「無い PNG」の件数だけ数える
+ *   node packages/ops/src/note/regen-derived-png.mjs --slug <記事ディレクトリ名>   # 無い PNG だけ作る
+ *   node packages/ops/src/note/regen-derived-png.mjs --all                        # 全記事
+ *   node packages/ops/src/note/regen-derived-png.mjs --slug <s> --force           # 既存も作り直す
+ *   node packages/ops/src/note/regen-derived-png.mjs --all --check                # 作らず「無い PNG」の件数だけ数える
  *
  * 公開前 (publish-note)・note:article save の前と、clone 直後に本文の画像を見たいときに使う。
  */
@@ -15,7 +15,7 @@ import { createRequire } from "node:module";
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const DOCS31_DIR = join(ROOT, "docs", "31_note記事原稿");
 const require = createRequire(import.meta.url);
 
@@ -43,7 +43,7 @@ export function pendingSvgs(slugDir, { force = false } = {}) {
 export async function regenerateSlug(slug, options = {}) {
   const slugDir = join(DOCS31_DIR, slug);
   if (!existsSync(slugDir)) throw new Error(`記事ディレクトリが無い: ${slug}`);
-  const { svgToPng } = require(join(ROOT, ".claude/scripts/lib/svg-to-png.cjs"));
+  const { svgToPng } = require(join(ROOT, "packages/ops/src/media/svg-to-png.cjs"));
   const done = [];
   for (const svg of pendingSvgs(slugDir, options)) {
     if (options.check) {

@@ -1,5 +1,5 @@
 import { inspectNoteCover } from "./cover-audit.mjs";
-import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";
+import { SITE_ORIGIN } from "../../../../types/mirror/site-config.cjs";
 
 const TRACKING_PARAMETER = /^(?:utm_.+|link)$/i;
 

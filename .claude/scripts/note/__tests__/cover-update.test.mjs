@@ -12,10 +12,10 @@ import {
   assertPublicCoverPixels,
   comparePublicCover,
   publishedRevisionAfterArchive,
-} from '../lib/cover-update.mjs';
+} from '../../../../packages/ops/src/note/lib/cover-update.mjs';
 import sharp from 'sharp';
 import fs from 'node:fs';
-import { currentUrlname, assertAccount } from '../lib/note-session.mjs';
+import { currentUrlname, assertAccount } from '../../../../packages/ops/src/note/lib/note-session.mjs';
 
 test('browser-authenticated account remains usable when the separate request transport cannot connect', async () => {
   const requests = [];

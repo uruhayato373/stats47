@@ -1,6 +1,6 @@
 // 公開ページを実測し、図が段落の切れ目に入ったことと、他が変わっていないことを確認する。
 import fs from "node:fs";
-import { misplacedFigures, plain } from "./lib/figure-split.mjs";
+import { misplacedFigures, plain } from "../../../packages/ops/src/note/lib/figure-split.mjs";
 const slug = process.argv[2];
 const key = fs.readFileSync(`/tmp/notefix-${slug}.key`, "utf8").trim();
 const before = JSON.parse(fs.readFileSync(`/tmp/notefix-${slug}.before.json`, "utf8"));

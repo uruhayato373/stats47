@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
-import { buildCoverMetricsReport } from '../../note/lib/dashboard-metrics.mjs';
+import { buildCoverMetricsReport } from '../../../../packages/ops/src/note/lib/dashboard-metrics.mjs';
 import { readFileSync } from 'node:fs';
 import { acceptedNoteGap, noteInventoryAvailable, noteMetricsExitCode, validateNoteInventory } from '../note-inventory.mjs';
 import { validateAttempt, validateEvidence, validateInventoryAttempt } from '../consumer-paths.mjs';

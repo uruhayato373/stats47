@@ -24,7 +24,7 @@ import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
  *   source.json             出典 manifest (SSOT配慮: rankingKey のみ保持、生パラメータは複製しない)
  *   caption.txt              投稿キャプション草稿 (publish-x が --caption なしで読む位置)
  *
- * PNG 変換は共通 lib `.claude/scripts/lib/svg-to-png.cjs` に一本化。
+ * PNG 変換は共通 lib `packages/ops/src/media/svg-to-png.cjs` に一本化。
  *   - 既定: sharp が無ければ警告して SVG のみ出力 (クラウド生成フェーズ用。PNG は publish 時にローカル再生成)
  *   - `--require-png`: sharp 不在/変換失敗を致命扱い (exit 2)。publish-x --from-queue がローカルで指定
  *
@@ -275,7 +275,7 @@ ${bottomLines}
   // ---------- PNG (共通 lib svg-to-png.cjs に一本化) ----------
   // 既定は sharp 不在なら警告して SVG のみ (クラウド生成用)。--require-png で致命化 (publish 時)。
   const pngResults: { file: string; ok: boolean; reason?: string }[] = [];
-  const svgToPngMod = await import("../lib/svg-to-png.cjs");
+  const svgToPngMod = await import("../../../packages/ops/src/media/svg-to-png.cjs");
   const svgToPng = (svgToPngMod as { svgToPng: (i: string, o: string) => Promise<{ width: number; height: number }> }).svgToPng;
   for (const [svgFile, pngFile] of [
     [svgPath, path.join(OUT_DIR, `${KEY}.png`)],

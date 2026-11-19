@@ -9,7 +9,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const DRIVE_NOTE_FOLDER = "note画像";
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 
 export async function noteCandidatesDir(slug, { create = false } = {}) {
   const { resolveVaultRoot } = await import(join(ROOT, "packages/ops/src/source-vault/source-vault.mjs"));

@@ -1,5 +1,5 @@
 /** Freeze the article's year and 47 values; never silently use the latest partition. */
-import { PREF_AREA_CODES } from "../../../../packages/area/mirror/prefectures.cjs";
+import { PREF_AREA_CODES } from "../../../../area/mirror/prefectures.cjs";
 
 const PREFECTURE_CODES = new Set(PREF_AREA_CODES);
 

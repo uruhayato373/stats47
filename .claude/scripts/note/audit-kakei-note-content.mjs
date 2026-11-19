@@ -15,7 +15,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { auditDraft } from "./lib/kakei-note-audit.mjs";
+import { auditDraft } from "../../../packages/ops/src/note/lib/kakei-note-audit.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const OUT_BASE = path.join(ROOT, "docs/31_note記事原稿");
@@ -122,7 +122,7 @@ async function runLiveFigures(markdown) {
   }
   if (!note) return { id: "live-figures", ok: false, detail: "note API 取得に失敗" };
 
-  const { misplacedFiguresFrom, publishedBlocks } = await import("./lib/figure-split.mjs");
+  const { misplacedFiguresFrom, publishedBlocks } = await import("../../../packages/ops/src/note/lib/figure-split.mjs");
   const dblocks = draftBlocksFromMarkdown(markdown);
   const misplaced = misplacedFiguresFrom(dblocks, note.body);
   const figureCount = publishedBlocks(note.body).filter((b) => b.tag === "figure").length;

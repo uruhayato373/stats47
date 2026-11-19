@@ -16,9 +16,9 @@ import { buildDraft, imageNames, titleSha256 } from "../lib/kakei-note-body.mjs"
 import { auditDraft } from "../lib/kakei-note-audit.mjs";
 
 const NOTE_DIR = join(dirname(fileURLToPath(import.meta.url)), "..");
-const ROOT = join(NOTE_DIR, "..", "..", "..");
+const ROOT = join(NOTE_DIR, "..", "..", "..", "..");
 const CHART_DATA = JSON.parse(
-  readFileSync(join(ROOT, ".claude/scripts/note/__tests__/fixtures/a-kakei-kumamoto-chart-data.json"), "utf8"),
+  readFileSync(join(ROOT, "packages/ops/src/note/__tests__/fixtures/a-kakei-kumamoto-chart-data.json"), "utf8"),
 );
 
 const TITLE = "テスト用タイトル: 熊本県の家計は教育に偏っている";

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { parse } from 'csv-parse/sync';
 import JSZip from 'jszip';
-import { PREF_AREA_CODES } from '../../../../packages/area/mirror/prefectures.cjs';
+import { PREF_AREA_CODES } from '../../../../area/mirror/prefectures.cjs';
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 

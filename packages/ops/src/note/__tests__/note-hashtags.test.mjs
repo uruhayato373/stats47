@@ -4,12 +4,12 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { datasetPath } from '../../../../config/datasets.mjs';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 import {
   validateHashtags, requiredHashtags, readApprovedHashtags, writeHashtagRecord, HASHTAG_COUNT, HASHTAG_FILE, HASHTAG_MODEL,
 } from '../lib/note-hashtags.mjs';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
 
 const title = '鳥取県の家計は何にお金が偏っているか';
 const text = '2024年の家計調査で鳥取市の住居費は全国平均を上回る。';

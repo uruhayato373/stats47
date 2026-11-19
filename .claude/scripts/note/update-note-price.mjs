@@ -13,8 +13,8 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetPath } from "../../../config/datasets.mjs";
 import { findLedgerArticle, updateArticleLedger, readArticleLedger } from "../../../packages/ops/src/note/article-ledger.mjs";
-import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
-import { liveProblems, plannedChanges, preflightProblems } from "./lib/price-change.mjs";
+import { assertAccount, launchContext, UA } from "../../../packages/ops/src/note/lib/note-session.mjs";
+import { liveProblems, plannedChanges, preflightProblems } from "../../../packages/ops/src/note/lib/price-change.mjs";
 import { noteKeyFromUrl, splitPublishedBody } from "./patch-note-paid-landing.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");

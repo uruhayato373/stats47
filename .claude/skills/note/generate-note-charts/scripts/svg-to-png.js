@@ -1,7 +1,7 @@
 /**
  * SVG → PNG 一括変換 (note 用 CLI シム)
  *
- * 実装は `.claude/scripts/lib/svg-to-png.cjs` に一本化済み (SNS/note 共用)。
+ * 実装は `packages/ops/src/media/svg-to-png.cjs` に一本化済み (SNS/note 共用)。
  * 本ファイルは後方互換のための薄いラッパー。既存の note スキルは
  *   node .claude/skills/note/generate-note-charts/scripts/svg-to-png.js <images-dir>
  * の呼び出し規約をそのまま使える。
@@ -10,7 +10,7 @@
  */
 const path = require("node:path");
 const { svgDirToPng } = require(
-  path.resolve(__dirname, "../../../../scripts/lib/svg-to-png.cjs"),
+  path.resolve(__dirname, "../../../../../packages/ops/src/media/svg-to-png.cjs"),
 );
 
 const dir = path.resolve(process.argv[2] || ".");

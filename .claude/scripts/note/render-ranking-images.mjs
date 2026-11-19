@@ -15,8 +15,8 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, 
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { NOTE_RANKING_IMAGES, buildRenderSpec, validateRenderSpec } from "./lib/note-render-spec.mjs";
-import { isRankingArticleSlug } from "./lib/image-assets-audit.mjs";
+import { NOTE_RANKING_IMAGES, buildRenderSpec, validateRenderSpec } from "../../../packages/ops/src/note/lib/note-render-spec.mjs";
+import { isRankingArticleSlug } from "../../../packages/ops/src/note/lib/image-assets-audit.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const DOCS31 = join(ROOT, "docs", "31_note記事原稿");

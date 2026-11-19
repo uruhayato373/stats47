@@ -2,8 +2,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { datasetPath } from '../../../../config/datasets.mjs';
-import { PREF_NAMES } from '../../../../packages/area/mirror/prefectures.cjs';
+import { datasetPath } from '../../../../../config/datasets.mjs';
+import { PREF_NAMES } from '../../../../area/mirror/prefectures.cjs';
 
 export const HASHTAG_COUNT = 99;
 export const HASHTAG_MODEL = 'claude-sonnet-5-5';

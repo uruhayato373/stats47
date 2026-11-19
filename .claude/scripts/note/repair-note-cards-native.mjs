@@ -4,12 +4,12 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { assertAccount, launchContext, pruneProfileCaches } from './lib/note-session.mjs';
-import { assertRegisteredCards, cardEntries, noteRequest, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
+import { assertAccount, launchContext, pruneProfileCaches } from '../../../packages/ops/src/note/lib/note-session.mjs';
+import { assertRegisteredCards, cardEntries, noteRequest, registerMissingCards, unregisteredCards, verifyPublicCards } from '../../../packages/ops/src/note/lib/native-cards.mjs';
 import { bodyHash, publishCardBody } from './lib/publish-card-body.mjs';
 import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
-import { createCardImageRefresh, imageRefreshAlreadyApplied, readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
-import { readLinkCardLedger } from '../ogp/lib/link-card-ledger.mjs';
+import { createCardImageRefresh, imageRefreshAlreadyApplied, readApprovedCardImageRefresh } from '../../../packages/ops/src/note/lib/card-image-refresh.mjs';
+import { readLinkCardLedger } from '../../../packages/ops/src/ogp/lib/link-card-ledger.mjs';
 import { datasetDir } from '../../../config/datasets.mjs';
 import { SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 

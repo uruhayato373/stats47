@@ -20,16 +20,16 @@
  * (公開後に outbox が掃除された記事) catalog の r2Path から R2 公開 URL で取得する。
  *
  * 使い方:
- *   node .claude/scripts/note/build-kakei-related-picks.mjs --dry-run
- *   node .claude/scripts/note/build-kakei-related-picks.mjs --write
+ *   node packages/ops/src/note/build-kakei-related-picks.mjs --dry-run
+ *   node packages/ops/src/note/build-kakei-related-picks.mjs --write
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
-import { readArticleLedger, writeArticleLedger } from "../../../packages/ops/src/note/article-ledger.mjs";
+import { R2_PUBLIC_BASE_URL } from "../../../types/mirror/site-config.cjs";
+import { readArticleLedger, writeArticleLedger } from "./article-ledger.mjs";
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 const DOCS = path.join(ROOT, "docs/31_note記事原稿");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 

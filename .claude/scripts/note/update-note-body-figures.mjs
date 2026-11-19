@@ -18,8 +18,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { findLedgerArticle, readArticleLedger } from '../../../packages/ops/src/note/article-ledger.mjs';
 import { fetchNoteDetail } from '../../../packages/ops/src/note/cover-storage.mjs';
-import { NOTE_RANKING_IMAGES } from './lib/note-render-spec.mjs';
-import { assertAccount, launchContext } from './lib/note-session.mjs';
+import { NOTE_RANKING_IMAGES } from '../../../packages/ops/src/note/lib/note-render-spec.mjs';
+import { assertAccount, launchContext } from '../../../packages/ops/src/note/lib/note-session.mjs';
 import { fetchOwnerNote, noteKeyFromUrl, pngSize, publishEditedBody, uploadImage } from './patch-note-paid-landing.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');

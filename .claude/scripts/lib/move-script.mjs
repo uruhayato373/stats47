@@ -126,8 +126,9 @@ const MAIN_DEFINITION_TRIGGERS = ["schedule", "workflow_dispatch", "workflow_run
  */
 export function mainDefinitionJobsText(texts) {
   return texts.flatMap((text) => {
+    /** @type {{ on?: unknown, true?: unknown, jobs?: unknown } | undefined} */
     let doc;
-    try { doc = yaml.load(text); } catch { return [text]; } // 読めない YAML は全文を見る (止める側に倒す)
+    try { doc = /** @type {any} */ (yaml.load(text)); } catch { return [text]; } // 読めない YAML は全文を見る (止める側に倒す)
     const on = doc?.on ?? doc?.true;
     const triggers = typeof on === "string" ? [on] : Array.isArray(on) ? on : Object.keys(on ?? {});
     const jobs = yaml.dump(doc?.jobs ?? {}, { lineWidth: -1 });

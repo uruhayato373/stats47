@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
+import { rankingR2Key } from '../../../../r2-storage/mirror/r2-keys.mjs';
 /**
  * note ランキング記事に「データ復元マニフェスト」(data-provenance.json) を後付けする backfill。
  *
@@ -26,18 +26,18 @@ import { rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs
  * 作業コピーに未保存の変更がある記事には置かない (local-modified)。保存済みの復元マニフェストと同じ内容なら作業コピーを作らない (unchanged)。
  *
  * Usage:
- *   node .claude/scripts/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]
+ *   node packages/ops/src/note/catalog/backfill-note-data-provenance.mjs [--limit N] [--slug a,b]
  */
 import { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } from "fs";
 import { resolve, join, dirname } from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 import { tmpdir } from "os";
-import { R2_PUBLIC_BASE_URL } from "../../../../packages/types/mirror/site-config.cjs";
-import { hasStoredBody, readArticleLedger } from "../../../../packages/ops/src/note/article-ledger.mjs";
-import { createArticleStores, loadArticleFiles, readLocalFiles, readManifest, sha256, workingDir } from "../../../../packages/ops/src/note/article-store.mjs";
+import { R2_PUBLIC_BASE_URL } from "../../../../types/mirror/site-config.cjs";
+import { hasStoredBody, readArticleLedger } from "../article-ledger.mjs";
+import { createArticleStores, loadArticleFiles, readLocalFiles, readManifest, sha256, workingDir } from "../article-store.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, "../../../..");
+const ROOT = resolve(__dirname, "../../../../..");
 const R2 = R2_PUBLIC_BASE_URL;
 export const PROVENANCE_FILE = "data-provenance.json";
 

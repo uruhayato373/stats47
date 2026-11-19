@@ -139,7 +139,7 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 1. **docs/31 に追跡ファイルを置かない。** 作業コピーは `.gitignore` 済み。保存は `note:article save` だけで、R2 へ読み戻して SHA を照合し、
    台帳のマニフェストを更新してから作業コピーを消す。旧版は private R2 の `note-archive/` に残る (git の履歴の代わり)。
 2. **派生 PNG は作業コピーで作り直してよいが、保存すると R2 の正本になる。** SVG から作る PNG の復元は
-   `npm run note:images:regen -- --slug <記事ディレクトリ名>` (変換は `.claude/scripts/lib/svg-to-png.cjs` に一本化)。
+   `npm run note:images:regen -- --slug <記事ディレクトリ名>` (変換は `packages/ops/src/media/svg-to-png.cjs` に一本化)。
    公開 (`/publish-note`) の前に PNG が無ければ復元してから使う。SVG は手作りの図版 (koumuin シリーズの 268 枚など) を含む正本で、
    PNG と一緒に R2 に置く。
 3. **ランキング記事は `chart-data.json` と `data-provenance.json` だけでデータを復元できる。**
@@ -180,7 +180,7 @@ git に置くと有料記事の行き場が無く (公開 R2 に置けない)、
 - `chart-data.json` の順位は同値にも通し番号を振っている。型の入力は値から順位を計算し直し、同値は同順位になる。本文の順位とずれる記事は更新のときに確かめる。
 - 47 県がそろわない指標は型にできず、生成が止まる。
 - PNG にする librsvg は「°C」の 2 文字を離して描くので、`rasterSafeSvg` が 1 文字の「℃」へ置き換える。
-- **見た目を変えたら** `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、`render-ranking-images.mjs --stale` で全記事を作り直す。上げ忘れても、古い spec は `RENDER_SPEC_INVALID` で止まる。
+- **見た目を変えたら** `packages/ops/src/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、`render-ranking-images.mjs --stale` で全記事を作り直す。上げ忘れても、古い spec は `RENDER_SPEC_INVALID` で止まる。
 - 公開済みの無料記事の 3 枚は `update-note-body-figures.mjs --key <key>` が差し替える (既定は dry-run・`--commit` で更新)。エディタの画像挿入を使わず、公開版の本文 HTML の `<img>` だけを置き換えて公開 PUT に差し込むので、文章・カード・タグ・カバーは変わらない。有料記事は止める。更新後は `note:article save` で正本の画像も入れ替える。
 - カバーは Remotion の制作入力のままで、画像の保存・採用の正典は共通画像台帳。公開済み記事のカバー一括差し替えは `NOTE-COVER-ROLLOUT-20260928` が持つ。
 

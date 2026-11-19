@@ -296,7 +296,7 @@ X 投稿に添付できる画像種の正本は台帳 `sns.x-catalog` の `image
   Remotion レンダが要るため瞬発量産には重い (バッチは ranking-card を主軸に、多様性のため一部 tile-map)。
 - **Geoは一般量産の対象外**。`domain=geo`は`/operate-geo-content`だけで生成し、ranking-card/tile-mapを
   流用しない。15件構成はbaseline 3 / spatial cross 9 / method 2 / decision 1を機械検証する。
-- SVG→PNG 変換は `.claude/scripts/lib/svg-to-png.cjs` に一本化 (sharp 失敗時は exit≠0 で確実化)。
+- SVG→PNG 変換は `packages/ops/src/media/svg-to-png.cjs` に一本化 (sharp 失敗時は exit≠0 で確実化)。
 
 ### 2-9a. SNS画像の構図提案と実データ制作 (2026-10-11 オーナー指定)
 
@@ -552,7 +552,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 - **X 量産スキル**: `.claude/skills/sns/post-x-batch/` (候補選定 `select-candidates.cjs` / lint `lint-x-captions.cjs` / 登録 `register-drafts.cjs`)
 - **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
 - **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`
-- **X 画像最短経路**: `.claude/scripts/sns/quick-still.ts` / SVG→PNG `.claude/scripts/lib/svg-to-png.cjs`
+- **X 画像最短経路**: `.claude/scripts/sns/quick-still.ts` / SVG→PNG `packages/ops/src/media/svg-to-png.cjs`
 - **バズ地図カード (日本地図×統計)**: 規約 `.claude/rules/buzz-map-standards.md` / スキル `.claude/skills/sns/buzz-map/SKILL.md` / Remotion feature `apps/remotion/src/features/buzz-map/` (owner: sns-renderer、co: X配信=x-strategist / IG配信=instagram-strategist / 地理データ=gis-curator)
 - メトリクス時系列: `.claude/skills/analytics/sns-metrics-improvement/`
 - agent 責務: `.claude/agents/README.md` (Tier 4 SNS) / X オーナー `.claude/agents/x-strategist.md`

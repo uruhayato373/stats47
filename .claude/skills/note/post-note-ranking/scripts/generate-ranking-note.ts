@@ -5,7 +5,7 @@ import path from 'node:path';
 import { R2_PUBLIC_BASE_URL } from '../../../../../packages/types/mirror/site-config.cjs';
 import { rankingR2Key, statsR2Key } from '../../../../../packages/r2-storage/mirror/r2-keys.mjs';
 import { datasetPath } from "../../../../../config/datasets.mjs";
-import { NOTE_RANKING_IMAGES } from '../../../../scripts/note/lib/note-render-spec.mjs';
+import { NOTE_RANKING_IMAGES } from '../../../../../packages/ops/src/note/lib/note-render-spec.mjs';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../../..');
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;

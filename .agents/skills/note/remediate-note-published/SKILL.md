@@ -49,6 +49,6 @@ primary_agent: note-manager
 
 ## 関連
 
-- 採点の判定と減点: `.claude/scripts/note/lib/published-audit.mjs`
+- 採点の判定と減点: `packages/ops/src/note/lib/published-audit.mjs`
 - 本文画像の型と差し替えの契約: `.claude/rules/note-image-assets.md`「ランキング記事の本文画像 3 枚」
 - 進捗のカード: `NOTE-PUBLISHED-AUDIT-01`・`NOTE-FIGURE-ROLLOUT-01`

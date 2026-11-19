@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { cardEntries, unregisteredCards } from './native-cards.mjs';
+import { cardEntries, unregisteredCards } from '../../../../packages/ops/src/note/lib/native-cards.mjs';
 import { applyNavigationFooter } from './navigation-footer.mjs';
 
 const escapeHtml = (text) => String(text).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');

@@ -17,8 +17,8 @@
  *   svgDirToPng(dir)           → 上記の配列
  *
  * CLI:
- *   node .claude/scripts/lib/svg-to-png.cjs <images-dir>   # ディレクトリ内の *.svg を一括変換
- *   node .claude/scripts/lib/svg-to-png.cjs <in.svg> <out.png>
+ *   node packages/ops/src/media/svg-to-png.cjs <images-dir>   # ディレクトリ内の *.svg を一括変換
+ *   node packages/ops/src/media/svg-to-png.cjs <in.svg> <out.png>
  */
 
 const fs = require("node:fs");

@@ -31,7 +31,7 @@ import { RANKING_STORY_COVER_COPY } from './catalog/ranking-story-cover-copy';
 import { neutralJapanMap, swatchPanel, figureImage, choroplethPanel } from './lib/cover-visuals';
 import { NOTE_ARTICLES } from '../../../packages/ops/src/note/catalog';
 import { noteCoverCategory } from './catalog/cover-categories';
-import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from './lib/question-cover-data.mjs';
+import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from '../../../packages/ops/src/note/lib/question-cover-data.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
 import { assertCoverGenerationType } from '../../../packages/ops/src/note/cover-assets.mjs';
 import { topologyFeatures, fittedMercator, heightFittedMercator, largestPolygon } from '../../../packages/gis/src/map/geometry.mjs';
@@ -300,7 +300,7 @@ async function main() {
         mapSource: 'apps/remotion/public/prefecture.topojson',
         mapSha256: sha(fs.readFileSync(path.join(ROOT, 'apps/remotion/public/prefecture.topojson'))),
         rendererSha256: sha(Buffer.concat(['.claude/scripts/note/generate-cover-refresh.ts',
-          '.claude/scripts/note/lib/question-cover-data.mjs', 'apps/web/scripts/lib/note-cover-render.ts']
+          'packages/ops/src/note/lib/question-cover-data.mjs', 'apps/web/scripts/lib/note-cover-render.ts']
           .map(file => fs.readFileSync(path.join(ROOT, file))))),
         fonts: fonts.map(font => ({ name: font.name, weight: font.weight, sha256: sha(Buffer.from(font.data)) })),
         copy, renderSpec: { version, palette: 'YlOrRd', paletteRange: [0.15, 0.85], domain, scale: 'linear',

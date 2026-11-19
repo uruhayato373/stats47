@@ -1,9 +1,9 @@
-import { rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
+import { rankingR2Key } from '../../../../r2-storage/mirror/r2-keys.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import JSZip from 'jszip';
 import { inspectLandingArchive, selectLandingMetric, sha256 } from '../lib/product-landing-evidence.mjs';
-import { PREF_AREA_CODES } from '../../../../packages/area/mirror/prefectures.cjs';
+import { PREF_AREA_CODES } from '../../../../area/mirror/prefectures.cjs';
 
 const csv = (rows) => '\uFEFF' + rows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\r\n');
 

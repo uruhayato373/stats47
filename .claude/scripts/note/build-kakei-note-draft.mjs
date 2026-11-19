@@ -11,7 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildDraft } from "./lib/kakei-note-body.mjs";
+import { buildDraft } from "../../../packages/ops/src/note/lib/kakei-note-body.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const OUT_BASE = path.join(ROOT, "docs/31_note記事原稿");

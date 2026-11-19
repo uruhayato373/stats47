@@ -27,9 +27,9 @@ import {
 import { countBodyLength } from "../lib/kakei-note-audit.mjs";
 
 const NOTE_DIR = join(dirname(fileURLToPath(import.meta.url)), "..");
-const ROOT = join(NOTE_DIR, "..", "..", "..");
+const ROOT = join(NOTE_DIR, "..", "..", "..", "..");
 const CHART_DATA = JSON.parse(
-  readFileSync(join(ROOT, ".claude/scripts/note/__tests__/fixtures/a-kakei-kumamoto-chart-data.json"), "utf8"),
+  readFileSync(join(ROOT, "packages/ops/src/note/__tests__/fixtures/a-kakei-kumamoto-chart-data.json"), "utf8"),
 );
 
 // ---- 合成 evidence-data (熊本の実 chart-data の dominant=教育 と揃えるが、値は手書き) ----

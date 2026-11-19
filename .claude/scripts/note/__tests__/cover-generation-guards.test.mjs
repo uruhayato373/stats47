@@ -6,7 +6,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 import { COVER_ROOT } from '../../../../packages/ops/src/note/cover-assets.mjs';
-import { NOTE_RANKING_IMAGES, buildRenderSpec, validateRenderSpec } from '../lib/note-render-spec.mjs';
+import { NOTE_RANKING_IMAGES, buildRenderSpec, validateRenderSpec } from '../../../../packages/ops/src/note/lib/note-render-spec.mjs';
 
 for (const file of ['.claude/scripts/note/generate-note-covers.mjs', '.claude/scripts/note/generate-koumuin-covers.cjs',
   '.claude/scripts/note/generate-cover-refresh.ts', '.claude/skills/note/generate-note-charts/scripts/cover-template.js']) {

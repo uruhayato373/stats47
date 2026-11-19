@@ -1,4 +1,4 @@
-import { articleId, classifyDashboardInventory, METRIC_COLUMNS } from '../note/lib/dashboard-metrics.mjs';
+import { articleId, classifyDashboardInventory, METRIC_COLUMNS } from '../../../packages/ops/src/note/lib/dashboard-metrics.mjs';
 
 /** Only verified inventory rows may be used; this does not certify a KPI or experiment baseline. */
 export function validateNoteInventory(snapshot, cover, now = Date.now()) {

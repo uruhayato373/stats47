@@ -9,7 +9,7 @@
  *
  * 数字は CSV から読むだけで本文に手書きしない (本文の 8.7倍 等は同じ CSV 由来)。
  * デザインは .claude/skills/note/generate-note-charts/reference/design-system.md に従う。
- * SVG→PNG は .claude/scripts/lib/svg-to-png.cjs (density 288 = 2x)。
+ * SVG→PNG は packages/ops/src/media/svg-to-png.cjs (density 288 = 2x)。
  *
  * 使い方: node .claude/scripts/note/build-kakei-dataset-sample-images.mjs [--slug d-kakei-category-dataset]
  */
@@ -21,7 +21,7 @@ import { tableSvg, svgDoc, COLORS as C, esc } from "./lib/sample-table-svg.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const require = createRequire(import.meta.url);
-const { svgDirToPng } = require(path.join(ROOT, ".claude/scripts/lib/svg-to-png.cjs"));
+const { svgDirToPng } = require(path.join(ROOT, "packages/ops/src/media/svg-to-png.cjs"));
 
 const slugIdx = process.argv.indexOf("--slug");
 const SLUG = slugIdx >= 0 ? process.argv[slugIdx + 1] : "d-kakei-category-dataset";

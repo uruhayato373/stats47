@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { COVER_ROOT, readCoverLedger, validateCoverLedger, emptyCoverArticle, updateCoverLedger,
   recordCoverObservation, addCoverRevision, reviewCoverRevision, coverSha, adoptedCoverRevision } from '../../../packages/ops/src/note/cover-assets.mjs';
 import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, readStoredCover, readStoredCoverInput } from '../../../packages/ops/src/note/cover-storage.mjs';
-import { comparePublicCover, publishedRevisionAfterArchive } from './lib/cover-update.mjs';
+import { comparePublicCover, publishedRevisionAfterArchive } from '../../../packages/ops/src/note/lib/cover-update.mjs';
 import { registerCoverCandidate } from '../../../packages/ops/src/note/cover-ingest.mjs';
 import { enumerateNoteBodies } from '../../../packages/ops/src/media/gallery-collectors.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';

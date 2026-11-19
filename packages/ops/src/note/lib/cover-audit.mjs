@@ -148,7 +148,7 @@ export async function auditNoteCovers({ catalog, fetchJson, now = () => new Date
     account,
     scope: "published articles; drafts and scheduled unpublished articles excluded",
     status,
-    source: { cover: "v3 article detail data.eyecatch", catalog: ".claude/scripts/note/catalog/", imageHealthChecked: false, storedAssetsChecked: false },
+    source: { cover: "v3 article detail data.eyecatch", catalog: "note の記事台帳 (catalog/dump-circulation-json.ts)", imageHealthChecked: false, storedAssetsChecked: false },
     coverage: { complete, declaredTotal, listed: listed.size, catalog: byKey.size, reachedLastPage, pages, issues },
     summary,
     groups: { prefectureHousehold: summarizeCovers(articles.filter((article) => article.catalogKey?.startsWith("a-kakei-"))) },

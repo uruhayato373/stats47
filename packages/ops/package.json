@@ -14,7 +14,7 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.checkjs.json",
-    "test": "node --import tsx --test \"src/**/__tests__/*.test.mjs\" \"src/**/__tests__/*.test.cjs\""
+    "test": "node --import tsx --experimental-test-module-mocks --test \"src/**/__tests__/*.test.mjs\" \"src/**/__tests__/*.test.cjs\""
   },
   "dependencies": {
     "ajv": "^6.15.0",

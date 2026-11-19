@@ -5,7 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { misplacedFigures, publishedBlocks } from "./lib/figure-split.mjs";
+import { misplacedFigures, publishedBlocks } from "../../../packages/ops/src/note/lib/figure-split.mjs";
 // .claude/scripts/note/ → 3 階層上がリポジトリ root
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const DOCS = path.join(ROOT, "docs/31_note記事原稿");
