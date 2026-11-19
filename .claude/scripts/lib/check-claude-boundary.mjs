@@ -9,6 +9,7 @@
  *   - `.claude/` を含む文字列 (import の指定・require・vi.mock・パスの文字列)
  *   - `".claude"` だけの文字列 (path.join(root, ".claude", "todo") のような組み立て)
  *
+ * 置き場の台帳 config/datasets.mjs は数えない (.claude の置き場を宣言する唯一の場所。管理画面などは id で引く)。
  * 件数はファイルごとに .claude/config/claude-boundary-baseline.json の上限と比べる。基準は縮小専用で、
  * HEAD・親 commit・origin/develop との merge-base より増えたら失敗する (改名は元の行を引き継ぐ)。
  * --init は基準が無いときだけ作る。
@@ -23,8 +24,12 @@ const ROOT = fileURLToPath(new URL("../../../", import.meta.url));
 const BASELINE = ".claude/config/claude-boundary-baseline.json";
 const SCOPES = ["apps/", "packages/", "config/"];
 
+/** 置き場の台帳 (カタログ) は .claude の置き場を宣言する唯一の場所なので数えない。ほかのコードは id で引く (datasetPath(id)) */
+const CATALOG = new Set(["config/datasets.mjs"]);
+
 export function isSource(path) {
   if (!SCOPES.some((scope) => path.startsWith(scope))) return false;
+  if (CATALOG.has(path)) return false;
   if (/(?:^|\/)node_modules\//.test(path)) return false;
   return /\.(?:[cm]?[jt]sx?)$/.test(path) && !/\.d\.(?:m|c)?ts$/.test(path);
 }

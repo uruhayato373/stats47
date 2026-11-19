@@ -17,7 +17,9 @@ test("import・require・vi.mock・パスの文字列・'.claude' の組み立�
 
 test("対象は apps・packages・config のソースだけ (型の宣言と node_modules は除く)", () => {
   assert.equal(isSource("apps/admin/lib/a.ts"), true);
-  assert.equal(isSource("config/datasets.mjs"), true);
+  assert.equal(isSource("config/paths.mjs"), true);
+  // 置き場の台帳は .claude の置き場を宣言する唯一の場所なので数えない
+  assert.equal(isSource("config/datasets.mjs"), false);
   assert.equal(isSource(".claude/scripts/lib/a.mjs"), false);
   assert.equal(isSource("packages/ops/src/a.d.mts"), false);
   assert.equal(isSource("apps/web/node_modules/x/a.js"), false);

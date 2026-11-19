@@ -129,10 +129,6 @@
       "count": 1,
       "reason": "品質のゲートの基準 (.claude/config) を検査が読む。無人の Claude が自分のゲートを緩められないよう .claude に置く決まり (data-storage.md)。恒久の例外"
     },
-    "config/datasets.mjs": {
-      "count": 136,
-      "reason": "置き場の台帳 (カタログ)。.claude の置き場を宣言する唯一の場所で、ほかのコードは id で引く。恒久の例外"
-    },
     "packages/ai-content/src/scripts/generate-blog-article.ts": {
       "count": 4,
       "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
