@@ -412,7 +412,7 @@ candidate → applied → approved → harvested → registered → published
 
 `score = 0.40·rewardNorm + 0.25·epcNorm + 0.15·confirmNorm + 0.20·gapBonus`
 (gapBonus: `inventory-latest.json` の gapVertical=1.0 / thinVertical=0.7 / 他=0.2)。係数・上限・blocklist・
-vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `.claude/scripts/ads/data/a8-curated.json`。
+vertical 写像・`weeklyApplyMax`・`minScore` の SSOT は `config/a8-curated.json`。
 
 ### 規律 (機械強制)
 
@@ -573,7 +573,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 - `vertical` は広告意図の分類であり、掲載許可には使わない。掲載許可は catalog の program に置く
   `eligibility` だけで判定し、未設定は `pending` 相当として fail-closed にする。
-- 語彙の SSOT は `.claude/scripts/ads/data/affiliate-eligibility-policy.json`、判定と指紋の正規化は
+- 語彙の SSOT は `config/affiliate-eligibility-policy.json`、判定と指紋の正規化は
   `.claude/scripts/ads/lib/affiliate-eligibility-core.mjs`。policy 外の status / risk / page type は拒否する。
 - apply plan は `status=approved`、掲載対象が1件以上、risk が空の案件だけ生成できる。risk がある案件は
   `reviewedBy=owner`、有効な `reviewedAt`、案件単位の `evidence` がすべて揃った場合だけ許可する。
@@ -761,7 +761,7 @@ banner 上位 1 + text 上位 2 で頭打ちだったため。
 - 自動 scout: skill `.claude/skills/ads/scout-asp/SKILL.md` / agent `.claude/agents/asp-scout.md` /
   コア `.claude/scripts/ads/lib/{a8-scout-core,a8-code-core,a8-append-core}.mjs` (+ `__tests__/`) /
   ブラウザ `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}` /
-  カタログ `data/affiliate/a8-catalog.json` / curated `.claude/scripts/ads/data/a8-curated.json` /
+  カタログ `data/affiliate/a8-catalog.json` / curated `config/a8-curated.json` /
   週次 `scripts/scheduled/scout-asp-weekly.sh` (週次の取得 `weekly-saturday.sh` から呼ぶ) /
   追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `.claude/scripts/ads/check-a8-apply-budget.cjs`
 - 3 ASP 提携運用 (§11): skill `.claude/skills/ads/affiliate-operate/SKILL.md` / agent `.claude/agents/affiliate-operator.md` /

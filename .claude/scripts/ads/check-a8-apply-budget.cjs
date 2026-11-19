@@ -22,10 +22,11 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { datasetPath } = require("../../../config/datasets.mjs");
+const { A8_CURATED } = require("../../../config/paths.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
-const CURATED_PATH = path.join(PROJECT_ROOT, ".claude/scripts/ads/data/a8-curated.json");
+const CURATED_PATH = path.join(PROJECT_ROOT, A8_CURATED);
 
 function loadCatalog() {
   try {

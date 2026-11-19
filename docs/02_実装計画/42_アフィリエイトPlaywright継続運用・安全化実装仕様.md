@@ -352,7 +352,7 @@ type AffiliateEligibility = {
 };
 ```
 
-禁止語、risk flag、最低需要などの規則は `.claude/scripts/ads/data/` の versioned policy へ置き、
+禁止語、risk flag、最低需要などの規則は `config/` の versioned policy (`config/affiliate-eligibility-policy.json` など) へ置き、
 catalog の各 entry には判定結果と fingerprint を保存する。アプリ配信に必要な allowlist だけを
 広告の台帳 `affiliate.ads` の型付きフィールドへ移す。
 

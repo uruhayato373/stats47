@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "アフィリエイト広告の掲載可否の語彙 (状態・リスクの印・ページの種類・判定者)",
+  "description": "config/affiliate-eligibility-policy.json の形状契約。2026-11-20 に .claude/scripts/ads/data/ から移したときに実データから作成。読むのは packages/ops/src/ads/lib/affiliate-eligibility-core.mjs。",
+  "type": "object",
+  "required": ["schemaVersion", "statuses", "riskFlags", "pageTypes", "reviewers"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "statuses": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+    "riskFlags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "pageTypes": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+    "reviewers": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true }
+  }
+}

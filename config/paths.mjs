@@ -20,6 +20,8 @@ export const NOTE_ACCOUNT = "config/note-account.json";
 // アフィリエイト (ASP の接続設定・A8 レポート収集)
 export const AFFILIATE_ASP = "config/affiliate-asp.json";
 export const A8_REPORT_AUTOMATION = "config/a8-report-automation.json";
+export const A8_CURATED = "config/a8-curated.json";
+export const AFFILIATE_ELIGIBILITY_POLICY = "config/affiliate-eligibility-policy.json";
 
 // 広告の枠の台帳
 export const ADS_PLACEMENTS = "data/ads/placements.json";

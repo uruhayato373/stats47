@@ -8,20 +8,21 @@
  *   - vertical 解決 (A8 ジャンル/プログラム名 → 10軸)
  *   - 状態機械の遷移検証
  *
- * curated 値 (係数・上限・blocklist・vertical map) は data/a8-curated.json を読む
+ * curated 値 (係数・上限・blocklist・vertical map) は config/a8-curated.json (置き場の定数 A8_CURATED) を読む
  * (ハードコードしない)。正典 = .claude/rules/affiliate-ads-standards.md §10。
  */
 
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { A8_CURATED } from "../../../../config/paths.mjs";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** curated data をロード (テストは curated を渡して差し替え可)。 */
 export function loadCurated() {
-  return require(path.resolve(__dirname, "../data/a8-curated.json"));
+  return require(path.resolve(__dirname, "../../../..", A8_CURATED));
 }
 
 // ---------- 表記ゆれ正規化 ----------
