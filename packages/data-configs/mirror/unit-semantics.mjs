@@ -180,7 +180,7 @@ const RATIO_UNITS = [
 const INDEX_PATTERNS = [/^指数$/, /^（.*=\s*\d+）$/, /^\(.*=\s*\d+\)$/];
 
 /** 分母つき (人口10万対 など)。素の単位と換算してはならない。 */
-const DENOMINATOR_PATTERN = /(人口|児童|出生|生徒|婚姻)?\s*(十万|百万|(?:\d+)?万|(?:\d+)?千)\s*(対|あたり|当たり)/;
+const DENOMINATOR_PATTERN = /(人口|児童|出生|生徒|婚姻)?\s{0,8}(十万|百万|(?:\d{1,9})?万|(?:\d{1,9})?千)\s{0,8}(対|あたり|当たり)/;
 
 
 
@@ -244,7 +244,7 @@ export function parseUnit(raw) {
   }
 
   // 分母つきは括弧を落とした本体で次元を見る (「人（人口10万対）」→ 人)
-  const body = hasDenominator ? normalized.replace(/[（(].*?[）)]/g, "").trim() : normalized;
+  const body = hasDenominator ? normalized.replace(/[（(][^（()）]*[）)]/g, "").trim() : normalized;
   const target = body === "" ? normalized : body;
 
   // スケール接頭辞 + 基底単位 (長い接頭辞から試す)

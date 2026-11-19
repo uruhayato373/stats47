@@ -17,10 +17,15 @@ const BOILERPLATE = [
   // 2026-11-02 owner decision: the publisher is named in the article or post text, not in the image.
   /stats47/i,
 ];
+function removeTags(text) {
+  let previous;
+  do { previous = text; text = text.replace(/<[^>]*>/g, ''); } while (text !== previous);
+  return text;
+}
 /** Validate visible SVG text, not provenance, accessibility labels, or input metadata. */
 export function assertMinimalChartCopy(svg) {
   const lines = [...svg.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)]
-    .map((match) => match[1].replace(/<[^>]*>/g, '').trim());
+    .map((match) => removeTags(match[1]).trim());
   const rejected = lines.find((line) => BOILERPLATE.some((pattern) => pattern.test(line)));
   if (rejected) throw Error('画像内の解説・一般的な注意書きは記事本文または投稿文へ移してください。');
 }

@@ -712,16 +712,21 @@ export function extractInlineSvgs(md) {
   return matches ?? [];
 }
 
+/** 1 回の置換で新しく現れた一致 (例: `<<b>b>`) も消えるまで繰り返す */
+function removeUntilStable(text, pattern) {
+  let previous;
+  do { previous = text; text = text.replace(pattern, ''); } while (text !== previous);
+  return text;
+}
+
 /** SVG 文字列 → 表示テキスト (タグ除去 + XML エンティティ復元 + 空白正規化) */
 function svgPlainText(svgContent) {
-  return String(svgContent)
-    .replace(/<!--[\s\S]*?-->/g, '')
-    .replace(/<[^>]+>/g, '')
-    .replace(/&amp;/g, '&')
+  return removeUntilStable(removeUntilStable(String(svgContent), /<!--[\s\S]*?-->/g), /<[^>]+>/g)
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&')
     .replace(/\s+/g, '');
 }
 
