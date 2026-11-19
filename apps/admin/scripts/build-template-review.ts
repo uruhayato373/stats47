@@ -33,7 +33,7 @@ import { regionNetSteps, renderWaterfallChart } from '../lib/template-waterfall'
 import { CHART_THEMES } from '../../remotion/src/features/data-cards/chart-theme';
 import { datasetPath } from '../../../config/datasets.mjs';
 import { chartSourceName, groupedBarChartFromArticleData, itemBarChartFromArticleData, lineChartFromArticleData, rankingChartFromArticleData, stackedChartFromArticleData } from '../lib/type-chart-input';
-import { fetchPrefectures } from '@stats47/area';
+import { fetchPrefectures, to2DigitPrefCode } from '@stats47/area';
 import { assertMinimalChartCopy } from '@stats47/ops/media/image-copy.mjs';
 import { SITE } from '@stats47/types';
 import { metricPresentation } from '../../../packages/data-configs/src/color-policy';
@@ -43,7 +43,6 @@ import { parseStatsValuesPayload } from '../../../packages/stats-r2/src/schemas'
 import { MANUFACTURING_SHIPMENT_AMOUNT_2023 } from '../../../packages/product-factory/src/data/datasets/manufacturing-shipment-amount';
 import { serializeDatasetCsv } from '../../../packages/product-factory/src/generators/csv';
 import type { Topology } from 'topojson-specification';
-import { to2DigitPrefCode } from '@stats47/area';
 
 const ROOT = path.resolve(__dirname, '../../..');
 const OUT = path.join(ROOT, '.local/template-review');

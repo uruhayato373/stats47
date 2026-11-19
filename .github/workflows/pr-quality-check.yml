@@ -228,6 +228,11 @@ jobs:
           node --import tsx packages/ui-theme/scripts/inline-lyra.mjs --check
         continue-on-error: false
 
+      - name: 🧰 Ops Package Tests
+        # packages/ops に移した運用の部品の node:test を全件回す (SCRIPTS-TO-PACKAGES-01)
+        run: npm run test --workspace=@stats47/ops
+        continue-on-error: false
+
       - name: 🃏 Card Census Guard
         # *Card の増殖を抑える (スパゲッティ化の止血)。ベースライン超過で失敗。
         run: node .claude/scripts/lib/check-card-census.cjs
