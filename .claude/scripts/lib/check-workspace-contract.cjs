@@ -63,6 +63,54 @@ function findCycles(graph) {
 }
 
 /** node_modules を除いてテストファイルを 1 つでも持つか (見つけ次第 true)。 */
+function testFiles(directory) {
+  const out = [];
+  const stack = [directory];
+  while (stack.length > 0) {
+    const current = stack.pop();
+    let entries = [];
+    try { entries = fs.readdirSync(current, { withFileTypes: true }); } catch { continue; }
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        if (entry.name === "node_modules" || entry.name === "dist" || entry.name.startsWith(".")) continue;
+        stack.push(path.join(current, entry.name));
+      } else if (/\.(test|spec)\.[cm]?[jt]sx?$/.test(entry.name)) {
+        out.push(normalize(path.relative(ROOT, path.join(current, entry.name))));
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * node:test で書いたテストのパッケージ (packages/ops・packages/ui-theme) は vitest の project に登録しない。
+ * そのテストが root の npm script か workflow からパス・glob ですべて呼ばれていれば、登録済みとして扱う
+ * (2026-11-19 に .claude/scripts から移したテストは、移す前と同じ npm script・workflow が回している)。
+ */
+function globToRegExp(glob) {
+  const escaped = glob.replace(/[.+^${}()|[\]\\]/g, "\\$&").replace(/\*\*/g, "\u0000").replace(/\*/g, "[^/]*").replace(/\u0000/g, ".*");
+  return new RegExp(`^${escaped}$`);
+}
+
+function rootTestReferences() {
+  const texts = [];
+  try { texts.push(Object.values(JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8")).scripts || {}).join("\n")); } catch {}
+  const workflows = path.join(ROOT, ".github", "workflows");
+  try {
+    for (const name of fs.readdirSync(workflows)) {
+      if (/\.ya?ml$/.test(name)) texts.push(fs.readFileSync(path.join(workflows, name), "utf8"));
+    }
+  } catch {}
+  const tokens = new Set();
+  for (const text of texts) {
+    for (const raw of text.split(/[\s\\]+/)) {
+      const token = raw.replace(/^["']|["';]$/g, "");
+      if (/\.test\.[cm]?[jt]sx?$/.test(token)) tokens.add(token);
+    }
+  }
+  return [...tokens].map(globToRegExp);
+}
+
 function hasTestFiles(directory) {
   const stack = [directory];
   while (stack.length > 0) {
@@ -340,12 +388,15 @@ function main() {
   }
 
   const registered = registeredVitestProjects();
+  const rootTests = rootTestReferences();
   if (registered === null) {
     findings.push({ code: "MISSING_VITEST_CONFIG", file: "vitest.config.mts", message: "file not found" });
   } else {
     for (const item of packages) {
       if (registered.has(item.relative)) continue;
       if (!hasTestFiles(item.directory)) continue;
+      const files = testFiles(item.directory);
+      if (files.length > 0 && files.every((file) => rootTests.some((re) => re.test(file)))) continue;
       findings.push({
         code: "UNWIRED_TEST_SUITE",
         file: "vitest.config.mts",
