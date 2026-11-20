@@ -229,13 +229,13 @@
     "componentKey": "theme-real-income-actual-vs-disposable",
     "componentType": "line-chart",
     "rawRequestKeys": [
-      "0000010212?cdCat01=#L01201"
+      "0000010112?cdCat01=L3110"
     ],
     "metricKeys": [
       "actual-income-worker-households-per-month"
     ],
     "units": [
-      "千円"
+      "円"
     ]
   },
   {

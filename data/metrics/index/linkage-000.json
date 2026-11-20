@@ -2087,20 +2087,20 @@
       "sources": [
         {
           "role": "primary",
-          "statsDataId": "0000010212",
+          "statsDataId": "0000010112",
           "filters": {
-            "cdCat01": "#L01201"
+            "cdCat01": "L3110"
           }
         }
       ],
       "recipe": {
         "kind": "estat",
         "estatParams": {
-          "statsDataId": "0000010212",
-          "cdCat01": "#L01201"
+          "statsDataId": "0000010112",
+          "cdCat01": "L3110"
         },
         "derived": false,
-        "configHash": "4592c1fe7b4b6461"
+        "configHash": "aa621ff7fb15cf9c"
       },
       "dependencies": [],
       "normalizationDependencies": [],
