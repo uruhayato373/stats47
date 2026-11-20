@@ -95,3 +95,10 @@ test("正規表現に埋めたパス (\\. の形) も置き換える", () => {
   const text = "grep -E '^(\\.claude/scripts/sns/lib/a-core\\.mjs|x)'";
   assert.equal(replaceRepoPaths(text, "apps/web/scripts/pre-commit-checks.sh", moves), "grep -E '^(packages/ops/src/sns/lib/a-core\\.mjs|x)'");
 });
+
+test("run: の中のシェルのコメント行は名指しと数えない", () => {
+  const wf = "on:\n  schedule:\n    - cron: '0 0 * * *'\njobs:\n  a:\n    steps:\n      - uses: actions/checkout@v4\n        with: { ref: develop }\n      - run: |\n          # 判定は .claude/scripts/x/commented.mjs と同じ\n          node .claude/scripts/x/real.mjs";
+  const text = mainDefinitionJobsText([wf]);
+  assert.match(text, /real\.mjs/);
+  assert.doesNotMatch(text, /commented\.mjs/);
+});
