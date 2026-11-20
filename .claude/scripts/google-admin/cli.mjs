@@ -27,8 +27,8 @@ import {
   MAX_ITEMS_PER_APPROVAL,
   requireCommit,
   decideScActions,
-} from "./apply-allowlisted-settings.mjs";
-import { parseDimensionLedger, LEDGER_STATUS_KINDS } from "./dimension-ledger.mjs";
+} from "../../../packages/ops/src/google/apply-allowlisted-settings.mjs";
+import { parseDimensionLedger, LEDGER_STATUS_KINDS } from "../../../packages/ops/src/google/dimension-ledger.mjs";
 import { sanitizeObject } from "./redact.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
@@ -269,7 +269,7 @@ async function runAuditUi() {
 async function runApplyUi(argv) {
   const { launchAdminContext, acquireLock, releaseLock } = await import("./browser-context.mjs");
   const ga4 = await import("./audit-ga4.mjs");
-  const { applyCreateScLink, applyPublishScCollection } = await import("./apply-allowlisted-settings.mjs");
+  const { applyCreateScLink, applyPublishScCollection } = await import("../../../packages/ops/src/google/apply-allowlisted-settings.mjs");
   const runId = `${Date.now().toString(36)}-${process.pid}`;
   const screenshotDir = path.join(`/tmp/stats47-google-admin-${runId}`, "screenshots");
   fs.mkdirSync(screenshotDir, { recursive: true });

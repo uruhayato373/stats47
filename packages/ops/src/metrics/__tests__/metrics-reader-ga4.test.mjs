@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { computeWeekRanges, fetchGa4Weekly } from '../../lib/metrics-reader.mjs';
+import { computeWeekRanges, fetchGa4Weekly } from '../metrics-reader.mjs';
 
 const row = (values, channel) => ({
   metricValues: values.map(value => ({ value: String(value) })),

@@ -49,6 +49,7 @@
     ".claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/dataset-registries.test.ts": "置き場の規則の検査のテスト (台帳の参照の読み方を check-datasets と突き合わせる)",
     ".claude/scripts/lib/__tests__/dependency-security-contract.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/dimension-ledger-rules.test.mjs": "規則の文書 (analytics-event-standards) の実物を GA4 の dimension の台帳として読めることのテスト",
     ".claude/scripts/lib/__tests__/husky-worktree-hook.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs": "agent の定義とスクリプトが最新年の選び方の部品を使うことの検査のテスト",
     ".claude/scripts/lib/__tests__/lib-tests-wiring.test.cjs": "CI の検査の配線と範囲の契約のテスト",
@@ -128,7 +129,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "google-admin": {
-      "count": 3,
+      "count": 2,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "gsc": {
@@ -156,7 +157,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "metrics": {
-      "count": 22,
+      "count": 7,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "model-usage": {

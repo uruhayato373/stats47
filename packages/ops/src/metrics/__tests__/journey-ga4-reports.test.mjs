@@ -92,7 +92,7 @@ test('Phase 5 slices: every request is Japan-only and filters to its own event',
     assert.equal(report.columns.length, report.dims.length + report.metrics.length, `${name} の列数`);
   }
   // key event の集合は google-admin の AUTHORED_KEY_EVENTS と一致させる (片方だけ増やすと成果が数えられない)
-  const { AUTHORED_KEY_EVENTS } = await import('../../google-admin/apply-allowlisted-settings.mjs');
+  const { AUTHORED_KEY_EVENTS } = await import('../../google/apply-allowlisted-settings.mjs');
   assert.deepEqual([...KEY_EVENT_NAMES].sort(), AUTHORED_KEY_EVENTS.map((k) => k.eventName).sort());
 });
 

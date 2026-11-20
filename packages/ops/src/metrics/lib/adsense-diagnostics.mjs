@@ -11,7 +11,7 @@
  * pure module (I/O なし)。テスト: __tests__/adsense-diagnostics.test.mjs
  */
 
-import { effectWindows } from "../../../../packages/ops/src/metrics/periods.mjs";
+import { effectWindows } from "../periods.mjs";
 
 export const MAX_CANDIDATES = 3;
 export const ADSENSE_ACTIVE_WIP_LIMIT = 2;

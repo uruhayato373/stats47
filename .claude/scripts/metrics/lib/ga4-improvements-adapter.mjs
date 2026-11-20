@@ -17,8 +17,8 @@ import { extractDeployDate, extractTarget } from "../../../../packages/ops/src/e
 import { isoWeekEnd, isoWeekOf, weekDiff, weekLt } from "../../../../packages/ops/src/effect-verdict/iso-week.mjs";
 import { parseBacklog } from "../../lib/scan-pending-improvements.mjs";
 import { DEFAULT_THRESHOLDS } from "../../../../packages/ops/src/effect-verdict/thresholds.mjs";
-import { parseCsv } from "./measurement-cycle.mjs";
-import { PROJECT_ROOT } from "./auth.mjs";
+import { parseCsv } from "../../../../packages/ops/src/metrics/lib/measurement-cycle.mjs";
+import { PROJECT_ROOT } from "../../../../packages/ops/src/metrics/lib/auth.mjs";
 import { datasetDir } from "../../../../config/datasets.mjs";
 
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);

@@ -19,7 +19,7 @@
 
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { PROJECT_ROOT } from "./auth.mjs";
+import { PROJECT_ROOT } from "../../../../packages/ops/src/metrics/lib/auth.mjs";
 
 /** constants.ts の既定パス。 */
 export const CODE_AD_SLOTS_PATH = "apps/web/src/lib/google-adsense/constants.ts";

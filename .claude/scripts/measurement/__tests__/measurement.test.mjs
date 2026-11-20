@@ -477,7 +477,7 @@ test('measurement bookshelf reuse requires the correct origin, path and exact dr
 });
 
 test('note の販売履歴は日 × 記事の行にまとめ、購入者名の項目が来たら止める', async () => {
-  const { parseNoteSalesHistory } = await import('../report-parsers.mjs');
+  const { parseNoteSalesHistory } = await import('../../../../packages/ops/src/measurement/report-parsers.mjs');
   const range = { start: '2026-10-01', end: '2026-11-13', observedAt: '2026-11-14T00:00:00.000Z' };
   const url = 'https://note.com/stats47/n/nc5a1358141a5';
   const pages = [

@@ -42,5 +42,6 @@
     "src/sns/x-catalog.cjs",
     "src/sns/x-weighted-length.cjs"
   ],
-  "exclude": ["node_modules", "**/__tests__/**"]
+  // fetch-adsense-snapshot・fetch-popular-blog-articles は移す前の検査 (metrics/lib だけ) の範囲外で、googleapis の型に合わない。範囲を広げずに引き継ぐ
+  "exclude": ["node_modules", "**/__tests__/**", "src/metrics/fetch-adsense-snapshot.mjs", "src/metrics/fetch-popular-blog-articles.mjs"]
 }

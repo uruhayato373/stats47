@@ -7,17 +7,17 @@
  * 自分を除く上位 5 件を出す。公開をやめた記事はサイトの読み込みが除く (ここでは判定しない)。
  *
  * Usage:
- *   node .claude/scripts/metrics/fetch-popular-blog-articles.mjs [--dry-run]
+ *   node packages/ops/src/metrics/fetch-popular-blog-articles.mjs [--dry-run]
  * 認証: ../../../packages/ops/src/google/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)。Property: env GA4_PROPERTY_ID。
  */
 import { writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { datasetDir } from "../../../config/datasets.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 import { PROJECT_ROOT } from "./lib/auth.mjs";
-import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
-import { createGa4DataClient } from "../../../packages/ops/src/google/google-client.cjs";
+import { GA4_PROPERTY_ID } from "../../../types/mirror/site-config.cjs";
+import { createGa4DataClient } from "../google/google-client.cjs";
 
 export const POPULAR_ARTICLES_PATH = `${datasetDir("blog.operations")}/popular-articles.json`;
 export const POPULAR_ARTICLES_COUNT = 10;

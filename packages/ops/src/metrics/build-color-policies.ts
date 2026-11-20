@@ -1,10 +1,10 @@
 import { isPrefectureAreaCode } from "@stats47/area";
-import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
+import { statsR2Key } from '../../../r2-storage/mirror/r2-keys.mjs';
 /**
  * 配色の台帳。指標 × 粒度ごとに、連続か 5 段階か・一方向か発散かを R2 の値から決めて持つ。
  * 指標定義は人が決める色相と基準値、この台帳は値が決める段階 (正規化。結合は metricPresentation)。
  *
- *   npx tsx .claude/scripts/metrics/build-color-policies.ts   # R2 から作り直す (週次の CI)
+ *   npx tsx packages/ops/src/metrics/build-color-policies.ts   # R2 から作り直す (週次の CI)
  *   検査は check-color-policies.ts (通信なし)
  *
  * 判定の規則の正本は packages/types/src/color-policy.ts。取得できなかった指標は前回の行を残す。
@@ -12,14 +12,14 @@ import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { datasetPath } from '../../../config/datasets.mjs';
-import { buildMunicipalityEntityPolicy, resolveWardModeAreas } from '../../../packages/area/src/municipalities';
-import { listAllMetrics } from '../../../packages/data-configs/src/registry';
-import { COLOR_GRAINS, colorPolicyRow, type ColorGrain, type ColorPolicyRow, type ColorPolicySkip } from '../../../packages/types/src/color-policy';
-import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
+import { datasetPath } from '../../../../config/datasets.mjs';
+import { buildMunicipalityEntityPolicy, resolveWardModeAreas } from '../../../area/src/municipalities';
+import { listAllMetrics } from '../../../data-configs/src/registry';
+import { COLOR_GRAINS, colorPolicyRow, type ColorGrain, type ColorPolicyRow, type ColorPolicySkip } from '../../../types/src/color-policy';
+import { R2_PUBLIC_BASE_URL } from '../../../types/mirror/site-config.cjs';
 import { summaryOf, type Ledger } from './check-color-policies';
 
-const ROOT = path.resolve(__dirname, '../../..');
+const ROOT = path.resolve(__dirname, '../../../..');
 const LEDGER = path.join(ROOT, datasetPath('ranking.color-policies'));
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const CONCURRENCY = 12;

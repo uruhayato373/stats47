@@ -10,10 +10,10 @@
  * - rolling28d は機会発見用。前回 snapshot との差を WoW と呼ばない (renderer は前週比を出さない)。
  * - 欠損日を 0 補完しない (assessDailyCoverage の結果をそのまま保持する)。
  *
- * テスト: .claude/scripts/metrics/__tests__/weekly-summary.test.mjs
+ * テスト: packages/ops/src/metrics/__tests__/weekly-summary.test.mjs
  */
 
-import { resolvePeriods, assessDailyCoverage, periodMetadata } from "../../../../packages/ops/src/metrics/periods.mjs";
+import { resolvePeriods, assessDailyCoverage, periodMetadata } from "../periods.mjs";
 
 export const SUMMARY_SCHEMA_VERSION = 2;
 export const SUMMARY_FILE = "summary.json";

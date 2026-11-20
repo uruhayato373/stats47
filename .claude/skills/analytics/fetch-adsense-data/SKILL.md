@@ -183,7 +183,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ### 実行スクリプト
 
-正典実装 `.claude/scripts/metrics/fetch-adsense-snapshot.mjs` を実行する
+正典実装 `packages/ops/src/metrics/fetch-adsense-snapshot.mjs` を実行する
 (旧: SKILL 内に同義スクリプトを複製していたが、公式 CPC 契約導入時の
 drift 防止のため 2026-07-28 に正典参照へ一本化した):
 

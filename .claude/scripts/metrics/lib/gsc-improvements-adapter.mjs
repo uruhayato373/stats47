@@ -14,8 +14,8 @@ import { extractDeployDate, extractTarget } from "../../../../packages/ops/src/e
 import { isoWeekEnd, isoWeekOf, weekDiff, weekLt } from "../../../../packages/ops/src/effect-verdict/iso-week.mjs";
 import { parseBacklog } from "../../lib/scan-pending-improvements.mjs";
 import { DEFAULT_THRESHOLDS } from "../../../../packages/ops/src/effect-verdict/thresholds.mjs";
-import { parseCsv } from "./measurement-cycle.mjs";
-import { PROJECT_ROOT } from "./auth.mjs";
+import { parseCsv } from "../../../../packages/ops/src/metrics/lib/measurement-cycle.mjs";
+import { PROJECT_ROOT } from "../../../../packages/ops/src/metrics/lib/auth.mjs";
 import { resolvePeriods } from "../../../../packages/ops/src/metrics/periods.mjs";
 import { datasetDir } from "../../../../config/datasets.mjs";
 import { OUT_OF_SCOPE_MARKER } from "../../../../packages/ops/src/management/improvement-markers.mjs";

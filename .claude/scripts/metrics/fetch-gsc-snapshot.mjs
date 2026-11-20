@@ -25,10 +25,10 @@ import {
   PROJECT_ROOT,
   parseWeekArg,
   toCsv,
-} from "./lib/auth.mjs";
+} from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
-import { buildGscSummary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
-import { PAGES_FINALIZED_FILE, QUERIES_FINALIZED_FILE, detailCoverage } from "./lib/gsc-demand.mjs";
+import { buildGscSummary, SUMMARY_FILE } from "../../../packages/ops/src/metrics/lib/weekly-summary.mjs";
+import { PAGES_FINALIZED_FILE, QUERIES_FINALIZED_FILE, detailCoverage } from "../../../packages/ops/src/metrics/lib/gsc-demand.mjs";
 import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
 import { createSearchConsoleClient } from "../../../packages/ops/src/google/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";

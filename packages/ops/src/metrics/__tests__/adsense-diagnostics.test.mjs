@@ -16,7 +16,7 @@ import {
   ADSENSE_ACTIVE_WIP_LIMIT,
   ADSENSE_WEEKLY_ADOPTION_LIMIT,
 } from "../lib/adsense-diagnostics.mjs";
-import { classifyPageType, aggregateByPageType, PAGE_TYPES } from "../../../../packages/ops/src/metrics/page-type.mjs";
+import { classifyPageType, aggregateByPageType, PAGE_TYPES } from "../page-type.mjs";
 
 const BASELINE_END = "2026-07-25";
 

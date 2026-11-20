@@ -22,7 +22,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { PROJECT_ROOT } from "./lib/auth.mjs";
+import { PROJECT_ROOT } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const CONFIG_PATH = ".claude/config/revenue-guards.json";

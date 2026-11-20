@@ -13,8 +13,8 @@
  * 認証: ../../../packages/ops/src/google/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)。Property: env GA4_PROPERTY_ID (未設定時 463218070)。
  * 出力は stdout (csv / json)。先頭行に期間と総行数をコメントで出すので、そのまま根拠として引用できる。
  */
-import { toCsv } from "./lib/auth.mjs";
-import { buildQuery } from "./lib/ga4-query.mjs";
+import { toCsv } from "../../../packages/ops/src/metrics/lib/auth.mjs";
+import { buildQuery } from "../../../packages/ops/src/metrics/lib/ga4-query.mjs";
 import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient } from "../../../packages/ops/src/google/google-client.cjs";
 

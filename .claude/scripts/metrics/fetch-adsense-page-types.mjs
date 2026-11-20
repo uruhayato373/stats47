@@ -16,14 +16,14 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
+import { PROJECT_ROOT, parseWeekArg, toCsv } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
 import {
   GA4_PAGE_TYPE_METRICS,
   PAGE_TYPE_FIELDS,
   PAGE_TYPES_SNAPSHOT_FILE,
   buildPageTypeRows,
-} from "./lib/adsense-page-types.mjs";
+} from "../../../packages/ops/src/metrics/lib/adsense-page-types.mjs";
 import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient } from "../../../packages/ops/src/google/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";

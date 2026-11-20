@@ -522,7 +522,7 @@ jobs:
 
       - name: 🔄 GSC operations cycle contract
         # snapshot→review→候補判断→plan→月次集約の接続、JST週境界、coverage入力鮮度の退行を止める。
-        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs .claude/scripts/gsc/__tests__/coverage-probe.test.mjs .claude/scripts/metrics/__tests__/metrics-reader-ga4.test.mjs
+        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs .claude/scripts/gsc/__tests__/coverage-probe.test.mjs packages/ops/src/metrics/__tests__/metrics-reader-ga4.test.mjs
         continue-on-error: false
 
       - name: 🔑 Google API client contract
@@ -691,7 +691,7 @@ jobs:
         # AdSense の job 契約 / ad unit inventory / unit history の突き合わせロジックと、
         # コード側 slot 定数 (constants.ts) の決定的パーサを検証する。
         # ネットワーク・AdSense API には触れない (実データ取得は週次 workflow が担当)。
-        # 正典: .claude/scripts/metrics/lib/adsense-report-contract.mjs
+        # 正典: packages/ops/src/metrics/lib/adsense-report-contract.mjs
         run: npm run metrics:test
         continue-on-error: false
 

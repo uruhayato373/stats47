@@ -2,7 +2,7 @@
  * adsense-ad-unit-walk — AdSense の ad client → ad unit を辿る**唯一の実装**。
  * ---------------------------------------------------------------------------
  * ★なぜ 1 箇所に集めるか (2026-08-21): この走査は元々 2 箇所に複製されていた。
- *   - `.claude/scripts/metrics/fetch-adsense-snapshot.mjs` (週次 snapshot)
+ *   - `packages/ops/src/metrics/fetch-adsense-snapshot.mjs` (週次 snapshot)
  *   - `.claude/scripts/google-admin/audit-adsense.mjs` (週次 audit)
  *   2026-08-04 に前者だけ「1 client の失敗で inventory 全体を落とさない」修正が入り、
  *   後者は素通しのままだった。結果、**同じ資格情報で snapshot は成功しているのに
@@ -19,7 +19,7 @@
  *     (native ad unit は adcode を持たないので正常系でも通る)。
  *   - ページングを辿る。
  *
- * テスト: .claude/scripts/metrics/__tests__/adsense-ad-unit-walk.test.mjs
+ * テスト: packages/ops/src/metrics/__tests__/adsense-ad-unit-walk.test.mjs
  */
 
 /**

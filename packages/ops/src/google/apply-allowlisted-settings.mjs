@@ -14,7 +14,7 @@
  * (README「denylist」)。ALLOWED_ACTIONS は Playwright residual の 2 action だけ。
  */
 import { createHash } from "node:crypto";
-import { GSC_PROPERTY, SITE_DOMAIN } from "../../../packages/types/mirror/site-config.cjs";
+import { GSC_PROPERTY, SITE_DOMAIN } from "../../../types/mirror/site-config.cjs";
 
 /**
  * ローカル Playwright で実行してよい action。README「allowlist」(ローカル Playwright) と 1:1。

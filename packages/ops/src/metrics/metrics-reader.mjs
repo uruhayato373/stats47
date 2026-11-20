@@ -15,14 +15,14 @@
  *   - PSI_API_KEY env（任意、指定すれば PSI を取得）
  *
  * CLI 使用:
- *   node .claude/scripts/lib/metrics-reader.mjs [--json]
+ *   node packages/ops/src/metrics/metrics-reader.mjs [--json]
  */
 
-import { resolvePeriods, DATA_DELAY_DAYS } from "../../../packages/ops/src/metrics/periods.mjs";
-import { assessDailyCoverage } from "../../../packages/ops/src/metrics/periods.mjs";
+import { resolvePeriods, DATA_DELAY_DAYS } from "./periods.mjs";
+import { assessDailyCoverage } from "./periods.mjs";
 import { pathToFileURL } from "node:url";
-import { GA4_PROPERTY_ID, GSC_PROPERTY, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
-import { createGa4DataClient, createSearchConsoleClient } from "../../../packages/ops/src/google/google-client.cjs";
+import { GA4_PROPERTY_ID, GSC_PROPERTY, SITE_ORIGIN } from "../../../types/mirror/site-config.cjs";
+import { createGa4DataClient, createSearchConsoleClient } from "../google/google-client.cjs";
 
 const GSC_SITE_URL = GSC_PROPERTY;
 const PSI_TARGET_URL = `${SITE_ORIGIN}/`;

@@ -20,7 +20,7 @@ import { isoWeekRange } from "../../../packages/ops/src/metrics/periods.mjs";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
-import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
+import { PROJECT_ROOT, toIsoWeek } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
 import { aspRevenueLines, productRevenueLine } from '../../../packages/ops/src/metrics/nsm-revenue-lines.mjs';
 import { adsenseRevenueLine } from '../../../packages/ops/src/metrics/adsense-revenue.mjs';

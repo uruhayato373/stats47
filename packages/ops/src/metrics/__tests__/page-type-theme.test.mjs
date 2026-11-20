@@ -4,9 +4,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync } from "node:fs";
 
-import { classifyPageType, themeOfPath } from "../../../../packages/ops/src/metrics/page-type.mjs";
+import { classifyPageType, themeOfPath } from "../page-type.mjs";
 
-const slug = readdirSync(new URL("../../../../data/themes/catalogs/", import.meta.url)).find((f) => f.endsWith(".json")).slice(0, -5);
+const slug = readdirSync(new URL("../../../../../data/themes/catalogs/", import.meta.url)).find((f) => f.endsWith(".json")).slice(0, -5);
 
 test("全国版・県別・市区町村別の URL が同じテーマに当たり、ルートの形で区別できる", () => {
   assert.deepEqual(themeOfPath(`/themes/${slug}`), { themeSlug: slug, route: "/themes/[themeSlug]" });

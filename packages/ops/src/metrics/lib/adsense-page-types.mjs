@@ -10,7 +10,7 @@
  * - 国で絞らない (AdSense の収益は全世界で、絞ると合計が AdSense の画面と合わなくなる)。PV も同じ条件の GA4 の値。
  * - クリックは週に数十回なので、ページ種別の判断には 1,000 PV あたりの収益を使う (クリック率は参考)。
  */
-import { aggregateByPageType, PAGE_TYPES } from "../../../../packages/ops/src/metrics/page-type.mjs";
+import { aggregateByPageType, PAGE_TYPES } from "../page-type.mjs";
 
 export const PAGE_TYPES_SNAPSHOT_FILE = "page-types.csv";
 export const PAGE_TYPES_HISTORY_FILE = "history-page-types.csv";

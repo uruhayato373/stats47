@@ -3,7 +3,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { computeWeekRanges } from "../../lib/metrics-reader.mjs";
+import { computeWeekRanges } from "../../../../packages/ops/src/metrics/metrics-reader.mjs";
 import { resolvePeriods } from "../../../../packages/ops/src/metrics/periods.mjs";
 import { markdownAdsense } from "../update-history-csv.mjs";
 

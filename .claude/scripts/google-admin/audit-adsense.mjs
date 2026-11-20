@@ -23,9 +23,9 @@ import { join } from "node:path";
 import { createAdsenseClient } from "../../../packages/ops/src/google/google-client.cjs";
 // PROJECT_ROOT は auth.mjs から取る (browser-context.mjs 経由だと playwright を巻き込み、
 // API-only の read 経路が browser 依存になるため)。
-import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";
-import { extractSlotIdFromAdCode } from "../metrics/lib/adsense-report-contract.mjs";
-import { collectAdUnitEntries } from "../metrics/lib/adsense-ad-unit-walk.mjs";
+import { PROJECT_ROOT } from "../../../packages/ops/src/metrics/lib/auth.mjs";
+import { extractSlotIdFromAdCode } from "../../../packages/ops/src/metrics/lib/adsense-report-contract.mjs";
+import { collectAdUnitEntries } from "../../../packages/ops/src/metrics/lib/adsense-ad-unit-walk.mjs";
 
 const ADSENSE_ENV_KEYS = Object.freeze([
   "GOOGLE_ADSENSE_CLIENT_ID",
@@ -133,7 +133,7 @@ export async function auditAdSenseAccount() {
 /**
  * ad client を辿って ad unit を集め、audit 用の行に変換する。
  *
- * ★走査そのものは `../metrics/lib/adsense-ad-unit-walk.mjs` に共有してある (2026-08-21)。
+ * ★走査そのものは `../../../packages/ops/src/metrics/lib/adsense-ad-unit-walk.mjs` に共有してある (2026-08-21)。
  *   元はこの関数と `fetch-adsense-snapshot.mjs` に**同じ走査が二重実装**されていて、
  *   2026-08-04 に snapshot 側だけ「1 client の失敗で全体を落とさない」修正が入り、
  *   こちらは素通しのままだった。結果、同じ資格情報で snapshot は成功しているのに

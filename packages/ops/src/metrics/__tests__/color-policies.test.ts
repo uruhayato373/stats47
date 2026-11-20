@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { latestValues } from '../build-color-policies';
-import { colorPolicyOf, colorViewOf } from '../../../../packages/types/src/color-policy';
+import { colorPolicyOf, colorViewOf } from '../../../../types/src/color-policy';
 import { colorPolicyErrors, figureColorViewErrors, figureViewDriftErrors, schemaDriftErrors, unaccountedMetrics } from '../check-color-policies';
 
 const row = (over = {}) => ({ metricKey: 'a', grain: 'prefecture', colorSchemeType: 'sequential', classification: { method: 'continuous' }, year: '2024', areaCount: 47, ...over }) as never;

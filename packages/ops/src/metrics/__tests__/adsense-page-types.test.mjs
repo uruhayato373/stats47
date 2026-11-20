@@ -10,7 +10,7 @@ import {
   markdownPageTypeSection,
   PAGE_TYPE_FIELDS,
 } from "../lib/adsense-page-types.mjs";
-import { PAGE_TYPES } from "../../../../packages/ops/src/metrics/page-type.mjs";
+import { PAGE_TYPES } from "../page-type.mjs";
 
 const row = (pagePath, pv, imp, clk, rev) => ({
   pagePath,

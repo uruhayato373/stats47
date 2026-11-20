@@ -22,10 +22,10 @@
 
 import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { PROJECT_ROOT } from "./lib/auth.mjs";
+import { PROJECT_ROOT } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { readCsv } from "./update-history-csv.mjs";
 import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
-import { AD_UNITS_FILE, ADSENSE_UNIT_HISTORY_FILE } from "./lib/adsense-report-contract.mjs";
+import { AD_UNITS_FILE, ADSENSE_UNIT_HISTORY_FILE } from "../../../packages/ops/src/metrics/lib/adsense-report-contract.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const SNAPSHOT_DIR = datasetDir("adsense.snapshots");

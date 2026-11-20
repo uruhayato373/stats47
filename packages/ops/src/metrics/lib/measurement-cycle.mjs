@@ -5,12 +5,12 @@
  * 週次メトリクス Issue / weekly-review / レビュー中の improvement-triage が同じ事実を読むための 1 つの state にする。
  * 欠けた入力は 0 に丸めず status で区別する (evidence-based-judgment)。
  */
-import { describeChannel, weeklyProductRevenue } from "../../../../packages/ops/src/metrics/product-revenue.mjs";
-import { reconcileDimensions } from "../../google-admin/dimension-ledger.mjs";
-import { isoWeekOf, isoWeekRange } from "../../../../packages/ops/src/metrics/periods.mjs";
-import { datasetDir } from "../../../../config/datasets.mjs";
-import { adYield28d } from "../../../../packages/ops/src/metrics/adsense-revenue.mjs";
-import { weeklyRevenueNode } from "../../../../packages/ops/src/metrics/weekly-revenue.mjs";
+import { describeChannel, weeklyProductRevenue } from "../product-revenue.mjs";
+import { reconcileDimensions } from "../../google/dimension-ledger.mjs";
+import { isoWeekOf, isoWeekRange } from "../periods.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
+import { adYield28d } from "../adsense-revenue.mjs";
+import { weeklyRevenueNode } from "../weekly-revenue.mjs";
 
 /** 登録すれば値別の内訳を読める最低発火量 (28 日)。これ未満は登録しても判定の標本にならない。 */
 export const MIN_EVENTS_FOR_BREAKDOWN = 100;

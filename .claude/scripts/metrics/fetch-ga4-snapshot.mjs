@@ -30,20 +30,20 @@ import {
   parseWeekArg,
   isoWeekToDateRange,
   toCsv,
-} from "./lib/auth.mjs";
+} from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
-import { buildGa4Summary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
+import { buildGa4Summary, SUMMARY_FILE } from "../../../packages/ops/src/metrics/lib/weekly-summary.mjs";
 
 import {
   buildCleanPagesRequest, buildThemeNavigationRequest, buildThemeReportMetadata,
   CLEAN_PAGE_COLUMNS, THEME_NAV_API_DIMENSIONS, THEME_NAV_COLUMNS,
-} from "./lib/theme-ga4-reports.mjs";
+} from "../../../packages/ops/src/metrics/lib/theme-ga4-reports.mjs";
 import {
   aggregateLandingContext, aggregateTransitions, buildEventVolumeRequest, buildInternalTransitionsRequest,
   buildLandingContextRequests, EVENT_VOLUME_COLUMNS, LANDING_CONTEXT_COLUMNS, TRANSITION_COLUMNS,
   MEASUREMENT_REPORTS,
   measurementRow,
-} from "./lib/journey-ga4-reports.mjs";
+} from "../../../packages/ops/src/metrics/lib/journey-ga4-reports.mjs";
 import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 import { createGa4DataClient } from "../../../packages/ops/src/google/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";

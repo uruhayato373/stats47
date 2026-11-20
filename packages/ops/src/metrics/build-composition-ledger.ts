@@ -2,16 +2,16 @@
  * 内訳の台帳。「足すと全体になる」指標の組は指標の定義からは判らないので、テーマのカタログの積み上げ
  * (composition-chart) に書かれた組を集める。正本はカタログで、ここは生成物 (手で直さない)。
  *
- *   npx tsx .claude/scripts/metrics/build-composition-ledger.ts          # data/themes/compositions/sets.json を作り直す
- *   npx tsx .claude/scripts/metrics/build-composition-ledger.ts --check  # カタログとのずれと、組の問題で止める
+ *   npx tsx packages/ops/src/metrics/build-composition-ledger.ts          # data/themes/compositions/sets.json を作り直す
+ *   npx tsx packages/ops/src/metrics/build-composition-ledger.ts --check  # カタログとのずれと、組の問題で止める
  */
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
-import { getMetricConfig } from '../../../packages/data-configs/src/registry';
+import { datasetDir, datasetPath } from '../../../../config/datasets.mjs';
+import { getMetricConfig } from '../../../data-configs/src/registry';
 
-const ROOT = path.resolve(__dirname, '../../..');
+const ROOT = path.resolve(__dirname, '../../../..');
 const CATALOG_DIR = path.join(ROOT, datasetDir('themes.catalogs'));
 const LEDGER = path.join(ROOT, datasetPath('themes.composition-sets'));
 const COMPOSITION = 'composition-chart';
@@ -52,7 +52,7 @@ function main() {
     return;
   }
   if (!fs.existsSync(LEDGER) || fs.readFileSync(LEDGER, 'utf8').split('\r\n').join('\n') !== ledger) {
-    console.error('✗ 内訳の台帳がカタログとずれている。npx tsx .claude/scripts/metrics/build-composition-ledger.ts で作り直す');
+    console.error('✗ 内訳の台帳がカタログとずれている。npx tsx packages/ops/src/metrics/build-composition-ledger.ts で作り直す');
     process.exit(1);
   }
   console.log('✓ 内訳の台帳はカタログと一致');

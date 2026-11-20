@@ -28,7 +28,7 @@ import {
   resolveUnitMatch,
   adsenseUnitRow,
 } from "../lib/adsense-report-contract.mjs";
-import { resolvePeriods } from "../../../../packages/ops/src/metrics/periods.mjs";
+import { resolvePeriods } from "../periods.mjs";
 
 test("job 契約: unit/format/placement/bid-type/traffic/country は PAGE_VIEWS を要求しない", () => {
   for (const name of ["units", "formats-platforms", "placements-platforms", "bid-types-platforms", "traffic-sources", "countries"]) {

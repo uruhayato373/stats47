@@ -6,9 +6,9 @@
 
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { isoWeekOf, isoWeekRange, jstDateOf } from "../../../../packages/ops/src/metrics/periods.mjs";
+import { isoWeekOf, isoWeekRange, jstDateOf } from "../periods.mjs";
 
-export const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..", "..");
+export const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..", "..", "..");
 
 /**
  * ISO 週番号 (YYYY-Www) を JST の暦日で算出する。正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)

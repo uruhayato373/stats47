@@ -53,7 +53,7 @@ node .claude/scripts/lib/write-past-effects.mjs             # 反映
 ```
 
 read 側: `.claude/scripts/search-growth/lib/scoring.mjs` (confidence ×0.6 / ×0.3) /
-`.claude/scripts/metrics/lib/adsense-diagnostics.mjs` (同様)。
+`packages/ops/src/metrics/lib/adsense-diagnostics.mjs` (同様)。
 key を解決できなかった行は writer が `unmapped` として報告するので、対象 URL または
 candidate key (`<rule>::<key>`) をバックログ行に明記して解決する (黙って捨てない)。
 

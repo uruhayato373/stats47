@@ -6,7 +6,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { measurementContext, markMeasurementAuthenticated } from './browser-session.mjs';
-import { parseNoteSales, parseNoteSalesHistory } from './report-parsers.mjs';
+import { parseNoteSales, parseNoteSalesHistory } from '../../../packages/ops/src/measurement/report-parsers.mjs';
 
 const output = process.argv[2];
 
