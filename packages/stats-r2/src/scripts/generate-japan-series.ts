@@ -171,7 +171,7 @@ export type GenerateOneResult =
   | { ok: true; metricKey: string; rows: number; rangeFrom: string; rangeTo: string; latestValue: number; latestUnit: string; outPath: string; artifact: JapanSeriesArtifact }
   | { ok: false; metricKey: string; reason: string };
 
-async function fetchWithProxy(url: string): Promise<Response> {
+export async function fetchWithProxy(url: string): Promise<Response> {
   const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
   const dispatcher = proxyUrl
     ? new (await import("undici")).ProxyAgent(proxyUrl)

@@ -398,6 +398,23 @@ jobs:
 
       # statsのPUT完了後、production/S3 readで同じキーの配信用派生を生成する。
       # items --onlyでもall.jsonは全registryから生成される。索引を部分集合へ縮めない。
+      # 指定 key のうち、R2 に公式の全国の系列 (app/japan/<key>/series.json) がある指標だけ作り直す。
+      # テーマの全国の値はこの系列を item.json の表示の倍率で書くので、取得元や単位を変えた指標で
+      # 系列を古いまま残すと、全国の値が桁違いに出る。系列の無い指標には作らない (refresh-japan-series.ts)。
+      # ranking の snapshot より先に置き、作り直しに失敗したら item.json も書かずに止める。
+      - name: 🗾 Regenerate official national series + push to R2
+        if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.scope.outputs.snapshot_scope == 'ranking'
+        env:
+          REFRESH_METRIC: ${{ steps.resolve.outputs.metric }}
+        run: |
+          npx tsx packages/stats-r2/src/scripts/refresh-japan-series.ts --metrics "$REFRESH_METRIC"
+          IFS=',' read -r -a KEYS <<< "$REFRESH_METRIC"
+          for KEY in "${KEYS[@]}"; do
+            if [ -f ".local/r2/app/japan/$KEY/series.json" ]; then
+              npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite --prefix "app/japan/$KEY/"
+            fi
+          done
+
       - name: 🗂️ Regenerate scoped ranking snapshots + push to R2
         if: steps.resolve.outputs.skip != 'true' && steps.resolve.outputs.dry_run != 'true' && steps.scope.outputs.snapshot_scope == 'ranking'
         env:
