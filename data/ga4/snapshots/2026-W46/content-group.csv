@@ -1,0 +1,264 @@
+contentGroup,sessionDefaultChannelGroup,deviceCategory,screenPageViews,engagedSessions,keyEvents
+ranking,Organic Search,desktop,13095,5807,0
+ranking,Organic Search,mobile,7323,4068,0
+blog,Organic Search,desktop,6141,3996,0
+blog,Organic Search,mobile,4824,3188,0
+municipality_ranking,Organic Search,mobile,3394,1133,0
+municipality_ranking,Organic Search,desktop,3190,931,0
+area_theme,Organic Search,desktop,1997,1040,0
+search,Organic Search,desktop,1252,400,0
+ranking,Direct,desktop,1128,494,0
+category,Organic Search,desktop,1103,407,0
+city,Organic Search,desktop,1059,590,0
+theme,Organic Search,desktop,1046,456,0
+area,Organic Search,desktop,1030,549,0
+home,Organic Search,desktop,974,632,0
+city,Organic Search,mobile,720,327,0
+geo,Organic Search,desktop,717,316,0
+survey,Organic Search,desktop,704,394,0
+area_theme,Organic Search,mobile,654,360,0
+ranking_index,Organic Search,desktop,499,283,0
+area_index,Organic Search,desktop,478,294,0
+ranking,Organic Search,tablet,383,197,0
+ranking,Direct,mobile,380,176,0
+ranking,Referral,desktop,379,169,0
+municipality_index,Organic Search,desktop,362,218,0
+ranking,AI Assistant,desktop,337,140,0
+ranking,Referral,mobile,327,160,0
+blog,Direct,desktop,309,170,0
+home,Direct,desktop,291,114,0
+home,Organic Search,mobile,265,125,0
+theme_index,Organic Search,desktop,264,148,0
+blog,Organic Search,tablet,257,171,0
+municipality_theme,Organic Search,desktop,251,112,0
+japan,Organic Search,desktop,242,131,0
+blog,Direct,mobile,223,111,0
+search,Direct,desktop,206,50,0
+area_theme,Direct,desktop,174,67,0
+area,Organic Search,mobile,160,76,0
+municipality_ranking,Organic Search,tablet,159,51,0
+ranking,AI Assistant,mobile,159,73,0
+survey,Organic Search,mobile,145,91,0
+category,Direct,desktop,140,40,0
+blog_index,Organic Search,desktop,136,63,0
+municipality_ranking,Direct,mobile,126,40,0
+category,Organic Search,mobile,120,52,0
+municipality_theme,Organic Search,mobile,120,26,0
+ranking,Direct,tablet,107,52,0
+search,Organic Search,mobile,107,37,0
+blog,Referral,desktop,105,46,0
+blog,Referral,mobile,105,85,0
+other,Organic Search,desktop,98,76,0
+blog,AI Assistant,desktop,97,51,0
+ranking_index,Organic Search,mobile,91,32,0
+area,Direct,desktop,90,47,0
+geo,Organic Search,mobile,89,27,0
+municipality_ranking,Direct,desktop,87,23,0
+ranking_index,Direct,desktop,87,37,0
+municipality_ranking,AI Assistant,mobile,86,21,0
+area_theme,AI Assistant,desktop,82,36,0
+home,Referral,desktop,81,45,0
+theme,AI Assistant,desktop,79,33,0
+theme,Direct,desktop,76,41,0
+theme,Organic Search,mobile,72,34,0
+municipality_ranking,AI Assistant,desktop,67,18,0
+city,Organic Search,tablet,62,28,0
+search,AI Assistant,desktop,60,20,0
+ranking,Organic Social,mobile,54,29,0
+survey,Direct,desktop,52,35,0
+ranking,Unassigned,desktop,49,7,0
+area_index,Direct,desktop,48,32,0
+area_theme,Direct,mobile,48,26,0
+city,Direct,mobile,44,12,0
+municipality_index,Organic Search,mobile,44,21,0
+search,Referral,desktop,43,12,0
+home,AI Assistant,desktop,41,33,0
+survey,AI Assistant,desktop,38,14,0
+other,Direct,desktop,37,14,0
+area_theme,Organic Search,tablet,36,17,0
+category,Referral,desktop,35,21,0
+geo,Direct,desktop,33,17,0
+tag,Organic Search,desktop,32,18,0
+theme_index,Organic Search,mobile,29,18,0
+search,Organic Search,tablet,28,8,0
+blog,Organic Social,mobile,27,13,0
+home,Direct,mobile,27,15,0
+municipality_ranking,Referral,desktop,27,8,0
+city,Direct,desktop,26,6,0
+municipality_index,Direct,desktop,26,9,0
+area,AI Assistant,desktop,25,11,0
+category,AI Assistant,desktop,25,14,0
+area_theme,Referral,desktop,24,11,0
+area,Referral,desktop,23,18,0
+product,Organic Search,desktop,23,14,0
+theme,Organic Search,tablet,23,8,0
+japan,Organic Search,mobile,22,14,0
+area_index,Organic Search,mobile,21,13,0
+home,Organic Search,tablet,21,16,0
+other,Organic Search,mobile,21,13,0
+survey,Organic Search,tablet,21,11,0
+theme,Referral,desktop,19,14,0
+theme_index,Direct,desktop,19,14,0
+area_theme,AI Assistant,mobile,18,9,0
+area,Direct,mobile,17,8,0
+ranking_index,Referral,desktop,17,10,0
+blog,Direct,tablet,16,8,0
+category,Organic Search,tablet,16,6,0
+geo,Referral,desktop,16,5,0
+municipality_ranking,Referral,mobile,16,10,0
+ranking,Unassigned,mobile,16,4,0
+area_index,Referral,desktop,15,10,0
+blog_index,Organic Search,mobile,15,6,0
+japan,Direct,desktop,15,10,0
+area,Organic Search,tablet,14,8,0
+japan,AI Assistant,desktop,14,11,0
+ranking,Organic Social,desktop,14,9,0
+theme_index,AI Assistant,desktop,14,7,0
+city,Referral,mobile,13,7,0
+ranking_index,Organic Search,tablet,13,7,0
+tag,Organic Search,mobile,13,7,0
+category,Direct,tablet,12,3,0
+municipality_theme,Direct,desktop,12,5,0
+municipality_theme,Referral,desktop,12,4,0
+ranking,Referral,tablet,12,4,0
+survey_index,Organic Search,desktop,12,11,0
+area_index,AI Assistant,desktop,11,5,0
+city,AI Assistant,desktop,11,7,0
+city,Referral,desktop,11,7,0
+home,Referral,mobile,11,8,0
+theme_index,Referral,desktop,11,10,0
+(not set),Direct,desktop,10,769,65
+area_index,Organic Search,tablet,10,7,0
+blog,AI Assistant,mobile,10,4,0
+geo,AI Assistant,mobile,10,6,0
+home,Organic Social,mobile,10,7,0
+japan,Unassigned,desktop,10,0,0
+search,Unassigned,desktop,10,0,0
+theme,AI Assistant,mobile,10,5,0
+theme,Direct,tablet,10,2,0
+area,Referral,mobile,9,4,0
+area_theme,Referral,mobile,9,9,0
+municipality_index,AI Assistant,desktop,9,5,0
+municipality_theme,Organic Search,tablet,9,3,0
+theme,Organic Social,mobile,9,6,0
+area,Direct,tablet,8,4,0
+city,AI Assistant,mobile,8,5,0
+city,Unassigned,desktop,8,0,0
+geo,AI Assistant,desktop,8,4,0
+home,Direct,tablet,8,6,0
+municipality_index,Referral,desktop,8,4,0
+product,Direct,desktop,8,3,0
+search,Organic Social,mobile,8,3,0
+area,Organic Social,mobile,7,3,0
+area,Unassigned,desktop,7,0,0
+category,Referral,mobile,7,5,0
+municipality_ranking,Direct,tablet,7,4,0
+survey,Direct,mobile,7,4,0
+survey,Referral,desktop,7,5,0
+tag,Direct,desktop,7,5,0
+area_index,Direct,tablet,6,3,0
+blog_index,Direct,desktop,6,3,0
+survey,Unassigned,desktop,6,1,0
+theme,Referral,mobile,6,3,0
+blog,Organic Social,desktop,5,5,0
+blog_index,Organic Search,tablet,5,5,0
+geo,Direct,mobile,5,3,0
+japan,Organic Search,tablet,5,4,0
+municipality_index,Organic Search,tablet,5,3,0
+municipality_ranking,Organic Social,desktop,5,1,0
+search,AI Assistant,mobile,5,3,0
+area,Organic Social,desktop,4,2,0
+area_theme,AI Assistant,tablet,4,3,0
+area_theme,Direct,tablet,4,2,0
+area_theme,Unassigned,desktop,4,1,0
+category,Direct,mobile,4,3,0
+city,Organic Social,desktop,4,1,0
+home,AI Assistant,mobile,4,4,0
+japan,Direct,mobile,4,2,0
+other,AI Assistant,desktop,4,4,0
+other,Direct,mobile,4,3,0
+search,Direct,mobile,4,2,0
+survey_index,AI Assistant,desktop,4,3,0
+theme_index,Organic Social,mobile,4,3,0
+blog,Unassigned,mobile,3,1,0
+geo,Organic Search,tablet,3,3,0
+home,Unassigned,desktop,3,0,0
+japan,Direct,tablet,3,2,0
+japan,Referral,desktop,3,3,0
+municipality_index,Organic Social,mobile,3,2,0
+other,Referral,desktop,3,3,0
+product,Organic Search,mobile,3,3,0
+product,Referral,desktop,3,1,0
+ranking_index,Referral,mobile,3,2,0
+survey,AI Assistant,mobile,3,3,0
+theme,Direct,mobile,3,2,0
+theme,Unassigned,desktop,3,1,0
+theme_index,Organic Search,tablet,3,2,0
+theme_index,Referral,mobile,3,2,0
+theme_index,Unassigned,desktop,3,0,0
+area_index,Unassigned,desktop,2,0,0
+blog,Organic Search,smart tv,2,1,0
+blog,Referral,tablet,2,1,0
+blog,Unassigned,desktop,2,0,0
+blog_index,AI Assistant,desktop,2,2,0
+blog_index,Referral,desktop,2,1,0
+city,Direct,tablet,2,1,0
+municipality_index,AI Assistant,mobile,2,1,0
+municipality_index,Direct,mobile,2,2,0
+municipality_ranking,Unassigned,desktop,2,0,0
+municipality_ranking,Unassigned,mobile,2,0,0
+product,Direct,mobile,2,1,0
+ranking,Organic Video,mobile,2,0,0
+ranking_index,AI Assistant,desktop,2,2,0
+ranking_index,Unassigned,desktop,2,0,0
+search,Direct,tablet,2,2,0
+search,Referral,mobile,2,1,0
+theme_index,Direct,mobile,2,1,0
+(not set),Organic Search,desktop,1,11666,627
+area,Organic Social,tablet,1,1,0
+area_index,AI Assistant,tablet,1,1,0
+area_index,Direct,mobile,1,1,0
+area_index,Organic Social,desktop,1,1,0
+area_index,Organic Social,mobile,1,1,0
+area_index,Referral,mobile,1,1,0
+blog,AI Assistant,tablet,1,1,0
+blog,Organic Social,tablet,1,1,0
+blog_index,Organic Social,mobile,1,1,0
+category,Organic Social,mobile,1,1,0
+category,Unassigned,desktop,1,0,0
+category,Unassigned,mobile,1,0,0
+city,Organic Search,smart tv,1,0,0
+home,Organic Social,desktop,1,1,0
+japan,AI Assistant,mobile,1,1,0
+municipality_ranking,Referral,tablet,1,1,0
+municipality_theme,AI Assistant,desktop,1,1,0
+municipality_theme,AI Assistant,mobile,1,1,0
+municipality_theme,Organic Social,mobile,1,1,0
+product,AI Assistant,desktop,1,1,0
+ranking,Organic Social,tablet,1,1,0
+ranking_index,Direct,tablet,1,1,0
+ranking_index,Organic Social,mobile,1,1,0
+search,Organic Social,desktop,1,1,0
+survey_index,Direct,desktop,1,1,0
+survey_index,Organic Search,mobile,1,1,0
+survey_index,Referral,desktop,1,1,0
+tag,Referral,desktop,1,1,0
+tag,Referral,mobile,1,1,0
+theme,Organic Social,tablet,1,1,0
+theme_index,Direct,tablet,1,1,0
+(not set),AI Assistant,desktop,0,242,21
+(not set),AI Assistant,mobile,0,116,3
+(not set),AI Assistant,tablet,0,4,0
+(not set),Direct,mobile,0,327,7
+(not set),Direct,tablet,0,63,0
+(not set),Organic Search,mobile,0,8361,57
+(not set),Organic Search,smart tv,0,1,0
+(not set),Organic Search,tablet,0,433,2
+(not set),Organic Social,desktop,0,10,0
+(not set),Organic Social,mobile,0,47,0
+(not set),Organic Social,tablet,0,3,0
+(not set),Referral,desktop,0,239,10
+(not set),Referral,mobile,0,238,2
+(not set),Referral,tablet,0,5,0
+(not set),Unassigned,desktop,0,9,5
+(not set),Unassigned,mobile,0,6,0
