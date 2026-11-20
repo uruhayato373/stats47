@@ -370,3 +370,22 @@ jobs:
       # だったのを、index の件数ハードコードとして発見した (どの監視も緑のままだった)。
       - name: 🗺️ Sitemap index の整合性
         run: bash .github/scripts/check-sitemap-index.sh https://stats47.jp
+
+  # 見張り役 (pr-skip-ci-head-guard.yml) が GITHUB_TOKEN で起動したデプロイは、完了しても Post-Deploy Smoke の
+  # workflow_run が作られない (GITHUB_TOKEN が起こしたイベントは workflow_dispatch と repository_dispatch を除いて新しい run を
+  # 作らない。GitHub の文書「Automatic token authentication」)。11-18・11-19・11-20 の 3 回、確認が走らなかった
+  # (RELEASE-SQUASH-SKIP-TOKEN-01)。そのときだけ、確認を workflow_dispatch で起動する。人が起動したデプロイと push の
+  # デプロイは workflow_run で走るので起動しない (二重にしない)。
+  post-deploy-smoke:
+    needs: deploy
+    if: github.event_name == 'workflow_dispatch' && github.actor == 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    name: Start Post-Deploy Smoke
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Dispatch post-deploy-smoke.yml on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run post-deploy-smoke.yml --repo "$GITHUB_REPOSITORY" --ref main
