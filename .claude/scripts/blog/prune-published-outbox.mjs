@@ -36,7 +36,7 @@ import {
   fetchR2Article as fetchR2ArticleShared,
   getPublished,
   normalizeBody,
-} from "./lib/outbox-r2.mjs";
+} from "../../../packages/ops/src/blog/lib/outbox-r2.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = resolve(import.meta.dirname, "../../..");

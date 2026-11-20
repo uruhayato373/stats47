@@ -1,4 +1,4 @@
-import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
+import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 /**
  * 指標定義シート — 記事・書籍が使う指標の「単位・対象と分母・期間の型・調査・注意」を
  * data-configs (git TS SSOT) から決定的に引き、執筆 (article-writer) と審査 (blog-critic) の
@@ -12,9 +12,9 @@ import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
  *   metric config を読む手順になっていなかったので、その表をここで作る。
  *
  * 実行:
- *   npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <slug> [--slug ...]
- *   npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --keys a,b,c
- *   npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --article contents/blog/<slug>/article.md
+ *   npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --slug <slug> [--slug ...]
+ *   npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --keys a,b,c
+ *   npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --article contents/blog/<slug>/article.md
  *
  * 指標の集め方 (--slug / --article):
  *   本文の `/ranking/<key>` リンク + data/*.json の rankingKey (R2 または contents/blog のローカル)。
@@ -26,12 +26,12 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { METRICS_REGISTRY } from "../../../packages/data-configs/src/registry.ts";
-import type { MetricConfig } from "../../../packages/data-configs/src/types.ts";
-import { resolveSurveyLinkage } from "../../../packages/ranking/src/builders/build-ranking-item-from-metric.ts";
-import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
+import { METRICS_REGISTRY } from "../../../data-configs/src/registry.ts";
+import type { MetricConfig } from "../../../data-configs/src/types.ts";
+import { resolveSurveyLinkage } from "../../../ranking/src/builders/build-ranking-item-from-metric.ts";
+import { R2_PUBLIC_BASE_URL } from "../../../types/mirror/site-config.cjs";
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 
 /**

@@ -1192,7 +1192,7 @@ export const DATASETS = [
     ],
   }),
   d("surveys.editorial-schema", "data/surveys/editorial/editorial.schema.json", "schema", "data", "data", "上の調査ハブの本文の JSON Schema"),
-  d("surveys.release-calendar", "data/surveys/release-calendar/release-calendar.json", "ledger", "data", "data", "統計の公表暦 (主要統計が都道府県別の年次の値を何月に公表するか。1 調査 1 件で、確かめた実際の公表 1 件を証拠に持つ)。調査の名前・機関・URL は持たない。build-stale-data-years.mjs が読み、公表済みなのに古い年のままの公開記事を週次の一覧に出す (判定は .claude/scripts/blog/lib/release-calendar.mjs)", {
+  d("surveys.release-calendar", "data/surveys/release-calendar/release-calendar.json", "ledger", "data", "data", "統計の公表暦 (主要統計が都道府県別の年次の値を何月に公表するか。1 調査 1 件で、確かめた実際の公表 1 件を証拠に持つ)。調査の名前・機関・URL は持たない。build-stale-data-years.mjs が読み、公表済みなのに古い年のままの公開記事を週次の一覧に出す (判定は packages/ops/src/blog/lib/release-calendar.mjs)", {
     schema: "data/surveys/release-calendar/release-calendar.schema.json",
     refs: [{ field: "entries[].surveyId", to: "surveys.master", key: "[].id" }],
   }),

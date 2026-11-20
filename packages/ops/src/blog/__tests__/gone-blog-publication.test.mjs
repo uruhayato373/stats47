@@ -4,8 +4,8 @@ import path from 'node:path';
 import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-const root = path.resolve(fileURLToPath(new URL('../../../../', import.meta.url)));
-const gate = path.join(root, '.claude/scripts/blog/quality-gate.mjs');
+const root = path.resolve(fileURLToPath(new URL('../../../../../', import.meta.url)));
+const gate = path.join(root, 'packages/ops/src/blog/quality-gate.mjs');
 
 describe('恒久終了ブログの公開前ゲート', () => {
   for (const slug of [

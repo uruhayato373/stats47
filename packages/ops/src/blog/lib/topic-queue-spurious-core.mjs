@@ -3,7 +3,7 @@
  * (TOPIC-QUEUE-SPURIOUS-FILTER-01)
  *
  * build-topic-queue.mjs から呼ばれる。モデル判断を挟まない (ルーティングはすべて決定的)。
- * テスト: .claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs (node --test)
+ * テスト: packages/ops/src/blog/lib/__tests__/topic-queue-spurious-core.test.mjs (node --test)
  *
  * 除外ルール (reason code):
  *  - self-derived     : 同一 metric / 派生 key (prefix 包含。例 convenience-store-count vs -commercial)
@@ -21,7 +21,7 @@
  *                       例 コンビニ店舗数×歳入決算総額 r=0.95・郵便局数×老人福祉費 (BLOG-TOPIC-PAIR-SCALE-01)。
  *                       count-pair と同じ理由で |r| に関係なく除外する
  */
-import { parseUnit } from "../../../../packages/data-configs/mirror/unit-semantics.mjs";
+import { parseUnit } from "../../../../data-configs/mirror/unit-semantics.mjs";
 
 const RATIO_UNIT_RE = /[%％‰倍]|ポイント/u;
 const DERIVED_KEY_RE =

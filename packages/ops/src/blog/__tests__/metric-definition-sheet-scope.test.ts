@@ -58,7 +58,7 @@ test("読み違い注意は、単位や副題が基準を宣言する指数に�
 // 定義シートが全角の「Ｍｗｈ」と「対象の記述なし」を返すと、記事の MWh の表記と対象を確かめられない。
 test("電力需要量の定義シートは単位が半角の MWh で、対象と調査が埋まる", async () => {
   const { buildSheet } = await import("../build-metric-definition-sheet.ts");
-  const { METRICS_REGISTRY } = await import("../../../../packages/data-configs/src/registry.ts");
+  const { METRICS_REGISTRY } = await import("../../../../data-configs/src/registry.ts");
   const row = buildSheet(["electricity-demand"]).split("\n").find((l) => l.startsWith("| `")) ?? "";
   const cells = row.split("|").map((s) => s.trim());
   assert.equal(cells[3], "MWh", row);
@@ -93,7 +93,7 @@ test("雪日数・年平均気温・老人ホーム定員・完全失業率・�
 });
 
 test("雪日数と年平均気温の観測地点の例外 (埼玉・千葉・東京・滋賀・山口) を config が書く", async () => {
-  const { METRICS_REGISTRY } = await import("../../../../packages/data-configs/src/registry.ts");
+  const { METRICS_REGISTRY } = await import("../../../../data-configs/src/registry.ts");
   const text = (k: string) => { const c = METRICS_REGISTRY[k]; return `${c.description ?? ""} ${c.note ?? ""}`; };
   for (const place of ["熊谷市", "千代田区", "彦根市"]) {
     assert.match(text("annual-snow-days"), new RegExp(place));

@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 // 送り箱の記事に使える背景が無いと、push 後の公開 run で初めて skip される (2026-10-07、22 記事中 5 記事)。
 // quality-gate.mjs が check-blog-background.ts を呼んで push 前に止める配線を、実物の CLI で固定する。
 // R2 の代わりに手元の HTTP サーバーを読ませるので、外部には接続しない。
-const PROJECT_ROOT = resolve(fileURLToPath(new URL('../../../../', import.meta.url)));
+const PROJECT_ROOT = resolve(fileURLToPath(new URL('../../../../../', import.meta.url)));
 const SLUG = 'qg-background-fixture-no-asset';
 const dirs = [];
 const servers = [];
@@ -50,7 +50,7 @@ async function backgroundBlockers(publicUrl) {
     // blocker があると exit 1 になる。JSON は stdout に出ている
     execFile(
       process.execPath,
-      [join(PROJECT_ROOT, '.claude/scripts/blog/quality-gate.mjs'), articlePath],
+      [join(PROJECT_ROOT, 'packages/ops/src/blog/quality-gate.mjs'), articlePath],
       { cwd: PROJECT_ROOT, env: { ...process.env, R2_PUBLIC_FETCH_URL: publicUrl }, encoding: 'utf8' },
       (_error, out) => done(out)
     );

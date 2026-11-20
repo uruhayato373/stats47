@@ -1,4 +1,4 @@
-import { isPrefectureAreaCode } from "../../../../packages/area/mirror/prefectures.cjs";
+import { isPrefectureAreaCode } from "../../../../area/mirror/prefectures.cjs";
 /**
  * ブログの図を指標の最新年で取り直すための純粋関数 (refresh-article-data-years.mjs が使う)。
  *

@@ -33,7 +33,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - **定義整合 (★2026-09-19 追加・BLOCK)**: 本文の解釈は指標の定義 (単位・対象と分母・期間の型・調査・名目/実質) に
   縛られる。執筆と審査の両方が **同じ「指標定義シート」** を入力にする:
   ```bash
-  npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <slug>   # または --article <path> / --keys a,b
+  npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --slug <slug>   # または --article <path> / --keys a,b
   ```
   (data-configs の git TS から決定的に生成。判定はしない)。critic は次を BLOCK にする — (a) 本文の値・順位・年が
   図 JSON と違う (b) 対象 (二人以上世帯全体 / 勤労者世帯 / 事業所…) や分母を取り違える (c) 名目と実質、暦年と年度を

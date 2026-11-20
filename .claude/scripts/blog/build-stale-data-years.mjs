@@ -27,8 +27,8 @@ import { fileURLToPath } from "node:url";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
-import { findReleaseDue } from "./lib/release-calendar.mjs";
-import { findStaleDataYears } from "./lib/stale-data-years.mjs";
+import { findReleaseDue } from "../../../packages/ops/src/blog/lib/release-calendar.mjs";
+import { findStaleDataYears } from "../../../packages/ops/src/blog/lib/stale-data-years.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const OUT_DIR = path.join(PROJECT_ROOT, datasetDir("blog.operations"));

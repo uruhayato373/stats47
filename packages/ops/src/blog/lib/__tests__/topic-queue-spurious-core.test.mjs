@@ -19,7 +19,7 @@ import {
   spuriousReasons,
 } from "../topic-queue-spurious-core.mjs";
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../../..");
 
 const scatter47 = Array.from({ length: 47 }, (_, i) => ({
   areaCode: `${String(i + 1).padStart(2, "0")}000`,

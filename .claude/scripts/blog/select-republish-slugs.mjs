@@ -32,7 +32,7 @@ import {
   fetchR2Article,
   getPublished,
   needsPublish,
-} from "./lib/outbox-r2.mjs";
+} from "../../../packages/ops/src/blog/lib/outbox-r2.mjs";
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const OUTBOX_REL = "contents/blog";

@@ -1,12 +1,16 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 
 import {
   parseSourceRepairPayload,
   resolveCasJsonWrite,
   sha256Text,
 } from '../source-repair-core.mjs';
+
+// workspace (packages/ops) から回しても root の相対パスで読めるよう、cwd は repo root に固定する
+const ROOT = fileURLToPath(new URL('../../../../../../', import.meta.url));
 
 test('base64 JSON payloadを件数上限内で解釈する', () => {
   const encoded = Buffer.from(JSON.stringify([{ slug: 'a' }])).toString(
@@ -30,7 +34,7 @@ test('Node 20 + tsx の package namespace からtaxonomy resolverを復元でき
   const result = spawnSync(
     process.execPath,
     ['--import', 'tsx', '--input-type=module', '--eval', code],
-    { cwd: process.cwd(), encoding: 'utf8' }
+    { cwd: ROOT, encoding: 'utf8' }
   );
   assert.equal(result.status, 0, result.stderr || result.stdout);
 });

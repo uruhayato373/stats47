@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import { CHART_SOURCE_KIND_SPECS } from '../../../../packages/ops/src/blog/lint/chart-provenance.mjs';
 import { CHART_SOURCE_SCHEMA, chartSourceShapeErrors } from '../../../../packages/svg-builder/src/lint/chart-source-schema.mjs';
 import { lintImageTypeSvg } from '../../../../packages/svg-builder/src/lint/svg-lint.mjs';
-import { chartDataFilesOf, chartDataKey } from '../../blog/archive-blog-articles.mjs';
+import { chartDataFilesOf, chartDataKey } from '../../../../packages/ops/src/blog/archive-blog-articles.mjs';
 import { compareAsset } from '../../blog/verify-published-assets.mjs';
 import { buildRepair, yearValues } from '../../blog/rebuild-scatter-data.mjs';
 import { isOutdatedChart } from '../../blog/drop-outdated-outbox-charts.mjs';

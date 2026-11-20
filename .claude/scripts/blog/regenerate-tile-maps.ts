@@ -30,7 +30,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { yearLabelOf } from "./lib/ranking-year-label.mjs";
+import { yearLabelOf } from "../../../packages/ops/src/blog/lib/ranking-year-label.mjs";
 import { renderTileMapChart } from "../../../apps/admin/lib/template-ranking-tile-map";
 import { rankingChartFromArticleData } from "../../../apps/admin/lib/type-chart-input";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";

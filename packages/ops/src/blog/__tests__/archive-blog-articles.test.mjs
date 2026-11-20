@@ -1,6 +1,6 @@
 /**
  * ブログ本文の版を private R2 に退避する archiveVersion の契約。
- * 実行: node --test .claude/scripts/blog/__tests__/archive-blog-articles.test.mjs
+ * 実行: node --test packages/ops/src/blog/__tests__/archive-blog-articles.test.mjs
  */
 import { strict as assert } from "node:assert";
 import crypto from "node:crypto";

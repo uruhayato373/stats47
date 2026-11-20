@@ -272,7 +272,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs": {
+    "packages/ops/src/blog/lib/__tests__/refresh-chart-year.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -287,7 +287,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs": {
+    "packages/ops/src/blog/lib/__tests__/topic-queue-spurious-core.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -302,7 +302,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/topic-queue-spurious-core.mjs": {
+    "packages/ops/src/blog/lib/topic-queue-spurious-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

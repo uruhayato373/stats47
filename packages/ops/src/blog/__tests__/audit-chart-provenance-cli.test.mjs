@@ -6,10 +6,10 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { datasetDir } from '../../../../config/datasets.mjs';
+import { datasetDir } from '../../../../../config/datasets.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..', '..', '..', '..');
+const ROOT = path.resolve(HERE, '..', '..', '..', '..', '..');
 const SCRIPT = path.join(HERE, '..', 'audit-chart-provenance.mjs');
 const OUTPUTS = ['chart-provenance-queue.json', 'chart-provenance-LATEST.md'].map((f) =>
   path.join(ROOT, datasetDir('blog.operations'), f)
