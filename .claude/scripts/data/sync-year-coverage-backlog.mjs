@@ -15,7 +15,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
-import { insertCards } from "../gsc/lib/coverage-backlog.mjs";
+import { insertCards } from "../../../packages/ops/src/gsc/lib/coverage-backlog.mjs";
 import { BATCH_DIR, BY_DESIGN_PATH, CARD_PREFIX, batchPath, planYearCoverageCard } from "./lib/year-coverage-backlog.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

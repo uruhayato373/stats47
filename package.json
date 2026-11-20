@@ -188,6 +188,7 @@
     "cloudflare-usage:fetch": "node .claude/scripts/cloudflare/fetch-usage.mjs",
     "cloudflare-usage:digest": "node .claude/scripts/cloudflare/update-digest.mjs",
     "cloudflare-usage:check": "node .claude/scripts/cloudflare/threshold-check.mjs",
+    "gsc:test": "node --test packages/ops/src/gsc/__tests__/*.test.mjs packages/ops/src/gsc/__tests__/*.test.cjs .claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs",
     "fetch-gsc-snapshot": "node .claude/scripts/metrics/fetch-gsc-snapshot.mjs",
     "fetch-ga4-snapshot": "node .claude/scripts/metrics/fetch-ga4-snapshot.mjs",
     "fetch-adsense-snapshot": "node packages/ops/src/metrics/fetch-adsense-snapshot.mjs",

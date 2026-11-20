@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { parseCoverageDrilldown } from '../lib/coverage-csv.mjs';
 
 test('coverage queue preserves quoted URLs and crawl dates without dropping observations', () => {
@@ -11,5 +10,4 @@ test('coverage queue preserves quoted URLs and crawl dates without dropping obse
   ]);
   assert.throws(() => parseCoverageDrilldown('URL,前回のクロール\nnot-a-url,\n', 'test'));
   assert.throws(() => parseCoverageDrilldown('URL,other\nhttps://stats47.jp/,\n', 'test'));
-  assert.match(readFileSync('.claude/scripts/gsc/build-coverage-queue.mjs', 'utf8'), /rows\.push\(\.\.\.parseCoverageDrilldown\(text, category\)\)/);
 });

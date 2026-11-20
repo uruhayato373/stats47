@@ -8,7 +8,7 @@ const {
   rotateDaily,
   todayInTokyo,
   uniqueNormalizedUrls,
-} = require("../url-inspection-daily.cjs");
+} = require("../lib/url-inspection-core.cjs");
 
 test("URL Inspection 前に fragment を除去する", () => {
   assert.equal(

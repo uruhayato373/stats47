@@ -10,7 +10,9 @@ import {
 } from "../lib/coverage-backlog.mjs";
 
 const require = createRequire(import.meta.url);
-const { parseBacklog, ID_PATTERN, EXECUTORS, KINDS } = require("../../../../packages/ops/src/management/backlog-lib.cjs");
+const { parseBacklog, ID_PATTERN, EXECUTORS, KINDS } = require("../../management/backlog-lib.cjs");
+
+const REFS = { queueCli: "node scripts/queue.mjs", runbook: "docs/runbook.md" };
 
 const entry = (url, action, status = "pending") => ({
   url,
@@ -49,7 +51,7 @@ test("判断が要る action だけをカードにし、観測待ちや放置確
     entry("https://stats47.jp/47", "none", "resolved-by-design"),
     entry("https://stats47.jp/ranking/c", "sitemap-gap", "in-progress"),
   ];
-  const cards = planCoverageCards({ queue, openIds: [], today: "2026-09-24" });
+  const cards = planCoverageCards({ queue, openIds: [], today: "2026-09-24", refs: REFS });
 
   assert.deepEqual(cards.map((c) => c.id), ["GSC-COV-SITEMAP-20260924"]);
   assert.deepEqual(cards[0].urls, ["https://stats47.jp/ranking/a", "https://stats47.jp/ranking/b"]);
@@ -57,13 +59,13 @@ test("判断が要る action だけをカードにし、観測待ちや放置確
 
 test("同じ action のカードが開いている間は次の batch を起票しない", () => {
   const queue = [entry("https://stats47.jp/ranking/a", "sitemap-gap")];
-  const cards = planCoverageCards({ queue, openIds: ["GSC-COV-SITEMAP-20260920"], today: "2026-09-24" });
+  const cards = planCoverageCards({ queue, openIds: ["GSC-COV-SITEMAP-20260920"], today: "2026-09-24", refs: REFS });
   assert.equal(cards.length, 0);
 });
 
 test("1 枚のカードは BATCH_SIZE 件まで", () => {
   const queue = Array.from({ length: BATCH_SIZE + 5 }, (_, i) => entry(`https://stats47.jp/r/${String(i).padStart(2, "0")}`, "content-check"));
-  const [card] = planCoverageCards({ queue, openIds: [], today: "2026-09-24" });
+  const [card] = planCoverageCards({ queue, openIds: [], today: "2026-09-24", refs: REFS });
   assert.equal(card.urls.length, BATCH_SIZE);
 });
 
@@ -74,7 +76,7 @@ test("差し込んだカードは backlog-lib が読めて、CI ループが拾�
     entry("https://stats47.jp/ranking/a", "sitemap-gap"),
     { ...entry("https://stats47.jp/blog/y", "fix-5xx"), current_http: 503 },
   ];
-  const cards = planCoverageCards({ queue, openIds: [], today: "2026-09-24" });
+  const cards = planCoverageCards({ queue, openIds: [], today: "2026-09-24", refs: REFS });
   const { text, inserted } = insertCards(BACKLOG, cards);
   const parsed = parseBacklog(text);
 

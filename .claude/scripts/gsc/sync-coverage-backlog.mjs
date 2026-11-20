@@ -24,11 +24,16 @@ import {
   insertCards,
   planCoverageCards,
   staleBatchFiles,
-} from "./lib/coverage-backlog.mjs";
+} from "../../../packages/ops/src/gsc/lib/coverage-backlog.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const { parseBacklog } = require("../../../packages/ops/src/management/backlog-lib.cjs");
+
+const COVERAGE_CARD_REFS = {
+  queueCli: "node .claude/scripts/gsc/build-coverage-queue.mjs",
+  runbook: ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
+};
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const QUEUE_PATH = path.join(PROJECT_ROOT, datasetPath("gsc.coverage-queue"));
@@ -50,7 +55,7 @@ const { queue } = JSON.parse(fs.readFileSync(QUEUE_PATH, "utf8"));
 const backlog = fs.readFileSync(BACKLOG_PATH, "utf8");
 const openIds = parseBacklog(backlog).map((card) => card.id).filter(Boolean);
 
-const cards = planCoverageCards({ queue, openIds, today });
+const cards = planCoverageCards({ queue, openIds, today, refs: COVERAGE_CARD_REFS });
 if (dryRun) {
   for (const card of cards) console.log(`${card.markdown}\n`);
   console.log(`[dry-run] 起票予定 ${cards.length} 枚`);

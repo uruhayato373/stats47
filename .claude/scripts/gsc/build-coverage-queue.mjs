@@ -39,19 +39,19 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseCsv } from "csv-parse/sync";
-import { parseCoverageDrilldown } from './lib/coverage-csv.mjs';
-import { probeCoverageUrls } from "./lib/coverage-probe.mjs";
+import { parseCoverageDrilldown } from '../../../packages/ops/src/gsc/lib/coverage-csv.mjs';
+import { probeCoverageUrls } from "../../../packages/ops/src/gsc/lib/coverage-probe.mjs";
 import { extractLocs } from "../search-growth/lib/live-sitemap.mjs";
 
 import {
   isIntentionallyNonIndexableResource,
   readCanonicalUrl,
   readHtmlIndexSignals,
-} from "./coverage-policy.mjs";
+} from "../../../packages/ops/src/gsc/coverage-policy.mjs";
 import {
   assertFreshCoverageSource,
   getCoverageSourceFreshness,
-} from "./lib/coverage-source-freshness.mjs";
+} from "../../../packages/ops/src/gsc/lib/coverage-source-freshness.mjs";
 import {
   applyContentVerdict,
   applyInspectionObservations,
@@ -64,7 +64,7 @@ import {
   sitemapKey,
   summarizeCoverageQueue,
   upsertTotalsHistoryRow,
-} from "./lib/coverage-queue-state.mjs";
+} from "../../../packages/ops/src/gsc/lib/coverage-queue-state.mjs";
 import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 

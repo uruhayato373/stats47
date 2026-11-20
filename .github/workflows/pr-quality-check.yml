@@ -525,13 +525,13 @@ jobs:
 
       - name: 🔄 GSC operations cycle contract
         # snapshot→review→候補判断→plan→月次集約の接続、JST週境界、coverage入力鮮度の退行を止める。
-        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs .claude/scripts/gsc/__tests__/coverage-probe.test.mjs packages/ops/src/metrics/__tests__/metrics-reader-ga4.test.mjs
+        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs packages/ops/src/gsc/__tests__/*.test.mjs packages/ops/src/gsc/__tests__/*.test.cjs packages/ops/src/metrics/__tests__/metrics-reader-ga4.test.mjs .claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs
         continue-on-error: false
 
       - name: 🔑 Google API client contract
         # 認証とクライアント生成は google-client.cjs だけが持ち、読み取りの POST は再試行・書き込みは 1 回だけ送る契約を固定する
         # (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。共通クライアントへ置き換えた計測スクリプトの単体テストも同じ step で回す。
-        run: node --test packages/ops/src/google/__tests__/google-client.test.cjs .claude/scripts/gsc/__tests__/url-inspection-daily.test.cjs packages/ops/src/ads/__tests__/fetch-affiliate-ga4.test.cjs
+        run: node --test packages/ops/src/google/__tests__/google-client.test.cjs packages/ops/src/gsc/__tests__/url-inspection-daily.test.cjs packages/ops/src/ads/__tests__/fetch-affiliate-ga4.test.cjs
         continue-on-error: false
 
       - name: 🔁 Workflow Commit-back Contract Gate

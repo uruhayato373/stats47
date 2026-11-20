@@ -1,10 +1,15 @@
 {
-  "hash": "aeecc4b53117c07083278f9ba003eb5e8106f00a5a98910c0c5960974ad08f4a",
-  "audited_at": "2026-11-20T04:05:45",
+  "hash": "882f35b8757bf0e8782fc1582601acef40cd084078174d4896d40897ac3dea2a",
+  "audited_at": "2026-11-20T14:21:31",
   "files": [
-    ".claude/scripts/blog/lib/source-repair-core.mjs",
-    ".claude/scripts/lib/__tests__/sns-posted-core.test.cjs",
-    ".claude/scripts/lib/__tests__/threads-core.test.cjs",
-    ".claude/scripts/lib/chart-provenance.mjs"
+    ".claude/scripts/blog/critic-findings-digest.mjs",
+    ".claude/scripts/data/lib/year-coverage-backlog.mjs",
+    ".claude/scripts/data/sync-year-coverage-backlog.mjs",
+    ".claude/scripts/gsc/build-coverage-queue.mjs",
+    ".claude/scripts/gsc/export-coverage-playwright.mjs",
+    ".claude/scripts/gsc/sync-coverage-backlog.mjs",
+    ".claude/scripts/gsc/url-inspection-daily.cjs",
+    ".claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs",
+    ".claude/scripts/metrics/lib/cycle-health.mjs"
   ]
 }

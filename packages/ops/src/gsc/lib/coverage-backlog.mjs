@@ -4,16 +4,13 @@
  * 機械で決まるもの (observe-after-fix の観測・404 の放置判定・5xx の再測定) は
  * build-coverage-queue.mjs が自動で処理する。ここで扱うのは「このページを検索に出すべきか」
  * のような判断とコード変更を伴うものだけで、処理は backlog-loop-daily (CI の Claude) が行う。
- * CLI: .claude/scripts/gsc/sync-coverage-backlog.mjs
+ * 入口 (CLI): sync-coverage-backlog.mjs。カード本文に書く手順の参照先 (refs) は入口が渡す。
  */
 
-import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../../config/datasets.mjs";
 export const CARD_PREFIX = "GSC-COV";
 export const BATCH_SIZE = 10;
 export const BATCH_DIR = `${datasetDir("gsc.coverage-queue")}/backlog-batches`;
-
-const QUEUE_CLI = "node .claude/scripts/gsc/build-coverage-queue.mjs";
-const RUNBOOK = ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md";
 
 /**
  * 判断が要る action → カードの型。tier / kind は todo-standards の語彙。
@@ -85,8 +82,9 @@ export const batchPath = (id) => `${BATCH_DIR}/${id}.txt`;
 /**
  * 起票するカードを決める。action ごとに開いているカードは 1 枚までにし、
  * ループが消化してから次の batch を出す (同じ URL を 2 枚のカードに載せない)。
+ * refs: { queueCli, runbook } はカード本文に書くコマンドと手順書のパス。呼ぶ側が渡す。
  */
-export function planCoverageCards({ queue, openIds, today }) {
+export function planCoverageCards({ queue, openIds, today, refs }) {
   const open = [...openIds];
   const cards = [];
   for (const [action, def] of Object.entries(CARD_ACTIONS)) {
@@ -99,7 +97,7 @@ export function planCoverageCards({ queue, openIds, today }) {
       .slice(0, BATCH_SIZE);
     if (!urls.length) continue;
     const id = `${prefix}${dateId(today)}`;
-    cards.push({ id, action, tier: def.tier, urls, markdown: renderCard({ id, def, urls, queue, today }) });
+    cards.push({ id, action, tier: def.tier, urls, markdown: renderCard({ id, def, urls, queue, today, refs }) });
   }
   return cards;
 }
@@ -111,7 +109,8 @@ function describe(entry) {
   return parts.join(" / ");
 }
 
-function renderCard({ id, def, urls, queue, today }) {
+function renderCard({ id, def, urls, queue, today, refs }) {
+  const { queueCli: QUEUE_CLI, runbook: RUNBOOK } = refs;
   const byUrl = new Map(queue.map((entry) => [entry.url, entry]));
   const file = batchPath(id);
   return [

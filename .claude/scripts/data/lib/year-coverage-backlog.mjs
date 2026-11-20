@@ -1,7 +1,7 @@
 /**
  * e-Stat 年カバレッジ監査の要拡張候補 (extend-candidate) をバックログカードにする (純粋関数)。
  * CYCLE-HEALTH-01 (2026-09-26): 検出器の指摘は自動起票を既定にする。形は GSC カバレッジの
- * `.claude/scripts/gsc/lib/coverage-backlog.mjs` にそろえた (開いているカードは 1 枚・1 枚 10 件・batch ファイル)。
+ * `packages/ops/src/gsc/lib/coverage-backlog.mjs` にそろえた (開いているカードは 1 枚・1 枚 10 件・batch ファイル)。
  * CLI: .claude/scripts/data/sync-year-coverage-backlog.mjs
  */
 import { datasetDir } from "../../../../config/datasets.mjs";
