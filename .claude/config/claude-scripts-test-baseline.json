@@ -9,6 +9,15 @@
     "model-usage"
   ],
   "harness": {
+    ".claude/scripts/backlog-loop/__tests__/backlog-loop-routine.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (CI の routine のプロンプトと振り分けの設定 .claude/config・書き込み先 .claude/memory を確かめる)",
+    ".claude/scripts/backlog-loop/__tests__/backlog-waits-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (待ちのタグの判定を todo-standards と文書の検査に揃える)",
+    ".claude/scripts/backlog-loop/__tests__/ledger-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (completion gate の証拠を書く実行台帳 .claude/state/backlog-loop/ledger.json の形)",
+    ".claude/scripts/backlog-loop/__tests__/local-runtime-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (手元で回すときの実行条件を規約 backlog-loop.md に揃える)",
+    ".claude/scripts/backlog-loop/__tests__/parse-backlog-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (.claude/todo/backlog.md のカードの読み取り)",
+    ".claude/scripts/backlog-loop/__tests__/queue-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (カードの選び方と振り分けの設定 .claude/config/backlog-routing-policy.json)",
+    ".claude/scripts/backlog-loop/__tests__/record-backlog-outcome.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (結果を実行台帳へ記録する CLI)",
+    ".claude/scripts/backlog-loop/__tests__/routing-policy-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (実行台帳とモデル利用量 .claude/state から振り分けの設定を更新する)",
+    ".claude/scripts/backlog-loop/__tests__/verify-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (行を消す前の completion gate。.claude/todo と実行台帳を読む)",
     ".claude/scripts/lib/__tests__/admin-ci-contract.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/affiliate-workflow-safety.test.mjs": "workflow の YAML の契約のテスト (広告の workflow が外部を変えないこと)",
     ".claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs": "workflow の YAML の契約のテスト",
@@ -109,10 +118,6 @@
     },
     "audit": {
       "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "backlog-loop": {
-      "count": 9,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "blog": {

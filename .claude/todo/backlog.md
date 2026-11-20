@@ -130,8 +130,8 @@ updated: 2026-11-01
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
 
 - **起点**: 2026-11-19 オーナー判断「テストは基本的に .claude に置かない」(`.claude/rules/skill-code-placement.md`)。基準は `.claude/config/claude-scripts-test-baseline.json` (縮小専用)。
-- **現在地 (2026-11-20)**: 数える対象は 126 本 (基盤の `harness` は別に 80 本)。`page-quality` は 10 → 1 本 (残る `local-verification` はアプリと `.claude` の CLI の本文を読む)。領域ごとの本数は基準の `domains` が正本。
-- **次 ① 本数の多い領域**: `backlog-loop` 9・`gsc` 9・`open-data` 9・`search-growth` 9 (`lib` の `write-past-effects`・`effect-verdict-cli` は search-growth と一緒に動かす)。
+- **現在地 (2026-11-20)**: 数える対象は 117 本 (基盤の `harness` は別に 89 本)。`backlog-loop` の 9 本は、バックログ・実行台帳・振り分けの設定を扱う基盤なので移さず `harness` に登録した。`page-quality` は 10 → 1 本 (残る `local-verification` はアプリと `.claude` の CLI の本文を読む)。領域ごとの本数は基準の `domains` が正本。
+- **次 ① 本数の多い領域**: `gsc` 9・`open-data` 9・`search-growth` 9 (`lib` の `write-past-effects`・`effect-verdict-cli` は search-growth と一緒に動かす)。`harnessDomains` の残り (`audit` 2・`management` 3・`model-usage` 1) は、中身が基盤なら移さず `harness` に登録する。
 - **次 ② 判断待ちで残しているもの**: `apps/admin` のチャートの部品 (blog の `audit-chart-axes`・`generate-article-charts-ranks`、note の `build-ranking-type-images`・`pop-cover-render`) と Remotion の data-cards の部品 (sns の 3 本) を packages へ出すか。出さないなら、これらは `harness` ではなく理由付きで基準に残す。
 - **次 ③ CLI ごと移すときに一緒に移すもの**: note の 6 本 (`attachment-dom`・`cover-update`・`image-assets-tools`・`materialize-cover`・`publishing-safety`・`cover-generation-guards`)、ads の `affiliate-apply-args`、blog の `ranking-year-label`。
 - **次 ④ themes の型**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラー 76 件 (28 ファイル)。JSDoc で直して範囲に入れる。`ingest-bridge-inspection-age.mjs:33`・`ingest-shelter-applicability.mjs:38` は ROOT を `process.cwd()` で決めているので、ファイルの位置から求める形に直す。
