@@ -458,15 +458,14 @@ updated: 2026-11-01
 - **次**: 目標を続けるか閉じるかをオーナーが決める。続けるなら baseline を `data/psi/` の現在の計測で取り直し、閉じるなら `close_reason` を書く。
 - **完了条件**: status と実態が一致し、存在しないパスへの参照が無い。
 
-### [RELEASE-SQUASH-SKIP-TOKEN-01] develop→main の squash マージ本文に取り込んだコミットの skip-ci 系トークンが入り、本番デプロイが起動しない
+### [RELEASE-SQUASH-SKIP-TOKEN-01] 見張りの workflow が起動した本番デプロイのあとに、Post-Deploy Smoke が走らない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
 
-- **済み (2026-11-14・f19b619c0)**: `pr-skip-ci-head-guard.yml` の job `deploy-after-skip-ci-merge` が、main 向け PR のマージを `pull_request_target` (closed) で受け、マージコミットの本文に CI を飛ばす指定があるときだけ `deploy-workers.yml` を `workflow_dispatch` で main に起動する。契約テスト `pr-skip-ci-head-guard.test.cjs` と規約 `branch-workflow.md` の段落を足した。
-- **残り**: この job は main の定義で動くので、このコミットが main に入った後の develop→main のマージから効く。CI の記録コミットを含む次の squash マージの後に `gh run list --workflow deploy-workers.yml --branch main --limit 3` を実行し、event が `workflow_dispatch` のデプロイの run が自動で作られたことを確かめる。作られていなければ `gh run list --workflow pr-skip-ci-head-guard.yml --limit 5` で見張り役の run の有無と job のログを読み、`gh workflow run deploy-workers.yml --ref main` で手で起動する。
-- **止まっている理由**: 本番 (main) へのマージが要り、オーナーの指示なしには行えない。観測は次の release のマージを待つ。
-- **残り (追補・2026-11-14)**: 足した job が起動し直すのはデプロイだけで、main への push で動く `security-scan.yml`・`cache-node-modules.yml`・`correlation-refresh.yml` は起動し直さない。`workflow_dispatch` で起動したデプロイは `github.event.before` が空なので、`deploy-workers.yml` の範囲の判定を通らず必ずデプロイし、smoke test の DIFF_BASE も空になって、そのマージで足した ranking キーが検査の対象に入らない。見張り役の正規表現と `check-commit-message.cjs` は、GitHub の公式ページ (Skipping workflow runs、2026-11-14 取得) が挙げる skip-checks の trailer を見ていない。`docs/01_技術設計/06_自動化インベントリ.md` に `pr-skip-ci-head-guard.yml` が載っていない。
-- **完了条件**: 本文に CI を飛ばす指定を含むマージコミットが main に入った後、手で起動せずに `deploy-workers.yml` の run が作られたことを run の URL で示し、`branch-workflow.md` の該当段落の「実際のマージでの起動はまだ観測していない」を観測した日付と PR 番号に書き換える。
-
+- **済み**: squash のマージの本文に skip 指定が入ったときに `pr-skip-ci-head-guard.yml` の `deploy-after-skip-ci-merge` が `deploy-workers.yml` を起動する手当ては、2026-11-20 の PR #1289 のマージ (本文に skip 指定 36 個) で手を触れずに動いた (マージの 12 秒後に run 44671168001、成功)。
+- **残り (2026-11-20 観測)**: この手当てで起動したデプロイ (11-18 の 44298526417・11-19 の 44481255904・11-20 の 44671168001。どれも `triggering_actor` が `github-actions[bot]`) のあと、`post-deploy-smoke.yml` の `workflow_run` が 1 回も作られていない (最後の自動の run は 11-14)。[仮説] GITHUB_TOKEN が起こしたイベントは `workflow_dispatch`・`repository_dispatch` 以外で新しい run を作らない (https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)。デプロイの完了が `workflow_run` を起こさない。
+- **影響**: 11-14 から Post-Deploy Smoke が自動で走らず、11-14 の変更で古くなったテストの期待 (Kindle の商品ページの見出し) にも 6 日気づかなかった (テストは 2026-11-20 に develop で直した。main へは次のリリースで入る。Issue #1273 はそのあとの Post-Deploy Smoke の成功で閉じる)。
+- **次**: `deploy-workers.yml` の最後に、`github.actor == 'github-actions[bot]'` のときだけ `gh workflow run post-deploy-smoke.yml --ref main` を足す (`workflow_dispatch` は GITHUB_TOKEN でも run を作る)。人が手で起動したデプロイと push のデプロイは `workflow_run` が動くので二重にしない。workflow の権限 (`actions: write`) と `audit-workflow-policy.cjs` の契約を同じ差分で直す。main の定義で動くので、効くのはその次のリリースから。
+- **完了条件**: 見張りが起動したデプロイのあとに Post-Deploy Smoke の run が作られたことを run の URL で示す。
 ### [PRODUCT-ANALYSIS-WIRING-01] 商品分析の調査候補を一次資料と実データで検証し、改訂案へ追加する
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-12] [領域:商品]
 
