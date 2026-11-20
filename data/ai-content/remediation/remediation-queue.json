@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-11-19T03:26:59.511Z",
+  "generatedAt": "2026-11-20T03:13:43.331Z",
   "gscSnapshot": "2026-W45",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
     "total": 2624,
-    "done": 1359,
-    "needsRegen": 1265,
+    "done": 1361,
+    "needsRegen": 1263,
     "needsByReason": {
-      "stale-year": 806,
+      "stale-year": 804,
       "missing": 458,
       "incomplete": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 135358,
-    "needsImpressions": 105872,
+    "doneImpressions": 137677,
+    "needsImpressions": 103553,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -335,20 +335,20 @@
       "impressions": 1208,
       "clicks": 19,
       "position": 5.82,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
       "warns": [
-        "pref-count"
+        "length-short",
+        "length-short",
+        "pref-count",
+        "pref-len"
       ],
-      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
-      "updatedAt": "2026-07-03T05:06:42.000Z",
-      "contentYear": "2015",
-      "dataYear": "2023",
+      "lastModified": "Thu, 19 Nov 2026 03:28:56 GMT",
+      "updatedAt": "2026-11-19T03:27:20.830Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "manual-escalation"
+      ]
     },
     {
       "rankingKey": "elementary-school-count",
@@ -379,20 +379,20 @@
       "impressions": 1111,
       "clicks": 13,
       "position": 7.86,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
       "warns": [
-        "pref-count"
+        "length-short",
+        "length-short",
+        "pref-count",
+        "pref-len"
       ],
-      "lastModified": "Fri, 03 Jul 2026 05:11:15 GMT",
-      "updatedAt": "2026-07-03T05:07:03.817Z",
-      "contentYear": "2015",
-      "dataYear": "2023",
+      "lastModified": "Thu, 19 Nov 2026 03:28:56 GMT",
+      "updatedAt": "2026-11-19T03:27:27.848Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "manual-escalation"
+      ]
     },
     {
       "rankingKey": "births",
@@ -837,7 +837,7 @@
       "updatedAt": null,
       "contentYear": "2024",
       "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "forestry-mushroom-output-value",
@@ -847,7 +847,7 @@
       "status": "needs-regen",
       "reason": "missing",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "avg-salary-police-prefecture",
