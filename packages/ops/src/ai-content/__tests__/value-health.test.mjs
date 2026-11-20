@@ -1,6 +1,6 @@
 /**
  * value-health.mjs のテスト
- *   node --test .claude/scripts/ai-content/__tests__/value-health.test.mjs
+ *   node --test packages/ops/src/ai-content/__tests__/value-health.test.mjs
  *
  * 全部 PASS が「正しく通した」のか「何も見ていない」のかを区別できるよう、
  * **通すケースと落とすケースを対で置く**。実データで確認した 3 件 (2026-08-04 実測) を

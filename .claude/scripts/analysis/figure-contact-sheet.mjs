@@ -10,7 +10,7 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
 
-import { isPrimaryFigure, renderContactSheet, sheetSize } from "./figure-contact-sheet-core.mjs";
+import { isPrimaryFigure, renderContactSheet, sheetSize } from "../../../packages/ops/src/analysis/figure-contact-sheet-core.mjs";
 
 const { values } = parseArgs({ options: { dir: { type: "string" }, out: { type: "string" } } });
 if (!values.dir || !values.out) {

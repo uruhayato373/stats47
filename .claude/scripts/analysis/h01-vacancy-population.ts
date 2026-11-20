@@ -11,7 +11,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { correlation } from "./analysis-frame-core.mjs";
+import { correlation } from "../../../packages/ops/src/analysis/analysis-frame-core.mjs";
 
 interface FrameRow {
   code: string;

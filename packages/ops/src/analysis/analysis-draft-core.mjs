@@ -1,4 +1,4 @@
-import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
+import { statsR2Key } from "../../../r2-storage/mirror/r2-keys.mjs";
 /**
  * 分析の結果と図の台帳から、記事の図のデータと出典を組み立てる純粋関数。
  * 値は結果の JSON からだけ読み、ここで丸めも補完もしない。ファイルの読み書きは analysis-draft.ts が持つ。

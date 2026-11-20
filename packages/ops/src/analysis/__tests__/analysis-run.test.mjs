@@ -82,10 +82,13 @@ test("書き手の小包は主張・図・数値の出どころだけを渡し�
     analysis: { finding: "規模が過半", claims: [{ text: "上位でも規模が過半", value: "steps.2", interval: "iv.2", above: 50 }], caveats: ["名目値"], article: { chars: "18000-20000" } },
     figures: [{ id: "figure:a", title: "段ごとの差", reads: "上の段でも規模", chart: { name: "gap-steps-bars", alt: "段" } }],
     reason: "初稿", unmatchedNumbers: ["52.8%"],
+    rules: ["rules/a.md", "rules/b.md"],
   });
   assert.match(packet, /C1: 上位でも規模が過半/);
   assert.match(packet, /data\/gap-steps-bars\.svg/);
   assert.match(packet, /52\.8%/);
+  // 規約のパスは呼ぶ側 (.claude に残る CLI) が渡し、そのまま並べて <sources> に入る
+  assert.match(packet, /<sources>規約 rules\/a\.md・rules\/b\.md。/);
   assert.doesNotMatch(packet, /frame\.json/);
 });
 

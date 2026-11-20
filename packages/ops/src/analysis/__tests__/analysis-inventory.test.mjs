@@ -4,10 +4,10 @@ import { dirname, join, resolve } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 import { parseMetric, parseYears, selectMetrics, summarizeRows } from "../analysis-inventory-core.mjs";
 
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const readMetric = (key) => parseMetric(readFileSync(join(ROOT, datasetDir("metrics.definitions"), `${key}.ts`), "utf8"), `${key}.ts`);
 
 const metricTs = (body) => `import type { MetricConfig } from "../x";\nexport const m: MetricConfig = {\n${body}\n};\n`;

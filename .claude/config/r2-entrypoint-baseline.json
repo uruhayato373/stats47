@@ -16,7 +16,7 @@
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/analysis/__tests__/analysis-draft.test.mjs": {
+    "packages/ops/src/analysis/__tests__/analysis-draft.test.mjs": {
       "stats": 3,
       "ranking": 0,
       "origin": 0,

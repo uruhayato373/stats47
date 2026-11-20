@@ -2,7 +2,7 @@
   "version": 2,
   "policy": "縮小専用。パス・出現数の追加は禁止。HEAD・親commit・origin/developとのmerge-baseからの増加を検査する。--baseで比較基準を追加できる。",
   "exceptions": {
-    ".claude/scripts/ai-content/__tests__/value-health.test.mjs": {
+    "packages/ops/src/ai-content/__tests__/value-health.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -17,7 +17,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/ai-content/audit-ai-content.mjs": {
+    "packages/ops/src/ai-content/audit-ai-content.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -32,7 +32,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/ai-content/lib/value-health.mjs": {
+    "packages/ops/src/ai-content/lib/value-health.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -47,7 +47,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/analysis/__tests__/analysis-frame.test.mjs": {
+    "packages/ops/src/analysis/__tests__/analysis-frame.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -62,7 +62,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/analysis/analysis-frame-core.mjs": {
+    "packages/ops/src/analysis/analysis-frame-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

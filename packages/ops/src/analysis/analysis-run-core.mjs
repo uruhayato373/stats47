@@ -62,14 +62,14 @@ export function reviewMode(history = []) {
  * 書き手 (Claude) に渡す小包。データは渡さず、主張・注意点・図の読み方・数値の出どころだけを渡す。
  * 書き手が数値を自分で計算し直さないので、文脈が小さく済む。
  */
-export function buildWriterPacket({ question, terms, analysis, figures, summaryPath, articlePath, reason, findings = [], unmatchedNumbers = [] }) {
+export function buildWriterPacket({ question, terms, analysis, figures, summaryPath, articlePath, reason, rules, findings = [], unmatchedNumbers = [] }) {
   const claims = (analysis.claims ?? []).map((c, i) => `- C${i + 1}: ${c.text} (値 ${c.value}${c.interval ? `・幅 ${c.interval}` : ""})`).join("\n");
   const figs = figures.map((f) => `- ![${f.chart?.alt ?? f.title}](data/${f.chart?.name ?? f.id}.svg) ${f.title}: ${f.reads}`).join("\n");
   const fix = findings.map((f) => `- ${typeof f === "string" ? f : `[${f.severity}] ${f.text}`}`).join("\n");
   return `<task>
 <goal>${reason === "初稿" ? "論文型の記事の初稿を書く" : reason === "改稿" ? "記事の条件の字数を目安に、主張と図に沿って章を組み直し、全体を書き直す" : `指摘 (${reason}) の箇所だけを直す`}</goal>
 <scope>書いてよいのは ${articlePath} だけ。データ・図・台帳を変えない。R2 や外部へ書かない</scope>
-<sources>規約 .claude/rules/blog-quality-standards.md・.claude/rules/content-type-standards.md。数値の出どころ ${summaryPath} (本文の数値はここから取る。自分で計算し直さない)。今の本文 ${articlePath}</sources>
+<sources>規約 ${rules.join("・")}。数値の出どころ ${summaryPath} (本文の数値はここから取る。自分で計算し直さない)。今の本文 ${articlePath}</sources>
 <done_when>問いに最初の段落で答え、主張より強く書かず、図をすべて載せた</done_when>
 </task>
 

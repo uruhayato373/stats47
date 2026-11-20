@@ -15,7 +15,7 @@ import { computeAnalyses, describeAnalysis } from '../../../packages/product-fac
 import { resolveAnalysisRevision, type AuthoredAnalysisRevision, type ResolvedSource } from '../../../packages/product-factory/src/analysis/catalog';
 import { fetchResolvedSource, relinkCachedRows, validateSourceRows } from '../../../packages/product-factory/src/analysis/load-source';
 import { buildAnalysisFigures } from '../../../packages/product-factory/src/analysis/figures';
-import { buildFrame, checkCoverage } from '../analysis/analysis-frame-core.mjs';
+import { buildFrame, checkCoverage } from '../../../packages/ops/src/analysis/analysis-frame-core.mjs';
 import { renderLicenseText } from '../../../packages/product-factory/src/licenses/license-text';
 import { serializeSourcesCsv, type SourceRow } from '../../../packages/product-factory/src/data/sources';
 import { renderProductFigures } from '../note/render-product-figures';

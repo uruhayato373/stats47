@@ -1,6 +1,6 @@
 /**
  * partial-publish の再発防止テスト (node 標準のみ・node_modules 不要)。
- *   node --test .claude/scripts/ai-content/__tests__/generation-outcome.test.mjs
+ *   node --test packages/ops/src/ai-content/__tests__/generation-outcome.test.mjs
  *
  * ここが緑 = 「失敗キーは quarantine へ積み上がり、成功でリセットされ、threshold で
  * --next から外れる」ことが固定される。verify の partial-publish が意味を持つのはこの

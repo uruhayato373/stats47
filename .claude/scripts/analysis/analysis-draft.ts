@@ -21,7 +21,7 @@ import { renderRelationshipScatterChart } from "../../../apps/admin/lib/template
 import { renderLineChart } from "../../../apps/admin/lib/template-trend-line";
 import { CHART_THEMES } from "../../../apps/remotion/src/features/data-cards/chart-theme";
 import { datasetPath } from "../../../config/datasets.mjs";
-import { buildChart, buildChartData, buildChartSource, buildMaterials, draftInputProblems } from "./analysis-draft-core.mjs";
+import { buildChart, buildChartData, buildChartSource, buildMaterials, draftInputProblems } from "../../../packages/ops/src/analysis/analysis-draft-core.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const GENERATED_BY = ".claude/scripts/analysis/analysis-draft.ts";
