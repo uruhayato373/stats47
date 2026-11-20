@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T06:40:39.340Z",
+  "updatedAt": "2026-11-20T23:46:42.055Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -12266,6 +12266,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-14T06:40:39.340Z"
+    },
+    "WEEKLY-COLLECT-NODE20-FAIL-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": ".claude/todo/backlog.md",
+      "title": "週次の取得で GSC 画面の取得とサイト内リンク監査がスクリプトの例外で落ちる",
+      "attempts": [
+        {
+          "at": "2026-11-20T23:46:42.055Z",
+          "runId": null,
+          "model": null,
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run weekly:collect; node -e 'require(\"./data/authenticated/latest.json\").sources' ; grep -c ERR_REQUIRE .local/weekly-audits/2026-11-21/internal-links.log"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-21 weekly:collect: gsc status=pass (observedAt 2026-11-20T22:37:16Z, data/authenticated/latest.json)、internal-links は 1258 件を 21.9 分で走り切り ERR_REQUIRE 0 件 (.local/weekly-audits/2026-11-21/internal-links.log)。原因修正は e86342e35 (node@22 の PATH)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-20T23:46:42.055Z"
     }
   }
 }

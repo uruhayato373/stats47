@@ -146,6 +146,21 @@ updated: 2026-11-01
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
+### [AFF-GA4-WEEKLY-GATE-01] 週次のアフィリエイト計測 (affiliate-ga4-weekly) が計測ゲートで 6 回続けて落ち、アフィリエイトの観測が 11-14 で止まっている
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:gh run list --workflow affiliate-ga4-weekly.yml --limit 1] [起票:2026-11-21] [領域:アフィリエイト]
+
+- **観測 (2026-11-21・週次レビュー W46)**: `affiliate-ga4-weekly.yml` は 6 回連続失敗・最終成功から 25 日 (`.local/weekly-audits/2026-11-21/ci-health.log`)。最新 run 43973234812 は ga4・read-back・commit-back は success で、measurement gate だけが failure。理由は `inventory-snapshot-stale(13d>10d)`・`a8-cross-check-shortfall`・`a8-results-month-missing`・`eligible-candidate-missing` (自動アラート #1207)。週次要約のアフィリエイト行は最終観測 2026-11-14 のまま。
+- **次**: ① 在庫 snapshot (Refresh Affiliate Inventory & Compliance) が 10 日を超えて古い理由を run 履歴で確かめる ② A8 の照合不足と当月の成果欠落が、土曜の認証付き計測 (a8 は 2026-11-20 に pass) の記録と workflow の読む場所の食い違いかを確かめる。
+- **完了条件**: `affiliate-ga4-weekly` の最新 run が success で、#1207 が閉じている。
+- **禁止**: ゲートの閾値を緩めて通さない (`.claude/config/` の基準はオーナー判断)。
+
+### [PROVENANCE-LINK-CHECK-01] 出典のリンク検査 2 本 (都道府県統計・オープンデータ) の error を、リンク切れか検査の故障かに分けて直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run weekly:audits] [起票:2026-11-21] [領域:データ]
+
+- **観測 (2026-11-21・週次レビュー W46)**: 週次監査 provenance が ❌。`check:prefecture-statistics-links` と `check:open-data-links` が error (`.local/weekly-audits/2026-11-21/provenance.log`)。gsi の出典ページは fetch failed のあと再確認で HTTP 200。
+- **次**: ログから失敗した URL を読み、出典の移転・削除 (台帳を直す) か、検査側の取得失敗 (再試行・タイムアウト) かに分ける。
+- **完了条件**: 週次監査の provenance が ✅。
+
 ### [SCRIPTS-TO-PACKAGES-01] パッケージのスクリプトが .claude/scripts の道具を呼ぶ 12 ファイルを片付ける
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-boundary.mjs] [起票:2026-11-19] [領域:サイト]
 
@@ -1389,18 +1404,6 @@ updated: 2026-11-01
 - **① 済み (2026-11-16)**: 3 回の run (41122877579・42295351706・43513853562) を比べた。**毎回落ちるもの**: E2E の blog-detail.spec.ts (:24・:29・:40・:56。`toBeVisible` が要素を見つけられない)、blog-list.spec.ts (:21・:29・:98。h2 を持つ `main a[href^='/blog/']` が見つからない)、comparison.spec.ts :45 (`toHaveURL`)、header-navigation.spec.ts :41・:95、Theme quality audit (10-30・11-06 は `AssertionError [ERR_ASSERTION]`。どの assert かは未特定)、OGP image audit (原因は毎週違う。11-06 は data-muni-manufacturing の short-title の生成失敗、11-13 は gloves-… の article.md の R2 fetch 失敗)。**3 回中 2 回**: unit の bridge-inspection-age-ui と population-profile-ui の 10 秒タイムアウト。**1 回だけ**: header-navigation :34、public-route-contract :36 (10-30)、Page quality audit (11-06)。unit のログに「R2クライアントを取得できませんでした / getCloudflareContext」が繰り返し出ており、blog E2E と同じ原因か (`CI-LIVE-R2-TEST-FLAKE-01`) は未確認。`affiliate-ga4-weekly` (#1207) は計測ゲート (inventory-snapshot-stale・A8 の照合不足) で落ちており、別の原因。**次**: ② blog E2E から、失敗時のスクショ artifact で R2 の取得失敗かテストデータかを分ける。
 - **追記 (2026-11-16)**: ② に入るときは、Theme quality audit の assert が 3 回とも落ちている件 (どの assert かは未特定) と、OGP 監査で data-muni-manufacturing の short-title の生成が 11-06 に失敗した件も、このカードで扱う。
 
-### [WEEKLY-COLLECT-NODE20-FAIL-01] 週次の取得で GSC 画面の取得とサイト内リンク監査がスクリプトの例外で落ちる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:管理]
-
-- **観測 (2026-11-14)**: `npm run weekly:collect` の 2 か所が、ログインと無関係の例外で落ちた。① 認証付き計測の GSC: `{"source":"gsc","status":"failed","step":"bootstrap","message":"Node.js v20.19.0"}` (12:31 と取り直しの 13:44 の 2 回とも。`~/Library/Logs/stats47/measurement-collect-local.log`)。message には例外の末尾の行しか残っておらず、例外の本体は読めない。② 週次監査の internal-links: `Error [ERR_REQUIRE_CYCLE_MODULE]: Cannot require() ES Module …/stats47-measurement/config/datasets.mjs in a cycle. (from …/packages/area/mirror/prefectures.cjs)` (`.local/weekly-audits/2026-11-14/internal-links.log`)。対話のシェルの Node は v22.23.3、取得の専用 clone で動いた Node は v20.19.0。同じ日の `npm run measurement:status` は gsc を「切れている (認証 cookie が無い)」と表示し、復旧に `node .claude/scripts/google-admin/cli.mjs login` を示している。GSC の失敗が例外なのかログイン切れなのかは、例外の本体が残っていないので切り分けられていない。
-- **[仮説]** 2 件とも、専用 clone が Node v20 で動き、CJS から `config/datasets.mjs` を require する経路が v20 で通らない。検証コマンド: `cd ~/stats47-measurement && node -v && node -e "require('./packages/area/mirror/prefectures.cjs')"` を v20 と v22 で実行して比べる。検証期日: 2026-11-21 (次の週次の取得の前)。v22 で通り v20 で落ちれば仮説を支持、両方で落ちれば循環 import そのものを直す。
-- **影響**: GSC の除外理由の内訳はその時点の書き出しなので、W46 の土曜の分は後から取り直せない。サイト内リンク監査は 132 ページを走査した時点の結果しか無い。
-- **次**: ① 上の検証 ② 取得の失敗時に例外の本体 (末尾の行でなく最初の行) を `message` に残す ③ 専用 clone の Node の版を対話のシェルと揃えるか、require の経路を直す。
-- **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
-- **済み (2026-11-15・develop)**: 次の ② は済み (`collect-local.mjs` が bootstrap・collect の失敗時に stderr の末尾 20 行を `message` に残す。次に GSC が落ちれば例外の本体が `measurement-collect-local.log` で読める)。③ のうち `prefectures.cjs` は `config/datasets.mjs` を require せず、カタログの行の文字列から置き場を読む形に直した。ただし手元の Node は v22.23.3 で、v20.19.0 での元のエラーは再現できていない (require(esm) を無効にした起動で代わりに確かめた)。専用 clone の v20.19.0 は `package.json` の engines (>=22) を満たしていない。
-- **残り**: ① 2026-11-21 の `weekly:collect` で internal-links が走り切るかを読む ② GSC が再び落ちたら、記録された例外の本体から原因を決める ③ `.claude/scripts/lib` には `datasets.mjs` を require する cjs がほかに 4 本ある (`sns-posts-store.cjs`・`sns-metrics-store.cjs`・`x-catalog.cjs`・`strategy-lanes.cjs`)。同じ例外になるかは [仮説] で、専用 clone の Node を v22 に上げれば不要になる。先に Node の版を揃えるかをオーナーが決める。
-- **済み (2026-11-16・`e86342e35`)**: 原因を特定した。launchd・`weekly:collect` の共通設定 `scripts/scheduled/_common.sh` が PATH の先頭に `/opt/homebrew/opt/node@20/bin` (v20.19.0) を固定していた (engines は >=22)。v20.19.0 の失敗ログは最後の行がちょうど `Node.js v20.19.0` で、GSC の bootstrap の `message` と一致する。node@22 に直し、node@22 の PATH で internal-links を起動して 1,249 件中 200 件まで例外なしで進むことを確かめた (時間がかかるため途中で止めた)。cjs 4 本は v20・v22 とも単体の require は通るので触っていない。残りは 11-21 の `weekly:collect` で GSC と internal-links が走り切るかを読むことだけ。`post-instagram-w18.sh` にも node@20 の固定が残るが、IG は停止中なので触っていない。
-
 ### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
 
@@ -2090,6 +2093,7 @@ updated: 2026-11-01
 - **次 (実行順)**: ① 11-12〜13 に作り替えた段のユニットの 2 週の実績 (`history-units.csv`) を、同じ位置の記事内広告と比べる。② 一覧の形のページ (関連記事・検索結果・ブログ一覧・タグ) で、カードの見た目をそろえてインフィード広告を入れる案を、ページごとに閲覧数と一緒に出す (検索結果のカードには画像が無い)。③ 長い表が続くページ (都道府県・市区町村のデータブック・調査) は、章立てと章の頭の 1 文で記事内広告の置き場を作る。④ Multiplex は回遊 (関連記事) と取り合うので、使うなら関連記事の後のページの最後に限り、回遊の内訳 (`internal-transitions.csv`) と一緒に判定する。
 - **停止条件・禁止**: スマホの広告の高さは本文の 30% まで (広告の枠の台帳の共通のルール)。広告のためだけに中身の薄い文を足さない (章の 1 文は値から導いた中身のある文にする)。1 ページで同じユニットを重ねない。最初の画面に置かない。
 - **完了条件**: ページの種類ごとの形式 (記事内・インフィード・表示・置かない) と、そのための UI の変更をオーナーが決め、実装のカードに分けている。
+- **追補 (2026-11-21・週次レビュー W46)**: 本文に「11-14 判定の後にデプロイ」と読める記述が残っているが、2026-W46 の AdSense のユニットは 47 (W45 は 12。`data/adsense/history-units.csv`) で、配置の再構成が判定前に本番に出ていた可能性がある。デプロイ日を確かめ、`ADSENSE-PLACEMENT-01` (期日を 2026-12-05 に引き直し済み) の比較窓と矛盾しないかを書く。
 
 ### [ADSENSE-FORMAT-EXPERIMENT-01] 広告の形式を枠ごとに試す (固定 300×250 と、大きさに上限を付けたレスポンシブ・記事内・関連コンテンツ型)
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-11]
@@ -2333,6 +2337,8 @@ updated: 2026-11-01
 - **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。 ほかに 2 つの写しが残っている。`packages/area-profile/src/highlights/select-area-highlights.ts` の `PREFECTURE_COUNT = 47` は、SNS のスクリプトが相対パスで直接読む「パッケージの外を import しない」契約のため残した (契約を見直すか、`@stats47/area/area-code` だけは読んでよいことにする)。`packages/data-configs/src/open-data-catalog/normalized-table.ts` と `src/area-axis.ts` は `@stats47/area` ではなく `../../../area/src/constants/prefecture-codes` を相対パスで読んでいる (出口 `@stats47/area/area-code` に替えられるか確かめる)。
 - **追補 (2026-11-19)**: `npm run preflight:pr` は workspace の CI 契約 (`.claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`) を回さない。PR #1288 で `ops`・`ui-theme` にテストを移したのに `testPolicy` が `none` のままで、手元の preflight は通り CI の Static Gates で初めて落ちた。再現: `node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`。preflight の一覧に足すかを決める。
 - **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
+- **追補 (2026-11-21・週次レビュー W46)**: 土曜 07:30 のスケジュール済みレビューは、02:00 の fetch-metrics-weekly が遅れて 07:35〜08:42 に走った週は W46 の GSC・GA4・AdSense の行が develop に無いまま収集を始める (2026-11-21 は review-input の 3 項目が FAIL → 08:42 の commit f38d92035 の取り込み後に全 PASS)。手元で先に作った `data/nsm/weekly-snapshots/<週>.json`・`data/google-admin/audits/<週>.json` が CI の commit と衝突して pull が止まる。収集の前に「当週の `chore(metrics): weekly snapshot <週>` が develop にあるか」を確かめ、無ければ待つ手順を weekly-review の SKILL.md の「無人で実行するとき」に足す。`npm run reference:expansion -- status --json` などの `--json` 出力は npm のバナー行 (`> ...`) が先頭に混ざり、そのまま JSON.parse できない (`npm run -s` で回避できるかを確かめ、手順書の例を直す)。`.claude/todo/weekly.md` が土曜のレビュー前に次週分へ上書きされ、前週の Must の checkbox の実績が git 履歴にしか残らない (W46 のレビューは 719098a3db の版から読んだ)。週次計画の上書きの時点をレビューの後に揃えるかを決める。
+- **追補 (2026-11-21・週次レビュー W46)**: `audit-operations-cycle.mjs --stage plan --week 2026-W48` を週の途中に実行すると、まだ終わっていない週の snapshot・verdict・review を FAIL と出す。weekly-plan の SKILL.md の手順は `--week` を省いている。計画の段で渡す対象週 (レビューした週か計画する週か) を SKILL.md に書く。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
@@ -2395,6 +2401,7 @@ updated: 2026-11-01
 - **次**: (1) improvements.md を月次で上限 5 件 (2026-10-27 に 10 から変更) まで削る (improvement-triage の排他 write)。削除基準は「`[target:]` が無い」「計器が止まっていて判定できない」。(3) `review-wiring.json` の requiredSections 6 を「サマリー / 計画 vs 実績 / 申し送り」の 3 に減らしてよいか、`/weekly-review` の所要時間を 1 回測ってから決める。
 - **残り**: W41〜W44 の週次レビューで Must の達成率を読む。判定日 2026-11-08 (W44 のレビューの翌日)。
 - **完了条件**: active ≤ 10、`[target:]` なし 0、4 週連続で Must ≥ 2/3。
+- **追補 (2026-11-21・週次レビュー W46)**: backlog は 377 枚で目安 200 枚を超え、W45・W47 は削減を定常に置いて進まなかった。W48 の Must 1 (377 枚から 20 枚以上減らす) の主 ID をこのカードにした。手順: 期日超過のカード (`npm run backlog:waits -- due --week <週>`) を今週やる・期日を引き直す・消すのどれかに決め、完了カードは `record-backlog-outcome.mjs` で記録してから消す。完了の目安: `npm run backlog:waits -- flow` の総枚数 ≤ 200。
 
 ### [UI-FIX-THEME-20261011] UI 是正: theme の週次 UI 検査の指摘 1 件を直す
 
