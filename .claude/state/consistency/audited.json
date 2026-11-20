@@ -1,15 +1,10 @@
 {
-  "hash": "75109526ce71c1b39dd558c9cc6c64cde6b7b56926729962130b0358714d389c",
-  "audited_at": "2026-11-19T13:15:08",
+  "hash": "aeecc4b53117c07083278f9ba003eb5e8106f00a5a98910c0c5960974ad08f4a",
+  "audited_at": "2026-11-20T04:05:45",
   "files": [
-    ".agents/skills/theme/audit-theme-components/SKILL.md",
-    ".agents/skills/theme/manage-theme-portfolio/SKILL.md",
-    ".claude/scripts/lib/__tests__/theme-ledger-paths.test.mjs",
-    ".claude/scripts/lib/__tests__/theme-weekly-workflow.test.mjs",
-    ".claude/scripts/themes/check-theme-review.mjs",
-    ".claude/scripts/themes/run-theme-portfolio-audit.sh",
-    ".claude/skills/theme/audit-theme-components/SKILL.md",
-    ".claude/skills/theme/manage-theme-portfolio/SKILL.md",
-    ".claude/skills/theme/manage-theme-portfolio/reference/\\343\\203\\206\\343\\203\\274\\343\\203\\236\\343\\203\\235\\343\\203\\274\\343\\203\\210\\343\\203\\225\\343\\202\\251\\343\\203\\252\\343\\202\\252\\351\\201\\213\\347\\224\\250.md"
+    ".claude/scripts/blog/lib/source-repair-core.mjs",
+    ".claude/scripts/lib/__tests__/sns-posted-core.test.cjs",
+    ".claude/scripts/lib/__tests__/threads-core.test.cjs",
+    ".claude/scripts/lib/chart-provenance.mjs"
   ]
 }
