@@ -18,7 +18,10 @@
  *
  * レイアウト構造 (テンプレート shadcndashboard の dashboard-layout に寄せた・2026-10-27):
  * - SidebarProvider の中に AppSidebar と SidebarInset を兄弟で置く (sidebar.tsx の DOM 前提)
- * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content (p-4)・Footer を並べる
+ * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content・Footer を並べる
+ *   main の余白は上下 16px だけで、左右は持たない (パネル内の余白で足りる。2026-11-20 オーナー決定)。
+ *   main の -mx-px は、パネルの格子の外周の線を SidebarInset の overflow-clip で隠し、外枠の線と 2 本並ばないようにする
+ *   SidebarInset の m-2 と外枠の線は sm 以上だけに付け、スマホではパネルを画面の端まで広げる
  * - ヘッダーとフッターをルートに置くので、画面遷移で再マウントされない
  * - SidebarProvider の defaultOpen は true 固定。開閉状態を cookies() で読まない (SSG 維持)
  * - SidebarInset は overflow-hidden ではなく overflow-clip にする (sticky ヘッダーと右レールの追従を壊さない)
@@ -161,11 +164,11 @@ export default function RootLayout({
           {/* サイドバー型の骨組み (lg 未満では AppSidebar が Sheet に替わる) */}
           <SidebarProvider defaultOpen>
             <AppSidebar />
-            <SidebarInset className="m-2 min-w-0 overflow-clip rounded-none! outline outline-border">
+            <SidebarInset className="min-w-0 overflow-clip rounded-none! sm:m-2 sm:outline sm:outline-border">
               {/* ヘッダー（全ページ共通） */}
               <SiteHeader />
               {/* メインコンテンツエリア（ページで唯一の main。各ページが PageShell で幅を制御） */}
-              <main id="main-content" className="min-w-0 flex-1 p-4" tabIndex={-1}>
+              <main id="main-content" className="-mx-px min-w-0 flex-1 py-4" tabIndex={-1}>
                 {children}
               </main>
               {/* フッター（全ページ共通） */}

@@ -39,7 +39,7 @@ interface PageShellProps {
  *
  * 2026-07-11: 1700px → 1280px に統一 (ArticleShell = blog/ranking 詳細と同一幅)。
  * 2026-10-27: 横の余白はテンプレートの p-4 に寄せた。本文の余白はルートレイアウトの
- * main#main-content (p-4) が持つので、PageShell / ArticleShell 自身は余白を持たない。
+ * main#main-content (上下の py-4 だけ。左右は持たない) が持つので、PageShell / ArticleShell 自身は余白を持たない。
  * 2026-10-28: このトークンから px-4 を外した。main の中で使うと main の p-4 と重なり 32px になっていた。
  * main の外 (Footer) は自分で px-4 を足す。
  */
