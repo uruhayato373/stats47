@@ -93,7 +93,9 @@ export function reviewLines(text) {
     // 点と斜線だけの文字列 ("..", "../../..") は ROOT を求める式の一部。複数行に分かれていても出す
     const root = /["'`](?:\.\.?\/?)+["'`]/.test(line);
     const claude = /["'`][^"'`]*\.claude(?:[/"'`]|$)/.test(line);
-    return root || claude ? [`${index + 1}: ${line.trim().slice(0, 140)}`] : [];
+    // 相対パスに式を埋めたテンプレート文字列 (`../../${datasetPath(id)}`) は道具が付け替えないので、人が確かめる
+    const template = /`(?:\.\.?\/)+[^`]*\$\{/.test(line);
+    return root || claude || template ? [`${index + 1}: ${line.trim().slice(0, 140)}`] : [];
   });
 }
 

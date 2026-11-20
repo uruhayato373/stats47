@@ -102,3 +102,12 @@ test("run: の中のシェルのコメント行は名指しと数えない", () 
   assert.match(text, /real\.mjs/);
   assert.doesNotMatch(text, /commented\.mjs/);
 });
+
+test("相対パスに式を埋めたテンプレート文字列は、付け替えないので人が確かめる行に出す", () => {
+  const text = [
+    "const a = JSON.parse(readFileSync(new URL(`../../../../${datasetPath(\"areas.prefectures\")}`, import.meta.url)));",
+    "const b = `${name}/../x`;",
+    "const c = `../fixtures/${name}`;",
+  ].join("\n");
+  assert.deepEqual(reviewLines(text).map((line) => Number(line.split(":")[0])), [1, 3]);
+});
