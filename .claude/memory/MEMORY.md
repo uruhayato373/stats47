@@ -190,6 +190,7 @@
 - [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree は再開で消える
 - [worktree junction deletes target](feedback_worktree_junction_deletes_target.md) — junction の worktree remove が本体を消す
 - [worktree node modules resolve main](feedback_worktree_symlinked_node_modules_resolve_main.md) — @stats47 だけ worktree へ張る
+- [move script staged renames](feedback_move_script_staged_renames.md) — 移動の道具は改名を index に載せる。移動の commit を最初に作る
 
 ## Windows・会社 PC
 - [windows script portability](feedback_windows_script_portability.md) — Windows で落ちる書き方
