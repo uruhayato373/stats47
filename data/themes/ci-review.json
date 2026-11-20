@@ -1,43 +1,45 @@
 {
   "status": "blocked",
-  "summary": "今回のランタイム監査は 112 件中 112 件が失敗しました。前回は 110 件中 1 件の単発503だけだったので、性質が違います。ただし原因は証明できていません。今回は HTTP 200・HTML 完結（x-html-integrity: complete）で、503 ではありません。consumer-prices の保存 HTML には、全国表示（?pref=all）で 6 章のうち 3 章（expenses / historical-change / reading）だけが入っています。カードとグラフはクライアント描画で、保存 HTML には kpi-card 属性が 1 件しかありません。2026-11-01 の設計決定は「全国ページは全国値のある指標だけを出し、描くものの無い章は出さない」です。監査（audit-theme-runtime.ts:208-241）は全章の存在とカード数を期待しており、設計と食い違う可能性があります。県セレクタは保存 HTML に aria-label があるのに、監査の combobox 数は 0 でした。この点は説明できていません。本番がリポジトリの最新カタログより古い可能性もあります。確認手段がありません。Bash が途中から拒否され、curl・release:status・テストを実行できませんでした。監査スクリプトは変更禁止です。そのためコード修正はせず、推測で直しません。実験判定（d7/d28/d56）は実行せず、ci-followup.json を読んだだけで日付・baseline・観測は未変更です。公式原典の確認は今回できていません（sourceReviews は空）。次の条件: 本番の buildId と develop の差を release:status と curl で確認し、監査側の期待値（全国表示の章・セレクタの役割）の是正をオーナーか監査の担当に渡します。",
+  "summary": "ランタイム監査は 112/112 件が失敗し、前回（11-14）と同じ結果です。全件 HTTP 200・x-html-integrity=complete で、503 ではありません。ソースを読んだ限り、監査の期待値が現行の設計に合っていないことが原因です。確証ではありません。(1) 監査は常に「都道府県を選択」という combobox がちょうど 1 つあることを要求します（theme-followup-core.mjs:74）。通常テーマの地域切替は ThemeRegionNav（「地域を変える」ボタンと Sheet）で、PrefectureSelect を描くのは local-finance 専用の ThemeSideNav だけです。(2) 監査は URL に ?pref=all を付け、カタログの全章と全カード数を要求します（audit-theme-runtime.ts:208-241）。しかし 2026-11-01 の設計決定は「全国表示では全国値のある指標だけを出し、描くものが無い章は出さない」です。consumer-prices の保存 HTML では 6 章中 3 章だけが出ていて、CPI 図は「全国表示には対応していません」と表示されています。監査と判定ロジックは変更禁止のため、コード修正は行いません。本番が最新カタログより古い可能性は、Bash が拒否されて curl や release:status を実行できず、確認できていません。実験判定（d7 は 2026-11-19 期日の THEME-COPY-20261112-* 群）と evaluate-theme-experiments.mjs、validate-theme-state.mjs も実行していません。d7 の品質入力は 112/112 失敗で汚染されているため、合否のどちらにも使わないことを推奨します。実験の日付・baseline・保存済み観測は未変更です。前回 review と同じ月で unreviewedThemes が 55 件残っていますが、今回は公式原典を確認できていないため sourceReviews は空です。次の条件: オーナーまたは監査担当が、期待値を ThemeRegionNav と全国表示の章構成に合わせて直すこと、または本番とのビルド差を確認することです。",
   "findings": [
     {
       "themeKey": "consumer-prices",
-      "detail": "全 112 ケース（55 テーマ × 1440/390px。実装は 2 幅）が失敗し、前回（1/110）から急増しました。consumer-prices の 1440px は HTTP 200・htmlIntegrity=complete・h1「全国の物価・消費」で、503 や空応答ではありません。保存 HTML の #theme-section-* は expenses / historical-change / reading の 3 件のみで、カタログ（data/themes/catalogs/consumer-prices.json:455-499）にある overall / food-prices-and-expenditure / utilities-prices-and-expenditure は出ていません。これは「全国ページは全国値のある指標だけを出し、描くものの無い章は出さない」という 2026-11-01 の設計決定（theme-catalog-standards.md）と整合します。監査は catalog.sections を全件期待します。[仮説] 監査の期待値が現行の全国表示の設計より古い。検証期日: 次回の週次レビュー。検証手順: 本番で同じ URL を取得し、章数が保存 HTML と一致するか、および develop と本番の buildId 差を release:status で確認する。仮説棄却の条件: 本番がリポジトリの現行ビルドと一致していて、章が欠けていれば本物の表示退行として原因調査に進む。",
+      "detail": "1440px の case は HTTP 200・htmlIntegrity=complete・h1=「全国の物価・消費」で、503 や空応答ではありません。sections の実測は overall=0 / expenses=1 / historical-change=1 / food-prices-and-expenditure=0 / utilities-prices-and-expenditure=0 / reading=1 で、章が欠けているため section と section-cards の finding が出ています。CPI の 2 つの図は state=no-data で、本文は「全国平均を100とする指数のため、全国表示には対応していません」でした。監査は ?pref=all で全章を期待するため、全国表示で章を出さない 2026-11-01 の設計決定（theme-catalog-standards.md）と食い違います。[仮説] 監査の期待値が現行設計より古い。検証期日: 次回の週次レビュー（2026-11-28）。仮説の棄却条件: 本番がリポジトリの現行ビルドと一致し、県表示でも章が欠けていれば表示退行として原因調査に進む。検証コマンド: curl -s 'https://stats47.jp/themes/consumer-prices?pref=all' | grep -o 'theme-section-[a-z-]*'",
       "evidenceRefs": [
         ".local/ci/theme-followup/runtime.json",
-        ".local/ci/theme-followup/runtime.log",
         ".local/ci/theme-followup/consumer-prices-1440-document.html",
         "data/themes/catalogs/consumer-prices.json",
-        ".claude/scripts/themes/audit-theme-runtime.ts"
+        ".claude/scripts/themes/audit-theme-runtime.ts",
+        "packages/ops/src/themes/theme-followup-core.mjs"
       ]
     },
     {
       "themeKey": "aging-society",
-      "detail": "全テーマ共通で prefecture-selector が失敗しました。監査は getByRole('combobox', {name:'都道府県を選択'}) を数えます（audit-theme-runtime.ts:261-263）。コンポーネント PrefectureSelect.tsx:78-81 は aria-label=\"都道府県を選択\" の SelectTrigger を出しており、ThemeSideNav のユニットテストは getByLabelText で存在を確認しています。保存 HTML（SSR のみ）には aria-label はあるものの role=\"combobox\" が 0 件でした。水和後の DOM は保存されていないため、実際のブラウザで combobox ロールが付くかは未確認です。選択 UI が消えたのか、監査のロール期待が合わなくなったのかを区別できていません。ここでは監査側の不具合の可能性を記録するだけで、検証基準は変更していません。次の条件: 本番で水和後の DOM のロール（Base UI の Select のトリガー）を 1 テーマで確認する。",
+      "detail": "全テーマ共通の prefecture-selector 失敗は、監査側の期待のずれである可能性が高いです。監査は getByRole('combobox',{name:'都道府県を選択'}) がちょうど 1 件であることを要求します（audit-theme-runtime.ts:261-263、theme-followup-core.mjs:74）。通常テーマの ThemePageLayout は ThemeRegionNav（ThemePageLayout.tsx:239）を描画し、ThemeRegionNav.tsx の aria-label は「地域を変える」「県名で探す」「市区町村名で探す」などで、combobox ロールも「都道府県を選択」という名前も持ちません。PrefectureSelect を描く ThemeSideNav は local-finance 専用です（ThemeSideNav.tsx:67 のコメント）。保存 HTML の「都道府県を選択」2 件がどの要素かは未確認です。水和後の DOM は保存されていません。検査側の不具合の可能性として記録するだけで、検証基準は変更していません。次の条件: 本番 1 テーマで水和後の DOM を取得し、地域切替の role を確認する。",
       "evidenceRefs": [
         ".local/ci/theme-followup/runtime.json",
         ".local/ci/theme-followup/aging-society-1440-document.html",
-        "apps/web/src/features/theme-dashboard/components/PrefectureSelect.tsx",
-        "apps/web/src/features/theme-dashboard/components/__tests__/ThemeSideNav.test.tsx",
-        ".claude/scripts/themes/audit-theme-runtime.ts"
+        "apps/web/src/features/theme-dashboard/components/ThemeRegionNav.tsx",
+        "apps/web/src/features/theme-dashboard/components/ThemePageLayout.tsx",
+        "apps/web/src/features/theme-dashboard/components/ThemeSideNav.tsx",
+        "packages/ops/src/themes/theme-followup-core.mjs"
       ]
     },
     {
       "themeKey": "population-dynamics",
-      "detail": "実験の判定は今回実行していません。保存済みの前回レビューの記録では、THEME-EXP-001 の d56 は insufficient-data のまま pending を維持し、新規launchの d7 は quality-only でした。今回の ci-followup.json の runtime 失敗は 112/112 でテーマ品質の判定入力になるため、監査の期待値が確定するまで d7 品質を「合格」「不合格」のどちらにも使わないことを推奨します。実験の日付・baseline・保存済み観測は変更していません。evaluate-theme-experiments.mjs と validate-theme-state.mjs は未実行です。",
+      "detail": "今回の plan.json では THEME-COPY-20261112-* 群（manufacturing・population-dynamics・aging-society ほか）の d7 が 2026-11-19 期日で due になっています。ただし今回の runtime 失敗は 112/112 で、原因は上の 2 件のとおり監査の期待値のずれが疑われます。そのため d7 の品質判定は、監査側の期待値が確定するまで保留を推奨します。evaluate-theme-experiments.mjs --launch-review と validate-theme-state.mjs は、Bash 拒否のため今回実行していません。実験の日付・baseline・保存済み観測は変更していません。d56 前の insufficient-data 終了や新規 launch への effect ラベル付与も行っていません。",
       "evidenceRefs": [
+        ".local/ci/theme-followup/plan.json",
         "data/themes/ci-followup.json",
-        "data/themes/experiments.json",
-        "data/themes/ci-review.json"
+        "data/themes/experiments.json"
       ]
     }
   ],
   "sourceReviews": [],
   "tests": [
-    "未実行: Bash が途中から don't ask モードで拒否され、テスト・curl・release:status・evaluate-theme-experiments.mjs・validate-theme-state.mjs はいずれも実行できなかった。コード変更が無いため対象テストは無い。",
-    "参照のみ: .local/ci/theme-followup/runtime.json と runtime.log の実測（112/112 失敗、開始 2026-11-13T21:53:55Z、終了 21:57:57Z）。前段 CI の結果で、今回は再実行していない。"
+    "未実行: Bash が don't ask モードで拒否されたため、テスト・curl・release:status・evaluate-theme-experiments.mjs・validate-theme-state.mjs はいずれも実行できなかった。コードは変更していないので対象テストも無い。",
+    "参照のみ: .local/ci/theme-followup/runtime.json（2026-11-20T22:34:41Z〜22:37:48Z、112 件中 112 件失敗、buildId=BEdPY1B_nfVQLnuKOSHzd）と data/themes/ci-followup.json（failed=112）。前段 CI の結果で、今回は再実行していない。",
+    "参照のみ（ソース読解）: audit-theme-runtime.ts、theme-followup-core.mjs、ThemePageLayout.tsx、ThemeRegionNav.tsx、ThemeSideNav.tsx、app/themes/[themeSlug]/page.tsx。ブラウザでの再現は行っていない。"
   ],
   "unreviewedThemes": [
     "aging-society",
@@ -97,7 +99,7 @@
     "water-services"
   ],
   "schemaVersion": 1,
-  "inputSha256": "26162b7d82d69ddbeb90333bea86525d5277a61979c69927b34bb7949f5075b0",
-  "reviewedAt": "2026-11-14",
+  "inputSha256": "ee46e45e7926094f5ca13916544add511057399ed5a6ce034b794dc67a75ddb2",
+  "reviewedAt": "2026-11-21",
   "month": "2026-11"
 }
