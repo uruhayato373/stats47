@@ -139,7 +139,7 @@ export function mainDefinitionJobsText(texts) {
     const triggers = typeof on === "string" ? [on] : Array.isArray(on) ? on : Object.keys(on ?? {});
     // シェルのコメント行 (run: の中の "# ...") は実行しないので見ない (2026-11-20。blog-auto-publish がコメントで部品を名指しする)
     const jobs = yaml.dump(doc?.jobs ?? {}, { lineWidth: -1 }).split("\n").filter((line) => !/^\s*#/.test(line)).join("\n");
-    return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*['"]?develop\b/.test(jobs) ? [jobs] : [];
+    return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*(?:['"]?develop\b|\$\{\{[^}\n]*['"]develop['"])/.test(jobs) ? [jobs] : [];
   }).join("\n");
 }
 
