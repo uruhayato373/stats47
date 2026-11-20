@@ -3,9 +3,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import Ajv from 'ajv';
-import { datasetPath } from '../../../../config/datasets.mjs';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 
-export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
+export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
 export const DEFAULT_MAX_BYTES = 5 * 1024 ** 3;
 export const REPORT_DIR = '.local/verification/open-data';
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');

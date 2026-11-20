@@ -902,7 +902,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/open-data/__tests__/normalize.test.mjs": {
+    "packages/ops/src/open-data/__tests__/normalize.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

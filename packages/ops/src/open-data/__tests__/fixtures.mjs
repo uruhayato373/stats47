@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import ExcelJS from 'exceljs';
-import { datasetPath } from '../../../../config/datasets.mjs';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 import { loadCatalog, sha256, writeJson } from '../lib/contracts.mjs';
 import { archiveRecipe, loadSnapshot, localKey } from '../lib/archive.mjs';
 import { createHttpClient } from '../lib/http.mjs';

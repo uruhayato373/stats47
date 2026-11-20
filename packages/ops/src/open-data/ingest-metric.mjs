@@ -8,18 +8,18 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { require as requireTs } from 'tsx/cjs/api';
-import { datasetPath } from '../../../config/datasets.mjs';
-import { PREFECTURES } from '../../../packages/area/mirror/prefectures.cjs';
-import { statsR2Key, R2_PUBLIC_ORIGIN } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
-import { R2_PRIVATE_BUCKET } from '../../../packages/types/mirror/site-config.cjs';
+import { datasetPath } from '../../../../config/datasets.mjs';
+import { PREFECTURES } from '../../../area/mirror/prefectures.cjs';
+import { statsR2Key, R2_PUBLIC_ORIGIN } from '../../../r2-storage/mirror/r2-keys.mjs';
+import { R2_PRIVATE_BUCKET } from '../../../types/mirror/site-config.cjs';
 import { ROOT, assertPublishable, assertSha, loadCatalog, readJson, sha256, writeJson } from './lib/contracts.mjs';
 import { loadSnapshot, localKey, snapshotPath, verifyEntry } from './lib/archive.mjs';
 import { restoreEntry } from './lib/restore.mjs';
 import { normalizeRecipe } from './normalize-source.mjs';
 
-const { evaluateExpansionCandidate, selectExpansionDenominator } = requireTs('../../../packages/data-configs/src/open-data-catalog/expansion.ts', import.meta.url);
-const { buildRecipe } = requireTs('../../../packages/data-configs/src/recipe.ts', import.meta.url);
-const { parseStatsValuesPayload } = requireTs('../../../packages/stats-r2/src/schemas.ts', import.meta.url);
+const { evaluateExpansionCandidate, selectExpansionDenominator } = requireTs('../../../data-configs/src/open-data-catalog/expansion.ts', import.meta.url);
+const { buildRecipe } = requireTs('../../../data-configs/src/recipe.ts', import.meta.url);
+const { parseStatsValuesPayload } = requireTs('../../../stats-r2/src/schemas.ts', import.meta.url);
 
 export const METRIC_KEYS = [
   'national-assessment-junior-high-mathematics-correct-rate',
@@ -142,8 +142,8 @@ export async function prepareTable({ root, scratch, candidate, recipe, localSour
 
 async function privateReadStore() {
   // Explicit bucket avoids changing the public publisher's process environment.
-  const { createS3ImageObjectStore } = requireTs('../../../packages/r2-storage/src/image-pipeline.ts', import.meta.url);
-  const { createR2S3Client } = await import('../../../packages/r2-storage/src/lib/clients/r2-s3-client.mjs');
+  const { createS3ImageObjectStore } = requireTs('../../../r2-storage/src/image-pipeline.ts', import.meta.url);
+  const { createR2S3Client } = await import('../../../r2-storage/src/lib/clients/r2-s3-client.mjs');
   const store = createS3ImageObjectStore(createR2S3Client(), R2_PRIVATE_BUCKET);
   return { get: (key) => store.get(key) };
 }
@@ -206,7 +206,7 @@ export async function main(args = process.argv.slice(2)) {
   // 既定の一括は、展開の台帳に候補が残っている指標だけ。公開済みの指標は公開時に候補を台帳から外すので、一括に含めると最初の 1 本で止まる。
   const keys = options.metric ? [options.metric] : pendingMetricKeys(readJson(path.join(ROOT, datasetPath('open-data.expansion'))));
   assert.ok(keys.length && keys.every((key) => METRIC_KEYS.includes(key)), '--metric <registered key> required');
-  const { METRICS_REGISTRY } = requireTs('../../../packages/data-configs/src/registry.ts', import.meta.url);
+  const { METRICS_REGISTRY } = requireTs('../../../data-configs/src/registry.ts', import.meta.url);
   const report = await ingestMetrics({ configs: keys.map((key) => METRICS_REGISTRY[key]),
     localSource: options['local-source'], writeLocal: options['write-local'], out: options.out });
   console.log(JSON.stringify({ status: report.status, metrics: report.metrics, rows: report.rows, localStaged: report.localStaged }));

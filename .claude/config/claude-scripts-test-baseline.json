@@ -59,6 +59,7 @@
     ".claude/scripts/lib/__tests__/dataset-registries.test.ts": "置き場の規則の検査のテスト (台帳の参照の読み方を check-datasets と突き合わせる)",
     ".claude/scripts/lib/__tests__/dependency-security-contract.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/dimension-ledger-rules.test.mjs": "規則の文書 (analytics-event-standards) の実物を GA4 の dimension の台帳として読めることのテスト",
+    ".claude/scripts/lib/__tests__/open-data-workflow-wiring.test.mjs": "open-data の workflow (open-data-source-archive.yml) が .claude/scripts/open-data/normalize-ci.mjs の入口を起動することを確かめる",
     ".claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs": "GSC カバレッジの部品と、.claude に残る CLI・Python の取り込みの本文の配線を突き合わせる",
     ".claude/scripts/lib/__tests__/husky-worktree-hook.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs": "agent の定義とスクリプトが最新年の選び方の部品を使うことの検査のテスト",
@@ -171,10 +172,6 @@
     },
     "note": {
       "count": 16,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "open-data": {
-      "count": 9,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "page-quality": {

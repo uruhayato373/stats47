@@ -5,10 +5,10 @@ import { crc32 } from 'node:zlib';
 import { require as tsxRequire } from 'tsx/cjs/api';
 import Ajv from 'ajv';
 import ExcelJS from 'exceljs';
-import { datasetPath } from '../../../../config/datasets.mjs';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 
-const { normalizeOpenDataArea, OPEN_DATA_NORMALIZED_TABLE_SCHEMA } = tsxRequire('../../../../packages/data-configs/src/open-data-catalog/normalized-table.ts', import.meta.url);
-const prefectures = JSON.parse(fs.readFileSync(new URL(`../../../../${datasetPath('areas.prefectures')}`, import.meta.url), 'utf8'));
+const { normalizeOpenDataArea, OPEN_DATA_NORMALIZED_TABLE_SCHEMA } = tsxRequire('../../../../data-configs/src/open-data-catalog/normalized-table.ts', import.meta.url);
+const prefectures = JSON.parse(fs.readFileSync(new URL(`../../../../../${datasetPath('areas.prefectures')}`, import.meta.url), 'utf8'));
 const prefectureCodesByName = new Map(prefectures.map((p) => [p.prefName, p.prefCode]));
 const ajv = new Ajv({ allErrors: true, strictNumbers: true });
 const validateTable = ajv.compile(OPEN_DATA_NORMALIZED_TABLE_SCHEMA);

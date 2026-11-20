@@ -102,16 +102,3 @@ test('workflow retains archive default, release stop and r2-write serialization;
     }
   }
 });
-
-for (const dryRun of ['true', 'false']) test(`workflow normalize shell forwards ${dryRun === 'true' ? '--dry-run' : '--apply'} with no separate write step`, (t) => {
-  const root = temp(t);
-  fs.writeFileSync(path.join(root, 'npm'), '#!/bin/bash\nexit 0\n', { mode: 0o755 });
-  fs.writeFileSync(path.join(root, 'node'), '#!/bin/bash\nif [ "$1" = "-p" ]; then printf "private-bucket\\n"; else printf "%s\\n" "$*" >> "$CALLS"; fi\n', { mode: 0o755 });
-  const step = steps.find((s) => s.run?.includes('normalize-ci.mjs'));
-  const calls = path.join(root, 'calls');
-  const result = spawnSync('bash', ['-e', '-c', step.run], { cwd: ROOT, env: { ...process.env, PATH: `${root}:${process.env.PATH}`, TARGET: 'dataset:test', DRY_RUN: dryRun, CALLS: calls }, encoding: 'utf8' });
-  assert.equal(result.status, 0, result.stderr);
-  const invocations = fs.readFileSync(calls, 'utf8').trim().split('\n');
-  assert.equal(invocations.at(-1), `--import tsx .claude/scripts/open-data/normalize-ci.mjs --dataset test ${dryRun === 'true' ? '--dry-run' : '--apply'}`);
-  assert.equal(invocations.some((line) => line.includes('lib/publish.mjs')), false);
-});

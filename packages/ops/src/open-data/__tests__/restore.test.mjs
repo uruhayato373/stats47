@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { datasetPath } from '../../../../config/datasets.mjs';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 import { restoreRecipe, main } from '../restore-source.mjs';
 import { localKey, snapshotPath, verifyEntry } from '../lib/archive.mjs';
 import { REPORT_DIR, sha256, writeJson } from '../lib/contracts.mjs';

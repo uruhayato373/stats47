@@ -65,7 +65,7 @@ jobs:
           TARGET: ${{ inputs.target }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
-          node --test .claude/scripts/open-data/__tests__/*.test.mjs
+          node --test packages/ops/src/open-data/__tests__/*.test.mjs .claude/scripts/lib/__tests__/open-data-workflow-wiring.test.mjs
           npm run validate:open-data-catalog --workspace packages/data-configs
           case "$TARGET" in
             all) args=(--all) ;;
@@ -96,7 +96,7 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
         run: |
-          node --test .claude/scripts/open-data/__tests__/*.test.mjs
+          node --test packages/ops/src/open-data/__tests__/*.test.mjs .claude/scripts/lib/__tests__/open-data-workflow-wiring.test.mjs
           npm run validate:open-data-catalog --workspace packages/data-configs
           case "$TARGET" in
             all) args=(--all) ;;

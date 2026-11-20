@@ -3,7 +3,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, writeJson } from './contracts.mjs';
 import { loadSnapshot, snapshotPath } from './archive.mjs';
-import { datasetDir } from '../../../../config/datasets.mjs';
+import { datasetDir } from '../../../../../config/datasets.mjs';
 
 /** Append verified entries; never replace a different immutable version during commit-back. */
 export function mergeSnapshots(fromRoot, toRoot) {
@@ -23,7 +23,10 @@ export function mergeSnapshots(fromRoot, toRoot) {
   }
   for (const [file, doc] of pending) writeJson(file, doc);
 }
+export function main(args = process.argv.slice(2)) {
+  if (args.length !== 1) throw Error('Usage: merge-snapshots.mjs <develop-checkout>');
+  mergeSnapshots(ROOT, path.resolve(args[0]));
+}
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  if (process.argv.length !== 3) throw Error('Usage: merge-snapshots.mjs <develop-checkout>');
-  mergeSnapshots(ROOT, path.resolve(process.argv[2]));
+  main();
 }

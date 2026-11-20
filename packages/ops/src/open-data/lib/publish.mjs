@@ -5,7 +5,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, REPORT_DIR, assertSha, readJson, sha256, validateDocument, writeJson } from './contracts.mjs';
 import { entryFiles, loadSnapshot, localKey, snapshotPath, verifyEntry } from './archive.mjs';
-import { R2_PRIVATE_BUCKET } from '../../../../packages/types/mirror/site-config.cjs';
+import { R2_PRIVATE_BUCKET } from '../../../../types/mirror/site-config.cjs';
 
 export async function publishPlan({ root = ROOT, plan, store, publish }) {
   if (!Array.isArray(plan.files) || !Array.isArray(plan.snapshots)) throw Error('Invalid upload plan');
@@ -75,7 +75,7 @@ export async function publishPlan({ root = ROOT, plan, store, publish }) {
 }
 
 export async function assertPrivateWriteAllowed(keys) {
-  const guardModule = await import('../../../../packages/r2-storage/src/scripts/_assert-ci-write.ts');
+  const guardModule = await import('../../../../r2-storage/src/scripts/_assert-ci-write.ts');
   const { assertR2WriteAllowed } = guardModule.default ?? guardModule;
   assertR2WriteAllowed({ op: 'open-data-source-archive', bucket: R2_PRIVATE_BUCKET, targets: keys });
 }
@@ -83,7 +83,7 @@ export async function assertPrivateWriteAllowed(keys) {
 /** Shared private-bucket authentication and GET implementation for archive/normalize. */
 export async function createPrivateStore() {
   if (process.env.CLOUDFLARE_R2_BUCKET_NAME !== R2_PRIVATE_BUCKET) throw Error('Private bucket must be explicitly selected');
-  const storeModule = await import('../../../../packages/r2-storage/src/image-pipeline.ts');
+  const storeModule = await import('../../../../r2-storage/src/image-pipeline.ts');
   const { createS3ImageObjectStoreFromEnv } = storeModule.default ?? storeModule;
   const store = createS3ImageObjectStoreFromEnv();
   if (!store) throw Error('R2 S3 authentication required');
@@ -91,7 +91,7 @@ export async function createPrivateStore() {
 }
 
 export async function exactPublisher(options) {
-  const publisherModule = await import('../../../../packages/r2-storage/src/scripts/push-exact-r2-assets-core.ts');
+  const publisherModule = await import('../../../../r2-storage/src/scripts/push-exact-r2-assets-core.ts');
   const { publishExactR2Assets } = publisherModule.default ?? publisherModule;
   return publishExactR2Assets(options);
 }
@@ -119,7 +119,7 @@ export async function publishNormalizedOutputs({ root = ROOT, files, store, publ
   return { ...result, verified: candidates.length, dryRun: false };
 }
 
-async function main() {
+export async function main() {
   const plan = readJson(path.join(ROOT, REPORT_DIR, 'upload-plan.json'));
   await assertPrivateWriteAllowed(plan.files.map((f) => f.key));
   const store = await createPrivateStore();
