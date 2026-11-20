@@ -11,7 +11,7 @@ import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCove
 import { readStoredCover, readStoredCoverInput, createCoverStore, fetchNoteDetail, fetchCoverSource } from '../../../packages/ops/src/note/cover-storage.mjs';
 import { launchContext, assertAccount, pruneProfileCaches } from '../../../packages/ops/src/note/lib/note-session.mjs';
 import { assertCurrentCoverCandidate } from '../../../packages/ops/src/note/cover-production.mjs';
-import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
+import { measurementContext, unattended, markMeasurementAuthenticated } from '../../../packages/ops/src/measurement/browser-session.mjs';
 import {
   sha256,
   assetPath,

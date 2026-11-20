@@ -3,13 +3,16 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { execFileSync, spawnSync } from 'node:child_process';
 import {
   agentView, chromeTimeToMs, classifySession, cookiesFromChromeRows, cookiesFromState, notificationText, preflightAlerts,
   readProfileCookies, runPreflight, sessionDefinitions, writePreflight, PREFLIGHT_FILE,
 } from '../session-preflight.mjs';
 import { LOGIN } from '../refresh-session.mjs';
-import { credentialServices } from '../../../../packages/ops/src/measurement/credential-store.mjs';
+import { credentialServices } from '../credential-store.mjs';
+
+const REPO = fileURLToPath(new URL('../../../../../', import.meta.url));
 
 const NOW = Date.parse('2026-11-14T00:00:00Z');
 const DAY = 86400000;
@@ -39,7 +42,7 @@ test('失敗印は cookie の期限より優先する', () => {
   const r = classify({ cookies: [cookie(NOW + 300 * DAY)], failMark: { at: '2026-11-08T00:00:00.000Z' } });
   assert.equal(r.state, 'autologin_failed');
   assert.equal(r.failedAt, '2026-11-08T00:00:00.000Z');
-  assert.equal(r.recovery, 'node .claude/scripts/measurement/refresh-session.mjs x --wait-human');
+  assert.equal(r.recovery, 'node packages/ops/src/measurement/refresh-session.mjs x --wait-human');
 });
 
 // 意図: 期限を読めないものを「有効」や「切れている」に推測で寄せない。理由を必ず持たせる。
@@ -162,7 +165,7 @@ test('runPreflight はファイルだけを読み、取得元ごとの状態・�
     assert.equal(by.a8.lastSuccessAt, '2026-11-08T00:09:53.386Z');
     assert.equal(by.note.lastSuccessAt, null, '失敗した取得を最終成功にしない');
     assert.equal(by.x.lastSuccessAt, '2026-11-12T00:00:00.000Z');
-    assert.equal(by['kdp-reports'].recovery, 'node .claude/scripts/measurement/refresh-session.mjs kdp --wait-human');
+    assert.equal(by['kdp-reports'].recovery, 'node packages/ops/src/measurement/refresh-session.mjs kdp --wait-human');
     assert.equal(by.gsc.recovery, '人がログインする');
     assert.doesNotMatch(JSON.stringify(result), /SECRET-FIXTURE/);
 
@@ -199,12 +202,12 @@ test('正本の sessions は資格情報の全サービス + Threads + KDP レ�
 
 // 意図: 日次の確認はブラウザを起動せず、ネットワークに出ず、ファイルを読むだけ。
 test('事前確認と日次スクリプトはブラウザもネットワークも使わない', () => {
-  const src = readFileSync('.claude/scripts/measurement/session-preflight.mjs', 'utf8');
+  const src = readFileSync(join(REPO, 'packages/ops/src/measurement/session-preflight.mjs'), 'utf8');
   assert.doesNotMatch(src, /from 'playwright'|import\('playwright'\)|launchPersistentContext|fetch\(|node:https?|readCredential|security'/);
-  const sh = readFileSync('scripts/scheduled/session-preflight.sh', 'utf8').split('\n').filter((line) => !line.startsWith('#')).join('\n');
+  const sh = readFileSync(join(REPO, 'scripts/scheduled/session-preflight.sh'), 'utf8').split('\n').filter((line) => !line.startsWith('#')).join('\n');
   assert.match(sh, /session-preflight\.mjs --write --notify/);
   assert.doesNotMatch(sh, /refresh-session|collect|curl|git /);
-  assert.ok(existsSync('scripts/scheduled/com.stats47.session-preflight.plist'));
+  assert.ok(existsSync(join(REPO, 'scripts/scheduled/com.stats47.session-preflight.plist')));
 });
 
 // 意図: health.mjs --check の終了コードは収集状態だけで決まる。事前確認の「切れている」を混ぜて既存の判定を変えない。
@@ -216,7 +219,7 @@ test('measurement:status --check の判定は事前確認に左右されない',
       capability: { a8: 'site-outcomes', note: 'dashboard-metrics', gsc: 'verified-coverage-export', kdp: 'publication-daily-and-monthly-royalties', rakuten: 'monthly-outcomes' }[source] }));
     writeFileSync(join(root, 'data/authenticated/latest.json'), JSON.stringify({ generatedAt: now, sources }));
     writeFileSync(join(root, '.local/authenticated-measurement/note.autologin-failed'), `${now} login_failed\n`);
-    const run = (...extra) => spawnSync(process.execPath, ['.claude/scripts/measurement/health.mjs', '--root', root, ...extra], { encoding: 'utf8' });
+    const run = (...extra) => spawnSync(process.execPath, [join(REPO, 'packages/ops/src/measurement/health.mjs'), '--root', root, ...extra], { encoding: 'utf8' });
     const pass = run('--check');
     assert.equal(pass.status, 0, pass.stderr);
     assert.match(pass.stdout, /保存済みセッションの事前確認/);

@@ -7,12 +7,12 @@ import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import yaml from 'js-yaml';
-import { SOURCES, scopedState, sourceFor, failureCode } from '../sources.mjs';
+import { SOURCES, scopedState, sourceFor, failureCode } from '../../../../packages/ops/src/measurement/sources.mjs';
 import { encrypt, decrypt, BUCKET } from '../vault.mjs';
-import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
-import { measurementHealth } from '../health.mjs';
+import { consumerPath, validateAttempt } from '../../../../packages/ops/src/measurement/consumer-paths.mjs';
+import { measurementHealth } from '../../../../packages/ops/src/measurement/health.mjs';
 import ExcelJS from 'exceljs';
-import { kdpAsinMap, kdpDailyRows, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
+import { kdpAsinMap, kdpDailyRows, parseKdpReport, openKdpReports } from '../../../../packages/ops/src/measurement/kdp-reports.mjs';
 import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
 
 test('GSC validates ZIP contents, expected categories, row counts and site ownership', () => {
@@ -398,7 +398,7 @@ test('no CI-only entry point for sessions or credentials remains', () => {
     assert.equal(existsSync(join(dir, removed)), false, `${removed} は CI 専用だった`);
   }
   for (const script of ['refresh-session.mjs', 'bootstrap-session.mjs', 'collect.mjs', 'collect-local.mjs']) {
-    assert.doesNotMatch(readFileSync(join(dir, script), 'utf8'), /--publish|'--ci'|GITHUB_ACTIONS/, `${script} は Secrets へ送らず、CI の分岐を持たない`);
+    assert.doesNotMatch(readFileSync(script === 'refresh-session.mjs' ? 'packages/ops/src/measurement/refresh-session.mjs' : join(dir, script), 'utf8'), /--publish|'--ci'|GITHUB_ACTIONS/, `${script} は Secrets へ送らず、CI の分岐を持たない`);
   }
 });
 

@@ -24,7 +24,7 @@ test('OS の資格情報ストアを直接読むのは credential-store.mjs だ�
 
 // 意図: 読み出した資格情報をログへ出さない。cred / credential をそのまま console や JSON に渡す書き方を止める。
 test('計測ログインのスクリプトは資格情報をログや JSON に出さない', () => {
-  for (const path of ['.claude/scripts/measurement/refresh-session.mjs', STORE]) {
+  for (const path of ['packages/ops/src/measurement/refresh-session.mjs', STORE]) {
     const src = readFileSync(`${ROOT}${path}`, 'utf8');
     assert.doesNotMatch(src, /console\.(log|error|warn)\([^)]*\b(cred|credential|password|totpSecret)\b/, path);
     assert.doesNotMatch(src, /JSON\.stringify\(\s*(cred|credential)\b/, path);

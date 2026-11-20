@@ -44,14 +44,14 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { repoRoot } from "./lib/asp-browser-base.mjs";
+import { repoRoot } from "../../../packages/ops/src/ads/lib/asp-browser-base.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const REPO_ROOT = repoRoot();
 const MARKER = join(REPO_ROOT, datasetPath("a8.ui-last-run"));
 const LOG = join(REPO_ROOT, datasetPath("a8.report-log"));
 const REVIEW =
-  "node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports all --month YYYY-MM && node .claude/scripts/ads/normalize-a8-csv.mjs --latest（ローカル・要 A8 ログイン）";
+  "node packages/ops/src/ads/fetch-a8-ui-csv.mjs --reports all --month YYYY-MM && node .claude/scripts/ads/normalize-a8-csv.mjs --latest（ローカル・要 A8 ログイン）";
 
 function readJson(p) {
   try {

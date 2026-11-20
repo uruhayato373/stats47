@@ -554,7 +554,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 |---|---|
 | 接続設定 (URL / セレクタ / サイト ID / timeout) | `config/affiliate-asp.json` |
 | サイト帰属の判定 (純関数・例外) | `packages/ops/src/ads/lib/asp-site-guard.mjs` (+ `__tests__/`) |
-| ブラウザ共通基盤 (永続 context / dump / mask) | `.claude/scripts/ads/lib/asp-browser-base.mjs` |
+| ブラウザ共通基盤 (永続 context / dump / mask) | `packages/ops/src/ads/lib/asp-browser-base.mjs` |
 | ASP 共通操作 (openAsp / ensureTargetSite) | `.claude/scripts/ads/lib/asp-browser.mjs` |
 | 提携状態の実機照合 (read-only / `--write`) | `.claude/scripts/ads/affiliate-status.mjs` |
 | 提携申請 (dry-run 既定 / `--commit`) | `.claude/scripts/ads/affiliate-apply.mjs` |
@@ -584,7 +584,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 ### 規律
 
-成果の取得元は A8 と楽天だけで、どちらも Mac が週次にログイン済みのセッションで読む (afb・もしもは 2026-10-19 に取得元から外した。`.claude/scripts/measurement/sources.mjs`)。以下の同一headed process制約は提携・原稿等のブラウザ操作に適用する。
+成果の取得元は A8 と楽天だけで、どちらも Mac が週次にログイン済みのセッションで読む (afb・もしもは 2026-10-19 に取得元から外した。`packages/ops/src/measurement/sources.mjs`)。以下の同一headed process制約は提携・原稿等のブラウザ操作に適用する。
 
 | 規律 | 手段 |
 |---|---|

@@ -34,7 +34,7 @@ test('browser MCP: publishing, applying and local previews are not blocked', () 
 }));
 
 test('Bash: running a reader script or browser-use on an admin page is denied; mentioning it is not', () => withRoot((root) => {
-  for (const command of ['node .claude/scripts/ads/fetch-a8-ui-csv.mjs --month 2026-10', 'cd /x && node packages/ops/src/ads/rakuten-report.mjs',
+  for (const command of ['node packages/ops/src/ads/fetch-a8-ui-csv.mjs --month 2026-10', 'cd /x && node packages/ops/src/ads/rakuten-report.mjs',
     'npx -y tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts check-approval', 'npm run note:metrics:fetch',
     'node .claude/scripts/measurement/collect-local.mjs --main-root ~/stats47 a8', 'node .claude/scripts/kdp/kdp-reports-probe.mjs',
     'browser-use --profile x open https://note.com/dashboard']) {

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import ExcelJS from 'exceljs';
-import { kdpAsinMap, kdpBookIdsPublishedBy } from './kdp-reports.mjs';
+import { kdpAsinMap, kdpBookIdsPublishedBy } from '../../../packages/ops/src/measurement/kdp-reports.mjs';
 
 // Observed from the Japanese August 2026 export on 2026-09-21.
 // https://kdp.amazon.co.jp/ja_JP/help/topic/G200641190

@@ -5,12 +5,12 @@ import { gunzipSync } from 'node:zlib';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, readdirSync, lstatSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sourceFor, scopedState, failureCode } from './sources.mjs';
+import { sourceFor, scopedState, failureCode } from '../../../packages/ops/src/measurement/sources.mjs';
 import { writeVault } from './vault.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
-import { kdpDailyRows } from './kdp-reports.mjs';
+import { kdpDailyRows } from '../../../packages/ops/src/measurement/kdp-reports.mjs';
 import { kdpMonthlyObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
-import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
+import { acceptedNoteGap, noteInventoryAvailable } from '../../../packages/ops/src/measurement/note-inventory.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const run = promisify(execFile);
@@ -78,7 +78,7 @@ try {
   result.collectionAttempted = true;
   if (name === 'a8') {
     const yesterday = new Date(Date.now() + 9 * 3600000 - 86400000).toISOString().slice(0, 10);
-    await command('.claude/scripts/ads/fetch-a8-ui-csv.mjs', ['--reports', 'site-summary', '--month', yesterday.slice(0, 7)]);
+    await command('packages/ops/src/ads/fetch-a8-ui-csv.mjs', ['--reports', 'site-summary', '--month', yesterday.slice(0, 7)]);
     const marker = JSON.parse(/** @type {any} */ (readFileSync(join(ROOT, datasetPath("a8.ui-last-run")))));
     if (marker.status !== 'ok' || marker.downloadedUnits !== 1 || marker.collectedAt < now) throw new Error('collection_incomplete');
     await command('.claude/scripts/ads/normalize-a8-csv.mjs', ['--run', marker.lastRun]);

@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 // ★ Mac パスを直書きすると Windows では別ドライブ配下に空プロファイルを掘ってしまい、
 //   「ログイン済みなのに未ログイン扱い」になる。process.platform で分岐せず、
 //   **実在するほうを採る**フォールバック 1 本で両対応する
-//   (.claude/scripts/ads/lib/asp-browser-base.mjs と同じ規約)。
+//   (packages/ops/src/ads/lib/asp-browser-base.mjs と同じ規約)。
 const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";
 // .claude/skills/ads/scout-asp/scripts/ → 5 階層上がリポジトリ root
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");

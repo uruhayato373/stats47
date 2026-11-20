@@ -24,12 +24,15 @@
 import { createHmac } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { datasetPath } from '../../../../config/datasets.mjs';
 
-const CONFIG_URL = new URL('../../../../.claude/config/auth-credentials.json', import.meta.url);
+const CONFIG_PATH = join(fileURLToPath(new URL('../../../../', import.meta.url)), datasetPath('agent.auth-credentials'));
 
 /** 正本 (auth-credentials.json) の services。呼ばれたときに読む (import 時には読まない)。 */
 export function credentialServices() {
-  return JSON.parse(readFileSync(CONFIG_URL, 'utf8')).services;
+  return JSON.parse(readFileSync(CONFIG_PATH, 'utf8')).services;
 }
 
 export const SERVICE_PREFIX = 'stats47-measurement-';

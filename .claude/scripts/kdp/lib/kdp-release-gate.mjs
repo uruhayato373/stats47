@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { join } from "node:path";
-import { assertKindleAssetsArchived } from "./kdp-archive-gate.mjs";
+import { assertKindleAssetsArchived } from "../../../../packages/ops/src/kdp/lib/kdp-archive-gate.mjs";
 
 /** Shared by single and batch flows. Approval/identity gates remain the caller's responsibility. */
 export function assertKindleReleaseReady(root, id, listing) {

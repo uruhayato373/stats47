@@ -33,7 +33,7 @@ import { measurementContext, unattended } from '../../measurement/browser-sessio
 // (`process.cwd()` だと実行ディレクトリ次第でプロファイルが分裂するため使わない)。
 const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";
 // .claude/scripts/ads/lib/ → 4 階層上がリポジトリ root
-const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
+const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 
 /** プロファイル・state を置く root。Mac 本体チェックアウトが実在すればそれ、無ければ現リポジトリ。 */
 export function profileRoot() {

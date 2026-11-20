@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { datasetPath } from "../../../../config/datasets.mjs";
+import { datasetPath } from "../../../../../config/datasets.mjs";
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 

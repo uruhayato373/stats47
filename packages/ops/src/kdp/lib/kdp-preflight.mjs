@@ -1,5 +1,5 @@
 /** KDP preflight: deterministic metadata checks plus a fresh bookshelf capacity snapshot. */
-import { restrictedDescriptionIssues } from "../../../../packages/product-factory/src/channels/kindle/kdp-listing-copy.mjs";
+import { restrictedDescriptionIssues } from "../../../../product-factory/src/channels/kindle/kdp-listing-copy.mjs";
 import { normalizeKdpStatus } from "./kdp-status.mjs";
 import { sleep } from "./kdp-session.mjs";
 

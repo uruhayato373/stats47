@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { KDP_LISTINGS, KDP_LISTING_COPY } from "../../../config/paths.mjs";
-import { ranksFromResults } from "./lib/kdp-search-ranks.mjs";
+import { ranksFromResults } from "../../../packages/ops/src/kdp/lib/kdp-search-ranks.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const readJson = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8"));

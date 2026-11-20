@@ -24,6 +24,6 @@ else
   failed+=("affiliate-portfolio-missing")
 fi
 run superseded-dispatches node .claude/scripts/ci/audit-superseded-dispatches.mjs
-run authenticated-measurement node .claude/scripts/measurement/health.mjs --check
+run authenticated-measurement node packages/ops/src/measurement/health.mjs --check
 run next-support-window node .claude/scripts/lib/check-next-support-window.cjs
 if [ "${#failed[@]}" -gt 0 ]; then echo "異常: ${failed[*]}"; exit 1; fi

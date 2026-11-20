@@ -30,7 +30,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { unattended } from '../../measurement/browser-session.mjs';
-import { A8_REPORT_AUTOMATION } from "../../../../config/paths.mjs";
+import { A8_REPORT_AUTOMATION } from "../../../../../config/paths.mjs";
 
 import {
   launchContext,

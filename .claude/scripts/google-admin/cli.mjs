@@ -350,7 +350,7 @@ async function runApplyUi(argv) {
 async function runLogin() {
   const { spawn } = await import("node:child_process");
   const { PROFILE_DIR } = await import("./browser-context.mjs");
-  const { runPreflight } = await import("../measurement/session-preflight.mjs");
+  const { runPreflight } = await import("../../../packages/ops/src/measurement/session-preflight.mjs");
   const { gscSession, profileOpen, waitForProfileClosed } = await import("./login-wait.mjs");
   const argv = process.argv.slice(3);
   const check = () => gscSession(runPreflight({ root: PROJECT_ROOT }));
@@ -358,7 +358,7 @@ async function runLogin() {
     const before = check();
     if (before.usable) { console.log(JSON.stringify({ source: "gsc", status: "ok", state: before.state, opened: false })); return; }
     if (profileOpen(PROFILE_DIR)) { console.log(JSON.stringify({ source: "gsc", status: "profile_open", reason: "専用プロファイルの Chrome が開いたまま。閉じてから取り直す" })); process.exit(1); }
-    const { notify } = await import("../measurement/refresh-session.mjs");
+    const { notify } = await import("../../../packages/ops/src/measurement/refresh-session.mjs");
     notify("Google (GSC) のログインが切れています。開いた Chrome でログインし、Cmd+Q で閉じてください (10 分待ちます)");
   }
   fs.mkdirSync(PROFILE_DIR, { recursive: true });

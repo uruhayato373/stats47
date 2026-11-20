@@ -7,10 +7,10 @@ import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import ExcelJS from 'exceljs';
 import { expectedKdpRoyaltyMonth, kdpMonthlyVaultKey, archivedKdpMonthlyReport, parseKdpMonthlyReport, collectKdpMonthlyReport } from '../kdp-monthly-reports.mjs';
-import { kdpBookIdsPublishedBy } from '../kdp-reports.mjs';
-import { validateAttempt, consumerPath } from '../consumer-paths.mjs';
-import { measurementHealth } from '../health.mjs';
-import { SOURCES } from '../sources.mjs';
+import { kdpBookIdsPublishedBy } from '../../../../packages/ops/src/measurement/kdp-reports.mjs';
+import { validateAttempt, consumerPath } from '../../../../packages/ops/src/measurement/consumer-paths.mjs';
+import { measurementHealth } from '../../../../packages/ops/src/measurement/health.mjs';
+import { SOURCES } from '../../../../packages/ops/src/measurement/sources.mjs';
 import { kdpMonthlyObservations, validateSalesLedger } from '../../../../packages/product-factory/src/sales/ledger-core.mjs';
 
 const listings = { 'K-S1-01': { author: 'stats47', asin: null, previousEditions: [{ author: 'stats47', asin: 'B000000001' }] } };

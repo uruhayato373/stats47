@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
-import { tailLines } from '../tail-lines.mjs';
+import { tailLines } from '../../../../packages/ops/src/measurement/tail-lines.mjs';
 
 const stack = [
   'node:internal/modules/cjs/loader:1100',

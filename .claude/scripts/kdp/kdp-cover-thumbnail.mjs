@@ -16,8 +16,8 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import sharp from "sharp";
 import { KDP_COVER_THUMBNAIL_CHECKS } from "../../../config/paths.mjs";
-import { ROOT, readListings } from "./lib/kdp-session.mjs";
-import { COVER_THUMBNAIL_HEIGHTS_PX } from "./lib/kdp-cover-thumbnail.mjs";
+import { ROOT, readListings } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
+import { COVER_THUMBNAIL_HEIGHTS_PX } from "../../../packages/ops/src/kdp/lib/kdp-cover-thumbnail.mjs";
 
 const argv = process.argv.slice(2);
 const command = argv[0];

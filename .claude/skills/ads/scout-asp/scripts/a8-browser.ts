@@ -44,7 +44,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 // ★ Mac パスを直書きすると Windows では別ドライブ配下に空プロファイルを掘ってしまい、
 //   「ログイン済みなのに未ログイン扱い」になる。process.platform で分岐せず、
 //   **実在するほうを採る**フォールバック 1 本で両対応する
-//   (.claude/scripts/ads/lib/asp-browser-base.mjs と同じ規約)。
+//   (packages/ops/src/ads/lib/asp-browser-base.mjs と同じ規約)。
 const MAIN_CHECKOUT = "/Users/minamidaisuke/stats47";
 const PROFILE_ROOT = fs.existsSync(MAIN_CHECKOUT) ? MAIN_CHECKOUT : PROJECT_ROOT;
 const PROFILE_DIR = path.join(PROFILE_ROOT, ".local/playwright-a8-profile");

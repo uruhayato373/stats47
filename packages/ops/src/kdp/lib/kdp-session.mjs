@@ -25,10 +25,10 @@ import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeKdpOperationalState, normalizeKdpStatus } from "./kdp-status.mjs";
 import { advancePublicationStage, hasUnpublishedPredecessor } from "./kdp-publication-stage.mjs";
-import { KDP_ACCOUNT, KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { KDP_ACCOUNT, KDP_LISTINGS } from "../../../../../config/paths.mjs";
 
-// このファイル: .claude/scripts/kdp/lib/kdp-session.mjs → repo root は 4 つ上。
-export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
+// このファイル: packages/ops/src/kdp/lib/kdp-session.mjs → repo root は 4 つ上。
+export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..", "..");
 
 // ★プロファイルは本体チェックアウト固定 (worktree 分裂で「毎回ログイン」になるのを防ぐ)。
 const PROFILE_ROOT = process.env.KDP_PROFILE_ROOT

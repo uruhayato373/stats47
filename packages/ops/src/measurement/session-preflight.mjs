@@ -20,8 +20,8 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'no
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { datasetPath } from '../../../config/datasets.mjs';
-import { ALERT_STATES, PREFLIGHT_DIR, PREFLIGHT_FILE, STATE_LABELS, formatJst } from '../../../packages/ops/src/measurement/session-states.mjs';
+import { datasetPath } from '../../../../config/datasets.mjs';
+import { ALERT_STATES, PREFLIGHT_DIR, PREFLIGHT_FILE, STATE_LABELS, formatJst } from './session-states.mjs';
 
 export { ALERT_STATES, PREFLIGHT_DIR, PREFLIGHT_FILE, STATE_LABELS, formatJst };
 
@@ -29,7 +29,7 @@ export const DEFAULT_WARN_DAYS = 3;
 const DAY_MS = 86400000;
 /** Chromium の expires_utc は 1601-01-01 からのマイクロ秒。Unix 起点との差 (ミリ秒) */
 const CHROME_EPOCH_OFFSET_MS = 11644473600000;
-const CONFIG_URL = new URL('../../config/auth-credentials.json', import.meta.url);
+const CONFIG_PATH = join(fileURLToPath(new URL('../../../../', import.meta.url)), datasetPath('agent.auth-credentials'));
 
 /**
  * @typedef {{ label: string, refreshSource?: string, failMark?: string, profile?: string, state?: string, domains?: string[],
@@ -38,14 +38,14 @@ const CONFIG_URL = new URL('../../config/auth-credentials.json', import.meta.url
  */
 
 /** 正本の sessions を [id, def] の配列で返す (`_comment` を除く) */
-export function sessionDefinitions(config = JSON.parse(readFileSync(CONFIG_URL, 'utf8'))) {
+export function sessionDefinitions(config = JSON.parse(readFileSync(CONFIG_PATH, 'utf8'))) {
   return Object.entries(config.sessions ?? {}).filter(([id]) => !id.startsWith('_'))
     .map(([id, def]) => /** @type {[string, SessionDef]} */ ([id, def]));
 }
 
 /** 復旧コマンド。refresh-session.mjs が扱う取得元はオーナーが打つ --wait-human、それ以外は recoveryNote */
 export function recoveryFor(def) {
-  return def.refreshSource ? `node .claude/scripts/measurement/refresh-session.mjs ${def.refreshSource} --wait-human` : (def.recoveryNote ?? null);
+  return def.refreshSource ? `node packages/ops/src/measurement/refresh-session.mjs ${def.refreshSource} --wait-human` : (def.recoveryNote ?? null);
 }
 
 export function chromeTimeToMs(expiresUtc) {
@@ -215,7 +215,7 @@ async function main(args) {
     return;
   }
   const option = (name) => { const i = args.indexOf(name); return i < 0 ? null : args[i + 1]; };
-  const root = resolve(option('--root') ?? fileURLToPath(new URL('../../../', import.meta.url)));
+  const root = resolve(option('--root') ?? fileURLToPath(new URL('../../../../', import.meta.url)));
   const warnDays = option('--warn-days') ? Number(option('--warn-days')) : DEFAULT_WARN_DAYS;
   const result = runPreflight({ root, warnDays });
   if (args.includes('--write')) writePreflight(root, result);

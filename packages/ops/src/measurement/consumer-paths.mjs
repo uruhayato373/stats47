@@ -1,7 +1,7 @@
 /** Exact canonical restore allowlist. Sessions, diagnostics and arbitrary paths never leave the vault. */
 import { sourceFor, MEASUREMENT_MAX_AGE_MS } from './sources.mjs';
 import { createHash } from 'node:crypto';
-import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 export function consumerPath(name, path) {
   if (name === 'rakuten' && path === datasetPath("rakuten.results")) return path;
   if (name === 'a8' && /^data\/affiliate\/a8-(results|report-log|ui-last-run)\.json$/.test(path)) return path;

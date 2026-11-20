@@ -32,8 +32,8 @@ import {
   waitForLogin,
   writeBackKdpState,
   writeBackPreviousEditionUnpublished,
-} from "./lib/kdp-session.mjs";
-import { pendingPredecessors } from "./lib/kdp-publication-stage.mjs";
+} from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
+import { pendingPredecessors } from "../../../packages/ops/src/kdp/lib/kdp-publication-stage.mjs";
 
 const BASE = "https://kdp.amazon.co.jp/ja_JP";
 const args = process.argv.slice(2);

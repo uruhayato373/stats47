@@ -43,9 +43,9 @@ collect はオーナーが会話で頼んだときだけ動かす。成果の判
 
 ```bash
 # まず DOM 検出だけ (ダウンロードしない)
-node .claude/scripts/ads/fetch-a8-ui-csv.mjs --dry-run
+node packages/ops/src/ads/fetch-a8-ui-csv.mjs --dry-run
 # 実収集
-node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports all
+node packages/ops/src/ads/fetch-a8-ui-csv.mjs --reports all
 ```
 
 - 未ログインならブラウザが開くので人間がログインする (`/scout-asp` の `login.mjs` でも可)。

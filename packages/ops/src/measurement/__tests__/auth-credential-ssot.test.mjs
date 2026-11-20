@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { LOGIN } from '../refresh-session.mjs';
-import { credentialServices, parseCmdkeyList, readCredential, storedAccounts } from '../../../../packages/ops/src/measurement/credential-store.mjs';
+import { credentialServices, parseCmdkeyList, readCredential, storedAccounts } from '../credential-store.mjs';
 
-const ROOT = fileURLToPath(new URL('../../../../', import.meta.url));
+const ROOT = fileURLToPath(new URL('../../../../../', import.meta.url));
 const services = credentialServices();
 
 // 意図: 正本に「自動ログインする」と書いた service と、実際にセレクタを持つ service を一致させる。

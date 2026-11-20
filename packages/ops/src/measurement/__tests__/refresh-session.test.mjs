@@ -4,7 +4,7 @@ import { classifyLoginOutcome, LOGIN, passTotpIfOffered, refresh } from '../refr
 import { mkdtempSync, mkdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { parseKeychainAccount, totpCode } from '../../../../packages/ops/src/measurement/credential-store.mjs';
+import { parseKeychainAccount, totpCode } from '../credential-store.mjs';
 
 test('failed automatic login stays paused; explicit human recovery saves only a verified session', async () => {
   const root = mkdtempSync(join(tmpdir(), 'stats47-human-recovery-'));
