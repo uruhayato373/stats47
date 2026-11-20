@@ -5,7 +5,7 @@
  *   npm run surveys:lenses:status -- [--survey kakei-chousa] [--json]
  *
  * 状況は展開記録 (data/source-inventory/expansion.json) と各チャネルの正本から集計し、台帳には書かない。
- * 判定の本体は .claude/scripts/lib/survey-lenses.mjs。規約: .claude/rules/survey-content-standards.md「調査の切り口台帳」
+ * 判定の本体は packages/ops/src/surveys/survey-lenses.mjs。規約: .claude/rules/survey-content-standards.md「調査の切り口台帳」
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -14,7 +14,7 @@ import { KAKEI_ANALYSES } from "@stats47/data-configs";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
-import { checkLensLedgers, lensStatus, type LensLedger } from "../lib/survey-lenses.mjs";
+import { checkLensLedgers, lensStatus, type LensLedger } from "../../../packages/ops/src/surveys/survey-lenses.mjs";
 import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from "../../../packages/ops/src/source-vault/lib/reference-expansion.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");

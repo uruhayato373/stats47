@@ -6,7 +6,7 @@
  * タイムラインを開き、見えた投稿の status URL・本文・時刻を集めて、台帳 posts.json の X 行
  * (status=scheduled で予約時刻を過ぎたもの) と本文 1 行目で突き合わせる。一致した行だけ
  * status=posted + post_url にする。時刻の経過だけでは posted にしない (memory feedback_x_post_url_integrity)。
- * 判定は lib/sns-posted-core.cjs (テスト付き)。
+ * 判定は packages/ops/src/sns/sns-posted-core.cjs (テスト付き)。
  *
  * X はログインしないとプロフィールが 403 になる (2026-09-23 実測) ため CI では動かせない。
  * Mac の launchd (scripts/scheduled/x-verify-posted.sh) が毎晩 --record で動かし、確認できた URL を
@@ -25,7 +25,7 @@
 const path = require("node:path");
 const { chromium } = require("playwright");
 const store = require(path.join(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
-const core = require(path.join(__dirname, "../lib/sns-posted-core.cjs"));
+const core = require(path.join(__dirname, "../../../packages/ops/src/sns/sns-posted-core.cjs"));
 const fs = require("node:fs");
 
 // publish-x と同じ専用プロファイル

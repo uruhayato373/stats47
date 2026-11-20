@@ -1,4 +1,4 @@
-import { isoWeekEnd, isoWeekOf } from "../../lib/effect-verdict/iso-week.mjs";
+import { isoWeekEnd, isoWeekOf } from "../../../../packages/ops/src/effect-verdict/iso-week.mjs";
 
 const MS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
 

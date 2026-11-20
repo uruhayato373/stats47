@@ -20,9 +20,9 @@ import fs from "node:fs";
 import { execFile as execFileCallback } from "node:child_process";
 import { promisify } from "node:util";
 
-import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../../../packages/ops/src/blog/lint/article-structure-lint.mjs";
 import { lintInternalLinks } from "../../../apps/web/scripts/lib/internal-link-lint.mjs";
-import { lintParenNumbers } from "../lib/paren-number-lint.mjs";
+import { lintParenNumbers } from "../../../packages/ops/src/blog/lint/paren-number-lint.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const BASE_URL = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;

@@ -20,7 +20,7 @@ import {
   buildManifest, createArticleStores, listRemoteFiles, loadArticleFiles, readLocalFiles, saveArticleFiles,
   verifyArticleStorage, workingDir,
 } from '../../../packages/ops/src/note/article-store.mjs';
-import { validateRankingArticleFiles } from './lib/image-assets-audit.mjs';
+import { validateRankingArticleFiles } from '../../../packages/ops/src/note/lib/image-assets-audit.mjs';
 
 dotenv.config({ path: path.join(LEDGER_ROOT, '.env.local'), quiet: true });
 

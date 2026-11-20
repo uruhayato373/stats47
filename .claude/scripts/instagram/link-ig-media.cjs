@@ -5,7 +5,7 @@
  * Graph API の media 一覧 (fetch-metrics-ci.cjs --media-out が出す JSON) を投稿台帳と結び付ける。
  *   - 台帳の Instagram 行に external_id (media_id)、post_url の無い行には permalink を入れる
  *   - 指標の時系列 (metric-snapshots) で sns_post_id が空の Instagram 行を、media_id から台帳 id へ結び付ける
- * 判定は lib/ig-ledger-core.cjs の matchIgMediaToLedger (テスト付き)。
+ * 判定は packages/ops/src/sns/ig-ledger-core.cjs の matchIgMediaToLedger (テスト付き)。
  *
  * sns-metrics-weekly.yml が main で media 一覧を取得したあと、develop へ切り替えてから develop の台帳に対して
  * 実行する (main の古い台帳を書き換えて develop へ持ち込むと台帳を巻き戻すため)。
@@ -17,7 +17,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const store = require(path.join(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
 const metricsStore = require(path.join(__dirname, "../../../packages/ops/src/sns/sns-metrics-store.cjs"));
-const { matchIgMediaToLedger } = require(path.join(__dirname, "../lib/ig-ledger-core.cjs"));
+const { matchIgMediaToLedger } = require(path.join(__dirname, "../../../packages/ops/src/sns/ig-ledger-core.cjs"));
 
 const args = process.argv.slice(2);
 const mediaFile = args[args.indexOf("--media") + 1];

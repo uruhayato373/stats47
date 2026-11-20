@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import * as cheerio from 'cheerio';
-import { noteRequest } from './native-cards.mjs';
+import { noteRequest } from '../../../../packages/ops/src/note/lib/native-cards.mjs';
 
 export const bodyHash = (body) => createHash('sha256').update(body || '').digest('hex');
 // GET returns the generated heading array; native saves accept an enabled/disabled boolean.

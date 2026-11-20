@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Keep single-attempt HTTP handling and the unmodified API error payload.
-import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { resolveEstatAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { extractYearCode } from "../../../packages/estat-api/mirror/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
 /**
@@ -34,7 +34,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { ESTAT_STATS_DATA_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");

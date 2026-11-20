@@ -272,7 +272,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs": {
+    "packages/ops/src/blog/lib/__tests__/refresh-chart-year.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -287,7 +287,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs": {
+    "packages/ops/src/blog/lib/__tests__/topic-queue-spurious-core.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -302,7 +302,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/topic-queue-spurious-core.mjs": {
+    "packages/ops/src/blog/lib/topic-queue-spurious-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -602,7 +602,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/__tests__/estat-catalog.test.mjs": {
+    "packages/ops/src/estat/__tests__/estat-catalog.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -617,7 +617,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/__tests__/svg-lint.image-type.test.mjs": {
+    "packages/svg-builder/src/lint/__tests__/svg-lint.image-type.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -632,7 +632,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs": {
+    "packages/svg-builder/src/lint/__tests__/svg-lint.scatter.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -647,7 +647,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/article-factual-check.mjs": {
+    "packages/ops/src/blog/lint/article-factual-check.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -737,7 +737,7 @@
       "topoPrefCode": 3,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/__tests__/image-assets-audit.test.mjs": {
+    "packages/ops/src/note/__tests__/image-assets-audit.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -752,7 +752,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/__tests__/question-cover-data.test.mjs": {
+    "packages/ops/src/note/__tests__/question-cover-data.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -782,7 +782,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/build-note-figure-ledger.mjs": {
+    "packages/ops/src/note/build-note-figure-ledger.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -842,7 +842,7 @@
       "topoPrefCode": 6,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/lib/question-cover-data.mjs": {
+    "packages/ops/src/note/lib/question-cover-data.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1022,7 +1022,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/correlation-carousel-core.test.ts": {
+    "packages/ops/src/sns/__tests__/correlation-carousel-core.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1052,7 +1052,7 @@
       "topoPrefCode": 3,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/ig-map-props.test.ts": {
+    "packages/ops/src/sns/__tests__/ig-map-props.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1067,7 +1067,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/ranking-story-card.test.ts": {
+    "packages/ops/src/sns/__tests__/ranking-story-card.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1172,7 +1172,7 @@
       "topoPrefCode": 1,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/buzz-map-area-code.ts": {
+    "packages/ops/src/sns/lib/buzz-map-area-code.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1187,7 +1187,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/correlation-carousel-core.ts": {
+    "packages/ops/src/sns/lib/correlation-carousel-core.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1217,7 +1217,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-area-props.ts": {
+    "packages/ops/src/sns/lib/ig-area-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1232,7 +1232,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-compare-props.ts": {
+    "packages/ops/src/sns/lib/ig-compare-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1247,7 +1247,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-map-props.ts": {
+    "packages/ops/src/sns/lib/ig-map-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1307,7 +1307,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/cultural-industry.test.mjs": {
+    "packages/ops/src/themes/__tests__/cultural-industry.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1322,7 +1322,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/earthquake-exposure.test.mjs": {
+    "packages/ops/src/themes/__tests__/earthquake-exposure.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1337,7 +1337,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/ingest-employment-community-contract.test.mjs": {
+    "packages/ops/src/themes/__tests__/ingest-employment-community-contract.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1352,7 +1352,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/ingest-factory-investment-contract.test.mjs": {
+    "packages/ops/src/themes/__tests__/ingest-factory-investment-contract.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1367,7 +1367,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/ingest-prefectural-buildings-contract.test.mjs": {
+    "packages/ops/src/themes/__tests__/ingest-prefectural-buildings-contract.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1382,7 +1382,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/landslide-canonical.test.mjs": {
+    "packages/ops/src/themes/__tests__/landslide-canonical.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1397,7 +1397,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/retail-employees.test.mjs": {
+    "packages/ops/src/themes/__tests__/retail-employees.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1412,7 +1412,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/snow-designation.test.mjs": {
+    "packages/ops/src/themes/__tests__/snow-designation.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1427,7 +1427,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/theme-expansion.test.mjs": {
+    "packages/ops/src/themes/__tests__/theme-expansion.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1442,7 +1442,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/theme-quality-core.test.mjs": {
+    "packages/ops/src/themes/__tests__/theme-quality-core.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1457,7 +1457,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/tsunami-native.test.mjs": {
+    "packages/ops/src/themes/__tests__/tsunami-native.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1472,7 +1472,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/vacancy-types.test.mjs": {
+    "packages/ops/src/themes/__tests__/vacancy-types.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1487,7 +1487,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/verify-external-ingest.test.mjs": {
+    "packages/ops/src/themes/__tests__/verify-external-ingest.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1502,7 +1502,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/__tests__/water-pipe-maintenance.test.mjs": {
+    "packages/ops/src/themes/__tests__/water-pipe-maintenance.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1562,7 +1562,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-cultural-industry.mjs": {
+    "packages/ops/src/themes/ingest-cultural-industry.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1577,7 +1577,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-earthquake-exposure.mjs": {
+    "packages/ops/src/themes/ingest-earthquake-exposure.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1607,7 +1607,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-employment-community.mjs": {
+    "packages/ops/src/themes/ingest-employment-community.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1652,7 +1652,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-factory-investment.mjs": {
+    "packages/ops/src/themes/ingest-factory-investment.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1697,7 +1697,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-foreign-employment.mjs": {
+    "packages/ops/src/themes/ingest-foreign-employment.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1787,7 +1787,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-perinatal-heritage.mjs": {
+    "packages/ops/src/themes/ingest-perinatal-heritage.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1817,7 +1817,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-prefectural-buildings.mjs": {
+    "packages/ops/src/themes/ingest-prefectural-buildings.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1847,7 +1847,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-retail-employees.mjs": {
+    "packages/ops/src/themes/ingest-retail-employees.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1877,7 +1877,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-shelter-applicability.mjs": {
+    "packages/ops/src/themes/ingest-shelter-applicability.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1922,7 +1922,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-tourism-consumption.mjs": {
+    "packages/ops/src/themes/ingest-tourism-consumption.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1967,7 +1967,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-tsunami-exposure.mjs": {
+    "packages/ops/src/themes/ingest-tsunami-exposure.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1982,7 +1982,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-vacancy-types.mjs": {
+    "packages/ops/src/themes/ingest-vacancy-types.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1997,7 +1997,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/ingest-water-pipe-maintenance.mjs": {
+    "packages/ops/src/themes/ingest-water-pipe-maintenance.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -2027,7 +2027,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/lib/tsunami-native-reader.mjs": {
+    "packages/ops/src/themes/lib/tsunami-native-reader.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -2042,7 +2042,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/lib/tsunami-source-reader.mjs": {
+    "packages/ops/src/themes/lib/tsunami-source-reader.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -2057,7 +2057,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/lib/tsunami-spatial.mjs": {
+    "packages/ops/src/themes/lib/tsunami-spatial.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -2087,7 +2087,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/theme-expansion-core.mjs": {
+    "packages/ops/src/themes/theme-expansion-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -2102,7 +2102,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/themes/verify-external-ingest.mjs": {
+    "packages/ops/src/themes/verify-external-ingest.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

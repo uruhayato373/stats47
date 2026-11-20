@@ -18,7 +18,7 @@ import {
   AUTHORED_KEY_EVENTS,
   plannedActionToken,
   requireCommit,
-} from "../apply-allowlisted-settings.mjs";
+} from "../../../../packages/ops/src/google/apply-allowlisted-settings.mjs";
 import { assertAdSenseAccount, collectAdUnits, deriveDesiredAdUnits } from "../audit-adsense.mjs";
 import { assertPropertyId, assertStreamHost, summarizeCustomDimensions, summarizeEnhancedMeasurement } from "../audit-ga4-api.mjs";
 import { sanitize, sanitizeObject, redactEmail, redactHelpToken } from "../redact.mjs";

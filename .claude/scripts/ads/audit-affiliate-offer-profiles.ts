@@ -8,11 +8,11 @@ import {
   AFFILIATE_OFFER_PROFILES,
   AFFILIATE_PROGRAM_REF_BY_AD_ID,
 } from "../../../apps/web/scripts/affiliate-offer-profiles-data";
-import { AFFILIATE_VERTICALS } from "./lib/affiliate-status-core.mjs";
+import { AFFILIATE_VERTICALS } from "../../../packages/ops/src/ads/lib/affiliate-status-core.mjs";
 import {
   deriveAffiliateProgramRefs,
   validateAffiliateOfferProfiles,
-} from "./lib/affiliate-offer-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-offer-core.mjs";
 
 function main(): void {
   const derived = deriveAffiliateProgramRefs(AFFILIATE_ADS, AFFILIATE_PROGRAM_REF_BY_AD_ID);

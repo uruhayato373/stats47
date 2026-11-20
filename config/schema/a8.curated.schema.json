@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "A8 scout の設定 (申請上限・採点の係数・NG ジャンル・vertical の写像・priority のバンド)",
+  "description": "config/a8-curated.json の形状契約。2026-11-20 に .claude/scripts/ads/data/ から移したときに実データから作成。読むのは packages/ops/src/ads/lib/a8-scout-core.mjs と check-a8-apply-budget.cjs。_ で始まる項目は説明の文。",
+  "type": "object",
+  "required": ["weeklyApplyMax", "minScore", "scoreWeights", "scoreNorm", "blocklistKeywords", "verticalKeywords", "categoryCodeToVertical", "priorityBands", "priorityTargetBonus", "materialSizePref"],
+  "properties": {
+    "weeklyApplyMax": { "type": "integer", "minimum": 0 },
+    "minScore": { "type": "number" },
+    "scoreWeights": {
+      "type": "object",
+      "required": ["reward", "epc", "confirm", "gap"],
+      "additionalProperties": { "type": "number" }
+    },
+    "scoreNorm": {
+      "type": "object",
+      "required": ["rewardCapYen", "rewardRateCapPct", "epcCapYen", "gapBonus"],
+      "properties": {
+        "rewardCapYen": { "type": "number" },
+        "rewardRateCapPct": { "type": "number" },
+        "epcCapYen": { "type": "number" },
+        "gapBonus": { "type": "object", "additionalProperties": { "type": "number" } }
+      }
+    },
+    "blocklistKeywords": { "type": "array", "items": { "type": "string" } },
+    "verticalKeywords": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "type": "string" } }
+    },
+    "categoryCodeToVertical": { "type": "object", "additionalProperties": { "type": "string" } },
+    "priorityBands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["minConfirmedEpc", "priority"],
+        "properties": { "minConfirmedEpc": { "type": "number" }, "priority": { "type": "number" } }
+      }
+    },
+    "priorityTargetBonus": { "type": "number" },
+    "materialSizePref": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["width", "height"],
+        "properties": { "width": { "type": "integer" }, "height": { "type": "integer" } }
+      }
+    }
+  },
+  "patternProperties": { "^_": { "type": "string" } }
+}

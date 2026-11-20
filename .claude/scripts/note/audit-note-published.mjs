@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { auditArticle, buildQueue, checkBaseline, noteIdOf, parseBody, pngSize, rankingKeysOf, summarize } from './lib/published-audit.mjs';
+import { auditArticle, buildQueue, checkBaseline, noteIdOf, parseBody, pngSize, rankingKeysOf, summarize } from '../../../packages/ops/src/note/lib/published-audit.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)('../../../packages/types/mirror/site-config.cjs');

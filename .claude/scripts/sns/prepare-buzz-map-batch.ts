@@ -24,13 +24,13 @@ import { readFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { createRequire } from 'node:module';
 
-import { selectBatch, isPostable } from './lib/buzz-map-router-core.mjs';
-import { verifyLandingContract } from './lib/buzz-map-contract-core.mjs';
+import { selectBatch, isPostable } from '../../../packages/ops/src/sns/lib/buzz-map-router-core.mjs';
+import { verifyLandingContract } from '../../../packages/ops/src/sns/lib/buzz-map-contract-core.mjs';
 import {
   buildUtmUrl,
   utmCampaignFor,
   validateAttributionContract,
-} from './lib/buzz-map-utm-core.mjs';
+} from '../../../packages/ops/src/sns/lib/buzz-map-utm-core.mjs';
 import {
   assetPlanForType,
   compositionsForType,
@@ -40,7 +40,7 @@ import {
   idempotencyDecision,
   captionComplete,
   buildCandidatePlan,
-} from './lib/buzz-map-batch-core.mjs';
+} from '../../../packages/ops/src/sns/lib/buzz-map-batch-core.mjs';
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 

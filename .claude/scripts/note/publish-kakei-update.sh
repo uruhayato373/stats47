@@ -65,7 +65,7 @@ for MOBILE_SVG in "$ADIR"/data/*-prefecture-rankings-ig.svg; do
   [ -e "$MOBILE_SVG" ] || continue
   BASE=$(basename "$MOBILE_SVG" -ig.svg)
   cp "$MOBILE_SVG" "$ADIR/images/$BASE.svg"
-  node "$ROOT/.claude/scripts/lib/svg-to-png.cjs" \
+  node "$ROOT/packages/ops/src/media/svg-to-png.cjs" \
     "$ADIR/images/$BASE.svg" "$ADIR/images/$BASE.png" >/dev/null \
     || { echo "FAIL $SLUG mobile ranking image: $BASE"; exit 1; }
 done

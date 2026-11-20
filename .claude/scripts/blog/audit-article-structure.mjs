@@ -25,7 +25,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
+import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../../../packages/ops/src/blog/lint/article-structure-lint.mjs";
 import { lintInternalLinks } from "../../../apps/web/scripts/lib/internal-link-lint.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

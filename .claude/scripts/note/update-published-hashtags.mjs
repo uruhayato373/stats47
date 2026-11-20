@@ -25,7 +25,7 @@ import {
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readApprovedHashtags } from './lib/note-hashtags.mjs';
+import { readApprovedHashtags } from '../../../packages/ops/src/note/lib/note-hashtags.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));

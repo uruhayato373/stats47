@@ -30,11 +30,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { yearLabelOf } from "./lib/ranking-year-label.mjs";
+import { yearLabelOf } from "../../../packages/ops/src/blog/lib/ranking-year-label.mjs";
 import { renderTileMapChart } from "../../../apps/admin/lib/template-ranking-tile-map";
 import { rankingChartFromArticleData } from "../../../apps/admin/lib/type-chart-input";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
-import { matchRate, parseMapDisplay } from "../lib/map-value-match.mjs";
+import { matchRate, parseMapDisplay } from "../../../packages/ops/src/blog/lint/map-value-match.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
@@ -99,7 +99,7 @@ async function pMap<T, R>(items: T[], fn: (x: T) => Promise<R>, c: number): Prom
 }
 
 // 照合の純粋関数は lib に切り出してテストで固定してある
-// (`.claude/scripts/lib/map-value-match.mjs` + `__tests__/`)。
+// (`packages/ops/src/blog/lint/map-value-match.mjs` + `__tests__/`)。
 
 /** SSOT: ranking values.json の各年 partition */
 async function ssotPartitions(key: string) {

@@ -19,7 +19,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { launchContext, assertAccount, UA } from "./lib/note-session.mjs";
+import { launchContext, assertAccount, UA } from "../../../packages/ops/src/note/lib/note-session.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const MAGAZINES_TS = join(ROOT, "packages/ops/src/note/catalog/magazines.ts");

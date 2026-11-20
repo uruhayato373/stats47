@@ -44,7 +44,7 @@ import {
   validateDuelItems,
   MAX_DUEL_ITEMS,
   MIN_DUEL_ITEMS,
-} from "./lib/ig-compare-props.ts";
+} from "../../../packages/ops/src/sns/lib/ig-compare-props.ts";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");

@@ -10,7 +10,7 @@
  *     カテゴリ別の前週比に使う (lib/gsc-demand.mjs。GSC-DEMAND-REPORT-01)
  *   - summary.json … 確定7日 KPI (finalized7d/previous7d) + rolling28d の期間 metadata 付き summary。
  *     details に明細の期間とキーワード表の捕捉率 (queries の clicks 合計 ÷ サイト全体の clicks) を持つ
- * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)
+ * 認証: ../../../packages/ops/src/google/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)
  *
  * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - 期間は lib/periods.mjs (SSOT) が week から決定的に導出する (実行日に依存しない)。
@@ -25,12 +25,12 @@ import {
   PROJECT_ROOT,
   parseWeekArg,
   toCsv,
-} from "./lib/auth.mjs";
+} from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
-import { buildGscSummary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
-import { PAGES_FINALIZED_FILE, QUERIES_FINALIZED_FILE, detailCoverage } from "./lib/gsc-demand.mjs";
+import { buildGscSummary, SUMMARY_FILE } from "../../../packages/ops/src/metrics/lib/weekly-summary.mjs";
+import { PAGES_FINALIZED_FILE, QUERIES_FINALIZED_FILE, detailCoverage } from "../../../packages/ops/src/metrics/lib/gsc-demand.mjs";
 import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
-import { createSearchConsoleClient } from "../lib/google-client.cjs";
+import { createSearchConsoleClient } from "../../../packages/ops/src/google/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const SITE_URL = GSC_PROPERTY;

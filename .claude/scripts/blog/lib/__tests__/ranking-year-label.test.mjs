@@ -15,7 +15,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { resolveYearFormat, yearLabelOf } from "../ranking-year-label.mjs";
+import { resolveYearFormat, yearLabelOf } from "../../../../../packages/ops/src/blog/lib/ranking-year-label.mjs";
 
 const SCRIPT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "fetch-ranking-data-r2.mjs");
 

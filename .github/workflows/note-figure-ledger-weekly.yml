@@ -11,6 +11,7 @@ on:
     branches: [develop]
     paths:
       - ".claude/scripts/note/build-note-figure-ledger.mjs"
+      - "packages/ops/src/note/build-note-figure-ledger.mjs"
       - ".github/workflows/note-figure-ledger-weekly.yml"
   schedule:
     # JST 土曜 04:00。計測 (02:00) の後、週次レビューの前

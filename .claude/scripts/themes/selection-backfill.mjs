@@ -45,7 +45,7 @@ import {
   gateEntries,
   listTargets,
   loadClassIndex,
-} from "./selection-backfill-core.mjs";
+} from "../../../packages/ops/src/themes/selection-backfill-core.mjs";
 
 const REPORT_DIR_DEFAULT = path.join(PROJECT_ROOT, datasetDir("themes.audits"));
 const LOCAL_DIR = path.join(PROJECT_ROOT, ".local/selection-backfill");

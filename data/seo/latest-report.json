@@ -6,7 +6,7 @@
     "periodEnd": "2026-11-16",
     "windowDays": 7
   },
-  "inputHash": "7ea4bccd3a359851a72f93f482667df0fdfee6cf44e70c2ad6c7ae14585a4461",
+  "inputHash": "0379c006212d939c08ecb73a50b66b9d403019110ab920362f84d618f88a8ab4",
   "movements": [
     {
       "keyword": "津山 人口",
@@ -100,16 +100,7 @@
     }
   ],
   "verdicts": [],
-  "selected": {
-    "keyword": "阿波市 人口",
-    "targetPath": "/areas/36000/cities/36206",
-    "rank": 7.061624649859944,
-    "impressions": 714,
-    "clicks": 0,
-    "group": 5,
-    "previousMethod": null,
-    "editableFile": null
-  },
+  "selected": null,
   "observing": [],
   "pendingPublication": [
     {
@@ -171,6 +162,11 @@
       "keyword": "金沢市 人口",
       "targetPath": "/areas/17000/cities/17201",
       "proposalId": "42960578131-1"
+    },
+    {
+      "keyword": "阿波市 人口",
+      "targetPath": "/areas/36000/cities/36206",
+      "proposalId": "44442727274-1"
     }
   ]
 }

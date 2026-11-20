@@ -1,6 +1,6 @@
 /** 商品LPの分析台帳 → 原典取得 → CSV/Excel/共通画像 → 未公開の改訂案。公開版の納品は変更しない。 */
 // The shared loader resolves local/CI credentials before the API package is imported.
-import { getAppId } from '../lib/estat-catalog/api.mjs';
+import { getAppId } from '../../../packages/ops/src/estat/catalog-api.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';

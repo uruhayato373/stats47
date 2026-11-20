@@ -9,9 +9,9 @@ import { promisify } from 'node:util';
 import sharp from 'sharp';
 import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision, renameCoverFile } from '../../../packages/ops/src/note/cover-assets.mjs';
 import { readStoredCover, readStoredCoverInput, createCoverStore, fetchNoteDetail, fetchCoverSource } from '../../../packages/ops/src/note/cover-storage.mjs';
-import { launchContext, assertAccount, pruneProfileCaches } from './lib/note-session.mjs';
+import { launchContext, assertAccount, pruneProfileCaches } from '../../../packages/ops/src/note/lib/note-session.mjs';
 import { assertCurrentCoverCandidate } from '../../../packages/ops/src/note/cover-production.mjs';
-import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
+import { measurementContext, unattended, markMeasurementAuthenticated } from '../../../packages/ops/src/measurement/browser-session.mjs';
 import {
   sha256,
   assetPath,
@@ -22,7 +22,7 @@ import {
   coverOperationVersion,
   findCoverOperation,
   assertPublicCoverPixels,
-} from './lib/cover-update.mjs';
+} from '../../../packages/ops/src/note/lib/cover-update.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(

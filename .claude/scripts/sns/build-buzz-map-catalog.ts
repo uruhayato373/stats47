@@ -52,14 +52,14 @@ import {
   findMachineDuplicate,
   curatedToCatalogEntry,
   resolveMergedStatus,
-} from "./lib/buzz-map-router-core.mjs";
+} from "../../../packages/ops/src/sns/lib/buzz-map-router-core.mjs";
 import { loadInventory } from "./lib/buzz-map-inventory-core.mjs";
 
 // x-catalog / sns-posts-store は .cjs (require)
 import { createRequire } from "node:module";
 import { datasetDir } from "../../../config/datasets.mjs";
 const require = createRequire(import.meta.url);
-const { getAffinity } = require("../lib/x-catalog.cjs") as {
+const { getAffinity } = require("../../../packages/ops/src/sns/x-catalog.cjs") as {
   getAffinity: () => Record<string, Record<string, string>>;
 };
 // posts.json は read-only 参照 (draft 継承)。書込は store 経由のみ・ここでは query しか使わない。

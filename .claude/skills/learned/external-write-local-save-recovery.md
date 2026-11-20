@@ -21,4 +21,4 @@ owner: knowledge-curator。外部操作の復旧判断を共有するための�
 
 **根拠**: ranking 500件の公開run `40337293104`は成功したが、後続の公開SHA照合で`link-card-rollout.json.pending`のrenameがEPERMになった。外部再公開をせず同じpublish planから照合を再開する。分割台帳writerにも最大5回の短い置換再試行を適用し、恒久的な失敗は旧台帳を残したままエラーにする。公開成功と記録成功を別々に確かめる。原因となったWindowsプロセスは未特定。
 **確信度**: 0.9（既存パターンの別経路での再現）。
-**関連**: `.claude/scripts/ogp/lib/link-card-ledger.mjs` / `.claude/scripts/ogp/__tests__/link-card-ledger.test.mjs`
+**関連**: `packages/ops/src/ogp/lib/link-card-ledger.mjs` / `packages/ops/src/ogp/__tests__/link-card-ledger.test.mjs`

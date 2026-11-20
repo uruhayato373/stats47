@@ -16,7 +16,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 /**
  * 散布図 source.json が示す 2 指標 (昇順)。記録するフィールドは kind ごとに違う
- * (語彙の正典は .claude/scripts/lib/chart-provenance.mjs の CHART_SOURCE_KIND_SPECS)。
+ * (語彙の正典は packages/ops/src/blog/lint/chart-provenance.mjs の CHART_SOURCE_KIND_SPECS)。
  * "a + b" のような合成キーや同一キーは 2 指標の関係を表さないので返さない。
  */
 export function extractChartMetricPair(source: unknown): [string, string] | null {

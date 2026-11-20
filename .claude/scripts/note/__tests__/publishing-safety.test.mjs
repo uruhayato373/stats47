@@ -133,7 +133,7 @@ test("the CDP launcher installs the guard before opening the note profile and ga
   assert.match(launcher, /--remote-debugging-port=\$\{port\}/);
   assert.match(launcher, /assertAccount\(/);
   assert.match(launcher, /NOTE_BU_CDP=http:\/\/127\.0\.0\.1:\$\{port\}/);
-  const session = readFileSync(join(NOTE_DIR, "lib/note-session.mjs"), "utf8");
+  const session = readFileSync(join(NOTE_DIR, "../../../packages/ops/src/note/lib/note-session.mjs"), "utf8");
   assert.match(session, /"--disable-blink-features=AutomationControlled", \.\.\.extraArgs/);
 });
 

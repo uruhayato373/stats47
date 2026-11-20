@@ -33,7 +33,7 @@ node .claude/scripts/lib/scan-pending-improvements.mjs
 - Tier は直前の `## Tier N` 見出しから継承
 - `due` は先頭の `YYYY-MM-DD` のみ取る (`-` は null)
 - **`deployed_at`**: タイトルから `deployed|デプロイ済|実装済 + YYYY-MM-DD` を抽出
-  (実装は `.claude/scripts/lib/effect-verdict/engine.mjs` の `extractDeployDate`。
+  (実装は `packages/ops/src/effect-verdict/engine.mjs` の `extractDeployDate`。
   「未デプロイ」「slotId を記入」等の未稼働表現は null)
 - **`overdue_days`**: `deployed_at` からの経過日数。`deployed_at` が無ければ **null** (0 にしない)
 - `parseBacklog(path, today)` は export 済 (`write-past-effects.mjs` が同じパーサを再利用)

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Keep the 60s raw-byte download for source hashes and original HTTP/error handling.
-import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
+import { resolveEstatAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { extractYearCode } from "../../../packages/estat-api/mirror/year-code.mjs";
 // Compatibility: malformed time prefixes retain the previous slice result.
 import { statsR2Key } from "../../../packages/r2-storage/mirror/r2-keys.mjs";
@@ -12,7 +12,7 @@ import {createRequire} from 'node:module';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {parseArgs} from 'node:util';
-import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
+import { ESTAT_STATS_DATA_URL } from '../../../packages/ops/src/estat/catalog-endpoints.cjs';
 const require=createRequire(import.meta.url);
 const ExcelJS=require('exceljs');
 const prefectures=require('../../../packages/area/mirror/prefectures.cjs').PREFECTURES;

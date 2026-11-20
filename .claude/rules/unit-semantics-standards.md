@@ -293,7 +293,7 @@ blog の data json も同じ形で、`label: 人口10万人あたり外国人数
   lint `validate-metric-config.ts` の `[value-scale]`
 - 期間 (月額↔年額): `packages/ranking/src/utils/period-align.ts` / `metric-config-standards.md` の `periodAlign`
 - 値照合: `.claude/scripts/lib/article-factual-check.mjs` (ブログ) /
-  `packages/product-factory/src/text/fact-claims.ts` (書籍) / `.claude/scripts/lib/map-value-match.mjs` (地図) /
+  `packages/product-factory/src/text/fact-claims.ts` (書籍) / `packages/ops/src/blog/lint/map-value-match.mjs` (地図) /
   **`packages/data-configs/src/seo-meta-facts.ts` (seoTitle・seoDescription)**
 - **桁の接頭辞 (「5,090億円」の「億」) を読む実装は `scalePrefixMultiplier` +
   `isScalePrefixPartOfUnit` を呼ぶ**。地図 (`map-value-match.mjs`) と SEO

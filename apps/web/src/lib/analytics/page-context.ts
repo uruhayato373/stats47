@@ -3,7 +3,7 @@
  *
  * `content_group` は GA4 標準のディメンション (Content group) なので登録枠を使わない。
  * 語彙はページ責務 (docs/01_技術設計/03_情報設計.md「ページ責務」) に合わせた固定値で、
- * 集計側の `.claude/scripts/metrics/lib/page-type.mjs` より細かい。
+ * 集計側の `packages/ops/src/metrics/page-type.mjs` より細かい。
  * キー類 (ranking_key / theme_slug / area_code / category_key) は URL から決まるものだけを載せる。
  */
 

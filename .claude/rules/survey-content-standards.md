@@ -4,7 +4,7 @@ paths:
   - ".claude/{scripts/surveys,skills/survey}/**"
   - "data/surveys/**"
   - "config/schema/surveys.lenses.schema.json"
-  - ".claude/scripts/lib/survey-lenses.mjs"
+  - "packages/ops/src/surveys/survey-lenses.mjs"
   - "packages/data-configs/src/{kakei-analysis-catalog,survey-editorial}.ts"
   - ".claude/agents/survey-curator.md"
 ---

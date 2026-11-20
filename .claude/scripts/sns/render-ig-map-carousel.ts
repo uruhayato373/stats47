@@ -18,7 +18,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { buildMapCaption, type TileCandidate } from "./lib/ig-map-props.ts";
+import { buildMapCaption, type TileCandidate } from "../../../packages/ops/src/sns/lib/ig-map-props.ts";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const REMOTION_DIR = join(PROJECT_ROOT, "apps/remotion");

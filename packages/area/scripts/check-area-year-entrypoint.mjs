@@ -137,11 +137,12 @@ export function followRenames(previous, renames) {
   return next;
 }
 
+/** 改名に加え、元のパスに薄い入口だけを残した移動も拾う (-B で書き換えを分け、コピーの行として出る) */
 function renamesSince(git, base) {
   try {
-    return git(["diff", "--name-status", "-M", base, "--"]).split("\n")
+    return git(["diff", "--name-status", "-M", "-B", base, "--"]).split("\n")
       .map((line) => line.split("\t"))
-      .filter((cols) => cols.length === 3 && cols[0].startsWith("R"))
+      .filter((cols) => cols.length === 3 && /^[RC]/.test(cols[0]))
       .map((cols) => [cols[1], cols[2]]);
   } catch { return []; }
 }

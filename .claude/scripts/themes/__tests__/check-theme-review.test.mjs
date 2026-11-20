@@ -68,7 +68,7 @@ test('the reviewer cannot alter its guards or unrelated files', () => {
     'package.json',
     '.claude/scripts/themes/check-theme-review.mjs',
     '.claude/scripts/themes/validate-theme-state.mjs',
-    '.claude/scripts/themes/theme-followup-core.mjs',
+    'packages/ops/src/themes/theme-followup-core.mjs',
   ]) {
     assert.throws(
       () => validateReview(report, input, [file], before, before),

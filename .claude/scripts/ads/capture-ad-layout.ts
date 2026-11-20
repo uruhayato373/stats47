@@ -40,7 +40,7 @@ import {
   installAdTrafficBlock,
   requiresAdTrafficBlock,
   summarizeAdTraffic,
-} from "./lib/ad-traffic-block.mjs";
+} from "../../../packages/ops/src/ads/lib/ad-traffic-block.mjs";
 
 const REPO_ROOT = resolve(__dirname, "../../..");
 const PLACEMENTS_PATH = join(REPO_ROOT, ADS_PLACEMENTS);

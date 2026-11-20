@@ -232,7 +232,7 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 
 - 根拠は「統計項目の定義」の「時点又は期間」と「指標計算式」の基礎項目。控えは
   `data/estat/ssds-year-format/definitions.json` (`npm run estat:ssds-year-format:build` で取り直す)。
-- 判定は `.claude/scripts/estat/lib/ssds-year-format.mjs`。年度の項目 (年度計・年度間・3月31日 など) を 1 つでも含めば
+- 判定は `packages/ops/src/estat/ssds-year-format.mjs`。年度の項目 (年度計・年度間・3月31日 など) を 1 つでも含めば
   fiscal、すべて暦年の項目 (暦年計・暦年平均・12月31日・10月1日、または年で呼ぶ調査) なら calendar、それ以外は決めない。
 - `gen-ssds-configs.mjs` はこの判定で `yearFormat` を書き、決まらない spec は書かずに止まる。
 - `npm run estat:ssds-year-format:check` (preflight・PR の CI) が全 SSDS 指標を突き合わせ、食い違いを error にする。
@@ -570,7 +570,7 @@ ranking は異なる）。いずれにせよ **200 にはならない**ので、
 > 空ページのまま sitemap 掲載されていた。「isActive:true + item.json だけで公開完了」とも思い込まないこと。
 >
 > **手動投入 metric (`fetcherKey:"manual"`) の値を R2 へ上げる経路 (2026-11-13)**: `data-refresh.yml` は e-Stat の指標しか扱わない。
-> 省庁の xlsx / CSV / PDF から作る指標は、取り込みスクリプト (`.claude/scripts/themes/ingest-*.mjs`) を
+> 省庁の xlsx / CSV / PDF から作る指標は、取り込みスクリプト (`packages/ops/src/themes/ingest-*.mjs`。テストの無い古いものは `.claude/scripts/themes/ingest-*.mjs`) を
 > `external-metric-ingest.yml` に登録し、CI の中で原典から取り直して `app/stats/<key>/values.json` へ上げる (既定は dry run)。
 > 順序は「指標定義を `isActive: false` で main へ入れる → workflow で値を上げる → `isActive: true` にする」。
 > 先に公開にすると、値の無いランキングページが配信される。

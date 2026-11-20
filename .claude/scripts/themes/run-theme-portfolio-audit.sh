@@ -17,16 +17,16 @@ echo "── 2/6 build (機械項目の再導出) ──"
 node --import tsx .claude/scripts/themes/build-theme-portfolio.ts
 
 echo "── 3/6 aggregate (56d 実測: GSC / Japan-only GA4 / 品質観測) ──"
-node --import tsx .claude/scripts/themes/aggregate-theme-metrics.ts
+node --import tsx packages/ops/src/themes/aggregate-theme-metrics.ts
 
 echo "── 4/6 validate (判定規律) ──"
 node .claude/scripts/themes/validate-theme-state.mjs
 
 echo "── 5/6 実験期日チェック ──"
-node .claude/scripts/themes/evaluate-theme-experiments.mjs --check
+node packages/ops/src/themes/evaluate-theme-experiments.mjs --check
 
 echo "── 5b 指標を選ぶ視点の該当件数を週ごとに記録 ──"
-node --import tsx .claude/scripts/themes/record-theme-viewpoints.ts
+node --import tsx packages/ops/src/themes/record-theme-viewpoints.ts
 
 echo "── 6/6 drift (git HEAD との差分) ──"
 node --input-type=module <<'EOF'

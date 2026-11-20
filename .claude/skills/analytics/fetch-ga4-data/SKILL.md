@@ -33,7 +33,7 @@ $ARGUMENTS — [期間] [レポート種類] [フィルタ] [snapshot YYYY-Www]
 
 ## 前提
 
-- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json`（gitignore 済み）。読むのは共通モジュール `.claude/scripts/lib/google-client.cjs`
+- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-f6b5dae19196.json` または `stats47-31b18ee67144.json`（gitignore 済み）。読むのは共通モジュール `packages/ops/src/google/google-client.cjs`
 - サービスアカウント: `stats47-windows@stats47.iam.gserviceaccount.com`
 - GA4 プロパティ ID: `463218070`
 - npm パッケージ: `googleapis`（インストール済み）
@@ -47,10 +47,10 @@ $ARGUMENTS — [期間] [レポート種類] [フィルタ] [snapshot YYYY-Www]
 
 ### Step 1: データ取得
 
-単発の照会は、まず `node .claude/scripts/metrics/ga4-query.mjs --start <startDate> --end <endDate> --dims <dims> --metrics <metrics>` を使う (フィルタ記法・CSV 出力つき)。それで足りないときだけ、プロジェクトルートで `node -e` を実行する。認証とクライアントは共通モジュール `.claude/scripts/lib/google-client.cjs` が作る (鍵の探し方・一時的な失敗の再試行を自前で書かない):
+単発の照会は、まず `node .claude/scripts/metrics/ga4-query.mjs --start <startDate> --end <endDate> --dims <dims> --metrics <metrics>` を使う (フィルタ記法・CSV 出力つき)。それで足りないときだけ、プロジェクトルートで `node -e` を実行する。認証とクライアントは共通モジュール `packages/ops/src/google/google-client.cjs` が作る (鍵の探し方・一時的な失敗の再試行を自前で書かない):
 
 ```javascript
-const { createGa4DataClient } = require('./.claude/scripts/lib/google-client.cjs');
+const { createGa4DataClient } = require('./packages/ops/src/google/google-client.cjs');
 const analyticsdata = createGa4DataClient();
 const PROPERTY = 'properties/463218070';
 ```
@@ -227,7 +227,7 @@ GA4 データは GSC より遅延が少なく、前日分まで取得可能。
 ```javascript
 const path = require('path');
 const fs = require('fs');
-const { createGa4DataClient } = require('./.claude/scripts/lib/google-client.cjs');
+const { createGa4DataClient } = require('./packages/ops/src/google/google-client.cjs');
 
 const analyticsdata = createGa4DataClient();
 const PROPERTY = 'properties/463218070';

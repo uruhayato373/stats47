@@ -14,12 +14,12 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { PROJECT_ROOT } from "../metrics/lib/auth.mjs";
-import { SCOPES, createAnalyticsAdminEditClient, createAnalyticsAdminReadClients } from "../lib/google-client.cjs";
+import { PROJECT_ROOT } from "../../../packages/ops/src/metrics/lib/auth.mjs";
+import { SCOPES, createAnalyticsAdminEditClient, createAnalyticsAdminReadClients } from "../../../packages/ops/src/google/google-client.cjs";
 import { auditGscProperty, GSC_PROPERTY } from "./audit-gsc.mjs";
 import { auditAdSenseAccount, auditAdUnits, expectedAdSenseAccount } from "./audit-adsense.mjs";
 import { loadCodeAdSlots } from "../metrics/lib/code-ad-slots.mjs";
-import { parseDimensionLedger, requiredDimensionParams, reconcileDimensions } from "./dimension-ledger.mjs";
+import { parseDimensionLedger, requiredDimensionParams, reconcileDimensions } from "../../../packages/ops/src/google/dimension-ledger.mjs";
 
 export const GA4_READ_SCOPE = SCOPES.GA4_READ;
 export const GA4_EDIT_SCOPE = SCOPES.GA4_EDIT;

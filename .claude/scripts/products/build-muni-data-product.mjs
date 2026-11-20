@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Keep the existing raw response/status handling for symbol recovery.
-import { resolveEstatAppId } from "../lib/estat-catalog/api.mjs";
-import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { resolveEstatAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
+import { ESTAT_STATS_DATA_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
 import { R2_PUBLIC_ORIGIN, statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * 市区町村データ商品を作る: 最新境域の時系列 CSV + 結合用 GeoJSON + README + 検算表。

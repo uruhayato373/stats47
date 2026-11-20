@@ -11,8 +11,9 @@ on:
     # 新しい workflow は main に入るまで dispatch できないので、道具を変えた push でも作り直す
     branches: [develop]
     paths:
-      - ".claude/scripts/metrics/build-color-policies.ts"
+      - "packages/ops/src/metrics/build-color-policies.ts"
       - ".claude/scripts/estat/build-monthly-ledger.mjs"
+      - "packages/ops/src/estat/build-monthly-ledger.mjs"
       - "packages/types/src/color-policy.ts"
       - ".github/workflows/ledgers-weekly.yml"
   schedule:

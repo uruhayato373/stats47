@@ -40,7 +40,7 @@ import {
   SiteAttributionError,
 } from "./lib/asp-browser.mjs";
 // vertical 別の抽出語は moshimo-scan と共有する (ASP ごとに書くとドリフトするため 1 箇所)。
-import { parseAfbBlocks } from "./lib/affiliate-status-core.mjs";
+import { parseAfbBlocks } from "../../../packages/ops/src/ads/lib/affiliate-status-core.mjs";
 import { VERTICAL_KEYWORDS, buildVerticalFilter } from "./lib/asp-vertical-keywords.mjs";
 
 /**

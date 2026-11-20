@@ -33,7 +33,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - **定義整合 (★2026-09-19 追加・BLOCK)**: 本文の解釈は指標の定義 (単位・対象と分母・期間の型・調査・名目/実質) に
   縛られる。執筆と審査の両方が **同じ「指標定義シート」** を入力にする:
   ```bash
-  npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <slug>   # または --article <path> / --keys a,b
+  npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --slug <slug>   # または --article <path> / --keys a,b
   ```
   (data-configs の git TS から決定的に生成。判定はしない)。critic は次を BLOCK にする — (a) 本文の値・順位・年が
   図 JSON と違う (b) 対象 (二人以上世帯全体 / 勤労者世帯 / 事業所…) や分母を取り違える (c) 名目と実質、暦年と年度を
@@ -427,7 +427,7 @@ e-Stat のメタ情報の控え (`data/estat/meta/<ID>.json` の `statName`) と
 ↑ 紅茶のカードは前の節と重複、緑茶・コーヒーは直上の図と無関係。読者には「関係ないリンク」に見える。
 図に対応する 1 枚だけカードで残し、他は `あわせて見る: [緑茶消費支出額ランキング](/ranking/green-tea-consumption-expenditure) / [コーヒー消費支出額ランキング](/ranking/coffee-consumption-expenditure)` にする。
 
-検査 (決定的 lint・**blocker**): `.claude/scripts/lib/article-structure-lint.mjs` が
+検査 (決定的 lint・**blocker**): `packages/ops/src/blog/lint/article-structure-lint.mjs` が
 `dup-ranking-link` / `adjacent-cluster` / `no-figure-section` / `tail-cluster` を検出する
 (`offtopic-link` = 指標名が節の本文に出てこない、は warning)。配線先は `quality-gate.mjs`
 (pre-commit + publish-blog.yml で公開前ブロック) / `audit-article-structure.mjs` (バッチ) /

@@ -29,7 +29,7 @@ import {
   SiteAttributionError,
   visibleText,
 } from "./lib/asp-browser.mjs";
-import { parseAfbCode } from "./lib/afb-code-core.mjs";
+import { parseAfbCode } from "../../../packages/ops/src/ads/lib/afb-code-core.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const CATALOG_PATH = join(repoRoot(), datasetPath("affiliate.catalog"));

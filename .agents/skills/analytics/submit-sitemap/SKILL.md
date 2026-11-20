@@ -17,7 +17,7 @@ Google Search Console `webmasters.sitemaps.submit` API を叩いて sitemap.xml 
 
 ## 前提
 
-- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-*.json`（git ignore 済み）。読むのは共通モジュール `.claude/scripts/lib/google-client.cjs`
+- サービスアカウント鍵: env `GOOGLE_SERVICE_ACCOUNT_KEY_JSON`、無ければリポジトリルートの `stats47-*.json`（git ignore 済み）。読むのは共通モジュール `packages/ops/src/google/google-client.cjs`
 - サイト: `sc-domain:stats47.jp`（GSC でドメインプロパティ登録済み）
 - npm パッケージ: `googleapis`（既に `/fetch-gsc-data` で使用中のため通常インストール済）
 
@@ -45,7 +45,7 @@ node -e "require('googleapis')" 2>/dev/null && echo OK || npm install -D googlea
 
 ```bash
 node -e "$(cat <<'JS'
-const { createSearchConsoleWriteClient } = require('./.claude/scripts/lib/google-client.cjs');
+const { createSearchConsoleWriteClient } = require('./packages/ops/src/google/google-client.cjs');
 const SITE_URL = 'sc-domain:stats47.jp';
 const SITEMAP = process.argv[1] || 'https://stats47.jp/sitemap.xml';
 

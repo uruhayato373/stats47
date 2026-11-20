@@ -28,8 +28,8 @@ test("check-*.cjs と preflight-commit.mjs は CLAUDE_PROJECT_DIR をルート�
 const ROOT_READERS = [
   ".claude/scripts/lib/audit-workflow-policy.cjs",
   ".claude/scripts/lib/remove-worktree.mjs",
-  ".claude/scripts/lib/state-pull.mjs",
-  ".claude/scripts/ads/append-ga4-affiliate-history.mjs",
+  "packages/ops/src/datasets/state-pull.mjs",
+  "packages/ops/src/ads/append-ga4-affiliate-history.mjs",
   ".claude/scripts/note/audit-note-image-assets.mjs",
 ];
 

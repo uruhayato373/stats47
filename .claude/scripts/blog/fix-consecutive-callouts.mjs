@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 import {
   lintConsecutiveCallouts,
   normalizeConsecutiveCallouts,
-} from "../lib/article-structure-lint.mjs";
+} from "../../../packages/ops/src/blog/lint/article-structure-lint.mjs";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = process.argv.slice(2);

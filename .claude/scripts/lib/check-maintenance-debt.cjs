@@ -138,7 +138,7 @@ const ISO_WEEK_ALLOWED = new Map([
   ["packages/ops/src/metrics/periods.mjs", "ISO 週・JST の暦日の正本"],
 ]);
 
-// Google API の認証・クライアント生成の自前実装 (2026-10-21 SCRIPT-GOOGLE-CLIENT-UNIFY-01)。正本は .claude/scripts/lib/google-client.cjs
+// Google API の認証・クライアント生成の自前実装 (2026-10-21 SCRIPT-GOOGLE-CLIENT-UNIFY-01)。正本は packages/ops/src/google/google-client.cjs
 // (鍵の探し方・スコープ・読み取りの POST だけを再試行する設定を 1 か所で決める)。15 ファイルが鍵の探し方 4 通り・自前の再試行なしで
 // ばらばらに組んでいたのを寄せた後の再発止め。GoogleAuth / OAuth2 / JWT を正本の外で作ったら止める。
 const GOOGLE_AUTH_LOCAL_RE = /\bgoogle\.auth\.(?:GoogleAuth|OAuth2|JWT|fromJSON)\b|\bnew\s+(?:GoogleAuth|OAuth2Client|JWT)\s*\(/;
@@ -146,7 +146,7 @@ const GOOGLE_AUTH_LOCAL_RE = /\bgoogle\.auth\.(?:GoogleAuth|OAuth2|JWT|fromJSON)
 // 正本の .claude だけを見る。Codex 用の写し (.agents/skills・.codex/agents) は sync-codex-mirror.cjs --check が同一を保証する。
 const GOOGLE_AUTH_DOC_RE = /^\.claude\/(?:skills|agents)\/.*\.md$/;
 const GOOGLE_AUTH_ALLOWED = new Map([
-  [".claude/scripts/lib/google-client.cjs", "Google API の認証とクライアント生成の正本"],
+  ["packages/ops/src/google/google-client.cjs", "Google API の認証とクライアント生成の正本"],
   [".claude/scripts/adsense/oauth-setup.js", "AdSense のリフレッシュトークンを発行する対話式ツール。リダイレクト付きの OAuth クライアントで同意画面を開く (取得には使わない)"],
 ]);
 
@@ -241,7 +241,7 @@ function inspect(file) {
     if (!isTest && (/\.[cm]?[jt]sx?$/.test(relative) || GOOGLE_AUTH_DOC_RE.test(relative)) && !GOOGLE_AUTH_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && GOOGLE_AUTH_LOCAL_RE.test(line))
       results.push(finding("GOOGLE_AUTH_LOCAL", file, number,
-        "Google API の認証の自前実装。.claude/scripts/lib/google-client.cjs の create*Client を使う", line));
+        "Google API の認証の自前実装。packages/ops/src/google/google-client.cjs の create*Client を使う", line));
 
     if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !SITE_IDENTITY_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && SITE_IDENTITY_LITERAL_RE.test(line))

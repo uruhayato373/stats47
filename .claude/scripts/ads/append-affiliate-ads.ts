@@ -28,8 +28,8 @@ import { datasetPath } from "../../../config/datasets.mjs";
 import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const require = createRequire(import.meta.url);
-const core = require("./lib/a8-scout-core.mjs");
-const appendCore = require("./lib/a8-append-core.mjs");
+const core = require("../../../packages/ops/src/ads/lib/a8-scout-core.mjs");
+const appendCore = require("../../../packages/ops/src/ads/lib/a8-append-core.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const ADS_DATA = path.join(PROJECT_ROOT, datasetPath("affiliate.ads"));

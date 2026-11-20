@@ -11,7 +11,7 @@ co_agents: [improvement-triage]
 
 - **直接配置 SSOT**: 台帳 `affiliate.direct-placements` (読み込み口 `AFFILIATE_DIRECT_PLACEMENTS[]`)
 - **自動配置 SSOT**: 台帳 `affiliate.ads` (サイズ規約は `audit-affiliate-inventory.ts --check-size` が担当)
-- **判定コア**: `.claude/scripts/ads/lib/affiliate-compliance-core.mjs` (純粋関数・`node --test` 対象)
+- **判定コア**: `packages/ops/src/ads/lib/affiliate-compliance-core.mjs` (純粋関数・`node --test` 対象)
 - **state 出力**: `data/affiliate/compliance-latest.json` (`--live` 時のみ更新)
 
 ## 実行
@@ -50,8 +50,8 @@ npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size
 | ファイル | 役割 |
 |---|---|
 | `.claude/scripts/ads/audit-affiliate-compliance.ts` | 監査 CLI (決定的) |
-| `.claude/scripts/ads/lib/affiliate-compliance-core.mjs` | 判定コア (純粋関数) |
-| `.claude/scripts/ads/__tests__/affiliate-compliance-core.test.mjs` | fixture テスト (`node --test`) |
+| `packages/ops/src/ads/lib/affiliate-compliance-core.mjs` | 判定コア (純粋関数) |
+| `packages/ops/src/ads/__tests__/affiliate-compliance-core.test.mjs` | fixture テスト (`node --test`) |
 | 台帳 `affiliate.direct-placements` | 直接配置 SSOT |
 | `data/affiliate/compliance-latest.json` | 最新監査 state (operations state の入力) |
 | `.claude/rules/affiliate-ads-standards.md` | 規約 (PR 表記・サイズの正典) |

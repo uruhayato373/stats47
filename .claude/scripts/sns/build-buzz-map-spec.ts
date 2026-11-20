@@ -31,7 +31,7 @@ import { dirname, join } from "node:path";
 
 import { getMetricConfig } from "@stats47/data-configs";
 
-import { toBuzzMapAreaCode } from "./lib/buzz-map-area-code";
+import { toBuzzMapAreaCode } from "../../../packages/ops/src/sns/lib/buzz-map-area-code";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

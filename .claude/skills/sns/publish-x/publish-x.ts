@@ -36,11 +36,11 @@ import * as fs from "fs";
 import { execFileSync } from "child_process";
 // 完全DBレス (doc12 Phase E): sns_posts は共有ストア (data/sns/posts.json) 経由で読み書きする。
 import store from "../../../../packages/ops/src/sns/sns-posts-store.cjs";
-import directLedger from "../../../scripts/sns/lib/x-direct-ledger.cjs";
+import directLedger from "../../../../packages/ops/src/sns/lib/x-direct-ledger.cjs";
 
 const { planDirectLedgerWrite } = directLedger;
 // X 頻度ガード (SSOT: sns-content-standards §1 quota)。--from-queue の予約が上限を超えないよう判定する。
-import budget from "../../../scripts/sns/check-x-post-budget.cjs";
+import budget from "../../../../packages/ops/src/sns/check-x-post-budget.cjs";
 
 // ─── 設定 ──────────────────────────────────────────
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");

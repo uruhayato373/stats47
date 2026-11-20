@@ -7,12 +7,12 @@ import {
   buildAffiliatePilotState,
   estimateAffiliatePilotFeasibility,
   validateAffiliatePilotState,
-} from "./lib/affiliate-pilot-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-pilot-core.mjs";
 import {
   aggregatePilotExperimentMetrics,
   buildAffiliatePilotObservation,
   parseAffiliateExperimentHistory,
-} from "./lib/affiliate-pilot-history-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-pilot-history-core.mjs";
 
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 

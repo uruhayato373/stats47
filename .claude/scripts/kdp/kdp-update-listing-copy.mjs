@@ -16,9 +16,9 @@ import { fileURLToPath } from "node:url";
 import { KDP_LISTING_COPY } from "../../../config/paths.mjs";
 import { readBookshelfState } from "./lib/kdp-flow.mjs";
 import { fillKdpListingCopy, goToNextKdpStep, readKdpListingCopy } from "./lib/kdp-form.mjs";
-import { validateKdpListingMetadata } from "./lib/kdp-preflight.mjs";
-import { assertAccount, launchContext, readListings, shotPath, sleep, waitForLogin, writeBackKdpState } from "./lib/kdp-session.mjs";
-import { normalizeKdpStatus } from "./lib/kdp-status.mjs";
+import { validateKdpListingMetadata } from "../../../packages/ops/src/kdp/lib/kdp-preflight.mjs";
+import { assertAccount, launchContext, readListings, shotPath, sleep, waitForLogin, writeBackKdpState } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
+import { normalizeKdpStatus } from "../../../packages/ops/src/kdp/lib/kdp-status.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const BASE = "https://kdp.amazon.co.jp/ja_JP";

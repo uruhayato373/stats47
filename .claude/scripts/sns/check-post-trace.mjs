@@ -13,7 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
-import { checkPostTrace } from "./lib/post-trace-core.mjs";
+import { checkPostTrace } from "../../../packages/ops/src/sns/lib/post-trace-core.mjs";
 import { verifyArchivedAssets } from "../../../packages/ops/src/sns/sns-drive-assets.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 

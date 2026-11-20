@@ -49,6 +49,8 @@ export function validateReview(report, input, files, before, after) {
         'apps/web/src/features/theme-dashboard/',
         'packages/data-configs/src/theme-catalog/',
         '.claude/scripts/themes/',
+        // テーマのスクリプトの大半は 2026-11-19 にここへ移した。移す前と同じ範囲を直してよい
+        'packages/ops/src/themes/',
       ].some((p) => f.startsWith(p));
     assert.ok(
       allowed &&

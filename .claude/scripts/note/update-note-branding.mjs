@@ -9,7 +9,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
+import { assertAccount, launchContext, UA } from "../../../packages/ops/src/note/lib/note-session.mjs";
 import { datasetDir,datasetPath } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));

@@ -23,6 +23,26 @@ export function literalCounts(text) {
     appId: [...text.matchAll(/\b(?:[A-Z][A-Z0-9]*_)*ESTAT_(?:APP_?ID|APPLICATION_?ID|API_KEY)\b/g)].length,
   };
 }
+/** 改名したファイルの行は、新しいパスの「追加」ではなく元のパスの行の引き継ぎとして比べる (ほかの入口の検査と同じ) */
+export function followRenames(previous, renames) {
+  if (!previous) return previous;
+  const next = { ...previous };
+  for (const [from, to] of renames) {
+    if (next[from] && !next[to]) next[to] = next[from];
+  }
+  return next;
+}
+
+/** 改名に加え、元のパスに薄い入口だけを残した移動も拾う (-B で書き換えを分け、コピーの行として出る) */
+function renamesSince(git, base) {
+  try {
+    return git(["diff", "--name-status", "-M", "-B", base, "--"]).split("\n")
+      .map((line) => line.split("\t"))
+      .filter((cols) => cols.length === 3 && /^[RC]/.test(cols[0]))
+      .map((cols) => [cols[1], cols[2]]);
+  } catch { return []; }
+}
+
 export function auditSources(files, exceptions, previous) {
   const errors = [];
   if (previous) {
@@ -64,9 +84,9 @@ export function main(args = process.argv.slice(2)) {
   for (const base of bases) {
     // The first introduction has no prior manifest. Once present, malformed baselines fail closed.
     try { git(["cat-file", "-e", `${base}:${ALLOWLIST}`]); } catch { continue; }
-    previous.push(JSON.parse(git(["show", `${base}:${ALLOWLIST}`])).exceptions);
+    previous.push(followRenames(JSON.parse(git(["show", `${base}:${ALLOWLIST}`])).exceptions, renamesSince(git, base)));
   }
-  if (args.length) previous.push(JSON.parse(git(["show", `${args[1]}:${ALLOWLIST}`])).exceptions);
+  if (args.length) previous.push(followRenames(JSON.parse(git(["show", `${args[1]}:${ALLOWLIST}`])).exceptions, renamesSince(git, args[1])));
   const files = sourceInventory();
   const errors = [...new Set([undefined, ...previous].flatMap((baseline) => auditSources(files, exceptions, baseline)))];
   if (errors.length) { console.error(errors.join("\n")); process.exitCode = 1; }

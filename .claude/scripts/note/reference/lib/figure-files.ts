@@ -39,7 +39,7 @@ export function renderSavedReferenceFigure(data: ReferenceFigureData, filename: 
 /** Same common SVG converter as other note figures; indexed, opaque PNG keeps text sharp and files small. */
 export async function writeReferenceFigure(svgPath: string, pngPath: string, svg: string) {
   writeFileSync(svgPath,svg);
-  const {svgToPng}=require('../../../lib/svg-to-png.cjs') as {svgToPng:(svg:string,png:string)=>Promise<unknown>};
+  const {svgToPng}=require('../../../../../packages/ops/src/media/svg-to-png.cjs') as {svgToPng:(svg:string,png:string)=>Promise<unknown>};
   await svgToPng(svgPath,pngPath);
   const source=readFileSync(pngPath);
   const png=await sharp(source).flatten({background:'#F8F5EC'}).png({palette:true,colours:32,quality:80,dither:0,effort:10,compressionLevel:9}).toBuffer();

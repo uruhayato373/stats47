@@ -1,0 +1,71 @@
+/** Recompute the complete source; R2 is written only with --write-local. */
+import { require as tsxRequire } from 'tsx/cjs/api';
+import { readFile, writeFile, mkdir, realpath } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { datasetDir, datasetPath } from '../../../../config/datasets.mjs';
+import { assertDatasetShape } from '../datasets/dataset-shape.mjs';
+
+/**
+ * 出典の固定を読む。提案 (--proposal-dir) は台帳 themes.sources と同じ名前・同じ形の JSON で、
+ * ここの検査に通ったファイルはそのまま台帳 (data/themes/sources/) へ置ける。
+ */
+export async function readSourceDefinition({ root, proposal }) {
+  const dir = proposal ? resolve(proposal) : resolve(root, datasetDir('themes.sources'));
+  const source = JSON.parse(await readFile(resolve(dir, 'bridge-inspection-age.json'), 'utf8'));
+  assertDatasetShape('themes.sources', source);
+  return source;
+}
+
+/**
+ * Web の読み手と同じ厳密な検査関数を TS から読む。tsx の tsImport (ESM) は入れ子の TS import
+ * (packages/area/src/index.ts) を解決できず ERR_MODULE_NOT_FOUND で止まるため、
+ * ingest-vacancy-types.mjs と同じ tsx/cjs/api の require で読む。
+ */
+export function loadSnapshotParser(root) {
+  const parserPath = resolve(root, 'apps/web/src/features/bridge-inspection-age/lib/bridge-inspection-age-snapshot.ts');
+  return tsxRequire(parserPath, import.meta.url).parseBridgeInspectionAgeSnapshot;
+}
+
+export async function main(args = process.argv.slice(2)) {
+  const root = process.cwd();
+  const value = flag => { const index = args.indexOf(flag); return index < 0 ? undefined : args[index + 1]; };
+  const sourceDir = value('--source-dir');
+  if (!sourceDir) throw new Error('Required: --source-dir (three original XLSX files)');
+  const proposal = value('--proposal-dir');
+  if (proposal && args.includes('--write-local')) throw new Error('Proposal validation cannot write canonical R2');
+  const source = await readSourceDefinition({ root, proposal });
+  const prefectures = JSON.parse(await readFile(resolve(root, datasetPath('areas.prefectures')), 'utf8'));
+  const result = spawnSync('python3', [resolve(dirname(fileURLToPath(import.meta.url)), 'extract-bridge-inspection-age.py')], {
+    input: JSON.stringify({source, prefectures, sourceDir: resolve(sourceDir), generatedAt: new Date().toISOString()}), encoding: 'utf8', maxBuffer: 32 * 1024 * 1024,
+  });
+  if (result.error) throw result.error;
+  if (result.status !== 0) throw new Error(result.stderr || `Source extraction exited ${result.status}`);
+  const { snapshot, proof } = JSON.parse(result.stdout);
+  // The production import validates the same strict contract as the Web reader.
+  // A proposal is checked against the ledger schema when it is read; its snapshot is not parsed here.
+  if (!proposal) {
+    loadSnapshotParser(root)(snapshot);
+  }
+  const bytes = JSON.stringify(snapshot) + '\n';
+  proof.snapshotSha256 = createHash('sha256').update(bytes).digest('hex');
+  proof.snapshotBytes = Buffer.byteLength(bytes);
+  proof.r2Key = source.r2Key;
+  proof.sourceDefinition = source;
+  const out = value('--out');
+  if (out) {
+    await mkdir(out, {recursive:true});
+    await writeFile(resolve(out, 'inspection-age.json'), bytes);
+    await writeFile(resolve(out, 'bridge-source-proof.json'), JSON.stringify(proof, null, 2) + '\n');
+  }
+  if (args.includes('--write-local')) {
+    const destination = resolve(root, '.local/r2', source.r2Key);
+    await mkdir(dirname(destination), {recursive:true});
+    await writeFile(destination, bytes);
+  }
+  console.log(JSON.stringify({status:'PASS', rawRows:proof.rawRows, rejects:proof.rejects, prefectures:47, knownYearCount:proof.knownYearCount, unknownYearCount:proof.unknownYearCount, snapshotSha256:proof.snapshotSha256, wroteLocal:args.includes('--write-local')}));
+  return {snapshot, proof};
+}
+if (process.argv[1] && await realpath(process.argv[1]) === await realpath(fileURLToPath(import.meta.url))) await main();

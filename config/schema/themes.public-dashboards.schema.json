@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "公式ダッシュボードの研究カタログ (問い・指標・可視化・ストーリー構成)",
-  "description": "data/themes/research/public-dashboards.json の形状契約。列挙の値と URL の許可ホストは .claude/scripts/themes/check-public-dashboard-catalog.mjs が検査する。",
+  "description": "data/themes/research/public-dashboards.json の形状契約。列挙の値と URL の許可ホストは packages/ops/src/themes/check-public-dashboard-catalog.mjs が検査する。",
   "type": "object",
   "required": ["schemaVersion", "researchedAt", "scope", "stats47ThemeKeys", "dashboards", "stories"],
   "properties": {

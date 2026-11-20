@@ -3,7 +3,7 @@
 import { execFileSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
 import * as cheerio from "cheerio";
-import { assertAccount, launchContext, pruneProfileCaches } from "./lib/note-session.mjs";
+import { assertAccount, launchContext, pruneProfileCaches } from "../../../packages/ops/src/note/lib/note-session.mjs";
 
 const args = process.argv.slice(2);
 const value = (flag) => args.includes(flag) ? args[args.indexOf(flag) + 1] : null;

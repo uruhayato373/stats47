@@ -4,7 +4,7 @@ import {
   createGa4ImprovementsAdapter, extractGa4Pages, spansDiscontinuity, sumPageViews, GA4_MEASUREMENT_DISCONTINUITY_WEEK,
 } from "../lib/ga4-improvements-adapter.mjs";
 import { runAdapter } from "../../lib/effect-verdict/cli.mjs";
-import { DEFAULT_THRESHOLDS } from "../../lib/effect-verdict/thresholds.mjs";
+import { DEFAULT_THRESHOLDS } from "../../../../packages/ops/src/effect-verdict/thresholds.mjs";
 
 // 鮮度の判定は実行日で変わる。固定の週 (W44) を使うこのテストは、観測日から 10 日を過ぎた 2026-11-11 に
 // stale-source で pending になり落ちた。ここで確かめるのは交絡の扱いなので、鮮度の上限だけを外す。

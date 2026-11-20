@@ -2,7 +2,7 @@
 /** Remove empty paragraphs immediately before saved note cards through the editor. */
 import { writeFileSync } from "node:fs";
 import * as cheerio from "cheerio";
-import { assertAccount, launchContext, pruneProfileCaches } from "./lib/note-session.mjs";
+import { assertAccount, launchContext, pruneProfileCaches } from "../../../packages/ops/src/note/lib/note-session.mjs";
 
 const args = process.argv.slice(2);
 const noteKey = args.includes("--note-key") ? args[args.indexOf("--note-key") + 1] : null;

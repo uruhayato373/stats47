@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { rebuild, misplacedFigures } from "./lib/figure-split.mjs";
+import { rebuild, misplacedFigures } from "../../../packages/ops/src/note/lib/figure-split.mjs";
 const slug = process.argv[2];
 if (!slug) { console.error("usage: build-figure-fix.mjs <slug>"); process.exit(2); }
 // .claude/scripts/note/ → 3 階層上がリポジトリ root

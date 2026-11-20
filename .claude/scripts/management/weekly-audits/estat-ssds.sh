@@ -4,5 +4,5 @@
 # 呼び出し元: run-weekly-audits.mjs (npm run weekly:audits)。出力: data/estat/ssds-candidates*.json
 set -uo pipefail
 cd "$(dirname "$0")/../../../.."
-export NEXT_PUBLIC_ESTAT_APP_ID="$(node --input-type=module -e 'import { getAppId } from "./.claude/scripts/lib/estat-catalog/api.mjs"; process.stdout.write(getAppId(process.env, "apps/web/.env.development"))')"
+export NEXT_PUBLIC_ESTAT_APP_ID="$(node --input-type=module -e 'import { getAppId } from "./packages/ops/src/estat/catalog-api.mjs"; process.stdout.write(getAppId(process.env, "apps/web/.env.development"))')"
 node .claude/scripts/estat/enumerate-ssds-indicators.mjs

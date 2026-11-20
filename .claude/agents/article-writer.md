@@ -95,7 +95,7 @@ node .claude/scripts/lib/article-factual-check.mjs \
 > PATH が壊れている環境があるので **curl は絶対パス `/usr/bin/curl`** で叩く。
 
 1. ランキング値を**公開 R2 URL**から取得: `/usr/bin/curl -s https://storage.stats47.jp/app/ranking/<metric_key>/values.json`
-2. 最新年は **`yearCode` が最大の partition** を使う (並びは values.json ごとに違い、新しい順のものもあるので末尾や先頭を最新年としない。script では `.claude/scripts/lib/latest-partition.mjs` の `latestPartition`)
+2. 最新年は **`yearCode` が最大の partition** を使う (並びは values.json ごとに違い、新しい順のものもあるので末尾や先頭を最新年としない。script では `packages/ops/src/ranking/latest-partition.mjs` の `latestPartition`)
 3. TOP 10 と BOTTOM 5、最大値/最小値、倍率を計算
 4. metric メタ (title・unit・category・subtitle) は **git TS が SSOT**: `data/metrics/<key>.ts` を Read、
    もしくは `/usr/bin/curl -s https://storage.stats47.jp/app/ranking/<key>/item.json`。**D1/sqlite3 は使わない**
@@ -103,7 +103,7 @@ node .claude/scripts/lib/article-factual-check.mjs \
 6. **未公開確認**: `/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` に対象 slug が無いこと（既公開なら別ネタへ）
 7. **取得した数値の要約** (都道府県名 → rank, value のペア) をメモして以降の Phase で参照する（数値は実データのみ・捏造/推測厳禁）
 8. **指標定義シートを作り、解釈文はその範囲で書く** (★2026-09-19・`blog-quality-standards.md`「定義整合」):
-   `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --keys <metric_key>,<related...>` を実行し、
+   `npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --keys <metric_key>,<related...>` を実行し、
    単位・対象と分母・期間の型 (暦年/年度)・調査・「読み違い注意」を読んでから書く。表に無い対象 (世帯範囲・
    名目/実質・年) を本文に持ち込まない。critic は同じシートで審査し、違反は BLOCK になる
 

@@ -12,7 +12,7 @@ import {
   validateStagedComparison,
   explicitIndicatorCodes,
   inspectLocalMetricCoverage,
-} from './theme-expansion-core.mjs';
+} from '../../../packages/ops/src/themes/theme-expansion-core.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 // Local preparation only: canonical builders produce the release files; no upload capability.
@@ -306,7 +306,7 @@ for (const key of options['local-metrics']?.split(',') ?? []) {
     JSON.parse(await readFile(resolve(stage, statsKey), 'utf8'))
   );
   if (key === 'retail-employees') {
-    const { verifyRetailSourceBytes, parseRetailEmployees } = await import('./ingest-retail-employees.mjs');
+    const { verifyRetailSourceBytes, parseRetailEmployees } = await import('../../../packages/ops/src/themes/ingest-retail-employees.mjs');
     const sourceBytes = await readFile(resolve(root, '.local/verification/themes/retail-employment-source/retail-employees.json'));
     verifyRetailSourceBytes(sourceBytes);
     const original = parseRetailEmployees(JSON.parse(sourceBytes));
@@ -411,7 +411,7 @@ if (options['landslide-exposure']) {
 }
 if (options['tsunami-exposure']) {
   const { TSUNAMI_EXPOSURE_SOURCE: source, parseTsunamiBundle } = require('../../../packages/data-configs/src/theme-catalog/index.ts');
-  const { verifyTsunamiIntermediate } = await import('./ingest-tsunami-exposure.mjs');
+  const { verifyTsunamiIntermediate } = await import('../../../packages/ops/src/themes/ingest-tsunami-exposure.mjs');
   const prefix = source.r2Root;
   const files = new Map(await Promise.all(['item', 'manifest', 'verification'].map(async name => {
     const key = `${prefix}/${name}.json`;

@@ -15,7 +15,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { METRIC_LINKAGE_DIR } from '../../../config/paths.mjs';
 
-import { fetchMetaInfo, getAppId, listAllTables, sleep } from "../lib/estat-catalog/api.mjs";
+import { fetchMetaInfo, getAppId, listAllTables, sleep } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { classRows, normalizeListRows, summarizeMeta } from "../../../packages/estat-api/src/catalog/normalize.mjs";
 import {
   buildPlan,
@@ -25,9 +25,9 @@ import {
   recordFetchFailure,
   recordFetchSuccess,
   upsertTableRow,
-} from "../lib/estat-catalog/index.mjs";
-import { loadMetricLinkage, loadPulled } from "../lib/estat-catalog/pulled.mjs";
-import { getObjectJson } from "../lib/estat-catalog/s3.mjs";
+} from "../../../packages/ops/src/estat/catalog-index.mjs";
+import { loadMetricLinkage, loadPulled } from "../../../packages/ops/src/estat/catalog-pulled.mjs";
+import { getObjectJson } from "../../../packages/ops/src/estat/catalog-s3.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);

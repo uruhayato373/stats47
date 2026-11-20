@@ -14,7 +14,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fetchMetaInfo, fetchStatsData } from '../lib/estat-catalog/api.mjs';
+import { fetchMetaInfo, fetchStatsData } from '../../../packages/ops/src/estat/catalog-api.mjs';
 
 const PAGE_LIMIT = 100000;
 const ITEM_NAME = '製造品出荷額等';

@@ -9,8 +9,8 @@ import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog
 import { collectChartDependencies } from "../../../packages/data-configs/src/theme-catalog/registry-checks";
 import { getMetricConfig } from "../../../packages/data-configs/src/registry";
 import { buildRecipe } from "../../../packages/data-configs/src/recipe";
-import { inspectThemePayload, compareThemeObservation, selectLastGoodObservations, inspectThemeStructure, inspectChartYears, summarizeThemeFindings } from "./theme-quality-core.mjs";
-import { readThemeQualityState, writeThemeQualityState } from "./theme-quality-state.mjs";
+import { inspectThemePayload, compareThemeObservation, selectLastGoodObservations, inspectThemeStructure, inspectChartYears, summarizeThemeFindings } from "../../../packages/ops/src/themes/theme-quality-core.mjs";
+import { readThemeQualityState, writeThemeQualityState } from "../../../packages/ops/src/themes/theme-quality-state.mjs";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
 import { datasetPath } from "../../../config/datasets.mjs";
 

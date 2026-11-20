@@ -4,7 +4,7 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { auditNoteCovers, coverAuditExitCode } from "./lib/cover-audit.mjs";
+import { auditNoteCovers, coverAuditExitCode } from "../../../packages/ops/src/note/lib/cover-audit.mjs";
 import { applyCoverAudit, updateCoverLedger } from '../../../packages/ops/src/note/cover-assets.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 

@@ -163,7 +163,7 @@ source.json に表示用の出典を明示する:
 
 `kind` は当初 `ranking` / `estat` / `manual` の 3 種として書かれていたが、**実装は 14 種まで増えていた**
 （2026-07-29 に公開済み 898 件を実測）。ドリフトを止めるため、語彙と「再取得に必要なフィールド」の
-正典を **`.claude/scripts/lib/chart-provenance.mjs` の `CHART_SOURCE_KIND_SPECS`** に置き、
+正典を **`packages/ops/src/blog/lint/chart-provenance.mjs` の `CHART_SOURCE_KIND_SPECS`** に置き、
 **未知の kind は error** にする。新しい kind を足すときは共有定義も更新する。公開前の
 `quality-gate.mjs` と定期監査 `audit-chart-provenance.mjs` はこの純粋関数を共用し、
 片方だけ判定が緩むドリフトを防ぐ。
@@ -293,7 +293,7 @@ SVG の byte 一致を要求し、既知の復元対象7件は ranking / e-Stat 
 > 全県が外れて一致率 0% になり、**値が完全一致しているのに「SSOT照合 失敗」**になる
 > （savings-map で発覚。単位が千円/万円系の指標がすべて再生成不能だった）。判定は
 > 「SSOT の unit がその短縮単位で始まるか」で行う。照合の純粋関数は
-> `.claude/scripts/lib/map-value-match.mjs`（`parseDisplayValue` / `matchRate` / `parseMapDisplay`）に
+> `packages/ops/src/blog/lint/map-value-match.mjs`（`parseDisplayValue` / `matchRate` / `parseMapDisplay`）に
 > 切り出し、`__tests__/map-value-match.test.mjs` が両方向を固定している。記事リンクの key が AI 生成の命名ゆれで実在 key とズレている場合（例 `health-life-expectancy-male` ↔ 実在 `healthy-life-expectancy-male`、`activity-rate` ↔ `annual-participation-rate`）は、**`--mapping <json>`**（`{"<slug>/<base>": "<correctKey>"}`）を渡すと triage をスキップし correctKey の SSOT で照合・再生成する。correctKey は `app/ranking/<key>/values.json` が 200 で実在し、かつ照合一致したものだけ staging に出る（値が合わなければ flag = 記事本文と地図のズレ防止）。
 
 旧地図SVGが県別 `<title>` 値を持たない古い形式（自動照合が空振りする）の場合は、mapping 値を `{"key":"<correctKey>","year":"<year>"}` 形式にすると、その年の SSOT で照合ゲートをスキップして生成する。**この trusted モードは年と記事本文の数値を事前に人/agent が突合していることが前提**（捏造防止）。生成された `source.json` には `verifiedMatchRate: 0` と `trusted`（記事本文照合済みの旨）が記録され、自動照合を通っていないことが追跡できる。`source.json` は観測値ではないため factual-check / quality-gate / チャート生成の対象外（§1.5）。

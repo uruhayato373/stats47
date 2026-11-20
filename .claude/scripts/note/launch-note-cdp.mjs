@@ -13,7 +13,7 @@
  * ダイアログの競合で落ちない理由は lib/dialog-race-guard.mjs の冒頭。
  */
 import { installDialogRaceGuard } from "./lib/dialog-race-guard.mjs";
-import { assertAccount, launchContext, pruneProfileCaches } from "./lib/note-session.mjs";
+import { assertAccount, launchContext, pruneProfileCaches } from "../../../packages/ops/src/note/lib/note-session.mjs";
 
 const DEFAULT_PORT = 9333;
 const args = process.argv.slice(2);

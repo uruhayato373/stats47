@@ -12,7 +12,7 @@ Mac / Windows 双方で動く。
 
 > **正典は `.claude/rules/affiliate-ads-standards.md` §11**。本 skill は手順のみ。
 > 接続設定は `config/affiliate-asp.json`、提携台帳は `data/affiliate/affiliate-catalog.json`、
-> サイト帰属の判定は `.claude/scripts/ads/lib/asp-site-guard.mjs` が SSOT。
+> サイト帰属の判定は `packages/ops/src/ads/lib/asp-site-guard.mjs` が SSOT。
 > A8 の**案件開拓**は `/scout-asp`、A8 の**成果取込**は `/a8-report` が担当 (役割が違う)。
 
 ## モード
@@ -29,7 +29,7 @@ Mac / Windows 双方で動く。
 | `harvest` (もしも) | `node .claude/scripts/ads/moshimo-harvest.mjs --id <promotion_id[,promotion_id]>` | なし (原稿を `.local/affiliate-harvest/moshimo/` に保存。SSOT 登録・公開は別工程) |
 | `inspect-offer` (もしも) | `node .claude/scripts/ads/moshimo-inspect-offer.mjs --id <promotion_id[,promotion_id]>` | なし (成果・掲載条件を `.local/affiliate-offer-inspect/moshimo/` に証拠保全) |
 | `report` (もしも) | `node .claude/scripts/ads/moshimo-report.mjs [--from YYYY-MM-DD --to YYYY-MM-DD]` | `data/affiliate/moshimo-results.json` を更新 (stats47サイト別・最大93日) |
-| `budget` | `node .claude/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
+| `budget` | `node packages/ops/src/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
 
 ## 手順
 

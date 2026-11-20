@@ -9,7 +9,7 @@ import {
   runtimeFindings,
   expectedSectionPanels,
   withinDeadline,
-} from './theme-followup-core.mjs';
+} from '../../../packages/ops/src/themes/theme-followup-core.mjs';
 import { SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 
 async function main() {

@@ -71,7 +71,7 @@ OAuth scope、必要ロールまで公式リファレンスとローカル `goog
 > 無く `adunits.list` が NOT_FOUND を返す。per-client の try/catch が無かったため、
 > **週次 audit は毎回「AdSense ad units: 0 件 (error)」だった** (同じ資格情報で
 > `fetch-adsense-snapshot.mjs` は成功しており、原因は credential ではなく walk の実装だった)。
-> 走査は `.claude/scripts/metrics/lib/adsense-ad-unit-walk.mjs` (`collectAdUnitEntries`) に
+> 走査は `packages/ops/src/metrics/lib/adsense-ad-unit-walk.mjs` (`collectAdUnitEntries`) に
 > **1 箇所へ集約**した。snapshot と audit は同じ走査を使い、行の形だけを各自が決める。
 > 失敗した client は `skippedClients` に残り、**全滅のときだけ throw** する。
 > 再実装が生えると `metrics/__tests__/adsense-ad-unit-walk.test.mjs` の検知テストが落ちる。
@@ -80,7 +80,7 @@ OAuth scope、必要ロールまで公式リファレンスとローカル `goog
 | custom dimension台帳との突合 | `dimension-ledger.mjs` |
 | custom dimension登録状況 | `.claude/rules/analytics-event-standards.md` |
 | code slot定義 | `apps/web/src/lib/google-adsense/constants.ts` |
-| AdSense report契約 | `.claude/scripts/metrics/lib/adsense-report-contract.mjs` |
+| AdSense report契約 | `packages/ops/src/metrics/lib/adsense-report-contract.mjs` |
 | secret / env名 | `config/env-registry.json` |
 | 自動処理の索引 | `docs/01_技術設計/06_自動化インベントリ.md` |
 | 生成された監査state | `.claude/state/metrics/google-admin/` |

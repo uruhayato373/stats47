@@ -12,7 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createObservation } from "./contracts.mjs";
-import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "./freshness.mjs";
+import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "../../../../packages/ops/src/metrics/freshness.mjs";
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";

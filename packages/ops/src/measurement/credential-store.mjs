@@ -23,13 +23,26 @@
  */
 import { createHmac } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { datasetPath } from '../../../../config/datasets.mjs';
 
-const CONFIG_URL = new URL('../../../../.claude/config/auth-credentials.json', import.meta.url);
+/**
+ * repo root。管理画面の本番ビルドでは import.meta.url がビルド後の場所を指すので、ファイルの位置からは求めない。
+ * STATS47_PROJECT_ROOT があればそれを使い、無ければ作業場所から上へたどって置き場の台帳 (config/datasets.mjs) を探す
+ * (CLI は repo root、管理画面は apps/admin、packages のテストは packages/ops から呼ばれる)。
+ */
+function projectRoot() {
+  if (process.env.STATS47_PROJECT_ROOT) return resolve(process.env.STATS47_PROJECT_ROOT);
+  for (let dir = process.cwd(); ; dir = dirname(dir)) {
+    if (existsSync(join(dir, 'config', 'datasets.mjs'))) return dir;
+    if (dirname(dir) === dir) throw new Error('repo root (config/datasets.mjs) が見つからない。STATS47_PROJECT_ROOT を渡す');
+  }
+}
 
 /** 正本 (auth-credentials.json) の services。呼ばれたときに読む (import 時には読まない)。 */
 export function credentialServices() {
-  return JSON.parse(readFileSync(CONFIG_URL, 'utf8')).services;
+  return JSON.parse(readFileSync(join(projectRoot(), datasetPath('agent.auth-credentials')), 'utf8')).services;
 }
 
 export const SERVICE_PREFIX = 'stats47-measurement-';

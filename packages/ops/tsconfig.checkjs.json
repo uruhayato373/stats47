@@ -15,7 +15,33 @@
     "src/media/gallery-collectors.mjs",
     "src/media/svg-classify.mjs",
     "src/measurement/**/*.mjs",
-    "src/metrics/**/*.mjs"
+    "src/effect-verdict/**/*.mjs",
+    "src/metrics/**/*.mjs",
+    "src/blog/lint/**/*.mjs",
+    "src/cloudflare/googlebot.mjs",
+    "src/cloudflare/threshold-check.mjs",
+    "src/google/**/*.cjs",
+    "src/gates/**/*.cjs",
+    "src/gates/**/*.mjs",
+    "src/estat/audit-time-coverage.cjs",
+    "src/estat/gen-ssds-configs.mjs",
+    "src/estat/catalog-api.mjs",
+    "src/estat/catalog-endpoints.cjs",
+    "src/estat/catalog-s3.mjs",
+    "src/estat/build-monthly-ledger.mjs",
+    "src/estat/catalog-index.mjs",
+    "src/estat/catalog-pulled.mjs",
+    "src/estat/kakei-classification.mjs",
+    "src/estat/kakei-ledger.mjs",
+    "src/estat/ssds-year-format.mjs",
+    "src/ranking/**/*.mjs",
+    "src/surveys/**/*.mjs",
+    "src/sns/ig-ledger-core.cjs",
+    "src/sns/sns-posted-core.cjs",
+    "src/sns/threads-core.cjs",
+    "src/sns/x-catalog.cjs",
+    "src/sns/x-weighted-length.cjs"
   ],
-  "exclude": ["node_modules", "**/__tests__/**"]
+  // fetch-adsense-snapshot・fetch-popular-blog-articles は移す前の検査 (metrics/lib だけ) の範囲外で、googleapis の型に合わない。範囲を広げずに引き継ぐ
+  "exclude": ["node_modules", "**/__tests__/**", "src/metrics/fetch-adsense-snapshot.mjs", "src/metrics/fetch-popular-blog-articles.mjs"]
 }

@@ -20,7 +20,7 @@ import fs from "fs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import path from "path";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
-import { observedOnly } from "../lib/blog-observed-values.mjs";
+import { observedOnly } from "../../../packages/ops/src/blog/lint/blog-observed-values.mjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 const R2_PUBLIC_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;

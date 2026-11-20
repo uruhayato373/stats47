@@ -21,7 +21,7 @@
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
+import { PROJECT_ROOT, parseWeekArg, toCsv } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
 import {
   SUMMARY_FILE,
@@ -36,7 +36,7 @@ import {
   GA4_HISTORY_FIELDS_V2,
   GSC_FINALIZED_HISTORY_FIELDS,
   GA4_FINALIZED_HISTORY_FIELDS,
-} from "./lib/weekly-summary.mjs";
+} from "../../../packages/ops/src/metrics/lib/weekly-summary.mjs";
 import {
   ADSENSE_HISTORY_FIELDS_V2,
   ADSENSE_DEVICE_FIELDS_V2,
@@ -52,15 +52,15 @@ import {
   AD_UNITS_FILE,
   adsenseUnitRow,
   resolveUnitMatch,
-} from "./lib/adsense-report-contract.mjs";
+} from "../../../packages/ops/src/metrics/lib/adsense-report-contract.mjs";
 import {
   PAGE_TYPES_SNAPSHOT_FILE,
   PAGE_TYPES_HISTORY_FILE,
   PAGE_TYPE_HISTORY_FIELDS,
   markdownPageTypeSection,
-} from "./lib/adsense-page-types.mjs";
+} from "../../../packages/ops/src/metrics/lib/adsense-page-types.mjs";
 import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
-import { DEMAND_LATEST_FILE, readWeekSnapshot, snapshotDetailCoverage, writeGscDemand } from "./lib/gsc-demand.mjs";
+import { DEMAND_LATEST_FILE, readWeekSnapshot, snapshotDetailCoverage, writeGscDemand } from "../../../packages/ops/src/metrics/lib/gsc-demand.mjs";
 import { pathToFileURL } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
 

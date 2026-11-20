@@ -3,7 +3,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
-import { inspectExpansionWiring } from './theme-expansion-core.mjs';
+import { inspectExpansionWiring } from '../../../packages/ops/src/themes/theme-expansion-core.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);

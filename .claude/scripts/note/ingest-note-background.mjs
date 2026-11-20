@@ -17,8 +17,8 @@ import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { noteCandidatesDir, resolveDriveInput } from "./lib/drive-assets.mjs";
-import { NOTE_BACKGROUND_HEIGHT, NOTE_BACKGROUND_WIDTH, noteBackgroundR2Key, validateBackground } from "./lib/note-render-spec.mjs";
+import { noteCandidatesDir, resolveDriveInput } from "../../../packages/ops/src/note/lib/drive-assets.mjs";
+import { NOTE_BACKGROUND_HEIGHT, NOTE_BACKGROUND_WIDTH, noteBackgroundR2Key, validateBackground } from "../../../packages/ops/src/note/lib/note-render-spec.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const require = createRequire(import.meta.url);

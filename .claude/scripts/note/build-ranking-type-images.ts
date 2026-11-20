@@ -15,7 +15,7 @@ import { renderTileMapChart } from '../../../apps/admin/lib/template-ranking-til
 import type { RankingChart } from '../../../apps/admin/lib/template-ranking-data';
 import { getMetricConfig } from '../../../packages/data-configs/src/registry';
 import { rankingChartFromArticleData } from '../../../apps/admin/lib/type-chart-input';
-import { NOTE_RANKING_IMAGES } from './lib/note-render-spec.mjs';
+import { NOTE_RANKING_IMAGES } from '../../../packages/ops/src/note/lib/note-render-spec.mjs';
 
 const RENDERERS: Record<string, (chart: RankingChart) => string> = {
   'ranking-tile-map': renderTileMapChart,

@@ -10,7 +10,7 @@
  *   1. `data/search-growth/past-effects.json` … `.urls` (key = pathKey or `<type>::<pathKey>`)
  *      → `.claude/scripts/search-growth/lib/scoring.mjs` が confidence を ×0.6 / ×0.3 する
  *   2. `data/adsense/past-effects.json` … `.candidates` (key = `<rule>::<key>`)
- *      → `.claude/scripts/metrics/lib/adsense-diagnostics.mjs` が同様に抑制する
+ *      → `packages/ops/src/metrics/lib/adsense-diagnostics.mjs` が同様に抑制する
  *
  * key の抽出は**決定的**で、推測しない:
  *   - search-growth: 行タイトル中の `/blog/...` 等のサイト内 path、`<type>::/path` 形式、

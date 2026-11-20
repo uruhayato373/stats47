@@ -28,11 +28,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { assessmentForSubject } from "../../metrics/lib/adsense-measurement-contract.mjs";
-import { ASSESSMENT_CONTRACT_VERSION, reassessmentProvenance } from "./reassessment.mjs";
-import { decideVerdict } from "./engine.mjs";
-import { DEFAULT_THRESHOLDS } from "./thresholds.mjs";
-import { weekLt } from "./iso-week.mjs";
+import { assessmentForSubject } from "../../../../packages/ops/src/metrics/adsense-measurement-contract.mjs";
+import { ASSESSMENT_CONTRACT_VERSION, reassessmentProvenance } from "../../../../packages/ops/src/effect-verdict/reassessment.mjs";
+import { decideVerdict } from "../../../../packages/ops/src/effect-verdict/engine.mjs";
+import { DEFAULT_THRESHOLDS } from "../../../../packages/ops/src/effect-verdict/thresholds.mjs";
+import { weekLt } from "../../../../packages/ops/src/effect-verdict/iso-week.mjs";
 import { currentIsoWeek } from "../../search-growth/lib/state.mjs";
 import { createGscBlogWaveAdapter } from "../../blog/measure-gsc-impact.mjs";
 import { createAdsenseAdapter } from "../../metrics/measure-adsense-impact.mjs";
@@ -178,7 +178,7 @@ function main() {
     assessmentContractVersion: ASSESSMENT_CONTRACT_VERSION,
     ...(reassesses ? { reassesses } : {}),
     thresholdsVersion: DEFAULT_THRESHOLDS.version,
-    thresholdsPath: ".claude/scripts/lib/effect-verdict/thresholds.mjs",
+    thresholdsPath: "packages/ops/src/effect-verdict/thresholds.mjs",
     note:
       "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。" +
       "backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",

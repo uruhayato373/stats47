@@ -147,11 +147,11 @@ test("isoWeekOf: 週境界 (月曜開始)", () => {
 // SCRIPT-ISO-WEEK-UNIFY-01 (2026-10-21): 週のラベルを作る関数は、どこから呼んでも JST の暦日で数える。
 // 以前は UTC や実行マシンの時刻で数える実装が混ざり、月曜 0〜9 時 (JST) に前の週を返していた (CI は UTC)。
 test("週のラベルを作る関数は、どれも JST の暦日で数える (月曜の朝に前の週を返さない)", async () => {
-  const { toIsoWeek } = await import("../lib/auth.mjs");
+  const { toIsoWeek } = await import("../../../../packages/ops/src/metrics/lib/auth.mjs");
   const { isoWeek } = await import("../../model-usage/usage-core.mjs");
   const { isoWeekOfDate } = await import("../../search-growth/lib/triage.mjs");
   const { currentIsoWeek } = await import("../../search-growth/lib/state.mjs");
-  const effect = await import("../../lib/effect-verdict/iso-week.mjs");
+  const effect = await import("../../../../packages/ops/src/effect-verdict/iso-week.mjs");
   const cases = [
     ["2026-10-18T16:30:00Z", "2026-W43"], // 月曜 01:30 JST (UTC ではまだ日曜)
     ["2026-10-18T14:30:00Z", "2026-W42"], // 日曜 23:30 JST

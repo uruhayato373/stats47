@@ -27,9 +27,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateScatterSvg } from '../../../packages/svg-builder/src/charts/scatter.ts';
-import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { inspectChartSourceManifest } from '../../../packages/ops/src/blog/lint/chart-provenance.mjs';
 import { R2_PUBLIC_BASE_URL } from '../../../packages/types/mirror/site-config.cjs';
-import { stripProvenance, withProvenance } from '../lib/svg-provenance.mjs';
+import { stripProvenance, withProvenance } from '../../../packages/ops/src/blog/lint/svg-provenance.mjs';
 import {
   imageTemplateOf,
   lintScatterData,

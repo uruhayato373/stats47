@@ -404,7 +404,7 @@ export function assertEarthquakeManifest(
   ]);
   requireCondition(
     value.reproduction.command ===
-      'node --import tsx .claude/scripts/themes/ingest-earthquake-exposure.mjs --source-dir <PRIVATE_INPUT_DIR> --private-work-dir <PRIVATE_WORK_DIR> --write-local' &&
+      'node --import tsx packages/ops/src/themes/ingest-earthquake-exposure.mjs --source-dir <PRIVATE_INPUT_DIR> --private-work-dir <PRIVATE_WORK_DIR> --write-local' &&
       value.reproduction.privateInputRequirement ===
         'J-SHIS original ZIP and joined mesh rows remain outside public R2' &&
       value.reproduction.populationIdentity ===

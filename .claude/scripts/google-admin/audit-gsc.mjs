@@ -7,7 +7,7 @@
  * owner/user・change of address・bulk export 等の変更 API は呼ばない (README「denylist」)。
  */
 import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
-import { createWebmastersClient } from "../lib/google-client.cjs";
+import { createWebmastersClient } from "../../../packages/ops/src/google/google-client.cjs";
 
 export { GSC_PROPERTY };
 

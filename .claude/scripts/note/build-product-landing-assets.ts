@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import dotenv from 'dotenv';
-import { inspectLandingArchive, selectLandingMetric, sha256 } from './lib/product-landing-evidence.mjs';
+import { inspectLandingArchive, selectLandingMetric, sha256 } from '../../../packages/ops/src/note/lib/product-landing-evidence.mjs';
 import { renderProductFigures } from './render-product-figures';
 import { getMetricConfig, METRICS_REGISTRY } from '../../../packages/data-configs/src/registry';
 import { isCapitalCityValueMetric } from '../../../packages/data-configs/src/provenance/resolve-metric-provenance';

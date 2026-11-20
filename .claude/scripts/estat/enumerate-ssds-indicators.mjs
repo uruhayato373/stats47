@@ -19,8 +19,8 @@ import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
-import { ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
-import { getAppId } from "../lib/estat-catalog/api.mjs";
+import { ESTAT_META_INFO_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
+import { getAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

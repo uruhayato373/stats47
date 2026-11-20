@@ -22,7 +22,7 @@ import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
-import { GOOGLEBOT_QUERY, GOOGLEBOT_UA_LIKE, aggregateGooglebot, unavailableGooglebot } from "./lib/googlebot.mjs";
+import { GOOGLEBOT_QUERY, GOOGLEBOT_UA_LIKE, aggregateGooglebot, unavailableGooglebot } from "../../../packages/ops/src/cloudflare/googlebot.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const SNAPSHOTS_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.snapshots"));

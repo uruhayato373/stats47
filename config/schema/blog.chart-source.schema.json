@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ブログ図の出典 manifest (app/blog/<slug>/data/<name>.source.json)",
-  "description": "kind の語彙と再取得に必要なフィールドの正典は .claude/scripts/lib/chart-provenance.mjs の CHART_SOURCE_KIND_SPECS。ここは形だけを固定する。散布図の軸は generate-article-charts.ts が axes に書き戻す。",
+  "description": "kind の語彙と再取得に必要なフィールドの正典は packages/ops/src/blog/lint/chart-provenance.mjs の CHART_SOURCE_KIND_SPECS。ここは形だけを固定する。散布図の軸は generate-article-charts.ts が axes に書き戻す。",
   "type": "object",
   "required": [
     "kind"

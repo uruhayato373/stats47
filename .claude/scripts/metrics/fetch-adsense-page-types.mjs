@@ -10,22 +10,22 @@
  *   node .claude/scripts/metrics/fetch-adsense-page-types.mjs [YYYY-Www] [--dry-run]
  *   --dry-run: GA4 を呼ばず、期間と出力先だけを表示する
  *
- * 認証: ../lib/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)。Property: env GA4_PROPERTY_ID。
+ * 認証: ../../../packages/ops/src/google/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json)。Property: env GA4_PROPERTY_ID。
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { PROJECT_ROOT, parseWeekArg, toCsv } from "./lib/auth.mjs";
+import { PROJECT_ROOT, parseWeekArg, toCsv } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { resolvePeriods } from "../../../packages/ops/src/metrics/periods.mjs";
 import {
   GA4_PAGE_TYPE_METRICS,
   PAGE_TYPE_FIELDS,
   PAGE_TYPES_SNAPSHOT_FILE,
   buildPageTypeRows,
-} from "./lib/adsense-page-types.mjs";
+} from "../../../packages/ops/src/metrics/lib/adsense-page-types.mjs";
 import { GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
-import { createGa4DataClient } from "../lib/google-client.cjs";
+import { createGa4DataClient } from "../../../packages/ops/src/google/google-client.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const PAGE_SIZE = 10000;

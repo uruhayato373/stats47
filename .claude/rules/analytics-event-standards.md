@@ -63,7 +63,7 @@ npm run google-admin:audit-api
 | `ledger-claims-registered-but-absent` | 台帳が登録済みと言うのに GA4 に無い | **台帳が誤っている**。実登録を確認して是正する |
 | `confirmed-absent` | ⏳要登録 のとおり未登録 | §1 の手順で登録する |
 
-突合ロジックは `.claude/scripts/google-admin/dimension-ledger.mjs` (pure・テスト付き)。
+突合ロジックは `packages/ops/src/google/dimension-ledger.mjs` (pure・テスト付き)。
 パラメータ名は単語境界で照合するので `ad_id` が `ad_idx` に誤マッチしない。
 **推測で台帳の ❓ を ✅ に変えない** — このコマンドの実出力を根拠にする。
 

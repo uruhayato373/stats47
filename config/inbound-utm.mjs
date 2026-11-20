@@ -12,7 +12,7 @@
  * - note のリンクカード (data-src を持つ figure) には付けない。note はカードの URL に query があると
  *   カードを作れないので、商品カードは clean path `/products/<slug>/from/note/<noteKey>`
  *   (サイト側で utm_campaign=note_product へ転送) を使い、ページへのカードは参照元 note.com で数える。
- * - SNS の UTM は `.claude/scripts/lib/sns-utm.cjs` が別に持つ (utm_medium=social)。
+ * - SNS の UTM は `packages/ops/src/sns/sns-utm.cjs` が別に持つ (utm_medium=social)。
  * TS からも読むため、型は隣の `inbound-utm.d.mts` に置く。
  */
 

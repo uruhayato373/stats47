@@ -47,24 +47,24 @@ import {
   buildJournalEvent,
   validatePlanForCommit,
   deriveOperationOutcome,
-} from "./lib/asp-operation-core.mjs";
+} from "../../../packages/ops/src/ads/lib/asp-operation-core.mjs";
 import {
   writePlan,
   readPlan,
   expirePlan,
   appendJournal,
   readJournal,
-} from "./lib/asp-operation-store.mjs";
+} from "../../../packages/ops/src/ads/lib/asp-operation-store.mjs";
 import {
   buildEligibilityFingerprintMaterial,
   evaluateAffiliateEligibility,
-} from "./lib/affiliate-eligibility-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-eligibility-core.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const CATALOG = join(repoRoot(), datasetPath("affiliate.catalog"));
 
 // 頻度ガードは CommonJS (A8 側の check-a8-apply-budget.cjs と同じ形) なので require で読む。
-const { applyBudget, toJstDate } = createRequire(import.meta.url)("./check-asp-apply-budget.cjs");
+const { applyBudget, toJstDate } = createRequire(import.meta.url)("../../../packages/ops/src/ads/check-asp-apply-budget.cjs");
 
 function parseArgs() {
   const a = process.argv.slice(2);

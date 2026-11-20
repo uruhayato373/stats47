@@ -401,7 +401,7 @@ node .claude/scripts/note/render-ranking-images.mjs <RANKING_KEY>   # 約 15 秒
 - 描画は `apps/remotion/src/features/ranking-note/` の note 専用テンプレート (cover / map / 47 県バー / 箱ひげ図)。
   X・Instagram と共有する `ranking-x/` の部品は変えない。props 欠落時は別指標のモックに落ちず例外になる。
 - `render-spec.json` は `chart-data.json` の SHA・テンプレート版・色スケールを記録する。テンプレートを変えたら
-  `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、
+  `packages/ops/src/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、
   `node .claude/scripts/note/render-ranking-images.mjs --stale` で全記事を作り直す (監査が古い spec を止める)。
 - PNG は git に載らない (`.gitignore`)。`data-provenance.json` は `generate-ranking-note.ts` が書く。契約は `.claude/rules/note-image-assets.md`。
 

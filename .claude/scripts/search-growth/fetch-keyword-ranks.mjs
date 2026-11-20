@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import { resolvePeriods, assessDailyCoverage } from '../../../packages/ops/src/metrics/periods.mjs';
 import { sitePath, validateSnapshot } from './lib/keyword-cycle.mjs';
 import { GSC_PROPERTY } from '../../../packages/types/mirror/site-config.cjs';
-import { createSearchConsoleClient } from '../lib/google-client.cjs';
+import { createSearchConsoleClient } from '../../../packages/ops/src/google/google-client.cjs';
 
 export async function fetchRows(client, period, dimensions) {
   const rows = [];

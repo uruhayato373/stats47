@@ -5,7 +5,7 @@ import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import * as cheerio from "cheerio";
-import { unregisteredCards } from './lib/native-cards.mjs';
+import { unregisteredCards } from '../../../packages/ops/src/note/lib/native-cards.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = process.argv.slice(2);

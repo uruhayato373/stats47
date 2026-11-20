@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, symlinkSync, rmSync, writeFileSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { assertClosedNativeProfile } from '../native-profile.mjs';
+import { assertClosedNativeProfile } from '../../../../packages/ops/src/measurement/native-profile.mjs';
 
 test('native session export refuses a live or dangling Chrome lock without modifying the profile', () => {
   const profile = mkdtempSync(join(tmpdir(), 'stats47-native-profile-'));

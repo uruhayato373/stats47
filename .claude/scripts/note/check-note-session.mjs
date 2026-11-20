@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** Verify the persistent macOS note profile without opening an editor. */
-import { assertAccount, launchContext, pruneProfileCaches } from "./lib/note-session.mjs";
+import { assertAccount, launchContext, pruneProfileCaches } from "../../../packages/ops/src/note/lib/note-session.mjs";
 
 const context = await launchContext();
 try {

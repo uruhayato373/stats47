@@ -1,0 +1,349 @@
+import { inspectNoteCover } from "./cover-audit.mjs";
+import { SITE_ORIGIN } from "../../../../types/mirror/site-config.cjs";
+
+const TRACKING_PARAMETER = /^(?:utm_.+|link)$/i;
+
+function decodeHtmlAttribute(value) {
+  return String(value || "")
+    .replaceAll("&amp;", "&")
+    .replaceAll("&#38;", "&")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'");
+}
+
+export function unique(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+
+export function noteKeyFromUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.hostname === "note.com"
+      ? url.pathname.match(/^\/stats47\/n\/(n[0-9a-f]+)\/?$/i)?.[1] ?? null
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+export function magazineKeyFromUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.hostname === "note.com"
+      ? url.pathname.match(/^\/stats47\/m\/(m[0-9a-f]+)\/?$/i)?.[1] ?? null
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+export function isStats47SiteUrl(value) {
+  try {
+    const hostname = new URL(value).hostname.toLowerCase();
+    return hostname === "stats47.jp" || hostname === "www.stats47.jp";
+  } catch {
+    return false;
+  }
+}
+
+export function normalizedSitePath(value) {
+  try {
+    const url = new URL(value, SITE_ORIGIN);
+    if (url.hostname !== "stats47.jp" && url.hostname !== "www.stats47.jp") return null;
+    return url.pathname.replace(/\/$/, "") || "/";
+  } catch {
+    return null;
+  }
+}
+
+export function hasTrackingParameters(value) {
+  try {
+    return [...new URL(value).searchParams.keys()].some((key) => TRACKING_PARAMETER.test(key));
+  } catch {
+    return false;
+  }
+}
+
+/** noteカード用のclean pathが、記事別UTMへ契約どおり転送されるか。 */
+export function isExpectedNoteProductRedirect(value, health) {
+  try {
+    const source = new URL(value);
+    const match = source.pathname.match(/^\/products\/([a-z0-9-]+)\/from\/note\/(n[0-9a-f]+)\/?$/i);
+    if (
+      source.hostname !== "stats47.jp"
+      || source.protocol !== "https:"
+      || source.search
+      || source.hash
+      || !match
+      || health?.status !== 307
+      || health?.finalStatus !== 200
+    ) return false;
+    const destination = new URL(health.finalUrl);
+    const expected = new URLSearchParams({
+      utm_source: "note",
+      utm_medium: "referral",
+      utm_campaign: "note_product",
+      utm_content: match[2],
+    });
+    return destination.protocol === "https:"
+      && destination.hostname === "stats47.jp"
+      && destination.pathname === `/products/${match[1]}`
+      && !destination.hash
+      && destination.searchParams.toString() === expected.toString();
+  } catch {
+    return false;
+  }
+}
+
+export function extractNavigationUrls(body, embeddedContents = []) {
+  const urls = [];
+  const source = String(body || "");
+  for (const match of source.matchAll(/\b(?:href|data-src)=(['"])(https?:\/\/.*?)\1/gi)) {
+    urls.push(decodeHtmlAttribute(match[2]));
+  }
+  for (const embedded of embeddedContents || []) {
+    // note は差し替え済みカードの metadata を残すことがある。本文から参照されるものだけ有効。
+    if (typeof embedded?.url === "string" && source.includes(embedded.url)) urls.push(embedded.url);
+  }
+  return unique(urls);
+}
+
+export function extractCardUrls(body, embeddedContents = []) {
+  const urls = [];
+  const source = String(body || "");
+  for (const match of source.matchAll(/<figure\b[^>]*\bembedded-service="external-article"[^>]*\bdata-src="(https?:\/\/[^"]+)"/gi)) {
+    urls.push(decodeHtmlAttribute(match[1]));
+  }
+  for (const embedded of embeddedContents || []) {
+    if (
+      embedded?.service === "external-article"
+      && typeof embedded.url === "string"
+      && source.includes(embedded.url)
+    ) urls.push(embedded.url);
+  }
+  return unique(urls);
+}
+
+// ── 有料記事の無料部分 (購入前に読める部分) の着地品質 ──
+// 2026-09-20: d-kakei-category-dataset (¥2,980) が公開 2 週で PV 2・売上 0 だった。無料部分に出典が無く
+// (統計局利用規約は出典と加工の明記を必須にしている)、対象読者・わかること・サンプル画像も無く、
+// 他記事からの流入リンクが 0 本だった。同じ欠陥を全有料記事で機械的に見つけるための検査。
+// 対象は統計データ商品 = 無料キュレーションマガジンに入っている有料記事だけ。有料マガジン (Claude Code 講座 /
+// D3 配色) の各章は「データの出典」を持たないので対象外にする (マガジン key を直書きせず isPaid で判定)。
+const PAID_SOURCE_PATTERN = /出典|総務省統計局|統計局|e-Stat|政府統計|国土数値情報|国土交通省|厚生労働省|文部科学省|農林水産省|経済産業省|環境省|国立社会保障・人口問題研究所|国勢調査|家計調査/;
+// 「この記事では〜を配布します」のような書き出しは読者像を示さないので数えない (旧 d-kakei が通ってしまった)。
+const PAID_INTRO_PATTERN = /こんな人|こんな方|向けです|向けの|わかること|できること|対象読者|次のような方|役に立つ方|使える方/;
+const PAID_PREMIUM_PRICE_JPY = 1000;
+
+export function auditPaidLanding({ article, live, expectedMagazine = null, inboundNoteLinkCount = null }) {
+  const livePaid = Number(live.price || 0) > 0;
+  const applicable = livePaid && article.vertical === "stats47-note" && expectedMagazine?.isPaid !== true;
+  if (!applicable) return { applicable: false, premium: false, checks: null, issues: [] };
+  const body = String(live.body || "");
+  const premium = Number(article.priceJpy || live.price || 0) >= PAID_PREMIUM_PRICE_JPY;
+  const checks = {
+    source: PAID_SOURCE_PATTERN.test(body),
+    intro: PAID_INTRO_PATTERN.test(body),
+    image: /<img\b/.test(body),
+    inbound: inboundNoteLinkCount === null ? null : inboundNoteLinkCount > 0,
+  };
+  const severity = premium ? "error" : "warning";
+  const issues = [];
+  // 出典は価格に関係なく必須 (無料部分だけ読む人にも出典が見える状態にする)
+  if (!checks.source) issues.push({ code: "paid_free_missing_source", severity: "error" });
+  if (!checks.intro) issues.push({ code: "paid_free_missing_intro", severity });
+  if (!checks.image) issues.push({ code: "paid_free_missing_image", severity });
+  if (checks.inbound === false) issues.push({ code: "paid_no_inbound_note_link", severity, detail: inboundNoteLinkCount });
+  return { applicable: true, premium, checks, issues };
+}
+
+export function buildArticleAudit({
+  article,
+  live,
+  magazinesByKey,
+  catalogNoteKeys,
+  eligibleRelatedNoteKeys = new Set(),
+  linkHealthByUrl = new Map(),
+  inboundNoteLinkCount = null,
+}) {
+  const links = extractNavigationUrls(live.body, live.embedded_contents);
+  const cardUrls = extractCardUrls(live.body, live.embedded_contents);
+  const siteLinks = links.filter(isStats47SiteUrl);
+  const noteArticleLinks = links.filter((url) => {
+    const key = noteKeyFromUrl(url);
+    return key && key !== live.key && catalogNoteKeys.has(key);
+  });
+  const magazineLinks = links.filter((url) => magazineKeyFromUrl(url));
+  const expectedMagazine = article.magazine ? magazinesByKey.get(article.magazine) : null;
+  const expectedMagazineNoteKey = magazineKeyFromUrl(expectedMagazine?.noteUrl);
+  const actualMagazineKeys = Array.isArray(live.belonging_magazine_keys)
+    ? live.belonging_magazine_keys
+    : [];
+  const errors = [];
+  const warnings = [];
+
+  if (live.user?.urlname !== "stats47") errors.push({ code: "account_mismatch", detail: live.user?.urlname || null });
+  if (live.status !== "published") errors.push({ code: "not_published", detail: live.status || null });
+
+  const cover = inspectNoteCover(live, noteKeyFromUrl(article.noteUrl));
+  if (cover.status === "missing") errors.push({ code: "cover_missing" });
+  if (cover.status === "unknown") errors.push({ code: "cover_unknown", detail: cover.reason });
+
+  const hashtagCount = Array.isArray(live.hashtag_notes) ? live.hashtag_notes.length : 0;
+  if (hashtagCount < 95) errors.push({ code: "hashtags_below_95", detail: hashtagCount });
+
+  const livePaid = Number(live.price || 0) > 0;
+  if (livePaid !== article.isPaid) errors.push({ code: "paid_state_mismatch", detail: { catalog: article.isPaid, live: livePaid } });
+  if (article.priceJpy > 0 && Number(live.price || 0) !== article.priceJpy) {
+    errors.push({ code: "price_mismatch", detail: { catalog: article.priceJpy, live: Number(live.price || 0) } });
+  }
+  if (article.publishedSeparator && live.separator !== article.publishedSeparator) {
+    errors.push({
+      code: "published_separator_mismatch",
+      detail: { catalog: article.publishedSeparator, live: live.separator || null },
+    });
+  }
+  if (article.pinned && !live.is_pinned) errors.push({ code: "expected_pinned_article_missing" });
+  if (article.profiled && !live.is_profiled) errors.push({ code: "expected_profile_article_missing" });
+
+  if (expectedMagazineNoteKey && !actualMagazineKeys.includes(expectedMagazineNoteKey)) {
+    errors.push({ code: "missing_magazine_membership", detail: expectedMagazineNoteKey });
+  }
+  const knownMagazineKeys = new Set(
+    [...magazinesByKey.values()].map((magazine) => magazineKeyFromUrl(magazine.noteUrl)).filter(Boolean),
+  );
+  const unexpectedMagazineKeys = actualMagazineKeys.filter(
+    (key) => knownMagazineKeys.has(key) && key !== expectedMagazineNoteKey,
+  );
+  if (unexpectedMagazineKeys.length > 0) {
+    warnings.push({ code: "unexpected_magazine_membership", detail: unexpectedMagazineKeys });
+  }
+
+  // 有料記事では購入が無料プレビューの主 CTA。無料記事向けの回遊 CTA を
+  // 機械的に強制すると購入導線を弱めるため、欠落警告は無料記事だけに出す。
+  if (!livePaid && siteLinks.length === 0) warnings.push({ code: "missing_site_link" });
+  if (!livePaid && expectedMagazine?.noteUrl && !magazineLinks.some((url) => magazineKeyFromUrl(url) === expectedMagazineNoteKey)) {
+    warnings.push({ code: "missing_magazine_link_in_free_body", detail: expectedMagazine.noteUrl });
+  }
+  if (!livePaid && eligibleRelatedNoteKeys.size > 0 && noteArticleLinks.length === 0) {
+    warnings.push({ code: "missing_related_note_link" });
+  }
+  if (!livePaid && links.length === 0) warnings.push({ code: "no_navigation_links" });
+
+  const targetPaths = article.stats47Targets.map(normalizedSitePath).filter(Boolean);
+  const linkedPaths = new Set(siteLinks.map(normalizedSitePath).filter(Boolean));
+  const missingTargets = targetPaths.filter((target) => !linkedPaths.has(target));
+  if (!livePaid && missingTargets.length > 0) {
+    errors.push({ code: "missing_catalog_site_target", detail: missingTargets });
+  }
+
+  const nonHttpsSiteLinks = siteLinks.filter((value) => new URL(value).protocol !== "https:");
+  if (nonHttpsSiteLinks.length > 0) warnings.push({ code: "non_https_site_link", detail: nonHttpsSiteLinks });
+  const trackedCardUrls = cardUrls.filter((value) => isStats47SiteUrl(value) && hasTrackingParameters(value));
+  if (trackedCardUrls.length > 0) warnings.push({ code: "tracked_url_used_as_card", detail: trackedCardUrls });
+
+  const brokenSiteLinks = [];
+  const redirectedSiteLinks = [];
+  for (const url of siteLinks) {
+    const health = linkHealthByUrl.get(url);
+    if (!health) continue;
+    if (health.status === 404 || health.status === 410 || health.status >= 500 || health.error) {
+      brokenSiteLinks.push({ url, ...health });
+    } else if (health.redirected && !isExpectedNoteProductRedirect(url, health)) {
+      redirectedSiteLinks.push({ url, ...health });
+    }
+  }
+  if (brokenSiteLinks.length > 0) errors.push({ code: "broken_site_link", detail: brokenSiteLinks });
+  if (redirectedSiteLinks.length > 0) warnings.push({ code: "redirected_site_link", detail: redirectedSiteLinks });
+
+  // フッター見出しの二重化 (2026-09-16 の商品カード一括追加で 190 本)。footer 適用時に畳むので再発は warning で捕まえる
+  // 見出し本文が「次に読む」だけのものを数える (本文中の「関連記事 / 次に読む」のような著者見出しは別物)
+  const footerHeadings = (String(live.body || "").match(/<h2[^>]*>次に読む<\/h2>/g) || []).length;
+  if (footerHeadings >= 2) warnings.push({ code: "duplicate_footer_heading", detail: footerHeadings });
+
+  const paidLanding = auditPaidLanding({ article, live, expectedMagazine, inboundNoteLinkCount });
+  for (const issue of paidLanding.issues) {
+    (issue.severity === "error" ? errors : warnings).push({ code: issue.code, detail: issue.detail ?? null });
+  }
+
+  return {
+    key: article.key,
+    noteKey: live.key,
+    title: article.title,
+    vertical: article.vertical,
+    isPaid: article.isPaid,
+    r2Body: article.r2Body,
+    noteUrl: article.noteUrl,
+    hashtagCount,
+    cover,
+    linkCounts: {
+      total: links.length,
+      cards: cardUrls.length,
+      site: siteLinks.length,
+      relatedNote: noteArticleLinks.length,
+      magazine: magazineLinks.length,
+    },
+    actualMagazineKeys,
+    expectedMagazineKey: expectedMagazineNoteKey,
+    isPinned: Boolean(live.is_pinned),
+    isProfiled: Boolean(live.is_profiled),
+    inboundNoteLinkCount,
+    paidLanding: paidLanding.applicable
+      ? { premium: paidLanding.premium, checks: paidLanding.checks, issueCodes: paidLanding.issues.map((issue) => issue.code) }
+      : null,
+    errors,
+    warnings,
+  };
+}
+
+export function summarizeArticleAudits(articles) {
+  const countWith = (predicate) => articles.filter(predicate).length;
+  return {
+    total: articles.length,
+    errors: articles.reduce((sum, article) => sum + article.errors.length, 0),
+    warnings: articles.reduce((sum, article) => sum + article.warnings.length, 0),
+    compliantHashtags: countWith((article) => article.hashtagCount >= 95),
+    coversConfigured: countWith((article) => article.cover.status === "configured"),
+    coversMissing: countWith((article) => article.cover.status === "missing"),
+    coversUnknown: countWith((article) => article.cover.status === "unknown"),
+    withSiteLink: countWith((article) => article.linkCounts.site > 0),
+    withRelatedNoteLink: countWith((article) => article.linkCounts.relatedNote > 0),
+    withMagazineLink: countWith((article) => article.linkCounts.magazine > 0),
+    withNoNavigation: countWith((article) => article.linkCounts.total === 0),
+    assignedMagazineMembershipOk: countWith(
+      (article) => !article.expectedMagazineKey || article.actualMagazineKeys.includes(article.expectedMagazineKey),
+    ),
+    pinnedArticles: countWith((article) => article.isPinned),
+    profiledArticles: countWith((article) => article.isProfiled),
+    paidLandingApplicable: countWith((article) => Boolean(article.paidLanding)),
+    paidLandingCompliant: countWith((article) => article.paidLanding && article.paidLanding.issueCodes.length === 0),
+    paidLandingErrors: articles.reduce(
+      (sum, article) => sum + article.errors.filter((issue) => issue.code.startsWith("paid_")).length,
+      0,
+    ),
+    paidLandingWarnings: articles.reduce(
+      (sum, article) => sum + article.warnings.filter((issue) => issue.code.startsWith("paid_")).length,
+      0,
+    ),
+  };
+}
+
+export function buildProfileAudit(profile) {
+  const externalLinks = profile?.externalLinks || {};
+  const biography = String(profile?.profile || "").trim();
+  const externalText = `${JSON.stringify(externalLinks)} ${biography}`;
+  const warnings = [];
+  if (!biography) warnings.push({ code: "profile_bio_missing" });
+  if (!/stats47\.jp/i.test(externalText)) warnings.push({ code: "profile_site_link_missing" });
+  if (!profile?.headerImageUrl) warnings.push({ code: "profile_header_missing" });
+  return {
+    urlname: profile?.urlname || null,
+    noteCount: profile?.noteCount ?? null,
+    magazineCount: profile?.magazineCount ?? null,
+    followerCount: profile?.followerCount ?? null,
+    hasBio: Boolean(biography),
+    hasSiteLink: /stats47\.jp/i.test(externalText),
+    hasHeaderImage: Boolean(profile?.headerImageUrl),
+    warnings,
+  };
+}

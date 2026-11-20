@@ -32,7 +32,7 @@ import {
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
-const { MAX_WEIGHTED_LENGTH, weightedLength } = require("../lib/x-weighted-length.cjs") as {
+const { MAX_WEIGHTED_LENGTH, weightedLength } = require("../../../packages/ops/src/sns/x-weighted-length.cjs") as {
   MAX_WEIGHTED_LENGTH: number;
   weightedLength: (text: string) => number;
 };

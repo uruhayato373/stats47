@@ -25,7 +25,7 @@ import {
   evaluateMoshimoOutcomeGate,
   MOSHIMO_RESULTS_SCHEMA_VERSION,
   parseMoshimoPromotionRows,
-} from './lib/moshimo-report-core.mjs';
+} from '../../../packages/ops/src/ads/lib/moshimo-report-core.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const OUTPUT_PATH = join(

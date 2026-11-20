@@ -90,8 +90,8 @@ estat-catalog/
 | `pull` | 公開URLからmanifest+索引を`.local/estat-catalog/`へ |
 | `search <語...> [--id <statsDataId>] [--pref-only] [--year 2020] [--collect-area 2]` (0=該当なし) | pull済み索引をキーワード検索 |
 
-lib (純粋関数・テスト対象): `.claude/scripts/lib/estat-catalog/{api,normalize,index,s3}.mjs`。
-テスト: `npm run estat:catalog:test` (`node --import tsx --test .claude/scripts/lib/__tests__/estat-catalog.test.mjs`)。
+lib (純粋関数・テスト対象): `packages/ops/src/estat/catalog-{api,index,pulled,s3}.mjs` と `packages/estat-api/src/catalog/normalize.mjs`。
+テスト: `npm run estat:catalog:test` (`node --import tsx --test packages/ops/src/estat/__tests__/estat-catalog.test.mjs`)。
 
 失敗方針: 個別失敗はmanifest `failed[]`に記録して次回再試行 (5回でquarantine)。
 **run内の失敗率 > 20%ならexit 1** (API障害時に取得済みを誤記録しない fail-closed)。

@@ -114,14 +114,14 @@
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/instagram/post-from-schedule.cjs": {
+    "packages/ops/src/sns/instagram-post-from-schedule.cjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 1,
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/lib/__tests__/chart-provenance.test.mjs": {
+    "packages/ops/src/blog/lint/__tests__/chart-provenance.test.mjs": {
       "stats": 13,
       "ranking": 2,
       "origin": 0,
@@ -170,14 +170,14 @@
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/lib/__tests__/threads-core.test.cjs": {
+    "packages/ops/src/sns/__tests__/threads-core.test.cjs": {
       "stats": 0,
       "ranking": 0,
       "origin": 3,
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/lib/check-r2-route-ssg.cjs": {
+    "packages/ops/src/gates/check-r2-route-ssg.cjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
@@ -191,7 +191,7 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/lib/latest-partition.mjs": {
+    "packages/ops/src/ranking/latest-partition.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 0,
@@ -212,21 +212,21 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/note/__tests__/image-assets-audit.test.mjs": {
+    "packages/ops/src/note/__tests__/image-assets-audit.test.mjs": {
       "stats": 2,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/note/build-note-figure-ledger.mjs": {
+    "packages/ops/src/note/build-note-figure-ledger.mjs": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/note/catalog/backfill-note-data-provenance.mjs": {
+    "packages/ops/src/note/catalog/backfill-note-data-provenance.mjs": {
       "stats": 0,
       "ranking": 3,
       "origin": 0,
@@ -296,7 +296,7 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/themes/__tests__/verify-external-ingest.test.mjs": {
+    "packages/ops/src/themes/__tests__/verify-external-ingest.test.mjs": {
       "stats": 3,
       "ranking": 1,
       "origin": 0,

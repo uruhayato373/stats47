@@ -17,7 +17,7 @@ const { isPrefectureAreaCode } = require("../../../packages/area/mirror/prefectu
 
 const path = require("node:path");
 const fs = require("node:fs");
-const { ESTAT_STATS_DATA_URL } = require("../lib/estat-catalog/endpoints.cjs");
+const { ESTAT_STATS_DATA_URL } = require("../../../packages/ops/src/estat/catalog-endpoints.cjs");
 require("dotenv").config({
   path: path.resolve(__dirname, "../../../.env.local"),
 });
@@ -222,7 +222,7 @@ async function processMetric(db, metricKey, opts) {
 }
 
 async function main() {
-  const { resolveEstatAppId } = await import("../lib/estat-catalog/api.mjs");
+  const { resolveEstatAppId } = await import("../../../packages/ops/src/estat/catalog-api.mjs");
   APP_ID = resolveEstatAppId(process.env, false);
   if (!APP_ID) {
     console.error("e-Stat app ID required");

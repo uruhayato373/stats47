@@ -79,7 +79,7 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 | A8 `check-approval` の全ページ走査は実装済 (2026-08-04)    | `a8-browser.ts` `collectPartneredProgramIds`           | 残りは上限到達の `partial` 表現 (§8.1)    |
 | cron は各失敗を echo 後に継続して握り潰す                  | `scout-asp-weekly.sh`                                  | partial / failed を exit と health に反映 |
 | append の失敗復元が `git checkout --`                      | `append-affiliate-ads.ts`                              | 既存未コミット変更を消し得る              |
-| 広告スクリプト純粋コアのテストは 120 件成功                | `node --test .claude/scripts/ads/__tests__/*.test.mjs` | browser adapter と cron の test が不足    |
+| 広告スクリプト純粋コアのテストは 120 件成功                | `node --test packages/ops/src/ads/__tests__/*.test.*` | browser adapter と cron の test が不足    |
 
 ## 3. 最優先の不変条件
 
@@ -189,12 +189,12 @@ analytics
 
 | 種別                             | 推奨配置                                |
 | -------------------------------- | --------------------------------------- |
-| 純粋な状態・plan・reconcile      | `.claude/scripts/ads/lib/`              |
+| 純粋な状態・plan・reconcile      | `packages/ops/src/ads/lib/` (ブラウザの部品は `.claude/scripts/ads/lib/`) |
 | 3 ASP 共通 CLI                   | `.claude/scripts/ads/`                  |
 | A8 固有 UI adapter               | `.claude/skills/ads/scout-asp/scripts/` |
 | OS の定期実行 wrapper            | `scripts/scheduled/`                    |
 | synthetic DOM fixture (未実装)   | `.claude/scripts/ads/__fixtures__/`     |
-| 単体テスト                       | `.claude/scripts/ads/__tests__/`        |
+| 単体テスト                       | `packages/ops/src/ads/__tests__/` (ブラウザ・アプリのデータに依存するものは `.claude/scripts/ads/__tests__/`) |
 | ローカル journal / lock / health | `.local/affiliate-ops/`                 |
 
 ## 6. 状態モデル
@@ -352,7 +352,7 @@ type AffiliateEligibility = {
 };
 ```
 
-禁止語、risk flag、最低需要などの規則は `.claude/scripts/ads/data/` の versioned policy へ置き、
+禁止語、risk flag、最低需要などの規則は `config/` の versioned policy (`config/affiliate-eligibility-policy.json` など) へ置き、
 catalog の各 entry には判定結果と fingerprint を保存する。アプリ配信に必要な allowlist だけを
 広告の台帳 `affiliate.ads` の型付きフィールドへ移す。
 
@@ -661,10 +661,10 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 | `.claude/agents/affiliate-manager.md`                             | eligibility を通過した draft だけ SSOT 化                          |
 | `.claude/skills/ads/scout-asp/SKILL.md`                           | A8 pagination、safe cron、unknown 状態                             |
 | `.claude/skills/ads/affiliate-operate/SKILL.md`                   | check-approval / harvest / health mode                             |
-| `.claude/scripts/ads/lib/affiliate-operations-core.mjs`           | measurement gate v2                                                |
+| `packages/ops/src/ads/lib/affiliate-operations-core.mjs`           | measurement gate v2                                                |
 | `.claude/scripts/ads/fetch-affiliate-ga4.cjs`                     | snapshot schema v2・quality                                        |
 | `.claude/scripts/ads/build-affiliate-operations-state.ts`         | schema v2・compliance gate                                         |
-| `.claude/scripts/ads/lib/asp-browser-base.mjs`                    | lock、artifact mode、mask、retention                               |
+| `packages/ops/src/ads/lib/asp-browser-base.mjs`                    | lock、artifact mode、mask、retention                               |
 | `.claude/scripts/ads/affiliate-apply.mjs`                         | plan必須、journal、unknown、idempotency                            |
 | `.claude/scripts/ads/affiliate-status.mjs`                        | pagination、completeness、positive-only transition                 |
 | `.claude/skills/ads/scout-asp/scripts/a8-browser.ts`              | approval 全ページ走査、raw dump廃止                                |
@@ -677,9 +677,9 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 
 想定する新規 pure core。Phase 0 で既存 core に収まるなら統合し、ファイルを増やさない。
 
-- `.claude/scripts/ads/lib/asp-operation-core.mjs`
+- `packages/ops/src/ads/lib/asp-operation-core.mjs`
 - `.claude/scripts/ads/lib/asp-reconciliation-core.mjs` (未実装)
-- `.claude/scripts/ads/lib/affiliate-eligibility-core.mjs`
+- `packages/ops/src/ads/lib/affiliate-eligibility-core.mjs`
 
 ## 15. 実装フェーズ
 
@@ -841,6 +841,8 @@ live smoke は既存案件の read-only 1 件まで。新規申請しない。
 
 ```bash
 # 広告 pure core
+node --test packages/ops/src/ads/__tests__/*.test.*
+# ブラウザ・アプリのデータに依存するもの
 node --test .claude/scripts/ads/__tests__/*.test.mjs
 
 # web の resolver / repository を変更した場合

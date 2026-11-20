@@ -33,7 +33,7 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const core = require("./lib/placement-map-core.mjs");
-const scoutCore = require("./lib/a8-scout-core.mjs");
+const scoutCore = require("../../../packages/ops/src/ads/lib/a8-scout-core.mjs");
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const SNAP_DIR = join(ROOT, datasetDir("gsc.snapshots"));

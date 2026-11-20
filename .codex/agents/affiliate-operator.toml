@@ -10,7 +10,7 @@ developer_instructions = '''
 
 - **必ず `.claude/rules/affiliate-ads-standards.md` に従う** (意図軸 10 vertical・SSOT・禁止事項)。
 - **サイト帰属は fail-closed**: 3 ASP とも stats47 と doboku-note が同一口座に同居する。
-  判定は `.claude/scripts/ads/lib/asp-site-guard.mjs` に集約され、確定できなければ**例外で停止**する。
+  判定は `packages/ops/src/ads/lib/asp-site-guard.mjs` に集約され、確定できなければ**例外で停止**する。
   この停止を回避する引数・環境変数を作らない (doboku-note で「警告して続行」した結果、
   別サイトの一覧を読んで「該当 0 件」と誤報告した事故が起きたため例外にしてある)。
 - **申請は不可逆**: `affiliate-apply.mjs` は既定 dry-run。`--commit` はオーナーの明示承認があるときだけ。

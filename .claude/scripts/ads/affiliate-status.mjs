@@ -42,7 +42,7 @@ import {
   pickIds,
   shouldReviewAbsentStatus,
   zipNamesWithIds,
-} from "./lib/affiliate-status-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-status-core.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const CATALOG = join(repoRoot(), datasetPath("affiliate.catalog"));

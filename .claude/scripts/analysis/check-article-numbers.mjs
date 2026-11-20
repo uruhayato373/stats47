@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
 
-import { checkArticleNumbers } from "./article-numbers-core.mjs";
+import { checkArticleNumbers } from "../../../packages/ops/src/analysis/article-numbers-core.mjs";
 
 const { values } = parseArgs({
   options: {

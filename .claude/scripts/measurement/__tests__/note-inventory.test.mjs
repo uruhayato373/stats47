@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
-import { buildCoverMetricsReport } from '../../note/lib/dashboard-metrics.mjs';
+import { buildCoverMetricsReport } from '../../../../packages/ops/src/note/lib/dashboard-metrics.mjs';
 import { readFileSync } from 'node:fs';
-import { acceptedNoteGap, noteInventoryAvailable, noteMetricsExitCode, validateNoteInventory } from '../note-inventory.mjs';
-import { validateAttempt, validateEvidence, validateInventoryAttempt } from '../consumer-paths.mjs';
-import { SOURCES } from '../sources.mjs';
-import { measurementHealth } from '../health.mjs';
+import { acceptedNoteGap, noteInventoryAvailable, noteMetricsExitCode, validateNoteInventory } from '../../../../packages/ops/src/measurement/note-inventory.mjs';
+import { validateAttempt, validateEvidence, validateInventoryAttempt } from '../../../../packages/ops/src/measurement/consumer-paths.mjs';
+import { SOURCES } from '../../../../packages/ops/src/measurement/sources.mjs';
+import { measurementHealth } from '../../../../packages/ops/src/measurement/health.mjs';
 
 const time = '2026-09-21T05:00:00Z';
 const now = Date.parse(time);

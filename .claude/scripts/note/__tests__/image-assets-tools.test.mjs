@@ -6,9 +6,9 @@ import { tmpdir } from "node:os";
 import { basename, dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { referencedPngs, missingImages } from "../ensure-note-images.mjs";
-import { pendingSvgs } from "../regen-derived-png.mjs";
-import { resolveDriveInput } from "../lib/drive-assets.mjs";
+import { referencedPngs, missingImages } from "../../../../packages/ops/src/note/ensure-note-images.mjs";
+import { pendingSvgs } from "../../../../packages/ops/src/note/regen-derived-png.mjs";
+import { resolveDriveInput } from "../../../../packages/ops/src/note/lib/drive-assets.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const require = createRequire(import.meta.url);

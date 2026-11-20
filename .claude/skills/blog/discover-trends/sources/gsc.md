@@ -29,7 +29,7 @@ stats47.jp に対する検索クエリの過去 7 日 / 28 日比較を取り、
 
 ```javascript
 // 認証とクライアントは共通モジュールが作る (プロジェクトルートで実行)
-const { createSearchConsoleClient } = require('./.claude/scripts/lib/google-client.cjs');
+const { createSearchConsoleClient } = require('./packages/ops/src/google/google-client.cjs');
 const searchconsole = createSearchConsoleClient();
 const SITE_URL = 'https://stats47.jp/';
 

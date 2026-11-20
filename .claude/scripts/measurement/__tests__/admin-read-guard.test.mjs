@@ -34,13 +34,13 @@ test('browser MCP: publishing, applying and local previews are not blocked', () 
 }));
 
 test('Bash: running a reader script or browser-use on an admin page is denied; mentioning it is not', () => withRoot((root) => {
-  for (const command of ['node .claude/scripts/ads/fetch-a8-ui-csv.mjs --month 2026-10', 'cd /x && node .claude/scripts/ads/rakuten-report.mjs',
+  for (const command of ['node packages/ops/src/ads/fetch-a8-ui-csv.mjs --month 2026-10', 'cd /x && node packages/ops/src/ads/rakuten-report.mjs',
     'npx -y tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts check-approval', 'npm run note:metrics:fetch',
     'node .claude/scripts/measurement/collect-local.mjs --main-root ~/stats47 a8', 'node .claude/scripts/kdp/kdp-reports-probe.mjs',
     'browser-use --profile x open https://note.com/dashboard']) {
     assert.ok(checkBashCommand(command, { root }), command);
   }
-  for (const command of ['grep -n fetch-a8-ui-csv.mjs .claude/skills/ads/a8-report/SKILL.md', "echo 'node .claude/scripts/ads/rakuten-report.mjs'",
+  for (const command of ['grep -n fetch-a8-ui-csv.mjs .claude/skills/ads/a8-report/SKILL.md', "echo 'node packages/ops/src/ads/rakuten-report.mjs'",
     'npx -y tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts apply --id 1', 'browser-use open https://note.com/notes/new',
     'node .claude/scripts/metrics/gsc-query.mjs --dims query', 'node --test .claude/scripts/measurement/__tests__/admin-read-guard.test.mjs']) {
     assert.equal(checkBashCommand(command, { root }), null, command);
@@ -54,7 +54,7 @@ test('the owner request passes for 60 minutes and is logged; the env prefix pass
   assert.equal(checkBrowserInput({ url: 'https://note.com/dashboard' }, { root, now: now + 59 * 60000 }), null);
   assert.ok(checkBrowserInput({ url: 'https://note.com/dashboard' }, { root, now: now + 61 * 60000 }), 'expired');
   assert.throws(() => allowOwnerRequest('  ', { root, now }), /引用/);
-  assert.equal(checkBashCommand('STATS47_OWNER_REQUESTED=1 node .claude/scripts/ads/rakuten-report.mjs', { root, now: now + 2 * 3600000 }), null);
+  assert.equal(checkBashCommand('STATS47_OWNER_REQUESTED=1 node packages/ops/src/ads/rakuten-report.mjs', { root, now: now + 2 * 3600000 }), null);
 }));
 
 test('both hooks deny through the real stdin contract and pass unreadable input', () => {

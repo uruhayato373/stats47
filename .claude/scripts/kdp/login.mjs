@@ -8,7 +8,7 @@
  * ログインが完了したら、このターミナルで Enter を押すとプロファイルが保存されて終了する。
  * ログイン後は capture-account.mjs で accountEmail/accountName を kdp-account.json に記入すること。
  */
-import { launchContext, waitForLogin, sleep } from "./lib/kdp-session.mjs";
+import { launchContext, waitForLogin, sleep } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
 
 const ctx = await launchContext({ headless: false });
 try {

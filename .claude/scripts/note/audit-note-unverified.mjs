@@ -12,7 +12,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { findUnverifiedDisclosures, formatDisclosures } from "./lib/unverified-disclosure.mjs";
+import { findUnverifiedDisclosures, formatDisclosures } from "../../../packages/ops/src/note/lib/unverified-disclosure.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -32,7 +32,7 @@ function checkFiles() {
     console.error(`FAIL 未検証の断り書きが本文に残っている: ${file}\n${formatDisclosures(hits)}`);
   }
   if (failed) {
-    console.error("検証してから書き直すか、公開しない (.claude/scripts/note/lib/unverified-disclosure.mjs)。");
+    console.error("検証してから書き直すか、公開しない (packages/ops/src/note/lib/unverified-disclosure.mjs)。");
     process.exit(1);
   }
   console.log(`OK 未検証の断り書きなし (${files.length} files)`);

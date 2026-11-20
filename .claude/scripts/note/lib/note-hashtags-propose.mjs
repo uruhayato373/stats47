@@ -1,6 +1,6 @@
 /** Ask headless Claude for 99 tags and accept only a set that passes the deterministic gate. */
 import { spawn } from 'node:child_process';
-import { HASHTAG_COUNT, HASHTAG_MODEL, GENERIC_HASHTAGS, requiredHashtags, validateHashtags } from './note-hashtags.mjs';
+import { HASHTAG_COUNT, HASHTAG_MODEL, GENERIC_HASHTAGS, requiredHashtags, validateHashtags } from '../../../../packages/ops/src/note/lib/note-hashtags.mjs';
 
 const BODY_CHARS = 6000;
 const ATTEMPTS = 3;

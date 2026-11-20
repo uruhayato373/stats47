@@ -27,8 +27,8 @@ import {
   MAX_ITEMS_PER_APPROVAL,
   requireCommit,
   decideScActions,
-} from "./apply-allowlisted-settings.mjs";
-import { parseDimensionLedger, LEDGER_STATUS_KINDS } from "./dimension-ledger.mjs";
+} from "../../../packages/ops/src/google/apply-allowlisted-settings.mjs";
+import { parseDimensionLedger, LEDGER_STATUS_KINDS } from "../../../packages/ops/src/google/dimension-ledger.mjs";
 import { sanitizeObject } from "./redact.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
@@ -269,7 +269,7 @@ async function runAuditUi() {
 async function runApplyUi(argv) {
   const { launchAdminContext, acquireLock, releaseLock } = await import("./browser-context.mjs");
   const ga4 = await import("./audit-ga4.mjs");
-  const { applyCreateScLink, applyPublishScCollection } = await import("./apply-allowlisted-settings.mjs");
+  const { applyCreateScLink, applyPublishScCollection } = await import("../../../packages/ops/src/google/apply-allowlisted-settings.mjs");
   const runId = `${Date.now().toString(36)}-${process.pid}`;
   const screenshotDir = path.join(`/tmp/stats47-google-admin-${runId}`, "screenshots");
   fs.mkdirSync(screenshotDir, { recursive: true });
@@ -350,7 +350,7 @@ async function runApplyUi(argv) {
 async function runLogin() {
   const { spawn } = await import("node:child_process");
   const { PROFILE_DIR } = await import("./browser-context.mjs");
-  const { runPreflight } = await import("../measurement/session-preflight.mjs");
+  const { runPreflight } = await import("../../../packages/ops/src/measurement/session-preflight.mjs");
   const { gscSession, profileOpen, waitForProfileClosed } = await import("./login-wait.mjs");
   const argv = process.argv.slice(3);
   const check = () => gscSession(runPreflight({ root: PROJECT_ROOT }));
@@ -358,7 +358,7 @@ async function runLogin() {
     const before = check();
     if (before.usable) { console.log(JSON.stringify({ source: "gsc", status: "ok", state: before.state, opened: false })); return; }
     if (profileOpen(PROFILE_DIR)) { console.log(JSON.stringify({ source: "gsc", status: "profile_open", reason: "専用プロファイルの Chrome が開いたまま。閉じてから取り直す" })); process.exit(1); }
-    const { notify } = await import("../measurement/refresh-session.mjs");
+    const { notify } = await import("../../../packages/ops/src/measurement/refresh-session.mjs");
     notify("Google (GSC) のログインが切れています。開いた Chrome でログインし、Cmd+Q で閉じてください (10 分待ちます)");
   }
   fs.mkdirSync(PROFILE_DIR, { recursive: true });

@@ -29,8 +29,8 @@ co_agents: [instagram-strategist, x-strategist]
 (X 側が予約時刻に自動投稿する)。**予約時刻を過ぎた scheduled を posted へ昇格**するには:
 
 ```bash
-node .claude/scripts/sns/promote-scheduled-x.cjs --dry-run   # 昇格対象を確認
-node .claude/scripts/sns/promote-scheduled-x.cjs --apply     # scheduled→posted (posted_at=予約日)
+node packages/ops/src/sns/promote-scheduled-x.cjs --dry-run   # 昇格対象を確認
+node packages/ops/src/sns/promote-scheduled-x.cjs --apply     # scheduled→posted (posted_at=予約日)
 ```
 
 - X の実投稿 URL (`post_url`) が確認済みの行だけ昇格する。時刻超過だけの行は `HOLD` として保留する。

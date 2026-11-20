@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
-const core = require("./lib/a8-scout-core.mjs");
+const core = require("../../../packages/ops/src/ads/lib/a8-scout-core.mjs");
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const CATALOG = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
 const INVENTORY = path.join(PROJECT_ROOT, `${datasetDir("affiliate.inventory")}/inventory-latest.json`);

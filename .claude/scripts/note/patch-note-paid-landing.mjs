@@ -33,10 +33,10 @@ import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { randomUUID } from "node:crypto";
 import { externalCard } from "./lib/navigation-footer.mjs";
-import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
+import { assertAccount, launchContext, UA } from "../../../packages/ops/src/note/lib/note-session.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
-import { assertRegisteredCards, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
-import { findUnverifiedDisclosures, formatDisclosures } from "./lib/unverified-disclosure.mjs";
+import { assertRegisteredCards, registerMissingCards, unregisteredCards, verifyPublicCards } from '../../../packages/ops/src/note/lib/native-cards.mjs';
+import { findUnverifiedDisclosures, formatDisclosures } from "../../../packages/ops/src/note/lib/unverified-disclosure.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");

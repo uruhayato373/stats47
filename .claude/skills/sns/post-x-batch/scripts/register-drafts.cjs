@@ -29,13 +29,13 @@ const path = require("node:path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 const catalog = require(
-  path.join(PROJECT_ROOT, ".claude/scripts/lib/x-catalog.cjs"),
+  path.join(PROJECT_ROOT, "packages/ops/src/sns/x-catalog.cjs"),
 );
 const store = require(
   path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-posts-store.cjs"),
 );
 // UTM は正典 sns-utm.cjs に一本化 (CP5)。ranking domain の campaign=<key> / content=<template>。
-const snsUtm = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-utm.cjs"));
+const snsUtm = require(path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-utm.cjs"));
 
 function parseArgs(argv) {
   const args = argv.slice(2);

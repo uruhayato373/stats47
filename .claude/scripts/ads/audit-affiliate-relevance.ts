@@ -20,7 +20,7 @@ import {
 import {
   auditBlogAffiliatePolicyCatalog,
   auditBlogAffiliateRelevance,
-} from "./lib/affiliate-relevance-core.mjs";
+} from "../../../packages/ops/src/ads/lib/affiliate-relevance-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

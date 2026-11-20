@@ -6,8 +6,8 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { ROOT } from "./lib/kdp-session.mjs";
-import { validateWeeklyApproval } from "./lib/kdp-weekly-approval.mjs";
+import { ROOT } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
+import { validateWeeklyApproval } from "../../../packages/ops/src/kdp/lib/kdp-weekly-approval.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const argv = process.argv.slice(2);

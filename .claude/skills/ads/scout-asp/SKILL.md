@@ -11,7 +11,7 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 判定はすべて決定的コードに委譲し、agent の意味判断は「pending-vertical 解決」「UI 変化診断」の 2 点のみ。
 
 > **正典は `.claude/rules/affiliate-ads-standards.md` §10**。本 skill は手順のみ。スコア式・blocklist・
-> vertical 写像・申請上限は `.claude/scripts/ads/data/a8-curated.json`、状態機械は `a8-scout-core.mjs` が SSOT。
+> vertical 写像・申請上限は `config/a8-curated.json`、状態機械は `a8-scout-core.mjs` が SSOT。
 > 手動貼付での 1 件登録は従来どおり `/register-affiliate-banner` (両者は `a8-code-core.mjs` の抽出仕様を共有)。
 
 ## 前提: 初回セットアップ (1 回だけ・人間)
@@ -122,7 +122,7 @@ npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts check-approval [--dry
 npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts harvest [--dry-run]
 npx tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts inspect-offer --id s00000000000000
 npx tsx .claude/scripts/ads/append-affiliate-ads.ts [--apply]     # register (既定 dry-run)
-node .claude/scripts/ads/check-a8-apply-budget.cjs                # 今週の申請残枠
+node packages/ops/src/ads/check-a8-apply-budget.cjs                # 今週の申請残枠
 ```
 
 ## 制約 (必ず守る)
@@ -138,6 +138,6 @@ node .claude/scripts/ads/check-a8-apply-budget.cjs                # 今週の申
 - 正典ルール: `.claude/rules/affiliate-ads-standards.md` §10
 - コア: `.claude/scripts/ads/lib/{a8-scout-core,a8-code-core,a8-append-core}.mjs` + `__tests__/`
 - ブラウザ: `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`
-- カタログ: `data/affiliate/a8-catalog.json` (状態機械) / curated: `.claude/scripts/ads/data/a8-curated.json`
+- カタログ: `data/affiliate/a8-catalog.json` (状態機械) / curated: `config/a8-curated.json`
 - 手動登録: `/register-affiliate-banner` / agent: `asp-scout` (ブラウザ) + `affiliate-manager` (SSOT 排他 writer)
 - 認証方式: `docs/01_技術設計/07_Playwright認証プロファイル.md`

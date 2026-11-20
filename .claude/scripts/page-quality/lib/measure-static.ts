@@ -84,7 +84,7 @@ function pageTitle($: cheerio.CheerioAPI): string | null {
 
 /**
  * 広告リンクの「店」(ASP の案件)。同じ店の広告が別のクリエイティブ (バナーとテキスト) で並ぶのを数える。
- * 案件 ID の取り出し方は `.claude/scripts/ads/lib/affiliate-offer-core.mjs` の programRef と同じ
+ * 案件 ID の取り出し方は `packages/ops/src/ads/lib/affiliate-offer-core.mjs` の programRef と同じ
  * (A8 = a8mat の 2 番目の token / もしも = p_id / afb = a / バリューコマース = pid)。楽天は遷移先の店。
  */
 export function adShopKey(href: string): string | null {

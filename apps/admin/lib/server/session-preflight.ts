@@ -10,7 +10,7 @@ import { fileExists, readJson, wrap } from "./state-io";
 
 /**
  * 保存済みセッションの事前確認の最新結果 (読み取り専用)。書き手は launchd の scripts/scheduled/session-preflight.sh
- * (`.claude/scripts/measurement/session-preflight.mjs --write`)。管理画面はブラウザもプロファイルも開かず、この JSON だけを読む。
+ * (`packages/ops/src/measurement/session-preflight.mjs --write`)。管理画面はブラウザもプロファイルも開かず、この JSON だけを読む。
  * 結果が無ければ ran: false (画面は「未実行」)。
  */
 export type SessionState = "valid" | "expiring" | "expired" | "autologin_failed" | "unknown";

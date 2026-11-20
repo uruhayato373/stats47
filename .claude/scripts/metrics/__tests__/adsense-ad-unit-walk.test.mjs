@@ -13,9 +13,10 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, dirname, resolve, relative as relativePath } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { collectAdUnitEntries } from "../lib/adsense-ad-unit-walk.mjs";
+import { collectAdUnitEntries } from "../../../../packages/ops/src/metrics/lib/adsense-ad-unit-walk.mjs";
 
 const SCRIPTS_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const OPS_ROOT = resolve(SCRIPTS_ROOT, "../../packages/ops/src");
 
 /** @param clients { [name]: units[] | Error } — Error なら adunits.list が throw する */
 function stubAdsense(clients, { adCode = null, failAdCode = false } = {}) {
@@ -127,12 +128,14 @@ test("adunits.list を呼ぶのは共有 walk だけ (再実装の検知)", () =
   };
   // google-admin も .claude/scripts 配下なので、ここ 1 回で両方の消費者を覆う。
   walk(SCRIPTS_ROOT);
+  // 共有 walk 本体と、移した消費者 (fetch-adsense-snapshot) は packages/ops/src にある。
+  walk(OPS_ROOT);
 
   // .claude の親からの相対で比べる (作業ツリーが .claude/worktrees/ の下にあると、パスに .claude が 2 回出る)
-  const relative = [...new Set(offenders)].map((p) => relativePath(resolve(SCRIPTS_ROOT, ".."), p).split("\\").join("/"));
+  const relative = [...new Set(offenders)].map((p) => relativePath(resolve(SCRIPTS_ROOT, "../.."), p).split("\\").join("/"));
   assert.deepEqual(
     relative,
-    ["scripts/metrics/lib/adsense-ad-unit-walk.mjs"],
+    ["packages/ops/src/metrics/lib/adsense-ad-unit-walk.mjs"],
     "ad client の走査が共有 walk の外に生えている (二重実装は片方だけ直る事故を招く)",
   );
 });

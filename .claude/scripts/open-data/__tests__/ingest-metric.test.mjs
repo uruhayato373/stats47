@@ -6,7 +6,7 @@ import YAML from 'yaml';
 import { datasetPath } from '../../../../config/datasets.mjs';
 import { PREFECTURES } from '../../../../packages/area/mirror/prefectures.cjs';
 import { statsR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs';
-import { verifyIngestReport } from '../../themes/verify-external-ingest.mjs';
+import { verifyIngestReport } from '../../../../packages/ops/src/themes/verify-external-ingest.mjs';
 import { buildMetricPayload, ingestMetrics, pendingMetricKeys, selectCandidate, METRIC_KEYS } from '../ingest-metric.mjs';
 import { ROOT, loadCatalog, sha256, writeJson } from '../lib/contracts.mjs';
 import { archiveRecipe, loadSnapshot } from '../lib/archive.mjs';
@@ -181,10 +181,12 @@ test('default batch skips metrics whose candidate left the expansion ledger at p
   assert.deepEqual(pendingMetricKeys(expansion), [pending]);
 });
 
-test('default batch on the current ledger resolves exactly one candidate per metric', () => {
+test('default batch on the current ledger resolves exactly one candidate per metric', (t) => {
   const expansion = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/open-data/expansion.json'), 'utf8'));
   const keys = pendingMetricKeys(expansion);
-  assert.ok(keys.length > 0);
+  // 候補を全部公開すると、台帳から県ランキングの候補が消えて対象が 0 件になる (2026-11-18 に 13 本を公開した後がそう)。
+  // 0 件は台帳の正しい状態なので落とさない。1 件以上あるときの「1 指標 1 候補」は下で確かめる
+  if (keys.length === 0) return t.skip('展開候補の県ランキングはすべて公開済み');
   for (const key of keys) {
     assert.equal(expansion.candidates.filter((c) => c.metricKey === key && c.channel === 'prefecture-ranking').length, 1, key);
   }

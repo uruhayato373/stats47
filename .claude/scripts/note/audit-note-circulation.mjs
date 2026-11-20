@@ -20,7 +20,7 @@ import {
   noteKeyFromUrl,
   summarizeArticleAudits,
   unique,
-} from "./lib/circulation-audit.mjs";
+} from "../../../packages/ops/src/note/lib/circulation-audit.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
