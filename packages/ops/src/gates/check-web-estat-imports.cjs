@@ -220,7 +220,7 @@ function parseTsconfigAliases(text, tsconfigPath) {
     }))
     .sort(
       (a, b) =>
-        b.pattern.replace('*', '').length - a.pattern.replace('*', '').length
+        b.pattern.replaceAll('*', '').length - a.pattern.replaceAll('*', '').length
     );
 }
 
@@ -247,7 +247,7 @@ function aliasCandidates(specifier, aliases) {
     if (matched === null) continue;
     for (const target of alias.targets) {
       candidates.push(
-        path.resolve(alias.baseUrl, target.replace('*', matched))
+        path.resolve(alias.baseUrl, target.replaceAll('*', matched))
       );
     }
   }

@@ -17,7 +17,9 @@ const REQUIRED_INCLUDE = [
   "metrics/lib/**/*.mjs",
   "metrics/lib/**/*.cjs",
 ];
-const SCOPE_DIRS = [".claude/scripts/lib", ".claude/scripts/measurement", ".claude/scripts/metrics/lib"];
+// measurement・metrics の部品は 2026-11 に packages/ops へ移し、型検査は packages/ops/tsconfig.checkjs.json が引き継いだ。
+// 数える場所も移し先を含める (移した分だけ件数が減って走査の壊れと見分けがつかなくなるため)
+const SCOPE_DIRS = [".claude/scripts/lib", ".claude/scripts/measurement", ".claude/scripts/metrics/lib", "packages/ops/src/measurement", "packages/ops/src/metrics"];
 // 範囲内で型検査を外してよいファイル。理由の無い追加はしない。
 const NOCHECK_ALLOWED = new Map([
   ["packages/data-configs/mirror/unit-semantics.mjs", "自動生成の鏡。型は正典 packages/data-configs/src/unit/unit-semantics.ts が検査する"],

@@ -68,13 +68,23 @@ export function bodyImagesOf(markdown, { remote = false } = {}) {
 
 /** note.com の本文 HTML を、見出しと画像と段落の順だけ残した Markdown にする */
 export function noteHtmlToMarkdown(html) {
-  return html
+  return replaceUntilStable(html
     .replace(/<figure[^>]*>\s*<img[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/figure>/g, (_, src) => `\n![](${src.split('?')[0]})\n`)
     .replace(/<img[^>]*src="([^"]+)"[^>]*>/g, (_, src) => `\n![](${src.split('?')[0]})\n`)
     .replace(/<a [^>]*href="([^"]+)"[^>]*>/g, ' $1 ')
     .replace(/<h([2-4])[^>]*>([\s\S]*?)<\/h\1>/g, (_, level, text) => `\n${'#'.repeat(Number(level))} ${text}\n`)
-    .replace(/<\/(p|li|blockquote)>/g, '\n')
-    .replace(/<[^>]+>/g, '');
+    .replace(/<\/(p|li|blockquote)>/g, '\n'), /<[^>]+>/g);
+}
+
+
+/** 取り除けなくなるまで繰り返す。1 回の置換だと、入れ子のタグが置換のあとで組み上がって残る (CodeQL の指摘) */
+function replaceUntilStable(text, pattern, replacement = '') {
+  let previous;
+  do {
+    previous = text;
+    text = text.replace(pattern, replacement);
+  } while (text !== previous);
+  return text;
 }
 
 /** 台帳の stats47Targets から指標キーを 1 つ読む。複数を指す記事は指標を決められない */
