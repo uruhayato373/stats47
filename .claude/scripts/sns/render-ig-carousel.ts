@@ -43,7 +43,7 @@ import {
   type CorrelationCarouselSlide,
   type CorrelationCarouselSpec,
 } from "../../../apps/remotion/src/features/correlation-instagram/correlation.ts";
-import { buildCaptionCorrelationLines } from "./lib/correlation-carousel-core.ts";
+import { buildCaptionCorrelationLines } from "../../../packages/ops/src/sns/lib/correlation-carousel-core.ts";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const REMOTION_DIR = join(PROJECT_ROOT, "apps/remotion");

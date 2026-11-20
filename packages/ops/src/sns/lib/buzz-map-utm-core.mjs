@@ -1,7 +1,7 @@
 /**
  * buzz-map-utm-core.mjs — buzz-map の UTM API (薄い adapter)。
  *
- * ★UTM の実装本体は正典 `.claude/scripts/lib/sns-utm.cjs` に一本化した (CP5)。
+ * ★UTM の実装本体は正典 `packages/ops/src/sns/sns-utm.cjs` に一本化した (CP5)。
  *   本モジュールは buzz-map の呼び出し形 (ideaId → campaign=buzz-map-<ideaId>) を
  *   canonical util へ委譲するだけ。UTM 規則を変えるときは sns-utm.cjs を直す。
  *
@@ -10,10 +10,10 @@
  */
 
 import { createRequire } from "node:module";
-import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";
+import { SITE_ORIGIN } from "../../../../types/mirror/site-config.cjs";
 
 const require = createRequire(import.meta.url);
-const snsUtm = require("../../lib/sns-utm.cjs");
+const snsUtm = require("../sns-utm.cjs");
 
 /**
  * buzz-map の canonical URL に UTM を付ける。canonical util へ委譲。

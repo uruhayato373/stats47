@@ -1,7 +1,7 @@
 /**
  * buzz-map status machine (upsert / merged 継承) + postable predicate + batch selection のテスト。
  * status / draft gate / batch。
- * 実行: node --test .claude/scripts/sns/lib/__tests__/buzz-map-status-gate.test.mjs
+ * 実行: node --test packages/ops/src/sns/lib/__tests__/buzz-map-status-gate.test.mjs
  */
 
 import test from "node:test";

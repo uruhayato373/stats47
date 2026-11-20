@@ -1,7 +1,7 @@
 /**
  * prepare-buzz-map-batch の純粋コア (batch-core / utm-core) テスト。
  * asset plan / R2 key / 動画上限 / idempotent skip / caption 完全性 / UTM。
- * 実行: node --test .claude/scripts/sns/lib/__tests__/buzz-map-batch-core.test.mjs
+ * 実行: node --test packages/ops/src/sns/lib/__tests__/buzz-map-batch-core.test.mjs
  */
 
 import test from "node:test";

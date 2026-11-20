@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import { checkPostTrace } from "../lib/post-trace-core.mjs";
 
 const require = createRequire(import.meta.url);
-const { externalIdOf } = require("../../../../packages/ops/src/sns/sns-posts-store.cjs");
+const { externalIdOf } = require("../sns-posts-store.cjs");
 
 const CUTOVER = "2026-10-10T00:00:00.000Z";
 const SHA = "a".repeat(64);

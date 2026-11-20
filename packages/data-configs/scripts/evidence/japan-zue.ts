@@ -68,7 +68,7 @@ async function readItemShards(): Promise<ItemShard[]> {
 const SURVEYS_PATH = path.join(PROJECT_ROOT, datasetPath("surveys.master"));
 const EXPERIMENTS_PATH = path.join(PROJECT_ROOT, datasetPath("business.experiments"));
 const SNS_POSTS_PATH = path.join(PROJECT_ROOT, datasetPath("sns.posts"));
-const SNS_UTM_POLICY_PATH = path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-utm.cjs");
+const SNS_UTM_POLICY_PATH = path.join(PROJECT_ROOT, "packages/ops/src/sns/sns-utm.cjs");
 
 type EvidenceKind = JapanZueCandidate["source"]["kind"];
 

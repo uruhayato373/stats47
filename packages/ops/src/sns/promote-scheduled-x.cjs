@@ -6,12 +6,12 @@
  * 時刻経過だけでは X 側の投稿成功を証明できないため、post_url が無い行は保留する。
  *
  * Usage:
- *   node .claude/scripts/sns/promote-scheduled-x.cjs --dry-run
- *   node .claude/scripts/sns/promote-scheduled-x.cjs --apply
+ *   node packages/ops/src/sns/promote-scheduled-x.cjs --dry-run
+ *   node packages/ops/src/sns/promote-scheduled-x.cjs --apply
  */
 
 const path = require("node:path");
-const store = require(path.resolve(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
+const store = require(path.resolve(__dirname, "./sns-posts-store.cjs"));
 
 function jstDate(iso) {
   const d = new Date(iso);

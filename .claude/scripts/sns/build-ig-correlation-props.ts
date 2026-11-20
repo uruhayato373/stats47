@@ -67,7 +67,7 @@ import {
   yearGapExceedsLimit,
   type JoinableValue,
   type JoinRow,
-} from "./lib/correlation-carousel-core.ts";
+} from "../../../packages/ops/src/sns/lib/correlation-carousel-core.ts";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");

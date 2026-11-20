@@ -1,6 +1,6 @@
 /**
  * buzz-map attribution core テスト（GA4集計 / KPI / score還流）+ UTM一本化。
- * 実行: node --test .claude/scripts/sns/lib/__tests__/buzz-map-attribution-core.test.mjs
+ * 実行: node --test packages/ops/src/sns/lib/__tests__/buzz-map-attribution-core.test.mjs
  */
 
 import test from "node:test";
@@ -17,7 +17,7 @@ import {
 } from "../buzz-map-attribution-core.mjs";
 
 const require = createRequire(import.meta.url);
-const snsUtm = require("../../../lib/sns-utm.cjs");
+const snsUtm = require("../../sns-utm.cjs");
 
 // ── UTM 一本化 (sns-utm.cjs) ─────────────────────────────────────────────────
 
@@ -155,7 +155,7 @@ test("buildScoreFeedback: 高 session ほど score 単調増加 (log スケー�
 test("canonical 不変条件: catalog の primaryUrl に UTM/query が付いていない", () => {
   const catalog = JSON.parse(
     readFileSync(
-      new URL("../../../../../data/sns/buzz-map-catalog.json", import.meta.url),
+      new URL("../../../../../../data/sns/buzz-map-catalog.json", import.meta.url),
       "utf8",
     ),
   );

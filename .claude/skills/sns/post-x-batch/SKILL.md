@@ -86,11 +86,11 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
 `quick-still.ts --layout spotlight|comparison|distribution --out <preview-dir> --require-png`
 で、1県の数値を主役にする・最大/最小を対比する・全県の分布を見せる3構図を選べる。
 例: `npx tsx .claude/scripts/sns/quick-still.ts --key waste-recycling-rate --year 2023 --layout spotlight --out .local/verification/x-visuals/spotlight --require-png`。
-型の実装は `.claude/scripts/sns/lib/ranking-story-card.ts`、再現用のlayoutと年は生成先の`source.json`に記録する。
+型の実装は `packages/ops/src/sns/lib/ranking-story-card.ts`、再現用のlayoutと年は生成先の`source.json`に記録する。
 単位・年度・出典は保持し、中央値を全国平均と呼ばず、同値の最大/最小は同順位を明記する。
 `--layout`省略時は全47県タイルの`all47`。この比較生成は台帳・予約添付・カタログの既定割当を変更しない。
 既定割当の採択はSNS規約§2-10で扱う。表示した事実と本文の主張が合う画像を選ぶ。
-検証: `node --import tsx --test .claude/scripts/sns/__tests__/ranking-story-card.test.ts`。
+検証: `node --import tsx --test packages/ops/src/sns/__tests__/ranking-story-card.test.ts`。
 
 ### ③ キャプション執筆 (LLM — このフェーズだけが判断)
 
@@ -146,7 +146,7 @@ node .claude/skills/sns/post-x-batch/scripts/register-drafts.cjs --in .local/r2/
 生成した draft は **ローカルで** 消化する:
 
 ```bash
-node .claude/scripts/sns/check-x-post-budget.cjs          # 週次の残枠を確認
+node packages/ops/src/sns/check-x-post-budget.cjs          # 週次の残枠を確認
 node .claude/scripts/sns/approve-posts.cjs --list --platform x   # 承認待ち一覧 → オーナーの指示で --ids を承認 (承認済みだけが予約される)
 npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue --dry-run   # 初回必須 (予約モード確認)
 npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue             # 予約投稿 → status=scheduled

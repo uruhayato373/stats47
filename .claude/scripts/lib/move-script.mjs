@@ -77,7 +77,11 @@ export function replaceRepoPaths(text, file, moves) {
   let next = text;
   for (const { from, to, keepEntry } of moves) {
     if (keepEntry && !BASELINE.test(file)) continue;
-    next = keepEntry ? next.split(`"${from}"`).join(`"${to}"`) : next.split(from).join(to);
+    if (keepEntry) { next = next.split(`"${from}"`).join(`"${to}"`); continue; }
+    next = next.split(from).join(to);
+    // 正規表現に埋めたパス (pre-commit の起動条件など) は "." を "\\." と書く。同じ形で置き換える (2026-11-20 に取りこぼした)
+    const escape = (p) => p.replace(/\./g, "\\.");
+    next = next.split(escape(from)).join(escape(to));
   }
   return next;
 }

@@ -17,7 +17,7 @@ import {
   yearGapExceedsLimit,
   type CandidatePairMeta,
 } from "../lib/correlation-carousel-core.ts";
-import { calculatePartialR, calculatePearsonR } from "../../../../packages/correlation/src/utils/calculate-pearson.ts";
+import { calculatePartialR, calculatePearsonR } from "../../../../correlation/src/utils/calculate-pearson.ts";
 
 const shijimiPair: CandidatePairMeta = {
   keyX: "freshwater-clam-consumption-expenditure",

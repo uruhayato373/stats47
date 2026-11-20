@@ -10,9 +10,9 @@
  * 契約の正典: .claude/rules/sns-content-standards.md §3
  */
 import Ajv from "ajv";
-import postsSchema from "../../../../data/sns/posts.schema.json" with { type: "json" };
-import scriptsSchema from "../../../../data/sns/scripts.schema.json" with { type: "json" };
-import { addCommonSchema } from "../../../../packages/ops/src/datasets/dataset-shape.mjs";
+import postsSchema from "../../../../../data/sns/posts.schema.json" with { type: "json" };
+import scriptsSchema from "../../../../../data/sns/scripts.schema.json" with { type: "json" };
+import { addCommonSchema } from "../../datasets/dataset-shape.mjs";
 
 /**
  * この時刻以降に作られた行は承認の記録が必須 (2026-10-09 オーナー決定: 新規投稿は承認必須)。

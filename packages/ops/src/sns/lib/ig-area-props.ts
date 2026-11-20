@@ -11,7 +11,7 @@
  * 中立フレーミングの規約: 「強み/弱み」とは書かない。家計調査由来の指標は都道府県庁所在市
  * (東京都のみ都区部) の値であることを明記する。
  */
-import type { AreaHighlight } from "../../../../packages/area-profile/src/highlights/select-area-highlights.ts";
+import type { AreaHighlight } from "../../../../area-profile/src/highlights/select-area-highlights.ts";
 
 // 対決カルーセル (ig-compare-props.ts) が使う共通の整形関数。定義は選定パッケージ側にある。
 export {
@@ -20,7 +20,7 @@ export {
   collectHighlightCandidateKeys as extractCuratedRankingKeys,
   familyKeyOf,
   type DatabookTemplateLike,
-} from "../../../../packages/area-profile/src/highlights/select-area-highlights.ts";
+} from "../../../../area-profile/src/highlights/select-area-highlights.ts";
 import { to2DigitPrefCode, to5DigitPrefCode } from "@stats47/area/area-code";
 
 /** 対決カルーセル (ig-compare-props.ts) の多様性上限。地域カルーセルの選定には使わない。 */

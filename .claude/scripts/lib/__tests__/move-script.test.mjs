@@ -89,3 +89,9 @@ test("main の定義で動き develop を checkout する workflow の jobs だ�
   assert.match(mainDefinitionJobsText(["on: [\n broken .claude/scripts/x/y.mjs"]), /y\.mjs/);
   assert.equal(mainDefinitionJobsText([""]), "");
 });
+
+test("正規表現に埋めたパス (\\. の形) も置き換える", () => {
+  const moves = [{ from: ".claude/scripts/sns/lib/a-core.mjs", to: "packages/ops/src/sns/lib/a-core.mjs" }];
+  const text = "grep -E '^(\\.claude/scripts/sns/lib/a-core\\.mjs|x)'";
+  assert.equal(replaceRepoPaths(text, "apps/web/scripts/pre-commit-checks.sh", moves), "grep -E '^(packages/ops/src/sns/lib/a-core\\.mjs|x)'");
+});

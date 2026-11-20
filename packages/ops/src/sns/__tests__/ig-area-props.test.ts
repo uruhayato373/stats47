@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import type { AreaHighlight } from "../../../../packages/area-profile/src/highlights/select-area-highlights.ts";
-import { AREA_DATABOOK_SCHEMA_VERSION } from "../../../../packages/area-profile/src/types/databook-snapshot.ts";
+import type { AreaHighlight } from "../../../../area-profile/src/highlights/select-area-highlights.ts";
+import { AREA_DATABOOK_SCHEMA_VERSION } from "../../../../area-profile/src/types/databook-snapshot.ts";
 import {
   buildCoverHook,
   buildCoverTeaser,

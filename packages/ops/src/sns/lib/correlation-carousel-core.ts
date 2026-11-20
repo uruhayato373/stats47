@@ -11,7 +11,7 @@
  *
  * 正典: .claude/rules/evidence-based-judgment.md (因果を示唆しない), sns-content-standards.md §2-3b
  */
-import { isExcludedCorrelationKey } from "../../../../packages/correlation/src/trivial-pairs.ts";
+import { isExcludedCorrelationKey } from "../../../../correlation/src/trivial-pairs.ts";
 
 // ─── キー stem 判定 ─────────────────────────────────────────────────────────
 //

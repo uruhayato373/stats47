@@ -52,7 +52,7 @@ import {
   findMachineDuplicate,
   curatedToCatalogEntry,
   resolveMergedStatus,
-} from "./lib/buzz-map-router-core.mjs";
+} from "../../../packages/ops/src/sns/lib/buzz-map-router-core.mjs";
 import { loadInventory } from "./lib/buzz-map-inventory-core.mjs";
 
 // x-catalog / sns-posts-store は .cjs (require)

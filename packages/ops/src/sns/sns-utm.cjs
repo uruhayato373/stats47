@@ -18,7 +18,7 @@
 
 "use strict";
 
-const { SITE_ORIGIN } = require("../../../packages/types/mirror/site-config.cjs");
+const { SITE_ORIGIN } = require("../../../types/mirror/site-config.cjs");
 
 const BASE = SITE_ORIGIN;
 const VALID_SOURCES = new Set(["x", "instagram", "youtube", "threads"]);

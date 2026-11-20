@@ -1,6 +1,6 @@
 /** X用の編集カード。quick-still --layout から明示選択し、実データだけを組版する。 */
-import { formatValueLabel, resolveValuePrecision } from "../../../../packages/svg-builder/src/shared/axis.ts";
-import { FONT_FAMILY } from "../../../../packages/svg-builder/src/shared/color.ts";
+import { formatValueLabel, resolveValuePrecision } from "../../../../svg-builder/src/shared/axis.ts";
+import { FONT_FAMILY } from "../../../../svg-builder/src/shared/color.ts";
 
 export const STORY_LAYOUTS = ["spotlight", "comparison", "distribution"] as const;
 export type StoryLayout = (typeof STORY_LAYOUTS)[number];

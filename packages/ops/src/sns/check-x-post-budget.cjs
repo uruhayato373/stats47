@@ -17,13 +17,13 @@
  *   isoWeekStart(dateStr)         → その日を含む週の月曜 "YYYY-MM-DD"
  *
  * CLI:
- *   node .claude/scripts/sns/check-x-post-budget.cjs [--date YYYY-MM-DD]
+ *   node packages/ops/src/sns/check-x-post-budget.cjs [--date YYYY-MM-DD]
  *     → その日(既定=今日)を含む週の日別集計 + quota を表示。日次上限超過があれば exit 1
  */
 
 const path = require("node:path");
-const store = require(path.resolve(__dirname, "../../../packages/ops/src/sns/sns-posts-store.cjs"));
-const catalog = require(path.resolve(__dirname, "../../../packages/ops/src/sns/x-catalog.cjs"));
+const store = require(path.resolve(__dirname, "./sns-posts-store.cjs"));
+const catalog = require(path.resolve(__dirname, "./x-catalog.cjs"));
 
 /** post の JST カレンダー日付 ("YYYY-MM-DD")。scheduled_at(ISO) 優先、無ければ posted_at。 */
 function jstDateOf(post) {
@@ -66,7 +66,7 @@ function dayCount(dateStr) {
 /** dateStr を含む週の月曜 (JST) を "YYYY-MM-DD" で返す。 */
 function isoWeekStart(dateStr) {
   // dateStr は JST の日付。正本は packages/ops/src/metrics/periods.mjs (JST の暦日で数える。SCRIPT-ISO-WEEK-UNIFY-01)
-  const { isoWeekOf, isoWeekRange } = require("../../../packages/ops/src/metrics/periods.mjs");
+  const { isoWeekOf, isoWeekRange } = require("../metrics/periods.mjs");
   return isoWeekRange(isoWeekOf(dateStr)).monday;
 }
 

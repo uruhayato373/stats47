@@ -64,10 +64,10 @@ npm run sns:trace:check                                                     # �
 # ① 量産 (クラウド可): 候補選定→画像→執筆→lint→draft 登録を 1 コマンドで
 /post-x-batch --count 14        # 頻度・型・画像は rules §1/§2 が SSOT
 # ② 投稿 (ローカル専用): draft キューを予約消化。必ず dry-run 先行
-node .claude/scripts/sns/check-x-post-budget.cjs                                  # 週次残枠を確認
+node packages/ops/src/sns/check-x-post-budget.cjs                                  # 週次残枠を確認
 npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue --dry-run          # 予約モード確認 (初回必須)
 npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue                    # 予約 → status=scheduled
-node .claude/scripts/sns/promote-scheduled-x.cjs --apply                          # 予約時刻経過分を posted へ
+node packages/ops/src/sns/promote-scheduled-x.cjs --apply                          # 予約時刻経過分を posted へ
 /find-quote-rt                 # トレンドがあれば引用RT (1日≤3・72h以内・炎上/政治回避)
 ```
 

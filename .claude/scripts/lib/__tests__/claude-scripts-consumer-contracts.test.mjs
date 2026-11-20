@@ -13,7 +13,7 @@ const REPO = fileURLToPath(new URL('../../../../', import.meta.url));
 
 // --- 県の「特徴」の 1 系統契約 (packages/area-profile の area-highlights-contract と同じ検査) ---
 const CONSUMER_FILES = [
-  '.claude/scripts/sns/lib/ig-area-props.ts',
+  'packages/ops/src/sns/lib/ig-area-props.ts',
   '.claude/scripts/sns/build-ig-area-props.ts',
 ];
 

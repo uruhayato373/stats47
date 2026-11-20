@@ -1022,7 +1022,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/correlation-carousel-core.test.ts": {
+    "packages/ops/src/sns/__tests__/correlation-carousel-core.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1052,7 +1052,7 @@
       "topoPrefCode": 3,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/ig-map-props.test.ts": {
+    "packages/ops/src/sns/__tests__/ig-map-props.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1067,7 +1067,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/ranking-story-card.test.ts": {
+    "packages/ops/src/sns/__tests__/ranking-story-card.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1172,7 +1172,7 @@
       "topoPrefCode": 1,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/buzz-map-area-code.ts": {
+    "packages/ops/src/sns/lib/buzz-map-area-code.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1187,7 +1187,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/correlation-carousel-core.ts": {
+    "packages/ops/src/sns/lib/correlation-carousel-core.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1217,7 +1217,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-area-props.ts": {
+    "packages/ops/src/sns/lib/ig-area-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1232,7 +1232,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-compare-props.ts": {
+    "packages/ops/src/sns/lib/ig-compare-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1247,7 +1247,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-map-props.ts": {
+    "packages/ops/src/sns/lib/ig-map-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
