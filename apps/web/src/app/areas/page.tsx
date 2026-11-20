@@ -1,14 +1,10 @@
-import { fetchPrefectures, REGIONS } from '@stats47/area';
+import { fetchPrefectures } from '@stats47/area';
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 
 import { AdRow, composeAdRows } from '@/features/ads';
-import {
-  AreaDirectoryRegionNav,
-  AreaDirectoryRegionProvider,
-  PrefectureNavigator,
-} from '@/features/area-profile';
+import { PrefectureNavigator } from '@/features/area-profile';
 
 import { CONTENT_FOOTER } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
@@ -33,10 +29,6 @@ export const metadata: Metadata = {
 
 export default async function AreasPage() {
   const prefectures = fetchPrefectures();
-  const regions = REGIONS.map(({ regionCode, regionName }) => ({
-    regionCode,
-    regionName,
-  }));
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SITE_ORIGIN;
   const structuredData = {
@@ -55,9 +47,8 @@ export default async function AreasPage() {
   // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
   const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
   return (
-    <AreaDirectoryRegionProvider>
-      {/* ページ内ナビ (地方の切替) はパンくずと h1 の後・本文の上に置く (PageShell の header → leftRail → 本文) */}
-      <PageShell
+    // 地方の切り替え (ページ内ナビ) は 2026-11-20 に外した。一覧は地方ごとに分かれ、地図が地方を色で示す
+    <PageShell
         header={
           <>
             <Breadcrumbs
@@ -71,7 +62,6 @@ export default async function AreasPage() {
             />
           </>
         }
-        leftRail={<AreaDirectoryRegionNav regions={regions} />}
       >
         <script
           type="application/ld+json"
@@ -86,12 +76,8 @@ export default async function AreasPage() {
           className="mt-2"
         />
 
-        {/*
-          一覧面の共通フッター枠。PageShell の左レール化により広告は本文カラム幅へ
-          収まり、地方ナビと同じグリッド内でカテゴリ・テーマ面と揃う。
-        */}
+        {/* 一覧面の共通フッター枠。広告は本文カラム幅へ収まり、カテゴリ・テーマ面と揃う */}
         {indexRow.length > 0 && <AdRow cells={indexRow} position="areas-index-row" trackingCategory="areas-index" wide />}
       </PageShell>
-    </AreaDirectoryRegionProvider>
   );
 }

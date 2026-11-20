@@ -24,8 +24,8 @@ interface PrefectureNavigatorProps {
  * 47都道府県を地図・地方別リンク・検索から選べる共通ナビゲーション。
  *
  * 全県リンクは通常の Next Link として SSR し、JavaScript が失敗しても直接遷移できる。
- * embedded は地図を常時表示して広いコンテナだけ一覧を併記し、full は検索と
- * モバイル向けの「一覧 / 地図」切り替えを提供する。
+ * embedded は地図を常時表示して広いコンテナだけ一覧を併記し、full は検索と、
+ * 地図と一覧の両方 (広い幅は左右、スマホは縦) を提供する。
  */
 export function PrefectureNavigator({
   prefectures,

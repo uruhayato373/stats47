@@ -12,7 +12,7 @@ import { PrefectureNavigator } from "../PrefectureNavigator";
 const PREFS = fetchPrefectures();
 
 describe("PrefectureNavigator (SSR / 初期 HTML)", () => {
-  it("full は全47県の直接リンクと検索を SSR する", () => {
+  it("full は全47県の直接リンク (地図と一覧) と検索を SSR する", () => {
     const html = renderToStaticMarkup(
       <PrefectureNavigator
         prefectures={PREFS}
@@ -26,7 +26,8 @@ describe("PrefectureNavigator (SSR / 初期 HTML)", () => {
       expect(html).toContain(`href="/areas/${pref.prefCode}"`);
     }
     expect(html).toContain("都道府県名を検索");
-    expect(html).toContain("地図から探す");
+    expect(html).toContain("地図から都道府県を選ぶ");
+    expect(html.match(/href="\/areas\/\d{5}"/g)).toHaveLength(94);
   });
 
   it("embedded も地図の47県から直接遷移できる", () => {

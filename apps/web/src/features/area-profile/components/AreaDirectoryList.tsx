@@ -13,12 +13,6 @@ const FOCUS_RING =
 
 interface AreaDirectoryListProps {
   regionGroups: AreaRegionGroup[];
-  /**
-   * デスクトップの地方フィルタ。`"all"` 以外を指定するとその地方以外の section を
-   * `hidden`（display:none）にする。全 section は常に DOM に描画するため、初期 HTML
-   * には常に全 47 県リンクが含まれる（クローラから県リンクが消えない）。
-   */
-  activeRegionCode?: string;
   /** リンククリック時の計測フック（遷移は Link 自身が行う） */
   onSelect?: (prefCode: string, prefName: string) => void;
   /** embedded 面では境界線カードを省き、地方別テキストリンクとして密度を上げる。 */
@@ -31,12 +25,11 @@ interface AreaDirectoryListProps {
  *
  * `<nav>` > 地方 `<section>` > `<ul><li><Link>` の構造で、全県がキーボードだけで到達可能。
  * comfortable の各リンクは最低44px、embedded向けcompactは32pxのインラインリンク。
- * 同一ページ内で複数箇所（デスクトップ 2 ペイン / モバイルタブ）に描画されるため、
+ * 地図と同じページに並ぶため、
  * 重複 id を避けて `aria-label` で見出しを与える。
  */
 export function AreaDirectoryList({
   regionGroups,
-  activeRegionCode = "all",
   onSelect,
   density = "comfortable",
   className,
@@ -49,14 +42,8 @@ export function AreaDirectoryList({
       className={cn("flex flex-col", compact ? "gap-3" : "gap-5", className)}
     >
       {regionGroups.map((region) => {
-        const isHidden =
-          activeRegionCode !== "all" && activeRegionCode !== region.regionCode;
         return (
-          <section
-            key={region.regionCode}
-            aria-label={region.regionName}
-            className={cn(isHidden && "hidden")}
-          >
+          <section key={region.regionCode} aria-label={region.regionName}>
             <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
               <span
                 aria-hidden="true"

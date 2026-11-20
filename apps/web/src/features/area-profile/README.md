@@ -7,13 +7,12 @@
 
 ## `/areas` 都道府県選択ハブ
 
-目的の県へ一操作で移動できることを主目的とし、入口の優先順位を「検索 → 一覧 → 地図」とする。
+目的の県へ一操作で移動できることを主目的とし、検索・地図・一覧の 3 つの入口を最初から見せる。
 
-- routeはServer Componentを維持し、`PageShell`のページ内ナビ（`leftRail`。列を作らず本文の上に置く）、`Breadcrumbs`、`PageHeader`、`AreaDirectory`を構成する。
-- 地方フィルタ`AreaDirectoryRegionNav`はページ内ナビとして本文の上に置く（2026-10-28 にサイドバー型へ寄せ、左の列をやめた）。サイト全体のナビは`AppSidebar`が持つ。
+- routeはServer Componentを維持し、`PageShell`、`Breadcrumbs`、`PageHeader`、`PrefectureNavigator`を構成する。ページ内ナビ（`leftRail`）は持たない。
+- 地方の絞り込み（旧`AreaDirectoryRegionNav`）は 2026-11-20 に外した。一覧は地方ごとに分かれ、地図が地方を色と凡例で示すため。
 - `AreaSearch`は県名のsuffix省略検索、候補表示、キーボード操作、直接遷移を担うClient Component。
-- desktopは`AreaSelectionPanels`で軽量タイル地図と地方別一覧を2ペイン表示し、本文上の地方選択を一覧へ反映する。
-- mobile/tabletは一覧を既定タブとし、地図は利用者が切り替えたときに表示する。
+- `AreaSelectionPanels`（full）は地図と地方別一覧をタブなしで両方描く。本文 480px 以上は左右に並べ、スマホは地図の下に一覧を置く（2026-11-20 オーナー決定。地図をタブの裏に置いた 2026-09-15〜11-20 は、`/areas`の地図のクリックが週 0〜2 回まで減った）。
 - `AreaTileMap`はD3やcanvasを使わず、通常の県リンクをCSS Gridへ配置する。初期HTMLに47県リンクを残す。
 - `AreaDirectoryList`は地方別のsemantic listを描画し、各リンクの操作領域を44px以上にする。
 
@@ -32,7 +31,6 @@
 - 検索はvisible label、combobox/listbox semantics、Arrow keys、Enter、Escape、0件stateを持つ。
 - 一覧と地図のリンクは`{都道府県名}の統計を見る`をaccessible nameにする。
 - 地方はcategorical colorと地方名・凡例を併用し、色だけで区別しない。
-- inactiveなmobile panelをfocus順へ残さない。
 - canonical `/areas`、47件の`ItemList` JSON-LD、県URLを維持する。
 - 県選択UIの途中へ広告を挿入しない。
 
@@ -69,6 +67,3 @@ npm run test:run --workspace apps/web -- src/features/area-profile
 npm run type-check --workspace apps/web
 npm run design-system:check --workspace apps/web
 ```
-
-`/areas`の未完了QAと本番反映状況は
-`.claude/todo/backlog.md#AREAS-DIRECTORY-UX-01`を正典とする。

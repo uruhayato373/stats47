@@ -2,12 +2,6 @@
 
 
 import { cn } from '@stats47/components';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@stats47/components/atoms/ui/tabs';
 import { hrefFor } from '@stats47/data-configs/content/href';
 
 import { SectionIndexLink } from '@/components/section/SectionIndexLink';
@@ -15,7 +9,6 @@ import { SectionIndexLink } from '@/components/section/SectionIndexLink';
 import { trackNavClick } from '@/lib/analytics/events';
 
 import { AreaDirectoryList } from './AreaDirectoryList';
-import { useAreaDirectoryRegion } from './AreaDirectoryRegionContext';
 import { AreaTileMap } from './AreaTileMap';
 
 import type { AreaDirectoryData, AreaTile } from '../utils';
@@ -49,11 +42,11 @@ interface AreaSelectionPanelsProps extends AreaDirectoryData {
 /**
  * 都道府県選択パネル（レスポンシブ・計測の合流点）。
  *
- * - full: 画面幅にかかわらず一覧/地図をタブで切り替え、選択中の一方だけを描画する。
+ * - full (/areas): 地図と一覧を常に両方描く。コンテナ幅 480px 以上は左右に並べ、狭い幅は地図の下に一覧を置く。
+ *   一覧は押しやすさのため comfortable (各リンク 44px 以上)。
  * - embedded: 地図を常時表示し、コンテナ幅 768px 以上でコンパクト一覧を併記する。
- *   PageShell のレール表示幅では `AreaDirectoryRegionNav` が地方フィルタを担う。
  *
- * 初期HTMLには既定の一覧だけを描画し、47県リンクを1組に保つ。
+ * どちらも地図と一覧の県リンクを初期 HTML に持つ (47 県 × 2 組)。
  * 計測は既存 nav_click を配置・導線別の surface で送る。
  */
 export function AreaSelectionPanels({
@@ -65,7 +58,6 @@ export function AreaSelectionPanels({
   surface,
   className,
 }: AreaSelectionPanelsProps) {
-  const { activeRegionCode } = useAreaDirectoryRegion();
   const trackingSurface = TRACKING_SURFACES[surface];
 
   const legend = regionGroups.map((r) => ({
@@ -109,32 +101,25 @@ export function AreaSelectionPanels({
     );
   }
 
+  // 地図を最初から見せる (2026-11-20 オーナー決定)。タブの裏に置いた間は地図がほぼ押されなかった
+  // (/areas の地図は週 0〜2 回、地図を最初から出すトップページは週 100 回超)。
+  // 本文 480px 以上 (サイドバーのある PC・タブレット) は地図と一覧を左右に、スマホは地図の下に一覧を置く。
+  // 768px で切ると、サイドバーを開いた幅 1044px の PC (本文 738px) で地図が幅いっぱいの縦積みになる。
   return (
-    <Tabs defaultValue="list" className={className}>
-      <TabsList className="grid h-auto! w-full grid-cols-2">
-        <TabsTrigger value="list" className="min-h-11">
-          一覧から探す
-        </TabsTrigger>
-        <TabsTrigger value="map" className="min-h-11">
-          地図から探す
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="list" className="mt-4">
-        <AreaDirectoryList
-          regionGroups={regionGroups}
-          activeRegionCode={activeRegionCode}
-          onSelect={onListSelect}
-        />
-      </TabsContent>
-      <TabsContent value="map" className="mt-4">
-        <AreaTileMap
-          tiles={tiles}
-          gridCols={gridCols}
-          gridRows={gridRows}
-          regionLegend={legend}
-          onSelect={onMapSelect}
-        />
-      </TabsContent>
-    </Tabs>
+    <div
+      className={cn(
+        'grid gap-6 @sm:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] @sm:items-start',
+        className
+      )}
+    >
+      <AreaTileMap
+        tiles={tiles}
+        gridCols={gridCols}
+        gridRows={gridRows}
+        regionLegend={legend}
+        onSelect={onMapSelect}
+      />
+      <AreaDirectoryList regionGroups={regionGroups} onSelect={onListSelect} />
+    </div>
   );
 }

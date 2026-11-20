@@ -32,15 +32,6 @@ describe("AreaDirectoryList", () => {
     expect(onSelect).toHaveBeenCalledWith("13000", "東京都");
   });
 
-  it("activeRegionCode で絞り込んでも全リンクは DOM に残る (クローラ保全)", () => {
-    render(
-      <AreaDirectoryList regionGroups={regionGroups} activeRegionCode="kanto" />,
-    );
-    expect(
-      screen.getAllByRole("link", { name: /の統計を見る$/ }),
-    ).toHaveLength(47);
-  });
-
   it("compact は境界線カードではなく地方別テキストリンクを描画する", () => {
     render(<AreaDirectoryList regionGroups={regionGroups} density="compact" />);
     const tokyo = screen.getByRole("link", { name: "東京都の統計を見る" });
