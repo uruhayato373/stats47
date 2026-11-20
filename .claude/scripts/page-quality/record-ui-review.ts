@@ -12,8 +12,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-import { SCREENSHOT_PREFIX } from "./lib/screenshots";
-import { STATE_DIR } from "./lib/storage";
+import { SCREENSHOT_PREFIX } from "../../../packages/ops/src/page-quality/lib/screenshots";
+import { STATE_DIR } from "../../../packages/ops/src/page-quality/lib/storage";
 import {
   buildUiAlert,
   type ReadCoverage,
@@ -22,9 +22,10 @@ import {
   type ReviewReport,
   structuredOutput,
   validateReview,
-} from "./lib/ui-report";
+} from "../../../packages/ops/src/page-quality/lib/ui-report";
 import type { Violation } from "../../../packages/ops/src/page-quality/types";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const CI_DIR = ".local/ci/page-quality";
 
@@ -98,6 +99,7 @@ function main() {
     input,
     screenshotBaseUrl: process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_ORIGIN,
     keyOf: (template, device) => `${SCREENSHOT_PREFIX}/${date}/${template}-${device}.webp`,
+    refs: { backlog: datasetPath("agent.todo-backlog"), pageQualityRule: ".claude/rules/page-quality-standards.md" },
   });
   const alertOut = arg("--alert-out") ?? "/tmp/ui-review-alert.md";
   if (body) {

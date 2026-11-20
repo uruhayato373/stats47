@@ -39,7 +39,7 @@ test("代表ページ計測はChromium sessionをURL間で共有し、ローカ�
     "utf8",
   );
   const browser = fs.readFileSync(
-    path.join(ROOT, ".claude/scripts/page-quality/lib/measure-browser.ts"),
+    path.join(ROOT, "packages/ops/src/page-quality/lib/measure-browser.ts"),
     "utf8",
   );
   assert.match(representative, /createBrowserMeasurementSession\(\)/);

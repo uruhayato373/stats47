@@ -4,13 +4,11 @@
  * 検査 (quality-suite-weekly の page-quality job) → 起票 (UI-FIX-* カード) → 修正 (backlog-loop-daily) → 本番確認 (次の週次)
  * を 1 本のループにするための状態。以前は検査結果が Issue に載るだけで、カードは人が手で起こしていた
  * (2026-09-23 の Claude の指摘 6 件のうち 4 件はカードにならないまま残った)。
- * 形は GSC カバレッジ是正キュー (`.claude/scripts/gsc/lib/coverage-queue-state.mjs`) と同じ。
- *
- * CLI: .claude/scripts/page-quality/ui-findings.ts
+ * 形は GSC カバレッジ是正キューと同じ。CLI の入口と、カード本文に書くコマンド・規約の文書のパスは呼ぶ側が渡す (UiCardRefs)。
  */
-import type { AuditRun } from "../../../../packages/ops/src/page-quality/types";
+import type { AuditRun } from "../types";
 import { UI_METRIC_KEYS } from "./ui-report";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 /**
  * - pending: 未対応 (カードにする)
@@ -251,6 +249,17 @@ export function findUnhandled(queue: readonly UiFinding[], keys: readonly string
 const cardSlug = (template: string) => template.toUpperCase().replace(/[^A-Z0-9]+/g, "-");
 export const batchPath = (id: string) => `${BATCH_DIR}/${id}.txt`;
 
+/** カード本文に書くコマンドと規約の文書のパス。置き場を知る呼ぶ側 (入口) が渡す。 */
+export interface UiCardRefs {
+  /** このキューを操作する CLI の起動コマンド */
+  cli: string;
+  /** 記事チャート SVG を振り分ける CLI の起動コマンド */
+  planSvgFixCli: string;
+  chartRule: string;
+  uiComponentsRule: string;
+  pageQualityRule: string;
+}
+
 export interface PlannedCard {
   id: string;
   template: string;
@@ -264,11 +273,13 @@ export function planUiCards({
   openIds,
   today,
   screenshotBaseUrl,
+  refs,
 }: {
   queue: readonly UiFinding[];
   openIds: readonly string[];
   today: string;
   screenshotBaseUrl: string;
+  refs: UiCardRefs;
 }): PlannedCard[] {
   const pendingByTemplate = new Map<string, UiFinding[]>();
   for (const f of queue) {
@@ -283,12 +294,10 @@ export function planUiCards({
       .sort((a, b) => (SEVERITY_RANK[b.severity] ?? 0) - (SEVERITY_RANK[a.severity] ?? 0) || a.key.localeCompare(b.key))
       .slice(0, BATCH_SIZE);
     const id = `${prefix}${today.replaceAll("-", "")}`;
-    cards.push({ id, template, keys: picked.map((f) => f.key), markdown: renderCard(id, template, picked, today, screenshotBaseUrl) });
+    cards.push({ id, template, keys: picked.map((f) => f.key), markdown: renderCard(id, template, picked, today, screenshotBaseUrl, refs) });
   }
   return cards;
 }
-
-const CLI = "npx tsx .claude/scripts/page-quality/ui-findings.ts";
 
 const hasMetric = (findings: readonly UiFinding[], metric: string) =>
   findings.some((f) => f.metric_key === metric || f.key.endsWith(`|${metric}`));
@@ -297,16 +306,16 @@ const hasMetric = (findings: readonly UiFinding[], metric: string) =>
  * チャートの文字の指摘は、直し方が「部品を直す (agent)」と「作り直すだけ (スクリプト)」に分かれる。
  * 判断をカードの読み手に委ねず、振り分けの手順をカード本文に書く。正典: page-quality-standards.md
  */
-export function chartFixGuide(findings: readonly UiFinding[], batchFile: string): string[] {
+export function chartFixGuide(findings: readonly UiFinding[], batchFile: string, refs: UiCardRefs): string[] {
   const lines: string[] = [];
   if (hasMetric(findings, "chart_text_issues")) {
     lines.push(
-      "- **チャートの文字 (ページに描く D3 チャート・agent が直す)**: 指摘の `svg[…]` から部品 (`packages/visualization/src/d3/components/*`) を特定し、部品を直す。1 部品を直せば同じ部品を使う全ページが直るので、ページ単位で直さない。描画範囲の外へ出る文字は共通の仕組み (`.claude/rules/chart-component-standards.md`) で収め、長いラベル (「1,400.0万」・47 都道府県名・6 系列の凡例) で描く回帰テストを足す。"
+      `- **チャートの文字 (ページに描く D3 チャート・agent が直す)**: 指摘の \`svg[…]\` から部品 (\`packages/visualization/src/d3/components/*\`) を特定し、部品を直す。1 部品を直せば同じ部品を使う全ページが直るので、ページ単位で直さない。描画範囲の外へ出る文字は共通の仕組み (\`${refs.chartRule}\`) で収め、長いラベル (「1,400.0万」・47 都道府県名・6 系列の凡例) で描く回帰テストを足す。`
     );
   }
   if (hasMetric(findings, "blog_svg_text_issues")) {
     lines.push(
-      `- **記事チャート SVG (振り分けてから直す)**: まず \`npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @${batchFile}\` を実行する。` +
+      `- **記事チャート SVG (振り分けてから直す)**: まず \`${refs.planSvgFixCli} @${batchFile}\` を実行する。` +
         "`regen-fixes` は生成器が既に正しく、R2 の SVG を作り直すだけで直る (コード変更なし)。R2 への反映はオーナー承認が要るので、出力された `gh workflow run regenerate-blog-svgs.yml …` を書いた `[実行:ユーザー]` カードを起票し、対象を `--mark-owner` で紐付ける。" +
         "`generator-fix` は `packages/svg-builder` の該当チャートを直し、長いラベルの fixture テストを足してから再実行して `regen-fixes` になることを確かめる (以降は同じ手順)。" +
         "`no-data` は data JSON が無く作り直せないので、手作業の brushup を依頼するカードを起票して `--mark-owner`。`clean` は既に直っているので `--mark-fixed`。"
@@ -316,12 +325,12 @@ export function chartFixGuide(findings: readonly UiFinding[], batchFile: string)
 }
 
 /** 線の格子の指摘 (LINE-GRID-COLUMN-01)。ページごとの余白ではなく、パネルの並べ方 (部品) を直すことをカード本文に書く。 */
-export function lineGridFixGuide(findings: readonly UiFinding[]): string[] {
+export function lineGridFixGuide(findings: readonly UiFinding[], refs: UiCardRefs): string[] {
   if (!hasMetric(findings, "line_grid_issues")) return [];
   return [
     "- **線の格子 (パネルの並べ方を直す)**: 指摘の `outside-grid` はパネルが格子の外にある (`gap-*`・`space-y-*` で空けて並べている等)、`mixed-cell` はパネルを含むセルが文章・見出しも直に持つ。" +
       "パネルを並べる所は `PanelGrid` / `PageSections` (`@/components/layout`) にし、文章・見出しはパネルと別のセルにする。右レールは格子の外で対象外。" +
-      "規約は `.claude/rules/ui-components.md` の「本文の列は 1 本の線の格子」。直したあと `npm run ui-theme:line-grid -- <baseUrl>` で描いた結果を確かめる。",
+      `規約は \`${refs.uiComponentsRule}\` の「本文の列は 1 本の線の格子」。直したあと \`npm run ui-theme:line-grid -- <baseUrl>\` で描いた結果を確かめる。`,
   ];
 }
 
@@ -340,7 +349,7 @@ export function semanticFixGuide(findings: readonly UiFinding[]): string[] {
   ];
 }
 
-function renderCard(id: string, template: string, findings: UiFinding[], today: string, screenshotBaseUrl: string): string {
+function renderCard(id: string, template: string, findings: UiFinding[], today: string, screenshotBaseUrl: string, refs: UiCardRefs): string {
   const file = batchPath(id);
   const shots = ["mobile-390", "desktop-1440"]
     .map((device) => `[${device}](${screenshotBaseUrl}/state/page-quality/screenshots/latest/${template}-${device}.png)`)
@@ -354,17 +363,17 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
   return [
     `### [${id}] UI 是正: ${template} の週次 UI 検査の指摘 ${findings.length} 件を直す`,
     "",
-    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}] [領域:サイト]`,
+    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${refs.cli} --assert-handled ${file}] [起票:${today}] [領域:サイト]`,
     "",
-    `- **自動起票**: 週次のページ品質監査 (\`quality-suite-weekly.yml の page-quality job\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`${datasetDir("page-quality.findings")}/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
+    `- **自動起票**: 週次のページ品質監査 (\`quality-suite-weekly.yml の page-quality job\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`${datasetDir("page-quality.findings")}/ui-findings-queue.json\`。正典は \`${refs.pageQualityRule}\`「UI 指摘のループ」。`,
     `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`${datasetDir("page-quality.metrics")}/LATEST.md\`。`,
     "- **対象**:",
     ...findings.flatMap(target),
-    ...chartFixGuide(findings, file),
-    ...lineGridFixGuide(findings),
+    ...chartFixGuide(findings, file, refs),
+    ...lineGridFixGuide(findings, refs),
     ...semanticFixGuide(findings),
-    "- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。",
-    `- **記録**: 直した指摘は \`${CLI} --mark-fixed <key> --note "<何を変えたか>"\`、直さないと判断した指摘は \`--mark-by-design <key> --note "<理由>"\`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた \`[実行:対話]\` のカードを backlog に起票してから \`--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"\` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは \`@${file}\`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。`,
+    "- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`packages/ops/src/page-quality/lib/screenshots.ts`) を直すか by-design にする。",
+    `- **記録**: 直した指摘は \`${refs.cli} --mark-fixed <key> --note "<何を変えたか>"\`、直さないと判断した指摘は \`--mark-by-design <key> --note "<理由>"\`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた \`[実行:対話]\` のカードを backlog に起票してから \`--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"\` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは \`@${file}\`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。`,
     "- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。",
     "- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。",
   ].join("\n");

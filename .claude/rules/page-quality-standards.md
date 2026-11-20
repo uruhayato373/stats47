@@ -194,11 +194,11 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 
 広告リンクは `<a rel="sponsored">` (`TrackedAffiliateLink`の既存規約) とAdSenseの`ins.adsbygoogle`を
 検出に使う。新しいdata属性は追加していない。重複は正規化した`href`の一致で数える
-(`.claude/scripts/page-quality/lib/measure-static.ts`)。
+(`packages/ops/src/page-quality/lib/measure-static.ts`)。
 
 ## 会社ネットワークからの手動実行
 
-`fetch()`は`.claude/scripts/page-quality/lib/http-dispatcher.ts`の`resolveDispatcher()`で
+`fetch()`は`packages/ops/src/page-quality/lib/http-dispatcher.ts`の`resolveDispatcher()`で
 `HTTPS_PROXY`環境変数があればundici `ProxyAgent`を自動で使う(`local-environment.md`の
 `resolveDispatcher`パターンと同一)。CIには`HTTPS_PROXY`が無いため通常のfetchのまま動く。
 これが無いと会社Windows PCから本番へ直接fetchすると`SELF_SIGNED_CERT_IN_CHAIN`で全滅する

@@ -6,7 +6,7 @@ import { chromium, type Page } from "playwright";
 import { PNG } from "pngjs";
 import sharp from "sharp";
 
-import type { ScreenshotRecord } from "../../../../packages/ops/src/page-quality/types";
+import type { ScreenshotRecord } from "../types";
 import { resolveDispatcher } from "./http-dispatcher";
 import { evaluateLayoutIssues, scrollThroughPage } from "./ui-probe";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";

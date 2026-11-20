@@ -57,6 +57,7 @@
     ".claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/metric-release-order.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/move-script.test.mjs": "スクリプトを packages へ移す道具 (移行の基盤) のテスト",
+    ".claude/scripts/lib/__tests__/page-quality-agent-assets.test.mjs": "page-quality の入口が頼る .claude の実物 (手元の検査の既定の画面・週次 UI 確認のプロンプト) の契約のテスト",
     ".claude/scripts/lib/__tests__/pr-skip-ci-head-guard.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/pre-bash-safety-git-pipe.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/pre-bash-safety-release.test.cjs": "Claude Code と git の hook のテスト",
@@ -171,7 +172,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "page-quality": {
-      "count": 10,
+      "count": 1,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "products": {

@@ -10,13 +10,13 @@
  *   2 = 入力不備・実行時エラー
  */
 import { affectedTemplates, PAGE_TEMPLATES } from "../../../packages/ops/src/page-quality/templates";
-import { auditUrl } from "./lib/audit-url";
-import { checkImages } from "./lib/check-images";
-import { checkSvgText } from "./lib/check-svg-text";
-import { createBrowserMeasurementSession } from "./lib/measure-browser";
+import { auditUrl } from "../../../packages/ops/src/page-quality/lib/audit-url";
+import { checkImages } from "../../../packages/ops/src/page-quality/lib/check-images";
+import { checkSvgText } from "../../../packages/ops/src/page-quality/lib/check-svg-text";
+import { createBrowserMeasurementSession } from "../../../packages/ops/src/page-quality/lib/measure-browser";
 import { changedFilesSince, currentCommitSha } from "../../../packages/ops/src/page-quality/lib/git-diff";
 import { evaluateAll, loadBudgets } from "../../../packages/ops/src/page-quality/lib/thresholds";
-import { appendHistory, readPreviousValue, writeLatestJson, writeLatestMarkdown } from "./lib/storage";
+import { appendHistory, readPreviousValue, writeLatestJson, writeLatestMarkdown } from "../../../packages/ops/src/page-quality/lib/storage";
 import type { AuditRun, MetricKey, PageAuditResult } from "../../../packages/ops/src/page-quality/types";
 
 function parseArgs() {

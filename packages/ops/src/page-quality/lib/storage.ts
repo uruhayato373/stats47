@@ -1,10 +1,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../../../../packages/ops/src/page-quality/types";
-import { PROJECT_ROOT } from "../../../../packages/ops/src/page-quality/lib/thresholds";
+import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../types";
+import { PROJECT_ROOT } from "./thresholds";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 export const STATE_DIR = join(PROJECT_ROOT, datasetDir("page-quality.metrics"));
 export const HISTORY_CSV = join(STATE_DIR, "history.csv");

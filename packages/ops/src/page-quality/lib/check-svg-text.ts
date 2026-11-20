@@ -1,5 +1,5 @@
-import type { PageAuditResult } from "../../../../packages/ops/src/page-quality/types";
-import { findChartTextIssues } from "../../../../packages/svg-builder/src/lint/svg-lint.mjs";
+import type { PageAuditResult } from "../types";
+import { findChartTextIssues } from "../../../../svg-builder/src/lint/svg-lint.mjs";
 import { resolveDispatcher } from "./http-dispatcher";
 
 /** 記事に <img> で埋め込んだ静的チャート (svg-builder の出力)。ロゴ等の SVG は取得しない。 */

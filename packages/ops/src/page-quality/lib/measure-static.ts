@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 
-import type { MetricKey, MetricValue } from "../../../../packages/ops/src/page-quality/types";
+import type { MetricKey, MetricValue } from "../types";
 import { resolveDispatcher } from "./http-dispatcher";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
 

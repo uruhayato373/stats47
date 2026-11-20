@@ -1,4 +1,4 @@
-import type { PageTemplateKey } from "../../../../packages/ops/src/page-quality/types";
+import type { PageTemplateKey } from "../types";
 import { resolveDispatcher } from "./http-dispatcher";
 
 const dispatcher = resolveDispatcher();

@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-import type { AuditRun, MetricKey, PageAuditResult, ScreenshotRecord, Violation } from "../../../../packages/ops/src/page-quality/types";
+import type { AuditRun, MetricKey, PageAuditResult, ScreenshotRecord, Violation } from "../types";
 
 /** UI 検査の指標。新規発生の通知対象 (肥大化・重複の既存指標は page-quality-alert が扱う)。 */
 export const UI_METRIC_KEYS: MetricKey[] = [
@@ -154,6 +154,8 @@ export function buildUiAlert(params: {
   input: ReviewInput;
   screenshotBaseUrl: string;
   keyOf: (template: string, device: string) => string;
+  /** 本文に書く、カードを起こす台帳と規約の文書のパス。置き場を知る呼ぶ側が渡す */
+  refs: { backlog: string; pageQualityRule: string };
 }): string | null {
   const { newViolations, review } = params;
   const reviewFindings = review?.findings ?? [];
@@ -162,7 +164,7 @@ export function buildUiAlert(params: {
   const lines: string[] = [];
   lines.push(`## ページ UI の週次確認 (${params.date})`);
   lines.push("");
-  lines.push("直すと決めたものはバックログ (`.claude/todo/backlog.md`) へカードにする。正典: `.claude/rules/page-quality-standards.md`");
+  lines.push(`直すと決めたものはバックログ (\`${params.refs.backlog}\`) へカードにする。正典: \`${params.refs.pageQualityRule}\``);
   lines.push("");
 
   lines.push(`### 機械検査で新しく見つかったもの${params.firstRun ? " (初回のため全件)" : " (先週は無かったもの)"}`);

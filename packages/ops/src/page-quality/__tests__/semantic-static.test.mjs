@@ -1,4 +1,4 @@
-import { R2_PUBLIC_ORIGIN } from "../../../../packages/r2-storage/mirror/r2-keys.mjs";
+import { R2_PUBLIC_ORIGIN } from "../../../../r2-storage/mirror/r2-keys.mjs";
 // 表示の意味の検査 (SITE-DISPLAY-SEMANTICS-AUDIT-01 層 2・層 3)。
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -9,6 +9,7 @@ import { applyTitleChanges, UI_METRIC_KEYS } from "../lib/ui-report.ts";
 import { evaluateTypography, SMALL_TEXT_PX } from "../lib/ui-probe.ts";
 import { observeFindings, planUiCards, syncFindings } from "../lib/ui-findings.ts";
 
+const REFS = { cli: "npx tsx tools/ui-findings.ts", planSvgFixCli: "npx tsx tools/plan-svg-text-fix.ts", chartRule: "rules/chart.md", uiComponentsRule: "rules/ui.md", pageQualityRule: "rules/page-quality.md" };
 const BASE = "https://stats47.jp/areas/13000";
 
 test("画面に出た内部用語 (保存則など) を数え、script・RSC payload の中は数えない", () => {
@@ -131,7 +132,7 @@ test("表示の意味の違反は UI 指摘キューに machine の指摘とし�
     agentReviewed: false,
   });
   assert.equal(queue[0].status, "pending");
-  const [card] = planUiCards({ queue, openIds: [], today: "2026-10-04", screenshotBaseUrl: R2_PUBLIC_ORIGIN });
+  const [card] = planUiCards({ queue, openIds: [], today: "2026-10-04", screenshotBaseUrl: R2_PUBLIC_ORIGIN, refs: REFS });
   assert.match(card.markdown, /表示の意味 \(定義単位で直す\)/);
 });
 

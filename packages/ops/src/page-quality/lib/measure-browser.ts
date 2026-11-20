@@ -1,6 +1,6 @@
 import { chromium } from "playwright";
 
-import type { MetricValue } from "../../../../packages/ops/src/page-quality/types";
+import type { MetricValue } from "../types";
 import { evaluateTypography, probeUi, type TypographyMetrics } from "./ui-probe";
 
 export interface BrowserMeasurement {

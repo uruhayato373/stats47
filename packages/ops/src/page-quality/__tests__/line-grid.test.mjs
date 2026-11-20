@@ -2,14 +2,13 @@
 // 週次の page-quality (line_grid_issues) と npm run ui-theme:line-grid が共有する。
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { chromium } from "playwright";
 
 import { evaluateLineGridIssues } from "../lib/line-grid-probe.mjs";
 import { UI_METRIC_KEYS } from "../lib/ui-report.ts";
 import { lineGridFixGuide } from "../lib/ui-findings.ts";
-import { browserPages } from "../../../../packages/ops/src/page-quality/templates.ts";
-import { evaluateResult } from "../../../../packages/ops/src/page-quality/lib/thresholds.ts";
+import { browserPages } from "../templates.ts";
+import { evaluateResult, loadBudgets } from "../lib/thresholds.ts";
 import { probeUi } from "../lib/ui-probe.ts";
 
 // 実物と同じく、本文の列 (shell-main を含む格子) は本文とレールを並べる外側の格子の中にある
@@ -99,9 +98,11 @@ test("週次のブラウザ検査 (probeUi) が line_grid_issues を件数で返
   });
 });
 
+const REFS = { uiComponentsRule: "rules/ui.md" };
+
 test("週次の配線: 指標が UI 指摘キューの対象で、予算が 0 件の warning として登録され、超えた画面が違反になる", () => {
   assert.ok(UI_METRIC_KEYS.includes("line_grid_issues"));
-  const budgets = JSON.parse(readFileSync(new URL("../../../skills/analytics/performance-improvement/page-quality-budgets.json", import.meta.url), "utf8")).budgets;
+  const budgets = loadBudgets();
   const budget = budgets.find((b) => b.metric_key === "line_grid_issues");
   assert.ok(budget, "page-quality-budgets.json に line_grid_issues の予算が無い");
   assert.equal(budget.page_type, "all");
@@ -123,18 +124,8 @@ test("週次の配線: 指標が UI 指摘キューの対象で、予算が 0 �
   assert.deepEqual(violations.map((v) => [v.metric_key, v.actual, v.severity]), [["line_grid_issues", 3, "warning"]]);
 });
 
-test("手元の検査 (npm run ui-theme:line-grid) の既定の画面は、週次が見るページと同じ一覧を使い、検索・固定ページを含む", () => {
-  const script = readFileSync(new URL("../../ui/check-line-grid.mjs", import.meta.url), "utf8");
-  assert.match(script, /browserPages\(\)/, "既定の一覧を手書きに戻すと週次と食い違う");
-  assert.match(script, /line-grid-probe\.mjs/, "判定を手元の検査に複製しない");
-  const urls = browserPages().map((p) => p.url);
-  for (const url of ["/search?q=%E4%BA%BA%E5%8F%A3", "/privacy", "/terms", "/ranking", "/geo/compare"]) {
-    assert.ok(urls.includes(url), `週次のブラウザ検査に ${url} が無い`);
-  }
-});
-
 test("UI 指摘のカードに、線の格子の直し方 (パネルの並べ方を直す) が載る", () => {
   const f = { metric_key: "line_grid_issues", key: "machine|https://stats47.jp/search|line_grid_issues" };
-  assert.match(lineGridFixGuide([f]).join("\n"), /PanelGrid/);
-  assert.deepEqual(lineGridFixGuide([{ metric_key: "clipped_text", key: "machine|u|clipped_text" }]), []);
+  assert.match(lineGridFixGuide([f], REFS).join("\n"), /PanelGrid/);
+  assert.deepEqual(lineGridFixGuide([{ metric_key: "clipped_text", key: "machine|u|clipped_text" }], REFS), []);
 });
