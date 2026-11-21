@@ -159,6 +159,26 @@ test('Cloudflare counts only violations inside the 7-day window ending at the we
   assert.equal(cf.workersErrorRate, 0.02);
   assert.deepEqual(cf.violationsBySeverity, { warning: 1 });
   assert.equal(cf.r2StorageGb, 32.9);
+  assert.equal(cf.workersCpuMsPerDay, null);
+  assert.equal(cf.topRoutes, null);
+});
+
+test('Cloudflare averages Worker CPU over days that have it and keeps the latest route breakdown (CF-CPU-ISR-01)', () => {
+  const row = (date) => ({ date, workers_requests: '1', workers_errors: '0', r2_class_a_ops: '0', r2_class_b_ops: '0', r2_egress_mb: '0', r2_storage_gb: '1' });
+  const cf = summarizeCloudflare(
+    [row('2026-11-19'), row('2026-11-20')],
+    [
+      { date: '2026-11-19', violations: [], cpuMs: 40_000_000, topRoutes: [{ route: 'areas', cpuShare: 40, fullRendersPerUrlPerDay: 2.5 }] },
+      { date: '2026-11-20', violations: [], cpuMs: 50_000_000, topRoutes: [{ route: 'ranking', cpuShare: 37.7, fullRendersPerUrlPerDay: 3.1 }] },
+      { date: '2026-11-18', violations: [] },
+    ],
+    '2026-11-20',
+  );
+  assert.equal(cf.workersCpuMsPerDay, 45_000_000);
+  // 5 + (45,000,000 x 30 - 30,000,000) x 0.02 / 1,000,000 = 31.4
+  assert.equal(cf.workersCpuMonthlyUsd, 31.4);
+  assert.equal(cf.topRoutes.date, '2026-11-20');
+  assert.equal(cf.topRoutes.routes[0].route, 'ranking');
 });
 
 test('SNS keeps reach and views because Instagram no longer reports impressions', () => {

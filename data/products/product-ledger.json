@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "asOf": "2026-11-21",
   "notePeriod": {
-    "start": "2026-10-17",
-    "end": "2026-11-13"
+    "start": "2026-10-24",
+    "end": "2026-11-20"
   },
   "lines": [
     {
@@ -13,7 +13,7 @@
       "products": 12,
       "priceMinYen": 980,
       "priceMaxYen": 980,
-      "pageViews": 149,
+      "pageViews": 161,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -25,7 +25,7 @@
       "products": 2,
       "priceMinYen": 1980,
       "priceMaxYen": 2980,
-      "pageViews": 48,
+      "pageViews": 60,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -37,7 +37,7 @@
       "products": 11,
       "priceMinYen": 980,
       "priceMaxYen": 2980,
-      "pageViews": 70,
+      "pageViews": 69,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -49,7 +49,7 @@
       "products": 73,
       "priceMinYen": 200,
       "priceMaxYen": 500,
-      "pageViews": 359,
+      "pageViews": 387,
       "salesYen": 0,
       "nextReviewOn": "2026-12-30",
       "reviewDue": false
@@ -147,7 +147,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 2,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -173,7 +173,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 1,
+      "pageViews": 0,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -238,7 +238,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 5,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -264,7 +264,7 @@
       "status": "published",
       "priceYen": 1980,
       "netPerSaleYen": 1692,
-      "pageViews": 4,
+      "pageViews": 6,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -355,7 +355,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 13,
+      "pageViews": 14,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -381,7 +381,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 23,
+      "pageViews": 22,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -394,7 +394,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 0,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -407,7 +407,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 4,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -433,7 +433,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 3,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -459,7 +459,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 9,
+      "pageViews": 11,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -511,7 +511,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 4,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -550,7 +550,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 6,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -576,7 +576,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 5,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -589,7 +589,7 @@
       "status": "published",
       "priceYen": 500,
       "netPerSaleYen": 427,
-      "pageViews": 9,
+      "pageViews": 6,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -602,7 +602,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 14,
+      "pageViews": 9,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -615,7 +615,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 2,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -628,7 +628,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 22,
+      "pageViews": 21,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -654,7 +654,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 2,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -693,7 +693,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 9,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -706,7 +706,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 4,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -758,7 +758,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 5,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -797,7 +797,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 7,
+      "pageViews": 12,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -823,7 +823,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 3,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -836,7 +836,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 7,
+      "pageViews": 3,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -862,7 +862,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 8,
+      "pageViews": 7,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -901,7 +901,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 15,
+      "pageViews": 18,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -914,7 +914,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 3,
+      "pageViews": 5,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -927,7 +927,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 2,
+      "pageViews": 1,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -940,7 +940,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 6,
+      "pageViews": 8,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -953,7 +953,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 16,
+      "pageViews": 18,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -966,7 +966,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 6,
+      "pageViews": 7,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -979,7 +979,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 44,
+      "pageViews": 81,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1005,7 +1005,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 47,
+      "pageViews": 43,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1031,7 +1031,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 3,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1044,7 +1044,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 1,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1057,7 +1057,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 3,
+      "pageViews": 4,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1070,7 +1070,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 1,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1239,7 +1239,7 @@
       "status": "published",
       "priceYen": 300,
       "netPerSaleYen": 256,
-      "pageViews": 11,
+      "pageViews": 13,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1265,7 +1265,7 @@
       "status": "published",
       "priceYen": 200,
       "netPerSaleYen": 171,
-      "pageViews": 4,
+      "pageViews": 2,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": null
@@ -1915,7 +1915,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 9,
+      "pageViews": 10,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -1932,7 +1932,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 13,
+      "pageViews": 14,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -1949,7 +1949,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 9,
+      "pageViews": 10,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -1966,7 +1966,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 27,
+      "pageViews": 29,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2000,7 +2000,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 8,
+      "pageViews": 9,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2017,7 +2017,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 21,
+      "pageViews": 23,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2051,7 +2051,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 16,
+      "pageViews": 17,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2068,7 +2068,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 6,
+      "pageViews": 8,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2102,7 +2102,7 @@
       "status": "published",
       "priceYen": 2980,
       "netPerSaleYen": 2547,
-      "pageViews": 23,
+      "pageViews": 24,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2119,7 +2119,7 @@
       "status": "published",
       "priceYen": 980,
       "netPerSaleYen": 837,
-      "pageViews": 16,
+      "pageViews": 17,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {
@@ -2136,7 +2136,7 @@
       "status": "published",
       "priceYen": 1980,
       "netPerSaleYen": 1692,
-      "pageViews": 25,
+      "pageViews": 36,
       "salesYen": 0,
       "unitsSold": null,
       "lastPriceChange": {

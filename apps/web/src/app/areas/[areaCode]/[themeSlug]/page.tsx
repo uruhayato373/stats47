@@ -33,10 +33,16 @@ interface PageProps {
   params: Promise<{ areaCode: string; themeSlug: string }>;
 }
 
-// 836ページ (47×18) をビルド時に全プリレンダリングすると CI が R2 大量アクセスで
-// タイムアウトするため、generateStaticParams を持たず ISR (オンデマンド生成+キャッシュ) を採用。
-// force-dynamic は付けない (毎リクエスト full render になりキャッシュが効かないため)。
-// 初回アクセス時にレンダリング → R2 incremental cache / エッジに 24h 保存。
+/**
+ * オンデマンド ISR（24時間）。generateStaticParams は **空配列** を返す (キー列を返さない)。
+ * 関数が無いと revalidate を書いても実行時の ISR が効かず毎リクエスト描画になり、キー列を返すと
+ * ビルド時に R2 を読めず notFound が焼かれる (2026-06-22 障害)。理由の全文は ranking/[rankingKey]/page.tsx、
+ * 契約は __tests__/render-mode-contract.test.ts (CF-CPU-ISR-01)。
+ */
+export async function generateStaticParams(): Promise<Array<{ areaCode: string; themeSlug: string }>> {
+  return [];
+}
+
 export const revalidate = 86400;
 
 /** 説明文 (generateMetadata) と本文で同じテーマのデータを 1 回だけ読む (React の cache はリクエストごと) */
@@ -79,7 +85,9 @@ export default async function AreaThemePage({ params }: PageProps) {
   if (!theme || !pref) notFound();
 
   const data = await loadAreaThemeData(theme.themeKey);
-  if (!data) notFound();
+  // テーマと県は実在するので、データが 1 件も読めないのは R2 の読み取り失敗。notFound にすると
+  // ISR が「見つかりません」を保存するので投げる (CF-CPU-ISR-01)
+  if (!data) throw new Error(`area theme data unavailable: ${areaCode}/${themeSlug}`);
 
   return (
     <ThemePageLayout

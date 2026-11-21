@@ -146,6 +146,21 @@ updated: 2026-11-01
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
+### [AFF-GA4-WEEKLY-GATE-01] 週次のアフィリエイト計測 (affiliate-ga4-weekly) が計測ゲートで 6 回続けて落ち、アフィリエイトの観測が 11-14 で止まっている
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:gh run list --workflow affiliate-ga4-weekly.yml --limit 1] [起票:2026-11-21] [領域:アフィリエイト]
+
+- **観測 (2026-11-21・週次レビュー W46)**: `affiliate-ga4-weekly.yml` は 6 回連続失敗・最終成功から 25 日 (`.local/weekly-audits/2026-11-21/ci-health.log`)。最新 run 43973234812 は ga4・read-back・commit-back は success で、measurement gate だけが failure。理由は `inventory-snapshot-stale(13d>10d)`・`a8-cross-check-shortfall`・`a8-results-month-missing`・`eligible-candidate-missing` (自動アラート #1207)。週次要約のアフィリエイト行は最終観測 2026-11-14 のまま。
+- **次**: ① 在庫 snapshot (Refresh Affiliate Inventory & Compliance) が 10 日を超えて古い理由を run 履歴で確かめる ② A8 の照合不足と当月の成果欠落が、土曜の認証付き計測 (a8 は 2026-11-20 に pass) の記録と workflow の読む場所の食い違いかを確かめる。
+- **完了条件**: `affiliate-ga4-weekly` の最新 run が success で、#1207 が閉じている。
+- **禁止**: ゲートの閾値を緩めて通さない (`.claude/config/` の基準はオーナー判断)。
+
+### [PROVENANCE-LINK-CHECK-01] 出典のリンク検査 2 本 (都道府県統計・オープンデータ) の error を、リンク切れか検査の故障かに分けて直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run weekly:audits] [起票:2026-11-21] [領域:データ]
+
+- **観測 (2026-11-21・週次レビュー W46)**: 週次監査 provenance が ❌。`check:prefecture-statistics-links` と `check:open-data-links` が error (`.local/weekly-audits/2026-11-21/provenance.log`)。gsi の出典ページは fetch failed のあと再確認で HTTP 200。
+- **次**: ログから失敗した URL を読み、出典の移転・削除 (台帳を直す) か、検査側の取得失敗 (再試行・タイムアウト) かに分ける。
+- **完了条件**: 週次監査の provenance が ✅。
+
 ### [SCRIPTS-TO-PACKAGES-01] パッケージのスクリプトが .claude/scripts の道具を呼ぶ 12 ファイルを片付ける
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-boundary.mjs] [起票:2026-11-19] [領域:サイト]
 
@@ -153,17 +168,6 @@ updated: 2026-11-01
 - **次**: 基準 `.claude/config/claude-boundary-baseline.json` の理由が「減らす対象」の 11 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。記事の lint・e-Stat の API 層・Google 接続は SCRIPTS-TO-PACKAGES-02 で packages/ops へ移したので、それを呼んでいた行は import を書き換えるだけで消せるものがある。
 - **停止条件**: 移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
-
-### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテストを、対象のロジックごと packages へ移す
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
-
-- **起点**: 2026-11-19 オーナー判断「テストは基本的に .claude に置かない」(`.claude/rules/skill-code-placement.md`)。基準は `.claude/config/claude-scripts-test-baseline.json` (縮小専用)。
-- **現在地 (2026-11-21)**: ①〜⑧ は済み。数える対象は 1 本だけで、`.claude/scripts/search-growth/__tests__/keyword-cycle.test.mjs` の橋渡し (新しいテストを読み込む 1 行) が残る。main の `seo-keyword-cycle-daily.yml` がこのパスを起動するので、**次のリリースの後で消す** (消すと基準の `domains` が空になり完了)。基盤の `harness` は 127 本。アプリの部品を試すテストは `apps/{admin,remotion,web}/scripts/__tests__` (web は `scripts/lib/__tests__`) に置き、`node:test` なので各アプリの vitest の対象から外している。`apps/` のパスは packages に置いてよい慣習 (呼ぶ側から渡すのは `.claude` のパスだけ)。
-- **道具の注意**: `claude:scripts:move` は、テストの中の fixture の文字列 (`'../../../../packages/x'` のように、移した先で実在するパスに偶然当たるもの) を相対 import と取り違えて書き換える。`--apply` の後は、移したテストの差分を `git diff -M` で読んで戻す。
-- **themes の型**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラー 76 件。JSDoc で直して範囲に入れる。`ingest-bridge-inspection-age.mjs:33`・`ingest-shelter-applicability.mjs:38` の ROOT を `process.cwd()` からファイルの位置へ直す。
-- **進め方**: 閉包はアプリ全体と `.claude` まで構文木で調べる。移動は `npm run claude:scripts:move -- <表.json> --apply`、あと `check-claude-scripts-tests.mjs --shrink`。`.claude/config` の基準は入口から環境変数で渡すか置き場の台帳の id で引く。`.claude` の中身そのものを確かめるテストは `harness` へ。合否は移す前後の出力の一致で決める。移したテストは root の npm script か workflow で名指しする (`check-workspace-contract`)。作業は Sonnet / medium 1 本 (各回 12〜18 万トークン) で足り、統合側が境界の検査・`pre-commit-guard-paths`・`preflight:pr` を自分で走らせてから commit する。
-- **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む。テストだけを packages へ移さない。
-- **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
 
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
@@ -387,6 +391,19 @@ updated: 2026-11-01
 - **あわせて確かめる (2026-11-13 レビュー)**: 全国版は HTML に上位 50 件だけを出すので、51 位以下の市区町村ページ (`/areas/<県>/cities/<市>`) への静的なリンクが全国版から無くなった (以前は `?page=N` から辿れた)。sitemap には全件が載っているが、内部リンクの他の経路 (県のページの市区町村一覧・県別ランキング) で全市区町村に届くかは数えていない。県別ランキングを広げると各県の全自治体へのリンクが戻る。
 - **完了条件**: 成立する (指標, 県) の組がすべて県別パスで表示され、sitemap に載り、波ごとの CPU と登録数が改善ログに記録された。
 
+### [CF-CPU-FOLLOWUP-01] Workers CPU 課金の削減の残り (ISR の本番確認・自前クローラー・課金の通知)
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-21] [領域:サイト] [待ち:承認]
+
+- **背景**: Cloudflare の請求は 09-15 $11.40 → 10-15 $29.02 → 11-15 $43.71 (全額が Worker `stats47` の CPU)。主因の対策はブランチ `fix/cf-cpu-isr` (`CF-CPU-ISR-01`)。目標は品質を落とさずに月 $5〜10。
+- **次 (実行順)**:
+  1. 本番反映 (オーナー承認): `fix/cf-cpu-isr` を develop → main。反映後に、Workers Cache を避けたクエリ付きで `/ranking/<指標>` を 2 回取り、2 回目が `x-nextjs-cache: HIT` か `STALE` になることを確かめる。memory queue の作り直しは手元の workerd で確かめられていない (worktree では OpenNext のバンドルが sharp の解決で止まる)ので、`STALE` の次の要求が新しい描画になるかも見る。確かめたら `.github/scripts/smoke-test-routes.sh` の ISR 検査を `ISR_CHECK_STRICT=1` (deploy-workers.yml の smoke の env) にする。
+  2. 自前の品質監査クローラー: 11-20 (UTC) のフル描画 CPU の UA 1 位は `stats47-page-quality-audit/1.0` (9,564 秒・その日の 21%)。ISR 反映後の週次で同じ値を取り直し、まだ上位なら巡回の対象を「変更のあったテンプレートの代表 URL + 全 URL を週替わりで分割」に絞る案を出す (`.claude/rules/page-quality-standards.md` の担当範囲)。
+  3. 送客の無いクローラー: 11-20 の `/ranking/*`・`/areas/*` で ExaSearchBot 約 1,220 秒・SirdataBot 約 510 秒・Amzn-SearchBot 約 90 秒。`robots.ts` で止めるかはオーナー判断 (Googlebot・bingbot は止めない)。
+  4. 課金の通知 (オーナー作業): Cloudflare の予算アラートはいま $3 の 1 件だけ。$15 と $25 の 2 段にする。利用額の上限 (超えたら止める設定) はサイトが止まるので入れない。
+  5. R2 (`storage.stats47.jp`) への UA `node` の GET (1 日 約 19 万件): 11-20 のパスは `app/stats/*/values.json`・`app/blog/all.json`、送信元 IP の大半は Azure・AWS の範囲 (ASN はこのプランの GraphQL で引けず未確定)。最多は IPv6 の 1 アドレス `2001:ce8:143:6d31:…` (55,560 件) で、オーナーの手元の回線かを照合する。R2 の請求は $0 なので、照合の結果が外部なら WAF で止めるかを決めるだけでよい。
+- **停止条件**: 本番反映・robots の変更・WAF・予算アラートの設定はオーナー承認の後。計測なしに対策を足さない。
+- **完了条件**: 1〜5 がそれぞれ「済み」か「やらない (理由)」になり、`CF-CPU-ISR-01` の判定期日 (本番反映の 3 日後) の実測が改善ログにある。
+
 ### [CF-EDGE-TTL-01] HTML の edge 保持を 1 日から 7 日に延ばし、パージの呼び出しを配線する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
@@ -395,6 +412,7 @@ updated: 2026-11-01
 - **停止条件**: パージの配線を確かめる前に保持だけを延ばさない (更新が 7 日出なくなる)。
 - **あわせて確かめる (2026-11-13 レビュー・未実測)**: 全国版の市区町村ランキングを `revalidate = 86400` にしたので、Workers Cache を tag で消しても OpenNext の incremental cache (R2) に前の HTML が残りうる (`/ranking/[rankingKey]` と同じ形。コードに revalidatePath / revalidateTag の呼び出しは見つからなかった)。R2 が一時的に読めないときの「配信用データを準備しています」(200) が保存される可能性もある。本番でデータ更新後の応答を読んで確かめる。
 - **同じ形の疑い (未実測)**: `apps/web/src/app/api/flow/[feature]/[code]/route.ts` は `revalidate = 86400` のまま no-store の 404 を返す。route handler が 404 も保存するなら、R2 の一時失敗が 1 日残る (市区町村の全行 JSON の route は同じ理由で force-dynamic にした)。
+- **前提の変化 (2026-11-21)**: 拠点ごとの描き直しの主因は、`/ranking/*` が ISR になっていなかったこと (`CF-CPU-ISR-01`)。ISR が効けば Workers Cache の miss は数 ms の ISR 応答になり、保持を延ばす効果は小さい。`CF-CPU-ISR-01` の反映後に、日次 snapshot の `routeCpu` で 1 URL あたりの描画回数が版の数を超えるかを見てから、このカードを続けるか閉じるかを決める。
 - **完了条件**: 保持 7 日とパージの配線が本番に入り、`/ranking/*` の 1 URL あたりの 1 日の描画回数を前後で比べた値が改善ログに記録された。
 - **統合 (2026-11-13)**: `CF-HTML-EDGE-TTL-01` をこのカードへ統合した。完了条件に含める: 保持 7 日とパージの配線が本番に入り、/ranking/* の 1 URL あたり 1 日の描画回数の前後比較が改善ログにある。加えて旧カード側の項目を落とさない: (1) purge されない経路 (データ更新・テーマ定義・page_components・広告) を洗い出し、延長で古い内容が残るページを特定して塞ぐ (2) stale-while-revalidate が Workers Cache で効くか (MISS でなく STALE を返すか) を本番で確認 (3) 期間案と効果見込み、HIT 率か CPU の before/after を測る。停止条件は purge 漏れを残したまま延ばさない・本番反映はオーナー承認後。
 
@@ -406,6 +424,7 @@ updated: 2026-11-01
 - **残り (ランキングの図)**: `components/stat-charts/.../RankingChart.tsx` は指標の定義を自分で読んだ後、`lib/metric-axis-policy.ts` の `resolveMetricAxisPolicy` が同じ指標の定義を最大 2 回読み直す。`RadarChartDashboard.tsx` も軸ごとに定義を直接読む。`RankingSidebarContainer` はランキングのページから `categoryKey` を受け取るので、そのページでは定義を読まない (対象から外してよい)。
 - **残り (判断)**: ランキングの図の重複読みをまとめるには、`features/ranking/lib/cached-ranking-item.ts` の `cachedFindRankingItem` を `components/` と `lib/` から使える場所 (`apps/web/src/lib/`) へ移す必要がある。選択肢は「上の計測で `/ranking/*` の CPU が下がらなかったときだけ行う」か「計測を待たずに行う」。推奨は前者で、根拠はカードの停止条件 (計測なしに最適化しない) と、この図が代表 3 route の描画に入る割合を測っていないこと。
 - **残り (統合元のカード)**: (1) CF-CPU-SURGE-01 の反映後 7 日で Observability の url.path 別 CPU 合計の上位 20 を取り直す。(2) 上位 route が読む R2 オブジェクトの数とサイズを数え、CPU が JSON の解析か描画かを分ける。(3) 必要な年・項目だけの派生 snapshot (R2) を 1 route で試し、localhost の本番ビルドで比べる。
+- **実測 (2026-11-21)**: フル描画 (CPU 200 ms 超) の平均は `/ranking/*` 1,674 ms、`/areas/<県>/household-food-spending` は 4.4〜4.9 秒。`CF-CPU-ISR-01` (実行時 ISR) は描画の回数を減らすだけで 1 回の重さは変えない。ISR 反映後も CPU は「版ごとに URL 1 回 × 1.7 秒」残る (1 日 2 版で約 15,000 秒/日・月 約 $18)。月 $10 以下にはこのカードの削減が要る。日次 snapshot の `routeCpu.routes[].avgFullRenderCpuMs` を前後の比較に使う。
 - **完了条件**: 3 route の平均 CPU の前後の値が改善ログに記録され、下がらなかった箇所は元に戻した。停止条件は、計測なしに最適化しない・永続 DB に戻さない・表示内容と SEO 構造化データを変えない。効果の観測は改善台帳の別 ID へ引き渡す。
 
 ### [URL-QUERY-INVENTORY-01] `searchParams` を読むページを棚卸しし、パスへ移すか URL から外す
@@ -418,11 +437,12 @@ updated: 2026-11-01
 - **完了条件**: 許可リストの各行に、残す理由か移行先が書かれている。
 
 ### [CF-CPU-ROUTE-WEEKLY-01] route 別・UA 別の CPU 上位を週次で記録する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:管理]
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-11-13] [領域:管理]
 
 - **背景**: 日次の記録は Worker 全体の CPU 合計だけで、どの URL とどのクローラーが使ったかは Cloudflare の画面でしか分からない。2026-11-13 の調査は内部ブラウザの手作業だった。
-- **次**: Workers Observability の telemetry query を API トークンで呼べるかを公式文書で確かめる (未確認)。呼べるなら `fetch-usage.mjs` に route 先頭 2 階層別と UA 別の上位 20 を足し、`data/cloudflare/` に週次で残す。
-- **完了条件**: 週次の記録に route 別と UA 別の CPU 上位が載り、週次レビューが読む。呼べないと分かった場合は理由を書いてこのカードを閉じる。
+- **済み (2026-11-21・ブランチ `fix/cf-cpu-isr`)**: `packages/ops/src/cloudflare/route-cpu.mjs` が route 別のフル描画 (CPU 200 ms 超) の回数・1 URL あたりの回数・平均 CPU・UA 上位・版の数を組み、`fetch-usage.mjs` が日次 snapshot の `routeCpu` に書く。閾値は `budgets-daily.json` の `workers-route-*`、週次の計測サイクルと `LATEST.md` が読む。query の本文はダッシュボードのセッションで本番に投げて応答を確かめた。
+- **残り (オーナー作業)**: CI の `CLOUDFLARE_API_TOKEN` に Workers の Metadata Read-Only (Observability の読み取り) を足す (https://developers.cloudflare.com/workers/authorization/ 、2026-11-21 確認)。足すまで `routeCpu` は `status: "unavailable"` を記録する。
+- **完了条件**: 日次 snapshot の `routeCpu.status` が `ok` になり、週次の計測サイクルの Cloudflare の行に route 上位が出た。
 
 ### [STRATEGY-LEDGER-JSON-01] 戦略文書の表・値・決定を `data/` の JSON 台帳へ移し、管理画面が台帳を描く形にする (8 段)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:戦略]
@@ -478,14 +498,6 @@ updated: 2026-11-01
 - **次**: 目標を続けるか閉じるかをオーナーが決める。続けるなら baseline を `data/psi/` の現在の計測で取り直し、閉じるなら `close_reason` を書く。
 - **完了条件**: status と実態が一致し、存在しないパスへの参照が無い。
 
-### [RELEASE-SQUASH-SKIP-TOKEN-01] 見張りの workflow が起動した本番デプロイのあとに、Post-Deploy Smoke が走らない
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理] [待ち:承認]
-
-- **済み**: squash のマージの本文に skip 指定が入ったときに `pr-skip-ci-head-guard.yml` の `deploy-after-skip-ci-merge` が `deploy-workers.yml` を起動する手当ては、2026-11-20 の PR #1289 のマージ (本文に skip 指定 36 個) で手を触れずに動いた (マージの 12 秒後に run 44671168001、成功)。
-- **残り (2026-11-20 観測)**: この手当てで起動したデプロイ (11-18 の 44298526417・11-19 の 44481255904・11-20 の 44671168001。どれも `triggering_actor` が `github-actions[bot]`) のあと、`post-deploy-smoke.yml` の `workflow_run` が 1 回も作られていない (最後の自動の run は 11-14)。[仮説] GITHUB_TOKEN が起こしたイベントは `workflow_dispatch`・`repository_dispatch` 以外で新しい run を作らない (https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)。デプロイの完了が `workflow_run` を起こさない。
-- **影響**: 11-14 から Post-Deploy Smoke が自動で走らず、11-14 の変更で古くなったテストの期待 (Kindle の商品ページの見出し) にも 6 日気づかなかった (テストは 2026-11-20 に develop で直した。main へは次のリリースで入る。Issue #1273 はそのあとの Post-Deploy Smoke の成功で閉じる)。
-- **次 (2026-11-20 develop に入れた)**: `deploy-workers.yml` に job `post-deploy-smoke` を足した。見張りが起動したとき (`workflow_dispatch` かつ `github.actor == 'github-actions[bot]'`) だけ、デプロイの成功後に `post-deploy-smoke.yml` を main で `workflow_dispatch` で起動する。契約テストは `pr-skip-ci-head-guard.test.cjs`。main の定義で動くので、効くのは main に入ったあとの次の見張りの起動から。
-- **完了条件**: 見張りが起動したデプロイのあとに Post-Deploy Smoke の run が作られたことを run の URL で示す。
 ### [PRODUCT-ANALYSIS-WIRING-01] 商品分析の調査候補を一次資料と実データで検証し、改訂案へ追加する
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-12] [領域:商品]
 
@@ -1127,6 +1139,7 @@ updated: 2026-11-01
   - **完了条件**: 先読み停止後の実測で消えたことを確かめたか、レート制限を入れて同じ集計で件数が下がったことを確かめた。
 - **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
 - **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している (2026-10-16 に満たした)。対策の本番反映と効果観測の引き渡しまでをこのカードで持つ。
+- **主因 (2026-11-21)**: `/ranking/*` と `/areas/*` が実行時 ISR になっておらず毎回描画だった (CPU の約 7 割)。対策と効果観測は `CF-CPU-ISR-01` (改善ログ `data/improvement/cloudflare-cost-improvement/improvement-log.md`) が持つ。`_rsc` の割合は 11-20 で 3.4% (1,539 秒) まで下がっており、先読み停止は効いた。このカードは閉じてよい (オーナー判断の (b) に当たる)。
 - **11-16 の確認**: Observability の Query API を読むスクリプトは repo に無く、Cloudflare のトークンは CI 専任なので、手元のセッションからは `_rsc` の割合を取り直せない。11-21 のレビューでオーナーに次のどちらかを諮る: (a) Observability の Query Builder で 10-16 と同じ条件の 1 時間を手で取る (b) このカードを閉じ、効果観測を `CF-CPU-URL-01` (期日 11-27) に寄せる。
 
 ### [AFFILIATE-COMMON-PRODUCTS-01] アフィリエイトを共通的で収益性の高い商品に切り替え、本文の広告の段 (広い画面は横 3 枠) を試す
@@ -1407,18 +1420,6 @@ updated: 2026-11-01
 - **完了条件**: main の `quality-suite-weekly` が 1 回 success になり、Issue #1202 が自動で閉じる。
 - **① 済み (2026-11-16)**: 3 回の run (41122877579・42295351706・43513853562) を比べた。**毎回落ちるもの**: E2E の blog-detail.spec.ts (:24・:29・:40・:56。`toBeVisible` が要素を見つけられない)、blog-list.spec.ts (:21・:29・:98。h2 を持つ `main a[href^='/blog/']` が見つからない)、comparison.spec.ts :45 (`toHaveURL`)、header-navigation.spec.ts :41・:95、Theme quality audit (10-30・11-06 は `AssertionError [ERR_ASSERTION]`。どの assert かは未特定)、OGP image audit (原因は毎週違う。11-06 は data-muni-manufacturing の short-title の生成失敗、11-13 は gloves-… の article.md の R2 fetch 失敗)。**3 回中 2 回**: unit の bridge-inspection-age-ui と population-profile-ui の 10 秒タイムアウト。**1 回だけ**: header-navigation :34、public-route-contract :36 (10-30)、Page quality audit (11-06)。unit のログに「R2クライアントを取得できませんでした / getCloudflareContext」が繰り返し出ており、blog E2E と同じ原因か (`CI-LIVE-R2-TEST-FLAKE-01`) は未確認。`affiliate-ga4-weekly` (#1207) は計測ゲート (inventory-snapshot-stale・A8 の照合不足) で落ちており、別の原因。**次**: ② blog E2E から、失敗時のスクショ artifact で R2 の取得失敗かテストデータかを分ける。
 - **追記 (2026-11-16)**: ② に入るときは、Theme quality audit の assert が 3 回とも落ちている件 (どの assert かは未特定) と、OGP 監査で data-muni-manufacturing の short-title の生成が 11-06 に失敗した件も、このカードで扱う。
-
-### [WEEKLY-COLLECT-NODE20-FAIL-01] 週次の取得で GSC 画面の取得とサイト内リンク監査がスクリプトの例外で落ちる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:管理]
-
-- **観測 (2026-11-14)**: `npm run weekly:collect` の 2 か所が、ログインと無関係の例外で落ちた。① 認証付き計測の GSC: `{"source":"gsc","status":"failed","step":"bootstrap","message":"Node.js v20.19.0"}` (12:31 と取り直しの 13:44 の 2 回とも。`~/Library/Logs/stats47/measurement-collect-local.log`)。message には例外の末尾の行しか残っておらず、例外の本体は読めない。② 週次監査の internal-links: `Error [ERR_REQUIRE_CYCLE_MODULE]: Cannot require() ES Module …/stats47-measurement/config/datasets.mjs in a cycle. (from …/packages/area/mirror/prefectures.cjs)` (`.local/weekly-audits/2026-11-14/internal-links.log`)。対話のシェルの Node は v22.23.3、取得の専用 clone で動いた Node は v20.19.0。同じ日の `npm run measurement:status` は gsc を「切れている (認証 cookie が無い)」と表示し、復旧に `node .claude/scripts/google-admin/cli.mjs login` を示している。GSC の失敗が例外なのかログイン切れなのかは、例外の本体が残っていないので切り分けられていない。
-- **[仮説]** 2 件とも、専用 clone が Node v20 で動き、CJS から `config/datasets.mjs` を require する経路が v20 で通らない。検証コマンド: `cd ~/stats47-measurement && node -v && node -e "require('./packages/area/mirror/prefectures.cjs')"` を v20 と v22 で実行して比べる。検証期日: 2026-11-21 (次の週次の取得の前)。v22 で通り v20 で落ちれば仮説を支持、両方で落ちれば循環 import そのものを直す。
-- **影響**: GSC の除外理由の内訳はその時点の書き出しなので、W46 の土曜の分は後から取り直せない。サイト内リンク監査は 132 ページを走査した時点の結果しか無い。
-- **次**: ① 上の検証 ② 取得の失敗時に例外の本体 (末尾の行でなく最初の行) を `message` に残す ③ 専用 clone の Node の版を対話のシェルと揃えるか、require の経路を直す。
-- **完了条件**: `npm run weekly:collect` で GSC の取得元が pass になり、internal-links が例外なしで走り切る。
-- **済み (2026-11-15・develop)**: 次の ② は済み (`collect-local.mjs` が bootstrap・collect の失敗時に stderr の末尾 20 行を `message` に残す。次に GSC が落ちれば例外の本体が `measurement-collect-local.log` で読める)。③ のうち `prefectures.cjs` は `config/datasets.mjs` を require せず、カタログの行の文字列から置き場を読む形に直した。ただし手元の Node は v22.23.3 で、v20.19.0 での元のエラーは再現できていない (require(esm) を無効にした起動で代わりに確かめた)。専用 clone の v20.19.0 は `package.json` の engines (>=22) を満たしていない。
-- **残り**: ① 2026-11-21 の `weekly:collect` で internal-links が走り切るかを読む ② GSC が再び落ちたら、記録された例外の本体から原因を決める ③ `.claude/scripts/lib` には `datasets.mjs` を require する cjs がほかに 4 本ある (`sns-posts-store.cjs`・`sns-metrics-store.cjs`・`x-catalog.cjs`・`strategy-lanes.cjs`)。同じ例外になるかは [仮説] で、専用 clone の Node を v22 に上げれば不要になる。先に Node の版を揃えるかをオーナーが決める。
-- **済み (2026-11-16・`e86342e35`)**: 原因を特定した。launchd・`weekly:collect` の共通設定 `scripts/scheduled/_common.sh` が PATH の先頭に `/opt/homebrew/opt/node@20/bin` (v20.19.0) を固定していた (engines は >=22)。v20.19.0 の失敗ログは最後の行がちょうど `Node.js v20.19.0` で、GSC の bootstrap の `message` と一致する。node@22 に直し、node@22 の PATH で internal-links を起動して 1,249 件中 200 件まで例外なしで進むことを確かめた (時間がかかるため途中で止めた)。cjs 4 本は v20・v22 とも単体の require は通るので触っていない。残りは 11-21 の `weekly:collect` で GSC と internal-links が走り切るかを読むことだけ。`post-instagram-w18.sh` にも node@20 の固定が残るが、IG は停止中なので触っていない。
 
 ### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
@@ -2109,6 +2110,7 @@ updated: 2026-11-01
 - **次 (実行順)**: ① 11-12〜13 に作り替えた段のユニットの 2 週の実績 (`history-units.csv`) を、同じ位置の記事内広告と比べる。② 一覧の形のページ (関連記事・検索結果・ブログ一覧・タグ) で、カードの見た目をそろえてインフィード広告を入れる案を、ページごとに閲覧数と一緒に出す (検索結果のカードには画像が無い)。③ 長い表が続くページ (都道府県・市区町村のデータブック・調査) は、章立てと章の頭の 1 文で記事内広告の置き場を作る。④ Multiplex は回遊 (関連記事) と取り合うので、使うなら関連記事の後のページの最後に限り、回遊の内訳 (`internal-transitions.csv`) と一緒に判定する。
 - **停止条件・禁止**: スマホの広告の高さは本文の 30% まで (広告の枠の台帳の共通のルール)。広告のためだけに中身の薄い文を足さない (章の 1 文は値から導いた中身のある文にする)。1 ページで同じユニットを重ねない。最初の画面に置かない。
 - **完了条件**: ページの種類ごとの形式 (記事内・インフィード・表示・置かない) と、そのための UI の変更をオーナーが決め、実装のカードに分けている。
+- **追補 (2026-11-21・週次レビュー W46)**: 本文に「11-14 判定の後にデプロイ」と読める記述が残っているが、2026-W46 の AdSense のユニットは 47 (W45 は 12。`data/adsense/history-units.csv`) で、配置の再構成が判定前に本番に出ていた可能性がある。デプロイ日を確かめ、`ADSENSE-PLACEMENT-01` (期日を 2026-12-05 に引き直し済み) の比較窓と矛盾しないかを書く。
 
 ### [ADSENSE-FORMAT-EXPERIMENT-01] 広告の形式を枠ごとに試す (固定 300×250 と、大きさに上限を付けたレスポンシブ・記事内・関連コンテンツ型)
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-11]
@@ -2340,6 +2342,8 @@ updated: 2026-11-01
 ### [CI-TOOLING-FOLLOWUP-03] CI と開発の道具に残る穴 (第 4 波の実行で見つけた分)
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14]
 
+- **packages/ops の themes の型 (2026-11-21・SCRIPTS-TO-PACKAGES-02 から)**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラー 76 件。JSDoc で直して範囲に入れる。`ingest-bridge-inspection-age.mjs:33`・`ingest-shelter-applicability.mjs:38` の ROOT を `process.cwd()` からファイルの位置へ直す。
+- **移動の道具の穴 (2026-11-21)**: `npm run claude:scripts:move` は、テストの中の fixture の文字列 (`'../../../../packages/x'` のように、移した先で実在するパスに偶然当たるもの) を相対 import と取り違えて書き換え、一覧にも出さない。テストの中の文字列リテラルを対象から外すか、書き換えた行を一覧に出す。
 - **済み (2026-11-14・fe3988b31)**: 項目 1〜7 は修正し、直す前に落ちて直した後に通るテストで固定した。項目 8 の sns の 36 件は 64f91ead9 で解消済みである。項目 9 では、本番ビルドの middleware (.next/server/src/middleware.js) が 1,179,977 バイト (gzip で 247,017 バイト) で、Cloudflare Workers の上限 64 MiB (非圧縮・全プラン。https://developers.cloudflare.com/workers/platform/limits/#worker-size 、2026-11-14 確認) の約 1.8% だった。
 - **残り (判断)**: geo.analyses の contentId 3 件 (geo-107・geo-128・geo-129) は、business-plan.content-opportunities (geo-001〜geo-100) に無いため、check-datasets が warning を出し続けている。選択肢は 2 つある。(a) 事業計画にこの 3 件の機会を足す。(b) 3 分析の contentId を既存の機会の ID に直す。この 3 分析が事業計画の外で始めた分析なら (a) を推奨する。根拠は、datasets.mjs が事業計画の担当に判断を任せると宣言していることである。
 - **残り (計測)**: 最大の負荷は middleware ではなく Worker 全体なので、Worker 全体のサイズを測る。手順は、OpenNext で build してから `wrangler deploy --outdir bundled/ --dry-run` の Total Upload を読み、64 MiB と起動時間の上限 1 秒と比べる。
@@ -2350,6 +2354,8 @@ updated: 2026-11-01
 - **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。 ほかに 2 つの写しが残っている。`packages/area-profile/src/highlights/select-area-highlights.ts` の `PREFECTURE_COUNT = 47` は、SNS のスクリプトが相対パスで直接読む「パッケージの外を import しない」契約のため残した (契約を見直すか、`@stats47/area/area-code` だけは読んでよいことにする)。`packages/data-configs/src/open-data-catalog/normalized-table.ts` と `src/area-axis.ts` は `@stats47/area` ではなく `../../../area/src/constants/prefecture-codes` を相対パスで読んでいる (出口 `@stats47/area/area-code` に替えられるか確かめる)。
 - **追補 (2026-11-19)**: `npm run preflight:pr` は workspace の CI 契約 (`.claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`) を回さない。PR #1288 で `ops`・`ui-theme` にテストを移したのに `testPolicy` が `none` のままで、手元の preflight は通り CI の Static Gates で初めて落ちた。再現: `node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`。preflight の一覧に足すかを決める。
 - **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
+- **追補 (2026-11-21・週次レビュー W46)**: 土曜 07:30 のスケジュール済みレビューは、02:00 の fetch-metrics-weekly が遅れて 07:35〜08:42 に走った週は W46 の GSC・GA4・AdSense の行が develop に無いまま収集を始める (2026-11-21 は review-input の 3 項目が FAIL → 08:42 の commit f38d92035 の取り込み後に全 PASS)。手元で先に作った `data/nsm/weekly-snapshots/<週>.json`・`data/google-admin/audits/<週>.json` が CI の commit と衝突して pull が止まる。収集の前に「当週の `chore(metrics): weekly snapshot <週>` が develop にあるか」を確かめ、無ければ待つ手順を weekly-review の SKILL.md の「無人で実行するとき」に足す。`npm run reference:expansion -- status --json` などの `--json` 出力は npm のバナー行 (`> ...`) が先頭に混ざり、そのまま JSON.parse できない (`npm run -s` で回避できるかを確かめ、手順書の例を直す)。`.claude/todo/weekly.md` が土曜のレビュー前に次週分へ上書きされ、前週の Must の checkbox の実績が git 履歴にしか残らない (W46 のレビューは 719098a3db の版から読んだ)。週次計画の上書きの時点をレビューの後に揃えるかを決める。
+- **追補 (2026-11-21・週次レビュー W46)**: `audit-operations-cycle.mjs --stage plan --week 2026-W48` を週の途中に実行すると、まだ終わっていない週の snapshot・verdict・review を FAIL と出す。weekly-plan の SKILL.md の手順は `--week` を省いている。計画の段で渡す対象週 (レビューした週か計画する週か) を SKILL.md に書く。
 
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
@@ -2412,6 +2418,7 @@ updated: 2026-11-01
 - **次**: (1) improvements.md を月次で上限 5 件 (2026-10-27 に 10 から変更) まで削る (improvement-triage の排他 write)。削除基準は「`[target:]` が無い」「計器が止まっていて判定できない」。(3) `review-wiring.json` の requiredSections 6 を「サマリー / 計画 vs 実績 / 申し送り」の 3 に減らしてよいか、`/weekly-review` の所要時間を 1 回測ってから決める。
 - **残り**: W41〜W44 の週次レビューで Must の達成率を読む。判定日 2026-11-08 (W44 のレビューの翌日)。
 - **完了条件**: active ≤ 10、`[target:]` なし 0、4 週連続で Must ≥ 2/3。
+- **追補 (2026-11-21・週次レビュー W46)**: backlog は 377 枚で目安 200 枚を超え、W45・W47 は削減を定常に置いて進まなかった。W48 の Must 1 (377 枚から 20 枚以上減らす) の主 ID をこのカードにした。手順: 期日超過のカード (`npm run backlog:waits -- due --week <週>`) を今週やる・期日を引き直す・消すのどれかに決め、完了カードは `record-backlog-outcome.mjs` で記録してから消す。完了の目安: `npm run backlog:waits -- flow` の総枚数 ≤ 200。
 
 ### [UI-FIX-THEME-20261011] UI 是正: theme の週次 UI 検査の指摘 1 件を直す
 

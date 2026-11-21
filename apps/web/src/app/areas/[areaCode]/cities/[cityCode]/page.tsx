@@ -79,14 +79,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 /**
- * オンデマンド ISR（24時間）。
- *
- * generateStaticParams は付けない。付けると対象市区町村が `●` SSG 化され、ビルド時に R2 から
- * データブックを読めず notFound として prerender される。この OpenNext 構成では ISR 再生成が
- * 効かず「市区町村が見つかりません」が永久固着する（2026-06-22 障害）。generateStaticParams なし =
- * `ƒ`（オンデマンド）でランタイムに R2 を読んで描画する（ranking / areas と同方式）。
- * 詳細: .claude/rules/nextjs-ssg-preservation.md
+ * オンデマンド ISR（24時間）。generateStaticParams は **空配列** を返す (キー列を返さない)。
+ * 関数が無いと revalidate を書いても実行時の ISR が効かず毎リクエスト描画になり、キー列を返すと
+ * ビルド時に R2 を読めず notFound が焼かれる (2026-06-22 障害)。理由の全文は ranking/[rankingKey]/page.tsx、
+ * 契約は __tests__/render-mode-contract.test.ts (CF-CPU-ISR-01)。
  */
+export async function generateStaticParams(): Promise<Array<{ areaCode: string; cityCode: string }>> {
+  return [];
+}
+
 export const revalidate = 86400;
 
 /** 関連記事を探すときに使う指標の数 (見出しの指標と、データブックの先頭の分野)。 */

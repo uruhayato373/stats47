@@ -134,10 +134,5 @@
     ".claude/scripts/lib/__tests__/client-graph-audit-wiring.test.mjs": "client-graph の検査を .claude の入口から起動し、baseline のパス (.claude/config/client-graph-baseline.json) が渡ることを確かめるテスト (本体の判定は packages/ops/src/audit/__tests__)",
     ".claude/scripts/lib/__tests__/generate-article-charts-ranks.test.mjs": "記事の図の生成 CLI (.claude/scripts/blog/generate-article-charts.ts) を起動する結合テスト"
   },
-  "domains": {
-    "search-growth": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    }
-  }
+  "domains": {}
 }

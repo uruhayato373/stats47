@@ -2,7 +2,7 @@ import "server-only";
 
 import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
 import { shouldShowMetricTotal } from "@stats47/data-configs/metric-summary-display";
-import { getRankingTitle, type RankingReferenceValue, type RankingValue } from "@stats47/ranking";
+import { getRankingTitle } from "@stats47/ranking";
 import {
   readAllYearsRankingValuesWithReferencesFromR2,
   readRankingItemsByGroupKeyFromR2,
@@ -37,7 +37,10 @@ function sameYear(a: string, b: string): boolean {
 
 export async function loadRankingPageModel(rankingKey: string) {
   const rankingItemResult = await cachedFindRankingItem(rankingKey, AREA_TYPE);
-  const rankingItem = isOk(rankingItemResult) ? rankingItemResult.data : null;
+  // 読み取りの失敗 (err) は「存在しない」(ok(null)) と分けて投げる。ISR は描画結果を保存するので、
+  // 失敗を notFound にすると R2 の一時的な失敗が「見つかりません」として再描画まで残る。例外は保存されない
+  if (!isOk(rankingItemResult)) throw rankingItemResult.error;
+  const rankingItem = rankingItemResult.data;
 
   if (!rankingItem) {
     return null;
@@ -52,10 +55,13 @@ export async function loadRankingPageModel(rankingKey: string) {
   // (畳んだ全国平均系列 ≤50 点だけを渡す。全年配列は最大 400KB 超で RSC payload に乗せられない)。
   // 参考値 (推計の人数が下限未満で順位から外した県・年) も同じ 1 read で取る。件数は数行なので全年を client へ渡す
   const allYearsPromise = readAllYearsRankingValuesWithReferencesFromR2(rankingKey, AREA_TYPE)
-    .then((r) => (isOk(r) ? r.data : { values: [] as RankingValue[], referenceValues: [] as RankingReferenceValue[] }))
-    .catch((error) => {
-      logger.error({ error }, "RankingKeyPage: 全年 ranking values 取得失敗");
-      return { values: [] as RankingValue[], referenceValues: [] as RankingReferenceValue[] };
+    .then((r) => {
+      // 主データ。失敗を空の表として描くと ISR がその描画を保存するので投げる (上の item と同じ理由)
+      if (!isOk(r)) {
+        logger.error({ error: r.error }, "RankingKeyPage: 全年 ranking values 取得失敗");
+        throw r.error;
+      }
+      return r.data;
     });
 
   // 都道府県 TopoJSON はここで取得しない。1,015,004 bytes が RSC payload へ直列化され、

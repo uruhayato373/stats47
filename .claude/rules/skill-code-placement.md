@@ -46,7 +46,7 @@ paths:
 - `.claude/scripts` に新しいテストを置けるのは、エージェントが居るから存在する基盤 (hook・セッションの検知・
   agent/skill の整合検査・backlog-loop・モデル利用量・CI の契約の検査) だけ。基準の `harness` に理由付きで 1 行足す。
   置ける領域は基準の `harnessDomains` に限る。
-- 既存のテストは、その領域を触るときに対象のロジックごと packages へ移し、基準を縮める (SCRIPTS-TO-PACKAGES-02)。
+- 既存のテストは 2026-11-21 にすべて移し終えた (SCRIPTS-TO-PACKAGES-02。基準の `domains` は空)。アプリの部品を試すテストは各アプリの `scripts/__tests__` (web は `scripts/lib/__tests__`) に置き、`node:test` なので各アプリの vitest の対象から外す。
   移すときは下の「拡張子」の注意 (packages は `"type": "module"` を持たない) と、依存を入れない CI の job は
   相対パスで読む決まりに従う。
 - 機械の止め: `node .claude/scripts/lib/check-claude-scripts-tests.mjs` (PR の検査。領域ごとのテスト数の縮小専用の基準

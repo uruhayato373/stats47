@@ -12,6 +12,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { datasetDir } from "../../../../config/datasets.mjs";
+import { routeCpuMetrics } from "./route-cpu.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..", "..");
 const STATE_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.cost-snapshots"));
@@ -101,6 +102,13 @@ export function flatten(snapshot) {
   // 取得不能の日 (null / 欠落) はキー自体を入れない。0 と見せない
   if (typeof snapshot.workers.totalCpuTimeUs === "number") {
     metrics.workers_cpu_ms = snapshot.workers.totalCpuTimeUs / 1000;
+  }
+
+  // route 別 CPU (取得できた日だけ。unavailable の日はキーを入れない)
+  if (snapshot.routeCpu?.status === "ok") {
+    for (const [key, entry] of Object.entries(routeCpuMetrics(snapshot.routeCpu))) {
+      if (entry) metrics[key] = entry.value;
+    }
   }
 
   for (const [bucketName, storage] of Object.entries(snapshot.r2_storage.byBucket ?? {})) {
@@ -259,6 +267,13 @@ export function buildReport({ snapshot, metrics, violations }) {
   lines.push(`| R2 Class B ops | ${metrics.r2_class_b_ops.toLocaleString()} |`);
   lines.push(`| R2 storage | ${metrics.r2_storage_gb.toFixed(2)} GB / ${metrics.r2_objects.toLocaleString()} objects |`);
   lines.push(`| R2 egress | ${metrics.r2_egress_mb.toFixed(0)} MB |`);
+  // route 別 CPU (取得できた日だけ。unavailable の日はキーを入れない)
+  if (snapshot.routeCpu?.status === "ok") {
+    for (const [key, entry] of Object.entries(routeCpuMetrics(snapshot.routeCpu))) {
+      if (entry) metrics[key] = entry.value;
+    }
+  }
+
   for (const [bucketName, storage] of Object.entries(snapshot.r2_storage.byBucket ?? {})) {
     lines.push(`| R2 bucket: ${bucketName} | ${(storage.bytes / 1e9).toFixed(2)} GB / ${storage.objects.toLocaleString()} objects |`);
   }
