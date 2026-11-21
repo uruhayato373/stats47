@@ -1,13 +1,22 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-19",
+  "date": "2026-11-21",
   "period": {
-    "periodStart": "2026-11-10",
-    "periodEnd": "2026-11-16",
+    "periodStart": "2026-11-12",
+    "periodEnd": "2026-11-18",
     "windowDays": 7
   },
-  "inputHash": "0379c006212d939c08ecb73a50b66b9d403019110ab920362f84d618f88a8ab4",
+  "inputHash": "d3b6f52641607cee0b0c77fa5a2ea1a348b41c37fd8f1926ee5f13e38501d2aa",
   "movements": [
+    {
+      "keyword": "高校の数",
+      "targetPath": "/municipalities/ranking/high-school-count",
+      "before": 8.25,
+      "after": 107,
+      "beforeImpressions": 4,
+      "impressions": 1,
+      "change": -98.75
+    },
     {
       "keyword": "津山 人口",
       "targetPath": "/areas/33000/cities/33203",
@@ -16,15 +25,6 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": -86
-    },
-    {
-      "keyword": "佐賀 平均年収",
-      "targetPath": "/areas/41000/labor-wages",
-      "before": 92,
-      "after": 8,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 84
     },
     {
       "keyword": "広島県 人口",
@@ -36,22 +36,13 @@
       "change": 82.5
     },
     {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-property",
-      "before": 96,
-      "after": 17.166666666666668,
-      "beforeImpressions": 1,
-      "impressions": 6,
-      "change": 78.83333333333333
-    },
-    {
       "keyword": "県庁 公務員 年収",
       "targetPath": "/blog/avg-salary-admin-prefecture-prefecture-gap",
-      "before": 15,
+      "before": 14.5,
       "after": 91,
-      "beforeImpressions": 3,
+      "beforeImpressions": 2,
       "impressions": 1,
-      "change": -76
+      "change": -76.5
     },
     {
       "keyword": "神奈川県平均年収",
@@ -61,15 +52,6 @@
       "beforeImpressions": 2,
       "impressions": 1,
       "change": 74.5
-    },
-    {
-      "keyword": "静岡 市 人口",
-      "targetPath": "/areas/22000/cities/22100",
-      "before": 8.666666666666668,
-      "after": 83,
-      "beforeImpressions": 3,
-      "impressions": 1,
-      "change": -74.33333333333333
     },
     {
       "keyword": "広島県 人口",
@@ -90,6 +72,15 @@
       "change": 72
     },
     {
+      "keyword": "豊田市人口",
+      "targetPath": "/areas/23000/cities/23211",
+      "before": 82,
+      "after": 11,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 71
+    },
+    {
       "keyword": "群馬県人口",
       "targetPath": "/areas/10000/population-dynamics",
       "before": 97,
@@ -97,10 +88,28 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 69
+    },
+    {
+      "keyword": "福島県平均年収",
+      "targetPath": "/areas/07000/labor-wages",
+      "before": 75,
+      "after": 8,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 67
     }
   ],
   "verdicts": [],
-  "selected": null,
+  "selected": {
+    "keyword": "鳥取市 人口",
+    "targetPath": "/areas/31000/cities/31201",
+    "rank": 7.735449735449736,
+    "impressions": 189,
+    "clicks": 0,
+    "group": 5,
+    "previousMethod": null,
+    "editableFile": null
+  },
   "observing": [],
   "pendingPublication": [
     {
