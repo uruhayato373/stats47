@@ -396,13 +396,13 @@ updated: 2026-11-01
 
 - **背景**: Cloudflare の請求は 09-15 $11.40 → 10-15 $29.02 → 11-15 $43.71 (全額が Worker `stats47` の CPU)。主因の対策はブランチ `fix/cf-cpu-isr` (`CF-CPU-ISR-01`)。目標は品質を落とさずに月 $5〜10。
 - **次 (実行順)**:
-  1. 本番反映 (オーナー承認): `fix/cf-cpu-isr` を develop → main。反映後に、Workers Cache を避けたクエリ付きで `/ranking/<指標>` を 2 回取り、2 回目が `x-nextjs-cache: HIT` か `STALE` になることを確かめる。memory queue の作り直しは手元の workerd で確かめられていない (worktree では OpenNext のバンドルが sharp の解決で止まる)ので、`STALE` の次の要求が新しい描画になるかも見る。確かめたら `.github/scripts/smoke-test-routes.sh` の ISR 検査を `ISR_CHECK_STRICT=1` (deploy-workers.yml の smoke の env) にする。
+  1. **済み (2026-11-21)**: #1292・#1294 で本番反映。2 回目以降が HIT になり、裏の描き直しが止まったことを本番で確かめ、smoke の ISR 検査を strict にした。効果の判定は改善ログ CF-CPU-ISR-01 (期日 11-24)。
   2. 自前の品質監査クローラー: 11-20 (UTC) のフル描画 CPU の UA 1 位は `stats47-page-quality-audit/1.0` (9,564 秒・その日の 21%)。ISR 反映後の週次で同じ値を取り直し、まだ上位なら巡回の対象を「変更のあったテンプレートの代表 URL + 全 URL を週替わりで分割」に絞る案を出す (`.claude/rules/page-quality-standards.md` の担当範囲)。
   3. 送客の無いクローラー: 11-20 の `/ranking/*`・`/areas/*` で ExaSearchBot 約 1,220 秒・SirdataBot 約 510 秒・Amzn-SearchBot 約 90 秒。`robots.ts` で止めるかはオーナー判断 (Googlebot・bingbot は止めない)。
   4. 課金の通知 (オーナー作業): Cloudflare の予算アラートはいま $3 の 1 件だけ。$15 と $25 の 2 段にする。利用額の上限 (超えたら止める設定) はサイトが止まるので入れない。
   5. R2 (`storage.stats47.jp`) への UA `node` の GET (1 日 約 19 万件): 11-20 のパスは `app/stats/*/values.json`・`app/blog/all.json`、送信元 IP の大半は Azure・AWS の範囲 (ASN はこのプランの GraphQL で引けず未確定)。最多は IPv6 の 1 アドレス `2001:ce8:143:6d31:…` (55,560 件) で、オーナーの手元の回線かを照合する。R2 の請求は $0 なので、照合の結果が外部なら WAF で止めるかを決めるだけでよい。
-- **停止条件**: 本番反映・robots の変更・WAF・予算アラートの設定はオーナー承認の後。計測なしに対策を足さない。
-- **完了条件**: 1〜5 がそれぞれ「済み」か「やらない (理由)」になり、`CF-CPU-ISR-01` の判定期日 (本番反映の 3 日後) の実測が改善ログにある。
+- **停止条件**: robots の変更・WAF・予算アラートの設定はオーナー承認の後。計測なしに対策を足さない。
+- **完了条件**: 2〜5 がそれぞれ「済み」か「やらない (理由)」になり、`CF-CPU-ISR-01` の判定期日 (2026-11-24) の実測が改善ログにある。
 
 ### [CF-EDGE-TTL-01] HTML の edge 保持を 1 日から 7 日に延ばし、パージの呼び出しを配線する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]

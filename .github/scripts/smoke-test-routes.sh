@@ -231,7 +231,7 @@ check_redirect "/municipalities/ranking/manufacturing-shipment-amount?page=2" "/
 #   (Workers CPU 課金の約 7 割)。HTTP 200・title が正常なので上の検査ではすり抜ける。
 #   Workers Cache を避けるクエリ付きで同じパスを 2 回取り、2 回目が ISR から返る (x-nextjs-cache: HIT / STALE) かを見る。
 #   ISR の保存先はパスで決まりクエリを含まないので、2 回目は描画しないで返るはず。
-#   ISR_CHECK_STRICT=1 で fail、既定は warning (memory queue の初回の本番反映で応答を確かめてから strict にする)。
+#   ISR_CHECK_STRICT=1 で fail、既定は warning。deploy-workers.yml は 2026-11-21 から 1 を渡す (本番で HIT を確かめた)。
 echo ""
 echo "🧊 runtime ISR check (2 回目が ISR から返るか)"
 ISR_PATHS=(
