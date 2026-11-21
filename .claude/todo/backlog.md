@@ -391,6 +391,19 @@ updated: 2026-11-01
 - **あわせて確かめる (2026-11-13 レビュー)**: 全国版は HTML に上位 50 件だけを出すので、51 位以下の市区町村ページ (`/areas/<県>/cities/<市>`) への静的なリンクが全国版から無くなった (以前は `?page=N` から辿れた)。sitemap には全件が載っているが、内部リンクの他の経路 (県のページの市区町村一覧・県別ランキング) で全市区町村に届くかは数えていない。県別ランキングを広げると各県の全自治体へのリンクが戻る。
 - **完了条件**: 成立する (指標, 県) の組がすべて県別パスで表示され、sitemap に載り、波ごとの CPU と登録数が改善ログに記録された。
 
+### [CF-CPU-FOLLOWUP-01] Workers CPU 課金の削減の残り (ISR の本番確認・自前クローラー・課金の通知)
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-21] [領域:サイト] [待ち:承認]
+
+- **背景**: Cloudflare の請求は 09-15 $11.40 → 10-15 $29.02 → 11-15 $43.71 (全額が Worker `stats47` の CPU)。主因の対策はブランチ `fix/cf-cpu-isr` (`CF-CPU-ISR-01`)。目標は品質を落とさずに月 $5〜10。
+- **次 (実行順)**:
+  1. 本番反映 (オーナー承認): `fix/cf-cpu-isr` を develop → main。反映後に、Workers Cache を避けたクエリ付きで `/ranking/<指標>` を 2 回取り、2 回目が `x-nextjs-cache: HIT` か `STALE` になることを確かめる。memory queue の作り直しは手元の workerd で確かめられていない (worktree では OpenNext のバンドルが sharp の解決で止まる)ので、`STALE` の次の要求が新しい描画になるかも見る。確かめたら `.github/scripts/smoke-test-routes.sh` の ISR 検査を `ISR_CHECK_STRICT=1` (deploy-workers.yml の smoke の env) にする。
+  2. 自前の品質監査クローラー: 11-20 (UTC) のフル描画 CPU の UA 1 位は `stats47-page-quality-audit/1.0` (9,564 秒・その日の 21%)。ISR 反映後の週次で同じ値を取り直し、まだ上位なら巡回の対象を「変更のあったテンプレートの代表 URL + 全 URL を週替わりで分割」に絞る案を出す (`.claude/rules/page-quality-standards.md` の担当範囲)。
+  3. 送客の無いクローラー: 11-20 の `/ranking/*`・`/areas/*` で ExaSearchBot 約 1,220 秒・SirdataBot 約 510 秒・Amzn-SearchBot 約 90 秒。`robots.ts` で止めるかはオーナー判断 (Googlebot・bingbot は止めない)。
+  4. 課金の通知 (オーナー作業): Cloudflare の予算アラートはいま $3 の 1 件だけ。$15 と $25 の 2 段にする。利用額の上限 (超えたら止める設定) はサイトが止まるので入れない。
+  5. R2 (`storage.stats47.jp`) への UA `node` の GET (1 日 約 19 万件): 11-20 のパスは `app/stats/*/values.json`・`app/blog/all.json`、送信元 IP の大半は Azure・AWS の範囲 (ASN はこのプランの GraphQL で引けず未確定)。最多は IPv6 の 1 アドレス `2001:ce8:143:6d31:…` (55,560 件) で、オーナーの手元の回線かを照合する。R2 の請求は $0 なので、照合の結果が外部なら WAF で止めるかを決めるだけでよい。
+- **停止条件**: 本番反映・robots の変更・WAF・予算アラートの設定はオーナー承認の後。計測なしに対策を足さない。
+- **完了条件**: 1〜5 がそれぞれ「済み」か「やらない (理由)」になり、`CF-CPU-ISR-01` の判定期日 (本番反映の 3 日後) の実測が改善ログにある。
+
 ### [CF-EDGE-TTL-01] HTML の edge 保持を 1 日から 7 日に延ばし、パージの呼び出しを配線する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
@@ -399,6 +412,7 @@ updated: 2026-11-01
 - **停止条件**: パージの配線を確かめる前に保持だけを延ばさない (更新が 7 日出なくなる)。
 - **あわせて確かめる (2026-11-13 レビュー・未実測)**: 全国版の市区町村ランキングを `revalidate = 86400` にしたので、Workers Cache を tag で消しても OpenNext の incremental cache (R2) に前の HTML が残りうる (`/ranking/[rankingKey]` と同じ形。コードに revalidatePath / revalidateTag の呼び出しは見つからなかった)。R2 が一時的に読めないときの「配信用データを準備しています」(200) が保存される可能性もある。本番でデータ更新後の応答を読んで確かめる。
 - **同じ形の疑い (未実測)**: `apps/web/src/app/api/flow/[feature]/[code]/route.ts` は `revalidate = 86400` のまま no-store の 404 を返す。route handler が 404 も保存するなら、R2 の一時失敗が 1 日残る (市区町村の全行 JSON の route は同じ理由で force-dynamic にした)。
+- **前提の変化 (2026-11-21)**: 拠点ごとの描き直しの主因は、`/ranking/*` が ISR になっていなかったこと (`CF-CPU-ISR-01`)。ISR が効けば Workers Cache の miss は数 ms の ISR 応答になり、保持を延ばす効果は小さい。`CF-CPU-ISR-01` の反映後に、日次 snapshot の `routeCpu` で 1 URL あたりの描画回数が版の数を超えるかを見てから、このカードを続けるか閉じるかを決める。
 - **完了条件**: 保持 7 日とパージの配線が本番に入り、`/ranking/*` の 1 URL あたりの 1 日の描画回数を前後で比べた値が改善ログに記録された。
 - **統合 (2026-11-13)**: `CF-HTML-EDGE-TTL-01` をこのカードへ統合した。完了条件に含める: 保持 7 日とパージの配線が本番に入り、/ranking/* の 1 URL あたり 1 日の描画回数の前後比較が改善ログにある。加えて旧カード側の項目を落とさない: (1) purge されない経路 (データ更新・テーマ定義・page_components・広告) を洗い出し、延長で古い内容が残るページを特定して塞ぐ (2) stale-while-revalidate が Workers Cache で効くか (MISS でなく STALE を返すか) を本番で確認 (3) 期間案と効果見込み、HIT 率か CPU の before/after を測る。停止条件は purge 漏れを残したまま延ばさない・本番反映はオーナー承認後。
 
@@ -410,6 +424,7 @@ updated: 2026-11-01
 - **残り (ランキングの図)**: `components/stat-charts/.../RankingChart.tsx` は指標の定義を自分で読んだ後、`lib/metric-axis-policy.ts` の `resolveMetricAxisPolicy` が同じ指標の定義を最大 2 回読み直す。`RadarChartDashboard.tsx` も軸ごとに定義を直接読む。`RankingSidebarContainer` はランキングのページから `categoryKey` を受け取るので、そのページでは定義を読まない (対象から外してよい)。
 - **残り (判断)**: ランキングの図の重複読みをまとめるには、`features/ranking/lib/cached-ranking-item.ts` の `cachedFindRankingItem` を `components/` と `lib/` から使える場所 (`apps/web/src/lib/`) へ移す必要がある。選択肢は「上の計測で `/ranking/*` の CPU が下がらなかったときだけ行う」か「計測を待たずに行う」。推奨は前者で、根拠はカードの停止条件 (計測なしに最適化しない) と、この図が代表 3 route の描画に入る割合を測っていないこと。
 - **残り (統合元のカード)**: (1) CF-CPU-SURGE-01 の反映後 7 日で Observability の url.path 別 CPU 合計の上位 20 を取り直す。(2) 上位 route が読む R2 オブジェクトの数とサイズを数え、CPU が JSON の解析か描画かを分ける。(3) 必要な年・項目だけの派生 snapshot (R2) を 1 route で試し、localhost の本番ビルドで比べる。
+- **実測 (2026-11-21)**: フル描画 (CPU 200 ms 超) の平均は `/ranking/*` 1,674 ms、`/areas/<県>/household-food-spending` は 4.4〜4.9 秒。`CF-CPU-ISR-01` (実行時 ISR) は描画の回数を減らすだけで 1 回の重さは変えない。ISR 反映後も CPU は「版ごとに URL 1 回 × 1.7 秒」残る (1 日 2 版で約 15,000 秒/日・月 約 $18)。月 $10 以下にはこのカードの削減が要る。日次 snapshot の `routeCpu.routes[].avgFullRenderCpuMs` を前後の比較に使う。
 - **完了条件**: 3 route の平均 CPU の前後の値が改善ログに記録され、下がらなかった箇所は元に戻した。停止条件は、計測なしに最適化しない・永続 DB に戻さない・表示内容と SEO 構造化データを変えない。効果の観測は改善台帳の別 ID へ引き渡す。
 
 ### [URL-QUERY-INVENTORY-01] `searchParams` を読むページを棚卸しし、パスへ移すか URL から外す
@@ -422,11 +437,12 @@ updated: 2026-11-01
 - **完了条件**: 許可リストの各行に、残す理由か移行先が書かれている。
 
 ### [CF-CPU-ROUTE-WEEKLY-01] route 別・UA 別の CPU 上位を週次で記録する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:管理]
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-11-13] [領域:管理]
 
 - **背景**: 日次の記録は Worker 全体の CPU 合計だけで、どの URL とどのクローラーが使ったかは Cloudflare の画面でしか分からない。2026-11-13 の調査は内部ブラウザの手作業だった。
-- **次**: Workers Observability の telemetry query を API トークンで呼べるかを公式文書で確かめる (未確認)。呼べるなら `fetch-usage.mjs` に route 先頭 2 階層別と UA 別の上位 20 を足し、`data/cloudflare/` に週次で残す。
-- **完了条件**: 週次の記録に route 別と UA 別の CPU 上位が載り、週次レビューが読む。呼べないと分かった場合は理由を書いてこのカードを閉じる。
+- **済み (2026-11-21・ブランチ `fix/cf-cpu-isr`)**: `packages/ops/src/cloudflare/route-cpu.mjs` が route 別のフル描画 (CPU 200 ms 超) の回数・1 URL あたりの回数・平均 CPU・UA 上位・版の数を組み、`fetch-usage.mjs` が日次 snapshot の `routeCpu` に書く。閾値は `budgets-daily.json` の `workers-route-*`、週次の計測サイクルと `LATEST.md` が読む。query の本文はダッシュボードのセッションで本番に投げて応答を確かめた。
+- **残り (オーナー作業)**: CI の `CLOUDFLARE_API_TOKEN` に Workers の Metadata Read-Only (Observability の読み取り) を足す (https://developers.cloudflare.com/workers/authorization/ 、2026-11-21 確認)。足すまで `routeCpu` は `status: "unavailable"` を記録する。
+- **完了条件**: 日次 snapshot の `routeCpu.status` が `ok` になり、週次の計測サイクルの Cloudflare の行に route 上位が出た。
 
 ### [STRATEGY-LEDGER-JSON-01] 戦略文書の表・値・決定を `data/` の JSON 台帳へ移し、管理画面が台帳を描く形にする (8 段)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-13] [領域:戦略]
@@ -1123,6 +1139,7 @@ updated: 2026-11-01
   - **完了条件**: 先読み停止後の実測で消えたことを確かめたか、レート制限を入れて同じ集計で件数が下がったことを確かめた。
 - **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
 - **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している (2026-10-16 に満たした)。対策の本番反映と効果観測の引き渡しまでをこのカードで持つ。
+- **主因 (2026-11-21)**: `/ranking/*` と `/areas/*` が実行時 ISR になっておらず毎回描画だった (CPU の約 7 割)。対策と効果観測は `CF-CPU-ISR-01` (改善ログ `data/improvement/cloudflare-cost-improvement/improvement-log.md`) が持つ。`_rsc` の割合は 11-20 で 3.4% (1,539 秒) まで下がっており、先読み停止は効いた。このカードは閉じてよい (オーナー判断の (b) に当たる)。
 - **11-16 の確認**: Observability の Query API を読むスクリプトは repo に無く、Cloudflare のトークンは CI 専任なので、手元のセッションからは `_rsc` の割合を取り直せない。11-21 のレビューでオーナーに次のどちらかを諮る: (a) Observability の Query Builder で 10-16 と同じ条件の 1 時間を手で取る (b) このカードを閉じ、効果観測を `CF-CPU-URL-01` (期日 11-27) に寄せる。
 
 ### [AFFILIATE-COMMON-PRODUCTS-01] アフィリエイトを共通的で収益性の高い商品に切り替え、本文の広告の段 (広い画面は横 3 枠) を試す

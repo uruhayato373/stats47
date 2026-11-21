@@ -203,3 +203,32 @@ test("info の violation と required な info ルールでも報告生成は落
   assert.equal(missing[0].severity, "critical");
   assert.doesNotThrow(() => buildReport({ snapshot: snap, metrics, violations: missing }));
 });
+
+test("route 別 CPU: 取得できた日は最大値を指標に出し、budgets のルールで warning になる (CF-CPU-ISR-01)", () => {
+  const snapshot = createSnapshot(undefined);
+  snapshot.routeCpu = {
+    status: "ok",
+    routes: [
+      { route: "ranking", fullRendersPerUrlPerDay: 3.1, avgFullRenderCpuMs: 1674 },
+      { route: "areas", fullRendersPerUrlPerDay: 2.1, avgFullRenderCpuMs: 1800 },
+      { route: "geo", fullRendersPerUrlPerDay: null, avgFullRenderCpuMs: null },
+    ],
+  };
+  const metrics = flatten(snapshot);
+  assert.equal(metrics.workers_route_max_full_renders_per_url, 3.1);
+  assert.equal(metrics.workers_route_max_avg_full_render_cpu_ms, 1800);
+  const routeRules = budgets.rules.filter((r) => r.metric_key.startsWith("workers_route_"));
+  assert.deepEqual(
+    evaluateRules(metrics, routeRules).violations.map((v) => v.rule_id).sort(),
+    ["workers-route-avg-full-render-cpu", "workers-route-full-renders-per-url"],
+  );
+});
+
+test("route 別 CPU: 取得不能の日はキーを入れず、ルールは違反にしない (required: false)", () => {
+  const snapshot = createSnapshot(undefined);
+  snapshot.routeCpu = { status: "unavailable", reason: "HTTP 403" };
+  const metrics = flatten(snapshot);
+  assert.equal("workers_route_max_full_renders_per_url" in metrics, false);
+  const routeRules = budgets.rules.filter((r) => r.metric_key.startsWith("workers_route_"));
+  assert.deepEqual(evaluateRules(metrics, routeRules).violations, []);
+});

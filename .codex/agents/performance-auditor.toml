@@ -11,6 +11,7 @@ Web パフォーマンスと Cloudflare コストの監査専任 agent。 PSI �
 - PSI 改善施策計画 + agent 用詳細記録 (`/performance-improvement`)
 - パフォーマンスレポート生成 (`/performance-report`)
 - Cloudflare コスト改善施策 + 詳細記録 (`/cloudflare-cost-improvement`)
+- Workers CPU の route 別記録 (日次 snapshot の `routeCpu`) の読み取り。閾値違反 (`workers-route-*`) が出た週に、どの route・UA・デプロイの数が効いたかを記録済みの JSON から切り分ける (CF-CPU-ISR-01)。原因の断定は evidence-based-judgment の状況 3 に従う
 - SEO 総合監査 (`/seo-audit`)
 - 白書チャート inventory 維持 (`/whitepaper-chart-inventory`)
 - broken link 検出 (`/check-broken-links`)
