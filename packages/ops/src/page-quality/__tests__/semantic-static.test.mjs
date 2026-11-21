@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { R2_PUBLIC_ORIGIN } from "../../../../r2-storage/mirror/r2-keys.mjs";
 // 表示の意味の検査 (SITE-DISPLAY-SEMANTICS-AUDIT-01 層 2・層 3)。
 import test from "node:test";
@@ -136,7 +137,11 @@ test("表示の意味の違反は UI 指摘キューに machine の指摘とし�
   assert.match(card.markdown, /表示の意味 \(定義単位で直す\)/);
 });
 
-test("11px 未満の見える文字を数え、SVG 内・非表示・sr-only は数えない。ページ高さも返す", async () => {
+// ブラウザの入っていない CI の job (PR の Static Gates) では走らせない。.claude から移す前も、この確かめは
+// ブラウザのある手元 (push 前の検査) でだけ走っていた (SCRIPTS-TO-PACKAGES-02)
+const BROWSER_MISSING = existsSync(chromium.executablePath()) ? false : "Chromium が無い環境では走らせない (npx playwright install chromium で入る)";
+
+test("11px 未満の見える文字を数え、SVG 内・非表示・sr-only は数えない。ページ高さも返す", { skip: BROWSER_MISSING }, async () => {
   assert.equal(SMALL_TEXT_PX, 11);
   const browser = await chromium.launch({ headless: true });
   try {
