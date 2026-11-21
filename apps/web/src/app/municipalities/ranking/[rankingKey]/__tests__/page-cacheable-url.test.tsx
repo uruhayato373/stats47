@@ -95,11 +95,13 @@ beforeEach(() => {
 });
 
 describe('市区町村ランキング全国版のページ', () => {
-  it('URL のクエリで描き分けず、1 日キャッシュする (毎回描画にしない)', () => {
+  it('URL のクエリで描き分けず、1 日キャッシュする (毎回描画にしない)', async () => {
     const mod = pageModule as Record<string, unknown>;
     expect(mod.revalidate).toBe(86400);
     expect(mod.dynamic).toBeUndefined();
-    expect(mod.generateStaticParams).toBeUndefined();
+    // 空配列を返す generateStaticParams が無いと実行時の ISR が効かない。キー列を返すとビルド時に notFound が焼かれる (CF-CPU-ISR-01)
+    expect(typeof mod.generateStaticParams).toBe('function');
+    await expect((mod.generateStaticParams as () => Promise<unknown>)()).resolves.toEqual([]);
   });
 
   it.each([true, false])(

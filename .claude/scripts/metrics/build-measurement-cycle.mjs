@@ -102,10 +102,16 @@ function buildOperations(week, asOf, pending) {
   const rules = JSON.parse(readFileSync(join(PROJECT_ROOT, ".claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json"), "utf8")).rules;
   const snapshotsDir = join(cfDir, "snapshots");
   const evaluated = existsSync(snapshotsDir)
-    ? readdirSync(snapshotsDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).map((f) => ({
-      date: f.slice(0, 10),
-      violations: evaluateRules(flatten(JSON.parse(readFileSync(join(snapshotsDir, f), "utf8"))), rules).violations,
-    }))
+    ? readdirSync(snapshotsDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).map((f) => {
+      const snapshot = JSON.parse(readFileSync(join(snapshotsDir, f), "utf8"));
+      const metrics = flatten(snapshot);
+      return {
+        date: f.slice(0, 10),
+        violations: evaluateRules(metrics, rules).violations,
+        cpuMs: metrics.workers_cpu_ms,
+        topRoutes: snapshot.routeCpu?.status === "ok" ? snapshot.routeCpu.routes.slice(0, 3) : undefined,
+      };
+    })
     : [];
   const { startDate, endDate } = isoWeekToDateRange(week);
   const snsStore = createRequire(import.meta.url)("../../../packages/ops/src/sns/sns-metrics-store.cjs");

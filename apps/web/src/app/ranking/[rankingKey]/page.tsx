@@ -7,8 +7,8 @@
  * ## 責務
  * 1. **データ取得**: R2 snapshot からランキング定義（`rankingItem`）と統計値（`rankingValues`）を取得する。
  * 2. **SEO**: 動的メタデータ（タイトル・description）と構造化データ（JSON-LD）を生成する。
- * 3. **オンデマンド ISR**: `generateStaticParams` を持たず `ƒ`（オンデマンド）で描画し、
- *    ランタイムに R2 を読んで 24時間 ISR キャッシュする（build 時 R2 不可で notFound 固着を回避）。
+ * 3. **オンデマンド ISR**: `generateStaticParams` が空配列を返し、ビルド時には 1 件も描かない。
+ *    最初のリクエストでランタイムに R2 を読んで描画し、24 時間 ISR キャッシュする。
  *    年度切替はクライアント側で Server Action を呼び出し、ページ遷移なしで更新する。
  *
  * ## Composition Pattern
@@ -39,14 +39,21 @@ import {
 /**
  * オンデマンド ISR（24時間）。
  *
- * generateStaticParams は付けない。付けると全 rankingKey が `●` SSG 化され、
- * ビルド時に R2 (`app/ranking/<key>/item.json`) を読めず（readRankingItemFromR2 が
- * build 時は ok(null) を返す）notFound として prerender される。この OpenNext 構成では
- * ISR 再生成が効かず「ランキングが見つかりません」が永久固着する（2026-06-22 障害）。
- * generateStaticParams なし = `ƒ`（オンデマンド）でランタイムに R2 を読んで描画し、
- * 初回描画結果を ISR キャッシュする（category / areas/[areaCode]/[themeSlug] と同方式）。
+ * generateStaticParams は **空配列** を返す (キー列を返さない)。
+ * - キー列を返すと全 rankingKey がビルド時に prerender される。ビルド時は R2 を読めず
+ *   (readRankingItemFromR2 が build 時は ok(null))、notFound が焼かれて永久固着する (2026-06-22 障害)。
+ * - 関数そのものを外すと、revalidate を書いても実行時の ISR が効かず、毎リクエスト描画になる
+ *   (2026-06-22〜11-21 の状態。1 描画約 1.7 秒 CPU が Workers 課金の約 38% を占めた。CF-CPU-ISR-01)。
+ *   Next.js 公式: 実行時に ISR を効かせるには空配列か force-static が要る
+ *   (https://nextjs.org/docs/app/api-reference/functions/generate-static-params 、2026-11-21 確認)。
+ * 期限切れの再描画は open-next.config.ts の memory queue が行う。
+ * 契約は apps/web/src/__tests__/render-mode-contract.test.ts が固定する。
  * 詳細: .claude/rules/nextjs-ssg-preservation.md
  */
+export async function generateStaticParams(): Promise<Array<{ rankingKey: string }>> {
+  return [];
+}
+
 export const revalidate = 86400;
 
 /** ページコンポーネントの Props 型 */

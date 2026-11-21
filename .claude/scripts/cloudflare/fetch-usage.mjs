@@ -10,6 +10,8 @@
  *   Account → Account Analytics → Read である (D1:Read は要らない)。出典 (2026-11-14 取得):
  *   https://developers.cloudflare.com/analytics/graphql-api/getting-started/authentication/api-token-auth/
  *   https://developers.cloudflare.com/d1/observability/metrics-analytics/ (同じ API を読む D1 の insights コマンドも Account Analytics Read を要求する)
+ *   route 別 CPU (Workers Observability の telemetry query) は Workers の Metadata Read-Only 相当が要る
+ *   (https://developers.cloudflare.com/workers/authorization/ 、2026-11-21 取得)。無ければ routeCpu だけ unavailable を記録する。
  *   Googlebot 集計の zone 検索 (GET /zones) は Zone → Zone → Read が要る
  *   (https://developers.cloudflare.com/api/resources/zones/methods/list/)。無ければ googlebot だけ unavailable を記録する。
  *
@@ -23,6 +25,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { GOOGLEBOT_QUERY, GOOGLEBOT_UA_LIKE, aggregateGooglebot, unavailableGooglebot } from "../../../packages/ops/src/cloudflare/googlebot.mjs";
+import { buildRecord, planQueries } from "../../../packages/ops/src/cloudflare/route-cpu.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const SNAPSHOTS_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.snapshots"));
@@ -253,6 +256,32 @@ async function fetchGooglebot(since, until) {
   }
 }
 
+/**
+ * route 別 CPU (packages/ops/src/cloudflare/route-cpu.mjs)。Observability の保持は 7 日なので前日分は取れる。
+ * 権限不足・取得失敗で日次全体を落とさず、status: "unavailable" と理由を記録する (CF-CPU-ISR-01)。
+ */
+async function fetchRouteCpu(accountTag, since, until) {
+  const token = process.env.CLOUDFLARE_API_TOKEN;
+  const from = Date.parse(since);
+  const to = Date.parse(until) + 1;
+  try {
+    const responses = {};
+    for (const { id, body } of planQueries({ from, to })) {
+      const res = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${accountTag}/workers/observability/telemetry/query`,
+        { method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(body) },
+      );
+      const json = await res.json();
+      if (!json.success) throw new Error(`telemetry query ${id}: HTTP ${res.status} ${JSON.stringify(json.errors).slice(0, 200)}`);
+      responses[id] = json;
+    }
+    const record = buildRecord({ responses, from, to, days: 1 });
+    return { status: "ok", ...record };
+  } catch (err) {
+    return { status: "unavailable", reason: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 async function main() {
   loadEnv();
   const opts = parseArgs();
@@ -265,13 +294,14 @@ async function main() {
 
   console.log(`Cloudflare usage snapshot: ${date} (UTC) [${since} - ${until}]`);
 
-  const [d1, workers, workersCpu, r2Ops, r2Storage, googlebot] = await Promise.all([
+  const [d1, workers, workersCpu, r2Ops, r2Storage, googlebot, routeCpu] = await Promise.all([
     fetchD1(accountTag, since, until),
     fetchWorkers(accountTag, since, until),
     fetchWorkersCpuTotal(accountTag, since, until),
     fetchR2Operations(accountTag, since, until),
     fetchR2Storage(accountTag),
     fetchGooglebot(since, until),
+    fetchRouteCpu(accountTag, since, until),
   ]);
 
   const snapshot = {
@@ -283,6 +313,7 @@ async function main() {
     r2_operations: r2Ops,
     r2_storage: r2Storage,
     googlebot,
+    routeCpu,
   };
 
   mkdirSync(SNAPSHOTS_DIR, { recursive: true });
@@ -298,6 +329,9 @@ async function main() {
   console.log(googlebot.status === "ok"
     ? `   Googlebot: ${googlebot.total} reqs (POST path types: ${JSON.stringify(googlebot.postByPathType)})`
     : `   Googlebot: 取得不能 (${googlebot.reason})`);
+  console.log(routeCpu.status === "ok"
+    ? `   Route CPU: top ${routeCpu.routes.slice(0, 3).map((r) => `${r.route} ${r.cpuShare}% (${r.fullRendersPerUrlPerDay ?? "-"} renders/url)`).join(", ")}`
+    : `   Route CPU: 取得不能 (${routeCpu.reason})`);
   console.log(`   R2 storage: ${(r2Storage.totalBytes/1e9).toFixed(2)}GB / ${r2Storage.totalObjects.toLocaleString()} objects`);
 }
 

@@ -234,7 +234,8 @@ export function summarizePsi(rows, asOf) {
 /**
  * Cloudflare history.csv と、日次 snapshot を threshold-check.mjs の evaluateRules で判定した結果。
  * @param {Array<object>} rows history.csv
- * @param {Array<{date:string, violations:Array<{severity:string,title:string}>}>} evaluated
+ * @param {Array<{date:string, violations:Array<{severity:string,title:string}>, cpuMs?:number, topRoutes?:Array<{route:string,cpuShare:number,fullRendersPerUrlPerDay:number|null}>}>} evaluated
+ *   cpuMs は日次 snapshot の Worker 全体の CPU (取得不能の日は無い)。topRoutes は route 別 CPU の上位 (CF-CPU-ISR-01)。
  */
 export function summarizeCloudflare(rows, evaluated, asOf) {
   const dates = rows.map((r) => r.date).filter((d) => d <= asOf).sort();
@@ -242,7 +243,11 @@ export function summarizeCloudflare(rows, evaluated, asOf) {
   const window = rows.filter((r) => inWindow(r.date, asOf));
   const total = (key) => sum(window, (r) => r[key]);
   const requests = total("workers_requests");
-  const violations = evaluated.filter((e) => inWindow(e.date, asOf)).flatMap((e) => e.violations);
+  const evaluatedInWindow = evaluated.filter((e) => inWindow(e.date, asOf));
+  const violations = evaluatedInWindow.flatMap((e) => e.violations);
+  const cpuDays = evaluatedInWindow.filter((e) => typeof e.cpuMs === "number");
+  const workersCpuMsPerDay = cpuDays.length ? Math.round(sum(cpuDays, (e) => e.cpuMs) / cpuDays.length) : null;
+  const latestRoutes = [...evaluatedInWindow].sort((x, y) => y.date.localeCompare(x.date)).find((e) => e.topRoutes?.length);
   const bySeverity = {};
   for (const v of violations) bySeverity[v.severity] = (bySeverity[v.severity] ?? 0) + 1;
   return {
@@ -255,6 +260,12 @@ export function summarizeCloudflare(rows, evaluated, asOf) {
     r2ClassBOps: total("r2_class_b_ops"),
     r2EgressMb: Math.round(total("r2_egress_mb")),
     r2StorageGb: latest ? Number(rows.find((r) => r.date === latest).r2_storage_gb) : null,
+    workersCpuMsPerDay,
+    // 月額の見込み: 基本料 $5 + (1 日平均 × 30 - 込み分 3,000 万 ms) × $0.02/100 万 ms (threshold-check.mjs と同じ料金)
+    workersCpuMonthlyUsd: workersCpuMsPerDay === null
+      ? null
+      : Math.round((5 + Math.max(0, workersCpuMsPerDay * 30 - 30_000_000) * 0.02 / 1_000_000) * 100) / 100,
+    topRoutes: latestRoutes ? { date: latestRoutes.date, routes: latestRoutes.topRoutes } : null,
     violationsBySeverity: bySeverity,
     violationTitles: [...new Set(violations.map((v) => v.title))],
   };
@@ -678,7 +689,13 @@ export function renderCycleMarkdown(state) {
     }
     if (cloudflare) {
       const sev = Object.entries(cloudflare.violationsBySeverity).map(([k, v]) => `${k} ${v}`).join("・") || "なし";
-      lines.push(`| Cloudflare | ${cloudflare.status}（最新 ${cloudflare.latestDate ?? "—"}） | Workers ${cloudflare.workersRequests} req・error ${pct(cloudflare.workersErrorRate)}・R2 A ${cloudflare.r2ClassAOps} / B ${cloudflare.r2ClassBOps}・保存 ${cloudflare.r2StorageGb ?? "—"} GB | ${sev}${cloudflare.violationTitles.length ? `（${cloudflare.violationTitles.join("、")}）` : ""} | ${ids(improvements.cloudflare)} |`);
+      const cpu = cloudflare.workersCpuMsPerDay == null
+        ? "CPU 取得不能"
+        : `CPU 1 日平均 ${Math.round(cloudflare.workersCpuMsPerDay / 10_000).toLocaleString()} 万 ms (月換算 約 $${cloudflare.workersCpuMonthlyUsd})`;
+      const routes = cloudflare.topRoutes
+        ? `・route 上位 ${cloudflare.topRoutes.routes.map((r) => `${r.route} ${r.cpuShare}% (描画 ${r.fullRendersPerUrlPerDay ?? "—"} 回/URL)`).join("・")}`
+        : "";
+      lines.push(`| Cloudflare | ${cloudflare.status}（最新 ${cloudflare.latestDate ?? "—"}） | Workers ${cloudflare.workersRequests} req・error ${pct(cloudflare.workersErrorRate)}・${cpu}${routes}・R2 A ${cloudflare.r2ClassAOps} / B ${cloudflare.r2ClassBOps}・保存 ${cloudflare.r2StorageGb ?? "—"} GB | ${sev}${cloudflare.violationTitles.length ? `（${cloudflare.violationTitles.join("、")}）` : ""} | ${ids(improvements.cloudflare)} |`);
     }
     if (sns) {
       const reachText = (v) => ["impressions", "reach", "views"].filter((k) => v[k] > 0).map((k) => `${k} ${v[k]}`).join("・") || "表示指標 0";

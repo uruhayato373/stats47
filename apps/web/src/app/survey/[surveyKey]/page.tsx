@@ -72,7 +72,16 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
 import type { Metadata } from 'next';
 
-/** 24時間 ISR */
+/**
+ * オンデマンド ISR（24時間）。generateStaticParams は **空配列** を返す (キー列を返さない)。
+ * 関数が無いと revalidate を書いても実行時の ISR が効かず毎リクエスト描画になり、キー列を返すと
+ * ビルド時に R2 を読めず notFound が焼かれる (2026-06-22 障害)。理由の全文は ranking/[rankingKey]/page.tsx、
+ * 契約は __tests__/render-mode-contract.test.ts (CF-CPU-ISR-01)。
+ */
+export async function generateStaticParams(): Promise<Array<{ surveyKey: string }>> {
+  return [];
+}
+
 export const revalidate = 86400;
 
 interface PageProps {
@@ -126,7 +135,9 @@ export default async function SurveyPage({ params }: PageProps) {
   const { surveyKey } = await params;
 
   const surveyResult = await readSurveyByIdFromR2(surveyKey);
-  const survey = isOk(surveyResult) ? surveyResult.data : null;
+  // 読み取りの失敗は notFound にせず投げる (ISR が「見つかりません」を保存しないように。CF-CPU-ISR-01)
+  if (!isOk(surveyResult)) throw surveyResult.error;
+  const survey = surveyResult.data;
 
   if (!survey) {
     notFound();
@@ -139,6 +150,8 @@ export default async function SurveyPage({ params }: PageProps) {
   // ハブに集める調査 ID (家計調査は品目別と、社会・人口統計体系経由の収入・支出割合の 2 つ。2026-11-02)
   const sourceIds = surveyHubSourceIds(surveyKey);
   const rankingResults = await Promise.all(sourceIds.map((id) => readRankingItemsBySurveyFromR2(id)));
+  const failedRankingResult = rankingResults.find((result) => !isOk(result));
+  if (failedRankingResult && !isOk(failedRankingResult)) throw failedRankingResult.error;
   const seenRankingKeys = new Set<string>();
   const rankingItems = rankingResults
     .flatMap((result) => (isOk(result) ? result.data : []))

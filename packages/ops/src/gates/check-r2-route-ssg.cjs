@@ -1,33 +1,38 @@
 #!/usr/bin/env node
 /**
- * recurrence guard: R2 依存の動的 route に generateStaticParams を付けない
+ * recurrence guard: R2 依存の動的 route の generateStaticParams はキー列を返さない (空配列だけ)
  *
  * 2026-06-22 障害: ranking/[rankingKey]・areas/[areaCode]・areas/[areaCode]/cities/[cityCode] が
  * generateStaticParams で静的キー列を返し ● SSG 化 → CI build (R2 不可) で notFound prerender →
- * ISR 再生成が効かず本番で「〜が見つかりません」が永久固着した。
+ * 本番で「〜が見つかりません」が再デプロイまで固着した。
  *
- * これらの route はランタイムに R2 を読んで描画する必要があるため、generateStaticParams を持たず
- * ƒ (オンデマンド ISR) でなければならない。本ガードは PR/pre-commit 時点 (build 前) に再混入を弾く。
+ * 2026-11-21 (CF-CPU-ISR-01): 当時の対策は「generateStaticParams を外す」だったが、外すと revalidate を
+ * 書いても実行時の ISR が効かず、毎リクエスト描画になる (Next.js 公式: 実行時の ISR には空配列か
+ * force-static が要る https://nextjs.org/docs/app/api-reference/functions/generate-static-params 、2026-11-21 確認)。
+ * 5 か月この状態で、Workers CPU 課金の約 7 割がこれらの route の描画だった。
+ * 正しい形は「空配列を返す generateStaticParams」。ビルド時には 1 件も描かず (notFound は焼かれない)、
+ * 実行時に描いた結果を ISR が保存する。本ガードはキー列の再混入を PR/pre-commit 時点 (build 前) に弾く。
+ * 関数が無いこと (ISR が効かない) は apps/web/src/__tests__/render-mode-contract.test.ts が弾く。
  *
  * 正典: .claude/rules/nextjs-ssg-preservation.md §generateStaticParams 固着
  * memory: feedback_generatestaticparams_r2_notfound_stuck
  *
  * Usage: node .claude/scripts/lib/check-r2-route-ssg.cjs
- * Exit: generateStaticParams が混入していれば 1。
+ * Exit: キー列を返す generateStaticParams が混入していれば 1。
  */
 const fs = require("fs");
 const path = require("path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../..");
 
-// R2 を読んで描画するため ƒ (オンデマンド) でなければならない動的 route page。
-// build 時に R2 を読めず notFound prerender になる → generateStaticParams 禁止。
+// R2 を読んで描画する動的 route page。build 時に R2 を読めず notFound prerender になる
+// → generateStaticParams は空配列だけを返す (キー列禁止)。
 const R2_DEPENDENT_ROUTES = [
   "apps/web/src/app/ranking/[rankingKey]/page.tsx",
   "apps/web/src/app/areas/[areaCode]/page.tsx",
   "apps/web/src/app/areas/[areaCode]/cities/[cityCode]/page.tsx",
   // 2026-07-06: /survey 一覧が build 時 R2 不可で空 prerender 固着した事故に伴い ƒ 化。
-  // [surveyKey] も generateStaticParams (build 時 [] を返すだけ) を撤去済 → 再混入禁止。
+  // [surveyKey] は 2026-11-21 から空配列を返す generateStaticParams を持つ (実行時 ISR のため)。
   "apps/web/src/app/survey/[surveyKey]/page.tsx",
   // 2026-08-20: GEO-SCOPE-SEPARATION-01 WP4。readJapanSeries() で app/japan/<metric>/series.json を
   // ランタイムに読む。build 時に generateStaticParams を付けると同じ notFound 固着が再発する。
@@ -48,14 +53,17 @@ for (const rel of R2_DEPENDENT_ROUTES) {
     .split("\n")
     .filter((l) => !l.trim().startsWith("*") && !l.trim().startsWith("//"));
   const joined = codeLines.join("\n");
-  if (/\bgenerateStaticParams\b/.test(joined)) {
+  const hasStaticParams = /\bgenerateStaticParams\b/.test(joined);
+  const returnsEmpty =
+    /export (async )?function generateStaticParams\([^)]*\)(\s*:[^\n]*?)?\s*\{\s*return \[\];\s*\}/.test(joined);
+  if (hasStaticParams && !returnsEmpty) {
     violations++;
     console.error(`❌ ${rel}`);
     console.error(
-      "   R2 依存 route に generateStaticParams が混入。● SSG 化 → build 時 R2 不可 →",
+      "   R2 依存 route の generateStaticParams がキー列を返している。● SSG で build 時に描かれ、R2 不可で",
     );
     console.error(
-      "   notFound 固着の再発。generateStaticParams を撤去し revalidate のみ残して ƒ 化すること。",
+      "   notFound 固着の再発。`return [];` だけにする (関数ごと外すと実行時 ISR が効かない)。",
     );
   }
 }
@@ -109,4 +117,4 @@ if (violations > 0) {
   );
   process.exit(1);
 }
-console.log("✓ R2-route SSG guard: R2 依存 route は ƒ (オンデマンド) を維持");
+console.log("✓ R2-route SSG guard: R2 依存 route はビルド時に描かない (generateStaticParams は空配列だけ)");

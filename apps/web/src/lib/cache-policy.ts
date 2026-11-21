@@ -92,6 +92,9 @@ const PRIVATE_COOKIE_NAMES = new Set([
   "__Host-authjs.session-token",
 ]);
 
+/** Next.js が ISR の再描画要求に使うヘッダー (memory queue が付ける)。値は preview mode ID で、Next.js 側が照合する */
+export const ISR_REVALIDATE_REQUEST_HEADER = "x-prerender-revalidate";
+
 type CachePolicyRequest = Pick<Request, "headers" | "method">;
 
 export interface PageCacheHeaders {
@@ -118,6 +121,8 @@ export function isRscRequest(headers: Headers): boolean {
 export function shouldBypassPageCache(request: CachePolicyRequest): boolean {
   if (request.method !== "GET" && request.method !== "HEAD") return true;
   if (request.headers.has("authorization")) return true;
+  // ISR の再描画要求 (open-next.config.ts の memory queue)。Workers Cache が答えると再描画されない
+  if (request.headers.has(ISR_REVALIDATE_REQUEST_HEADER)) return true;
   if (isRscRequest(request.headers)) return true;
   return hasPrivateCookie(request.headers);
 }
