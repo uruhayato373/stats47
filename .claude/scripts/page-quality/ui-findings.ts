@@ -25,13 +25,23 @@ import {
   insertCards,
   observeFindings,
   planUiCards,
+  type UiCardRefs,
   staleBatchFiles,
   syncFindings,
   type UiFinding,
   type UiFindingStatus,
-} from "./lib/ui-findings";
+} from "../../../packages/ops/src/page-quality/lib/ui-findings";
 import { R2_PUBLIC_ORIGIN } from "@stats47/r2-storage/keys";
 import { datasetDir } from "../../../config/datasets.mjs";
+
+/** カード本文に書くコマンドと規約の文書。置き場 (.claude) はこの入口が知る */
+const UI_CARD_REFS: UiCardRefs = {
+  cli: "npx tsx .claude/scripts/page-quality/ui-findings.ts",
+  planSvgFixCli: "npx tsx .claude/scripts/blog/plan-svg-text-fix.ts",
+  chartRule: ".claude/rules/chart-component-standards.md",
+  uiComponentsRule: ".claude/rules/ui-components.md",
+  pageQualityRule: ".claude/rules/page-quality-standards.md",
+};
 
 const require = createRequire(join(PROJECT_ROOT, "package.json"));
 const { parseBacklog } = require("./packages/ops/src/management/backlog-lib.cjs") as {
@@ -102,7 +112,7 @@ function sync(): void {
     agentReviewed,
     agentReviewedPages: "reviewedPages" in review ? review.reviewedPages : undefined,
   });
-  const cards = planUiCards({ queue: findings, openIds, today: today(), screenshotBaseUrl: SCREENSHOT_BASE_URL });
+  const cards = planUiCards({ queue: findings, openIds, today: today(), screenshotBaseUrl: SCREENSHOT_BASE_URL, refs: UI_CARD_REFS });
 
   const tally = (status: UiFindingStatus) => findings.filter((f) => f.status === status).length;
   const summary =

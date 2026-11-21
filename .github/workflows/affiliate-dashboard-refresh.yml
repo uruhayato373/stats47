@@ -25,7 +25,7 @@ on:
       - ".claude/scripts/ads/build-affiliate-dashboard.ts"
       - ".claude/scripts/ads/audit-affiliate-inventory.ts"
       - ".claude/scripts/ads/build-placement-map.mjs"
-      - ".claude/scripts/ads/lib/placement-map-core.mjs"
+      - "packages/ops/src/ads/lib/placement-map-core.mjs"
       - ".claude/scripts/ads/audit-affiliate-compliance.ts"
       - ".claude/scripts/ads/audit-affiliate-relevance.ts"
       - "packages/ops/src/ads/lib/affiliate-relevance-core.mjs"

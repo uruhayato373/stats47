@@ -193,3 +193,15 @@ test("本番デプロイは workflow_dispatch で起動でき、そのときは�
   assert.ok(deploy.on.push.branches.includes("main"), "通常の push の起動は残す");
   assert.match(deployText, /if \[ "\$GITHUB_EVENT_NAME" = "workflow_dispatch" \]; then\n\s+echo "deploy=true" >> "\$GITHUB_OUTPUT"/);
 });
+
+test("見張り役が起動したデプロイのあとだけ、Post-Deploy Smoke を main で起動する (GITHUB_TOKEN の起動では workflow_run が作られない)", () => {
+  const job = deploy.jobs["post-deploy-smoke"];
+  assert.ok(job, "deploy-workers.yml に post-deploy-smoke の job が無い");
+  assert.equal(job.needs, "deploy", "デプロイが成功したあとに動く");
+  assert.equal(job.if, "github.event_name == 'workflow_dispatch' && github.actor == 'github-actions[bot]'", "人の起動と push では起動しない");
+  assert.deepEqual(job.permissions, { actions: "write" }, "起動に要る権限だけ");
+  assert.match(job.steps.map((s) => s.run ?? "").join("\n"), /gh workflow run post-deploy-smoke\.yml --repo "\$GITHUB_REPOSITORY" --ref main/);
+  const smoke = yaml.load(fs.readFileSync(path.join(ROOT, ".github/workflows/post-deploy-smoke.yml"), "utf8"));
+  assert.ok("workflow_dispatch" in smoke.on, "post-deploy-smoke.yml が workflow_dispatch を受けない");
+  assert.match(String(smoke.jobs["smoke-test"].if), /github\.event_name == 'workflow_dispatch'/, "dispatch で起動したとき確認の job が動く");
+});

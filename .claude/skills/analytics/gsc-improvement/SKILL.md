@@ -198,7 +198,7 @@ ls -t data/gsc/snapshots/ | head -3
 cat data/gsc/LATEST.md
 
 # 進行中施策
-node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown
+node packages/ops/src/effect-verdict/scan-pending-improvements.mjs --format markdown
 
 # 効果測定済み施策・詳細ログ
 cat data/improvement/gsc-improvement/improvement-log.md
@@ -213,7 +213,7 @@ node .claude/scripts/gsc/analyze-ctr-seesaw.mjs --weekly            # 日次を�
 
 # 計測→review→候補判断→plan→月次集約の接続
 node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor
-node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs
+node --test .claude/scripts/lib/__tests__/audit-operations-cycle.test.mjs
 ```
 
 ## 実証チェックリスト（効果判定を確定してTODO行を削除する前に必須）

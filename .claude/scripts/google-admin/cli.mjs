@@ -18,8 +18,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { auditGa4Api, applyCreateCustomDimension, applyCreateKeyEvent, resolveApiPropertyId, adminEditClient, LEDGER_PATH } from "./audit-ga4-api.mjs";
-import { auditGscProperty, GSC_PROPERTY } from "./audit-gsc.mjs";
+import { auditGa4Api, applyCreateCustomDimension, applyCreateKeyEvent, resolveApiPropertyId, adminEditClient } from "../../../packages/ops/src/google-admin/audit-ga4-api.mjs";
+import { auditGscProperty, GSC_PROPERTY } from "../../../packages/ops/src/google-admin/audit-gsc.mjs";
 import {
   planCustomDimension,
   planKeyEvents,
@@ -29,10 +29,11 @@ import {
   decideScActions,
 } from "../../../packages/ops/src/google/apply-allowlisted-settings.mjs";
 import { parseDimensionLedger, LEDGER_STATUS_KINDS } from "../../../packages/ops/src/google/dimension-ledger.mjs";
-import { sanitizeObject } from "./redact.mjs";
+import { sanitizeObject } from "../../../packages/ops/src/google-admin/redact.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/google-admin");
+const LEDGER_PATH = path.join(PROJECT_ROOT, ".claude/rules/analytics-event-standards.md");
 const CONFIRM_SITE = "stats47.jp";
 
 function getArg(flag) {
@@ -139,7 +140,7 @@ function printApiAudit(audit) {
 // ── modes ─────────────────────────────────────────────────────────────────────
 
 async function runAuditApi() {
-  const audit = await auditGa4Api();
+  const audit = await auditGa4Api({ ledgerPath: LEDGER_PATH });
   printApiAudit(audit);
   // read-only 監査は「認証不良を green に隠さない」= 主要 assert が ok でなければ非 0 で終わる。
   const problems = identityBlockers(audit).map((b) => `${b.code}:${b.detail}`);
@@ -152,7 +153,7 @@ async function runAuditApi() {
 }
 
 async function runPlan() {
-  const audit = await auditGa4Api();
+  const audit = await auditGa4Api({ ledgerPath: LEDGER_PATH });
   printApiAudit(audit);
   const { plans, noops, blockers, token, idBlockers } = derivePlan(audit);
   console.log(`\n# plan (GA4 custom dimension / key event、1 承認 最大 ${MAX_ITEMS_PER_APPROVAL} 件)`);
@@ -176,7 +177,7 @@ async function runPlan() {
 }
 
 async function runApply(argv) {
-  const audit = await auditGa4Api();
+  const audit = await auditGa4Api({ ledgerPath: LEDGER_PATH });
   printApiAudit(audit);
   const { plans, blockers, token, idBlockers } = derivePlan(audit);
   console.log("\n# apply (GA4 custom dimension / key event)");
@@ -227,7 +228,7 @@ async function runApply(argv) {
 
 /** Playwright residual (GSC link / Library) の read-only 監査。 */
 async function runAuditUi() {
-  const { launchAdminContext, acquireLock, releaseLock } = await import("./browser-context.mjs");
+  const { launchAdminContext, acquireLock, releaseLock } = await import("../../../packages/ops/src/google-admin/browser-context.mjs");
   const ga4 = await import("./audit-ga4.mjs");
   const runId = `${Date.now().toString(36)}-${process.pid}`;
   const screenshotDir = path.join(`/tmp/stats47-google-admin-${runId}`, "screenshots");
@@ -267,7 +268,7 @@ async function runAuditUi() {
 
 /** Playwright residual の mutation (create-sc-link / publish-collection)。draft-first + 承認トークン。 */
 async function runApplyUi(argv) {
-  const { launchAdminContext, acquireLock, releaseLock } = await import("./browser-context.mjs");
+  const { launchAdminContext, acquireLock, releaseLock } = await import("../../../packages/ops/src/google-admin/browser-context.mjs");
   const ga4 = await import("./audit-ga4.mjs");
   const { applyCreateScLink, applyPublishScCollection } = await import("../../../packages/ops/src/google/apply-allowlisted-settings.mjs");
   const runId = `${Date.now().toString(36)}-${process.pid}`;
@@ -349,9 +350,9 @@ async function runApplyUi(argv) {
  */
 async function runLogin() {
   const { spawn } = await import("node:child_process");
-  const { PROFILE_DIR } = await import("./browser-context.mjs");
+  const { PROFILE_DIR } = await import("../../../packages/ops/src/google-admin/browser-context.mjs");
   const { runPreflight } = await import("../../../packages/ops/src/measurement/session-preflight.mjs");
-  const { gscSession, profileOpen, waitForProfileClosed } = await import("./login-wait.mjs");
+  const { gscSession, profileOpen, waitForProfileClosed } = await import("../../../packages/ops/src/google-admin/login-wait.mjs");
   const argv = process.argv.slice(3);
   const check = () => gscSession(runPreflight({ root: PROJECT_ROOT }));
   if (argv.includes("--if-expired")) {

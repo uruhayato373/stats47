@@ -70,7 +70,7 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
 
 page-data-batch が skip する `external` + `manual` の metric は、一次資料 (xlsx / PDF / 公開 HTML) ごとに専用の取得スクリプトが
 `.claude/scripts/data/` にあり、`.local/r2/app/stats/<key>/values.json` を書き出す (rank は値の降順・同値同順位で付く。
-共通部品は `.claude/scripts/data/lib/stats-values-writer.mjs`)。各 metric の `source.config.provenance.restore` が同じスクリプトを指す。
+共通部品は `packages/ops/src/data/lib/stats-values-writer.mjs`)。各 metric の `source.config.provenance.restore` が同じスクリプトを指す。
 書き出しはローカルだけで、本番 R2 への反映は上の「5. R2 へ push」(`diff-push-r2.ts`) を別に行う。
 provenance の規約は [`data-provenance-standards.md`](../../../rules/data-provenance-standards.md)。
 

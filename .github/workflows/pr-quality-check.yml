@@ -292,7 +292,7 @@ jobs:
         # 管理画面のページに生のカード・<table>・style などが増えていないか。部品は公開サイトと同じ @stats47/components。
         # 契約: .claude/rules/admin-ui.md
         run: |
-          node --test .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs
+          node --test packages/ops/src/admin-ui/__tests__/check-admin-ui-debt.test.mjs
           node .claude/scripts/admin-ui/check-admin-ui-debt.mjs
         continue-on-error: false
 
@@ -313,7 +313,7 @@ jobs:
         # docs/31 (note 記事の作業場) に git の追跡ファイルを置かない。本文・画像の正本は R2、
         # 所在は data/note/articles.json。契約: .claude/rules/note-image-assets.md
         run: |
-          node --test packages/ops/src/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
+          node --test packages/ops/src/note/__tests__/image-assets-audit.test.mjs .claude/scripts/lib/__tests__/image-assets-tools.test.mjs
           node .claude/scripts/note/audit-note-image-assets.mjs
           npm run note:assets:validate
           npm run note:assets:test
@@ -345,7 +345,7 @@ jobs:
         run: |
           git fetch --no-tags origin "$BASE_SHA" --depth=1
           node .claude/scripts/search-growth/check-keyword-state.mjs --base "$BASE_SHA"
-          node --test .claude/scripts/search-growth/__tests__/*.test.mjs
+          node --test packages/ops/src/search-growth/__tests__/*.test.mjs .claude/scripts/lib/__tests__/search-growth-compliance.test.mjs
 
       - name: 📦 Workspace Contract Guard
         # package entrypoint/exports、internal dependency、runtime循環、package-lock登録を検査。
@@ -525,13 +525,13 @@ jobs:
 
       - name: 🔄 GSC operations cycle contract
         # snapshot→review→候補判断→plan→月次集約の接続、JST週境界、coverage入力鮮度の退行を止める。
-        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs .claude/scripts/gsc/__tests__/coverage-source-freshness.test.mjs .claude/scripts/gsc/__tests__/coverage-probe.test.mjs packages/ops/src/metrics/__tests__/metrics-reader-ga4.test.mjs
+        run: node --test .claude/scripts/lib/__tests__/audit-operations-cycle.test.mjs packages/ops/src/gsc/__tests__/*.test.mjs packages/ops/src/gsc/__tests__/*.test.cjs packages/ops/src/metrics/__tests__/metrics-reader-ga4.test.mjs .claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs
         continue-on-error: false
 
       - name: 🔑 Google API client contract
         # 認証とクライアント生成は google-client.cjs だけが持ち、読み取りの POST は再試行・書き込みは 1 回だけ送る契約を固定する
         # (SCRIPT-GOOGLE-CLIENT-UNIFY-01)。共通クライアントへ置き換えた計測スクリプトの単体テストも同じ step で回す。
-        run: node --test packages/ops/src/google/__tests__/google-client.test.cjs .claude/scripts/gsc/__tests__/url-inspection-daily.test.cjs packages/ops/src/ads/__tests__/fetch-affiliate-ga4.test.cjs
+        run: node --test packages/ops/src/google/__tests__/google-client.test.cjs packages/ops/src/gsc/__tests__/url-inspection-daily.test.cjs packages/ops/src/ads/__tests__/fetch-affiliate-ga4.test.cjs
         continue-on-error: false
 
       - name: 🔁 Workflow Commit-back Contract Gate
@@ -647,7 +647,7 @@ jobs:
         run: |
           node packages/ops/src/blog/lint/__tests__/paren-number-lint.test.mjs
           node packages/ops/src/blog/lint/__tests__/stats-table-id-lint.test.mjs
-          node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
+          node --test .claude/scripts/lib/__tests__/critic-findings.test.mjs
           node --test packages/ops/src/blog/__tests__/audit-chart-provenance-cli.test.mjs
           node packages/ops/src/blog/lint/__tests__/article-factual-check.value.test.mjs
           node --test packages/ops/src/blog/lint/__tests__/article-factual-check.correlation.test.mjs
@@ -664,7 +664,7 @@ jobs:
           node --test packages/ops/src/blog/lib/__tests__/stale-data-years.test.mjs
           node --test packages/ops/src/blog/lib/__tests__/release-calendar.test.mjs
           node --test packages/ops/src/blog/lib/__tests__/refresh-chart-year.test.mjs
-          node --test .claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs
+          node --test .claude/scripts/lib/__tests__/ranking-year-label.test.mjs
           node --test packages/ops/src/ranking/__tests__/latest-partition.test.mjs .claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs
           node --test packages/svg-builder/src/lint/__tests__/svg-lint.scatter.test.mjs
           node --test packages/svg-builder/src/lint/__tests__/svg-lint.responsive-bar.test.mjs
@@ -687,7 +687,7 @@ jobs:
         #   - value-health  : 観測値が順位として成立するか (全県同値・県重複・47超)
         # ネットワーク・R2 には触れない (実データ照合は audit-ai-content.mjs が実行時に行う)。
         # 正典: .claude/rules/ranking-content-standards.md
-        run: node --test .claude/scripts/ai-content/__tests__/*.test.mjs
+        run: node --test packages/ops/src/ai-content/__tests__/*.test.mjs
         continue-on-error: false
 
       - name: 📈 AdSense Metrics Contract Guard
@@ -701,7 +701,7 @@ jobs:
       - name: 📐 PSI Collector Contract Guard
         # PSI batch に保存する DOM 規模 (dom_size) の抽出が Lighthouse の 2 形式で成立し、
         # 欠測を 0 と誤らないことを検証する。PSI API には触れない (実計測は日次 workflow)。
-        # 正典: .claude/scripts/psi/fetch-psi-audit.mjs
+        # 正典: packages/ops/src/psi/fetch-psi-audit.mjs
         run: npm run psi:test
         continue-on-error: false
 
@@ -818,7 +818,7 @@ jobs:
           # 広告在庫の vertical・実験・offer profile の整合 (R2 反映時にしか走っていなかった。2026-10-26)。
           # --validate-only は R2 に書かない。repository が server-only を読むので react-server condition が要る
           NODE_OPTIONS="--conditions react-server" npx tsx apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only
-          node --test .claude/scripts/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.cjs
+          node --test .claude/scripts/lib/__tests__/ad-traffic-block.test.mjs .claude/scripts/lib/__tests__/audit-affiliate-inventory-check-size.test.mjs packages/ops/src/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.cjs
         continue-on-error: false
 
       - name: 📋 Survey Portfolio State Guard

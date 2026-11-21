@@ -216,7 +216,7 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 文書配置: `.claude/rules/docs-vs-issues.md`
 - source vault 設定: `config/source-vault.json`
 - source vault CLI: `packages/ops/src/source-vault/source-vault.mjs`
-- OCR / page / crop / stage CLI: `.claude/scripts/source-vault/source-processing.mjs`
+- OCR / page / crop / stage CLI: `packages/ops/src/source-vault/source-processing.mjs`
 - 段階運用 skill: `.claude/skills/db/process-reference-source/SKILL.md` (`/process-reference-source`、owner `open-data-curator`)
 - evidence inventory CLI: `.claude/scripts/source-vault/source-inventory.mjs`
 - 実装例: `docs/02_実装計画/45_日本国勢図会一次資料化・マルチチャネル展開実装仕様.md`

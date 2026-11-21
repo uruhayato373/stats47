@@ -25,7 +25,7 @@
  * 全件走査で同じことを見る。ここは**記事が実際に引用する行**を見るので、正典が直る前でも
  * 執筆を止められる (allowlist で降格された既知の壊れも 1. で弾く)。
  * **判定を変えるときは shape-gate と合わせる。** 40 行未満の扱いだけ意図的に違う
- * (ここは reject・ai-content 側は warn。理由は .claude/scripts/ai-content/lib/value-health.mjs)。
+ * (ここは reject・ai-content 側は warn。理由は packages/ops/src/ai-content/lib/value-health.mjs)。
  *
  * ## 書く価値の判定 (2026-11-04)
  *

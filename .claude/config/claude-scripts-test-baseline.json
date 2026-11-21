@@ -9,10 +9,25 @@
     "model-usage"
   ],
   "harness": {
+    ".claude/scripts/backlog-loop/__tests__/backlog-loop-routine.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (CI の routine のプロンプトと振り分けの設定 .claude/config・書き込み先 .claude/memory を確かめる)",
+    ".claude/scripts/backlog-loop/__tests__/backlog-waits-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (待ちのタグの判定を todo-standards と文書の検査に揃える)",
+    ".claude/scripts/backlog-loop/__tests__/ledger-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (completion gate の証拠を書く実行台帳 .claude/state/backlog-loop/ledger.json の形)",
+    ".claude/scripts/backlog-loop/__tests__/local-runtime-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (手元で回すときの実行条件を規約 backlog-loop.md に揃える)",
+    ".claude/scripts/backlog-loop/__tests__/parse-backlog-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (.claude/todo/backlog.md のカードの読み取り)",
+    ".claude/scripts/backlog-loop/__tests__/queue-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (カードの選び方と振り分けの設定 .claude/config/backlog-routing-policy.json)",
+    ".claude/scripts/backlog-loop/__tests__/record-backlog-outcome.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (結果を実行台帳へ記録する CLI)",
+    ".claude/scripts/backlog-loop/__tests__/routing-policy-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (実行台帳とモデル利用量 .claude/state から振り分けの設定を更新する)",
+    ".claude/scripts/backlog-loop/__tests__/verify-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (行を消す前の completion gate。.claude/todo と実行台帳を読む)",
+    ".claude/scripts/lib/__tests__/ad-traffic-block.test.mjs": "広告の配置の撮影 (capture-ad-layout.ts) の自動閲覧の遮断を、.claude/scripts の撮影スクリプトの本文・apps/web の計装・workflow の文言から確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/admin-ci-contract.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/admin-read-guard.test.mjs": "ログインが要る管理画面を読む操作を止める hook (pre-browser-admin-read・pre-bash-safety) の判定を確かめるテスト",
+    ".claude/scripts/lib/__tests__/adsense-ad-unit-walk.test.mjs": "AdSense の広告ユニットの列挙を共有の部品だけが行うことを、.claude/scripts と packages/ops を走査して確かめるテスト",
     ".claude/scripts/lib/__tests__/affiliate-workflow-safety.test.mjs": "workflow の YAML の契約のテスト (広告の workflow が外部を変えないこと)",
     ".claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/audit-affiliate-inventory-check-size.test.mjs": "広告在庫の監査 CLI (.claude/scripts/ads/audit-affiliate-inventory.ts) を起動して、検査サイズの扱いを確かめる基盤のテスト",
+    ".claude/scripts/lib/__tests__/audit-operations-cycle.test.mjs": "GSC の運用の周期 (.claude/config/gsc-operations-cycle.json) と .claude/todo の週次・月次の計画の監査のテスト",
     ".claude/scripts/lib/__tests__/audit-workflow-policy.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/buzz-map-publish-policy.test.mjs": "buzz-map の公開が .claude/scripts/sns の CLI 本文 (prepare-buzz-map-batch.ts) で byte-exact 公開になっていることを確かめる",
     ".claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs": "エージェント運用・文書・リポジトリの規約の検査のテスト",
     ".claude/scripts/lib/__tests__/check-card-freshness.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/check-checker-wiring.test.cjs": "CI の検査の配線と範囲の契約のテスト",
@@ -45,18 +60,36 @@
     ".claude/scripts/lib/__tests__/ci-test-tiering.test.mjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/claude-scripts-consumer-contracts.test.mjs": ".claude/scripts の TS が packages の契約を守るかの検査のテスト",
     ".claude/scripts/lib/__tests__/content-generation-routine.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/cover-generation-guards.test.mjs": "note のカバーを作る .claude の CLI と skill のスクリプトが共有の部品を使うことを、本文から確かめるテスト",
+    ".claude/scripts/lib/__tests__/credential-store-contract.test.mjs": "認証情報の保管の契約 (.claude/scripts・scripts・packages・apps の全ファイルを走査) を確かめるテスト",
+    ".claude/scripts/lib/__tests__/critic-findings.test.mjs": "critic の指摘の型の台帳 (.claude/config/critic-finding-types.json) と規約から、繰り返す指摘を起票する仕組みのテスト",
     ".claude/scripts/lib/__tests__/critical-module-coverage-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
+    ".claude/scripts/lib/__tests__/cycle-health-wiring.test.mjs": "週次 Issue の「サイクルの健全性」の部品 (packages) に、.claude に残る backlog-waits-core の buildFlow と年カバレッジの CLI のコマンドを渡す配線を、実物で確かめるテスト",
     ".claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/dataset-registries.test.ts": "置き場の規則の検査のテスト (台帳の参照の読み方を check-datasets と突き合わせる)",
     ".claude/scripts/lib/__tests__/dependency-security-contract.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/dimension-ledger-rules.test.mjs": "規則の文書 (analytics-event-standards) の実物を GA4 の dimension の台帳として読めることのテスト",
+    ".claude/scripts/lib/__tests__/effect-verdict-wiring.test.mjs": "効果判定の週次ランナー・過去の効果の台帳 writer・triage-matrix を、.claude に残る入口から起動して確かめるテスト (入口が packages の本体へ再現コマンドのパスを渡す配線を含む)",
+    ".claude/scripts/lib/__tests__/geo-article-source-contract.test.ts": ".claude に残る Geo 記事の生成 CLI の本文から、図の出典の契約を読み出して確かめるテスト",
+    ".claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs": "GSC カバレッジの部品と、.claude に残る CLI・Python の取り込みの本文の配線を突き合わせる",
     ".claude/scripts/lib/__tests__/husky-worktree-hook.test.cjs": "Claude Code と git の hook のテスト",
+    ".claude/scripts/lib/__tests__/image-assets-tools.test.mjs": "note の画像の補完・取り込みの CLI (.claude/scripts/note/) を起動して確かめる基盤のテスト",
+    ".claude/scripts/lib/__tests__/iso-week-consistency.test.mjs": "週のラベルを作る関数 (packages の部品と、.claude に残る model-usage の usage-core) が JST の暦日で一致することを突き合わせるテスト",
+    ".claude/scripts/lib/__tests__/kdp-monthly-wiring.test.mjs": "KDP の月次の部品と、.claude に残る計測の CLI (marketplace-status・collect・restore・summarize) の本文と起動の配線を確かめるテスト",
+    ".claude/scripts/lib/__tests__/kdp-weekly-wiring.test.mjs": "KDP の週次の作業が週次レビュー・週次計画の skill と npm script に配線されていることを確かめるテスト",
     ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs": "agent の定義とスクリプトが最新年の選び方の部品を使うことの検査のテスト",
     ".claude/scripts/lib/__tests__/lib-tests-wiring.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/local-resources.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
+    ".claude/scripts/lib/__tests__/measurement-wiring.test.mjs": "measurement の部品と、.claude/scripts/measurement・note に残る CLI の本文 (bootstrap-session・collect-local・fetch-note-metrics) の配線を突き合わせる",
+    ".claude/scripts/lib/__tests__/measurement.test.mjs": "計測の基盤 (.claude/scripts/measurement の collect・summarize・vault・bootstrap) を起動するか本文を読んで確かめるテスト",
     ".claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/metric-release-order.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/move-script.test.mjs": "スクリプトを packages へ移す道具 (移行の基盤) のテスト",
+    ".claude/scripts/lib/__tests__/note-cli-wiring.test.mjs": "note の部品 (packages/ops/src/note) と .claude に残るシェル・CLI (editor-helpers.sh・update-note-covers.mjs) の本文の配線を確かめる基盤のテスト",
+    ".claude/scripts/lib/__tests__/note-materialize-cover.test.mjs": "表紙の復元の入口 (.claude/scripts/note/materialize-cover.mjs) を起動して確かめる基盤のテスト (入口が .claude に残る)",
+    ".claude/scripts/lib/__tests__/note-publishing-safety.test.mjs": "note の公開のシェル・CLI (publish-new-note.sh・editor-helpers.sh・launch-note-cdp.mjs など) の本文と、公開記録の commit スクリプトの挙動を確かめる基盤のテスト",
+    ".claude/scripts/lib/__tests__/open-data-workflow-wiring.test.mjs": "open-data の workflow (open-data-source-archive.yml) が .claude/scripts/open-data/normalize-ci.mjs の入口を起動することを確かめる",
+    ".claude/scripts/lib/__tests__/page-quality-agent-assets.test.mjs": "page-quality の入口が頼る .claude の実物 (手元の検査の既定の画面・週次 UI 確認のプロンプト) の契約のテスト",
     ".claude/scripts/lib/__tests__/pr-skip-ci-head-guard.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/pre-bash-safety-git-pipe.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/pre-bash-safety-release.test.cjs": "Claude Code と git の hook のテスト",
@@ -65,146 +98,44 @@
     ".claude/scripts/lib/__tests__/preflight-commit.test.mjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/prune-state-snapshots.test.mjs": "置き場の規則の検査のテスト (記録の寿命。fixture が .claude/state のパス)",
     ".claude/scripts/lib/__tests__/publish-blog-review-order.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/quality-gate.q-numbers.test.mjs": "ブログの品質ゲートの入口 (.claude/scripts/blog/quality-gate.mjs) の起動を確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/r2-key-classes-run-sh.test.ts": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/r2-overlay-server.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/ranking-scoped-workflow.test.mjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/ranking-year-label.test.mjs": "年度の指標の図の見出しを、.claude の CLI (fetch-ranking-data-r2.mjs) を偽の R2 に向けて起動して確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/record-claude-usage.test.mjs": "モデルの利用量の計測のテスト",
     ".claude/scripts/lib/__tests__/release-status.test.mjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/remove-worktree.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
+    ".claude/scripts/lib/__tests__/revenue-guards-wiring.test.mjs": "収益計測ガードを、.claude/config の閾値 SSOT (revenue-guards.json) と週次 Issue の生成器の本文の実物で確かめるテスト",
     ".claude/scripts/lib/__tests__/root-script-tools.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/scripts-checkjs-scope.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs": "CI の検査の配線と範囲の契約のテスト",
+    ".claude/scripts/lib/__tests__/search-growth-compliance.test.mjs": "Indexing API の送信 path が .claude/scripts の CLI の本文 (gsc/ の CLI と .claude/scripts 全体) に無いことを、本文を読んで確かめるテスト",
     ".claude/scripts/lib/__tests__/session-guard.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/setup-memory-symlink.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
-    ".claude/scripts/lib/__tests__/sns-posted-core.test.cjs": "橋渡し: main の workflow の定義が旧パスを名指しする間だけ置く。次の main へのリリースのあと消す (SCRIPTS-TO-PACKAGES-BRIDGE-01)",
+    ".claude/scripts/lib/__tests__/source-inventory.test.mjs": "参考文献の解決台帳の CLI が、書籍のページを skill と規約のパスへ対応づけることを確かめるテスト",
     ".claude/scripts/lib/__tests__/stop-docs-cache.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs": "モデルの利用量の計測のテスト",
     ".claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs": "スキルの run.sh と workflow の契約のテスト",
     ".claude/scripts/lib/__tests__/test-packages-ci.test.mjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/theme-ledger-paths.test.mjs": "置き場の規則の検査のテスト (テーマの台帳を datasetPath で引くことを、.claude/scripts と packages を走査して確かめる)",
     ".claude/scripts/lib/__tests__/theme-weekly-workflow.test.mjs": "workflow の YAML の契約のテスト (quality-suite-weekly の theme の job の step を実行して確かめる)",
-    ".claude/scripts/lib/__tests__/threads-core.test.cjs": "橋渡し: main の workflow の定義が旧パスを名指しする間だけ置く。次の main へのリリースのあと消す (SCRIPTS-TO-PACKAGES-BRIDGE-01)",
+    ".claude/scripts/lib/__tests__/validate-survey-portfolio.test.mjs": "調査ポートフォリオの検証 CLI (.claude/scripts/surveys/validate-survey-portfolio.ts) を起動して出力を確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/workflow-commit-back.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/workflow-health-core.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/workflow-node-version.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
-    ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs": "規則の文言が台帳の id を指すことの検査のテスト"
+    ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs": "規則の文言が台帳の id を指すことの検査のテスト",
+    ".claude/scripts/management/__tests__/review-cadence.test.mjs": "週次・月次・年次のレビューの配線 (.claude/config/review-wiring.json) と .claude/todo・backlog-loop の台帳を確かめるテスト",
+    ".claude/scripts/management/__tests__/weekly-audits.test.mjs": "週次の監査が .claude/todo/backlog.md へ起票する仕組みのテスト",
+    ".claude/scripts/model-usage/__tests__/model-usage.test.mjs": "agent のモデルと effort の利用量の集計と canary のテスト (.claude/agents・.claude/state/metrics を読む)",
+    ".claude/scripts/lib/__tests__/page-quality-local-wiring.test.mjs": "代表ページ計測の入口 (.claude/scripts/page-quality/run-representative.ts) の本文を、packages の計測の部品と突き合わせるテスト (ローカル検証の本体は apps/web/scripts/lib/__tests__/local-verification.test.mjs)",
+    ".claude/scripts/lib/__tests__/client-graph-audit-wiring.test.mjs": "client-graph の検査を .claude の入口から起動し、baseline のパス (.claude/config/client-graph-baseline.json) が渡ることを確かめるテスト (本体の判定は packages/ops/src/audit/__tests__)",
+    ".claude/scripts/lib/__tests__/generate-article-charts-ranks.test.mjs": "記事の図の生成 CLI (.claude/scripts/blog/generate-article-charts.ts) を起動する結合テスト"
   },
   "domains": {
-    "admin-ui": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "ads": {
-      "count": 4,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "ai-content": {
-      "count": 6,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "analysis": {
-      "count": 6,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "audit": {
-      "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "backlog-loop": {
-      "count": 9,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "blog": {
-      "count": 5,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "content-types": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "data": {
-      "count": 3,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "google-admin": {
-      "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "gsc": {
-      "count": 9,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "issues": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "kdp": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "lib": {
-      "count": 5,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "management": {
-      "count": 3,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "measurement": {
-      "count": 7,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "metrics": {
-      "count": 7,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "model-usage": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "note": {
-      "count": 16,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "open-data": {
-      "count": 9,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "page-quality": {
-      "count": 10,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "products": {
-      "count": 5,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "provenance": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "psi": {
-      "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
     "search-growth": {
-      "count": 9,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "sns": {
-      "count": 6,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "source-vault": {
-      "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "surveys": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "themes": {
       "count": 1,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     }

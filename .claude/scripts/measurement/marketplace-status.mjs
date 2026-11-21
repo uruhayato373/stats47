@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { measurementContext, markMeasurementAuthenticated } from '../../../packages/ops/src/measurement/browser-session.mjs';
 import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { collectKdpReport, openKdpReports } from '../../../packages/ops/src/measurement/kdp-reports.mjs';
-import { collectKdpMonthlyReport } from './kdp-monthly-reports.mjs';
+import { collectKdpMonthlyReport } from '../../../packages/ops/src/measurement/kdp-monthly-reports.mjs';
 import { KDP_LISTINGS } from '../../../config/paths.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');

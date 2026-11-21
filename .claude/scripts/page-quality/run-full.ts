@@ -18,18 +18,18 @@
  *   1 = error違反あり
  *   2 = 入力不備・実行時エラー
  */
-import { auditUrl } from "./lib/audit-url";
+import { auditUrl } from "../../../packages/ops/src/page-quality/lib/audit-url";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { checkImages } from "./lib/check-images";
-import { checkSvgText } from "./lib/check-svg-text";
-import { createScreenshotSession, responsiveFindings, SCREENSHOT_PREFIX } from "./lib/screenshots";
-import { applyTitleChanges, buildReviewInput, newUiViolations } from "./lib/ui-report";
+import { checkImages } from "../../../packages/ops/src/page-quality/lib/check-images";
+import { checkSvgText } from "../../../packages/ops/src/page-quality/lib/check-svg-text";
+import { createScreenshotSession, responsiveFindings, SCREENSHOT_PREFIX } from "../../../packages/ops/src/page-quality/lib/screenshots";
+import { applyTitleChanges, buildReviewInput, newUiViolations } from "../../../packages/ops/src/page-quality/lib/ui-report";
 import { browserPages, reviewPageKeys, type BrowserPage } from "../../../packages/ops/src/page-quality/templates";
-import { createBrowserMeasurementSession } from "./lib/measure-browser";
+import { createBrowserMeasurementSession } from "../../../packages/ops/src/page-quality/lib/measure-browser";
 import { currentCommitSha } from "../../../packages/ops/src/page-quality/lib/git-diff";
-import { enumerateAllUrls } from "./lib/enumerate-urls";
+import { enumerateAllUrls } from "../../../packages/ops/src/page-quality/lib/enumerate-urls";
 import { evaluateAll, loadBudgets } from "../../../packages/ops/src/page-quality/lib/thresholds";
 import {
   appendWeeklySummary,
@@ -38,7 +38,7 @@ import {
   readPreviousValue,
   writeFullState,
   writeLatestMarkdown,
-} from "./lib/storage";
+} from "../../../packages/ops/src/page-quality/lib/storage";
 import type { AuditRun, MetricKey, PageAuditResult } from "../../../packages/ops/src/page-quality/types";
 
 function parseArgs() {

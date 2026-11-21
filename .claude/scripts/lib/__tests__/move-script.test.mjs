@@ -102,3 +102,19 @@ test("run: の中のシェルのコメント行は名指しと数えない", () 
   assert.match(text, /real\.mjs/);
   assert.doesNotMatch(text, /commented\.mjs/);
 });
+
+test("相対パスに式を埋めたテンプレート文字列は、付け替えないので人が確かめる行に出す", () => {
+  const text = [
+    "const a = JSON.parse(readFileSync(new URL(`../../../../${datasetPath(\"areas.prefectures\")}`, import.meta.url)));",
+    "const b = `${name}/../x`;",
+    "const c = `../fixtures/${name}`;",
+  ].join("\n");
+  assert.deepEqual(reviewLines(text).map((line) => Number(line.split(":")[0])), [1, 3]);
+});
+
+test("checkout の ref が式の中で develop を指す workflow も見る (ai-content-gemini-daily の形)", () => {
+  const wf = "on:\n  schedule:\n    - cron: '15 22 * * *'\njobs:\n  a:\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ inputs.verify_only && github.ref_name || 'develop' }}\n      - run: node .claude/scripts/x/expr.mjs";
+  assert.match(mainDefinitionJobsText([wf]), /expr\.mjs/);
+  const mainRef = wf.replace("'develop'", "'main'");
+  assert.equal(mainDefinitionJobsText([mainRef]), "");
+});

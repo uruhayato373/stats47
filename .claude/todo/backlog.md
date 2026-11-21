@@ -118,39 +118,51 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UI-FIX-SURVEY-POLICE-20261121] UI 是正: survey--police の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt] [起票:2026-11-21] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey--police-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey--police-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|survey--police` (Claude の確認)
+    - [mobile-390/low] スマホ 1 枚目、見出し直下の「出典・指標の定義」ボタン左のアイコン: アイコンの左上に黒い丸が重なっており、通知バッジのように見えて意図が分からない。 → 黒い点の重なりが意図したものか確認し、不要なら取り除くか、バッジなら意味が分かる表示にする。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`packages/ops/src/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121] UI 是正: geo-analysis--analysis-pref の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt] [起票:2026-11-21] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-pref-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-pref-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **対象**:
+  - `agent|geo-analysis--analysis-pref` (Claude の確認)
+    - [mobile-390/medium] スマホ 1 枚目、タイトル下のメタ行「データ生成 2026/09/05 ・ coverage 47/47 ・ 47都道府県 ・ 2020-2050 ・ %」: 「coverage 47/47」という英語の運用用語と、単位だけの「%」が読者向けの説明なしに並んでいる。何の % か、coverage が何を数えているかが画面から分からない。 → 「coverage 47/47」は「47 都道府県すべて対応」のように日本語で言い換え、「%」は「単位: %(人口割合)」など何の値かが分かる形にする。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`packages/ops/src/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
 ### [SCRIPTS-TO-PACKAGES-01] パッケージのスクリプトが .claude/scripts の道具を呼ぶ 12 ファイルを片付ける
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-boundary.mjs] [起票:2026-11-19] [領域:サイト]
 
 - **済み**: アプリと packages が読む `.claude/scripts` の部品 69 を packages へ移した (2026-11-19 リリース・PR #1288)。管理画面が実行時に読んでいた `strategy-lanes.cjs` も `packages/ops/src/management/` へ移し、境界の基準からその行を消した (同日・develop)。
-- **次**: 基準 `.claude/config/claude-boundary-baseline.json` の理由が「減らす対象」の 12 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/product-factory/src/channels/note/build/build-revision.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。記事の lint・e-Stat の API 層・Google 接続は SCRIPTS-TO-PACKAGES-02 で packages/ops へ移したので、それを呼んでいた行は import を書き換えるだけで消せるものがある。
+- **次**: 基準 `.claude/config/claude-boundary-baseline.json` の理由が「減らす対象」の 11 ファイル (`packages/ai-content/src/scripts/{generate-blog-article,generate-parallel,write-blog-batch,write-blog-headless}.ts`・`packages/data-configs/scripts/{build-estat-availability,validate-business-plan}.ts`・`evidence/japan-zue.ts`・`packages/r2-storage/src/scripts/r2-key-classes.ts`・`packages/r2-storage/vitest.config.mts`・`packages/ranking/src/scripts/audit-survey-taxonomy.ts`・`apps/web/scripts/export-yoy-timeseries.ts`)。呼ぶ側を `.claude/scripts` へ移すか、呼ばれる道具を packages へ移す。記事の lint・e-Stat の API 層・Google 接続は SCRIPTS-TO-PACKAGES-02 で packages/ops へ移したので、それを呼んでいた行は import を書き換えるだけで消せるものがある。
 - **停止条件**: 移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
-### [SCRIPTS-TO-PACKAGES-BRIDGE-01] 次の main へのリリースのあと、旧パスの橋渡し 4 ファイルを消す
-タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
-
-- **起点 (2026-11-19)**: 定期実行の workflow は main の定義で動き、中で develop のコードを使う。SCRIPTS-TO-PACKAGES-02 で移したファイルのうち 3 つを main の workflow の定義が旧パスで名指ししていたので、旧パスに 1 行の橋渡しを置いた: `.claude/scripts/lib/__tests__/sns-posted-core.test.cjs` (`sns-verify-threads-posted.yml`・毎日 23:50 JST)、`.claude/scripts/lib/__tests__/threads-core.test.cjs` (`post-threads-scheduled.yml`)、`.claude/scripts/lib/chart-provenance.mjs` (`regenerate-blog-svgs.yml` のインラインの import)。2026-11-20 に `.claude/scripts/blog/lib/source-repair-core.mjs` (同じ `regenerate-blog-svgs.yml` のインラインの import) を足した。移動の道具の止め (`blockedByMainWorkflows`) は、main の定義で動き (schedule・手動・workflow_run) 中で develop を checkout する workflow の jobs だけを見る (2026-11-20。PR の検査と起動の条件の `paths:` は旧パスでも壊れない)。
-- **次**: develop → main のリリースが済んだら、`git grep -n "<上の 4 つのパス>" origin/main -- .github/workflows` が 0 件であることを確かめ、4 ファイルと、基準 `.claude/config/claude-scripts-test-baseline.json` の `harness` の 2 行と、`package.json` の `test:claude-lib-contracts` の 2 つの名前を消す。
-- **完了条件**: 4 ファイルが無く、`node .claude/scripts/lib/check-claude-scripts-tests.mjs` と `lib-tests-wiring` が通る。
-- **関連の既存の壊れた参照 (同じ形の穴。今回の移動とは別)**: main と develop の `blog-data-source-migration.yml` が `.claude/scripts/blog/data/display-sources-backfill.js` を名指しするが、ファイルが無い (2026-11-19 確認)。workflow を消すか、パスを直す。
-
-### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテスト 286 本を、対象のロジックごと packages へ移す
+### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテストを、対象のロジックごと packages へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19 オーナー判断「テストは基本的に .claude に置かない」)**: テストが要るロジックは packages に置く決まり (`.claude/rules/skill-code-placement.md`「テストは `.claude` に置かない」) と、領域ごとのテスト数の縮小専用の基準 `.claude/config/claude-scripts-test-baseline.json`。
-- **済み (2026-11-19・第 1 回と第 2 回)**: `lib` を 132 → 5 本にした。基盤のテスト 75 本は基準の `harness` に登録済み。SNS の台帳・e-Stat・記事の lint とブログの品質ゲート・Google 接続・state の同期・製品の品質ゲートの検査 10 本・Cloudflare・効果判定のエンジン・`strategy-lanes` を `packages/ops/src/` へ移した。CLI は元のパスに本体の `main` を呼ぶ薄い入口を残している。
-- **次 ① (`lib` の残り 5 本)**: `write-past-effects` と `effect-verdict-cli` (`cli.mjs`・`scan-pending-improvements`・`triage-matrix`・`write-past-effects` を起動する。`write-past-effects` が `search-growth/lib` の部品を読むので search-growth の領域と一緒に動かす)、`chart-recurrence-guards` (`blog` の 4 スクリプトと workflow の手順の順番を同時に確かめている。分けてから移す)、`revenue-guards` (本体が `metrics` にあり `.claude/config/revenue-guards.json` の実物を読む)、`quality-gate.q-numbers` (fixture に `.claude/scripts/blog/` のパスを使う 1 ケースだけ残した)。
-- **次 ②**: workflow からの参照が多い領域から進める (`page-quality` 10・`backlog-loop` 9・`gsc` 9・`open-data` 9・`search-growth` 9)。`measurement` は 2026-11-20 に、KDP のセッションの部品と ads のブラウザの部品と一緒に移した (本体 21・テスト 11。measurement 10 → 7・ads 6 → 4・kdp 7 → 1)。認証の設定 `.claude/config/auth-credentials.json` は、置き場の台帳の id `agent.auth-credentials` で引く形に替え、境界の基準から `credential-store.mjs` の行が消えた。残る measurement の 7 本は、計測の CLI の本文を読む・`.claude` の hook と設定を読む・`.claude/scripts` を走査するもの。ads の残り 4 本は `affiliate-apply-args` (`.claude` に残る `affiliate-ops.mjs` を起動する CLI) とアプリのデータを読む 2 本と Chromium の 1 本。土曜の計測 (`npm run weekly:collect`) とログインの更新は、移した CLI を新しいパスで起動する (CI では確かめられない。次の土曜に確かめる)。`blog` は 2026-11-20 に 17 → 5 本にした (本体 11・テスト 12 を `packages/ops/src/blog/` へ。`archive-blog-articles`・`audit-chart-provenance` は元のパスに入口、`lib/source-repair-core` は橋渡し。記事の品質ゲートを起動する 2 本は、起動先を入口から本体へ替えた。新設の `blog:test` を PR の検査で走らせる)。残る 5 本: `apps/admin` を import する `audit-chart-axes`、起動する CLI が `apps/admin`・`apps/remotion` を import する `generate-article-charts-ranks`、`.claude/config/critic-finding-types.json` と規則の文書を読む `critic-findings`、`.claude` に残る記事生成 CLI の本文を読む `geo-article-source-contract`、`.claude` に残る `fetch-ranking-data-r2.mjs` を起動する `ranking-year-label` (本体は packages へ移した)。`apps/admin` のチャートの部品を packages へ出すかの判断が、blog の 2 本と note の `build-ranking-type-images` の共通の前提。`sns` は 2026-11-20 に 22 → 6 本にした (本体 16・テスト 16 を `packages/ops/src/sns/` へ。共用の `lib/sns-utm.cjs` も移し、境界の基準から `japan-zue.ts` の行が消えた)。残る 6 本: Remotion のコード (`apps/remotion/src/features/data-cards/`) を import する 3 本 (`all47-svg`・`data-card-input`・`tile-change`。Remotion の部品を packages へ出すかの判断が要る)、アプリのディレクトリを走査する `buzz-map-inventory-core`、残る CLI の本文を読む `buzz-map-publish-policy`、出力に規則の文書のパスを書く `sns-image-review`。`lib/__tests__/` の 6 本は移す前はどこからも走っていなかったので、`sns:test` に載せた。`metrics` は 2026-11-20 に 22 → 7 本にした (本体 20・テスト 16。共用の `google-admin/dimension-ledger`・`google-admin/apply-allowlisted-settings`・`lib/metrics-reader` は `packages/ops/src/{google,metrics}/`、`measurement/report-parsers` は `packages/ops/src/measurement/` へ。規則の文書の実物を読む検査は基盤のテスト `dimension-ledger-rules` に分けた)。残る 7 本: アプリの広告の定数を読む 2 本 (`adsense-week-range`・`code-ad-slots`)、`.claude/scripts` を走査する `adsense-ad-unit-walk`、`.claude/todo` を読む `cycle-health`、lib の残り (`scan-pending-improvements`・効果判定の CLI) を読む 2 本、ほかの領域の使い方を突き合わせる `periods`。`note` は 2026-11-20 に 36 → 16 本にした (本体 29・テスト 23 を `packages/ops/src/note/` へ。共用の `svg-to-png.cjs` は `packages/ops/src/media/`、`link-card-ledger` とそのテストは `packages/ops/src/ogp/` へ。`build-note-figure-ledger` と `ensure-note-images` は元のパスに入口を残し、基準と起動する CLI のパスを環境変数で渡す)。残る 16 本の内訳: アプリのファイルを読む 9 本 (商品データ `storefront.generated.ts` を読む 6 本・`apps/admin` を import する `build-ranking-type-images` の 1 本・`apps/web/.env.development` を読む reference の 2 本)、`.claude` に残る CLI を起動・読み込みするテスト 6 本 (`attachment-dom`・`cover-update`・`image-assets-tools`・`materialize-cover`・`publishing-safety`・`cover-generation-guards`。CLI ごと移すときに一緒に移す)、ブログの取得 CLI を起動する `kakei-note-evidence`。`build-ranking-type-images.ts` と `pop-cover-render.ts` は `apps/admin/lib` を import するので、admin の部品を packages へ出すかを決めてから移す。`ads` は 2026-11-20 に 37 → 6 本にした (本体 29・テスト 30 を `packages/ops/src/ads/` へ。設定 JSON 2 つは `config/` へ。workflow の契約のテスト 1 本は `harness`)。残る 6 本は、計測用ブラウザの部品 `.claude/scripts/measurement/browser-session.mjs` を読む 3 本 (`a8-period-browser`・`affiliate-apply-args`・`asp-browser-base`)、アプリのデータを読む CLI を起動・import する 2 本 (`audit-affiliate-inventory-check-size`・`placement-map-core`)、Chromium を入れる CI の job でだけ通る `ad-traffic-block` (`packages/ops` のテストを走らせる job は Chromium を入れない)。前の 3 本は measurement の領域を移すときに一緒に扱う。`themes` は 2026-11-19 に本体 47・テスト 42 を移し、基盤のテスト 2 本を `harness` に登録した (残りは `check-theme-review` の 1 本。証拠として認めるパスの一覧に `.claude` を持つ)。
-- **次 ③ (themes の残り)**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラーが 76 件 (28 ファイル。取り込みの CLI の大半・`selection-backfill-core`・`theme-quality-state`・`lib/tsunami-*`) 出る。移す前も型検査の範囲外だったので足していない。JSDoc の型注釈で直して範囲に入れる (挙動は変えない)。取り込みの CLI のうち `ingest-bridge-inspection-age.mjs:33` と `ingest-shelter-applicability.mjs:38` は ROOT を `process.cwd()` で決めていて、リポジトリ直下以外から起動すると読む場所がずれる (ほかの 4 本は移すときにファイルの位置から求める形に直した)。
-- **進め方 (2 回で固まった型)**:
-  - 妨げは構文木で数える (`.claude` を含む文字列の数)。Explore で調べない。
-  - 移動は `npm run claude:scripts:move -- <表.json> --apply`。`git mv`・相対パスの読み・旧パスの言及を機械的に付け替え、判断が要る行だけを一覧に出す。移したあと `node .claude/scripts/lib/check-claude-scripts-tests.mjs --shrink`。
-  - `.claude/config` の基準を読む検査は、基準の場所を入口が環境変数で渡す。予算と作業カードは置き場の台帳の id で引く。`.claude` という文字列を組み立てて境界の検査を避けない (比較元の旧パスが要るときは git の改名の記録から引く)。
-  - 確かめる対象そのものが `.claude` の中身のテスト (置き場の規則・スクリプトの契約・スキルの run.sh) は移さず `harness` に登録する。一部だけが `.claude` を確かめるテストは、その部分を小さな基盤のテストに分ける。
-  - 合否は移す前後の出力の一致で決める (品質ゲートは記事 122 ケース、検査は品質ゲートの台帳の command)。
-  - `node:test` のテストを vitest の project を持つパッケージへ移すときは、その vitest が拾わないことを確かめる (`packages/ops` には無い)。移す前から JS の型検査の外だったファイルは、型エラーを直すまで ops の `tsconfig.checkjs.json` に足さない。
-- **分業の実績 (Sonnet。トークン / 所要 / 移した本体とテスト)**: 第 1 回は道具なしで medium 15.1 万 / 3.2 分 / 14+8、high 16.1 万 / 8.0 分 / 14+13、medium 15.8 万 / 3.5 分 / 8+5、加えて調査の Explore 3 本で 35.4 万。第 2 回は道具ありで medium 20.5 万 / 10.5 分 / 15+19、medium 14.7 万 / 12.1 分 / 5+6 (記事 122 ケースの比較を含む)、high 15.7 万 / 4.5 分 / 6+テストの分割、調査は構文木のスクリプトだけ。第 4 回 (ads) は medium 14.1 万 / 4.1 分 / 29+30 (品質ゲートの 5 コマンドの比較を含む)。第 5 回 (note) は medium 17.6 万 / 13.1 分 / 29+23 (4 コマンドの比較を含む)。第 6 回 (metrics) は medium 14.5 万 / 5.1 分 / 20+16。第 7 回 (sns) は medium 12.3 万 / 3.7 分 / 17+16。第 8 回 (blog) は medium 15.9 万 / 6.3 分 / 11+12。第 9 回 (measurement・kdp・ads のブラウザ) は medium 14.3 万 / 5.9 分 / 21+11。領域をまたぐ移動表は、テストの閉包を `.claude/scripts` 全体で辿って作った。閉包の調べは、アプリ全体 (`apps/remotion` を含む) と `.claude` のほかの領域まで見る形に広げた。この回は作業側の「preflight の失敗は基準の縮小だけ」という報告が事実と違った (境界の検査の失敗を見落とした) ので、統合側は境界の検査と preflight を自分で 1 回走らせてから commit する。移したテストは root の npm script か workflow で名指ししないと `check-workspace-contract` が落ちるので、依頼書に書く。判断が要るのは入口の切り分けとテストの分割で、型どおりの移動は medium で足りる。
-- **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む決まりを守る。テストだけを packages へ移さない。
+- **起点**: 2026-11-19 オーナー判断「テストは基本的に .claude に置かない」(`.claude/rules/skill-code-placement.md`)。基準は `.claude/config/claude-scripts-test-baseline.json` (縮小専用)。
+- **現在地 (2026-11-21)**: ①〜⑧ は済み。数える対象は 1 本だけで、`.claude/scripts/search-growth/__tests__/keyword-cycle.test.mjs` の橋渡し (新しいテストを読み込む 1 行) が残る。main の `seo-keyword-cycle-daily.yml` がこのパスを起動するので、**次のリリースの後で消す** (消すと基準の `domains` が空になり完了)。基盤の `harness` は 127 本。アプリの部品を試すテストは `apps/{admin,remotion,web}/scripts/__tests__` (web は `scripts/lib/__tests__`) に置き、`node:test` なので各アプリの vitest の対象から外している。`apps/` のパスは packages に置いてよい慣習 (呼ぶ側から渡すのは `.claude` のパスだけ)。
+- **道具の注意**: `claude:scripts:move` は、テストの中の fixture の文字列 (`'../../../../packages/x'` のように、移した先で実在するパスに偶然当たるもの) を相対 import と取り違えて書き換える。`--apply` の後は、移したテストの差分を `git diff -M` で読んで戻す。
+- **themes の型**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラー 76 件。JSDoc で直して範囲に入れる。`ingest-bridge-inspection-age.mjs:33`・`ingest-shelter-applicability.mjs:38` の ROOT を `process.cwd()` からファイルの位置へ直す。
+- **進め方**: 閉包はアプリ全体と `.claude` まで構文木で調べる。移動は `npm run claude:scripts:move -- <表.json> --apply`、あと `check-claude-scripts-tests.mjs --shrink`。`.claude/config` の基準は入口から環境変数で渡すか置き場の台帳の id で引く。`.claude` の中身そのものを確かめるテストは `harness` へ。合否は移す前後の出力の一致で決める。移したテストは root の npm script か workflow で名指しする (`check-workspace-contract`)。作業は Sonnet / medium 1 本 (各回 12〜18 万トークン) で足り、統合側が境界の検査・`pre-commit-guard-paths`・`preflight:pr` を自分で走らせてから commit する。
+- **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む。テストだけを packages へ移さない。
 - **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
 
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
@@ -466,15 +478,14 @@ updated: 2026-11-01
 - **次**: 目標を続けるか閉じるかをオーナーが決める。続けるなら baseline を `data/psi/` の現在の計測で取り直し、閉じるなら `close_reason` を書く。
 - **完了条件**: status と実態が一致し、存在しないパスへの参照が無い。
 
-### [RELEASE-SQUASH-SKIP-TOKEN-01] develop→main の squash マージ本文に取り込んだコミットの skip-ci 系トークンが入り、本番デプロイが起動しない
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理]
+### [RELEASE-SQUASH-SKIP-TOKEN-01] 見張りの workflow が起動した本番デプロイのあとに、Post-Deploy Smoke が走らない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理] [待ち:承認]
 
-- **済み (2026-11-14・f19b619c0)**: `pr-skip-ci-head-guard.yml` の job `deploy-after-skip-ci-merge` が、main 向け PR のマージを `pull_request_target` (closed) で受け、マージコミットの本文に CI を飛ばす指定があるときだけ `deploy-workers.yml` を `workflow_dispatch` で main に起動する。契約テスト `pr-skip-ci-head-guard.test.cjs` と規約 `branch-workflow.md` の段落を足した。
-- **残り**: この job は main の定義で動くので、このコミットが main に入った後の develop→main のマージから効く。CI の記録コミットを含む次の squash マージの後に `gh run list --workflow deploy-workers.yml --branch main --limit 3` を実行し、event が `workflow_dispatch` のデプロイの run が自動で作られたことを確かめる。作られていなければ `gh run list --workflow pr-skip-ci-head-guard.yml --limit 5` で見張り役の run の有無と job のログを読み、`gh workflow run deploy-workers.yml --ref main` で手で起動する。
-- **止まっている理由**: 本番 (main) へのマージが要り、オーナーの指示なしには行えない。観測は次の release のマージを待つ。
-- **残り (追補・2026-11-14)**: 足した job が起動し直すのはデプロイだけで、main への push で動く `security-scan.yml`・`cache-node-modules.yml`・`correlation-refresh.yml` は起動し直さない。`workflow_dispatch` で起動したデプロイは `github.event.before` が空なので、`deploy-workers.yml` の範囲の判定を通らず必ずデプロイし、smoke test の DIFF_BASE も空になって、そのマージで足した ranking キーが検査の対象に入らない。見張り役の正規表現と `check-commit-message.cjs` は、GitHub の公式ページ (Skipping workflow runs、2026-11-14 取得) が挙げる skip-checks の trailer を見ていない。`docs/01_技術設計/06_自動化インベントリ.md` に `pr-skip-ci-head-guard.yml` が載っていない。
-- **完了条件**: 本文に CI を飛ばす指定を含むマージコミットが main に入った後、手で起動せずに `deploy-workers.yml` の run が作られたことを run の URL で示し、`branch-workflow.md` の該当段落の「実際のマージでの起動はまだ観測していない」を観測した日付と PR 番号に書き換える。
-
+- **済み**: squash のマージの本文に skip 指定が入ったときに `pr-skip-ci-head-guard.yml` の `deploy-after-skip-ci-merge` が `deploy-workers.yml` を起動する手当ては、2026-11-20 の PR #1289 のマージ (本文に skip 指定 36 個) で手を触れずに動いた (マージの 12 秒後に run 44671168001、成功)。
+- **残り (2026-11-20 観測)**: この手当てで起動したデプロイ (11-18 の 44298526417・11-19 の 44481255904・11-20 の 44671168001。どれも `triggering_actor` が `github-actions[bot]`) のあと、`post-deploy-smoke.yml` の `workflow_run` が 1 回も作られていない (最後の自動の run は 11-14)。[仮説] GITHUB_TOKEN が起こしたイベントは `workflow_dispatch`・`repository_dispatch` 以外で新しい run を作らない (https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)。デプロイの完了が `workflow_run` を起こさない。
+- **影響**: 11-14 から Post-Deploy Smoke が自動で走らず、11-14 の変更で古くなったテストの期待 (Kindle の商品ページの見出し) にも 6 日気づかなかった (テストは 2026-11-20 に develop で直した。main へは次のリリースで入る。Issue #1273 はそのあとの Post-Deploy Smoke の成功で閉じる)。
+- **次 (2026-11-20 develop に入れた)**: `deploy-workers.yml` に job `post-deploy-smoke` を足した。見張りが起動したとき (`workflow_dispatch` かつ `github.actor == 'github-actions[bot]'`) だけ、デプロイの成功後に `post-deploy-smoke.yml` を main で `workflow_dispatch` で起動する。契約テストは `pr-skip-ci-head-guard.test.cjs`。main の定義で動くので、効くのは main に入ったあとの次の見張りの起動から。
+- **完了条件**: 見張りが起動したデプロイのあとに Post-Deploy Smoke の run が作られたことを run の URL で示す。
 ### [PRODUCT-ANALYSIS-WIRING-01] 商品分析の調査候補を一次資料と実データで検証し、改訂案へ追加する
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-12] [領域:商品]
 

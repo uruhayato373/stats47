@@ -16,7 +16,7 @@
  * - 日別行の欠損は 0 補完しない。assessDailyCoverage が partial/missing と欠損日を返す。
  *
  * このファイルは純粋 (Node built-ins のみ・now は注入可能)。テスト:
- * .claude/scripts/metrics/__tests__/periods.test.mjs
+ * packages/ops/src/metrics/__tests__/periods.test.mjs
  */
 
 /**

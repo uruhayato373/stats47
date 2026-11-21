@@ -93,7 +93,9 @@ export function reviewLines(text) {
     // 点と斜線だけの文字列 ("..", "../../..") は ROOT を求める式の一部。複数行に分かれていても出す
     const root = /["'`](?:\.\.?\/?)+["'`]/.test(line);
     const claude = /["'`][^"'`]*\.claude(?:[/"'`]|$)/.test(line);
-    return root || claude ? [`${index + 1}: ${line.trim().slice(0, 140)}`] : [];
+    // 相対パスに式を埋めたテンプレート文字列 (`../../${datasetPath(id)}`) は道具が付け替えないので、人が確かめる
+    const template = /`(?:\.\.?\/)+[^`]*\$\{/.test(line);
+    return root || claude || template ? [`${index + 1}: ${line.trim().slice(0, 140)}`] : [];
   });
 }
 
@@ -137,7 +139,7 @@ export function mainDefinitionJobsText(texts) {
     const triggers = typeof on === "string" ? [on] : Array.isArray(on) ? on : Object.keys(on ?? {});
     // シェルのコメント行 (run: の中の "# ...") は実行しないので見ない (2026-11-20。blog-auto-publish がコメントで部品を名指しする)
     const jobs = yaml.dump(doc?.jobs ?? {}, { lineWidth: -1 }).split("\n").filter((line) => !/^\s*#/.test(line)).join("\n");
-    return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*['"]?develop\b/.test(jobs) ? [jobs] : [];
+    return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*(?:['"]?develop\b|\$\{\{[^}\n]*['"]develop['"])/.test(jobs) ? [jobs] : [];
   }).join("\n");
 }
 

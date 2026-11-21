@@ -15,7 +15,7 @@ import { datasetPath } from "../../../config/datasets.mjs";
 import { findLedgerArticle, updateArticleLedger, readArticleLedger } from "../../../packages/ops/src/note/article-ledger.mjs";
 import { assertAccount, launchContext, UA } from "../../../packages/ops/src/note/lib/note-session.mjs";
 import { liveProblems, plannedChanges, preflightProblems } from "../../../packages/ops/src/note/lib/price-change.mjs";
-import { noteKeyFromUrl, splitPublishedBody } from "./patch-note-paid-landing.mjs";
+import { noteKeyFromUrl, splitPublishedBody } from "../../../packages/ops/src/note/patch-note-paid-landing.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const HISTORY_PATH = join(ROOT, datasetPath("products.price-history"));

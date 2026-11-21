@@ -555,9 +555,9 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | 接続設定 (URL / セレクタ / サイト ID / timeout) | `config/affiliate-asp.json` |
 | サイト帰属の判定 (純関数・例外) | `packages/ops/src/ads/lib/asp-site-guard.mjs` (+ `__tests__/`) |
 | ブラウザ共通基盤 (永続 context / dump / mask) | `packages/ops/src/ads/lib/asp-browser-base.mjs` |
-| ASP 共通操作 (openAsp / ensureTargetSite) | `.claude/scripts/ads/lib/asp-browser.mjs` |
+| ASP 共通操作 (openAsp / ensureTargetSite) | `packages/ops/src/ads/lib/asp-browser.mjs` |
 | 提携状態の実機照合 (read-only / `--write`) | `.claude/scripts/ads/affiliate-status.mjs` |
-| 提携申請 (dry-run 既定 / `--commit`) | `.claude/scripts/ads/affiliate-apply.mjs` |
+| 提携申請 (dry-run 既定 / `--commit`) | `packages/ops/src/ads/affiliate-apply.mjs` |
 | operation plan / journal の I/O | `packages/ops/src/ads/lib/asp-operation-store.mjs` (判定は `asp-operation-core.mjs`) |
 | lock / health の I/O | `.claude/scripts/ads/affiliate-ops.mjs` |
 | afb 未提携案件の走査 | `.claude/scripts/ads/afb-scan.mjs` |

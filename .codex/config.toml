@@ -17,7 +17,7 @@ args = ["mcp-server"]
 [mcp_servers.seo-observability]
 enabled = false
 command = "node"
-args = [".claude/scripts/search-growth/mcp/server.mjs"]
+args = ["packages/ops/src/search-growth/mcp/server.mjs"]
 
 [mcp_servers.shadcn]
 enabled = false

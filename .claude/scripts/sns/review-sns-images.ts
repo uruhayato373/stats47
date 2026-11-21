@@ -28,7 +28,7 @@ import {
   mechanicalFindings,
   type ReviewItem,
   validateAgentReview,
-} from "./lib/sns-image-review";
+} from "../../../packages/ops/src/sns/lib/sns-image-review";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
@@ -226,6 +226,7 @@ async function main() {
   }
 
   const report = buildSnsReport({
+    ruleRef: ".claude/rules/sns-content-standards.md",
     date,
     from: now.toISOString().slice(0, 10),
     to: to.toISOString().slice(0, 10),

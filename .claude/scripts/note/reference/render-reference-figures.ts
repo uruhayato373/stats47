@@ -4,7 +4,7 @@
  */
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { renderSavedReferenceFigure, writeReferenceFigure, type ReferenceFigureData } from './lib/figure-files';
+import { renderSavedReferenceFigure, writeReferenceFigure, type ReferenceFigureData } from '../../../../packages/ops/src/note/reference/lib/figure-files';
 const ROOT=path.resolve(__dirname,'../../../..');
 const option=(name:string)=>{const index=process.argv.indexOf(name);return index<0?undefined:process.argv[index+1];};
 const keys=option('--keys')?.split(',');

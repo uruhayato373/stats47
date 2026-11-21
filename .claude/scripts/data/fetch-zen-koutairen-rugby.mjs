@@ -26,7 +26,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import ExcelJS from "exceljs";
-import { fetchBuffer, makeWorkDir, toFullPrefName, writeStatsValues, roundTo, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, makeWorkDir, toFullPrefName, writeStatsValues, roundTo, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const PDF_URL = "https://www.zen-koutairen.com/pdf/reg-reiwa07.pdf";
 const DENOM_URL = "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040393253&fileKind=0";

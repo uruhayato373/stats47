@@ -19,7 +19,7 @@ import {
   openAsp,
   repoRoot,
   SiteAttributionError,
-} from './lib/asp-browser.mjs';
+} from '../../../packages/ops/src/ads/lib/asp-browser.mjs';
 import {
   completeMoshimoRecords,
   evaluateMoshimoOutcomeGate,

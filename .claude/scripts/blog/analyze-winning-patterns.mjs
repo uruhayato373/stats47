@@ -32,7 +32,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+import { isAnchorRow } from "../../../packages/ops/src/gsc/analyze-ctr-seesaw.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

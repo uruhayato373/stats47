@@ -14,7 +14,7 @@ import { join } from "node:path";
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities } from "@stats47/area";
 
 import { R2_PUBLIC_ORIGIN, statsR2Key } from "@stats47/r2-storage/keys";
-import { buildFrame, checkCoverage, checkReliability, checkTotal, checkYears, columnOf, indexRows, latestYear, summarize } from "./analysis-frame-core.mjs";
+import { buildFrame, checkCoverage, checkReliability, checkTotal, checkYears, columnOf, indexRows, latestYear, summarize } from "../../../packages/ops/src/analysis/analysis-frame-core.mjs";
 
 interface SpecMetric {
   alias: string;

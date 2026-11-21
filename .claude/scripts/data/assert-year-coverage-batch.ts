@@ -11,7 +11,7 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import type { MetricConfig } from "@stats47/data-configs";
 
 import { yearSpecCount } from "../../../packages/ranking/src/scripts/audit-estat-year-coverage";
-import { BY_DESIGN_PATH, unhandledKeys } from "./lib/year-coverage-backlog.mjs";
+import { BY_DESIGN_PATH, unhandledKeys } from "../../../packages/ops/src/data/lib/year-coverage-backlog.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const batchFile = process.argv[2];

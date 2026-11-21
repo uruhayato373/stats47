@@ -194,7 +194,7 @@ analytics
 | A8 固有 UI adapter               | `.claude/skills/ads/scout-asp/scripts/` |
 | OS の定期実行 wrapper            | `scripts/scheduled/`                    |
 | synthetic DOM fixture (未実装)   | `.claude/scripts/ads/__fixtures__/`     |
-| 単体テスト                       | `packages/ops/src/ads/__tests__/` (ブラウザ・アプリのデータに依存するものは `.claude/scripts/ads/__tests__/`) |
+| 単体テスト                       | `packages/ops/src/ads/__tests__/` (ブラウザ・アプリのデータに依存するものは `.claude/scripts/lib/__tests__/` (基盤のテスト)) |
 | ローカル journal / lock / health | `.local/affiliate-ops/`                 |
 
 ## 6. 状態モデル
@@ -665,7 +665,7 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 | `.claude/scripts/ads/fetch-affiliate-ga4.cjs`                     | snapshot schema v2・quality                                        |
 | `.claude/scripts/ads/build-affiliate-operations-state.ts`         | schema v2・compliance gate                                         |
 | `packages/ops/src/ads/lib/asp-browser-base.mjs`                    | lock、artifact mode、mask、retention                               |
-| `.claude/scripts/ads/affiliate-apply.mjs`                         | plan必須、journal、unknown、idempotency                            |
+| `packages/ops/src/ads/affiliate-apply.mjs`                         | plan必須、journal、unknown、idempotency                            |
 | `.claude/scripts/ads/affiliate-status.mjs`                        | pagination、completeness、positive-only transition                 |
 | `.claude/skills/ads/scout-asp/scripts/a8-browser.ts`              | approval 全ページ走査、raw dump廃止                                |
 | `.claude/scripts/ads/append-affiliate-ads.ts`                     | dirty preflight、byte-preserving rollback                          |
@@ -843,7 +843,7 @@ live smoke は既存案件の read-only 1 件まで。新規申請しない。
 # 広告 pure core
 node --test packages/ops/src/ads/__tests__/*.test.*
 # ブラウザ・アプリのデータに依存するもの
-node --test .claude/scripts/ads/__tests__/*.test.mjs
+node --test packages/ops/src/ads/__tests__/*.test.mjs .claude/scripts/lib/__tests__/ad-traffic-block.test.mjs .claude/scripts/lib/__tests__/audit-affiliate-inventory-check-size.test.mjs
 
 # web の resolver / repository を変更した場合
 npm run type-check --workspace apps/web

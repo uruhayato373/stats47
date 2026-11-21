@@ -1,0 +1,278 @@
+import assert from 'node:assert/strict';
+import { execFile } from 'node:child_process';
+import path from 'node:path';
+import { promisify } from 'node:util';
+import test from 'node:test';
+
+import {
+  parseContentCrop,
+  resolveContentCrop,
+  parsePageSelector,
+  stageStatus,
+  validateCropSpec,
+  validateMdPage,
+  validateOcrLayout,
+  validatePageImageContract,
+} from '../source-processing.mjs';
+
+const execFileAsync = promisify(execFile);
+const PROJECT_ROOT = path.resolve(import.meta.dirname, '../../../../..');
+const SCRIPT = path.join(
+  PROJECT_ROOT,
+  'packages/ops/src/source-vault/source-processing.mjs'
+);
+
+test('all source profiles have a restorable processing contract', async () => {
+  const { stdout } = await execFileAsync(
+    process.execPath,
+    [SCRIPT, 'readiness', '--contract-only'],
+    { cwd: PROJECT_ROOT }
+  );
+  const readiness = JSON.parse(stdout);
+  assert.equal(readiness.ready, true);
+  assert.equal(readiness.contractOnly, true);
+  assert.equal(readiness.profiles.length, 15);
+  assert.deepEqual(
+    readiness.profiles.map((profile) => profile.profile).sort(),
+    [
+      'amusement-shop-density',
+      'average-income-ranking',
+      'capital-city-guide',
+      'claude-skills-guide-2026',
+      'color-japan-map',
+      'gis-business-guide',
+      'japan-zue',
+      'kakei-marketing-2015',
+      'money-health-ranking',
+      'prefecture-databook-2021',
+      'prefecture-deviation',
+      'prefecture-ranking-consumption',
+      'tokyo-kakusa-data',
+      'visual-japan-data',
+      'yabai-kenmin-ranking',
+    ]
+  );
+  for (const profile of readiness.profiles) {
+    assert.ok(profile.pdfCount > 0);
+    assert.equal(profile.publicOriginalReuse, 'forbidden');
+  }
+});
+
+test('page selector is explicit, bounded, deduplicated, and sorted', () => {
+  assert.deepEqual(parsePageSelector('5,2-3,3', 8), [2, 3, 5]);
+  assert.throws(
+    () => parsePageSelector('all', 3),
+    /requires --allow-all-pages/
+  );
+  assert.deepEqual(parsePageSelector('all', 3, true), [1, 2, 3]);
+  assert.throws(() => parsePageSelector('0,2', 3), /outside 1-3/);
+  assert.throws(() => parsePageSelector('2-4', 3), /outside 1-3/);
+  assert.throws(() => parsePageSelector('1;2', 3), /Invalid page selector/);
+});
+
+test('OCR layout accepts only deterministic rotations and Tesseract modes', () => {
+  assert.deepEqual(validateOcrLayout('90', '4'), {
+    rotationDegrees: 90,
+    pageSegmentationMode: 4,
+  });
+  assert.throws(() => validateOcrLayout(45, 4), /rotation must be one of/);
+  assert.throws(() => validateOcrLayout(0, 14), /psm must be an integer/);
+});
+
+test('crop spec requires an internal-only rights and primary-source gate', () => {
+  const workspace = {
+    profile: 'prefecture-databook-2021',
+    sourceKey: 'prefecture-databook',
+    edition: '2021',
+    revision: 1,
+    sourceBundleSha256: 'abc',
+    documents: [{ id: 'pdf-123', path: 'sample.pdf', pages: 2 }],
+  };
+  const valid = {
+    schemaVersion: 1,
+    profile: workspace.profile,
+    sourceKey: workspace.sourceKey,
+    edition: workspace.edition,
+    revision: workspace.revision,
+    sourceBundleSha256: workspace.sourceBundleSha256,
+    internalUseOnly: true,
+    publicOriginalReuse: 'forbidden',
+    crops: [
+      {
+        id: 'prefecture-symbol-box',
+        document: 'sample.pdf',
+        page: 1,
+        box: { unit: 'pixel', x: 10, y: 20, width: 300, height: 200 },
+        purpose: '県シンボルの事実照合',
+        sourceRef: 'p.1 県のシンボル欄',
+        intendedStats47Use: '一次資料で裏取りする候補の抽出',
+        primarySourceRequired: true,
+      },
+    ],
+  };
+  assert.equal(validateCropSpec(valid, workspace), valid);
+  assert.throws(
+    () =>
+      validateCropSpec({ ...valid, publicOriginalReuse: 'allowed' }, workspace),
+    /publicOriginalReuse must be forbidden/
+  );
+  assert.throws(
+    () =>
+      validateCropSpec(
+        {
+          ...valid,
+          crops: [{ ...valid.crops[0], primarySourceRequired: false }],
+        },
+        workspace
+      ),
+    /primarySourceRequired must be true/
+  );
+});
+
+test('page image contract validates dpi, format, quality, and content crop geometry', () => {
+  assert.equal(validatePageImageContract(undefined), null);
+  assert.deepEqual(
+    validatePageImageContract({ dpi: 220, format: 'jpg', quality: 85, contentCrop: '1970x2550+236+268' }),
+    {
+      dpi: 220,
+      format: 'jpg',
+      quality: 85,
+      contentCrop: { geometry: '1970x2550+236+268', width: 1970, height: 2550, x: 236, y: 268 },
+    }
+  );
+  assert.deepEqual(validatePageImageContract({}), { dpi: 180, format: 'png', quality: 85, contentCrop: null });
+  assert.throws(() => validatePageImageContract({ format: 'webp' }), /format must be png or jpg/);
+  assert.throws(() => validatePageImageContract({ dpi: 30 }), /dpi must be an integer/);
+  assert.throws(() => parseContentCrop('1970x2550'), /WxH\+X\+Y/);
+  assert.throws(() => parseContentCrop('0x10+1+1'), /positive/);
+});
+
+test('crop spec coordinateSpace defaults to full-page and page-image needs a pageImage contract', () => {
+  const workspace = {
+    profile: 'prefecture-databook-2021',
+    sourceKey: 'prefecture-databook',
+    edition: '2021',
+    revision: 2,
+    sourceBundleSha256: 'abc',
+    documents: [{ id: 'pdf-123', path: 'sample.pdf', pages: 2 }],
+  };
+  const spec = {
+    schemaVersion: 1,
+    profile: workspace.profile,
+    sourceKey: workspace.sourceKey,
+    edition: workspace.edition,
+    revision: workspace.revision,
+    sourceBundleSha256: workspace.sourceBundleSha256,
+    internalUseOnly: true,
+    publicOriginalReuse: 'forbidden',
+    crops: [
+      {
+        id: 'pdf123-p0001-tab-1',
+        document: 'pdf-123',
+        page: 1,
+        box: { unit: 'pixel', x: 10, y: 20, width: 300, height: 200 },
+        purpose: '表の原本照合',
+        sourceRef: 'p.1',
+        intendedStats47Use: '内部照合',
+        primarySourceRequired: true,
+      },
+    ],
+  };
+  assert.equal(validateCropSpec(spec, workspace), spec);
+  assert.throws(
+    () => validateCropSpec({ ...spec, coordinateSpace: 'page-image' }, workspace),
+    /page-image requires processing.pageImage/
+  );
+  assert.throws(
+    () => validateCropSpec({ ...spec, coordinateSpace: 'pixels' }, workspace),
+    /coordinateSpace must be one of full-page\|page-image/
+  );
+  const withContract = { ...workspace, pageImage: { dpi: 216, format: 'jpg', quality: 85, contentCrop: null } };
+  assert.equal(
+    validateCropSpec({ ...spec, coordinateSpace: 'page-image' }, withContract).coordinateSpace,
+    'page-image'
+  );
+});
+
+test('content crop can be declared per rendered page size and resolves by the actual render', () => {
+  const contract = validatePageImageContract({
+    dpi: 216,
+    format: 'jpg',
+    contentCrop: { '2400x3090': '1800x3000+300+80', '4800x5436': '3200x5200+800+170' },
+  });
+  assert.deepEqual(Object.keys(contract.contentCrop.byRenderedSize), ['2400x3090', '4800x5436']);
+  assert.deepEqual(resolveContentCrop(contract.contentCrop, { width: 4800, height: 5436 }), {
+    geometry: '3200x5200+800+170',
+    width: 3200,
+    height: 5200,
+    x: 800,
+    y: 170,
+  });
+  assert.throws(
+    () => resolveContentCrop(contract.contentCrop, { width: 2400, height: 2718 }),
+    /no entry for rendered page 2400x2718/
+  );
+  const single = parseContentCrop('10x10+1+1');
+  assert.deepEqual(resolveContentCrop(single, { width: 99, height: 99 }), single);
+  assert.equal(resolveContentCrop(null, { width: 1, height: 1 }), null);
+  assert.throws(() => parseContentCrop({ wide: '10x10+1+1' }), /rendered page size WxH/);
+  assert.throws(() => parseContentCrop({}), /at least one rendered page size/);
+});
+
+test('markdown transcription pages require page/kind frontmatter and existing figure ids', () => {
+  const known = new Set(['p0012-fig-1']);
+  assert.deepEqual(
+    validateMdPage({
+      fileName: 'p0012.md',
+      frontmatter: { page: 12, kind: 'figure', figures: ['p0012-fig-1'] },
+      body: '図の要点',
+      knownFigureIds: known,
+    }),
+    []
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 13, kind: 'text' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /frontmatter.page must be 12/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'poem' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /kind must be one of/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'figure', figures: '[p0099-fig-1]' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /unknown figure id p0099-fig-1/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'table' }, body: 'x', knownFigureIds: known }).join('\n'),
+    /requires figures/
+  );
+  assert.match(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'text' }, body: '  \n', knownFigureIds: known }).join('\n'),
+    /body is empty/
+  );
+  assert.deepEqual(
+    validateMdPage({ fileName: 'p0012.md', frontmatter: { page: 12, kind: 'blank' }, body: '', knownFigureIds: known }),
+    []
+  );
+  assert.match(validateMdPage({ fileName: 'page12.md', frontmatter: {}, body: '', knownFigureIds: known }).join('\n'), /pNNNN\.md/);
+});
+
+test('stage status derives S0-S4 reach from manifest counts and inventory summary', () => {
+  const manifest = {
+    revision: 2,
+    componentCounts: { markdown: 0, figures: 0, pageImages: 307, ocrRaw: 0, transcripts: 307, pdfs: 1, auxiliary: 1 },
+  };
+  const status = stageStatus(manifest, { input: { pages: 307 }, resolutionCoverage: 1 });
+  assert.deepEqual(status.stages, {
+    s0Preserved: true,
+    s1PageImages: true,
+    s2Transcripts: true,
+    s2Markdown: false,
+    s3Figures: false,
+    s4Inventory: true,
+  });
+  const partial = stageStatus(manifest, { input: { pages: 400 }, resolutionCoverage: 0.5 });
+  assert.equal(partial.stages.s1PageImages, false);
+  assert.equal(partial.stages.s4Inventory, false);
+  assert.equal(stageStatus({ revision: 1, componentCounts: {} }, null).stages.s0Preserved, false);
+});

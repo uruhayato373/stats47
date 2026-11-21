@@ -29,7 +29,7 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { fetchBuffer, makeWorkDir, writeStatsValues, roundTo, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, makeWorkDir, writeStatsValues, roundTo, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const PDF_URL = "https://www.mhlw.go.jp/content/001675215.pdf";
 const PDF_SHA256 = "ff87172adb1246c45e90cac29f24068d7f9fc59f1528138d2c5697e02126cbd1";

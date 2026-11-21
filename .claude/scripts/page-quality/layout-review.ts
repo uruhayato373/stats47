@@ -21,7 +21,7 @@ import { join, resolve } from "node:path";
 
 import { chromium, type Page } from "playwright";
 
-import { VIEWPORTS } from "./lib/screenshots";
+import { VIEWPORTS } from "../../../packages/ops/src/page-quality/lib/screenshots";
 
 const OUT_DIR = resolve(__dirname, "../../../.local/layout-review/latest");
 

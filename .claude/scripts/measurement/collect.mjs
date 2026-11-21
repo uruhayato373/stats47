@@ -7,7 +7,7 @@ import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sourceFor, scopedState, failureCode } from '../../../packages/ops/src/measurement/sources.mjs';
 import { writeVault } from './vault.mjs';
-import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
+import { kdpMonthlyVaultKey } from '../../../packages/ops/src/measurement/kdp-monthly-reports.mjs';
 import { kdpDailyRows } from '../../../packages/ops/src/measurement/kdp-reports.mjs';
 import { kdpMonthlyObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { acceptedNoteGap, noteInventoryAvailable } from '../../../packages/ops/src/measurement/note-inventory.mjs';

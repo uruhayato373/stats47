@@ -29,7 +29,7 @@ stats47.jp の各ページの Core Web Vitals を計測し、`data/psi/` に蓄�
 
 ```bash
 # 1) 計測 → data/psi/psi-batch-<ISO>.json
-npm run fetch-psi-audit                 # = node .claude/scripts/psi/fetch-psi-audit.mjs
+npm run fetch-psi-audit                 # = node packages/ops/src/psi/fetch-psi-audit.mjs
 #    オプション: --strategy mobile / --strategy desktop / --file custom-urls.txt
 #    PSI_API_KEY があれば quota が上がる（.env.local / CI secret）。無くても動く（レート制限注意）
 

@@ -1,40 +1,40 @@
-# GSC カバレッジ是正 — 2026-W45 (2026-11-14)
+# GSC カバレッジ是正 — 2026-W47 (2026-11-21)
 
 > SSOT: `data/gsc/coverage-remediation/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
-> 入力観測日: 2026-11-08 / 入力週齢: 1 週
+> 入力観測日: 2026-11-21 / 入力週齢: 0 週
 
 ## GSC カテゴリ別総件数 (UI export)
 
 | カテゴリ | 件数 | 扱い |
 |---|---:|---|
-| 見つからない(404) | 12653 | 大半=意図的削除/旧URL。放置 |
-| 登録済み | 7069 | 概要グラフの最新値。増やす対象 |
-| robots ブロック | 4837 | 意図的(OGP/CSV)。放置 |
-| noindex 除外 | 2414 | 意図的。放置 |
-| クロール済-未登録 | 2068 | Google判断。live は observe-after-fix |
-| 代替canonical | 1226 | 正常 |
-| リダイレクト | 1148 | 意図的301。放置 |
-| 検出-未登録 | 834 | クロール待ち |
-| robots-blocked-indexed | 586 |  |
-| ソフト404 | 413 | live は content-check |
-| duplicate-no-user-canonical | 22 |  |
-| redirect-error | 17 |  |
-| サーバーエラー5xx | 17 | 実測で fix/解消判定 |
-| duplicate-google-chose-other | 10 |  |
+| 見つからない(404) | 11734 | 大半=意図的削除/旧URL。放置 |
+| 登録済み | 8611 | 概要グラフの最新値。増やす対象 |
+| 代替canonical | 4688 | 正常 |
+| noindex 除外 | 4603 | 意図的。放置 |
+| クロール済-未登録 | 4280 | Google判断。live は observe-after-fix |
+| robots ブロック | 3596 | 意図的(OGP/CSV)。放置 |
+| リダイレクト | 3269 | 意図的301。放置 |
+| 検出-未登録 | 692 | クロール待ち |
+| ソフト404 | 209 | live は content-check |
+| duplicate-no-user-canonical | 80 |  |
+| robots-blocked-indexed | 17 |  |
+| サーバーエラー5xx | 13 | 実測で fix/解消判定 |
+| redirect-error | 8 |  |
+| duplicate-google-chose-other | 8 |  |
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **3264** / 要対応 pending: **1744**
-- URL Inspection で登録を確認して done にした URL: **65** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
+- 追跡 URL: **2914** / 要対応 pending: **1694**
+- URL Inspection で登録を確認して done にした URL: **0** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
 
 | action | 分類総数 | pending | 意味 |
 |---|---:|---:|---|
-| observe-after-fix | 837 | 773 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
-| sitemap-gap | 958 | 958 | 現在200で未登録なのに sitemap に無い→sitemap へ載せるか noindex にするかを決める |
-| recheck | 14 | 13 | timeout=再測定 |
-| none | 1455 | 0 | 意図的/解消済=放置 |
+| observe-after-fix | 735 | 735 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| sitemap-gap | 957 | 957 | 現在200で未登録なのに sitemap に無い→sitemap へ載せるか noindex にするかを決める |
+| recheck | 2 | 2 | timeout=再測定 |
+| none | 1220 | 0 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**773 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**735 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 

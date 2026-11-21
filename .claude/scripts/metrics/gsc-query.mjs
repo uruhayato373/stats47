@@ -13,7 +13,7 @@
  * 認証: ../../../packages/ops/src/google/google-client.cjs (GOOGLE_SERVICE_ACCOUNT_KEY_JSON env をメモリで渡す・一時ファイルに書かない、または stats47-*.json)。
  */
 import { toCsv } from "../../../packages/ops/src/metrics/lib/auth.mjs";
-import { buildGscQuery } from "./lib/gsc-query.mjs";
+import { buildGscQuery } from "../../../packages/ops/src/metrics/lib/gsc-query.mjs";
 import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
 import { createSearchConsoleClient } from "../../../packages/ops/src/google/google-client.cjs";
 

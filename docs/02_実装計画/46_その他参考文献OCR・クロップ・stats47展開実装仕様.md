@@ -104,7 +104,7 @@ box、出力SHAを記録する。これらは一時派生物でGit SSOTにしな
 
 ## 3. 文字抽出・OCR・画像クロップ契約
 
-共通CLIは`.claude/scripts/source-vault/source-processing.mjs`である。
+共通CLIは`packages/ops/src/source-vault/source-processing.mjs`である。
 
 ```bash
 # Drive のローカルマウント上の版 folder を manifest と照合し、OS 一時領域へ複製

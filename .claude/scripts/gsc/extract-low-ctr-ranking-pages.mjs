@@ -20,7 +20,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { isAnchorRow } from "./analyze-ctr-seesaw.mjs";
+import { isAnchorRow } from "../../../packages/ops/src/gsc/analyze-ctr-seesaw.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

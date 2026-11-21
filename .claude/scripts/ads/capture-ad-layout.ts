@@ -27,8 +27,8 @@ import { join, resolve } from "node:path";
 
 import { chromium, type Page } from "playwright";
 
-import { VIEWPORTS, type ViewportSpec } from "../page-quality/lib/screenshots";
-import { scrollThroughPage } from "../page-quality/lib/ui-probe";
+import { VIEWPORTS, type ViewportSpec } from "../../../packages/ops/src/page-quality/lib/screenshots";
+import { scrollThroughPage } from "../../../packages/ops/src/page-quality/lib/ui-probe";
 
 import { ADS_PLACEMENTS } from "../../../config/paths.mjs";
 import { adsenseUnitNames, unitOfEntry } from "../../../packages/ops/src/ads/ad-layout-ledger";

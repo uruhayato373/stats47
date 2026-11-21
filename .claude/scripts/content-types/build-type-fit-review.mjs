@@ -13,7 +13,7 @@ import { parseCsv, pathOfUrl } from "../../../packages/ops/src/issues/issue-grap
 import { classifyAll } from "../../../packages/ops/src/content-types/classify-core.mjs";
 import { readClassifyInputs } from "../../../packages/ops/src/content-types/content-types-io.mjs";
 import { isoWeekRange } from "../../../packages/ops/src/metrics/periods.mjs";
-import { findMergePairs, isObservable, proposeAction, publishedDateOf } from "./type-fit-core.mjs";
+import { findMergePairs, isObservable, proposeAction, publishedDateOf } from "../../../packages/ops/src/content-types/type-fit-core.mjs";
 
 const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../../../packages/types/mirror/site-config.cjs");
 const ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");

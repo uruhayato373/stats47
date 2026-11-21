@@ -21,7 +21,7 @@ import {
   repoRoot,
   SiteAttributionError,
   visibleText,
-} from './lib/asp-browser.mjs';
+} from '../../../packages/ops/src/ads/lib/asp-browser.mjs';
 import { parseMoshimoCode } from '../../../packages/ops/src/ads/lib/moshimo-code-core.mjs';
 import { datasetPath } from "../../../config/datasets.mjs";
 

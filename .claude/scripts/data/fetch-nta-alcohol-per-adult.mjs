@@ -25,7 +25,7 @@
  * 正典: .claude/rules/data-provenance-standards.md
  */
 import ExcelJS from "exceljs";
-import { fetchBuffer, toFullPrefName, writeStatsValues, roundTo, assertClose } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, toFullPrefName, writeStatsValues, roundTo, assertClose } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const ORIGIN = "https://www.nta.go.jp";
 const EDITIONS = [

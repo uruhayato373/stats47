@@ -1,0 +1,2 @@
+week,date,status,indexed,not-indexed,discovered-not-indexed,noindex-excluded,crawled-not-indexed,robots-blocked,not-found-404,redirect,redirect-error,server-error-5xx,soft-404
+2026-W47,2026-11-21,captured,7967,1448,692,579,110,0,52,2,8,5,0

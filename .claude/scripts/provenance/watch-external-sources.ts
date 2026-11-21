@@ -9,7 +9,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { datasetDir } from "../../../config/datasets.mjs";
-import { compareSource, fingerprint, sourceWatchUrl } from "./lib/source-watch.mjs";
+import { compareSource, fingerprint, sourceWatchUrl } from "../../../packages/ops/src/provenance/lib/source-watch.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const STATE_DIR = resolve(ROOT, datasetDir("provenance.queue"));

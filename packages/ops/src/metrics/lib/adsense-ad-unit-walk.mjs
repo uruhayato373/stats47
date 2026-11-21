@@ -3,7 +3,7 @@
  * ---------------------------------------------------------------------------
  * ★なぜ 1 箇所に集めるか (2026-08-21): この走査は元々 2 箇所に複製されていた。
  *   - `packages/ops/src/metrics/fetch-adsense-snapshot.mjs` (週次 snapshot)
- *   - `.claude/scripts/google-admin/audit-adsense.mjs` (週次 audit)
+ *   - `packages/ops/src/google-admin/audit-adsense.mjs` (週次 audit)
  *   2026-08-04 に前者だけ「1 client の失敗で inventory 全体を落とさない」修正が入り、
  *   後者は素通しのままだった。結果、**同じ資格情報で snapshot は成功しているのに
  *   audit は毎回「AdSense ad units: 0 件 (error)」**という食い違いが 2 週間以上続き、

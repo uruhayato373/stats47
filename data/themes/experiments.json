@@ -22053,7 +22053,27 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 13,
+            "oldestLatestDataYear": "2015",
+            "ageReviewKeys": [
+              "industrial-water-usage",
+              "factory-location-area-annual"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 42
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#manufacturing/metricsAllRoutes",
@@ -22096,7 +22116,30 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 34,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "social-increase-rate",
+              "day-time-population-ratio",
+              "five-year-residence-same-address",
+              "five-year-residence-other-prefecture",
+              "sex-ratio-age-20-39"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#population-dynamics/metricsAllRoutes",
@@ -22139,7 +22182,31 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 25,
+            "oldestLatestDataYear": "2019",
+            "ageReviewKeys": [
+              "social-increase-rate",
+              "household-ratio-with-65plus",
+              "single-person-household-old-population-ratio",
+              "elderly-living-alone-rate",
+              "elderly-couple-only-household-ratio",
+              "elderly-workers-ratio"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#aging-society/metricsAllRoutes",
@@ -22182,7 +22249,28 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 11,
+            "oldestLatestDataYear": "2014",
+            "ageReviewKeys": [
+              "agricultural-output-per-employed-person",
+              "agricultural-farm-count",
+              "core-agricultural-workers"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#agriculture-production/metricsAllRoutes",
@@ -22225,7 +22313,24 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 14,
+            "oldestLatestDataYear": "2024",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#consumer-prices/metricsAllRoutes",
@@ -22268,7 +22373,33 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 12,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "foreign-resident-count-per-100k",
+              "foreign-resident-count",
+              "foreign-resident-count-china-per-100k",
+              "foreign-resident-count-china",
+              "foreign-resident-count-korea-per-100k",
+              "foreign-resident-count-korea",
+              "foreign-resident-count-usa-per-100k",
+              "foreign-resident-count-usa"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#foreign-residents/metricsAllRoutes",
@@ -22311,7 +22442,38 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 18,
+            "oldestLatestDataYear": "2014",
+            "ageReviewKeys": [
+              "total-production-in-the-prefecture",
+              "per-capita-prefectural-income-h27",
+              "employed-people-ratio-primary",
+              "employed-people-ratio-secondary",
+              "employed-people-ratio-tertiary",
+              "number-of-establishments-economic-census-basic-survey",
+              "agricultural-employment-population",
+              "employment-location-quotient-manufacturing",
+              "employment-location-quotient-information-communication",
+              "employment-location-quotient-health-welfare",
+              "enterprise-net-value-added-all-industries",
+              "private-establishment-net-value-added",
+              "unemployment-rate"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#local-economy/metricsAllRoutes",
@@ -22354,7 +22516,28 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 10,
+            "oldestLatestDataYear": "2007",
+            "ageReviewKeys": [
+              "annual-clear-days",
+              "annual-snow-days",
+              "maximum-snow-depth"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 11
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#climate/metricsAllRoutes",
@@ -22397,7 +22580,28 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 6,
+            "oldestLatestDataYear": "2007",
+            "ageReviewKeys": [
+              "woodland-area",
+              "forest-area-ratio",
+              "artificial-forest-area"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#natural-environment/metricsAllRoutes",
@@ -22440,7 +22644,32 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 18,
+            "oldestLatestDataYear": "2007",
+            "ageReviewKeys": [
+              "travel-participation-rate-domestic-tourism",
+              "travel-participation-rate-overseas",
+              "travel-participation-rate-overnight",
+              "travel-participation-rate-day-trip",
+              "number-of-hotel-facilities",
+              "number-of-hotel-rooms",
+              "airport-count"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#tourism/metricsAllRoutes",
@@ -22483,7 +22712,24 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 41,
+            "oldestLatestDataYear": "2022",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#local-finance/metricsAllRoutes",
@@ -22526,7 +22772,29 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 20,
+            "oldestLatestDataYear": "2020",
+            "ageReviewKeys": [
+              "unemployment-rate",
+              "employment-rate",
+              "employed-people-ratio",
+              "labor-force-population-ratio-woman"
+            ],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#labor-wages/metricsAllRoutes",
@@ -22569,7 +22837,24 @@
         "d28": "2026-12-10",
         "d56": "2027-01-07"
       },
-      "result": null,
+      "result": {
+        "d7": {
+          "observedAt": "2026-11-21",
+          "status": "quality-only",
+          "values": {},
+          "quality": {
+            "status": "ok",
+            "observedAt": "2026-11-20T22:34:36.941Z",
+            "keysChecked": 8,
+            "oldestLatestDataYear": "2026",
+            "ageReviewKeys": [],
+            "freshnessStatus": "requires-official-release-check",
+            "missingKeys": 0,
+            "missingKeyList": [],
+            "latestYearPrefCoverageMin": 47
+          }
+        }
+      },
       "notes": "基準は portfolio.json の metricsAllRoutes (非重複の 28 日 2 本 W41+W45)。公開日は本番デプロイ (deploy-workers の e3ac001a7・2026-11-12 21:54 JST)。同時変更: THEME-PAGE-REVIEW-01 の共通の UI の変更 (値の単位・値の無いタイル・表・県間移動の表) が d28 までの間に本番へ出る見込みで、題の効果と切り分けられない。d28・d56 の判定ではこれを制約として併記し、因果の効果と断定しない。",
       "evidenceRefs": [
         "data/themes/portfolio.json#landslide-exposure/metricsAllRoutes",

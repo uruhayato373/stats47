@@ -33,16 +33,20 @@ import {
   launchAdminContext,
   waitForLogin,
   isLoginUrl,
-} from "../google-admin/browser-context.mjs";
+} from "../../../packages/ops/src/google-admin/browser-context.mjs";
 import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
+import {
+  SUBMITTED_VIEW,
+  SUBMITTED_VIEW_SLUG,
+  submittedViewUrl as buildSubmittedViewUrl,
+} from "../../../packages/ops/src/gsc/lib/coverage-submitted-view.mjs";
 
 const PROPERTY = GSC_PROPERTY;
 const INDEX_URL = `https://search.google.com/search-console/index?resource_id=${encodeURIComponent(PROPERTY)}`;
 
-/** 「すべての送信済みページ」ビュー。値は 2026-11-11 に画面で確認 (SUBMITTED 等は HTTP 400)。 */
-export const SUBMITTED_VIEW = "ALL_SUBMITTED_URLS";
-export const SUBMITTED_VIEW_SLUG = "概要-送信済みビュー"; // ingest-gsc-export.py の SUBMITTED_MARKER と一致させる
-export const submittedViewUrl = (indexUrl = INDEX_URL) => `${indexUrl}&pages=${SUBMITTED_VIEW}`;
+/** 「すべての送信済みページ」ビュー。定数と URL の組み立ては packages/ops の部品が持つ。 */
+export { SUBMITTED_VIEW, SUBMITTED_VIEW_SLUG };
+export const submittedViewUrl = (indexUrl = INDEX_URL) => buildSubmittedViewUrl(indexUrl);
 
 /** 既定の export 対象。actionable (転換可能) を優先し、意図的カテゴリは既定で採らない。 */
 const DEFAULT_TARGETS = [

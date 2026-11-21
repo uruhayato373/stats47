@@ -1,15 +1,15 @@
 {
-  "hash": "75109526ce71c1b39dd558c9cc6c64cde6b7b56926729962130b0358714d389c",
-  "audited_at": "2026-11-19T13:15:08",
+  "hash": "882f35b8757bf0e8782fc1582601acef40cd084078174d4896d40897ac3dea2a",
+  "audited_at": "2026-11-20T14:21:31",
   "files": [
-    ".agents/skills/theme/audit-theme-components/SKILL.md",
-    ".agents/skills/theme/manage-theme-portfolio/SKILL.md",
-    ".claude/scripts/lib/__tests__/theme-ledger-paths.test.mjs",
-    ".claude/scripts/lib/__tests__/theme-weekly-workflow.test.mjs",
-    ".claude/scripts/themes/check-theme-review.mjs",
-    ".claude/scripts/themes/run-theme-portfolio-audit.sh",
-    ".claude/skills/theme/audit-theme-components/SKILL.md",
-    ".claude/skills/theme/manage-theme-portfolio/SKILL.md",
-    ".claude/skills/theme/manage-theme-portfolio/reference/\\343\\203\\206\\343\\203\\274\\343\\203\\236\\343\\203\\235\\343\\203\\274\\343\\203\\210\\343\\203\\225\\343\\202\\251\\343\\203\\252\\343\\202\\252\\351\\201\\213\\347\\224\\250.md"
+    ".claude/scripts/blog/critic-findings-digest.mjs",
+    ".claude/scripts/data/lib/year-coverage-backlog.mjs",
+    ".claude/scripts/data/sync-year-coverage-backlog.mjs",
+    ".claude/scripts/gsc/build-coverage-queue.mjs",
+    ".claude/scripts/gsc/export-coverage-playwright.mjs",
+    ".claude/scripts/gsc/sync-coverage-backlog.mjs",
+    ".claude/scripts/gsc/url-inspection-daily.cjs",
+    ".claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs",
+    ".claude/scripts/metrics/lib/cycle-health.mjs"
   ]
 }

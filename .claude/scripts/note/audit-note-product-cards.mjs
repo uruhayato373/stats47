@@ -30,14 +30,15 @@ import { writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from 'playwright';
-import { resolveProductCardText } from "./lib/navigation-footer.mjs";
-import { inspectPaidProductCard, resolvePaidProduct } from './lib/product-cards.mjs';
-import { applyPlanBody, buildPlans } from './update-published-navigation.mjs';
+import { resolveProductCardText } from "../../../packages/ops/src/note/lib/navigation-footer.mjs";
+import { inspectPaidProductCard, resolvePaidProduct } from '../../../packages/ops/src/note/lib/product-cards.mjs';
+import { applyPlanBody, buildPlans } from '../../../packages/ops/src/note/update-published-navigation.mjs';
 import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
 const DUMP_CIRCULATION_TS = join(ROOT, ".claude/scripts/note/catalog/dump-circulation-json.ts");
+const STOREFRONT_PATH = join(ROOT, "apps/web/src/features/products/storefront.generated.ts");
 const OUT_JSON = "/tmp/note-product-card-audit.json";
 const UA = "stats47-note-product-card-audit/1.0";
 const CONCURRENCY = 6;
@@ -73,7 +74,7 @@ function auditCatalogIntegrity(catalog) {
     try {
       const resolved = magazine.paidProductId
         ? resolvePaidProduct({ magazine: magazine.key, isPaid: false }, catalog)
-        : resolveProductCardText(magazine.productTarget);
+        : resolveProductCardText(magazine.productTarget, STOREFRONT_PATH);
       results.push({
         magazineKey: magazine.key,
         productTarget: magazine.productTarget,
@@ -184,7 +185,7 @@ function extractProductCardText(body, productTarget) {
 }
 
 async function auditLive(catalog, magazinesByKey) {
-  const productPlans = new Map(buildPlans(catalog, new Map(), { products: true }).map((plan) => [plan.article.key, plan]));
+  const productPlans = new Map(buildPlans(catalog, new Map(), { products: true, storefrontPath: STOREFRONT_PATH }).map((plan) => [plan.article.key, plan]));
   const targets = catalog.articles.filter((article) => {
     if (article.isPaid !== false) return false;
     const magazine = magazinesByKey.get(article.magazine);
@@ -199,7 +200,7 @@ async function auditLive(catalog, magazinesByKey) {
     try {
       expected = magazine.paidProductId
         ? resolvePaidProduct(article, catalog)
-        : resolveProductCardText(magazine.productTarget);
+        : resolveProductCardText(magazine.productTarget, STOREFRONT_PATH);
     } catch (error) {
       return { key: article.key, ok: false, detail: `期待値解決に失敗: ${error.message}` };
     }

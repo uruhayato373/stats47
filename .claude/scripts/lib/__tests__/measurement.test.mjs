@@ -1,0 +1,502 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { readBookshelfState } from '../../kdp/lib/kdp-flow.mjs';
+import { randomBytes } from 'node:crypto';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { resolve, join } from 'node:path';
+import { execFileSync } from 'node:child_process';
+import yaml from 'js-yaml';
+import { SOURCES, scopedState, sourceFor, failureCode } from '../../../../packages/ops/src/measurement/sources.mjs';
+import { encrypt, decrypt, BUCKET } from '../../measurement/vault.mjs';
+import { consumerPath, validateAttempt } from '../../../../packages/ops/src/measurement/consumer-paths.mjs';
+import { measurementHealth } from '../../../../packages/ops/src/measurement/health.mjs';
+import ExcelJS from 'exceljs';
+import { kdpAsinMap, kdpDailyRows, parseKdpReport, openKdpReports } from '../../../../packages/ops/src/measurement/kdp-reports.mjs';
+import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
+
+test('GSC validates ZIP contents, expected categories, row counts and site ownership', () => {
+  execFileSync('python3', ['.claude/scripts/gsc/__tests__/test_ingest_gsc_export.py']);
+});
+
+test('GSC expands paginated reasons and never swallows a failed detail click', async () => {
+  let failedClick = false, checkedUrl = false;
+  const calls = [];
+  const page = {
+    locator(selector) {
+      assert.equal(selector, '[role="option"][data-value="25"]:visible');
+      calls.push('visible-option');
+      return { click: async () => {} };
+    },
+    getByRole(role) {
+      calls.push(role);
+      const locator = { first: () => locator, getByRole: child => { calls.push(child); return locator; },
+        click: async () => { if (role === 'cell' && failedClick) throw new Error('hidden reason'); },
+        waitFor: async () => {} };
+      return locator;
+    },
+    async waitForURL(predicate) {
+      checkedUrl = true;
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index?resource_id=sc-domain%3Astats47.jp')), false);
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Adoboku-note.com&item_key=test')), false);
+      assert.equal(predicate(new URL('https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Astats47.jp&item_key=test')), true);
+    },
+  };
+  await openCoverageReason(page, '検出 - インデックス未登録');
+  assert.deepEqual(calls, ['listbox', 'visible-option', 'cell', 'heading']);
+  assert.equal(checkedUrl, true);
+  checkedUrl = false; failedClick = true;
+  await assert.rejects(openCoverageReason(page, '検出 - インデックス未登録'), /hidden reason/);
+  assert.equal(checkedUrl, false);
+});
+
+test('native Google session export preserves the OS keychain and original profile', () => {
+  const code = readFileSync('.claude/scripts/measurement/bootstrap-session.mjs', 'utf8');
+  assert.match(code, /mkdtempSync/);
+  assert.match(code, /cpSync\(profile, temporaryProfile/);
+  assert.match(code, /launchPersistentContext\(temporaryProfile \?\? profile/);
+  assert.match(code, /ignoreDefaultArgs: \['--password-store=basic', '--use-mock-keychain'\]/);
+  // 普通の Chrome で入る対象: Google。Playwright での --login を拒む (ココナラは 2026-10-19 に撤退し取得対象から外した)
+  assert.match(code, /const NATIVE_PROFILE_SOURCES = new Set\(\['gsc'\]\);/);
+  assert.match(code, /const nativeProfile = NATIVE_PROFILE_SOURCES\.has\(sourceName\);/);
+  assert.match(code, /google_login_requires_native_chrome/);
+  assert.doesNotMatch(code, /AutomationControlled|--enable-automation|navigator\.webdriver/);
+  assert.match(code, /reports_requires_kdp_login/);
+});
+
+function kdpFixture() {
+  const book = new ExcelJS.Workbook();
+  book.addWorksheet('確定済み注文').addRows([
+    ['日付', 'タイトル', '著者名', 'ASIN', 'マーケットプレイス', '有料ダウンロード数', '無料ダウンロード数'],
+    ['2026-09-20', '統計', 'stats47', 'B0HF17SQ9N', 'Amazon.co.jp', 2, 0],
+    ['2026-09-20', '他サイト', 'doboku-note', 'B0H8HW139T', 'Amazon.co.jp', 100, 0],
+  ]);
+  book.addWorksheet('既読 KENPC').addRows([
+    ['日付', 'タイトル', '著者名', 'ASIN', 'マーケットプレイス', '既読 KENP (Kindle Edition Normalized Pages)'],
+    ['2026-09-20', '統計', 'stats47', 'B0HF17SQ9N', 'Amazon.co.jp', 12],
+  ]);
+  book.addWorksheet('電子書籍のロイヤリティ').addRows([
+    ['ロイヤリティ発生日', 'タイトル', '著者名', 'ASIN', 'マーケットプレイス', 'ロイヤリティの種類', 'コンテンツ区分', '注文数', '払い戻し数', '実質注文数', '平均希望小売価格 (税別)', '平均販売価格 (税別)', '平均ファイルサイズ（MB）', '平均配信コスト', 'ロイヤリティ', '通貨'],
+    ['2026-09-20', '統計', 'stats47', 'B0HF17SQ9N', 'Amazon.co.jp', '70%', '電子書籍', 2, 0, 2, 100, 100, 1, 1, 140, 'JPY'],
+  ]);
+  return book;
+}
+const kdpListings = { 'K-S1-01': { author: 'stats47', asin: null, previousEditions: [{ author: 'stats47', asin: 'B0HF17SQ9N' }] } };
+test('KDP Reports readiness rejects login and requires the actual report UI', async () => {
+  let url = 'https://kdpreports.amazon.co.jp/dashboard';
+  let ready = false;
+  let redirect = false;
+  const tab = { first: () => tab, waitFor: async options => {
+    assert.equal(options.state, 'visible');
+    assert.equal(options.timeout, 30000);
+    if (!ready) throw new Error('report UI unavailable');
+    if (redirect) url = 'https://kdpreports.amazon.co.jp/dashboard';
+  } };
+  const password = { first: () => password, isVisible: async () => true };
+  const page = { goto: async target => assert.equal(target, 'https://kdpreports.amazon.co.jp/dashboard'),
+    url: () => url, locator: () => password, getByRole: (role, options) => {
+      assert.equal(role, 'tab'); assert.equal(options.name, '昨日'); return tab;
+    } };
+  await assert.rejects(openKdpReports(page), /report UI unavailable/);
+  ready = true;
+  assert.equal(await openKdpReports(page), tab);
+  url = 'https://www.amazon.co.jp/ap/signin?private=not-for-logs'; ready = false;
+  await assert.rejects(openKdpReports(page), error => {
+    assert.match(error.message, /auth_required/);
+    assert.match(error.message, /"passwordVisible":true/);
+    assert.doesNotMatch(error.message, /private|not-for-logs/);
+    return true;
+  });
+  ready = true; redirect = true;
+  assert.equal(await openKdpReports(page), tab, 'an intermediate SSO URL must not be mistaken for a settled login form');
+  url = 'https://kdpreports.amazon.co.jp.evil.example/dashboard'; redirect = false;
+  await assert.rejects(openKdpReports(page), /account_mismatch: reports_origin/);
+});
+test('KDP collects short-lived Reports before the long bookshelf scan and retains its own tab', () => {
+  const code = readFileSync('.claude/scripts/measurement/marketplace-status.mjs', 'utf8');
+  const identity = code.indexOf('if (!identity.found');
+  const preflight = code.indexOf('await openKdpReports(reportsPage)');
+  const report = code.indexOf('sales = await collectKdpReport');
+  const verified = code.indexOf('markMeasurementAuthenticated(source)');
+  const scan = code.indexOf('for (const [id, entry]');
+  const monthly = code.indexOf('monthlyRoyalties = await collectKdpMonthlyReport(reportsPage');
+  assert.ok(identity > 0 && identity < preflight && preflight < report && report < monthly && monthly < scan && scan < verified, '13-minute bookshelf scans must not consume the Reports session before revenue collection');
+  assert.match(code, /const reportsPage = await context.newPage\(\)/);
+  assert.doesNotMatch(code, /readBookshelfState\(reportsPage|reportsPage.close\(/);
+  const bootstrap = readFileSync('.claude/scripts/measurement/bootstrap-session.mjs', 'utf8');
+  const readiness = bootstrap.indexOf('await openKdpReports(page)');
+  assert.ok(readiness > 0 && readiness < bootstrap.indexOf('state = await context.storageState'));
+});
+test('KDP scopes old editions by exact ASIN and never adds shared-account totals', () => {
+  const report = parseKdpReport(kdpFixture(), kdpListings, '2026-09-20');
+  assert.equal(report.records.find(r=>r.kind==='processed-orders').paid, 2);
+  assert.equal(report.records.find(r=>r.kind==='kenp').pages, 12);
+  assert.equal(report.coverage.excludedRows, 1);
+  assert.equal(report.finality, 'provisional');
+  assert.equal(report.period.basis, 'metric-specific-date');
+  assert.equal(report.records.find(r=>r.kind==='processed-orders').dateBasis, 'marketplace-local-date');
+  assert.equal(report.records.find(r=>r.kind==='kenp').dateBasis, 'UTC');
+  assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.xlsx'), null);
+  assert.equal(consumerPath('kdp', '.local/authenticated-measurement/kdp-123/status.json'), '.local/authenticated-measurement/restored/kdp.json');
+});
+test('KDP accepts a date range and turns book rows into daily revenue rows', () => {
+  // 範囲の中の日付は受け、範囲の外は止める
+  assert.equal(parseKdpReport(kdpFixture(), kdpListings, { start: '2026-09-14', end: '2026-09-20' }).period.start, '2026-09-14');
+  assert.throws(() => parseKdpReport(kdpFixture(), kdpListings, { start: '2026-09-21', end: '2026-09-27' }));
+  const report = parseKdpReport(kdpFixture(), kdpListings, '2026-09-20');
+  const rows = kdpDailyRows(report, '2026-09-21T00:00:00.000Z');
+  const paid = rows.find(r => r.kind === 'paid-orders');
+  assert.equal(paid.quantity, 2);
+  assert.equal(paid.channel, 'kdp');
+  assert.equal(paid.finality, 'provisional');
+  assert.ok(rows.every(r => r.date === '2026-09-20' && r.productId && r.marketplace));
+  // 同じ日・書籍・ストア・種類は 1 行にまとまる (明細のキーが重複しない)
+  assert.equal(new Set(rows.map(r => JSON.stringify([r.date, r.productId, r.marketplace, r.kind]))).size, rows.length);
+  // 円以外のロイヤリティは円に直さず、明細に書かない
+  const foreign = { ...report, records: report.records.map(r => r.kind === 'estimated-ebook-royalty' ? { ...r, currency: 'USD' } : r) };
+  if (report.records.some(r => r.kind === 'estimated-ebook-royalty')) assert.equal(kdpDailyRows(foreign, '2026-09-21T00:00:00.000Z'), null);
+});
+test('KDP rejects malformed, wrong-day, unmapped, duplicate and foreign observations', () => {
+  for (const mutate of [
+    w => w.removeWorksheet('既読 KENPC'),
+    w => { w.getWorksheet('確定済み注文').getRow(1).getCell(6).value = '新列'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(1).value = '2026-09-19'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(4).value = 'B0HF17SQ9X'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(3).value = 'doboku-note'; },
+    w => { w.getWorksheet('確定済み注文').getRow(2).getCell(6).value = ''; },
+    w => { const s=w.getWorksheet('確定済み注文');s.addRow(s.getRow(2).values); },
+  ]) {
+    const w = kdpFixture(); mutate(w);
+    assert.throws(()=>parseKdpReport(w,kdpListings,'2026-09-20'));
+  }
+  assert.throws(()=>kdpAsinMap({ ...kdpListings, other: { author:'stats47',asin:'B0HF17SQ9N' } }));
+});
+
+test('human login opens a page for every collected source and none for sources removed from collection', () => {
+  // もしも・afb は 2026-10-19 に取得元から外した。sourceFor が unknown_source で止めるので、ログイン先の表に残しても使われない
+  const bootstrap = readFileSync(resolve('.claude/scripts/measurement/bootstrap-session.mjs'), 'utf8');
+  for (const name of Object.keys(SOURCES)) assert.match(bootstrap, new RegExp(`\\b${name}: 'https://`), name);
+  for (const name of ['moshimo', 'afb']) assert.doesNotMatch(bootstrap, new RegExp(`\\b${name}: 'https://`), name);
+  assert.throws(() => sourceFor('moshimo'), /unknown_source/);
+});
+
+test('session export strips other services and rejects lookalike hosts', () => {
+  const state = scopedState('note', { cookies: [
+    { domain: '.note.com', name: 'auth', value: 'secret' },
+    { domain: 'note.com.evil.example', name: 'auth', value: 'wrong' },
+    { domain: '.google.com', name: 'auth', value: 'other' },
+  ], origins: [{ origin: 'https://note.com', localStorage: [] }, { origin: 'https://google.com', localStorage: [] }] });
+  assert.equal(state.cookies.length, 1);
+  assert.equal(state.origins.length, 1);
+  assert.throws(() => scopedState('note', { cookies: [], origins: [] }), /session_missing/);
+  assert.throws(() => sourceFor('__proto__'), /unknown_source/);
+});
+
+test('private evidence is authenticated and bound to its object address', () => {
+  assert.equal(BUCKET, 'stats47-private');
+  const key = randomBytes(32), body = Buffer.from('sensitive report');
+  const sealed = encrypt(body, key, 'note/session');
+  assert.equal(sealed.includes(body), false);
+  assert.deepEqual(decrypt(sealed, key, 'note/session'), body);
+  assert.throws(() => decrypt(sealed, key, 'a8/session'));
+  assert.throws(() => decrypt(sealed, randomBytes(32), 'note/session'));
+  sealed[sealed.length - 1] ^= 1;
+  assert.throws(() => decrypt(sealed, key, 'note/session'));
+});
+
+test('public failure codes cannot contain raw authentication diagnostics', () => {
+  assert.equal(failureCode('auth_required cookie=private'), 'auth_required');
+  assert.equal(failureCode('account_mismatch name=private'), 'account_mismatch');
+  assert.equal(failureCode('AccessDenied secret=private'), 'storage_error');
+  assert.equal(failureCode('HTML with private details'), 'collection_failed');
+  assert.equal(failureCode('report_incomplete'), 'report_incomplete');
+});
+
+test('restore permits canonical reports only and rejects failed, stale or future attempts', () => {
+  const gscDir = 'data/gsc/coverage-drilldown/2026-W42/';
+  assert.equal(consumerPath('gsc', `${gscDir}not-found-404-drilldown.csv`), `${gscDir}not-found-404-drilldown.csv`);
+  assert.equal(consumerPath('gsc', `${gscDir}category-totals.json`), `${gscDir}category-totals.json`);
+  for (const file of ['coverage-live-observe-urls.csv', 'coverage-live-resubmit-urls.csv']) {
+    assert.equal(consumerPath('gsc', `${gscDir}${file}`), null, 'restoring inputs must not overwrite newer queue-derived observation targets');
+  }
+  assert.equal(consumerPath('note', '.local/authenticated-measurement/note-123/note/latest.json'), 'data/note/dashboard/latest.json');
+  for (const path of ['../../.env.local', '.local/authenticated-measurement/note-123/state.json', '.local/authenticated-measurement/note-123/note/../../note/latest.json']) assert.equal(consumerPath('note', path), null);
+  assert.equal(consumerPath('moshimo', 'data/affiliate/a8-results.json'), null);
+  const now = Date.parse('2026-09-21T00:00:00Z');
+  validateAttempt({status:'pass',observedAt:'2026-09-20T00:00:00Z'},now);
+  const gsc = { source: 'gsc', capability: SOURCES.gsc.capability, status: 'pass', observedAt: '2026-09-20T00:00:00Z' };
+  validateAttempt(gsc, now, 'gsc');
+  assert.throws(() => validateAttempt({ ...gsc, capability: 'coverage-export' }, now, 'gsc'), /capability_mismatch/);
+  assert.throws(() => validateAttempt(gsc, now, 'kdp'), /capability_mismatch/);
+  // 数日後に動くアフィリエイト週次は週次の記録を復元できる。9 日前の記録は拒む
+  validateAttempt({status:'pass',observedAt:'2026-09-14T00:00:00Z'},now);
+  for (const attempt of [null, {status:'failed',observedAt:'2026-09-20T00:00:00Z'}, {status:'pass',observedAt:'2026-09-12T00:00:00Z'}, {status:'pass',observedAt:'2026-09-22T00:00:00Z'}]) assert.throws(()=>validateAttempt(attempt,now));
+});
+
+test('independent health detects stalled schedules even when the last run passed', () => {
+  const now = Date.parse('2026-09-21T00:00:00Z');
+  const state = {generatedAt:'2026-09-20T00:00:00Z', sources:Object.keys(SOURCES).map(source=>({source,capability:SOURCES[source].capability,status:'pass',observedAt:'2026-09-20T00:00:00Z',metricsAvailable:true}))};
+  assert.equal(measurementHealth(state,now).status,'pass');
+  const kdp = state.sources.find(s=>s.source==='kdp');
+  kdp.capability = 'publication-status';
+  assert.equal(measurementHealth(state,now).sources.find(s=>s.source==='kdp').metricsAvailable,false);
+  assert.equal(measurementHealth(state,now).status,'action_required');
+  kdp.capability = SOURCES.kdp.capability;
+  // 週次の取得 (土曜) の記録は次の取得まで有効で、8 日を過ぎたら古い (MEASUREMENT_MAX_AGE_MS)
+  assert.equal(measurementHealth(state,now+6*86400000).status,'pass');
+  assert.equal(measurementHealth(state,now+8*86400000).status,'action_required');
+  state.sources[0].observedAt='2026-09-10T00:00:00Z';
+  assert.equal(measurementHealth(state,now).status,'action_required');
+  assert.equal(measurementHealth(null,now).status,'action_required');
+});
+
+test('missing jobs remain failed and activated consumers never silently fall back after failure', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-measurement-test-'));
+  const script = resolve('.claude/scripts/measurement/summarize.mjs');
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const observation = { source: 'note', capability: SOURCES.note.capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID };
+    writeFileSync(join(input, 'note.json'), JSON.stringify(observation));
+    execFileSync(process.execPath, [script, input], { cwd: temp });
+    const path = join(temp, 'data/authenticated/latest.json');
+    const first = JSON.parse(readFileSync(path));
+    assert.equal(first.sources.length, Object.keys(SOURCES).length);
+    assert.equal(first.status, 'action_required');
+    assert.equal(first.sources.find(s => s.source === 'note').activated, true);
+    assert.equal(first.sources.find(s => s.source === 'a8').code, 'runner_failed');
+    writeFileSync(join(input, 'note.json'), JSON.stringify({ ...observation, status: 'failed', code: 'auth_required', metricsAvailable: true }));
+    execFileSync(process.execPath, [script, input], { cwd: temp });
+    const second = JSON.parse(readFileSync(path)).sources.find(s => s.source === 'note');
+    assert.equal(second.activated, true);
+    assert.equal(second.metricsAvailable, false);
+    assert.equal(second.code, 'auth_required');
+    const current = { ...observation, runId: 'current-run' };
+    for (const invalid of [
+      { ...current, source: 'gsc' },
+      { ...current, capability: 'publication-status' },
+      { ...current, observedAt: '2020-01-01T00:00:00Z' },
+      { ...current, runId: 'old-run' }, null,
+    ]) {
+      writeFileSync(join(input, 'note.json'), JSON.stringify(invalid));
+      execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'current-run' } });
+      const rejected = JSON.parse(readFileSync(path)).sources.find(s => s.source === 'note');
+      assert.equal(rejected.code, 'invalid_observation');
+      assert.equal(rejected.status, 'failed');
+      assert.equal(rejected.metricsAvailable, false);
+    }
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test('rerun artifacts select the latest attempt and never resurrect an older success', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-measurement-rerun-'));
+  const script = resolve('.claude/scripts/measurement/summarize.mjs');
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const observation = { source: 'a8', capability: SOURCES.a8.capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId: 'current-run', runAttempt: 4 };
+    writeFileSync(join(input, 'a8.json'), JSON.stringify({ ...observation, status: 'failed' }));
+    writeFileSync(join(input, 'a8-4.json'), JSON.stringify(observation));
+    const read = () => {
+      execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'current-run', GITHUB_RUN_ATTEMPT: '5' } });
+      return JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources.find(s => s.source === 'a8');
+    };
+    assert.equal(read().status, 'pass');
+    assert.equal(read().runAttempt, 4);
+    writeFileSync(join(input, 'a8-5.json'), JSON.stringify({ ...observation, runAttempt: 5, status: 'failed', code: 'api_auth_required' }));
+    assert.equal(read().code, 'api_auth_required');
+    for (const bad of ['not JSON', JSON.stringify(observation), JSON.stringify({ ...observation, runAttempt: 5, runId: 'old-run' })]) {
+      writeFileSync(join(input, 'a8-5.json'), bad);
+      assert.equal(read().code, 'invalid_observation');
+      assert.equal(read().metricsAvailable, false);
+    }
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+// 意図: 認証切れの案内は、今ある手順 (Mac で本人が入り直して取り直す) だけを指す。撤去した「Secrets へ送る」手順を案内しない。
+test('KDP auth recovery points to a human login on the Mac instead of re-exporting stale state', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-kdp-recovery-test-'));
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    writeFileSync(join(input, 'kdp-2.json'), JSON.stringify({ source: 'kdp', capability: SOURCES.kdp.capability,
+      observedAt: new Date().toISOString(), status: 'failed', code: 'auth_required', runId: 'kdp-recovery', runAttempt: 2,
+      relogin: 'human_required' }));
+    execFileSync(process.execPath, [resolve('.claude/scripts/measurement/summarize.mjs'), input], {
+      cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'kdp-recovery', GITHUB_RUN_ATTEMPT: '2' },
+    });
+    const summary = readFileSync('/tmp/authenticated-measurement-summary.md', 'utf8');
+    assert.match(summary, /refresh-session\.mjs kdp --wait-human/);
+    assert.match(summary, /measurement-session-refresh\.sh で取り直す/);
+    assert.doesNotMatch(summary, /--publish|Secret|CI/);
+    assert.match(summary, /再ログインを反復せず停止/);
+    // relogin の欄は記録の形として残す。値を書かなかった取得元は null で、結果を推測で埋めない
+    const sources = JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources;
+    assert.equal(sources.find(s => s.source === 'kdp').relogin, 'human_required');
+    assert.equal(sources.find(s => s.source === 'a8').relogin, null);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+// 成果物の取得に失敗しても認証付き計測の検査が走ることは、2026-10-26 に週次レビューへ移した台本 ci-health.sh の
+// 振る舞いテスト (.claude/scripts/management/__tests__/weekly-audits.test.mjs) が持つ。
+
+// ログインは週 1 回 (土曜 07:00) この Mac だけが持ち、CI へは渡さない (2026-10-20 オーナー判断。CI の認証付き計測は撤去)。
+test('the weekly Mac job logs in locally and collects on the Mac without handing sessions to CI', () => {
+  assert.equal(existsSync('.github/workflows/authenticated-measurement.yml'), false, 'CI の認証付き計測は撤去した');
+  const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
+  assert.match(wrapper, /refresh-session\.mjs a8 kdp note rakuten \|\| REFRESH_RC=/);
+  assert.match(wrapper, /measurement-collect-local\.sh" \|\| REFRESH_RC=/);
+  assert.doesNotMatch(wrapper, /--publish/, 'セッションを CI の Secrets へ渡さない');
+  assert.doesNotMatch(wrapper, /gh workflow run/, 'CI を起動しない');
+  assert.match(readFileSync('.claude/scripts/measurement/collect-local.mjs', 'utf8'), /MEASUREMENT_SOURCES: names\.join\(','\)/);
+});
+
+// 一部の取得元だけを取り直した実行は、取らなかった取得元の行を残す。取りに行って失敗した取得元は前回の成功に戻さない。
+test('a partial run keeps the rows of sources it did not collect and still records its own failures', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-measurement-backup-'));
+  const script = resolve('.claude/scripts/measurement/summarize.mjs');
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const pass = (source, runId) => ({ source, capability: SOURCES[source].capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId });
+    writeFileSync(join(input, 'a8.json'), JSON.stringify(pass('a8', 'mac-run')));
+    writeFileSync(join(input, 'note.json'), JSON.stringify(pass('note', 'mac-run')));
+    const run = (env) => {
+      execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, MEASUREMENT_SOURCES: '', ...env } });
+      return JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json')));
+    };
+    const mac = run({ GITHUB_RUN_ID: 'mac-run' });
+    assert.equal(mac.sources.find((s) => s.source === 'a8').status, 'pass');
+
+    rmSync(input, { recursive: true }); mkdirSync(input);
+    writeFileSync(join(input, 'note.json'), JSON.stringify({ ...pass('note', 'ci-run'), status: 'failed', code: 'auth_required' }));
+    const backup = run({ GITHUB_RUN_ID: 'ci-run', MEASUREMENT_SOURCES: 'note' });
+    assert.deepEqual(backup.sources.find((s) => s.source === 'a8'), mac.sources.find((s) => s.source === 'a8'));
+    assert.equal(backup.sources.find((s) => s.source === 'note').code, 'auth_required');
+    assert.equal(backup.sources.find((s) => s.source === 'note').metricsAvailable, false);
+
+    // 取得元の指定が無い実行では、結果の無い取得元は従来どおり失敗のまま
+    const full = run({ GITHUB_RUN_ID: 'ci-run' });
+    assert.equal(full.sources.find((s) => s.source === 'a8').code, 'runner_failed');
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+// 意図 (2026-10-20 オーナー判断・MEASUREMENT-MAC-DIRECT-01): ログインと取得は Mac だけが持つ。CI がセッションや
+// ID/PW を受け取る入口 (Secrets の名前・CI 再ログイン・Secrets への送信) を残すと、撤去した経路を誰かが
+// 再び配線できてしまうので、入口そのものが無いことを固定する。
+test('no CI-only entry point for sessions or credentials remains', () => {
+  const ciOnly = /MEASUREMENT_SESSION|STATS47_AUTH_|AFB_API_KEY|ciLogin|ciRelogin|readCiCredential|ciCredential|ciStored|ciSecrets|auth:ci-secret|set-ci-secret|auth-recovery\.mjs|gh', \['secret'|"gh", \["secret"/;
+  const dir = '.claude/scripts/measurement';
+  const files = [
+    ...readdirSync(dir).filter((file) => file.endsWith('.mjs')).map((file) => join(dir, file)),
+    'package.json', 'config/env-registry.json', '.claude/config/auth-credentials.json',
+    'apps/admin/app/ops/auth/page.tsx', 'apps/admin/lib/server/auth-credentials.ts',
+    'docs/01_技術設計/07_Playwright認証プロファイル.md',
+  ];
+  // bootstrap-session.mjs は保管庫の鍵を二重に作らないために Secrets の名前の一覧だけを読む (値は読めず、書かない)
+  const allowed = (file, line) => file.endsWith('bootstrap-session.mjs') && /gh', \['secret', 'list'/.test(line);
+  const hits = files.flatMap((file) => readFileSync(file, 'utf8').split('\n')
+    .flatMap((line, index) => (ciOnly.test(line) && !allowed(file, line) ? [`${file}:${index + 1}`] : [])));
+  assert.deepEqual(hits, []);
+  for (const removed of ['set-ci-secret.mjs', 'auth-recovery.mjs', '__tests__/auth-recovery.test.mjs']) {
+    assert.equal(existsSync(join(dir, removed)), false, `${removed} は CI 専用だった`);
+  }
+  for (const script of ['refresh-session.mjs', 'bootstrap-session.mjs', 'collect.mjs', 'collect-local.mjs']) {
+    assert.doesNotMatch(readFileSync(script === 'refresh-session.mjs' ? 'packages/ops/src/measurement/refresh-session.mjs' : join(dir, script), 'utf8'), /--publish|'--ci'|GITHUB_ACTIONS/, `${script} は Secrets へ送らず、CI の分岐を持たない`);
+  }
+});
+
+test('Mac direct collection reads the session from the Mac profile and writes only evidence to the vault', () => {
+  const collect = readFileSync('.claude/scripts/measurement/collect.mjs', 'utf8');
+  assert.match(collect, /const vaultWrites = process\.argv\.includes\('--vault'\);/);
+  // セッションの正本は Mac の専用プロファイル。保管庫へはセッションも認証停止の記録も書かず、保管庫から読みもしない
+  assert.doesNotMatch(collect, /\/session`|\/auth-recovery`|readVault/);
+  const runner = readFileSync('.claude/scripts/measurement/collect-local.mjs', 'utf8');
+  assert.match(runner, /\[name, '--vault'\]/);
+  assert.match(runner, /MEASUREMENT_VAULT_WRITER: 'mac'/);
+  const vault = readFileSync('.claude/scripts/measurement/vault.mjs', 'utf8');
+  assert.match(vault, /if \(process\.env\.MEASUREMENT_VAULT_WRITER !== 'mac'\) throw new Error\('vault_write_mac_only'\)/);
+  const shell = readFileSync('scripts/scheduled/measurement-collect-local.sh', 'utf8');
+  const commit = shell.split('\n').find((line) => /git .*commit/.test(line));
+  assert.ok(commit, '記録コミットがある');
+  assert.doesNotMatch(commit, /skip ci|ci skip|no ci/i, 'CI を止める印を付けると develop→main の PR の検査が止まる');
+});
+
+test('note sales with private evidence survive an incomplete article inventory without making the source pass', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'stats47-note-revenue-'));
+  try {
+    const input = join(temp, 'input'); mkdirSync(input);
+    const runId = 'note-sales-recovery';
+    const observation = { source: 'note', capability: SOURCES.note.capability,
+      observedAt: new Date().toISOString(), status: 'failed', code: 'report_incomplete',
+      runId, runAttempt: 1, collectionAttempted: true, inventoryAvailable: true,
+      evidence: { sha256: 'a'.repeat(64), bytes: 100 },
+      quality: { revenueStatus: 'pass', revenueEvidenceAvailable: true,
+        revenue: { date: '2026-10-17', month: '2026-10', monthToDateYen: 0, closedMonths: {} } } };
+    const collect = (value) => {
+      rmSync(join(temp, 'data'), { recursive: true, force: true });
+      writeFileSync(join(input, 'note-1.json'), JSON.stringify(value));
+      execFileSync(process.execPath, [resolve('.claude/scripts/measurement/summarize.mjs'), input], {
+        cwd: temp, env: { ...process.env, GITHUB_RUN_ID: runId, GITHUB_RUN_ATTEMPT: '1' },
+      });
+      return {
+        state: JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))),
+        rows: JSON.parse(readFileSync(join(temp, 'data/authenticated/revenue-history.json'))).entries,
+      };
+    };
+    const result = collect(observation);
+    assert.equal(result.state.status, 'action_required');
+    assert.equal(result.state.sources.find(s => s.source === 'note').metricsAvailable, false);
+    assert.equal(result.rows.length, 1);
+    assert.equal(result.rows[0].monthToDateYen, 0, 'measured zero must be recorded');
+    for (const change of [
+      { evidence: null }, { collectionAttempted: false }, { code: 'auth_required' },
+      { quality: { ...observation.quality, revenueStatus: 'verification_required' } },
+      { quality: { ...observation.quality, revenueEvidenceAvailable: false } },
+      { runId: 'old-run' },
+    ]) assert.equal(collect({ ...observation, ...change }).rows.length, 0);
+    const code = readFileSync(resolve('.claude/scripts/measurement/collect.mjs'), 'utf8');
+    assert.match(code, /capture\(`\.local\/authenticated-measurement\/\$\{name\}-\$\{runId\}\/sales\.json`\)/,
+      'recorded note revenue must have a raw sales artifact in the private vault');
+  } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+// Keep full per-book assertions, but do not reload an already visible exact draft row.
+test('measurement bookshelf reuse requires the correct origin, path and exact draft; publishing still navigates', async () => {
+  const expected = { found: true, status: '販売中', asin: 'B0HF17SQ9N' };
+  const page = (url, count, visible = count > 0) => ({
+    url: () => url,
+    locator: selector => { assert.equal(selector, 'a[href*="/title-setup/kindle/draft-1/"]'); return { count: async () => count, first: () => ({ isVisible: async () => visible }) }; },
+    goto: async () => { throw new Error('fresh-navigation-required'); },
+    evaluate: async (_fn, args) => { assert.equal(args.id, 'draft-1'); return expected; },
+  });
+  const bookshelf = 'https://kdp.amazon.co.jp/ja_JP/bookshelf#2';
+  assert.equal(await readBookshelfState(page(bookshelf, 1), 'draft-1', { reuseVisibleRow: true }), expected);
+  for (const [url, count, reuseVisibleRow, visible] of [
+    [bookshelf, 0, true], [bookshelf, 1, true, false], [bookshelf, 1, false],
+    ['https://kdpreports.amazon.co.jp/dashboard', 1, true],
+    ['https://kdp.amazon.co.jp.evil.example/ja_JP/bookshelf', 1, true],
+    ['https://kdp.amazon.co.jp/ja_JP/bookshelf-other', 1, true],
+  ]) await assert.rejects(readBookshelfState(page(url, count, visible), 'draft-1', { reuseVisibleRow }), /fresh-navigation-required/);
+});
+
+test('note の販売履歴は日 × 記事の行にまとめ、購入者名の項目が来たら止める', async () => {
+  const { parseNoteSalesHistory } = await import('../../../../packages/ops/src/measurement/report-parsers.mjs');
+  const range = { start: '2026-10-01', end: '2026-11-13', observedAt: '2026-11-14T00:00:00.000Z' };
+  const url = 'https://note.com/stats47/n/nc5a1358141a5';
+  const pages = [
+    { month: '2026-10', complete: true, items: [
+      { url, date: '2026-10-05', priceYen: 300 }, { url, date: '2026-10-05', priceYen: 300 },
+      { url: null, date: '2026-10-20', priceYen: 500 },
+    ] },
+    { month: '2026-11', complete: true, items: [] },
+  ];
+  const daily = parseNoteSalesHistory(pages, range);
+  assert.deepEqual(daily.rows.map(r => [r.date, r.productId, r.kind, r.quantity, r.amountYen]),
+    [['2026-10-05', 'nc5a1358141a5', 'sales', 2, 600], ['2026-10-20', null, 'sales-total', 1, 500]]);
+  assert.deepEqual([daily.channel, daily.start, daily.end], ['note', '2026-10-01', '2026-11-13']);
+  // 月が欠ける・続きがある (complete でない) なら明細を作らない
+  assert.throws(() => parseNoteSalesHistory([pages[0]], range), /report_incomplete/);
+  assert.throws(() => parseNoteSalesHistory([{ ...pages[0], complete: false }, pages[1]], range), /report_incomplete/);
+  // 購入者名などの余分な項目は受け取らない (公開リポジトリに個人の名前を書かない)
+  assert.throws(() => parseNoteSalesHistory([{ month: '2026-10', complete: true, items: [{ url, date: '2026-10-05', priceYen: 300, buyer: 'x' }] }, pages[1]], range), /report_schema_changed/);
+  // 取得側はブラウザの外へ URL・日付・金額だけを出す
+  const code = readFileSync('.claude/scripts/measurement/note-sales.mjs', 'utf8');
+  assert.match(code, /return \{ url: link \? link\.href\.split\('\?'\)\[0\] : null, date: .*\n\s+priceYen: /);
+});

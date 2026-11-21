@@ -111,7 +111,7 @@ observe-after-fix (sitemap/内部リンク/canonical/content 修正 + URL Inspec
 
 - pipeline: `.claude/scripts/search-growth/{collect,normalize,analyze,report,cli}.mjs`
 - lib: `.claude/scripts/search-growth/lib/{contracts,freshness,redaction,join-url,scoring,sources,service,state}.mjs`
-- MCP: `.claude/scripts/search-growth/mcp/server.mjs`
+- MCP: `packages/ops/src/search-growth/mcp/server.mjs`
 - state: `data/search-growth/{latest,candidates,health,past-effects}.json` + `manifests/`
 - CI: `.github/workflows/search-growth-weekly.yml` (weekly candidate rebuild・committed snapshot 再利用)
 - test: `.claude/scripts/search-growth/__tests__/*.test.mjs`

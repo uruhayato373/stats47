@@ -1,0 +1,44 @@
+{
+  "week": "2026-W47",
+  "date": "2026-11-21",
+  "view": "ALL_SUBMITTED_URLS",
+  "status": "captured",
+  "index_status": {
+    "date": "2026-11-16",
+    "indexed": 7967,
+    "not_indexed": 1448
+  },
+  "totals": {
+    "server-error-5xx": 5,
+    "redirect": 2,
+    "discovered-not-indexed": 692,
+    "crawled-not-indexed": 110,
+    "noindex-excluded": 579,
+    "not-found-404": 52,
+    "redirect-error": 8,
+    "soft-404": 0,
+    "robots-blocked": 0
+  },
+  "raw": {
+    "サーバーエラー（5xx）": 5,
+    "ページにリダイレクトがあります": 2,
+    "検出 - インデックス未登録": 692,
+    "クロール済み - インデックス未登録": 110,
+    "noindex タグによって除外されました": 579,
+    "見つかりませんでした（404）": 52,
+    "リダイレクト エラー": 8,
+    "ソフト 404": 0,
+    "robots.txt によりブロックされました": 0
+  },
+  "validation": {
+    "server-error-5xx": "失敗しました",
+    "redirect": "開始前",
+    "discovered-not-indexed": "開始前",
+    "crawled-not-indexed": "開始前",
+    "noindex-excluded": "開始",
+    "not-found-404": "開始",
+    "redirect-error": "開始",
+    "soft-404": "該当なし",
+    "robots-blocked": "合格"
+  }
+}

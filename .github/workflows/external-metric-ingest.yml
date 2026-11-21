@@ -68,7 +68,7 @@ jobs:
       - name: 🗂️ 取り込みスクリプトを決める
         run: |
           case "$INGEST" in
-            open-data-rankings) script=.claude/scripts/open-data/ingest-metric.mjs; report=.local/verification/themes/open-data-rankings-source.json ;;
+            open-data-rankings) script=packages/ops/src/open-data/ingest-metric.mjs; report=.local/verification/themes/open-data-rankings-source.json ;;
             ndb-questionnaire)
               script=.claude/scripts/themes/ingest-ndb-questionnaire.mjs
               report=.local/verification/themes/ndb-questionnaire-source.json

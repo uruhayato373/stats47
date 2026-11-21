@@ -115,7 +115,7 @@ Noto JPのPDFはフォント全体を埋め込む。subsetでは文字抽出が�
 ### 定型パックの納品物照合
 
 note で売る納品版は `data/products/note-pack-deliveries.json` の `_delivery`（成果物ディレクトリと manifest SHA）で固定し、
-`.claude/scripts/products/lib/pack-evidence.mjs` が manifest SHA・CSVの47地域・出典行数・PowerPoint抜粋数と照合する。
+`packages/ops/src/products/lib/pack-evidence.mjs` が manifest SHA・CSVの47地域・出典行数・PowerPoint抜粋数と照合する。
 数値・欠損・年・単位は固定し、公式メタデータ由来の指標名を `verified-product-labels.ts` に固定する。
 `product-indicator-label.ts` はソースの表ID・分類コードが変わったら再照合を要求する。
 短いサイト用titleをそのまま納品物の定義として使わない。基準年固定版を「最新」と宣伝しない。
