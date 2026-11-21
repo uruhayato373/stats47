@@ -80,7 +80,7 @@
 - [listmodels not proof](feedback_listmodels_is_not_proof_of_usable.md) — API の一覧は使える証拠でない。1 回叩く
 
 ## サイト (Next.js・UI)
-- [generatestaticparams r2 notfound](feedback_generatestaticparams_r2_notfound_stuck.md) — R2 依存 route に gSP を付けると notFound 固着
+- [generatestaticparams r2 notfound](feedback_generatestaticparams_r2_notfound_stuck.md) — R2 依存 route の gSP は空配列だけ (キー列は notFound 固着・関数なしは毎回描画)
 - [nextjs ssg cookies](feedback_nextjs_ssg_cookies.md) — layout 配下で cookies() を呼ぶと SSG 崩れ
 - [home pure ssg r2 empty](feedback_home_pure_ssg_r2_empty.md) — トップは force-dynamic
 - [workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番で空なら CLOUDFLARE_WORKERS の R2 skip を疑う

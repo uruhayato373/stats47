@@ -68,7 +68,16 @@ interface Params {
 // 1 指標 1 URL の HTML を 1 日キャッシュする (2026-11-13)。以前は県・ページ・自治体名のクエリで描き分ける
 // 毎回描画のページで、クローラーが 47 県とページ送りのリンクを総なめにするたびに 1.5〜2 秒の描画が走っていた。
 // 県の違いは県別のパス、ページ送りと自治体名の検索はクライアントの部品が担い、URL に載せない。
-// R2 を読む動的 route なので generateStaticParams は付けない (nextjs-ssg-preservation.md)
+/**
+ * オンデマンド ISR（24時間）。generateStaticParams は **空配列** を返す (キー列を返さない)。
+ * 関数が無いと revalidate を書いても実行時の ISR が効かず毎リクエスト描画になり、キー列を返すと
+ * ビルド時に R2 を読めず notFound が焼かれる (2026-06-22 障害)。理由の全文は ranking/[rankingKey]/page.tsx、
+ * 契約は __tests__/render-mode-contract.test.ts (CF-CPU-ISR-01)。
+ */
+export async function generateStaticParams(): Promise<Array<{ rankingKey: string }>> {
+  return [];
+}
+
 export const revalidate = 86400;
 
 /** サーバーが HTML に出す上位の件数 (検索エンジンに読ませる一覧)。51 位以下は利用者の操作で読む */

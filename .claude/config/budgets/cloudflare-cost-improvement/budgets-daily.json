@@ -65,6 +65,26 @@
       "note": "込み分 3,000 万 ms/月、超過 $0.02/100 万 ms。4,500 万 ms/日は 2026-10-15〜11-11 の日次の中央値付近、8,000 万 ms/日は月約 $48 相当。対策の効果確認後に引き下げる"
     },
     {
+      "rule_id": "workers-route-full-renders-per-url",
+      "metric_key": "workers_route_max_full_renders_per_url",
+      "required": false,
+      "operator": ">",
+      "threshold": 2,
+      "severity": "warning",
+      "title": "1 URL あたり 1 日のフル描画 (CPU 200 ms 超) が 2 回を超えた route がある",
+      "note": "ISR が効いていれば 1 URL は 1 日 1 回 + デプロイの回数しか描かれない。2026-11-21 の /ranking/* は 3.1 (ISR が効いていなかった。CF-CPU-ISR-01)。どの route かは snapshot の routeCpu.routes を見る。デプロイが多い日は版の数 (routeCpu.versionsSeen) だけ増える"
+    },
+    {
+      "rule_id": "workers-route-avg-full-render-cpu",
+      "metric_key": "workers_route_max_avg_full_render_cpu_ms",
+      "required": false,
+      "operator": ">",
+      "threshold": 1700,
+      "severity": "warning",
+      "title": "フル描画 1 回の平均 CPU が 1,700 ms を超えた route がある",
+      "note": "2026-11-21 の /ranking/* のフル描画平均 1,674 ms を上限にした (これより重くなったら 1 描画の退行)。どの route かは snapshot の routeCpu.routes を見る"
+    },
+    {
       "rule_id": "r2-class-a-spike",
       "metric_key": "r2_class_a_ops",
       "operator": ">",
