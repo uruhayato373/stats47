@@ -213,7 +213,7 @@ node .claude/scripts/gsc/analyze-ctr-seesaw.mjs --weekly            # 日次を�
 
 # 計測→review→候補判断→plan→月次集約の接続
 node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor
-node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs
+node --test .claude/scripts/lib/__tests__/audit-operations-cycle.test.mjs
 ```
 
 ## 実証チェックリスト（効果判定を確定してTODO行を削除する前に必須）

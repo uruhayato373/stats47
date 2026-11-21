@@ -85,7 +85,7 @@ test("agent の指摘は見せた投稿だけを採用し、無い id と形の�
 
 test("報告は指摘が無く agent も動いていれば null、あれば媒体・予約時刻つきで並べる", () => {
   const items = [item({ id: "post-1", contentKey: "wooden-housing-ratio" })];
-  const base = { date: "2026-09-27", from: "2026-09-27", to: "2026-10-05", items, mechanical: [] };
+  const base = { date: "2026-09-27", from: "2026-09-27", to: "2026-10-05", items, mechanical: [], ruleRef: "rules/sns.md" };
   assert.equal(buildSnsReport({ ...base, agent: { findings: [], summary: "なし" }, agentError: null }), null);
   const body = buildSnsReport({
     ...base,
@@ -93,5 +93,7 @@ test("報告は指摘が無く agent も動いていれば null、あれば媒�
     agentError: null,
   });
   assert.match(body ?? "", /🔴 高 x 2026-09-25 08:00 `wooden-housing-ratio`: 本文の県名が画像と違う/);
+  // 正典の規約のパスは呼ぶ側が渡した値をそのまま出す
+  assert.match(body ?? "", /正典: `rules\/sns\.md` §5\.6/);
   assert.match(buildSnsReport({ ...base, agent: null, agentError: "claude exited 1" }) ?? "", /実行できなかった/);
 });

@@ -525,7 +525,7 @@ jobs:
 
       - name: 🔄 GSC operations cycle contract
         # snapshot→review→候補判断→plan→月次集約の接続、JST週境界、coverage入力鮮度の退行を止める。
-        run: node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs packages/ops/src/gsc/__tests__/*.test.mjs packages/ops/src/gsc/__tests__/*.test.cjs packages/ops/src/metrics/__tests__/metrics-reader-ga4.test.mjs .claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs
+        run: node --test .claude/scripts/lib/__tests__/audit-operations-cycle.test.mjs packages/ops/src/gsc/__tests__/*.test.mjs packages/ops/src/gsc/__tests__/*.test.cjs packages/ops/src/metrics/__tests__/metrics-reader-ga4.test.mjs .claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs
         continue-on-error: false
 
       - name: 🔑 Google API client contract
@@ -647,7 +647,7 @@ jobs:
         run: |
           node packages/ops/src/blog/lint/__tests__/paren-number-lint.test.mjs
           node packages/ops/src/blog/lint/__tests__/stats-table-id-lint.test.mjs
-          node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
+          node --test .claude/scripts/lib/__tests__/critic-findings.test.mjs
           node --test packages/ops/src/blog/__tests__/audit-chart-provenance-cli.test.mjs
           node packages/ops/src/blog/lint/__tests__/article-factual-check.value.test.mjs
           node --test packages/ops/src/blog/lint/__tests__/article-factual-check.correlation.test.mjs

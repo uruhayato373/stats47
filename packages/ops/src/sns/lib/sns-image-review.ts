@@ -154,6 +154,8 @@ export function buildSnsReport(params: {
   mechanical: MechanicalFinding[];
   agent: { findings: AgentFinding[]; summary: string } | null;
   agentError: string | null;
+  /** 報告の末尾に出す正典の規約のパス (呼ぶ側の CLI が渡す) */
+  ruleRef: string;
 }): string | null {
   const agentFindings = params.agent?.findings ?? [];
   if (params.mechanical.length === 0 && agentFindings.length === 0 && !params.agentError) return null;
@@ -186,6 +188,6 @@ export function buildSnsReport(params: {
     lines.push(`対象外 ${skipped.length} 件: ${skipped.map((i) => `${label(i.id)} (${i.skipped})`).join(" / ")}`);
   }
   lines.push("");
-  lines.push("正典: `.claude/rules/sns-content-standards.md` §5.6");
+  lines.push(`正典: \`${params.ruleRef}\` §5.6`);
   return lines.join("\n");
 }

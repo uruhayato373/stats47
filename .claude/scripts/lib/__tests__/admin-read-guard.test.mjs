@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { allowOwnerRequest, checkBashCommand, checkBrowserInput } from '../admin-read-guard.mjs';
+import { allowOwnerRequest, checkBashCommand, checkBrowserInput } from '../../measurement/admin-read-guard.mjs';
 
 // 意図 (2026-10-20 オーナー判断): ログインが要る計測は土曜の朝に Mac が記録する。セッションは記録から判断し、
 // 管理画面を読むためにブラウザを開かない。投稿・申請・出品と、オーナーが会話で頼んだ取得は止めない。
@@ -42,7 +42,7 @@ test('Bash: running a reader script or browser-use on an admin page is denied; m
   }
   for (const command of ['grep -n fetch-a8-ui-csv.mjs .claude/skills/ads/a8-report/SKILL.md', "echo 'node packages/ops/src/ads/rakuten-report.mjs'",
     'npx -y tsx .claude/skills/ads/scout-asp/scripts/a8-browser.ts apply --id 1', 'browser-use open https://note.com/notes/new',
-    'node .claude/scripts/metrics/gsc-query.mjs --dims query', 'node --test .claude/scripts/measurement/__tests__/admin-read-guard.test.mjs']) {
+    'node .claude/scripts/metrics/gsc-query.mjs --dims query', 'node --test .claude/scripts/lib/__tests__/admin-read-guard.test.mjs']) {
     assert.equal(checkBashCommand(command, { root }), null, command);
   }
 }));

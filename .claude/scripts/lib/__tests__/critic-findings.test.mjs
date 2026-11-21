@@ -1,5 +1,5 @@
 /**
- * critic-findings の境界を固定する。実行: node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
+ * critic-findings の境界を固定する。実行: node --test .claude/scripts/lib/__tests__/critic-findings.test.mjs
  *
  * ★「繰り返した型だけを起票する」「同じ review.md を二重に数えない」「格上げ済みの型は格上げ後の再発だけを見る」
  *   の 3 つが崩れると、カードが毎日増えるか、逆に何も起票されない無検査の仕組みになる。
@@ -21,9 +21,9 @@ import {
   readLedgerRows,
   reviewProblems,
   toLedgerRows,
-} from "../critic-findings.mjs";
+} from "../../blog/lib/critic-findings.mjs";
 
-const RECORDER = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "record-critic-findings.mjs");
+const RECORDER = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "blog", "record-critic-findings.mjs");
 
 const TYPES = { "related-link": { label: "関連記事の紹介" }, region: { label: "地域のくくり" }, other: { label: "その他" } };
 const review = (slug, date, findings, heading = "## 指摘") =>
