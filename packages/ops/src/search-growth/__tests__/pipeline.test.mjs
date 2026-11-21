@@ -1,6 +1,6 @@
 /**
  * pipeline tests — source isolation / freshness / helpers。
- *   node --test .claude/scripts/search-growth/__tests__/pipeline.test.mjs
+ *   node --test packages/ops/src/search-growth/__tests__/pipeline.test.mjs
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";

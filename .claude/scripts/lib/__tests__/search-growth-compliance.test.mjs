@@ -5,7 +5,7 @@
  * stats47 の通常ページ (ranking/area/theme/blog/410) への送信 path が存在しないことを
  * 決定的に保証する。URL Inspection (観測) は維持されることも確認する。
  *
- *   node --test .claude/scripts/search-growth/__tests__/compliance.test.mjs
+ *   node --test .claude/scripts/lib/__tests__/search-growth-compliance.test.mjs
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -35,7 +35,7 @@ function walkScripts(rel) {
       if (e.isDirectory()) {
         if (e.name === "__tests__" || e.name === "node_modules") continue;
         rec(p);
-      } else if (/\.(mjs|cjs|js)$/.test(e.name)) {
+      } else if (/\.(mjs|cjs|js|ts)$/.test(e.name)) {
         out.push(p);
       }
     }
@@ -58,9 +58,10 @@ test("submit-cities-indexing.mjs は Indexing API publish path を持たない",
   assert.ok(!/from\s+["']googleapis["']/.test(src), "googleapis import が残存している");
 });
 
-test(".claude/scripts 配下の全スクリプトが Indexing API publish を参照しない", () => {
+// 運用の部品は packages/ops/src へ移している (SCRIPTS-TO-PACKAGES-02) ので、両方を走査する
+test(".claude/scripts と packages/ops/src の全スクリプトが Indexing API publish を参照しない", () => {
   const offenders = [];
-  for (const file of walkScripts(".claude/scripts")) {
+  for (const file of [...walkScripts(".claude/scripts"), ...walkScripts("packages/ops/src")]) {
     const src = fs.readFileSync(file, "utf8");
     if (src.includes(PUBLISH_NEEDLE)) offenders.push(path.relative(ROOT, file));
   }

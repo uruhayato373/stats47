@@ -8,7 +8,7 @@
  *
  * 台帳 (2 つ):
  *   1. `data/search-growth/past-effects.json` … `.urls` (key = pathKey or `<type>::<pathKey>`)
- *      → `.claude/scripts/search-growth/lib/scoring.mjs` が confidence を ×0.6 / ×0.3 する
+ *      → `packages/ops/src/search-growth/lib/scoring.mjs` が confidence を ×0.6 / ×0.3 する
  *   2. `data/adsense/past-effects.json` … `.candidates` (key = `<rule>::<key>`)
  *      → `packages/ops/src/metrics/lib/adsense-diagnostics.mjs` が同様に抑制する
  *
@@ -33,8 +33,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { parseBacklog } from "./scan-pending-improvements.mjs";
-import { toPathKey } from "../search-growth/lib/join-url.mjs";
-import { writeJson, readJson } from "../search-growth/lib/state.mjs";
+import { toPathKey } from "../../../packages/ops/src/search-growth/lib/join-url.mjs";
+import { writeJson, readJson } from "../../../packages/ops/src/search-growth/lib/state.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

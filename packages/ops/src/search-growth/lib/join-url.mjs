@@ -7,7 +7,7 @@
  * （trailing slash / query / fragment / canonical / domain）。
  */
 
-import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";
+import { SITE_ORIGIN } from "../../../../types/mirror/site-config.cjs";
 
 export { SITE_ORIGIN };
 const SITE_HOSTS = new Set(["stats47.jp", "www.stats47.jp"]);

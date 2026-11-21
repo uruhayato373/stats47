@@ -3,11 +3,11 @@
  * 正典: .claude/skills/analytics/search-growth/reference/platform-contract.md。
  * raw snapshot は既存配置を尊重し、ここには normalized/derived のみ置く。
  */
-import { isoWeekOf, jstDateOf } from '../../../../packages/ops/src/metrics/periods.mjs';
+import { isoWeekOf, jstDateOf } from '../../metrics/periods.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { PROJECT_ROOT } from "./sources.mjs";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 export const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("search-growth.state"));
 export const PATHS = {

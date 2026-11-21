@@ -5,7 +5,7 @@
  * （順序: blocker → verified → top opp → mobile → CWV → coverage → freshness → 判定対象）。
  *   node .claude/scripts/search-growth/report.mjs [--limit N] [--json]
  */
-import { PATHS, readJson, getArg, hasFlag } from "./lib/state.mjs";
+import { PATHS, readJson, getArg, hasFlag } from "../../../packages/ops/src/search-growth/lib/state.mjs";
 import { pathToFileURL } from "node:url";
 
 const BLOCKER_TYPES = new Set(["server-risk", "indexability-conflict", "soft-404-risk", "canonical-drift"]);

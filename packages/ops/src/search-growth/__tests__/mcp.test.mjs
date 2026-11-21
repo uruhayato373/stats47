@@ -1,6 +1,6 @@
 /**
  * MCP + service tests。
- *   node --test .claude/scripts/search-growth/__tests__/mcp.test.mjs
+ *   node --test packages/ops/src/search-growth/__tests__/mcp.test.mjs
  * 注: latest.json / candidates.json (normalize→analyze 後) を読む。無ければ構造だけ検証。
  */
 import { test } from "node:test";

@@ -345,7 +345,7 @@ jobs:
         run: |
           git fetch --no-tags origin "$BASE_SHA" --depth=1
           node .claude/scripts/search-growth/check-keyword-state.mjs --base "$BASE_SHA"
-          node --test .claude/scripts/search-growth/__tests__/*.test.mjs
+          node --test packages/ops/src/search-growth/__tests__/*.test.mjs .claude/scripts/lib/__tests__/search-growth-compliance.test.mjs
 
       - name: 📦 Workspace Contract Guard
         # package entrypoint/exports、internal dependency、runtime循環、package-lock登録を検査。

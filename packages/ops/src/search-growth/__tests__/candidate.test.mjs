@@ -1,6 +1,6 @@
 /**
  * candidate engine tests — 決定的ルールの検証。
- *   node --test .claude/scripts/search-growth/__tests__/candidate.test.mjs
+ *   node --test packages/ops/src/search-growth/__tests__/candidate.test.mjs
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";

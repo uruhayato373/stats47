@@ -229,7 +229,7 @@ test("実 backlog に対して writer が正常終了する (現在 0 件)", () 
 });
 
 test("search-growth 台帳の key 規約が scoring.mjs の lookup と一致する", async () => {
-  const { buildCandidates } = await import("../../search-growth/lib/scoring.mjs");
+  const { buildCandidates } = await import("../../../../packages/ops/src/search-growth/lib/scoring.mjs");
   const url = "/blog/price-index-high-low-prefecture";
   const obs = (metric, value) => ({
     source: "gsc",

@@ -60,8 +60,8 @@ jobs:
       # source 別に失敗を隔離する (1 source の失敗が全体を止めない)。
       - name: 🧪 Compliance + unit tests (search-growth + metrics period contract)
         run: |
-          node --test .claude/scripts/search-growth/__tests__/*.test.mjs
-          node --test .claude/scripts/metrics/__tests__/*.test.mjs
+          node --test packages/ops/src/search-growth/__tests__/*.test.mjs .claude/scripts/lib/__tests__/search-growth-compliance.test.mjs
+          node --test .claude/scripts/metrics/__tests__/*.test.mjs packages/ops/src/metrics/__tests__/periods.test.mjs .claude/scripts/lib/__tests__/iso-week-consistency.test.mjs
 
       # 生 PSI は git に無く R2 state/psi/ が正本 (公開 URL・認証不要)。取れなくても他の source は進める
       - name: 📥 Pull raw PSI from R2 state/psi/

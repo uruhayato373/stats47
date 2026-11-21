@@ -1,7 +1,7 @@
 /**
  * MCP protocol smoke — stdio server を spawn し initialize/tools/list/tools/call を実際に往復する。
  * Claude Code に load させずに server の動作を確認する。
- *   node --test .claude/scripts/search-growth/__tests__/mcp-protocol.test.mjs
+ *   node --test packages/ops/src/search-growth/__tests__/mcp-protocol.test.mjs
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";

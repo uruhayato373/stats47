@@ -11,7 +11,7 @@
  * この module は純粋 (I/O なし)。書き込みは cli.mjs が state.mjs 経由で行う。
  * MCP には mutation を公開しない（read-only維持）。
  */
-import { isoWeekOf, jstDateOf } from '../../../../packages/ops/src/metrics/periods.mjs';
+import { isoWeekOf, jstDateOf } from '../../metrics/periods.mjs';
 
 /** candidate type → トリアージの3区分。 */
 export const CANDIDATE_CATEGORY = Object.freeze({

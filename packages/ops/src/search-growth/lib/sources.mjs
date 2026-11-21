@@ -12,15 +12,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createObservation } from "./contracts.mjs";
-import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "../../../../packages/ops/src/metrics/freshness.mjs";
+import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "../../metrics/freshness.mjs";
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
-import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
-import { findLatestPsiBatch } from "../../../../packages/ops/src/psi/lib/latest-batch.mjs";
-import { addDays, isoWeekRange } from '../../../../packages/ops/src/metrics/periods.mjs';
+import { datasetDir, datasetPath } from "../../../../../config/datasets.mjs";
+import { findLatestPsiBatch } from "../../psi/lib/latest-batch.mjs";
+import { addDays, isoWeekRange } from '../../metrics/periods.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
+export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
 const LIVE_DIR = path.join(PROJECT_ROOT, `${datasetDir("search-growth.state")}/live`);
 
 // ── CSV / week helpers ────────────────────────────────────────────────
@@ -126,7 +126,6 @@ const GSC = {
   staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.gsc,
   api: "searchconsole.searchanalytics.query",
   secretName: "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
-  liveScript: ".claude/scripts/metrics/fetch-gsc-snapshot.mjs",
   normalize(root, now) {
     const dir = path.join(root, datasetDir("gsc.snapshots"));
     const week = latestWeekDir(dir);
@@ -161,7 +160,6 @@ const GA4 = {
   staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.ga4,
   api: "analyticsdata.runReport",
   secretName: "GA4_PROPERTY_ID",
-  liveScript: ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
   normalize(root, now) {
     const dir = path.join(root, datasetDir("ga4.snapshots"));
     const week = latestWeekDir(dir);
@@ -285,7 +283,6 @@ const INSPECTION = {
   staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.inspection,
   api: "searchconsole.urlInspection.index.inspect",
   secretName: "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
-  liveScript: ".claude/scripts/gsc/url-inspection-daily.cjs",
   normalize(root, now) {
     const dir = path.join(root, datasetDir("gsc.url-inspection"));
     const file = newestFile(dir, /^\d{4}-\d{2}-\d{2}\.csv$/);
@@ -331,7 +328,6 @@ const CLOUDFLARE = {
   staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.cloudflare,
   api: "cloudflare.graphql (usage)",
   secretName: "CLOUDFLARE_API_TOKEN",
-  liveScript: ".claude/scripts/cloudflare/fetch-usage.mjs",
   normalize(root, now) {
     const dir = path.join(root, datasetDir("cloudflare.snapshots"));
     const file = newestFile(dir, /^\d{4}-\d{2}-\d{2}\.json$/);
@@ -479,10 +475,21 @@ export function coverageSourceObservedAt(queue, fallback = null) {
   );
 }
 
-/** live fetch 用: 既存 fetcher を subprocess で呼ぶコマンドを組み立てる (実行は collect.mjs)。 */
-export function liveCommandFor(def, week) {
-  if (!def.liveScript) return null;
-  const args = [def.liveScript];
+/** source の live fetcher のパス。リポジトリ直下からの相対パス。 */
+export function liveScriptFor(def, liveScripts = {}) {
+  return liveScripts[def.name] ?? def.liveScript ?? null;
+}
+
+/**
+ * live fetch 用: 既存 fetcher を subprocess で呼ぶコマンドを組み立てる (実行は collect.mjs)。
+ * @param {object} def  source 定義
+ * @param {string} [week]
+ * @param {Record<string, string>} [liveScripts]  source name → fetcher のパス。呼ぶ側 (入口) が渡す。def.liveScript があればそれを既定にする
+ */
+export function liveCommandFor(def, week, liveScripts = {}) {
+  const script = liveScriptFor(def, liveScripts);
+  if (!script) return null;
+  const args = [script];
   if (week && (def.name === "gsc" || def.name === "ga4")) args.push("--week", week);
   return { cmd: "node", args, note: redactString(`node ${args.join(" ")}`) };
 }

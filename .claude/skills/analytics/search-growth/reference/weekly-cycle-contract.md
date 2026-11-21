@@ -14,7 +14,7 @@ tags: [search-growth, weekly, gsc, ga4, measurement]
 
 - 期間導出の機械SSOT: `packages/ops/src/metrics/periods.mjs`
 - 集計・履歴・LATEST描画: `packages/ops/src/metrics/lib/weekly-summary.mjs`
-- candidate・承認操作: `.claude/scripts/search-growth/lib/triage.mjs`
+- candidate・承認操作: `packages/ops/src/search-growth/lib/triage.mjs`
 - 運用入口: `../SKILL.md`
 - 未完了のCI/live確認: `.claude/todo/backlog.md` の `SEARCH-OBSERVABILITY-RELEASE-01`
 - 改善サイクルの効果状態: `.claude/todo/improvements.md#SEARCH-GROWTH-CYCLE-01`

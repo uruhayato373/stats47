@@ -6,7 +6,7 @@ on:
     paths:
       - '.github/workflows/seo-keyword-cycle-daily.yml'
       - '.claude/scripts/search-growth/*keyword*.mjs'
-      - '.claude/scripts/search-growth/lib/keyword-cycle.mjs'
+      - 'packages/ops/src/search-growth/lib/keyword-cycle.mjs'
       - '.claude/prompts/ci/keyword-cycle.md'
   schedule:
     - cron: '0 21 * * 5' # 土曜 06:00 JST。週 1 回 (2026-10-26 に日次から変更)
@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
       - name: Test keyword lifecycle and evidence guards
-        run: node --test .claude/scripts/search-growth/__tests__/*.test.mjs
+        run: node --test packages/ops/src/search-growth/__tests__/*.test.mjs .claude/scripts/lib/__tests__/search-growth-compliance.test.mjs
       - name: Fetch finalized seven-day GSC ranks
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
@@ -131,7 +131,7 @@ jobs:
           test -s "$EXECUTION_FILE"
           node .claude/scripts/search-growth/keyword-review.mjs "$EXECUTION_FILE" "$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           node .claude/scripts/search-growth/check-keyword-state.mjs --base HEAD
-          node --test .claude/scripts/search-growth/__tests__/keyword-cycle.test.mjs
+          node --test packages/ops/src/search-growth/__tests__/keyword-cycle.test.mjs
           cat .local/seo-rank-watch/review-body.md >> "$GITHUB_STEP_SUMMARY"
       - name: Verify proposed implementation
         if: steps.proposal.outputs.code_changed == 'true'

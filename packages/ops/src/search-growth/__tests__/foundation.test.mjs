@@ -1,11 +1,11 @@
 /**
  * foundation tests — contracts / freshness / redaction / join-url。
- *   node --test .claude/scripts/search-growth/__tests__/foundation.test.mjs
+ *   node --test packages/ops/src/search-growth/__tests__/foundation.test.mjs
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createObservation, validateObservation } from "../lib/contracts.mjs";
-import { daysBetween, classifyAge, freshnessForSource, worstFreshness } from "../../../../packages/ops/src/metrics/freshness.mjs";
+import { daysBetween, classifyAge, freshnessForSource, worstFreshness } from "../../metrics/freshness.mjs";
 import { hashQuery, redactString, redactUrl, redactObject } from "../lib/redaction.mjs";
 import { toPathKey, toCanonicalUrl, isAllowedUrl, stripTrackingParams } from "../lib/join-url.mjs";
 

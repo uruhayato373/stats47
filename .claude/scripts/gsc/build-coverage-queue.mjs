@@ -41,7 +41,7 @@ import { fileURLToPath } from "node:url";
 import { parse as parseCsv } from "csv-parse/sync";
 import { parseCoverageDrilldown } from '../../../packages/ops/src/gsc/lib/coverage-csv.mjs';
 import { probeCoverageUrls } from "../../../packages/ops/src/gsc/lib/coverage-probe.mjs";
-import { extractLocs } from "../search-growth/lib/live-sitemap.mjs";
+import { extractLocs } from "../../../packages/ops/src/search-growth/lib/live-sitemap.mjs";
 
 import {
   isIntentionallyNonIndexableResource,

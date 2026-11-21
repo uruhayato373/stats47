@@ -33,7 +33,7 @@ import { ASSESSMENT_CONTRACT_VERSION, reassessmentProvenance } from "../../../..
 import { decideVerdict } from "../../../../packages/ops/src/effect-verdict/engine.mjs";
 import { DEFAULT_THRESHOLDS } from "../../../../packages/ops/src/effect-verdict/thresholds.mjs";
 import { weekLt } from "../../../../packages/ops/src/effect-verdict/iso-week.mjs";
-import { currentIsoWeek } from "../../search-growth/lib/state.mjs";
+import { currentIsoWeek } from "../../../../packages/ops/src/search-growth/lib/state.mjs";
 import { createGscBlogWaveAdapter } from "../../blog/measure-gsc-impact.mjs";
 import { createAdsenseAdapter } from "../../metrics/measure-adsense-impact.mjs";
 import { loadGscImprovementsAdapter } from "../../metrics/lib/gsc-improvements-adapter.mjs";

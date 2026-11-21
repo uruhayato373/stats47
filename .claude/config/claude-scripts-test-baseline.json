@@ -69,6 +69,7 @@
     ".claude/scripts/lib/__tests__/geo-article-source-contract.test.ts": ".claude に残る Geo 記事の生成 CLI の本文から、図の出典の契約を読み出して確かめるテスト",
     ".claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs": "GSC カバレッジの部品と、.claude に残る CLI・Python の取り込みの本文の配線を突き合わせる",
     ".claude/scripts/lib/__tests__/husky-worktree-hook.test.cjs": "Claude Code と git の hook のテスト",
+    ".claude/scripts/lib/__tests__/iso-week-consistency.test.mjs": "週のラベルを作る関数 (packages の部品と、.claude に残る model-usage の usage-core) が JST の暦日で一致することを突き合わせるテスト",
     ".claude/scripts/lib/__tests__/kdp-monthly-wiring.test.mjs": "KDP の月次の部品と、.claude に残る計測の CLI (marketplace-status・collect・restore・summarize) の本文と起動の配線を確かめるテスト",
     ".claude/scripts/lib/__tests__/kdp-weekly-wiring.test.mjs": "KDP の週次の作業が週次レビュー・週次計画の skill と npm script に配線されていることを確かめるテスト",
     ".claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs": "agent の定義とスクリプトが最新年の選び方の部品を使うことの検査のテスト",
@@ -98,6 +99,7 @@
     ".claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/scripts-checkjs-scope.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs": "CI の検査の配線と範囲の契約のテスト",
+    ".claude/scripts/lib/__tests__/search-growth-compliance.test.mjs": "Indexing API の送信 path が .claude/scripts の CLI の本文 (gsc/ の CLI と .claude/scripts 全体) に無いことを、本文を読んで確かめるテスト",
     ".claude/scripts/lib/__tests__/session-guard.test.cjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/setup-memory-symlink.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
     ".claude/scripts/lib/__tests__/source-inventory.test.mjs": "参考文献の解決台帳の CLI が、書籍のページを skill と規約のパスへ対応づけることを確かめるテスト",
@@ -150,7 +152,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "metrics": {
-      "count": 6,
+      "count": 5,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "note": {
@@ -166,7 +168,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "search-growth": {
-      "count": 9,
+      "count": 1,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "sns": {

@@ -231,7 +231,7 @@
     "search-growth:dismiss": "node .claude/scripts/search-growth/cli.mjs dismiss",
     "search-growth:measure": "node .claude/scripts/search-growth/cli.mjs measure",
     "search-growth:all": "node .claude/scripts/search-growth/cli.mjs all",
-    "search-growth:test": "node --test .claude/scripts/search-growth/__tests__/*.test.mjs",
+    "search-growth:test": "node --test packages/ops/src/search-growth/__tests__/*.test.mjs .claude/scripts/lib/__tests__/search-growth-compliance.test.mjs .claude/scripts/lib/__tests__/iso-week-consistency.test.mjs",
     "seo:rank:fetch": "node .claude/scripts/search-growth/fetch-keyword-ranks.mjs --days 7",
     "seo:rank:cycle": "node .claude/scripts/search-growth/keyword-cycle.mjs run",
     "seo:rank:check": "node .claude/scripts/search-growth/check-keyword-state.mjs",
