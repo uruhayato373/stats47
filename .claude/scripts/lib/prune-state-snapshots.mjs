@@ -153,6 +153,25 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
+  // 2026-11-22 オーナー判断: 増え続けていた時系列 3 つに直近 26 週の寿命を付ける (古い世代は git の履歴から戻せる)。
+  // GSC カバレッジの週次ドリルダウン。週ごとのディレクトリを 26 個残す (history.csv は対象外)
+  "gsc-coverage-drilldown": {
+    directory: datasetDir("gsc.coverage-drilldown"),
+    pattern: /^\d{4}-W\d{2}$/,
+    keep: 26,
+  },
+  // 対象キーワードの順位の日次観測。26 週 = 182 日分を残す
+  "seo-rank-history": {
+    directory: datasetDir("seo.rank-history"),
+    pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
+    keep: 182,
+  },
+  // SNS 投稿の指標の取得 (ほぼ週 1 回。取得した日ごとのディレクトリ)。26 回分を残す
+  "sns-metric-snapshots": {
+    directory: datasetDir("sns.metric-snapshots"),
+    pattern: /^\d{4}-\d{2}-\d{2}$/,
+    keep: 26,
+  },
   // page-components-audit.cjs が書く area/theme 責務分離の棚卸しレポート (手動・不定期)。直近 8 回分を残す。
   "seo-audit-area-theme": {
     directory: datasetDir("seo.area-theme-audits"),

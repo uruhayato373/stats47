@@ -22,6 +22,7 @@ import { ProxyAgent } from "undici";
 import { ESTAT_META_INFO_URL } from "../../../packages/ops/src/estat/catalog-endpoints.cjs";
 import { getAppId } from "../../../packages/ops/src/estat/catalog-api.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
@@ -127,6 +128,8 @@ async function main() {
     topUnits: Object.entries(byUnit).sort((a, b) => b[1] - a[1]).slice(0, 20),
     perTable,
   };
+  // 書く前に台帳 estat.candidates の Schema で形を確かめる (要約の ssds-candidates-summary.json はこの台帳の外)
+  assertDatasetShape("estat.candidates", candidates);
   fs.mkdirSync(path.dirname(OUT_CANDIDATES), { recursive: true });
   fs.writeFileSync(OUT_CANDIDATES, JSON.stringify(candidates, null, 1));
   fs.writeFileSync(OUT_SUMMARY, JSON.stringify(summary, null, 2));

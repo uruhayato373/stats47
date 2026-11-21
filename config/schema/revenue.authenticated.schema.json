@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "認証付き計測の最新の成否",
-  "description": "data/authenticated/latest.json の形状契約。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "data/authenticated/latest.json の形状契約。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。書き手 (.claude/scripts/measurement/summarize.mjs) が決まった項目だけを書くオブジェクトは閉じる (additionalProperties: false。2026-11-22)。取得元ごとに項目が変わる quality だけは開けておく。新しい項目は properties へ足す。",
   "type": "object",
   "properties": {
     "generatedAt": {
@@ -16,7 +16,58 @@
         "string"
       ]
     },
-    "salesLedger": {},
+    "salesLedger": {
+      "description": "KDP 月次レポートを販売台帳へ足した結果 (KDP の取得が pass で月次の集計があったときだけ。無ければ null)",
+      "type": [
+        "null",
+        "object"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pass",
+            "conflict",
+            "failed"
+          ],
+          "description": "足した結果"
+        },
+        "month": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "対象の月"
+        },
+        "added": {
+          "type": "number",
+          "description": "足した行の数"
+        },
+        "skipped": {
+          "type": "number",
+          "description": "記録済みで足さなかった行の数"
+        },
+        "conflicts": {
+          "type": "array",
+          "description": "既存の行と数値が食い違った行"
+        },
+        "excluded": {
+          "type": "array",
+          "description": "円以外などで除外した行"
+        },
+        "coverageAdded": {
+          "type": "boolean",
+          "description": "計測済みの書籍の範囲を足したか"
+        },
+        "code": {
+          "type": "string",
+          "description": "書き込みに失敗した理由"
+        }
+      }
+    },
     "schemaVersion": {
       "type": [
         "null",
@@ -64,9 +115,17 @@
               "object"
             ],
             "properties": {
-              "bytes": {},
-              "sha256": {}
-            }
+              "sha256": {
+                "type": "string",
+                "description": "証拠の JSON の sha256"
+              },
+              "bytes": {
+                "type": "number",
+                "description": "証拠の JSON のバイト数"
+              }
+            },
+            "description": "保管庫へ書いた取得の証拠 (vault.mjs の writeVault が返す)",
+            "additionalProperties": false
           },
           "inventoryAvailable": {
             "type": [
@@ -74,7 +133,37 @@
               "null"
             ]
           },
-          "knownIncomplete": {},
+          "knownIncomplete": {
+            "description": "既知の欠け (オーナーが受け入れた取得の欠け。pass の取得元だけが持つ)",
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "description": "欠けの種類"
+              },
+              "missingRows": {
+                "type": [
+                  "null",
+                  "number"
+                ],
+                "description": "欠けた行の数"
+              },
+              "acceptedBy": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "description": "欠けを受け入れた判断 (誰・いつ)"
+              }
+            }
+          },
           "metricsAvailable": {
             "type": [
               "boolean",
@@ -100,8 +189,23 @@
               "revenue": {},
               "revenueEvidenceAvailable": {},
               "revenueStatus": {},
-              "totalsMatched": {}
-            }
+              "totalsMatched": {},
+              "dailyRows": {
+                "type": [
+                  "null",
+                  "number"
+                ],
+                "description": "収益の明細 (quality.daily) の行数。明細そのものは data/revenue/daily/ へ移し、ここには件数だけ残す"
+              },
+              "dailyCode": {
+                "type": [
+                  "null",
+                  "string"
+                ],
+                "description": "収益の明細を取れなかった理由"
+              }
+            },
+            "description": "取得元が書いた品質の記録 (取得元ごとに項目が変わるので閉じない)"
           },
           "recovery": {
             "type": [
@@ -111,7 +215,8 @@
             "properties": {
               "blockedSince": {},
               "state": {}
-            }
+            },
+            "additionalProperties": false
           },
           "relogin": {
             "type": [
@@ -152,7 +257,8 @@
         },
         "required": [
           "source"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "status": {
@@ -160,6 +266,47 @@
         "null",
         "string"
       ]
+    },
+    "revenueDaily": {
+      "description": "収益の明細を月ごとの台帳 (data/revenue/daily/) へ書いた結果。取得元ごとに 1 行",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "channel",
+          "status"
+        ],
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "チャネル"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "failed"
+            ],
+            "description": "書いた結果"
+          },
+          "start": {
+            "type": "string",
+            "description": "明細の最初の日"
+          },
+          "end": {
+            "type": "string",
+            "description": "明細の最後の日"
+          },
+          "rows": {
+            "type": "number",
+            "description": "書いた行の数"
+          },
+          "code": {
+            "type": "string",
+            "description": "書けなかった理由"
+          }
+        }
+      }
     }
   },
   "required": [
@@ -169,5 +316,6 @@
     "schemaVersion",
     "sources",
     "status"
-  ]
+  ],
+  "additionalProperties": false
 }

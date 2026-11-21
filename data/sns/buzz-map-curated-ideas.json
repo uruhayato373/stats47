@@ -4573,10 +4573,10 @@
         "primaryUrl": "/ranking/agricultural-output",
         "primaryKey": "agricultural-output",
         "secondaryUrls": [
-          "/themes/agriculture"
+          "/themes/agriculture-production"
         ],
         "articleSlug": null,
-        "themeSlug": "agriculture",
+        "themeSlug": "agriculture-production",
         "landingPromise": "農業産出額のランキングと人口あたりの分布を見る",
         "ctaLabel": "農業産出ランキングを見る",
         "searchIntent": "農業産出額 都道府県",
@@ -8023,10 +8023,10 @@
         "primaryUrl": "/ranking/agricultural-output",
         "primaryKey": "agricultural-output",
         "secondaryUrls": [
-          "/themes/agriculture"
+          "/themes/agriculture-production"
         ],
         "articleSlug": null,
-        "themeSlug": "agriculture",
+        "themeSlug": "agriculture-production",
         "landingPromise": "農業産出額のランキングと分布を見る",
         "ctaLabel": "農業産出ランキングを見る",
         "searchIntent": "農業産出額 都道府県",

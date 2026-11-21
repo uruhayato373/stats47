@@ -16,6 +16,7 @@ import { fileURLToPath } from "url";
 import { execFileSync } from 'node:child_process';
 import { NOTE_ARTICLES } from "../../../../packages/ops/src/note/catalog/index";
 import { datasetPath } from "../../../../config/datasets.mjs";
+import { assertDatasetShape } from "../../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
@@ -73,6 +74,8 @@ const outputs = [
 let drift = 0;
 const scratchpad = process.env.SCRATCHPAD || "/tmp";
 for (const { id, body } of outputs) {
+  // 台帳が Schema を宣言している出力は、書く前に形を確かめる (note.draft-index)
+  if (id === "note.draft-index") assertDatasetShape(id, body);
   const text = `${JSON.stringify(body, null, 2)}\n`;
   const target = join(ROOT, datasetPath(id));
   if (CHECK) {

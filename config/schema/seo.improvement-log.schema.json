@@ -1,7 +1,72 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "キーワード改善の実施記録",
-  "description": "data/seo/improvement-log.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "data/seo/improvement-log.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。書き手 (packages/ops/src/search-growth/lib/keyword-cycle.mjs の reviewDue / recordDeployment) が決まった項目だけを書くので、オブジェクトは閉じる (additionalProperties: false。2026-11-22)。新しい項目は properties へ足す。",
+  "definitions": {
+    "period": {
+      "description": "Search Console の集計期間 (periods.mjs が作る)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "periodStart": {
+          "type": "string"
+        },
+        "periodEnd": {
+          "type": "string"
+        },
+        "windowDays": {
+          "type": "number"
+        }
+      }
+    },
+    "review": {
+      "description": "判定 1 回分。判定できなかった回 (insufficient-data) は before / after / attribution を持たない。観測を人が閉じた回は note に経緯を書き、period / snapshotHash を持たない",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date"
+      ],
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string",
+          "description": "人が観測を閉じたときの経緯"
+        },
+        "before": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "施策時の順位 (actions[].rankAtAction)"
+        },
+        "after": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "判定時の順位"
+        },
+        "period": {
+          "$ref": "#/definitions/period"
+        },
+        "snapshotHash": {
+          "type": "string"
+        },
+        "attribution": {
+          "type": "string",
+          "description": "順位差の読み方 (observed-change-only = 観測された差だけで因果を言わない)"
+        }
+      }
+    }
+  },
   "type": "object",
   "properties": {
     "schemaVersion": {
@@ -33,18 +98,7 @@
                   "type": "number"
                 },
                 "baselinePeriod": {
-                  "type": "object",
-                  "properties": {
-                    "periodStart": {
-                      "type": "string"
-                    },
-                    "periodEnd": {
-                      "type": "string"
-                    },
-                    "windowDays": {
-                      "type": "number"
-                    }
-                  }
+                  "$ref": "#/definitions/period"
                 },
                 "baselineHash": {
                   "type": "string"
@@ -76,7 +130,8 @@
                   },
                   "required": [
                     "date"
-                  ]
+                  ],
+                  "additionalProperties": false
                 },
                 "files": {
                   "type": "array",
@@ -92,7 +147,8 @@
                       "sha256": {
                         "type": "string"
                       }
-                    }
+                    },
+                    "additionalProperties": false
                   }
                 },
                 "methods": {
@@ -104,56 +160,35 @@
               },
               "required": [
                 "date"
-              ]
+              ],
+              "additionalProperties": false
             }
           },
           "nextReviewDate": {
             "description": "観測中 (observing) は判定日。判定が済むと reviewDue (keyword-cycle.mjs) が null にする",
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "reviews": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "date": {
-                  "type": "string"
-                },
-                "outcome": {
-                  "type": "string"
-                },
-                "reason": {
-                  "type": "string"
-                },
-                "period": {
-                  "type": "object",
-                  "properties": {
-                    "periodStart": {
-                      "type": "string"
-                    },
-                    "periodEnd": {
-                      "type": "string"
-                    },
-                    "windowDays": {
-                      "type": "number"
-                    }
-                  }
-                },
-                "snapshotHash": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "date"
-              ]
+              "$ref": "#/definitions/review"
             }
+          },
+          "lastReview": {
+            "description": "最後の判定 (reviews の最後の判定済みの回と同じ)",
+            "$ref": "#/definitions/review"
           }
-        }
+        },
+        "additionalProperties": false
       }
     }
   },
   "required": [
     "schemaVersion",
     "entries"
-  ]
+  ],
+  "additionalProperties": false
 }

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "e-Stat の指標候補",
+  "description": "data/estat/{name}-candidates.json の形状契約 (いまは ssds-candidates.json だけ)。.claude/scripts/estat/enumerate-ssds-indicators.mjs が社会・人口統計体系 (SSDS) の都道府県の表ごとに getMetaInfo の cat01 を取り、既存の metric config が使っていない (statsDataId, cdCat01) の組を毎回全量で書き出す (CI で再生成。件数の要約は別の行 estat.candidate-summaries)。集計値の「総数」「計」は除く。読み手: .claude/scripts/estat/build-expansion-queue.mjs (需要スコアを付けて expansion-queue.json を作る)。",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["statsDataId", "cdCat01"],
+    "properties": {
+      "statsDataId": { "type": "string", "minLength": 1, "description": "e-Stat の統計表 ID" },
+      "cdCat01": { "type": "string", "minLength": 1, "description": "cat01 の分類コード (CLASS の @code)" },
+      "name": { "type": "string", "description": "分類の名前 (@name)。e-Stat が返さないときは項目ごと無い" },
+      "unit": { "type": ["string", "null"], "description": "単位 (@unit)。無ければ null" },
+      "level": { "type": ["string", "null"], "description": "階層 (@level)。無ければ null" }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GSC カバレッジ是正キュー",
+  "description": "data/gsc/coverage-remediation/coverage-remediation-queue.json の形状契約。GSC の画面のページ export (ingest-gsc-export.py が data/gsc/coverage-drilldown/<週>/ に取り込んだ drilldown CSV) と本番の HTTP 実測 (Googlebot UA) から、.claude/scripts/gsc/build-coverage-queue.mjs が URL ごとの分類・対処・状態を毎週作り直す (前回のキューの判断・状態は URL で引き継ぐ)。同じスクリプトの --mark-in-progress / --mark-done / --mark-by-design / --set-content-verdict / --sync-inspection (url-inspection-daily.cjs の観測を照合) が状態を書き換え、そのたびに summary を数え直す。集計の関数は packages/ops/src/gsc/lib/coverage-queue-state.mjs。読み手: .claude/scripts/gsc/sync-coverage-backlog.mjs (pending を backlog カードへ束ねる)・url-inspection-daily.cjs、packages/ops/src/gsc/lib/coverage-backlog.mjs、packages/ops/src/metrics/lib/cycle-health.mjs、packages/ops/src/search-growth/lib/sources.mjs、apps/admin/lib/server/dashboard.ts。",
+  "type": "object",
+  "required": [
+    "generated_at", "week", "source_observed_at", "source_age_weeks", "source", "gsc_category_totals", "summary", "queue"
+  ],
+  "properties": {
+    "generated_at": { "type": "string", "minLength": 1, "description": "作成・更新した日 (Asia/Tokyo の暦日。--date で上書きできる)" },
+    "week": { "type": "string", "minLength": 1, "description": "入力にした drilldown の週 (YYYY-Www)" },
+    "source_observed_at": { "type": ["string", "null"], "description": "入力の export を取った日 (category-totals.json の date。無ければ週の末日)" },
+    "source_age_weeks": { "type": "number", "description": "入力の週から実行日までの週数" },
+    "source": { "type": "string", "description": "入力の説明" },
+    "gsc_category_totals": {
+      "type": ["object", "null"],
+      "description": "GSC の除外理由ごとの総件数 (category-totals.json の totals)。無い週は null",
+      "additionalProperties": { "type": ["number", "null"] }
+    },
+    "summary": { "$ref": "#/definitions/summary" },
+    "queue": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/entry" }
+    }
+  },
+  "definitions": {
+    "countMap": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "summary": {
+      "type": "object",
+      "description": "queue から summarizeCoverageQueue が数えた要約",
+      "required": [
+        "tracked_urls", "pending_actionable", "by_action", "by_status", "indexed_by_inspection",
+        "pending_by_action", "by_verdict", "by_category"
+      ],
+      "properties": {
+        "tracked_urls": { "type": "integer", "minimum": 0 },
+        "pending_actionable": { "type": "integer", "minimum": 0, "description": "status が pending で action が none 以外の件数" },
+        "by_action": { "$ref": "#/definitions/countMap" },
+        "by_status": { "$ref": "#/definitions/countMap" },
+        "indexed_by_inspection": { "type": "integer", "minimum": 0, "description": "URL Inspection で登録済みと観測して done にした件数" },
+        "pending_by_action": { "$ref": "#/definitions/countMap" },
+        "by_verdict": { "$ref": "#/definitions/countMap" },
+        "by_category": { "$ref": "#/definitions/countMap" }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "description": "URL 1 件の分類と状態",
+      "required": [
+        "url", "gsc_category", "gsc_last_crawl", "current_http", "in_sitemap", "verdict", "action", "status",
+        "first_seen", "last_checked", "resolved_at", "resolved_by", "inspection", "wave_id", "content_verdict",
+        "content_signal", "note"
+      ],
+      "properties": {
+        "url": { "type": "string", "minLength": 1 },
+        "gsc_category": { "type": "string", "description": "GSC の除外理由 (drilldown CSV のファイル名から決めた語)" },
+        "gsc_last_crawl": { "type": ["string", "null"], "description": "GSC の「前回のクロール」" },
+        "current_http": { "type": ["number", "null"], "description": "本番の HTTP 実測。未実測は null、取れなかったときは 0" },
+        "in_sitemap": { "type": ["boolean", "null"], "description": "本番 sitemap に載っているか。actionable でない分類と、sitemap を全件取れなかった初回は null" },
+        "robots_noindex": { "type": "boolean", "description": "200 の HTML が noindex を出しているか (実測した URL だけ)" },
+        "soft_not_found": { "type": "boolean", "description": "200 の HTML が見つからないページの形か (実測した URL だけ)" },
+        "canonical_url": { "type": ["string", "null"], "description": "HTML の canonical (実測した URL だけ)" },
+        "verdict": { "type": "string", "description": "分類 (live-misflagged・sitemap-gap・cc:<内容判定> など)" },
+        "action": { "type": "string", "description": "次の対処 (observe-after-fix・sitemap-gap・none など)" },
+        "status": { "type": "string", "description": "pending・in-progress・done・resolved-by-design" },
+        "first_seen": { "type": "string", "minLength": 1 },
+        "last_checked": { "type": "string", "minLength": 1 },
+        "resolved_at": { "type": ["string", "null"] },
+        "resolved_by": { "type": ["string", "null"], "description": "url-inspection のとき URL Inspection の観測で自動に done にした" },
+        "inspection": {
+          "description": "URL Inspection の最新の観測 (--sync-inspection が付ける)",
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "required": ["observed_at", "verdict", "coverage_state", "last_crawl"],
+              "properties": {
+                "observed_at": { "type": "string" },
+                "verdict": { "type": "string" },
+                "coverage_state": { "type": "string" },
+                "last_crawl": { "type": ["string", "null"] }
+              }
+            }
+          ]
+        },
+        "wave_id": { "type": ["string", "null"], "description": "done / resolved-by-design にした是正の波の ID (--wave-id)" },
+        "content_verdict": { "type": ["string", "null"], "description": "内容確認の判定 (--set-content-verdict)" },
+        "content_signal": { "type": ["string", "null"] },
+        "note": { "type": "string", "description": "判断の理由 (--note)。done 以外を処理済みにするには空でない理由が要る" }
+      }
+    }
+  }
+}

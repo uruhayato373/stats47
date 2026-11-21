@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "改善施策の効果判定 (閾値エンジン)",
-  "description": "週次の効果判定と原本hashに結んだappend-only再評価。assessmentはbaseline観測と効果実験を分離する。過去のassessment無し記録は維持する。",
+  "description": "週次の効果判定と原本hashに結んだappend-only再評価。assessmentはbaseline観測と効果実験を分離する。過去のassessment無し記録は維持する。 書き手 (packages/ops/src/effect-verdict/cli.mjs の runAdapter と engine.mjs の decideVerdict) が決まった項目だけを書くオブジェクトは閉じる (additionalProperties: false。2026-11-22)。件数の集計 (byLabel / byGuard) はラベル・ガードの名前をキーにした辞書なので閉じない。",
   "type": "object",
   "properties": {
     "schemaVersion": {
@@ -34,6 +34,10 @@
             "effect/pending": {
               "type": "number"
             }
+          },
+          "description": "effect ラベルごとの件数 (キーはラベル)",
+          "additionalProperties": {
+            "type": "number"
           }
         },
         "byGuard": {
@@ -47,10 +51,18 @@
             },
             "confounded": {
               "type": "number"
+            },
+            "insufficient-window": {
+              "type": "number"
             }
+          },
+          "description": "ガードごとの hit 件数 (キーはガードの code)",
+          "additionalProperties": {
+            "type": "number"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "verdicts": {
       "type": "array",
@@ -83,7 +95,8 @@
                 "detail": {
                   "type": "string"
                 }
-              }
+              },
+              "additionalProperties": false
             }
           },
           "before": {
@@ -98,7 +111,8 @@
               "impressions": {
                 "type": "number"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "after": {
             "type": [
@@ -112,7 +126,8 @@
               "impressions": {
                 "type": "number"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "delta": {
             "type": [
@@ -144,13 +159,15 @@
               "adverseRelativeDrop": {
                 "type": "number"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "window": {
             "type": "object",
             "properties": {
               "beforeWeek": {
-                "type": "string"
+                "description": "比べる前の週。施策のデプロイ週が無いとき (notDue) は adapter が null を返す (ga4-improvements-adapter.mjs・gsc-improvements-adapter.mjs)",
+                "type": ["string", "null"]
               },
               "afterWeek": {
                 "type": [
@@ -169,8 +186,21 @@
               },
               "minWeeks": {
                 "type": "number"
+              },
+              "weeks": {
+                "description": "baseline 観測で揃える週 (assessment.weeks の写し)",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reviewDate": {
+                "description": "baseline 観測の期限 (assessment.reviewDate の写し)",
+                "type": "string"
               }
-            }
+            },
+            "additionalProperties": false,
+            "description": "判定窓。効果実験は beforeWeek / afterWeek / elapsedWeeks (+ engine が minWeeks、adapter が notDue) を、baseline 観測は weeks / reviewDate を持つ"
           },
           "sources": {
             "type": "array",
@@ -185,8 +215,21 @@
                 },
                 "freshness": {
                   "type": "string"
+                },
+                "accountId": {
+                  "description": "baseline 観測で照合する口座 ID",
+                  "type": "string"
+                },
+                "firstWeek": {
+                  "description": "baseline 観測で数え始める週",
+                  "type": "string"
+                },
+                "identityBasis": {
+                  "description": "同じ口座の記録と見なす根拠",
+                  "type": "string"
                 }
-              }
+              },
+              "additionalProperties": false
             }
           },
           "confounders": {
@@ -204,7 +247,8 @@
                   "type": "string"
                 }
               }
-            }
+            },
+            "additionalProperties": false
           },
           "pastEffectKeys": {
             "type": "array",
@@ -232,7 +276,8 @@
                   "kind": {
                     "const": "effect-experiment"
                   }
-                }
+                },
+                "additionalProperties": false
               },
               {
                 "type": "object",
@@ -277,9 +322,48 @@
                     "type": "string",
                     "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                   }
-                }
+                },
+                "additionalProperties": false
               }
             ]
+          },
+          "observation": {
+            "description": "baseline 観測の充足 (adsense-measurement-contract.mjs の observeAdsenseBaseline が返す)。baseline-observation の verdict だけが持つ",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "observedWeeks",
+              "missingWeeks",
+              "overdue"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "pending",
+                  "ready"
+                ],
+                "description": "揃っていない週があれば pending"
+              },
+              "observedWeeks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "記録が揃った週"
+              },
+              "missingWeeks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "記録が欠けた週"
+              },
+              "overdue": {
+                "type": "boolean",
+                "description": "期限を過ぎても欠けた週が残っているか"
+              }
+            }
           }
         },
         "allOf": [
@@ -331,7 +415,8 @@
               }
             }
           }
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "assessmentContractVersion": {
@@ -359,7 +444,8 @@
             "null"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "required": [
@@ -371,5 +457,6 @@
     "note",
     "summary",
     "verdicts"
-  ]
+  ],
+  "additionalProperties": false
 }

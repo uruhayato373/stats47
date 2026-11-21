@@ -179,6 +179,16 @@ updated: 2026-11-01
 - **③ `turbo.json` の `data/**` の inputs 30 行**: build・lint・type-check・test に同じ内容が 4 回書かれ、同期を確かめる検査が無い。turbo は inputs の共有 (変数) を持たないので、`config/datasets.mjs` から生成して `--check` で一致を見る形が候補。
 - **完了条件**: ①の変更が 2026-12-01 より前に main へ入り、その月次の run が `data/geo/ksj/catalog.json` を書き戻す (または増減なしで success)。②の循環が消えて `data-configs` に `@stats47/ops` を宣言でき、③の inputs が 1 か所の正本から作られる。`npm run knip:deps` と `npm run type-check` が通る。
 
+### [DATA-SCHEMA-FOLLOWUP-01] data/ の型と Schema の二重管理・Schema の無い作業状態・寿命の残り
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-22] [領域:サイト] [待ち:判断]
+
+- **済み (2026-11-22・develop・未 push)**: 外部キー 54 本を `config/datasets.mjs` に宣言 (231 → 285 本。指標のキー約 2,900 個・note の表紙の版・Kindle の本などが検査に入った)。11 台帳の Schema を実データに合わせ、未定義の項目を 0 にした。作業状態 5 行 (`business-plan.state`・`note.draft-index`・`gsc.coverage-queue`・`affiliate.catalog`・`estat.candidates`) に Schema を付け、書き手が 1 本の 4 行は書く前に `assertDatasetShape` で形を確かめる。時系列 3 行に 26 週の寿命 (オーナー判断)。地図カードの企画 2 件の存在しないテーマ `agriculture` を `agriculture-production` に直した (オーナー了承)。
+- **① 型と Schema の二重管理 (オーナー判断)**: `data/` の JSON を読む 168 の読み込み口のうち 131 が手書きの型へ `as` でキャストし、Schema から型を作る仕組みが無い。案 (a) Schema から型を生成して手書きの型を置き換える (json-schema-to-typescript などの依存が 1 つ増える)、案 (b) 手書きの型は残し、型と Schema の項目の一致をテストで固定する (`packages/data-configs/scripts/generate-metric-schema.ts` と同じ考え方)。
+- **② Schema の無い作業状態の残り**: コードが読むのに Schema の無い state・series が約 40 行。うち `affiliate.audits` (`data/affiliate/{name}-latest.json` の 9 ファイルが別々の形) と `search-growth.state` (3 ファイル・14MB が別々の形) は 1 つの Schema にできないので、行をファイルごとに分けるか `oneOf` にするかを決める。`affiliate.catalog` は書き手が 2 本 (`affiliate-status.mjs --write`・`affiliate-apply.mjs --commit`) で、afb の項目の識別子が書き手によって `pid` と `promotionId` に分かれる (afb 118 件のうち 19 件が両方を持つ)。識別子を 1 つにそろえてから書き手に形の検査を入れる。
+- **③ 書き手と実データの食い違い (2026-11-22 の Schema の引き締めで見つけた分)**: `data/seo/improvement-log.json` の 2026-11-14 の `lastReview`・`reviews[]` は `note`・`reason` を持ち `period`・`snapshotHash` が無い手書きの行で、書き手 (`packages/ops/src/search-growth/lib/keyword-cycle.mjs`) はこの形を書かない。`data/affiliate/affiliate-catalog.json` の moshimo の履歴 16 行 (2026-07-28) は `status` が無く、今の書き手はこの形を書かない。どちらも Schema は任意の項目として受けている。
+- **④ `note.dashboard` の寿命**: ファイル名が集計期間の開始日で始まる (`2021-05-01_2026-09-11_<取得時刻>.json`) ので、名前で並べて古いものを消す今の寿命の仕組み (`prune-state-snapshots.mjs`) では、取得の新しい全期間のファイルから消えてしまう。取得時刻で並べる形を寿命の仕組みに足すか、ファイル名を取得時刻から始める形に変えてから寿命を付ける (21 ファイル・8.1MB)。
+- **完了条件**: ①の方針が決まり、型と Schema のずれが機械で検出される。②の 2 行が Schema を持つ (または行が分かれる)。`npm run check-datasets` と `npm run type-check` が通る。
+
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
