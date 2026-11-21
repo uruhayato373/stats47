@@ -13,12 +13,13 @@ import { isAnchorRow } from '../../../../packages/ops/src/gsc/analyze-ctr-seesaw
 
 const NOW = new Date('2026-08-24T12:00:00.000Z');
 const REPO_ROOT = process.cwd();
+// 本体の場所 (リポジトリ直下から)。packages へ移した CLI は、.claude に残る入口ではなく本体を読む
 const PAGE_CSV_CONSUMERS = [
-  'blog/build-remediation-queue.mjs',
-  'ai-content/build-ai-content-queue.mjs',
-  'blog/analyze-winning-patterns.mjs',
-  'gsc/extract-low-ctr-ranking-pages.mjs',
-  'ads/build-placement-map.mjs',
+  '.claude/scripts/blog/build-remediation-queue.mjs',
+  '.claude/scripts/ai-content/build-ai-content-queue.mjs',
+  '.claude/scripts/blog/analyze-winning-patterns.mjs',
+  '.claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs',
+  'packages/ops/src/ads/build-placement-map.mjs',
 ];
 const POLICY = {
   urlInspectionMaxAgeDays: 3,
@@ -43,7 +44,7 @@ test('fragment URL だけを GSC アンカー行と判定する', () => {
 test('pages.csv の5 consumerが共通のアンカー判定を使う', () => {
   for (const relativePath of PAGE_CSV_CONSUMERS) {
     const source = fs.readFileSync(
-      path.join(REPO_ROOT, '.claude/scripts', relativePath),
+      path.join(REPO_ROOT, relativePath),
       'utf8'
     );
     assert.match(source, /import \{ isAnchorRow \} from /, relativePath);
