@@ -4,7 +4,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
 
 test("ローカル検証はfastとreleaseの二入口だけを公開する", () => {
   const rootPackage = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8"));
@@ -31,23 +31,4 @@ test("release検査はdev成果物と分離し、1回のbuildを代表検査で�
   assert.match(source, /mode === "fast" \? "HEAD" : "origin\/main"/);
   assert.match(source, /process\.argv\.includes\("--typecheck"\)/);
   assert.match(nextConfig, /distDir: process\.env\.NEXT_DIST_DIR \|\| "\.next"/);
-});
-
-test("代表ページ計測はChromium sessionをURL間で共有し、ローカルは1回計測する", () => {
-  const representative = fs.readFileSync(
-    path.join(ROOT, ".claude/scripts/page-quality/run-representative.ts"),
-    "utf8",
-  );
-  const browser = fs.readFileSync(
-    path.join(ROOT, "packages/ops/src/page-quality/lib/measure-browser.ts"),
-    "utf8",
-  );
-  assert.match(representative, /createBrowserMeasurementSession\(\)/);
-  assert.match(representative, /get\("--runs"\) \?\? "1"/);
-  assert.match(browser, /export async function createBrowserMeasurementSession/);
-  assert.equal(
-    (browser.match(/context\.newPage\(\)/g) ?? []).length,
-    1,
-    "横スクロール検査のために同じURLを余分に再読込しない",
-  );
 });

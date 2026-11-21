@@ -14,8 +14,8 @@ import {
   rankDirection,
   type RankingRow,
   type ReadJson,
-} from '../../../../apps/remotion/src/features/data-cards/data-card-input';
-import { rankLabelPositions } from '../../../../apps/remotion/src/features/data-cards/model';
+} from '../../src/features/data-cards/data-card-input';
+import { rankLabelPositions } from '../../src/features/data-cards/model';
 
 // Deliberately synthetic fixtures; no network and no publication output.
 const key = 'bread-consumption-expenditure';
@@ -234,7 +234,7 @@ test('離島で主要部が縮む場合だけ拡大し、省略を明示する',
     JSON.parse(
       readFileSync(
         new URL(
-          '../../../../apps/remotion/public/prefecture.topojson',
+          '../../public/prefecture.topojson',
           import.meta.url
         ),
         'utf8'

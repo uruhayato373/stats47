@@ -19,7 +19,7 @@ import { buildFrame, checkCoverage } from '../../../packages/ops/src/analysis/an
 import { renderLicenseText } from '../../../packages/product-factory/src/licenses/license-text';
 import { serializeSourcesCsv, type SourceRow } from '../../../packages/product-factory/src/data/sources';
 import { renderProductFigures } from '../note/render-product-figures';
-import { buildPreviewFiles, writePreviewFiles, createPreviewServer } from '../note/build-product-landing-preview';
+import { buildPreviewFiles, writePreviewFiles, createPreviewServer } from '../../../apps/web/scripts/build-product-landing-preview';
 import { STOREFRONT_PRODUCTS } from '../../../apps/web/src/features/products/storefront.generated';
 import type { StorefrontProduct, StorefrontShowcaseSection } from '../../../apps/web/src/features/products/types';
 import { buildReusePack } from './build-reuse-pack';

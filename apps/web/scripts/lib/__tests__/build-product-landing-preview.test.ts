@@ -3,9 +3,9 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import type { StorefrontProduct } from "../../../../apps/web/src/features/products/types";
-import { buildPreviewFiles, createPreviewServer, writePreviewFiles } from "../build-product-landing-preview";
-import { R2_PUBLIC_BASE_URL } from "../../../../packages/types/mirror/site-config.cjs";
+import type { StorefrontProduct } from "../../../src/features/products/types";
+import { buildPreviewFiles, createPreviewServer, writePreviewFiles } from "../../build-product-landing-preview";
+import { R2_PUBLIC_BASE_URL } from "../../../../../packages/types/mirror/site-config.cjs";
 
 const product: StorefrontProduct = {
   id: "P-01", slug: "data-first", channel: "note", channelLabel: "note",

@@ -292,7 +292,7 @@ jobs:
         # 管理画面のページに生のカード・<table>・style などが増えていないか。部品は公開サイトと同じ @stats47/components。
         # 契約: .claude/rules/admin-ui.md
         run: |
-          node --test .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs
+          node --test packages/ops/src/admin-ui/__tests__/check-admin-ui-debt.test.mjs
           node .claude/scripts/admin-ui/check-admin-ui-debt.mjs
         continue-on-error: false
 

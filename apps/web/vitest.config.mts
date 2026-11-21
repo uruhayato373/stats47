@@ -47,6 +47,9 @@ export default defineConfig({
       "**/tests/smoke/**", // Smoke tests are handled by Playwright
       "**/tests/visual/**", // Visual regression tests are handled by Playwright
       "scripts/lib/__tests__/internal-link-geo.test.mjs", // node:test のテスト (npm run test:claude-lib-contracts)
+      "scripts/lib/__tests__/local-verification.test.mjs", // node:test のテスト (npm run page-quality:test)
+      "scripts/lib/__tests__/build-product-landing-preview.test.ts", // node:test のテスト (npm run note:reference:test)
+      "scripts/lib/__tests__/analysis-release.test.ts", // node:test のテスト (npm run test:claude-lib-contracts)
     ],
     coverage: {
       provider: "v8",

@@ -5,10 +5,10 @@ import { createHash } from 'node:crypto';
 import JSZip from 'jszip';
 import assert from 'node:assert/strict';
 import { afterEach, it } from 'node:test';
-import { inspectAnalysisRelease, prepareAnalysisDelivery, publishAnalysisDelivery, verifyAnalysisNote, type AnalysisNoteVerification } from '../release-analysis-pack';
-import { readProductLanding } from '../../../../apps/web/scripts/lib/product-landing';
+import { inspectAnalysisRelease, prepareAnalysisDelivery, publishAnalysisDelivery, verifyAnalysisNote, type AnalysisNoteVerification } from '../../release-analysis-pack';
+import { readProductLanding } from '../product-landing';
 
-const root = path.resolve(import.meta.dirname, '../../../..');
+const root = path.resolve(import.meta.dirname, '../../../../..');
 const hash = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');
 const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const temporaries: string[] = [];

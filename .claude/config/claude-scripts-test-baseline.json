@@ -129,39 +129,14 @@
     ".claude/scripts/lib/__tests__/x-catalog-rule-contract.test.cjs": "規則の文言が台帳の id を指すことの検査のテスト",
     ".claude/scripts/management/__tests__/review-cadence.test.mjs": "週次・月次・年次のレビューの配線 (.claude/config/review-wiring.json) と .claude/todo・backlog-loop の台帳を確かめるテスト",
     ".claude/scripts/management/__tests__/weekly-audits.test.mjs": "週次の監査が .claude/todo/backlog.md へ起票する仕組みのテスト",
-    ".claude/scripts/model-usage/__tests__/model-usage.test.mjs": "agent のモデルと effort の利用量の集計と canary のテスト (.claude/agents・.claude/state/metrics を読む)"
+    ".claude/scripts/model-usage/__tests__/model-usage.test.mjs": "agent のモデルと effort の利用量の集計と canary のテスト (.claude/agents・.claude/state/metrics を読む)",
+    ".claude/scripts/lib/__tests__/page-quality-local-wiring.test.mjs": "代表ページ計測の入口 (.claude/scripts/page-quality/run-representative.ts) の本文を、packages の計測の部品と突き合わせるテスト (ローカル検証の本体は apps/web/scripts/lib/__tests__/local-verification.test.mjs)",
+    ".claude/scripts/lib/__tests__/client-graph-audit-wiring.test.mjs": "client-graph の検査を .claude の入口から起動し、baseline のパス (.claude/config/client-graph-baseline.json) が渡ることを確かめるテスト (本体の判定は packages/ops/src/audit/__tests__)",
+    ".claude/scripts/lib/__tests__/generate-article-charts-ranks.test.mjs": "記事の図の生成 CLI (.claude/scripts/blog/generate-article-charts.ts) を起動する結合テスト"
   },
   "domains": {
-    "admin-ui": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "audit": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "blog": {
-      "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "note": {
-      "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "page-quality": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "products": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
     "search-growth": {
       "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "sns": {
-      "count": 3,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     }
   }

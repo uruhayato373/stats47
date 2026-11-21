@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { test } from 'node:test';
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
 const script = path.join(root, '.claude/scripts/blog/generate-article-charts.ts');
 const tsx = path.join(root, 'node_modules/tsx/dist/cli.mjs');
 

@@ -4,8 +4,8 @@ import {
   CHANGE_TILE_LAYOUT,
   changeBin,
   signedPercent,
-} from '../../../../apps/remotion/src/features/data-cards/TileChange';
-import { buildDataCard } from '../../../../apps/remotion/src/features/data-cards/data-card-input';
+} from '../../src/features/data-cards/TileChange';
+import { buildDataCard } from '../../src/features/data-cards/data-card-input';
 import { buildRecipe } from '../../../../packages/data-configs/src/recipe';
 import { getMetricConfig } from '../../../../packages/data-configs/src/registry';
 
@@ -133,7 +133,7 @@ test('片年で1県欠けた比較を作らない', async () => {
 });
 
 test('増減タイルは共通のタイル地図で描き、符号付きの値と合計を出し、発行元や読み方の注記を入れない', async () => {
-  const { renderTileChangeSvg } = await import('../../../../apps/remotion/src/features/data-cards/TileChange');
+  const { renderTileChangeSvg } = await import('../../src/features/data-cards/TileChange');
   const { assertMinimalChartCopy } = await import('../../../../packages/ops/src/media/image-copy.mjs');
   const card = await buildDataCard({ kind: 'tile-change', key: 'total-population', from: '1975', to: '2025' }, read, shape);
   if (card.kind !== 'tile-change') throw new Error('kind');

@@ -122,7 +122,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/audit-chart-axes.ts": {
+    "apps/admin/scripts/audit-chart-axes.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -242,7 +242,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/generate-article-charts-ranks.test.mjs": {
+    ".claude/scripts/lib/__tests__/generate-article-charts-ranks.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1007,7 +1007,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/all47-svg.test.ts": {
+    "apps/remotion/scripts/__tests__/all47-svg.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1037,7 +1037,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/data-card-input.test.ts": {
+    "apps/remotion/scripts/__tests__/data-card-input.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1082,7 +1082,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/tile-change.test.ts": {
+    "apps/remotion/scripts/__tests__/tile-change.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { renderAll47TileSvg } from '../../../../apps/remotion/src/features/data-cards/all47-svg';
+import { renderAll47TileSvg } from '../../src/features/data-cards/all47-svg';
 const rows = Array.from({ length: 47 }, (_, i) => ({
   areaCode: `${String(i + 1).padStart(2, '0')}000`,
   areaName: `県${i + 1}`,
