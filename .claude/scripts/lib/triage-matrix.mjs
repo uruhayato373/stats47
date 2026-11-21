@@ -19,7 +19,7 @@
  *   - 未定: due が null
  *
  * 関連:
- *   .claude/scripts/lib/scan-pending-improvements.mjs (依存)
+ *   packages/ops/src/effect-verdict/scan-pending-improvements.mjs (依存)
  *   .claude/skills/management/triage-improvement-log/SKILL.md (UX レイヤー)
  */
 
@@ -33,9 +33,10 @@ const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const SCAN_SCRIPT = path.join(
   PROJECT_ROOT,
-  ".claude",
-  "scripts",
-  "lib",
+  "packages",
+  "ops",
+  "src",
+  "effect-verdict",
   "scan-pending-improvements.mjs",
 );
 

@@ -2,7 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { findStalePlanIds, formatCycleHealth, parseMustRatio, summarizeCards, summarizeDetectors, summarizeFlow, summarizeMust } from "../lib/cycle-health.mjs";
+import { findStalePlanIds, formatCycleHealth, parseMustRatio, summarizeCards, summarizeDetectors, summarizeMust } from "../lib/cycle-health.mjs";
 
 test("Must の達成数は太字あり・なしの両方の書式から取る", () => {
   assert.deepEqual(parseMustRatio("Must **0/3**、Should 1/3"), { done: 0, planned: 3 });
@@ -33,7 +33,7 @@ test("分類漏れと期日超過を数える (期日当日は超過にしない
 
 test("期日超過の数え方は計画が期日で引く cardsDueWithin と同じ (読めない日付は数えない)", async () => {
   const { createRequire } = await import("node:module");
-  const { cardsDueWithin, parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../../../packages/ops/src/management/backlog-lib.cjs");
+  const { cardsDueWithin, parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../management/backlog-lib.cjs");
   const backlogText = [
     "## 🔴 高",
     "### [A-01] 超過",
@@ -66,29 +66,6 @@ test("残件があるのにカードが開いていない検出器を、起票�
   });
   assert.deepEqual([year.pending, year.open, year.stalled], [1, false, true]);
   assert.deepEqual([gsc.pending, gsc.open, gsc.stalled], [1, true, false]);
-});
-
-test("起票と閉じた数は today を含む週だけを数え、backlog の総枚数を目安と比べる (backlog:waits flow と同じ数)", async () => {
-  const { createRequire } = await import("node:module");
-  const { parseAnnual, parseBacklog } = createRequire(import.meta.url)("../../../../packages/ops/src/management/backlog-lib.cjs");
-  const backlogCards = parseBacklog([
-    "## 🟡 中",
-    "### [NEW-01] 今週起票",
-    "タグ: [収益化] [起票:2026-11-11]",
-    "### [OLD-01] 先週起票",
-    "タグ: [収益化] [起票:2026-11-08]",
-    "### [NEW-02] 今週起票",
-    "タグ: [収益化] [起票:2026-11-15]",
-  ].join("\n"));
-  const annualCards = parseAnnual("## 2026-12\n\n### [ANNUAL-01] 年間計画で今週起票\nタグ: [収益化] [起票:2026-11-10] [期日:2026-12-01]");
-  const ledgerItems = {
-    "DONE-01": { status: "completed", completedAt: "2026-11-12T00:00:00.000Z" },
-    "DONE-02": { status: "completed", completedAt: "2026-11-07T00:00:00.000Z" },
-    "OPEN-01": { status: "open", completedAt: "2026-11-12T00:00:00.000Z" },
-  };
-  const flow = summarizeFlow({ backlogCards, annualCards, ledgerItems, today: "2026-11-14", target: 2 });
-  assert.deepEqual(flow, { week: "2026-W46", filed: 3, closed: 1, total: 3, target: 2, overTarget: true });
-  assert.equal(summarizeFlow({ backlogCards, annualCards: [], ledgerItems: {}, today: "2026-11-14" }).overTarget, false, "既定の目安は 200 枚");
 });
 
 test("週次 Issue の表に起票 → 完了の行を出し、目安を超えたら警告する", () => {

@@ -21,7 +21,7 @@ import { assessmentForSubject, hasBaselineAssessment, isMissingEffectTarget, obs
 import { selectReassessment } from '../../../packages/ops/src/effect-verdict/reassessment.mjs';
 import { isoWeekOf } from '../../../packages/ops/src/effect-verdict/iso-week.mjs';
 import { handoffPlanWeek, loadWiring, WIRING_PATH } from '../../../packages/ops/src/management/review-cadence.mjs';
-import { loadClosedWaveIds } from '../blog/measure-gsc-impact.mjs';
+import { loadClosedWaveIds } from '../../../packages/ops/src/blog/measure-gsc-impact.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

@@ -16,7 +16,7 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
 import { insertCards } from "../../../packages/ops/src/gsc/lib/coverage-backlog.mjs";
-import { BATCH_DIR, BY_DESIGN_PATH, CARD_PREFIX, batchPath, planYearCoverageCard } from "./lib/year-coverage-backlog.mjs";
+import { BATCH_DIR, BY_DESIGN_PATH, CARD_PREFIX, batchPath, planYearCoverageCard } from "../../../packages/ops/src/data/lib/year-coverage-backlog.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
@@ -53,7 +53,12 @@ const { results } = JSON.parse(fs.readFileSync(QUEUE_PATH, "utf8"));
 const backlog = fs.readFileSync(BACKLOG_PATH, "utf8");
 const openIds = parseBacklog(backlog).map((card) => card.id).filter(Boolean);
 
-const card = planYearCoverageCard({ results, openIds, byDesign, today });
+// カードに書く .claude の CLI のコマンドは、packages は持たないのでここ (.claude の入口) が渡す
+const commands = {
+  gate: "npx tsx .claude/scripts/data/assert-year-coverage-batch.ts",
+  sync: "node .claude/scripts/data/sync-year-coverage-backlog.mjs",
+};
+const card = planYearCoverageCard({ results, openIds, byDesign, today, commands });
 if (args.includes("--dry-run")) {
   console.log(card ? card.markdown : "[dry-run] 起票なし (開いているカードがあるか、候補が無い)");
   process.exit(0);

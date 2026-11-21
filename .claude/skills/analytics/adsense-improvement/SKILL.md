@@ -187,7 +187,7 @@ ls -t data/adsense/snapshots/ | head -3
 cat data/adsense/LATEST.md
 
 # 進行中施策
-node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown
+node packages/ops/src/effect-verdict/scan-pending-improvements.mjs --format markdown
 
 # 効果測定済み施策・詳細ログ
 cat data/improvement/adsense-improvement/improvement-log.md

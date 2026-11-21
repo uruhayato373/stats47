@@ -3,6 +3,8 @@
  *
  * 実 backlog の effect/none|adverse は現在 0 件なので、動作は fixture で証明する
  * (「0 件だから未検証」にしない)。0 件でも正常終了することも固定する。
+ * .claude の入口 (write-past-effects.mjs・triage-matrix.mjs) を起動する検査は
+ * .claude/scripts/lib/__tests__/effect-verdict-wiring.test.mjs に置いた。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -20,14 +22,12 @@ import {
 } from "../write-past-effects.mjs";
 import { parseBacklog, overdueDays } from "../scan-pending-improvements.mjs";
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..", "..");
 // ★fixture の deployed_at を書いた日に時刻を固定する。
 //   実時刻を使うと「deployed 2026-07-28 = まだ 2 日」が日が経つと 15 日になり、
 //   書いた日を過ぎた瞬間に必ず落ちる時限テストになる (2026-08-12 に実際に落ちた)。
 const FIXED_TODAY = "2026-07-30T00:00:00Z";
-const SCAN = path.join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
-const MATRIX = path.join(PROJECT_ROOT, ".claude/scripts/lib/triage-matrix.mjs");
-const WRITER = path.join(PROJECT_ROOT, ".claude/scripts/lib/write-past-effects.mjs");
+const SCAN = path.join(PROJECT_ROOT, "packages/ops/src/effect-verdict/scan-pending-improvements.mjs");
 
 const FIXTURE = `---
 title: fixture
@@ -86,21 +86,6 @@ test("--overdue-days N は deployed_at を持つ行だけを残す", () => {
     });
     const ids = JSON.parse(out).map((e) => e.section_id);
     assert.deepEqual(ids, ["FIX-OVERDUE-01"], "2 日しか経っていない行は落ちる");
-  });
-});
-
-test("triage-matrix の超過バケットが 0 以外になる (フィールド追加で動き出す)", () => {
-  withFixture(({ backlog }) => {
-    const out = execFileSync("node", [MATRIX, "--format", "matrix"], {
-      encoding: "utf-8",
-      env: { ...process.env, IMPROVEMENT_BACKLOG_PATH: backlog, IMPROVEMENT_TODAY: FIXED_TODAY },
-    });
-    // | 1 | 今週 | 来週 | 来来週 | 超過 | 未定 |
-    const row = out.split("\n").find((l) => /^\| 1 \|/.test(l));
-    assert.ok(row, `Tier 1 行が無い:\n${out}`);
-    const cells = row.split("|").map((c) => c.trim()).filter(Boolean);
-    assert.equal(cells[4], "1", `超過バケットが 0 のまま: ${row}`);
-    assert.match(out, /FIX-OVERDUE-01.*deployed 2026-06-14, 46d/);
   });
 });
 
@@ -175,61 +160,8 @@ test("buildLedgers: 同一 key に none と adverse なら adverse を残す", (
 
 // ── write-past-effects: CLI ───────────────────────────────────────────
 
-test("CLI: 2 台帳を書き、既存の note / source を保持する", () => {
-  withFixture(({ dir, backlog }) => {
-    const sgOut = path.join(dir, "search-growth.json");
-    const adOut = path.join(dir, "adsense.json");
-    fs.writeFileSync(sgOut, JSON.stringify({ note: "既存note", source: "既存source", urls: { "/old": "none" } }));
-    execFileSync("node", [WRITER, "--backlog", backlog, "--search-growth-out", sgOut, "--adsense-out", adOut, "--history", path.join(dir, "no-history.json")], {
-      encoding: "utf-8",
-    });
-    const sg = JSON.parse(fs.readFileSync(sgOut, "utf8"));
-    assert.equal(sg.note, "既存note", "note を書き換えない");
-    assert.equal(sg.source, "既存source");
-    assert.ok(!("/old" in sg.urls), "urls は差し替える (バックログが真実源)");
-    assert.equal(sg.urls["/blog/price-index-high-low-prefecture"], "none");
-    const ad = JSON.parse(fs.readFileSync(adOut, "utf8"));
-    assert.equal(ad.candidates["device-regression::Desktop"], "adverse");
-    assert.match(ad.note, /adsense-diagnostics|AdSense/);
-  });
-});
-
-test("CLI: --dry-run は書き込まない", () => {
-  withFixture(({ dir, backlog }) => {
-    const sgOut = path.join(dir, "sg-dry.json");
-    execFileSync("node", [WRITER, "--dry-run", "--backlog", backlog, "--search-growth-out", sgOut, "--adsense-out", path.join(dir, "ad-dry.json")], {
-      encoding: "utf-8",
-    });
-    assert.equal(fs.existsSync(sgOut), false);
-  });
-});
-
-test("CLI: effect/none|adverse が 0 件でも正常終了して空台帳を書く", () => {
-  withFixture(({ dir }) => {
-    const backlog = path.join(dir, "empty.md");
-    fs.writeFileSync(
-      backlog,
-      "# b\n\n## Tier 1\n\n| ID | タイトル | Status | Due | Owner | Metric |\n|---|---|---|---|---|---|\n| A-01 | 何か | pending | 2026-09-30 | claude | gsc |\n",
-    );
-    const sgOut = path.join(dir, "sg-empty.json");
-    const adOut = path.join(dir, "ad-empty.json");
-    const out = execFileSync("node", [WRITER, "--backlog", backlog, "--search-growth-out", sgOut, "--adsense-out", adOut], {
-      encoding: "utf-8",
-    });
-    assert.match(out, /effect\/none\|adverse の行は 0 件/);
-    assert.deepEqual(JSON.parse(fs.readFileSync(sgOut, "utf8")).urls, {});
-    assert.deepEqual(JSON.parse(fs.readFileSync(adOut, "utf8")).candidates, {});
-  });
-});
-
-test("実 backlog に対して writer が正常終了する (現在 0 件)", () => {
-  const out = execFileSync("node", [WRITER, "--dry-run"], { encoding: "utf-8" });
-  assert.match(out, /# past-effects 台帳 writer/);
-  assert.match(out, /search-growth: \d+ key/);
-});
-
 test("search-growth 台帳の key 規約が scoring.mjs の lookup と一致する", async () => {
-  const { buildCandidates } = await import("../../../../packages/ops/src/search-growth/lib/scoring.mjs");
+  const { buildCandidates } = await import("../../search-growth/lib/scoring.mjs");
   const url = "/blog/price-index-high-low-prefecture";
   const obs = (metric, value) => ({
     source: "gsc",

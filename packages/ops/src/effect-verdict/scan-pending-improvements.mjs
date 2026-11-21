@@ -6,12 +6,12 @@
  * weekly-plan の自動候補抽出と、triage-matrix.mjs の両方で利用する。
  *
  * Usage:
- *   node .claude/scripts/lib/scan-pending-improvements.mjs                    # 全 active 施策を JSON 出力
- *   node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown  # Markdown 表で出力
- *   node .claude/scripts/lib/scan-pending-improvements.mjs --due-before 2026-05-24
- *   node .claude/scripts/lib/scan-pending-improvements.mjs --tier 1,2
- *   node .claude/scripts/lib/scan-pending-improvements.mjs --status pending
- *   node .claude/scripts/lib/scan-pending-improvements.mjs --overdue-days 14   # deploy から 14 日以上経過
+ *   node packages/ops/src/effect-verdict/scan-pending-improvements.mjs                    # 全 active 施策を JSON 出力
+ *   node packages/ops/src/effect-verdict/scan-pending-improvements.mjs --format markdown  # Markdown 表で出力
+ *   node packages/ops/src/effect-verdict/scan-pending-improvements.mjs --due-before 2026-05-24
+ *   node packages/ops/src/effect-verdict/scan-pending-improvements.mjs --tier 1,2
+ *   node packages/ops/src/effect-verdict/scan-pending-improvements.mjs --status pending
+ *   node packages/ops/src/effect-verdict/scan-pending-improvements.mjs --overdue-days 14   # deploy から 14 日以上経過
  *
  * 環境変数:
  *   IMPROVEMENT_BACKLOG_PATH … バックログのパスを差し替える (fixture 検証用。既定は .claude/todo/04)
@@ -43,12 +43,12 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { extractDeployDate } from "../../../packages/ops/src/effect-verdict/engine.mjs";
-import { datasetPath } from "../../../config/datasets.mjs";
+import { extractDeployDate } from "./engine.mjs";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
+const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const BACKLOG_REL = datasetPath("agent.todo-improvements");
 const BACKLOG_PATH =
   process.env.IMPROVEMENT_BACKLOG_PATH || path.join(PROJECT_ROOT, BACKLOG_REL);

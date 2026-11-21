@@ -3,8 +3,8 @@ import { test } from "node:test";
 import {
   createGa4ImprovementsAdapter, extractGa4Pages, spansDiscontinuity, sumPageViews, GA4_MEASUREMENT_DISCONTINUITY_WEEK,
 } from "../lib/ga4-improvements-adapter.mjs";
-import { runAdapter } from "../../lib/effect-verdict/cli.mjs";
-import { DEFAULT_THRESHOLDS } from "../../../../packages/ops/src/effect-verdict/thresholds.mjs";
+import { runAdapter } from "../../effect-verdict/cli.mjs";
+import { DEFAULT_THRESHOLDS } from "../../effect-verdict/thresholds.mjs";
 
 // 鮮度の判定は実行日で変わる。固定の週 (W44) を使うこのテストは、観測日から 10 日を過ぎた 2026-11-11 に
 // stale-source で pending になり落ちた。ここで確かめるのは交絡の扱いなので、鮮度の上限だけを外す。
@@ -31,7 +31,7 @@ const entry = (title) => ({ section_id: "GA4-X-01", title, target_metric: "ga4",
 
 function adapter(title, weeks, pvByWeek) {
   return createGa4ImprovementsAdapter({
-    entries: [entry(title)], availableWeeks: weeks, loadPages: (w) => rows(pvByWeek[w] ?? 0), minWeeks: 2, logPath: "/tmp/x.md",
+    entries: [entry(title)], availableWeeks: weeks, loadPages: (w) => rows(pvByWeek[w] ?? 0), minWeeks: 2, logPath: "/tmp/x.md", queryScriptPath: "scripts/ga4-query.mjs",
   });
 }
 

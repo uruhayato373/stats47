@@ -24,7 +24,8 @@ import { PROJECT_ROOT, toIsoWeek } from "../../../packages/ops/src/metrics/lib/a
 import { readMeasurementHealth, formatMeasurementHealth } from '../../../packages/ops/src/measurement/health.mjs';
 import { aspRevenueLines, productRevenueLine } from '../../../packages/ops/src/metrics/nsm-revenue-lines.mjs';
 import { adsenseRevenueLine } from '../../../packages/ops/src/metrics/adsense-revenue.mjs';
-import { formatCycleHealth, readCycleHealth } from './lib/cycle-health.mjs';
+import { formatCycleHealth, readCycleHealth } from '../../../packages/ops/src/metrics/lib/cycle-health.mjs';
+import { createRequire } from 'node:module';
 import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
 
 function parseArgs() {
@@ -386,7 +387,7 @@ function cycleSection(week) {
 
 function pendingSection() {
   // improvements.md の pending|in-progress を scan-pending-improvements.mjs で取得
-  const scanScript = join(PROJECT_ROOT, ".claude/scripts/lib/scan-pending-improvements.mjs");
+  const scanScript = join(PROJECT_ROOT, "packages/ops/src/effect-verdict/scan-pending-improvements.mjs");
   let entries;
   try {
     const out = execFileSync(
@@ -428,7 +429,12 @@ function main() {
   lines.push(cycleSection(week));
   lines.push("## 🩺 サイクルの健全性（止まっている段）");
   lines.push("");
-  lines.push(formatCycleHealth(readCycleHealth(PROJECT_ROOT, new Date().toISOString().slice(0, 10))));
+  // packages は .claude の部品もパスも持たないので、backlog:waits と同じ buildFlow と docs-governance.json のパスはここで渡す
+  const { buildFlow } = createRequire(import.meta.url)('../backlog-loop/backlog-waits-core.cjs');
+  lines.push(formatCycleHealth(readCycleHealth(PROJECT_ROOT, new Date().toISOString().slice(0, 10), {
+    buildFlow,
+    docsGovernancePath: '.claude/config/docs-governance.json',
+  })));
   lines.push("## 🚨 今週の自動起票 Issue（閾値違反）");
   lines.push("");
   lines.push(alertsSection(week));

@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createGscImprovementsAdapter, extractGscPages, judgeability, sumPages } from '../lib/gsc-improvements-adapter.mjs';
 import { buildGscQuery, parseGscFilter } from '../lib/gsc-query.mjs';
-import { decideVerdict } from '../../../../packages/ops/src/effect-verdict/engine.mjs';
-import { runAdapter } from '../../lib/effect-verdict/cli.mjs';
-import { DEFAULT_THRESHOLDS } from '../../../../packages/ops/src/effect-verdict/thresholds.mjs';
+import { decideVerdict } from '../../effect-verdict/engine.mjs';
+import { runAdapter } from '../../effect-verdict/cli.mjs';
+import { DEFAULT_THRESHOLDS } from '../../effect-verdict/thresholds.mjs';
 
 const pages = {
   '2026-W30': [
@@ -25,6 +25,7 @@ const adapterFor = (entries) => createGscImprovementsAdapter({
   loadPages: (w) => pages[w] ?? [],
   minWeeks: DEFAULT_THRESHOLDS.window.minWeeks,
   logPath: '/dev/null',
+  queryScriptPath: 'scripts/gsc-query.mjs',
 });
 
 test('only GSC rows that name their pages become subjects; prose is never parsed into a scope', () => {

@@ -1,10 +1,9 @@
 /**
- * 収益計測ガード (check-revenue-guards.mjs) の自己テスト。
+ * 収益計測ガード (check-revenue-guards.mjs) を、閾値 SSOT (.claude/config/revenue-guards.json) の実物で確かめる。
+ * packages は .claude を読まないので、実物の閾値と実物の週次 Issue 生成器を読む検査はここに置く
+ * (packages/ops/src/metrics/__tests__/revenue-guards.test.mjs から分けた。assert は変えていない)。
  *
- * ガード自身が壊れていたら「見えない劣化」を検出できないので、
- * 正常系だけでなく「閾値を動かすと判定が変わる」ことまで固定する。
- *
- * 実行: node --test .claude/scripts/lib/__tests__/revenue-guards.test.mjs
+ * 実行: node --test .claude/scripts/lib/__tests__/revenue-guards-wiring.test.mjs
  */
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -15,8 +14,7 @@ import { fileURLToPath } from "node:url";
 import {
   evaluateGuards,
   readAffiliateTotals,
-  unresolvedVerticalShare,
-} from "../../metrics/check-revenue-guards.mjs";
+} from "../../../../packages/ops/src/metrics/check-revenue-guards.mjs";
 
 const PROJECT_ROOT = join(fileURLToPath(new URL(".", import.meta.url)), "../../../..");
 
@@ -106,23 +104,6 @@ test("閾値を緩めると同じ入力が PASS になる (閾値が実際に効
     asof: "2026-09-21",
   });
   assert.deepEqual(failures, []);
-});
-
-test("`(not set)` と空文字も未解決として数える", () => {
-  const csv = [
-    HEADER,
-    "2026-09-20,28,housing,ranking-sidebar,400,1,0.002500",
-    "2026-09-20,28,(not set),sidebar,600,0,0.000000",
-    "2026-09-20,28,_all,_all,1000,1,0.001000",
-  ].join("\n");
-  assert.equal(unresolvedVerticalShare(csv, "2026-09-20"), 0.6);
-});
-
-test("_all 行だけを総計として読む", () => {
-  const totals = readAffiliateTotals(HEALTHY_CSV);
-  assert.equal(totals.length, 1);
-  assert.equal(totals[0].impressions, 1000);
-  assert.equal(totals[0].clicks, 4);
 });
 
 test("backfill 行が末尾に来ても日付順に並べ、最新観測を誤認しない", () => {

@@ -9,19 +9,6 @@ const row = (key, configYears, estatNonNullYears, verdict = "extend-candidate") 
   availableYearCodes: Array.from({ length: estatNonNullYears }, (_, i) => String(2000 + i)),
 });
 
-test("年数差の大きい順に 10 件まで、単年確定と by-design は載せない", () => {
-  const results = Object.fromEntries([
-    row("small-gap", 1, 2), row("big-gap", 1, 40), row("confirmed", 1, 1, "confirmed-single-year"), row("skipped", 1, 30),
-    ...Array.from({ length: 12 }, (_, i) => row(`mid-${String(i).padStart(2, "0")}`, 1, 5)),
-  ].map((r) => [r.key, r]));
-  const card = planYearCoverageCard({ results, openIds: [], byDesign: { skipped: { note: "定義替え" } }, today: "2026-09-26" });
-  assert.equal(card.id, "YEAR-COV-20260926");
-  assert.equal(card.keys.length, 10);
-  assert.equal(card.keys[0], "big-gap");
-  assert.ok(!card.keys.includes("confirmed") && !card.keys.includes("skipped") && !card.keys.includes("small-gap"));
-  assert.match(card.markdown, /\[検証:npx tsx .claude\/scripts\/data\/assert-year-coverage-batch.ts /);
-});
-
 test("開いている YEAR-COV カードがあれば起票しない", () => {
   const results = { a: row("a", 1, 5) };
   assert.equal(planYearCoverageCard({ results, openIds: ["YEAR-COV-20260919"], byDesign: {}, today: "2026-09-26" }), null);

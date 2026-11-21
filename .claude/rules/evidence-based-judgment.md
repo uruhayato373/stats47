@@ -244,5 +244,5 @@ grep -rn "$NG" \
 - 親方針: `CLAUDE.md` の行動原則 12「失敗を隠さない — 未検証部分・スキップ箇所は『完了』と言わず明示する」
 - 既存実装: `.claude/scripts/gsc/url-inspection-daily.cjs`（URL Inspection API の参照実装）
 - 閾値エンジン: `packages/ops/src/effect-verdict/`（`thresholds.mjs` = 閾値 SSOT / `engine.mjs` = 判定純粋関数）と `.claude/scripts/lib/effect-verdict/cli.mjs`（週次ランナー）
-- テスト: `node --test packages/ops/src/effect-verdict/__tests__/effect-verdict.test.mjs`（エンジン。CLI は `.claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs`。群 A 正常系 + 群 B mutation。閾値を動かすと判定が変わることを固定）
+- テスト: `node --test packages/ops/src/effect-verdict/__tests__/effect-verdict.test.mjs`（エンジン。CLI は `packages/ops/src/effect-verdict/__tests__/effect-verdict-cli.test.mjs`。群 A 正常系 + 群 B mutation。閾値を動かすと判定が変わることを固定）
 - 抑制台帳 writer: `.claude/scripts/lib/write-past-effects.mjs`（effect/none|adverse → candidate の confidence 抑制）

@@ -1,29 +1,32 @@
 /**
  * 「検出 → 起票 → 計画 → 実行 → 完了 → 振り返り」の各段の停滞信号 (CYCLE-HEALTH-01)。
  * 週次メトリクス Issue の「サイクルの健全性」節が読む。新しい台帳は作らず、既存の
- * .claude/todo・週次レビュー・backlog-loop ledger を数えるだけ。まだ機械で数えられない段は「未計測」と出す。
+ * .claude/todo・週次レビュー・backlog-loop ledger を数えるだけ (置き場は台帳 agent.todo* / agent.backlog-loop から引く)。まだ機械で数えられない段は「未計測」と出す。
  */
 import { existsSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
-import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 // 期日の読み方 (範囲内・超過の境界) は月次・週次計画が期日で引く cardsDueWithin と同じ partitionByDue を使う
-const { parseAnnual, parseBacklog, partitionByDue } = require("../../../../packages/ops/src/management/backlog-lib.cjs");
+const { parseAnnual, parseBacklog, partitionByDue } = require("../../management/backlog-lib.cjs");
 // Must の読み取り・連続未達の閾値・🔴 の上限は docs:check (DG081/082) と同じ実装を使う
-const strategyLanes = require("../../../../packages/ops/src/management/strategy-lanes.cjs");
-// 起票と完了の流れ・総枚数の目安は npm run backlog:waits -- flow と同じ実装を使う
-const { buildFlow } = require("../../backlog-loop/backlog-waits-core.cjs");
+const strategyLanes = require("../../management/strategy-lanes.cjs");
+// 起票と完了の流れ・総枚数の目安は npm run backlog:waits -- flow と同じ実装 (buildFlow) を呼ぶ側が渡す
+// (実装は .claude の基盤の検査を読むので packages からは import しない)
 
-import { CARD_ACTIONS as GSC_CARD_ACTIONS, CARD_PREFIX as GSC_PREFIX } from "../../../../packages/ops/src/gsc/lib/coverage-backlog.mjs";
+import { CARD_ACTIONS as GSC_CARD_ACTIONS, CARD_PREFIX as GSC_PREFIX } from "../../gsc/lib/coverage-backlog.mjs";
 import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "../../data/lib/year-coverage-backlog.mjs";
 // 振り返りの段 (週次・月次レビューの期限と申し送りの振り分け) は check-review-cadence.mjs と同じ実装を読む
-import { handoffSummary, reviewCadence } from "../../../../packages/ops/src/management/review-cadence.mjs";
+import { handoffSummary, reviewCadence } from "../../management/review-cadence.mjs";
 
-const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
+const BACKLOG_FILE = datasetPath("agent.todo-backlog");
+const TODO_FILES = [BACKLOG_FILE, datasetPath("agent.todo-improvements")];
 /** 年間計画 (月見出しの下のカード)。無い間は空として読む */
-const ANNUAL_FILE = ".claude/todo/annual.md";
+const ANNUAL_FILE = `${datasetDir("agent.todo")}/annual.md`;
+const WEEKLY_FILE = `${datasetDir("agent.todo")}/weekly.md`;
+const BACKLOG_LOOP_LEDGER = datasetPath("agent.backlog-loop");
 /** 連続未達がこの週数に達したら、次週計画で分割か降格を必須にする (DG082 が再掲を error にする) */
 export const MUST_MISS_STREAK_LIMIT = strategyLanes.MUST_MISS_STREAK_LIMIT;
 
@@ -40,9 +43,10 @@ export function summarizeCards(cards, today) {
 
 /**
  * 起票 → 完了: flow の最新週 (today を含む ISO 週) の起票数・閉じた数と、backlog の総枚数・目安超過の有無
- * @param {{backlogCards:any[], annualCards:any[], ledgerItems:Record<string, any>, today:string, target?:number, untriagedMaxAgeDays?:number}} input
+ * @param {{buildFlow:Function, backlogCards:any[], annualCards:any[], ledgerItems:Record<string, any>, today:string, target?:number, untriagedMaxAgeDays?:number}} input
+ *   buildFlow は backlog-waits-core.cjs の同名の関数 (呼ぶ側が渡す)
  */
-export function summarizeFlow({ backlogCards, annualCards, ledgerItems, today, target, untriagedMaxAgeDays }) {
+export function summarizeFlow({ buildFlow, backlogCards, annualCards, ledgerItems, today, target, untriagedMaxAgeDays }) {
   const flow = buildFlow({ backlogCards, annualCards, ledgerItems, today, weeks: 1, target, untriagedMaxAgeDays });
   const [latest] = flow.weeks;
   return { week: latest.week, filed: latest.filed, closed: latest.closed, total: flow.total, target: flow.target, overTarget: flow.overTarget };
@@ -103,8 +107,14 @@ function summarizeReviews(root, today) {
   }
 }
 
-export function readCycleHealth(root, today) {
-  const backlogCards = parseBacklog(readText(root, ".claude/todo/backlog.md") ?? "");
+/**
+ * @param {string} root
+ * @param {string} today YYYY-MM-DD
+ * @param {{buildFlow:Function, docsGovernancePath:string}} wiring 呼ぶ側 (.claude に残る入口) が渡す。
+ *   buildFlow = backlog-waits-core.cjs の buildFlow / docsGovernancePath = docs-governance.json の repo 相対パス
+ */
+export function readCycleHealth(root, today, { buildFlow, docsGovernancePath }) {
+  const backlogCards = parseBacklog(readText(root, BACKLOG_FILE) ?? "");
   const annualCards = parseAnnual(readText(root, ANNUAL_FILE) ?? "");
   const cards = [
     ...TODO_FILES.flatMap((rel) => parseBacklog(readText(root, rel) ?? "")),
@@ -115,13 +125,13 @@ export function readCycleHealth(root, today) {
   const board = strategyLanes.laneBoard(root, today);
   let completedIds = new Set();
   let ledgerItems = {};
-  const ledgerText = readText(root, ".claude/state/backlog-loop/ledger.json");
+  const ledgerText = readText(root, BACKLOG_LOOP_LEDGER);
   if (ledgerText) {
     const items = JSON.parse(ledgerText).items ?? {};
     ledgerItems = items;
     completedIds = new Set(Object.entries(items).filter(([, v]) => v.status === "completed").map(([id]) => id));
   }
-  const todoConfig = JSON.parse(readText(root, ".claude/config/docs-governance.json") ?? "{}").todo ?? {};
+  const todoConfig = JSON.parse(readText(root, docsGovernancePath) ?? "{}").todo ?? {};
   const yearText = readText(root, `${datasetDir("estat.year-coverage")}/queue.json`);
   const gscText = readText(root, datasetPath("gsc.coverage-queue"));
   const detectors = summarizeDetectors({
@@ -134,9 +144,10 @@ export function readCycleHealth(root, today) {
     detectors,
     cards: summarizeCards(cards, today),
     must: summarizeMust(weeks),
-    stalePlanIds: findStalePlanIds(readText(root, ".claude/todo/weekly.md") ?? "", completedIds, new Set(cards.map((c) => c.id))),
+    stalePlanIds: findStalePlanIds(readText(root, WEEKLY_FILE) ?? "", completedIds, new Set(cards.map((c) => c.id))),
     review: summarizeReviews(root, today),
     flow: summarizeFlow({
+      buildFlow,
       backlogCards,
       annualCards,
       ledgerItems,

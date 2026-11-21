@@ -1,5 +1,5 @@
 /**
- * effect-verdict engine のテスト (エンジンだけ。CLI を使う部分は .claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs)。
+ * effect-verdict engine のテスト (エンジンだけ。CLI を使う部分は packages/ops/src/effect-verdict/__tests__/effect-verdict-cli.test.mjs)。
  *
  * 群 A (正常系): 想定 +100 に対する実測で full / partial / none / adverse が出ること。
  * 群 B (mutation): thresholds を動かすと判定が**変わること**。

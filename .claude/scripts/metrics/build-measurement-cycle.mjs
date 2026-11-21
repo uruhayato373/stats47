@@ -22,9 +22,9 @@ import {
   countOpsImprovements, parseCsv, renderCycleMarkdown, summarizeCloudflare, summarizeDimensionGaps, summarizeEngine,
   summarizeDataQuality, summarizeJourney, summarizeKpiTree, summarizePaidPurchases, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
 } from "../../../packages/ops/src/metrics/lib/measurement-cycle.mjs";
-import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
+import { judgeability } from "../../../packages/ops/src/metrics/lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../../../packages/ops/src/google/dimension-ledger.mjs";
-import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
+import { parseBacklog } from "../../../packages/ops/src/effect-verdict/scan-pending-improvements.mjs";
 import { summarizeWeeklyRevenue } from "../../../packages/ops/src/metrics/weekly-revenue.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 

@@ -13,13 +13,13 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { extractDeployDate, extractTarget } from "../../../../packages/ops/src/effect-verdict/engine.mjs";
-import { isoWeekEnd, isoWeekOf, weekDiff, weekLt } from "../../../../packages/ops/src/effect-verdict/iso-week.mjs";
-import { parseBacklog } from "../../lib/scan-pending-improvements.mjs";
-import { DEFAULT_THRESHOLDS } from "../../../../packages/ops/src/effect-verdict/thresholds.mjs";
-import { parseCsv } from "../../../../packages/ops/src/metrics/lib/measurement-cycle.mjs";
-import { PROJECT_ROOT } from "../../../../packages/ops/src/metrics/lib/auth.mjs";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { extractDeployDate, extractTarget } from "../../effect-verdict/engine.mjs";
+import { isoWeekEnd, isoWeekOf, weekDiff, weekLt } from "../../effect-verdict/iso-week.mjs";
+import { parseBacklog } from "../../effect-verdict/scan-pending-improvements.mjs";
+import { DEFAULT_THRESHOLDS } from "../../effect-verdict/thresholds.mjs";
+import { parseCsv } from "./measurement-cycle.mjs";
+import { PROJECT_ROOT } from "./auth.mjs";
+import { datasetDir, datasetPath } from "../../../../../config/datasets.mjs";
 
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const PAGE_MARKER = /\[ga4-page:\s*([^\]\s]+)\s*\]/g;
@@ -48,7 +48,8 @@ export function spansDiscontinuity(beforeWeek, afterWeek, discontinuityWeek = GA
   return weekLt(beforeWeek, discontinuityWeek) && !weekLt(afterWeek, discontinuityWeek);
 }
 
-export function createGa4ImprovementsAdapter({ entries, availableWeeks, loadPages, minWeeks, logPath }) {
+/** queryScriptPath = 再現コマンドが指す GA4 クエリ CLI のパス (.claude に残る道具なので、呼ぶ側が渡す) */
+export function createGa4ImprovementsAdapter({ entries, availableWeeks, loadPages, minWeeks, logPath, queryScriptPath }) {
   const latestWeek = availableWeeks[availableWeeks.length - 1] ?? null;
   return {
     domainId: "ga4-improvement",
@@ -109,13 +110,15 @@ export function createGa4ImprovementsAdapter({ entries, availableWeeks, loadPage
     },
 
     reproduceCommand(subject) {
-      return `node .claude/scripts/metrics/ga4-query.mjs --japan --dims pagePath --metrics screenPageViews --filter 'pagePath*=${subject.pages[0]}'`;
+      if (!queryScriptPath) throw new Error("queryScriptPath が渡されていない");
+      return `node ${queryScriptPath} --japan --dims pagePath --metrics screenPageViews --filter 'pagePath*=${subject.pages[0]}'`;
     },
   };
 }
 
 /** repo の improvements.md と GA4 週次 snapshot から adapter を組み立てる (effect-verdict/cli.mjs が使う)。 */
-export function loadGa4ImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEFAULT_THRESHOLDS.window.minWeeks } = {}) {
+/** @param {{ root?: string, minWeeks?: number, queryScriptPath?: string }} [opts] */
+export function loadGa4ImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEFAULT_THRESHOLDS.window.minWeeks, queryScriptPath } = {}) {
   const snapshotDir = path.join(root, datasetDir("ga4.snapshots"));
   const availableWeeks = fs.existsSync(snapshotDir)
     ? fs.readdirSync(snapshotDir).filter((d) => /^\d{4}-W\d{2}$/.test(d) && fs.existsSync(path.join(snapshotDir, d, "pages-clean.csv"))).sort()
@@ -128,12 +131,13 @@ export function loadGa4ImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEF
     }
     return cache.get(week);
   };
-  const entries = parseBacklog(path.join(root, ".claude/todo/improvements.md")).filter((e) => ACTIVE_STATUSES.has(e.status));
+  const entries = parseBacklog(path.join(root, datasetPath("agent.todo-improvements"))).filter((e) => ACTIVE_STATUSES.has(e.status));
   return createGa4ImprovementsAdapter({
     entries,
     availableWeeks,
     loadPages,
     minWeeks,
     logPath: path.join(root, `${datasetDir("improvement.logs")}/ga4-improvement/improvement-log.md`),
+    queryScriptPath,
   });
 }
