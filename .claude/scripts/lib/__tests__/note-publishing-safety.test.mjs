@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-const NOTE_DIR = join(dirname(fileURLToPath(import.meta.url)), "..");
+const NOTE_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "note");
 const PUBLISHER = readFileSync(join(NOTE_DIR, "publish-new-note.sh"), "utf8");
 const HELPERS = readFileSync(join(NOTE_DIR, "editor-helpers.sh"), "utf8");
 const MAGAZINES = readFileSync(join(NOTE_DIR, "note-magazine.mjs"), "utf8");
@@ -74,7 +74,7 @@ test("kakei catalog entry builder defaults a-/d-kakei magazine to s47-kakei-read
 test("new publication and paid-landing patches stop on unverified disclaimers in the body", () => {
   assert.match(PUBLISHER, /audit-note-unverified\.mjs" --file "\$ADIR\/draft\.md"/);
   assert.match(PUBLISHER, /FAIL: 未検証の断り書きが本文に残っている/);
-  const patcher = readFileSync(join(NOTE_DIR, "patch-note-paid-landing.mjs"), "utf8");
+  const patcher = readFileSync(join(NOTE_DIR, "../../../packages/ops/src/note/patch-note-paid-landing.mjs"), "utf8");
   assert.match(patcher, /findUnverifiedDisclosures\(`\$\{composed\.html\}\\n\$\{pay\}`\)/);
   const weekly = readFileSync(join(NOTE_DIR, "../management/weekly-audits/note-circulation.sh"), "utf8");
   assert.match(weekly, /note:unverified:audit/);

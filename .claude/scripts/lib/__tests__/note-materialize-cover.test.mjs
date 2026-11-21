@@ -46,7 +46,7 @@ afterEach(() => {
   output.mock.restore(); process.argv = originalArgv;
 });
 // The actual upload-entry module must stop before producing any usable path (毎回新しく評価する).
-const materialize = () => import(`../materialize-cover.mjs?run=${runs++}`);
+const materialize = () => import(`../../note/materialize-cover.mjs?run=${runs++}`);
 
 test('新規記事も旧方式の承認済み画像をR2取得前に拒否する', async () => {
   state.ledger.articles[0].revisions[0].provenance.renderer = 'note-pop-cover-v1';

@@ -1,7 +1,7 @@
-import { rankingR2Key } from "../../../../../packages/r2-storage/mirror/r2-keys.mjs";
+import { rankingR2Key } from "../../../../packages/r2-storage/mirror/r2-keys.mjs";
 /**
  * 年度の指標の図に「2021年」と書かないことを固定する (BLOG-FETCH-RANKING-FISCAL-01)。
- * 実行: node --test .claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs
+ * 実行: node --test .claude/scripts/lib/__tests__/ranking-year-label.test.mjs
  *
  * 純粋関数の判定に加え、fetch-ranking-data-r2.mjs をローカルの偽 R2 に向けて実行し、
  * ランキングとタイルマップの両方の data JSON の subtitle を確かめる (配線まで固定する)。
@@ -15,9 +15,9 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { resolveYearFormat, yearLabelOf } from "../../../../../packages/ops/src/blog/lib/ranking-year-label.mjs";
+import { resolveYearFormat, yearLabelOf } from "../../../../packages/ops/src/blog/lib/ranking-year-label.mjs";
 
-const SCRIPT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "fetch-ranking-data-r2.mjs");
+const SCRIPT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "blog", "fetch-ranking-data-r2.mjs");
 
 test("item.yearFormat が fiscal なら年度、calendar なら年", () => {
   assert.equal(yearLabelOf("2021", { yearFormat: "fiscal" }), "2021年度");

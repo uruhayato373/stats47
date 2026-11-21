@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { applyPlanBody, buildPlans } from "../update-published-navigation.mjs";
+
+// buildPlans が商品カードの文言を読む storefront.generated.ts (呼ぶ側が渡す。実物と同じパス)
+const STOREFRONT_PATH = fileURLToPath(new URL("../../../../../apps/web/src/features/products/storefront.generated.ts", import.meta.url));
 
 // 実カタログの s47-economy マガジンが指す実商品 (kindle-k-s1-01) を模す。
 // マガジン名 (誤ったカードが表示していた文言) と実商品タイトルが異なることが前提条件。
@@ -34,7 +38,7 @@ function baseSource({ isPaid = false, publishedLinkRepairs = [] } = {}) {
 }
 
 test("buildPlans resolves productTitle/productDescription from the real storefront record", () => {
-  const [plan] = buildPlans(baseSource(), new Map(), { products: true });
+  const [plan] = buildPlans(baseSource(), new Map(), { products: true, storefrontPath: STOREFRONT_PATH });
   assert.ok(plan.footer, "productTarget を持つ記事は footer が生成されるはず");
   assert.equal(typeof plan.footer.productTitle, "string");
   assert.ok(plan.footer.productTitle.length > 0);
@@ -49,7 +53,7 @@ test("buildPlans resolves productTitle/productDescription from the real storefro
 
 test("buildPlans auto-adds a regenerate-card repair whenever productTarget resolves, without catalog entries", () => {
   // article.publishedLinkRepairs は空のまま (catalog に手書きしない設計を確認する)。
-  const [plan] = buildPlans(baseSource({ publishedLinkRepairs: [] }), new Map(), { products: true });
+  const [plan] = buildPlans(baseSource({ publishedLinkRepairs: [] }), new Map(), { products: true, storefrontPath: STOREFRONT_PATH });
   const repair = plan.repairs.find((entry) => entry.mode === "regenerate-card");
   assert.ok(repair, "regenerate-card repair が自動的に追加されているはず");
   assert.equal(repair.fromUrl, plan.footer.productUrl);
@@ -69,7 +73,7 @@ test('ordinary footer updates and explicit product updates keep the current paid
   source.magazines[0].paidProductId = 'P-01';
   source.productNotes = [{ productId: 'P-01', canonicalSlug: 'paid-pack' }];
   source.articles.push({ key: 'paid-pack', title: '県別データ集', isPaid: true, magazine: null, noteUrl: 'https://note.com/stats47/n/ne47eb45f8a15' });
-  for (const options of [{ products: true }, { allFree: true }, { slug: 'article-a' }]) {
+  for (const options of [{ products: true, storefrontPath: STOREFRONT_PATH }, { allFree: true }, { slug: 'article-a' }]) {
     const plan = buildPlans(source, new Map(), options).find((plan) => plan.article.key === 'article-a');
     assert.equal(plan.footer.productNoteUrl, 'https://note.com/stats47/n/ne47eb45f8a15');
     assert.equal(plan.footer.productUrl, plan.footer.productNoteUrl);
@@ -84,7 +88,7 @@ test('product-only checks leave unrelated navigation and body links unchanged', 
   source.productNotes = [{ productId: 'P-01', canonicalSlug: 'paid-pack' }];
   source.articles.push({ key: 'paid-pack', title: '県別データ集', isPaid: true, magazine: null,
     noteUrl: 'https://note.com/stats47/n/ne47eb45f8a15', nextBestArticle: 'article-a' });
-  const plans = buildPlans(source, new Map(), { products: true });
+  const plans = buildPlans(source, new Map(), { products: true, storefrontPath: STOREFRONT_PATH });
   assert.equal(plans.length, 1);
   const body = '<p>http://stats47.jp/ranking/example</p><figure embedded-service="note" data-src="https://note.com/stats47/n/ne47eb45f8a15" embedded-content-key="embPaid"></figure>';
   assert.equal(applyPlanBody(body, plans[0]).body, body);

@@ -12,10 +12,9 @@ import {
   assertPublicCoverPixels,
   comparePublicCover,
   publishedRevisionAfterArchive,
-} from '../../../../packages/ops/src/note/lib/cover-update.mjs';
+} from '../lib/cover-update.mjs';
 import sharp from 'sharp';
-import fs from 'node:fs';
-import { currentUrlname, assertAccount } from '../../../../packages/ops/src/note/lib/note-session.mjs';
+import { currentUrlname, assertAccount } from '../lib/note-session.mjs';
 
 test('browser-authenticated account remains usable when the separate request transport cannot connect', async () => {
   const requests = [];
@@ -60,16 +59,6 @@ test('a failed upload is released only by a superseded record that names its ins
   assert.equal(findCoverOperation([journal({ ...failed, status: 'superseded', supersededBy: 'palette-v2',
     inspection: 'live colours inverted by note quantisation; replaced by palette PNG' })], article), null);
 });
-test('Windows uses the dedicated authenticated browser and closes it without a POSIX daemon lookup', () => {
-  const source = fs.readFileSync(new URL('../update-note-covers.mjs', import.meta.url), 'utf8');
-  assert.match(source, /process\.platform === 'win32' \|\| unattended\(\)/);
-  assert.match(source, /await assertAccount\(playwrightContext\)/);
-  const cleanup = source.slice(source.indexOf('async function cleanup()'));
-  assert.ok(cleanup.indexOf('await playwrightContext?.close()') < cleanup.indexOf('const before = processes()'));
-  assert.match(cleanup, /pruneProfileCaches\(\);\s*return;/);
-  assert.match(source, /const prior = findCoverOperation\(previousJournals, a\)/);
-});
-
 const note = {
   id: 123,
   key: 'nabc',

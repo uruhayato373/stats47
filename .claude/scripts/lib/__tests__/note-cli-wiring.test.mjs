@@ -1,6 +1,12 @@
-const assert = require('node:assert/strict');
-const { readFileSync } = require('node:fs');
-const { test } = require('node:test');
+// note の部品 (packages/ops/src/note) と、.claude に残る note のシェル・CLI の配線を確かめる基盤のテスト。
+// 部品のテストは packages へ移したが、editor-helpers.sh と update-note-covers.mjs の本文は .claude にあるのでここで確かめる (SCRIPTS-TO-PACKAGES-02)。
+// 各 test の中身は移す前のまま (attachment-dom.test.cjs・cover-update.test.mjs から test ごと移した)。
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import test from 'node:test';
+
+const require = createRequire(import.meta.url);
 const { JSDOM } = require('jsdom');
 const { buildExpression } = require('../../../../packages/ops/src/note/attachment-dom.cjs');
 
@@ -39,44 +45,16 @@ test('無料説明文の同名言及を無視し、折り返し段落のDOM先�
   f.attach();
   assert.equal(f.run('verify'), 'note-attachment-verified');
   assert.equal(f.paragraph.textContent, original);
-  const shell = readFileSync(require.resolve('../editor-helpers.sh'), 'utf8').split('ins_file(){')[1].split('\n}\n')[0];
+  const shell = fs.readFileSync(require.resolve('../../note/editor-helpers.sh'), 'utf8').split('ins_file(){')[1].split('\n}\n')[0];
   assert.doesNotMatch(shell, /keys Home|index\(\$0,h\)|startsWith/);
 });
 
-test('見出し欠落・重複・直後段落欠落は挿入前に拒否する', () => {
-  const missing = fixture(); missing.h2.remove();
-  assert.equal(missing.run('prepare'), 'heading-not-unique');
-  const duplicate = fixture(); duplicate.h2.after(duplicate.h2.cloneNode(true));
-  assert.equal(duplicate.run('prepare'), 'heading-not-unique');
-  const noParagraph = fixture(); noParagraph.paragraph.remove();
-  assert.equal(noParagraph.run('prepare'), 'immediate-paragraph-missing');
-});
-
-test('添付欠落・同名重複・見出し前の添付・別節への添付を拒否する', () => {
-  for (const scenario of ['missing', 'duplicate', 'before', 'next-section']) {
-    const f = fixture(); f.run('prepare');
-    if (scenario === 'duplicate') { f.attach(); f.attach(); }
-    if (scenario === 'before') f.attach(true);
-    if (scenario === 'next-section') f.editor.append(f.attach());
-    assert.equal(f.run('verify'), ({ missing: 'attachment-not-unique', duplicate: 'attachment-not-unique', before: 'attachment-before-heading', 'next-section': 'attachment-outside-section' })[scenario]);
-  }
-});
-
-test('既存同名添付を再挿入せず、ZIP説明の段落分割を拒否する', () => {
-  const existing = fixture(); existing.attach(true);
-  assert.equal(existing.run('prepare'), 'attachment-already-present');
-  const split = fixture(); split.run('prepare'); split.attach();
-  split.paragraph.textContent = 'Z';
-  assert.equal(split.run('verify'), 'paragraph-changed');
-});
-
-test('引用符・改行・backslash・JS断片を見出し/ファイル名の文字列として扱う', () => {
-  const f = fixture();
-  const special = '商品\'"\\\n${x}`); window.compromised=true;//';
-  const name = special + '.zip';
-  f.h2.textContent = special;
-  assert.equal(f.run('prepare', special, name), 'note-attachment-prepared');
-  f.attach(false, name);
-  assert.equal(f.run('verify', special, name), 'note-attachment-verified');
-  assert.equal(f.dom.window.compromised, undefined);
+test('Windows uses the dedicated authenticated browser and closes it without a POSIX daemon lookup', () => {
+  const source = fs.readFileSync(new URL('../../note/update-note-covers.mjs', import.meta.url), 'utf8');
+  assert.match(source, /process\.platform === 'win32' \|\| unattended\(\)/);
+  assert.match(source, /await assertAccount\(playwrightContext\)/);
+  const cleanup = source.slice(source.indexOf('async function cleanup()'));
+  assert.ok(cleanup.indexOf('await playwrightContext?.close()') < cleanup.indexOf('const before = processes()'));
+  assert.match(cleanup, /pruneProfileCaches\(\);\s*return;/);
+  assert.match(source, /const prior = findCoverOperation\(previousJournals, a\)/);
 });

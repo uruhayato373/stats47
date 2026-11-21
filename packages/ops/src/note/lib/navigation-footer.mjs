@@ -1,13 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import { SITE_ORIGIN } from "../../../../packages/types/mirror/site-config.cjs";
-import { noteInboundUrl } from "../../../../config/inbound-utm.mjs";
-
-const LIB_DIR = dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = resolve(LIB_DIR, "../../../..");
-const STOREFRONT_PATH = join(REPO_ROOT, "apps/web/src/features/products/storefront.generated.ts");
+import { SITE_ORIGIN } from "../../../../types/mirror/site-config.cjs";
+import { noteInboundUrl } from "../../../../../config/inbound-utm.mjs";
 
 function escapeHtml(value) {
   return String(value)
@@ -54,11 +48,13 @@ function readStorefrontField(block, field) {
 /**
  * note商品カードのtitle/descriptionを、マガジン名の代用ではなく
  * 実商品SSOT (storefront.generated.ts) から解決する。見つからなければ fail-fast する。
+ * storefrontPath = storefront.generated.ts のパス (呼ぶ側が渡す。packages はリポジトリの配置を持たない)。
  */
-export function resolveProductCardText(productTarget) {
+export function resolveProductCardText(productTarget, storefrontPath) {
   const slug = String(productTarget || "").match(/^\/products\/([a-z0-9-]+)$/)?.[1];
   if (!slug) throw new Error(`商品導線pathが不正: ${productTarget}`);
-  const source = readFileSync(STOREFRONT_PATH, "utf8");
+  if (!storefrontPath) throw new Error("storefrontPath が渡されていない");
+  const source = readFileSync(storefrontPath, "utf8");
   for (const match of source.matchAll(/\{[^{}]*\}/g)) {
     const block = match[0];
     if (readStorefrontField(block, "slug") !== slug) continue;

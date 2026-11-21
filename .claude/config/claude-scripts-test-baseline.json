@@ -81,6 +81,9 @@
     ".claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/metric-release-order.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/move-script.test.mjs": "スクリプトを packages へ移す道具 (移行の基盤) のテスト",
+    ".claude/scripts/lib/__tests__/note-cli-wiring.test.mjs": "note の部品 (packages/ops/src/note) と .claude に残るシェル・CLI (editor-helpers.sh・update-note-covers.mjs) の本文の配線を確かめる基盤のテスト",
+    ".claude/scripts/lib/__tests__/note-materialize-cover.test.mjs": "表紙の復元の入口 (.claude/scripts/note/materialize-cover.mjs) を起動して確かめる基盤のテスト (入口が .claude に残る)",
+    ".claude/scripts/lib/__tests__/note-publishing-safety.test.mjs": "note の公開のシェル・CLI (publish-new-note.sh・editor-helpers.sh・launch-note-cdp.mjs など) の本文と、公開記録の commit スクリプトの挙動を確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/open-data-workflow-wiring.test.mjs": "open-data の workflow (open-data-source-archive.yml) が .claude/scripts/open-data/normalize-ci.mjs の入口を起動することを確かめる",
     ".claude/scripts/lib/__tests__/page-quality-agent-assets.test.mjs": "page-quality の入口が頼る .claude の実物 (手元の検査の既定の画面・週次 UI 確認のプロンプト) の契約のテスト",
     ".claude/scripts/lib/__tests__/pr-skip-ci-head-guard.test.cjs": "workflow の YAML の契約のテスト",
@@ -91,9 +94,11 @@
     ".claude/scripts/lib/__tests__/preflight-commit.test.mjs": "Claude Code と git の hook のテスト",
     ".claude/scripts/lib/__tests__/prune-state-snapshots.test.mjs": "置き場の規則の検査のテスト (記録の寿命。fixture が .claude/state のパス)",
     ".claude/scripts/lib/__tests__/publish-blog-review-order.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/quality-gate.q-numbers.test.mjs": "ブログの品質ゲートの入口 (.claude/scripts/blog/quality-gate.mjs) の起動を確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/r2-key-classes-run-sh.test.ts": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/r2-overlay-server.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/ranking-scoped-workflow.test.mjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/ranking-year-label.test.mjs": "年度の指標の図の見出しを、.claude の CLI (fetch-ranking-data-r2.mjs) を偽の R2 に向けて起動して確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/record-claude-usage.test.mjs": "モデルの利用量の計測のテスト",
     ".claude/scripts/lib/__tests__/release-status.test.mjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/remove-worktree.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
@@ -135,15 +140,11 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "blog": {
-      "count": 3,
+      "count": 2,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "google-admin": {
       "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "lib": {
-      "count": 2,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "measurement": {
@@ -155,7 +156,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "note": {
-      "count": 15,
+      "count": 5,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "page-quality": {

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import {
   applyNavigationFooter,
   collapseDuplicateFooterHeadings,
@@ -21,6 +22,8 @@ import {
 // 是正対象のバグは productTitle にマガジン名が入ってしまうことなので、実商品側の値を
 // 直接ハードコードせず「実商品の値であること」「マガジン名でないこと」の両方を確認する。
 const REAL_PRODUCT_TARGET = "/products/kindle-k-s1-01";
+// resolveProductCardText が読む storefront.generated.ts (呼ぶ側が渡す。実物と同じパス)
+const STOREFRONT_PATH = fileURLToPath(new URL("../../../../../apps/web/src/features/products/storefront.generated.ts", import.meta.url));
 const WRONG_MAGAZINE_DERIVED_TITLE = "都道府県ランキング｜家計・所得・物価の商品・書籍";
 const WRONG_GENERIC_DESCRIPTION = "無料の数値に加え、テーマ別に編集したKindle本または再利用しやすいデータ集を確認できます。";
 
@@ -255,7 +258,7 @@ test("published card repair removes stale embed metadata and keeps a clean link"
 });
 
 test("resolveProductCardText resolves the real storefront record, not a magazine-derived placeholder", () => {
-  const result = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const result = resolveProductCardText(REAL_PRODUCT_TARGET, STOREFRONT_PATH);
   assert.equal(typeof result.title, "string");
   assert.equal(typeof result.description, "string");
   assert.ok(result.title.length > 0 && result.description.length > 0);
@@ -267,20 +270,20 @@ test("resolveProductCardText resolves the real storefront record, not a magazine
 
 test("resolveProductCardText fails fast when the productTarget path is malformed", () => {
   assert.throws(
-    () => resolveProductCardText(`${REAL_PRODUCT_TARGET}?utm_source=note`),
+    () => resolveProductCardText(`${REAL_PRODUCT_TARGET}?utm_source=note`, STOREFRONT_PATH),
     /商品導線pathが不正/,
   );
 });
 
 test("resolveProductCardText fails fast when no storefront product matches the slug", () => {
   assert.throws(
-    () => resolveProductCardText("/products/this-slug-does-not-exist"),
+    () => resolveProductCardText("/products/this-slug-does-not-exist", STOREFRONT_PATH),
     /商品ストアに productTarget が見つかりません/,
   );
 });
 
 test("regenerate-card repair is idempotent once the card already shows the real product text", () => {
-  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET, STOREFRONT_PATH);
   const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5";
   const correctBody = `<p>本文</p>${externalCard(url, title, description, ids())}`;
   const result = applyPublishedLinkRepairs(
@@ -294,7 +297,7 @@ test("regenerate-card repair is idempotent once the card already shows the real 
 });
 
 test("regenerate-card repair rewrites a magazine-derived wrong title while keeping the external-article card", () => {
-  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET, STOREFRONT_PATH);
   const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5";
   const wrongBody = `<p>本文</p>${externalCard(url, WRONG_MAGAZINE_DERIVED_TITLE, WRONG_GENERIC_DESCRIPTION, ids())}`;
   const result = applyPublishedLinkRepairs(
@@ -309,7 +312,7 @@ test("regenerate-card repair rewrites a magazine-derived wrong title while keepi
 });
 
 test("regenerate-card repair is a no-op when the target card is absent from the body (本文差し替え直後など、新規追加は applyNavigationFooter に委ねる)", () => {
-  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET, STOREFRONT_PATH);
   const body = "<p>関係ないカードだけの本文</p>";
   const result = applyPublishedLinkRepairs(
     body,
@@ -397,7 +400,7 @@ test("regenerate-card leaves a correctly-addressed card alone when note returned
 });
 
 test("forceRegenerateCards issues a fresh embedded-content-key even when the card text already matches (note が古い key を再解決しないための一回限りの手段)", () => {
-  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET);
+  const { title, description } = resolveProductCardText(REAL_PRODUCT_TARGET, STOREFRONT_PATH);
   const url = "https://stats47.jp/products/kindle-k-s1-01/from/note/n023501038bd5";
   // idFactory を共有し、修復呼び出し側のカウンタが「初期生成時」から続くようにする
   // (別々に ids() を呼ぶと両方 1 から始まり、同じ key が再生成されて偽陽性の pass になる)。

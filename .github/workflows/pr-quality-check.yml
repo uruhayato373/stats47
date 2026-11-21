@@ -664,7 +664,7 @@ jobs:
           node --test packages/ops/src/blog/lib/__tests__/stale-data-years.test.mjs
           node --test packages/ops/src/blog/lib/__tests__/release-calendar.test.mjs
           node --test packages/ops/src/blog/lib/__tests__/refresh-chart-year.test.mjs
-          node --test .claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs
+          node --test .claude/scripts/lib/__tests__/ranking-year-label.test.mjs
           node --test packages/ops/src/ranking/__tests__/latest-partition.test.mjs .claude/scripts/lib/__tests__/latest-partition-usage-contract.test.mjs
           node --test packages/svg-builder/src/lint/__tests__/svg-lint.scatter.test.mjs
           node --test packages/svg-builder/src/lint/__tests__/svg-lint.responsive-bar.test.mjs

@@ -257,7 +257,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs": {
+    ".claude/scripts/lib/__tests__/ranking-year-label.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -332,7 +332,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/rebuild-scatter-data.mjs": {
+    "packages/ops/src/blog/rebuild-scatter-data.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -587,7 +587,7 @@
       "topoPrefCode": 3,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/__tests__/chart-recurrence-guards.test.mjs": {
+    "packages/ops/src/blog/__tests__/chart-recurrence-guards.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

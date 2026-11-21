@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { test } from 'node:test';
 
-import { CHART_SOURCE_KIND_SPECS } from '../../../../packages/ops/src/blog/lint/chart-provenance.mjs';
-import { CHART_SOURCE_SCHEMA, chartSourceShapeErrors } from '../../../../packages/svg-builder/src/lint/chart-source-schema.mjs';
-import { lintImageTypeSvg } from '../../../../packages/svg-builder/src/lint/svg-lint.mjs';
-import { chartDataFilesOf, chartDataKey } from '../../../../packages/ops/src/blog/archive-blog-articles.mjs';
-import { compareAsset } from '../../blog/verify-published-assets.mjs';
-import { buildRepair, yearValues } from '../../blog/rebuild-scatter-data.mjs';
-import { isOutdatedChart } from '../../blog/drop-outdated-outbox-charts.mjs';
+import { CHART_SOURCE_KIND_SPECS } from '../lint/chart-provenance.mjs';
+import { CHART_SOURCE_SCHEMA, chartSourceShapeErrors } from '../../../../svg-builder/src/lint/chart-source-schema.mjs';
+import { lintImageTypeSvg } from '../../../../svg-builder/src/lint/svg-lint.mjs';
+import { chartDataFilesOf, chartDataKey } from '../archive-blog-articles.mjs';
+import { compareAsset } from '../verify-published-assets.mjs';
+import { buildRepair, yearValues } from '../rebuild-scatter-data.mjs';
+import { isOutdatedChart } from '../drop-outdated-outbox-charts.mjs';
 
 const svg = ({ theme = 'light', name = '東京都', title = '年間収入と支出', fill = '#0f579f', paper = '#F8FAFC' } = {}) =>
   `<svg width="1080" height="1350" viewBox="0 0 1080 1350" data-theme="${theme}" data-image-template="scatter"><rect width="1080" height="1350" fill="${paper}"/><text y="120" font-size="64">${title}</text><circle data-pref="13000" r="10" fill="${fill}"/><text text-anchor="start" font-size="32" font-weight="700">${name}</text></svg>`;
@@ -29,7 +29,7 @@ test('axes の形を止める', () => {
 
 test('一時ファイルで作った source.json を見分ける', () => {
   assert.ok(chartSourceShapeErrors({ kind: 'derived', generatedBy: '/tmp/backfill.mjs' }).length);
-  assert.deepEqual(chartSourceShapeErrors({ kind: 'derived', generatedBy: '.claude/scripts/blog/x.mjs' }), []);
+  assert.deepEqual(chartSourceShapeErrors({ kind: 'derived', generatedBy: 'packages/ops/src/blog/x.mjs' }), []);
 });
 
 test('型の画像の文字化け・矢印・短い県名を止める', () => {
@@ -65,7 +65,7 @@ test('点データの復元は 47 県そろわない年を止め、一時ファ�
   const rows = Array.from({ length: 47 }, (_, i) => ({ yearCode: '2020', areaCode: `${String(i + 1).padStart(2, '0')}000`, areaName: `県${i + 1}`, value: i, unit: '％' }));
   assert.throws(() => yearValues(rows.slice(1), 'a', '2020'), /46 県/);
   const v = yearValues(rows, 'a', '2020');
-  const { manifest, data } = buildRepair({ base: 'b', x: ['a', '2020'], y: ['a', '2020'] }, { kind: 'derived', rankingKeys: ['a'], generatedBy: '/tmp/x.mjs' }, v, v);
+  const { manifest, data } = buildRepair({ base: 'b', x: ['a', '2020'], y: ['a', '2020'] }, { kind: 'derived', rankingKeys: ['a'], generatedBy: '/tmp/x.mjs' }, v, v, 'packages/ops/src/blog/rebuild-scatter-data.mjs');
   assert.equal(data.points.length, 47);
   assert.equal(manifest.kind, 'scatter');
   assert.equal(manifest.rankingKeys, undefined);
