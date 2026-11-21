@@ -20,15 +20,15 @@
  * 由来: doboku-note `scripts/affiliate-apply.mjs`
  *
  * usage:
- *   node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154            # dry-run
- *   node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit   # 実申請
+ *   node packages/ops/src/ads/affiliate-apply.mjs --asp moshimo --id 6154            # dry-run
+ *   node packages/ops/src/ads/affiliate-apply.mjs --asp moshimo --id 6154 --commit   # 実申請
  */
 import { createRequire } from "node:module";
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { join } from "node:path";
 
 import {
@@ -47,24 +47,24 @@ import {
   buildJournalEvent,
   validatePlanForCommit,
   deriveOperationOutcome,
-} from "../../../packages/ops/src/ads/lib/asp-operation-core.mjs";
+} from "./lib/asp-operation-core.mjs";
 import {
   writePlan,
   readPlan,
   expirePlan,
   appendJournal,
   readJournal,
-} from "../../../packages/ops/src/ads/lib/asp-operation-store.mjs";
+} from "./lib/asp-operation-store.mjs";
 import {
   buildEligibilityFingerprintMaterial,
   evaluateAffiliateEligibility,
-} from "../../../packages/ops/src/ads/lib/affiliate-eligibility-core.mjs";
-import { datasetPath } from "../../../config/datasets.mjs";
+} from "./lib/affiliate-eligibility-core.mjs";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const CATALOG = join(repoRoot(), datasetPath("affiliate.catalog"));
 
 // 頻度ガードは CommonJS (A8 側の check-a8-apply-budget.cjs と同じ形) なので require で読む。
-const { applyBudget, toJstDate } = createRequire(import.meta.url)("../../../packages/ops/src/ads/check-asp-apply-budget.cjs");
+const { applyBudget, toJstDate } = createRequire(import.meta.url)("./check-asp-apply-budget.cjs");
 
 function parseArgs() {
   const a = process.argv.slice(2);
@@ -469,7 +469,7 @@ export function eligibilityFingerprint(catalog, aspName, id) {
 function opsLock(action, aspName, operationId) {
   const r = spawnSync(
     process.execPath,
-    [join(repoRoot(), ".claude/scripts/ads/affiliate-ops.mjs"), "lock", action, "--asp", aspName, "--operation-id", operationId],
+    [fileURLToPath(new URL("./affiliate-ops.mjs", import.meta.url)), "lock", action, "--asp", aspName, "--operation-id", operationId],
     { encoding: "utf-8" },
   );
   if (r.stdout?.trim()) console.log(`  ${r.stdout.trim()}`);

@@ -2,7 +2,7 @@
  * 手動投入の書き手 (stats-values-writer.mjs) が values.json に焼く取得レシピを、正典の buildRecipe から出す境界。
  * 素の node の .mjs は TS の data-configs を import できないので、ここで JSON にして渡す。
  *
- * Usage: node --import tsx .claude/scripts/data/lib/print-metric-recipe.ts <metricKey>
+ * Usage: node --import tsx packages/ops/src/data/lib/print-metric-recipe.ts <metricKey>
  */
 import { buildRecipe, getMetricConfig } from "@stats47/data-configs";
 

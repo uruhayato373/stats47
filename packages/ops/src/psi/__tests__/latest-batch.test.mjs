@@ -5,7 +5,7 @@ import { basename, join } from "node:path";
 import test from "node:test";
 
 import { findLatestPsiBatch, loadLatestPsiBatch } from "../lib/latest-batch.mjs";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 test("生 PSI の置き場は R2 state/psi/ の手元の写しと同じ git 管理外の live/ である", () => {
   assert.equal(datasetDir("psi.batch"), "data/psi/live");

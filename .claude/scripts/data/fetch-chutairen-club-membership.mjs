@@ -31,7 +31,7 @@ import { fileURLToPath } from "node:url";
 import os from "node:os";
 import { execFileSync } from "node:child_process";
 import { PREF_NAMES, PREF_AREA_CODES } from "../../../packages/area/mirror/prefectures.cjs";
-import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
+import { resolveMetricRecipe } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const PDF_BASE =
   "https://nippon-chutairen.or.jp/cms/wp-content/themes/nippon-chutairen/file/kameikou/";

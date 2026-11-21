@@ -176,6 +176,6 @@ npm run test:run   --workspace=@stats47/product-factory
 
 - 商品案の由来: 台帳 `products.packs` の `sourceIds`（旧調査はGit履歴）
 - モジュール: `packages/product-factory/`（README + `src/`）
-- 納品版の固定値: `data/products/note-pack-deliveries.json` / 照合: `.claude/scripts/products/lib/pack-evidence.mjs`
+- 納品版の固定値: `data/products/note-pack-deliveries.json` / 照合: `packages/ops/src/products/lib/pack-evidence.mjs`
 - 完全DBレス: `.claude/rules/data-storage.md` / データ保存先: `.claude/rules/data-storage.md`
 - 実証判定: `.claude/rules/evidence-based-judgment.md` / 収益化戦略: `docs/00_プロジェクト管理/02_収益化戦略.md`

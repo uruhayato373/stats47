@@ -5,4 +5,4 @@
 **根拠**: 2026-09-08のafbで `pm_search` と `search_x` が各2件存在。nameで絞ったformも2件になった。一覧内の `#get-keywords` と `#keywordSearchBtn` を実機確認後に使い、6検索すべてで表示総数と抽出PID数の一致を確認した。IDを無条件に固定せず、次回も一意性を検証する。
 **確信度**: 0.7
 **発見日**: 2026-09-08
-**関連**: `.claude/scripts/ads/afb-scan.mjs`、`.claude/scripts/ads/lib/asp-browser.mjs`、`.claude/rules/affiliate-ads-standards.md` §11
+**関連**: `.claude/scripts/ads/afb-scan.mjs`、`packages/ops/src/ads/lib/asp-browser.mjs`、`.claude/rules/affiliate-ads-standards.md` §11

@@ -11,17 +11,17 @@
  *
  * Usage:
  *   npm run fetch-psi-audit
- *   node .claude/scripts/psi/fetch-psi-audit.mjs --strategy mobile
- *   node .claude/scripts/psi/fetch-psi-audit.mjs --file custom-urls.txt
+ *   node packages/ops/src/psi/fetch-psi-audit.mjs --strategy mobile
+ *   node packages/ops/src/psi/fetch-psi-audit.mjs --file custom-urls.txt
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { PSI_URLS } from "../../../config/paths.mjs";
-import { datasetDir } from "../../../config/datasets.mjs";
+import { PSI_URLS } from "../../../../config/paths.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
-const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
+const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..", "..");
 const DEFAULT_URL_FILE = join(PROJECT_ROOT, PSI_URLS);
 const OUTPUT_DIR = join(PROJECT_ROOT, datasetDir("psi.batch"));
 const CATEGORIES = ["performance", "accessibility", "best-practices", "seo"];

@@ -7,7 +7,7 @@
  * 行き先の語彙はレビューの申し送りと同じ (review-wiring.json の handoffRouting)。
  * 本文は各 workflow が毎回書き換えるので、振り分けはコメントにだけ書く (本文の記述は数えない)。
  */
-import { classifyRoute, parseRoutes } from "../../../../packages/ops/src/management/review-cadence.mjs";
+import { classifyRoute, parseRoutes } from "../review-cadence.mjs";
 
 const DAY = 86400000;
 

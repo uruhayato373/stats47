@@ -5,7 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { readVault } from './vault.mjs';
 import { sourceFor } from '../../../packages/ops/src/measurement/sources.mjs';
 import { consumerPath, validateAttempt, validateEvidence, validateInventoryAttempt } from '../../../packages/ops/src/measurement/consumer-paths.mjs';
-import { kdpMonthlyVaultKey, archivedKdpMonthlyReport } from './kdp-monthly-reports.mjs';
+import { kdpMonthlyVaultKey, archivedKdpMonthlyReport } from '../../../packages/ops/src/measurement/kdp-monthly-reports.mjs';
 import { validateNoteInventory } from '../../../packages/ops/src/measurement/note-inventory.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 

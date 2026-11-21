@@ -20,7 +20,7 @@
  * 正典: .claude/rules/data-provenance-standards.md
  */
 import ExcelJS from "exceljs";
-import { fetchBuffer, toFullPrefName, writeStatsValues, roundTo, assertClose, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, toFullPrefName, writeStatsValues, roundTo, assertClose, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const PAGE_URL = "https://www.shiruporuto.jp/public/document/container/literacy_chosa/2022/";
 const METRIC_KEY = "financial-literacy-correct-rate";

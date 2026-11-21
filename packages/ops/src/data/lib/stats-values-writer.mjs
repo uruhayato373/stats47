@@ -13,9 +13,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PREF_NAMES, PREF_AREA_CODES } from "../../../../packages/area/mirror/prefectures.cjs";
+import { PREF_NAMES, PREF_AREA_CODES } from "../../../../area/mirror/prefectures.cjs";
 
-export const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+export const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
 export { PREF_NAMES, PREF_AREA_CODES };
 export const CODE_BY_NAME = Object.fromEntries(PREF_NAMES.map((n, i) => [n, PREF_AREA_CODES[i]]));
 
@@ -51,7 +51,7 @@ export function roundTo(value, decimals) {
 
 /** 正典 buildRecipe(config) の結果を返す。config が無ければ例外 (書き出しを止める)。 */
 export function resolveMetricRecipe(metricKey) {
-  const helper = path.join(PROJECT_ROOT, ".claude/scripts/data/lib/print-metric-recipe.ts");
+  const helper = fileURLToPath(new URL("./print-metric-recipe.ts", import.meta.url));
   const raw = execFileSync(process.execPath, ["--import", "tsx", helper, metricKey], {
     cwd: PROJECT_ROOT,
     encoding: "utf8",
@@ -61,7 +61,7 @@ export function resolveMetricRecipe(metricKey) {
 
 /** 指標定義の yearFormat (calendar / fiscal / plain / 未宣言)。config が無ければ例外 (書き出しを止める)。 */
 export function resolveMetricYearFormat(metricKey) {
-  const helper = path.join(PROJECT_ROOT, ".claude/scripts/data/lib/print-metric-year-format.ts");
+  const helper = fileURLToPath(new URL("./print-metric-year-format.ts", import.meta.url));
   const raw = execFileSync(process.execPath, ["--import", "tsx", helper, metricKey], {
     cwd: PROJECT_ROOT,
     encoding: "utf8",

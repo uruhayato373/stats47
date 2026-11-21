@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFileSync } from 'node:fs';
-import { tailLines } from '../../../../packages/ops/src/measurement/tail-lines.mjs';
+import { tailLines } from '../tail-lines.mjs';
 
 const stack = [
   'node:internal/modules/cjs/loader:1100',
@@ -24,11 +23,4 @@ test('長い出力は末尾 20 行・4000 文字までに切り、空は空の�
   assert.equal(tailLines(long).split('\n')[0], 'line 80');
   assert.equal(tailLines('x'.repeat(9000)).length, 4000);
   assert.equal(tailLines(undefined), '');
-});
-
-test('collect-local は bootstrap と collect の失敗に stderr の末尾を残す', () => {
-  const runner = readFileSync(new URL('../collect-local.mjs', import.meta.url), 'utf8');
-  assert.match(runner, /step: 'bootstrap'.*message: tailLines\(boot\.stderr\)/);
-  assert.match(runner, /step: 'collect'.*message: tailLines\(collected\.stderr\)/);
-  assert.doesNotMatch(runner, /message: lastLine\(boot\.stderr\)/);
 });

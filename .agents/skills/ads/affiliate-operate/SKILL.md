@@ -21,7 +21,7 @@ Mac / Windows 双方で動く。
 |---|---|---|
 | `status` (既定) | `node .claude/scripts/ads/affiliate-status.mjs [--asp a8,moshimo,afb]` | なし (read-only) |
 | `status --write` | 同上 `--write` | カタログ JSON を実機値で更新 |
-| `apply` (dry-run) | `node .claude/scripts/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | plan を書き出す (押さない) |
+| `apply` (dry-run) | `node packages/ops/src/ads/affiliate-apply.mjs --asp <moshimo\|afb> --id <id>` | plan を書き出す (押さない) |
 | `apply --commit` | `同上 --plan <operationId> --commit` | **提携申請を送信 (不可逆・要オーナー承認)** |
 | `scan` (afb) | `node .claude/scripts/ads/afb-scan.mjs [--vertical <軸>] [--mode search\|crawl]` | なし (走査 JSON を .local に出力) |
 | `scan` (もしも) | `node .claude/scripts/ads/moshimo-scan.mjs [--query <語>] [--vertical <軸>]` | なし (同上) |
@@ -83,11 +83,11 @@ node .claude/scripts/ads/afb-scan.mjs --vertical travel,economy
 
 ```bash
 # 1. dry-run。押せる状態かを確認し、plan を .local/affiliate-ops/plans/ に書き出す
-node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --id 6154
+node packages/ops/src/ads/affiliate-apply.mjs --asp moshimo --id 6154
 #    → 出力の `plan: moshimo-6154-<timestamp>` が operationId
 
 # 2. オーナー承認を得てから、その plan だけを実行する
-node .claude/scripts/ads/affiliate-apply.mjs --asp moshimo --plan moshimo-6154-<timestamp> --commit
+node packages/ops/src/ads/affiliate-apply.mjs --asp moshimo --plan moshimo-6154-<timestamp> --commit
 ```
 
 - **★`--commit --id` は使えない (exit 2)。`--commit` は `--plan` 必須**。id 直指定だと

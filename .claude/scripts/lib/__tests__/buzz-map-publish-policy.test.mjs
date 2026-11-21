@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 
-const source = (name) => readFileSync(new URL(`../${name}`, import.meta.url), 'utf8');
+const source = (name) => readFileSync(new URL(`../../sns/${name}`, import.meta.url), 'utf8');
 
 describe('generated image source policy (buzz-map)', () => {
   for (const name of ['prepare-buzz-map-batch.ts']) {

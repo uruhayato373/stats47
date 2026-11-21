@@ -19,7 +19,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { PROJECT_ROOT, writeStatsValues, roundTo, assertClose, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { PROJECT_ROOT, writeStatsValues, roundTo, assertClose, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const AGES = ["20-24", "25-29", "30-34", "35-39"];
 /** 国勢調査 結果の概要「補完前の集計結果(原数値)」年齢(5歳階級)別人口・男女計の全国値 */

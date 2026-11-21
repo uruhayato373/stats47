@@ -8,13 +8,13 @@
  * 地域を絞る cdArea は使わず (estat-api.md)、項目 (製造品出荷額等) の軸だけで絞って表を取り、自治体はメモリで選ぶ。
  * 地域編の表は地域と業種が 1 つの軸にまとまり、名前は「年コード_年_自治体コード_自治体名_業種コード_業種名」。
  *
- * Usage (CI): node .claude/scripts/products/fetch-estat-muni-industry.mjs \
+ * Usage (CI): node packages/ops/src/products/fetch-estat-muni-industry.mjs \
  *   --stats-data-ids 0004048588,0004028808,0004035178 [--areas all|23211,33202] --out <dir>
  * 取り込み (Mac): gh run download <run> -n estat-muni-industry -D .local/muni-data-products/_cache/industry
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fetchMetaInfo, fetchStatsData } from '../../../packages/ops/src/estat/catalog-api.mjs';
+import { fetchMetaInfo, fetchStatsData } from '../estat/catalog-api.mjs';
 
 const PAGE_LIMIT = 100000;
 const ITEM_NAME = '製造品出荷額等';

@@ -8,7 +8,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
-import { buildLedger, collectProducts, renderLedgerMarkdown } from "./lib/product-ledger.mjs";
+import { buildLedger, collectProducts, renderLedgerMarkdown } from "../../../packages/ops/src/products/lib/product-ledger.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const read = (path) => JSON.parse(readFileSync(join(ROOT, path), "utf8"));

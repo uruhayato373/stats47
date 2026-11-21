@@ -665,7 +665,7 @@ Phase 0 で再確認し、既存機能と重複する場合は新規ファイル
 | `.claude/scripts/ads/fetch-affiliate-ga4.cjs`                     | snapshot schema v2・quality                                        |
 | `.claude/scripts/ads/build-affiliate-operations-state.ts`         | schema v2・compliance gate                                         |
 | `packages/ops/src/ads/lib/asp-browser-base.mjs`                    | lock、artifact mode、mask、retention                               |
-| `.claude/scripts/ads/affiliate-apply.mjs`                         | plan必須、journal、unknown、idempotency                            |
+| `packages/ops/src/ads/affiliate-apply.mjs`                         | plan必須、journal、unknown、idempotency                            |
 | `.claude/scripts/ads/affiliate-status.mjs`                        | pagination、completeness、positive-only transition                 |
 | `.claude/skills/ads/scout-asp/scripts/a8-browser.ts`              | approval 全ページ走査、raw dump廃止                                |
 | `.claude/scripts/ads/append-affiliate-ads.ts`                     | dirty preflight、byte-preserving rollback                          |

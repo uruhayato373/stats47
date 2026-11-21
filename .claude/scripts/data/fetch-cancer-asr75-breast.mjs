@@ -22,7 +22,7 @@
  * 正典: .claude/rules/data-provenance-standards.md
  */
 import { readXls, sheetToArray } from "./lib/read-xls.mjs";
-import { fetchBuffer, writeStatsValues, roundTo, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, writeStatsValues, roundTo, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const INDEX_URL = "https://ganjoho.jp/reg_stat/statistics/data/dl/index.html";
 const ORIGIN = "https://ganjoho.jp";

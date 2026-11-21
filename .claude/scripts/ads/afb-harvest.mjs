@@ -28,7 +28,7 @@ import {
   repoRoot,
   SiteAttributionError,
   visibleText,
-} from "./lib/asp-browser.mjs";
+} from "../../../packages/ops/src/ads/lib/asp-browser.mjs";
 import { parseAfbCode } from "../../../packages/ops/src/ads/lib/afb-code-core.mjs";
 import { datasetPath } from "../../../config/datasets.mjs";
 

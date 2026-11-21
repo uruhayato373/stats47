@@ -701,7 +701,7 @@ jobs:
       - name: 📐 PSI Collector Contract Guard
         # PSI batch に保存する DOM 規模 (dom_size) の抽出が Lighthouse の 2 形式で成立し、
         # 欠測を 0 と誤らないことを検証する。PSI API には触れない (実計測は日次 workflow)。
-        # 正典: .claude/scripts/psi/fetch-psi-audit.mjs
+        # 正典: packages/ops/src/psi/fetch-psi-audit.mjs
         run: npm run psi:test
         continue-on-error: false
 

@@ -27,8 +27,8 @@ import {
   pathOfUrl,
   sumTraffic,
   validateIssueGraph,
-} from "../../../../packages/ops/src/issues/issue-graph-core.mjs";
-import { grainsOfMetricSource } from "../../../../packages/ops/src/issues/issue-data-grains.mjs";
+} from "../issue-graph-core.mjs";
+import { grainsOfMetricSource } from "../issue-data-grains.mjs";
 
 const page = (id, extra = {}) => {
   const [kind, key] = id.split(":");
@@ -170,7 +170,7 @@ test("問いの候補に、統計用語の『関係』と主語の無い語を�
 });
 
 test("リポジトリの台帳そのものが検査を通る", () => {
-  const root = resolve(fileURLToPath(import.meta.url), "../../../../..");
+  const root = resolve(fileURLToPath(import.meta.url), "../../../../../..");
   const read = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
   const dir = "data/content/pages";
   const pages = indexPages(readdirSync(join(root, dir)).filter((f) => f.endsWith(".json")).map((f) => read(`${dir}/${f}`)));
@@ -231,7 +231,7 @@ test("1 つの問いに答えを 2 本結ぶと止まる", () => {
 
 // 分析の軸 → 図: 型は図の型の台帳 (実物) から引き、描画器の無い型と地域の要る型を全国の問いに出さない
 const TEMPLATES = JSON.parse(
-  readFileSync(resolve(fileURLToPath(import.meta.url), "../../../../../data/content-operations/image-templates.json"), "utf8"),
+  readFileSync(resolve(fileURLToPath(import.meta.url), "../../../../../../data/content-operations/image-templates.json"), "utf8"),
 ).templates;
 const axis = (pattern, metrics) => ({ label: pattern, pattern, ...(metrics ? { data: metrics.map((m) => (typeof m === "string" ? { metric: m } : m)) } : {}) });
 const group = () => ({ label: "区分", pattern: "compare", group: true });

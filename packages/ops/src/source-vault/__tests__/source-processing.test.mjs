@@ -16,10 +16,10 @@ import {
 } from '../source-processing.mjs';
 
 const execFileAsync = promisify(execFile);
-const PROJECT_ROOT = path.resolve(import.meta.dirname, '../../../..');
+const PROJECT_ROOT = path.resolve(import.meta.dirname, '../../../../..');
 const SCRIPT = path.join(
   PROJECT_ROOT,
-  '.claude/scripts/source-vault/source-processing.mjs'
+  'packages/ops/src/source-vault/source-processing.mjs'
 );
 
 test('all source profiles have a restorable processing contract', async () => {

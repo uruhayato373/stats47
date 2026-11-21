@@ -29,10 +29,10 @@ import {
   sha256File,
   maskSecrets,
   startStatusTicker,
-} from "../../../../packages/ops/src/ads/lib/asp-browser-base.mjs";
-import { assertSiteOrThrow, extractSiteId, SiteAttributionError } from "../../../../packages/ops/src/ads/lib/asp-site-guard.mjs";
-import { unattended } from '../../../../packages/ops/src/measurement/browser-session.mjs';
-import { AFFILIATE_ASP } from "../../../../config/paths.mjs";
+} from "./asp-browser-base.mjs";
+import { assertSiteOrThrow, extractSiteId, SiteAttributionError } from "./asp-site-guard.mjs";
+import { unattended } from '../../measurement/browser-session.mjs';
+import { AFFILIATE_ASP } from "../../../../../config/paths.mjs";
 
 export {
   launchContext,

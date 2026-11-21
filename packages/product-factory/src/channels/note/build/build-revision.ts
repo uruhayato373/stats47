@@ -69,7 +69,7 @@ async function verifyInput(root: string, pid: string, listing: Listing): Promise
     contained(dir, resolve(dir, file.path));
     contained(realpathSync(dir), realpathSync(resolve(dir, file.path)));
   }
-  const audit = await import(pathToFileURL(join(ROOT, '.claude/scripts/products/lib/pack-evidence.mjs')).href) as {
+  const audit = await import(pathToFileURL(join(ROOT, 'packages/ops/src/products/lib/pack-evidence.mjs')).href) as {
     inspectPack(root: string, listing: Listing): Promise<PackEvidence>;
   };
   return audit.inspectPack(root, listing);

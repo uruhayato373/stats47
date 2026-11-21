@@ -16,7 +16,7 @@ import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "../../../../pa
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
-import { findLatestPsiBatch } from "../../psi/lib/latest-batch.mjs";
+import { findLatestPsiBatch } from "../../../../packages/ops/src/psi/lib/latest-batch.mjs";
 import { addDays, isoWeekRange } from '../../../../packages/ops/src/metrics/periods.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -200,7 +200,7 @@ const PSI = {
   staleAfterDays: FRESHNESS_STALE_DEFAULT_DAYS.psi,
   api: "pagespeedonline.runpagespeed",
   secretName: "PSI_API_KEY",
-  liveScript: ".claude/scripts/psi/fetch-psi-audit.mjs",
+  liveScript: "packages/ops/src/psi/fetch-psi-audit.mjs",
   normalize(root, now) {
     // 生 PSI は git 管理外の live/ (R2 state/psi/ の写し)。CI の別 job と手元は state:pull -- psi で取る
     const file = findLatestPsiBatch(path.join(root, datasetDir("psi.batch")));

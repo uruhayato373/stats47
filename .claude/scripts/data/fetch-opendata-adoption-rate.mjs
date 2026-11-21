@@ -20,7 +20,7 @@ import { R2_PUBLIC_ORIGIN, statsR2Key } from "../../../packages/r2-storage/mirro
  * 実行: node .claude/scripts/data/fetch-opendata-adoption-rate.mjs
  * 正典: .claude/rules/data-provenance-standards.md
  */
-import { PREF_NAMES, PREF_AREA_CODES, fetchBuffer, fetchJson, writeStatsValues, roundTo } from "./lib/stats-values-writer.mjs";
+import { PREF_NAMES, PREF_AREA_CODES, fetchBuffer, fetchJson, writeStatsValues, roundTo } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const LANDING_URL = "https://www.digital.go.jp/resources/data_local_governments";
 const ORIGIN = "https://www.digital.go.jp";

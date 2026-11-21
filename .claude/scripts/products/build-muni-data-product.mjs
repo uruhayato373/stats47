@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { extractYearCode } from '../../../packages/estat-api/src/stats-data/utils/extract-year-code.ts';
 import { renderReadme } from './lib/muni-data-product-readme.mjs';
-import { INDUSTRY_HEADER, buildIndustryRows, industryCatalog, industryCheck, industryRowCells, renderIndustryReadme } from './lib/muni-industry-product.mjs';
+import { INDUSTRY_HEADER, buildIndustryRows, industryCatalog, industryCheck, industryRowCells, renderIndustryReadme } from '../../../packages/ops/src/products/lib/muni-industry-product.mjs';
 import { BOUNDARY_CODE_OVERRIDES, BOUNDARY_EXCLUDED_CODES, MUNI_PRODUCT_SPECS } from './lib/muni-data-product-specs.mjs';
 import {
   CSV_HEADER,
@@ -35,7 +35,7 @@ import {
   rowCells,
   splitAreaName,
   toCsv,
-} from './lib/muni-data-product.mjs';
+} from '../../../packages/ops/src/products/lib/muni-data-product.mjs';
 import { datasetPath } from '../../../config/datasets.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');

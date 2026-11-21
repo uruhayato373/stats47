@@ -23,7 +23,7 @@ import { R2_PUBLIC_ORIGIN, statsR2Key } from "../../../packages/r2-storage/mirro
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { resolveMetricRecipe } from "./lib/stats-values-writer.mjs";
+import { resolveMetricRecipe } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const REPORT_URL = "https://www.zennichiyuren.or.jp/material/report/8.html";
 const POP_URL = `${R2_PUBLIC_ORIGIN}/${statsR2Key("japanese-population", "prefecture")}`;

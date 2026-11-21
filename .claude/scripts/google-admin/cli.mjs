@@ -351,7 +351,7 @@ async function runLogin() {
   const { spawn } = await import("node:child_process");
   const { PROFILE_DIR } = await import("./browser-context.mjs");
   const { runPreflight } = await import("../../../packages/ops/src/measurement/session-preflight.mjs");
-  const { gscSession, profileOpen, waitForProfileClosed } = await import("./login-wait.mjs");
+  const { gscSession, profileOpen, waitForProfileClosed } = await import("../../../packages/ops/src/google-admin/login-wait.mjs");
   const argv = process.argv.slice(3);
   const check = () => gscSession(runPreflight({ root: PROJECT_ROOT }));
   if (argv.includes("--if-expired")) {

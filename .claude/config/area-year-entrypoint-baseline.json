@@ -392,7 +392,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs": {
+    "packages/ops/src/data/__tests__/fetch-japanese-instruction-students.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -917,7 +917,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/__tests__/muni-data-product.test.mjs": {
+    "packages/ops/src/products/__tests__/muni-data-product.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -932,7 +932,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/__tests__/muni-industry-product.test.mjs": {
+    "packages/ops/src/products/__tests__/muni-industry-product.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -947,7 +947,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/__tests__/pack-evidence.test.mjs": {
+    "packages/ops/src/products/__tests__/pack-evidence.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -977,7 +977,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/fetch-estat-muni-industry.mjs": {
+    "packages/ops/src/products/fetch-estat-muni-industry.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -992,7 +992,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/lib/muni-data-product.mjs": {
+    "packages/ops/src/products/lib/muni-data-product.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

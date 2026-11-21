@@ -15,12 +15,12 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
-import { SOURCE_VAULT } from '../../../config/paths.mjs';
-import { datasetDir } from "../../../config/datasets.mjs";
+import { SOURCE_VAULT } from '../../../../config/paths.mjs';
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const SCRIPT_DIR = path.dirname(SCRIPT_PATH);
-const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
+const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../../..');
 const CONFIG_PATH = path.join(PROJECT_ROOT, SOURCE_VAULT);
 const VAULT_SCRIPT = path.join(PROJECT_ROOT, 'packages/ops/src/source-vault/source-vault.mjs');
 const TEMP_VAULT_ROOT = path.join(tmpdir(), 'stats47-source-vault');
@@ -31,14 +31,14 @@ const PDF_TOOLS = ['pdfinfo', 'pdftotext', 'pdftoppm', 'tesseract', 'magick'];
 
 function usage() {
   return `Usage:
-  node .claude/scripts/source-vault/source-processing.mjs readiness [--profile <name>] [--contract-only]
-  node .claude/scripts/source-vault/source-processing.mjs prepare --profile <name> [--manifest <file>] [--source <dir>] [--output-dir <dir>]
-  node .claude/scripts/source-vault/source-processing.mjs extract --workspace <dir> --document <id-or-path> --pages <selector> [--mode auto|text|ocr|image] [--dpi <n>] [--rotate 0|90|180|270] [--psm <0-13>] [--force]
-  node .claude/scripts/source-vault/source-processing.mjs crop --workspace <dir> --spec <json> [--force]
-  node .claude/scripts/source-vault/source-processing.mjs md-check --workspace <dir> [--md-dir <dir>] [--check]
-  node .claude/scripts/source-vault/source-processing.mjs stage --workspace <dir> --revision <n> [--md-dir <dir>] [--force]
-  node .claude/scripts/source-vault/source-processing.mjs stage-status [--profile <name>]
-  node .claude/scripts/source-vault/source-processing.mjs cleanup --profile <name>
+  node packages/ops/src/source-vault/source-processing.mjs readiness [--profile <name>] [--contract-only]
+  node packages/ops/src/source-vault/source-processing.mjs prepare --profile <name> [--manifest <file>] [--source <dir>] [--output-dir <dir>]
+  node packages/ops/src/source-vault/source-processing.mjs extract --workspace <dir> --document <id-or-path> --pages <selector> [--mode auto|text|ocr|image] [--dpi <n>] [--rotate 0|90|180|270] [--psm <0-13>] [--force]
+  node packages/ops/src/source-vault/source-processing.mjs crop --workspace <dir> --spec <json> [--force]
+  node packages/ops/src/source-vault/source-processing.mjs md-check --workspace <dir> [--md-dir <dir>] [--check]
+  node packages/ops/src/source-vault/source-processing.mjs stage --workspace <dir> --revision <n> [--md-dir <dir>] [--force]
+  node packages/ops/src/source-vault/source-processing.mjs stage-status [--profile <name>]
+  node packages/ops/src/source-vault/source-processing.mjs cleanup --profile <name>
 
 Page selectors: 1,3-5 or all (all requires --allow-all-pages).
 Derived transcripts, page images, and crops stay under ${TEMP_VAULT_ROOT}/derived and are never public source assets.`;

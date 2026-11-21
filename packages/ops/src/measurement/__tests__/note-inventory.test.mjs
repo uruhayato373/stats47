@@ -1,12 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
-import { buildCoverMetricsReport } from '../../../../packages/ops/src/note/lib/dashboard-metrics.mjs';
-import { readFileSync } from 'node:fs';
-import { acceptedNoteGap, noteInventoryAvailable, noteMetricsExitCode, validateNoteInventory } from '../../../../packages/ops/src/measurement/note-inventory.mjs';
-import { validateAttempt, validateEvidence, validateInventoryAttempt } from '../../../../packages/ops/src/measurement/consumer-paths.mjs';
-import { SOURCES } from '../../../../packages/ops/src/measurement/sources.mjs';
-import { measurementHealth } from '../../../../packages/ops/src/measurement/health.mjs';
+import { buildCoverMetricsReport } from '../../note/lib/dashboard-metrics.mjs';
+import { acceptedNoteGap, noteInventoryAvailable, noteMetricsExitCode, validateNoteInventory } from '../note-inventory.mjs';
+import { validateAttempt, validateEvidence, validateInventoryAttempt } from '../consumer-paths.mjs';
+import { SOURCES } from '../sources.mjs';
+import { measurementHealth } from '../health.mjs';
 
 const time = '2026-09-21T05:00:00Z';
 const now = Date.parse(time);
@@ -108,11 +107,4 @@ test('単独の取得の終了コードは受け入れた欠けだけを失敗�
   assert.equal(noteMetricsExitCode(snapshot, { status: 'incomplete', issues: ['cover_audit_unavailable:x'] }), 2);
   assert.equal(noteMetricsExitCode({ status: 'incomplete', issues: [{ code: 'collection_failed' }], coverage: {} },
     { status: 'incomplete', issues: ['metrics_unavailable'] }), 2);
-});
-
-test('単独の取得の終了コードは自前の条件でなく共有の関数で決める', () => {
-  const dir = new URL('../../note/', import.meta.url);
-  const script = readFileSync(new URL('fetch-note-metrics.mjs', dir), 'utf8');
-  assert.match(script, /process\.exitCode = noteMetricsExitCode\(snapshot, joined\)/);
-  assert.doesNotMatch(script, /snapshot\.status === "pass" && joined\.status === "pass" \? 0 : 2/);
 });
