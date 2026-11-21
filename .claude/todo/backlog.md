@@ -467,14 +467,6 @@ updated: 2026-11-01
 - **次**: 目標を続けるか閉じるかをオーナーが決める。続けるなら baseline を `data/psi/` の現在の計測で取り直し、閉じるなら `close_reason` を書く。
 - **完了条件**: status と実態が一致し、存在しないパスへの参照が無い。
 
-### [RELEASE-SQUASH-SKIP-TOKEN-01] 見張りの workflow が起動した本番デプロイのあとに、Post-Deploy Smoke が走らない
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理] [待ち:承認]
-
-- **済み**: squash のマージの本文に skip 指定が入ったときに `pr-skip-ci-head-guard.yml` の `deploy-after-skip-ci-merge` が `deploy-workers.yml` を起動する手当ては、2026-11-20 の PR #1289 のマージ (本文に skip 指定 36 個) で手を触れずに動いた (マージの 12 秒後に run 44671168001、成功)。
-- **残り (2026-11-20 観測)**: この手当てで起動したデプロイ (11-18 の 44298526417・11-19 の 44481255904・11-20 の 44671168001。どれも `triggering_actor` が `github-actions[bot]`) のあと、`post-deploy-smoke.yml` の `workflow_run` が 1 回も作られていない (最後の自動の run は 11-14)。[仮説] GITHUB_TOKEN が起こしたイベントは `workflow_dispatch`・`repository_dispatch` 以外で新しい run を作らない (https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)。デプロイの完了が `workflow_run` を起こさない。
-- **影響**: 11-14 から Post-Deploy Smoke が自動で走らず、11-14 の変更で古くなったテストの期待 (Kindle の商品ページの見出し) にも 6 日気づかなかった (テストは 2026-11-20 に develop で直した。main へは次のリリースで入る。Issue #1273 はそのあとの Post-Deploy Smoke の成功で閉じる)。
-- **次 (2026-11-20 develop に入れた)**: `deploy-workers.yml` に job `post-deploy-smoke` を足した。見張りが起動したとき (`workflow_dispatch` かつ `github.actor == 'github-actions[bot]'`) だけ、デプロイの成功後に `post-deploy-smoke.yml` を main で `workflow_dispatch` で起動する。契約テストは `pr-skip-ci-head-guard.test.cjs`。main の定義で動くので、効くのは main に入ったあとの次の見張りの起動から。
-- **完了条件**: 見張りが起動したデプロイのあとに Post-Deploy Smoke の run が作られたことを run の URL で示す。
 ### [PRODUCT-ANALYSIS-WIRING-01] 商品分析の調査候補を一次資料と実データで検証し、改訂案へ追加する
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-12] [領域:商品]
 
