@@ -45,12 +45,22 @@ export function allowedNumbers(chart) {
   return allowed;
 }
 
+/** 置き換えで新しく一致が生まれる入れ子 (`<!-<!---->-->`) も残さないよう、変化が無くなるまで繰り返す */
+function replaceUntilStable(text, pattern, replacement = '') {
+  let previous;
+  do {
+    previous = text;
+    text = text.replace(pattern, replacement);
+  } while (text !== previous);
+  return text;
+}
+
 export function numbersIn(text) {
-  const stripped = text
+  const withoutComments = replaceUntilStable(replaceUntilStable(text, /<!--[\s\S]*?-->/g), /<!--/g);
+  const stripped = withoutComments
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
     .replace(/\]\([^)]*\)/g, ']')
     .replace(/https?:\/\/\S+/g, '')
-    .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/\d{4}年改定/g, ''); // 分類の版の名前 (品目分類 2020年改定) は数値の主張ではない
   return [...stripped.matchAll(/-?\d[\d,]*(?:\.\d+)?/g)].map((m) => m[0].replace(/,$/, ''));
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- CLI なので結果と使い方を標準出力へ出す (.claude/scripts から移した。SCRIPTS-TO-PACKAGES-02) */
 import { statsR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 /**
  * audit-chart-axes.ts — 公開中のブログ散布図を「値」で検査する。

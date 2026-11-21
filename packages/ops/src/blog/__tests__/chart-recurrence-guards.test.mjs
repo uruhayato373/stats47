@@ -81,8 +81,8 @@ test('送り箱の古い図は公開中の型の図を上書きしない。点�
 });
 
 test('送り箱の除外は同期より前に走り、描き直しの反映は公開 URL で確かめる', () => {
-  const publish = fs.readFileSync('.github/workflows/blog-auto-publish.yml', 'utf8');
+  const publish = fs.readFileSync(new URL("../../../../../.github/workflows/blog-auto-publish.yml", import.meta.url), 'utf8');
   assert.ok(publish.indexOf('drop-outdated-outbox-charts.mjs') < publish.indexOf('cp -R "contents/blog/$SLUG/."'));
-  const regen = fs.readFileSync('.github/workflows/regenerate-blog-svgs.yml', 'utf8');
+  const regen = fs.readFileSync(new URL("../../../../../.github/workflows/regenerate-blog-svgs.yml", import.meta.url), 'utf8');
   assert.ok(regen.indexOf('verify-published-assets.mjs') > regen.indexOf('Push regenerated/repaired assets'));
 });

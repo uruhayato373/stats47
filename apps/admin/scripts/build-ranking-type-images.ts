@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- CLI なので結果と使い方を標準出力へ出す (.claude/scripts から移した。SCRIPTS-TO-PACKAGES-02) */
 /**
  * ランキング note 記事の本文 3 枚を、サイトと同じ共通の型の画像で chart-data.json から作る。
  *

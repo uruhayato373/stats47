@@ -143,6 +143,6 @@ test('August-like monthly report yields exactly one K-S1-02 observation and drop
 });
 
 test('the Mac collection commits the sales ledger written by the summary', () => {
-  const workflow = readFileSync('scripts/scheduled/measurement-collect-local.sh', 'utf8');
+  const workflow = readFileSync(new URL("../../../../../scripts/scheduled/measurement-collect-local.sh", import.meta.url), 'utf8');
   assert.match(workflow, /git add data\/authenticated\/latest\.json data\/authenticated\/revenue-history\.json data\/products\/sales-ledger\.json/);
 });

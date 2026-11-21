@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
-const daily = readFileSync(".github/workflows/ai-content-gemini-daily.yml", "utf8");
-const publisher = readFileSync(".github/workflows/publish-ai-content.yml", "utf8");
+const daily = readFileSync(new URL("../../../../../.github/workflows/ai-content-gemini-daily.yml", import.meta.url), "utf8");
+const publisher = readFileSync(new URL("../../../../../.github/workflows/publish-ai-content.yml", import.meta.url), "utf8");
 
 test("Gemini日次は少量・直列・structured preflight・独立criticを固定する", () => {
   assert.match(daily, /^  schedule:\n    - cron: "15 22 \* \* \*"/m);
