@@ -92,7 +92,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/audit/__tests__/theme-chart-live-audit.test.mjs": {
+    "packages/ops/src/audit/__tests__/theme-chart-live-audit.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -107,7 +107,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/audit/theme-chart-live-audit-core.mjs": {
+    "packages/ops/src/audit/theme-chart-live-audit-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -872,7 +872,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/reference/build-reference-note.ts": {
+    "packages/ops/src/note/reference/build-reference-note.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -887,7 +887,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/reference/lib/figure-renderer.ts": {
+    "packages/ops/src/note/reference/lib/figure-renderer.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,

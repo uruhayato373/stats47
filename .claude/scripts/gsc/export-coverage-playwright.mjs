@@ -33,7 +33,7 @@ import {
   launchAdminContext,
   waitForLogin,
   isLoginUrl,
-} from "../google-admin/browser-context.mjs";
+} from "../../../packages/ops/src/google-admin/browser-context.mjs";
 import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
 import {
   SUBMITTED_VIEW,

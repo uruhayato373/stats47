@@ -18,12 +18,12 @@ import { rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
-import { writeReferenceFigure } from './lib/figure-files';
+import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from '../../../../packages/ops/src/note/reference/lib/figure-renderer';
+import { writeReferenceFigure } from '../../../../packages/ops/src/note/reference/lib/figure-files';
 import { R2_PUBLIC_BASE_URL } from '../../../../packages/types/mirror/site-config.cjs';
 const ESTAT_STATS_DATA_URL = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
 import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from '../../../../packages/ops/src/source-vault/lib/reference-expansion.mjs';
-import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
+import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from '../../../../packages/ops/src/note/reference/build-reference-note';
 
 const ROOT = path.resolve(__dirname, '../../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -209,7 +209,7 @@ async function build(a: Analysis) {
     inputs: built.map((i) => ({ rankingKey: i.key, estat: { statsDataId: STATS_DATA_ID, cdCat01: i.code, cdCat02: TWO_PERSON, years } })),
     skipped, primarySources: a.primarySources ?? [],
     restore: `npx tsx .claude/scripts/note/reference/build-reference-note-quintile.ts --analysis ${a.id}`,
-    images: built.map((i) => ({ file: `images/${i.key}-quintile.png`, generator: '.claude/scripts/note/reference/lib/figure-renderer.ts', rendererVersion: REFERENCE_FIGURE_RENDERER_VERSION, year: latest })),
+    images: built.map((i) => ({ file: `images/${i.key}-quintile.png`, generator: 'packages/ops/src/note/reference/lib/figure-renderer.ts', rendererVersion: REFERENCE_FIGURE_RENDERER_VERSION, year: latest })),
   }, null, 2)}\n`);
   {
     const draftPath = path.join(dir, 'draft.md'), fresh = draftOf(a, built, years, household as Record<string, Quintile>);

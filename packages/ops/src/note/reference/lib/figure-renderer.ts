@@ -1,4 +1,4 @@
-import { PREF_CAPITAL_COORDS } from '../../../../../packages/migration-flow/src/lib/pref-capitals';
+import { PREF_CAPITAL_COORDS } from '../../../../../migration-flow/src/lib/pref-capitals';
 export const REFERENCE_FIGURE_RENDERER_VERSION = 'reference-fixed-figures-v1';
 
 export interface FigureRow { areaCode: string; areaName: string; value: number }

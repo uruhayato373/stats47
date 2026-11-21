@@ -66,12 +66,13 @@ test('the reviewer cannot alter its guards or unrelated files', () => {
   for (const file of [
     '.github/workflows/quality-suite-weekly.yml',
     'package.json',
-    '.claude/scripts/themes/check-theme-review.mjs',
-    '.claude/scripts/themes/validate-theme-state.mjs',
+    'tools/themes/check-theme-review.mjs',
+    'tools/themes/validate-theme-state.mjs',
     'packages/ops/src/themes/theme-followup-core.mjs',
   ]) {
+    // 本番の入口は .claude のテーマの道具の置き場を許可の範囲として渡す。範囲の中でも検査のファイルは名前で止まることを確かめる
     assert.throws(
-      () => validateReview(report, input, [file], before, before),
+      () => validateReview(report, input, [file], before, before, { extraAllowedPrefixes: ['tools/themes/'] }),
       /Disallowed/
     );
   }

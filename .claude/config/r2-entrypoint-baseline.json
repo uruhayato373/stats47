@@ -9,7 +9,7 @@
       "s3Client": 0,
       "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
     },
-    ".claude/scripts/ads/__tests__/ad-traffic-block.test.mjs": {
+    ".claude/scripts/lib/__tests__/ad-traffic-block.test.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 4,
@@ -23,7 +23,7 @@
       "s3Client": 0,
       "reason": "キー・URL契約を検査するテストの固定入力・期待値"
     },
-    ".claude/scripts/audit/__tests__/theme-chart-live-audit.test.mjs": {
+    "packages/ops/src/audit/__tests__/theme-chart-live-audit.test.mjs": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,

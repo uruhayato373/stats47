@@ -14,16 +14,14 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { PROJECT_ROOT } from "../../../packages/ops/src/metrics/lib/auth.mjs";
-import { SCOPES, createAnalyticsAdminEditClient, createAnalyticsAdminReadClients } from "../../../packages/ops/src/google/google-client.cjs";
+import { SCOPES, createAnalyticsAdminEditClient, createAnalyticsAdminReadClients } from "../google/google-client.cjs";
 import { auditGscProperty, GSC_PROPERTY } from "./audit-gsc.mjs";
 import { auditAdSenseAccount, auditAdUnits, expectedAdSenseAccount } from "./audit-adsense.mjs";
 import { loadCodeAdSlots } from "../metrics/lib/code-ad-slots.mjs";
-import { parseDimensionLedger, requiredDimensionParams, reconcileDimensions } from "../../../packages/ops/src/google/dimension-ledger.mjs";
+import { parseDimensionLedger, requiredDimensionParams, reconcileDimensions } from "../google/dimension-ledger.mjs";
 
 export const GA4_READ_SCOPE = SCOPES.GA4_READ;
 export const GA4_EDIT_SCOPE = SCOPES.GA4_EDIT;
-export const LEDGER_PATH = path.join(PROJECT_ROOT, ".claude/rules/analytics-event-standards.md");
 
 /** env から GA4 property ID を取る。CI で hard-coded fallback を使わない (未設定は null)。 */
 export function resolveApiPropertyId() {
@@ -158,7 +156,7 @@ export function summarizeEnhancedMeasurement(settings) {
  * GA4 Admin API + GSC + AdSense を read-only で監査する。
  * 各セクションは独立に status を持ち、一部失敗を全体 ok へ読み替えない。
  */
-export async function auditGa4Api({ ledgerMd = null } = {}) {
+export async function auditGa4Api({ ledgerMd = null, ledgerPath = null } = {}) {
   const propertyId = resolveApiPropertyId();
   const out = { propertyId, gscProperty: GSC_PROPERTY };
 
@@ -240,7 +238,7 @@ export async function auditGa4Api({ ledgerMd = null } = {}) {
 
   // 7. 台帳との突合
   try {
-    const md = ledgerMd ?? fs.readFileSync(LEDGER_PATH, "utf-8");
+    const md = ledgerMd ?? fs.readFileSync(ledgerPath, "utf-8");
     const entries = parseDimensionLedger(md);
     if (cdSummary && out.customDimensions?.status === "ok") {
       out.dimensionReconcile = reconcileDimensions(entries, cdSummary.params);

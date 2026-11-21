@@ -15,7 +15,7 @@ import {
 } from "../lib/placement-map-core.mjs";
 import { loadAffiliateMaps, loadInventory, rankingContentFromSnapshot, articleContentFromSnapshot, surveyKeysFromRows } from "../build-placement-map.mjs";
 
-const runtime = tsxRequire("../../../../apps/web/src/features/ads/constants/affiliate-category.ts", import.meta.url);
+const runtime = tsxRequire("../../../../../apps/web/src/features/ads/constants/affiliate-category.ts", import.meta.url);
 
 const MAPS = {
   rankingKeyToCategory: { "natto-consumption-expenditure": "economy", "vacant-housing-rate": "construction", "retail-store-count": "commercial" },

@@ -8,7 +8,7 @@ import { resolve, join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import yaml from 'js-yaml';
 import { SOURCES, scopedState, sourceFor, failureCode } from '../../../../packages/ops/src/measurement/sources.mjs';
-import { encrypt, decrypt, BUCKET } from '../vault.mjs';
+import { encrypt, decrypt, BUCKET } from '../../measurement/vault.mjs';
 import { consumerPath, validateAttempt } from '../../../../packages/ops/src/measurement/consumer-paths.mjs';
 import { measurementHealth } from '../../../../packages/ops/src/measurement/health.mjs';
 import ExcelJS from 'exceljs';

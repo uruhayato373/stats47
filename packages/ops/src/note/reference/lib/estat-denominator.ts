@@ -1,5 +1,5 @@
 // Parse JSON even on non-2xx responses, as before; the shared request client rejects them.
-import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../../../packages/estat-api/src/ingest.js";
+import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../../../estat-api/src/ingest.js";
 /**
  * 指標の表示名に分母 (「人口100万人当たり」など) が無いとき、e-Stat の項目名から分母を補う。
  * ランキングの表示名は分母を落としているものがある (博物館数 = 人口100万人当たりなのに「博物館数」「館」)。
@@ -8,9 +8,9 @@ import { resolveEstatAppId, ESTAT_API, ESTAT_ENDPOINTS } from "../../../../../pa
  */
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { datasetDir } from '../../../../../config/datasets.mjs';
+import { datasetDir } from '../../../../../../config/datasets.mjs';
 
-const ROOT = path.resolve(__dirname, '../../../../..');
+const ROOT = path.resolve(__dirname, '../../../../../..');
 const META_API = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_META_INFO}`;
 const cache = new Map<string, Map<string, string>>();
 

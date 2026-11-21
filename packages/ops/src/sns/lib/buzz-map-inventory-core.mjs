@@ -10,13 +10,13 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
-import { R2_PUBLIC_BASE_URL } from "../../../../packages/types/mirror/site-config.cjs";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { R2_PUBLIC_BASE_URL } from "../../../../types/mirror/site-config.cjs";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-/** project root (.claude/scripts/sns/lib → 4 階層上)。 */
-const PROJECT_ROOT = resolve(__dirname, "../../../..");
+/** project root (packages/ops/src/sns/lib → 5 階層上)。 */
+const PROJECT_ROOT = resolve(__dirname, "../../../../..");
 
 const KNOWN_RANKING_KEYS_PATH = resolve(
   PROJECT_ROOT,

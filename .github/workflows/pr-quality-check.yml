@@ -313,7 +313,7 @@ jobs:
         # docs/31 (note 記事の作業場) に git の追跡ファイルを置かない。本文・画像の正本は R2、
         # 所在は data/note/articles.json。契約: .claude/rules/note-image-assets.md
         run: |
-          node --test packages/ops/src/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
+          node --test packages/ops/src/note/__tests__/image-assets-audit.test.mjs .claude/scripts/lib/__tests__/image-assets-tools.test.mjs
           node .claude/scripts/note/audit-note-image-assets.mjs
           npm run note:assets:validate
           npm run note:assets:test
@@ -818,7 +818,7 @@ jobs:
           # 広告在庫の vertical・実験・offer profile の整合 (R2 反映時にしか走っていなかった。2026-10-26)。
           # --validate-only は R2 に書かない。repository が server-only を読むので react-server condition が要る
           NODE_OPTIONS="--conditions react-server" npx tsx apps/web/scripts/export-affiliate-ads-snapshot.ts --validate-only
-          node --test .claude/scripts/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.cjs
+          node --test .claude/scripts/lib/__tests__/ad-traffic-block.test.mjs .claude/scripts/lib/__tests__/audit-affiliate-inventory-check-size.test.mjs packages/ops/src/ads/__tests__/*.test.mjs packages/ops/src/ads/__tests__/*.test.cjs
         continue-on-error: false
 
       - name: 📋 Survey Portfolio State Guard

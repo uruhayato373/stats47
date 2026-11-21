@@ -5,7 +5,7 @@
  * cookie / token / localStorage / Authorization / account email / URL query を
  * console・audit JSON・state へ出さない。search-growth の redaction を再利用して拡張する。
  */
-import { redactString as baseRedactString } from "../../../packages/ops/src/search-growth/lib/redaction.mjs";
+import { redactString as baseRedactString } from "../search-growth/lib/redaction.mjs";
 
 /** email をマスクする (account email を保存しない)。 */
 export function redactEmail(s) {

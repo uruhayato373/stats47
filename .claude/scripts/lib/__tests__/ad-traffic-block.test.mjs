@@ -176,7 +176,7 @@ test("Service Worker 経由の通信は route を通らないので、context �
 // ── 撮影のスクリプトの配線 ────────────────────────────────────────────────────
 
 test("撮影のスクリプトは、ページを開く前に通信の遮断を差し込み、外す引数を持たない", () => {
-  const source = readFileSync(join(HERE, "..", "capture-ad-layout.ts"), "utf8");
+  const source = readFileSync(join(HERE, "..", "..", "ads", "capture-ad-layout.ts"), "utf8");
   // 止めるかどうかは接続先で決める (本番は必ず止める)
   assert.match(source, /requiresAdTrafficBlock\(/);
   const install = source.indexOf("installAdTrafficBlock(context");
@@ -203,7 +203,7 @@ test("同意を断る印の名前は、サイトの同意の帯と gtag が読�
 });
 
 test("撮影のスクリプトは、ページを開く前に Cookie と localStorage の両方で同意を断る", () => {
-  const source = readFileSync(join(HERE, "..", "capture-ad-layout.ts"), "utf8");
+  const source = readFileSync(join(HERE, "..", "..", "ads", "capture-ad-layout.ts"), "utf8");
   const decline = source.indexOf("declineCookieConsent(context");
   assert.ok(decline > 0, "declineCookieConsent(context, …) を呼んでいない");
   assert.ok(decline < source.indexOf("context.newPage()"), "context.newPage() より前に断る");
@@ -303,7 +303,7 @@ async function visitWithServer(chromium, { block }) {
 test("PR の workflow は、このテストを走らせる job で先に Chromium を入れる", () => {
   // 入れないと下の実ブラウザの確認が CI で毎回 skip になり、遮断が壊れても緑のまま (CI-TOOLING-FOLLOWUP-03)
   const workflow = readFileSync(join(HERE, "..", "..", "..", "..", ".github", "workflows", "pr-quality-check.yml"), "utf8");
-  const run = workflow.indexOf("node --test .claude/scripts/ads/__tests__/*.test.mjs");
+  const run = workflow.indexOf("node --test .claude/scripts/lib/__tests__/ad-traffic-block.test.mjs");
   assert.ok(run > 0, "pr-quality-check.yml で ads のテストを走らせる step を見つけられない");
   const jobHeader = [...workflow.slice(0, run).matchAll(/\n  ([a-z][a-z0-9-]*):\n/g)].pop();
   assert.ok(jobHeader, "ads のテストを走らせる job を見つけられない");

@@ -6,8 +6,8 @@
  * ブラウザは GA4 Admin UI (リンク作成側) だけに使う。
  * owner/user・change of address・bulk export 等の変更 API は呼ばない (README「denylist」)。
  */
-import { GSC_PROPERTY } from "../../../packages/types/mirror/site-config.cjs";
-import { createWebmastersClient } from "../../../packages/ops/src/google/google-client.cjs";
+import { GSC_PROPERTY } from "../../../types/mirror/site-config.cjs";
+import { createWebmastersClient } from "../google/google-client.cjs";
 
 export { GSC_PROPERTY };
 

@@ -18,7 +18,7 @@ import {
   AUTHORED_KEY_EVENTS,
   plannedActionToken,
   requireCommit,
-} from "../../../../packages/ops/src/google/apply-allowlisted-settings.mjs";
+} from "../../google/apply-allowlisted-settings.mjs";
 import { assertAdSenseAccount, collectAdUnits, deriveDesiredAdUnits } from "../audit-adsense.mjs";
 import { assertPropertyId, assertStreamHost, summarizeCustomDimensions, summarizeEnhancedMeasurement } from "../audit-ga4-api.mjs";
 import { sanitize, sanitizeObject, redactEmail, redactHelpToken } from "../redact.mjs";
@@ -438,7 +438,7 @@ test("collectAdUnits: ページングを辿る", async () => {
 test("AUTHORED_DIMENSIONS の parameterName は Web のコードが実際に送っている (改名で登録済み dimension が空になるのを防ぐ)", async () => {
   const { readFileSync, readdirSync, statSync } = await import("node:fs");
   const { join } = await import("node:path");
-  const root = join(import.meta.dirname, "../../../../apps/web/src");
+  const root = join(import.meta.dirname, "../../../../../apps/web/src");
   const files = [];
   const walk = (d) => {
     for (const n of readdirSync(d)) {

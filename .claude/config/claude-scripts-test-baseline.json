@@ -18,11 +18,13 @@
     ".claude/scripts/backlog-loop/__tests__/record-backlog-outcome.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (結果を実行台帳へ記録する CLI)",
     ".claude/scripts/backlog-loop/__tests__/routing-policy-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (実行台帳とモデル利用量 .claude/state から振り分けの設定を更新する)",
     ".claude/scripts/backlog-loop/__tests__/verify-core.test.cjs": "バックログ自動処理 (backlog-loop) の基盤のテスト (行を消す前の completion gate。.claude/todo と実行台帳を読む)",
+    ".claude/scripts/lib/__tests__/ad-traffic-block.test.mjs": "広告の配置の撮影 (capture-ad-layout.ts) の自動閲覧の遮断を、.claude/scripts の撮影スクリプトの本文・apps/web の計装・workflow の文言から確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/admin-ci-contract.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/admin-read-guard.test.mjs": "ログインが要る管理画面を読む操作を止める hook (pre-browser-admin-read・pre-bash-safety) の判定を確かめるテスト",
     ".claude/scripts/lib/__tests__/adsense-ad-unit-walk.test.mjs": "AdSense の広告ユニットの列挙を共有の部品だけが行うことを、.claude/scripts と packages/ops を走査して確かめるテスト",
     ".claude/scripts/lib/__tests__/affiliate-workflow-safety.test.mjs": "workflow の YAML の契約のテスト (広告の workflow が外部を変えないこと)",
     ".claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs": "workflow の YAML の契約のテスト",
+    ".claude/scripts/lib/__tests__/audit-affiliate-inventory-check-size.test.mjs": "広告在庫の監査 CLI (.claude/scripts/ads/audit-affiliate-inventory.ts) を起動して、検査サイズの扱いを確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/audit-operations-cycle.test.mjs": "GSC の運用の周期 (.claude/config/gsc-operations-cycle.json) と .claude/todo の週次・月次の計画の監査のテスト",
     ".claude/scripts/lib/__tests__/audit-workflow-policy.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/buzz-map-publish-policy.test.mjs": "buzz-map の公開が .claude/scripts/sns の CLI 本文 (prepare-buzz-map-batch.ts) で byte-exact 公開になっていることを確かめる",
@@ -71,6 +73,7 @@
     ".claude/scripts/lib/__tests__/geo-article-source-contract.test.ts": ".claude に残る Geo 記事の生成 CLI の本文から、図の出典の契約を読み出して確かめるテスト",
     ".claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs": "GSC カバレッジの部品と、.claude に残る CLI・Python の取り込みの本文の配線を突き合わせる",
     ".claude/scripts/lib/__tests__/husky-worktree-hook.test.cjs": "Claude Code と git の hook のテスト",
+    ".claude/scripts/lib/__tests__/image-assets-tools.test.mjs": "note の画像の補完・取り込みの CLI (.claude/scripts/note/) を起動して確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/iso-week-consistency.test.mjs": "週のラベルを作る関数 (packages の部品と、.claude に残る model-usage の usage-core) が JST の暦日で一致することを突き合わせるテスト",
     ".claude/scripts/lib/__tests__/kdp-monthly-wiring.test.mjs": "KDP の月次の部品と、.claude に残る計測の CLI (marketplace-status・collect・restore・summarize) の本文と起動の配線を確かめるテスト",
     ".claude/scripts/lib/__tests__/kdp-weekly-wiring.test.mjs": "KDP の週次の作業が週次レビュー・週次計画の skill と npm script に配線されていることを確かめるテスト",
@@ -78,6 +81,7 @@
     ".claude/scripts/lib/__tests__/lib-tests-wiring.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/local-resources.test.mjs": "ローカル環境の道具 (掃除・worktree・memory のリンク) のテスト",
     ".claude/scripts/lib/__tests__/measurement-wiring.test.mjs": "measurement の部品と、.claude/scripts/measurement・note に残る CLI の本文 (bootstrap-session・collect-local・fetch-note-metrics) の配線を突き合わせる",
+    ".claude/scripts/lib/__tests__/measurement.test.mjs": "計測の基盤 (.claude/scripts/measurement の collect・summarize・vault・bootstrap) を起動するか本文を読んで確かめるテスト",
     ".claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/metric-release-order.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/move-script.test.mjs": "スクリプトを packages へ移す道具 (移行の基盤) のテスト",
@@ -117,6 +121,7 @@
     ".claude/scripts/lib/__tests__/test-packages-ci.test.mjs": "CI の検査の配線と範囲の契約のテスト",
     ".claude/scripts/lib/__tests__/theme-ledger-paths.test.mjs": "置き場の規則の検査のテスト (テーマの台帳を datasetPath で引くことを、.claude/scripts と packages を走査して確かめる)",
     ".claude/scripts/lib/__tests__/theme-weekly-workflow.test.mjs": "workflow の YAML の契約のテスト (quality-suite-weekly の theme の job の step を実行して確かめる)",
+    ".claude/scripts/lib/__tests__/validate-survey-portfolio.test.mjs": "調査ポートフォリオの検証 CLI (.claude/scripts/surveys/validate-survey-portfolio.ts) を起動して出力を確かめる基盤のテスト",
     ".claude/scripts/lib/__tests__/workflow-commit-back.test.cjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/workflow-health-core.test.mjs": "workflow の YAML の契約のテスト",
     ".claude/scripts/lib/__tests__/workflow-node-version.test.cjs": "workflow の YAML の契約のテスト",
@@ -131,32 +136,16 @@
       "count": 1,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
-    "ads": {
-      "count": 3,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
     "audit": {
-      "count": 2,
+      "count": 1,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "blog": {
       "count": 2,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
-    "google-admin": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "measurement": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "metrics": {
-      "count": 2,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
     "note": {
-      "count": 5,
+      "count": 2,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "page-quality": {
@@ -172,15 +161,7 @@
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     },
     "sns": {
-      "count": 4,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "surveys": {
-      "count": 1,
-      "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
-    },
-    "themes": {
-      "count": 1,
+      "count": 3,
       "reason": "2026-11-19 の時点で残っていたテスト。対象のロジックを packages へ移して減らす (SCRIPTS-TO-PACKAGES-02)"
     }
   }

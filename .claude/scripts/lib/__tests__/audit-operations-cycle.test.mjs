@@ -9,7 +9,7 @@ import {
   auditOperationsCycle,
   renderMarkdown,
 } from '../../gsc/audit-operations-cycle.mjs';
-import { isAnchorRow } from '../../gsc/analyze-ctr-seesaw.mjs';
+import { isAnchorRow } from '../../../../packages/ops/src/gsc/analyze-ctr-seesaw.mjs';
 
 const NOW = new Date('2026-08-24T12:00:00.000Z');
 const REPO_ROOT = process.cwd();

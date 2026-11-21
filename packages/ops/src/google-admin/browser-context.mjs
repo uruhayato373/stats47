@@ -18,10 +18,10 @@ import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { measurementContext, unattended } from '../../../packages/ops/src/measurement/browser-session.mjs';
+import { measurementContext, unattended } from '../measurement/browser-session.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
+export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 export const PROFILE_DIR = path.join(PROJECT_ROOT, ".local", "playwright-google-admin-profile");
 export const LOCK_FILE = path.join(PROJECT_ROOT, ".local", "locks", "google-admin.lock");
 
