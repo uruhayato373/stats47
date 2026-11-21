@@ -154,17 +154,6 @@ updated: 2026-11-01
 - **停止条件**: 移した部品を使う週次の workflow を、移すたびに動かして確かめる。
 - **完了条件**: 基準に残る行が恒久の例外 (品質のゲートの基準・パスを入力として持つだけ) だけになる。
 
-### [SCRIPTS-TO-PACKAGES-02] .claude/scripts に残るテストを、対象のロジックごと packages へ移す
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-claude-scripts-tests.mjs] [起票:2026-11-19] [領域:サイト]
-
-- **起点**: 2026-11-19 オーナー判断「テストは基本的に .claude に置かない」(`.claude/rules/skill-code-placement.md`)。基準は `.claude/config/claude-scripts-test-baseline.json` (縮小専用)。
-- **現在地 (2026-11-21)**: ①〜⑧ は済み。数える対象は 1 本だけで、`.claude/scripts/search-growth/__tests__/keyword-cycle.test.mjs` の橋渡し (新しいテストを読み込む 1 行) が残る。main の `seo-keyword-cycle-daily.yml` がこのパスを起動するので、**次のリリースの後で消す** (消すと基準の `domains` が空になり完了)。基盤の `harness` は 127 本。アプリの部品を試すテストは `apps/{admin,remotion,web}/scripts/__tests__` (web は `scripts/lib/__tests__`) に置き、`node:test` なので各アプリの vitest の対象から外している。`apps/` のパスは packages に置いてよい慣習 (呼ぶ側から渡すのは `.claude` のパスだけ)。
-- **道具の注意**: `claude:scripts:move` は、テストの中の fixture の文字列 (`'../../../../packages/x'` のように、移した先で実在するパスに偶然当たるもの) を相対 import と取り違えて書き換える。`--apply` の後は、移したテストの差分を `git diff -M` で読んで戻す。
-- **themes の型**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラー 76 件。JSDoc で直して範囲に入れる。`ingest-bridge-inspection-age.mjs:33`・`ingest-shelter-applicability.mjs:38` の ROOT を `process.cwd()` からファイルの位置へ直す。
-- **進め方**: 閉包はアプリ全体と `.claude` まで構文木で調べる。移動は `npm run claude:scripts:move -- <表.json> --apply`、あと `check-claude-scripts-tests.mjs --shrink`。`.claude/config` の基準は入口から環境変数で渡すか置き場の台帳の id で引く。`.claude` の中身そのものを確かめるテストは `harness` へ。合否は移す前後の出力の一致で決める。移したテストは root の npm script か workflow で名指しする (`check-workspace-contract`)。作業は Sonnet / medium 1 本 (各回 12〜18 万トークン) で足り、統合側が境界の検査・`pre-commit-guard-paths`・`preflight:pr` を自分で走らせてから commit する。
-- **停止条件**: 移した部品を使う workflow と npm script を、移すたびに動かして確かめる。依存を入れない CI の job は相対パスで読む。テストだけを packages へ移さない。
-- **完了条件**: 基準の `domains` が空になり、`.claude/scripts` に残るテストが `harness` の行だけになる。
-
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
@@ -2340,6 +2329,8 @@ updated: 2026-11-01
 ### [CI-TOOLING-FOLLOWUP-03] CI と開発の道具に残る穴 (第 4 波の実行で見つけた分)
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14]
 
+- **packages/ops の themes の型 (2026-11-21・SCRIPTS-TO-PACKAGES-02 から)**: `packages/ops/tsconfig.checkjs.json` に `src/themes/**/*.mjs` を足すと型エラー 76 件。JSDoc で直して範囲に入れる。`ingest-bridge-inspection-age.mjs:33`・`ingest-shelter-applicability.mjs:38` の ROOT を `process.cwd()` からファイルの位置へ直す。
+- **移動の道具の穴 (2026-11-21)**: `npm run claude:scripts:move` は、テストの中の fixture の文字列 (`'../../../../packages/x'` のように、移した先で実在するパスに偶然当たるもの) を相対 import と取り違えて書き換え、一覧にも出さない。テストの中の文字列リテラルを対象から外すか、書き換えた行を一覧に出す。
 - **済み (2026-11-14・fe3988b31)**: 項目 1〜7 は修正し、直す前に落ちて直した後に通るテストで固定した。項目 8 の sns の 36 件は 64f91ead9 で解消済みである。項目 9 では、本番ビルドの middleware (.next/server/src/middleware.js) が 1,179,977 バイト (gzip で 247,017 バイト) で、Cloudflare Workers の上限 64 MiB (非圧縮・全プラン。https://developers.cloudflare.com/workers/platform/limits/#worker-size 、2026-11-14 確認) の約 1.8% だった。
 - **残り (判断)**: geo.analyses の contentId 3 件 (geo-107・geo-128・geo-129) は、business-plan.content-opportunities (geo-001〜geo-100) に無いため、check-datasets が warning を出し続けている。選択肢は 2 つある。(a) 事業計画にこの 3 件の機会を足す。(b) 3 分析の contentId を既存の機会の ID に直す。この 3 分析が事業計画の外で始めた分析なら (a) を推奨する。根拠は、datasets.mjs が事業計画の担当に判断を任せると宣言していることである。
 - **残り (計測)**: 最大の負荷は middleware ではなく Worker 全体なので、Worker 全体のサイズを測る。手順は、OpenNext で build してから `wrangler deploy --outdir bundled/ --dry-run` の Total Upload を読み、64 MiB と起動時間の上限 1 秒と比べる。
