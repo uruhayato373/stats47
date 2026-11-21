@@ -45,8 +45,17 @@ const TOP_ROWS = 3;
  * 都道府県のテーマに対応する市区町村テーマ (`MUNICIPALITY_THEME_FOR_PREFECTURE_THEME`) の指標ごとに、県内の上位を並べ、
  * 県内ランキングのページ (県別の独立ページがある指標) か、全国の市区町村ランキングへつなぐ。
  * 値は R2 の市区町村ランキング (県内ランキングのページと同じ `buildMunicipalityPrefectureRanking`) から組む。
- * R2 を読むので generateStaticParams を持たせない (nextjs-ssg-preservation.md)。
  */
+/**
+ * オンデマンド ISR（24時間）。generateStaticParams は **空配列** を返す (キー列を返さない)。
+ * 関数が無いと revalidate を書いても実行時の ISR が効かず毎リクエスト描画になり、キー列を返すと
+ * ビルド時に R2 を読めず notFound が焼かれる (2026-06-22 障害)。理由の全文は ranking/[rankingKey]/page.tsx、
+ * 契約は __tests__/render-mode-contract.test.ts (CF-CPU-ISR-01)。
+ */
+export async function generateStaticParams(): Promise<Array<{ areaCode: string; themeSlug: string }>> {
+  return [];
+}
+
 export const revalidate = 86400;
 
 function resolvePage({ areaCode, themeSlug }: Params) {

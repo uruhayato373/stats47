@@ -36,6 +36,10 @@ binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "stats47"
 preview_bucket_name = "stats47"
 
+# ISR の再描画 queue (open-next.config.ts の memory queue) が自分自身を呼ぶための service binding。
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "stats47-dev"
 
 # Observability設定（デフォルト）
 [observability]
@@ -108,6 +112,10 @@ bucket_name = "stats47"
 binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "stats47"
 
+# ISR の再描画 queue が自分自身 (stats47) を呼ぶための service binding。env ごとに書く (継承されない)。
+[[env.production.services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "stats47"
 
 # Observability設定（Production）
 [env.production.observability]

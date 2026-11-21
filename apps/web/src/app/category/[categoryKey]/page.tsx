@@ -66,7 +66,16 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
 import type { Metadata } from 'next';
 
-/** 24時間 ISR */
+/**
+ * オンデマンド ISR（24時間）。generateStaticParams は **空配列** を返す (キー列を返さない)。
+ * 関数が無いと revalidate を書いても実行時の ISR が効かず毎リクエスト描画になり、キー列を返すと
+ * ビルド時に R2 を読めず notFound が焼かれる (2026-06-22 障害)。理由の全文は ranking/[rankingKey]/page.tsx、
+ * 契約は __tests__/render-mode-contract.test.ts (CF-CPU-ISR-01)。
+ */
+export async function generateStaticParams(): Promise<Array<{ categoryKey: string }>> {
+  return [];
+}
+
 export const revalidate = 86400;
 
 interface PageProps {
@@ -141,7 +150,9 @@ export default async function CategoryPage({ params }: PageProps) {
   const { categoryKey } = await params;
 
   const catResult = await findCategoryByKey(categoryKey);
-  const category = isOk(catResult) ? catResult.data : null;
+  // 読み取りの失敗は notFound にせず投げる (ISR が「見つかりません」を保存しないように。CF-CPU-ISR-01)
+  if (!isOk(catResult)) throw catResult.error;
+  const category = catResult.data;
 
   if (!category) {
     notFound();

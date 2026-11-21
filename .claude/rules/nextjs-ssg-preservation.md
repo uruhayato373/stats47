@@ -122,22 +122,40 @@ dynamic な部分を別の child layout に切り出し、影響範囲を route 
 
 ### 正しいパターン (R2 依存の動的 route)
 
-**`generateStaticParams` を付けず `revalidate` だけ置く** → `ƒ`(オンデマンド ISR)。ランタイムに R2 を
-読んで初回描画 → 結果を ISR キャッシュ。`category` / `areas/[areaCode]/[themeSlug]` がこの方式で正常稼働。
+**空配列を返す `generateStaticParams` と `revalidate` を置く** → `●` だがビルド時には 1 件も描かず、
+最初のリクエストで R2 を読んで描画し、結果を ISR が保存する (2 回目以降は数 ms)。
+
+**2026-11-21 訂正 (CF-CPU-ISR-01)**: 以前ここには「`generateStaticParams` を付けず `revalidate` だけ置く
+(`ƒ` でも ISR キャッシュされる)」と書いていたが誤り。`ƒ` は毎リクエスト描画で、`revalidate` は効かない。
+Next.js 公式は、実行時に ISR を効かせるには空配列か `force-static` が要ると書いている
+(https://nextjs.org/docs/app/api-reference/functions/generate-static-params 、2026-11-21 確認)。
+`next start` の実測でも、関数なしは毎回描画、空配列は 2 回目から `x-nextjs-cache: HIT` だった。
+2026-06-22〜11-21 の間 `/ranking/*`・`/areas/*` は毎回 1.7 秒の描画をしており、Workers CPU 課金の約 7 割を占めた。
 
 ```typescript
-// ✅ R2 を読む動的 route: generateStaticParams を付けない
-export const revalidate = 86400;   // ƒ (オンデマンド) になり、ランタイムで R2 を読む
-// ❌ export const generateStaticParams = ...   // ● SSG 化 → build 時 R2 不可 → notFound 固着
+// ✅ R2 を読む動的 route: 空配列 (ビルド時に描かない) + revalidate (実行時の描画を保存)
+export async function generateStaticParams() {
+  return [];
+}
+export const revalidate = 86400;
+// ❌ 関数なし                         // ƒ = 毎リクエスト描画。revalidate は効かない
+// ❌ return KNOWN_RANKING_KEYS.map(…)  // build 時に描かれ R2 不可 → notFound 固着
 
-// 例外: blog/[slug]・survey/[surveyKey] は generateStaticParams を持つが、ビルド時に
-// R2 を読んで GOOD な内容を prerender できる (build ガードが無い) ため `● SSG` のままで正常。
-// 「build 時に実データを読めるか」で判定する。読めないなら ƒ にする。
+// 例外: blog/[slug]・tag/[tagKey] はキー列を返し、ビルド時に R2 を読んで prerender する。
+// 許可リストは apps/web/src/__tests__/render-mode-contract.test.ts。
 ```
+
+- **失敗を保存しない**: ISR は描いた結果を保存するので、主データの読み取り失敗 (`err`) を `notFound()` や
+  「準備しています」にすると、それが再描画まで残る。「存在しない」(`ok(null)`) だけを `notFound()` にし、
+  読み取り失敗は例外を投げる (500 は保存されない)。例: `features/ranking/services/load-ranking-page-model.ts`。
+- **期限切れの作り直し**: `open-next.config.ts` の memory queue が、`revalidate` を過ぎた描画を次のアクセスで
+  作り直す (自分自身への service binding `WORKER_SELF_REFERENCE`。gateway は `x-prerender-revalidate` 付きの
+  要求を Workers Cache に通さない)。ISR の置き場はビルド (buildId) ごとなので、デプロイのたびに全 URL が 1 回描き直しになる。
+- 機械の止め: 関数なし (ISR 無効) は `render-mode-contract.test.ts`、キー列の再混入は `check-r2-route-ssg.cjs`。
 
 > SSG にしたい (build 時に R2 を読んで静的化) 場合は、build env に R2 read 経路を与える必要があるが、
 > 全件 (例: ranking 2575 件) を build で読むと generateStaticParams が肥大化し build が重くなる (不採用)。
-> R2 依存ページは原則 `ƒ` オンデマンド ISR を採用する。
+> R2 依存ページは原則「空配列 + revalidate」の実行時 ISR を採用する。
 
 ## prerender 済みページの内容更新には再デプロイが要る (2026-07-24 実測)
 
@@ -175,14 +193,14 @@ export const revalidate = 86400;   // ƒ (オンデマンド) になり、ラン
 cd apps/web && npm run build 2>&1 | grep -E "Route|○|ƒ|Static|Dynamic" | head -50
 
 # R2 依存ページ (ranking/[rankingKey]・areas/[areaCode]・areas/[areaCode]/cities/[cityCode]) は
-# ƒ (Dynamic) であること。● (SSG) になっていたら generateStaticParams 混入 → notFound 固着の再発。
+# ● で、ビルド時に描いた件数 (prerender-manifest の routes) に含まれないこと。ƒ なら ISR が効いていない。
 #
 # 本番でデプロイ後に notFound 固着が無いか実測:
 curl -s -A "Mozilla/5.0 (compatible; Googlebot/2.1)" https://stats47.jp/ranking/annual-sunshine-duration \
   | grep -o '<title>[^<]*</title>'   # 「ランキングが見つかりません」なら固着
 ```
 
-`next build` で R2 依存ページが `● (Static)` になっていれば、generateStaticParams の混入 = notFound 固着の再発。
+`next build` で R2 依存ページが `ƒ` なら実行時 ISR が効いていない (毎回描画)。キー列がビルド時に描かれていれば notFound 固着の再発 (下の ② が検知する)。
 (逆に cookies()/headers() の混入は静的コンテンツページを `ƒ` 化する別事象 — 上の cookies ルールを参照)
 
 ### 多層の機械検知 (3 層)
