@@ -53,11 +53,6 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🧱 Rebuild disposable GIS catalog
-        run: |
-          npm run db:migrate:local --workspace=@stats47/database
-          npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts
-
       - name: 📥 Fetch and convert P12 locally
         if: inputs.metric == 'tourism-resource-count'
         run: npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts P12

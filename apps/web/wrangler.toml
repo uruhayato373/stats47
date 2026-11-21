@@ -21,7 +21,6 @@ NEXT_PUBLIC_ENV = "development"
 
 # 完全DBレス (doc 12): 本番アプリは D1 を一切 query しない。
 # vestigial だった [[d1_databases]] STATS47_STATIC_DB binding は削除済 (2026-06)。
-# DB schema の型ソースは packages/database/src/schema/*.ts にのみ保持する。
 
 # デフォルトR2ストレージ（ローカル開発用）
 [[r2_buckets]]

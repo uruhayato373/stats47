@@ -42,14 +42,13 @@
     "purge-cache": "tsx src/scripts/purge-cache.ts",
     "purge-worker-cache": "tsx src/scripts/purge-worker-cache.ts",
     "audit:incremental-cache": "tsx src/scripts/audit-incremental-cache.ts",
-    "gis:compress-topojson": "tsx src/scripts/compress-r2-topojson.ts",
-    "db:pull": "tsx src/scripts/db-r2-sync.ts pull",
-    "db:push": "tsx src/scripts/db-r2-sync.ts push"
+    "gis:compress-topojson": "tsx src/scripts/compress-r2-topojson.ts"
   },
   "dependencies": {
     "@stats47/area": "*",
     "@stats47/logger": "*",
     "@stats47/types": "*",
+    "https-proxy-agent": "^8.0.0",
     "server-only": "^0.0.1",
     "sharp": "^0.35.5"
   },
@@ -63,6 +62,7 @@
     "@opennextjs/cloudflare": "^1.20.18",
     "dotenv": "^17.2.3",
     "typescript": "^5.0.0",
+    "vitest": "^4.1.11",
     "wrangler": "4.152.0"
   }
 }

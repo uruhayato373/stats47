@@ -37,7 +37,9 @@
     "@stats47/area": "*",
     "@stats47/types": "*",
     "@stats47/utils": "*",
-    "@stats47/visualization": "*"
+    "@stats47/visualization": "*",
+    "ajv": "^6.15.0",
+    "d3-scale-chromatic": "^3.1.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",

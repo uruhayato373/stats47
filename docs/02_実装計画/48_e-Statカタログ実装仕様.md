@@ -2,7 +2,7 @@
 title: e-Statカタログ実装仕様
 type: implementation-spec
 status: active
-updated: 2026-11-02
+updated: 2026-11-21
 related_backlog: ESTAT-CATALOG-SSDS-DERIVE-01
 tags: [estat, r2, catalog, ci, data-discovery]
 ---
@@ -16,8 +16,8 @@ stats47には「e-Statにどんなデータがあるか (statsDataId / 分類コ
 毎回e-Stat生APIを叩いて調べ直していた。部分カタログが4つ散在していた
 (旧 `data/estat/prefecture-candidates.json` 8,706表・statsDataId止まり・git 3.1MB /
 `ssds-candidates.json` SSDS 35表のcdCat01 4,114件 / `estat-city-discovery.json` 市区町村3,361表・
-7月版 / `meta/` 要約77件)。`packages/database/src/schema/estat_catalog.ts` はschema型だけ残り、
-再生成の仕組みが無かった。
+7月版 / `meta/` 要約77件)。旧 database パッケージの `estat_catalog.ts` はschema型だけ残り、
+再生成の仕組みが無かった (そのパッケージは 2026-11-21 に削除した)。
 
 オーナー判断 (2026-09-16): R2は低コストなので、取得できる指標・年次・エリアのメタデータを
 全部保有し、CIで月次更新する。ranking-expanderの「計測ゲート付き需要ファースト」(公開して

@@ -2,13 +2,6 @@
   "version": 1,
   "policy": "縮小専用。パス・出現数の追加は禁止。HEAD・親commit・origin/developとのmerge-baseからの増加を検査する。--baseで比較基準を追加できる。",
   "exceptions": {
-    ".claude/hooks/check-local-db.js": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
-    },
     ".claude/scripts/lib/__tests__/ad-traffic-block.test.mjs": {
       "stats": 0,
       "ranking": 1,
@@ -1066,13 +1059,6 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
     },
-    "packages/database/src/schema/index.ts": {
-      "stats": 2,
-      "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
-    },
     "packages/gis/src/geo-analysis/low-elevation-population-overlay.py": {
       "stats": 1,
       "ranking": 0,
@@ -1531,13 +1517,6 @@
     "packages/ranking/src/utils/resolve-national-figure.ts": {
       "stats": 1,
       "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
-    },
-    "packages/stats-r2/src/scripts/export-stats-to-r2.ts": {
-      "stats": 1,
-      "ranking": 0,
       "origin": 0,
       "s3Client": 0,
       "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."

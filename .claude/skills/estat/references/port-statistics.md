@@ -16,14 +16,17 @@
 | e-Stat ファイル一覧 | https://www.e-stat.go.jp/stat-search/files?toukei=00600280&tstat=000001018967 |
 | API テーブル数 | 85件（甲種港湾・乙種港湾・都道府県別 各種） |
 
-## DB 実装状況
+## 実装状況
 
-### テーブル
+> 下の「格納指標」の表と旧 `ports` / `port_statistics` テーブルは、ローカル SQLite 時代の記録。SQLite 層 (旧 database パッケージ) は 2026-11-21 に削除した。
+> いまの置き場は、港湾のマスタが台帳 `areas.ports` (`data/areas/master/ports.json`)、港別の観測値が R2 `app/stats/<metric>/ports.json`、指標定義が `data/metrics/port-*.ts`。
 
-| テーブル | 行数 | 内容 |
-|---|---|---|
-| `ports` | 171+α | 甲種港湾171港 + 乙種港湾（港名・都道府県・緯度経度・港格・管理者） |
-| `port_statistics` | ~25,000 | 年度別統計データ（港×年×指標、甲種+乙種） |
+### 保存先
+
+| 保存先 | 内容 |
+|---|---|
+| 台帳 `areas.ports` (`data/areas/master/ports.json`) | 港湾マスタ（港名・都道府県・緯度経度・港格・管理者） |
+| R2 `app/stats/<metric>/ports.json` | 港×年の観測値（全年 × 全港） |
 
 ### 位置情報
 
@@ -62,33 +65,10 @@
 | `container_tonnage` | コンテナ・シャーシトン数（合計） | トン | `0003130808` | ✅ 登録済（cat03 フィルタなし全取得→港+年で合算） |
 | `vehicle_ferry_total` | 自動車航送車両台数（合計） | 台 | `0003130820` | ✅ 登録済 |
 
-### データ投入スクリプト
+### データ投入
 
-```bash
-# 乙種港湾マスタを投入（初回のみ）
-npx tsx packages/database/scripts/import-otsu-ports.ts
-
-# 全指標を投入（甲種＋乙種）
-npx tsx packages/database/scripts/populate-port-statistics.ts
-
-# 特定指標のみ
-npx tsx packages/database/scripts/populate-port-statistics.ts --metric passengers
-
-# 甲種のみ / 乙種のみ
-npx tsx packages/database/scripts/populate-port-statistics.ts --class 甲種
-npx tsx packages/database/scripts/populate-port-statistics.ts --class 乙種
-
-# dry-run（データ変更なし）
-npx tsx packages/database/scripts/populate-port-statistics.ts --dry-run
-```
-
-### スキーマ
-
-```
-packages/database/src/schema/port_statistics.ts
-```
-
-マイグレーション: `0005_cloudy_bloodscream.sql`（テーブル作成）, `0006_tired_black_widow.sql`（lat/lng追加）
+旧スクリプト (`import-otsu-ports.ts` / `populate-port-statistics.ts`) は SQLite 層とともに 2026-11-21 に削除した。
+港湾の指標は TS-config (`data/metrics/port-*.ts`) を足して `/page-data-batch --metric <key>` で e-Stat から R2 へ投入する。
 
 ## 全指標一覧
 
@@ -305,9 +285,9 @@ Leaflet バブルマップで表示。バブルサイズ = 値に比例（sqrt �
 
 ## 港湾等級データソース
 
-- **サイバーポート API**: `packages/database/scripts/import-cyport-ports.ts`
+- **サイバーポート API** (旧 `import-cyport-ports.ts` で取得。スクリプトは 2026-11-21 に削除し、取得済みの値は台帳 `areas.ports` に残る)
 - 国際戦略港湾（5港）/ 国際拠点港湾（18港）/ 重要港湾（102港）の等級を取得
-- `port_grade`, `administrator`, `cyport_code` カラムに保存
+- 台帳 `areas.ports` の港格・管理者の項目に保存
 
 ## 内陸県（データなし）
 

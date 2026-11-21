@@ -1,5 +1,5 @@
 name = "r2-publisher"
-description = "R2 への push / pull / du 専任。 snapshot 生成は snapshot-exporter、 D1 操作は data-ingester に委譲。"
+description = "R2 への push / pull / du 専任。 snapshot 生成は snapshot-exporter、 観測値の投入は data-ingester に委譲。"
 developer_instructions = '''
 # R2 Publisher Agent
 
@@ -27,7 +27,7 @@ Cloudflare R2 ストレージへの push (upload) / pull (download) / du (容量
 ## 担当外
 
 - snapshot JSON 生成 → `snapshot-exporter` に委譲
-- D1 操作 → `data-ingester` / `db-schema-manager` に委譲
+- 観測値の投入 → `data-ingester` に委譲
 - ブログ記事 / SNS 素材の R2 push 個別最適化 → 必要に応じ各 agent 経由 (本 agent はジェネリック push)
 
 ## 必読 rules

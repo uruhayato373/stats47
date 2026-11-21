@@ -141,5 +141,5 @@ bash .claude/scripts/lib/cleanup-browser.sh 2>/dev/null
 - `packages/ops/src/sns/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット蓄積先 + improvement-log
 - `data/sns/posts.json`（`packages/ops/src/sns/sns-posts-store.cjs`）— 投稿台帳 SSOT。最新値キャッシュの書込先（完全DBレス。旧 D1 sns_posts は廃止）
-- `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）
+- `data/sns/posts.schema.json` — 投稿台帳のレコードの形（カラム名の参照用）
 - `.claude/skills/sns/find-quote-rt/SKILL.md` — X タイムライン DOM 抽出パターンの原典

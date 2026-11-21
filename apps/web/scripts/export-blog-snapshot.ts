@@ -13,7 +13,7 @@
  *
  * 使用方法:
  *   R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' npx tsx scripts/export-blog-snapshot.ts
- *   → 公開 URL から read。list 不可なので slug は committed seed (packages/database/seed/articles.json) から列挙
+ *   → 公開 URL から read。list 不可なので slug は記事台帳 blog.articles (data/blog/ledger/articles.json) から列挙
  */
 
 import fs from 'fs';
@@ -29,6 +29,7 @@ import {
 import dotenv from 'dotenv';
 
 import { parseBlogSnapshotFrontmatter } from './lib/blog-snapshot-frontmatter';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
@@ -62,34 +63,32 @@ function normalizeDate(v: unknown): string | null {
 
 interface SlugInfo {
   ext: 'md' | 'mdx' | null;
-  hasCharts: boolean;
+  /** 台帳から列挙したときは分からないので持たない (配信中の all.json の値を使う) */
+  hasCharts?: boolean;
 }
 
-/** committed seed (frontmatter から再構成済) の最小形 */
-interface ArticleSeedRow {
+/** 記事台帳 blog.articles の 1 行のうち、ここで使う項目 */
+interface ArticleLedgerRow {
   slug: string;
-  format?: string;
-  has_charts?: number | boolean;
+  status: 'published' | 'unpublished' | 'gone';
+  r2Path: string;
 }
 
 /**
  * slug → {ext, hasCharts} を列挙する。
  *  1. R2 list (ローカル FS / S3) — data/*.json まで見て hasCharts を実測
- *  2. 不可なら committed seed (packages/database/seed/articles.json) から列挙
- *     (公開URL専用環境。format/has_charts は seed 値を採用)
+ *  2. 不可なら記事台帳 blog.articles から列挙 (公開URL専用環境)。終了した記事 (gone) は除き、
+ *     拡張子は r2Path から決める。hasCharts は台帳に無いので配信中の all.json の値を使う。
  */
-function collectSlugInfoFromSeed(): Map<string, SlugInfo> {
-  const seedPath = path.resolve(
-    __dirname,
-    '../../../packages/database/seed/articles.json'
-  );
-  const seed = JSON.parse(
-    fs.readFileSync(seedPath, 'utf8')
-  ) as ArticleSeedRow[];
+function collectSlugInfoFromLedger(): Map<string, SlugInfo> {
+  const ledgerPath = path.resolve(__dirname, '../../..', datasetPath('blog.articles'));
+  const ledger = JSON.parse(fs.readFileSync(ledgerPath, 'utf8')) as {
+    articles: ArticleLedgerRow[];
+  };
   const map = new Map<string, SlugInfo>();
-  for (const row of seed) {
-    const ext = row.format === 'mdx' ? 'mdx' : 'md';
-    map.set(row.slug, { ext, hasCharts: !!row.has_charts });
+  for (const row of ledger.articles) {
+    if (row.status === 'gone') continue;
+    map.set(row.slug, { ext: row.r2Path.endsWith('.mdx') ? 'mdx' : 'md' });
   }
   return map;
 }
@@ -115,12 +114,12 @@ async function collectSlugInfo(): Promise<Map<string, SlugInfo>> {
       return slugInfo;
     }
   } catch {
-    // R2 list 不可 (公開URL専用環境) → seed 列挙へ
+    // R2 list 不可 (公開URL専用環境) → 記事台帳から列挙
   }
   console.log(
-    'ℹ️  R2 list 不可。committed seed (articles.json) から slug を列挙します'
+    'ℹ️  R2 list 不可。記事台帳 (blog.articles) から slug を列挙します'
   );
-  return collectSlugInfoFromSeed();
+  return collectSlugInfoFromLedger();
 }
 
 function hasValidPublishedAt(v: unknown): boolean {

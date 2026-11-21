@@ -5,7 +5,7 @@ e-Stat 統計データのチャートレンダリングエンジン。area-profi
 > **命名に関する注記**: この feature は旧 `dashboard` からリネームされました。内部のコンポーネント名（`DashboardComponentRenderer`, `DashboardGridLayout` 等）は段階的に `StatChart*` に移行中です。新規コード・修正時に揃えてください。
 
 ダッシュボードにチャートを追加する手順リファレンス。
-ローカル D1（Static DB）を直接操作して追加する。
+配置は git の JSON (`apps/web/scripts/data/page-components/`) が正本で、編集してから R2 snapshot を作り直す (完全DBレス。ローカル D1 / SQLite は 2026-11-21 までに廃止)。
 
 ---
 
@@ -24,9 +24,9 @@ e-Stat 統計データのチャートレンダリングエンジン。area-profi
 ## アーキテクチャ概要
 
 ```
-dashboard_configs (1行)  ←  サブカテゴリ × エリアタイプ で 1 設定
-    ↓ dashboard_id で紐付け
-dashboard_components (N行)  ←  各チャート／カードの定義
+apps/web/scripts/data/page-components/<pageType>/<key>.json  ←  ページ 1 つ = チャート／カード定義の配列 (git が正本)
+    ↓ export-page-components-snapshot.ts
+R2 snapshot (page-components)  ←  本番アプリはこれだけを読む
     ↓ componentType + componentProps (JSON)
 DashboardComponentRenderer.tsx  ←  switch で振り分け
     ↓
@@ -42,8 +42,9 @@ e-Stat API からデータ取得 → 描画
 | `components/DashboardComponentRenderer.tsx` | componentType による描画振り分け（**新チャート追加時に case を追加**） |
 | `types/index.ts` | 共通 Props・`DashboardConfigMap`・`DashboardItemProps` |
 | `services/` | e-Stat API データ取得（fetchStatData, fetchTrendData, fetchSunburstData, fetchD3BarChartRaceData） |
-| `packages/database/src/schema/dashboard.ts` | DB スキーマ（Drizzle） |
-| `packages/database/src/schema/dashboard.ts` | Drizzle スキーマ（CHECK 制約に component_type の許可値） |
+| `apps/web/scripts/data/page-components/<pageType>/<key>.json` | 配置の正本（pageType は `area` / `area-category` / `city-category` / `theme`） |
+| `apps/web/scripts/export-page-components-snapshot.ts` | JSON → R2 snapshot の生成 |
+| `apps/web/scripts/verify-page-components-snapshot.ts` | git の JSON と R2 配信の一致検証 |
 
 ---
 
@@ -179,62 +180,44 @@ export type DashboardComponentType = keyof DashboardComponentPropsMap;
 
 ### 前提
 
-- **実行場所**: `apps/web` ディレクトリ
-- **対象DB**: `stats47_local_static`（Static DB）
-- **必ず `--local`** を付ける
+- **正本**: `apps/web/scripts/data/page-components/<pageType>/<key>.json`（1 ファイルが 1 ページ。中身はコンポーネント定義の配列）
+- 本番アプリは R2 snapshot だけを読むので、JSON を直したら snapshot を作り直す
+
+### Step 1: 対象ページの JSON を開く
+
+- 地域ページなら `area/<5桁の地域コード>.json`、地域×カテゴリなら `area-category/`、テーマなら `theme/` の該当ファイル
+- 新しいページを足すときは同じ形のファイルを作る
+
+### Step 2: 配列にチャートを追加する
+
+既存の要素と同じ形の 1 件を足す。フィールドは既存ファイルに合わせる。
+
+```json
+{
+  "componentKey": "area-ov-my-chart",
+  "componentType": "line-chart",
+  "title": "タイトル",
+  "componentProps": { "estatParams": [{ "statsDataId": "0000010101", "cdCat01": "A1101" }] },
+  "sourceName": "社会・人口統計体系",
+  "sourceLink": null,
+  "rankingLink": null,
+  "gridColumnSpan": 12,
+  "gridColumnSpanTablet": null,
+  "gridColumnSpanSm": null,
+  "dataSource": null,
+  "section": "人口・世帯",
+  "sortOrder": 10
+}
+```
+
+### Step 3: snapshot を作り直して確認する
 
 ```bash
-cd apps/web
-npx wrangler d1 execute stats47_local_static --local --command "SQL文"
+npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-page-components-snapshot.ts
+npx tsx apps/web/scripts/verify-page-components-snapshot.ts
 ```
 
-### Step 1: dashboard_configs の確認・追加
-
-既存のダッシュボードにチャートを追加する場合は **Step 2 へスキップ**。
-新規ダッシュボード（新しいサブカテゴリ or エリアタイプ）の場合のみ追加する。
-
-- **id 命名規則**: `{subcategory_key}-{area_type}`
-- `subcategory_key` は `subcategories` テーブルに存在する値であること
-
-```sql
-INSERT OR REPLACE INTO dashboard_configs
-  (id, subcategory_key, area_type, display_name, display_order, is_active)
-VALUES
-  ('fiscal-indicators-national', 'fiscal-indicators', 'national',
-   'fiscal-indicators (national)', 0, 1);
-```
-
-### Step 2: dashboard_components にチャートを追加
-
-```sql
-INSERT OR REPLACE INTO dashboard_components (
-  id, dashboard_id, component_type, display_order,
-  grid_column_span, grid_column_span_tablet, grid_column_span_sm, grid_column_span_mobile,
-  title, component_props, ranking_link, is_active, data_source, chart_type
-) VALUES (
-  '{dashboard_id}-{チャート種別}-{識別名}',   -- id: 一意な文字列
-  '{dashboard_id}',                           -- dashboard_configs.id
-  '{component_type}',                         -- 下記リファレンス参照
-  0,                                          -- display_order: 表示順
-  12, 12, 12, 12,                             -- grid幅（通常は全幅12）
-  'タイトル',
-  '{"JSON形式のprops"}',                       -- 下記リファレンス参照
-  NULL,                                       -- ranking_link（任意）
-  1,                                          -- is_active
-  'estat',                                    -- data_source
-  '{chart_type}'                              -- chart_type（任意）
-);
-```
-
-### Step 3: 新しい component_type を追加する場合（既存タイプなら不要）
-
-既存の component_type を使う場合はこのステップは不要。
-
-1. **`packages/database/src/schema/dashboard.ts`** の `componentTypeCheck` に新タイプを追加し、`npm run generate`（drizzle-kit generate）でマイグレーションを生成
-2. **`components/DashboardComponentRenderer.tsx`** に新しい case を追加
-3. **`types/index.ts`** の `DashboardConfigMap` に config 型を追加
-4. 対応するコンポーネントを `components/` に作成
-5. ローカル D1 のテーブルを再作成する必要がある場合あり（CHECK 制約変更時）
+新しい componentType が要るときは、下の「新規コンポーネント開発」で `types/index.ts` の `DashboardConfigMap` とレンダラーに足してから使う。DB の CHECK 制約やマイグレーションは無い。
 
 ---
 
@@ -397,62 +380,12 @@ export function DashboardComponentRenderer({ component }: Props) {
 }
 ```
 
-### Step 5: DBスキーマの更新
+### Step 5: 配置の JSON に登録する
 
-```typescript
-// packages/database/src/schema/dashboard.ts
+「チャート追加手順」の Step 2 と同じく、対象ページの JSON に `"componentType": "my-new-chart"` の要素を足し、Step 3 で snapshot を作り直す。
+componentType の許可値は `types/index.ts` の `DashboardConfigMap` のキー (Step 1 で追加済み) で、DB の CHECK 制約は無い。
 
-export const componentTypeCheck = sql`
-  CHECK (component_type IN (
-    'stats-card',
-    'line-chart',
-    'sunburst',
-    'my-new-chart'  -- 追加
-    -- 他のタイプ...
-  ))
-`;
-```
-
-```bash
-# マイグレーション生成
-npm run generate
-
-# ローカルDBに適用（CHECK制約変更の場合、テーブル再作成が必要）
-npx wrangler d1 execute stats47_local_static --local --file=path/to/migration.sql
-```
-
-### Step 6: DBへのコンポーネント登録
-
-```sql
-INSERT OR REPLACE INTO dashboard_components (
-  id,
-  dashboard_id,
-  component_type,
-  display_order,
-  grid_column_span,
-  grid_column_span_tablet,
-  grid_column_span_sm,
-  grid_column_span_mobile,
-  title,
-  component_props,
-  ranking_link,
-  is_active,
-  data_source
-) VALUES (
-  'fiscal-indicators-national-my-new-chart-1',
-  'fiscal-indicators-national',
-  'my-new-chart',
-  0,
-  12, 12, 12, 12,
-  '新規チャートのタイトル',
-  '{"customParam":"test-value","unit":"百万円"}',
-  NULL,
-  1,
-  'estat'
-);
-```
-
-### Step 7: テストの作成
+### Step 6: テストの作成
 
 ```typescript
 // components/charts/MyNewChart/__tests__/MyNewChart.test.tsx
@@ -755,11 +688,9 @@ grid 推奨: `12, 12, 12, 12`
 
 ---
 
-## component_type CHECK 制約の全値
+## component_type の全値
 
-`packages/database/src/schema/dashboard.ts` の CHECK 制約で許可されている値の全リスト（未実装のものも含む）:
-
-`stats-card`, `stats-card-with-trend`, `line-chart`, `donut-chart`, `definitions-card`, `bar-chart`, `pyramid-chart`, `progress-bar`, `custom`, `affiliate-ad`, `data-table`, `playback-bar-chart`, `revenue-sunburst-chart`, `sunburst`, `stacked-bar-chart`, `category-bar-chart`, `category-bar-chart-with-year-selector`, `category-bar-chart-with-view-toggle`, `multi-trend-chart`, `multi-stats-card`, `trend-chart-with-toggle`, `gender-ratio-progress-bar`, `gender-ratio-donut-chart`, `radial-chart`, `composed-chart`, `revenue-donut-chart`, `treemap`
+許可値の正本は `types/index.ts` の `DashboardComponentType` (= `DashboardConfigMap` のキー)。一覧はそこを読む。
 
 ---
 
@@ -777,11 +708,9 @@ grid 推奨: `12, 12, 12, 12`
 
 ## 注意事項
 
-- **component_props** は有効な JSON 文字列であること。SQL のシングルクォート内でダブルクォートをエスケープする。
-- **subcategory_key** は `subcategories` テーブルに存在する値のみ使用可。
-- **display_order** は 0 始まりの整数。同一ダッシュボード内で昇順に並ぶ。
-- **ローカル D1 の実体**: `apps/web/wrangler.toml` の `persist_to`（`../../.local/d1`）に保存される。
-- 新しい component_type を CHECK 制約に追加した場合、ローカル D1 のテーブル再作成が必要になることがある。
+- **componentProps** は JSON のオブジェクトで書く (文字列にしない)。
+- **sortOrder** は同一ページ内で昇順に並ぶ。
+- JSON を直しただけでは本番に出ない。snapshot を作り直し、R2 へ反映してから確認する。
 
 ---
 
@@ -832,16 +761,9 @@ npm run test:e2e:ui
 **症状**: ダッシュボードでチャートが表示されず、エラーメッセージも出ない
 
 **チェックポイント**:
-1. `dashboard_components.is_active = 1` になっているか確認
-2. `dashboard_configs.is_active = 1` になっているか確認
-3. `component_props` が有効なJSON文字列か確認
-
-```sql
--- コンポーネント設定の確認
-SELECT id, component_type, is_active, component_props
-FROM dashboard_components
-WHERE dashboard_id = 'your-dashboard-id';
-```
+1. 対象ページの JSON (`apps/web/scripts/data/page-components/<pageType>/<key>.json`) に要素があるか確認
+2. snapshot を作り直したか確認 (`verify-page-components-snapshot.ts` で R2 と一致するか)
+3. `componentType` が `DashboardConfigMap` のキーにあり、`DashboardComponentRenderer.tsx` に case があるか確認
 
 ### 問題2: Props型エラー
 
@@ -881,25 +803,11 @@ echo $ESTAT_API_KEY
 curl "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?appId=YOUR_KEY&statsDataId=0000010104"
 ```
 
-### 問題4: CHECK制約エラー
+### 問題4: Unknown component type と表示される
 
-**症状**: `CHECK constraint failed: dashboard_components`
+**原因**: JSON の `componentType` がレンダラーに登録されていない
 
-**原因**: `component_type` に許可されていない値を挿入しようとした
-
-**解決**:
-1. `packages/database/src/schema/dashboard.ts` の `componentTypeCheck` に新しい値を追加
-2. `npm run generate` でマイグレーション生成
-3. ローカルDBを再作成または制約を削除
-
-```bash
-# 一時的に制約を無効化（開発時のみ）
-npx wrangler d1 execute stats47_local_static --local --command "
-  CREATE TABLE dashboard_components_new AS SELECT * FROM dashboard_components;
-  DROP TABLE dashboard_components;
-  ALTER TABLE dashboard_components_new RENAME TO dashboard_components;
-"
-```
+**解決**: `types/index.ts` の `DashboardConfigMap` と `DashboardComponentRenderer.tsx` の case に追加する (DB の制約は無い)。
 
 ### 問題5: Storybookでコンポーネントが動かない
 
@@ -933,28 +841,14 @@ export const Default: Story = {
 
 **症状**: `Unexpected token in JSON at position X`
 
-**原因**: `component_props` の JSON が不正
+**原因**: 配置の JSON ファイルが不正
 
 **デバッグ**:
-```sql
--- component_propsの内容を確認
-SELECT id, component_props
-FROM dashboard_components
-WHERE id = 'your-component-id';
-
--- JSONが有効か確認（PostgreSQLの場合）
-SELECT id, component_props::json
-FROM dashboard_components;
+```bash
+node -e 'JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))' apps/web/scripts/data/page-components/area/01000.json
 ```
 
-**修正例**:
-```sql
--- ❌ 不正なJSON（シングルクォート使用）
-'{'statsDataId':'0000010104'}'
-
--- ✅ 正しいJSON（ダブルクォート使用）
-'{"statsDataId":"0000010104"}'
-```
+**修正例**: キーと文字列はダブルクォートで書く (`{"statsDataId":"0000010104"}`)。
 
 ---
 
@@ -1026,7 +920,7 @@ export const getCachedEstatData = unstable_cache(
 - **ブログ記事チャート**: [Blog Feature README](../../features/blog/README.md) - ブログ用チャートとの違い
 - **e-Stat APIパッケージ**: [packages/estat-api/README.md](../../../../../packages/estat-api/README.md)
 - **デザインシステム**: [デザインシステム](../../../../../docs/01_技術設計/04_デザインシステム.md)
-- **データベーススキーマ**: [packages/database/src/schema/dashboard.ts](../../../../packages/database/src/schema/dashboard.ts)
+- **配置の正本**: [apps/web/scripts/data/page-components/](../../../scripts/data/page-components/)
 
 ---
 

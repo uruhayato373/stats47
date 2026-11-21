@@ -33,13 +33,13 @@ paths:
 - 人が定義する低 volume の設定は git で review できるようにする。派生値は入力とロジックから再生成できるようにする
 - 集計に SQLite / DuckDB を使うのは、プロセス終了で破棄できる一時領域 (`:memory:`) に限る。一時 DB は cache か計算手段で、
   復元できない唯一のデータを持たない
-- schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は型ソース・テスト用として残してよいが、
-  存在することを永続 DB 利用の根拠にしない
+- ローカルの永続 SQLite 層 (旧 `packages/database` の Drizzle schema・migration・seed と、それを開くスクリプト) は 2026-11-21 に廃止した。
+  型は各 package の types に置き、DB の schema を型の正本にしない
 
 | 許容 | 禁止 |
 |---|---|
-| integration test の一時 DB・build 中だけの cache・`:memory:` 集計 | リモート D1 を運用 SSOT にする・ローカル SQLite だけに authored data を置く |
-| schema を型・テストに再利用 | 観測値・派生値を DB へ恒久保存する・本番アプリから DB query する |
+| テストの一時 DB・build 中だけの cache・`:memory:` 集計 | リモート D1 を運用 SSOT にする・ローカル SQLite だけに authored data を置く |
+| — | 観測値・派生値を DB へ恒久保存する・本番アプリから DB query する |
 
 #### データ分類
 

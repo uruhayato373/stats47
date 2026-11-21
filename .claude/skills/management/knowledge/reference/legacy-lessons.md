@@ -51,7 +51,7 @@ co_agents: [strategy-advisor]
 
 **問題**: `drizzle-kit push` や `drizzle-kit generate` がカラム削除・リネーム時に対話プロンプトを出し、非対話環境（CI、Claude Code）で止まる。
 
-**対策**: 手動でマイグレーション SQL を作成し、`better-sqlite3` で直接適用する。`packages/database/drizzle/0007_articles_refactor.sql` が実例。
+**対策** (当時): 手動でマイグレーション SQL を作成し、`better-sqlite3` で直接適用した。`packages/database/drizzle/0007_articles_refactor.sql` が実例だった。Drizzle の schema・migration は旧 database パッケージごと 2026-11-21 に削除したので、今は該当しない。
 
 ---
 
@@ -97,7 +97,7 @@ co_agents: [strategy-advisor]
 
 **原因**: `drizzle-kit generate` の対話プロンプト回避のため、手書き SQL を `drizzle/` に直接配置した。ジャーナルはスナップショット 0006 で止まったまま、実際の DB スキーマだけが進んだ。
 
-**対策**: (1) `drizzle/` には `drizzle-kit generate` の生成物のみ配置する（手動 SQL は `better-sqlite3` で直接適用）。(2) マイグレーションが 10 本を超えたら `/reset-migrations` でリセットする。(3) 詳細は `packages/database/README.md` の「マイグレーション運用ルール」を参照。
+**対策** (当時): (1) `drizzle/` には `drizzle-kit generate` の生成物のみ配置した（手動 SQL は `better-sqlite3` で直接適用）。(2) マイグレーションが 10 本を超えたらリセットした。migration と、リセットの skill・README は 2026-11-21 に旧 database パッケージごと削除したので、今は該当しない。
 
 ---
 
@@ -126,7 +126,7 @@ co_agents: [strategy-advisor]
 2. `available_years` は `[{"yearCode":"2023","yearName":"2023年度"},...]` 形式で保存
 3. `ranking_data.area_code` は都道府県なら `"01000"`〜`"47000"` の5桁で保存（2桁禁止）
 4. 独自 populate スクリプト作成時は `populate-port-rankings.ts` をリファレンスとし、上記フォーマットに準拠する
-5. 修正済み: `populate-occupation-income.ts`, `populate-port-rankings.ts` (歴史的記録: 旧 `/register-ranking` SKILL.md も併せて修正していたが、Phase 6.7 で skill 自体を削除し `/page-data-batch` + `/sync-metrics-cache` + TS-config に置換)
+5. 修正済み: `populate-occupation-income.ts`, `populate-port-rankings.ts` (歴史的記録: 旧 `/register-ranking` SKILL.md も併せて修正していたが、Phase 6.7 で skill 自体を削除し `/page-data-batch` + TS-config に置換。当時あったキャッシュ同期の skill は 2026-11-21 に削除)
 
 ---
 
@@ -148,7 +148,7 @@ co_agents: [strategy-advisor]
 
 **原因**: 元データの品質問題。同一都道府県内の複数港に同じ座標が割り当てられていた。
 
-**対策**: (1) MLIT サイバーポート（cyport）API のバース施設座標の平均値で修正。cyport に無い港は Web 調査で補完。修正スクリプト: `packages/database/scripts/import-cyport-ports.ts`。(2) 港湾データ投入・更新時は `SELECT ... FROM ports a JOIN ports b ON a.latitude = b.latitude AND a.longitude = b.longitude AND a.port_code < b.port_code` で重複座標チェックを行う。
+**対策**: (1) MLIT サイバーポート（cyport）API のバース施設座標の平均値で修正。cyport に無い港は Web 調査で補完。修正スクリプトは旧 database パッケージの `import-cyport-ports.ts` (2026-11-21 に削除。修正済みの座標は台帳 `areas.ports` の `data/areas/master/ports.json` に残る)。(2) 港湾データの更新時は、台帳 `areas.ports` で `latitude`・`longitude` が同じ組の港が無いかを確認する。
 
 ---
 
@@ -509,8 +509,8 @@ export async function GET() {
 4. **year_code 形式の正規化忘れに注意**: e-Stat は YYYYMM00 形式 ("1975100000")、R2 stats は YYYY 形式 ("1975")。混在すると重複行を作る。`/page-data-batch` 内で `SUBSTR(year_code, 1, 4)` 正規化する
 
 **関連**:
-- `.claude/scripts/estat/backfill-stats-prefecture.cjs` (要 UPSERT 化リファクタ)
-- `.claude/scripts/estat/restore-from-r2-cache.cjs` (UPSERT 実例)
+- `.claude/scripts/estat/backfill-stats-prefecture.cjs` (当時の DELETE+INSERT 実装。ローカル SQLite を開くスクリプトとして 2026-11-21 に削除)
+- `.claude/scripts/estat/restore-from-r2-cache.cjs` (当時の UPSERT 実例。同じく 2026-11-21 に削除)
 - `docs/01_技術設計/06_自動化インベントリ.md` 手動運用ツールセクション
 - memory: `project_estat_backfill_lessons.md` (本件 + e-Stat 全年度取得規約)
 

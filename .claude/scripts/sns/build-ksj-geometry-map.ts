@@ -23,9 +23,10 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const SEED_PATH = join(PROJECT_ROOT, "packages/database/seed/ksj-catalog.json");
+const SEED_PATH = join(PROJECT_ROOT, datasetPath("geo.ksj-catalog"));
 const OUT_PATH = join(PROJECT_ROOT, ".claude/scripts/sns/data/ksj-geometry.generated.json");
 
 interface SeedEntry {

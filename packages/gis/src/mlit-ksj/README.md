@@ -193,9 +193,6 @@ packages/gis/src/mlit-ksj/
 └── scripts/
     ├── run-pipeline.ts          # パイプライン CLI。台帳 geo.ksj-datasets を直接読む
     ├── build-data-catalog.ts    # git TS + 実R2 + open-data-catalog → 取得カタログ
-    ├── list-datasets.ts         # gis_datasets (使い捨て SQLite) 一覧 CLI (status 集計付き)
-    ├── seed-from-registry.ts    # ★台帳 geo.ksj-datasets → 使い捨て SQLite を決定的に UPSERT 再構築
-    ├── seed-ksj-catalog.ts      # 候補 126 件 (ksj-catalog.json) を status='available' で SQLite に投入
     └── generate-ksj-stats-values.ts # ★KSJ topojson → app/stats/<key>/values.json (配信の正典)
 ```
 
@@ -204,8 +201,8 @@ packages/gis/src/mlit-ksj/
 > (原子炉の無い京都府に 8 基、八丈島の地熱が神奈川県、秋田・福島が 0)。
 > 後継は `generate-ksj-stats-values.ts` で、SQLite を経由せず `app/stats` を直接作る。
 
-> SQLite (`packages/database/.data/stats47.sqlite`) は git TS から再生成可能な**使い捨てビルドキャッシュ**で
-> SSOT ではない。永続/リモート D1 ではない。SSOT は **台帳 geo.ksj-datasets (メタ) + registry.ts (技術設定) + R2 (配信)**。
+> 互換用の SQLite と、それを作る seed・一覧の CLI は 2026-11-21 に削除した。SSOT は **台帳 geo.ksj-datasets (メタ) + registry.ts (技術設定) + R2 (配信)** で、
+> 候補の一覧は台帳 `geo.ksj-catalog` (`data/geo/ksj/catalog.json`。`ksj-catalog-monthly.yml` が毎月上書き)。
 
 ## ジオメトリの目視確認
 
@@ -221,7 +218,7 @@ packages/gis/src/mlit-ksj/
 新規データセットは以下の順序で追加します（規約の正典: `.claude/rules/gis-data.md` / 担当 agent: `gis-curator`）。
 
 1. **台帳 `geo.ksj-datasets` の `datasets` にエントリを追加**（キーが dataId。メタ + ranking 定義。形は Schema）
-   - `name_en` は KSJ API 非提供のため不要（seed が空でセット・display 専用）
+   - `name_en` は KSJ API 非提供のため空でよい（display 専用）
    - 取得状態やfile_countは書かない（実R2一覧からカタログ生成時に導出）
 
 2. **registry.ts (`KSJ_CODE_CONFIG`) に技術設定を追加**:
@@ -239,8 +236,7 @@ packages/gis/src/mlit-ksj/
    npm run geo:check-data-catalog
    ```
 
-互換用の旧一覧scriptが必要な場合だけ `seed-from-registry.ts` で使い捨てSQLiteを再構築する。
-pipeline本体と取得完了判定には不要。
+SQLite の再 seed は無い (2026-11-21 に廃止)。pipeline 本体と取得完了判定は台帳と R2 だけで完結する。
 
 ## ライセンスと出典表示
 

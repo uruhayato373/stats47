@@ -51,7 +51,6 @@ npm run geo:check-data-catalog
 - 台帳 `geo.ksj-datasets` / `registry.ts` のメタ・技術設定編集 (SSOT) → **`gis-curator`**
 - R2 push (ローカル → 本番 R2) → **`r2-publisher`**
 - e-Stat / MLIT DPF 探索 → `estat-researcher`
-- 互換SQLiteのスキーマ変更 / migration → `db-schema-manager`
 - Geo分析のstage・lineage・保存則・サイト接続 → `geo-analysis-curator`
 
 ## 必読 rules

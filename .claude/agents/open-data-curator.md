@@ -69,7 +69,7 @@ npm run check:prefecture-statistics-links --workspace packages/data-configs
 npm run type-check --workspace @stats47/data-configs
 npm run source-vault:process -- stage-status            # 参考文献の到達段階 (S0-S4)
 npm run source-vault:test                               # source-vault CLI 3 本のテスト
-npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # KSJ 参照を触った場合
+npm run geo:check-data-catalog                          # KSJ 参照を触った場合
 ```
 
 - 初期実装 (2026-07-18): 13 source / 80 dataset (医療情報ネット 5・不動産情報ライブラリ 11・

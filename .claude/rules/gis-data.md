@@ -21,24 +21,23 @@ GIS を扱う agent (`gis-curator` / `gis-pipeline-runner` / `geo-analysis-curat
 |---|---|---|---|
 | 登録データセットのメタ + ranking 定義 | **台帳 `geo.ksj-datasets`** (`data/geo/ksj/datasets.json` + Schema。読み込み口 `datasets.ts`) | `GIS_DATASETS: GisDatasetMeta[]` | name/category/geometryType/coverage/license/stats47Category/isRankingTarget/rankingConfig/latestVersion |
 | pipeline 技術設定 | **`packages/gis/src/mlit-ksj/registry.ts`** (git TS) | `KSJ_CODE_CONFIG: Map` | downloadUrlPattern/geojsonDirInZip/propertyMap/simplifyOptions |
-| 候補メタの superset (126 件) | `packages/database/seed/ksj-catalog.json` (git) | JSON snapshot | jpksj-api フォールバック。`seed-ksj-catalog.ts` が status='available' で投入 |
+| 候補メタの superset (126 件) | **台帳 `geo.ksj-catalog`** (`data/geo/ksj/catalog.json` + Schema) | JSON snapshot | jpksj-api の一覧の写し。`ksj-catalog-monthly.yml` が毎月上書きし、増減を Issue で知らせる。取り込みの判断は持たない |
 | 公開可能な GIS 原典 (TopoJSON 等) | **R2** `gis/mlit-ksj/{dataId}/{version}/` | gzip TopoJSON + manifest | 台帳 `geo.ksj-license-policy` (読み込み口 `license-policy.ts`) が`public-r2-eligible`と判定したものだけ。本番アプリ・Remotion が読む |
 | 非商用・審査中の GIS 原典 | 公式配布元 + ローカル作業キャッシュ `.local/r2/gis/mlit-ksj/...` | zip / TopoJSON | **public R2へ置かない**。ローカルキャッシュはSSOTではなく再取得可能な作業物 |
 | ランキング観測値 | **R2** `app/stats/<key>/values.json` | JSON | GIS ranking も他 metric と同じR2配信。公開構造化データgateを通す |
 | Geo分析の途中artifact・lineage・集計 | **R2** `app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json}` | JSON | 定義はgit TS。47県coverageと保存則を`geo-analysis-curator`が監査 |
 | 取得カタログ | R2 `app/geo/data-catalog/items.json` | JSON | git TS + **実R2一覧**から生成。URL・alias・版・取得件数・公開条件を分離 |
 | Geo販売・媒体展開の運用台帳 | `.local/geo-content-pipeline/items.json` | JSON | 公開ページのreaderなし。`app/geo/`へ置かず、商品生成・記事queueだけが読む |
-| 互換用キャッシュ | `packages/database/.data/stats47.sqlite` の `gis_datasets` テーブル | SQLite | 旧一覧/集計script用。pipelineは読まず、**SSOTではない** |
 
-**「D1 gis_datasets」= 上記ローカル使い捨て SQLite** であり Cloudflare 永続/リモート D1 ではない (廃止済)。
-取得状態はSQLiteの `status='imported'` や単一オブジェクトの存在では判定しない。2026-08-30追加の
+互換用の SQLite (`gis_datasets` テーブル) と、それを作る seed・一覧の CLI は 2026-11-21 に廃止した。
+取得状態は単一オブジェクトの存在では判定しない。2026-08-30追加の
 公開取得対象は台帳 `geo.ksj-official-policy` (読み込み口 `official-policy.ts`) の公式アーカイブ数と、R2のscope別 `manifest.json` 数が一致した場合だけ
 完了とする。既存pipelineデータはR2実体から導出する。
 
 ## データフロー
 
 ```
-台帳 geo.ksj-datasets (メタ SSOT) + registry.ts (技術設定) + ksj-catalog.json (候補)
+台帳 geo.ksj-datasets (メタ SSOT) + registry.ts (技術設定) + 台帳 geo.ksj-catalog (候補)
   │  run-pipeline.ts <dataId> / acquire-public-ksj.ts
   │  → 公式配布manifest選択 → zip download → TopoJSON + scope別provenance manifest
   ▼
@@ -71,7 +70,7 @@ R2 app/geo/<slug>/{pref/<NN>.json,manifest.json,item.json} → /geo/<slug>
 5. ranking 対象なら `generate-ksj-stats-values.ts` で観測値を作る (下記 §県別集計)
 6. 公開条件gate後に `r2-publisher` が限定prefixをpushし、`build:data-catalog` → `check:data-catalog`
 
-> ranking 定義 (`rankingConfig`) は台帳に統合済 (旧 `seed-from-registry.ts` の RANKINGS 配列は廃止)。
+> ranking 定義 (`rankingConfig`) は台帳に統合済。
 > ranking 対象は `isRankingTarget: true` + `rankingConfig[]` を持たせる。年は 4 桁 (`yearCode`、estat-api.md 準拠)。
 
 ## 商用利用・公開ライセンス境界
@@ -96,7 +95,7 @@ N05 は 2026-10-29 に交通網の変遷のため登録した (public mirror は
 
 ## 地図の土台 (2026-11-06)
 
-静止画と動画の地図は、境界データから図の座標を作る処理を `packages/gis/src/map/geometry.mjs` だけで持つ (`topologyFeatures`・`fittedMercator`・`largestPolygon` など)。各処理の違いは、その上に何を描くかだけにする。`geoMercator` を直接呼ぶと `packages/gis/src/map/__tests__/geometry.test.ts` が止める。サイトの対話地図 (d3) と KML の書き出しだけが例外で、同じテストの一覧に載せてある。タイルの配置は `TILE_GRID_LAYOUT` が 1 つの正本で、4:5 と動画はそこから導く。
+静止画と動画の地図は、境界データから図の座標を作る処理を `packages/gis/src/map/geometry.mjs` だけで持つ (`topologyFeatures`・`fittedMercator`・`largestPolygon` など)。各処理の違いは、その上に何を描くかだけにする。`geoMercator` を直接呼ぶと `packages/gis/src/map/__tests__/geometry.test.ts` が止める。サイトの対話地図 (d3) だけが例外で、同じテストの一覧に載せてある (KML の書き出しは利用元が無く、依存 `tokml` も未導入だったので 2026-11-21 に削除)。タイルの配置は `TILE_GRID_LAYOUT` が 1 つの正本で、4:5 と動画はそこから導く。
 
 ## 地物の区分 (色分け) の台帳
 
@@ -184,10 +183,9 @@ npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
 
 | NG | OK |
 |---|---|
-| ローカル SQLite に手動 INSERT して「真実源」にする | 台帳 `geo.ksj-datasets` を編集して再 seed |
+| ローカル SQLite に手動 INSERT して「真実源」にする | 台帳 `geo.ksj-datasets` を編集する |
 | 永続/リモート D1 を GIS の SSOT として復活させる | 台帳 geo.ksj-datasets + registry.ts + R2 |
 | SQLiteのstatus/file_countや1ファイル存在を取得済み判定に使う | 公式アーカイブ数 = R2完了manifest数で判定 |
-| 本番アプリから gis_datasets を query | R2 `gis/mlit-ksj/...` を fetch |
 | 手編集の生成表を真実源にする | 登録一覧は台帳 `geo.ksj-datasets` が真実源 (旧 doc 04/generate-docs は 2026-07-12 廃止) |
 | **座標から最寄りの県庁所在地で県を決める** | `prefecture-assign.ts` の 3 段 (決まらなければ null) |
 | **全プロパティを走査して「それらしい値」を県コードに使う** | `registry.ts` の `prefectureSource` で明示宣言 |
@@ -224,10 +222,9 @@ npx tsc --noEmit -p packages/gis/tsconfig.json
 - **県別集計 (純関数)**: `packages/gis/src/mlit-ksj/ksj-stats-core.ts`
 - **観測値生成**: `packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts`
 - テスト: `packages/gis/src/mlit-ksj/__tests__/{prefecture-assign,ksj-stats-core}.test.ts` (39 件)
-- 互換用seed: `packages/gis/src/mlit-ksj/scripts/{seed-from-registry,seed-ksj-catalog}.ts`
 - pipeline/catalog: `packages/gis/src/mlit-ksj/scripts/{run-pipeline,build-data-catalog}.ts`
 - スキル: `.claude/skills/db/fetch-mlit-ksj/SKILL.md`
 - Geo分析標準/skill: `.claude/rules/geo-analysis-standards.md` / `.claude/skills/gis/build-geo-analysis/SKILL.md`
 - SNS バズ地図での消費 (KSJ topojson → 点プロット/点→自治体カード): `.claude/rules/buzz-map-standards.md` §4 `ksj`/`mlit-dpf` レーン
 - モジュール設計・使い方: `packages/gis/src/mlit-ksj/README.md` / 登録一覧の真実源: 台帳 `geo.ksj-datasets`
-- データ層: `.claude/rules/data-storage.md` / `packages/database/README.md`
+- データ層: `.claude/rules/data-storage.md`

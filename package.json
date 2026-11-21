@@ -157,11 +157,11 @@
     "check-domains": "node packages/ops/src/management/check-domains.cjs",
     "check-datasets": "node .claude/scripts/lib/check-datasets.mjs",
     "type-check": "cross-env NODE_OPTIONS=--max-old-space-size=4096 turbo run type-check && npm run type-check:scripts",
-    "type-check:scripts": "node .claude/scripts/lib/sync-codex-mirror.cjs --check && node .claude/scripts/lib/type-check-scripts.mjs apps/web/scripts/tsconfig.json packages/database/scripts/tsconfig.json packages/r2-storage/scripts/tsconfig.json packages/area/scripts/tsconfig.json packages/ranking/scripts/tsconfig.json apps/remotion/scripts/tsconfig.json .claude/skills/ads/scout-asp/scripts/tsconfig.json .claude/skills/note/post-note-ranking/scripts/tsconfig.json packages/product-factory/scripts/tsconfig.json .claude/scripts/tsconfig.json .claude/scripts/tsconfig.checkjs.json",
+    "type-check:scripts": "node .claude/scripts/lib/sync-codex-mirror.cjs --check && node .claude/scripts/lib/type-check-scripts.mjs apps/web/scripts/tsconfig.json packages/r2-storage/scripts/tsconfig.json packages/area/scripts/tsconfig.json packages/ranking/scripts/tsconfig.json apps/remotion/scripts/tsconfig.json .claude/skills/ads/scout-asp/scripts/tsconfig.json .claude/skills/note/post-note-ranking/scripts/tsconfig.json packages/product-factory/scripts/tsconfig.json .claude/scripts/tsconfig.json .claude/scripts/tsconfig.checkjs.json",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "knip": "knip",
+    "knip:deps": "node .claude/scripts/lib/check-package-deps.mjs",
     "knip:report": "knip --reporter json > knip-report-all.json",
-    "db:studio": "cd packages/database && cross-env DB_LOCAL=true npx drizzle-kit studio",
     "admin": "npm run dev --workspace=apps/admin",
     "audit:content-operations": "tsx .claude/scripts/content-operations/audit-content-operations.ts",
     "r2:classes": "tsx packages/r2-storage/src/scripts/list-r2-key-classes.ts",
@@ -326,7 +326,8 @@
     "prettier": "^3.4.2",
     "tsx": "^4.21.0",
     "turbo": "^2.10.12",
-    "vite": "^8.2.4"
+    "vite": "^8.2.4",
+    "wrangler": "4.152.0"
   },
   "workspaces": [
     "apps/*",

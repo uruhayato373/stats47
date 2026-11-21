@@ -36,10 +36,11 @@
     "@stats47/area": "*",
     "@stats47/logger": "*",
     "@stats47/r2-storage": "*",
-    "@stats47/types": "*"
+    "@stats47/types": "*",
+    "server-only": "^0.0.1",
+    "undici": "^7.30.1"
   },
   "devDependencies": {
-
     "typescript": "^5.0.0",
     "vitest": "^4.1.11"
   }

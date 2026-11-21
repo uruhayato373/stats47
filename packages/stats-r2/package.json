@@ -22,7 +22,6 @@
     }
   },
   "scripts": {
-    "export:from-d1": "tsx src/scripts/export-stats-to-r2.ts",
     "generate:japan-series": "tsx src/scripts/generate-japan-series.ts",
     "migrate:reviewed-recipes": "tsx src/scripts/migrate-legacy-recipes.ts",
     "migrate:reviewed-recipes:stage": "tsx src/scripts/migrate-legacy-recipes.ts --apply",
@@ -37,10 +36,9 @@
     "@stats47/types": "*"
   },
   "devDependencies": {
-    "better-sqlite3": "^12.6.2",
-    "@types/better-sqlite3": "^7.6.13",
     "tsx": "^4.19.0",
     "typescript": "^5.3.3",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.11",
+    "undici": "^7.30.1"
   }
 }

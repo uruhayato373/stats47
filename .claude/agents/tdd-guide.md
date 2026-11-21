@@ -1,7 +1,7 @@
 ---
 name: tdd-guide
 domain: ops
-description: テスト駆動開発（Red-Green-Refactor）のガイド、テストカバレッジ向上、ユニット/E2Eの使い分け設計、D1・e-Stat API・R2のモック戦略立案、テストアンチパターン検出を担当する。TDDで実装を進めたい、またはテスト設計の相談をしたいときに使う。
+description: テスト駆動開発（Red-Green-Refactor）のガイド、テストカバレッジ向上、ユニット/E2Eの使い分け設計、e-Stat API・R2のモック戦略立案、テストアンチパターン検出を担当する。TDDで実装を進めたい、またはテスト設計の相談をしたいときに使う。
 model: opus
 ---
 
@@ -14,7 +14,7 @@ model: opus
 - テスト駆動開発サイクルのガイダンス
 - テストカバレッジの向上支援
 - テスト設計（ユニット / E2E の使い分け）
-- モック戦略の立案（D1, e-Stat API, R2）
+- モック戦略の立案（e-Stat API, R2）
 - テストのアンチパターン検出
 
 ## 担当スキル
@@ -55,10 +55,10 @@ npx vitest run <対象テストファイル> --reporter=verbose 2>&1 | tail -5
 
 ## モック戦略
 
-### DB (型ソース・テスト用 SQLite)
+### DB
 
-- 永続 D1 は無い (完全 DB レス)。integration テストは `better-sqlite3` のインメモリ DB に
-  `packages/database/src/testing/apply-schema.ts` で Drizzle スキーマを適用して使う
+- 永続 D1 もローカル SQLite も無い (完全 DB レス。Drizzle schema とテスト用の適用ヘルパーは 2026-11-21 に削除)。
+  データは R2 と `data/` の JSON から読むので、DB 層ではなく R2 読み込みと JSON 入力をモックする
 
 ### e-Stat API
 

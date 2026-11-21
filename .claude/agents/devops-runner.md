@@ -40,7 +40,7 @@ model: sonnet
 ## 担当外
 
 - コードレビュー（code-reviewer）
-- DB 操作（db-schema-manager / data-ingester / snapshot-exporter / r2-publisher）
+- データ操作（data-ingester / snapshot-exporter / r2-publisher）
 - コンテンツ制作（article-writer / 各 SNS strategist / note-manager）
 - アナリティクス（gsc-analyst / ga4-analyst）
 

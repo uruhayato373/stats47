@@ -38,7 +38,7 @@
   - **Reference** (metrics=TS / articles=article.md / estat_catalog=e-Stat API / prefectures=JSON) → **再生成**
   - **Derived** (area_profiles / correlations) → **エフェメラル計算**（使い捨て `:memory:` SQLite / DuckDB が R2 を読む）→ R2。永続しない
 - **永続/リモート D1 は使わない**。S3 creds があれば集計もクラウドで完結する。R2 反映の実装例: `apps/web/scripts/export-page-components-snapshot.ts`
-- **観測値・派生を永続 DB に入れない** (DB 肥大で解約に至った経緯があるため R2 に置く)。schema 定義 (`packages/database/src/schema/*.ts`) と integration テスト基盤は「型ソース / テスト用」として残置可（配信 R2 に影響しない）。正典: `.claude/rules/data-storage.md`
+- **観測値・派生を永続 DB に入れない** (DB 肥大で解約に至った経緯があるため R2 に置く)。ローカルの SQLite 層 (旧 `packages/database` の schema・migration と、それを開くスクリプト) は 2026-11-21 に廃止した。正典: `.claude/rules/data-storage.md`
 - **Geo分析は結論だけ作らない**: Geo/GIS掛け合わせコンテンツは、計算入力・決定的空間演算・補助レイヤー・県別途中artifact・保存則・最終集計を同じcanonical着地で辿れることを必須とする。X・ブログ・noteもこのlineageへ接続し、単一指標ランキングと混在させない → `.claude/rules/geo-analysis-standards.md`
 - **browser-use は終了時に必ず daemon 停止 + Chrome タブクローズ** → `.claude/rules/browser-use-cleanup.md`
 - **ログインが要る計測値はブラウザで取りに行かない**: A8・楽天・note・KDP・GSC/GA4/AdSense の画面の数字は、毎週土曜の週次レビューの最初に Mac で取得 (`npm run weekly:collect`) して記録した `data/` から読む。読むための管理画面と読み取りスクリプトは hook が止める (例外はオーナーが会話で頼んだときだけ) → `.claude/rules/recorded-measurement-first.md`
@@ -160,7 +160,6 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | テスト構成・追加指針 | `apps/web/tests/README.md` |
 | 各 feature の設計 | `apps/*/src/features/*/README.md` |
 | デザインシステム | `.claude/design-system/README.md` |
-| DB 操作全般 ★DB操作時は必ず参照 | `packages/database/README.md` |
 | R2 ストレージ操作 | `packages/r2-storage/src/scripts/README.md` |
 
 ### スキル・エージェント

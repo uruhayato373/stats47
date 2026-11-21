@@ -8,10 +8,9 @@ import { MAINLAND_BBOX, dropSmallIslands, fittedMercator, inMainlandBox, isMainl
 const ROOT = path.resolve(__dirname, '../../../../..');
 const SCANNED = ['apps/remotion/src', 'apps/admin/lib', 'apps/admin/scripts', 'packages'];
 const SKIPPED_DIRECTORIES = new Set(['node_modules', '.local', '__tests__', 'dist']);
-// Interactive d3 on the site and a KML export: neither draws a static image or a video frame.
+// Interactive d3 on the site: it does not draw a static image or a video frame.
 const OWN_PROJECTION = new Set([
   'packages/gis/src/map/geometry.mjs',
-  'packages/gis/src/export/export-geojson-kml.ts',
   'packages/visualization/src/d3/components/DivergingChoroplethMap/DivergingChoroplethMap.tsx',
 ]);
 

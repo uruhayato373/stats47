@@ -159,8 +159,6 @@ export const OUTSIDE_DATA = [
   { path: "apps/remotion/public/", why: "generated", note: "動画の入力に生成した静的データ" },
   { path: "apps/web/coverage-thresholds.json", why: "app", note: "テストの閾値" },
   { path: "apps/web/regconfig.json", why: "app", note: "画像比較の設定" },
-  { path: "packages/database/drizzle/meta/", why: "generated", note: "migration のメタ" },
-  { path: "packages/database/seed/", why: "generated", note: "R2 と外部カタログから作る seed" },
   { path: "packages/types/src/site.json", why: "app", note: "サイトの識別子" },
   { path: "packages/product-factory/src/channels/kindle/kdp-category-tree.json", why: "generated", note: "KDP の分類表の写し" },
   { path: "packages/data-configs/src/registry.ts", why: "generated", note: "data/metrics から作る一覧 (build-registry.ts)" },
@@ -869,6 +867,7 @@ export const DATASETS = [
       { field: "notes.$keys", to: "geo.ksj-datasets", key: "datasets.$keys" },
     ],
   }),
+  d("geo.ksj-catalog", "data/geo/ksj/catalog.json", "state", "data", "data", "国土数値情報 (KSJ) の候補データセットの全量 (jpksj-api の一覧の写し。ksj-catalog-monthly.yml が毎月上書きし、増減を Issue で知らせる)。取り込みの判断は持たない。読み手は .claude/scripts/sns/build-buzz-map-catalog.ts・build-ksj-geometry-map.ts", { schema: "config/schema/geo.ksj-catalog.schema.json" }),
   d("geo.ksj-license-policy", "data/geo/ksj/license-policy.json", "master", "data", "data", "KSJ の利用条件の区分 (license) ごとの判定表 (元データの公開と商用成果物の 2 軸)。読み込みは packages/gis/src/mlit-ksj/license-policy.ts", { schema: "config/schema/geo.ksj-license-policy.schema.json" }),
   d("geo.ksj-official-policy", "data/geo/ksj/official-policy.json", "ledger", "data", "data", "KSJ の公式利用条件の監査 (未登録データセットの利用条件と取得判断・公開取得対象の期待アーカイブ数)。読み込みは packages/gis/src/mlit-ksj/official-policy.ts", {
     schema: "config/schema/geo.ksj-official-policy.schema.json",
@@ -1039,7 +1038,7 @@ export const DATASETS = [
       { field: "[].prefCode", to: "areas.cities", key: "[].cityCode", where: { level: "3" } },
     ],
   }),
-  d("areas.ports", "data/areas/master/ports.json", "master", "data", "data", "港湾のマスタ (港湾コード・名前・所在の都道府県・位置・港格・管理者。都道府県は 2 桁のコードで持つので refs では結べない)。読み込みは packages/database/src/utils/area-master.ts", {
+  d("areas.ports", "data/areas/master/ports.json", "master", "data", "data", "港湾のマスタ (港湾コード・名前・所在の都道府県・位置・港格・管理者。都道府県は 2 桁のコードで持つので refs では結べない)。読み手は apps/ges/scripts/generate-port-projects.ts と packages/area のテスト", {
     schema: "config/schema/areas.ports.schema.json",
   }),
   d("areas.databook-template", "data/areas/databook/template.json", "master", "data", "data", "47 県共通の県データブックのセクション構成 (どの指標をどのブロックでどの順に見せるか。数値は持たず指標のキーで参照する。chart ブロックは page-components の生成物になる)。読み込みは packages/data-configs/src/area-databook/template.ts", {
@@ -1291,6 +1290,8 @@ export const DATASETS = [
  * (旧パスを読んで黙って空になる・旧パスへ書き続けて記録が割れるのを防ぐ)。履歴の記録 (json の出典・md) は対象外。
  */
 export const RETIRED = [
+  // KSJ の候補データセットの全量 (2026-11-21 に packages/database を消したとき data/ へ)
+  { from: "packages/database/seed/ksj-catalog.json", to: "data/geo/ksj/catalog.json", since: "2026-11-21" },
   // ブログの公開待ち原稿 (2026-10-08 に docs/ から。docs/ は人が読み返す文書の置き場で、公開後に消える原稿と性質が合わない)
   { from: "docs/21_ブログ記事原稿", to: "contents/blog", since: "2026-10-08" },
   // 画像の原本 (2026-10-06 に assets/ へ)

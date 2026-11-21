@@ -127,20 +127,13 @@ model: sonnet
 
 ### Step 2: データインベントリ
 
-```sql
--- DB 登録済み指標
-SELECT ranking_key, ranking_name, unit, latest_year, available_years
-FROM ranking_items
-WHERE area_type = 'prefecture' AND is_active = 1
-  AND category_key IN ('safetyenvironment', ...)
-ORDER BY ranking_name;
-```
+登録済み指標は `data/metrics/<key>.ts` の `category` と `isActive` で絞って確認する (ローカル SQLite は 2026-11-21 に削除したので SQL では引かない)。
 
 e-Stat API 未登録指標の探索:
 
 - `/search-estat` でテーマ関連の統計表を検索
 - `/inspect-estat-meta` で有望な指標のメタデータを調査
-- **新規発見した指標は TS-config (`data/metrics/<key>.ts`) 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録を提案**
+- **新規発見した指標は TS-config (`data/metrics/<key>.ts`) 追加 + `/page-data-batch --metric <key>` で登録を提案**
 - **リファレンス索引を先に確認**: `.claude/skills/estat/references/README.md`
   - 特に `wage-structure-survey-occupations.md` — 145職種の都道府県別年収データ（39職種登録済み）
   - laborwage / socialsecurity / educationsports / construction テーマで活用可能
@@ -197,7 +190,7 @@ Step 2 で発見した未登録指標:
 
 1. `data/metrics/<new-key>.ts` を新規作成
 2. `npm run validate:config` `validate:years` で構造検証
-3. `data-ingester` が `/page-data-batch --metric <new-key>` で e-Stat → R2 直行投入 (旧 D1 sync-metrics-cache は廃止)
+3. `data-ingester` が `/page-data-batch --metric <new-key>` で e-Stat → R2 直行投入 (キャッシュ同期の段は無い)
 4. カタログの `metrics[]` / `charts[]` に追加 → `generate:catalog` → `validate:catalog`
 
 ## 担当スキル

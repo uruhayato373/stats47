@@ -114,7 +114,7 @@ const count = await fetchCount();
 型エラーが本番の cron 実行まで一切見えない。
 
 - **`scripts` ディレクトリを新設したら専用 tsconfig を作り `type-check:scripts` に足す。**
-  現在の対象: `apps/web/scripts` / `packages/database/scripts` / `packages/ranking/scripts` /
+  現在の対象: `apps/web/scripts` / `packages/ranking/scripts` /
   `packages/product-factory/scripts` / `apps/remotion/scripts` /
   `.claude/skills/ads/scout-asp/scripts`。`src/**/*` に含まれる `packages/*/src/scripts` は
   親 tsconfig が既に覆っているので不要。

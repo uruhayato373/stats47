@@ -195,7 +195,7 @@ node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
 
 `--whitepaper` 無しでは本 Phase は無効（`--deep` 単独指定はエラーにせず警告して skip）。**ローカル専用**（NotebookLM + e-Stat API + R2 が必要。リモートコンテナでは自動 skip）。
 
-> ⚠ コスト大（NotebookLM ~30 秒/回 + e-Stat 取得は `fetch → TS-config → /sync-metrics-cache → /page-data-batch` の重いパイプライン）。**無条件ループは禁止。** 下記の決定的ゲートで必ず縛る。
+> ⚠ コスト大（NotebookLM ~30 秒/回 + e-Stat 取得は `fetch → TS-config → /page-data-batch` の重いパイプライン）。**無条件ループは禁止。** 下記の決定的ゲートで必ず縛る。
 
 1. **起動条件（決定的フィルタ）**: 以下を **すべて** 満たす候補のみループに入れる。最大 **2 候補**（注目度上位順）。
    - マッチ度 ★☆☆（既存データなし）
@@ -210,7 +210,7 @@ node .claude/scripts/notebooklm/notebooklm-cross-query.mjs --json \
    ```
    - 該当 `statsDataId` が見つからない → **その候補は離脱**（「白書アングルあり / データ未整備」として Phase 5 で ★☆☆ のまま記録、将来の e-Stat 追加待ち）
 
-   **(b) データ取得**: 見つかった `statsDataId` を `/fetch-estat-data` で取得し、必要なら TS-config 追加 → `/sync-metrics-cache --apply` → `/page-data-batch --metric <key>`（`packages/database/README.md` の取り込みフロー準拠）。
+   **(b) データ取得**: 見つかった `statsDataId` を `/fetch-estat-data` で取得し、必要なら TS-config 追加 → `/page-data-batch --metric <key>`（`.claude/rules/metric-config-standards.md` の取り込みフロー準拠）。
 
    **(c) 白書に再照会**: 取得データの実際の上位/下位県を文脈に入れて白書へ再質問し、切り口を**実データで検証・精緻化**する:
    ```bash

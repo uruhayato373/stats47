@@ -85,12 +85,11 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 - R2 push（`.local/r2/` → 本番 R2）→ **r2-publisher**。
 - deploy / git / CDN 実行 → **devops-runner**（`/deploy` `/purge-cdn`）。
 - ランキングページの UI / SEO 構造化データ / コピー → **ranking-ui-manager**。
-- スキーマ・migration → **db-schema-manager**。
 
 ## 必読 rules / docs
 - `.claude/rules/metric-config-standards.md` —「isActive:true ≠ 本番公開」多段依存
 - `.claude/rules/branch-workflow.md` — develop→main、デプロイ規律、実行環境差分（cloud は workflow dispatch 不可）
-- `.claude/rules/r2-storage-design.md` / `packages/database/README.md` — R2 namespace / 完全DBレス
+- `.claude/rules/r2-storage-design.md` / `.claude/rules/data-storage.md` — R2 namespace / 完全DBレス
 - `.claude/todo/backlog.md` —「122 metric の本番公開」手順
 - memory `project_ranking_publish_pipeline_gap`
 
@@ -103,7 +102,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 ## File Boundary（並行衝突回避）
 - `ranking-ui-manager` が `apps/web/src/features/ranking/**` を触るのに対し、本エージェントは
   `apps/web/src/config/*-ranking-keys.ts` + 公開スクリプトを触る＝非重複。
-- R2 / D1（使い捨てビルドキャッシュ）への並列 write は data-ingester と排他（task-router 制御）。
+- R2 への並列 write は data-ingester と排他（task-router 制御）。
 - Agent 実行は `mode: "bypassPermissions"`。本番反映は outward-facing のため、明示指示が無ければ deploy 前に確認する。
 
 ## 関連

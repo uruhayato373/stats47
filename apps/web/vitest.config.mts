@@ -99,10 +99,6 @@ export default defineConfig({
         __dirname,
         "../../packages/components/src"
       ),
-      "@stats47/database": path.resolve(
-        __dirname,
-        "../../packages/database/src"
-      ),
       "@stats47/estat-api": path.resolve(
         __dirname,
         "../../packages/estat-api/src"

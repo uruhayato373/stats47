@@ -13,8 +13,6 @@
     "baseUrl": ".",
     "paths": {
       "@stats47/logger": ["../logger/src"],
-      "@stats47/database": ["../database/src"],
-      "@stats47/database/*": ["../database/src/*"],
       "@stats47/area": ["../area/src"],
       "@stats47/area/*": ["../area/src/*"],
       "@stats47/r2-storage": ["../r2-storage/src"],

@@ -37,8 +37,7 @@
 |---|---|---|---|
 | `estat-researcher` 🆕 | data | e-Stat / MLIT DPF 探索・メタ確認 (DB には触らない) | data-pipeline 分割 |
 | `open-data-curator` 🆕 | data | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。**+ provenance 監査オーナー** (全 metric の出典・再現性を `/audit-provenance` で棚卸し、クラス B/C/D を是正。正典 data-provenance-standards.md)。実取得・投入は既存ownerへ委譲。**+ 参考文献の段階処理オーナー** (PDF→ページ画像→Markdown文字起こし→図クロップ→台帳を `/process-reference-source` で不変 revision に積む。正典 reference-source-standards.md §3) | 2026-07-18 新設・2026-07-19 provenance 監査追加・2026-09-05 参考文献段階処理追加 |
-| `data-ingester` 🆕 | data | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲)。**非 e-Stat 投入時は provenance 9点セット必須** (data-provenance-standards.md) | data-pipeline + db-manager 分割 |
-| `db-schema-manager` 🆕 | data | スキーマ・migration・reset 専任 | db-manager 分割 |
+| `data-ingester` 🆕 | data | metrics 登録 + R2 観測値投入 + 47県カバレッジ確認 (GIS は gis-* に委譲)。**非 e-Stat 投入時は provenance 9点セット必須** (data-provenance-standards.md) | data-pipeline + db-manager 分割 |
 | `snapshot-exporter` 🆕 | data | git TS / R2 source → snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
 | `r2-publisher` 🆕 | data | R2 push / pull / du 専任 | db-manager 分割 |
 | `ranking-publisher` 🆕 | data | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
@@ -167,7 +166,7 @@
 | theme-ui-manager / ranking-ui-manager / site-ux-manager | 維持 | 担当ファイルで分ける (テーマページ / ランキングページ / サイト共通の枠) |
 | theme-researcher / theme-designer / theme-portfolio-manager | 維持 | 調査 → 設計 (ThemeCatalog) → 公開後の効果判定の段階 |
 | article-writer / blog-editor | 維持 | 文章を書くのは article-writer。公開と是正の段取りは blog-editor |
-| データ領域に 23 体 | 維持 | 領域は domains.json の 8 つに固定し、分割しない |
+| データ領域に 22 体 | 維持 | 領域は domains.json の 8 つに固定し、分割しない |
 
 ## 移行ステータス
 
@@ -176,7 +175,7 @@
 | 旧 agent | 状態 | 移行先 |
 |---|---|---|
 | `data-pipeline` | **削除済 (2026-05-28)** | `estat-researcher` + `data-ingester` |
-| `db-manager` | **削除済 (2026-05-28)** | `db-schema-manager` + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
+| `db-manager` | **削除済 (2026-05-28)** | `db-schema-manager` (2026-11-21 に packages/database とともに削除) + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
 | `blog-editor` | 縮退予定 (Phase 3、publish 系のみ保持) | + `trend-scout` + `chart-author` + `blog-critic` (企画は article-writer に統合) |
 | `adsense-analyst` | **削除済 (2026-09-30)** | `affiliate-manager` (アフィリエイト収益の計測分析・AdSense の配置改善)。AdSense は 2026-09-20 に停止し、2026-10-11 に手動枠で再開 |
 | `seo-auditor` | **削除済 (2026-07-03)** | `gsc-analyst` + `ga4-analyst` + `performance-auditor` + `adsense-analyst` (skill 参照の差し替え完了) |
