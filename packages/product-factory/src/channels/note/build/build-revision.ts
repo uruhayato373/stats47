@@ -32,7 +32,7 @@ function preparationListings(root: string): Record<string, Listing> {
   const free = readFreeSampleDelivery(root);
   return { ...ledger.packs, ...(free ? { 'P-13': free } : {}) };
 }
-export interface NoteRevisionItem {
+interface NoteRevisionItem {
   productId: string; slug: string; access: string; proposedPriceYen: number;
   status: 'draft-blocked'; readyToPublish: false; outDir: string;
   sourceRevision: string | null; sourceDirectory: string | null; sourceManifestSha256: string | null;

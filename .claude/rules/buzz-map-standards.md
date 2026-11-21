@@ -100,7 +100,7 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 > （builder `.claude/scripts/sns/build-buzz-map-catalog.ts` が全供給源をスコアリング・status upsert 保持）。
 > **5 レーン**で「利用できるものすべて」を採録する。うち `curated` が SNS 企画の主レーン
 > （人が選定した企画 SSOT）、`muni`〜`mlit-dpf` は機械採録の素材レーン:
-> - `curated` … **人が選定した企画 SSOT `.claude/scripts/sns/data/buzz-map-curated-ideas.ts`（160件）**。
+> - `curated` … **人が選定した企画の台帳 `sns.buzz-map-curated-ideas` (`data/sns/buzz-map-curated-ideas.json` + Schema・160件)**。読み込み口は `.claude/scripts/sns/data/buzz-map-curated-ideas.ts` (型だけを持つ)。
 >   各 idea を score gate（8要素 + landing 補正）・hard gate（license/sensitivity/hook）・
 >   landing router（§5 inventory 突合で strategy/readiness 解決）に通し、machine レーンとは
 >   `metricKeys`/`aliases` で dedup（`aliasesOf` に被マッチ key を記録）。既存 generated/posted へ dedup した

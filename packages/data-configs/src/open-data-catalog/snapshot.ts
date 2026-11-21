@@ -1,6 +1,6 @@
 import type { OpenDatasetLicense } from "./types";
 
-export interface OpenDataRawFile {
+interface OpenDataRawFile {
   readonly key: string;
   readonly url: string;
   readonly sha256: string;
@@ -9,7 +9,7 @@ export interface OpenDataRawFile {
   readonly retrievedAt: string;
 }
 
-export interface OpenDataSourceManifest {
+interface OpenDataSourceManifest {
   readonly schemaVersion: 1;
   readonly datasetId: string;
   readonly version: string;
@@ -20,7 +20,7 @@ export interface OpenDataSourceManifest {
   readonly files: readonly OpenDataRawFile[];
 }
 
-export interface OpenDataSnapshotVersion extends OpenDataSourceManifest {
+interface OpenDataSnapshotVersion extends OpenDataSourceManifest {
   readonly manifestKey: string;
   readonly manifestSha256: string;
   readonly bytes: number;

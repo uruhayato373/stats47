@@ -35,24 +35,6 @@ function parseStrengthWeaknessItem(value: unknown, path: string): StrengthWeakne
   return value as unknown as StrengthWeaknessItem;
 }
 
-export function parseAreaProfileData(value: unknown): AreaProfileData {
-  if (!isRecord(value)) throw new Error("area profile must be an object");
-  if (typeof value.areaCode !== "string" || typeof value.areaName !== "string") {
-    throw new Error("area profile code and name must be strings");
-  }
-  if (!Array.isArray(value.strengths) || !Array.isArray(value.weaknesses)) {
-    throw new Error("area profile strengths and weaknesses must be arrays");
-  }
-  return {
-    areaCode: value.areaCode,
-    areaName: value.areaName,
-    strengths: value.strengths.map((item, index) =>
-      parseStrengthWeaknessItem(item, `strengths[${index}]`)),
-    weaknesses: value.weaknesses.map((item, index) =>
-      parseStrengthWeaknessItem(item, `weaknesses[${index}]`)),
-  };
-}
-
 /** 都道府県別の集計サマリ */
 export interface AreaProfileSummary {
   areaCode: string;

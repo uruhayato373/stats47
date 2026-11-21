@@ -18,9 +18,6 @@ export interface AiContentSnapshotRow {
 }
 
 /** @deprecated aiContentKeyPath を使用してください */
-export const AI_CONTENT_SNAPSHOT_KEY = "ai-content/all.json";
-
-/** @deprecated aiContentKeyPath を使用してください */
 export interface AiContentSnapshot {
   generatedAt: string;
   count: number;

@@ -104,7 +104,7 @@ export function promoteNoteArticle(
 }
 
 /** 記事台帳のレコード (data/note/articles.schema.json の article) に変換する。本文は未保存 (manifest null)。 */
-export function toLedgerArticle(e: NoteCatalogEntry) {
+function toLedgerArticle(e: NoteCatalogEntry) {
   return {
     key: e.key,
     vertical: "product-sales" as const,

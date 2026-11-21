@@ -1,4 +1,4 @@
-export const LINK_AUDIT_POLICY = Object.freeze({
+const LINK_AUDIT_POLICY = Object.freeze({
   timeoutMs: 20_000,
   maxAttempts: 3,
   retryDelayMs: 250,

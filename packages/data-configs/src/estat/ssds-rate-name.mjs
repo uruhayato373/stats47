@@ -12,7 +12,7 @@ import path from "node:path";
 import { datasetDir } from "../../../../config/datasets.mjs";
 
 /** 項目名の末尾の括弧が「…当たり」(「あたり」も) なら、その項目は SSDS が算式で割り終えた率である */
-export const RATE_NAME = /[（(][^（）()]*(?:当たり|あたり)[^（）()]*[）)]\s*$/;
+const RATE_NAME = /[（(][^（）()]*(?:当たり|あたり)[^（）()]*[）)]\s*$/;
 
 /**
  * 統計表の cat01 コードと公式の項目名の対応を、data/estat/meta の控えから読む。
@@ -21,7 +21,7 @@ export const RATE_NAME = /[（(][^（）()]*(?:当たり|あたり)[^（）()]*[
  * @param {string} statsDataId
  * @returns {Map<string, string>}
  */
-export function readOfficialNames(projectRoot, statsDataId) {
+function readOfficialNames(projectRoot, statsDataId) {
   const names = new Map();
   const file = path.join(projectRoot, datasetDir("estat.meta"), `${statsDataId}.json`);
   if (!fs.existsSync(file)) return names;

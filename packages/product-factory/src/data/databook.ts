@@ -261,6 +261,3 @@ export const DATABOOKS: Readonly<Record<string, Databook>> = {
   },
 };
 
-export function isDatabookProduct(productId: string): boolean {
-  return productId in DATABOOKS;
-}

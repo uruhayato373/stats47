@@ -9,7 +9,7 @@ import type {
   GeoStationAccessPrefDetail,
 } from "./snapshot";
 
-export const STATION_ACCESS_RADIUS_KM = 0.8;
+const STATION_ACCESS_RADIUS_KM = 0.8;
 const STATION_GRID_DEGREES = 0.02;
 const DISTANCE_TOLERANCE_KM = 1e-9;
 

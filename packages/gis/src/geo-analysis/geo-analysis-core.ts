@@ -109,7 +109,7 @@ function pointInRing(point: Coordinate, ring: readonly Coordinate[]): boolean {
   return inside;
 }
 
-export function pointInPolygon(
+function pointInPolygon(
   point: Coordinate,
   polygon: readonly (readonly Coordinate[])[],
 ): boolean {

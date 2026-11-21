@@ -7,7 +7,7 @@
  * data.csv は 47 県 × 指標を横に並べた一覧用で、貼り付けても 10 件を超える範囲は反映されない。
  * (チャートを 47 県に変える場合は pptx.ts の items と、この文、tests/delivery-integrity.test.ts を同時に変える。)
  */
-export const CHART_ROW_COUNT = 10;
+const CHART_ROW_COUNT = 10;
 
 export const CHART_DATA_REPLACE_LINES: readonly string[] = [
   "グラフを選び「グラフのデザイン → データの編集」で埋め込み Excel を開きます。",

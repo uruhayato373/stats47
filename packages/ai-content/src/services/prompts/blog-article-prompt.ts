@@ -86,7 +86,7 @@ export interface CorrelationFact {
 }
 
 /** prompt と factual gate が同じ丸めを使う (小数第 2 位) */
-export const CORRELATION_DECIMALS = 2;
+const CORRELATION_DECIMALS = 2;
 
 function correlationSection(correlation: CorrelationFact | undefined): string {
   if (!correlation) return "";

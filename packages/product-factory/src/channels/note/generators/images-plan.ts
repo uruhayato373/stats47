@@ -5,7 +5,7 @@
  */
 import type { NoteArticlePlan } from "../types";
 
-export interface NoteImagePlanEntry {
+interface NoteImagePlanEntry {
   readonly kind: "cover" | "completion" | "free-paid-diff" | "file-structure";
   readonly filename: string;
   /** 入力の参照 (再利用元 or 生成指示)。 */

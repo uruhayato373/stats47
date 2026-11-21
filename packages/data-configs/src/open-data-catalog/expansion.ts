@@ -3,8 +3,8 @@ import type { OpenDataFetchRecipe } from "./fetch-recipe";
 import type { OpenDataNormalizedTable } from "./normalized-table";
 import { PREFECTURE_AREA_CODES } from "../../../area/src/constants/prefecture-codes";
 
-export type OpenDataExpansionChannel = "prefecture-ranking" | "municipality-ranking" | "theme" | "area" | "gis";
-export interface OpenDataExpansionSlice {
+type OpenDataExpansionChannel = "prefecture-ranking" | "municipality-ranking" | "theme" | "area" | "gis";
+interface OpenDataExpansionSlice {
   readonly version: string;
   readonly areaLevel: "prefecture" | "municipality";
   /** Every dimension is explicit; multiple values are summed only when declared below. */

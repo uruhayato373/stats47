@@ -35,7 +35,7 @@ export type NoteDisposition = "standalone-paid" | "bundle-member" | "free-lead" 
 export type NoteArticleRole = "pillar" | "how-to" | "use-case" | "comparison" | "sample";
 
 /** アクセス区分 (無料 / ペイウォール)。 */
-export type NoteAccess = "free" | "paid";
+type NoteAccess = "free" | "paid";
 
 /**
  * 1 商品の note 展開マッピング (仕様 §6)。

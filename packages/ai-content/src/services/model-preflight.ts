@@ -33,17 +33,6 @@ export function suggestTextModels(models: readonly string[], exclude?: string): 
     });
 }
 
-export function evaluateModelAvailability(configured: string, models: readonly string[]) {
-  if (models.includes(configured)) {
-    return { ok: true as const, configured, suggestions: [] as string[] };
-  }
-  return {
-    ok: false as const,
-    configured,
-    suggestions: suggestTextModels(models, configured),
-  };
-}
-
 export type SmokeResult =
   | { ok: true }
   | { ok: false; classification: string; status?: number };

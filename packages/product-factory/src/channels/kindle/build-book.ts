@@ -95,7 +95,7 @@ export interface BuildBookResult {
   readonly machineQualityOk: boolean;
 }
 
-export interface BookCoverage {
+interface BookCoverage {
   readonly rankingRequested: number;
   readonly rankingIncluded: number;
   readonly missing: readonly { key: string; reason: string }[];

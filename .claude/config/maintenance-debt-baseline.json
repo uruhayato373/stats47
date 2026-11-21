@@ -37,7 +37,6 @@
     "UNBOUNDED_LEGACY:packages/data-configs/src/types.ts:/** legacy: 計算式 (旧フォーマット) */": 1,
     "UNBOUNDED_LEGACY:packages/ranking/src/builders/build-ranking-item-from-metric.ts:// normalizationOptions は legacy で display 側に入る metric もある": 1,
     "UNBOUNDED_LEGACY:packages/ranking/src/types/snapshot.ts:/** @deprecated rankingValuesKeyPath を使用してください */": 2,
-    "UNBOUNDED_LEGACY:packages/ranking/src/utils/compute-ranking-title.ts:* @deprecated `getRankingTitle` を使用してください": 1,
     "UNBOUNDED_LEGACY:packages/svg-builder/src/charts/scatter.ts:* @deprecated 年度・出典はxLabel/yLabelに含めること。": 1,
     "UNBOUNDED_LEGACY:packages/visualization/src/d3/components/BarChartRace/D3BarChartRace.tsx:/** @deprecated Use BarChartRace */": 1,
     "UNBOUNDED_LEGACY:packages/visualization/src/d3/components/BarChartRace/index.ts:/** @deprecated Use BarChartRace */": 1,

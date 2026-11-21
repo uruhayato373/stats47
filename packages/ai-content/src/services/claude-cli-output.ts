@@ -56,7 +56,7 @@ export function isClaudeCliAlias(value: string): value is ClaudeCliAlias {
   return Object.prototype.hasOwnProperty.call(CLAUDE_CLI_MODELS, value);
 }
 
-export interface ClaudeCliUsageBreakdown {
+interface ClaudeCliUsageBreakdown {
   input: number;
   output: number;
   cacheWrite: number;

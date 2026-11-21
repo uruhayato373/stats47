@@ -58,7 +58,7 @@ export function normalizeCodeName(name: string): string {
  * (「海外観光旅行の行動者率」に国内の観光旅行を当ててしまう)。
  * 括弧を残した「海外観光旅行」なら title に包含されるので正しく選べる。
  */
-export function codeNameVariants(name: string): string[] {
+function codeNameVariants(name: string): string[] {
   const stripped = normalizeCodeName(name);
   const kept = foldVariants(name.replace(/^[0-9]+[_.\-\s]*/, "").replace(/[（()）]/g, "")).trim();
   return kept === stripped ? [stripped] : [stripped, kept];
@@ -69,7 +69,7 @@ export function normalizeTitle(title: string): string {
 }
 
 /** 2 文字列の最長共通部分文字列の長さ */
-export function longestCommonSubstring(a: string, b: string): number {
+function longestCommonSubstring(a: string, b: string): number {
   if (!a || !b) return 0;
   let best = 0;
   let prev = new Array<number>(b.length + 1).fill(0);

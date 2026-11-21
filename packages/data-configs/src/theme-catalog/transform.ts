@@ -77,7 +77,7 @@ function resolveIndicatorHubLinks(
 }
 
 /** theme key → IndicatorSet の export const 名 (例: "aging-society" → "AGING_SOCIETY_SET")。 */
-export function indicatorSetConstName(key: string): string {
+function indicatorSetConstName(key: string): string {
   return `${key.replace(/-/g, '_').toUpperCase()}_SET`;
 }
 
@@ -86,7 +86,7 @@ export function indicatorSetConstName(key: string): string {
  * selection / charts / rejectedCandidates は IndicatorSet に含めない (指標選定の view のみ)。
  * undefined フィールドは省略し、既存の手書き IndicatorSet と deep-equal になるようにする。
  */
-export function catalogToIndicatorSet(catalog: ThemeCatalog): IndicatorSet {
+function catalogToIndicatorSet(catalog: ThemeCatalog): IndicatorSet {
   const set: IndicatorSet = {
     key: catalog.key,
     title: catalog.title,

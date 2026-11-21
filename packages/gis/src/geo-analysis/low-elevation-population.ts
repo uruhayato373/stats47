@@ -25,7 +25,7 @@ export const LOW_ELEVATION_THRESHOLDS_M = [0, 5, 10] as const;
 export const LOW_ELEVATION_PRIMARY_THRESHOLD_M = 5;
 export const LOW_ELEVATION_PRIMARY_METRIC_KEY = 'lowElevationShareMean5m';
 /** 集計用の人口は小数4桁。10000倍した整数で足し合わせる。 */
-export const LOW_ELEVATION_POPULATION_SCALE = 10000;
+const LOW_ELEVATION_POPULATION_SCALE = 10000;
 export const LOW_ELEVATION_BAND_LABELS = [
   '標高不明',
   '平均標高0m以下',
@@ -64,7 +64,7 @@ export interface GeoLowElevationBand {
   readonly population: number;
   readonly sharePercent: number | null;
 }
-export interface GeoLowElevationThresholdBasis {
+interface GeoLowElevationThresholdBasis {
   readonly meshCount: number;
   readonly population: number;
   readonly sharePercent: number | null;
@@ -74,7 +74,7 @@ export interface GeoLowElevationThreshold {
   readonly meanBased: GeoLowElevationThresholdBasis;
   readonly minBased: GeoLowElevationThresholdBasis;
 }
-export interface GeoLowElevationConservation {
+interface GeoLowElevationConservation {
   readonly meshPopulation: number;
   readonly meshPopulationRounded: number;
   readonly censusPopulation2020: number;

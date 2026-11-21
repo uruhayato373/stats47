@@ -16,37 +16,13 @@ import { getPerformanceMeasurementString } from "./performanceMonitor";
  * @param defaultMessage - デフォルトメッセージ
  * @returns エラーメッセージ
  */
-export function createErrorMessage(
+function createErrorMessage(
   error: unknown,
   defaultMessage: string
 ): string {
   const errorMessage =
     error instanceof Error ? error.message : "Unknown error";
   return `${defaultMessage}: ${errorMessage}`;
-}
-
-/**
- * エラー詳細情報の収集（ログ記録用）
- *
- * @param error - エラーオブジェクト
- * @param context - ログコンテキスト
- * @param startTime - パフォーマンス計測の開始時刻（オプション）
- * @returns エラー詳細情報オブジェクト
- */
-export function collectErrorDetailsForLogging(
-  error: unknown,
-  context: Record<string, unknown>,
-  startTime?: number
-): Record<string, unknown> {
-  const errorContext: Record<string, unknown> = {
-    ...context,
-  };
-
-  if (startTime !== undefined) {
-    errorContext.processingTime = getPerformanceMeasurementString(startTime);
-  }
-
-  return collectErrorDetails(error, errorContext);
 }
 
 /**

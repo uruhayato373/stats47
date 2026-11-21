@@ -722,6 +722,7 @@ export const DATASETS = [
   d("sns.scripts", "data/sns/scripts/{name}.json", "ledger", "sns", "data", "長尺投稿 (YouTube 等) の台本。台帳の script_path から参照", { planned: true, schema: "data/sns/scripts.schema.json" }),
   d("sns.scripts-schema", "data/sns/scripts.schema.json", "schema", "sns", "data", "長尺投稿の台本の JSON Schema"),
   d("sns.buzz-map-attribution", "data/sns/buzz-map-attribution-{name}.json", "series", "sns", "data", "バズマップ投稿の流入の計測"),
+  d("sns.buzz-map-curated-ideas", "data/sns/buzz-map-curated-ideas.json", "ledger", "sns", "data", "地図カード (buzz-map) の企画の台帳 (人が選んで足す。1 件 1 企画)。build-buzz-map-catalog.ts が機械の候補と統合して作例カタログを作る。読み込み口は .claude/scripts/sns/data/buzz-map-curated-ideas.ts", { schema: "config/schema/sns.buzz-map-curated-ideas.schema.json" }),
   d("sns.buzz-map-catalog", "data/sns/buzz-map{name}catalog.json", "state", "sns", "data", "バズマップの作例カタログ"),
   d("sns.buzz-map-specs", "data/sns/buzz-map/specs/{name}.json", "ledger", "sns", "data", "地図カード (buzz-map) の制作の仕様 (1 枚 1 ファイル。ファイル名は spec.id。題・出典・凡例・使うデータで、そのまま Remotion の --props に渡す)。書き手は .claude/scripts/sns/build-buzz-map-spec*.ts と merge-buzz-map-specs.ts。見本の sample-*.json は Remotion の specs/ に残す", {
     schema: "config/schema/sns.buzz-map-specs.schema.json",

@@ -79,7 +79,7 @@ function assertTags(value: unknown): void {
   }
 }
 
-export function parseRankingItem(value: unknown): RankingItem {
+function parseRankingItem(value: unknown): RankingItem {
   if (!isRecord(value)) throw new Error("ranking item must be an object");
   for (const field of [
     "rankingKey", "areaType", "rankingName", "title", "unit", "dataSourceId", "hook",

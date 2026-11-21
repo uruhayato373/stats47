@@ -65,13 +65,6 @@
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
     },
-    ".claude/scripts/blog/find-chart-metric.mjs": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
-    },
     ".claude/scripts/blog/find-kakei-stale-title-values.mjs": {
       "stats": 0,
       "ranking": 1,
@@ -636,13 +629,6 @@
       "stats": 0,
       "ranking": 1,
       "origin": 0,
-      "s3Client": 0,
-      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
-    },
-    "apps/web/scripts/extract-page-components-from-r2.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
       "s3Client": 0,
       "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
     },

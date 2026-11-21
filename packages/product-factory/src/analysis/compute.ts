@@ -2,7 +2,7 @@ import type { AnalysisObservation } from './fetch-estat';
 import type { ProductThemeReference } from './theme-references';
 import { buildMunicipalityEntityPolicy, listPublishableMunicipalities, PREFECTURE_CODE_2DIGIT_RE } from '@stats47/area';
 
-export interface ResearchReference {
+interface ResearchReference {
   id: string; title: string; url: string; section: string; finding: string; checkedAt: string;
 }
 export interface AnalysisRecipe {

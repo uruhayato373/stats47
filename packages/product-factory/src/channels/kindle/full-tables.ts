@@ -16,7 +16,7 @@ import { PREFECTURE_BY_CODE5 } from "../../data/prefectures";
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const HOUSEHOLD_SURVEY_KEY = /-consumption-(?:quantity|expenditure)$/;
 /** 表を分ける行数。スマホの Kindle アプリ相当 (390×700) で 1 ページに約 14 行なので、見出し行込みで 1 ページに収まる 12 にする (表の途中で改ページしない) */
-export const TABLE_CHUNK_ROWS = 12;
+const TABLE_CHUNK_ROWS = 12;
 /** 見出しから落とさない副題・括弧書き (分母・対象)。落とすと「島根県 40.5 所」が県全体の実数に読める (2026-11-03 v6 レビュー K-S1-04 B01 ほか) */
 const KEEP_QUALIFIER = /当たり|あたり|男性|女性|有業者/;
 /**

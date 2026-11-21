@@ -8,9 +8,9 @@
 import type { EpubChapter, FullTableIndicator } from "./epub-inspect";
 
 /** 図の無い章を「長い」とみなす文字数。序章・あとがきの短いページは対象にしない。 */
-export const LONG_CHAPTER_CHARS = 1000;
+const LONG_CHAPTER_CHARS = 1000;
 
-export type QualityFlagCode =
+type QualityFlagCode =
   /** 1,000 字以上あって図が 1 枚も無い章 (図を足す候補) */
   | "long-chapter-without-figure"
   /** 図のすぐ後ろが段落でない図がある章 (図の読み方を本文で補えていない) */
