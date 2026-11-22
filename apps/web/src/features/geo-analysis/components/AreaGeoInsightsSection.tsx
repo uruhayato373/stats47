@@ -8,6 +8,8 @@ import { PanelGrid } from '@/components/layout/PageShell';
 import { SectionHeader } from '@/components/section';
 import { STAT_VALUE_CLASS, SurfaceCard } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { formatGeoValue, isGeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
 import { loadGeoAnalysisManifest } from '../lib/load-geo-analysis-evidence';
 import { loadGeoAnalysisSnapshot } from '../lib/load-geo-analysis-snapshot';
@@ -61,12 +63,14 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
               <Link
                 className="block font-medium text-primary underline"
                 href={`${item.free.canonicalPath}/${prefCode2}/overlap`}
+                {...navSurfaceProps("geo_analysis_list")}
               >
                 地図と結論を見る
               </Link>
               <Link
                 className="block text-primary underline"
                 href={`/geo/data/${item.analysisSlug}/${prefCode2}`}
+                {...navSurfaceProps("geo_evidence")}
               >
                 この県の地点・検算データを見る
               </Link>
