@@ -2484,14 +2484,6 @@ updated: 2026-11-01
 - **次**: オーナーが YouTube Studio の動画一覧 (非公開・削除済みを含む) と照合し、42 行に `post_url` を入れるか、存在しない投稿なら `deleted_at` を記録する。2 本の content_key をタイトルから決める。書き込みは store 経由 (`sns-posts-store.cjs`)。
 - **完了条件**: `npm run sns:trace:check` の「外部 ID をたどれない posted 行」から YouTube が消える。
 
-### [YEAR-COV-AREA-AXIS-01] 年カバレッジ監査が、都道府県が分類軸にある表などの取得条件を再現できず、8 指標で値のある年を 0 と数える
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts] [起票:2026-10-08] [領域:データ]
-
-- **事実 (2026-10-08)**: `audit-estat-year-coverage.ts` は 8 指標 (dairy-cattle-count・inpatient-rate-per-100k・fishery-household-sex-age・fishery-management-orgs・fishery-workers-coastal-offshore・fishing-port-count-by-type・fishing-vessel-crew・fishing-vessel-tonnage-class) で値のある年を 0 と数えるが、R2 の values.json には値がある。
-- **済 (2026-10-08)**: 値のある年が 0 件のときは新しい判定 `no-sample-values` (判断できない) にした。テストで固定し、修正を外すと落ちることを確かめた。8 指標の記録は `no-sample-values` に変わった。
-- **次**: 監査の取得を取り込み (`page-data-batch.ts`) と同じ条件 (`areaAxis`・軸の pin・合算) にそろえる。共通の取得関数があればそれを使い、無ければ取り込み側から切り出す。漁業の 6 指標は取得結果を見て原因を確かめる。
-- **完了条件**: 8 指標で、監査が R2 と同じ年に値を数え、`no-sample-values` が 0 件になる。
-
 ### [DATA-WAGE-TEACHER-COVERAGE-01] 賃金構造基本統計の教員年収ランキングが教員全体の約 5% しか映していないことをページに示すか、公開をやめるかを決める
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト] [待ち:承認]
 
@@ -3387,20 +3379,17 @@ updated: 2026-11-01
 - **完了条件**: 上の日次・週次の定期実行がすべて新しい置き場へ書いた (期日 2026-10-13)。
 
 ### [ESTAT-YEAR-AVAILABILITY-01] e-Stat の実在年を data/ の台帳で管理し、設定の years を「除外だけ」にする
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [待ち:承認] [起票:2026-10-07] [領域:データ]
 
-- **背景**: `years` 1 つに「e-Stat にある年 (事実)」と「見せないと決めた年 (判断)」が混ざり、D1 時代の取り込みと 2026-05-28 の D1 → R2 移行 (`ba298ec5a`) で年の穴が固定されていた。 (参照: f6c06c75c)
-- **2026-10-30 まで**: 未判断の除外 421 件を外して年を戻し (`dd824aed5`、オーナー指示「利用できるデータは全て利用する」)、data-refresh run 40953107078 で 420 件を R2 へ取り込んだ。`LATEST.md` (2026-10-30) は取り込み忘れ 0・新しい年 0・範囲より前 0・未判断の除外 0。
-- **残り**:
-  ① `private-life-insurance-contracts-per-1000` は通信の失敗で未取り込み。取り込み直しの依頼は `b7a0c6181` で `data/data-refresh-requests.json` に積んだので、反映を確かめる。
-  ② 取り込み中に `employment-insurance-daily-receipt-rate` (単位 %) の最大値が 1,545.5 → 5,025 に増えた (allowlist は legitimate で通過。中身は未確認)。
-  2026-11-14 再観測: `node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table 0000010206 --mark-verified` は形状検査で出力を作らず、同指標の読み取りが `ENOENT`。公開1,081行 (1990〜2023年) と切片からの再生成1,692行 (1975〜2023年) は共有行すべて一致し、差は追加611行だけ。石川県1979年の5,025%がallowlistの観測最大1,545.5%を超える。年範囲と日雇受給率の定義を確認するまで形状検査を迂回せず、表台帳は `pushed` に留める。
-  ③ `LATEST.md` の「e-Stat に無い年がある」13 件と「台帳なし・取得失敗・打ち切り・重複行」1 件 (`convenience-store-sales` の `timeScope` 未指定) を解く。年の問題より取り出し条件の問題が多い (職業別年収は設定 2010 年〜だが条件 0003445758 は 2020 年〜など)。
-  ④ 単年の旧監査 (`audit-estat-year-coverage.ts` と `YEAR-COV-*` の自動起票・`assert-year-coverage-batch.ts`) は一部の県だけの年の判断にしか使わなくなったので、backlog-loop とのつながりを外して廃止するかを決める。
-  ⑤ 市区町村の値 (`cities.json`) も台帳の差分の対象に載せるかを決める (今は報告だけ。ページへの配線の残りは `YEARS-DOWNSTREAM-FOLLOW-01`)。
+- **済み (2026-11-23)**: 台帳 `data/estat/availability/LATEST.md` の 4 分類 (取り込み忘れ・新しい年・e-Stat に無い年・範囲より前) と未判断の除外が 0 件になった。客室稼働率は本番の R2 で 2009〜2024 年の 16 年分を配信している。
+  - 「e-Stat に無い年」13 件 (漁業の魚種別 12 件の 2019〜2022 年・ネット利用率の 2002〜2005 年) は、1 県も値の無い年を `sync-estat-years.ts --remove-missing` で設定から外した。
+  - 民間生命保険の契約件数は R2 に 1975〜2024 年の 50 年分が入っていた。
+  - 旧監査 (北海道 1 県のサンプル・`audit-estat-year-coverage.ts`・`YEAR-COV-*` の自動起票) は廃止した。台帳では旧監査の要拡張候補 29 件はどれも足す年が 0 件で、旧監査の不具合のカード `YEAR-COV-AREA-AXIS-01` も対象が無くなった。データ品質のキューとサイクルの健全性の検出器は台帳 `diff.json` を読む形に付け替えた。
+  - 市区町村の値は、台帳の差分を報告だけに留めると決めた。`years` は県の値で決める設計 (合併でコードが変わる) で、県の系列より古い市区町村だけの年 (8 指標。高齢化率の 1980〜2000 年など) を足すには市区町村専用の年の仕組みが要る。需要を確かめてから起票する。
+- **残り (承認)**: 日雇の受給率 `employment-insurance-daily-receipt-rate` の 1975〜1989 年 (611 行) を R2 へ取り込み直す。設定の years は 1975 年からで、R2 は 1990 年からのまま。5,025% (石川県 1979 年) は 11-15 に算式 (201÷4×100) を確かめて形状の例外に記録済み。`node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table 0000010206` は 73/74 が一致し、差はこの 611 行だけ。承認後に `data/data-refresh-requests.json` で依頼し、取り込み後に同じコマンドへ `--mark-verified` を付けて表台帳を `verified` にする。
+- **残り (11-28 の週次で確認)**: 新しい指標 `actual-income-worker-households-per-month` (表 0000010112) の台帳が無い (no-ledger)。週次の取り直しで台帳ができ、`LATEST.md` の「台帳なし・取得失敗」が 0 件になることを確かめる。
 - **禁止**: 確かめていない年を設定に書かない。外す年を `years` から手で消さない (`yearExclusions` に理由付きで書く)。R2 の再取り込みを承認なしに行わない。
-- **完了条件**: #1094 の内容 (ブランチ `claude/estat-years-sync`) は 2026-10-10 のリリース統合 `6b9c294e0` で取り込み済み。そのうえで、本番の R2 で客室稼働率が 2009〜2024 年の 16 年分を配信し、`LATEST.md` の 4 分類が 0 件のまま週次で保たれ、未判断の除外が 0 件になる (`years` は手で書く許可リストではなく台帳から機械で合わせる列にした)。
-- **関連**: `THEME-SINGLE-YEAR-CARDS-01` (単年カード 287 枚の多くはこの穴が原因)、`YEAR-COV-*` の自動起票 (台帳の差分に置き換える)。
+- **完了条件**: 上の 611 行が R2 に入って表台帳が `verified` になり、`LATEST.md` の 4 分類と台帳なしが 0 件のまま週次で保たれる。
 
 ### [YEARS-DOWNSTREAM-FOLLOW-01] 指標の年が増えたあと、AI 解説・ブログ・計算型 metric・年固定の比較カードが古い年のまま残るのを直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:サイト]
@@ -3408,16 +3397,6 @@ updated: 2026-11-01
 - **済み (2026-11-14・`c110c707a`・`d0f6a692b`・`23309bd7a`)**: 古い年のままの記事 8 本 (米の消費量・製造品出荷額・ペットフード・エアコン・ティッシュ・消費支出・パンと米・かき) を最新年へ取り直し、critic PASS で送り箱に置いた。
 - **残り**: (a) `chicken-consumption-quantity` は「宮崎は最多になった年が無い」に期間を足して再審査する (実際は 2011 年に 1 位)。(b) `food-trio-prefecture-map` は 2025 年に前提が崩れた (豆腐の 1 位は富山、宮城の焼酎は 40 位) ので結論から書き直す。(c) `automotive-industry-transformation-map` (表示 14,289) の推移図を 2024 年まで手で延ばす。(d) refresh の対象外の図 (derived・estat・authored) を持つ記事約 7 本 (manufacturing-aichi-dominance・manufacturing-productivity・pharma-medical-device-production-map・welfare-expenses-squeeze・prefectural-debt-future-burden・library-museum-cultural-capital・local-tax-regional-gap) は図を手で取り直す。(e) 一覧の残り約 150 本を 15〜20 本ずつ処理する (1 本あたり critic 2 回)。(f) 例外 5 種 (healthy-life-expectancy-male-female-gap・physical-therapist-annual-income-prefecture-gap・dairy-cattle-count・it-industry-concentration・手順解説)。(g) `per-capita-income-gap` は 2020 年のデータで、quality-gate が止める「## データ出典」節を持ったまま公開されている。最低賃金の 2 本は 2024 年度のまま (BLOG-DUPLICATE-AUDIT-01 の差別化と同時に直す)。③ の年が 1 年だけのカードは `THEME-SINGLE-YEAR-CARDS-01` で扱う。
 - **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が作り直しの対象になり、古い年の記事が一覧とキューに出て、計算型のランキングとテーマの比較カードが新しい年を描く。加えて、一覧の件数が週次で減っていく。
-
-### [THEME-SINGLE-YEAR-CARDS-01] 1 年分しかない指標のカード 287 枚を、年の拡張か年固定の比較カードへ振り分ける
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run packages/data-configs/src/theme-catalog/__tests__/selection-viewpoints.test.ts] [起票:2026-10-07] [領域:データ]
-
-- **背景**: 管理画面 `/quality/theme-viewpoints` の視点 `single-year-as-trend` で、テーマのカードが 1 年分の指標だけを持ち推移を描けない。
-- **① 振り分けの結果 (2026-10-08、44 テーマ 281 枚・270 指標)**: e-Stat に複数年ある 63 指標・69 枚は、years を広げる uruhayato373/stats47#1094 (draft、11-06 のテーマ実験の観測の後のマージを推奨) で複数年になる。本当に 1 年だけの 62 指標・65 枚は、多くが調査回ごとに表が分かれる統計 (国勢調査・経済センサス等) の 1 回分で、前の回が別の表にあるかは未確認。未確認の 145 指標・147 枚はすべて `source.kind: external` (manual 142 等)。
-- **次**: ② #1094 の内容は `6b9c294e0` (2026-10-10) で取り込み済みなので、今の years で件数を数え直す。③ 65 枚は前の回の表を確かめ、無ければ年固定の比較カードへの提案 (`theme-proposal-format.md`) にする。147 枚は external の出典を指標ごとに確かめる (テーマのカードに出る指標から順に `YEAR-COV-*` と同じ 10 件ずつ。`sync-year-coverage-backlog.mjs` の並べ方を変えるか個別に扱うかを決める)。
-- **禁止**: 確認していない年を `years` に書かない。R2 の観測値の再取得とデプロイは別の承認で行う。
-- **完了条件**: `/quality/theme-viewpoints` の `single-year-as-trend` の件数が、振り分け ① の「本当に 1 年だけ」の件数以下になっている。
-- **関連**: 年の穴の根本対応は `ESTAT-YEAR-AVAILABILITY-01`。
 
 ### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription に観測値を直書きするのをやめ、値から生成する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:サイト]
@@ -3475,6 +3454,8 @@ updated: 2026-11-01
 - **観測 (2026-10-09・ブログ執筆のワークフロー)**: 農業産出額 (2024 年) と農業就業人口 (2014 年) の組で r=0.762 をランキングページの「相関が高い指標」に出している (同じ年の 2014 年でそろえると 0.758)。
 - **次**: ペアを作るときに年をそろえるか、年が違うことを画面と snapshot に書く。統制変数の年をペアの年に合わせる。
 - **完了条件**: 相関 snapshot の各ペアと統制変数の年が一致するか、食い違いが表示されている。
+- **調べたこと (2026-11-23)**: `packages/correlation/src/scripts/build-correlation-snapshot.ts` の `loadMetric` は指標ごとに最新年だけを読み、ペアはそれぞれの最新年の値どうしで組む。統制変数 (総人口・面積・高齢化率・人口密度) も各自の最新年。snapshot の型 (`CorrelatedItem`・`TopCorrelation`) は年を持たないので、画面で食い違いを出すこともできない。
+- **方針の選択 (オーナー判断待ち)**: (a) ペアごとに両方に値のある最新の共通年で計算し、統制変数も同じ年にそろえる (全指標の全年を保持する。相関の一覧の中身が全面的に変わる)。(b) 今の計算のまま、ペアと統制変数の年を snapshot に記録し、年が違うペアを画面に表示する。
 
 ### [BLOG-DATA-EXEC-CODE-RULE-01] ブログの data/ に再現用の実行コードを置いてよいかを決めて規約に書く
 

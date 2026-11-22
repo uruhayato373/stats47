@@ -10,7 +10,7 @@
  * 各監査の手順は weekly-audits/<id>.sh (旧 workflow の監査部分だけを移したもの)。Issue の作成と push はしない。
  * 毎週は週次レビューの最初に回す週次の取得 (npm run weekly:collect = scripts/scheduled/weekly-saturday.sh) が専用 clone で走らせ、監査が書いた記録をコミットする。
  * 手で走らせたときは、監査が書いた data/ の記録を週次レビューのセッションがレビュー本文と一緒にコミットする。
- * 1 本ずつ順に走らせるのは、backlog.md を書く監査が 2 本 (estat-year-coverage・blog-remediation) あり、
+ * 1 本ずつ順に走らせるのは、backlog.md を書く監査 (blog-remediation) と metric config を書く監査 (estat-year-coverage) があり、
  * 文書を検査する consistency は他の監査が書き終えた後に走らせる必要があるため。
  * 出力: .local/weekly-audits/<YYYY-MM-DD>/{<id>.log,summary.md,summary.json}。1 本でも落ちたら exit 1。
  */

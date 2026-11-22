@@ -24,8 +24,10 @@ export const internetUsageRate10plus: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2001,
-    "to": 2006,
+    "years": [
+      2001,
+      2006,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

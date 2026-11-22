@@ -165,17 +165,12 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 - **既存 metric を触るとき**も、単年設定 (`years.from === years.to`) を見つけたら「本当に
   1 年しかないか」を疑い、ついでに確認する (触ったついでの是正。全件一括の棚卸しは別途)。
 - 単年判定を回避するために存在しない年を書かない。確認できた年だけを列挙する。
-- **既存 755 件の棚卸しは 週次レビューの `npm run weekly:audits` (estat-year-coverage) が少しずつ巡回する**
-  (`packages/ranking/src/scripts/audit-estat-year-coverage.ts`、都道府県1件をサンプルに
-  `getStatsData` で実測し config と比較。755 件を一括では照会しない)。候補は
-  `data/estat/year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
-  config の `years` を拡張し、`data/data-refresh-requests.json` push で再取り込みする。
-- **e-Stat の実在年を確かめた結果の正本は `data/estat/year-coverage/queue.json` の `results`** (指標ごと。
-  2026-10-08 オーナー判断)。テーマの提案文書・カード・memory へ年の一覧を写さず、この記録を引く。
-  新規登録や `years` の拡張で確かめたときは、手で数えず
-  `npx tsx packages/ranking/src/scripts/audit-estat-year-coverage.ts --metrics <key1,key2>` で記録する
-  (`cdArea` なしで全都道府県を取り、年ごとの都道府県数 `prefectureCountsByYear` と `scope: "all-prefectures"` を残す)。
-  記録は年を広げても消えず、週次の巡回が今の config と照らして判定 (`extend-candidate` / `config-covers` 等) を付け直す。
+- **既存の棚卸しと実在年の確認結果の正本は、e-Stat の実在年の台帳 `data/estat/availability/`** (表・取り出し条件ごとに、
+  取り込みと同じ条件で年ごとの値のある県の数を数えたもの。下の「`years` は台帳から合わせる」)。テーマの提案文書・カード・memory へ
+  年の一覧を写さず、台帳 (`tables/<statsDataId>.json`) と差分 (`diff.json`・`LATEST.md`) を引く。
+  北海道 1 県をサンプルにした旧監査 (`audit-estat-year-coverage.ts`・`data/estat/year-coverage/`・`YEAR-COV-*` の自動起票) は
+  2026-11-23 に廃止した。旧監査の要拡張候補 29 件は台帳ではどれも足す年が 0 件で、北海道だけに値のある年や取り込みと違う
+  取得条件の年も数えていた (ESTAT-YEAR-AVAILABILITY-01)。
 
 ## `years` は台帳から合わせる (2026-10〜)
 

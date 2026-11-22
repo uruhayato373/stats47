@@ -5,7 +5,7 @@ import { rankingR2Key } from "@stats47/r2-storage/keys";
  *
  *   - 週次の ranking-integrity (weekly:audits) → `data/ranking/integrity-audit.json` の `deliveredYears`
  *     (配信 values.json の実在年。`years: "all"` の metric もここで最新年が分かる)
- *   - 週次の estat-year-coverage (weekly:audits) → `data/estat/year-coverage/queue.json`
+ *   - 週次の e-Stat 実在年の台帳 (weekly:audits の estat-year-coverage) → `data/estat/availability/diff.json`
  *
  * 年表記は SSDS 原典 (cdcat01-sources.generated.json) と config の yearFormat で判定する。
  * 需要は search-growth の GSC 表示 (候補集合に含まれる URL だけ。無ければ null = 未観測)。
@@ -31,7 +31,7 @@ import { datasetDir } from "../../../../config/datasets.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const INTEGRITY = path.join(ROOT, `${datasetDir("ranking.audits")}/integrity-audit.json`);
-const YEAR_COVERAGE = path.join(ROOT, `${datasetDir("estat.year-coverage")}/queue.json`);
+const YEAR_AVAILABILITY = path.join(ROOT, `${datasetDir("estat.availability")}/diff.json`);
 const CDCAT01 = path.join(ROOT, "packages/data-configs/src/ssds/cdcat01-sources.generated.json");
 const SEARCH_GROWTH = path.join(ROOT, `${datasetDir("search-growth.state")}/candidates.json`);
 const OUT_DIR = path.join(ROOT, datasetDir("data-quality.checks"));
@@ -64,7 +64,12 @@ async function fetchItemYears(key: string): Promise<string[] | null> {
 async function main() {
   const integrity = readJson<{ generatedAt?: string; deliveredYears?: Record<string, string[]> }>(INTEGRITY);
   const deliveredYears: Record<string, string[]> = { ...(integrity?.deliveredYears ?? {}) };
-  const coverage = readJson<{ results?: Record<string, { verdict?: string }> }>(YEAR_COVERAGE);
+  // 全県の値がある年が config に無い (中・後・前) metric。sync-estat-years.ts が週次で足すので、残るのは同期の前の分だけ
+  const coverage = readJson<{ metrics?: Record<string, { missingInside?: number[]; newer?: number[]; older?: number[] }> }>(YEAR_AVAILABILITY);
+  const hasMissingYears = (key: string) => {
+    const e = coverage?.metrics?.[key];
+    return Boolean(e && [e.missingInside, e.newer, e.older].some((ys) => (ys?.length ?? 0) > 0));
+  };
   const cdcat = readJson<Record<string, CdcatEntry>>(CDCAT01) ?? {};
   const growth = readJson<{
     generatedAt?: string;
@@ -113,7 +118,7 @@ async function main() {
       surveyId: config.surveyId ?? null,
       years,
       currentYear,
-      estatExtendCandidate: coverage?.results?.[key]?.verdict === "extend-candidate",
+      estatExtendCandidate: hasMissingYears(key),
       demand: demand[key] ?? null,
     });
   });
@@ -141,7 +146,7 @@ async function main() {
       integrityAudit: integrity?.generatedAt ?? null,
       integrityHasDeliveredYears: Boolean(integrity?.deliveredYears),
       fetchedFromR2: fetched,
-      estatYearCoverage: Boolean(coverage),
+      estatAvailability: Boolean(coverage),
       demandSource: growth ? `search-growth/candidates.json (${growth.generatedAt}) GSC impressions` : null,
     },
     basis:
@@ -167,7 +172,7 @@ async function main() {
     "",
     `- 生成: ${generatedAt} (基準日 ${queue.today})`,
     `- 対象: active metric ${summary.activeMetrics} 件 (配信年あり ${summary.withDeliveredYears} 件)`,
-    `- 入力: ranking-integrity ${queue.inputs.integrityAudit ?? "なし"} / estat-year-coverage ${coverage ? "あり" : "なし"} / 需要 ${queue.inputs.demandSource ?? "なし"}`,
+    `- 入力: ranking-integrity ${queue.inputs.integrityAudit ?? "なし"} / e-Stat 実在年の台帳 ${coverage ? "あり" : "なし"} / 需要 ${queue.inputs.demandSource ?? "なし"}`,
     `- 判定: ${queue.basis}`,
     "",
     "## サマリ",

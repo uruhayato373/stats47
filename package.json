@@ -199,7 +199,7 @@
     "metrics:check-period-contract": "node .claude/scripts/metrics/check-period-contract.mjs",
     "metrics:adsense-diagnostics": "node .claude/scripts/metrics/adsense-diagnostics-run.mjs",
     "blog:test": "node --import tsx --experimental-test-module-mocks --test packages/ops/src/blog/__tests__/metric-definition-sheet-scope.test.ts packages/ops/src/blog/lib/__tests__/preview-draft.test.mjs packages/ops/src/blog/lib/__tests__/outbox-r2.test.mjs",
-    "metrics:test": "node --import tsx --test .claude/scripts/metrics/__tests__/*.test.mjs packages/ops/src/metrics/__tests__/*.test.mjs packages/ops/src/metrics/__tests__/*.test.ts .claude/scripts/lib/__tests__/adsense-ad-unit-walk.test.mjs packages/ops/src/data/__tests__/year-coverage-backlog.test.mjs .claude/scripts/lib/__tests__/cycle-health-wiring.test.mjs",
+    "metrics:test": "node --import tsx --test .claude/scripts/metrics/__tests__/*.test.mjs packages/ops/src/metrics/__tests__/*.test.mjs packages/ops/src/metrics/__tests__/*.test.ts .claude/scripts/lib/__tests__/adsense-ad-unit-walk.test.mjs .claude/scripts/lib/__tests__/cycle-health-wiring.test.mjs",
     "test:dependency-security": "node --test .claude/scripts/lib/__tests__/dependency-security-contract.test.cjs .claude/scripts/lib/__tests__/check-dependency-audit.test.mjs .claude/scripts/lib/__tests__/root-script-tools.test.cjs",
     "psi:test": "node --test packages/ops/src/psi/__tests__/*.test.mjs",
     "cloudflare:test": "node --test packages/ops/src/cloudflare/__tests__/threshold-check.test.mjs packages/ops/src/cloudflare/__tests__/monthly-snapshot.test.mjs packages/ops/src/cloudflare/__tests__/route-cpu.test.mjs",

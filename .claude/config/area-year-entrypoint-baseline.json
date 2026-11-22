@@ -4667,21 +4667,6 @@
       "topoPrefCode": 0,
       "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
-    "packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
-    },
     "packages/ranking/src/scripts/lib/__tests__/calculated-stats-core.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,

@@ -59,8 +59,8 @@ test("計画が参照する完了済み ID は、台帳にまだ残っていれ�
 
 test("残件があるのにカードが開いていない検出器を、起票が止まっているとして出す", () => {
   const [year, gsc] = summarizeDetectors({
-    yearResults: { a: { key: "a", verdict: "extend-candidate" }, b: { key: "b", verdict: "extend-candidate" }, c: { key: "c", verdict: "confirmed-single-year" } },
-    yearByDesign: { b: { note: "定義替え" } },
+    // 取得失敗・台帳なしは次の週次で取り直すので数えず、人が判断する分類だけを残件にする
+    yearSummary: { notInEstat: 1, truncated: 0, duplicateRows: 0, inheritedExclusions: 0, fetchError: 3, noLedger: 2, clean: 10 },
     gscQueue: [{ action: "fix-5xx", status: "pending" }, { action: "observe-after-fix", status: "pending" }],
     openIds: ["GSC-COV-5XX-20260920"],
   });
