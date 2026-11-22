@@ -367,6 +367,11 @@ describe('ThemeMetricsDashboard — 連続する 1 指標カードのグリッ�
     const grid = document.querySelector('[data-theme-panel-grid="compact"]');
     expect(grid).not.toBeNull();
     expect(grid!.contains(screen.getByTestId('single-card'))).toBe(true);
+    // 1 枚だけのときは 4 列の 1 マスと白いセル 3 つにせず、横幅いっぱいの 1 列にする (2026-11-22)
+    const lineGrid = grid!.querySelector('[data-slot="panel-grid"]') as HTMLElement;
+    expect(lineGrid).toHaveClass('grid-cols-1');
+    expect(lineGrid).not.toHaveClass('@md:grid-cols-4');
+    expect(grid!.querySelectorAll('[data-cell="flush"][aria-hidden="true"]')).toHaveLength(0);
   });
 });
 

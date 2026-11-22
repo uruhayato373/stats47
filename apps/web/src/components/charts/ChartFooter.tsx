@@ -21,7 +21,8 @@ export interface ChartFooterProps {
   sourceLinks?: ChartFooterLink[];
   sourceDetail?: string;
   attribution?: SourceAttributionData | null;
-  annotation?: string;
+  /** 読むときの注意。複数あるときは配列で渡す (header は Sheet の先頭に並べ、footer は図の下に段落で並べる) */
+  annotation?: string | readonly string[];
   rankingLink?: string | null;
   rankingLabel?: string;
   rankingLinks?: ChartFooterLink[];
@@ -97,8 +98,11 @@ export function ChartFooter({
     ...(rankingLinks ?? []),
   ]);
   const hasSource = Boolean(sourceLabel || sourceTargets.length > 0);
+  const notes = (typeof annotation === 'string' ? [annotation] : [...(annotation ?? [])])
+    .map((note) => note.trim())
+    .filter(Boolean);
 
-  if (!hasSource && !annotation && indicatorTargets.length === 0) return null;
+  if (!hasSource && notes.length === 0 && indicatorTargets.length === 0) return null;
 
   // url の無い出典 (独自集計など) は名前だけを Sheet に出す
   const sources =
@@ -109,18 +113,18 @@ export function ChartFooter({
       <SourcesSheet
         id={id ? `${id}-sources` : undefined}
         trigger="icon"
-        groups={[{ notes: annotation ? [annotation] : [], sources, sourceDetail, rankings: indicatorTargets }]}
+        groups={[{ notes, sources, sourceDetail, rankings: indicatorTargets }]}
       />
     );
   }
 
   return (
     <div className="google-anno-skip space-y-1.5">
-      {annotation && (
-        <p className="text-left text-xs leading-relaxed text-muted-foreground">
-          {annotation}
+      {notes.map((note) => (
+        <p key={note} className="text-left text-xs leading-relaxed text-muted-foreground">
+          {note}
         </p>
-      )}
+      ))}
       {(hasSource || indicatorTargets.length > 0) && (
         <div className="flex justify-end">
           <SourcesSheet

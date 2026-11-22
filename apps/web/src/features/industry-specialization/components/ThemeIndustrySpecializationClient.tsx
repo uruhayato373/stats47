@@ -32,21 +32,21 @@ export function ThemeIndustrySpecializationClient({
         title="18業種の雇用構成を全国と比べる"
         description={`2021年6月1日 · ${area.areaName} · 民営事業所の従業者`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source={INDUSTRY_SPECIALIZATION_SOURCE.title}
             sourceLink={INDUSTRY_SPECIALIZATION_SOURCE.url}
+            annotation={[
+              `全産業の従業者は${format(area.totalEmployees)}人。このうち、大分類内訳に分かれない${format(area.unclassifiedEmployees)}人も構成割合の分母に含めています。`,
+              '特化係数1は全国と同じ構成割合です。1を超える業種は全国より割合が高く、生産性や成長性の評価を表すものではありません。',
+              '公務、農林漁業の個人経営、外国会社・法人でない団体等は対象に含みません。事業所の所在地で集計しています。',
+            ]}
           />
         }
       >
-        <p className="text-sm text-muted-foreground">
-          全産業の従業者は{format(area.totalEmployees)}
-          人。このうち、大分類内訳に分かれない
-          {format(area.unclassifiedEmployees)}人も構成割合の分母に含めています。
-        </p>
         <ValueTable fold
           ariaLabel={`${area.areaName}の18業種の雇用構成と特化係数`}
-          caption="特化係数1は全国と同じ構成割合です。1を超える業種は全国より割合が高く、生産性や成長性の評価を表すものではありません。"
           columns={[
             { key: 'industry', header: '産業', rowHeader: true, className: 'min-w-32' },
             {
@@ -108,9 +108,6 @@ export function ThemeIndustrySpecializationClient({
             ],
           }))}
         />
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          公務、農林漁業の個人経営、外国会社・法人でない団体等は対象に含みません。事業所の所在地で集計しています。
-        </p>
       </ChartPanel>
     </div>
   );

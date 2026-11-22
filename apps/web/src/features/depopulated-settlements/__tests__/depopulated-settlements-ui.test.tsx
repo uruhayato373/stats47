@@ -167,18 +167,19 @@ describe('県選択と公表地理を混同しない集落表示', () => {
       </Context>
     );
     expect(screen.getByText(/2024年4月1日時点/)).toBeTruthy();
-    expect(screen.getByText(source.universe)).toBeTruthy();
-    expect(
-      screen
-        .getByRole('link', { name: /原典の地方ブロック定義/ })
-        .getAttribute('href')
-    ).toBe(`${source.url}#page=19`);
+    expect(screen.queryByText(source.universe)).toBeNull();
     expect(screen.getByRole('table').parentElement?.className).toContain(
       'overflow-x-auto'
     );
-    // 出典はチャートの下の「出典・指標の定義」のボタンから開く Sheet の中 (2026-10-30)
-    fireEvent.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    // 調査対象・ブロック定義・出典は図の周りに置かず、見出しの右端から開く Sheet の中 (2026-11-22)
+    fireEvent.click(screen.getByRole('button', { name: '出典・指標の定義・読むときの注意' }));
     const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByText(source.universe)).toBeTruthy();
+    expect(
+      sheet
+        .getByRole('link', { name: /原典の地方ブロック定義/ })
+        .getAttribute('href')
+    ).toBe(`${source.url}#page=19`);
     expect(
       sheet
         .getByRole('link', { name: `出典: ${source.title}` })

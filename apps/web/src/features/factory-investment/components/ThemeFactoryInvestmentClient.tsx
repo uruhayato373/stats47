@@ -34,10 +34,15 @@ export function ThemeFactoryInvestmentClient({
         title="工場立地に伴う設備投資"
         description={`2024年 · ${area} · 百万円`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source={FACTORY_INVESTMENT_SOURCE.title}
             sourceLink={FACTORY_INVESTMENT_SOURCE.url}
+            annotation={[
+              '県内全企業の年間投資実績とは異なります。非公表の3県には順位を付けません。',
+              ...snapshot.notes,
+            ]}
           />
         }
       >
@@ -53,7 +58,6 @@ export function ThemeFactoryInvestmentClient({
         </p>
         <ValueTable fold
           ariaLabel={`${area}の設備投資計画額`}
-          caption="県内全企業の年間投資実績とは異なります。非公表の3県には順位を付けません。"
           columns={[
             { key: 'area', header: '都道府県', rowHeader: true },
             { key: 'value', header: '設備投資額（百万円）' },
@@ -73,11 +77,6 @@ export function ThemeFactoryInvestmentClient({
             ],
           }))}
         />
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {snapshot.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
       </ChartPanel>
     </div>
   );

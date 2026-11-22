@@ -4,6 +4,11 @@ import { ValueTable } from '@/components/surface';
 
 import { formatPopulationCount as format } from '../lib/population-profile-view';
 
+/** 構成割合の分母の注記 (表の下に置かず、チャートの見出しの出典の Sheet に入れる) */
+export function partitionDenominatorNote(total: number, unit: string): string {
+  return `構成割合の分母は、選択した地域・男女の総数${format(total)}${formatUnitForDisplay(unit)}です。不詳を含めた全区分を表示し、割合は小数第2位まで丸めています。`;
+}
+
 export function PopulationPartitionTable({
   areaName,
   category,
@@ -22,13 +27,6 @@ export function PopulationPartitionTable({
       ariaLabel={`${areaName}の${category}別内訳`}
       className="min-w-96"
       scrollRegion
-      caption={
-        <>
-          構成割合の分母は、選択した地域・男女の総数{format(total)}
-          {formatUnitForDisplay(unit)}
-          です。不詳を含めた全区分を表示し、割合は小数第2位まで丸めています。
-        </>
-      }
       columns={[
         { key: 'category', header: category, rowHeader: true, className: 'min-w-40' },
         {
