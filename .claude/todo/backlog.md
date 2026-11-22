@@ -116,6 +116,26 @@ updated: 2026-11-01
 - **次**: main へのリリースを確かめた後、sync-snapshots で `home/featured.json` だけを作り直す (R2 の正本の上書き。対象と範囲を示してオーナーの承認を取ってから実行する)。
 - **完了条件**: 本番の `/` で、注目のランキングのカードの `path[stroke="#f59e0b"]` が 0 本、各カードの `ol > li` が 3 行。
 
+### [BACKLOG-SIZE-TRIM-01] backlog.md が上限 1 MiB の 92% に達し、約 1 週間でコミットが止まる
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run docs:check] [起票:2026-11-22] [期日:2026-11-27] [領域:管理]
+
+- **事実 (2026-11-22)**: 969KB / 1,048,576。14 日前 815KB・7 日前 867KB で週に約 +50〜100KB。上限を超えると作業ツリー全体のコミットが止まる (DG085)。「済み」の行が 148 行・77KB、8KB を超えるカードが 3 枚 (OPENDATA-ARCHIVE-01・NOTE-CIRCULATION-LINK-FIX-01・QUALITY-GATE-COVERAGE-01)。
+- **次**: ①週次レビューで完了の証拠があるカードを消す ②「済み」の経緯を 1 行の要約に縮める ③8KB 超の 3 枚を縮める ④増え方が続くなら、起票の入口 (subagent の起票候補・critic の定型カード) を受け皿 1 枚へ寄せる。
+- **禁止**: 未完了の行動を消さない。
+- **完了条件**: 800KB 未満になり、`npm run docs:check` に DG085・DG086 が出ない。
+
+### [CI-SCHEDULE-FOLLOWUP-01] 定期実行の止まり・起動しない経路・消えた cron (2026-11-22 の全体の洗い出しで見つけた分)
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-22] [領域:サイト]
+
+- **① ブログの置き場の掃除の cron が消えている**: `.claude/scripts/blog/prune-published-outbox.mjs` は「日次 cron で回す」作りだが、2026-10-26 の `5a1364a782` (cron の workflow を 5 本から 2 本へまとめた回) から `.github` の呼び出しが 0。`contents/blog` の 256 記事のうち 236 記事が本番 R2 と完全一致の取り残し (約 20MB・2,600 ファイル。2026-11-22 に `packages/ops/src/blog/lib/outbox-r2.mjs` の `classifyAgainstLive` で読み取り確認)。週次か日次の workflow に掃除を戻し、一度流して 236 記事を消す (削除は git の履歴と R2 から戻せる)。
+- **② `sme-business-sentiment-regional-gap`**: 置き場で `published: true` なのに本番 R2 に無い。自動公開の検査で止まっているかを、直近の `blog-auto-publish.yml` の run で確かめる。
+- **③ `backlog-loop-daily.yml`**: GitHub の状態は disabled_manually で最後の run は 09-26。定義のコメントは「11-14 に週 1 回の再開を承認」。オーナーの判断どおり enable するか、コメントを直す。
+- **④ `search-growth-weekly.yml` の workflow_run**: 2 週とも 0 回で、予備の cron だけで動く (計測の約 2 時間後)。`gh api "repos/uruhayato373/stats47/actions/workflows/search-growth-weekly.yml/runs?event=workflow_run"` で確かめ、main の定義の起動条件を見る。
+- **⑤ `ai-content-gemini-daily.yml`**: 13 run 中 11 回が "Enforce non-zero generation" (生成 0 件) で失敗し、毎日赤い。原因 (キュー・無料枠の key) を調べて直すか、直るまで schedule を止める。
+- **⑥ GitHub に残る存在しない workflow の登録**: color-policies-weekly・migration-flow ×3。`gh workflow disable` か、run の履歴を消して一覧から外す。
+- **⑦ `post-deploy-smoke.yml`**: 13 日で 22 run 中 6 回失敗 (原因は未調査)。失敗 run のログで、本番の不調かテストの不安定かを分ける。
+- **完了条件**: ①の掃除が定期で動き、置き場に本番と同じ記事が残らない。③〜⑤の workflow の状態と定義が一致し、⑤が 1 週連続で緑。
+
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [UI-FIX-SURVEY-POLICE-20261121] UI 是正: survey--police の週次 UI 検査の指摘 1 件を直す
@@ -500,6 +520,7 @@ updated: 2026-11-01
 - **残り**: `browser-session.mjs` と `rakuten-report.mjs` は、refreshed.json と `.verified` の印を書くが、`collect.mjs` はどちらも読まない。この書き込みを消し、`markMeasurementAuthenticated` の呼び出し元 (note-sales・marketplace-status・fetch-note-metrics・update-note-covers) とそのテスト (`kdp-monthly.test.mjs` 123 行) を合わせて直す。
 - **残り**: 常に null の `relogin` と `recovery` の欄を消す。対象は `config/schema/revenue.authenticated.schema.json`、`data/authenticated/latest.json`、`summarize.mjs` 46〜50 行、`health.mjs` の `awaitingReauthentication`、`packages/ops/src/metrics/nsm-revenue-lines.mjs` 39 行とそのテストの fixture である。`sources.mjs` 38 行の api 系の失敗コードも、api の取得元が無いので一緒に消す。
 - **追補 (2026-11-14)**: `.claude/skills/sns/find-quote-rt/SKILL.md` (31・199〜209・253 行) と `publish-x/SKILL.md` (101〜105 行) が、撤去した駅の乗降・人の移動の動画を `--with-media` で添える手順を残していて、sns-content-standards.md §2-4 と食い違う。backlog に無い ADSENSE-RESTART-01 を参照する箇所が、このカードの 3 か所のほかに 8 か所ある。
+- **追補 (2026-11-22・全体の洗い出し)**: 整合性検査の W1 が `.claude/scripts/note/reference/render-reference-figures.ts` を orphan と出している (SKILL.md から参照するか消す)。`.codex/hooks.json` の欠けは `CODEX-MIRROR-SLIM-01`。
 - **完了条件**: `MEASUREMENT_BROWSER_OUTPUT_STATE_PATH` と `relogin`・`recovery` を git grep しても、生きたコードと schema に当たらない。`node --test .claude/scripts/measurement/__tests__/*.test.mjs packages/ops/src/metrics/__tests__/nsm-revenue-lines.test.mjs`、`npm run check-datasets` と、両方の `.claude/scripts` の tsc が通る。
 
 ### [DIR-PLACEMENT-CLEANUP-01] 置き場の規則から外れたスクリプト・データ・設定を正しい置き場へ移す
@@ -2378,6 +2399,92 @@ updated: 2026-11-01
 - **追補 (2026-11-21・週次レビュー W46)**: 土曜 07:30 のスケジュール済みレビューは、02:00 の fetch-metrics-weekly が遅れて 07:35〜08:42 に走った週は W46 の GSC・GA4・AdSense の行が develop に無いまま収集を始める (2026-11-21 は review-input の 3 項目が FAIL → 08:42 の commit f38d92035 の取り込み後に全 PASS)。手元で先に作った `data/nsm/weekly-snapshots/<週>.json`・`data/google-admin/audits/<週>.json` が CI の commit と衝突して pull が止まる。収集の前に「当週の `chore(metrics): weekly snapshot <週>` が develop にあるか」を確かめ、無ければ待つ手順を weekly-review の SKILL.md の「無人で実行するとき」に足す。`npm run reference:expansion -- status --json` などの `--json` 出力は npm のバナー行 (`> ...`) が先頭に混ざり、そのまま JSON.parse できない (`npm run -s` で回避できるかを確かめ、手順書の例を直す)。`.claude/todo/weekly.md` が土曜のレビュー前に次週分へ上書きされ、前週の Must の checkbox の実績が git 履歴にしか残らない (W46 のレビューは 719098a3db の版から読んだ)。週次計画の上書きの時点をレビューの後に揃えるかを決める。
 - **追補 (2026-11-21・週次レビュー W46)**: `audit-operations-cycle.mjs --stage plan --week 2026-W48` を週の途中に実行すると、まだ終わっていない週の snapshot・verdict・review を FAIL と出す。weekly-plan の SKILL.md の手順は `--week` を省いている。計画の段で渡す対象週 (レビューした週か計画する週か) を SKILL.md に書く。
 
+### [HOOK-STOP-AUDIT-SCOPE-01] Stop hook の整合性監査が、他セッションの変更まで数えて同じ会話を何度も差し戻す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理]
+
+- **事実**: 会話記録 44 本で Stop の差し戻し 222 回のうち約 130 回 (58%) が `check-consistency-on-stop.js`。作業ツリー全体の変更を数えるので、並行セッションの変更で「18→26→34 件」と再発火する (hook のコメントに記載)。
+- **次**: 数える範囲を、この会話の transcript で Edit/Write したファイルに絞る (`check-findings-on-stop.js` と同じ読み方)。
+- **完了条件**: 他セッションだけが変えた状態で Stop しても差し戻さないことをテストで固定した。
+
+### [HOOK-BASH-ADVISORY-NOISE-01] pre-bash-safety の注意書きが、実行でないコマンドにも出て毎回再注入される
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理]
+
+- **事実**: 注入 632 回・15.7 万字。177 回 (28%) はパスや文字列への一致 (sns は 133 回中 127、r2 は 53 回中 37)。branch-workflow は push のたびに 446 回。
+- **次**: advisory の一致を `DANGEROUS_PATTERNS` と同じくコマンド先頭に限り、同じ advisory は 1 会話 1 回にする。
+- **完了条件**: 文字列にだけ `git push`・R2・SNS の語を含むコマンドで注入されないことと、実際の push では出ることをテストで固定した。
+
+### [CI-NPM-CACHE-01] workflow 49 本のうち 46 本が npm ci をキャッシュ無しで実行している
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
+
+- **事実 (11-08〜11-21 の 1,000 run)**: npm ci は 42〜83 秒、キャッシュの復元は 9〜14 秒 (develop gate・PR で実測)。deploy は 83 秒、fetch-metrics は 3 job とも約 80 秒。
+- **次**: 人が待つ deploy-workers・blog-auto-publish・data-refresh・sync-snapshots から復元を入れ、残りへ広げる。
+- **完了条件**: 4 本の run で npm ci の step が 20 秒未満になった実測を、このカードに書いた。
+
+### [CI-PR-WAIT-01] PR の検査は中央値 12.9 分で、安い検査で落ちても赤と分かるまで約 13 分かかる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
+
+- **事実**: `pr-quality-check.yml` の Unit Tests は web 250 秒 + packages 334 秒 + admin 83 秒を 1 job で直列 (12.1 分)。Build Check は metadata 184 秒 + build 333 秒 + 共有 72 秒。失敗 20/65 run。標本 1 件では Debt Guard が 4 秒で落ち、run が赤になったのは 13.3 分後。`develop-quality-gate.yml` は 264 run 中 61 回失敗 (標本は Web unit と Catalog Gates)。
+- **次**: ①Unit Tests を develop gate と同じ並列の job に分ける ②metadata の生成を build と並べる ③Static Gates が落ちたら残りを止める ④preflight に Web unit と Catalog Gates を足すかを決める (`CI-TOOLING-FOLLOWUP-03` の preflight の追補と合わせる)。
+- **完了条件**: PR の run の中央値と、Static Gates の失敗が赤になるまでの時間を、前後の実測で比べて書いた。
+
+### [CI-CRON-TIMING-01] 定期実行が R2 の鍵と時刻で人の作業・互いの計測とぶつかる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
+
+- **事実**: ①11-14 23:29 の手動 deploy が、`r2-isr-gc` (最大 25.6 分) と `cleanup-r2-sns-videos` の直後で開始まで 21.8 分待った ②schedule の起動は cron より 3.3〜7.5 時間遅い (fetch-metrics は 01:00 JST の予定が 06:53・07:35) ③`fetch-metrics-weekly` と `quality-suite-weekly` が同じ cron `0 16 * * 5` で、13 job と本番への巡回が重なる。
+- **次**: ①GC と cleanup を実際に動く時刻で人の作業時間から外す (鍵を prefix で分ける案は、書き込み先の照合が先) ②後段 (note-figure・ledgers・seo-keyword・smoke) を時刻ずらしでなく workflow_run でつなぐ ③品質系を計測の後へつなぐ。
+- **完了条件**: 2 週の run で、後段が計測の完了の後に起動し、手動 deploy の鍵待ちが 5 分未満だった記録がある。
+
+### [ALWAYS-LOADED-TRIM-01] 毎会話に読み込む指示 (概算 3.1 万 token) を減らす
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-11-22] [領域:管理]
+
+- **事実**: CLAUDE.md 187 行・常時 rules 2 本 366 行 (553/600 行・DG070)、MEMORY.md 200 行。CLAUDE.md の rules の表 54 行 (8.1KB) は各 rule の `paths:` と重なる。MEMORY.md は 200 行ちょうどで、追記すると末尾が読み込まれない可能性がある ([仮説] 読み込みは先頭 200 行。公式文書で確かめる)。
+- **次**: ①rules の表を docs-vs-issues.md へ移し、DG072 の検査を同じ差分で直す ②MEMORY.md の索引を領域ごとにまとめ直して 170 行以下にする。
+- **禁止**: 常時 rules の追加・削除はオーナー判断。
+- **完了条件**: CLAUDE.md + 常時 rules が 500 行以下、MEMORY.md が 170 行以下で `npm run docs:check` が通る。
+
+### [AGENT-DORMANT-CONSOLIDATE-01] 起動の記録が無い agent 40 本を、統合するか休眠にするかを決める
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理] [待ち:判断]
+
+- **事実**: agent 59 本のうち起動の記録があるのは 19 本 (model-usage W29〜W47 と会話記録 132 本)。残り 40 本の description 6,012 字が毎回の一覧に載る。40 本とも名前で 3〜40 ファイルから参照されている。
+- **選択肢**: (a) 系統ごとに統合する (theme 5 本・ranking 5 本・A8/ASP 5 本・UI レビュー 3 本)。(b) 定義を残し、一覧に載らない置き場へ移す (IG 停止中の instagram-strategist など)。(c) 変えない。推奨は UI レビュー 3 本と A8/ASP 5 本から (a)。
+- **完了条件**: 系統ごとの扱いを決め、決めた分の定義と参照 (`check-agent-skill-consistency.cjs`) が一致している。`SKILL-AGENT-RULES-TO-CHECKS-01` とは別の範囲 (あちらは定義の中身)。
+
+### [SKILL-INVENTORY-TRIM-01] skill 161 本の登録の前提を決め、使われていない 8 本と重なる組を整理する
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理] [待ち:判断]
+
+- **事実**: `<群>/<名前>/` の入れ子なので Skill ツールに 1 本も登録されていない (09-14 に `Skill("weekly-plan")` が Unknown skill)。SKILL.md に触れた記録があるのは 78/161 本。参照 0 は ges/render-ges-ports・dev/strategic-compact、参照 1 は auto-resubmit-url・check-broken-links・inspect-url・monetize-article・prune-remotion-output・reset-git-history。重なる組: blog/panel-review と ui/panel-review、review-router と task-router、knowledge と continuous-learning、dev/security-review・dev/review-feature と組み込み。
+- **判断**: 「Read する文書」の前提を明文化する (起動時 0 token) か、平坦にして登録する ([概算] +約 2 万 token/会話)。推奨は前者。
+- **完了条件**: 前提が `skill-code-placement.md` か skills の README に 1 段落で書かれ、8 本と重なる組の残す・統合・削除が決まって反映された。
+
+### [CODEX-MIRROR-SLIM-01] Codex 向けの写し (.agents/skills・.codex) の複製と手保守をやめる
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理]
+
+- **事実**: `.agents/skills` は SKILL.md の複製 161 本 (1.43MB) + symlink 153 本。Codex の会話記録 65 本 (11-15〜11-19) で `.agents` の SKILL.md を読んだのは 0 回、`.claude` 側の原本は 13 本。`.codex/hooks.json` は手保守で、`.claude/settings.json` の hook 8 本のうち check-unpushed・check-findings-on-stop・pre-browser-admin-read が無い (整合性検査 E3 は存在だけを見る)。
+- **次**: ①SKILL.md も symlink にするか写しをやめる ②hooks.json を `sync-codex-mirror.cjs` で settings.json から生成する。
+- **完了条件**: 写しの複製が 0 本で、hooks.json が生成物になり、`sync-codex-mirror.cjs --check` が差分を止める。
+
+### [WEB-PUBLIC-UNUSED-ASSETS-01] apps/web/public に、参照の無い土木の画像 19 枚 (36.3MB) がデプロイのたびに送られている
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
+
+- **事実**: `apps/web/public/images` の civil-engineering-*・brand-civil/concrete/pe-* 19 枚は、検査の基準 2 ファイルからしか参照されていない。ほかに名前で参照されない公開ファイルが 135 本 (41.3MB) あるが、組み立てたパスで使うもの (flag・カテゴリ画像) を含むので未確定。
+- **次**: ①19 枚を消し、基準の行を外す ②135 本は本番のアクセスログか URL の組み立て元で使用を確かめてから分ける。
+- **完了条件**: 19 枚が消えて `npm run check-datasets` が通り、135 本の使用・不使用の一覧がこのカードにある。
+
+### [APPS-KNIP-UNUSED-01] apps の未使用ファイルと export を knip の結果から消す
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:npm run type-check] [起票:2026-11-22] [領域:サイト]
+
+- **事実 (2026-11-22 の knip)**: web は未使用ファイル 11 (ads/server.ts・slots.ts・ogp/AreaOgp・BlogOgp など)・export 153・型 118。admin は export 66・型 124。remotion は Remotion 用の入口の設定が無く参考値。
+- **次**: web の 11 ファイルを呼び出し元の検索 (動的 import・文字列での参照を含む) で確かめて消す。remotion の入口を `knip.config.ts` に足す。export と型は触ったファイルから減らす。
+- **完了条件**: web の未使用ファイルが 0 で、type-check と web・admin の vitest 全件が通る。
+
+### [CI-TOOLING-FOLLOWUP-04] CI の run の無駄と名前のずれ (2026-11-22 の全体の洗い出しで見つけた分)
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
+
+- **索引の作り直し**: `blog-auto-publish.yml` は 1 run で 515 秒 (18.9 分の 27%)。11-09 は 7 時間で 8 run。差分だけ更新できるかを索引の作り方で確かめ、できなければ同時期の push を 1 回にまとめる。
+- **CodeQL の二重**: 既定の設定の "codeql" (105 run・中央値 4.3 分) と `security-scan.yml` の CodeQL step (243 秒・80 run) が両方動く。片方にまとめる。
+- **起動しない workflow**: 13 日で 0 run の dispatch 専用が 10 本 (backlog-routing-policy-weekly・post-threads-scheduled・threads-token-refresh・commute-flow-ingest・google-admin-settings・infra-history-publish・kakei-axis-charts・ksj-aggregate-ingest・regenerate-blog-svgs・generate-ogp-images)。estat-ssds-enum は名前が weekly で schedule が無い。30 日の run 数で確かめ、名前と起動条件を合わせるか消す。
+- **完了条件**: 3 項目それぞれに、直した結果か残す理由が書いてある。
+
 ### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
 
@@ -3610,6 +3717,7 @@ updated: 2026-11-01
 - **残り (実装)**: 計測で HEAD と解凍の寄与を見てから、候補の重複解凍と HEAD の整理を選ぶ。buildExactPlan・preflight・共有 writer の前後で、1 件あたり HEAD が 4 回以上発生している。原典 SHA と生成コードと schema に結び付けて、検証済み生成物を再利用・再開する仕組みを設計し、失効条件と失効時の再生成をテストで拒否・固定する。
 - **残り (判断)**: コード push を検証だけにし、公開は明示 scope の CI に分けるかを決める。推奨は分けることで、理由は現状の develop push が全件の再生成・公開を起動するからである。準備を書き込み lock の外に出すかは、巨大 artifact の保存・転送・復元にかかる時間と費用を実測してから採否を決める。
 - **完了条件**: 対象テストが、並行上限 4・失敗後の停止・ETag の変更・gzip と decoded の不一致・scope 漏れ・生成物の失効・catalog の順序の異常を拒否すること。同じ scope と bytes の CI で、全フェーズと待ち時間・API 数・転送量の変更前後が残っていること。変更なし・一部変更・再開・全件監査のどの経路でも、公開対象と同じ強度の検証を取り落とさないこと。採用しなかった案には実測の理由を残すこと。
+- **追補 (2026-11-22・全体の洗い出し)**: 11-14 の run は r2-write の鍵を 109 分持った (準備 41 分・dry-run 39 分・publish 27 分)。同時刻の blog-auto-publish は 119.8 分 (中央値 15.1 分)。準備と dry-run を鍵の無い job に分け、鍵を publish の job だけにすれば約 27 分になる。
 
 ### [PREF-OFFICIAL-STATS-01] 47都道府県の公式統計入口から需要を抽出
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [領域:データ]
@@ -4145,6 +4253,14 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **完了条件**: 注記を 1 つ消した原稿と、年度を年に書き換えた原稿で検査が error になり、今の K-S3-08 では error 0 のまま。
 
 ## 🟢 低 — 再開条件を満たしたら着手する
+
+### [HARNESS-SMALL-COSTS-01] Stop hook 6 本の起動と、増え続ける運用の記録 (効果が小さいので、次に触るときにまとめて直す)
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理]
+
+- **事実**: Stop 1 回で node が 6 回起動する (起動だけで各 59ms。変更なしの経路の合計は約 0.9 秒)。`check-findings-on-stop.js` は transcript 全文を毎回読む (65MB で 388ms)。`check-docs-on-stop.js` は記録で中央値 4.6 秒・p90 21.2 秒だが、手元の部品の合計は約 0.8 秒で、差の原因は未確定。`.claude/state/backlog-loop/ledger.json` は 476KB で 30 日に約 +150KB。旧置き場 `.claude/state/session-locks` の 48 ファイルは prune の対象外。
+- **再開条件**: Stop hook か backlog-loop の台帳を次に変更するとき、または ledger.json が 1MB を超えたとき。
+- **次**: Stop hook を 1 プロセスにまとめる。findings は前回の位置から読む。ledger の完了分を月ごとに分ける。旧置き場も 7 日で prune する。
+- **完了条件**: 変更なしの Stop が 0.5 秒未満で、ledger.json が 200KB 未満。
 
 ### [WAGE-RULE-PAGE-01] 補助金の賃上げの要件に使う「都道府県別の最低賃金と物価」のページを作るかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-11-11] [領域:サイト] [待ち:判断]
