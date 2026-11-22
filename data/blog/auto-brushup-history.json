@@ -732,6 +732,15 @@
       "framing": "薄記事大幅加筆: inline svg除去→生成SVG・表2削除・callout3追加・である調→ですます・title改題・数値修正・人口あたり逆転を実数回収(prose2706), archetype A",
       "expectedLift": 0,
       "impressions": 37
+    },
+    {
+      "date": "2026-11-16",
+      "wave_id": "2026-11-16-manual",
+      "slug": "konbu-consumption-prefecture-gap",
+      "framing": "是正キュー 1 位の試走: 図を R2 の 2025 年の観測値から作り直し (上位5+下位5・タイル地図・明暗 2 枚・3 点セット)、本文を 2025 年の値で書き直し、題を「産地の北海道が44位」へ。blog-critic PASS (指摘 0)",
+      "expectedLift": 0,
+      "impressions": 947,
+      "ctr_before": 0.098
     }
   ]
 }
