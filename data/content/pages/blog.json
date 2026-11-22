@@ -7666,6 +7666,18 @@
       ]
     },
     {
+      "id": "blog:laundry-detergent-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "laundry-detergent-consumption-expenditure-prefecture-gap",
+      "title": "洗濯用洗剤の支出、県ごとの差はどこまで大きいか",
+      "href": "/blog/laundry-detergent-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "laundry-detergent-consumption-expenditure"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:layer-hen-count-prefecture-gap",
       "kind": "blog",
       "key": "layer-hen-count-prefecture-gap",
@@ -9797,6 +9809,18 @@
       "tagIds": []
     },
     {
+      "id": "blog:other-mushroom-consumption-quantity-prefecture-gap",
+      "kind": "blog",
+      "key": "other-mushroom-consumption-quantity-prefecture-gap",
+      "title": "他のきのこ消費量は最大3.54倍の差?",
+      "href": "/blog/other-mushroom-consumption-quantity-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "other-mushroom-consumption-quantity"
+      ],
+      "tagIds": []
+    },
+    {
       "id": "blog:other-noodle-dining-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "other-noodle-dining-consumption-expenditure-prefecture-gap",
@@ -11294,6 +11318,18 @@
         "tag:carbon-neutral",
         "tag:green-transformation"
       ]
+    },
+    {
+      "id": "blog:rent-group-consumption-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "rent-group-consumption-expenditure-prefecture-gap",
+      "title": "家賃地代の支出、最多の沖縄県は最少の三重県の約16倍？",
+      "href": "/blog/rent-group-consumption-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "rent-group-consumption-expenditure"
+      ],
+      "tagIds": []
     },
     {
       "id": "blog:retail-establishments-by-prefecture",
