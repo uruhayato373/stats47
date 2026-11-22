@@ -16,16 +16,16 @@ import { SEMANTIC_COLORS } from "../design/tokens";
 import { SITE } from "@stats47/data-configs";
 import { CHART_DATA_REPLACE_LINES } from "./usage-text";
 
-type PptxPoint = { x: number; y: number; moveTo?: boolean } | { close: true };
+export type PptxPoint = { x: number; y: number; moveTo?: boolean } | { close: true };
 
 // pptxgenjs の SHAPE_NAME union に custGeom が漏れているが、実行時は受理され OOXML <a:custGeom> を出力する。
-const CUSTGEOM = "custGeom" as unknown as PptxGenJS.SHAPE_NAME;
+export const CUSTGEOM = "custGeom" as unknown as PptxGenJS.SHAPE_NAME;
 
-const JP_FONT = "Meiryo";
-const hex = (c: string): string => c.replace("#", "");
+export const JP_FONT = "Meiryo";
+export const hex = (c: string): string => c.replace("#", "");
 const nameOf = (code5: string): string => PREFECTURE_BY_CODE5.get(code5)?.name ?? code5;
 
-const MAP = { x: 3.1, y: 1.35, w: 7.0, h: 5.6 } as const;
+export const MAP = { x: 3.1, y: 1.35, w: 7.0, h: 5.6 } as const;
 
 // custGeom の点数を抑えてファイルサイズを現実的に保つ (高解像度海岸線をそのまま入れると数十MBになる)。
 const SIMPLIFY_MIN_DIST = 0.02; // インチ
@@ -45,7 +45,7 @@ function simplifyRing(ring: readonly { x: number; y: number }[]): { x: number; y
 }
 
 /** geometry(画素) を MAP ボックス内の box-相対インチ点列に変換する (アスペクト保持・中央寄せ・簡略化)。 */
-function buildMapPoints(geo: PrefectureGeometry): Map<string, PptxPoint[]> {
+export function buildMapPoints(geo: PrefectureGeometry): Map<string, PptxPoint[]> {
   const scale = Math.min(MAP.w / geo.width, MAP.h / geo.height);
   const offX = (MAP.w - geo.width * scale) / 2;
   const offY = (MAP.h - geo.height * scale) / 2;
@@ -63,7 +63,7 @@ function buildMapPoints(geo: PrefectureGeometry): Map<string, PptxPoint[]> {
   return byCode;
 }
 
-function addTitle(slide: PptxGenJS.Slide, title: string, subtitle?: string): void {
+export function addTitle(slide: PptxGenJS.Slide, title: string, subtitle?: string): void {
   slide.addText(title, { x: 0.5, y: 0.3, w: 12.3, h: 0.6, fontSize: 24, fit: "shrink", bold: true, color: hex(BRAND.text), fontFace: JP_FONT });
   if (subtitle) {
     slide.addText(subtitle, { x: 0.5, y: 0.92, w: 12.3, h: 0.4, fontSize: 13, color: hex(BRAND.subtext), fontFace: JP_FONT });
@@ -103,7 +103,7 @@ function addMapSlide(
   addFooter(slide, ds);
 }
 
-function choroplethColorMap(ds: Dataset, classes: number, paletteId: string): Map<string, string> {
+export function choroplethColorMap(ds: Dataset, classes: number, paletteId: string): Map<string, string> {
   const spec = classifyChoropleth(ds, { classes, paletteId });
   return new Map(spec.bins.map((b) => [b.code5, b.color]));
 }
@@ -174,7 +174,7 @@ function addTableSlide(pptx: PptxGenJS, ds: Dataset, title: string): void {
   addFooter(slide, ds);
 }
 
-function addTextSlide(pptx: PptxGenJS, title: string, body: string[]): void {
+export function addTextSlide(pptx: PptxGenJS, title: string, body: string[]): void {
   const slide = pptx.addSlide();
   addTitle(slide, title);
   slide.addText(body.map((t) => ({ text: t, options: { bullet: true, fontSize: 15, color: hex(BRAND.text), fontFace: JP_FONT, paraSpaceAfter: 8 } })), {

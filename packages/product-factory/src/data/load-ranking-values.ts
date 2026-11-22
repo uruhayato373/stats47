@@ -55,18 +55,18 @@ class PermanentFetchError extends Error {}
  * 指標が 1 つ減り、件数を固定したテストが落ちた (2026-10-21 の develop-quality-gate run 39594085606 で P-12 が
  * 2,073 → 2,072。直後の手元の作り直しは 2 回とも 2,073)。4xx は元データが無いので、すぐ失敗にする。
  */
-async function fetchValuesPayload(
+export async function fetchJsonWithRetry<T>(
   url: string,
   rankingKey: string,
   deps: { fetchImpl?: typeof fetch; sleep?: (ms: number) => Promise<void> },
-): Promise<RankingValuesPayload> {
+): Promise<T> {
   const fetchImpl = deps.fetchImpl ?? fetch;
   const sleep = deps.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
   let lastError: unknown;
   for (let attempt = 0; attempt < FETCH_ATTEMPTS; attempt++) {
     try {
       const res = await fetchImpl(url);
-      if (res.ok) return (await res.json()) as RankingValuesPayload;
+      if (res.ok) return (await res.json()) as T;
       const message = `R2 fetch 失敗 (${res.status}): ${rankingKey}`;
       if (res.status < 500) throw new PermanentFetchError(message);
       lastError = new Error(message);
@@ -78,6 +78,12 @@ async function fetchValuesPayload(
   }
   throw lastError;
 }
+
+const fetchValuesPayload = (
+  url: string,
+  rankingKey: string,
+  deps: { fetchImpl?: typeof fetch; sleep?: (ms: number) => Promise<void> },
+): Promise<RankingValuesPayload> => fetchJsonWithRetry<RankingValuesPayload>(url, rankingKey, deps);
 
 /** app/ranking/<key>/values.json から最新の 47 県フル partition を取得する。 */
 export async function fetchRankingValues(

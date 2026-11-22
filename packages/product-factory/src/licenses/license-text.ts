@@ -40,8 +40,9 @@ function attributionLines(attribution: string, sources?: readonly SourceRow[]): 
 /**
  * licenseId から LICENSE-ja.txt の本文を生成する。未知 ID は throw。
  * @param sources 収録指標の出典行。出典表示をパックに含まれる出典の種類に合わせる。
+ * @param extraAttributions 出典表示に足す行 (例: 地図の境界の出どころ)。
  */
-export function renderLicenseText(licenseId: string, sources?: readonly SourceRow[]): string {
+export function renderLicenseText(licenseId: string, sources?: readonly SourceRow[], extraAttributions: readonly string[] = []): string {
   if (!isLicenseId(licenseId)) throw new Error(`未知の licenseId: ${licenseId}`);
   const lic = LICENSE_REGISTRY[licenseId];
   const clientLine = lic.clientWork
@@ -65,6 +66,7 @@ export function renderLicenseText(licenseId: string, sources?: readonly SourceRo
     "",
     "## 出典表示",
     ...attributionLines(lic.attribution, sources),
+    ...extraAttributions.map((line) => `- ${line}`),
     "",
     "## 免責",
     "- 公的統計の概況整理であり、医療・投資・防災等の意思決定結果を保証しません。",
