@@ -988,3 +988,17 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **本番確認**: sitemap index と子 11 件は HTTP 200。公開 sitemap の URL は 9,137 件。代表 24 URL の Googlebot UA 応答は 23 件が 200、意図的廃止 1 件が 410。5xx・空本文・UA 差は検出されなかった。
 - **GSC 操作**: 2026-11-01 09:17 JST に `https://stats47.jp/sitemap.xml` を Search Console API で再送信。直後の API 応答は `lastSubmitted=2026-11-01T00:17:50.344Z`、`isPending=true`、warnings/errors は各 0。Google の再取得・登録増は未確認。
 - **検証と次の観測**: Web 型チェック、対象テスト 18 件、対象 ESLint、docs check は通過。GSC coverage の最新認証取得は `auth_required` で、比較可能な母集団は 2026-10-17 のまま。次回の認証付き週次取得後に対象 URL の URL Inspection 状態と `indexed_by_inspection` を比較し、効果を判定する。
+
+## [KAKEI-REFLECT-EFFECT-01] 家計調査の反映の検索指標・2 ページ目到達の観測 (2026-11-22 デプロイ)
+
+- **デプロイ日**: 2026-11-22 (PR #1296・main 3e302d305。sync-snapshots の master・ranking-items・blog)。変えたこと: 家計調査 850 指標の 2025 年値、記事 3 本 (laundry-detergent・other-mushroom-quantity・rent-group)、実収入の 2025 年への付け替え、テーマの年の統一。backlog `CONTENT-KAKEI-EXPANSION-01` の完了条件「対象 URL の検索指標と 2 ページ目到達の観測開始日が記録される」をここで満たす。
+- **観測開始日**: 2026-11-22。
+- **対象 URL**: 家計調査のランキング (`/ranking/` のうち家計調査の指標)・`/survey/kakei-chousa`・`/themes/real-income`・記事 3 本。
+- **baseline**: `data/gsc/snapshots/2026-W43/pages.csv` の同じ窓で、家計調査由来のランキング 580 URL = 2,817 click / 51,790 imp (月次計画 `.claude/todo/monthly.md` 重点 1)。
+- **想定効果**: 数値を置かない。年値の更新が検索の表示とクリックに与える効果の前例と計算式が無く、根拠を示せない。`[target:]` は付けず閾値エンジンの対象外とし、手動で判定する。
+- **検証コマンド**: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-11-22 --end 2026-12-19 --dims page --filter 'page*=/ranking/'` を公開前 `--start 2026-10-25 --end 2026-11-21` と同じ形で並べる (家計調査の指標に絞る)。2 ページ目到達は GA4 の週次 snapshot (`data/ga4/snapshots/`) の同じ URL 集合で比べる。
+- **期日**: 2026-12-20 (公開後 28 日 2026-11-22〜12-19 がそろう日の翌日)。
+- **期日に動かなかった場合の次の手**: click が増えず imp だけ増えるなら題名と説明文を見直す。imp も増えなければ [仮説] 2025 年値が再クロールされていない。検証期日 2026-12-20、検証は URL Inspection API で対象 20 URL の lastCrawlTime を取り、2026-11-22 より前なら再クロール待ちとして次の窓 (2027-01-16) へ延ばす。
+- **KPI**: `search-clicks`。
+- **実測**: 未取得 (2026-11-22 時点)。
+- **登録時の注意**: active が上限 5 を超えた状態 (DG080 の warning 対象) で、呼び元の指示により追加した。

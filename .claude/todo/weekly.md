@@ -144,13 +144,13 @@ W47 は 11-22 まで続く。11-21 時点の checkbox とカードの記録か�
   ② 本文に完了の証拠があり残作業の無いカードと、統合先のあるカードを、`record-backlog-outcome.mjs` で実行台帳に記録してから消す (統合は class `stale`)
   ③ 期日の引き直しは todo-curator に渡す (年間計画のカードを含む)。
   完了条件: 期日超過 23 枚すべてに処置 (やる・引き直し・消す) がカードか ledger に記録され、`npm run backlog:waits -- flow` の総枚数が 357 枚以下 (377 から 20 枚以上の純減) になっている。
-- [ ] **家計調査の要修正 2 件を直し、W48 の一括反映の範囲の承認を取り、承認が出たら反映して計測開始日を記録する** [M] — `CONTENT-KAKEI-EXPANSION-01`（🔴 2 番目・サイト領域・KPI `search-clicks`・`site-circulation-rate`）。
+- [x] **家計調査の要修正 2 件を直し、W48 の一括反映の範囲の承認を取り、承認が出たら反映して計測開始日を記録する** [M] — `CONTENT-KAKEI-EXPANSION-01`（🔴 2 番目・サイト領域・KPI `search-clicks`・`site-circulation-rate`）。
   月次計画の W48 の段。W47 の点検で反映の手段と代表 URL の結果は出ている。
   ① `/themes/real-income` で実収入 2024 年と可処分所得 2025 年が混在する件を直す (年を揃えるか、年の違いを表示する)。題に 2024 年の値が残る 4 本 (`find-kakei-stale-title-values.mjs`) を article-writer → quality-gate → blog-critic PASS で直す
   ② 反映待ち 5 項目 (item.json の再生成・相関・エンゲル係数のテーマ表示・ハブ名・「読み解く記事」の題) から入れる範囲を 1 枚の承認依頼にまとめ、`sync-snapshots` の `dry_run=true` で生成だけを先に確かめる。相関の再計算の失敗 (#1276) が範囲に影響するかを併せて書く
   ③ 承認が出たら反映し、代表 10 URL を本番で確かめ、対象 URL の計測開始日をカードに書く (`HOME-FEATURED-RESYNC-01` もリリースの後に同じ承認で行う)。
   完了条件: ①の 2 件が localhost で直り、②の承認依頼がカードに書かれている。承認が週内に出た場合は、③の本番確認と計測開始日の記録まで。本番反映・R2 の正本の上書きはオーナーの承認なしに行わない。
-- [ ] **テーマページのチャートの説明を出典の Sheet へ寄せ、3 テーマで見える文字と高さを測る** [M] — `THEME-DASHBOARD-TEXT-TRIM-01`（🔴 1 番目・サイト領域・KPI `site-pageviews`）。
+- [x] **テーマページのチャートの説明を出典の Sheet へ寄せ、3 テーマで見える文字と高さを測る** [M] — `THEME-DASHBOARD-TEXT-TRIM-01`（🔴 1 番目・サイト領域・KPI `site-pageviews`）。
   W47 の ①③ (表を畳む) では living-housing の見える文字が 2,821→2,595 で、完了条件の「半分程度」に届いていない。次の段の ② を切り出す。
   ② チャートごとの説明文を出典の Sheet (`SourcesSheet`) へ移す。共通の部品で直し、テーマごとの専用部品は作らない
   ③ W47 と同じ測り方 (全国版・1280px・同じスクリプト) で living-housing・education-culture・aging-society の前後を測る。
