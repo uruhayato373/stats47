@@ -1,3 +1,4 @@
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 import { describe, expect, it } from "vitest";
 import { parseTimeSeries, checkSeriesAgainstDataset, compareSeriesWithDataset, withRoundingNote, fetchSeriesForDatasets, type StatsValueRow } from "../src/data/time-series";
 import { normalizeDataset } from "../src/data/dataset";
@@ -16,7 +17,7 @@ describe("時系列の取り込み (parseTimeSeries)", () => {
     const rows: StatsValueRow[] = [
       ...rowsFor("2020100000", "2020年", 200),
       ...rowsFor("2015", "2015年", 100),
-      { areaCode: "00000", yearCode: "2015", yearName: "2015年", value: 999, unit: "人" },
+      { areaCode: NATIONAL_AREA_CODE, yearCode: "2015", yearName: "2015年", value: 999, unit: "人" },
       { areaCode: "01100", yearCode: "2015", yearName: "2015年", value: 999, unit: "人" },
     ];
     const s = parseTimeSeries({ rows }, base);

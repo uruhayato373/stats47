@@ -92,7 +92,7 @@ describe("凡例と編集用 SVG", () => {
     const spec = classifyChoropleth(ds, { classes: 5 });
     const geo = syntheticGeometry();
     const editable = renderChoroplethSvg(geo, spec, { width: 620, title: "t", editable: true, legend: { title: "凡例", entries: legendEntries(spec) } });
-    expect((editable.match(/<path id="pref-\d{5}"/g) ?? []).length).toBe(47);
+    expect((editable.match(/<path id="pref-\d{5}"/g) ?? []).length).toBe(PREFECTURE_CODES5.length);
     expect(editable).toContain('id="pref-13000"');
     expect(editable).toContain("<title>東京都：");
     expect(editable).toContain('<g id="legend">');
@@ -157,7 +157,7 @@ describe("バンドルの書き出し (writeBundleFiles)", () => {
         expect(xml).toContain("凡例");
       }
     }
-    expect(counts.filter((c) => c === 47).length).toBe(2);
+    expect(counts.filter((c) => c === PREFECTURE_CODES5.length).length).toBe(2);
     expect(counts.filter((c) => c === 0).length).toBe(2);
     // 圧縮されている (pptxgenjs の Node 出力は既定で無圧縮)
     const entry = zip.file(slideNames[2]) as unknown as { _data: { compressedSize: number; uncompressedSize: number } };

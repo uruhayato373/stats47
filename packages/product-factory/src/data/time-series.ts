@@ -1,5 +1,5 @@
 /**
- * 指標の時系列 (取れる全年) を R2 の観測値 `app/stats/<metric>/values.json` から作る。
+ * 指標の時系列 (取れる全年) を R2 の都道府県の観測値 (`statsR2Key(metric, "prefecture")`) から作る。
  *
  * - 年は 4 桁に正規化する (`extractYearCode`・`.claude/rules/estat-api.md`)。4 桁にできない年は落として理由を残す。
  * - 単位は `@stats47/data-configs` の単位の正典 (`classifyUnitComparability`) で、比較表の単位にそろえる。
@@ -18,7 +18,7 @@ import { fetchJsonWithRetry } from "./load-ranking-values";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
-/** R2 `app/stats/<metric>/values.json` の行。 */
+/** R2 の都道府県の観測値 (`statsR2Key(metric, "prefecture")`) の行。 */
 export interface StatsValueRow {
   readonly areaCode: string;
   readonly yearCode: string;

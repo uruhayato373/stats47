@@ -131,29 +131,15 @@ describe("境界の読み込み", () => {
   });
 });
 
-// 本物の境界 (e-Stat 由来・git 管理外) があるときだけ実行する。CI には無いので skip になる。
-describe.skipIf(!prefectureBoundaryExists())("e-Stat 境界の生成物", () => {
-  it("検査記録: 47 県・全県の人口が R2 の国勢調査 2020 総人口と一致・重なりなし", () => {
-    expect(existsSync(PREFECTURE_BOUNDARY_META_PATH)).toBe(true);
-    const meta = JSON.parse(readFileSync(PREFECTURE_BOUNDARY_META_PATH, "utf8")) as {
-      checks: { features: number; overlapRatio: number; populationTotal: number };
-      perPrefecture: { code: string; areaRatio: number; landPopulation: number; waterAreaPopulation: number; r2Population: number }[];
-    };
-    expect(meta.checks.features).toBe(47);
-    expect(meta.perPrefecture.length).toBe(47);
-    for (const r of meta.perPrefecture) {
-      expect(r.landPopulation + r.waterAreaPopulation, r.code).toBe(r.r2Population);
-      expect(Math.abs(r.areaRatio - 1), r.code).toBeLessThan(0.01);
-    }
-    expect(meta.checks.overlapRatio).toBeLessThan(0.001);
-    expect(meta.checks.populationTotal).toBe(126146099); // 令和 2 年国勢調査の総人口
-  });
-
+// 生成物 (.local の境界と .meta.json) の 47 県・人口・面積・重なりの検査は build-prefecture-boundary.mts が生成のたびに行う。
+// CI には生成物が無いので、ここでは出典の行だけを確かめる (2026-11-22 に skip をやめた)。
+describe("e-Stat 境界の出典", () => {
   it("SOURCES.csv の境界の行は e-Stat の出どころ・基準日・加工を持つ", () => {
     const row = prefectureBoundarySourceRow();
     expect(row.surveyName).toContain("国勢調査");
     expect(row.year).toBe("2020");
-    expect(row.retrievedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    // 取得日は生成物の .meta.json から読む。生成物の無い CI では「不明」になり、行そのものは欠けない
+    expect(row.retrievedAt).toMatch(/^(\d{4}-\d{2}-\d{2}|不明)$/);
     expect(row.notes).toContain("公認・推奨");
   });
 });

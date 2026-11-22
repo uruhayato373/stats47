@@ -27,6 +27,8 @@ import {
 } from "../src/maps/prefecture-boundary";
 import { PREFECTURES } from "../src/data/prefectures";
 import { SITE } from "@stats47/data-configs";
+import { statsR2Key } from "@stats47/r2-storage/keys";
+import { to2DigitPrefCode } from "@stats47/area";
 
 const { values: args } = parseArgs({
   options: {
@@ -95,14 +97,14 @@ function waterPopulation(pref: string, shp: string): number {
 }
 
 function census2020Population(): Promise<Map<string, number>> {
-  return fetch(`${SITE.r2PublicBaseUrl}/app/stats/total-population/values.json`)
+  return fetch(`${SITE.r2PublicBaseUrl}/${statsR2Key("total-population", "prefecture")}`)
     .then((r) => {
       if (!r.ok) throw new Error(`total-population: HTTP ${r.status}`);
       return r.json() as Promise<{ rows: { areaCode: string; yearCode: string; value: number | null }[] }>;
     })
     .then((json) => {
       const m = new Map<string, number>();
-      for (const row of json.rows) if (row.yearCode === "2020" && row.value !== null) m.set(row.areaCode.slice(0, 2), row.value);
+      for (const row of json.rows) if (row.yearCode === "2020" && row.value !== null) m.set(to2DigitPrefCode(row.areaCode), row.value);
       return m;
     });
 }

@@ -61,7 +61,6 @@ updated: 2026-11-01
 - **済み (2026-11-22)**: 地図の境界を国土数値情報 N03 系から e-Stat「令和2年国勢調査 町丁・字等別境界データ」を都道府県で結合したものへ替えた (`scripts/build-prefecture-boundary.mts`。47 県・人口が国勢調査の総人口と一致)。時系列 (縦持ち CSV・指標ごとの Excel)・全指標の PowerPoint と SVG の地図の生成器を足した (`generate --id <ID> --version <V> --bundle`)。P-03 で生成して図形の数 2,350 (50 指標 × 47 県) を確かめた。オーナー決定 (11-22): 公開中の 13 本も e-Stat の境界の版へ差し替える。
 - **次 (実行順)**: ① P-01〜P-11 を 1 本 1 ZIP で生成する (どれも 50MiB 未満。実測 6.3〜24.2MB) ② P-12 (161MB)・P-14 (58MB) は分野ごとにまとめて 50MiB に収める (オーナー決定 11-22「大きい分野ごとにまとめて数日で」) ③ note の添付は 1 日 10 回までなので 2〜3 日に分けて差し替える ④ 添付と無料部分の説明 (`data/note/paid-landing/`) とカタログ `data/note/articles.json` を同じ差分で直し、差し替えた日を `data/products/price-history.json` に記録する。価格は変えない。
 - **注意**: 今の snapshot は納品済みの版と指標の数が違う (P-01 は 134 → 155)。固定 SHA の納品版ではなく、新しい版の生成として扱う。PowerPoint・Excel の実機での確認はしていない。境界のファイルは `.local/data-packs/_boundary/` (30 日の掃除の対象。消えたら `build-prefecture-boundary.mts` で作り直す)。Kindle の `build-cover-background.mts` も同じ境界を読むようになった。
-- **以前から落ちている**: `cd packages/product-factory && npx vitest run tests/delivery-integrity.test.ts tests/license-exclusion.test.ts` が 2 件落ちる (P-12 の指標数 2491・期待 2496、P-08 の除外 74・期待 73)。差し替えの前に直す。
 - **完了条件**: 13 本の添付が新しい中身に替わり、カタログ・無料部分の説明・`price-history.json` が同じ差分で直っている。
 
 ### [PRODUCT-REFERRAL-MEASURE-01] note の本文リンクに計測用の UTM を付け、商品への送客を販売まで測れるようにする
