@@ -443,11 +443,10 @@ export function ThemeMetricsDashboard({
       let j = i;
       while (j < list.length && isCompact(list[j])) j += 1;
       const run = list.slice(i, j);
-      // 1 枚でも数値タイルの格子に入れる (2026-10-29 オーナー決定「幅を 4 列にそろえる」)。ただし章に 1 枚だけが単独で並ぶときは、
-      // 4 列の 1 マスと白いセル 3 つにせず横幅いっぱいにする (空きが目立つため。2026-11-22。THEME-DASHBOARD-TEXT-TRIM-01 ④)
+      // 1 枚でも数値タイルの格子に入れ、どの章でも 1 マスの幅をそろえる (2026-10-29 オーナー決定「幅を 4 列にそろえる」)
       out.push(
         <div key={`compact-${panel.key}`} data-theme-panel-grid="compact">
-          <StatTileGrid fillWhenSingle>{run.map((item) => renderPanel(item, summaryOnlyOf(item), sectionTitle, annotationOf(item)))}</StatTileGrid>
+          <StatTileGrid>{run.map((item) => renderPanel(item, summaryOnlyOf(item), sectionTitle, annotationOf(item)))}</StatTileGrid>
         </div>
       );
       i = j;
