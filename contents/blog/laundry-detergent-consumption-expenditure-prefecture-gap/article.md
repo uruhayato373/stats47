@@ -3,8 +3,8 @@ title: 洗濯用洗剤の支出、県ごとの差はどこまで大きいか
 seoTitle: "洗濯用洗剤消費支出額の都道府県ランキング2025年【家計調査】"
 description: 毎日使う洗剤の支出に、県ごとの開きは本当にあるのでしょうか。2025年の家計調査をもとに、愛媛県が首位となった結果と四国への集中、地方ごとのばらつきを読み解きます。
 slug: laundry-detergent-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-11-22
+published: true
 tags: []
 ---
 

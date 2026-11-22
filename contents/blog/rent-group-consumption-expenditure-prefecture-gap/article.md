@@ -3,8 +3,8 @@ title: 家賃地代の支出、最多の沖縄県は最少の三重県の約16�
 seoTitle: "家賃地代消費支出額の都道府県ランキング【2025年家計調査】沖縄県が最多"
 description: 家賃地代への年間支出は、最多の沖縄県と最少の三重県で大きく開いています。2025年の家計調査をもとに、上位の顔ぶれと下位の密集ぶりから、数字の読み方を整理します。
 slug: rent-group-consumption-expenditure-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-11-22
+published: true
 tags: []
 ---
 

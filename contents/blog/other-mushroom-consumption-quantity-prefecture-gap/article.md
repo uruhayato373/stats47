@@ -3,8 +3,8 @@ title: 他のきのこ消費量は最大3.54倍の差?
 seoTitle: "他のきのこ消費量 都道府県ランキング【2025年 家計調査】"
 description: 宮城県の4,352gと愛媛県の1,231g、同じ「他のきのこ」でこれだけ開きます。2025年の家計調査をもとに、東北に多い傾向と西日本の少なさ、地方ごとの並び方を読み解きます。
 slug: other-mushroom-consumption-quantity-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-11-22
+published: true
 tags: []
 ---
 
