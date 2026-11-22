@@ -9,6 +9,6 @@
   "source": "r2:app/ranking/laundry-detergent-consumption-expenditure/values.json",
   "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
   "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug laundry-detergent-consumption-expenditure-prefecture-gap --keys laundry-detergent-consumption-expenditure --data-name laundry-detergent-consumption-expenditure-prefecture-gap-prefecture-rankings",
-  "fetchedAt": "2026-11-04T11:22:57.978Z",
+  "fetchedAt": "2026-11-22T05:33:41.744Z",
   "generatedBy": "fetch-ranking-data-r2.mjs"
 }
