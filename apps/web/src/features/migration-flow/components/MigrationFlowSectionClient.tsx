@@ -47,7 +47,6 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
     <ChartPanel
       id="theme-migration-flow"
       title="都道府県 人口移動フロー"
-      description="焦点の都道府県と全国との「人の出入り」。フロー図で県間の転入・転出の量を、アニメ地図で移動の動きを示します。"
       action={
         <div className="flex flex-wrap items-center justify-end gap-2">
           {isNationalFallback && (
@@ -73,15 +72,15 @@ export function MigrationFlowSectionClient({ initialData }: Props) {
               ))}
             </SelectContent>
           </Select>
+          <ChartFooter
+            placement="header"
+            annotation="焦点の都道府県と全国との「人の出入り」。フロー図で県間の転入・転出の量を、アニメ地図で移動の動きを示します。"
+            source="住民基本台帳人口移動報告"
+            sourceLink={buildEstatTableUrl("0003423613")}
+            rankingLink="/ranking/moving-in-excess-rate"
+            rankingLabel="ランキングを見る"
+          />
         </div>
-      }
-      footer={
-        <ChartFooter
-          source="住民基本台帳人口移動報告"
-          sourceLink={buildEstatTableUrl("0003423613")}
-          rankingLink="/ranking/moving-in-excess-rate"
-          rankingLabel="ランキングを見る"
-        />
       }
     >
       <MigrationSankey code={prefCode} initialData={initialData} />

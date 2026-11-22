@@ -101,8 +101,9 @@ export function ThemeMedicalWorkforceClient({
         title="医師の年齢構成（14階級）"
         description={`2024年12月31日 · ${areaLabel} · 医療施設に従事する医師`}
         contentClassName="min-w-0"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source="令和6年医師・歯科医師・薬剤師統計 医師第5表"
             sourceLink={source.files[0].url}
           />
@@ -122,16 +123,15 @@ export function ThemeMedicalWorkforceClient({
         title="主たる診療科の構成（45区分）"
         description={`2024年12月31日 · ${areaLabel} · 主たる従業地別`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
+            annotation="主に従事する診療科を1つずつ数えた人数です。臨床研修医・その他・不詳も含めて全体を示します。常勤換算や専門医資格の人数ではありません。"
             source="令和6年医師・歯科医師・薬剤師統計 医師第21表"
             sourceLink={source.files[1].url}
           />
         }
       >
-        <p className="text-sm text-muted-foreground">
-          主に従事する診療科を1つずつ数えた人数です。臨床研修医・その他・不詳も含めて全体を示します。常勤換算や専門医資格の人数ではありません。
-        </p>
         <WorkforceTable
           areaName={areaLabel}
           kind="主たる診療科"
