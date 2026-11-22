@@ -3630,7 +3630,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 
 - **済み (2026-11-23)**: 申告 `.claude/shared-policy/local-data.json` に区分を足した。ビルドとテストの生成物・キャッシュ (`.wrangler`・`coverage`・`.husky/_`・テストの比較画像・`.local/muni-data-products/_cache` 1.1GB・`.local/r2-manifest`・`data/` の追跡外の写し) は再生成できるもの、エディタの設定は端末固有、`.env.local` と直下の `stats47-*.json` (GCP のサービスアカウントの鍵。git の追跡外) は秘密の値、各アプリの `.local/` は作業中の置き場にした。申告外は 89 件 → 11 件、上限超えは 583 件 → 241 件。
 - **残り (オーナー判断)**:
-  ① 申告外の 11 件はリポジトリ直下の `private/tmp/claude-501/...` (268KB)。過去のセッションが一時フォルダのつもりでリポジトリの中に作った家計調査の試作の JSON で、作業の残骸。消してよいか (エージェントの削除は止められた)。
+  ① 済み (2026-11-23・オーナー承認): リポジトリ直下の `private/tmp/claude-501/...` (過去のセッションの試作の JSON・268KB) を消し、申告外は 0 件になった。
   ② 上限 60 日を過ぎた 241 件の内訳: `.local/authenticated-measurement` 123 件 (ログイン計測の生の記録。記録は週次で `data/` に残る)・`.local/image-staging` 72 件 (商品画像の下書き)・`.local/kindle-listing-revisions` 24 件・`.local/selection-backfill` 10 件・`.local/blog-imagegen` 6 件・`.local/authenticated-ci-public` 5 件・`.local/geo-content-pipeline` 1 件。採用した画像があれば Google Drive (`drive-archive.mjs`) へ移してから消す。
 - **完了条件**: `npm run check-local-data` の申告外と上限超えが 0 件。
 
