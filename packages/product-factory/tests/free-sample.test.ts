@@ -3,6 +3,7 @@ import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "nod
 import { dirname, join } from "node:path";
 import { tmpdir } from "node:os";
 import { PDFDocument, PDFRawStream, decodePDFRawStream } from "pdf-lib";
+import { syntheticGeometry } from "./helpers/synthetic-geometry";
 import { buildDatabook, resolveDatabook } from "../src/build/build-databook";
 import { reserveProductVersion } from "../src/build/build-product";
 import { recordFreeSampleDelivery } from "../src/build/free-sample-delivery";
@@ -17,7 +18,7 @@ describe("free sample is real, pinned, and not an editable Office promise", () =
   it("generates a complete-font PDF and connects only free files to note", async () => {
     const root = mkdtempSync(join(tmpdir(), "free-sample-")); roots.push(root);
     const product = ALL_PRODUCTS.find(p => p.id === "P-13")!;
-    const res = await buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/data-packs"), version: "test-r1" });
+    const res = await buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/data-packs"), version: "test-r1", geo: syntheticGeometry() });
     const bytes = readFileSync(join(res.outDir, "databook.pdf"));
     const doc = await PDFDocument.load(bytes);
     const originalFont = Buffer.from(notoSansJpBytes());
@@ -25,7 +26,7 @@ describe("free sample is real, pinned, and not an editable Office promise", () =
       Buffer.from(decodePDFRawStream(object).decode()).equals(originalFont))).toBe(true);
     expect(readFileSync(join(res.outDir, "listing/listing.md"), "utf8")).toContain("PNGは固定画像");
     expect(readFileSync(join(res.outDir, "READINESS.md"), "utf8")).not.toContain("[x] Excel");
-    await expect(buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/data-packs"), version: "test-r1" })).rejects.toThrow();
+    await expect(buildDatabook(product, resolveDatabook(product)!, { outRoot: join(root, ".local/data-packs"), version: "test-r1", geo: syntheticGeometry() })).rejects.toThrow();
     expect(readFileSync(join(res.outDir, "databook.pdf")).equals(bytes)).toBe(true);
     recordFreeSampleDelivery(root, res.outDir);
     mkdirSync(join(root, dirname(NOTE_PACK_DELIVERIES)), { recursive: true });

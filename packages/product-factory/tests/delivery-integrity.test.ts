@@ -16,7 +16,7 @@ import type { Dataset } from "../src/data/dataset";
 import { renderLicenseText } from "../src/licenses/license-text";
 import { buildDatabook } from "../src/build/build-databook";
 import { buildDatabookPptx, buildProductPptx } from "../src/generators/pptx";
-import { loadPrefectureGeometry, JAPAN_CLIP } from "../src/maps/prefecture-geometry";
+import { syntheticGeometry } from "./helpers/synthetic-geometry";
 import { ALL_PRODUCTS } from "../src/catalog/products";
 import { JAPANESE_POPULATION_2024 } from "../src/data/datasets/japanese-population";
 
@@ -134,7 +134,7 @@ describe("不具合2: 使い方スライドの記載とグラフの参照範囲"
     const dir = mkdtempSync(join(tmpdir(), "pf-pptx-"));
     try {
       const out = join(dir, "d.pptx");
-      await buildDatabookPptx(packs.get("P-01")!.slice(0, 2), loadPrefectureGeometry(1000, JAPAN_CLIP), out, "t");
+      await buildDatabookPptx(packs.get("P-01")!.slice(0, 2), syntheticGeometry(), out, "t");
       expectUsageMatchesCharts(await slideTexts(out));
     } finally { rmSync(dir, { recursive: true, force: true }); }
   }, 60000);
@@ -143,7 +143,7 @@ describe("不具合2: 使い方スライドの記載とグラフの参照範囲"
     const dir = mkdtempSync(join(tmpdir(), "pf-pptx-"));
     try {
       const out = join(dir, "s.pptx");
-      await buildProductPptx(JAPANESE_POPULATION_2024, loadPrefectureGeometry(1000, JAPAN_CLIP), out, "t");
+      await buildProductPptx(JAPANESE_POPULATION_2024, syntheticGeometry(), out, "t");
       expectUsageMatchesCharts(await slideTexts(out));
     } finally { rmSync(dir, { recursive: true, force: true }); }
   }, 60000);
@@ -180,7 +180,7 @@ describe("不具合5: ランキング棒グラフは 1 位を一番上に描く"
     const dir = mkdtempSync(join(tmpdir(), "pf-pptx-"));
     try {
       const out = join(dir, "s.pptx");
-      await buildProductPptx(JAPANESE_POPULATION_2024, loadPrefectureGeometry(1000, JAPAN_CLIP), out, "t");
+      await buildProductPptx(JAPANESE_POPULATION_2024, syntheticGeometry(), out, "t");
       expectTopRankedAtTop(await barChartXmls(out));
     } finally { rmSync(dir, { recursive: true, force: true }); }
   }, 60000);
@@ -189,7 +189,7 @@ describe("不具合5: ランキング棒グラフは 1 位を一番上に描く"
     const dir = mkdtempSync(join(tmpdir(), "pf-pptx-"));
     try {
       const out = join(dir, "d.pptx");
-      await buildDatabookPptx(packs.get("P-01")!.slice(0, 2), loadPrefectureGeometry(1000, JAPAN_CLIP), out, "t");
+      await buildDatabookPptx(packs.get("P-01")!.slice(0, 2), syntheticGeometry(), out, "t");
       expectTopRankedAtTop(await barChartXmls(out));
     } finally { rmSync(dir, { recursive: true, force: true }); }
   }, 60000);
@@ -255,7 +255,7 @@ describe("不具合4: 47 県すべて同値の列は 1 つにまとめる", () =
       // 重複を含むパック全体ではなく、loader の結果から小さな databook を組む (統合済みなので alt は入らない)
       const datasets = p12.filter((d) => keep.includes(d.rankingKey!));
       expect(datasets.map((d) => d.rankingKey).sort()).toEqual(["fishing-port-count-ksj", "retail-store-count", "total-population"]);
-      const res = await buildDatabook(product, { title: product.name, datasets }, { outRoot: dir, version: "t1" });
+      const res = await buildDatabook(product, { title: product.name, datasets }, { outRoot: dir, version: "t1", geo: syntheticGeometry() });
       const csvHeader = readFileSync(join(res.outDir, "data.csv"), "utf8").split("\r\n")[0].split(",");
       const sources = readFileSync(join(res.outDir, "SOURCES.csv"), "utf8").trim().split("\r\n");
       expect(csvHeader.length - 3).toBe(datasets.length);

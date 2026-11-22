@@ -26,13 +26,35 @@ PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2
 - Kindleチャネルは `src/channels/kindle/` に同居する。EPUB生成とKDPフォーム操作を分離し、
   ログイン、税務・銀行情報、実公開は人間工程とする。
 
+### データ集の「比較表 + 時系列 + 塗り分け地図」(`generate --bundle`)
+
+`DATA-PACK-BUNDLE-01` (2026-11-22)。`buildDatabook` の `bundle` を指定すると、比較表 (`product.xlsx`・`data.csv`) に加えて
+`timeseries/` (R2 `app/stats/<key>/values.json` の全年。縦持ち CSV と、指標ごとに年を列にした Excel)・
+`maps/pptx/` (県ごとに色を変えられる塗り分け地図。1 指標 1 スライド)・`maps/svg/` (指標ごと)・`README.md` を書く。
+分野 (e-Stat 17 分類) ごと・50 指標ごとの「パート」(`<NN>-<分野>[-<n>]`) で全ファイルを分けるので、ZIP をパートごとに分けられる。
+実装は `src/data/time-series.ts` (取り込みと注記)・`src/build/pack-bundle.ts` (分割と書き出し)・`src/generators/{timeseries-*,map-pptx}.ts`。
+時系列と比較表の基準年の値が食い違えば、版のディレクトリを作る前に止まる。ZIP にしたときの大きさを READINESS.md に書き、note の添付の上限 (50MiB) と比べる。
+
+**地図の境界**は e-Stat「令和 2 年国勢調査 町丁・字等別境界データ」を都道府県で結合したもの (国土数値情報 N03 系の
+`apps/remotion/public/prefecture.topojson` は売る地図に使わない。2026-11-22 オーナー決定)。git 管理外の派生物
+`.local/data-packs/_boundary/prefecture-r2census-2020.geojson` を `loadPrefectureGeometry` が読み、無ければ作り方を案内して止まる。
+
+```bash
+# 境界を作る (e-Stat から都道府県ごとの shapefile を取得 → 結合 → 検査 → 書き出し。mapshaper が要る)
+npx tsx packages/product-factory/scripts/build-prefecture-boundary.mts [--source-dir <取得済みの shapefile の場所>]
+```
+
+検査 (1 つでも外れたら書き出さない): 47 件・県コード 01〜47・面積 (元の面積との差 1% 以内)・
+人口 (形の人口 + 水面調査区の人口 = R2 の国勢調査 2020 総人口 `total-population` と全県で一致)・重なり (各県の面積の合計と和集合)。
+結果は `.meta.json` に残る。CI には境界が無いので、本物の境界を読むテストは skip になり、生成物の構造のテストは `tests/helpers/synthetic-geometry.ts` を使う。
+
 ## CLI
 
 ```bash
 # データパック
 npm run products:catalog  --workspace=@stats47/product-factory -- --check
 npm run products:validate --workspace=@stats47/product-factory -- --id P-01
-npm run products:generate --workspace=@stats47/product-factory -- --id P-01 --version <NEW_VERSION>
+npm run products:generate --workspace=@stats47/product-factory -- --id P-01 --version <NEW_VERSION> [--bundle]
 npm run products:report   --workspace=@stats47/product-factory -- --kindle-version <VERSION> --note-revision <REVISION>
 
 # Kindle

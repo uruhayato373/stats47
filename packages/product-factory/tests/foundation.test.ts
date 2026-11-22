@@ -23,6 +23,7 @@ import {
   JAPAN_CLIP,
   loadPrefectureGeometry,
 } from '../src/maps/prefecture-geometry';
+import { prefectureBoundaryExists } from '../src/maps/prefecture-boundary';
 import { LICENSE_IDS } from '../src/catalog/licenses';
 
 describe('prefectures master', () => {
@@ -162,7 +163,8 @@ describe('license text', () => {
   });
 });
 
-describe('prefecture geometry', () => {
+// 本物の境界 (e-Stat 由来・git 管理外) があるときだけ実行する。CI には無いので skip になる (形の検査は生成スクリプトも持つ)。
+describe.skipIf(!prefectureBoundaryExists())('prefecture geometry (e-Stat 境界)', () => {
   it('decodes 47 prefecture shapes with rings inside the projected box', () => {
     const geo = loadPrefectureGeometry(1000);
     expect(geo.shapes.length).toBe(47);

@@ -51,6 +51,8 @@ export interface ChoroplethBin {
 export interface ChoroplethSpec {
   readonly paletteId: string;
   readonly breaks: readonly number[];
+  /** 区分ごとの色 (長さ = 区分数。凡例用。値の無い区分も含む)。 */
+  readonly classColors: readonly string[];
   readonly bins: readonly ChoroplethBin[];
 }
 
@@ -89,5 +91,41 @@ export function classifyChoropleth(
     return { code5: d.code5, value: d.value, classIndex: idx, color: colorFor(idx) };
   });
 
-  return { paletteId, breaks, bins };
+  return { paletteId, breaks, classColors: Array.from({ length: classes }, (_, i) => colorFor(i)), bins };
+}
+
+export interface LegendEntry {
+  readonly color: string;
+  readonly label: string;
+}
+
+/** 凡例に出す数値の書式 (桁区切り・大きさに応じた小数桁)。 */
+export function formatLegendNumber(v: number): string {
+  const abs = Math.abs(v);
+  const maximumFractionDigits = abs >= 100 ? 0 : abs >= 10 ? 1 : abs >= 1 ? 2 : 3;
+  return v.toLocaleString("ja-JP", { maximumFractionDigits });
+}
+
+/**
+ * 分位区分の凡例。各区分は「下限以上・上限未満」(最後の区分だけ上限なし)。
+ * 同じ値の境界で空になる区分は載せない (値の無い区分を凡例に出さない)。
+ */
+export function legendEntries(spec: ChoroplethSpec): LegendEntry[] {
+  const b = spec.breaks;
+  const entries: LegendEntry[] = [];
+  for (let i = 0; i < spec.classColors.length; i += 1) {
+    const lower = i === 0 ? null : b[i - 1];
+    const upper = i === spec.classColors.length - 1 ? null : b[i];
+    if (lower !== null && upper !== null && lower === upper) continue;
+    const label =
+      lower === null && upper === null
+        ? "全県"
+        : lower === null
+          ? `〜 ${formatLegendNumber(upper as number)}`
+          : upper === null
+            ? `${formatLegendNumber(lower)} 〜`
+            : `${formatLegendNumber(lower)} 〜 ${formatLegendNumber(upper)}`;
+    entries.push({ color: spec.classColors[i], label });
+  }
+  return entries;
 }
