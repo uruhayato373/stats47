@@ -163,18 +163,19 @@ describe('進路8区分と同一分母', () => {
       </Context>
     );
     expect(screen.getByText(/2025年3月卒業/)).toBeTruthy();
-    expect(screen.getByText(/卒業した学校の所在地/).textContent).toContain(
-      '通信制高校・中等教育学校・特別支援学校'
-    );
-    expect(screen.getByText(/この表の「就職者等」/).textContent).toContain(
-      '公式の就職割合とは定義が異なります'
-    );
     expect(screen.getByRole('table').parentElement?.className).toContain(
       'overflow-x-auto'
     );
-    // 出典はチャートの下の「出典・指標の定義」のボタンから開く Sheet の中 (2026-10-30)
-    fireEvent.click(screen.getByRole('button', { name: '出典・指標の定義' }));
+    // 説明と出典は図の周りに置かず、見出しの右端の「出典・指標の定義・読むときの注意」から開く Sheet の中 (2026-11-22)
+    expect(screen.queryByText(/卒業した学校の所在地/)).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: '出典・指標の定義・読むときの注意' }));
     const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByText(/卒業した学校の所在地/).textContent).toContain(
+      '通信制高校・中等教育学校・特別支援学校'
+    );
+    expect(sheet.getByText(/この表の「就職者等」/).textContent).toContain(
+      '公式の就職割合とは定義が異なります'
+    );
     expect(
       sheet
         .getByRole('link', { name: '出典: ' + GRADUATION_PATHS_SOURCE.title })

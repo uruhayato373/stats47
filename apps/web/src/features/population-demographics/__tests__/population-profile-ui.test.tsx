@@ -381,9 +381,12 @@ describe("取得境界と出典", () => {
         <ThemePopulationPartitionClient snapshot={snapshotOf()} />
       </Context>,
     );
-    await user.click(screen.getByRole("button", { name: "出典・指標の定義" }));
+    // 母集団・分母の説明は図の下に置かず、同じ Sheet の「読むときの注意」に入れる (2026-11-22)
+    expect(screen.queryByText(/構成割合の分母は/)).toBeNull();
+    await user.click(screen.getByRole("button", { name: "出典・指標の定義・読むときの注意" }));
     const sheet = within(await screen.findByRole("dialog"));
     expect(sheet.getByRole("link", { name: linkName }).getAttribute("href")).toContain(tableId);
+    expect(sheet.getByText(/構成割合の分母は/)).toBeTruthy();
   });
   it("若年章は同じ人口移動表の章へリンクする", () => {
     render(<ThemeYoungMigrationLink />);

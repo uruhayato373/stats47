@@ -18,6 +18,9 @@ import { PanelGrid } from './panel-grid';
  * チャート付きのタイルも同じ大きさのセルに入れる (2026-10-29 オーナー決定「すべて同じ列数」)。同じ行のタイルは
  * 高さがそろい、タイルのリンク行は下端にそろう。最終行の空きマスは白いセルで埋める (線の格子は空きマスが灰色に見えるため)。
  *
+ * 例外 (2026-11-22): テーマの章のように 1 枚だけが単独で並ぶ所は、4 列の 1 マスだけを置いて残りの 3 マスを白いセルで埋めると
+ * 空きが目立つ。`fillWhenSingle` を付けた格子は、1 枚のときだけ 1 列 (横幅いっぱい) にして白いセルを置かない。2 枚以上は上の規則のまま。
+ *
  * 仕様の正本は部品の台帳 data/design/components.json の stat-tile-grid。
  */
 
@@ -43,16 +46,19 @@ interface StatTileGridProps {
   children: ReactNode;
   /** 格子の最後の 1 行に全幅で置く注記 */
   footnote?: ReactNode;
+  /** 1 枚だけのとき、4 列の 1 マスと白いセルにせず横幅いっぱいの 1 列にする (テーマの章の単独のカード) */
+  fillWhenSingle?: boolean;
 }
 
-export function StatTileGrid({ children, footnote }: StatTileGridProps) {
+export function StatTileGrid({ children, footnote, fillWhenSingle = false }: StatTileGridProps) {
   const count = Children.toArray(children).length;
   if (count === 0) return null;
+  const single = fillWhenSingle && count === 1;
   return (
     <div data-slot-kind="stat-tile-grid" className="@container">
-      <PanelGrid className={COLUMN_CLASS}>
+      <PanelGrid className={single ? 'grid-cols-1' : COLUMN_CLASS}>
         {children}
-        {statTileGridFillers(count).map((className, i) => (
+        {(single ? [] : statTileGridFillers(count)).map((className, i) => (
           <div key={`filler-${i}`} aria-hidden="true" data-cell="flush" className={className} />
         ))}
         {footnote ? (
