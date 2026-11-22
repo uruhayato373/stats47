@@ -34,27 +34,15 @@ updated: 2026-11-01
 - **完了条件**: 代表のテーマページで、見える文字と高さが半分程度になり、最初の画面からチャートが続く。
 - **①③ 済み (2026-11-16)**: 共通の `ValueTable` に `fold` を足し、テーマページの 28 箇所で表を上下 3 行に畳んだ。
 
-### [CONTENT-KAKEI-EXPANSION-01] 家計調査の未展開候補を棚卸しし、note・サイトへ順次展開する
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
+### [CONTENT-KAKEI-EXPANSION-01] 家計調査の展開の残り (反映待ちの 5 項目・実収入の付け替え・承認の要る修正)
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト] [待ち:承認]
 
-- **済み (11-05時点)**: 合格記事81本を送り箱へ入れ (PR 1221)、予定6表の9指標を isActive:true にした。
-- **オーナー決定**: 11-01 に11月のサイト重点を家計調査にし (`.claude/todo/monthly.md` 重点1)、11-04 に品目の量産も含めて展開すると更新した。同日、サイトの案内は商品ページ経由でnoteへ出し、家計のデータ集は新しく作らずP-14を841指標へ更新すると決めた。
-- **次 (実行順)**:
-  1. 124指標の取り込みを、r2-write が空いてから `data/data-refresh-requests.json` で出し直す (run 41800174049 は取り消し)。予定6表の9指標は data-refresh で取り込み値が0〜100に収まるか確かめ、kakei-axis-charts を publish=true で回す。計画は `/Users/minamidaisuke/.claude/plans/smooth-stargazing-kay.md`、到達は `data/surveys/kakei-coverage.json`。
-  2. 上位5品目の2025年実値・出典・既存URLを照合し (`KAKEI-EXPANSION-02`)、追加品目を費目単位で照合・更新する。
-  3. 全国時系列・収入層・世帯別・貯蓄負債を既存テーマと記事の図と新しい問いへ展開する。
-  4. 導線・出典・表示を確かめて一括公開し、効果観測を始める。
-- **反映待ち**: 697件の item.json 再生成 (sync-snapshots)、相関snapshotの再計算、エンゲル係数のテーマ表示、ハブ名「家計調査」の再出力、「読み解く記事」の題の更新。
-- **残りの要対応**: REVISEの other-mushroom・laundry-detergent・rent-group を `write-blog-headless.ts --slugs` で再挑戦する。題に2024年の値が残る記事4本 (`find-kakei-stale-title-values.mjs`)。サービスと家賃の7指標の改名は保留 (オーナー判断)。ハブに2007年で止まった全世帯の3指標。実収入 (千円) と可処分所得 (円) の単位不一致。県ページの食の品目が47県共通6品目 (area-databook-designer の判断)。貯蓄負債テーマが2019年の全国家計構造調査だけ。楽天枠の「納豆」詰め込み出品。
-- **手順の穴**: `metrics:regen-derived` が `kakei-ranking-directory.generated.ts` を作り直さない。sync-ranking-keys が `data/metrics/index/` を再生成せず `Stale metric linkage shard` になる (手で `npm run metrics:build-index`)。
-- **小さな不整合**: `university-capacity-index.ts` の seoTitle 238.4 と R2 238.3、`d-kakei-category-dataset` の題「8.7倍」(5年平均は4.2倍)、P-14 snapshot の title、`data-refresh.yml` が `--ref` を無視する件、`taxonomy.json` のblog部分のずれ。`kakei-research/` の数値と民営家賃の母集団は原典未確認。
-- **停止条件**: 年次値と3年平均、県庁所在市と県全体、支出額と購入数量を混同する候補は公開しない。既存URLと同じ答えの別ページや、品目差し替えだけの薄い記事を作らない。Gemini Actions の定期公開は停止のまま。関連: `KAKEI-MULTIAXIS-01`・`SNS-KAKEI-EXPANSION-01`。
-- **完了条件**: 検証済みの既存指標が2025年値へ更新され、調査ハブ・テーマ・ブログから適切な粒度のページへ移動でき、対象URLの検索指標と2ページ目到達の観測開始日が記録される。
-- **W47 の点検 (2026-11-16・localhost)**: W48 に出す変更の範囲を決めるための一覧。
-  - 反映待ち 5 項目の反映手段 (いずれも R2 の書き込みか本番へのマージなので、オーナーの承認が要る): ① item.json の再生成 = `sync-snapshots.yml` の `only=ranking-items` (`dry_run=true` で先に生成だけ確認できる。R2 の `engel-coefficient/item.json` は 11-06 生成のまま) ② 相関 = `correlation-refresh.yml` (土曜 03:45 の定期と data-refresh 後に自動で走る。次回 11-21) ③ エンゲル係数のテーマ表示 = git 側は反映済みで、develop→main のマージ (`deploy-workers.yml`) で出る ④ ハブ名 = `sync-snapshots` の `only=master` ⑤ 「読み解く記事」の題 = `blog` task (`export-blog-snapshot.ts`) と `publish-blog.yml`。
-  - 代表 10 URL: 合格 8 (ハブ・household-food-spending (KAKEI-MULTIAXIS の図あり)・household-assets-debt・ランキング 3 本 (米支出・米数量・食料費)・ブログ 2 本)、反映待ち 1 (`/ranking/engel-coefficient` の注記に「2024年の47県平均」が残る。item.json の再生成後に残るなら文言を直す)、要修正 1 (`/themes/real-income` で実収入 2024 年と可処分所得 2025 年が混在。カードに既出の件)。
-  - #1064: `b-kakei-expense-*` 10 本 (food〜other) はすべて有料 note のカードもマガジンへのリンクも無い (`data/note/evidence/note-circulation-audit-2026-11-14.json` の `linkCounts.cards=0`)。#1064 の監査 (`audit-note-product-cards.mjs`) の対象に入るかは、`--live` (note.com の取得) をしていないので未確認。
-  - **オーナーの判断待ち**: W48 の一括反映に ①〜⑤ のどれを入れるか。
+- **済み (2026-11-22 に確かめた)**: 有効な家計調査の 850 指標は R2 で 845 件が 2025 年まで・5 件が分類改定で 2024 年が最終 (47 地域・ranking と stats の最新年が全件一致)。124 指標の取り込みの出し直しは不要だった。合算 6 件と分類変更 5 件は扱いが済んでいた (`KAKEI-EXPANSION-02` の次 ②)。題に古い年の値が残る記事は 0 本 (検出器の誤検出を直した `1f9a352a8`)。REVISE の 3 記事は blog-critic の PASS まで直した (`5ccd7c6d5`・published:false のまま)。`metrics:regen-derived` が家計調査のランキング一覧を作り直すようにした。P-14 の題を「47県庁所在市」に直した。大学の収容力の seoTitle は既に 238.3。全世帯の 4 指標の 2007 年止まりは `seriesEnd` で理由を表示済み。
+- **承認待ち (オーナー)**: ① 反映待ちの 5 項目 (item.json の再生成 `sync-snapshots only=ranking-items`・相関・エンゲル係数のテーマ表示・ハブ名 `only=master`・「読み解く記事」の題) をリリースに入れるか ② 直した 3 記事の公開 ③ 公開中の有料 note の題「教育費は8.7倍違う」(5 年平均は 4.2 倍) を直すか ④ `b-kakei-expense-*` 10 本の note に有料 note のカードとマガジンへのリンクを足すか (#1064) ⑤ 楽天の枠の「納豆」の詰め込み出品の扱い。
+- **判断待ち**: 実収入 (`0000010212`・`#L01201`・千円・2024 年まで) を、可処分所得と同じ表 `0000010112` の `L3110` (円) へ付け替えると `/themes/real-income` の年の混在が消える。`L3110` が 2025 年を持つかは data-refresh の dry_run で確かめる。単位と年が変わるので R2 の取り込み直しが先で、blog・ai-content・search-index・survey-editorial の依存も直す。付け替えまではテーマで年の違いを注記する案もある。あわせて、`data-refresh.yml` の dispatch が `--ref` を無視して main を checkout する件 (11-14 の賃金 40 指標で develop の修正を試せなかった) は、指定した ref で走らせる修正を一度作ったが、マージ前の定義で R2 の正本を上書きできるようになるので入れていない (worktree のコミット `3008f4867` にある)。
+- **制作の残り**: 貯蓄・負債のテーマが 2019 年の全国家計構造調査だけ。県ページの食の品目が 47 県共通の 6 品目 (area-databook-designer の判断)。`KAKEI-MULTIAXIS-01` の残り 1 件 (貯蓄・負債の都市比較)。サービスと家賃の 7 指標の改名はオーナーの保留のまま。
+- **停止条件**: 年次値と 3 年平均、県庁所在市と県全体、支出額と購入数量を混同する候補は公開しない。既存 URL と同じ答えの別ページや、品目差し替えだけの薄い記事を作らない。
+- **完了条件**: 反映待ちの 5 項目が本番に出て、対象 URL の検索指標と 2 ページ目到達の観測開始日が記録される。
 
 ### [AI-CONTENT-GEMINI-KEY-01] 無料枠キーでランキング解説の1件審査を通し、日次量産を起動する
 タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [検証:node --test packages/ops/src/ai-content/__tests__/gemini-workflow-contract.test.mjs] [起票:2026-11-01] [領域:サイト]
@@ -96,9 +84,11 @@ updated: 2026-11-01
 - **[仮説] 紹介文とキーワードを直すと検索の露出と購入が増える**: 検証は上の 30 語の再測定と販売台帳の 4 週の注文。KDP の検索が何を見るかの公式の仕様は未確認。
 - **済み (2026-11-06)**: 原稿の正本 `data/products/kdp-listing-copy.json`・監査 `npm run kdp:listing-copy -- check` (13 冊合格)・入稿前の検査 (`kdp-preflight`)・検索順位の週次記録 (基準 `data/products/kdp-search-ranks/2026-11-06.json`) を作った。
 - **現在の状態 (2026-11-14)**: 販売中 13 冊と K-S1-14 の原稿は提出済み (`submitted`)。2026-11-13 に【データの範囲】【全県の値を表で収録している指標】を足した版を提出したので、効果の測定の基準日は 2026-11-13 (検索 39 語の順位 `data/products/kdp-search-ranks/` と注文)。2026-11-06 の変更だけの効果は判定できない。K-S1-13 の表紙の縮小確認は `KDP-COVER-47PREF-DECISION-01` へ渡した。
-- **次**: ① KDP のレビュー後に `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify` で読み直して `reflected` にする (KDP のログインが要る) ② K-S1-01 の表紙の「6つ」と本文の章数が合うかを確かめる ③ 紹介文の悩みの文に、本文で扱わない語 (本文に 0 件か否定の文脈だけの語) が無いかを機械で見つける検査を足す。効果の比較 (基準 2026-11-13・2026-12-11 以降) は `improvements.md` の `KDP-LISTING-COPY-OBS-01` へ引き渡した (2026-11-22)。
+- **次**: ① KDP のレビュー後に `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify` で読み直して `reflected` にする (KDP のログインが要る)。効果の比較 (基準 2026-11-13・2026-12-11 以降) は `improvements.md` の `KDP-LISTING-COPY-OBS-01` へ引き渡した (2026-11-22)。
+- **判断待ち (2026-11-22 に確かめた)**: K-S1-01 の表紙は「47都道府県 × 6つの家計データ」と描かれているが、本文は第 0〜9 章の 10 章で、本文に「6つ」の言及が無い (`.local/kindle-books/K-S1-01/v10-20261103-final/book.epub` の目次と全文)。「6つ」が何を指すかを決め、合わなければ表紙を描き直す (`cover-design.ts` の `textBaked.checkedText` も変える)。
+- **やめたこと (2026-11-22)**: 「紹介文の悩みの文に本文で扱わない語が無いか」の機械の検査は足さない。21 冊の冒頭の文の漢字・カタカナの語を EPUB 本文と照らすと 27 件当たり、すべて「本当」「検討」「イメージ」のような一般語だった。指標名の語に絞ると 2 件で、それも一般語だった。11-06 の照合で見つかった 26 件は「県別の回復率が無いのに確かめられると書く」ような意味の約束で、語の有無では捕まらない。守りは別のエージェントの照合 (`review.epubSha256`) のまま。
 - **停止条件**: KDP への反映はオーナー承認の後。題名は公開後に変えられない (KDP ヘルプ)。
-- **完了条件**: 14 冊の紹介文とキーワードが KDP に反映され (`reflected`)、③ の検査が `npm run kdp:listing-copy -- check` に入っている。
+- **完了条件**: 14 冊の紹介文とキーワードが KDP に反映され (`reflected`)。K-S1-01 の表紙の「6つ」が本文と合っている。
 
 ### [HOME-FEATURED-RESYNC-01] 次のリリースの後、ホームの注目のランキングの snapshot を作り直す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
