@@ -21,6 +21,8 @@ run npm run metrics:build-index
 run npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json
 run npm run generate:catalog --workspace=@stats47/data-configs
 run npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts
+# 家計調査の全ランキングへのリンク一覧 (指標の追加・isActive の変更で増減する。値は読まない)
+run npx tsx .claude/scripts/themes/generate-kakei-ranking-directory.ts
 (cd apps/web && run npx tsx scripts/generate-ranking-prominence.ts)
 
 echo "▶ 変わった生成物"

@@ -119,12 +119,16 @@ jobs:
     # GitHub hosted の上限 360 分の範囲で余裕を取る (metric 指定の部分更新は従来どおり数分で終わる)。
     timeout-minutes: 180
     steps:
-      # push トリガーは develop (request file がそこにある)。
-      # dispatch / schedule は従来どおり main (本番と同じ config で走らせる)。
+      # 起動した ref の版で走らせる。push は develop (request file がそこにある)、schedule は main、
+      # dispatch は `gh workflow run --ref <ref>` で選んだ版 (既定は main = 本番と同じ config)。
+      # 以前は dispatch が --ref を無視して常に main を checkout し、develop で直した取り込みの入力
+      # (指標の定義・取得コード) を試すために develop を指定しても main の古い版で作り直した
+      # (2026-11-14 の賃金 40 指標。カード CONTENT-KAKEI-EXPANSION-01)。
+      # main 以外を選んだときは、下の派生 snapshot の工程が page-components を作らない。
       - name: 🧰 Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event_name == 'push' && github.ref_name || 'main' }}
+          ref: ${{ github.ref_name }}
           fetch-depth: 1
 
       # request file と workflow_dispatch inputs を 1 か所に統合する。
@@ -381,9 +385,9 @@ jobs:
         env:
           NODE_ENV: production
           NODE_OPTIONS: --max-old-space-size=8192
-          EVENT_NAME: ${{ github.event_name }}
-        # ★develop への push で起動したときは、テーマ・地域ページの図の定義 (page-components) を作らない。
-        #   push 起動は develop を checkout するので、作るとマージ前の図の定義が本番 R2 に出て、
+          REF_NAME: ${{ github.ref_name }}
+        # ★main 以外の ref (develop への push・dispatch の --ref) で起動したときは、テーマ・地域ページの図の定義 (page-components) を作らない。
+        #   そのとき develop 等を checkout するので、作るとマージ前の図の定義が本番 R2 に出て、
         #   main のコードが新しい定義を読む (2026-10-08 に観光・物価の定義が PR #1100 のマージ前に本番へ出た)。
         #   page-components の本番の書き手は main を checkout する sync-snapshots。
         #   広告 (affiliate-ads) は publish-affiliate-ads.yml が develop から出す設計なので除外しない。
@@ -391,7 +395,7 @@ jobs:
         #   (DATA-REFRESH-DERIVED-FROM-DEVELOP-01)
         run: |
           ARGS=()
-          if [ "$EVENT_NAME" = "push" ]; then
+          if [ "$REF_NAME" != "main" ]; then
             ARGS+=(--skip page-components)
           fi
           bash .claude/skills/db/sync-snapshots/run.sh "${ARGS[@]}"

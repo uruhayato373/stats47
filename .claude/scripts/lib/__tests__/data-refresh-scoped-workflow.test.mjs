@@ -262,22 +262,25 @@ for (const overrides of [{ INPUT_SNAPSHOT_SCOPE: 'invalid' }, { INPUT_SNAPSHOT_S
   });
 }
 
-test('develop への push で起動したときだけ、派生 snapshot から page-components を除外する', () => {
-  assert.equal(full.env.EVENT_NAME, '${{ github.event_name }}');
+test('main 以外の ref (develop への push・dispatch の --ref) で起動したときだけ、派生 snapshot から page-components を除外する', () => {
+  assert.equal(full.env.REF_NAME, '${{ github.ref_name }}');
+  // checkout も起動した ref を使う (dispatch の --ref を無視して main に固定しない)
+  const checkout = workflow.jobs.refresh.steps.find(step => String(step.uses ?? '').startsWith('actions/checkout'));
+  assert.equal(checkout.with.ref, '${{ github.ref_name }}');
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'data-refresh-skip-'));
   const fakeRoot = path.join(dir, '.claude/skills/db/sync-snapshots');
   fs.mkdirSync(fakeRoot, { recursive: true });
   // run.sh の代わりに、渡された引数だけを記録する
   fs.writeFileSync(path.join(fakeRoot, 'run.sh'), 'printf "%s\\n" "$*" > "$ARGS_LOG"\n');
-  const argsOf = (eventName) => {
-    const log = path.join(dir, `${eventName}.log`);
-    const res = spawnSync('bash', ['-e', '-c', full.run], { cwd: dir, encoding: 'utf8', env: { ...process.env, EVENT_NAME: eventName, ARGS_LOG: log } });
+  const argsOf = (refName) => {
+    const log = path.join(dir, `${refName}.log`);
+    const res = spawnSync('bash', ['-e', '-c', full.run], { cwd: dir, encoding: 'utf8', env: { ...process.env, REF_NAME: refName, ARGS_LOG: log } });
     assert.equal(res.status, 0, res.stderr);
     return fs.readFileSync(log, 'utf8').trim();
   };
-  assert.equal(argsOf('push'), '--skip page-components');
-  assert.equal(argsOf('schedule'), '');
-  assert.equal(argsOf('workflow_dispatch'), '');
+  assert.equal(argsOf('develop'), '--skip page-components');
+  assert.equal(argsOf('feature-x'), '--skip page-components');
+  assert.equal(argsOf('main'), '');
 });
 
 const cityKeys = 'fiscal-strength-index,taxable-income-total';
