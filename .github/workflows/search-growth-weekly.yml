@@ -15,7 +15,10 @@ name: 🔎 Search Growth (weekly candidate rebuild)
 
 on:
   workflow_run:
-    workflows: ["📈 Fetch weekly metrics (GSC + GA4 + AdSense)"]
+    # workflows は glob で照合され、`+` は「直前の文字の繰り返し」になる。文字の + は `\\+` で逃がす
+    # (https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax の on.workflow_run.workflows、2026-11-22 参照)。
+    # 逃がしていなかった 2026-07-23〜11-22 は workflow_run の起動が 0 回で、予備の cron だけで動いていた。
+    workflows: ["📈 Fetch weekly metrics (GSC \\+ GA4 \\+ AdSense)"]
     types: [completed]
   workflow_dispatch: {}
   schedule:

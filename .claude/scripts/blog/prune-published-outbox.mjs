@@ -85,8 +85,16 @@ function listLocalFiles(dirAbs, prefix = "") {
  *
  * @returns {Promise<string[]>} R2 に欠けている相対パス。空配列なら削除して安全。
  */
+/**
+ * 公開の CI が意図して R2 へ上げない作業ファイル (記事フォルダの直下だけ)。publish-blog.yml・blog-auto-publish.yml が
+ * 品質ゲートの後に `research.md`・`review.md`・`*.prompt.txt` を消してから push する (2026-10-28 `380042ccd`)。
+ * これを「R2 に無い」と数えると、公開済みの記事が 1 本も消えなくなる (2026-11-21 の週次で 257 本中 0 本)。
+ * review.md の BLOCK・MAJOR は、この掃除の前に record-critic-findings.mjs が台帳へ写す。
+ */
+const NOT_PUBLISHED_WORK_FILE = /^(research\.md|review\.md|[^/]+\.prompt\.txt)$/;
+
 async function findMissingInR2(slug, slugDirAbs) {
-  const files = listLocalFiles(slugDirAbs).filter((f) => f !== "article.md");
+  const files = listLocalFiles(slugDirAbs).filter((f) => f !== "article.md" && !NOT_PUBLISHED_WORK_FILE.test(f));
   if (files.length === 0) return [];
   const present = await mapLimit(files, CONCURRENCY, (f) => existsInR2(slug, f));
   return files.filter((_, i) => !present[i]);
