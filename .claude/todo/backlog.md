@@ -23,63 +23,12 @@ updated: 2026-11-01
 
 並び順が着手順。上限 10 枚 (DG081)。2026-11-01 の月次計画で 13 枚 → 8 枚に整理した後、同日のオーナー判断で Gemini 無料枠の復旧を追加し、子育ての2枚を 🟡 へ移し、家計調査の1枚を 🔴 に上げて 8 枚。サイト重点は家計調査へ変更、商品重点は製造品出荷額を維持。10 月の重点の残り・30 日超の未着手・維持領域のカードは 🟡 へ送った。
 
-### [CONTENT-KAKEI-EXPANSION-01] 家計調査の展開の残り (反映待ちの 5 項目・実収入の付け替え・承認の要る修正)
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト] [待ち:承認]
+### [CONTENT-KAKEI-EXPANSION-01] 家計調査の反映待ちの 5 項目を、リリースの後に本番へ出す
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト]
 
-- **済み (2026-11-22 に確かめた)**: 有効な家計調査の 850 指標は R2 で 845 件が 2025 年まで・5 件が分類改定で 2024 年が最終 (47 地域・ranking と stats の最新年が全件一致)。124 指標の取り込みの出し直しは不要だった。合算 6 件と分類変更 5 件は扱いが済んでいた (`KAKEI-EXPANSION-02` の次 ②)。題に古い年の値が残る記事は 0 本 (検出器の誤検出を直した `1f9a352a8`)。REVISE の 3 記事は blog-critic の PASS まで直した (`5ccd7c6d5`・published:false のまま)。`metrics:regen-derived` が家計調査のランキング一覧を作り直すようにした。P-14 の題を「47県庁所在市」に直した。大学の収容力の seoTitle は既に 238.3。全世帯の 4 指標の 2007 年止まりは `seriesEnd` で理由を表示済み。
-- **承認待ち (オーナー)**: ① 反映待ちの 5 項目 (item.json の再生成 `sync-snapshots only=ranking-items`・相関・エンゲル係数のテーマ表示・ハブ名 `only=master`・「読み解く記事」の題) をリリースに入れるか ② 直した 3 記事の公開 ③ 公開中の有料 note の題「教育費は8.7倍違う」(5 年平均は 4.2 倍) を直すか ④ `b-kakei-expense-*` 10 本の note に有料 note のカードとマガジンへのリンクを足すか (#1064) ⑤ 楽天の枠の「納豆」の詰め込み出品の扱い。
-- **判断待ち**: 実収入 (`0000010212`・`#L01201`・千円・2024 年まで) を、可処分所得と同じ表 `0000010112` の `L3110` (円) へ付け替えると `/themes/real-income` の年の混在が消える。`L3110` が 2025 年を持つかは data-refresh の dry_run で確かめる。単位と年が変わるので R2 の取り込み直しが先で、blog・ai-content・search-index・survey-editorial の依存も直す。付け替えまではテーマで年の違いを注記する案もある。あわせて、`data-refresh.yml` の dispatch が `--ref` を無視して main を checkout する件 (11-14 の賃金 40 指標で develop の修正を試せなかった) は、指定した ref で走らせる修正を一度作ったが、マージ前の定義で R2 の正本を上書きできるようになるので入れていない (worktree のコミット `3008f4867` にある)。
-- **制作の残り**: 貯蓄・負債のテーマが 2019 年の全国家計構造調査だけ。県ページの食の品目が 47 県共通の 6 品目 (area-databook-designer の判断)。`KAKEI-MULTIAXIS-01` の残り 1 件 (貯蓄・負債の都市比較)。サービスと家賃の 7 指標の改名はオーナーの保留のまま。
-- **追補 (2026-11-22・レビュー)**: P-14 の題は台帳 (`packs.json`・`catalog-status.json`) だけ直し、生成済みの `packages/product-factory/src/data/pack-snapshots/P-14.json` の `title` は「（47都道府県）」のまま。今は `Databook.title` を読む所が無いので実害は無い。次に snapshot を作り直すときに入れ替わる。
-- **停止条件**: 年次値と 3 年平均、県庁所在市と県全体、支出額と購入数量を混同する候補は公開しない。既存 URL と同じ答えの別ページや、品目差し替えだけの薄い記事を作らない。
-- **完了条件**: 反映待ちの 5 項目が本番に出て、対象 URL の検索指標と 2 ページ目到達の観測開始日が記録される。
-
-### [AI-CONTENT-GEMINI-KEY-01] 無料枠キーでランキング解説の1件審査を通し、日次量産を起動する
-タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [検証:node --test packages/ops/src/ai-content/__tests__/gemini-workflow-contract.test.mjs] [起票:2026-11-01] [領域:サイト]
-
-- **オーナー判断 (2026-11-01)**: Gemini をランキング解説の量産手段へ戻す。旧キーは 48 run 中 44 run が HTTP 402 で停止し生成 0 件。課金設定なしの専用 Google AI Studio project のキーを GitHub Secret `GEMINI_API_KEY` へ登録済み (キーの文字列は git・会話へ出さない)。無料枠 project のためキー再発行は求めず、現キーで続けてよい。
-- **確認済み (2026-11-01)**: 確認用 branch `codex/gemini-kakei-20261101` で、`gemini-3.5-flash-lite` を使った run `41271164945` が structured preflight・1件の生成・決定的監査・独立 Gemini critic すべて PASS (`verify_only=true` で記録・commit・R2 publish は skip)。`gemini-2.5-flash-lite` は structured preflight で HTTP 404。repository variable は未設定。
-- **次**: ① 日次公開を起動する前に feature branch の変更を review し、公開の承認を得る ② repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定 ③ 初回の定期 run と `publish-ai-content.yml` の R2 読み戻しを確認 ④ `data/ai-content/history.csv` の7 run で PASS率と token を評価して件数を決める。
-- **起動 (2026-11-09 オーナー承認)**: main と develop の workflow・スクリプトが同じで、モデルが 1 件確認と同じ `gemini-3.5-flash-lite` (workflow の env で固定) であることを確かめ、repository variable `GEMINI_FREE_TIER_VERIFIED=true` を設定した。11-05〜11-08 の定期 run は変数が無いため skipped だった。残り: ③ 初回の定期 run (2026-11-10 07:15 JST) と `publish-ai-content.yml` の R2 読み戻しを確かめる ④ 7 run の評価。
-- **原因と修正 (2026-11-22・develop・未 push)**: 11-10〜11-22 の日次で、県別解説が 47 件の key だけが毎回 HTTP 400 になり、26・38・39 件の key は生成できた (run 44974978002 ほか)。schema の県別解説の配列に件数 (minItems/maxItems=47) と順位の範囲を付けていたのを外した (件数は `audit-ai-content.mjs` の blocker が検査する)。[仮説] 制約付きの長い配列を structured output が受け付けない。400 の本文の `error.status`・`message` を `GeminiTextError.detail` に残すようにした (キーに見える文字列は伏せる)。テスト: `cd packages/ai-content && npx vitest run src/services/__tests__/` 100 件。
-- **確認 (push の後)**: develop で `gh workflow run ai-content-gemini-daily.yml --ref develop -f verify_only=true` を流し、47 件の key で生成と監査が通る。400 が残るなら detail の文を読んで次を決める。
-- **停止条件**: 402/429、0 PASS、課金状態不明なら変数を立てない。キー交換後は変数を false に戻して1件確認から再開する。本番デプロイ・R2 push は既存の承認境界に従う。
-- **完了条件**: 無料枠キーの1件確認が PASS し、日次の初回 run で審査 PASS の内容が R2 に反映され、7 run の運転設定の見直しが記録される。
-
-### [DATA-PACK-BUNDLE-01] 都道府県のデータ集を「比較表＋時系列＋塗り分け地図」のパックに作り替え、note の 13 本を差し替える
-タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-05] [領域:商品] [待ち:判断]
-
-- **起点**: 2026-11-05 のオーナー決定 (`02_収益化戦略.md` §3.4「商品展開」)。
-- **読者の課題 / HARM**: 県別の比較を資料に入れたいが、年を揃える・地図を塗る・出典を書くのに手間がかかる (A・M)。
-- **支払う理由**: 1 つの分野の比較表・推移・地図が、出典とともに同じ版で揃っている。無料で配る基本の CSV・KML・GeoJSON とは、時系列と編集できる地図の有無で分ける (§3.4「公開データをまとめ直したことだけを支払う理由にしない」)。
-- **需要の証拠**: パックへの需要は未検証。地図への関心 (BOOTH 677・271) と、データ集単体への関心ほぼ 0 (§2.2) から立てた仮説。
-- **パックの中身 (1 テーマ)**: ① 比較表: 最新年の 47 都道府県 (Excel・CSV。既存) ② 時系列: 同じ指標の取れる全年 (縦持ち CSV と、指標ごとに年を列にした Excel のシート。年の定義が変わった指標は注記) ③ 塗り分け地図: 指標ごとに PowerPoint の図形 (県ごとに色を変えられる) と SVG ④ 出典・定義 (`SOURCES.csv`)・利用条件 (`LICENSE-ja.txt`)・README。総合集は全テーマの ①〜④。
-- **次 (実行順)**:
-  1. **境界の出どころを確かめる [S]** — product-factory の `maps/prefecture-geometry.ts` は `apps/remotion/public/prefecture.topojson` を読む。このファイルの出どころが N03・Geoshape なら、**公開中のデータ集の `product.pptx` も同じ問題を持つ**ので、オーナーに報告して扱いを決める。売る地図は e-Stat「令和 2 年国勢調査 町丁・字等境界データ」を都道府県に結合したもの (`MUNI-DATA-PRODUCT-PILOT-01` と同じ出どころ) に替える。
-  2. **時系列を作る [M]** — 各テーマの指標について R2 の観測値 (`app/stats/<metric>/values.json`) から全年を取り出す生成器を product-factory に足す。年の 4 桁化と単位は既存の規約 (`estat-api.md`・`unit-semantics-standards.md`) に従う。
-  3. **地図を全指標に広げる [M]** — 既存の PowerPoint 生成 (`generators/pptx.ts`・`svg-map.ts`) を、パックの全指標 (総合集は分野ごとのファイルに分ける) に適用する。note の添付の上限に収まるかを測る。
-  4. **確かめる [S]** — product-factory の validators、PowerPoint の実機で県の色を変えられること、note-critic。
-  5. **差し替える [人手・承認]** — note の 13 本の添付と無料部分の説明 (`data/note/paid-landing/`) を新しい中身に合わせ、カタログ `data/note/articles.json` を同じ差分で直す。中身を変えた日を `data/products/price-history.json` に記録する (価格実験の交絡)。
-- **① の結果 (2026-11-22)**: 地図の境界 `apps/remotion/public/prefecture.topojson` は国土数値情報 N03 系だった。属性名が `N03_001` (県名)・`N03_007` (県コード) で、同じ属性を持つ `packages/gis/data/geoshape/prefecture.topojson` の metadata は「国土交通省『国土数値情報(行政区域データ)』をもとに NII が加工」・CC BY-SA 4.0。remotion 側のファイル自体には出典の記載が無い。公開中のデータ集 13 本の `product.pptx`・`product.svg` も同じ境界を使い、README と `LICENSE-ja.txt` に境界の出どころと CC BY-SA 4.0 の帰属・継承の記載が無い。
-- **判断待ち (オーナー)**: (a) 公開中の 13 本の扱い (出典と継承条件を README・LICENSE に書いて続けるか、境界を差し替えるか)。(b) 売る地図の境界にする e-Stat「令和 2 年国勢調査 町丁・字等境界データ」のダウンロードの可否 (外部ファイルの取得)。② 時系列は境界と独立なので先に作れる。
-- **判定**: 価格と判定基準は PRICE-DATA-PACK-2026-11 のまま (導線から 8 週で 5 件以上なら続ける、0 件ならデータの単体販売を止める。仮の期日 2026-12-30)。
-- **禁止**: 価格を変えない。新しいテーマを足さない。N03・Geoshape の境界を売る地図に使わない。note への差し替えは人手のログインとオーナー承認を経る。
-- **完了条件**: 13 本の添付が新しい中身に替わり、カタログ・無料部分の説明・`price-history.json` が同じ差分で直っている。売る地図の境界の出どころが README と `LICENSE-ja.txt` に書かれている。
-- **追補 (2026-11-22・以前から落ちている)**: `cd packages/product-factory && npx vitest run tests/delivery-integrity.test.ts tests/license-exclusion.test.ts` が 2 件落ちる (P-12 の指標数 2491・期待 2496、P-08 の権利要確認の除外 74・期待 73)。11-22 の表紙の変更を外しても同じ。指標の母集団が変わったのに期待値が古いのか、除外の判定が変わったのかを確かめて直す。
-
-### [KDP-LISTING-COPY-01] 販売中 13 冊の紹介文とキーワードの改善案を承認し、KDP へ反映して効果を測る
-タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [期日:2026-12-11] [領域:商品]
-
-- **事実 (2026-11-06)**: K-S1-01〜12 の紹介文は `export-kdp-listings.ts` の `buildDescription` が `concept` に同じ定型文を足したもの。
-- **検索の実測 (2026-11-06・ブラウザ・電子書籍カテゴリ・1 回の観測)**: 30 語の 1 ページ目に出たのは 5 語 (家計調査 K-S1-02 8 位、都道府県 年収 K-S1-01 9 位、教育費 K-S1-05 9 位、地方財政と自治体 財政 K-S1-06 14 位)。「都道府県 統計」「47都道府県」「人口減少」「健康寿命」「インバウンド」「移住」には出ない。
-- **[仮説] 紹介文とキーワードを直すと検索の露出と購入が増える**: 検証は上の 30 語の再測定と販売台帳の 4 週の注文。KDP の検索が何を見るかの公式の仕様は未確認。
-- **済み (2026-11-06)**: 原稿の正本 `data/products/kdp-listing-copy.json`・監査 `npm run kdp:listing-copy -- check` (13 冊合格)・入稿前の検査 (`kdp-preflight`)・検索順位の週次記録 (基準 `data/products/kdp-search-ranks/2026-11-06.json`) を作った。
-- **現在の状態 (2026-11-14)**: 販売中 13 冊と K-S1-14 の原稿は提出済み (`submitted`)。2026-11-13 に【データの範囲】【全県の値を表で収録している指標】を足した版を提出したので、効果の測定の基準日は 2026-11-13 (検索 39 語の順位 `data/products/kdp-search-ranks/` と注文)。2026-11-06 の変更だけの効果は判定できない。K-S1-13 の表紙の縮小確認は `KDP-COVER-47PREF-DECISION-01` へ渡した。
-- **次**: ① 2026-11-22 の読み直しで K-S1-06〜14 の 9 冊は `reflected` になった。K-S1-01〜05 の 5 冊は「内容紹介が台帳と違う・キーワードが台帳と違う」と出て、キーワード 7 枠の差分の欄が全部空文字だった。[仮説] 読み取り部が欄を取れていない (5 冊とも同じ出方で、本棚の「変更事項のレビュー中」は外れている)。検証: `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify --id K-S1-01` を、画面の控え (`.local/kdp-debug/details-K-S1-01.png`) を残す形で 1 冊流し、画面の値と比べる。あわせて、`--verify` は最初の不一致で全体を止めるので、不一致を記録して次の本へ進む形に直す。効果の比較 (基準 2026-11-13・2026-12-11 以降) は `improvements.md` の `KDP-LISTING-COPY-OBS-01` へ引き渡した (2026-11-22)。
-- **判断待ち (2026-11-22 に確かめた)**: K-S1-01 の表紙は「47都道府県 × 6つの家計データ」と描かれているが、本文は第 0〜9 章の 10 章で、本文に「6つ」の言及が無い (`.local/kindle-books/K-S1-01/v10-20261103-final/book.epub` の目次と全文)。「6つ」が何を指すかを決め、合わなければ表紙を描き直す (`cover-design.ts` の `textBaked.checkedText` も変える)。
-- **やめたこと (2026-11-22)**: 「紹介文の悩みの文に本文で扱わない語が無いか」の機械の検査は足さない。21 冊の冒頭の文の漢字・カタカナの語を EPUB 本文と照らすと 27 件当たり、すべて「本当」「検討」「イメージ」のような一般語だった。指標名の語に絞ると 2 件で、それも一般語だった。11-06 の照合で見つかった 26 件は「県別の回復率が無いのに確かめられると書く」ような意味の約束で、語の有無では捕まらない。守りは別のエージェントの照合 (`review.epubSha256`) のまま。
-- **停止条件**: KDP への反映はオーナー承認の後。題名は公開後に変えられない (KDP ヘルプ)。
-- **完了条件**: 14 冊の紹介文とキーワードが KDP に反映され (`reflected`)。K-S1-01 の表紙の「6つ」が本文と合っている。
+- **済み (2026-11-22)**: 850 指標の取り込みを確かめた・REVISE の 3 記事を PASS にして公開した・有料 note の題を「教育費の県差は5年平均で4.2倍」に直した・実収入を `0000010112` の L3110 (円・1975〜2025 年) へ付け替えて取り込んだ・P-14 の題・手順の穴を直した。
+- **次 (リリースの後・オーナー承認済み 11-22)**: ① `sync-snapshots` の `only=ranking-items` (item.json。`/ranking/engel-coefficient` の「2024年の47県平均」が消えるかを確かめる) ② 相関の再計算 (`correlation-refresh.yml`) ③ エンゲル係数のテーマ表示 (リリースで出る) ④ ハブ名 (`only=master`) ⑤ 「読み解く記事」の題 (`only=blog`)。実収入の付け替えで `/themes/real-income` の年がそろったことも確かめる。
+- **完了条件**: 5 項目が本番に出て、対象 URL の検索指標と 2 ページ目到達の観測開始日が記録される。
 
 ### [HOME-FEATURED-RESYNC-01] 次のリリースの後、ホームの注目のランキングの snapshot を作り直す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
@@ -88,23 +37,32 @@ updated: 2026-11-01
 - **次**: main へのリリースを確かめた後、sync-snapshots で `home/featured.json` だけを作り直す (R2 の正本の上書き。対象と範囲を示してオーナーの承認を取ってから実行する)。
 - **完了条件**: 本番の `/` で、注目のランキングのカードの `path[stroke="#f59e0b"]` が 0 本、各カードの `ol > li` が 3 行。
 
-### [BACKLOG-SIZE-TRIM-01] backlog.md を上限 1 MiB の 8 割未満に保ち、コミットが止まる前に増え方を抑える
-タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npm run docs:check] [起票:2026-11-22] [期日:2026-11-27] [領域:管理]
-
-- **済み (2026-11-22)**: 983KB → 919KB (88%)。「済み」を 1 文に縮め (−42KB)、「経緯」の行を消し (−10KB)、完了の検証が通る 2 枚を消し、8KB を超える 3 枚を 8KB 未満にした。DG085・DG086 は出ない。
-- **次**: ① 完了の証拠があるカードを全件で洗い出して消す (11-22 の洗い出しは 388 枚中 31 枚しか判定していない) ② 週に約 +50〜100KB 増える入口 (subagent の起票候補・critic の定型カード・週次の自動起票) を数え、受け皿 1 枚へ寄せる。
-- **禁止**: 未完了の行動を消さない。
-- **完了条件**: 838KB (80%) 未満で、2 週続けて週の増分が +20KB 以下。
-
-### [CI-SCHEDULE-FOLLOWUP-01] 定期実行の止まり・起動しない経路 (2026-11-22 の全体の洗い出しで見つけた分)
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-22] [領域:サイト] [待ち:承認]
-
-- **済み (2026-11-22・develop・未 push)**: ① ブログの置き場の掃除は週次レビュー (`weekly-audits/blog-remediation.sh`) で動いていたが、公開の CI が R2 へ上げない `review.md`・`research.md`・`*.prompt.txt` (2026-10-28 `380042ccd`) を「R2 に無い」と数え、257 本を全部保持していた。`prune-published-outbox.mjs` の判定から 3 種を外した (11-21 のログで数え直すと 236 本が消え、下書き 19 本は残る)。④ `search-growth-weekly.yml` の `workflows:` は glob で照合され、名前の `+` が文字として当たっていなかった (GitHub 公式 workflow-syntax の on.workflow_run.workflows、2026-11-22 参照)。`\\+` で逃がした。⑤ は `AI-CONTENT-GEMINI-KEY-01`。⑦ post-deploy-smoke の続いた失敗は商品詳細のテストで、11-21 のリリース #1290 で直り、その後の 3 回は成功 (残りは 503 が 1 回と 10 月の一過性)。② の未公開の記事は `BLOG-OUTBOX-PASS-PUBLISH-01` (未登録のタグ・公開はオーナー判断)。
-- **承認待ち**: ①の push (土曜の週次が 236 本を git rm する。git の履歴と R2 から戻せる)。③ `backlog-loop-daily.yml` の enable (GitHub の状態は disabled_manually・最後の run は 09-26。定義のコメントは 11-14 の週 1 回の再開の承認)。⑥ GitHub に残る存在しない workflow の登録 (color-policies-weekly・migration-flow ×3) の disable。
-- **リリース後の確認**: ④ は main の定義で動く。次の fetch-metrics-weekly の後に `gh api "repos/uruhayato373/stats47/actions/workflows/search-growth-weekly.yml/runs?event=workflow_run" --jq .total_count` が 1 以上。①は次の土曜の記録コミットで contents/blog が 236 本減る。
-- **完了条件**: ①④ の確認が取れ、③⑥ の状態が定義と一致している。
-
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [KAKEI-PRODUCTION-REMAINS-01] 家計調査の展開の制作の残り (貯蓄・負債のテーマ・県ページの品目・note のカード・楽天の枠)
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-22] [領域:サイト]
+
+- **起点**: CONTENT-KAKEI-EXPANSION-01 を反映だけに絞ったときの残り (2026-11-22)。
+- **次**: ① 貯蓄・負債のテーマが 2019 年の全国家計構造調査だけ ② 県ページの食の品目が 47 県共通の 6 品目 (area-databook-designer の判断) ③ `KAKEI-MULTIAXIS-01` の残り 1 件 (貯蓄・負債の都市比較) ④ `b-kakei-expense-*` 10 本の note に有料 note のカードとマガジンへのリンクを足すか (#1064。note の編集はオーナー承認) ⑤ 楽天の枠の「納豆」の詰め込み出品の扱い。サービスと家賃の 7 指標の改名はオーナーの保留のまま。
+- **停止条件**: 年次値と 3 年平均、県庁所在市と県全体、支出額と購入数量を混同する候補は公開しない。薄い記事を作らない。
+- **完了条件**: ①〜⑤ がそれぞれ実装されたか、見送りの理由が書かれている。
+
+### [KINDLE-K-S1-01-REPUBLISH-01] K-S1-01 を「9つ」の表紙で出し直す前に、撤去した第 9 章の扱いを決める
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-22] [領域:商品] [待ち:判断]
+
+- **済み (2026-11-22)**: 14 冊の紹介文とキーワードの KDP への反映を読み直しで確かめた (KDP-LISTING-COPY-01 を閉じ、効果の比較は `improvements.md` の KDP-LISTING-COPY-OBS-01)。K-S1-01 の表紙を「47都道府県 × 9つの家計データ」に描き直し、表紙だけを差し替えた v11-20261122-cover9 を保全した (R2 `media/kindle-cover-assets/K-S1-01/67ed707e0422/`・archive revision `cd6911d727141fd2`)。
+- **止まっている理由**: 受領記録 (`write-review-receipt.mts`) が「metadata.authoredSha256 が現行原稿と一致しない」で止まる。v10 の後に書籍の定義が変わったため、今の原稿から作り直す必要がある。作り直すと、第 9 章の素材のブログ `black-tea-income-gap` が 11-13 に公開 R2 から撤去されている (`5324d040ef`) ので章が消え、ブログ由来の章が 8 本になって「9つ」と合わなくなる。
+- **決めること**: (a) 紅茶の章を別の家計の指標の章に差し替えて 9 章を保つ (b) 8 章にして表紙を「8つ」で描き直す (c) 撤去したブログを戻す。決めたら作り直し → blog-critic → 受領記録 → 保全 → `kdp-publish --update` で表紙と原稿を差し替える (オーナー承認済み・2026-11-22「9つに描き直して出し直す」)。
+- **完了条件**: K-S1-01 の表紙の数と章の数が合う版が KDP で販売中になっている。
+
+### [DATA-PACK-BUNDLE-01] 作り直したデータ集のパック 13 本を note の有料記事へ差し替える (数日に分ける)
+タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-05] [領域:商品]
+
+- **済み (2026-11-22)**: 地図の境界を国土数値情報 N03 系から e-Stat「令和2年国勢調査 町丁・字等別境界データ」を都道府県で結合したものへ替えた (`scripts/build-prefecture-boundary.mts`。47 県・人口が国勢調査の総人口と一致)。時系列 (縦持ち CSV・指標ごとの Excel)・全指標の PowerPoint と SVG の地図の生成器を足した (`generate --id <ID> --version <V> --bundle`)。P-03 で生成して図形の数 2,350 (50 指標 × 47 県) を確かめた。オーナー決定 (11-22): 公開中の 13 本も e-Stat の境界の版へ差し替える。
+- **次 (実行順)**: ① P-01〜P-11 を 1 本 1 ZIP で生成する (どれも 50MiB 未満。実測 6.3〜24.2MB) ② P-12 (161MB)・P-14 (58MB) は分野ごとにまとめて 50MiB に収める (オーナー決定 11-22「大きい分野ごとにまとめて数日で」) ③ note の添付は 1 日 10 回までなので 2〜3 日に分けて差し替える ④ 添付と無料部分の説明 (`data/note/paid-landing/`) とカタログ `data/note/articles.json` を同じ差分で直し、差し替えた日を `data/products/price-history.json` に記録する。価格は変えない。
+- **注意**: 今の snapshot は納品済みの版と指標の数が違う (P-01 は 134 → 155)。固定 SHA の納品版ではなく、新しい版の生成として扱う。PowerPoint・Excel の実機での確認はしていない。境界のファイルは `.local/data-packs/_boundary/` (30 日の掃除の対象。消えたら `build-prefecture-boundary.mts` で作り直す)。Kindle の `build-cover-background.mts` も同じ境界を読むようになった。
+- **以前から落ちている**: `cd packages/product-factory && npx vitest run tests/delivery-integrity.test.ts tests/license-exclusion.test.ts` が 2 件落ちる (P-12 の指標数 2491・期待 2496、P-08 の除外 74・期待 73)。差し替えの前に直す。
+- **完了条件**: 13 本の添付が新しい中身に替わり、カタログ・無料部分の説明・`price-history.json` が同じ差分で直っている。
 
 ### [PRODUCT-REFERRAL-MEASURE-01] note の本文リンクに計測用の UTM を付け、商品への送客を販売まで測れるようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run products:sales --workspace=@stats47/product-factory -- validate] [起票:2026-11-03] [領域:商品] [待ち:ログイン]
