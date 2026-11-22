@@ -86,7 +86,7 @@ updated: 2026-11-01
 - **[仮説] 紹介文とキーワードを直すと検索の露出と購入が増える**: 検証は上の 30 語の再測定と販売台帳の 4 週の注文。KDP の検索が何を見るかの公式の仕様は未確認。
 - **済み (2026-11-06)**: 原稿の正本 `data/products/kdp-listing-copy.json`・監査 `npm run kdp:listing-copy -- check` (13 冊合格)・入稿前の検査 (`kdp-preflight`)・検索順位の週次記録 (基準 `data/products/kdp-search-ranks/2026-11-06.json`) を作った。
 - **現在の状態 (2026-11-14)**: 販売中 13 冊と K-S1-14 の原稿は提出済み (`submitted`)。2026-11-13 に【データの範囲】【全県の値を表で収録している指標】を足した版を提出したので、効果の測定の基準日は 2026-11-13 (検索 39 語の順位 `data/products/kdp-search-ranks/` と注文)。2026-11-06 の変更だけの効果は判定できない。K-S1-13 の表紙の縮小確認は `KDP-COVER-47PREF-DECISION-01` へ渡した。
-- **次**: ① KDP のレビュー後に `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify` で読み直して `reflected` にする (KDP のログインが要る)。効果の比較 (基準 2026-11-13・2026-12-11 以降) は `improvements.md` の `KDP-LISTING-COPY-OBS-01` へ引き渡した (2026-11-22)。
+- **次**: ① 2026-11-22 の読み直しで K-S1-06〜14 の 9 冊は `reflected` になった。K-S1-01〜05 の 5 冊は「内容紹介が台帳と違う・キーワードが台帳と違う」と出て、キーワード 7 枠の差分の欄が全部空文字だった。[仮説] 読み取り部が欄を取れていない (5 冊とも同じ出方で、本棚の「変更事項のレビュー中」は外れている)。検証: `node .claude/scripts/kdp/kdp-update-listing-copy.mjs --verify --id K-S1-01` を、画面の控え (`.local/kdp-debug/details-K-S1-01.png`) を残す形で 1 冊流し、画面の値と比べる。あわせて、`--verify` は最初の不一致で全体を止めるので、不一致を記録して次の本へ進む形に直す。効果の比較 (基準 2026-11-13・2026-12-11 以降) は `improvements.md` の `KDP-LISTING-COPY-OBS-01` へ引き渡した (2026-11-22)。
 - **判断待ち (2026-11-22 に確かめた)**: K-S1-01 の表紙は「47都道府県 × 6つの家計データ」と描かれているが、本文は第 0〜9 章の 10 章で、本文に「6つ」の言及が無い (`.local/kindle-books/K-S1-01/v10-20261103-final/book.epub` の目次と全文)。「6つ」が何を指すかを決め、合わなければ表紙を描き直す (`cover-design.ts` の `textBaked.checkedText` も変える)。
 - **やめたこと (2026-11-22)**: 「紹介文の悩みの文に本文で扱わない語が無いか」の機械の検査は足さない。21 冊の冒頭の文の漢字・カタカナの語を EPUB 本文と照らすと 27 件当たり、すべて「本当」「検討」「イメージ」のような一般語だった。指標名の語に絞ると 2 件で、それも一般語だった。11-06 の照合で見つかった 26 件は「県別の回復率が無いのに確かめられると書く」ような意味の約束で、語の有無では捕まらない。守りは別のエージェントの照合 (`review.epubSha256`) のまま。
 - **停止条件**: KDP への反映はオーナー承認の後。題名は公開後に変えられない (KDP ヘルプ)。
@@ -3798,7 +3798,7 @@ updated: 2026-11-01
   週次: 土曜の page-quality・内部リンク・出典・ランキング整合・e-Stat 年カバレッジ、日曜の `fetch-metrics-weekly` (`data/` 全体) と
   search-growth・affiliate GA4、月曜の improvement-cycle。
   オーナーの Mac / Windows の launchd ジョブ (SNS・A8) は `git pull` 後に新しい置き場へ書く。
-- **未決**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。
+- **未決**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。 2026-11-22 に 182 件の寿命を付けて外した: 索引 `seo.rank-history-summary` が全件のハッシュをつなぎ過去分の削除を禁じるので、寿命を付けるなら索引を縮める処理と一緒に入れる。
 - **完了条件**: 上の日次・週次の定期実行がすべて新しい置き場へ書いた (期日 2026-10-13)。
 
 ### [ESTAT-YEAR-AVAILABILITY-01] e-Stat の実在年を data/ の台帳で管理し、設定の years を「除外だけ」にする
