@@ -947,6 +947,21 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **観測期限と判定手順**: 2026-11-21 (after 窓 2026-10-22〜11-18 の 28 日 + 取得遅延 3 日)。active 施策の一覧 (`.claude/todo/improvements.md`) への登録は improvement-triage が行う。before と after の 28 日窓で、上の 3 群と対照群を並べる (差の差)。検索語群の CTR が対照群との差を半分以上縮めていれば title の効果ありとして記録する。市区町村ページの clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で対照群が同方向に動いていなければ、title の形を戻す案を backlog `MUNI-PAGE-QUALITY-01` へ。
 - **未確定 / 仮説**: [仮説] 「◯◯市 人口」の検索で表示されているのは市区町村ページではなく市区町村ランキングやブログ。W41 の city ページ上位 (imp 順) に坂出市・岩国市が無いことが根拠。検証コマンド: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-11 --end 2026-10-08 --dims query,page --filter 'query~=坂出市 ?人口'`。検証期日: 次の木曜計測 (2026-10-29) の後。期日後の判定: ランキングやブログに当たっていれば、データブック化後に市区町村ページへ表示が移るかを after 窓で確かめる。
 - **交絡の記録 (2026-10-28)**: PR #1193 で県名×市区町村ランキング `/municipalities/ranking/<key>/<県コード>` (10 指標 × 47 県 = 470 URL) を足し、全国版の `?pref=` を 301 で県別ページへ移す。判定では `page*=/municipalities/ranking/` から 2 段の URL (`/municipalities/ranking/[^/]+/[0-9]{5}`) を除いて baseline と並べる。同じ PR でサイドバーの項目と東京都の地図も変わる (title・説明文は変えていない。市区町村ページと全国版の title の数字の整形は判定後に `MUNI-TITLE-MAGNITUDE-01` で変える)。
+- **判定 (2026-11-22・improvement-triage): effect/none として improvements.md の行を閉じた**。
+  - 取得コマンド: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-10-22 --end 2026-11-18 --dims query --filter 'query~=(市|町|村|区) ?人口' --limit 25000` と、同じ窓の `--dims page --limit 25000`。集計条件は baseline と同じ (fragment と query を除き、正規表現 `(市|町|村|区)\s*人口`、市区町村ページ `/areas/\d+/cities/\d+$`、ランキングは 1 段の `/municipalities/ranking/[^/]+$`)。対照群は W41 pages.csv から baseline と同じ条件で抽出した 19 URL で、baseline の値 168 / 11,870 と一致した。
+
+  | 群 | baseline (09-11〜10-08) | after (10-22〜11-18) |
+  |---|---|---|
+  | 検索語群 | 341 語 / 2 clicks / 1,840 imp / CTR 0.11% / pos 13.7 | 3,028 語 / 118 clicks / 77,425 imp / CTR 0.15% / pos 9.0 |
+  | 市区町村ページ | 373 URL / 13 / 2,214 / 0.59% | 913 URL / 948 / 161,919 / 0.59% / pos 8.6 |
+  | 市区町村ランキング (1 段) | 65 URL / 448 / 4,686 / 9.56% | 601 URL / 1,371 / 34,954 / 3.92% (MUNI-SSDS-EXPANSION-01 の新規 541 件と交絡) |
+  | 対照群 19 URL | 168 / 11,870 / 1.42% | 214 / 10,434 / 2.05% |
+
+  - 判定: title の効果は確認できなかった。検索語群と対照群の CTR の差は 1.31pt から 1.90pt へ広がり、基準の「差を半分以上縮める」を満たさない。effect/none。
+  - 量は大きく増えた (市区町村ページの clicks 13 → 948、imp は 73 倍)。adverse の条件 (clicks が -10% 以下) には当たらない。
+  - 量の増加は、索引対象の拡大 (364 → 1,741 件) と title の変更を分けられない。想定効果値を置いていなかったので、量の効果は判定せず記録だけを残す。
+  - 検索語群は表示が増え、順位も 13.7 から 9.0 に上がったのに、CTR は 0.15% にとどまった。
+  - 次の一手: annual.md のカード `MUNI-CITY-PAGE-SNIPPET-01` (本文で「◯◯市 人口」に文で答える) と `MUNI-TITLE-MAGNITUDE-01` (title の数字の丸め)。
 
 ### [MUNI-SSDS-EXPANSION-01] 市区町村ランキング 541 件・市区町村テーマ 10 件の追加と回遊の配線 (2026-10-22 デプロイ)
 
