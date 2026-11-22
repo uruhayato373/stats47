@@ -10,7 +10,24 @@
     "**/playwright-report/",
     "**/playwright-smoke-report/",
     ".local/*-cache.json",
-    "docs/31_note記事原稿/"
+    "docs/31_note記事原稿/",
+    "**/.DS_Store",
+    "**/.wrangler/",
+    "**/coverage/",
+    "**/__golden__/*-actual.png",
+    "**/__golden__/*-diff.png",
+    ".husky/_/",
+    "apps/remotion/build/",
+    "apps/remotion/out/",
+    "apps/web/knip-report.json",
+    "pnpm-lock.yaml",
+    ".local/muni-data-products/_cache/",
+    ".local/r2-manifest/",
+    "data/affiliate/ga4-affiliate-????-??-??.json",
+    "data/content-operations/live/",
+    "data/search-growth/latest.json",
+    "data/sns/metric-discovery-index.json",
+    "packages/product-factory/src/data/pack-snapshots/"
   ],
   "offloaded": [],
   "device": [
@@ -19,11 +36,37 @@
     ".claude/state/session-locks/",
     ".claude/state/cadence/",
     ".local/playwright-*",
-    ".local/locks/"
+    ".local/locks/",
+    ".cursor/",
+    ".obsidian/",
+    ".memory-env/",
+    ".claude/.local/"
   ],
-  "secret": [],
+  "secret": [
+    ".env.local",
+    "stats47-*.json"
+  ],
   "staging": [
-    { "path": ".local/", "maxAgeDays": 60, "note": "作業の出力。採用した画像・成果物は R2 か Google Drive へ移す（Kindle 表紙・note の参照図など）" },
-    { "path": "apps/admin/.local/", "maxAgeDays": 60 }
+    {
+      "path": ".local/",
+      "maxAgeDays": 60,
+      "note": "作業の出力。採用した画像・成果物は R2 か Google Drive へ移す（Kindle 表紙・note の参照図など）"
+    },
+    {
+      "path": "apps/admin/.local/",
+      "maxAgeDays": 60
+    },
+    {
+      "path": "apps/web/.local/",
+      "maxAgeDays": 60
+    },
+    {
+      "path": "apps/remotion/.local/",
+      "maxAgeDays": 60
+    },
+    {
+      "path": "packages/product-factory/.local/",
+      "maxAgeDays": 60
+    }
   ]
 }

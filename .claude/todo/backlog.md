@@ -1306,6 +1306,7 @@ updated: 2026-11-01
 - **完了条件**: main の `quality-suite-weekly` が 1 回 success になり、Issue #1202 が自動で閉じる。
 - **① 済み (2026-11-16)**: 3 回の run (41122877579・42295351706・43513853562) を比べた。**毎回落ちるもの**: E2E の blog-detail.spec.ts (:24・:29・:40・:56。`toBeVisible` が要素を見つけられない)、blog-list.spec.ts (:21・:29・:98。h2 を持つ `main a[href^='/blog/']` が見つからない)、comparison.spec.ts :45 (`toHaveURL`)、header-navigation.spec.ts :41・:95、Theme quality audit (10-30・11-06 は `AssertionError [ERR_ASSERTION]`。どの assert かは未特定)、OGP image audit (原因は毎週違う。11-06 は data-muni-manufacturing の short-title の生成失敗、11-13 は gloves-… の article.md の R2 fetch 失敗)。**3 回中 2 回**: unit の bridge-inspection-age-ui と population-profile-ui の 10 秒タイムアウト。**1 回だけ**: header-navigation :34、public-route-contract :36 (10-30)、Page quality audit (11-06)。unit のログに「R2クライアントを取得できませんでした / getCloudflareContext」が繰り返し出ており、blog E2E と同じ原因か (`CI-LIVE-R2-TEST-FLAKE-01`) は未確認。`affiliate-ga4-weekly` (#1207) は計測ゲート (inventory-snapshot-stale・A8 の照合不足) で落ちており、別の原因。**次**: ② blog E2E から、失敗時のスクショ artifact で R2 の取得失敗かテストデータかを分ける。
 - **追記 (2026-11-16)**: ② に入るときは、Theme quality audit の assert が 3 回とも落ちている件 (どの assert かは未特定) と、OGP 監査で data-muni-manufacturing の short-title の生成が 11-06 に失敗した件も、このカードで扱う。
+- **4 回目 (2026-11-20・run 44829320471)**: 失敗した job は Full web build and E2E (10 件)・OGP image audit (r2-static の欠落 2 件)・Theme quality audit (14 件のチャート依存が実データの契約を満たさない)・Update weekly quality alert。E2E は blog-list の記事カード・comparison のカテゴリタブ・header-navigation のサイドバーの現在地とテーマ一覧のリンクなどで、① の「毎回落ちるもの」と重なる。
 
 ### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
@@ -1828,13 +1829,6 @@ updated: 2026-11-01
 - **次**: 会社 PC で `npm run dev:web` を起動し、ランキング詳細・テーマ詳細・県ページが 200 で表示され、データ (R2) とチャートが出ることを確かめる。動かなければ `WEB_DEV_BUNDLER=webpack npm run dev:web` で従来どおり起動し、原因をこのカードに書く。
 - **完了条件**: Windows でも Turbopack で主要ページが表示されるか、webpack に戻す条件が `local-environment.md` に書かれている。
 
-### [LOCAL-RELEASE-BUILD-R2-TIMEOUT-01] ローカルの本番ビルドが静的生成で R2 の読み込み 10 秒制限に引っかかって落ちることがある
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-21] [領域:管理]
-
-- **済み (2026-11-14・`3787a37a2`)**: 原因は、読み込みの制限がビルド中も本番の実行時と同じ 10 秒で、静的生成の並行読み込みが積み上がると超えることだと見て、ビルド中 (NEXT_PHASE=phase-production-build) だけ既定を 60 秒にした。
-- **残り (Mac で実行)**: `NEXT_DIST_DIR=.local/next-release next build` を 3 回続けて、R2 のタイムアウトで落ちないことを確かめる。原因 (静的生成中に同じ key を何回読むか) は仮説のままで、制限の延長だけを入れてある。まとめて読む方式は、モジュール単位のキャッシュを禁じる規約があるので採っていない。
-- **完了条件**: 3 回続けて完走する。落ちたら、落ちた key と回数を記録する。
-
 ### [THEME-DETAIL-CLIENT-PRELOAD-01] テーマ詳細が全テーマの client 部品を先読みしている (約 2,267KB) のを、route 別に分ける
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-14]
 
@@ -2323,6 +2317,11 @@ updated: 2026-11-01
 - **経過 (2026-10-11)**: 失敗率 100% の 4 本と高失敗率の workflow を調べ、SEO keyword・ブログ是正日次・アフィリエイト週次を直し、Gemini 日次は schedule を外した (develop `88b6d5c90`)。Security Scan と Develop Quality Gate は回復済み。Health Check は計測の auth_required と A8 の成果ゲートが直るまで落ち続ける。
 - **次**: 直せないもの、`SIMPLIFY-PORTFOLIO-CUT-01` で止める系統のものは schedule を外して workflow を削除し、`docs/01_技術設計/06_自動化インベントリ.md` を同じ差分で更新する。定期実行は main の定義で動くので、修正の main マージ日から 7 日後に `gh run list --created ">=<マージ日>"` で失敗率を数え直す。
 - **完了条件**: 直近 7 日の run で失敗率 50% 超の定期 workflow が 0 本。
+- **数え直し (2026-11-23・11-16 以降の定期実行 47 run)**: 失敗率 50% 超は 4 本。
+  - `ai-content-gemini-daily.yml` (6/7): 原因の HTTP 400 は 11-22 に直り、修正後の手動実行 (run 44992638911) は成功。次の定期実行で確かめる。
+  - `post-deploy-smoke.yml` (定期 1/1): その後のデプロイ後の実行は 4 回続けて成功。
+  - `affiliate-ga4-weekly.yml` (2/2): 計測ゲートが `inventory-snapshot-stale(19d>10d)` で落ちていた。11-13 の `dce7c7c6a` で `--check-size` を付けた在庫の監査が記録を書かなくなり、この workflow は `--json --check-size` の 1 回で在庫を作り直していたので、記録が 11-03 のまま止まった。作り直しとサイズの検査を 2 回の呼び出しに分けた (2026-11-23)。手元で作り直すと在庫の鮮度の理由は消えた。main に入った後の次の土曜 (11-29) の run で確かめる。
+  - `quality-suite-weekly.yml` (1/1・4 週連続): `QUALITY-SUITE-WEEKLY-RED-01` で扱う。
 
 ### [SIMPLIFY-REVIEW-LOOP-EXECUTION-01] 週次レビューを「書く」から「Must を実行する」側へ寄せ、active 施策を上限 5 件まで減らす
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-10-11] [期日:2026-11-08] [領域:計画]
@@ -3625,9 +3624,15 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 サイト・note・SNS の著者紹介の文言を揃える。経歴の書き方は本人に確認してから変える。（出典: obsidian の TODO マスタ ^t-0006 から移管・2026-10-19）
 
 ### [LOCAL-DATA-CLEANUP-01] 手元データの期限切れ（.local）を片付ける
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run check-local-data] [起票:2026-10-19] [領域:管理]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [待ち:判断] [検証:npm run check-local-data] [起票:2026-10-19] [領域:管理]
 
-方針は `.claude/shared-policy/LOCAL-DATA.md`。2026-10-19 の `npm run check-local-data` で staging の上限超えが 13 件（`.local/` の作業出力。Kindle 表紙の生成物 460MB・note の参照図など採用済みかもしれないものも混ざる）。採用済みは R2 か Google Drive へ移し、使い捨ては消す。完了条件は上限超えが 0 件。（出典: obsidian の TODO マスタ ^t-0016 を3リポへ展開・2026-10-19）
+方針は `.claude/shared-policy/LOCAL-DATA.md`。
+
+- **済み (2026-11-23)**: 申告 `.claude/shared-policy/local-data.json` に区分を足した。ビルドとテストの生成物・キャッシュ (`.wrangler`・`coverage`・`.husky/_`・テストの比較画像・`.local/muni-data-products/_cache` 1.1GB・`.local/r2-manifest`・`data/` の追跡外の写し) は再生成できるもの、エディタの設定は端末固有、`.env.local` と直下の `stats47-*.json` (GCP のサービスアカウントの鍵。git の追跡外) は秘密の値、各アプリの `.local/` は作業中の置き場にした。申告外は 89 件 → 11 件、上限超えは 583 件 → 241 件。
+- **残り (オーナー判断)**:
+  ① 申告外の 11 件はリポジトリ直下の `private/tmp/claude-501/...` (268KB)。過去のセッションが一時フォルダのつもりでリポジトリの中に作った家計調査の試作の JSON で、作業の残骸。消してよいか (エージェントの削除は止められた)。
+  ② 上限 60 日を過ぎた 241 件の内訳: `.local/authenticated-measurement` 123 件 (ログイン計測の生の記録。記録は週次で `data/` に残る)・`.local/image-staging` 72 件 (商品画像の下書き)・`.local/kindle-listing-revisions` 24 件・`.local/selection-backfill` 10 件・`.local/blog-imagegen` 6 件・`.local/authenticated-ci-public` 5 件・`.local/geo-content-pipeline` 1 件。採用した画像があれば Google Drive (`drive-archive.mjs`) へ移してから消す。
+- **完了条件**: `npm run check-local-data` の申告外と上限超えが 0 件。
 
 ### [BLOG-MUNI-SERIES-01] 市区町村データの解説記事を連載にする (国勢調査 2025 の人口増減から)
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-21] [領域:データ]
