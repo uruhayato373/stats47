@@ -111,7 +111,11 @@ async function verifyReflected(page, id, listing) {
   if (REVIEWING.test(shelf.rowText ?? "")) return { ok: true, pending: true };
   await openDetails(page, listing.draftId);
   const saved = listingCopyDiff(await readKdpListingCopy(page), listing);
-  if (saved.length) return { ok: false, reason: `読み戻し: ${saved.join(" / ")}` };
+  if (saved.length) {
+    // 不一致の原因 (読み取りの失敗か KDP の未反映か) を後から画面で切り分けられるように控えを残す
+    await page.screenshot({ path: shotPath(`copy-${id}-verify.png`), fullPage: true }).catch(() => {});
+    return { ok: false, reason: `読み戻し: ${saved.join(" / ")}` };
+  }
   markCopy(id, "reflected");
   return { ok: true, status: "読み戻し一致" };
 }
@@ -126,10 +130,18 @@ try {
   const account = await assertAccount(page, { tag: "[copy]" });
   if (!account.ok) throw new Error(account.reason);
   for (const id of ids) {
-    const result = await (VERIFY ? verifyReflected : update)(page, id, listings[id]);
+    // 読み直しは読むだけなので、1 冊の不一致や一時的な例外で残りを止めない (2026-11-22 に 1 冊目の不一致で 14 冊が 0 冊になった)。
+    // 提出 (update) は KDP へ書くので、従来どおり最初の失敗で止める。
+    let result;
+    try {
+      result = await (VERIFY ? verifyReflected : update)(page, id, listings[id]);
+    } catch (error) {
+      if (!VERIFY) throw error;
+      result = { ok: false, reason: `例外: ${error instanceof Error ? error.message : String(error)}` };
+    }
     results.push({ id, ...result });
-    console.log(`[copy] ${id}: ${result.ok ? (result.pending ? "まだレビュー中" : result.dryRun ? "入力と読み戻しは一致 (保存していない)" : `反映 (${result.status})`) : `停止 ${result.reason}`}`);
-    if (!result.ok) break;
+    console.log(`[copy] ${id}: ${result.ok ? (result.pending ? "まだレビュー中" : result.dryRun ? "入力と読み戻しは一致 (保存していない)" : `反映 (${result.status})`) : `${VERIFY ? "不一致" : "停止"} ${result.reason}`}`);
+    if (!result.ok && !VERIFY) break;
   }
 } finally {
   await ctx.close();
