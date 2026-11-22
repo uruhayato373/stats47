@@ -61,7 +61,7 @@ updated: 2026-11-01
 ### [DATA-PACK-BUNDLE-01] 都道府県のデータ集を「比較表＋時系列＋塗り分け地図」のパックに作り替え、note の 13 本を差し替える
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-05] [領域:商品] [待ち:判断]
 
-- **起点**: 2026-11-05 のオーナー決定 (`02_収益化戦略.md` §3.4「商品展開」)。都道府県のデータ集単体には全販売面で関心がほぼ無く、関心が集まるのは地図だった (§2.2)。新しいテーマは増やさず、既存のテーマ別 12 本 (¥980) と総合集 (¥2,980) の中身を作り替える。地図だけの単品 `ppt-japan-map-assets` は出さない。
+- **起点**: 2026-11-05 のオーナー決定 (`02_収益化戦略.md` §3.4「商品展開」)。
 - **読者の課題 / HARM**: 県別の比較を資料に入れたいが、年を揃える・地図を塗る・出典を書くのに手間がかかる (A・M)。
 - **支払う理由**: 1 つの分野の比較表・推移・地図が、出典とともに同じ版で揃っている。無料で配る基本の CSV・KML・GeoJSON とは、時系列と編集できる地図の有無で分ける (§3.4「公開データをまとめ直したことだけを支払う理由にしない」)。
 - **需要の証拠**: パックへの需要は未検証。地図への関心 (BOOTH 677・271) と、データ集単体への関心ほぼ 0 (§2.2) から立てた仮説。
@@ -81,7 +81,7 @@ updated: 2026-11-01
 ### [KDP-LISTING-COPY-01] 販売中 13 冊の紹介文とキーワードの改善案を承認し、KDP へ反映して効果を測る
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-06] [期日:2026-12-11] [領域:商品]
 
-- **事実 (2026-11-06)**: K-S1-01〜12 の紹介文は `export-kdp-listings.ts` の `buildDescription` が `concept` に同じ定型文を足したもの。カタログの `design.readerProblem` は紹介文に使っていない。機械の検査は社内語の混入・短すぎ・e-Stat の言及だけで、訴求は見ていない。K-S1-13 だけが `kdpExclusive.description` で読者の課題から書いてある。
+- **事実 (2026-11-06)**: K-S1-01〜12 の紹介文は `export-kdp-listings.ts` の `buildDescription` が `concept` に同じ定型文を足したもの。
 - **検索の実測 (2026-11-06・ブラウザ・電子書籍カテゴリ・1 回の観測)**: 30 語の 1 ページ目に出たのは 5 語 (家計調査 K-S1-02 8 位、都道府県 年収 K-S1-01 9 位、教育費 K-S1-05 9 位、地方財政と自治体 財政 K-S1-06 14 位)。「都道府県 統計」「47都道府県」「人口減少」「健康寿命」「インバウンド」「移住」には出ない。
 - **[仮説] 紹介文とキーワードを直すと検索の露出と購入が増える**: 検証は上の 30 語の再測定と販売台帳の 4 週の注文。KDP の検索が何を見るかの公式の仕様は未確認。
 - **済み (2026-11-06)**: 原稿の正本 `data/products/kdp-listing-copy.json`・監査 `npm run kdp:listing-copy -- check` (13 冊合格)・入稿前の検査 (`kdp-preflight`)・検索順位の週次記録 (基準 `data/products/kdp-search-ranks/2026-11-06.json`) を作った。
@@ -95,7 +95,7 @@ updated: 2026-11-01
 ### [HOME-FEATURED-RESYNC-01] 次のリリースの後、ホームの注目のランキングの snapshot を作り直す
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19 オーナー判断「次のリリース後」)**: 注目のランキングのカードを、地図が上 (40:21)・オレンジの線なし・上位 3 県の形に替えた (develop 83d759331・930952999)。カテゴリ・調査・ランキング一覧は表示のたびに作るのですぐ出るが、ホームは R2 の `home/featured.json` に焼いた地図と 1 位を読むので、作り直すまで「1 県だけ・オレンジの線あり」が残る。
+- **起点 (2026-11-19 オーナー判断「次のリリース後」)**: 注目のランキングのカードを、地図が上 (40:21)・オレンジの線なし・上位 3 県の形に替えた (develop 83d759331・930952999)。
 - **次**: main へのリリースを確かめた後、sync-snapshots で `home/featured.json` だけを作り直す (R2 の正本の上書き。対象と範囲を示してオーナーの承認を取ってから実行する)。
 - **完了条件**: 本番の `/` で、注目のランキングのカードの `path[stroke="#f59e0b"]` が 0 本、各カードの `ol > li` が 3 行。
 
@@ -129,12 +129,11 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt] [起票:2026-11-21] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey--police-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey--police-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey--police-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey--police-desktop-1440.png)。
 - **対象**:
   - `agent|survey--police` (Claude の確認)
     - [mobile-390/low] スマホ 1 枚目、見出し直下の「出典・指標の定義」ボタン左のアイコン: アイコンの左上に黒い丸が重なっており、通知バッジのように見えて意図が分からない。 → 黒い点の重なりが意図したものか確認し、不要なら取り除くか、バッジなら意味が分かる表示にする。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`packages/ops/src/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す (撮影による誤検知の扱いは `.claude/rules/page-quality-standards.md`「UI 指摘のループ」)。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
@@ -143,12 +142,11 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt] [起票:2026-11-21] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-pref-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-pref-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-pref-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-pref-desktop-1440.png)。
 - **対象**:
   - `agent|geo-analysis--analysis-pref` (Claude の確認)
     - [mobile-390/medium] スマホ 1 枚目、タイトル下のメタ行「データ生成 2026/09/05 ・ coverage 47/47 ・ 47都道府県 ・ 2020-2050 ・ %」: 「coverage 47/47」という英語の運用用語と、単位だけの「%」が読者向けの説明なしに並んでいる。何の % か、coverage が何を数えているかが画面から分からない。 → 「coverage 47/47」は「47 都道府県すべて対応」のように日本語で言い換え、「%」は「単位: %(人口割合)」など何の値かが分かる形にする。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`packages/ops/src/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す (撮影による誤検知の扱いは `.claude/rules/page-quality-standards.md`「UI 指摘のループ」)。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
 - **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
@@ -156,7 +154,7 @@ updated: 2026-11-01
 ### [AFF-GA4-WEEKLY-GATE-01] 週次のアフィリエイト計測 (affiliate-ga4-weekly) が計測ゲートで 6 回続けて落ち、アフィリエイトの観測が 11-14 で止まっている
 タグ: [収益化] [種類:不具合] [実行:対話] [検証:gh run list --workflow affiliate-ga4-weekly.yml --limit 1] [起票:2026-11-21] [領域:アフィリエイト]
 
-- **観測 (2026-11-21・週次レビュー W46)**: `affiliate-ga4-weekly.yml` は 6 回連続失敗・最終成功から 25 日 (`.local/weekly-audits/2026-11-21/ci-health.log`)。最新 run 43973234812 は ga4・read-back・commit-back は success で、measurement gate だけが failure。理由は `inventory-snapshot-stale(13d>10d)`・`a8-cross-check-shortfall`・`a8-results-month-missing`・`eligible-candidate-missing` (自動アラート #1207)。週次要約のアフィリエイト行は最終観測 2026-11-14 のまま。
+- **観測 (2026-11-21・週次レビュー W46)**: `affiliate-ga4-weekly.yml` は 6 回連続失敗・最終成功から 25 日 (`.local/weekly-audits/2026-11-21/ci-health.log`)。 (参照: run 43973234812・#1207)
 - **次**: ① 在庫 snapshot (Refresh Affiliate Inventory & Compliance) が 10 日を超えて古い理由を run 履歴で確かめる ② A8 の照合不足と当月の成果欠落が、土曜の認証付き計測 (a8 は 2026-11-20 に pass) の記録と workflow の読む場所の食い違いかを確かめる。
 - **完了条件**: `affiliate-ga4-weekly` の最新 run が success で、#1207 が閉じている。
 - **禁止**: ゲートの閾値を緩めて通さない (`.claude/config/` の基準はオーナー判断)。
@@ -200,7 +198,7 @@ updated: 2026-11-01
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
 
-- **起点 (2026-11-19 オーナー指摘「サムネイルを生成するルールも冗長になっていないか」)**: 注目のランキングのカードの地図を直したとき、地図の画像の経路 12 本を棚卸しした。本土の範囲・沖縄の判定・枠の比率は同じ作業でまとめた。次の 2 つは残っている (県コードの検査の穴は 2026-11-19 に `check-area-year-entrypoint.mjs` を広げて解消した)。
+- **起点 (2026-11-19 オーナー指摘「サムネイルを生成するルールも冗長になっていないか」)**: 注目のランキングのカードの地図を直したとき、地図の画像の経路 12 本を棚卸しした。
 - **次**: ① 配色の解決が 3 通りある。サムネイル (`packages/visualization/src/server/generate-mini-prefecture-svg.ts`) は順位で塗る。台帳の型 (`apps/remotion/src/features/data-cards/tile-scale.ts` の `resolveTileScale`) は値で塗る (`packages/types/src/color-policy.ts`)。Remotion のコロプレス (`apps/remotion/src/shared/utils/choropleth.ts` の `getInterpolator`) は配色の名前をカタログ (`d3KeyOfColorScheme`) と照らさず、知らない名前で黙って青に落ちる。どれに寄せるかを決めて 1 つにする (サムネイルを値で塗ると、外れ値の多い指標で色がつぶれるかを先に確かめる)。② `apps/web/src/features/ogp/JapanMapSvg.tsx` (手書きの多角形)・`RankingOgp`・`AreaOgp` の使い手を確かめ、無ければ消す。③ 地域コードの写しを止める検査 `packages/area/scripts/check-area-year-entrypoint.mjs` は決まった関数名と 47 県名の配列しか見ず、地図の部品が `"47"` を直書きしたり TopoJSON の `N03_007` を自前で正規化したりしても通る。止める形を足す (縮小専用の baseline で)。
 - **停止条件**: 配色を変えると全媒体の画像が変わる。① は見本の画像 (管理画面の型の見本) で前後を比べ、オーナーの確認を取ってから入れる。
 - **完了条件**: 配色の解決が 1 つの関数を通り、使われていない地図の部品が消える。
@@ -209,7 +207,7 @@ updated: 2026-11-01
 ### [GIT-PUSH-SSH-TIMEOUT-01] 会社の Windows PC で、push の前の検査が通った後に git が exit 141 で止まり push が届かない
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-16] [領域:管理]
 
-- **起点 (2026-11-16 観測)**: `git push origin <branch>` が、push の前の検査 (`pre-push-tests.mjs`、約 10 分) がすべて通った直後に exit 141 で止まり、リモートは更新されなかった。出力はファイルに書いていて、パイプは無い。検査が失敗した回のログには `unable to write flush packet: Broken pipe` が出ている。`--no-verify` の push はすぐ届いた。
+- **起点 (2026-11-16 観測)**: `git push origin <branch>` が、push の前の検査 (`pre-push-tests.mjs`、約 10 分) がすべて通った直後に exit 141 で止まり、リモートは更新されなかった。
 - **[仮説]** git は検査を走らせる前に GitHub との SSH 接続を開き、約 10 分の検査の間に社内ネットワークか GitHub がその接続を切る。**検証**: ① 検査が短く済む push で 141 が出ないか ② `~/.ssh/config` の github.com に `ServerAliveInterval 30` を入れて (オーナーの了解の上) 検査ありの push が通るか。
 - **次**: 仮説が支持されたら ② の設定を入れるか、検査を先に別で走らせてから push する手順を決める。支持されなければ git の trace (`GIT_TRACE=1 GIT_SSH_COMMAND="ssh -v"`) で止まる位置を見る。
 - **禁止**: 検査を毎回 `--no-verify` で飛ばす運用にしない (飛ばすのはオーナーの許可のあるときだけ)。
@@ -218,7 +216,7 @@ updated: 2026-11-01
 ### [BACKLOG-LEDGER-PARALLEL-FLAKE-01] 台帳の並行記録のテストが Windows で 3 回に 1 回落ち、push を止める
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [検証:node --test .claude/scripts/backlog-loop/__tests__/record-backlog-outcome.test.cjs] [起票:2026-11-16] [領域:管理]
 
-- **起点 (2026-11-16 観測)**: この会社の Windows PC で、`record-backlog-outcome.test.cjs` の「並行して記録しても 1 件も欠けない」が単独で 3 回中 1 回落ち、push の前の検査 (`pre-push-tests.mjs`) では 2 回続けて落ちて push が止まった。落ち方は終了コードの照合 (`codes`) で、24 本の子プロセスのうち 4 本が 1 で終わった。台帳の中身の照合までは進んでいない。
+- **起点 (2026-11-16 観測)**: この会社の Windows PC で、`record-backlog-outcome.test.cjs` の「並行して記録しても 1 件も欠けない」が単独で 3 回中 1 回落ち、push の前の検査 (`pre-push-tests.mjs`) では 2 回続けて落ちて push が止まった。
 - **[仮説]** 同時に 24 本がロックを取り合い、待ちの上限で諦めたプロセスが 1 で終わる。負荷の高い push 前の検査で落ちやすい。**検証**: 失敗したプロセスの stderr を残すよう `stdio` を変えて再現し、理由を読む。
 - **次**: 理由を確かめてから、ロックの待ち方 (record-backlog-outcome.mjs) かテストの並列数のどちらを直すかを決める。テストを消したり並列数を 1 にしたりして通すのは禁止 (同時書き込みで欠けないことを守るテストのため)。
 - **完了条件**: 単独で 20 回続けて通り、push の前の検査でも落ちない。
@@ -271,7 +269,7 @@ updated: 2026-11-01
 ### [THEME-URBAN-PARKS-HISTORY-LOSS-01] 都市公園の観測値から 1976・1977 年が消えている
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run theme:portfolio:audit] [起票:2026-11-14] [領域:データ]
 
-- **事実**: 2026-11-14 の品質監査で `history-loss` の error が 1 件。`stats` の `urban-parks` に、前回の正常な観測 (2026-10-05) にあった 1976・1977 年が無い (`data/themes/quality.json` の findings)。この error がある間、週次の `Theme quality audit` は失敗で終わる。
+- **事実**: 2026-11-14 の品質監査で `history-loss` の error が 1 件。
 - **次**: 2026-10-05 以降に `urban-parks` を再投入した記録を探し、年が減ったのが意図 (定義の変更) か取りこぼしかを確かめる。取りこぼしなら再投入、意図なら監査の基準を更新する。
 - **完了条件**: `npm run theme:portfolio:audit` の品質の error が 0。
 
@@ -279,8 +277,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt] [起票:2026-11-14] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--hokkaido-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--hokkaido-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--hokkaido-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--hokkaido-desktop-1440.png)。
 - **対象**:
   - `agent|prefecture-detail--hokkaido` (Claude の確認)
     - [mobile-390/high] スマホ1枚目の下部、「北海道が全国上位」の表の右端(「全国順位」列): 表が画面幅からはみ出し、右端の「全国順位」列が見出しも順位の数字も「1…」「3…」のように途中で切れている。順位は北海道の特徴を示す中心情報なのに読み取れない。 → スマホでは指標・値・順位を縦積みのカード表示にするか、列を詰めて順位列を画面内に収める。
@@ -294,8 +291,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt] [起票:2026-11-14] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--layer-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--layer-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--layer-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--layer-desktop-1440.png)。
 - **対象**:
   - `agent|geo-analysis--layer` (Claude の確認)
     - [tablet-768/high] タブレット1枚目の最上部、ページ上端を全幅で覆う広告バナー(トルコ語「STM Savunma Teknolojileri / Bilgi Edinin」): 外国語の大型広告が最初の画面の上部を覆っている。ページの見出しやパンくずが見えず、何のページか分からない。直下の「人口メッシュ」ヘッダーも広告に重なって途切れている。 → 広告枠の高さと位置を固定し、見出しに重ならないようにする。ページ上端への全幅オーバーレイ表示は避ける。
@@ -310,8 +306,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114.txt] [起票:2026-11-14] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis--analysis-desktop-1440.png)。
 - **対象**:
   - `agent|geo-analysis--analysis` (Claude の確認)
     - [mobile-390/low] スマホ1枚目、見出し下のメタ情報行(「データ生成 2026/09/05・coverage 47/47」「47都道府県・2020-2050・%」): 「coverage 47/47」のような運用用語が読者向けの画面に出ている。「・%」だけの単位表記も何の値か分からない。 → 「47都道府県すべてを収録」のような平易な表現に置き換え、単位は指標名と併記する。
@@ -325,13 +320,12 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt] [起票:2026-11-14] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-desktop-1440.png)。
 - **対象**:
   - `machine|https://stats47.jp/category/landweather|clipped_text` — clipped_text = 1 (閾値 <= 0)
     - 経緯: 修正の本番反映後も 2026-11-14 の週次で再検出 (前回: タイル地図の 3 文字名と文字の大きさ、記事の図の負の余白、タブ列の高さ (h-auto が lyra に負けていた) を修正。手元の 7 ページ・2 幅で切れ・重なり 0)
   - `machine|https://stats47.jp/category/landweather|small_text_count` — small_text_count = 49 (閾値 <= 18)
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。
 - **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
@@ -340,7 +334,7 @@ updated: 2026-11-01
 ### [BLOG-ISR-STALE-ON-REVISE-01] 改稿版を公開しても、公開前に開かれたページは旧版のまま残る
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
-- **起点**: 2026-11-13 に家計調査の改稿 96 本を `blog-auto-publish.yml` で公開した。R2 の本文は全件新しい版だが、本番ページは 18 本が旧版を返す (`x-nextjs-cache: STALE`・`x-nextjs-stale-time: 300`。1 時間後も、クエリを付けてエッジを迂回しても同じ)。同日 12:24Z の本番デプロイ以降・公開より前に一度でも開かれたページで起き、開かれていない 78 本は最初のアクセスで新版になった。`apps/web/open-next.config.ts` に再生成の queue が無く、ISR のエントリが作り直されない。18 本のうち 5 本は、切り分けで未公開のページを取得して自分で作った。
+- **起点**: 2026-11-13 に家計調査の改稿 96 本を `blog-auto-publish.yml` で公開した。
 - **対象 18 本**: aichi-food-culture banana-consumption-quantity bonito-vs-oyster-fish-map earthquake-insurance-prefecture-gap garden-plants-expenditure-ranking ishikawa-food-culture iwate-food-culture kagoshima-food-culture kumamoto-food-culture mayonnaise-consumption-expenditure mie-food-culture nagano-food-culture nara-food-culture natto-production-vs-consumption sea-bream-expenditure-ranking strawberry-consumption-prefecture-gap tottori-food-culture yokan-expenditure-ranking
 - **次**: 公開 CI の CDN 消去の前に `packages/r2-storage/src/scripts/purge-isr-routes.ts --routes /blog/<slug> --apply` を足すか、OpenNext に再生成の queue を設定する。足した後は改稿 1 本で、公開前に開いたページがデプロイなしで新版になるかを確かめる。
 - **完了条件**: 改稿版の公開後、デプロイなしで本番ページの h1 と本文が新版になる。18 本は次の本番デプロイで新版になったことを確かめる。
@@ -348,21 +342,21 @@ updated: 2026-11-01
 ### [BLOG-GATE-RANK-CONTEXT-01] quality-gate の題の検査の抜けと、順位の照合の取り違え
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
-- **起点 (2026-11-13・家計調査 96 本の審査)**: ① 題の「N位」の検査 (`quality-gate.mjs` の `NG_PATTERNS`) は `title: "…"` の形だけに掛かり、引用符なしの題は素通りする (`title: もやし消費量1位山形、沖縄の2.8倍差` など 3 本が通った)。② 順位の照合が、正しい文の「島根県は2位を大きく引き離し」「東北6県はすべて11位以内」「熊本は前年も11位」「静岡の20位から愛知の30位へ」を県の順位の誤りとして止めた (3 本で意味を変えずに言い換えて通した)。
+- **起点 (2026-11-13・家計調査 96 本の審査)**: ① 題の「N位」の検査 (`quality-gate.mjs` の `NG_PATTERNS`) は `title: "…"` の形だけに掛かり、引用符なしの題は素通りする (`title: もやし消費量1位山形、沖縄の2.8倍差` など 3 本が通った)。
 - **次**: 題の検査は引用符の有無に依らない形にし、公開済みの題で該当数を測ってから blocker にするかを決める。順位の照合は「N位以内」「N位を引き離し」「前年」「AのN位からBのM位へ」を対象から外し、非検出のテストで固定する。
 - **完了条件**: 上の 4 文が blocker にならず、引用符なしの題も検査に掛かる。
 
 ### [BLOG-AUTO-PUBLISH-DETECT-01] 公開対象の検出が push の先頭コミット 1 つの差分しか見ない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
-- **起点**: `blog-auto-publish.yml` は `git diff HEAD~1 HEAD` で変更された article.md を公開対象にし、それが空のときだけ送り箱の総ざらい (`select-republish-slugs.mjs`) に回る。複数コミットを 1 回で push すると、最後のコミットの記事だけが公開され、手前のコミットの記事は次に記事の変更が無い push が来るまで出ない。先頭が merge コミットだと差分が空になり総ざらいになる (2026-11-13 の 3 回の公開はこの形で 96 本が出た)。
+- **起点**: `blog-auto-publish.yml` は `git diff HEAD~1 HEAD` で変更された article.md を公開対象にし、それが空のときだけ送り箱の総ざらい (`select-republish-slugs.mjs`) に回る。
 - **次**: 検出を push の before..after の差分にするか、差分の検出に加えて常に総ざらいを足す。
 - **完了条件**: 記事を含む複数コミットの push で、全コミットの公開待ちが 1 回の run の対象になる。
 
 ### [OPENDATA-DEMAND-WAVE-01] 検索の需要の手がかりがある未展開の題材を、公的統計から波で足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-17] [領域:データ] [期日:2026-12-15]
 
-- **背景 (2026-11-17 オーナー指示「幅広く展開しないと需要があるか分からない」)**: GSC はページがある語しか記録しないので、出す前の需要は Google のサジェストで見た (225 回の取得・679 種。「都道府県 ランキング」など 5 つの種の語に 1 文字を足して取得し、全 2,611 キーの題名と意味で照合)。公的統計が出典になり、既存の指標が無い題材は次のとおり (出現回数の多い順・概算): 農産物の生産量 (野菜・果物・卵・牡蠣。約 20。農水省 作物統計・畜産統計・海面漁業生産統計) / 観光入込客数 (約 14。観光庁 共通基準) / 自然災害の発生 (11。消防庁 災害年報) / 健康寿命 (7。健康日本21 研究班) / 地震の回数 (6。気象庁 震度データベース) / 市町村数 (6。総務省) / 世界遺産・国宝 (6。文化庁 国指定文化財等データベース) / 台風の接近数 (5。気象庁) / 花粉 (5。環境省) / 犬猫の引取り・殺処分 (4。環境省) / 食品ロス (3。環境省) / 教員の離職 (3。学校教員統計調査) / 野生鳥獣の推定個体数 (3。環境省) / 猛暑日日数・降雪量 (各 3。気象庁) / 日本酒の製成 (2。国税庁) / 通級指導 (2。文科省) / 温泉の源泉数 (2。環境省) / 自動車の登録台数 (2。国交省)。民間調査しか無い題材 (魅力度・住みやすさ・幸福度・苗字・血液型・有名人など) は出典の条件を満たさないので外した。
+- **背景 (2026-11-17 オーナー指示「幅広く展開しないと需要があるか分からない」)**: GSC はページがある語しか記録しないので、出す前の需要は Google のサジェストで見た (225 回の取得・679 種。)
 - **進行中の 13 本 (2026-11-17 に定義を非公開で追加)**: 学力調査の国語 2・小 6 自己肯定感・夢 2・学校が楽しい 2・友達関係 2、道路交通センサス 3 (混雑度・大型車混入率・混雑時旅行速度)、降雪時の交通事故 1。取り込みの workflow `external-metric-ingest.yml` は main を checkout して `ingest-metric.mjs` の `METRIC_KEYS` を読むので、定義が main に入るまで値を作れない (手元には非公開 R2 の読み取りの認証情報が無い)。2026-11-17 のリリース後の試験実行 (run 44059477866) は、公開済みの 5 本の候補が台帳から外れていて 1 本目で止まった。一括の対象を台帳に候補が残る指標だけにする修正 `d18e2a825` は develop にあり、main に入るまで取り込めない。公開済みの 5 本は `--metric` 指定の復元 (provenance の restore) も同じ検査で止まるので、候補を外す代わりに status を変えるか、復元の経路を別に持つかを決める。済み (2026-11-18): 修正は PR #1283 で main に入り、`external-metric-ingest.yml` で 13 本 × 47 県 (611 行) を R2 の新しいキーへ上げ、読み戻して 13 本とも 47 県を確認した (run 44203405913)。残りの手順: (b) 13 本を `isActive: true` にして KNOWN・sitemap を生成し直す (c) その次のリリース直後に `sync-snapshots` の ranking-items → ranking-values を回し、ranking-items の OGP の段が落ちたら回し直す (d) 本番の `/ranking/<key>` が Googlebot UA で 13 本とも 200 を確かめ、improvements の `OPENDATA-RANKING-EFFECT-01` に 13 本と公開日を足す。済み (2026-11-18): (b) a1d09d14f で 13 本を isActive: true にし、KNOWN・sitemap は sync-ranking-keys (5bbdd916f) で develop に入った。(c) sync-snapshots の ranking-values (run 44215694484) と ranking-items (run 44214572308。OGP の段は values の 404 で一度落ち、回し直しで成功) を回した。(d) リリース PR #1285 (cf3d2b379、デプロイ run 44242824251) のあと、本番の `/ranking/<key>` が Googlebot UA で 13 本とも 200 (title が指標名)。効果の観測は improvements の `OPENDATA-RANKING-EFFECT-01` へ引き渡した。確認待ち: 極性 (国語 2・小 6 自己肯定感は高いほど良い、降雪時の事故は高いほど悪い、ほかの 9 本は中立。`data/metrics/policy/polarity.ts`) 。道路 3 本の surveyId `road-statistics` は、調査の名前の台帳 `data/surveys/master/source-names.json` が道路交通センサスを既にこの調査へ割り当てているので正本どおり (2026-11-17 確認)。
 - **次 (実行順)**: ① 2026-11-17 の 28 本 (学力 3・熱中症・75 歳以上の事故・NDB 10・学力と道路と降雪の 13) の判定 (improvements の `OPENDATA-RANKING-EFFECT-01`・`OPENDATA-NDB-EFFECT-01`、期日 12-15) を読む。② 上の題材から、出典が 47 県・同じ時点でそろうものを open-data-curator が展開の台帳へ候補として足す (`/data/open-data`)。③ 1 波 10〜20 本で、今日と同じ手順 (定義 → 取り込み → 公開 → 本番の実測) で出す。
 - **波の止める条件 (各波の公開から 28 日後に判定)**: 波のうち検索の表示が 0 のページの割合が、既存ランキングの 12 週の実測 41% (2026-07) を大きく上回る (目安 60% 超) か、GSC の「クロール済み - インデックス未登録」が波の本数を超えて増えたら、次の波へ進まず、題材の選び方を見直す。表示とクリックが付いた題材だけ、同じ出典の指標を足して深掘りする。
@@ -372,7 +366,7 @@ updated: 2026-11-01
 ### [OPENDATA-ARCHIVE-01] e-Stat 外の原本を非公開 R2 に一度だけ固定し、共通スキーマ経由で展開する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-14] [領域:データ]
 
-- **背景**: e-Stat 外の取り込み (`.claude/scripts/themes/ingest-*.mjs` 約 50 本) がそれぞれ原典を取りに行くため、同じサイトを何度も取得・確認している。オーナー決定 (2026-11-14): 機械で取れる原本は全件を非公開 R2 へ保存し、公開側へ出すのは `license.commercialUse === "allowed"` だけ。3D 都市モデル・地図タイル・ラスタは対象外。実装は Claude から Codex MCP で行う。
+- **背景**: e-Stat 外の取り込み (`.claude/scripts/themes/ingest-*.mjs` 約 50 本) がそれぞれ原典を取りに行くため、同じサイトを何度も取得・確認している。
 - **済み (2026-11-14・`99bd3ce5b` ブランチ `claude/open-data-archive`)**: 段 1 の基盤 (台帳 `open-data.fetch-recipes`・`open-data.snapshots`・`open-data.expansion`、取得の型 5 種の `.claude/scripts/open-data/fetch-source.mjs`、正規化 `normalize-source.mjs`、非公開 R2 の 2 区分、workflow `open-data-source-archive.yml`)。
 - **済み (2026-11-14・段 2)**: 136 件すべてに recipe があり、`--all --dry-run` で 33 件・約 4.3GB が取得可能 (失敗 0、商用可 23・不明 10)。
 - **済み (2026-11-15・段 3〜4)**: 本番反映 (PR #1274) の後、`open-data-source-archive.yml` を提供元・データセット単位で 1 本ずつ起動し、31 件・1,231 ファイル・4,287MB を非公開 R2 の `open-data/raw/` へ保存した。
@@ -399,7 +393,7 @@ updated: 2026-11-01
 ### [MUNI-PREF-RANKING-EXPAND-01] 県×指標の市区町村ランキングを (指標, 県) の組単位で広げる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
-- **背景 (2026-11-13 オーナー方針)**: 市区町村のページは SEO を踏まえてできるだけ検索に出す。今は台帳 `data/municipalities/catalog/prefecture-ranking.json` の 10 指標 × 47 県 = 470 ページだけで、「全 47 県で 10 自治体以上」を満たさない指標は指標ごと外している。CF-CPU-URL-01 で全国版の県の絞り込み (`?pref=`) をやめたので、台帳に無い指標は県内の順位を見る入口が自治体名・県の絞り込み (ブラウザ側) だけになった。
+- **背景 (2026-11-13 オーナー方針)**: 市区町村のページは SEO を踏まえてできるだけ検索に出す。
 - **費用の見立て**: 1 描画 約 1.5 秒 = $0.00003 (Workers CPU $0.02/100 万 ms)。8,037 ページ (171 × 47) が毎日 1 回描画されても月 約 $7。根拠の実測は `data/improvement/cloudflare-cost-improvement/improvement-log.md` の CF-CPU-URL-01。
 - **次**: (1) 採否を (指標, 県) の組単位に変える。値のある自治体が `MIN_MUNICIPALITIES_PER_PREFECTURE_RANKING` 以上の組だけを、R2 の values から生成スクリプトで git 定数にし、ページ・sitemap・内部リンク・`url-policy.ts` が同じ集合を読む。(2) 第 1 波は GSC で表示のある市区町村ランキングの指標を全県へ。以降は 1 波 約 2,000 ページ。(3) 県別ページの HTML の edge 保持を 7 日にする (`CF-EDGE-TTL-01`)。波ごとの検査は同じ形の繰り返しなので Workflow を使う。
 - **停止条件**: 各波の 14 日後に、日次の `workers_cpu_ms` と請求サイクルの累計ペース検査が warning のまま増えている、または GSC の県別ページで「クロール済み - インデックス未登録」が登録数を上回るなら次の波へ進まず、本文テンプレートを見直す。第 1 波は `MUNI-PREF-RANKING-OBS-01` (既存 470 ページの 4 週観測) の結果を読んでから始める。
@@ -423,14 +417,14 @@ updated: 2026-11-01
 ### [CF-EDGE-TTL-01] HTML の edge 保持を 1 日から 7 日に延ばし、パージの呼び出しを配線する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
 
-- **観測 (2026-11-13)**: `apps/web/src/lib/cache-policy.ts` の `PAGE_EDGE_CACHE_CONTROL` は `max-age=86400`。Workers Observability では同じ URL (`/ranking/vacant-housing-ratio`) が 3 日間に WAW・MIA・EWR・KIX の 4 拠点で描画され、`/ranking/*` はクエリなしの 714 URL が 24 時間に 4,845 回、平均 1.5 秒で描画されていた。
+- **観測 (2026-11-13)**: `apps/web/src/lib/cache-policy.ts` の `PAGE_EDGE_CACHE_CONTROL` は `max-age=86400`。
 - **次**: デプロイとデータ更新のときに `/api/internal/worker-cache/purge` (Cache-Tag) が呼ばれているかを確かめる (`.github` の grep では呼び出しが見つからなかった。見つからなかっただけで、無いとは確かめていない)。呼ばれていなければ `deploy-workers.yml` に足し、そのうえで保持を 7 日にする。
 - **停止条件**: パージの配線を確かめる前に保持だけを延ばさない (更新が 7 日出なくなる)。
 - **あわせて確かめる (2026-11-13 レビュー・未実測)**: 全国版の市区町村ランキングを `revalidate = 86400` にしたので、Workers Cache を tag で消しても OpenNext の incremental cache (R2) に前の HTML が残りうる (`/ranking/[rankingKey]` と同じ形。コードに revalidatePath / revalidateTag の呼び出しは見つからなかった)。R2 が一時的に読めないときの「配信用データを準備しています」(200) が保存される可能性もある。本番でデータ更新後の応答を読んで確かめる。
 - **同じ形の疑い (未実測)**: `apps/web/src/app/api/flow/[feature]/[code]/route.ts` は `revalidate = 86400` のまま no-store の 404 を返す。route handler が 404 も保存するなら、R2 の一時失敗が 1 日残る (市区町村の全行 JSON の route は同じ理由で force-dynamic にした)。
 - **前提の変化 (2026-11-21)**: 拠点ごとの描き直しの主因は、`/ranking/*` が ISR になっていなかったこと (`CF-CPU-ISR-01`)。ISR が効けば Workers Cache の miss は数 ms の ISR 応答になり、保持を延ばす効果は小さい。`CF-CPU-ISR-01` の反映後に、日次 snapshot の `routeCpu` で 1 URL あたりの描画回数が版の数を超えるかを見てから、このカードを続けるか閉じるかを決める。
 - **完了条件**: 保持 7 日とパージの配線が本番に入り、`/ranking/*` の 1 URL あたりの 1 日の描画回数を前後で比べた値が改善ログに記録された。
-- **統合 (2026-11-13)**: `CF-HTML-EDGE-TTL-01` をこのカードへ統合した。完了条件に含める: 保持 7 日とパージの配線が本番に入り、/ranking/* の 1 URL あたり 1 日の描画回数の前後比較が改善ログにある。加えて旧カード側の項目を落とさない: (1) purge されない経路 (データ更新・テーマ定義・page_components・広告) を洗い出し、延長で古い内容が残るページを特定して塞ぐ (2) stale-while-revalidate が Workers Cache で効くか (MISS でなく STALE を返すか) を本番で確認 (3) 期間案と効果見込み、HIT 率か CPU の before/after を測る。停止条件は purge 漏れを残したまま延ばさない・本番反映はオーナー承認後。
+- **統合 (2026-11-13)**: `CF-HTML-EDGE-TTL-01` をこのカードへ統合した。
 
 ### [CF-RENDER-CPU-01] 1 描画あたりの CPU (約 1.5 秒) を、重複読みの解消で下げる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-13] [領域:サイト]
@@ -440,7 +434,7 @@ updated: 2026-11-01
 - **残り (ランキングの図)**: `components/stat-charts/.../RankingChart.tsx` は指標の定義を自分で読んだ後、`lib/metric-axis-policy.ts` の `resolveMetricAxisPolicy` が同じ指標の定義を最大 2 回読み直す。`RadarChartDashboard.tsx` も軸ごとに定義を直接読む。`RankingSidebarContainer` はランキングのページから `categoryKey` を受け取るので、そのページでは定義を読まない (対象から外してよい)。
 - **残り (判断)**: ランキングの図の重複読みをまとめるには、`features/ranking/lib/cached-ranking-item.ts` の `cachedFindRankingItem` を `components/` と `lib/` から使える場所 (`apps/web/src/lib/`) へ移す必要がある。選択肢は「上の計測で `/ranking/*` の CPU が下がらなかったときだけ行う」か「計測を待たずに行う」。推奨は前者で、根拠はカードの停止条件 (計測なしに最適化しない) と、この図が代表 3 route の描画に入る割合を測っていないこと。
 - **残り (統合元のカード)**: (1) CF-CPU-SURGE-01 の反映後 7 日で Observability の url.path 別 CPU 合計の上位 20 を取り直す。(2) 上位 route が読む R2 オブジェクトの数とサイズを数え、CPU が JSON の解析か描画かを分ける。(3) 必要な年・項目だけの派生 snapshot (R2) を 1 route で試し、localhost の本番ビルドで比べる。
-- **実測 (2026-11-21)**: フル描画 (CPU 200 ms 超) の平均は `/ranking/*` 1,674 ms、`/areas/<県>/household-food-spending` は 4.4〜4.9 秒。`CF-CPU-ISR-01` (実行時 ISR) は描画の回数を減らすだけで 1 回の重さは変えない。ISR 反映後も CPU は「版ごとに URL 1 回 × 1.7 秒」残る (1 日 2 版で約 15,000 秒/日・月 約 $18)。月 $10 以下にはこのカードの削減が要る。日次 snapshot の `routeCpu.routes[].avgFullRenderCpuMs` を前後の比較に使う。
+- **実測 (2026-11-21)**: フル描画 (CPU 200 ms 超) の平均は `/ranking/*` 1,674 ms、`/areas/<県>/household-food-spending` は 4.4〜4.9 秒。
 - **完了条件**: 3 route の平均 CPU の前後の値が改善ログに記録され、下がらなかった箇所は元に戻した。停止条件は、計測なしに最適化しない・永続 DB に戻さない・表示内容と SEO 構造化データを変えない。効果の観測は改善台帳の別 ID へ引き渡す。
 
 ### [URL-QUERY-INVENTORY-01] `searchParams` を読むページを棚卸しし、パスへ移すか URL から外す
@@ -511,7 +505,7 @@ updated: 2026-11-01
 ### [GOAL-PSI-LCP-STALE-01] 性能目標 `psi-mobile-lcp-2500` の記録が ACTIVE のまま 2026-05-15 から止まっている
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理] [待ち:判断]
 
-- **観測 (2026-11-13)**: `data/goals/psi-mobile-lcp-2500/meta.json` は status が ACTIVE、cycle 1 が proposed、`updated_at` が 2026-05-15。`md_path` が指す `.claude/skills/management/goal/reference/goals/psi-mobile-lcp-2500-2026-05-15.md` は存在しない。baseline の `source` は `data/psi/` へ移す前の旧置き場 (エージェントの state 配下) を指す。
+- **観測 (2026-11-13)**: `data/goals/psi-mobile-lcp-2500/meta.json` は status が ACTIVE、cycle 1 が proposed、`updated_at` が 2026-05-15。
 - **次**: 目標を続けるか閉じるかをオーナーが決める。続けるなら baseline を `data/psi/` の現在の計測で取り直し、閉じるなら `close_reason` を書く。
 - **完了条件**: status と実態が一致し、存在しないパスへの参照が無い。
 
@@ -531,7 +525,7 @@ updated: 2026-11-01
 ### [POPULATION-MUNICIPAL-COVERAGE-01] 既存配信の一般世帯人員の市区町村欠落と取得表の記録を是正する
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-11-12] [領域:サイト]
 
-- **証拠**: P-01改訂用に原典0000020201から取得したA710201は2000・2015年とも1,741自治体ある。既存R2のgeneral-household-members/cities.jsonは2000年1,498件・2015年1,045件。取得結果の件数とハッシュは `data/products/landing-evidence/p-01.json` のanalysisRevision。households/cities.jsonのmeta.recipe.estatParams.statsDataIdも県表0000010101になっている。2026-11-12の追加照合では total-population・annual-sales-amount・general-clinic-count・elementary-school-count のcities.jsonにも県表IDが残っていた。転出者数の2004〜2014年にも一部欠年があり、原典欠測か未取得かは未確定。
+- **証拠**: P-01改訂用に原典0000020201から取得したA710201は2000・2015年とも1,741自治体ある。
 - **次・順序**: data-ingesterが既存指標の取得条件と原典メタを照合→修正済みの共通city取得経路で欠落年度・古いmetaを再生成→地域マスタによる全件性と実際の表ID・cat01を検査→既存のR2反映手順へ渡す。別途、recipeの既存configHash互換性を保ったままcitySource単独の変更を検出できる契約を設計・検証する。P-01の入力は再取得済みなのでこの不具合の値で補完しない。
 - **停止条件**: 一般世帯/総世帯や日本人/総数の定義が一致しない場合は投入しない。
 - **完了条件**: 対象年度の自治体数が原典と一致し、配信メタから正しい表・条件を追跡できる。転出者の欠年は取得または原典欠測の理由を記録する。
@@ -549,7 +543,7 @@ updated: 2026-11-01
 ### [THEME-SINGLE-CARD-BUNDLE-01] テーマの指標 1 つだけのカードの縦の並びを、数値タイルの格子か表に束ねる
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-11-13] [領域:サイト]
 
-- **観測 (2026-11-12)**: 56 テーマの指標カード 467 枚のうち 342 枚が指標 1 つだけのカード (`metricGroups` の `rankingKeys` が 1 件)。地方財政は 23 枚すべて、林業は 15 枚すべてで、ページが縦に長い。11-03 に「食卓と家計の支出」で試した束ね方 (`view: "tiles"` の数値タイルの格子・5 件以上は `"table"`) はほかのテーマに広げていない。
+- **観測 (2026-11-12)**: 56 テーマの指標カード 467 枚のうち 342 枚が指標 1 つだけのカード (`metricGroups` の `rankingKeys` が 1 件)。
 - **次**: カードの多いテーマ (地方財政・林業・医療・地方の生活サービス) の 1 つで、同じ章の 1 指標カードを 1 グループの `tiles` にまとめる案を作り、オーナーと localhost で見比べる。良ければ同じ規則 (同じ章・単位 2 種まで・5 件以上は table) で他のテーマへ広げる。`tiles` の章には答えの文 (`section-answer.ts`) が出るので、その文面も見る。
 - **完了条件**: 合意したテーマで束ね、`validate:catalog` が error 0、テーマ画面の vitest が通り、localhost の画面で確かめたスクリーンショットをオーナーが見ている。
 - **禁止**: 合意前に全テーマを一括で書き換えない。
@@ -557,7 +551,7 @@ updated: 2026-11-01
 ### [RANKING-RAIL-CIRCULATION-01] PC のランキングの右レールの下の空きに、回遊の導線を足すかを決める
 タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-11-12] [領域:サイト] [待ち:判断]
 
-- **起点 (2026-11-12 オーナー)**: PC でランキングを開くと、右レールの中身が本文より短く下が空いている (総人口のランキング・1440px で約 840px。量はページの長さで変わる)。その日はまず右レールの最後の AdSense を 300×600 の追従にし (`ADSENSE-FORMAT-EXPERIMENT-01`)、回遊は別のセッションで議論すると決めた。
+- **起点 (2026-11-12 オーナー)**: PC でランキングを開くと、右レールの中身が本文より短く下が空いている (総人口のランキング・1440px で約 840px。)
 - **案 (未決定)**: 分野のランキング一覧の後、追従する広告の上に「この県が 1 位の指標」「同じ調査のランキング」のような導線を足す。右レールは本文の横にあるときだけ出るので PC だけの話。既存の部品 (`RelatedContentNavigation`・`RankingItemsSidebar`) と台帳 `data/content/` の関係で作れるかを先に見る (専用の部品を作らない)。
 - **判断の材料**: 回遊は PV の主なレバー (KPI `site-circulation-rate`)。サイト内の遷移は週次の `internal-transitions.csv` (referrer) で読む。追従広告の 2 週の結果 (ユニット `stats47-ranking-table-side` の視認率・収益) を見てから、広告と導線の並び順を決める。
 - **停止条件・禁止**: 追従する広告と導線が重ならない・隣り合わないようにする (広告の枠の台帳の共通のルール)。右レールに独立したスクロールを作らない (`ui-components.md`)。
@@ -566,7 +560,7 @@ updated: 2026-11-01
 ### [SUBSIDY-EVIDENCE-STRATEGY-01] 補助金・創業計画を書く事業者と支援者を「仕事の読者」として採るかを決め、収益化戦略とペルソナに反映する
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-11] [領域:戦略] [待ち:判断]
 
-- **起点**: 2026-11-11 のオーナーとの検討と Web 調査。検討の問いと答え・ペルソナ・導線・商品の階段・制度ごとの統計の欄・市場の調査・未確認の点は `docs/02_実装計画/49_補助金の根拠データとAIノウハウ展開仕様.md` にまとめた (status は draft。このカードの決定で active に上げる)。
+- **起点**: 2026-11-11 のオーナーとの検討と Web 調査。
 - **問い**: `ISSUE-PAYING-NEED-01` の「別の仕事の読者を先に確かめるか」に対し、行政職員とは別の読者 (自分で申請書を書く創業予定者・小規模事業者／診断士・行政書士・認定支援機関などの支援者／統計局の無料講座を受けた社会人) を先に確かめるか。
 - **読者の課題 / HARM**: 計画書の「市場の動向」「売上の根拠」に、どの統計をどの年の値で置けば客観的なデータになるか分からない (M: 資金の調達、A: 事業の達成)。提供価値は、公庫の式「世帯数 × 1 世帯あたり消費額 × シェア」の単価の項と、使う年・出典の判断。支払う理由は、締切の前に探して揃える時間を買えること。
 - **需要の証拠 (2026-11-11 観測)**: 持続化補助金は一般型 第 20 回から「客観的なデータを用いた市場や顧客ニーズの分析」が補助対象事業の要件になった (公募要領 第 9 版)。ココナラの商圏分析は 30,000 円の出品に評価 57 件。補助金向けの地域統計データ集は市場に見当たらない。stats47 で売れたのは「e-Stat × Claude Code」の作り方だけ (note 累計 600 円)。**未検証**: 検索ボリューム、この読者が stats47 の記事に払うか、申請件数の規模。聞き取りはしていない。
@@ -594,7 +588,7 @@ updated: 2026-11-01
 ### [KNOWHOW-FREE-COURSE-ENTRY-01] 無料の入口記事「統計局の講座で Excel でやった集計を、Claude Code で 5 分にする」を出し、有料記事へ流れる数を 4 週測る
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-11] [領域:商品]
 
-- **起点**: 統計局の「社会人のためのデータサイエンス入門」は累計 23.1 万人で、e-Stat と Excel の手作業を教えている。受けた人は競合の客ではなく見込み客で、「その作業を生成 AI で短くする」は講座の次の段階になる (2026-11-11 オーナーの指摘。`docs/02_実装計画/49_補助金の根拠データとAIノウハウ展開仕様.md` §3 の C・§4 の ②)。生成 AI × 公的統計に絞った有料商品は、note・Kindle・Udemy・Brain に見つからなかった。
+- **起点**: 統計局の「社会人のためのデータサイエンス入門」は累計 23.1 万人で、e-Stat と Excel の手作業を教えている。
 - **未検証**: 既存の有料マガジン「公務員の e-Stat × Claude Code 実務ガイド」(1,480 円) は売れたのが 2 件で、この母集団に届いていない可能性がある。庁内で外部の生成 AI を使えない職員が多いなら、読者は講座を受けた個人・診断士・コンサル・研究者・記者の側に寄る。
 - **中身**: 講座と同じ題材 (e-Stat の表を落として集計しグラフにする) を、手作業と Claude Code で並べて見せる。所要時間は自分で測った値だけを書く。講座の教材そのものは写さない (題材の種類を合わせるだけ)。末尾で `KNOWHOW-SUBSIDY-EVIDENCE-01` の有料記事と既存のマガジンへ 1 行ずつ案内する。
 - **集客**: note の中の検索・推薦が主。stats47 の Claude Code 連載は 28 日 25 PV なので、サイトからの送客は当てにしない (収益化戦略 §3.5)。
@@ -605,7 +599,7 @@ updated: 2026-11-01
 ### [KAKEI-MARKET-SIZE-PILOT-01] 品目 × 地域の「1 世帯あたり支出と推計市場規模」のページを 10 品目ほど試し、検索と記事への送客を 8 週測る
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-11-11] [領域:サイト] [待ち:判断]
 
-- **起点**: 公庫の創業の手引は「世帯数 × 1 世帯あたり消費額 × シェア」で売上を見積もる例を示し、材料に e-Stat の家計調査を挙げている。世帯数は jSTAT MAP が無料で出し、シェアは申請者が置く。統計サイトが担えるのは単価の項 (`docs/02_実装計画/49_補助金の根拠データとAIノウハウ展開仕様.md` §5)。家計調査は stats47 で検索の流入が最も多い分野で、表で完結するので小地域のデータも販売に申請が要る境界データも要らない。
+- **起点**: 公庫の創業の手引は「世帯数 × 1 世帯あたり消費額 × シェア」で売上を見積もる例を示し、材料に e-Stat の家計調査を挙げている。
 - **前提**: `KNOWHOW-SUBSIDY-EVIDENCE-01` の判定の後に始める (1 つずつ試す)。採否は `SUBSIDY-EVIDENCE-STRATEGY-01`。
 - **ページの形**: 主役は品目別の 1 世帯あたり支出 (出典・年次・対象の世帯区分つき)。市区町村の世帯数を掛けた推計は「上限の目安」として並べる。利用者が自分の商圏の世帯数とシェアを入れる計算欄を付ける。「市区町村の市場規模」を主役にしない。
 - **弱点と対処**: 家計調査の品目別の値は 52 市 (県庁所在市と政令市) だけ。ほかの市区町村は県庁所在市の値で代えるか按分する推計になるので、「推計」と方法を値のそばに書く。世帯区分をそろえる。市区町村は商圏より粗いので、これだけで売上の予測は作れないと書く。
@@ -616,7 +610,7 @@ updated: 2026-11-01
 ### [SUBSIDY-FIELD-MAP-01] 「どの制度のどの欄に、どの統計を、どの粒度で」の対応表を無料で出し、推計ページと記事の入口にする
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-11] [領域:コンテンツ]
 
-- **起点**: 公式の資料は統計の名前をほとんど挙げていない (名指しは統合補助金の RESAS だけ。持続化の参考資料には「統計」「人口」「商圏」の語が無い)。どの欄にどの統計をどの粒度で置くかは支援者の慣行に任されていて、まとまった表が見当たらない。オーナーの見立て: ここまで分析すればコンテンツとデータがつながる (2026-11-11)。
+- **起点**: 公式の資料は統計の名前をほとんど挙げていない (名指しは統合補助金の RESAS だけ。)
 - **材料**: `docs/02_実装計画/49_補助金の根拠データとAIノウハウ展開仕様.md` §7 の表 (持続化 第 20 回、新事業進出・ものづくり統合補助金、経営革新計画、公庫の創業計画書、賃上げの要件、事業承継・M&A、統計が要らない制度)。要領の原文で確認済みの範囲と、未確認の範囲 (統合補助金の第 2 回の日程、持続化の記入例) が分かれている。
 - **形**: ブログのハブ記事 1 本。制度ごとに、欄の名前・求められる中身・使える統計 (e-Stat のどの調査・どの粒度)・stats47 のどのページで見られるか・見られないものは jSTAT MAP など公式の無料ツール。要領の版と確認日を必ず書く。欄に書く文章の例は載せない。
 - **前提**: `KAKEI-MARKET-SIZE-PILOT-01` と同じ時期に出す (表から送る先が要る)。制度の事実は公開の前に公募要領で確かめ直す (回が変わると欄も変わる)。
@@ -655,19 +649,19 @@ updated: 2026-11-01
 
 - **証拠 (2026-11-10)**: `apps/web/scripts/lib/__tests__/blog-fullbleed-cli.test.ts` の 2 件が、パス区切り (`\`) を `/` の正規表現で照合して落ちる
 - **証拠 (2026-11-10)**: `packages/data-configs/mirror/unit-semantics.mjs` は `eol=lf` の属性が無く、作業ツリーで CRLF になって `preflight:pr` の Unit Semantics Mirror が落ちる (`git ls-files --eol` が `i/lf w/crlf`)
-- **証拠 (2026-11-10)**: `apps/admin/tests/unit/agent-models.test.ts` が、期待値 `.claude/agents/broken.md` に対して区切りが逆のパスを返されて落ちる。admin の vitest の 3 件 (`reference-content-read-model`・`draft-caption`・`reference-blog-source`) は 5 秒の時間切れで落ち、時間切れを延ばすと通る
+- **証拠 (2026-11-10)**: `apps/admin/tests/unit/agent-models.test.ts` が、期待値 `.claude/agents/broken.md` に対して区切りが逆のパスを返されて落ちる。
 - **証拠 (2026-11-11)**: テーマの `evaluate-theme-experiments` の CLI テスト 7 件が、`--import` に Windows の絶対パスを渡して `ERR_UNSUPPORTED_ESM_URL_SCHEME` で落ちる (file URL にする必要がある)。`npm run theme:quality:test` は 551 件中 8 件が失敗し、残り 1 件は preview ゲートウェイの 502 のテスト
 - **証拠 (2026-11-11)**: `.claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs` が、`spawnSync` で `node_modules/.bin/tsx` を起動できず `status: null` で落ちる
-- **証拠 (2026-11-12)**: `.claude/scripts/note/__tests__/attachment-dom.test.cjs` の「無料説明文の同名言及を無視し、折り返し段落のDOM先頭を選ぶ」が、生成した式に `keys Home|index($0,h)|startsWith` が無いことの検査で落ちる (読むファイルは作業ツリーで CRLF。差分の無い作業ツリーでも落ちることを段 13 の検証で確認)。Mac (改行は LF) の作業ツリーでも同じ検査で落ちる (2026-11-13 確認)。`.claude/scripts/note/editor-helpers.sh` の `ins_file` に `index($0,h)` が残っているためで、改行コードは原因ではない。Windows の件と分けて、`ins_file` を `attachment-dom.cjs` の式へ寄せるかテストを現状に合わせるかを決める
+- **証拠 (2026-11-12)**: `.claude/scripts/note/__tests__/attachment-dom.test.cjs` の「無料説明文の同名言及を無視し、折り返し段落のDOM先頭を選ぶ」が、生成した式に `keys Home|index($0,h)|startsWith` が無いことの検査で落ちる (読むファイルは作業ツリーで CRLF。)
 - **証拠 (2026-11-13)**: `apps/web/src/config/__tests__/gone-blog-publication.test.ts` の 3 件 (「…はslug指定でも旧原稿path指定でも再公開を拒否する」) が、変更の無い本体ツリーでも落ちる (原因は読んでいない)
 - **証拠 (2026-11-13)**: `apps/web/src/__tests__/region-page-no-comparison.test.ts` の 3 件が、列挙したパス (`appareaspage.tsx`) を `/` 区切りの期待値と比べて落ちる (CF-CPU-URL-01 の作業中の vitest で観測。触っていないファイル)
 - **完了条件**: この PC で `npm run preflight:pr` の該当の 2 ゲートと、`apps/web/scripts`・`apps/admin` の vitest、`npm run theme:quality:test` が通る
-- **統合 (2026-11-13)**: `ADMIN-AGENT-MODELS-WIN-PATH-01` をこのカードへ統合した。完了条件に含める: この PC で preflight:pr の該当 2 ゲート・apps/web/scripts と apps/admin の vitest・npm run theme:quality:test が通る。吸収分: (1) region-page-no-comparison.test.ts の 3 件は PR #1258 で修正済みなので Windows で通ることの確認だけ残す (2) apps/admin/tests/unit/agent-models.test.ts は agentModelCatalog が返す file を / 区切りにそろえ、npm run test -w apps/admin が通ること。
+- **統合 (2026-11-13)**: `ADMIN-AGENT-MODELS-WIN-PATH-01` をこのカードへ統合した。 (参照: #1258)
 - **確認の追加 (2026-11-13・消した `ADMIN-VITEST-TIMEOUT-01` から)**: `apps/admin/vitest.config.mts` の testTimeout と hookTimeout を 120 秒にした (`ce725a765`)。この PC で tsc や dev サーバーと並行して `npm run test --workspace apps/admin` を流し、タイムアウトが 0 件かを確かめる。
 - **確認の追加 (2026-11-13・消した `ROOT-TSX-NODE-PIN-01` から)**: この PC の Node は 22.14.0 で、`.mjs` が `.ts` を直接 import すると `ERR_UNKNOWN_FILE_EXTENSION` で落ちる (型の除去が既定で有効なのは 22.18 から)。`.claude/scripts` に約 10 本ある (`ads/build-placement-map.mjs`・`estat/gen-ssds-configs.mjs`・`lib/internal-link-lint.mjs` など)。22.14 を支えるなら tsx 経由にし、支えないなら Node を上げる (オーナーが決める)。ルートの devDependencies への tsx の追加は `7f6f18db0` で済み。
-- **観測 (2026-11-14・Mac)**: `attachment-dom.test.cjs` の 1 件は Mac でも落ちるので、Windows 固有ではない。原因は、添付の位置を決める部品 `.claude/scripts/note/attachment-dom.cjs` (prepare / verify) はできているのに、`.claude/scripts/note/editor-helpers.sh` の `ins_file` がまだ旧方式 (`startsWith` での前方一致・awk の `index($0,h)`) で探していること。テストは旧方式が残っていないことを確かめている。直すには `ins_file` を `attachment-dom.cjs` の `buildExpression("prepare"|"verify", ...)` を呼ぶ形に置き換え、note の下書きで 1 回添付して確かめる (note への外部操作なので下書きで行う)。再現: `node --test .claude/scripts/note/__tests__/attachment-dom.test.cjs`。
-- **再観測 (2026-11-15・R2 Stage 3 batch B)**: `node --import tsx --test .claude/scripts/note/__tests__/attachment-dom.test.cjs` の同じ 1 件が `ERR_ASSERTION` (`/keys Home|index\(\$0,h\)|startsWith/` に一致) で失敗。sandbox の listen 制限とは別。今回の R2 キー移行では添付処理を変更していない。
-- **再観測 (2026-11-20・Mac)**: 同じ 1 件が同じ assert で失敗 (note のテストを packages へ移す作業中に確認。`editor-helpers.sh` の最後の変更は 2026-10-24 の `d3ce3bac09` で、今回は触っていない)。テストは `.claude/scripts/note/__tests__/` に残し、この 1 件に `todo` の印を付けた (push 前の検査を止めないため。オーナー判断)。`ins_file` を直したら印を外す。
+- **観測 (2026-11-14・Mac)**: `attachment-dom.test.cjs` の 1 件は Mac でも落ちるので、Windows 固有ではない。
+- **再観測 (2026-11-15・R2 Stage 3 batch B)**: `node --import tsx --test .claude/scripts/note/__tests__/attachment-dom.test.cjs` の同じ 1 件が `ERR_ASSERTION` (`/keys Home|index\(\$0,h\)|startsWith/` に一致) で失敗。
+- **再観測 (2026-11-20・Mac)**: 同じ 1 件が同じ assert で失敗 (note のテストを packages へ移す作業中に確認。) (参照: d3ce3bac09)
 
 ### [AFFILIATE-PUBLISH-PROFILE-TRIGGER-01] 案件の台帳だけを変えた push で、広告の R2 への反映が走らない
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-11-11] [領域:アフィリエイト] [待ち:判断]
@@ -708,7 +702,7 @@ updated: 2026-11-01
 ### [BLOG-ENGEL-VALUE-MISMATCH-01] 公開記事「物価高で切り捨てられた品目」のエンゲル係数が家計調査の表と合わない
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-09] [領域:サイト]
 
-- **事象 (2026-11-09)**: `blog:household-spending-before-after-inflation` の本文と図のエンゲル係数は 2019 年 27.0%・2024 年 27.8% だが、家計調査の用途分類 (`0002070003`、全国・二人以上の世帯) は 2019 年 25.7%・2024 年 28.3%。新しい下書き `engel-coefficient-rise-hardship-2025` を作る書き手が照合で見つけた。原因 (対象世帯・集計の違いか、算出の誤りか) は未調査。
+- **事象 (2026-11-09)**: `blog:household-spending-before-after-inflation` の本文と図のエンゲル係数は 2019 年 27.0%・2024 年 27.8% だが、家計調査の用途分類 (`0002070003`、全国・二人以上の世帯) は 2019 年 25.7%・2024 年 28.3%。
 - **次**: ① 記事の data/*.json と source を R2 の記事から読み、どの表・世帯・式で出した値かを確かめる ② 誤りなら `/blog-revise-fix` で本文と図を直し、critic を通す。
 - **完了条件**: 記事の値が出典の表と一致するか、違う理由 (対象世帯など) が本文に書かれている。
 - **進み (2026-11-09)**: 一次資料 (e-Stat 0002070003、二人以上・全国) で確かめ、記事の値は誤りだった (図の折れ線 25 点がほぼ実値と合わない)。正しい値 2019 年 25.7%・2024 年 28.3% で本文と図を直し、品目別の 2 図も 0004023605 の実値で作り直した改稿を `contents/blog/household-spending-before-after-inflation/` に用意 (gate blocker 0・critic PASS)。公開後に R2 の本文と図が改稿と一致することを確かめたら消してよい。残る指摘は `BLOG-KAKEI-PUBLISHED-FACT-FIX-01` の「残り」。
@@ -717,7 +711,7 @@ updated: 2026-11-01
 ### [BLOG-KAKEI-PUBLISHED-FACT-FIX-01] 公開済みのビール系の記事 2 本に、出典と合わない記述がある
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-09] [領域:サイト]
 
-- **事象 (2026-11-09、下書き `beer-happoshu-liquor-tax-steps-household-response` の書き手が照合で発見)**: ① `blog:beer-vs-happoshu-shift` は「新ジャンルは家計調査で別区分」と書くが、統計局の品目分類では発泡酒の品目 (3X7) に新ジャンルを含む。② `blog:beer-peak-month-july-to-december` の「350ml換算154円」は、国税庁のビールの酒税 (350ml あたり 54.25 円、2026年10月) と合わない。いずれも書き手の照合で、呼び元は公式資料を未取得。
+- **事象 (2026-11-09、下書き `beer-happoshu-liquor-tax-steps-household-response` の書き手が照合で発見)**: ① `blog:beer-vs-happoshu-shift` は「新ジャンルは家計調査で別区分」と書くが、統計局の品目分類では発泡酒の品目 (3X7) に新ジャンルを含む。
 - **次**: ① 統計局の家計調査の品目分類 (用語の解説・収支項目分類) と国税庁の酒税の資料を取得して、2 本の該当箇所と照らす ② 誤りなら `/blog-revise-fix` で直し、critic を通す。
 - **完了条件**: 2 本の該当箇所が公式資料と一致するか、記事の値の根拠が本文に書かれている。
 - **進み (2026-11-09)**: 2 本とも誤りと確かめ、直した改稿を `contents/blog/<slug>/` に用意した (新ジャンルは品目 3X7 に入る。酒税は 350ml 換算 54.25 円・財務省 d08 と国税庁の手引き。2026 年 10 月の一本化は実施済みの時制へ)。同時に `blog:household-spending-before-after-inflation` (`BLOG-ENGEL-VALUE-MISMATCH-01`) も直した。3 本とも gate blocker 0・factual exit 0・critic PASS。公開 (published のまま develop へ push) で反映する。
@@ -734,7 +728,7 @@ updated: 2026-11-01
 ### [PAGE-UI-REVIEW-COVERAGE-01] ページ UI の週次確認で読むべき画面の 9 割が読まれず、新しい指摘の行き先が無い
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-11-08] [領域:サイト]
 
-- **観測 (2026-11-08・W44 週次レビュー)**: `data/page-quality/metrics/ui-review-latest.json` (監査 2026-10-30) は `reviewStatus: reviewed` だが、読んだ切り出しは 196 枚中 22 枚で、読み残し 63 画面・全部読めたページ 0。指摘 10 件と新しい機械検出 166 件 (Issue #1015) の振り分け先が無かった。
+- **観測 (2026-11-08・W44 週次レビュー)**: `data/page-quality/metrics/ui-review-latest.json` (監査 2026-10-30) は `reviewStatus: reviewed` だが、読んだ切り出しは 196 枚中 22 枚で、読み残し 63 画面・全部読めたページ 0。 (参照: #1015)
 - **次**: 読み残しの原因 (エージェントの読む上限か、切り出しの枚数か) を `quality-suite-weekly.yml` の page-quality job のログで確かめ、全ページを読める形にする。指摘 10 件のうち直すものはテンプレートごとの `UI-FIX-*` カードへ分ける。
 - **完了条件**: 次の週次確認で `readCoverage.unreadScreens` が 0 で、Issue #1015 の指摘がすべてカードか見送り理由に振り分けられている。
 
@@ -765,14 +759,14 @@ updated: 2026-11-01
 ### [MUNI-SIZE-RANKING-01] 1事業所あたり出荷額の市区町村ランキングを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-06] [領域:データ]
 
-- **起点**: M01 の結論の中心の指標なのに、市区町村ランキングが無い。県の `manufacturing-shipment-amount-per-establishment` はある。事業所数の市区町村ランキングは公開済み (2026-11-06 に確認)。管理画面の問いの詳細が「なし」と示している。
+- **起点**: M01 の結論の中心の指標なのに、市区町村ランキングが無い。
 - **やること**: ① 出荷額 (2023 年) と事業所数 (2024 年) の年のずれを許すかを決める ② 市区町村の値の作り方を `.claude/rules/metric-config-standards.md` の多段依存に沿って決める ③ R2 へ生成して公開する (本番の反映はオーナーの指示で) ④ 記事の案内を足す。1 人あたり出荷額の市区町村ランキングも同じ手順で判断する。
 - **完了条件**: 問いの詳細の市区町村の欄にリンクが出て、本番で開ける。
 
 ### [CONTENT-TYPE-FIT-01] 型に合っていない記事の処置を決めて反映する
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run content-types:check] [起票:2026-11-06] [領域:コンテンツ] [待ち:判断]
 
-- **起点**: 2026-11-06 に全コンテンツを 4 型へ振り分け、機械の止めとルールを入れた (`.claude/rules/content-type-standards.md`)。処置の案は `data/content/type-fit-review.json` にあり、一覧は `/content/fit`。公開から 28 日に満たない 246 本はクリックで判定していない。
+- **起点**: 2026-11-06 に全コンテンツを 4 型へ振り分け、機械の止めとルールを入れた (`.claude/rules/content-type-standards.md`)。
 - **決定済み (撤去 3 本・実行待ち)**: `annual-sunshine-duration-vs-auto-liability-insurance-amount`・`shumai-consumption-expenditure-vs-jr-freight-shipment`・`road-length-per-km2-vs-residential-building-starts`。残す決定は 3 本。
 - **やること**: ① 撤去 3 本の実行をオーナーに確認し、`GONE_BLOG_SLUGS` の手順で反映する (本文は `archive-blog-articles.mjs` で退避してから) ② 統合 9 本・書き直し 23 本の処置を決め、`decisions` に書く ③ note の用途別商品とサービスの型 (題名から仮置き) を確定する ④ URL の規則で参照型にした 420 本のうち、題名に「なぜ」を含む 187 本を参照型のままにしてよいかを確認する ⑤ 2026-10-28 以降に公開した相関の記事は、計測が 28 日を超えた週の `content-types:fit` で改めて判定する。
 - **完了条件**: `/content/fit`が 0 件で、決定が台帳にあり、note の仮置きが確定している。
@@ -807,7 +801,7 @@ updated: 2026-11-01
 ### [H01-VACANT-ARTICLE-PUBLISH-01] H01 と M01 の記事を公開し、図の台帳と X の下書きを進める
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run issues:figures] [起票:2026-11-06] [領域:サイト]
 
-- **起点**: 記事 `vacant-houses-population-decline` と `manufacturing-strength-factory-size` は `contents/blog` に `published: false` で入っている。背景画像は 2026-11-06 に Codex で生成して取り込み済み。M01 は既存記事 `manufacturing-productivity` の更新をやめて新しい記事にした (既存記事は図データの欠落など過去の負債を直さないと再公開できない)。
+- **起点**: 記事 `vacant-houses-population-decline` と `manufacturing-strength-factory-size` は `contents/blog` に `published: false` で入っている。
 - **済み (2026-11-15)**: 2 本は本番で公開済み (HTTP 200)。
 - **次**: X の下書き 1195・1196 はオーナー承認済み (2026-11-15) だが、画像が未作成で管理画面の段階は「画像準備待ち」。図 `M01-gap-steps-bars`・`H01-vacancy-rate-trend` から X 用の画像を作り、`assets` に記録してから予約へ回す。`H01-vacancy-rate-trend` の行き先 `municipality-ranking:vacant-housing-ratio` (planned) は、ページに図を置くかを決める。
 - **完了条件**: 2 本が本番で公開され、`issues:figures` の記事の行が消え、X の投稿の状態が台帳と一致している。
@@ -824,7 +818,7 @@ updated: 2026-11-01
 ### [ISSUE-LEDGER-TOP10-01] 問いの台帳から、最初に記事にする10本を選ぶ
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:check] [起票:2026-11-05] [領域:商品]
 
-- **起点**: `data/content/issues.json`（大きな問い 169・小さな問い 9。県・市区町村のどこまで降りれば答えが出るか、答えの深さ relation / caveat / myth と収益の軸 `revenue` 付き）と `data/content/issue-links.json`。規約は `docs/01_技術設計/03_情報設計.md`「問いの台帳」
+- **起点**: `data/content/issues.json`（大きな問い 169・小さな問い 9。）
 - **次**: ① 需要・答えが出る・意外性・更新性の4基準で上位10本に絞る（候補: H05 H11 A01 A10 D01 D12 D13 D03 B01 B02 B03 A12 C02 F10 F08 I09-1 H13 H14 I14 I08 J04 J09 J10 H01 M10） ② 選んだ問いの `dataNote` の統計が実在し、市区町村まで取れるかを1本ずつ当てる（台帳作成時は未確認） ③ `STRATEGY-DATA-PRODUCT-FIRST-01` と整合させる（問い記事＝入口、作り方・加工データ＝出口）
 
 ### [ISSUE-COVERAGE-GROW-01] 棚卸しで「紐づかないが読まれている」ページに問いを足し、「読まれていない」ページの扱いを決める
@@ -837,7 +831,7 @@ updated: 2026-11-01
 ### [CONTENT-PUBLIC-WORKS-FISCAL-01] 「公共事業は無駄か」を、都道府県の土木費・普通建設事業費と財政指標の関係で確かめて記事にする
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-07] [領域:サイト]
 
-- **起点**: issue [#1245](https://github.com/uruhayato373/stats47/issues/1245)（切り口・一次資料）。既存のランキング `ordinary-construction-expenses-prefecture`・`local-bonds-prefecture`・`local-allocation-tax-prefecture` は絶対額なので、人口・歳出総額で割ってから比べる
+- **起点**: issue [#1245](https://github.com/uruhayato373/stats47/issues/1245)（切り口・一次資料）。
 - **確かめる関係（どれも未検証の仮説）**: ① 1人あたり普通建設事業費 × 財政力指数（財政力が弱い県ほど高い） ② 1990年代の普通建設事業費 × 今の実質公債費比率・将来負担比率（時間差のある正の相関） ③ 経常収支比率 × 土木費の構成比（負の相関） ④ 地方交付税への依存 × 普通建設事業費（正の相関）。面積あたりの値も並べ、面積・地形という共通の原因と見分ける
 - **次**: ① 財政指標（財政力指数・実質公債費比率・将来負担比率・経常収支比率）と目的別歳出の土木費が都道府県別・年次で取れるかを、e-Stat の社会・人口統計体系と総務省「地方財政状況調査」で当てる ② 1990年代まで遡れる系列を確かめる ③ 取れた分で散布図を作り、記事の軸を1本に絞る（第一候補: 1990年代の1人あたり普通建設事業費 × 今の実質公債費比率）
 - **注意**: 災害の年（東日本大震災後の岩手・宮城・福島など）は外れ値になるので複数年の平均で見る。都道府県の決算だけでは市町村の道路・下水道が抜ける。相関を因果として書かない
@@ -846,7 +840,7 @@ updated: 2026-11-01
 ### [STRATEGY-DATA-PRODUCT-FIRST-01] 記事の量より、独自の加工データの販売へ時間を移す
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-04] [領域:商品] [待ち:判断]
 
-- **起点**: 2026-11-04 の3面方針で、stats47 の役割はデータ商品になった（vault `memos/20261104_decision_kazu-noteは軸を1つにして商品を広げる.md`）。データの解説はAIに置き換えられやすく、公的データの突合・GIS の可視化・継続更新は真似されにくい
+- **起点**: 2026-11-04 の3面方針で、stats47 の役割はデータ商品になった（vault `memos/20261104_decision_kazu-noteは軸を1つにして商品を広げる.md`）。
 - **次**: ① 🔴 高のカードをデータ商品に効くものとそれ以外に分ける ② 記事の量産のカードを止めるか下げるかを本人が決める ③ 製造品出荷額の商品 (EXP-007) の次に出すデータ商品の候補を挙げる
 - **完了条件**: 配分の判断を backlog の並びに反映した。
 - **禁止**: 判断の前にカードを消さない。
@@ -854,7 +848,7 @@ updated: 2026-11-01
 ### [STRATEGY-ISSUE-MAP-01] 事業のイシューマップ（コンテンツの4型×3収益源）を管理画面で管理し、レビューのたびに更新する
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run check-datasets && npm run docs:check] [起票:2026-11-05] [領域:戦略] [進行中]
 
-- **起点**: 2026-11-05 にオーナーと『イシューからはじめよ』の型（イシュー → 分解 → 絵コンテ → ストーリーライン）で事業戦略を分解した。図は Artifact `https://claude.ai/artifact/4v9AuVPHsSe2zYhJDSVqxu`（Version 5。オーナーだけが開ける。Claude は Artifact ツールの `action: "read"` で読める）。オーナー指示は「図はいったんこのままで、管理画面で管理し、プロジェクトを進める中で順次改善する」。
+- **起点**: 2026-11-05 にオーナーと『イシューからはじめよ』の型（イシュー → 分解 → 絵コンテ → ストーリーライン）で事業戦略を分解した。
 - **図の中身（Artifact が読めないときはこれを正本にする）**:
   - 主イシュー: stats47 のコンテンツは、どの型をどの収益源で回収すれば、運営費と改善の工数を賄えるか。
   - 仮説: 参照型で集め、ノウハウ型で売り、論文型で信頼を作る。売れた実績はノウハウ型だけで、統計の内容（教科書型・データ）で売れるかはこれから確かめる。
@@ -916,7 +910,7 @@ updated: 2026-11-01
 ### [PRICE-DATA-PACK-REVIEW-01] データ集の価格実験を 2026-12-30 に判定し、導線を増やす
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-04] [期日:2026-12-30] [領域:商品]
 
-- **起点 (2026-11-04 オーナー決定)**: note のデータ集 13 本を値下げした (テーマ別 12 本 ¥980・総合集 ¥2,980。同日に ¥1,980・¥4,980 から再変更)。実験の定義と変更の履歴は `data/products/price-history.json` の `PRICE-DATA-PACK-2026-11`、判断の記録は `data/products/product-strategy.json`、集計は `data/products/PRODUCT-LEDGER.md` と管理画面の「商品の台帳」。
+- **起点 (2026-11-04 オーナー決定)**: note のデータ集 13 本を値下げした (テーマ別 12 本 ¥980・総合集 ¥2,980。)
 - **分かっていること**: 値下げ前の 2026-10 はテーマ別 12 本で計 93 PV、総合集 14 PV、売上 ¥0。データ集の公開は 10 月 24〜25 日で、観測は約 1 週間。10 月 31 日以降の売上は未確認で、次の土曜の記録で読む。買った人がいた場合の対応は未決。
 - **次**: ① 導線: 有料データ集の閲覧を増やす (`PRODUCT-REFERRAL-MEASURE-01` と合わせ、ランキングと記事の案内のクリックを週次で読む) ② 判定日に基準どおり続ける・変える・止めるを決め、`price-history.json` の `status`・`result` と `product-strategy.json` の `decisions` に書く ③ 実験の判定後に、有料の下書き 54 本を公開するかを 1 本ずつ決める。
 - **同時の変更 (2026-11-04)**: 同じ日に note の 13 本の題へ「都道府県別」「CSV・Excel」などの検索語を入れた (本文・価格は不変)。判定では価格の効果と題の効果を分けられない。
@@ -978,7 +972,7 @@ updated: 2026-11-01
 - **済み (2026-11-15・オーナー承認)**: main の `data-refresh.yml` を `metric=convenience-store-sales`・`dry_run=false` で実行し (run 43667621239)、R2 の値を年計に入れ替えた。
 - **済み (2026-11-13・`3d5c87fd9`)**: e-Stat `0004032502` は年計・四半期・月次を 1 つの表に持ち、`timeScope` 未指定のため 2025 年 1 月の月間値 (東京都 155,869 百万円) を年の値として採っていた。
 - **残り (R2 への書き込みが要る)**: main へ入った後に CI で再取り込みする。配信中の値はそれまで月間値のまま。再取り込み後に、表示単位の台帳 (`data/metrics/display-units/ledger.json`・週次生成) と、値を含む SEO 文字列を作り直す (`seo-meta-facts` のゲートは R2 の配信値と照合するので、それまで値を載せられない)。
-- **再観測 (2026-11-15)**: 表切片との一致検査で、公開2025年度の47県値が原表の `2025000101` (2025年1月) と全件一致。現在の `timeScope: annual` は2022〜2024年の141行を生成し、公開値との共通年がない。表更新日2026-01-15は公開値生成日2026-11-05より前なので、版更新ではなく既知の取り出し条件差として表 `0004032502` は `pushed` に保留。原表の年計名は「年」だが生成物は「年度」のため、再取り込み前に年名も確認する。再現: `node --import tsx packages/data-configs/scripts/verify-table-snapshot-equivalence.ts --table 0004032502 --mark-verified`。
+- **再観測 (2026-11-15)**: 表切片との一致検査で、公開2025年度の47県値が原表の `2025000101` (2025年1月) と全件一致。 (参照: 0004032502)
 - **あわせて確かめる**: 百貨店・スーパー販売額 (`department-supermarket-sales`・`0004032493`) は台帳で 2025 年が 20 県分しか無い。同じ取り出し条件の問題かは未確認。
 - **完了条件**: 配信中の値が年計になり、値・単位・説明・SEO 文字列が一致している。
 
@@ -994,7 +988,7 @@ updated: 2026-11-01
 ### [R2-WRITE-PENDING-DISPLACE-01] R2 書き込みの待ち枠を後続の実行が奪い、新規ランキングの OGP 生成が始まる前に取り消される
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-02] [領域:データ]
 
-- **証拠 (2026-11-02)**: develop への push で起動した `ranking-ogp-new-keys.yml` (run 41401652806) が、ジョブを 1 つも始めずに 15 秒で `cancelled` になった。concurrency group `r2-write` は待ち枠を 1 つしか持たず、後から来た R2 書き込みが待ちの実行を取り消すため。結果、家計調査の貯蓄・負債の 4 指標の OGP が作られないまま main へ出て、デプロイ後スモークが og:image 404 で落ちた (run 41406310986)。同じ罠は 2026-09-06 にブログ公開でも踏んでいる (memory `project_kakei_marketing_book_pipeline`)。今回は `gh run rerun 41401652806` で作り直した。
+- **証拠 (2026-11-02)**: develop への push で起動した `ranking-ogp-new-keys.yml` (run 41401652806) が、ジョブを 1 つも始めずに 15 秒で `cancelled` になった。 (参照: run 41406310986)
 - **なぜ構造で直すか**: 取り消しは無言で、気づくのはデプロイ後スモークか本番の 404 になってから。手で再実行する運用では毎回同じ順に踏む。
 - **次 (案)**: ① `r2-write` の workflow のうち、取りこぼすと困るもの (OGP の新規キー・ブログ公開) を、取り消されても後で拾う形にする。例: sync-snapshots の最後で「新規キーの OGP 欠落」を検査して足りない分を作る、または取り消し済みでジョブ未開始の r2-write run を一定間隔で再実行する見張りを置く ② main へのマージ前に、増えた既知キーの og:image が R2 にあるかを確かめる。
 - **完了条件**: 待ち枠を奪われた OGP 生成が人手を介さず作り直され、デプロイ後スモークが新規キーの og:image で落ちない。
@@ -1018,7 +1012,7 @@ updated: 2026-11-01
 ### [KINDLE-K-S1-02-STATUS-DRIFT-01] Kindle の K-S1-02 で、カタログの元定義と状態ファイルの状態・章数が食い違う
 タグ: [収益化] [種類:不具合] [実行:sweep] [検証:npm run products:kindle:validate --workspace packages/product-factory] [起票:2026-11-02] [領域:商品]
 
-- **証拠 (2026-11-02、kindle の agent の報告)**: `data/products/kindle-status.json` は K-S1-02 を generated・8 章としているが、`packages/product-factory/src/channels/kindle/book-catalog.ts` の元定義は planned・5 章。`withS1Fresh` が実行時に generated へ上書きするため、元定義の `status: "planned"` が読み手を誤らせる。章立ての切り口 ID はコメントにしか無く、`BookChapter` 型に欄が無い。
+- **証拠 (2026-11-02、kindle の agent の報告)**: `data/products/kindle-status.json` は K-S1-02 を generated・8 章としているが、`packages/product-factory/src/channels/kindle/book-catalog.ts` の元定義は planned・5 章。
 - **次**: 元定義の状態と章を実際に合わせるか、上書きの仕組みを元定義に寄せる。`BookChapter` に切り口 ID の欄を足し、切り口台帳と検査でつなぐ。
 - **完了条件**: 元定義と状態ファイルが一致し、章ごとの切り口 ID が型付きで検査される。
 
@@ -1032,7 +1026,7 @@ updated: 2026-11-01
 ### [BUZZ-MAP-CONTENT-ROLLOUT-01] バズ地図の候補160件がブログ・note・SNSにほとんど展開されていない
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS] [待ち:判断]
 
-- **実測 (2026-11-02)**: `data/sns/buzz-map-catalog.json` の curated 160 件のうち、着地先が実在するのは15件（ブログ7・ランキング2・テーマ4ほか）。ブログ7件はどれも 2026-03〜06 公開の既存記事を当てたもので、バズ地図から新しく書いた記事は0件。`create-blog` 69件中62件は記事なし。note 記事台帳 (`data/note/articles.json`) に候補とつながる記事は0件。SNS は posts.json の domain=buzz-map が下書き11件（IG6・X5）で投稿0件。候補台帳の `generatedAt` が 2026-08-28 のままで、`landingReadiness` は当時の値。
+- **実測 (2026-11-02)**: `data/sns/buzz-map-catalog.json` の curated 160 件のうち、着地先が実在するのは15件（ブログ7・ランキング2・テーマ4ほか）。
 - **① 台帳の作り直し (2026-11-02 済)**: `generatedAt` 2026-11-02。curated 160件の着地先は live 15件のままで、変化は気候4件 (blocked→needs-content) だけ。型 A〜F・flow は型台帳の「地図（実際の形）」に統合済み (`buzz-map-standards.md` §1)。
 - **② 候補 (2026-11-02 選定・オーナー判断待ち)**: P0・`feasibility=now`・ライセンス allowed・記事なしから2本。
   - ブログ: `children-more-than-elderly-muni`「15歳未満が65歳以上より多い街」。R2 `cities.json` で実測すると該当自治体は 1980年1,776 → 2000年375 → 2010年45 → 2015年14 → 2020年6（長久手市・新宮町・粕屋町・南風原町・御蔵島村・小笠原村）→ 2025年0。二値1枚ではなく年ごとの地図（型B=塗りの時系列）で「消えるまで」を見せる構成にする。**2025年値は別表 `0004065933` の補完なので、定義の連続性を確かめるまで「0になった」と書かない。**
@@ -1055,7 +1049,7 @@ updated: 2026-11-01
 ### [REMOTION-RSPACK-WIN-01] Windows で Remotion の描画が rspack のネイティブ部品欠落で起動しない
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-02] [領域:SNS]
 
-- **証拠 (2026-11-02)**: `npx remotion still` が `@rspack/binding` の `requireNative` で `MODULE_NOT_FOUND`。`package-lock.json` は `@rspack/binding` の optionalDependencies に `@rspack/binding-win32-x64-msvc` 1.7.11 を挙げるが、`node_modules/@rspack/binding-win32-x64-msvc` の項目が無い（Windows 用 Rolldown 部品の lock 欠落と同じ型。memory `feedback_windows_npm_install_rolldown_binding`）。
+- **証拠 (2026-11-02)**: `npx remotion still` が `@rspack/binding` の `requireNative` で `MODULE_NOT_FOUND`。
 - **次**: 親と同版の lock metadata（resolved・integrity・cpu/os）を足して `npm install` し、`npx remotion still src/index.ts RankingInstagram-Cover` が通ることを確かめる。依存の変更は他の作業と排他（`local-environment.md`「検証コマンドの粒度」）。
 - **完了条件**: この PC で Remotion の静止画が描け、Mac の lock 再生成で項目が消えないことを確認した。
 
@@ -1141,7 +1135,7 @@ updated: 2026-11-01
 ### [AFFILIATE-COMMON-PRODUCTS-01] アフィリエイトを共通的で収益性の高い商品に切り替え、本文の広告の段 (広い画面は横 3 枠) を試す
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-03] [領域:アフィリエイト] [待ち:判断]
 
-- **起点 (2026-11-03 オーナー判断)**: 分野ごとの文脈一致をやめ、多くの読者に共通し、報酬単価か成約率が高い商品に切り替える (収益化戦略 §3.2 を同日に書き換えた)。あわせて、本文の中段・下段の広告を広い画面では 300×250 の横 3 枠に並べ、モバイルでは 1 枠にする案 (オーナー提案)。
+- **起点 (2026-11-03 オーナー判断)**: 分野ごとの文脈一致をやめ、多くの読者に共通し、報酬単価か成約率が高い商品に切り替える (収益化戦略 §3.2 を同日に書き換えた)。
 - **根拠 (実測)**: 直近 4 週のアフィリエイトは 16,594 表示・21 クリック (0.13%)、ふるさと納税は 1,135 表示・2 クリック。A8 は 8〜10 月で 690 クリック・成約 0。AdSense の本文中の枠は 1,000 表示あたり ¥43〜45、右レール・表の横・ページ末の関連コンテンツ型は ¥7〜17 (2026-W43)。
 - **次**:
   1. 候補の洗い出し: 提携済み・申請中の案件から、共通的な商品 (分野を問わず読者の多くに当てはまるもの) を挙げ、報酬単価・成約条件・ASP の公表成約率 (確認日付き) を一覧にする。1,000 表示あたりの見込み収益を計算し、本文中の AdSense (¥43) を上回りうるものだけを残す。オーナーが採用を決める。
@@ -1193,10 +1187,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-RELATED-LINK] critic の指摘「関連記事の紹介」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-31] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「関連記事の紹介」(`related-link`) の BLOCK/MAJOR を 3 本の記事で 3 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-28 other-fresh-fish-consumption-quantity-prefecture-gap: 「島根県のデータを見ると、魚介に関わる他の指標でも特徴が見られるかもしれません」は、内容の確認なしに誘導する書き方で、読者への情報価値がありません。
-  - 2026-10-28 hobby-participation-rate-instrument-prefecture-gap: 東京都・神奈川県のデータへのリンク段落は「見比べると背景が見えてくる」と一般論で促すだけで、この指標固有の読みを与えていない。
-  - 2026-10-28 cooking-oil-consumption-quantity-prefecture-gap: マヨネーズやドレッシングとの比較を促す段落は、書き手が他指標を使えないため、この記事では答えが出ません。
+- **事象**: 直近の窓で、blog-critic が型「関連記事の紹介」(`related-link`) の BLOCK/MAJOR を 3 本の記事で 3 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `related-link` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -1204,12 +1195,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-STRUCTURE] critic の指摘「構成・冗長」が 97 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-31] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「構成・冗長」(`structure`) の BLOCK/MAJOR を 97 本の記事で 112 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-08 cc-estat-09-radar-prefecture: 62〜64、268〜277、423〜425 行で、同じ 6 軸の数値と結論が 3 回出てきます（図カード、直後の段落、Step 2 の箇条書きと段落）。
-  - 2026-10-28 average-height-primary-school-fifth-grade-male-vs-other: 上位・下位の2節は、図に載っている県名と数値を並べ直した文が節の大半を占めています。
-  - 2026-10-28 bacon-consumption-expenditure-prefecture-gap: 「関連品目との対比」の節は、ハムやソーセージのデータがなく、「あれば〜と想像できる」という仮定の話が中心です。
-  - 2026-10-28 cocoa-consumption-expenditure-prefecture-gap: 「関連する品目との対比で考える」は、本文自身が数値比較をしないと断っており、読者に新しい情報を渡していません。
-  - 2026-10-28 cocoa-consumption-expenditure-prefecture-gap: 「上位県の個別の姿」と「下位県の傾向」は、前半で示した順位と「近畿・九州で差が大きい」という指摘の繰り返しです。
+- **事象**: 直近の窓で、blog-critic が型「構成・冗長」(`structure`) の BLOCK/MAJOR を 97 本の記事で 112 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `structure` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -1218,15 +1204,14 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-LIST-20261031.txt] [起票:2026-10-31] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-PREFECTURE-LIST-20261031.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-list-desktop-1440.png)。
 - **対象**:
   - `agent|prefecture-list` (Claude の確認)
     - [mobile-390/medium] スマホ1枚目、「地方」の7行の縦リストと、その下の「都道府県を選ぶ」: 地方の絞り込みが縦に7行並んで最初の画面の大半を占め、都道府県名の検索欄は画面の一番下に押し出される。このページの目的である都道府県の選択に届くまでスクロールが要る。 → 地方の絞り込みを横スクロールのチップか折りたたみにし、都道府県の検索と一覧を最初の画面に出す。
   - `machine|https://stats47.jp/areas|a11y_violations` — a11y_violations = 2 (閾値 <= 0)
   - `machine|https://stats47.jp/areas|mobile_page_height` — mobile_page_height = 2766 (閾値 <= 2600)
   - `machine|prefecture-list|title_changed` — title_changed: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/areas
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。
 - **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-PREFECTURE-LIST-20261031.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
@@ -1236,8 +1221,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-OTHER-MUNICIPALITIES-THEME-20261031.txt] [起票:2026-10-31] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-OTHER-MUNICIPALITIES-THEME-20261031.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other--municipalities-theme-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other--municipalities-theme-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other--municipalities-theme-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other--municipalities-theme-desktop-1440.png)。
 - **対象**:
   - `agent|other--municipalities-theme` (Claude の確認)
     - [mobile-390/low] スマホ1枚目、各指標カードの灰色ヒストグラム(「65歳以上人口割合」「高齢夫婦のみの世帯数」): ヒストグラムに軸の数値も最大・最小のラベルもなく、何の分布か分からない。「高齢夫婦のみの世帯数」は左端1本だけ高く残りは線に見え、図の意味が読み取れない。 → 横軸の最小値と最大値、または「多くの自治体は〇〇付近」のような一言をヒストグラムの下に添える。
@@ -1250,8 +1234,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-OTHER-20261031.txt] [起票:2026-10-31] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml の page-quality job`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-OTHER-20261031.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-desktop-1440.png)。
 - **対象**:
   - `machine|https://stats47.jp/japan|a11y_violations` — a11y_violations = 2 (閾値 <= 0)
   - `machine|https://stats47.jp/municipalities/ranking/junior-high-school-count|a11y_violations` — a11y_violations = 2 (閾値 <= 0)
@@ -1264,7 +1247,7 @@ updated: 2026-11-01
   - `machine|https://stats47.jp/tag/population|a11y_violations` — a11y_violations = 3 (閾値 <= 0)
   - `machine|other|title_changed` — title_changed: 60 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/municipalities/ranking/annual-sales-amount / https://stats47.jp/municipalities/ranking/annual-sales-amount-per-employee / https://stats47.jp/municipalities/ranking/annual-sales-amount-per-establishment
     - 経緯: 再発 (2026-10-31 の週次で再検出)
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。
 - **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-OTHER-20261031.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
@@ -1273,7 +1256,7 @@ updated: 2026-11-01
 ### [INCOME-SOURCES-LEDGER-01] stats47 の AdSense と KDP の月次受取を vault の収入台帳に載せ、給与以外の収入源の比率に入れる
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-30] [領域:管理]
 
-- **起点 (2026-10-30 オーナー)**: 「複数の収入源を持ちたい」。vault の収入台帳 (`memos/家計/収入_2026.csv`) に stats47 の分は note 入金しかなく、AdSense の受取は 1 行も無く、KDP 入金は doboku-note と stats47 の ASIN が分かれていない。これでは stats47 が収入源として育っているかを家計の側から判断できない。
+- **起点 (2026-10-30 オーナー)**: 「複数の収入源を持ちたい」。
 - **読者の課題／HARM**: 本カードは収益の計測 (M: Money は運営者自身の判断材料)。新しい打ち手ではない。KDP を増やすかの判断は既存の `KDP-EXPANSION-01`、doboku-note 分は doboku-note の DN-0920 が持つ。
 - **次 (実行順)**:
   ① AdSense の月次の確定収益 (支払いレポート) を取得する経路を決める (管理画面の手動 export か、既存の計測の段に足すか)。
@@ -1403,14 +1386,14 @@ updated: 2026-11-01
 - **判断待ち (2026-11-14)**: 公開 R2 が不調のとき、固定データを読む 2 テスト (`license-exclusion`・`delivery-integrity`) をどう扱うかをオーナーが決める。(a) skip を許す (品質の例外台帳に test-skip 2 件を足す。定期監査は `PACK_SNAPSHOTS_STRICT=1` で従来どおり止める) / (b) skip を許さず、CI の固定データを `actions/cache` で持ち越す / (c) 2 テストを別ジョブへ分けて必須チェックから外す。
 - **なぜ手元で決められないか**: (a) は `quality-exceptions` の検査が例外の追加を禁じており、「固定データが取れなければ止まる」という現在の方針 (`0f754efda`) を緩める判断になる。固定データを fixture にする案は、テストが実データの件数 (P-12 は 2,491 指標など) を固定していて、13 パックで数千指標になるので採れない。
 - **観測 (2026-11-14)**: `R2_PUBLIC_FETCH_URL=http://127.0.0.1:9` で、Unit Tests の前処理が `packages/product-factory` の全 55 テストファイルを巻き込んで落ちることを再現した。
-- **再観測 (2026-11-15・別の原因)**: 公開 R2 の中身が変わっても同じ 2 テストが落ちる。develop の Unit Tests (packages) が run 43685432330 (ff44de49e) と 43690534376 (926faa6b2) で失敗: P-12 の指標数 2,496 (期待 2,491)・除外件数 73 (期待 74)。手元の固定データを消して作り直すと再現する (`packages/product-factory/src/data/pack-snapshots/` を退避して `npx vitest run --project @stats47/product-factory tests/delivery-integrity.test.ts tests/license-exclusion.test.ts`)。P-12 に公開された 6 指標 (annual-clear-days・annual-snow-days・bamboo-production・factory-industrial-park-rate・factory-location-area-annual・flood-damage-road) が加わり、convenience-store-sales の値が 11-15 の作り直しで変わった。テストが「公開中の R2 の件数」を固定しているので、指標の公開や作り直しのたびに落ちる。2026-11-15 にオーナー了承で期待値を更新した (P-12 2,491 → 2,496・P-08 74 → 73。P-08 の減少はコンビニの販売額を年計に直して `convenience-store-sales-monthly` と同じ値になり 1 列にまとまったため)。公開中の件数を固定する作りは残るので、次の公開でまた落ちる。 再観測 (2026-11-18・Mac): 手元の `vitest run packages/product-factory` で同じ 2 件が 2,491 (期待 2,496)・74 (期待 73) で落ちた。期待値は更新済みで、手元の固定データが 11-15 より古いまま (globalSetup が既存ファイルを作り直さない)。 再観測 (2026-11-19・Mac): 地域コードの集約の取り込み後に同じ 2 件 (2,491・74) が落ち、取り込み前の中身に戻しても同じだった (今回の変更とは無関係)。 再観測 (2026-11-21・Mac): packages の依存宣言の整理 (PACKAGES-DEPS-FOLLOWUP-01) の後の `npm run test:packages` で同じ 2 件 (2,491・74)。ほかの 4,385 件は通った。
+- **再観測 (2026-11-15・別の原因)**: 公開 R2 の中身が変わっても同じ 2 テストが落ちる。 (参照: run 43685432330・ff44de49e)
 - **次**: 判断の後、前処理に取得失敗の許容を足し、2 テストに固定データの有無の判定を入れる (約 1 時間)。Build Check の R2 読み取り件数と所要の測定は未着手。
 - **完了条件**: 公開 R2 が不調でも、関係の無い PR の必須チェックが落ちない。
 
 ### [QUALITY-SUITE-WEEKLY-RED-01] 週次フル品質検査 (main) が 3 週続けて失敗している
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:サイト]
 
-- **観測 (2026-11-14)**: `quality-suite-weekly.yml` の main の run が 10-30 (`41122877579`)・11-06 (`42295351706`)・11-13 (`43513853562`) の 3 回とも failure (Issue #1202)。11-13 の run で落ちた job は 4 つ。① Full unit tests and coverage: 2995 件中 2 件が `Test timed out in 10000ms` (`population-profile-ui.test.tsx` の「全47県・3男女・21年齢の県間in/out…」、`bridge-inspection-age-ui.test.tsx` の「全国→全47県→全国で7帯…」) ② Full web build and E2E: 10 件 (`blog-detail.spec.ts` 4 件・`blog-list.spec.ts` 3 件・`comparison.spec.ts:45`・`header-navigation.spec.ts:41`・`:95`) が `element(s) not found` / `toBeVisible() failed` ③ Theme quality audit: exit code 1 (落ちた検査の行は未特定) ④ OGP image audit: `Fatal: R2 fetch failed: …/app/blog/gloves-consumption-expenditure-prefecture-gap/article.md`。原因は未調査で、10-30・11-06 の run が同じ job・同じテストで落ちたかも未確認。
+- **観測 (2026-11-14)**: `quality-suite-weekly.yml` の main の run が 10-30 (`41122877579`)・11-06 (`42295351706`)・11-13 (`43513853562`) の 3 回とも failure (Issue #1202)。
 - **再現**: `gh run view 43513853562 --log-failed`。手元では `npm run test --workspace apps/web -- population-profile-ui bridge-inspection-age-ui`。
 - **次**: ① 3 回の run の失敗 job とテスト名を並べ、毎回落ちるものと 1 回だけのものを分ける ② 毎回落ちるものから、job ごとに原因を実証して直す (公開 R2 の取得失敗が絡むものは `CI-LIVE-R2-TEST-FLAKE-01` と重なるかを先に確かめる) ③ 落ちた E2E の artifact でサーバーの例外が読めるかを確かめる (`E2E-FAILURE-EVIDENCE-01` の残り)。
 - **完了条件**: main の `quality-suite-weekly` が 1 回 success になり、Issue #1202 が自動で閉じる。
@@ -1420,7 +1403,7 @@ updated: 2026-11-01
 ### [REVIEW-CADENCE-HANDOFF-PARSE-01] 週次レビューの申し送りの検査が、行き先の括弧の中の「、」で文を切る
 タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/management/__tests__/] [起票:2026-11-14] [領域:管理]
 
-- **観測 (2026-11-14)**: 2026-W45 のレビューを書いたとき、`check-review-cadence.mjs` が申し送り 3 件を「行き先不明」と判定した。「→ 振り分け: 見送り (理由…、…)」のように括弧の中に「、」があると、後半を別の行き先として読んで不正にする。レビュー側の書き方を変えて通したので、検査は直っていない。
+- **観測 (2026-11-14)**: 2026-W45 のレビューを書いたとき、`check-review-cadence.mjs` が申し送り 3 件を「行き先不明」と判定した。
 - **次**: 3 件の元の書き方を fixture にしたテストを足し (直す前に落ちることを確かめる)、括弧の中では区切らないようにする。
 - **完了条件**: 括弧の中に「、」を含む「見送り (理由)」が 1 つの行き先として通り、テストが固定している。
 - **済み (2026-11-16)**: `parseRoutes` (`lib/review-cadence.mjs`) が括弧の中 (半角・全角) を除いてから区切るように直し、括弧の中に「、」と「/」を含む 3 通りの fixture をテストに足した (直す前は 1 件 fail、直した後は 22 件 pass)。
@@ -1428,7 +1411,7 @@ updated: 2026-11-01
 ### [GSC-COVERAGE-TOTALS-DUP-ROW-01] GSC カバレッジ履歴の W45 行が W44 行と全列同じ
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-14] [領域:サイト]
 
-- **観測 (2026-11-14)**: `data/gsc/coverage-totals-history.csv` の `2026-W45,2026-11-08` の行が、`2026-W44,2026-10-31` の行と 10 列すべて同じ値 (404 が 12653、登録済み 7069 など)。11-08 の認証付き取得が新しい書き出しを読んだのか、前回の書き出しを別の週の名前で写したのかは未確認。同じ値のまま前週差を出すと「変化なし」と読める。
+- **観測 (2026-11-14)**: `data/gsc/coverage-totals-history.csv` の `2026-W45,2026-11-08` の行が、`2026-W44,2026-10-31` の行と 10 列すべて同じ値 (404 が 12653、登録済み 7069 など)。
 - **次**: 11-08 の取得の入力 (`data/gsc/coverage-drilldown/` の当日の書き出しの日付と、履歴へ行を足すスクリプトの週の決め方) を読み、独立した観測かを確かめる。写しなら、書き出しの日付が前の行と同じときは行を足さないようにする。
 - **完了条件**: W45 の行が独立した観測と確認できるか、写しの行を足さない検査が入っている。
 - **済み (2026-11-16・`e86342e35`)**: 写しだった。
@@ -1444,7 +1427,7 @@ updated: 2026-11-01
 ### [BLOG-PUBLIC-REVIEW-MD-CLEANUP-01] 公開 R2 に残る過去記事の review.md (審査結果) を消す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-29] [領域:サイト]
 
-- **証拠 (2026-10-28)**: 公開の CI は記事フォルダを丸ごと公開 R2 へ写していたので、`app/blog/<slug>/review.md` が公開 URL から読める (`livable-prefecture-composite-ranking`・`municipality-population-change-census-2025` で HTTP 200)。`380042ccd` でこれからの公開はステージから外したが、既に上がった分は残っている。指摘は台帳 `data/blog/critic-findings/` に残っているので消しても情報は失われない。
+- **証拠 (2026-10-28)**: 公開の CI は記事フォルダを丸ごと公開 R2 へ写していたので、`app/blog/<slug>/review.md` が公開 URL から読める (`livable-prefecture-composite-ranking`・`municipality-population-change-census-2025` で HTTP 200)。 (参照: 380042ccd)
 - **次**: ① 公開 R2 の `app/blog/*/review.md` (と `research.md`・`*.prompt.txt`) を列挙する ② `r2-retention.ts` に exact key の target を足し、`r2-maintenance.yml` の dry-run → 承認 → 削除で消す (削除の唯一の入口)。
 - **完了条件**: 公開 R2 に review.md・research.md・prompt が 0 件。
 - **進捗 (2026-11-16・オーナー承認「review.md の残りも消して」)**: ① 公開中の 862 本で `review.md`・`research.md`・`article.prompt.txt` を公開 URL で確かめ、718 件 (review.md 585・prompt 133・research.md 0) を見つけた。718 件の中身を取り、MD5 が R2 の ETag と全件一致することを確かめてから Google Drive `stats47/ブログ/公開R2から外した審査記録とprompt/2026-11-16` に保全した (読み戻しで照合済み)。② キー単位の撤去の一覧 `data/blog/public-private-files-retention-20261116.json` (target `blog-public-private-files-20261116`) を `license-retention.ts` に足し、記事フォルダの審査記録と prompt だけであることをテストで固定した。③ `r2-maintenance.yml` の dry-run (run 43870785525。718 件・2,842,515 バイトがキー・サイズ・ETag とも一致) → 実削除 (run 43871460492。deleted=718・errors=0・remote remainder=0) で消した。公開 URL で抜き出した 11 件が 404、記事本文は 200。完了条件 (公開 R2 に review.md・research.md・prompt が 0 件) を満たしたので、このカードは閉じてよい。
@@ -1452,14 +1435,14 @@ updated: 2026-11-01
 ### [BLOG-ALLJSON-MISSING-BODY-01] 記事一覧 all.json に載っているのに R2 に本文が無い 6 記事を調べる
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-29] [領域:サイト]
 
-- **証拠 (2026-10-28)**: 本文の版の初回退避 (`archive-blog-articles.mjs --all`) で、`app/blog/all.json` の 619 記事のうち 6 記事は `app/blog/<slug>/article.md` が無かった (未公開として数えた)。一覧からリンクされていればページが空か 404 になる。
+- **証拠 (2026-10-28)**: 本文の版の初回退避 (`archive-blog-articles.mjs --all`) で、`app/blog/all.json` の 619 記事のうち 6 記事は `app/blog/<slug>/article.md` が無かった (未公開として数えた)。
 - **次**: 6 記事の slug を出し、本番のページの応答と all.json の掲載理由 (公開フラグ・別の置き場) を確かめて、本文を戻すか一覧から外す。
 - **完了条件**: all.json の全記事に R2 の本文がある。
 
 ### [BLOG-QUESTION-ANSWER-01] 「〜が最も少ない県はどこ」の質問形の検索に、答えを冒頭に置いた記事で応える
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
 
-- **証拠 (GSC 2026-W42 のクエリ・`data/gsc/snapshots/2026-W42/queries.csv`)**: 「病院数が最も少ない都道府県はどこ」1,869 表示をはじめ、病院が少ない県を問う言い回しが 12 通りで計約 7,800 表示ある。ブログには一般病院数の分布に答える記事が無い (公開 619 本の題・説明に「病院数」0 件。近いのは病床利用率と市町村の記事)。ほかに「2023年現在 全国で最も市町村の数が少ない都道府県」581 表示など。
+- **証拠 (GSC 2026-W42 のクエリ・`data/gsc/snapshots/2026-W42/queries.csv`)**: 「病院数が最も少ない都道府県はどこ」1,869 表示をはじめ、病院が少ない県を問う言い回しが 12 通りで計約 7,800 表示ある。
 - **案**: 答え (県名・値・順位) を冒頭 1 文に置き、人口あたりで並べ替えると順位が逆転するか、を本文の主題にする型を作る。AI の概要表示で答えだけ取られても、人口あたりの逆転と図は記事に来ないと分からない構成にする。headless の型ガイド (`ARCHETYPE_GUIDE`) に足し、トピックは GSC の質問形クエリから決定的に拾う。
 - **次**: ① 一般病院数と人口 10 万人あたりの一般病院数で 1 本書き、4 週の表示とクリックを記録する ② 質問形クエリを抽出するスクリプトを topic-queue の入力に足すかを、その結果で決める。
 - **完了条件**: 1 本が公開され、4 週の GSC 実測が記録され、型を広げるか決まっている。
@@ -1484,31 +1467,31 @@ updated: 2026-11-01
 ### [BLOG-LIVABILITY-PURPOSE-SERIES-01] 「住みやすい県ランキング」を目的別 (子育て・老後・一人暮らし・移住) に分けたシリーズを作るか決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-28] [領域:サイト] [待ち:判断]
 
-- **証拠 (GSC 2026-W42)**: 「住みやすい県ランキング」2,229・「住みやすさランキング 都道府県」451・「住みやすい都道府県ランキング」418 など、計約 3,700 表示。公開済みは総合の 1 本 (`livable-prefecture-composite-ranking`・2026-10-23)。
+- **証拠 (GSC 2026-W42)**: 「住みやすい県ランキング」2,229・「住みやすさランキング 都道府県」451・「住みやすい都道府県ランキング」418 など、計約 3,700 表示。
 - **案**: 目的ごとに指標と重みを明示した 4 本 (子育て・老後・単身・移住)。重みと指標は記事内に書き、読者が組み替えられることを示す。市区町村の子育て (`MUNI-KOSODATE-RANKING-01`) と指標を揃える。
 - **決めること**: 総合の 1 本の 4 週の実績を見てから作るか、今作るか。合成指標は恣意的に見えるので、重みの根拠を書けない目的は作らない。
 
 ### [BLOG-REGION-PUBLISHED-FIX-01] 公開済み 10 本の地方のくくりと題の約束の誤りを直す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-11-04] [領域:サイト]
 
-- **背景 (2026-11-04)**: `region-claim-lint.mjs` と `title-promise-lint.mjs` を公開済み 767 本に掛けると、blocker の形が 10 本で見つかった。検出は前後の文ごと全件読み、「新潟など東北」「内陸県の山形」のような本物の誤りだった。gate が止めるのは再公開の時だけなので、公開中の記事は直るまで残る。
+- **背景 (2026-11-04)**: `region-claim-lint.mjs` と `title-promise-lint.mjs` を公開済み 767 本に掛けると、blocker の形が 10 本で見つかった。
 - **対象**: `assembly-answer-chatgpt-5steps` `croquette-consumption-expenditure-prefecture-gap` `hospital-bed-utilization-map` `nagano-food-culture` `pork-consumption-quantity` `school-nonattendance-pattern` `sugar-consumption-prefecture-gap` `tochigi-food-culture` `tuna-consumption-quantity-vs-annual-new-inpatients-general` `yamagata-food-culture`
 - **完了条件**: 各記事の quality-gate で `地方のくくり` と `題の約束` の blocker が 0。`/brushup-blog --target article` で本文を直す。
 
 ### [BLOG-HEADLESS-AUTHOR-01] ブログ執筆を headless `claude -p` のバッチに移し、本数を増やしながら 1 本あたりの費用と通過率を記録する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ai-content/src/scripts/write-blog-headless.ts --dry-run] [起票:2026-10-28] [領域:サイト] [進行中]
 
-- **背景 (2026-10-28 オーナー指示)**: 「Claude のトークン消費を節約してブログをもっと展開したい」。Agent tool (article-writer / blog-critic) は subagent が CLAUDE.md と rules を毎ターン読み、是正で約 10 万トークン/本・旧 CI で $8.2/本だった。ランキング解説の headless 経路は $0.51/件 (`ranking-content-standards.md`)。
+- **背景 (2026-10-28 オーナー指示)**: 「Claude のトークン消費を節約してブログをもっと展開したい」。
 - **実装 (branch `claude/determined-newton-2d077c`)**: `packages/ai-content/src/scripts/write-blog-headless.ts` + `src/services/claude-cli-runner.ts`。準備 (`generate-blog-article.ts`) が作った prompt を sonnet・effort low の `claude -p` で書き、`quality-gate.mjs` + `ci-factual-gate.mjs` → 別プロセスの critic (`buildBlogCriticPrompt`・本文だけ) → REVISE なら指摘と原稿を author に返して 1 回書き直す。記録は `data/blog/headless-runs.csv`。公開はしない (`published:false` のまま)。手順は `/write-prepared-article` の「headless 経路」。
 - **量産の入口 (2026-11-04)**: `npm run blog:batch` に一本化した (対象選定〜`--ingest`・一覧。`blog-quality-standards.md`「量産バッチ」)。書く前の材料・書く価値の判定・地方と題の検査も入れた。
-- **実測 (2026-10-28 の要約、明細は `data/blog/headless-runs.csv`)**: 5 本・15 run で、1 本あたり (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27。審査 prompt に書き手の制約と重大度の基準を書き verdict を blocker の有無からコードで決めるよう直した後は 2/4 PASS・PASS 1 本 $0.32 (Agent tool 経路の約 1/25)。残る blocker は記事の事実誤り (山口と岡山を隣接と書く・北海道を東北に含める・題が「なぜ」を約束して答えない) と、審査が順位の整合を疑う誤判定。費用は CLI の `total_cost_usd` (API 換算・Pro/Max の OAuth では実請求ではない)。
+- **実測 (2026-10-28 の要約、明細は `data/blog/headless-runs.csv`)**: 5 本・15 run で、1 本あたり (書き直し 1 周込み) 1.8〜4.9 万トークン・$0.10〜0.27。
 - **次 (実行順)**: ⓪ author prompt (`blog-article-prompt.ts`) に「題で『なぜ』を約束したら本文で答える。答えられないなら題を変える」と、地方区分・隣接の言及は prompt に渡した区分だけを使う指示を足す (残る blocker の多数) ① 型B 以外 (A / D2 / F) で 3〜5 本ずつ回し、型ごとの通過率と費用を CSV に貯める ② 通過率が低い型は critic の指摘を読んで author prompt (`blog-article-prompt.ts`) 側を直す (critic は緩めない) ③ PASS 分を `--ingest` で確定して develop へ push する (公開は週次計画の本数で人が決める)。
 - **完了条件**: 型ごとに 5 本以上の実測が CSV にあり、既定の運転設定 (型・本数・rounds) を skill に書いている。
 
 ### [MUNI-WARD-MODE-READERS-01] 自前の統合版の地図 (`_city_dc`) を読む残り 2 か所を、データの単位を確かめてから WardMode の地図へ移す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
 
-- **背景**: `<県>_city_dc.topojson` は 23 区を特別区部 13100 の 1 つにまとめる。移動フローの中継 `apps/web/src/app/api/mf-topo/[code]/route.ts`、Remotion の人口コロプレス `apps/remotion/src/features/population-choropleth/usePopulationData.ts`、`apps/remotion/scripts/fetch-municipality-net.ts` を `fetchMunicipalityTopologyForWardMode` / `deriveWardModeTopology` (merged、Remotion 向けの入口 `@stats47/gis/ward-mode-topology`) へ 2026-10-28 に移した (tsc・vitest 通過)。
+- **背景**: `<県>_city_dc.topojson` は 23 区を特別区部 13100 の 1 つにまとめる。
 - **未検証**: Remotion の人口コロプレスは値のファイル (`blog/population-choropleth/data/population-ratio-tokyo.json`) が R2 に無いため描画を確かめていない。移動フローの地図は localhost で見ていない (データの結び付きはスクリプトで確認済み)。
 - **次**: ① 本番反映後、`/api/mf-topo/13` が 23 区を返し、移動フローの東京の地図で区ごとに色が付くかを確かめる ② 読み手が 0 になったので `_city_dc` の R2 からの削除を承認制で行う (`.claude/rules/r2-storage-design.md`「市区町村の境界」)。
 - **完了条件**: `_city_dc` を読むコードが 0 件で、2 か所の地図で地域と形が対応している。
@@ -1552,7 +1535,7 @@ updated: 2026-11-01
 ### [NOTE-OWNER-ACTIONS-01] note の画面でオーナーだけができる操作と判断をまとめて済ませる
 タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [起票:2026-11-13] [領域:商品]
 
-- **起点 (2026-11-13)**: note の下書きの削除・マガジンの作成と記事の追加・下書きを捨てるか公開するかの判断が 5 枚のカードに散っていたので 1 枚に集めた。どれも note へログインした画面での操作で、Claude は行わない (記事の削除・非公開化はオーナーの操作だけ)。済んだ行から消す。
+- **起点 (2026-11-13)**: note の下書きの削除・マガジンの作成と記事の追加・下書きを捨てるか公開するかの判断が 5 枚のカードに散っていたので 1 枚に集めた。
 - **1. 残った下書きを削除する**:
   - 題名なしの `n0ae79d01a60b`・`nbb8ef52bd1ff` (2026-11-05 の公開中にブラウザが落ちて残った)。
   - 空・途中の `n6c6e1708a2a1`・`n7f3aa1bb55b8`・`nb2b302a56c8c`・`n706d8699fcd7` ほか (教材の note 92 本の公開で失敗した回の残り。下書き一覧で公開済みの記事と照合してから消す)。
@@ -1616,7 +1599,7 @@ updated: 2026-11-01
 ### [BLOG-CHART-FILES-MISSING-01] 公開中のブログ本文が指す図が R2 に無い
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
 
-- **証拠 (2026-11-05)**: R2 の `app/blog/all.json` の全記事を数えた。`climate-lifestyle-connection` の 4 枚 (sunshine-pacific-vs-nihonkai・precipitation-gap・snow-kerosene-scatter・clear-days-map) と `medical-access-regional-gap` の 3 枚 (physicians-ranking・bed-occupancy-ranking・summary-findings) の `data/<名前>.svg` が 404 だった。別に 6 記事 (estimated-hourly-wage-ranking・gender-wage-gap-ranking・nurse-salary-ranking・telework-income-correlation・tokyo-real-income-after-rent・truck-driver-salary-trend) は一覧にあるのに `article.md` が 404 だった。
+- **証拠 (2026-11-05)**: R2 の `app/blog/all.json` の全記事を数えた。
 - **未確認**: 公開ページの表示はまだ見ていない。
 - **次**: 2 記事と 6 記事を本番のページで開き、図の欠けと 404 を確かめる。原因を調べ、図の再生成か一覧からの除外を決める。
 - **完了条件**: 一覧の全記事に `article.md` があり、本文が指す図がすべて R2 にある。
@@ -1625,7 +1608,7 @@ updated: 2026-11-01
 ### [BLOG-PUBLISH-AUDIT-KAKEI-01] 公開後の検査が家計調査の 9 指標で落ち、送り箱の掃除が止まる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
 
-- **証拠 (2026-11-05)**: `blog-auto-publish.yml` の公開後の検査が、`*-budget-share-kakei` の 9 指標で `values.json` が 404 になり失敗する。記事の公開そのものは成功している。この失敗で「Remove published drafts」が skip され、公開済みの記事が `contents/blog` に残る。
+- **証拠 (2026-11-05)**: `blog-auto-publish.yml` の公開後の検査が、`*-budget-share-kakei` の 9 指標で `values.json` が 404 になり失敗する。
 - **次**: 9 指標を有効にした `863c80cd6` の後に値が投入されたかを確かめ、投入するか有効化を外す。`contents/blog` の公開済みの原稿が消えることを確かめる。
 - **完了条件**: 公開の run が成功し、送り箱の掃除が動く。
 
@@ -1640,7 +1623,7 @@ updated: 2026-11-01
 ### [BLOG-SCATTER-SOURCE-YEAR-01] 散布図の source.json の年が、図の点と見出しの年と食い違う
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-10-28] [領域:サイト] [待ち:判断]
 
-- **証拠 (2026-10-28)**: `safe-driving-5-features/aging-fatality-scatter` は source.json の `year` が 2023 だが、点と見出しは 2024 年の値 (図の年の取り直しの照合で発見)。古い図の一覧 (`build-stale-data-years.mjs`) は source.json の年を読むので、誤った年で判定される。
+- **証拠 (2026-10-28)**: `safe-driving-5-features/aging-fatality-scatter` は source.json の `year` が 2023 だが、点と見出しは 2024 年の値 (図の年の取り直しの照合で発見)。
 - **次**: 散布図の点を R2 と照合して年を決める関数 (`lib/refresh-chart-year.mjs`) で公開済みの散布図を一括で調べ、source.json の年と食い違う図を一覧にして直す。
 - **完了条件**: 公開済みの散布図で source.json の年と点の年の食い違いが 0 件。
 - **調査結果 (2026-10-28・公開 609 記事を読み取り)**: 散布図 196 枚のうち両軸の点が R2 と 95% 以上一致したのは 140 枚。うち source.json の年と一致 66・**食い違い 4**・year 無し 70 (59 は kind `correlation`)。照合できない 56 枚 (点なし 28・どの key/年とも一致しない 16・key なし 9・同じ指標の 2 年 3)。食い違いの 4 枚: `safe-driving-5-features/aging-fatality-scatter` (year 2023 → 点は両軸 2024)、`vacant-house-crisis/vacant-aging-scatter` (2023 → x 2024 / y 2023)、`fertility-fiscal-nexus/fiscal-fertility-scatter` (2022 → x 2022 / y 2023)、`housing-cost-livability-trend/rent-floorarea-scatter` (2024 → x 2024 / y 2023)。両軸の年が違う 3 枚は year 1 つでは表せない。照合関数が略した「京都」を「京」にして外していた不具合は直した (`refresh-chart-year.mjs` の `prefKey`・テストで固定)。
@@ -1649,7 +1632,7 @@ updated: 2026-11-01
 ### [MUNI-FUTURE-BURDEN-DASH-01] 将来負担比率の「―」(将来負担が無い) の団体を理由つきで示し、23 区の注記も直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ] [進行中]
 
-- **証拠 (2026-10-28)**: 健全化判断比率の「―」は「将来負担が無い (基金などが将来負担を上回る)」の意味 (東京都 別紙2 の備考 https://www.metro.tokyo.lg.jp/documents/d/tosei/13_02_223)。R2 の `future-burden-ratio-city` は 2021 年度に 1,742 団体中 925 団体しか行が無く、財政が最も良い側の約 800 団体がランキングから消えていた。東京都の 2020 年度 39 市町村で「―」の団体 = R2 に行が無い団体を確かめた (39/39 一致)。
+- **証拠 (2026-10-28)**: 健全化判断比率の「―」は「将来負担が無い (基金などが将来負担を上回る)」の意味 (東京都 別紙2 の備考 https://www.metro.tokyo.lg.jp/documents/d/tosei/13_02_223)。
 - **済み (`f9d38ed036`、main に入っている)**: metric config に `absentValueReason` を足して `future-burden-ratio-city` に設定し、純粋関数 `municipalityAbsenceNote` (`packages/ranking`) が全国版と県別ページに「全国の816自治体は、将来負担が無く…このランキングに含まれていません。」
 - **見送り**: 「―」の団体を 0 として順位に入れる案は、「比率 0%」と誤読されるので採らない。居ない団体の一覧表示は作っていない。
 - **次**: 本番で `/municipalities/ranking/future-burden-ratio-city` と `/municipalities/ranking/future-burden-ratio-city/13000` の注記を確かめる。
@@ -1685,7 +1668,7 @@ updated: 2026-11-01
 - **続き**: 型ができたら、同じ型で老後 (EXP-009、車なしで暮らせる町を3ページ) と移住 (EXP-010) を同じ基準で試す。
 - **関係**: 市区町村ランキングの拡充は `MUNI-RANKING-EXPANSION-01`、市区町村ページの本文は `MUNI-CITY-PAGE-SNIPPET-01`。
 - **完了条件**: 8週の表示・PV が記録され、拡大・停止のどちらかをオーナーが決めた。
-- **統合 (2026-11-13)**: `MUNI-KOSODATE-PAGES-01` をこのカードへ統合した。完了条件に含める: 親の完了条件 (8 週の表示・PV を記録し拡大・停止をオーナーが決定) に加え、子の項目: (1) 指標セットのランキングを cron 生成のまま公開 (手書き記事は書かない) (2) 市区町村テーマに子育てを足すか education・vital-statistics に寄せるか決める (3) 県版の子育てランキング・記事から市区町村版と県別ページへ内部リンクを張り nav_click で計測 (4) 公開日を EXP-008 の started_at にして running にし、8 週後の next_check_date を書く。前提の METRICS-01・PREF-RANKING-ROUTE-01 は別カードのまま。
+- **統合 (2026-11-13)**: `MUNI-KOSODATE-PAGES-01` をこのカードへ統合した。
 
 ### [MUNI-ROUGO-CARFREE-01] 老後に車なしで暮らせる町を、子育てと同じ型で 3 ページだけ試す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
@@ -1788,7 +1771,7 @@ updated: 2026-11-01
 ### [TRACKED-SECRET-FILE-CHECK-01] 秘密情報らしい名前の追跡ファイル 2 本に、本物の秘密が入っていないかを確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-26] [領域:管理] [待ち:判断]
 
-- **事象 (2026-10-26・GITIGNORE-AUDIT-01 の点検)**: `.claude/config/auth-credentials.json` と `apps/web/.env.development` が git で追跡されている。リポジトリは PUBLIC。セッションからは中身を読む操作が安全判定で止められたため、値は確かめていない (`data/sns/instagram-token.json` は台帳に「トークン本体は置かない」とあり対象外)。
+- **事象 (2026-10-26・GITIGNORE-AUDIT-01 の点検)**: `.claude/config/auth-credentials.json` と `apps/web/.env.development` が git で追跡されている。
 - **次 (オーナー)**: 2 本を開き、パスワード・API キー・トークンの値そのものが入っていないかを確かめる。名前・置き場所・期限だけなら問題なし。値が入っていたら、その鍵を失効・再発行し、ファイルから値を抜いて追跡を続けるか ignore するかを決める。
 - **完了条件**: 2 本に秘密の値が無いことを確かめた、または入っていた鍵を失効させて値を取り除いた。
 
@@ -1824,7 +1807,7 @@ updated: 2026-11-01
 ### [KDP-COVER-47PREF-DECISION-01] Kindle の表紙で「47都道府県」を読める大きさに上げ、2 冊で試してから全冊へ広げるか決める
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-09] [領域:商品]
 
-- **観測 (2026-11-13、Kindle ストアの検索結果)**: 自社 S1 12 冊は最大の文字が「地図」で、「47都道府県」は最も小さい帯。検索「都道府県 ランキング 統計」の上位 14 冊はすべて「都道府県」が最大の文字。K-S1-13 は題名が小さく最も目立たない。
+- **観測 (2026-11-13、Kindle ストアの検索結果)**: 自社 S1 12 冊は最大の文字が「地図」で、「47都道府県」は最も小さい帯。
 - **決定 (2026-11-13 オーナー承認)**: 「47都道府県」を最大にはしない (12 冊の区別がつかなくなるため)。主題の語を最大にし、上部の共通の帯「47都道府県のデータで比べる」を 2 番目に上げる。見本はセレクト登録の K-S1-05 と K-S1-13。
 - **次**: ① `cover-design.ts` の 2 冊に新しい序列の文字を定義する ② Codex で候補を作り Drive へ置き (`stash-cover-candidate.mts`)、文字を 1 字ずつ照合する ③ `kdp-cover-thumbnail.mjs render` で 120px / 220px に縮めて記録する ④ オーナー承認後に R2 へ反映し、新しい版を保全して `kdp-publish --update` ⑤ 4 週後に検索順位と既読ページで残り 11 冊へ広げるか決める。
 - **判定の限界**: KDP の販売は台帳に 2 冊だけで、販売数では表紙の効果を判定できない。K-S1-13 の表紙を変えると EXP-011 と変更が重なる。
@@ -1846,12 +1829,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-YEAR] critic の指摘「年の食い違い」が 5 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-24] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「年の食い違い」(`year`) の BLOCK/MAJOR を 5 本の記事で 5 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-07 sixth-industry-direct-sales: seoTitle「農業産出額1位は北海道1兆4,817億・最下位東京226億｜農家総所得は北海道8位、大阪1位 2024年」は、末尾の「2024年」が農家総所得にもかかる読み方になります。
-  - 2026-10-23 manufacturing-aichi-dominance: 調査の切り替わりの注意が、問題の年とずれている。
-  - 2026-10-23 livable-prefecture-composite-ranking: 所得は 2020 年度を使っていますが、R2 `per-capita-prefectural-income-h27` の最新は 2021 年度です (東京都 5,761 千円、愛知県 3,597 千円)。
-  - 2026-10-23 alcohol-prefecture-map: 「何を飲んでいるのか」の節で、年のそろえ方が読者に伝わりにくい。
-  - 2026-10-23 automotive-industry-transformation-map: 調査切り替えの注意が、位置と影響範囲の両面で足りない。
+- **事象**: 直近の窓で、blog-critic が型「年の食い違い」(`year`) の BLOCK/MAJOR を 5 本の記事で 5 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `year` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -1859,12 +1837,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-SOURCE] critic の指摘「出典・統計表」が 6 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-24] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「出典・統計表」(`source`) の BLOCK/MAJOR を 6 本の記事で 7 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-08 bonito-catch-prefecture: data/bonito-two-poles.source.json の来歴が実態と合わない。
-  - 2026-10-08 school-teacher-annual-income: 警告 callout の「集計対象や方法が完全には統一されておらず、政令指定都市の教員を含むか否かで数値が変わる場合があります」は、この統計の注意点として根拠が無い。
-  - 2026-10-23 manufacturing-aichi-dominance: 産業構成比の節を削除した穴が、「地方の製造業は今──産業構造の変化」節に残っている。
-  - 2026-10-23 manufacturing-aichi-dominance: 工業地帯の範囲の出典(確認事項 d)は、京浜に千葉を含むか否かの根拠だけが十分である。
-  - 2026-10-23 livable-prefecture-composite-ranking: 数値の根拠が読者に追える形になっていません。
+- **事象**: 直近の窓で、blog-critic が型「出典・統計表」(`source`) の BLOCK/MAJOR を 6 本の記事で 7 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `source` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -1881,7 +1854,7 @@ updated: 2026-11-01
 ### [MODEL-USAGE-COVERAGE-01] エージェントの利用記録を Windows と CI の無人実行まで広げ、4 週分たまったら統合候補を決める
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:管理]
 
-- **背景 (2026-10-20 実測)**: エージェントの定義は 61 体ある。Mac の利用記録 (`.claude/state/metrics/model-usage/local-mac.json`、W29〜W42 に Agent ツールで起動した分) で起動されたのは 6 種 (article-writer 11 回・blog-critic 8 回・note-critic 4 回など) で、57 体は記録上 0 回だった。ただし Windows の記録 (`local-windows.json`) は空で、CI の無人実行も数えていないので、「使われていない」とは判断できない。
+- **背景 (2026-10-20 実測)**: エージェントの定義は 61 体ある。
 - **次**: ① Windows で `.claude/scripts/model-usage/collect-local-usage.mjs` の記録が空になる原因を直す ② CI の無人 Claude (improvement-cycle など) の起動も同じ形で記録する ③ 4 週分たまったら、起動 0 回の体を統合候補として一覧にし、オーナーが決める。
 - **停止条件**: 記録が 4 週分そろうまで、エージェントの定義を消さない。系統は残し、系統の中の重複だけを減らす (2026-10-11 オーナー判断)。
 - **完了条件**: 3 環境の 4 週分の記録があり、統合候補の一覧とオーナーの判断が出ている。
@@ -1891,7 +1864,7 @@ updated: 2026-11-01
 ### [X-METRICS-WEEKLY-RECORD-01] X の指標を週次で記録する定期実行を作り、管理画面を読みに行く操作を止める hook の対象に X を加える
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:SNS]
 
-- **背景 (2026-10-20)**: Instagram の指標は週次の CI (`sns-metrics-weekly.yml`) が記録するが、X の指標は `/update-sns-metrics --platform x` が browser-use でその都度取るしかない。同日に、セッションが管理画面を読みに行く操作を hook で止めたが、X は代わりに読む記録が無いので対象から外した。
+- **背景 (2026-10-20)**: Instagram の指標は週次の CI (`sns-metrics-weekly.yml`) が記録するが、X の指標は `/update-sns-metrics --platform x` が browser-use でその都度取るしかない。
 - **次**: X の指標を週 1 回 (認証付き計測と同じ土曜の Mac) で `data/sns/metric-snapshots/` に記録し、`.claude/scripts/measurement/sources.mjs` の `readUrls` に X の分析画面を足す。
 - **完了条件**: X の指標が週次で記録され、セッションがブラウザで取りに行く必要が無くなっている。
 
@@ -1950,7 +1923,7 @@ updated: 2026-11-01
 ### [NOTE-CIRCULATION-LINK-FIX-01] note 公開記事のリンク切れ 5 件と導線の欠けを直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-18] [領域:SNS] [待ち:ログイン]
 
-- **事象**: note 回遊の週次監査 (`npm run weekly:audits -- --only note-circulation`) でリンク切れ (`broken_site_link`)・http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空段落 (47記事・175件、`data/note/card-visibility-latest.json`) が出ている。明細は `data/note/evidence/note-circulation-audit-2026-10-30.json`。
+- **事象**: note 回遊の週次監査 (`npm run weekly:audits -- --only note-circulation`) でリンク切れ (`broken_site_link`)・http リンク・リダイレクト・無料部分のマガジン導線の欠け (`missing_magazine_link_in_free_body`)・カード前後の余分な空段落 (47記事・175件、`data/note/card-visibility-latest.json`) が出ている。
 - **済み (2026-11-15・オーナー承認)**: 置換表の切れたリンクは公開本文ですべて置換済み (11-15 の監査で broken_site_link 0 件、10-30 は 4 件)。
 - **残り (note の 403 が解けてから)**: 次の 7 件を `node .claude/scripts/note/update-published-navigation.mjs --slug <key> --repair-redirects --repairs-only --commit` で直す: `d-kakei-spending-personality` (中華麺を外食のラーメン `ramen-dining-consumption-expenditure` へ。記事台帳に積み済み)・`13-fiscal-peer-no-code` (http)・`c-engel-food-gap`・`c-kita-kanto-fiscal`・`c-tokyo-vs-osaka-fiscal`・`d-education-income-gap`・`recovered-n03844512d58a`。後ろの 5 件はカード画像の検証ガード (`Verified source image bytes changed`) で PUT 前に止まった。[仮説] `ogp.inventory` の `link-card-rollout.json` の画像ハッシュが古い。検証: 同じコマンドをもう一度実行し、ガードの出力にある期待と実際の SHA を比べる。
 - **判断**: `d-kakei-spending-personality` の `frozen-gyoza` は置換先の `gyoza-frozen-consumption-expenditure` の定義が「冷凍品を除く」で意味が逆。冷凍ぎょうざの指標は無いので、リンクを外すか文を直すかを決める (リンクを外す機能はスクリプトに無い)。
@@ -1974,9 +1947,9 @@ updated: 2026-11-01
 ### [YEARFORMAT-REFLECT-01] 年表記を直した 410 指標を R2 と記事・AI 解説・書籍へ反映する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-21] [領域:データ]
 
-- **背景**: 2026-10-21 に 410 指標の `yearFormat` を fiscal → calendar に直した (develop のコミット `06316dc21`・`a21c4586a`・`5e72aa59a`。家計・物価・地価 68、SSDS の他分野 221 と 121)。サイトの年表記 (R2 の `yearName`「2020年度」→「2020年」) が変わるのは、develop→main のマージ後に配信値を作り直したときだけ (`sync-snapshots` は main のコードで動く)。
+- **背景**: 2026-10-21 に 410 指標の `yearFormat` を fiscal → calendar に直した (develop のコミット `06316dc21`・`a21c4586a`・`5e72aa59a`。)
 - **次**: ① main へマージした後、変わった指標の `ranking-values` を作り直す (`gh workflow run sync-snapshots.yml --ref main -f only=ranking-values -f ranking_keys=<最大50件>` を分けて実行するか、月次の data-refresh を待つ)。数件を curl で読み、`yearName` が「年」で終わることを確かめる。② 公開済みのブログ・ランキングの AI 解説 (`app/ranking/<key>/ai-content.json`)・note・Kindle の本文で、これらの指標に「◯年度」と書いた箇所を洗い出し、出典の期間に合わせて直す (ブログは公開記事の差し替えになるのでまとめて 1 回)。
-- **観測 (2026-11-14)**: 公開 R2 の values.json で、暦年の `annual-income-per-household`・`consumption-expenditure-multi-person-households-per-month`・`penal-code-offenses-recognized-per-1000`・`certified-childcare-center-count-per-100k-0-5` の yearName がまだ「YYYY年度」だった。Kindle の執筆ブリーフ (`build-fresh-briefs.mts`) は yearName を使わず、全県表 (`full-tables.ts`) と同じく yearFormat で年を決めるようにした。
+- **観測 (2026-11-14)**: 公開 R2 の values.json で、暦年の `annual-income-per-household`・`consumption-expenditure-multi-person-households-per-month`・`penal-code-offenses-recognized-per-1000`・`certified-childcare-center-count-per-100k-0-5` の yearName がまだ「YYYY年度」だった。
 - **完了条件**: 410 指標の R2 の `yearName` が「年」で終わり、本文の「年度」表記の食い違いが 0 件か、直さない理由が記録されている。
 - **統合 (2026-10-26 オーナー判断): `BLOG-FISCAL-YEAR-LABEL-REGEN-01`** 年度の指標なのに図の見出しが「YYYY年」になっている公開済み 193 記事を作り直す
   - **本文の欠け (2026-11-13 確認)**: この統合のコミットで、元カード 5 行のうち 3 行 (字下げした続きの行と番号付きの手順) が落ちた。着手の前に `git show 47aa651d1^:.claude/todo/backlog.md` で `[BLOG-FISCAL-YEAR-LABEL-REGEN-01]` の全文を読み、今の実装と突き合わせて残りを決める。
@@ -1987,7 +1960,7 @@ updated: 2026-11-01
 ### [TURBOPACK-DEV-WINDOWS-01] 会社の Windows PC で開発サーバーが Turbopack で動くことを確かめる
 タグ: [インフラ・計測] [種類:改善] [実行:windows] [起票:2026-10-21] [領域:管理]
 
-- **背景**: 2026-10-21 に `npm run dev:web` の既定を Turbopack にした (`apps/web/scripts/dev-server.ts`)。確かめたのは自宅の Mac だけ。会社 PC は i-FILTER の TLS 傍受があり、R2 を読むために dev-server が Windows の R2 gateway を起動して `R2_PUBLIC_FETCH_URL` を差し替える (`.claude/rules/local-environment.md`)。この経路と Turbopack の組み合わせは未確認。
+- **背景**: 2026-10-21 に `npm run dev:web` の既定を Turbopack にした (`apps/web/scripts/dev-server.ts`)。
 - **次**: 会社 PC で `npm run dev:web` を起動し、ランキング詳細・テーマ詳細・県ページが 200 で表示され、データ (R2) とチャートが出ることを確かめる。動かなければ `WEB_DEV_BUNDLER=webpack npm run dev:web` で従来どおり起動し、原因をこのカードに書く。
 - **完了条件**: Windows でも Turbopack で主要ページが表示されるか、webpack に戻す条件が `local-environment.md` に書かれている。
 
@@ -2001,7 +1974,7 @@ updated: 2026-11-01
 ### [THEME-DETAIL-CLIENT-PRELOAD-01] テーマ詳細が全テーマの client 部品を先読みしている (約 2,267KB) のを、route 別に分ける
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-14]
 
-- **観測 (2026-11-14・ANALYZE 付きの本番ビルド)**: `/themes/[themeSlug]` が tsunami-exposure 108KB など全テーマの client 部品を先読みしている。`packages/area` は全 55 route の先読みに 145KB 入っている (県・市区町村のデータの client 同梱)。`@base-ui/react` は 239KB。内訳は `data/improvement/performance-improvement/improvement-log.md` (`d610a337d`)。
+- **観測 (2026-11-14・ANALYZE 付きの本番ビルド)**: `/themes/[themeSlug]` が tsunami-exposure 108KB など全テーマの client 部品を先読みしている。 (参照: d610a337d)
 - **次**: テーマごとの部品を dynamic import で分ける案の効果を route 別に数えてから着手する。
 - **完了条件**: テーマ詳細の先読み JS が減り、前後の内訳が改善ログにある。増えた route が無い。
 
@@ -2040,7 +2013,7 @@ updated: 2026-11-01
 - **GSC案24 / P2（本番HTTP確認済み・Google検証中）**: robotsブロック済み登録584件のうち576件は公開CSV/JSON、8件はOGP。公開ダウンロードに限定してcrawlを許可しX-Robots-Tag:noindexを読ませる。公開画像と廃止URLのHTTP応答も読めるようにする。
 - **owner / 入力**: gsc-analyst・site-ux-manager。対象・内容確認・ローカル検証は `data/gsc/ui-audits/2026-10-16-remediation.json`。変更はrobots.ts・download route・middleware、恒久方針はcoding-standards.md。
 - **次 / 順序**: PR #1139をmainへ反映し、本番31 URLは全件期待どおり。デプロイ・purge・post-deploy smokeの最終結果は `data/gsc/ui-audits/2026-10-16-remediation.json` のreleaseを参照。GSCのrobots.txt再取得リクエストは受理済み、584件の警告は10-16に「検証: 開始」。10-23にGoogleの再取得とnoindex/404/410による除外を確認する。Google側の検証完了前にカードを閉じない。
-- **観測 (2026-10-22 GSC通知)**: 「robots.txt によりブロックされましたが、インデックスに登録しました」の検証結果が「修正できませんでした」(一部のページが引き続き影響を受けている) で届いた (Message type WNC-10031170)。残ったURLと件数はGSCのインデックス登録レポートで確かめ、584件のうちどの種類 (公開CSV/JSON・OGP) が残ったか、Googleがnoindex/404/410を取得済みかを切り分けてから、修正か再検証かを決める。
+- **観測 (2026-10-22 GSC通知)**: 「robots.txt によりブロックされましたが、インデックスに登録しました」の検証結果が「修正できませんでした」(一部のページが引き続き影響を受けている) で届いた (Message type WNC-10031170)。
 - **停止条件**: API全体は開放しない。ダウンロード/画像機能を壊さない。Googleがnoindex/404/410を取得する前に解消としない。ローカル実装を本番反映済みとしない。
 - **完了条件**: 本番で意図したHTTP/robotsが配信され、対象URLのGoogle再取得でダウンロードの検索除外・廃止画像の除外が確認できる。正常画像は取得可能。noindex対象増加は意図した除外として評価する。
 - **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 「robots.txt によりブロックされましたが、インデックスに登録しました」は 23 件 (検証は「失敗しました」表示)。一方、許可したダウンロード API がクロールされ、全既知の「クロール済み - 未登録」2,413 件は W44 記録 1,000 件中 959 件が `/api/ranking/*/download?format=…`、32 件が `storage.stats47.jp` の JSON。kml は 1 ファイル 2.5MB。**次**: 23 件が 0 になったらダウンロードの許可を Disallow に戻す案を `GSC-CRAWL-WASTE-01` で判断する (Dataset 構造化データの `contentUrl` が同じ URL を指すので、戻す前に Dataset の検証への影響を確かめる)。
@@ -2083,7 +2056,7 @@ updated: 2026-11-01
 ### [ADSENSE-FORMAT-BY-PAGE-01] 広告の形式 (記事内・インフィード・表示) をページの作りに合わせて見直し、広告の側から UI を直す
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-11-13]
 
-- **起点 (2026-11-13 オーナー)**: 「UI を改善したらインフィード広告・記事内広告・Multiplex も活用できる。広告の側から UI を直す観点もある」。市区町村のページで先に試し (章立て + 記事内広告 + 関連記事のインフィード。`ADSENSE-FORMAT-EXPERIMENT-01` の 19 個目の変更)、結果を見てサイト全体へ広げる。
+- **起点 (2026-11-13 オーナー)**: 「UI を改善したらインフィード広告・記事内広告・Multiplex も活用できる。」
 - **材料 (2026-W44・`data/adsense/history-units.csv`)**: 1,000 表示あたり、記事内広告 ¥29〜38 (ハブ・一覧 ¥38、ブログ ¥36、ランキングの解説の後 ¥29)、Multiplex ¥13〜19 (埋まる割合 17〜22%・視認率 29〜38%)、右レールの表示広告 ¥6〜14。11-12 に本文の段を幅いっぱいの表示広告 (レスポンシブ) で作り直したユニットと、都道府県のページのインフィード (`stats47-area-infeed`) はまだ実績が無い。
 - **次 (実行順)**: ① 11-12〜13 に作り替えた段のユニットの 2 週の実績 (`history-units.csv`) を、同じ位置の記事内広告と比べる。② 一覧の形のページ (関連記事・検索結果・ブログ一覧・タグ) で、カードの見た目をそろえてインフィード広告を入れる案を、ページごとに閲覧数と一緒に出す (検索結果のカードには画像が無い)。③ 長い表が続くページ (都道府県・市区町村のデータブック・調査) は、章立てと章の頭の 1 文で記事内広告の置き場を作る。④ Multiplex は回遊 (関連記事) と取り合うので、使うなら関連記事の後のページの最後に限り、回遊の内訳 (`internal-transitions.csv`) と一緒に判定する。
 - **停止条件・禁止**: スマホの広告の高さは本文の 30% まで (広告の枠の台帳の共通のルール)。広告のためだけに中身の薄い文を足さない (章の 1 文は値から導いた中身のある文にする)。1 ページで同じユニットを重ねない。最初の画面に置かない。
@@ -2095,7 +2068,7 @@ updated: 2026-11-01
 
 - **済み**: 10-31 に表示広告を固定 300×250 にした。 (参照: 5469a28b8)
 - **オーナー決定**: 自動広告は今の設定を続ける (11-11)。アフィリエイトは戦略を練り直すまで止め、枠は消さずに AdSense のレスポンシブへ 1 つずつ替える (11-12)。ランキング専用の案件の例外を戻すときは commit 955444898 の版の `ranking-affiliate-policy.ts` から戻す。
-- **観測 (2026-11-15・AdSense 管理画面「最適化案」を閲覧)**: 届いている最適化案は 1 件で、固定サイズの 5 ユニット (stats47-content-footer-rect・stats47-ranking-rail-top・stats47-ranking-table-side・stats47-themes-content・stats47-ranking-footer-rect) をレスポンシブのコードへ替える提案。画面の「最適化されたトラフィックの割合」は順に 3%・0%・0%・8%・18%。画面が示す「平均 45% 増」は 2019-11-04 の週の Google 全体の調査値で、このサイトの実測ではない。「テスト」は終了済みの 2 件 (アンカーのみ・Ad intents) だけ、Labs は利用できる機能なし。同日の画面に「住所確認が必要なため、お支払いが保留されています」(PIN は 11-13 発送) と税務情報の追加の案内が出ている (オーナー工程)。
+- **観測 (2026-11-15・AdSense 管理画面「最適化案」を閲覧)**: 届いている最適化案は 1 件で、固定サイズの 5 ユニット (stats47-content-footer-rect・stats47-ranking-rail-top・stats47-ranking-table-side・stats47-themes-content・stats47-ranking-footer-rect) をレスポンシブのコードへ替える提案。
 - **済み (2026-11-15・未コミット・未デプロイ)**: 最適化案の 1 枠目として、市区町村のページ末 (`CityPageFooter`・ユニット stats47-content-footer-rect) を固定 300×250 から本文の幅いっぱい (上限 580px。)
 - **基準値 (before)**: W44 (10-25〜10-31・`data/adsense/history-units.csv`) の手動ユニット計は 223 円、1,000 PV あたり 19.0 円、表示 1,000 回あたり 19 円。11-04〜11-10 (AdSense のレポート画面・11-11 取得) は 247 円・20.2 円・16 円。ランキングの解説の後の記事内広告ユニットは W42〜W44 で表示 1,000 回あたり ¥29〜31・視認率 37〜42%・埋まった割合 90%。ランキング右レール末尾 `stats47-ranking-table-side` (300×600 化前) は W42〜W44 で ¥8〜10・視認率 32〜33%。
 - **次 (実行順)**:
@@ -2155,7 +2128,7 @@ updated: 2026-11-01
 ### [R2-VALUES-REUPLOAD-01] ランキングの values.json が生成のたびに全件送り直されるのを止める
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-11] [領域:データ]
 
-- **観測 (2026-11-15・sync-snapshots run 43671404197・オーナー承認)**: `[values] 時刻を引き継いだ=2728 中身が変わった・初回=0`、`[normalized] 時刻を引き継いだ=1823`。最後の R2 push はローカル 14,118 件のうち `R2 と中身が同じ（送らない）: 11414`・`送信する: 2704` (regenerable CHANGED=2703 と station-passengers/index.json)。全件の再送は止まった。ただし納豆の `app/ranking/natto-consumption-expenditure/values.json` の Last-Modified は 03:17:57 で、この run の push (03:54〜) ではなく Correlation Refresh (run 43671486374、03:17 に 2,653 件を push) の時刻と一致する。
+- **観測 (2026-11-15・sync-snapshots run 43671404197・オーナー承認)**: `[values] 時刻を引き継いだ=2728 中身が変わった・初回=0`、`[normalized] 時刻を引き継いだ=1823`。 (参照: run 43671486374)
 - **次**: ①送った 2,703 件が何か (前回の run が失敗して R2 が旧い時刻のままだった values.json か) を、もう 1 回の sync-snapshots のログで確かめる。2 回目でも同程度なら差分の出どころを 1 件の diff で特定する。②Correlation Refresh が values.json を毎回送り直しているかを run のログと `curl -sI` の Last-Modified で確かめ、送っているなら同じ引き継ぎを入れる。
 - **済み (2026-11-14・3b10a0410)**: `generate-ranking-values.ts` は前回配信した values.json を読み、中身が同じなら `generatedAt` を引き継いで同じバイト列にする。
 - **残り**: この変更を main へ反映した後、sync-snapshots (全 task) を連続 2 回実行する。1 回目は values.json の `generatedAt` が前回配信と同じ値に固定されるが、R2 側は旧い時刻のままなので values.json の全件が再送される。2 回目のログで `[values] 時刻を引き継いだ=` の件数、`R2 と中身が同じ（送らない）:` と `送信する:` の件数を読み、`curl -sI https://storage.stats47.jp/app/ranking/<key>/values.json` の Last-Modified を 2 回目の前後で比べる。
@@ -2165,7 +2138,7 @@ updated: 2026-11-01
 ### [DEPS-PICOMATCH-REDOS-01] picomatch の ReDoS (GHSA-fc5q-39xc-vjpf) で Security Scan が全 PR で赤になっている
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-18] [領域:管理]
 
-- **観測 (2026-11-18)**: PR #1284 の Security Scan が `check-dependency-audit.mjs` の high で失敗した (run 44205673797)。lock は前回の成功 (11-17 10:25) から変わっておらず、advisory が新しく公表されたもの。大元は picomatch <=4.0.7 (最新版が 4.0.7 で修正版なし)。経路は vitest・vite・tinyglobby・knip → fdir → picomatch 4.0.7 と、apps/admin の shadcn → fast-glob 3.3.3 → micromatch → picomatch 2.3.2 で、`npm audit --omit=dev` には現れない (dev 依存だけ)。必須チェックは Code Quality Check だけなので、マージは止まらない。
+- **観測 (2026-11-18)**: PR #1284 の Security Scan が `check-dependency-audit.mjs` の high で失敗した (run 44205673797)。
 - **再現**: `node .claude/scripts/lib/check-dependency-audit.mjs` / `npm audit --json`
 - **選択肢**: (a) `.claude/config/dependency-audit-exceptions.json` に dev 依存の例外として理由と期限 (例 2026-12-18) 付きで載せる (2026-10-10 のオーナー判断の仕組み。Claude が足そうとしたら自動の安全判定が止めたので、オーナーの判断で入れる) (b) picomatch の修正版を待つ (その間 Security Scan は赤)。
 - **済み (2026-11-18・オーナー判断)**: picomatch (GHSA-fc5q-39xc-vjpf) を `dependency-audit-exceptions.json` に dev 依存の例外として期限 2026-12-18 で載せた。
@@ -2176,7 +2149,7 @@ updated: 2026-11-01
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:gh pr list --state all --search "author:app/renovate"] [起票:2026-10-13] [待ち:承認]
 
 - **背景**: improvements.md の期限 (2026-10-12) を超過し、改善台帳の上限 10 件を塞いでいたため、オーナー指示で 2026-10-13 に active から外した。効果は未確定 (effect ラベルなし)。
-- **実測**: renovate.json はあるが未稼働。2026-09-07 は `gh pr list --search "author:app/renovate"` = 0 件。2026-10-11 の再実測は `gh pr list --state all --limit 200` で作者または head ブランチに renovate を含む PR が 0 件、`gh api repos/uruhayato373/stats47/branches --paginate` の 2 ブランチにも renovate を含むものは無い。
+- **実測**: renovate.json はあるが未稼働。
 - **次 (オーナー)**: GitHub App のインストール。DEPS-MAJOR-SECURITY-01 は Dependabot security alerts で解消済みなので緊急度は低い。
 - **完了条件**: インストール後の最初の月曜 (renovate.json の schedule は月曜 6 時前) の翌日に、上の検証コマンドで 1 件以上。無ければオーナーへ再依頼する。
 
@@ -2245,8 +2218,7 @@ updated: 2026-11-01
 ### [ACADEMIC-TEST-YEARS-01] 全国学力テストの都道府県別平均正答率が 2025 年の 1 年分しか無い
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:データ]
 
-- **事実 (2026-10-13)**: `academic-achievement-test-average-rate` の R2 values は 2025 年の 47 行だけ。教材の企画 `kakei-marketing-2015-a01-01`
-  (「継続して上位に入る県はどこか」) の note 記事 `b-ref-kakei-a01-01` は、継続性を確かめられないと書いて 2025 年だけで答えている。
+- **事実 (2026-10-13)**: `academic-achievement-test-average-rate` の R2 values は 2025 年の 47 行だけ。
 - **次**: 国立教育政策研究所の公表 (https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html) から過去の年の都道府県別正答率を取り込む (`data-provenance-standards.md` の 9 点セット)。
   取り込んだら記事の答えを複数年で書き直す。
 - **完了条件**: 3 年以上の 47 都道府県の値が R2 にあり、記事が複数年で答えている。
@@ -2359,7 +2331,7 @@ updated: 2026-11-01
 ### [CI-PR-WAIT-01] PR の検査は中央値 12.9 分で、安い検査で落ちても赤と分かるまで約 13 分かかる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
 
-- **事実**: `pr-quality-check.yml` の Unit Tests は web 250 秒 + packages 334 秒 + admin 83 秒を 1 job で直列 (12.1 分)。Build Check は metadata 184 秒 + build 333 秒 + 共有 72 秒。失敗 20/65 run。標本 1 件では Debt Guard が 4 秒で落ち、run が赤になったのは 13.3 分後。`develop-quality-gate.yml` は 264 run 中 61 回失敗 (標本は Web unit と Catalog Gates)。
+- **事実**: `pr-quality-check.yml` の Unit Tests は web 250 秒 + packages 334 秒 + admin 83 秒を 1 job で直列 (12.1 分)。
 - **次**: ①Unit Tests を develop gate と同じ並列の job に分ける ②metadata の生成を build と並べる ③Static Gates が落ちたら残りを止める ④preflight に Web unit と Catalog Gates を足すかを決める (`CI-TOOLING-FOLLOWUP-03` の preflight の追補と合わせる)。
 - **完了条件**: PR の run の中央値と、Static Gates の失敗が赤になるまでの時間を、前後の実測で比べて書いた。
 
@@ -2373,7 +2345,7 @@ updated: 2026-11-01
 ### [ALWAYS-LOADED-TRIM-01] 毎会話に読み込む指示 (概算 3.1 万 token) を減らす
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-11-22] [領域:管理]
 
-- **事実**: CLAUDE.md 187 行・常時 rules 2 本 366 行 (553/600 行・DG070)、MEMORY.md 200 行。CLAUDE.md の rules の表 54 行 (8.1KB) は各 rule の `paths:` と重なる。MEMORY.md は 200 行ちょうどで、追記すると末尾が読み込まれない可能性がある ([仮説] 読み込みは先頭 200 行。公式文書で確かめる)。
+- **事実**: CLAUDE.md 187 行・常時 rules 2 本 366 行 (553/600 行・DG070)、MEMORY.md 200 行。
 - **次**: ①rules の表を docs-vs-issues.md へ移し、DG072 の検査を同じ差分で直す ②MEMORY.md の索引を領域ごとにまとめ直して 170 行以下にする。
 - **禁止**: 常時 rules の追加・削除はオーナー判断。
 - **完了条件**: CLAUDE.md + 常時 rules が 500 行以下、MEMORY.md が 170 行以下で `npm run docs:check` が通る。
@@ -2388,21 +2360,21 @@ updated: 2026-11-01
 ### [SKILL-INVENTORY-TRIM-01] skill 161 本の登録の前提を決め、使われていない 8 本と重なる組を整理する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理] [待ち:判断]
 
-- **事実**: `<群>/<名前>/` の入れ子なので Skill ツールに 1 本も登録されていない (09-14 に `Skill("weekly-plan")` が Unknown skill)。SKILL.md に触れた記録があるのは 78/161 本。参照 0 は ges/render-ges-ports・dev/strategic-compact、参照 1 は auto-resubmit-url・check-broken-links・inspect-url・monetize-article・prune-remotion-output・reset-git-history。重なる組: blog/panel-review と ui/panel-review、review-router と task-router、knowledge と continuous-learning、dev/security-review・dev/review-feature と組み込み。
+- **事実**: `<群>/<名前>/` の入れ子なので Skill ツールに 1 本も登録されていない (09-14 に `Skill("weekly-plan")` が Unknown skill)。
 - **判断**: 「Read する文書」の前提を明文化する (起動時 0 token) か、平坦にして登録する ([概算] +約 2 万 token/会話)。推奨は前者。
 - **完了条件**: 前提が `skill-code-placement.md` か skills の README に 1 段落で書かれ、8 本と重なる組の残す・統合・削除が決まって反映された。
 
 ### [CODEX-MIRROR-SLIM-01] Codex 向けの写し (.agents/skills・.codex) の複製と手保守をやめる
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理]
 
-- **事実**: `.agents/skills` は SKILL.md の複製 161 本 (1.43MB) + symlink 153 本。Codex の会話記録 65 本 (11-15〜11-19) で `.agents` の SKILL.md を読んだのは 0 回、`.claude` 側の原本は 13 本。`.codex/hooks.json` は手保守で、`.claude/settings.json` の hook 8 本のうち check-unpushed・check-findings-on-stop・pre-browser-admin-read が無い (整合性検査 E3 は存在だけを見る)。
+- **事実**: `.agents/skills` は SKILL.md の複製 161 本 (1.43MB) + symlink 153 本。
 - **次**: ①SKILL.md も symlink にするか写しをやめる ②hooks.json を `sync-codex-mirror.cjs` で settings.json から生成する。
 - **完了条件**: 写しの複製が 0 本で、hooks.json が生成物になり、`sync-codex-mirror.cjs --check` が差分を止める。
 
 ### [WEB-PUBLIC-UNUSED-ASSETS-01] apps/web/public に、参照の無い土木の画像 19 枚 (36.3MB) がデプロイのたびに送られている
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
 
-- **事実**: `apps/web/public/images` の civil-engineering-*・brand-civil/concrete/pe-* 19 枚は、検査の基準 2 ファイルからしか参照されていない。ほかに名前で参照されない公開ファイルが 135 本 (41.3MB) あるが、組み立てたパスで使うもの (flag・カテゴリ画像) を含むので未確定。
+- **事実**: `apps/web/public/images` の civil-engineering-*・brand-civil/concrete/pe-* 19 枚は、検査の基準 2 ファイルからしか参照されていない。
 - **次**: ①19 枚を消し、基準の行を外す ②135 本は本番のアクセスログか URL の組み立て元で使用を確かめてから分ける。
 - **完了条件**: 19 枚が消えて `npm run check-datasets` が通り、135 本の使用・不使用の一覧がこのカードにある。
 
@@ -2478,48 +2450,17 @@ updated: 2026-11-01
 ### [SIMPLIFY-REVIEW-LOOP-EXECUTION-01] 週次レビューを「書く」から「Must を実行する」側へ寄せ、active 施策を上限 5 件まで減らす
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-10-11] [期日:2026-11-08] [領域:計画]
 
-- **事実 (2026-10-11 実測)**: 配線は健全だが、W37〜W39 の Must が 1/3・0/3・0/3 (W40 は 2/2)、NSM 週次収益は全週「判定不能」だった。active 施策の削減・`[target:]` 欠落の処置・DG080 の是正は 10-11 に済み (`db4abc0a0`・`94e5b456a`)。週次 Must は 10 月の月次計画の「Must 2 件・🔴 の上から」で運用する。
+- **事実 (2026-10-11 実測)**: 配線は健全だが、W37〜W39 の Must が 1/3・0/3・0/3 (W40 は 2/2)、NSM 週次収益は全週「判定不能」だった。 (参照: db4abc0a0・94e5b456a)
 - **次**: (1) improvements.md を月次で上限 5 件 (2026-10-27 に 10 から変更) まで削る (improvement-triage の排他 write)。削除基準は「`[target:]` が無い」「計器が止まっていて判定できない」。(3) `review-wiring.json` の requiredSections 6 を「サマリー / 計画 vs 実績 / 申し送り」の 3 に減らしてよいか、`/weekly-review` の所要時間を 1 回測ってから決める。
 - **残り**: W41〜W44 の週次レビューで Must の達成率を読む。判定日 2026-11-08 (W44 のレビューの翌日)。
 - **完了条件**: active ≤ 10、`[target:]` なし 0、4 週連続で Must ≥ 2/3。
 - **追補 (2026-11-21・週次レビュー W46)**: backlog は 377 枚で目安 200 枚を超え、W45・W47 は削減を定常に置いて進まなかった。W48 の Must 1 (377 枚から 20 枚以上減らす) の主 ID をこのカードにした。手順: 期日超過のカード (`npm run backlog:waits -- due --week <週>`) を今週やる・期日を引き直す・消すのどれかに決め、完了カードは `record-backlog-outcome.mjs` で記録してから消す。完了の目安: `npm run backlog:waits -- flow` の総枚数 ≤ 200。
 
-### [UI-FIX-THEME-20261011] UI 是正: theme の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-THEME-20261011.txt] [起票:2026-10-11] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-THEME-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
-- **対象**:
-  - `machine|theme|unit_symbol_mixing` — unit_symbol_mixing: 1 URL (最大 2、閾値 <= 0)。例: https://stats47.jp/themes/tourism
-    - 経緯: 修正の本番反映後も 2026-10-11 の週次で再検出 (前回: aging-society / local-economy の論点要約の「100％」を「100%」に、テーマ部品の単位を formatUnitForDisplay に通した。localhost /themes/aging-society 等で ％ 0 件)
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-THEME-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-SURVEY-20261011] UI 是正: survey の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-SURVEY-20261011.txt] [起票:2026-10-11] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-SURVEY-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
-- **対象**:
-  - `machine|survey|unit_symbol_mixing` — unit_symbol_mixing: 2 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/survey/hospital-report / https://stats47.jp/survey/road-statistics
-    - 経緯: 修正の本番反映後も 2026-10-11 の週次で再検出 (前回: カテゴリ一覧表 (CategoryRankingListClient) の単位列を formatUnitForDisplay に通した。localhost /survey/cpi-annual・local-finance・accommodation-survey で ％ 0 件)
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-SURVEY-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
 ### [UI-FIX-RANKING-20261011] UI 是正: ranking の週次 UI 検査の指摘 4 件を直す
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-20261011.txt] [起票:2026-10-11] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-RANKING-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-desktop-1440.png)。
 - **対象**:
   - `agent|ranking` (Claude の確認)
     - [desktop-1440/high] デスクトップ 1 枚目下部、地図の右隣の順位表。右端の「偏差値」列: 順位表の右端の列が切れています。見出し「偏差値」が半分しか見えず、各行の値も「9」「7」「6」のように先頭の 1 文字だけが見えます。読者は偏差値を読めません。 → 表を横スクロール可能なコンテナに入れるか、列幅を詰めて偏差値列が枠内に収まるようにする。
@@ -2531,7 +2472,7 @@ updated: 2026-11-01
   - `machine|ranking|title_changed` — title_changed: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/ranking/production-age-population-ratio
   - `machine|ranking|unit_symbol_mixing` — unit_symbol_mixing: 425 URL (最大 13、閾値 <= 0)。例: https://stats47.jp/ranking/academic-achievement-test-average-rate / https://stats47.jp/ranking/agricultural-income-ratio / https://stats47.jp/ranking/agriculture-forestry-fisheries-expenditure-ratio-pref-finance
     - 経緯: 修正の本番反映後も 2026-10-11 の週次で再検出 (前回: 関連ランキング・カテゴリ一覧表・KPI 部品の単位を formatUnitForDisplay、AI 解説本文の数字直後の ％ を normalizePercentInText で表示時に % へ揃えた。localhost /ranking/abandoned-cultivated-land-area で ％ 0 件)
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。
 - **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-RANKING-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
@@ -2541,8 +2482,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-POPULATION-20261011.txt] [起票:2026-10-11] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-POPULATION-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-population-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-population-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-population-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-population-desktop-1440.png)。
 - **対象**:
   - `agent|prefecture-detail--theme-population` (Claude の確認)
     - [mobile-390/low] スマホ 2 枚目、「総人口」カードの推移グラフ: グラフの軸の年ラベル (1975 / 2025) が極小で、縦軸の目盛りもありません。値の範囲が分かりません。 → 軸ラベルを読めるサイズにし、最小値と最大値を添える。
@@ -2555,8 +2495,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20261011.txt] [起票:2026-10-11] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-desktop-1440.png)。
 - **対象**:
   - `agent|prefecture-detail` (Claude の確認)
     - [mobile-390/medium] スマホ 3 枚目、指標一覧の「合計特殊出生率」行 (東京都): 合計特殊出生率が「1 人」と表示されています。同じページ上部の特徴欄では「0.99人」なので、値の丸めが食い違っています。単位「人」も紛らわしく、小数が失われて 47 位との差が分かりません。 → 小数 2 桁で表示し、単位表記を他の欄と揃える。
@@ -2566,7 +2505,7 @@ updated: 2026-11-01
   - `machine|https://stats47.jp/areas/13000|small_text_count` — small_text_count = 78 (閾値 <= 56)
   - `machine|https://stats47.jp/areas/47000|small_text_count` — small_text_count = 76 (閾値 <= 56)
   - `machine|prefecture-detail|unit_symbol_mixing` — unit_symbol_mixing: 47 URL (最大 2、閾値 <= 0)。例: https://stats47.jp/areas/01000/tourism / https://stats47.jp/areas/02000/tourism / https://stats47.jp/areas/03000/tourism
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。
 - **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
@@ -2576,15 +2515,14 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-20261011.txt] [起票:2026-10-11] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality-desktop-1440.png)。
 - **対象**:
   - `agent|municipality` (Claude の確認)
     - [tablet-768/medium] タブレット 1 枚目、「千代田区の特徴」カード: 千代田区の上位指標がすべて「2006年度」のデータです。読者は最新の特徴だと受け取りかねません。年が古いことを知らせる注記がありません。 → 古い年度の指標には「古い年度のデータ」の注記を付けるか、新しい年度の指標を優先して出す。
     - [tablet-768/low] タブレット 1 枚目下部、「東京都の市区町村」一覧: 一覧の最終行 (日の出町・檜原村など) が枠の下端で文字の途中で切れています。スクロール領域だと分かりません。 → 枠の下端にフェードやスクロールの手がかりを付けるか、全件を表示する。
     - 経緯: 再発 (2026-10-11 の週次で再検出)
   - `machine|municipality|title_changed` — title_changed: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/areas/29000/cities/29204
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。
 - **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
@@ -2594,8 +2532,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-HOME-20261011.txt] [起票:2026-10-11] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-HOME-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-desktop-1440.png)。
 - **対象**:
   - `machine|https://stats47.jp/|clipped_text` — clipped_text = 1 (閾値 <= 0)
   - `machine|https://stats47.jp/|responsive_layout_issues` — responsive_layout_issues = 2 (閾値 <= 0)
@@ -2614,8 +2551,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261011.txt] [起票:2026-10-11] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-desktop-1440.png)。
 - **対象**:
   - `agent|geo-analysis` (Claude の確認)
     - [mobile-390/low] スマホ 1 枚目、各分析カード左側のサムネイル: サムネイルの地図が小さすぎ、内部のラベルが重なって読めません。何の分析か画像からは分かりません。 → サムネイルを判読できる大きさにするか、ラベルを省略した簡易図にする。
@@ -2629,8 +2565,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20261011.txt] [起票:2026-10-11] [領域:サイト]
 
-- **自動起票**: 週次のページ品質監査 (`quality-suite-weekly.yml` の page-quality job) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `data/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20261011.txt`、状態は `data/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-desktop-1440.png)。検査の詳細は `data/page-quality/metrics/LATEST.md`。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-desktop-1440.png)。
 - **対象**:
   - `machine|blog-article|abnormal_value_strings` — abnormal_value_strings: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/cc-estat-12-housing-treemap
   - `machine|blog-article|internal_jargon_terms` — internal_jargon_terms: 3 URL (最大 8、閾値 <= 0)。例: https://stats47.jp/blog/2050-population-flood-exposure / https://stats47.jp/blog/2050-population-map-reading / https://stats47.jp/blog/2050-station-access-population
@@ -2643,7 +2578,7 @@ updated: 2026-11-01
   - `machine|https://stats47.jp/blog/commercial-land-price-trend|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
   - `machine|https://stats47.jp/blog/communication-cost-burden|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
 - **記事チャート SVG (振り分けてから直す)**: まず `npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @data/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20261011.txt` を実行する。`regen-fixes` は生成器が既に正しく、R2 の SVG を作り直すだけで直る (コード変更なし)。R2 への反映はオーナー承認が要るので、出力された `gh workflow run regenerate-blog-svgs.yml …` を書いた `[実行:ユーザー]` カードを起票し、対象を `--mark-owner` で紐付ける。`generator-fix` は `packages/svg-builder` の該当チャートを直し、長いラベルの fixture テストを足してから再実行して `regen-fixes` になることを確かめる (以降は同じ手順)。`no-data` は data JSON が無く作り直せないので、手作業の brushup を依頼するカードを起票して `--mark-owner`。`clean` は既に直っているので `--mark-fixed`。
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。
 - **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
 - **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@data/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20261011.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
 - **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
@@ -2661,7 +2596,7 @@ updated: 2026-11-01
 ### [NOTE-COVER-DELIVERY-VERIFY-01] 文字込み生成カバーの配信検証をnote側の減色に対応させる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-14] [領域:商品]
 
-- **証拠**: 文字込みimagegen画像はnoteの公開PNGがpalette化され、画素平均差 (MAE) が旧閾値を超えて停止する。停止例は `data/note/evidence/note-cover-refresh-ledger-{a4bc4308a8b6dcce,ac5bd1a2f0af0d79,52ad7c58985bff1e,01cc1c41fc2c1556}.json` (MAE 2.8〜4.3、`NCI-00307` は大差チャネル1.4866%で1%ゲートに停止)。いずれも原寸/320pxの文字・構図・切り抜き、配信SHA、本文保全を個別に照合して重複POSTせず復旧した。一時的な一律閾値緩和は戻した。
+- **証拠**: 文字込みimagegen画像はnoteの公開PNGがpalette化され、画素平均差 (MAE) が旧閾値を超えて停止する。
 - **担当・順序**: image-prompt-curator / note-manager。① この6件の元画像・公開配信画像で減色の再現条件を確認 ② 文字欠落・別画像・色反転・切り抜きの負例を揃える ③ 自動判定と配信SHA単位の目視確認を共通手順にする。
 - **停止条件**: 差の原因を説明できない画像や負例が通る判定は採用しない。応答済みPOSTを再送しない。一律の閾値引き上げだけで解決しない。
 - **完了条件**: 正常な減色は判別でき、負例は止まり、目視確認は採用元SHA・配信SHA・公開URLに束縛される。関連テストと既存の本文保全・アカウント照合テストが通る。
@@ -2677,11 +2612,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-CHART-TEXT] critic の指摘「図と本文」が 4 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「図と本文」(`chart-text`) の BLOCK/MAJOR を 4 本の記事で 4 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-08 bonito-catch-prefecture: bonito-two-poles.svg は、既にチャート bonito-ranking.svg(上位5)に載っている静岡81,295トンと宮城19,828トンの2本の棒を再掲しただけで、読者に新しい情報を足さない(冗長・図表重複)。
-  - 2026-10-08 cc-estat-09-radar-prefecture: 62 行と 423 行の 2 枚の図（tokyo-radar-findings.svg / tokyo-kyoto-overlay-findings.svg）は generateFindingsCardSvg が描いた番号付きテキストの要…
-  - 2026-10-08 fish-catch-vs-consumption-prefecture: 54行目・87行目の散布図。
-  - 2026-10-08 bonito-catch-zero-prefectures-gap: 新しい主題 (0トンと行なしの年ごとの入れ替わり) を示す図がありません。
+- **事象**: 直近の窓で、blog-critic が型「図と本文」(`chart-text`) の BLOCK/MAJOR を 4 本の記事で 4 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `chart-text` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -2689,7 +2620,7 @@ updated: 2026-11-01
 ### [YEAR-COV-AREA-AXIS-01] 年カバレッジ監査が、都道府県が分類軸にある表などの取得条件を再現できず、8 指標で値のある年を 0 と数える
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts] [起票:2026-10-08] [領域:データ]
 
-- **事実 (2026-10-08)**: `audit-estat-year-coverage.ts` は 8 指標 (dairy-cattle-count・inpatient-rate-per-100k・fishery-household-sex-age・fishery-management-orgs・fishery-workers-coastal-offshore・fishing-port-count-by-type・fishing-vessel-crew・fishing-vessel-tonnage-class) で値のある年を 0 と数えるが、R2 の values.json には値がある。dairy と inpatient は都道府県が分類軸にある表 (`areaAxis`) で、監査の取得はこれを再現していない。漁業の 6 指標の原因は未調査。
+- **事実 (2026-10-08)**: `audit-estat-year-coverage.ts` は 8 指標 (dairy-cattle-count・inpatient-rate-per-100k・fishery-household-sex-age・fishery-management-orgs・fishery-workers-coastal-offshore・fishing-port-count-by-type・fishing-vessel-crew・fishing-vessel-tonnage-class) で値のある年を 0 と数えるが、R2 の values.json には値がある。
 - **済 (2026-10-08)**: 値のある年が 0 件のときは新しい判定 `no-sample-values` (判断できない) にした。テストで固定し、修正を外すと落ちることを確かめた。8 指標の記録は `no-sample-values` に変わった。
 - **次**: 監査の取得を取り込み (`page-data-batch.ts`) と同じ条件 (`areaAxis`・軸の pin・合算) にそろえる。共通の取得関数があればそれを使い、無ければ取り込み側から切り出す。漁業の 6 指標は取得結果を見て原因を確かめる。
 - **完了条件**: 8 指標で、監査が R2 と同じ年に値を数え、`no-sample-values` が 0 件になる。
@@ -2698,7 +2629,7 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト] [待ち:承認]
 
 - **済み (2026-11-14・`a7be3eaaa`)**: オーナー決定 (2026-11-14: 公開は続け、推計の人数と注記を出す。)
-- **観測 (2026-11-14)**: CI の作り直し (run 43583339428) は成功したが、手動起動の data-refresh は **main** の定義で動く (`ref: ... || 'main'`) ため、推計の人数の無い旧い定義で作り直されただけだった (値は不変)。賃金の切片 (非公開 R2 `estat-tables/0003445758/`) は保存済みで、develop の取り込みは切片から全 40 指標を公開中の値と一致して作れる。**次のリリースの後に同じ起動をもう一度行う**: `gh workflow run data-refresh.yml --ref develop -f metric=<賃金の 40 指標> -f snapshot_scope=ranking -f dry_run=false`。
+- **観測 (2026-11-14)**: CI の作り直し (run 43583339428) は成功したが、手動起動の data-refresh は **main** の定義で動く (`ref: ... || 'main'`) ため、推計の人数の無い旧い定義で作り直されただけだった (値は不変)。 (参照: 0003445758)
 - **残り (承認済み・2026-11-14 オーナー「賃金の再取得は進めて」)**: CI でこの 40 指標を取り直し (page-data-batch)、ranking-values・ranking-items を作り直して、人数を取る経路を実データで初めて動かす。観測値 `app/stats` の上書きなので R2 の正本の更新にあたる (`todo-standards.md` §7)。宣言が configHash に効くので、40 指標は再取得の対象になっている。
 - **残り**: 再取得した sampleCount から職種別の推計人数を集計し、国勢調査の職業別就業者数 (年と出典をそろえる) との比を表にする。比を見て、職種ごとの扱いをオーナーが決める。本番のランキングページの注記は、R2 の item.json が古いので旧文のまま (再生成の後に新しい注記と人数が出る)。
 - **停止条件**: 推計人数が小さいことだけを理由に、他の職種の指標を一括で非公開にしない (職種ごとに比を見てから決める)。
@@ -2707,10 +2638,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「タイトル・約束」(`title-promise`) の BLOCK/MAJOR を 3 本の記事で 3 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-07 dairy-cattle-count: タイトルは「東京と大阪で乳用牛が少ないのはなぜ?」ですが、本文の答えは「人口の多さだけでは説明できません」(L25・L71) と「このデータだけでは確かめられません」(L44・L67・L79) にとどまり、型A の必須視点「なぜ上位・下位…
-  - 2026-10-07 vacant-housing-vs-aging: タイトルは「なぜ空き家は少ない?」と理由を約束していますが、本文の答えは「住み継がれている可能性」の 1 つだけで、「このデータだけでは確かめられません」と自分で認めています (空き家率の節、散布図の節の 2 か所)。
-  - 2026-10-08 school-teacher-annual-income: タイトルの「大都市が上位とは限らない逆説」は、2023年1年分だけの並びである。
+- **事象**: 直近の窓で、blog-critic が型「タイトル・約束」(`title-promise`) の BLOCK/MAJOR を 3 本の記事で 3 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `title-promise` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -2729,11 +2657,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-READER-VALUE] critic の指摘「読者価値」が 4 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「読者価値」(`reader-value`) の BLOCK/MAJOR を 4 本の記事で 4 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-07 cc-estat-20-publish: 連載の約束 (Part 19 の「毎週ほったらかしで最新化」) が最終回で閉じていません。
-  - 2026-10-07 dairy-cattle-hokkaido-monopoly: 型Aの必須視点「なぜ上位か (地理・産業構造)」が、L25・L42・L57 の3か所で「確かめられていません」と保留され、答えが無いまま終わっています。
-  - 2026-10-07 sixth-industry-direct-sales: アーキタイプ A の必須視点「なぜ上位・下位か」が、確かめられないという記述で止まっています。
-  - 2026-10-08 frozen-gyoza-spending-prefecture-gap: アーキタイプ A の必須視点「なぜ上位/下位か」が、推測の一般論にとどまる。
+- **事象**: 直近の窓で、blog-critic が型「読者価値」(`reader-value`) の BLOCK/MAJOR を 4 本の記事で 4 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `reader-value` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -2741,12 +2665,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-REGION] critic の指摘「地域のくくり」が 5 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「地域のくくり」(`region`) の BLOCK/MAJOR を 5 本の記事で 6 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-08 fresh-udon-soba-consumption-prefecture-gap: 節見出し「九州・沖縄はなぜ少ない？」、リード「九州・沖縄が下位に沈む」、まとめ「沖縄・九州が下位に集中」は、九州を一括りにしすぎている。
-  - 2026-10-08 udon-soba-food-culture-prefecture-map: 「島根」と「山形」を「内陸のそば文化圏」「海から遠い内陸でも」と書いている(トップ5紹介、第二の層、まとめの『長野・島根など内陸のそば文化圏』)。
-  - 2026-10-08 udon-soba-food-culture-prefecture-map: 「大都市圏が下位に集まります」「南関東や北海道、沖縄が続きます」は一般化しすぎ。
-  - 2026-10-08 bonito-catch-prefecture: 「上位10県のうち9県が太平洋に面しており、唯一の例外は新潟県」は R2 値と合わない。
-  - 2026-10-08 katsuobushi-expenditure-ranking: 「三重・滋賀・岐阜・京都といった近畿・東海の内陸県も6〜10位」は誤り。
+- **事象**: 直近の窓で、blog-critic が型「地域のくくり」(`region`) の BLOCK/MAJOR を 5 本の記事で 6 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `region` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -2754,12 +2673,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-CAUSAL] critic の指摘「原因の断定」が 5 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「原因の断定」(`causal`) の BLOCK/MAJOR を 5 本の記事で 6 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-07 real-disposable-income-reversal: 逆転の大きさに対する注意がありません。
-  - 2026-10-08 fresh-udon-soba-consumption-prefecture-gap: 「外食でうどんを食べる文化が強い県ほど、この指標では家庭の購入量が小さく見えるのです」(下位構造節) と まとめの「福岡のように外食でうどんを食べる県は家庭の購入量が小さく出る」は、福岡1例を一般則にしており、データと矛盾する。
-  - 2026-10-08 fresh-udon-soba-consumption-prefecture-gap: 「うどん圏」「そば圏」の割り当てが矛盾している。
-  - 2026-10-08 udon-soba-food-culture-prefecture-map: 「九州が軒並み下位なのは、麺を食べないのではなく『外食で食べている』可能性が高い」(WARNING)、「福岡をはじめとする九州勢…そして大都市圏が下位に集まります。
-  - 2026-10-08 soba-udon-dining-consumption-expenditure-prefecture-gap: 「なぜ香川がこれほど突出しているのか」の節の説明に根拠が無い。
+- **事象**: 直近の窓で、blog-critic が型「原因の断定」(`causal`) の BLOCK/MAJOR を 5 本の記事で 6 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `causal` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -2767,12 +2681,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-VALUE] critic の指摘「数値・順位の食い違い」が 6 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「数値・順位の食い違い」(`value`) の BLOCK/MAJOR を 6 本の記事で 6 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-07 dairy-cattle-hokkaido-monopoly: L65「北海道への集中は、どの地方の合計と比べても桁が違います」は、直前の文の数字と合いません。
-  - 2026-10-07 school-teacher-annual-income-prefecture-gap: 「データについて」前の TIP「4年間で3位以内に2回以上入った県は…愛知県と…東京都の2県」は誤りです。
-  - 2026-10-07 vacant-housing-vs-aging: 65歳以上人口割合の節の「上位5県の差は0.2ポイントに収まっており、2位以下は僅差で並んでいます」は、図の JSON と合いません。
-  - 2026-10-08 bonito-catch-prefecture: 「漁獲ゼロ13県」の13県のうち、R2 `app/ranking/fishery-species-catch-bonito/values.json` の 2015 年 partition は30行で、値が0なのは山形・石川・島根・熊本の4…
-  - 2026-10-08 katsuobushi-expenditure-ranking: 最下位グループの「沖縄の4分の1以下の水準」は、下位5県のうち鳥取(566円=23.5%)にしか当てはまらない。
+- **事象**: 直近の窓で、blog-critic が型「数値・順位の食い違い」(`value`) の BLOCK/MAJOR を 6 本の記事で 6 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `value` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -2780,12 +2689,7 @@ updated: 2026-11-01
 ### [CRITIC-PATTERN-DEFINITION] critic の指摘「定義の取り違え」が 9 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **事象**: 直近の窓で、blog-critic が型「定義の取り違え」(`definition`) の BLOCK/MAJOR を 9 本の記事で 12 件出した。critic の目視でしか見つかっていない。例:
-  - 2026-10-07 engel-coefficient-vs-prefectural-income: 1人当たり県民所得は「雇用者報酬・財産所得・企業所得を合わせた県民所得を人口で割った値で、個人の給与や手取りの平均ではない」指標です (本リポジトリの apps/web/src/features/survey/survey-editori…
-  - 2026-10-07 engel-coefficient-vs-prefectural-income: 姉妹記事との食い違いの書き方が足りません。
-  - 2026-10-07 real-disposable-income-reversal: 冒頭の「逆転を起こしているのは、家賃ではなく物価の水準でした」は、家賃と物価を対立させて読ませますが、消費者物価地域差指数 (総合) は民営家賃を含む総合の品目構成で作られています。
-  - 2026-10-07 sixth-industry-direct-sales: 農家総所得の対象と分母が本文のどこにも書かれていません。
-  - 2026-10-07 sixth-industry-direct-sales: 順位相関の説明で、産出額の暦年 2003 と農家総所得の 2003 年度を「同じ 2003 年」と呼んでいます。
+- **事象**: 直近の窓で、blog-critic が型「定義の取り違え」(`definition`) の BLOCK/MAJOR を 9 本の記事で 12 件出した。
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `definition` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
@@ -2794,12 +2698,7 @@ updated: 2026-11-01
 ### [KEYS-SYNC-PROMINENCE-REGEN-01] ランキングの既知キーを足しても、そこから作るランキング索引の生成物が再生成されない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check] [起票:2026-10-08] [領域:データ] [進行中]
 
-- **事実**: `packages/data-configs/src/prominence/ranking-prominence.generated.ts` のカテゴリ別件数は `KNOWN_RANKING_KEYS` から数える
-  (`apps/web/scripts/generate-ranking-prominence.ts`)。既知キーを足すたびにこの生成物も変わるが、再生成を忘れて PR の Static Gates と
-  Catalog Gates が落ちたことが 2 回ある (2026-09-30 は 45907f98c の後に 940d03615 で、2026-10-08 は 77073be42 の後に ad05798b6 で直した)。
-  `sync-snapshots.yml` の sync-ranking-keys job は既知キーと sitemap を再生成して keys PR を作るが、この生成物は再生成せず、
-  PR の対象ファイル (`KEY_FILES`) にも入っていない。キーが増える keys PR は同じ検査で落ちる作りになっている。
-  pre-commit はこの検査を 2026-09-18 に外した (`pre-commit-checks.sh` 6.45〜6.6b)。
+- **事実**: `packages/data-configs/src/prominence/ranking-prominence.generated.ts` のカテゴリ別件数は `KNOWN_RANKING_KEYS` から数える (参照: 45907f98c・940d03615)
 - **次**: sync-ranking-keys job の再生成手順に `generate-ranking-prominence.ts` を足し、`KEY_FILES` に生成物を加える。
   手元で既知キーを再生成する手順 (`.claude/skills/db/generate-known-ranking-keys/SKILL.md`) にも同じ 1 行を足す。
 - **2026-10-08 実装 (develop)**: sync-ranking-keys job の再生成手順に `generate-ranking-prominence.ts` を足し、生成物を keys PR に含める
@@ -2992,7 +2891,7 @@ updated: 2026-11-01
 - **現状**: 是正は2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み (旧市区町村カテゴリsoft404は301、未知カテゴリ410 + noindex)。現sitemap内soft404 15件は本番200・自己canonical・index可を確認し、2026-10-17までに15/15の登録リクエストが受理された (自動化gsc-4はPAUSED)。Google保存状態は依然soft404で、登録完了・件数改善は未確認。根拠: `data/gsc/ui-audits/2026-10-16-remediation.json`。経過は `git log -p -- .claude/todo/backlog.md`。
 - **次**: 修正後の lastCrawlTime・登録状態を既存の日次Inspectionで再確認し、未再クロールならサイトマップ再取得・クロール統計を照合する。現在200・ライブテスト合格・送信受理だけで登録済みとしない。
 - **優先対象の絞り込み案 (10-16)**: soft404 15件・クロール済未登録146件・検出未登録971件の計1,132 URLを候補母集団にする（全件の現HTTPは未検査）。需要・最終クロール・内部リンク・本文の独自性で優先付けし、まず既存15件と需要のある小標本を調べる。
-- **観測の判断条件**: 登録済み6,700とsitemap6,574は対象集合が異なるので割り算しない。固定した対象URL群で修正後クロール・登録・検索表示・クリックを追い、未登録総数の減少だけを成功にしない。UI監査と既存coverage入力の鮮度を分け、取り込み時は既存CSV/manifest gateを通す。既存lastmodは実際の本文/データ更新を表すかを確認し、確認できない日時を捏造して一律更新しない。
+- **観測の判断条件**: 登録済み6,700とsitemap6,574は対象集合が異なるので割り算しない。
 - **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
 - **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
 - **2026-11-11 実測 (GSC 最終更新 11-06・本番 HTTP・サイトマップ 11 本)**: 送信済みの「クロール済み - 未登録」127 件は県×テーマ 70・ランキング 24・市区町村 21・ブログ 11・調査 1 (クロール日は 6 月〜11 月)。県×テーマはテーマ 35 種に散り、最多は aging-society の 8 件。県×テーマはサイトマップに 2,491 件あり、「検出 - 未登録」にも 239 件ある。**次 (案09・15 の入力)**: 登録済みと未登録の県×テーマを同じテーマで並べ、本文・固有の値・重複の差を比べてから、薄い組み合わせを noindex にするか内容を足すかを決める。
@@ -3094,13 +2993,13 @@ updated: 2026-11-01
   推測で再生成しない。公開参照asset契約と内容品質gateを各バッチ後に再実行する。
 - **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
 - **正典**: `.claude/rules/blog-data-schema.md`
-- **観測 (2026-11-14・develop の CI が落ちる)**: Develop Quality Gate の Catalog Gates (preflight:pr) で「Survey Taxonomy」が `✗ blog coverage 95.73% < 100%` で落ちる (run 43558460412 の a043f19d0 ほか、今日の 8a7e58804・0c08944be でも同じ)。ブログの図 2,279 件のうち 91 件が調査に結び付かない。名指しの先頭は 11-09 に公開した家計調査の記事 (`beer-happoshu-liquor-tax-steps-household-response` の 9 枚、`education-spending-income-quintile-decade` の 5 枚など)。この検査は `--offline` でもブログは公開中の R2 (`app/blog/all.json` と各図の source.json) を読むので、結果がコードではなく R2 の中身で決まり、同じコミットでも通ったり落ちたりする。再現: `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check`。直すには、91 件の図の source.json に調査 (surveyIds か e-Stat の表 ID) を足して再公開する。あわせて、R2 の状態で CI の合否が変わる作りを、ゲートから外すか週次の監査へ移すかを決める。
+- **観測 (2026-11-14・develop の CI が落ちる)**: Develop Quality Gate の Catalog Gates (preflight:pr) で「Survey Taxonomy」が `✗ blog coverage 95.73% < 100%` で落ちる (run 43558460412 の a043f19d0 ほか、今日の 8a7e58804・0c08944be でも同じ)。
 
 ### [CONTENT-PAINPOINT-PUBLISH-01] 悩み起点ブログ5本の公開とSNS展開を完了させる
 
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:curl -sI https://stats47.jp/blog/nursery-shortage-urban-prefecture が200を返す] [起票:2026-09-16] [期日:2026-09-30] [領域:サイト]
 
-- **背景**: 「悩み・不安」起点の記事がSEOに効くという仮説で、白書(NotebookLM)調査+note/X調査の両方で裏付けが取れた5テーマを記事化した。5本とも `quality-gate.mjs` / `article-factual-check.mjs` / blog-critic すべて PASS 済み (`contents/blog/{nursery-shortage-urban-prefecture, vacant-housing-rate-inherited-home-risk, elderly-welfare-expenditure-prefecture-gap, evacuation-plan-coverage-urban-prefecture-gap, intellectual-crime-tokyo-kagawa-gap}/`)。
+- **背景**: 「悩み・不安」起点の記事がSEOに効くという仮説で、白書(NotebookLM)調査+note/X調査の両方で裏付けが取れた5テーマを記事化した。
 - **公開の現在地**: 2026-11-03 時点で 5本とも本番は 410 (未公開)、原稿は `contents/blog/<slug>/` に残っている。9月は Codex の利用上限で背景画像を作れず止まった。画像リクエストは `npm run blog-images:codex -- request-article --slug <slug> --article contents/blog/<slug>/article.md` で決定的に再生成できる (Codex CLI の直接実行は `codex-mcp.md` の経路③で許可)。
 - **SNS下書き**: X投稿文5本・Instagramキャプション5本は `data/sns/pain-point-series-drafts.md` に保存済み。**投稿・予約は記事が本番公開されてから、ユーザーの明示許可を得て実施する**(まだ実行していない)。各投稿に添付する画像とチャートSVGの形式一致は未確認、投稿前に要突合。
 - **次**: 5 本分の request-article → `$imagegen` (1本1回) → `ingest-article` → `generate-blog-thumbnails.ts --slug <5slugs>` → `/publish-bulk-articles` の Phase 4 (R2 push・all.json・purge) → Phase 5 (HTTP 検証)。公開後に X・IG の下書きを予約枠 (X は週 2-3 本) へ入れる。
@@ -3331,10 +3230,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
 
-- **背景 (2026-09-25 `/areas/13000` 実測)**: 390px でページ高 13,174px。データブックの数値カードがスマホで 1 行 1 個に並ぶため。
-  「地価」「旅行者」は数値 1 個、「産業」は 2 個で全幅の節を使い、「暮らし」(犯罪) と「安全・くらし」(交通事故) の分け方が
-  分かりにくい。空間分析カードに内部用語「保存則 47/47」がそのまま出る。「%」と「％」の混在、「11％」と「11.2％」の小数桁の不揃い、
-  見出し「東京都の市区町村40 件」の空白抜け。交通事故グラフの横軸は「年度」だが、元統計は暦年の可能性がある (未確認)。
+- **背景 (2026-09-25 `/areas/13000` 実測)**: 390px でページ高 13,174px。
 - **次**: ① スマホでも数値カードを 2 列にする。② 数値の少ない節を統合し、「暮らし」と「安全・くらし」の区分を決め直す
   (`area-databook-designer`)。③ 「保存則」を読者向けの表現に直す。④ 単位記号・小数桁を共通の書式に揃える。
   ⑤ 交通事故の年の型を出典で確かめる。
@@ -3349,7 +3245,7 @@ updated: 2026-11-01
 
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
 
-- **背景 (2026-09-25 実測)**: `/areas/13000` の `StackedAreaChart` で縦軸の目盛りが左に 4〜12px 切れ (`computeMarginsByRatio` の固定幅比)、note のビール月別折れ線 SVG (`b-kakei-beer-peak-month/data/beer-months-by-year-timeseries.svg`、`svg-builder` の `line.ts`) で凡例と斜めの月ラベルが重なる。スクショでは 1 文字の欠けを読めないので、**文字の外枠の座標で機械判定する**。
+- **背景 (2026-09-25 実測)**: `/areas/13000` の `StackedAreaChart` で縦軸の目盛りが左に 4〜12px 切れ (`computeMarginsByRatio` の固定幅比)、note のビール月別折れ線 SVG (`b-kakei-beer-peak-month/data/beer-months-by-year-timeseries.svg`、`svg-builder` の `line.ts`) で凡例と斜めの月ラベルが重なる。
 - **方針 (検出 → 起票 → 修正 → 本番確認)**:
   1. **検出**: ①`chart_text_issues` — 週次ページ品質監査のブラウザ検査で、SVG の `<text>` の外接矩形が描画範囲から 2px 超出るもの (overflow: visible は除外) と、文字どうしが小さい方の 25% 以上かつ 3px 四方以上重なるもの (スクロールで描かせてから測る。スクロール処理は `ui-probe.ts` の共通関数)。②`blog_svg_text_issues` — 記事 SVG を `svg-lint.mjs` の `findChartTextIssues(svg)` で静的に検査 (`checkImages` が画像 URL を消す前に呼ぶ)。
   2. **起票**: 2 指標を `UI_METRIC_KEYS` と `page-quality-budgets.json` (warning・閾値 0) に足し、既存の `ui-findings.ts --sync` で `UI-FIX-<種類>` カードにする。
@@ -3407,7 +3303,7 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:週次 page-quality の degraded_images が prefecture-detail で 0] [起票:2026-09-23] [領域:サイト]
 
 - **owner**: area-curator (対象の確定) / image-prompt-curator (画像)
-- **実測 (2026-09-23)**: 600 URL の試運転で 12 県・21 枚の `app/areas/<code>/specialty/*.webp` が R2 で 404 (例: 07000 nameko / 10000 brix-nine・aka-imo / 12000 tomisato-suika・shiro-takenoko / 22000 midori-mai・kajiki / 24000 ise-hijiki・ao-sanori)。画面は `SpecialtyImage` が頭文字タイルに切り替えるので壊れては見えないが、写真が出ていない。全件の件数は次回の週次監査の `degraded_images` で確定する。
+- **実測 (2026-09-23)**: 600 URL の試運転で 12 県・21 枚の `app/areas/<code>/specialty/*.webp` が R2 で 404 (例: 07000 nameko / 10000 brix-nine・aka-imo / 12000 tomisato-suika・shiro-takenoko / 22000 midori-mai・kajiki / 24000 ise-hijiki・ao-sanori)。
 - **次**: 週次結果から欠落の全リストを出し、台帳 `areas.editorial` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 - **決定 (2026-10-26 オーナー)**: 頭文字タイルの正式化はせず、欠けている画像を用意する。次は週次監査の `degraded_images` から欠落の全リストを出し、image-prompt-curator で生成する。
@@ -3416,7 +3312,7 @@ updated: 2026-11-01
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs] [起票:2026-09-18] [期日:2026-11-30] [領域:管理] [待ち:判断]
 
 - **済み (2026-11-14・9f041b983)**: pre-commit は終了時に全段の所要時間を重い順で出す (`apps/web/scripts/pre-commit-stage-timer.sh` の `stage "名前"` で段を切る。)
-- **実測 (Mac・2026-11-14・metric config 1 件 + workflow 1 件を staged)**: 合計 49.9 秒。test:image-pipeline 9.3 秒、check-checker-wiring 6.7 秒、metrics:check 5.6 秒、note の cover-production validate 4.9 秒、GIS 台帳の vitest 4.5 秒、type-check:image-pipeline 4.5 秒、content:check 4.1 秒、check-datasets 1.8 秒、note の cover-assets validate 1.4 秒、build:category-keys --check 1.4 秒、commit 共通静的検査 1.3 秒、ui-theme:lyra:test 1.0 秒。note の 4 本 (合計 7.0 秒) と check-datasets は staged の内容に関係なく毎回走る。
+- **実測 (Mac・2026-11-14・metric config 1 件 + workflow 1 件を staged)**: 合計 49.9 秒。
 - **残り (判断)**: どの段を pre-commit から外すかをオーナーが決める。選択肢は、(a) Mac と Windows の両方で、上位の段 (画像 pipeline の 2 本、check-checker-wiring、metric 契約の 3 本、GIS 台帳の vitest、note の 4 本) を `preflight:pr` と CI に任せる、(b) 同じ段を Windows だけで外す、(c) 外さずに trigger を狭める (note の 4 本を note 関係のパスが staged のときだけ走らせる、など)。推奨は (a) と (c) の組み合わせである。根拠は、上記の段の合計が約 43 秒で、外すと残りが約 7 秒になり完了条件に届くことと、2 台で検査の内容を変えると片方だけ通る commit が生まれることである。
 - **残り (実装)**: 判断の後、外す段ごとに CI 側 (develop-quality-gate または Static Gates) で同じ検査が走ることを workflow の記述で確かめてから外す。2026-11-14 のリテラル検索では、test:image-pipeline・type-check:image-pipeline・check-checker-wiring・metrics:check・content:check・build:category-keys は `pr-quality-check.yml` に見つかり、cover-production と dataset-references は `develop-quality-gate.yml`・`pr-quality-check.yml`・`quality-gates.json`・`preflight-commit.mjs` に見つからなかった。見つからなかった 2 本は、CI へ配線するか trigger を狭めるまで外さない。Windows PC でも同じ commit の内訳を 1 回取り、Mac と上位の段が違うかを確かめる。
 - **停止条件**: 外した検査が CI 側に無いものは外さない (`CI-DEVELOP-GATE-COVERAGE-01` の症状を再発させない)。
@@ -3453,8 +3349,6 @@ updated: 2026-11-01
 - **済み (2026-11-15)**: 48 件の判断 (11-12) を含むカタログが本番反映 (#1274・#1275) で main に入った。
 - **owner**: theme-designer (採否判断・`data/themes/catalogs/<theme>.json` 編集) / 最終承認はユーザー
 - **背景**: `THEME-SELECTION-BACKFILL-01` の調査は selection の裏付けだけでなく、副産物として
-  「今の role (primary/secondary/context) は適切か」の判定も出す。夜間バッチは role を
-  書き換えない (禁止事項) ので、人の採否判断とカタログ編集を挟まないとサイトに届かない。
 - **role が画面に効く範囲 (2026-11-12 実測で訂正)**: 10/31 の章立て以降、指標カードは metricGroups の並びで出るので
   role を変えてもカードの指標は消えない (`ThemeMetricsDashboard.tsx` の「role に関わらず値を出す」)。
   primary は先頭 2 件がページの題・説明文・FAQ の数字に入り (`theme-seo.ts` の `LEAD_LABEL_COUNT`)、
@@ -3504,9 +3398,6 @@ updated: 2026-11-01
 
 - **owner**: affiliate-operator (A8 の確認・口座 assert) / note-manager (記事更新) / オーナー (公開承認)
 - **背景**: A8 は 2026-09-01 に X・Threads・note 専用の広告リンク発行を始め (新メディア管理画面のみ)、
-  09-17 に X 用リンクの商品画像 (OGP) 表示に対応した。X・Threads は採用しない。投稿のリンク枠が
-  stats47 への送客と競合し、成果を GA4 で計測できず、OGP が統計図を広告主の商品画像に置き換えるため。
-  note は読者の意図が案件と一致する記事に限れば、文脈一致の原則 (`.claude/rules/affiliate-ads-standards.md`) と両立する。
 - **次 (実行順)**: ① A8 新管理画面で、note 用リンクの発行にメディアサイト登録が要るか、成果レポートで
   note 経由の成果を stats47 分として取り出せるかを確認する (A8 は doboku-note と口座共用でサイト切替が無い)。
   ② 取り出せる場合だけ、ふるさと納税・移住など意図が明確な既存の無料 note 記事 1 本と提携済み案件 1 件を選び、
@@ -3610,7 +3501,7 @@ updated: 2026-11-01
 
 - **owner**: uruhayato373 (人間の PR でのみ着手できる)
 - **★backlog-loop では閉じられない**: 対象が `.github/` だけで、ループの verify はそこを禁止パスにしている (workflow を書き換えられるとループが自分の制限を緩められるため)。人間の PR で 3-4 本ずつ進める。
-- **背景**: `${{ inputs.x }}` を `run:` の中へ直接展開している箇所。private repo で dispatch 権限者は push もできるため実効的な権限昇格ではないが、衛生上の負債。**この負債は CodeQL に検出されていない** (`.github/workflows/security-scan.yml` の `languages` に `actions` が無い)。「CodeQL が出たら workflow の式インジェクション」と早合点しない (2 度誤診した)。
+- **背景**: `${{ inputs.x }}` を `run:` の中へ直接展開している箇所。
 - **済 (2026-10-06 第 1 弾・未発火)**: `fetch-metrics-weekly` / `migration-flow-weekly` / `sns-weekly-report` / `blog-remediation-daily` を step の `env:` 経由に書き換えた (actionlint exit 0)。各 workflow を 1 回発火させる確認は未実施。
 - **次**: 残りの `blog-auto-publish` / `publish-ai-content` / `sync-snapshots` を `env:` ブロック経由に書き換える (`data-refresh.yml` が手本)。併せて `languages` に `actions` を足すか判断する (足すと残件が一斉に critical で出るため、書き換えを先に済ませる)
 - **完了条件**: 上記走査で 0 件、かつ actionlint exit=0
@@ -3804,7 +3695,7 @@ updated: 2026-11-01
 ### [ESTAT-YEAR-AVAILABILITY-01] e-Stat の実在年を data/ の台帳で管理し、設定の years を「除外だけ」にする
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
 
-- **背景**: `years` 1 つに「e-Stat にある年 (事実)」と「見せないと決めた年 (判断)」が混ざり、D1 時代の取り込みと 2026-05-28 の D1 → R2 移行 (`ba298ec5a`) で年の穴が固定されていた。事実は実在年の台帳 `data/estat/availability/tables/<statsDataId>.json` (要約 `LATEST.md`・`diff.json`)、判断は理由の種類 (`kind`) 付きの `yearExclusions` に分け、`sync-estat-years.ts` が `years` を合わせ、PR CI (`Metric Years Gate`) と週次の台帳の取り直しで保つ形にした (第 2 段 `f6c06c75c` は main に入っている)。
+- **背景**: `years` 1 つに「e-Stat にある年 (事実)」と「見せないと決めた年 (判断)」が混ざり、D1 時代の取り込みと 2026-05-28 の D1 → R2 移行 (`ba298ec5a`) で年の穴が固定されていた。 (参照: f6c06c75c)
 - **2026-10-30 まで**: 未判断の除外 421 件を外して年を戻し (`dd824aed5`、オーナー指示「利用できるデータは全て利用する」)、data-refresh run 40953107078 で 420 件を R2 へ取り込んだ。`LATEST.md` (2026-10-30) は取り込み忘れ 0・新しい年 0・範囲より前 0・未判断の除外 0。
 - **残り**:
   ① `private-life-insurance-contracts-per-1000` は通信の失敗で未取り込み。取り込み直しの依頼は `b7a0c6181` で `data/data-refresh-requests.json` に積んだので、反映を確かめる。
@@ -3827,7 +3718,7 @@ updated: 2026-11-01
 ### [THEME-SINGLE-YEAR-CARDS-01] 1 年分しかない指標のカード 287 枚を、年の拡張か年固定の比較カードへ振り分ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run packages/data-configs/src/theme-catalog/__tests__/selection-viewpoints.test.ts] [起票:2026-10-07] [領域:データ]
 
-- **背景**: 管理画面 `/quality/theme-viewpoints` の視点 `single-year-as-trend` で、テーマのカードが 1 年分の指標だけを持ち推移を描けない。年カバレッジ監査の要拡張候補 (`data/estat/year-coverage/LATEST.md`) と重なるが、テーマのカードに出る指標を先に回す仕組みが無い。
+- **背景**: 管理画面 `/quality/theme-viewpoints` の視点 `single-year-as-trend` で、テーマのカードが 1 年分の指標だけを持ち推移を描けない。
 - **① 振り分けの結果 (2026-10-08、44 テーマ 281 枚・270 指標)**: e-Stat に複数年ある 63 指標・69 枚は、years を広げる uruhayato373/stats47#1094 (draft、11-06 のテーマ実験の観測の後のマージを推奨) で複数年になる。本当に 1 年だけの 62 指標・65 枚は、多くが調査回ごとに表が分かれる統計 (国勢調査・経済センサス等) の 1 回分で、前の回が別の表にあるかは未確認。未確認の 145 指標・147 枚はすべて `source.kind: external` (manual 142 等)。
 - **次**: ② #1094 のマージ後に件数を数え直す。③ 65 枚は前の回の表を確かめ、無ければ年固定の比較カードへの提案 (`theme-proposal-format.md`) にする。147 枚は external の出典を指標ごとに確かめる (テーマのカードに出る指標から順に `YEAR-COV-*` と同じ 10 件ずつ。`sync-year-coverage-backlog.mjs` の並べ方を変えるか個別に扱うかを決める)。
 - **禁止**: 確認していない年を `years` に書かない。R2 の観測値の再取得とデプロイは別の承認で行う。
@@ -3839,8 +3730,6 @@ updated: 2026-11-01
 
 - **GSC案30 / P2（次に着手）**: title・本文・観測値の年/単位/分母を一致させ、最新年と調査年、全国値と県単純平均を区別する。blogの混合年はBLOG-SEOTITLE-MIXED-YEAR-01へ接続し、同じ修正を二重起票しない。観測値由来の必須是正とCTR目的の文言実験を分け、後者の一括置換はしない。
 - **背景**: metric config 2,606 件のうち 1,915 件の `seoTitle` / `seoDescription` が「1位東京都（113,685,917百万円）」のように
-  1 位の県と値を直書きしている (2026-10-07 実測)。builder はこれをそのまま `item.json` に焼くので、年を広げたり値を取り直したりするたびに
-  検索結果の文言が古い値のまま残る。`audit-seo-meta-facts.ts` は食い違いを見つけるだけで直さない。
 - **次**: ① 直書きの型を分類する (年・1 位・最下位・倍率)。② builder (`build-ranking-item-from-metric.ts`) が R2 の値から
   同じ型の文言を作る関数を用意し、config には値を含まない雛形か上書きだけを残す。③ 既存 1,915 件を一括で雛形へ置き換え、
   検索結果の文言が変わる件数を事前に出してオーナーの承認を取る (タイトルの変更は検索順位に影響しうる)。
@@ -3849,7 +3738,7 @@ updated: 2026-11-01
 - **実例 (2026-10-08)**: 物価地域差指数 12 指標に 2025 年を補ったあとも、本番の `/ranking/consumer-price-difference-index-overall` のタイトルは
   「【2024年】｜1位東京」のまま (2024 年の値としては正しいので `audit-seo-meta-facts.ts` は通る)。魚種 12 指標は今回手で 2023 年に書き直した。
   値から生成すれば、年を広げるたびにこの手作業は要らなくなる。
-- **観測 (2026-11-14)**: `audit-seo-meta-facts` は値の許容が相対 2% なので、seoTitle の 47.4 と実測 46.7 (1.5% の差・university-capacity-index) を検出できなかった。値は手で直した (`d45468cb6`)。値から生成するまで、固定した数字が古くなる経路は塞がらない。
+- **観測 (2026-11-14)**: `audit-seo-meta-facts` は値の許容が相対 2% なので、seoTitle の 47.4 と実測 46.7 (1.5% の差・university-capacity-index) を検出できなかった。 (参照: d45468cb6)
 
 ### [GEO-LOW-ELEV-MANIFEST-SHA-01] 標高の低い土地の Geo 分析の manifest が SHA 照合の対象外になっている
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run -s geo:audit-low-elevation] [起票:2026-10-08] [領域:データ]
@@ -3862,7 +3751,7 @@ updated: 2026-11-01
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
-- **観測 (2026-10-08、Googlebot UA)**: `/themes/household-food-spending` と `/areas/<県>/household-food-spending` (47 ページ) の HTML が約 2.9MB、`/themes/healthcare` が 1.6MB。基準は `.claude/skills/analytics/performance-improvement/page-quality-budgets.json` の `html_bytes` 900,000 (warning)。初回応答は 10.6 秒。
+- **観測 (2026-10-08、Googlebot UA)**: `/themes/household-food-spending` と `/areas/<県>/household-food-spending` (47 ページ) の HTML が約 2.9MB、`/themes/healthcare` が 1.6MB。
 - **[仮説]** 指標 136 件と、`comparisonYear` を持つ 30 グループの値をサーバー描画で HTML に埋め込んでいる。検証: HTML 内の RSC payload を指標キーごとに数え、グループ数を減らした版をローカルで測る。
 - **関連**: Workers CPU の増加調査 `CF-CPU-SURGE-01` の候補「テーマ拡充で 1 ページが重くなった」と同じ現象。
 - **完了条件**: 新テーマと healthcare の HTML が 900KB 以下、または目安を超える理由と新しい基準を page-quality-budgets.json に記録する。
@@ -3872,11 +3761,9 @@ updated: 2026-11-01
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:管理] [待ち:判断]
 
 - **事象 (2026-10-09)**: PR #1113 で、検査中に blog-auto-publish の outbox 掃除と、cloudflare・psi の日次計測の commit-back (いずれも skip-ci 指定) が
-  develop の先頭になり、必須の Code Quality Check が head に付かず BLOCKED になった。マージまでに実コミットを 3 回 push し直した。
-  仕組みは `.claude/rules/branch-workflow.md` に書かれているが、対策は手作業のまま。
 - **次**: ① commit-back が先頭になったら同じ head で必須検査を起動し直す workflow ② 必須検査を直前の非 skip-ci コミットの結果で満たす判定
   ③ commit-back を別ブランチへ集める、のどれを採るかを決める。
-- **観測 (2026-11-18・PR #1285)**: 実コミット ac934b6b9 の PR 検査は全件 pass したが、AI 解説の日次出力 236540d33 (github-actions[bot] が GITHUB_TOKEN で push、skip-ci 指定) が先頭を取って BLOCKED。ガード `pr-skip-ci-head-guard.yml` の run はこの SHA で 0 本 (作られたのは CodeQL だけ)。GitHub の文書では GITHUB_TOKEN が起こしたイベントは新しい run を作らない (https://docs.github.com/en/actions/concepts/security/github_token、2026-11-18 参照) ので、ガードの 1 つ目の経路 (pull_request_target の synchronize) は CI の書き戻しを受け取れない。前回 PR #1282 (11-17) も同じ。対策の候補に ④ commit-back の workflow の最後で、開いている develop→main PR があれば pr-quality-check.yml を workflow_dispatch する、を足す。
+- **観測 (2026-11-18・PR #1285)**: 実コミット ac934b6b9 の PR 検査は全件 pass したが、AI 解説の日次出力 236540d33 (github-actions[bot] が GITHUB_TOKEN で push、skip-ci 指定) が先頭を取って BLOCKED。 (参照: #1282)
 - **完了条件**: commit-back が先頭に積まれても、手で push し直さずに develop→main の PR をマージできる。
 
 ### [JAPAN-SERIES-KAKEI-01] /japan の全国時系列の生成器を家計調査に対応させ、止めている 55 指標を載せる
@@ -3884,8 +3771,6 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:データ]
 
 - **観測 (2026-10-09)**: 参考文献由来の /japan 候補 66 件のうち 55 件は家計調査の品目で、全国値はあるが
-  `packages/stats-r2/src/scripts/generate-japan-series.ts` の official モードが `source.kind=kakei-chousa` に未対応 (`verify-japan-candidates.ts` で verified-unsupported)。
-  `data/source-inventory/placement-decisions.json` に blocked として記録してある (外部取得の農業産出額・計算型のエンゲル係数の 2 件も同じ理由)。
 - **11-01 staging / R2 反映**: 生成器を家計調査レシピと公式値の全ページ取得に対応。55件をすべて2025年まで値レベルで検証し、追加5件を含む60全国系列を7つの日本テーマへ配線した。採用済み55件は `placement-decisions.json` から除き、日本テーマのカタログを正本とした。763ファイルのR2反映と公開URLの全件SHA照合は済み。サイトの公開確認はmainデプロイ後に行う。
 - **11-01 サイト確認**: PR #1205 のmainデプロイ成功。`/japan/household-food-spending` と `/japan/household-assets-debt` はGooglebot UAで200を確認し、全国系列の配信元はR2の固定SHA照合を通過。
 - **次**: 固定SHAのrelease manifestでR2へ全国系列を反映し、7ページの実表示と導線を確認する。
@@ -3904,7 +3789,6 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
 - **観測 (2026-10-09・ブログ執筆のワークフロー)**: 農業産出額 (2024 年) と農業就業人口 (2014 年) の組で r=0.762 をランキングページの「相関が高い指標」に出している (同じ年の 2014 年でそろえると 0.758)。
-  核家族世帯割合 × 昼夜間人口比率 (2020 年国勢調査) の偏相関は、統制変数に 2025 年の総人口を使っている (`build-correlation-snapshot.ts` の `loadMetric` が統制変数だけ最新年を使う設計に見える)。
 - **次**: ペアを作るときに年をそろえるか、年が違うことを画面と snapshot に書く。統制変数の年をペアの年に合わせる。
 - **完了条件**: 相関 snapshot の各ペアと統制変数の年が一致するか、食い違いが表示されている。
 
@@ -3913,7 +3797,6 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-09] [領域:サイト] [待ち:判断]
 
 - **観測 (2026-10-09)**: `household-structure-daytime-population-gap/data/sensitivity-calc.mjs` が、本文の追加計算 (除外ごとの相関・偏相関・乱数の種) を再現するために置かれた。
-  `blog-data-schema.md` は禁止も許可もしておらず、先例はこの 1 件。critic は規約違反ではないと判断した。
 - **判断すること**: data/ に置くのは JSON の中間結果だけにするか、実行コードも許すか。許すなら置き方 (名前・R2 へ上げるか) を決める。
 - **完了条件**: `blog-data-schema.md` に置き方が書かれている。
 
@@ -3931,7 +3814,7 @@ updated: 2026-11-01
 タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-10] [領域:SNS]
 
 - **trigger**: 台帳の id 衝突がもう一度起きたとき。
-- **事象**: 2026-10-10 のリリースで、IG cron (CI) が `data/sns/posts.json` に新しい行を id 1076 で足した。同じ時期にローカルでも 1076 以降の行を追加していたため、マージで衝突した (行単位の 3-way マージで解消)。store の採番は手元の台帳の最大 id + 1 なので、別々の場所で同時に足すと必ず重なる。2026-07-07 の id 575 重複と同じ原因。
+- **事象**: 2026-10-10 のリリースで、IG cron (CI) が `data/sns/posts.json` に新しい行を id 1076 で足した。
 - **緩和済み**: Instagram は予約表の登録時に id を決める形にした (`register-ig-schedule.cjs`)。CI が新しい行を作るのは、予約表に無い投稿を記録するときだけになった。
 - **手順 (案)**: CI が書く行は採番せず、ローカルで登録済みの id だけを更新する。登録の無い投稿は CI では記録を保留し、検査で知らせる。どうしても足す場合は、id の範囲を CI とローカルで分ける。
 - **完了条件**: CI の workflow が新しい id を採番する経路が 0 本になり、`sns:trace:check` に検査が入っている。
@@ -3940,7 +3823,7 @@ updated: 2026-11-01
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-06] [領域:管理]
 
-- **背景**: 2026-10-06 (`77ba6e36a`・`eef2a0a1a`・`0098430a1`) にサイト識別子・都道府県コード・e-Stat URL などの直書き約 470 ファイルを正本参照へ置き換えた。値と意味が完全一致する箇所に限ったので、箇所ごとに挙動が違う重複は残っている。再発止めは `check-maintenance-debt.cjs` の SITE_IDENTITY_LITERAL。2026-10-26 に候補 2・4・5 の一部を寄せた (経過は `git log -p -- .claude/todo/backlog.md`)。
+- **背景**: 2026-10-06 (`77ba6e36a`・`eef2a0a1a`・`0098430a1`) にサイト識別子・都道府県コード・e-Stat URL などの直書き約 470 ファイルを正本参照へ置き換えた。
 - **候補 (上ほど優先)**:
   1. Windows で別の Playwright profile を読む可能性がある絶対パス直書き: `.claude/skills/sns/publish-x/check-x-scheduled.ts`・`.claude/skills/sns/update-x-profile/update-x-profile.cjs` (publish-x と profile を共有するため見送った)。
   2. 県名の短縮処理: `@stats47/area` の `prefectureShortName` へ寄せた (北海道は落とさない)。残りは単一実装の検査 `packages/area/src/utils/__tests__/prefecture-short-name-single-impl.test.ts` の許可リスト 6 件 (縮小のみ。`packages/svg-builder/src/charts/bar-chart.ts:192` は北海道を「北海」にする) と、TS の正本を import できない `.claude/scripts` の .mjs 18 ファイル。
@@ -3957,10 +3840,6 @@ updated: 2026-11-01
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
 
 - **背景**: 2026-09-25 にページ末尾の出典は `DataSourceList` でデータ由来に統一したが、図ごとの出典は手書き・固定値が残る。
-  公開ブログ 94 記事の図の直下に手書きの `<data-source url label>` タグがあり (URL 43 種)、source.json と照合されていない。
-  `apps/web/src/features` の 10 ファイルは `ChartFooter` に出典名を固定文字列で渡している (例: 人口移動 Sankey の統計表 ID)。
-  実例として `depopulation-area-medical-facilities` の source.json は国土数値情報 P04 の旧 URL (`KsjTmplt-P04.html`、404) を持つ
-  (表示は displaySources で現行 URL にしたが、系譜の URL は古いまま)。
 - **次**: ① `<data-source>` タグの label/url を、同じ図の source.json から導出した出典と突き合わせ、食い違い・リンク切れを一覧化する。
   ② 図の直下の出典を source.json から自動表示する (タグを使わない) か、タグを残すなら監査に載せるかを決めて実装する。
   ③ 機能別の固定値を metric config / attribution 由来に置き換える。④ 系譜 URL の到達性を定期監査に入れるか検討する。
@@ -3976,9 +3855,6 @@ updated: 2026-11-01
   実測は `data/note/cover-operations-latest.json` の `validation.preflightPr`。
 
 - **背景**: 2026-09-25 にこの Windows PC で `npm run preflight:pr` を実行すると、`check-japan-zue-evidence-inventory.mjs` と
-  `check-quality-warning-ratchet.cjs` が `spawnSync("npm", …)` で ENOENT、`check-money-unit-audit.cjs` も collector の起動で失敗し、
-  ゲートの判定まで到達しなかった (Linux CI では同じ gate が成功)。既知の環境要因 2 gate (Sitemap / Unit Semantics Mirror) とは別物。
-  原因の型は memory `feedback_windows_script_portability` の「npx/npm の spawn (Node22 は .cmd を EINVAL)」。
 - **次**: 3 スクリプトの npm/npx 起動を、Windows でも動く形 (node で npm-cli を直接起動するか `shell` 指定) に揃える。
   共通の起動ヘルパーがあればそれを使う。
 - **完了条件**: この PC で上記 3 gate が判定まで進む (成功・失敗は中身次第)。
@@ -4006,7 +3882,7 @@ updated: 2026-11-01
 - **owner**: Claude Code
 - **状態**: 未完了範囲はCIのbuild成果物再利用・変更種別ごとの検査分岐・短縮効果の実測。型検査の必須性を維持し、同一入力で合格したローカル検査は変更理由がなければ繰り返さない。
 - **trigger**: 1本のPRで現行build jobの壁時間とcache sizeを測れるとき。
-- **実測根拠（2026-09-13）**: PR964のCIはStatic Gates 533秒・Full E2E 522秒・Build Check 309秒の並行実行で、テストmatrixだけの修正でも全体build・型・unit・E2Eが再実行された。公開R2のデータ版もE2Eの検証入力になる (カタログ変更の公開前後で期待値がずれる)。
+- **実測根拠（2026-09-13）**: PR964のCIはStatic Gates 533秒・Full E2E 522秒・Build Check 309秒の並行実行で、テストmatrixだけの修正でも全体build・型・unit・E2Eが再実行された。
 - **次（実行順）**: ①jobごとの依存導入・build・検査・cache復元/保存の壁時間を測る。②コード・lockfile・生成設定・データmanifestの組を固定し、同じ入力の検証済みbuildを後続jobで再利用できるか試す。③アプリ変更、テスト変更、運用記録だけの変更に応じたrequired checksを設計し、無関係な全体buildの繰り返しを減らす。④同じscopeの前後時間と費用を比較する。公開R2を候補コードへ組み合わせるE2Eでは、カタログ変更の公開前後で期待値がずれるケースを別途検出する。
 - **停止条件**: restore/save込みで短縮しない、cacheが過大、または検査を弱める場合は採用しない。
 - **完了条件**: 変更種別ごとに必要な検査が必ず実行され、入力変更時のcache失効と失敗伝播を確認する。復元/保存込みの同条件比較で短縮が実測されるまで高速化完了とはしない。今回のリリースへCI構成変更を追加しない。
@@ -4023,7 +3899,7 @@ updated: 2026-11-01
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:管理]
 
-- **事象**: `scripts/dev-server.ts` は R2 を `.local/r2` で上書きする仕組みが Windows の gateway にしか無く、Mac では公開前の Geo bundle を dev server で確認できない。2026-10-08 の `/geo/population-low-elevation` は、Geo 担当が一時的な中継を組んで確認した。
+- **事象**: `scripts/dev-server.ts` は R2 を `.local/r2` で上書きする仕組みが Windows の gateway にしか無く、Mac では公開前の Geo bundle を dev server で確認できない。
 - **trigger**: 次に新しい Geo 分析を公開前に確認するとき。
 - **完了条件**: Mac でも `.local/r2` を優先して読む dev server の起動方法が手順書にあり、公開前の Geo ページを表示できる。
 
@@ -4063,7 +3939,7 @@ updated: 2026-11-01
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-19] [領域:サイト] [待ち:判断]
 
 Claude Design で検討済みの案がある。着手時に案の所在と範囲（トップ・一覧・詳細のどこまで変えるか）を決める。（出典: obsidian の TODO マスタ ^t-0004 から移管・2026-10-19）
-- **統合 (2026-10-26 オーナー判断)**: `BRAND-IMAGE-01` (色・トーン・見た目の約束を決める。言葉のほうは別) と `SIDEBAR-ACCENT-01` (サイドバーの強調色。doboku-note と共通の論点) をこのカードへ統合した。出典はどちらも vault の手書きメモ (2026-09-25・09-28)。
+- **統合 (2026-10-26 オーナー判断)**: `BRAND-IMAGE-01` (色・トーン・見た目の約束を決める。)
 - **2026-10-26 追記 (配線監査・旧 BRAND-IMAGE-01 の論点)**: ブランドの主色が媒体で 2 つある。サイトの OGP は `apps/web/src/features/ogp/brand.ts` の `#304BC6`、動画は `apps/remotion/src/shared/themes/brand.ts` の `#1E40AF`。
   色を決めたら、片方を packages に移してもう片方が import する (どちらを正にするかはこのカードで決める)。
 
@@ -4099,12 +3975,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [CITY-UNIT-DENOMINATOR-01] 市区町村ページ・ランキングで、分母が subtitle にしか無い指標が件数のように見える
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-23] [領域:データ]
 
-- **証拠**: 市区町村の表示名 (`municipalityRankingDisplayTitle`) は、同名の指標と衝突するときだけ subtitle を付ける。そのため分母が subtitle にしか書かれていない
-  指標は、市区町村データブックの表・見出し・特徴と市区町村ランキングの title で分母の無い値になる。2026-10-21 の localhost で札幌市の特徴に
-  「人口集中地区人口密度 7,993.8人（2020年）」が出た (unit は「人」、subtitle が「人口集中地区面積1km²当たり」)。2026-10-23 に公開中の 716 件を
-  機械的に抽出すると 7 件が当たった: `department-store-count-per-100k` (百貨店数・店・人口10万人当たり)、`densely-inhabited-district-population-density`、
-  `population-density-per-km2-inhabitable-area` (どちらも unit「人」)、持ち家・借家の畳数と延べ面積 4 件 (1住宅当たり)。抽出は語の一致によるもので、全件とは言えない。
-  財政力指数は unit「指数」がそのまま付き「0.81指数」と表示される。
+- **証拠**: 市区町村の表示名 (`municipalityRankingDisplayTitle`) は、同名の指標と衝突するときだけ subtitle を付ける。
 - **次**: 分母の持たせ方を 1 つに決める。(a) subtitle が分母を持つときは表示名に必ず付ける、(b) unit に分母を入れる (`packages/data-configs/src/unit/` の
   正典で「人/km²」などを解釈できる形)。全件の洗い出しは語の一致ではなく `parseUnit` の `hasDenominator` と subtitle の組で行う
   (`.claude/rules/unit-semantics-standards.md`・`feedback_ssds_denominator_evidence`)。「指数」のような無次元の unit を値の後ろに付けるかも同じ規則で決める。
@@ -4113,7 +3984,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [KINDLE-S1-BLOG-REWRITE-RECONCILE-01] ブログの書き直しで本の校訂が当たらなくなった 4 冊 (K-S1-01・04・06・09) を、作り直せる状態に戻す
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:商品]
 
-- **事象 (2026-11-03)**: 本の章の元のブログ記事 6 本が 2026-10-02 前後に大きく書き直され、本のための本文の校訂 (`editorial-corrections.ts`) の置換元がほとんど見つからない。生成はその章を「準備中」にして続くので、そのまま作ると章が抜ける。表紙の差し替え (`KDP-K-S1-08-REUPLOAD-01`) の作り直しでも同じく止まる。対象は K-S1-01 (real-disposable-income-reversal)・K-S1-04 (health-life-expectancy-structure)・K-S1-06 (fiscal-self-reliance-gap・fiscal-health-50years-trend・local-government-debt-burden)・K-S1-09 (manufacturing-aichi-dominance)。
+- **事象 (2026-11-03)**: 本の章の元のブログ記事 6 本が 2026-10-02 前後に大きく書き直され、本のための本文の校訂 (`editorial-corrections.ts`) の置換元がほとんど見つからない。
 - **決定 (オーナー・2026-11-03)**: (b) 書き直した今のブログ本文で作り直す。
 - **済み**: 当たらない校訂を外し、今の本文を critic に読ませた指摘を校訂に足した。
 - **残り**: ① 当たらなかった MINOR 2 件 (manufacturing の注意書きの重複、「効率」の言い方) ② 置換元の無い構造の指摘 (K-S1-06 の散布図の解説・ふるさと納税の節、K-S1-09 の一般論の節) は本文を書き足す判断が要るので未着手 ③ 正式の版 (承認済みの表紙)・保全・`kdp-publish --update` はオーナー承認 (`KDP-K-S1-08-REUPLOAD-01` と同じ便)。
@@ -4123,7 +3994,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [KINDLE-QUALITY-LOOP-01] 既刊 Kindle の中身を、機械の検査 → 図のスクショ評価 → NotebookLM の通読の 3 段で安く直し続ける仕組みを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-03] [領域:商品]
 
-- **起点 (2026-11-03 オーナー)**: 本文にもっと図を入れる・全データの表を見せる、を売れている内容を踏まえて拡充し、機械の検査・スクショのエージェント評価・NotebookLM の通読をトークンを節約して回したい。**新しい本は作らない** (収益化戦略 §3.6)。既刊 12 冊の改訂に限る。需要の証拠は K-S1-02 (2026-08) と K-S2-03 (2026-09) の各 1 冊だけで、中身の改善が売上に効くかは未検証。
+- **起点 (2026-11-03 オーナー)**: 本文にもっと図を入れる・全データの表を見せる、を売れている内容を踏まえて拡充し、機械の検査・スクショのエージェント評価・NotebookLM の通読をトークンを節約して回したい。
 - **図の配線 (2026-11-03 確認)**: ブログ由来の章の図は本を作るたびに R2 の `app/blog/<slug>/data/<name>.svg` を読む (`fetch-content.ts`) ので、ブログの図を共通の型 (`apps/admin/lib/template-ranking-bars.ts`・`template-ranking-tile-map.ts`) で描き直せば次の作り直しで入る。書籍版の図の校訂 (`figure-corrections.ts`) は元の文字が変わると生成を止める (止まったらエントリを消すか直す)。ランキング章の図 (`ranking-databook.ts` が `generateBarChartSvg` を直接呼ぶ) は共通の型を通っていないが、販売中の S1 12 冊には無く、効くのは公開を止めている S2〜S4 だけ。共通の型を `packages/product-factory` から使うには共有の場所へ移すか相対 import するかを決める (図の共通化の作業の持ち主と相談)。
 - **仕組み (トークンを使う段ほど対象を絞る)**: ① 機械の検査 `npm run kindle:quality [-- --write]` (`quality-cli.ts`・集計は `epub-inspect.ts` を管理画面と共有・記録 `data/products/kindle-quality.json`・EPUB は Mac の `.local` のみで CI 不可) ② 図のスクショ評価 (`capture-figures.mjs` 600px → Haiku/Sonnet、PNG の sha256 で `data/products/kindle-figure-reviews.json` に記録。1 枚約 7 千トークンなので印の付いた図か図の型ごとに 1 枚に絞る) ③ NotebookLM の通読 (`notebooklm-review.ts`、1 冊 1 notebook・`clear` で会話を切る。答えは `.local/kindle-quality/<id>/notebooklm.md`) ④ 直す [オーナー承認]: `editorial-corrections.ts` → `build-book` → `verify-publishable` → Previewer → `kdp-publish --update` で 1 冊ずつ ⑤ 効果を見る: 改訂した冊としていない冊で販売台帳の月次と GA4 `product_click` (`PRODUCT-REFERRAL-MEASURE-01`) を並べる。規模的に統計判定はできず「判定不能」も結果として書く。
 - **済み (2026-11-03 まで)**: ①を実装して 12 冊を計測した (印: 図の無い長い章 37・全県表の無い図の章 63・説明の無い図のある章 15・サイトへのリンクなし 12 冊)。
@@ -4156,14 +4027,14 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [KDP-PROMOTE-STALE-PROPOSAL-01] 出品台帳へ写す道具が、書籍の台帳とずれた古い提案を写さないようにする
 タグ: [収益化] [種類:不具合] [実行:sweep] [検証:npx vitest run packages/product-factory/tests/kindle-listing-revision.test.ts] [起票:2026-11-14] [領域:商品]
 
-- **起点 (2026-11-14)**: K-S3-08 で表紙の設計 (`cover-design.ts`) を直したあと、提案の書き出し (`export-kdp-listings.ts`) は「原稿・台帳が EPUB の版と違う」で止まったのに、`promote-kdp-listing.ts --apply` は同じ版名の古い提案ファイル (`.local/kindle-listing-revisions/<版>.<ID>.json`) をそのまま出品台帳へ写した。古い提案は AI 使用の申告が誤っていた (表紙は実データの地図なのに画像を AI 生成と申告)。気づいて行を消し、作り直した。
+- **起点 (2026-11-14)**: K-S3-08 で表紙の設計 (`cover-design.ts`) を直したあと、提案の書き出し (`export-kdp-listings.ts`) は「原稿・台帳が EPUB の版と違う」で止まったのに、`promote-kdp-listing.ts --apply` は同じ版名の古い提案ファイル (`.local/kindle-listing-revisions/<版>.<ID>.json`) をそのまま出品台帳へ写した。
 - **次**: promote でも、提案を写す前に今の書籍の台帳・原稿から `authoredBookSha256` を計算し、EPUB の `metadata.json` と提案の両方と一致することを確かめる (export と同じ照合を共有する)。
 - **完了条件**: 書籍の台帳を変えたあとに古い提案で promote すると error になるテストがあり、通常の流れでは通る。
 
 ### [KINDLE-FRESH-CAUTION-CHECK-01] 書き下ろし原稿の検査で、指標の注記 (⚠) を書いたかを機械で確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:npx tsx packages/product-factory/scripts/verify-fresh.mts --book K-S3-08] [起票:2026-11-14] [領域:商品]
 
-- **起点 (2026-11-14)**: K-S3-08 の意味レビュー (blog-critic) で、持ち家比率・住居の物価・医師数の注記が章によって抜けていた (should 6 件)。`verify-fresh.mts` は数値・文体・煽り語だけを見ていて、執筆ブリーフで ⚠ を付けた注記 (県庁所在市の値・持家の帰属家賃を含まない など) が本文にあるかを見ていない。
+- **起点 (2026-11-14)**: K-S3-08 の意味レビュー (blog-critic) で、持ち家比率・住居の物価・医師数の注記が章によって抜けていた (should 6 件)。
 - **次**: 1県1章の本 (`isPrefectureGuide`) で、指標名が出てくる章に、その指標の注記の要点 (県庁所在市・帰属家賃) があるかを決定的に数える。注記を第1章へまとめる書き方を許すなら、本 1 冊のどこかに 1 回あればよい形にする。
 - **同じ検査に足す (2026-11-14 の書き直しで判明)**: 本文の「2022年」と「2022年度」の書き分けも見ていない。指標定義の `yearFormat` (fiscal なら「年度」、ほかは「年」。全県表 `full-tables.ts` と執筆ブリーフも同じ決め方) と、本文で指標名の近くに書かれた年が食い違えば error にする。R2 の yearName は暦年の指標でも「年度」のことがあるので照らし先にしない (`YEARFORMAT-REFLECT-01`)。
 - **比較の文と定型の型 (2026-11-14 近畿・中国のレビューで判明)**: 「最も上位にあるのは○○」「5県で最も高い」のような比較の文を実データと照らしていない (中国の本で、最も上位でない指標を最も上位と書いた原稿が通った)。県の章の冒頭 3 文と結びが同じ型になっていても検出しない。
@@ -4175,7 +4046,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [HARNESS-SMALL-COSTS-01] Stop hook 6 本の起動と、増え続ける運用の記録 (効果が小さいので、次に触るときにまとめて直す)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理]
 
-- **事実**: Stop 1 回で node が 6 回起動する (起動だけで各 59ms。変更なしの経路の合計は約 0.9 秒)。`check-findings-on-stop.js` は transcript 全文を毎回読む (65MB で 388ms)。`check-docs-on-stop.js` は記録で中央値 4.6 秒・p90 21.2 秒だが、手元の部品の合計は約 0.8 秒で、差の原因は未確定。`.claude/state/backlog-loop/ledger.json` は 476KB で 30 日に約 +150KB。旧置き場 `.claude/state/session-locks` の 48 ファイルは prune の対象外。
+- **事実**: Stop 1 回で node が 6 回起動する (起動だけで各 59ms。)
 - **再開条件**: Stop hook か backlog-loop の台帳を次に変更するとき、または ledger.json が 1MB を超えたとき。
 - **次**: Stop hook を 1 プロセスにまとめる。findings は前回の位置から読む。ledger の完了分を月ごとに分ける。旧置き場も 7 日で prune する。
 - **完了条件**: 変更なしの Stop が 0.5 秒未満で、ledger.json が 200KB 未満。
@@ -4183,7 +4054,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [WAGE-RULE-PAGE-01] 補助金の賃上げの要件に使う「都道府県別の最低賃金と物価」のページを作るかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-11-11] [領域:サイト] [待ち:判断]
 
-- **起点**: 統合補助金・省力化・デジタル化 AI・持続化の賃上げの要件は、都道府県の地域別最低賃金 (+30〜50 円) と物価上昇率を基準にする。給与の伸びが物価上昇率を下回ると「審査上大幅に不利」と要領に書かれている。粒度が stats47 とそのまま合う (`docs/02_実装計画/49_補助金の根拠データとAIノウハウ展開仕様.md` §7)。
+- **起点**: 統合補助金・省力化・デジタル化 AI・持続化の賃上げの要件は、都道府県の地域別最低賃金 (+30〜50 円) と物価上昇率を基準にする。
 - **保留の理由**: 値は公的に無料で出ている。どの物価指標を使うかは要領に定義が無い (未確認)。
 - **再開条件**: `KAKEI-MARKET-SIZE-PILOT-01` が続くと決まったとき。
 - **完了条件**: 作る・作らないを決めた。
@@ -4216,10 +4087,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [WINDOWS-LOCAL-TEST-FAILURES-01] Windows の手元でだけ落ちるテスト 3 種を、CI と同じく通るようにする
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-10-27] [領域:管理]
 
-- **事象 (2026-10-27、会社の Windows PC で実測。CI の Linux では通る)**:
-  1. `packages/product-factory` の kindle CLI テスト (`kindle-verify-cli`・`kindle-listing-revision`) が、外部プロセスの 60 秒制限で打ち切られる。`verify-epub` は単体なら 42 秒・exit 1 の正しい応答。全件実行中は負荷で 60 秒を超える。
-  2. `apps/web` の `eslint-dependency-compatibility.test.ts` の深い入れ子のケースが、Windows の一時ディレクトリのパスが長いため、パターンが braces の上限 10000 字を超えて落ちる (memory `feedback_next_eslint_unpatched_braces` の braces と同じ部品)。
-  3. この PC の `packages/product-factory/src/data/pack-snapshots/*.json` が 158 バイトほどの空ファイルで、`delivery-integrity` と `license-exclusion` が null 参照で落ちる。globalSetup が既存ファイルを作り直さない。
+- **事象 (2026-10-27、会社の Windows PC で実測。CI の Linux では通る)**: 
 - **次**: 1 は所要時間の実測に合わせて制限を延ばす。2 は一時ディレクトリを短いパスに作るか、パス長に依存しない入力にする。3 は空・壊れた snapshot を globalSetup が作り直すか、明確な理由で落とす。
 - **追記 (2026-10-27)**: 4 種目。`apps/admin` の `agent-models.test.ts`「frontmatter の無いファイルは画面を落とさず errors に載せる」が、errors の `file` を `.claude\agents\broken.md` (Windows の区切り) で返し、期待の `/` 区切りと食い違って落ちる。変更を退避した develop でも再現。台帳のパスは `/` に揃える (memory `feedback_windows_script_portability`)。
 - **完了条件**: Windows で 4 種とも通り、CI の結果は変わらない。
@@ -4229,14 +4097,14 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [BUSINESS-PLAN-TARGETS-CONFLICT-01] KPI の台帳に残る M3・M6・M12 の目標値を消すか、仮説として残すかを決める
 タグ: [収益化] [種類:意思決定] [実行:ユーザー] [起票:2026-11-13] [領域:戦略]
 
-- **観測 (2026-11-13)**: `data/business-plan/plan/metrics.json` は `targetM3`・`targetM6`・`targetM12` (週次収益は 30,000・187,000・1,030,000) を持つ。`docs/00_プロジェクト管理/02_収益化戦略.md` の 166 行目は「既存のM3/M6/M12の売上・アクセス値を今回の戦略の予測として流用しない」と書いている。
+- **観測 (2026-11-13)**: `data/business-plan/plan/metrics.json` は `targetM3`・`targetM6`・`targetM12` (週次収益は 30,000・187,000・1,030,000) を持つ。
 - **次**: 目標値を消すか、仮説の印を付けて残すかをオーナーが決める。`STRATEGY-LEDGER-JSON-01` の段 5 で KPI の階層を足す前に決める。
 - **完了条件**: 台帳と戦略の記述が一致している。
 
 ### [TRADE-AREA-REPORT-DECISION-01] 補助金・創業融資の根拠に使える「商圏の参考資料」を受注するかを決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-11-11] [領域:商品]
 
-- **起点**: ココナラの「商圏分析」は 118 件で、30,000 円の出品に評価 57 件、5,000 円に 25 件。補助金向けと明示した出品は上位 30 件に無い (2026-11-11 観測)。中身は無料の jSTAT MAP の作業の代行で、使いこなせない申請者が払っている (`docs/02_実装計画/49_補助金の根拠データとAIノウハウ展開仕様.md` §5 の段 3)。
+- **起点**: ココナラの「商圏分析」は 118 件で、30,000 円の出品に評価 57 件、5,000 円に 25 件。
 - **決めること**:
   1. 販売面。ココナラからは 2026-10-19 に撤退している (収益化戦略 §3.6)。戻すのか、note の案内から直接受けるのか、やらないのか。`PRODUCT-LINEUP-2026-11` (統計の地図・グラフを資料用に作る受注) と一緒に決める。
   2. 「法人向けの小地域データ・GIS は作らない」の例外にするか。受注ごとに jSTAT MAP で集計するだけで、データは持たない。
@@ -4270,7 +4138,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 
 - **問い**: stats47 が解く問題は、好奇心ではなく、むしろ仕事の問題なのか。統計を仕事に使う人は、お金を払うほど困っているのか。
 - **仮説**: 今解いているのは「地元や話題の数字が気になる」という好奇心。仕事で払う人はまだ確かめられていない。
-- **実測 (2026-11-05 観測)**: 検索 14,733 クリック/28日、食べ物の消費量が約 31%。note 売上は累計 600 円で、売れたのは「e-Stat×Claude Code×自治体」の 300 円記事 2 件。ランキング有料記事 47 本は閲覧 4,842 で売上 0。聞き取りは 0 件 (`data/products/admin-stat-interviews.json`)。
+- **実測 (2026-11-05 観測)**: 検索 14,733 クリック/28日、食べ物の消費量が約 31%。
 - **位置づけ**: どの顧客を選ぶかの上位の問い。2026-11-14 にオーナーが、聞き取りで先に確かめる進め方 (行政資料の pilot。聞き取り 0/3 件で停止していた) をやめ、商品を出して実売で確かめると決めた (収益化戦略 §3.4)。
 - **問いの台帳との配線**: `data/content/issues.json` の `revenue` が `実務`・`データ` の問いを、聞き取りで「仕事で使うか」を尋ねる材料にする。
 - **次**: 仕事の読者に向けた商品 (データパック・市区町村データ・ノウハウ) と KDP の実売の判定 (`MUNI-DATA-PRODUCT-PILOT-01`・`KNOWHOW-PRODUCT-PILOT-01`・`KDP-EXPANSION-01`) を待ち、どちらの読者で売上が立つかを月次計画で決める。
@@ -4368,11 +4236,11 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [NOTE-PUBLISHED-DUPLICATES-DECISION-01] note 上で同じ記事が別 URL に複数回公開されている 8 組をどうするか決める
 タグ: [SNS・マーケ] [種類:意思決定] [実行:ユーザー] [起票:2026-10-21] [領域:商品]
 
-- **事実 (2026-10-21、`data/note/articles.json` の照合)**: 題名が同じで別の noteUrl を持つ公開済み記事が 8 組ある。「【2024年版】都道府県「最高気温」ランキング」は 4 本 (`a-maximum-temperature`・`recovered-n6f8a367906d1`・`recovered-n863f429319ca`・`recovered-nb2d65c42c28b`)、「大学数」ランキング・「47 都道府県データを 1 コマンドで取得する」・「e-Stat 統計の前年比較…」(有料) が各 2 本、koumuin の「災害時の SNS 発信文…」(有料)・「苦情メール返信案…」(有料)・「住民問い合わせ FAQ…」が各 2 本。台帳は実在の投稿どおりで誤りではない。
+- **事実 (2026-10-21、`data/note/articles.json` の照合)**: 題名が同じで別の noteUrl を持つ公開済み記事が 8 組ある。
 - **決めること**: 重複をそのまま残すか、片方を非公開にして残す方へ導線をまとめるか。有料の 3 組は購入者がいる可能性があるので、非公開にする前に購入の有無を記録 (`data/authenticated/revenue-history.json`) で確かめる。
 - **停止条件**: note 上の記事の削除・非公開化はオーナーの判断と操作だけで行う (Claude はしない)。
 - **完了条件**: 8 組の扱いが決まり、決めた操作の後に台帳の status が実際の公開状態と一致している。
-- **統合 (2026-10-26)**: `NOTE-RECOVERED-DUPLICATE-CONSOLIDATION-01` をこのカードへ統合した。そちらにあった追加の論点: 火災死傷者数 2022 の有料 2 本は題名の比較が食い違う (`paid-n7290144784d4`「鳥取と神奈川で2.5倍」、`paid-nb17d039bc1aa`「鳥取と滋賀で約1.9倍」)。どちらかが誤りなら本文の是正も要る。後継記事がある組は、後継を仕上げて公開し旧 stub を非公開にする案が有力。
+- **統合 (2026-10-26)**: `NOTE-RECOVERED-DUPLICATE-CONSOLIDATION-01` をこのカードへ統合した。
 
 ### [GSC-MOBILE-PERF-PLAN-01] 実ユーザー性能とモバイルの検索意図から必要な改善を選ぶ
 タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-10-16] [期日:2026-10-30] [領域:サイト]
@@ -4407,10 +4275,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 ### [NOTE-PAID-HISTORY-EXPOSURE-01] 公開リポジトリの git 履歴に残る有料 note 原稿の扱いを決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-13] [領域:商品]
 
-- **事実 (2026-10-13)**: `uruhayato373/stats47` は PUBLIC。旧方式では有料記事を公開 R2 に置けず、原稿を `docs/31_note記事原稿/` (git) に置いていたため、
-  有料本文が GitHub で読めた。対象は git に入っていた有料記事 (koumuin-claude-code 15 本・koumuin-estat-claude-code 11 本・d-kakei-category-dataset・
-  販売記事の下書き 62 本など。2026-10-13 時点の台帳で有料は計 151 本)。同日の変更で docs/31 は git から外れ、本文は private R2 へ移った (main へ反映すれば最新版からは消える)。
-  ただし過去のコミットには残る。例: `git show 8ce8358c41 --stat` (koumuin-claude-code の原稿追加)。
+- **事実 (2026-10-13)**: `uruhayato373/stats47` は PUBLIC。 (参照: 8ce8358c41)
 - **選択肢**: (a) 履歴はそのまま (既に公開済みと割り切る) / (b) `git filter-repo` で `docs/31_note記事原稿/` を全履歴から消して force push
   (全クローン・フォーク・CI キャッシュに影響し取り消せない。GitHub のキャッシュ削除依頼も要る) / (c) リポジトリを private にする (Cloudflare 連携・公開前提の仕組みへの影響を先に調べる)。
 - **禁止**: オーナーの決定なしに履歴を書き換えない・force push しない。
@@ -4430,7 +4295,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
   ③ 分野別の読み物 (旧 S2 の 11 冊。売れた K-S2-03 観光・宿泊の分野を先に) の型を決める。
   ④ 型ごとに数冊ずつ生成・レビュー・Previewer・保全を通し、1 冊ずつ公開承認を得て出す。
   ⑤ 各冊の公開日から 8 週の販売数と既読ページを台帳に記録し、型ごとに続ける・増やす・止めるを決める (`data/business/pilot-board.json` の `kdp`)。
-- **記録**: 2026-11-14 に、出版停止・出品前停止の 19 冊の行を出品台帳 `data/products/kdp/listings.json` から消した (販売記録のある K-S2-03 は残す)。旧版の原稿は `data/products/kindle-archives.json` の保全記録から復元できる。KDP の本棚には下書きとして残っているので、作り直した本を同じ ID で出す前に本棚の下書きの扱いを決める。 同日、週次公開の機械契約 `KDP_PUBLICATION_PLAN` を新方針 (型ごと・週の上限なし・8 週計測・承認は検証済みの候補から 1 冊ずつ) に直した。
+- **記録**: 2026-11-14 に、出版停止・出品前停止の 19 冊の行を出品台帳 `data/products/kdp/listings.json` から消した (販売記録のある K-S2-03 は残す)。
 - **K-S1-14 (2026-11-14 に出版済み・develop 側の記録)**: ① 審査後に本棚の「販売中」と ASIN を確かめる (`node .claude/scripts/kdp/kdp-batch.mjs --phase status`) ② セレクト登録の 3 冊 (K-S1-13・K-S1-05・K-S1-14) の既読ページと販売を 2026-12 の土曜の記録で読む (実験 EXP-011)。8 週の計測窓は上の ⑤ に従う。
 - **既知の欠け (2026-11-14)**: 紹介文の監査 (`kdp-listing-copy.mjs check`) は、キーワードが本文で答えのある語か、注記にしか出ない語かを見分けない。地域の 3 冊で「家賃」(本文は帰属家賃の注記だけ) が通り、照合の担当が見つけて「地価」に替えた。
 - **停止条件・禁止**: 型④ (単一表の薄冊) は作らない (自社サイトの無料ページと同じ内容になる)。競合本の本文・図案・章立てを複製しない (論点と型のみ)。公開承認をまとめて取らない。未計測のものを「需要あり」と書かない。
