@@ -12,7 +12,7 @@
  *   出力 : R2 `app/correlation/top-pairs.json` / `stats.json` / `by-ranking-key-v2/<key>.json`
  *
  * 計算量: ~2,000 active 指標² ≈ 2M ペア。全ペアでscatter object/配列を作ると
- * allocationとGCでheapを圧迫するため、valueMapからPearson集計値だけを直接計算し、JS側で
+ * allocationとGCでheapを圧迫するため、年ごとの県別配列からPearson集計値だけを直接計算し、JS側で
  *   - per-key 正負各10件 (人口補正後の順位相関の絶対値降順。populationAdjustedRankR)
  *   - global top-200 候補 (effectiveR 降順)
  *   - 走行中の total / strong(|r|>=0.7) カウント
@@ -57,13 +57,15 @@ import {
   isExcludedCorrelationKey,
   isExcludedCorrelationPair,
 } from '../trivial-pairs';
+import { calculatePartialR, type ScatterDataPoint } from '../utils/calculate-pearson';
 import {
-  buildScatterData,
-  calculateMatchedPearsonR,
-  calculatePartialR,
-  toAverageRanks,
-  type RankValueWithArea,
-} from '../utils/calculate-pearson';
+  AREA_CODES,
+  buildYearSeries,
+  latestCommonYear,
+  pairedPearsonR,
+  ranksOf,
+  type YearSeries,
+} from '../utils/year-slices';
 import {
   CORRELATION_STATS_KEY,
   CORRELATION_TOP_PAIRS_KEY,
@@ -261,46 +263,49 @@ function displayMetaFor(
 
 // ─── 観測値ロード ─────────────────────────────────────────────────────────────
 
-interface LoadedMetric {
+interface LoadedMetric extends YearSeries {
   key: string;
+  /** 値のある県が MIN_DATA_POINTS 以上の年のうち最新 (years[0]) */
   latestYear: string;
-  rows: RankValueWithArea[];
-  valueMap: Map<string, number>;
-  /** 県ごとの順位 (同値は平均順位)。順位相関を総当たりで出すために 1 度だけ作る */
-  rankRows: RankValueWithArea[];
-  rankMap: Map<string, number>;
 }
 
+/** 観測値の行が持つ県名 (散布図の表示用)。地域コードごとに最初に見た名前。 */
+const AREA_NAMES = new Map<string, string>();
+
 /**
- * 1 指標の latestYear prefecture 値を R2 から読む。
- * value=null は除外。MIN_DATA_POINTS 未満は null (相関対象外)。
+ * 1 指標の prefecture 値を全年ぶん R2 から読む。value=null は除外。
+ * 年は「観測値にある年のうち config.years の範囲内」で、値のある県が MIN_DATA_POINTS 未満の年は持たない
+ * (年が 1 つも残らなければ null = 相関対象外)。ペアは両方に値のある最新の共通年で組むので全年が要る。
  *
- * latestYear はランキングページ (generate-ranking-items の item.json) と同じく
- * 「観測値にある年のうち config.years の範囲内で最新」とする。config.years から直接取ると
- * years:"all" の指標は年が決まらず、years.to がデータより先の指標は存在しない年を探して
- * 0 件になる (2026-09-23 実測: 前者 49 件・後者 41 件が相関なし/古い相関のまま)。
+ * config.years から直接年を取らない。years:"all" の指標は年が決まらず、years.to がデータより先の指標は
+ * 存在しない年を探して 0 件になる (2026-09-23 実測: 前者 49 件・後者 41 件が相関なし/古い相関のまま)。
  */
 async function loadMetric(config: MetricConfig): Promise<LoadedMetric | null> {
   const payload = await readStatsValues(config.key, 'prefecture');
   if (!payload || payload.rows.length === 0) return null;
-  const latestYear = [...new Set(payload.rows.map((r) => r.yearCode))]
-    .filter((yearCode) => yearInSpec(yearCode, config.years))
-    .sort((a, b) => parseInt(b, 10) - parseInt(a, 10))[0];
-  if (!latestYear) return null;
+  for (const r of payload.rows) if (!AREA_NAMES.has(r.areaCode)) AREA_NAMES.set(r.areaCode, r.areaName);
+  const series = buildYearSeries(
+    payload.rows,
+    (yearCode) => yearInSpec(yearCode, config.years),
+    MIN_DATA_POINTS
+  );
+  if (series.years.length === 0) return null;
+  return { key: config.key, latestYear: series.years[0], ...series };
+}
 
-  const rows: RankValueWithArea[] = [];
-  const valueMap = new Map<string, number>();
-  for (const r of payload.rows) {
-    if (r.yearCode !== latestYear) continue;
-    if (r.value === null || r.value === undefined) continue;
-    rows.push({ areaCode: r.areaCode, areaName: r.areaName, value: r.value });
-    valueMap.set(r.areaCode, r.value);
-  }
-  if (rows.length < MIN_DATA_POINTS) return null;
-  const ranks = toAverageRanks(rows.map((row) => row.value));
-  const rankRows = rows.map((row, i) => ({ ...row, value: ranks[i] }));
-  const rankMap = new Map(rankRows.map((row) => [row.areaCode, row.value]));
-  return { key: config.key, latestYear, rows, valueMap, rankRows, rankMap };
+/** その年に両方に値のある県の散布図 (X=x 指標)。 */
+function scatterAt(x: YearSeries, y: YearSeries, year: string): ScatterDataPoint[] {
+  const xs = x.slices.get(year);
+  const ys = y.slices.get(year);
+  if (!xs || !ys) return [];
+  const points: ScatterDataPoint[] = [];
+  AREA_CODES.forEach((areaCode, i) => {
+    const xv = xs.values[i];
+    const yv = ys.values[i];
+    if (Number.isNaN(xv) || Number.isNaN(yv)) return;
+    points.push({ areaCode, areaName: AREA_NAMES.get(areaCode) ?? areaCode, x: xv, y: yv });
+  });
+  return points;
 }
 
 /** 並列度を制限して loadMetric を流す簡易ワーカープール。 */
@@ -353,21 +358,25 @@ function hashCorrelationSource(dir = CORRELATION_SRC_DIR): string {
 /**
  * 出力を決める入力の fingerprint。loaded は並列 fetch の完了順で Map に入るため key で整列し、
  * pairKeys は i<j 走査の X/Y 向きを決めるので与えられた順のまま hash する。
+ * 相関は全年から共通年を選ぶので、最新年だけでなく保持している全年の値を入れる。
  */
 export function computeInputFingerprint(
-  loaded: Map<string, Pick<LoadedMetric, 'latestYear' | 'rows'>>,
+  loaded: Map<string, Pick<LoadedMetric, 'years' | 'slices'>>,
   pairKeys: readonly string[],
   metaMap: Map<string, MetricDisplayMeta>,
-  sourceDigest: string
+  sourceDigest: string,
+  areaNames: ReadonlyMap<string, string> = AREA_NAMES
 ): string {
   const hash = createHash('sha256').update(sourceDigest);
   for (const key of [...loaded.keys()].sort()) {
     const metric = loaded.get(key)!;
-    const rows = [...metric.rows]
-      .sort((a, b) => a.areaCode.localeCompare(b.areaCode))
-      .map((r) => [r.areaCode, r.areaName, r.value]);
-    hash.update(JSON.stringify([key, metric.latestYear, rows]));
+    const years = metric.years.map((year) => [
+      year,
+      Array.from(metric.slices.get(year)!.values, (v) => (Number.isNaN(v) ? null : v)),
+    ]);
+    hash.update(JSON.stringify([key, years]));
   }
+  hash.update(JSON.stringify([...areaNames.entries()].sort(([a], [b]) => a.localeCompare(b))));
   hash.update(
     JSON.stringify(pairKeys.map((key) => [key, displayMetaFor(key, metaMap)]))
   );
@@ -392,29 +401,29 @@ function isTrivialPair(
 
 // ─── 偏相関 (制御変数との r) のキャッシュ ─────────────────────────────────────
 
-/** rankingKey × cvKey → r。getCvCorrelation で memoize。 */
+/**
+ * rankingKey × 年 × cvKey → r。統制変数はペアと同じ年の値だけを使い、その年に値が無ければ null
+ * (その統制変数の偏相関を出さない)。別の年の統制変数で補わない。
+ */
 function makeCvCorrelationGetter(
   metrics: Map<string, LoadedMetric>
-): (key: string, cvKey: string) => number | null {
+): (key: string, year: string, cvKey: string) => number | null {
   const cache = new Map<string, number | null>();
-  return (key: string, cvKey: string): number | null => {
-    const cacheKey = `${key}\0${cvKey}`;
+  return (key: string, year: string, cvKey: string): number | null => {
+    const cacheKey = `${key}\0${year}\0${cvKey}`;
     const cached = cache.get(cacheKey);
     if (cached !== undefined) return cached;
 
-    const metric = metrics.get(key);
-    const cv = metrics.get(cvKey);
-    if (!metric || !cv) {
+    const slice = metrics.get(key)?.slices.get(year);
+    const cvSlice = metrics.get(cvKey)?.slices.get(year);
+    if (!slice || !cvSlice) {
       cache.set(cacheKey, null);
       return null;
     }
-    const matched = calculateMatchedPearsonR(metric.rows, cv.valueMap);
-    if (matched.count < MIN_DATA_POINTS) {
-      cache.set(cacheKey, null);
-      return null;
-    }
-    cache.set(cacheKey, matched.r);
-    return matched.r;
+    const matched = pairedPearsonR(slice.values, cvSlice.values);
+    const r = matched.count < MIN_DATA_POINTS ? null : matched.r;
+    cache.set(cacheKey, r);
+    return r;
   };
 }
 
@@ -423,6 +432,8 @@ function makeCvCorrelationGetter(
 interface CandidateScore {
   keyX: string;
   keyY: string;
+  /** 両方に値のある最新の共通年。相関・偏相関・散布図はすべてこの年の値 */
+  year: string;
   pearsonR: number;
   partialRPopulation: number | null;
   partialRArea: number | null;
@@ -595,6 +606,7 @@ function buildMemoryDb(
       partial_r_aging REAL,
       partial_r_density REAL,
       pop_adj_rank_r REAL NOT NULL,
+      year TEXT NOT NULL,
       scatter_data_json TEXT NOT NULL
     );
     CREATE TABLE metrics (
@@ -621,8 +633,8 @@ function buildMemoryDb(
     INSERT INTO correlations
       (metric_key_x, metric_key_y, pearson_r,
        partial_r_population, partial_r_area, partial_r_aging, partial_r_density,
-       pop_adj_rank_r, scatter_data_json)
-    VALUES (@keyX, @keyY, @pearsonR, @prPop, @prArea, @prAging, @prDensity, @popAdjRankR, @scatter)
+       pop_adj_rank_r, year, scatter_data_json)
+    VALUES (@keyX, @keyY, @pearsonR, @prPop, @prArea, @prAging, @prDensity, @popAdjRankR, @year, @scatter)
   `);
   const insCorrTx = db.transaction(() => {
     for (const c of candidates) {
@@ -642,8 +654,9 @@ function buildMemoryDb(
         prAging: c.partialRAging,
         prDensity: c.partialRDensity,
         popAdjRankR: c.populationAdjustedRankR,
+        year: c.year,
         // 候補ごとに生成・直ちに INSERT し、JS 配列と SQLite の二重保持を避ける。
-        scatter: JSON.stringify(buildScatterData(x.rows, y.rows)),
+        scatter: JSON.stringify(scatterAt(x, y, c.year)),
       });
     }
   });
@@ -655,6 +668,7 @@ function buildMemoryDb(
 interface TopPairRow {
   rankingKeyX: string;
   rankingKeyY: string;
+  year: string;
   pearsonR: number;
   effectiveR: number;
   partialRPopulation: number | null;
@@ -684,6 +698,7 @@ function queryTopPairs(
       SELECT
         c.metric_key_x AS rankingKeyX,
         c.metric_key_y AS rankingKeyY,
+        c.year AS year,
         c.pearson_r AS pearsonR,
         (CASE WHEN c.pearson_r >= 0 THEN 1 ELSE -1 END) * ${effectiveAbsR} AS effectiveR,
         c.partial_r_population AS partialRPopulation,
@@ -716,6 +731,7 @@ function queryTopPairs(
     .map((r) => ({
       rankingKeyX: r.rankingKeyX,
       rankingKeyY: r.rankingKeyY,
+      year: r.year,
       titleX: r.titleX,
       titleY: r.titleY,
       normalizationBasisX: r.normalizationBasisX,
@@ -732,6 +748,7 @@ function queryTopPairs(
 interface ByKeyRawRow {
   rankingKeyX: string;
   rankingKeyY: string;
+  year: string;
   pearsonR: number;
   partialRPopulation: number | null;
   partialRArea: number | null;
@@ -760,6 +777,7 @@ function queryByKey(
       SELECT
         metric_key_x AS rankingKeyX,
         metric_key_y AS rankingKeyY,
+        year,
         pearson_r AS pearsonR,
         partial_r_population AS partialRPopulation,
         partial_r_area AS partialRArea,
@@ -802,6 +820,7 @@ function queryByKey(
       title: meta.title,
       subtitle: meta.subtitle,
       unit: meta.unit,
+      year: row.year,
       pearsonR: row.pearsonR,
       populationAdjustedR: row.populationAdjustedRankR,
       partialRPopulation: row.partialRPopulation,
@@ -935,16 +954,22 @@ export async function buildCorrelationSnapshot(
   let strong = 0;
   let trivialSkipped = 0;
 
-  // 各指標と総人口の順位相関 (偏相関の分母)。指標ごとに 1 回だけ計算する
-  const populationRanks = loaded.get(CONTROL_VARIABLES[0].key)?.rankMap;
+  // 各指標と総人口の順位相関 (偏相関の分母)。指標 × 年ごとに 1 回だけ計算する。総人口もペアと同じ年の値を使う
+  const population = loaded.get(CONTROL_VARIABLES[0].key);
   const rankPopulationCache = new Map<string, number | null>();
-  const rankWithPopulation = (metric: LoadedMetric): number | null => {
-    if (!populationRanks) return null;
-    if (!rankPopulationCache.has(metric.key)) {
-      const matched = calculateMatchedPearsonR(metric.rankRows, populationRanks);
-      rankPopulationCache.set(metric.key, matched.count < MIN_DATA_POINTS ? null : matched.r);
+  const rankWithPopulation = (metric: LoadedMetric, year: string): number | null => {
+    const cacheKey = `${metric.key}\0${year}`;
+    if (!rankPopulationCache.has(cacheKey)) {
+      const popSlice = population?.slices.get(year);
+      const slice = metric.slices.get(year);
+      if (!popSlice || !slice) {
+        rankPopulationCache.set(cacheKey, null);
+      } else {
+        const matched = pairedPearsonR(ranksOf(slice), ranksOf(popSlice));
+        rankPopulationCache.set(cacheKey, matched.count < MIN_DATA_POINTS ? null : matched.r);
+      }
     }
-    return rankPopulationCache.get(metric.key)!;
+    return rankPopulationCache.get(cacheKey)!;
   };
 
   for (let i = 0; i < pairKeys.length; i++) {
@@ -959,18 +984,20 @@ export async function buildCorrelationSnapshot(
         continue;
       }
       const my = loaded.get(keyY)!;
-      const matched = calculateMatchedPearsonR(mx.rows, my.valueMap);
-      if (matched.count < MIN_DATA_POINTS) continue;
-      const r = matched.r;
+      // 年の違う値どうしを組まない。両方に値のある最新の共通年で計算し、共通年が無ければ出さない
+      const common = latestCommonYear(mx, my, MIN_DATA_POINTS);
+      if (!common) continue;
+      const { year } = common;
+      const r = common.matched.r;
 
-      // 偏相関 4 種。
+      // 偏相関 4 種。統制変数もペアと同じ年の値だけを使う
       let prPop: number | null = null;
       let prArea: number | null = null;
       let prAging: number | null = null;
       let prDensity: number | null = null;
       for (const cv of CONTROL_VARIABLES) {
-        const rXZ = getCv(keyX, cv.key);
-        const rYZ = getCv(keyY, cv.key);
+        const rXZ = getCv(keyX, year, cv.key);
+        const rYZ = getCv(keyY, year, cv.key);
         if (rXZ === null || rYZ === null) continue;
         const pr = calculatePartialR(r, rXZ, rYZ);
         switch (cv.column) {
@@ -995,6 +1022,7 @@ export async function buildCorrelationSnapshot(
       const cand: CandidateScore = {
         keyX,
         keyY,
+        year,
         pearsonR: r,
         partialRPopulation: prPop,
         partialRArea: prArea,
@@ -1004,9 +1032,9 @@ export async function buildCorrelationSnapshot(
         populationAdjustedRankR: 0,
       };
       cand.effectiveAbsR = effectiveAbsROf(cand);
-      const rankR = calculateMatchedPearsonR(mx.rankRows, my.rankMap).r;
-      const rxp = rankWithPopulation(mx);
-      const ryp = rankWithPopulation(my);
+      const rankR = pairedPearsonR(ranksOf(mx.slices.get(year)!), ranksOf(my.slices.get(year)!)).r;
+      const rxp = rankWithPopulation(mx, year);
+      const ryp = rankWithPopulation(my, year);
       cand.populationAdjustedRankR =
         rxp === null || ryp === null ? rankR : (calculatePartialR(rankR, rxp, ryp) ?? rankR);
 
@@ -1064,6 +1092,7 @@ export async function buildCorrelationSnapshot(
     const snapshot: CorrelationByKeySnapshot = {
       generatedAt,
       rankingKey: key,
+      latestYear: loaded.get(key)!.latestYear,
       selectionPolicyVersion: CORRELATION_SELECTION_POLICY.version,
       groups: queryByKey(db, key, metaMap),
     };

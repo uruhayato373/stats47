@@ -12,13 +12,16 @@ import {
 } from "../types/snapshot";
 import type { CorrelationGroups } from "../selection-policy";
 
+/** 正負別の相関一覧と、この指標の最新年 (各ペアの year と比べて、別の年で比べたペアを示すため)。 */
+export type HighlyCorrelatedResult = CorrelationGroups<CorrelatedItem> & { latestYear?: string };
+
 /**
  * 台帳に従って生成・検証された正負別の相関一覧を R2 から返す。
  * 未生成なら空の組、取得・形式エラーなら err を返す。
  */
 export async function readHighlyCorrelatedFromR2(
   rankingKey: string,
-): Promise<Result<CorrelationGroups<CorrelatedItem>, Error>> {
+): Promise<Result<HighlyCorrelatedResult, Error>> {
   // build 時の全指標 fetch を避け、ISR の初回リクエスト時に取得する。
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return ok({ positive: [], negative: [] });
@@ -44,7 +47,7 @@ export async function readHighlyCorrelatedFromR2(
       return err(result.error);
     }
     if (result.data.rankingKey !== rankingKey) return err(new Error('correlation rankingKey mismatch'));
-    return ok(result.data.groups);
+    return ok({ ...result.data.groups, ...(result.data.latestYear ? { latestYear: result.data.latestYear } : {}) });
   } catch (error) {
     logger.error(
       {

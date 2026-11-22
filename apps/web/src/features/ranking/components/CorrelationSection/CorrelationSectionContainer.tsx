@@ -8,8 +8,10 @@ interface CorrelationSectionContainerProps {
 }
 
 // 一覧で使わない散布図・他の相関係数をブラウザへ送らない。
-const listItem = ({ rankingKey, title, populationAdjustedR }: CorrelationListItem): CorrelationListItem =>
-    ({ rankingKey, title, populationAdjustedR });
+// 年はこの指標の最新年と違うペアにだけ渡す (相関は両方に値のある最新の共通年で計算している)。
+const listItem = (latestYear: string | undefined) =>
+    ({ rankingKey, title, populationAdjustedR, year }: CorrelationListItem): CorrelationListItem =>
+        ({ rankingKey, title, populationAdjustedR, ...(year && latestYear && year !== latestYear ? { year } : {}) });
 
 export async function CorrelationSectionContainer({
     rankingKey,
@@ -21,8 +23,9 @@ export async function CorrelationSectionContainer({
         return null;
     }
 
+    const toItem = listItem(result.data.latestYear);
     return <CorrelationSectionClient groups={{
-        positive: result.data.positive.map(listItem),
-        negative: result.data.negative.map(listItem),
+        positive: result.data.positive.map(toItem),
+        negative: result.data.negative.map(toItem),
     }} />;
 }
