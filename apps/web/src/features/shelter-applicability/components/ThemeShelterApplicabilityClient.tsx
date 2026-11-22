@@ -34,7 +34,29 @@ export function ThemeShelterApplicabilityClient({
         title="災害の種類と指定緊急避難場所"
         description={`${row?.areaName ?? '地域未確認'} · 2026年9月11日取得 · 掲載件数（共通ID）`}
         contentClassName="min-w-0 space-y-4"
-        footer={<ChartFooter source={source.title} sourceLink={source.url} />}
+        action={
+          <ChartFooter
+            placement="header"
+            source={source.title}
+            sourceLink={source.url}
+            sourceLinks={[
+              { label: '国土地理院の指定避難場所・避難所の案内', url: source.confirmationUrl },
+              { label: '自治体別の公表・更新状況', url: source.url },
+              { label: '原典の利用上の注意', url: source.notesUrl },
+              { label: '国土地理院コンテンツ利用規約', url: source.licenseUrl },
+            ]}
+            annotation={[
+              ...(row
+                ? [
+                    `指定緊急避難場所は、災害の危険から緊急的に避難する場所です。公開データの${format(row.emergency.facilities)}件について、災害種別ごとの指定を示します。この地域の最新DB更新日は${row.latestDatabaseUpdate}です。指定日・開設日ではありません。`,
+                    '原典の「1」を該当、空欄を非該当として集計しています。本取得分に不明の記号はありません。非該当は、安全・危険の判定を意味しません。',
+                  ]
+                : []),
+              '原典は随時更新されます。最新でない情報や未掲載の施設があります。実際の利用時は、災害種別と自治体の最新の指定状況・開設情報を確認してください。',
+              ...source.notes,
+            ]}
+          />
+        }
       >
         {!row ? (
           <p role="status" className="text-sm text-muted-foreground">
@@ -42,13 +64,6 @@ export function ThemeShelterApplicabilityClient({
           </p>
         ) : (
           <>
-            <p className="text-sm leading-relaxed">
-              指定緊急避難場所は、災害の危険から緊急的に避難する場所です。
-              公開データの{format(row.emergency.facilities)}
-              件について、災害種別ごとの指定を示します。
-              この地域の最新DB更新日は{row.latestDatabaseUpdate}
-              です。指定日・開設日ではありません。
-            </p>
             <ValueTable fold
               ariaLabel={`${row.areaName}の指定緊急避難場所と災害種別`}
               className="min-w-96"
@@ -76,10 +91,6 @@ export function ThemeShelterApplicabilityClient({
                 ],
               }))}
             />
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              原典の「1」を該当、空欄を非該当として集計しています。本取得分に不明の記号はありません。
-              非該当は、安全・危険の判定を意味しません。
-            </p>
             <ValueTable fold
               ariaLabel={`${row.areaName}の指定避難所の掲載件数`}
               className="min-w-96"
@@ -116,51 +127,6 @@ export function ThemeShelterApplicabilityClient({
             </p>
           </>
         )}
-        <p className="text-sm leading-relaxed">
-          原典は随時更新されます。最新でない情報や未掲載の施設があります。実際の利用時は、災害種別と自治体の最新の指定状況・開設情報を確認してください。
-          <a
-            href={source.confirmationUrl}
-            className="underline underline-offset-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            国土地理院の指定避難場所・避難所の案内
-          </a>
-          {' / '}
-          <a
-            href={source.url}
-            className="underline underline-offset-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            自治体別の公表・更新状況
-          </a>
-        </p>
-        <details className="text-xs leading-relaxed text-muted-foreground">
-          <summary className="cursor-pointer">集計対象と出典の注意事項</summary>
-          <ul className="mt-2 space-y-1">
-            {source.notes.map((note) => (
-              <li key={note}>{note}</li>
-            ))}
-          </ul>
-          <a
-            href={source.notesUrl}
-            className="underline underline-offset-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            原典の利用上の注意
-          </a>
-          {' / '}
-          <a
-            href={source.licenseUrl}
-            className="underline underline-offset-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            国土地理院コンテンツ利用規約
-          </a>
-        </details>
       </ChartPanel>
     </div>
   );

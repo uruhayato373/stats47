@@ -2,7 +2,7 @@ import {
   TSUNAMI_EXPOSURE_SOURCE as source,
   type TsunamiSnapshot,
 } from '@stats47/data-configs/theme-catalog';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { ThemeTsunamiExposureClient } from '../ThemeTsunamiExposureClient';
@@ -47,12 +47,17 @@ function fixture(): TsunamiSnapshot {
   };
 }
 describe('Tsunami scenario selection', () => {
-  it('national selection is a coverage entry, not a nationwide exposure total', () => {
+  it('national selection is a coverage entry, not a nationwide exposure total', async () => {
     render(<ThemeTsunamiExposureClient snapshot={fixture()} />);
     expect(screen.queryByRole('table')).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: '徳島県を確認' }));
     expect(selection.setSelected).toHaveBeenCalledWith('36000');
-    expect(screen.getByText(/全国合計や県別の安全順位/)).toBeTruthy();
+    // 想定の範囲は図の周りに置かず、見出しの右端から開く Sheet の中 (2026-11-22)
+    expect(screen.queryByText(/全国合計や県別の安全順位/)).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: /読むときの注意/ }));
+    expect(
+      within(await screen.findByRole('dialog')).getByText(/全国合計や県別の安全順位/)
+    ).toBeTruthy();
   });
   it.each([
     ['22000', '静岡県', '2016年基準'],
