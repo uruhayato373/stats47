@@ -1644,6 +1644,17 @@
           "filters": {
             "cdCat01": "I521130"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0004048415",
+          "filters": {
+            "cdCat02": "1",
+            "cdCat03": "2"
+          },
+          "years": [
+            2024
+          ]
         }
       ],
       "recipe": {
@@ -1652,8 +1663,26 @@
           "statsDataId": "0000010109",
           "cdCat01": "I521130"
         },
-        "derived": false,
-        "configHash": "a478f82b3438f30c"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2024
+              ],
+              "estatParams": {
+                "statsDataId": "0004048415",
+                "cdCat02": "1",
+                "cdCat03": "2"
+              },
+              "areaAxis": {
+                "axis": "cat01",
+                "scheme": "name"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "2b410d67e525f9ce"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -1798,6 +1827,17 @@
           "filters": {
             "cdCat01": "I510110"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0004048408",
+          "filters": {
+            "cdCat01": "1",
+            "cdCat03": "2"
+          },
+          "years": [
+            2024
+          ]
         }
       ],
       "recipe": {
@@ -1806,8 +1846,26 @@
           "statsDataId": "0000010109",
           "cdCat01": "I510110"
         },
-        "derived": false,
-        "configHash": "f6797061bbe461ca"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2024
+              ],
+              "estatParams": {
+                "statsDataId": "0004048408",
+                "cdCat01": "1",
+                "cdCat03": "2"
+              },
+              "areaAxis": {
+                "axis": "cat02",
+                "scheme": "name"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "ffb17fbffc68347a"
       },
       "dependencies": [],
       "normalizationDependencies": [
