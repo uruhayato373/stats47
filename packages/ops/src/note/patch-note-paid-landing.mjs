@@ -49,6 +49,8 @@ function parseArgs(argv) {
     slug: slugIndex >= 0 ? argv[slugIndex + 1] : null,
     all: argv.includes("--all"),
     commit: argv.includes("--commit"),
+    // 題だけを変える (本文・区切り・価格・タグは公開版のまま。2026-11-22 d-kakei-category-dataset の「8.7倍」)
+    title: argv.includes("--title") ? argv[argv.indexOf("--title") + 1] : null,
   };
 }
 
@@ -288,6 +290,30 @@ export async function publishEditedBody(ctx, noteKey, published, { freeBody, pay
   return state;
 }
 
+/** 題だけを変える。本文・区切り・価格・タグは公開版のまま送り、公開後に題と本文を読み戻す。 */
+async function retitle(ctx, article, noteKey, published, { free, pay }, options) {
+  console.log(`  ${article.key}: title「${published.name}」→「${options.title}」`);
+  if (!options.commit) return { status: "dry-run", key: article.key, changes: ["title"] };
+  await publishEditedBody(ctx, noteKey, published, { freeBody: free, payBody: pay, separator: published.separator, name: options.title });
+  let live;
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    await new Promise((r) => setTimeout(r, 1_500));
+    live = await fetchOwnerNote(ctx, noteKey);
+    if (live.name === options.title) break;
+  }
+  const checks = {
+    title: live.name === options.title,
+    status: live.status === "published" && live.user?.urlname === "stats47",
+    price: Number(live.price || 0) === Number(published.price || 0),
+    body: String(live.body || "") === String(published.body || ""),
+    hashtags: (live.hashtag_notes || []).length === (published.hashtag_notes || []).length,
+  };
+  const failed = Object.entries(checks).filter(([, ok]) => !ok).map(([name]) => name);
+  if (failed.length) throw new Error(`${article.key}: 題の変更の live 検証失敗 ${failed.join(",")}`);
+  console.log(`  ${article.key}: RETITLED ${article.noteUrl}`);
+  return { status: "updated", key: article.key, changes: ["title"] };
+}
+
 async function processArticle(ctx, article, options) {
   const noteKey = noteKeyFromUrl(article.noteUrl);
   const { path: specPath, spec } = loadSpec(article.key);
@@ -328,9 +354,11 @@ async function processArticle(ctx, article, options) {
     throw error;
   }
   if (composed.changes.length === 0 && unregisteredCards(composed.html, published.embedded_contents).length === 0) {
+    if (options.title && options.title !== published.name) return retitle(ctx, article, noteKey, published, { free, pay }, options);
     console.log(`  ${article.key}: already compliant (intro/source ともに本文にある)`);
     return { status: "already_compliant", key: article.key };
   }
+  if (options.title) throw new Error(`${article.key}: 本文の変更と題の変更を同じ実行で行わない (先に本文を直してから --title を流す)`);
   const unverified = findUnverifiedDisclosures(`${composed.html}\n${pay}`);
   if (unverified.length) throw new Error(`${article.key}: 未検証の断り書きが本文に残っている。検証して本文を直すまで公開本文を更新しない\n${formatDisclosures(unverified)}`);
   const newSeparator = composed.separatorId || published.separator;
