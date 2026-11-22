@@ -134,3 +134,24 @@ test('代表 E2E ジョブは、サーバーの出力と R2 中継のログを�
   const upload = job.slice(job.indexOf("name: playwright-e2e-report"));
   assert.ok(upload.includes("apps/web/server-logs/"), "server-logs を artifact の path に含める");
 });
+
+test('公開前の Geo bundle の JSON は手元の .local/r2 から返し、手元に無い key と JSON 以外は本番へ取り次ぐ (GEO-DEV-LOCAL-R2-01)', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'geo-overlay-'));
+  fs.mkdirSync(path.join(dir, 'app/geo/new-analysis/pref'), { recursive: true });
+  fs.writeFileSync(path.join(dir, 'app/geo/new-analysis/item.json'), '{"geo":"local-item"}');
+  fs.writeFileSync(path.join(dir, 'app/geo/new-analysis/pref/28.json'), '{"geo":"local-pref"}');
+  fs.mkdirSync(path.join(dir, 'app/geo/datasets/L01/thumbnails/26'), { recursive: true });
+  fs.writeFileSync(path.join(dir, 'app/geo/datasets/L01/thumbnails/26/wide.webp'), 'binary');
+  const upstream = http.createServer((_req, res) => { res.writeHead(200); res.end('{"from":"upstream"}'); });
+  const upstreamPort = await listen(upstream);
+  const overlay = createOverlayServer({ upstream: 'http://127.0.0.1:' + upstreamPort, snapshotDir: dir });
+  const port = await listen(overlay);
+  const get = async (p) => (await fetch('http://127.0.0.1:' + port + p)).text();
+  try {
+    assert.equal(await get('/app/geo/new-analysis/item.json'), '{"geo":"local-item"}');
+    assert.equal(await get('/app/geo/new-analysis/pref/28.json'), '{"geo":"local-pref"}');
+    assert.equal(await get('/app/geo/published/item.json'), '{"from":"upstream"}', '手元に無い key は本番へ');
+    assert.equal(await get('/app/geo/datasets/L01/thumbnails/26/wide.webp'), '{"from":"upstream"}', 'JSON 以外は返さない');
+    assert.equal(localMetricSnapshotFile('/app/geo/../stats/x/values.json', dir), null);
+  } finally { overlay.close(); upstream.close(); fs.rmSync(dir, { recursive: true, force: true }); }
+});

@@ -2,6 +2,38 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "housing-expenditure-ratio-multi-person-households",
+      "pageId": "ranking:housing-expenditure-ratio-multi-person-households",
+      "title": "住居費割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L02412"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L02412"
+        },
+        "derived": false,
+        "configHash": "9d1da04de2f8cc26"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:housing-expenditure-ratio-multi-person-households",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "housing-expenditure-total",
       "pageId": "ranking:housing-expenditure-total",
       "title": "住居費",
@@ -11568,40 +11600,6 @@
       "consumers": [
         {
           "pageId": "ranking:judo-therapist-count",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "judo-therapist-rate",
-      "pageId": "ranking:judo-therapist-rate",
-      "title": "人口10万対柔道整復師数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004026940",
-          "filters": {
-            "cdTab": "0180",
-            "cdCat01": "100"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0004026940",
-          "cdCat01": "100",
-          "cdTab": "0180"
-        },
-        "derived": false,
-        "configHash": "51ba99ee490622d1"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:judo-therapist-rate",
           "kind": "ranking"
         }
       ],

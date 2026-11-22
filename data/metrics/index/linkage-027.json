@@ -2,6 +2,43 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "school-bag-consumption-quantity",
+      "pageId": "ranking:school-bag-consumption-quantity",
+      "title": "通学用かばん購入数量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "100132020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "100132020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "f866b9442207ce67"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:school-bag-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "school-lunch-consumption-expenditure",
       "pageId": "ranking:school-lunch-consumption-expenditure",
       "title": "学校給食消費支出額",
@@ -12415,41 +12452,6 @@
       "themes": [
         "daily-time-use"
       ]
-    },
-    {
-      "metricKey": "small-scale-farm-households",
-      "pageId": "ranking:small-scale-farm-households",
-      "title": "経営耕地面積規模別農家数（販売農家）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010103",
-          "filters": {
-            "cdCat01": "C310234"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010103",
-          "cdCat01": "C310234"
-        },
-        "derived": false,
-        "configHash": "b8f76ffe54e96fdd"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [
-        "total-area-including-northern-territories-and-takeshima",
-        "total-population"
-      ],
-      "consumers": [
-        {
-          "pageId": "ranking:small-scale-farm-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

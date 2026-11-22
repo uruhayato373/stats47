@@ -185,7 +185,7 @@ export function formatCycleHealth(h) {
     ? "未計測"
     : !handoff.inContract
       ? `${handoff.period} は契約の開始 (review-wiring.json の contractFrom) より前のため未検査`
-      : `${handoff.period}: 振り分け済み ${handoff.routed} / ${handoff.total} 件${handoff.routed < handoff.total ? " ⚠️ `check-review-cadence.mjs` で行き先の無い項目を確認する" : ""}`;
+      : `${handoff.period}: 振り分け済み ${handoff.routed} / ${handoff.total} 件 (うちカード ID・EXP・Issue に結ばれた ${handoff.linked} 件、定常・見送り ${handoff.routed - handoff.linked} 件)${handoff.routed < handoff.total ? " ⚠️ `check-review-cadence.mjs` で行き先の無い項目を確認する" : ""}`;
   const contractLine = review ? (review.contractErrors ? `⚠️ ${review.contractErrors} 件 (\`check-review-cadence.mjs\`)` : "なし") : "未計測";
   const highLine = discipline
     ? `${discipline.highCount} / 上限 ${strategyLanes.MAX_HIGH_TIER_CARDS} 枚${discipline.highCount > strategyLanes.MAX_HIGH_TIER_CARDS ? " ⚠️ 月次計画で 🟡 へ下げる" : ""}` +

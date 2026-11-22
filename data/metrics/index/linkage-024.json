@@ -2,6 +2,38 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "private-rented-housing-ratio",
+      "pageId": "ranking:private-rented-housing-ratio",
+      "title": "民営借家比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0130202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0130202"
+        },
+        "derived": false,
+        "configHash": "74c4d6a9a8ea81d2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:private-rented-housing-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "private-sports-facility",
       "pageId": "ranking:private-sports-facility",
       "title": "民間体育施設数",
@@ -6780,224 +6812,6 @@
         },
         {
           "pageId": "ranking:public-water-aged-pipe-length",
-          "kind": "ranking"
-        },
-        {
-          "pageId": "theme:water-services",
-          "kind": "theme"
-        }
-      ],
-      "themes": [
-        "water-services"
-      ]
-    },
-    {
-      "metricKey": "public-water-pipe-aging-rate",
-      "pageId": "ranking:public-water-pipe-aging-rate",
-      "title": "水道管路の経年化率",
-      "sources": [],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "sourceUrl": "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/9112b58e-556c-429e-906f-45be48b63fd9/db7e75fb/20260703_resources_govdashboard_watersupply_table_02.zip"
-        },
-        "fetcherKey": "manual",
-        "configHash": "a5799e2c5b6d49ff"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "area-theme:01000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:02000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:03000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:04000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:05000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:06000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:07000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:08000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:09000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:10000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:11000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:12000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:13000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:14000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:15000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:16000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:17000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:18000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:19000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:20000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:21000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:22000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:23000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:24000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:25000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:26000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:27000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:28000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:29000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:30000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:31000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:32000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:33000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:34000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:35000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:36000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:37000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:38000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:39000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:40000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:41000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:42000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:43000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:44000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:45000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:46000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "area-theme:47000:water-services",
-          "kind": "area-theme"
-        },
-        {
-          "pageId": "ranking:public-water-pipe-aging-rate",
           "kind": "ranking"
         },
         {

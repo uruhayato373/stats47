@@ -7556,6 +7556,39 @@
       ]
     },
     {
+      "metricKey": "heatstroke-deaths-per-100k",
+      "pageId": null,
+      "title": "熱中症による死亡数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "ops": {
+          "calc": {
+            "type": "ratio",
+            "numeratorKey": "heatstroke-deaths",
+            "denominatorKey": "total-population",
+            "scaleFactor": 100000,
+            "decimalPlaces": 2
+          }
+        },
+        "derived": true,
+        "fetcherKey": "calculated",
+        "configHash": "b587bd276aff5946"
+      },
+      "dependencies": [
+        "heatstroke-deaths",
+        "total-population"
+      ],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:heatstroke-deaths-per-100k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "heatstroke-emergency-transports",
       "pageId": "ranking:heatstroke-emergency-transports",
       "title": "熱中症救急搬送人員",
@@ -9373,38 +9406,6 @@
       "consumers": [
         {
           "pageId": "ranking:high-school-new-graduates-employment-rate",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "high-school-new-graduates-job-opening-ratio",
-      "pageId": "ranking:high-school-new-graduates-job-opening-ratio",
-      "title": "高等学校新規卒業者の求人倍率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010206",
-          "filters": {
-            "cdCat01": "#F03304"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010206",
-          "cdCat01": "#F03304"
-        },
-        "derived": false,
-        "configHash": "6cee013b2de9f9c8"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:high-school-new-graduates-job-opening-ratio",
           "kind": "ranking"
         }
       ],

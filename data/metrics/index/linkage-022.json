@@ -2,6 +2,59 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "pickled-daikon-consumption-quantity",
+      "pageId": "ranking:pickled-daikon-consumption-quantity",
+      "title": "だいこん漬消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004023606",
+          "filters": {
+            "cdCat01": "010540030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0004023606",
+          "cdCat01": "010540030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b63fb3948a953b27"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pickled-daikon-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "pickled-plum-consumption-expenditure",
       "pageId": "ranking:pickled-plum-consumption-expenditure",
       "title": "梅干し消費支出額",
@@ -7447,36 +7500,6 @@
       "themes": [
         "household-food-spending"
       ]
-    },
-    {
-      "metricKey": "port-cargo-coastal-in",
-      "pageId": null,
-      "title": "移入貨物トン数",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0003130803",
-          "filters": {}
-        }
-      ],
-      "recipe": {
-        "kind": "external",
-        "derived": false,
-        "refetch": {
-          "statsDataId": "0003130803"
-        },
-        "fetcherKey": "estat",
-        "configHash": "35db913a726be8f9"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:port-cargo-coastal-in",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
     }
   ]
 }

@@ -2,6 +2,44 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "theme-population-pyramid-20-24-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120501"
+        },
+        "derived": false,
+        "configHash": "649969c409b3b63f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-20-24-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
       "metricKey": "theme-population-pyramid-25-29-female",
       "pageId": null,
       "title": "5歳階級別人口",
@@ -10018,47 +10056,6 @@
         },
         {
           "pageId": "ranking:transport-communication-expenditure-ratio-multi-person-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "transport-communication-expenditure-total",
-      "pageId": "ranking:transport-communication-expenditure-total",
-      "title": "交通・通信費",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023605",
-          "filters": {
-            "cdCat01": "070000000",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023605",
-          "cdCat01": "070000000",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "75f68b818f9a0f82"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:transport-communication-expenditure-total-prefecture-gap",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:transport-communication-expenditure-total",
           "kind": "ranking"
         }
       ],
