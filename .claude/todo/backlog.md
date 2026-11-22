@@ -208,6 +208,7 @@ updated: 2026-11-01
 - **③ 書き手と実データの食い違い (2026-11-22 の Schema の引き締めで見つけた分)**: `data/seo/improvement-log.json` の 2026-11-14 の `lastReview`・`reviews[]` は `note`・`reason` を持ち `period`・`snapshotHash` が無い手書きの行で、書き手 (`packages/ops/src/search-growth/lib/keyword-cycle.mjs`) はこの形を書かない。`data/affiliate/affiliate-catalog.json` の moshimo の履歴 16 行 (2026-07-28) は `status` が無く、今の書き手はこの形を書かない。どちらも Schema は任意の項目として受けている。
 - **④ `note.dashboard` の寿命**: ファイル名が集計期間の開始日で始まる (`2021-05-01_2026-09-11_<取得時刻>.json`) ので、名前で並べて古いものを消す今の寿命の仕組み (`prune-state-snapshots.mjs`) では、取得の新しい全期間のファイルから消えてしまう。取得時刻で並べる形を寿命の仕組みに足すか、ファイル名を取得時刻から始める形に変えてから寿命を付ける (21 ファイル・8.1MB)。
 - **完了条件**: ①の方針が決まり、型と Schema のずれが機械で検出される。②の 2 行が Schema を持つ (または行が分かれる)。`npm run check-datasets` と `npm run type-check` が通る。
+- **追補 (2026-11-22)**: 11-22 に足した参照 `sns.buzz-map-specs` の `spec.data.values.$keys` → `areas.cities` が、`no-station-muni.json`・`towns-villages.json` の cityCode 01695〜01700 (北海道の北方領土の 6 村) で警告になる。areas.cities に無いのが正しいなら、spec から外すか参照の `where` で除く。
 
 ### [MAP-RULES-DEDUP-01] 地図の画像の作り方に残る重複 (配色の解決・使われていない地図) をまとめる
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-19] [領域:サイト]
@@ -788,6 +789,7 @@ updated: 2026-11-01
 - **決定済み (撤去 3 本・実行待ち)**: `annual-sunshine-duration-vs-auto-liability-insurance-amount`・`shumai-consumption-expenditure-vs-jr-freight-shipment`・`road-length-per-km2-vs-residential-building-starts`。残す決定は 3 本。
 - **やること**: ① 撤去 3 本の実行をオーナーに確認し、`GONE_BLOG_SLUGS` の手順で反映する (本文は `archive-blog-articles.mjs` で退避してから) ② 統合 9 本・書き直し 23 本の処置を決め、`decisions` に書く ③ note の用途別商品とサービスの型 (題名から仮置き) を確定する ④ URL の規則で参照型にした 420 本のうち、題名に「なぜ」を含む 187 本を参照型のままにしてよいかを確認する ⑤ 2026-10-28 以降に公開した相関の記事は、計測が 28 日を超えた週の `content-types:fit` で改めて判定する。
 - **完了条件**: `/content/fit`が 0 件で、決定が台帳にあり、note の仮置きが確定している。
+- **追補 (2026-11-22)**: `check-content-types` が「個別の指定の宛先が無い」6 件を出す (blog: general-hospital-bed-occupancy-rate・inpatient-rate-aging-burden・software-engineer-income-gap・telework-gap-tokyo-6x・total-fertility-rate・wheat-flour-consumption-food-culture-gap)。pre-commit は通る (warning)。指定を消すか宛先を足す。
 
 ### [ISSUE-PRODUCT-LINK-01] 既存の商品に、起点の問いを指す項目を足す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-11-06] [領域:商品]
@@ -2800,6 +2802,7 @@ updated: 2026-11-01
 - **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
 - **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `definition` に `promotedAt: "<入れた日>"` を書いた。
 - 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+- **追補 (2026-11-22)**: 家計調査の 3 記事 (laundry-detergent・other-mushroom-quantity・rent-group) が同時に、値が県庁所在市の二人以上世帯で県全体ではないという断りが無いことで BLOCK になった (前回の headless critic は見落とした)。家計調査の記事の書き手の指示に「冒頭で対象を断る」を足すか、quality-gate で家計調査の指標を使う記事に「県庁所在市」の語が無ければ止める。
 
 ### [KEYS-SYNC-PROMINENCE-REGEN-01] ランキングの既知キーを足しても、そこから作るランキング索引の生成物が再生成されない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check] [起票:2026-10-08] [領域:データ] [進行中]
