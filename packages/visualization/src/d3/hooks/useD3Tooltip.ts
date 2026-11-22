@@ -13,7 +13,7 @@ import { FONT } from "../constants/chart-styles";
 /**
  * ツールチップが画面外にはみ出さないよう位置を補正する
  */
-export function clampTooltipPosition(
+function clampTooltipPosition(
   tooltip: HTMLDivElement,
   pageX: number,
   pageY: number,
@@ -124,7 +124,7 @@ export interface TooltipSeriesItem {
 /**
  * 複数系列をスタック表示するツールチップHTML生成
  */
-export function createStackedTooltipContent(params: {
+function createStackedTooltipContent(params: {
   title: string;
   items: TooltipSeriesItem[];
   unit?: string;

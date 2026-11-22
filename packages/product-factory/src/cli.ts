@@ -79,6 +79,7 @@ async function runGenerate(): Promise<number> {
     const { buildAll } = await import("./build/build-all");
     const results = await buildAll({
       version,
+      bundle: flags.has("--bundle"),
       onProgress: (done, total, res) => {
         if (done % 10 === 0 || done === total || done === 1) {
           console.log(`  [${done}/${total}] ${res.productId} ${res.family} (${res.formatsBuilt.join(",") || "listing"})`);
@@ -92,7 +93,7 @@ async function runGenerate(): Promise<number> {
     return 0;
   }
   if (!idArg) {
-    console.log("usage: generate --id <ID> | generate --all");
+    console.log("usage: generate --id <ID> [--bundle] | generate --all [--bundle]  (--bundle: 時系列と全指標の塗り分け地図を付ける)");
     return 1;
   }
   const { buildProduct } = await import("./build/build-product");
@@ -106,7 +107,7 @@ async function runGenerate(): Promise<number> {
   }
   const databook = resolveDatabook(product);
   const res = databook
-    ? await buildDatabook(product, databook, { version })
+    ? await buildDatabook(product, databook, { version, bundle: flags.has("--bundle") ? {} : undefined })
     : await buildProduct(product, JAPANESE_POPULATION_2024, { version });
   if (product.id === "P-13") {
     const { recordFreeSampleDelivery } = await import("./build/free-sample-delivery");

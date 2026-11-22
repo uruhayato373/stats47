@@ -60,7 +60,7 @@ import { DISASTER_DAMAGE_AMOUNT_PER_PERSON_2023 } from "./disaster-damage-amount
 import { NATURE_PARK_AREA_RATIO_2024 } from "./nature-park-area-ratio";
 import { BEEF_CONSUMPTION_EXPENDITURE_2024 } from "./beef-consumption-expenditure";
 
-export const DATASET_REGISTRY: Readonly<Record<string, Dataset>> = {
+const DATASET_REGISTRY: Readonly<Record<string, Dataset>> = {
   "total-population": TOTAL_POPULATION_2024,
   "total-area-including-northern-territories-and-takeshima": TOTAL_AREA_2023,
   "general-households": GENERAL_HOUSEHOLDS_2020,

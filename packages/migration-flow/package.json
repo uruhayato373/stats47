@@ -25,8 +25,7 @@
     "@stats47/types": "*",
     "d3-geo": "^3.1.0",
     "d3-scale": "^4.0.0",
-    "d3-scale-chromatic": "^3.1.0",
-    "topojson-client": "^3.1.0"
+    "d3-scale-chromatic": "^3.1.0"
   },
   "peerDependencies": {
     "react": ">=18"
@@ -38,6 +37,7 @@
     "@types/geojson": "^7946.0.14",
     "@types/react": "^19.0.0",
     "@types/topojson-client": "^3.1.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^4.1.11"
   }
 }

@@ -3,6 +3,7 @@
  * 規則: metric config の license 欄に「[要確認]」を含む指標 (算出指標は親指標も) を pack snapshot の読み込みで除外し、
  * 除外した指標名と理由を READINESS.md に残す。無料パック P-13 (総人口のみ) は対象外。
  */
+import { syntheticGeometry } from "./helpers/synthetic-geometry";
 import { describe, it, expect } from "vitest";
 import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -73,7 +74,7 @@ describe("権利要確認の指標を有料パックから除く", () => {
       const product = ALL_PRODUCTS.find((p) => p.id === "P-08")!;
       const databook = resolveDatabook(product)!;
       const small = { ...databook, datasets: databook.datasets.slice(0, 3) };
-      const res = await buildDatabook(product, small, { outRoot: dir, version: "t1" });
+      const res = await buildDatabook(product, small, { outRoot: dir, version: "t1", geo: syntheticGeometry() });
       const readiness = readFileSync(join(res.outDir, "READINESS.md"), "utf8");
       expect(readiness).toContain("pachinko-shop-density-per-10k");
       expect(readiness).toContain("権利");

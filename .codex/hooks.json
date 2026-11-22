@@ -17,10 +17,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node '.claude/hooks/check-local-db.js'"
-          },
-          {
-            "type": "command",
             "command": "node '.claude/hooks/session-guard.js'"
           },
           {

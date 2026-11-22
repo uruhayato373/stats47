@@ -34,7 +34,7 @@ export function buildArc(
 }
 
 /** ベジェ曲線上の t∈[0,1] の座標 (t=0 で p0、t=1 で p2) */
-export function bezierPoint(arc: ArcGeom, t: number): [number, number] {
+function bezierPoint(arc: ArcGeom, t: number): [number, number] {
   const u = 1 - t;
   return [
     u * u * arc.p0[0] + 2 * u * t * arc.p1[0] + t * t * arc.p2[0],

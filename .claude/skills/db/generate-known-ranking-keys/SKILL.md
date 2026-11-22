@@ -1,11 +1,11 @@
 ---
 name: generate-known-ranking-keys
 domain: data
-description: ローカル D1 の metrics から有効な rankingKey を抽出し、apps/web/src/config/known-ranking-keys.ts に書き出す。middleware.ts Fix 6 が参照。Use when user says "known-ranking-keys 更新", "ranking キーリスト再生成". 新規 metric 追加後 (TS-config + /sync-metrics-cache 適用後) に必ず実行する.
-primary_agent: db-schema-manager
+description: data-configs の isActive な metric のうち R2 に item.json がある rankingKey を抽出し、known-ranking-keys.ts に書き出す。middleware.ts Fix 6 が参照。Use when user says "known-ranking-keys 更新", "ranking キーリスト再生成". 新規 metric 追加後 (TS-config 追加 + /page-data-batch と generate-ranking-items の後) に必ず実行する.
+primary_agent: ranking-publisher
 ---
 
-`apps/web/src/config/known-ranking-keys.ts` を再生成する。
+`packages/ranking/src/config/known-ranking-keys.ts` を再生成する (`apps/web/src/config/known-ranking-keys.ts` はその再エクスポート)。
 
 ## なぜ必要か
 
@@ -15,8 +15,8 @@ primary_agent: db-schema-manager
 
 ## いつ実行するか
 
-- **必須**: 新規 metric を追加 (TS-config + `/sync-metrics-cache --apply`) した直後
-- **必須**: `metrics.is_active` を変更した直後
+- **必須**: 新規 metric を追加 (TS-config + `/page-data-batch`) し、R2 に `item.json` ができた直後
+- **必須**: TS-config の `isActive` を変更した直後
 - 推奨: 週次レビュー時の差分確認（他 PC での更新をキャッチ）
 
 ## 手順
@@ -51,9 +51,9 @@ R2 に `app/ranking/<key>/item.json` があるキーだけが載る。sync-snaps
 
 ## トラブルシューティング
 
-### `D1 not found` エラー
+### 件数が想定より少ない
 
-ローカル D1 が未配置。`.local/d1/` のパスを確認し、CLAUDE.md 記載の固定パスを使うこと。
+R2 に `app/ranking/<key>/item.json` がまだ無いキーは載らない。`generate-ranking-items.ts` (sync-snapshots の ranking-items) を先に回し、`R2_PUBLIC_FETCH_URL` が公開 URL を指しているかを確認する。
 
 ### 更新を忘れてデプロイした場合
 
@@ -64,5 +64,5 @@ R2 に `app/ranking/<key>/item.json` があるキーだけが載る。sync-snaps
 - 生成スクリプト本体: `apps/web/scripts/generate-known-ranking-keys.ts`
 - 出力先: `packages/ranking/src/config/known-ranking-keys.ts` (+ `packages/data-configs/src/prominence/ranking-prominence.generated.ts`)
 - middleware 参照箇所: `apps/web/src/middleware.ts` の Fix 6
-- 関連スキル: `/sync-metrics-cache`, `/page-data-batch`, `/deploy`
+- 関連スキル: `/page-data-batch`, `/sync-snapshots`, `/deploy`
 - 背景・v1/v2 失敗の教訓: `data/improvement/gsc-improvement/improvement-log.md` T0-RKG-200-01-v3

@@ -26,32 +26,6 @@ export const DIVERGING_COLOR_SCHEMES: ColorScheme[] = byType("diverging");
 export const CATEGORICAL_COLOR_SCHEMES: ColorScheme[] = byType("categorical");
 
 /**
- * 用途別おすすめカラースキーム
- */
-export const RECOMMENDED_COLOR_SCHEMES = {
-  // 気象・環境
-  temperature: "interpolateYlOrRd",      // 気温
-  sunshine: "interpolateYlOrRd",         // 日照時間
-  rainfall: "interpolateBlues",          // 降水量
-  snow: "interpolatePuBu",              // 降雪量
-  humidity: "interpolateBuGn",          // 湿度
-
-  // 人口・社会
-  population: "interpolateOranges",      // 人口密度
-  aging: "interpolatePurples",          // 高齢化率
-
-  // 経済
-  income: "interpolateGreens",          // 所得
-
-  // 一般
-  general: "interpolateBlues",          // 汎用ランキング
-  diverging: "interpolateRdBu",         // 正負の値、偏差
-
-  // 科学的可視化（色覚異常対応）
-  scientific: "interpolateViridis",     // 科学的データ
-} as const;
-
-/**
  * カラースキーム値からタイプを取得
  */
 export function getColorSchemeType(schemeValue: string): ColorSchemeType {

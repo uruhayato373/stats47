@@ -49,10 +49,29 @@ export function ThemeDepopulatedSettlementsClient({
         title="過疎地域等の集落と高齢化"
         description={`2024年4月1日時点 · ${region}`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source={DEPOPULATED_SETTLEMENTS_SOURCE.title}
-            sourceLink={`${DEPOPULATED_SETTLEMENTS_SOURCE.url}#page=81`}
+            sourceLinks={[
+              {
+                label: DEPOPULATED_SETTLEMENTS_SOURCE.title,
+                url: `${DEPOPULATED_SETTLEMENTS_SOURCE.url}#page=81`,
+              },
+              {
+                label: '原典の地方ブロック定義（図表1-5）',
+                url: `${DEPOPULATED_SETTLEMENTS_SOURCE.url}#page=19`,
+              },
+            ]}
+            annotation={[
+              DEPOPULATED_SETTLEMENTS_SOURCE.universe,
+              `集落数の構成割合は、無回答を含む${format(view.total)}集落を分母に計算しています。住民人数の構成比ではありません。割合は小数第1位に丸めています。`,
+              ...(view.geography === 'national'
+                ? ['10地方ブロックの表は、各地方ブロックの対象集落数と、住民の半数以上が65歳以上の集落数です。無回答は各ブロックの総数に含みます。']
+                : []),
+              '無回答は高齢者がいない集落とは異なります。集落の定義は市町村の社会生活・行政上の単位に基づき、国勢調査や農林業センサスの地域区分とは異なります。原発事故に伴い過去の調査時点で避難指示区域にあった5町村は調査対象外です。',
+              '地域の範囲は原典の地方ブロック定義に従っています。新潟県は東北圏、福井県は北陸圏です。',
+            ]}
           />
         }
       >
@@ -73,9 +92,6 @@ export function ThemeDepopulatedSettlementsClient({
             全国と10地方ブロックで公表された集落数です。県を選択すると、その県に対応する地方ブロック全体の値を表示します。
           </p>
         )}
-        <p className="text-sm text-muted-foreground">
-          {DEPOPULATED_SETTLEMENTS_SOURCE.universe}
-        </p>
         <p className="text-sm" data-half-or-more={view.age65Share50plus}>
           住民の半数以上が65歳以上の集落は{format(view.age65Share50plus)}集落（
           {format(view.age65Share50plusPercent, 1)}
@@ -86,12 +102,6 @@ export function ThemeDepopulatedSettlementsClient({
           ariaLabel={`${region}の集落高齢化プロフィール`}
           className="min-w-96"
           scrollRegion
-          caption={
-            <>
-              集落数の構成割合は、無回答を含む{format(view.total)}
-              集落を分母に計算しています。住民人数の構成比ではありません。割合は小数第1位に丸めています。
-            </>
-          }
           columns={[
             { key: 'category', header: '集落人口に占める65歳以上割合', rowHeader: true },
             { key: 'count', header: '集落数' },
@@ -123,7 +133,6 @@ export function ThemeDepopulatedSettlementsClient({
             ariaLabel="10地方ブロックの対象集落と高齢化"
             className="min-w-96"
             scrollRegion
-            caption="各地方ブロックの対象集落数と、住民の半数以上が65歳以上の集落数。無回答は各ブロックの総数に含みます。"
             columns={[
               { key: 'block', header: '地方ブロック', rowHeader: true },
               { key: 'total', header: '対象集落' },
@@ -141,21 +150,6 @@ export function ThemeDepopulatedSettlementsClient({
             }))}
           />
         )}
-        <p className="text-sm text-muted-foreground">
-          無回答は高齢者がいない集落とは異なります。集落の定義は市町村の社会生活・行政上の単位に基づき、国勢調査や農林業センサスの地域区分とは異なります。原発事故に伴い過去の調査時点で避難指示区域にあった5町村は調査対象外です。
-        </p>
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          地域の範囲は
-          <a
-            href={`${DEPOPULATED_SETTLEMENTS_SOURCE.url}#page=19`}
-            className="underline underline-offset-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            原典の地方ブロック定義（図表1-5）
-          </a>
-          に従っています。新潟県は東北圏、福井県は北陸圏です。
-        </p>
       </ChartPanel>
     </div>
   );

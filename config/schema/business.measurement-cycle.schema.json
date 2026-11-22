@@ -1,7 +1,107 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "週次の計測→記録→改善サイクルのまとめ",
-  "description": "data/measurement-cycle/latest.json の形状契約。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "data/measurement-cycle/latest.json の形状契約。2026-10-20 に実データから推論して作成 (RECORD-SCHEMA-CONTRACT-01)。セッションのエージェントが判断に使う記録なので、形が変わったら同じ差分でここを直す。整数と小数を区別せず、ルート以外の項目は null も許し、必須はルートの項目と配列の要素の識別子だけ。書き手 (.claude/scripts/metrics/build-measurement-cycle.mjs と packages/ops/src/metrics/lib/measurement-cycle.mjs の summarize*) が決まった項目だけを書くオブジェクトは閉じる (additionalProperties: false。2026-11-22)。キーが取得元・ラベル・重大度などの名前になる辞書は閉じず、値の形を additionalProperties で決める。書き手は書く前に assertDatasetShape で検証するので、新しい項目は同じ差分で properties へ足す。",
+  "definitions": {
+    "diff": {
+      "description": "前の週の記録との差 (読めなかった週は null)",
+      "type": [
+        "null",
+        "object"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "added": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sourceStatus": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "status": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "journeyRate": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "fromPageViews": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "pageViews": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "rate": {
+          "type": [
+            "null",
+            "number"
+          ]
+        }
+      }
+    },
+    "countMap": {
+      "description": "名前ごとの件数 (キーは名前)",
+      "type": [
+        "null",
+        "object"
+      ],
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "domainSummary": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "subjects": {
+          "type": [
+            "null",
+            "number"
+          ]
+        },
+        "byLabel": {
+          "$ref": "#/definitions/countMap"
+        }
+      }
+    }
+  },
   "type": "object",
   "properties": {
     "asOf": {
@@ -11,10 +111,32 @@
       ]
     },
     "adminAudit": {
+      "description": "GA4 Admin の週次監査を前の週の記録と比べた結果 (--admin-audit を渡さない週は null)",
       "type": [
         "null",
         "object"
-      ]
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "previousWeek": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "customDimensions": {
+          "$ref": "#/definitions/diff"
+        },
+        "keyEvents": {
+          "$ref": "#/definitions/diff"
+        },
+        "problems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "dimensionGaps": {
       "type": [
@@ -32,9 +154,34 @@
           "type": [
             "array",
             "null"
-          ]
+          ],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "events": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "params": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "eventCount28d": {
+                "type": "number"
+              },
+              "breakdownReady": {
+                "type": "boolean"
+              }
+            }
+          }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "engine": {
       "type": [
@@ -43,21 +190,18 @@
       ],
       "properties": {
         "byDomain": {
+          "description": "領域ごとの今週の判定 (キーは verdict の domainId)",
           "type": [
             "null",
             "object"
           ],
           "properties": {
             "adsense": {
-              "type": [
-                "null",
-                "object"
-              ],
-              "properties": {
-                "byLabel": {},
-                "subjects": {}
-              }
+              "$ref": "#/definitions/domainSummary"
             }
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/domainSummary"
           }
         },
         "gsc": {
@@ -79,19 +223,42 @@
               ]
             },
             "missing": {
+              "description": "機械判定に必要な目印が欠けた GSC 施策",
               "type": [
                 "array",
                 "null"
-              ]
+              ],
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "missing": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "欠けている目印"
+                  }
+                }
+              }
             },
             "outOfScope": {
               "type": [
                 "array",
                 "null"
               ],
-              "items": {}
+              "items": {
+                "type": "string"
+              }
             }
-          }
+          },
+          "additionalProperties": false
         },
         "verdictsWeek": {
           "type": [
@@ -99,7 +266,8 @@
             "string"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "generatedAt": {
       "type": [
@@ -120,12 +288,50 @@
           ]
         },
         "overdue": {
+          "description": "期日を過ぎた active 施策",
           "type": [
             "array",
             "null"
-          ]
+          ],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "status": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "due": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "metric": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "owner": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "journey": {
       "type": [
@@ -134,82 +340,13 @@
       ],
       "properties": {
         "blogToRanking": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "fromPageViews": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "pageViews": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "rate": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          }
+          "$ref": "#/definitions/journeyRate"
         },
         "themesToBlog": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "fromPageViews": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "pageViews": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "rate": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          }
+          "$ref": "#/definitions/journeyRate"
         },
         "themesToRanking": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "fromPageViews": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "pageViews": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "rate": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          }
+          "$ref": "#/definitions/journeyRate"
         },
         "topCrossSection": {
           "type": [
@@ -217,18 +354,32 @@
             "null"
           ],
           "items": {
-            "type": [
-              "null",
-              "object"
-            ],
+            "type": "object",
+            "additionalProperties": false,
             "properties": {
-              "from": {},
-              "pageViews": {},
-              "to": {}
+              "from": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "to": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "pageViews": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              }
             }
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "kpiTree": {
       "type": [
@@ -277,15 +428,21 @@
                 "array",
                 "null"
               ],
-              "items": {}
+              "items": {
+                "type": "string"
+              }
             },
             "unlinked": {
               "type": [
                 "array",
                 "null"
-              ]
+              ],
+              "items": {
+                "type": "string"
+              }
             }
-          }
+          },
+          "additionalProperties": false
         },
         "nodes": {
           "type": [
@@ -301,14 +458,46 @@
               "cadence": {},
               "focus": {},
               "id": {},
-              "improvements": {},
+              "improvements": {
+                "description": "この KPI に [kpi:] で結んだ施策の ID",
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
               "label": {},
               "measurementStatus": {},
               "note": {},
               "previous": {},
               "source": {},
               "status": {},
-              "target": {},
+              "target": {
+                "description": "週次 KPI 表の目標 (business-plan.metrics の kpiTarget の写し)",
+                "type": [
+                  "null",
+                  "object"
+                ],
+                "additionalProperties": false,
+                "required": [
+                  "value",
+                  "dueWeek",
+                  "basis"
+                ],
+                "properties": {
+                  "value": {
+                    "type": "number"
+                  },
+                  "dueWeek": {
+                    "type": "string"
+                  },
+                  "basis": {
+                    "type": "string"
+                  }
+                }
+              },
               "tier": {},
               "unit": {},
               "value": {}
@@ -316,10 +505,12 @@
             "required": [
               "id",
               "source"
-            ]
+            ],
+            "additionalProperties": false
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "navCoverage": {
       "type": [
@@ -357,13 +548,21 @@
             "null"
           ],
           "items": {
-            "type": [
-              "null",
-              "object"
-            ],
+            "type": "object",
+            "additionalProperties": false,
             "properties": {
-              "clicks": {},
-              "label": {}
+              "label": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "clicks": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              }
             }
           }
         },
@@ -373,7 +572,8 @@
             "number"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "operations": {
       "type": [
@@ -434,9 +634,12 @@
                 "array",
                 "null"
               ],
-              "items": {}
+              "items": {
+                "type": "string"
+              }
             },
             "violationsBySeverity": {
+              "description": "閾値違反の重大度ごとの件数 (キーは重大度)",
               "type": [
                 "null",
                 "object"
@@ -444,6 +647,9 @@
               "properties": {
                 "info": {},
                 "warning": {}
+              },
+              "additionalProperties": {
+                "type": "number"
               }
             },
             "workersErrorRate": {
@@ -457,8 +663,39 @@
                 "null",
                 "number"
               ]
+            },
+            "workersCpuMsPerDay": {
+              "type": [
+                "null",
+                "number"
+              ],
+              "description": "Worker 全体の CPU の 1 日平均 (ms)"
+            },
+            "workersCpuMonthlyUsd": {
+              "type": [
+                "null",
+                "number"
+              ],
+              "description": "Worker の CPU の月額の見込み (USD)"
+            },
+            "topRoutes": {
+              "description": "route 別 CPU の上位 (窓の中で最新の日)",
+              "type": [
+                "null",
+                "object"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "routes": {
+                  "type": "array"
+                }
+              }
             }
-          }
+          },
+          "additionalProperties": false
         },
         "improvements": {
           "type": [
@@ -470,21 +707,31 @@
               "type": [
                 "array",
                 "null"
-              ]
+              ],
+              "items": {
+                "type": "string"
+              }
             },
             "psi": {
               "type": [
                 "array",
                 "null"
-              ]
+              ],
+              "items": {
+                "type": "string"
+              }
             },
             "sns": {
               "type": [
                 "array",
                 "null"
-              ]
+              ],
+              "items": {
+                "type": "string"
+              }
             }
-          }
+          },
+          "additionalProperties": false
         },
         "psi": {
           "type": [
@@ -539,9 +786,33 @@
                 "array",
                 "null"
               ],
-              "items": {}
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "url": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "score": {
+                    "type": [
+                      "null",
+                      "number"
+                    ]
+                  },
+                  "lcpMs": {
+                    "type": [
+                      "null",
+                      "number"
+                    ]
+                  }
+                }
+              }
             }
-          }
+          },
+          "additionalProperties": false
         },
         "sns": {
           "type": [
@@ -549,13 +820,39 @@
             "object"
           ],
           "properties": {
-            "latestDate": {},
+            "latestDate": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
             "platforms": {
+              "description": "プラットフォームごとの集計 (キーはプラットフォーム名)",
               "type": [
                 "null",
                 "object"
               ],
-              "properties": {}
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "posts": {
+                    "type": "number"
+                  },
+                  "impressions": {
+                    "type": "number"
+                  },
+                  "reach": {
+                    "type": "number"
+                  },
+                  "views": {
+                    "type": "number"
+                  },
+                  "engagements": {
+                    "type": "number"
+                  }
+                }
+              }
             },
             "status": {
               "type": [
@@ -567,11 +864,37 @@
               "type": [
                 "array",
                 "null"
-              ]
+              ],
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "platform": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "contentKey": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "engagements": {
+                    "type": "number"
+                  },
+                  "impressions": {
+                    "type": "number"
+                  }
+                }
+              }
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "schemaVersion": {
       "type": [
@@ -586,44 +909,10 @@
       ],
       "properties": {
         "customDimensions": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "detail": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "status": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          }
+          "$ref": "#/definitions/sourceStatus"
         },
         "effectVerdicts": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "detail": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "status": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          }
+          "$ref": "#/definitions/sourceStatus"
         },
         "ga4": {
           "type": [
@@ -655,7 +944,8 @@
                 "string"
               ]
             }
-          }
+          },
+          "additionalProperties": false
         },
         "ga4Settings": {
           "type": [
@@ -679,31 +969,19 @@
               "type": [
                 "array",
                 "null"
-              ]
+              ],
+              "items": {
+                "type": "string"
+              }
             }
-          }
+          },
+          "additionalProperties": false
         },
         "improvements": {
-          "type": [
-            "null",
-            "object"
-          ],
-          "properties": {
-            "detail": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "status": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          }
+          "$ref": "#/definitions/sourceStatus"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "week": {
       "type": [
@@ -741,7 +1019,8 @@
                 "number"
               ]
             }
-          }
+          },
+          "additionalProperties": false
         },
         "qualifyingSessions": {
           "type": [
@@ -755,20 +1034,44 @@
             "null"
           ],
           "items": {
-            "type": [
-              "null",
-              "object"
-            ],
+            "type": "object",
+            "additionalProperties": false,
             "properties": {
-              "avgEngagementSec": {},
-              "desktopShare": {},
-              "landingPage": {},
-              "sessions": {},
-              "workdayHoursShare": {}
+              "landingPage": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "sessions": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "desktopShare": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "workdayHoursShare": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              },
+              "avgEngagementSec": {
+                "type": [
+                  "null",
+                  "number"
+                ]
+              }
             }
           }
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "required": [
@@ -785,5 +1088,6 @@
     "sources",
     "week",
     "workContext"
-  ]
+  ],
+  "additionalProperties": false
 }

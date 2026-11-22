@@ -7821,6 +7821,18 @@
       "r2Path": "blog/late-elderly-medical-expense-prefecture-gap/article.md"
     },
     {
+      "slug": "laundry-detergent-consumption-expenditure-prefecture-gap",
+      "title": "洗濯用洗剤の支出、県ごとの差はどこまで大きいか",
+      "status": "published",
+      "publishedAt": "2026-11-22",
+      "updatedAt": null,
+      "rankingKeys": [
+        "laundry-detergent-consumption-expenditure"
+      ],
+      "tagIds": [],
+      "r2Path": "blog/laundry-detergent-consumption-expenditure-prefecture-gap/article.md"
+    },
+    {
       "slug": "layer-hen-count-prefecture-gap",
       "title": "採卵鶏が最も多い千葉県、首都圏に近いからだけか",
       "status": "published",
@@ -9991,6 +10003,18 @@
       "r2Path": "blog/other-mushroom-consumption-expenditure-prefecture-gap/article.md"
     },
     {
+      "slug": "other-mushroom-consumption-quantity-prefecture-gap",
+      "title": "他のきのこ消費量は最大3.54倍の差?",
+      "status": "published",
+      "publishedAt": "2026-11-22",
+      "updatedAt": null,
+      "rankingKeys": [
+        "other-mushroom-consumption-quantity"
+      ],
+      "tagIds": [],
+      "r2Path": "blog/other-mushroom-consumption-quantity-prefecture-gap/article.md"
+    },
+    {
       "slug": "other-noodle-dining-consumption-expenditure-prefecture-gap",
       "title": "他の麺類の外食支出が多いのはどの県か？",
       "status": "published",
@@ -11518,6 +11542,18 @@
         "tag:green-transformation"
       ],
       "r2Path": "blog/renewable-energy-regional-gap/article.md"
+    },
+    {
+      "slug": "rent-group-consumption-expenditure-prefecture-gap",
+      "title": "家賃地代の支出、最多の沖縄県は最少の三重県の約16倍？",
+      "status": "published",
+      "publishedAt": "2026-11-22",
+      "updatedAt": null,
+      "rankingKeys": [
+        "rent-group-consumption-expenditure"
+      ],
+      "tagIds": [],
+      "r2Path": "blog/rent-group-consumption-expenditure-prefecture-gap/article.md"
     },
     {
       "slug": "retail-establishments-by-prefecture",

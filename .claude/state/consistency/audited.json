@@ -1,15 +1,11 @@
 {
-  "hash": "882f35b8757bf0e8782fc1582601acef40cd084078174d4896d40897ac3dea2a",
-  "audited_at": "2026-11-20T14:21:31",
+  "hash": "1a1a746fd9718ab2a59267eb2212f9bb17201c918825cad76b68c2f472f22834",
+  "audited_at": "2026-11-21T23:15:28",
   "files": [
-    ".claude/scripts/blog/critic-findings-digest.mjs",
-    ".claude/scripts/data/lib/year-coverage-backlog.mjs",
-    ".claude/scripts/data/sync-year-coverage-backlog.mjs",
+    ".claude/scripts/estat/enumerate-ssds-indicators.mjs",
     ".claude/scripts/gsc/build-coverage-queue.mjs",
-    ".claude/scripts/gsc/export-coverage-playwright.mjs",
-    ".claude/scripts/gsc/sync-coverage-backlog.mjs",
-    ".claude/scripts/gsc/url-inspection-daily.cjs",
-    ".claude/scripts/lib/__tests__/gsc-coverage-wiring.test.mjs",
-    ".claude/scripts/metrics/lib/cycle-health.mjs"
+    ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
+    ".claude/scripts/lib/prune-state-snapshots.mjs",
+    ".claude/scripts/note/catalog/generate-note-catalog.ts"
   ]
 }

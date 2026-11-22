@@ -66,7 +66,7 @@ model: sonnet
 
 - note.com 記事（note-manager）
 - SNS キャプション・動画（sns-producer, sns-renderer）
-- DB 操作（db-schema-manager / data-ingester / snapshot-exporter）
+- データ操作（data-ingester / snapshot-exporter）
 - ブラウザ自動操作（browser-publisher）
 
 ## 出力先

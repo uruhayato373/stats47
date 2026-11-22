@@ -115,7 +115,7 @@
       "isOfficial": true,
       "status": "verified",
       "lastVerifiedAt": "2026-07-18",
-      "notes": "dataset は本カタログに複製しない: 稼働メタ SSOT = 台帳 geo.ksj-datasets、候補 superset = packages/database/seed/ksj-catalog.json (126)。利用許諾はデータ別 (CC-BY-4.0 / 非商用 混在)"
+      "notes": "dataset は本カタログに複製しない: 稼働メタ SSOT = 台帳 geo.ksj-datasets、候補 superset = 台帳 geo.ksj-catalog (data/geo/ksj/catalog.json・126 件)。利用許諾はデータ別 (CC-BY-4.0 / 非商用 混在)"
     },
     {
       "id": "mlit-plateau",

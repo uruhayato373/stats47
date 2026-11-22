@@ -15,9 +15,6 @@ export {
     findGeoshapeDataDir, getPrefectureSvgDir, getPrefectureTopojsonPath
 } from "./geoshape/utils/geoshape-data-dir";
 
-// export 関連は canvas/tokml に依存するため、webpack バンドル対象の server.ts からは除外。
-// 直接 @stats47/gis/export からインポートすること。
-
 export { getGisDataSource } from "./config";
 export type { GisDataSource } from "./config";
 

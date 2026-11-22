@@ -160,5 +160,5 @@ chmod +x .git/hooks/pre-commit
 
 ## 関連ドキュメント
 
-- **データベース**: [packages/database/README.md](../../../packages/database/README.md)
+- **データの置き場 (完全DBレス)**: [.claude/rules/data-storage.md](../../../.claude/rules/data-storage.md)
 - **メタデータ配置ルール**: [apps/web/src/lib/metadata/README.md](../src/lib/metadata/README.md)

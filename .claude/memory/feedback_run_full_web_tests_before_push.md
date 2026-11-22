@@ -15,3 +15,5 @@ apps/web の部品 (例 `RankedKpiGrid`) の表記や route の依存 (例 ダ�
 **How to apply:** 表記・関数の呼び出しを変えたら、旧表記の文字列や mock 対象の import 元 (`@stats47/ranking/server` 等) を `grep -rn` で探し、最後に全件を回す。このマシンでは `eslint-dependency-compatibility.test.ts` の 1 件が環境由来で落ちる (CI では通る) ので、それ以外が 0 件かで判断する。関連: [[develop-had-no-ci-gate]]
 
 **別ブランチの取り込みも同じ (2026-10-25)**: Codex の 68 コミットを develop へマージしたとき、変更ファイルが見えた admin の content-operations テスト 1 本だけを回して push し、admin の別テスト 2 件 (content route の fixture に新しい必須台帳 `data/note/cover-assets.json` が無い / M1 note の本文件数の期待値) が main 行き PR の Unit Tests で落ちた。取り込みの後は `git diff --name-only` に現れた workspace (apps/admin・packages/* 等) ごとに vitest を全件回す。
+
+**`packages/ops` は vitest ではない (2026-11-22)**: ops のテストは `node --test` (`npm run test --workspace=@stats47/ops`、約 3,000 件) で、`npm run test:packages` (vitest の `@stats47/*`) には入らない。node_modules の置き場を変えたとき (lock の入れ子を root へまとめた) に `test:packages` だけを回し、ops の `check-next-support-window.test.cjs` (OpenNext の helper.js を決まったパスで読む) が落ちるのを見逃して commit した。依存・lock・ops を触ったら ops のテストも回す。node_modules の中を決まったパスで読むコードは、npm の置き方が変わると壊れる (`createRequire` で解決するのが確実。`.github/scripts/check-build-preconditions.mjs` がその形)。

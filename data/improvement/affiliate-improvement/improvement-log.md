@@ -399,3 +399,25 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - **再現コマンド**: `awk -F, '$2==7 && ($4=="ranking-incontent"||$4=="ranking-native"||$4=="ranking-sidebar"||$4=="rakuten-native") && ($1=="2026-10-03"||$1=="2026-10-10"||$1=="2026-10-17"||$1=="2026-10-24"){i[$1]+=$5;c+=$6} END{for(k in i)print k,i[k];print "click",c}' data/affiliate/ga4-affiliate-history.csv`
 - **未確定**: [仮説] `ranking-incontent` が 10-17 週に消えたのは枠の配信条件が変わったため (履歴: 2026-08-16 配線、08-27 の ranking UI 統一)。検証: `git log -S"ranking-incontent" -- apps packages` と本番 ranking ページの描画。原因は未確認で、backlog カード `AFF-RANKING-SLOT-DECISION-01` に引き継ぐ。
 - **処置**: improvements.md から行を削除し、backlog (🟣 判断待ち) へ意思決定カードを起票。
+
+---
+
+## PRODUCT-REFERRAL-OBS-01 EXP-013 商品送客の6週観測 (2026-11-22 登録・backlog PRODUCT-REFERRAL-MEASURE-01 から引き継ぎ)
+
+- **デプロイ日**: 2026-11-14 (計測コード #1272。実験台帳 EXP-013 の `started_at` 2026-11-14T10:36:29Z)
+- **想定効果**: なし。`[target:]` を付けない理由: 売上・クリックの前例が無く (基準は Kindle 案内が64記事の閲覧3,901にクリック1、note データ集の通算売上0)、計算式も作れない。推測で数値を作らない。閾値エンジンの対象外で手動判定
+- **判定基準 (実験台帳 `target_delta` で先に固定)**: 6週の表示が群ごとに300未満は判定不能 (0 にしない)。クリック率 (product_click ÷ product_impression) 1%以上は案内が機能、0.3%未満は見せ方を変える、その間は続ける。注文は販売台帳の月次 (窓をはみ出す月は判定不能) と note データ集5本の売上
+- **検証コマンド**: `ls data/ga4/snapshots/` の最新週で `product-referrals.csv` の placement × product_id 別 product_impression・product_click を読む。注文は `npm run products:sales --workspace=@stats47/product-factory -- validate` と `data/products/sales-ledger.json`、note は `data/note/dashboard/latest.json`
+- **注意**: 2026-11-15 に群外の記事 assembly-answer-chatgpt-5steps へ P-04 の案内を足した。集計は記事パスを持たないので、判定時に pagePath で分けるか群に含めたと明記する。GA4 の dimension 登録前の週と KDP の取得失敗の月は判定不能
+- **期日**: 2026-12-26 (実験台帳 `next_check_date`)
+- **期日に動いていなければ**: [仮説] (a) 案内が読者の視野に入っていない (表示率が低い)、(b) 置き場所と商品の関連が薄い。次の手は置き場所別の表示・クリックを比べ、残す・直す・外すを backlog に起票する。表示・クリック・注文、または判定不能とその理由を EXP-013 の `result` に書いてから、この行を削除する
+
+---
+
+## KDP-LISTING-COPY-OBS-01 KDP 紹介文・キーワード改善の効果 (2026-11-22 登録・backlog KDP-LISTING-COPY-01 から引き継ぎ)
+
+- **デプロイ日**: 2026-11-13 (【データの範囲】【全県の値を表で収録している指標】を足した版を KDP へ提出。2026-11-06 の変更だけの効果は判定できない)
+- **想定効果**: なし。`[target:]` を付けない理由: 基準は検索の1回の観測 (2026-11-06 は30語中5語が1ページ目、11-14 まで計4回の記録) と販売2冊で、変化量を導く過去事例も計算式も無い。KDP の検索が何を見るかの公式の仕様も未確認。[仮説] 紹介文とキーワードを直すと検索の露出と購入が増える。閾値エンジンの対象外で手動判定
+- **検証コマンド**: `ls data/products/kdp-search-ranks/` の 2026-12-11 以降の記録と 2026-11-14.json (39語・`rows[].ranks`) を語ごとに比べる。注文は `data/products/sales-ledger.json` の 2026-11-13 以降4週
+- **期日**: 2026-12-11 (比較はこの日以降。注文は4週分が揃ってから)
+- **期日に動いていなければ**: 順位が基準より上がらず注文も増えなければ、(a) キーワード7枠の差し替え、(b) 紹介文の冒頭の訴求を読者の課題 (`design.readerProblem`) から書き直す、の順に backlog へ起票する。KDP への反映が `reflected` になっていない冊は比較から外し理由を書く。標本が小さく判定不能なら、その理由を書いて期日を延ばす

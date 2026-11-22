@@ -5,7 +5,7 @@ metadata:
   type: feedback
 ---
 
-2026-10-11 の簡素化監査で「W40 GSC クリックの 97% が blog/ranking/areas/municipalities、SNS 由来セッション 0.4%、商品売上 ¥0」を根拠に 4 系統の停止を提案したが、オーナーは SNS・Remotion を「残す」と明言し、テーマ/Geo/調査と商品ファクトリーも継続を選んだ。止めると決めた「残置パッケージ」も、実測すると area・category・station-passengers・migration-flow は web と Remotion が使っており、apps/ges は SNS 動画の道具、packages/database は web のテスト基盤 (CLAUDE.md が残置可と明記) で、消せるものは無かった。
+2026-10-11 の簡素化監査で「W40 GSC クリックの 97% が blog/ranking/areas/municipalities、SNS 由来セッション 0.4%、商品売上 ¥0」を根拠に 4 系統の停止を提案したが、オーナーは SNS・Remotion を「残す」と明言し、テーマ/Geo/調査と商品ファクトリーも継続を選んだ。止めると決めた「残置パッケージ」も、実測すると area・category・station-passengers・migration-flow は web と Remotion が使っており、apps/ges は SNS 動画の道具で、消せるものは無かった。packages/database は当時「web のテスト基盤」と見たが、2026-11-21 に実体を調べ直すと web の mock は存在しない機能を指しており、TS の import は 0 件だったので、オーナー指示でローカル SQLite 層ごと削除した (残置の判断は、名目の用途ではなく実際の読み手で確かめる)。
 
 **Why:** 流入シェアや直近の収益は計測が止まっている系統ほど小さく出る (商品は認証切れで判定不能、SNS は 10K 戦略の途中)。オーナーは系統の継続を短期の数字だけで決めない。
 

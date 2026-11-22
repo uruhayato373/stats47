@@ -45,7 +45,7 @@ export function parseSourceYear(value: unknown): number | null {
   return Number.isInteger(year) && year > 0 ? year : null;
 }
 
-export type SegmentAssignMethod = "polygon" | "coastline";
+type SegmentAssignMethod = "polygon" | "coastline";
 
 export interface SegmentAssignment {
   readonly prefCode: string;
@@ -199,9 +199,9 @@ export function maxSeriesDiffKm(a: InfraLengthSeries, b: InfraLengthSeries): num
 // とし、どちらでもない記録の区切りは「変更」(地図では強調しない) とする。
 
 /** 線が「同じ場所」とみなす距離 (km)。原典の座標の精度と、版ごとの細かな引き直しを吸収する */
-export const SAME_PLACE_TOLERANCE_KM = 0.1;
+const SAME_PLACE_TOLERANCE_KM = 0.1;
 /** 延伸・短縮と扱う最小の長さ (km)。これより短い差は線の引き直しとみなす */
-export const MIN_TRANSITION_KM = 0.5;
+const MIN_TRANSITION_KM = 0.5;
 
 export interface TransitionRecord {
   readonly start: number;
@@ -211,7 +211,7 @@ export interface TransitionRecord {
   readonly lines: readonly (readonly Position[])[];
 }
 
-export type TransitionKind = "open" | "extend" | "close" | "shorten";
+type TransitionKind = "open" | "extend" | "close" | "shorten";
 
 export interface TransitionEvent {
   readonly recordIndex: number;
@@ -226,7 +226,7 @@ export interface TransitionEvent {
 const KM_PER_DEGREE = 111.2;
 
 /** 点から線群への最短距離 (km)。経度は緯度の cos で縮めた平面近似 (数百 m の判定に十分) */
-export function distanceToLinesKm(point: Position, lines: readonly (readonly Position[])[]): number {
+function distanceToLinesKm(point: Position, lines: readonly (readonly Position[])[]): number {
   const cosLat = Math.cos(point[1] * DEG_TO_RAD);
   let best = Infinity;
   for (const line of lines) {
@@ -245,7 +245,7 @@ export function distanceToLinesKm(point: Position, lines: readonly (readonly Pos
 }
 
 /** lines のうち、others から tolerance を超えて離れた線分をつないだ部分線と、その長さ */
-export function linesAwayFrom(
+function linesAwayFrom(
   lines: readonly (readonly Position[])[],
   others: readonly (readonly Position[])[],
   toleranceKm = SAME_PLACE_TOLERANCE_KM,

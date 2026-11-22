@@ -1,13 +1,13 @@
 ---
 name: data-ingester
 domain: data
-description: TS-config (packages/data-configs) を SSOT に、e-Stat / MLIT から R2 (`app/stats/<metric>/*.json`) へ観測値を直接投入する agent。D1 metrics cache の sync も担当。
+description: TS-config (packages/data-configs) を SSOT に、e-Stat / MLIT から R2 (`app/stats/<metric>/*.json`) へ観測値を直接投入する agent。
 model: sonnet
 ---
 
 # Data Ingester Agent
 
-estat-researcher が確認した統計表を **R2 namespace に直接投入** する書き込み専門 agent。TS-config (`data/metrics/<key>.ts`) を入口に、e-Stat / MLIT から fetch して `app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json` を生成する。D1 `metrics` テーブルへの cache 同期も担当。
+estat-researcher が確認した統計表を **R2 namespace に直接投入** する書き込み専門 agent。TS-config (`data/metrics/<key>.ts`) を入口に、e-Stat / MLIT から fetch して `app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json` を生成する。
 
 Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テーブルへ書き込まない。
 
@@ -16,8 +16,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - **取り込む前に**: 既存の e-Stat カタログ (R2 `estat-catalog/`) と表の写し (非公開 R2 `estat-tables/`・台帳 `data/estat/table-snapshots.json`・`estat-table-snapshot.ts --check-updates`) を先に引く。置き場は `npm run check-datasets -- --er` と `npm run r2:classes` で確かめる。
 
 - TS-config 駆動の R2 観測値投入 (`/page-data-batch`)
-- metrics ビルドキャッシュの同期 (`/sync-metrics-cache`、TS registry が SSOT)
-- カバレッジ / FK 整合性検証 (`/verify-d1-integrity`、ビルドキャッシュ対象)
+- 観測値・カバレッジの確認 (R2 の `app/stats/<metric>/values.json` を読む。ローカル SQLite の整合性検証は 2026-11-21 に削除)
 
 > page_components は完全DBレス (doc12 Phase E) で **git TS SSOT** `apps/web/scripts/data/page-components/` に移行済。
 > D1 投入 (`/populate-component-data`) は廃止。編集は JSON 直編集 + `export-page-components-snapshot.ts`。
@@ -27,22 +26,19 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 | スキル | 用途 |
 |---|---|
 | `/page-data-batch` | TS-config registry を walk → e-Stat → R2 直行 |
-| `/sync-metrics-cache` | TS-config → metrics ビルドキャッシュ差分 sync |
-| `/verify-d1-integrity` | FK / 47 県カバレッジ / migration_flow net 一致 |
 | `/verify-value-distribution` | 疑わしい値分布 (ゼロ過多・県数不足・負値) を一次情報で検証し profile に記録 |
 
 ## 担当外
 
 - e-Stat / MLIT 探索 → `estat-researcher` に委譲
-- スキーマ変更 / migration → `db-schema-manager` に委譲
-- R2 snapshot 派生 (D1 → snapshot) → `snapshot-exporter` に委譲
+- R2 snapshot 派生 (R2 観測値 → snapshot) → `snapshot-exporter` に委譲
 - R2 push (`.local/r2/` → 本番 R2) → `r2-publisher` に委譲
 - **MLIT KSJ GIS データ (取得・メタ管理) → `gis-pipeline-runner` (実行) / `gis-curator` (SSOT) に委譲** (2026-06-21 分離)
 - AI コンテンツ生成 → 別 agent (現状未分割、暫定 article-writer / chart-author)
 
 ## 必読 rules
 
-- `packages/database/README.md` — TS-config = SSOT / R2 = 値の SSOT / D1 = cache
+- `.claude/rules/data-storage.md` — TS-config = 指標定義の SSOT / R2 = 値の SSOT (完全DBレス。ローカル SQLite 層は 2026-11-21 に削除)
 - `.claude/rules/estat-api.md` — 全年度取得 + メモリフィルタ、5 桁地域コード
 - `.claude/rules/metric-config-standards.md` — MetricConfig フィールド役割 / category 17 軸 / 量産後 validate:config
 - `.claude/rules/unit-semantics-standards.md` — **単位 (円/千円/％/人口10万対/月額年額) の解釈・換算の正典を所有する**。
@@ -61,15 +57,13 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - `.claude/rules/data-provenance-standards.md` — **非 e-Stat (手動/PDF/xlsx/HTML) 投入時は provenance 9点セット必須**。`fetcherKey:"manual"` は config.source.config.provenance に {pdfUrl/url, accessedAt, extraction, verification, restore} を記録 (欠落は `validate:config` の `[provenance]` error)。手本 `ambulance-hospital-arrival-time.ts`。出典なし (config 空) 投入は禁止
 - `.claude/rules/r2-storage-design.md` — `app/stats/` namespace 設計
 - `.claude/rules/branch-workflow.md` — DB 変更後フロー (R2 経由本番反映)
-- `.claude/rules/local-environment.md` — ローカル D1 パス固定値
+- `.claude/rules/local-environment.md` — モノレポ構成・頻用コマンド
 
 ## 触る state / files
 
 - `.local/r2/app/stats/<metric>/*.json` (write)
 - `data/metrics/*.ts` (新規 metric 追加時 write)
 - `packages/data-configs/src/registry.ts` (auto-generated, `npm run build:registry --workspace=packages/data-configs`)
-- ローカル D1 `metrics` テーブル (sync-metrics-cache 時のみ write)
-- `apps/web/scripts/seed-*` — seed スクリプト (read)
 - `data/estat/` の市区町村分 — estat-researcher の出力を read
 - `data/metrics/quality/verified-value-profiles.ts` (**単一 writer**) — 値分布の検証台帳。
   根拠は estat-researcher に調べさせてよいが、**書き込むのは本 agent だけ**
@@ -77,10 +71,8 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 
 ## File Boundary (並行衝突回避)
 
-- **D1 への並列 write は禁止** (better-sqlite3 単一プロセス前提)
-- 同 D1 への ingester / db-schema-manager 同時起動 NG (task-router で排他制御)
 - R2 への並列 write は metric 単位で並行可 (`/page-data-batch --concurrency N`)
-- 並行起動可能 agent: estat-researcher (read-only)、 snapshot-exporter (D1 read のみ、write は `.local/r2/app/`)
+- 並行起動可能 agent: estat-researcher (read-only)、 snapshot-exporter (write は `.local/r2/app/`)
 - `verified-value-profiles.ts` への並列 write は禁止 (単一 writer)。判断が付かない metric は
   **profile を書かず unverified のまま残す** — 推測で埋めると検証方式そのものが無意味になる
 
@@ -107,7 +99,7 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
   **量産・編集後は再生成すること**: `npx tsx .claude/scripts/sns/build-discovery-index.ts`
   (索引は git TS 由来の再生成キャッシュ = SSOT ではない。find-metrics 側も registry.ts より古い索引を警告する)
 - **2026-05-27 marriages/divorces 2023-2024 喪失事故**: DELETE+INSERT で他ソース年度を一掃。UPSERT 必須化で再発防止 (詳細: auto memory `project_estat_backfill_lessons.md`)
-- **note_articles テーブル消失 (2026-03)**: schema delete + migration reset の合わせ技で消失。本 agent は schema 操作不可、 `db-schema-manager` 経由で行うこと
+- **note_articles テーブル消失 (2026-03)**: schema delete + migration reset の合わせ技で消失。(Drizzle schema・migration は 2026-11-21 に packages/database ごと削除。台帳は `data/` の JSON が正本)
 - **isActive:true ≠ 本番公開 (2026-06-03)**: metric を `isActive:true` にしても ranking は本番公開されない。
   本番は `KNOWN_RANKING_KEYS` / R2 `app/ranking-items/all.json` 等の派生リストと整合して初めて 200 を返す
   (middleware は `isGone || !isKnown` で 410)。公開は config 起点の多段再生成 (generate-ranking-items 配線 +
@@ -138,4 +130,4 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 - prose / section header / 前置き文 はすべて禁止
 
 例外: **Template C** (report) を使う場面
-- カバレッジ検証 (`/verify-d1-integrity`) の結果 — 47 県中 N 県欠損の原因仮説と次手
+- カバレッジ検証 (R2 `app/stats/<metric>/values.json` の確認) の結果 — 47 県中 N 県欠損の原因仮説と次手

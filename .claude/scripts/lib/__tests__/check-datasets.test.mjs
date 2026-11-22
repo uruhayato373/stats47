@@ -538,7 +538,8 @@ test("台帳参照が宣言されている (投稿→指標・販売→出品・
   const refsOf = (id) => DATASETS.find((d) => d.id === id)?.refs ?? [];
   assert.ok(refsOf("sns.posts").some((r) => r.field === "posts[].metric_keys" && r.to === "registry:metrics"));
   assert.ok(refsOf("sns.posts").some((r) => r.field === "posts[].parent_post_id" && r.to === "sns.posts" && !r.severity));
-  assert.deepEqual(refsOf("sales.ledger").map((r) => r.to).sort(), ["kdp.listings"]);
+  // 観測は出品 (kdp.listings) を、集計の範囲は出していない本も含むので本のカタログ (products.kindle-books) を指す (2026-11-22)
+  assert.deepEqual(refsOf("sales.ledger").map((r) => r.to).sort(), ["kdp.listings", "products.kindle-books"]);
   assert.ok(refsOf("sales.ledger").every((r) => !r.severity));
   assert.ok(refsOf("products.note-pack-deliveries").some((r) => r.to === "products.packs" && !r.severity));
   assert.ok(refsOf("affiliate.ads").some((r) => r.field === "ads[].experimentId" && r.to === "affiliate.experiments" && !r.severity));

@@ -41,7 +41,7 @@ npm run dev --workspace web
 |---|---|
 | プロジェクト概要・要件 | `docs/00_プロジェクト管理/01_プロジェクト定義.md` |
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
-| DB 操作・スキーマ | `packages/database/README.md` |
+| データの置き場 (完全DBレス) | `.claude/rules/data-storage.md` |
 | CI/CD・デプロイ | `.github/workflows/README.md` |
 
 ## ライセンス

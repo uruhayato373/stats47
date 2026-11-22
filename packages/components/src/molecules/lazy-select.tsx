@@ -17,7 +17,7 @@ import * as React from "react";
 import { cn } from "../lib/cn";
 
 /** モジュールを 1 度だけ動的 import し、読み終わりを購読できるようにする。 */
-export function createLazyModule<T>(loader: () => Promise<T>) {
+function createLazyModule<T>(loader: () => Promise<T>) {
   let request: Promise<void> | null = null;
   let loaded: T | null = null;
   const listeners = new Set<() => void>();

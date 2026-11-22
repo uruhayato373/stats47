@@ -843,6 +843,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:other-mushroom-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:other-mushroom-consumption-quantity",
           "kind": "ranking"
         }

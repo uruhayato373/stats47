@@ -23,6 +23,7 @@ import {
   JAPAN_CLIP,
   loadPrefectureGeometry,
 } from '../src/maps/prefecture-geometry';
+import { fixtureBoundary } from './helpers/synthetic-geometry';
 import { LICENSE_IDS } from '../src/catalog/licenses';
 
 describe('prefectures master', () => {
@@ -162,9 +163,10 @@ describe('license text', () => {
   });
 });
 
-describe('prefecture geometry', () => {
+// 本物の境界を間引いた fixture で形を検査する (CI でも動く。生成物そのものの検査は build-prefecture-boundary.mts)。
+describe('prefecture geometry (e-Stat 境界の fixture)', () => {
   it('decodes 47 prefecture shapes with rings inside the projected box', () => {
-    const geo = loadPrefectureGeometry(1000);
+    const geo = loadPrefectureGeometry(1000, undefined, { boundary: fixtureBoundary() });
     expect(geo.shapes.length).toBe(47);
     expect(geo.width).toBe(1000);
     expect(geo.height).toBeGreaterThan(0);
@@ -189,7 +191,7 @@ describe('prefecture geometry', () => {
   //   商品の日本地図がアスペクト比 0.079 の平たい帯になっていた (正しくは約 1.12)。
   //   形が日本に見えるかは縦横比でしか機械判定できないので、ここで固定する。
   it('本土+沖縄の縦横比が実際の日本と一致する (投影の単位ずれを防ぐ)', () => {
-    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP);
+    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP, { boundary: fixtureBoundary() });
     const aspect = geo.height / geo.width;
     // 経度 122-146 / 緯度 23-46 の Mercator 比は約 1.18。実データの端は少し内側なので幅を持たせる。
     expect(aspect).toBeGreaterThan(1.0);
@@ -197,7 +199,7 @@ describe('prefecture geometry', () => {
   });
 
   it('北海道が九州より北にあり、沖縄が最南にある (南北の向きが反転していない)', () => {
-    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP);
+    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP, { boundary: fixtureBoundary() });
     const midY = (code5: string): number => {
       const s = geo.shapes.find((x) => x.code5 === code5);
       if (!s) throw new Error(`${code5} が無い`);
@@ -210,7 +212,7 @@ describe('prefecture geometry', () => {
   });
 
   it('東京が福岡より東にある (東西の向きが反転していない)', () => {
-    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP);
+    const geo = loadPrefectureGeometry(1000, JAPAN_CLIP, { boundary: fixtureBoundary() });
     const midX = (code5: string): number => {
       const s = geo.shapes.find((x) => x.code5 === code5);
       if (!s) throw new Error(`${code5} が無い`);

@@ -14,7 +14,7 @@ co_agents: [gsc-analyst]
 stats47.jp の各ページの Core Web Vitals を計測し、`data/psi/` に蓄積する。
 閾値は `.claude/skills/analytics/performance-improvement/budgets.json` を参照。
 
-> **2026-06-21 PSI 統合**。旧版は Lighthouse CLI（`packages/database/scripts/lighthouse-check.ts`）で計測し
+> **2026-06-21 PSI 統合**。旧版は Lighthouse CLI（旧 database パッケージの `lighthouse-check.ts`、削除済）で計測し
 > `performance-improvement/snapshots/*/metrics.csv` に蓄積していたが、当該スクリプトは完全DBレス移行で削除され、
 > その CSV を書く writer が無くなっていた。CWV 監視は **PSI 日次ワークフロー**（`.claude/scripts/psi/*` +
 > `data/psi/` + `fetch-metrics-weekly.yml` の psi job）に一本化済（Lighthouse Lab data は廃止）。本スキルは

@@ -451,7 +451,7 @@
     },
     {
       "id": "P-14",
-      "title": "家計・消費データパック（47都道府県）",
+      "title": "家計・消費データパック（47県庁所在市）",
       "kind": "pack",
       "catalogStatus": "cataloged",
       "scope": "家計調査の消費支出・消費数量を品目横断でまとめて把握・比較する",
@@ -3040,7 +3040,7 @@
     {
       "id": "P-14",
       "theme": "household-consumption",
-      "name": "家計・消費データパック（47都道府県）",
+      "name": "家計・消費データパック（47県庁所在市）",
       "catalogStatus": "cataloged",
       "buildStatus": "invalid"
     }

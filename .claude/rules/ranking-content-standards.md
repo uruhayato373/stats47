@@ -272,7 +272,7 @@ quarantine は持たない。
 
 1. `build-ai-content-queue.mjs --scope all` で R2 から対象を再導出する。
 2. 極小の structured generateContent で preflight する。ListModels は失敗時の候補提示にしか使わない。
-3. author は response schema で FAQ 5 件・観測地域全件を固定する。既存の決定的監査に落ちた候補は公開しない。
+3. author は response schema で FAQ 5 件を固定する。県別解説の件数・順位は schema に持たせず (47 件の制約付き配列は 2026-11-22 まで HTTP 400 だった)、`audit-ai-content.mjs` の blocker が観測地域全件を検査する。既存の決定的監査に落ちた候補は公開しない。
 4. 生成と別の Gemini リクエストが意味品質を `PASS | REVISE` で審査する。`REVISE` は指摘付きで最大 1 回だけ全体再生成する。
 5. PASS 分だけ outbox へ書き、develop へコミットする。CI からの push は後続 workflow を発火しないため、`publish-ai-content.yml` を明示 dispatch し、run 成功まで待つ。
 6. 件数・通過率・author/critic リクエスト数・トークン数を `data/ai-content/` へ記録する。生成本文と prompt は記録しない。

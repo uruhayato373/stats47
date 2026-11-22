@@ -140,21 +140,21 @@
       "firstFailedAt": "2026-11-20"
     },
     "icecream-consumption-expenditure": {
-      "failCount": 2,
+      "failCount": 3,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-21",
+      "lastFailedAt": "2026-11-22",
       "firstFailedAt": "2026-11-20"
     },
     "bread-consumption-quantity": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-21",
+      "lastFailedAt": "2026-11-22",
       "firstFailedAt": "2026-11-21"
     },
     "annual-sales-amount": {
-      "failCount": 1,
+      "failCount": 2,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-21",
+      "lastFailedAt": "2026-11-22",
       "firstFailedAt": "2026-11-21"
     }
   }

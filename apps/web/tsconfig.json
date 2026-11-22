@@ -83,12 +83,6 @@
       "@stats47/ranking/*": [
         "../../packages/ranking/src/*"
       ],
-      "@stats47/database": [
-        "../../packages/database/src"
-      ],
-      "@stats47/database/*": [
-        "../../packages/database/src/*"
-      ],
       "@stats47/blog": [
         "../../packages/blog/src"
       ],

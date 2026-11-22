@@ -39,8 +39,10 @@ export function ThemeAirportTrafficClient({
         title="空港別の旅客と貨物"
         description={`2025年（暦年・確定値） · ${area} · ${rows.length}空港 · 旅客：人、貨物：トン`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
+            annotation={snapshot.notes}
             source={AIRPORT_TRAFFIC_SOURCE.title}
             sourceLink={AIRPORT_TRAFFIC_SOURCE.files[0].url}
           />
@@ -118,11 +120,6 @@ export function ThemeAirportTrafficClient({
             />
           </>
         )}
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {snapshot.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
       </ChartPanel>
     </div>
   );

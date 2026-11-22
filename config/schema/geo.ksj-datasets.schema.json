@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "国土数値情報 (KSJ) の登録データセット",
-  "description": "data/geo/ksj/datasets.json の形状契約。stats47 が稼働対象とする KSJ データセットの純メタ (名前・区分・形状・範囲・利用条件・ranking 定義) の単一の真実源。datasets のキーが dataId で、記録の中には dataId を書かない (読み込み口 packages/gis/src/mlit-ksj/datasets.ts がキーから戻す)。ダウンロードの技術設定 (downloadUrlPattern・propertyMap・simplifyOptions) は packages/gis/src/mlit-ksj/registry.ts が持つ。候補メタの superset は packages/database/seed/ksj-catalog.json。取り込みの結果 (r2Version・fileCount・convertedAt・status) は pipeline 実行時に使い捨て SQLite へ書かれる ephemeral で、ここには持たない。nameEn は KSJ API が出さないので持たない。新規データセットはここに 1 件足し、registry.ts に技術設定を足してから seed-from-registry.ts で再 seed する。datasets.*.license は geo.ksj-license-policy の区分、stats47Category と rankingConfig[].categoryKey は categories.master のキー、rankingConfig[].rankingKey は指標のキー (config/datasets.mjs の refs が検査する)。",
+  "description": "data/geo/ksj/datasets.json の形状契約。stats47 が稼働対象とする KSJ データセットの純メタ (名前・区分・形状・範囲・利用条件・ranking 定義) の単一の真実源。datasets のキーが dataId で、記録の中には dataId を書かない (読み込み口 packages/gis/src/mlit-ksj/datasets.ts がキーから戻す)。ダウンロードの技術設定 (downloadUrlPattern・propertyMap・simplifyOptions) は packages/gis/src/mlit-ksj/registry.ts が持つ。候補メタの superset は台帳 geo.ksj-catalog (data/geo/ksj/catalog.json)。取り込みの結果 (r2Version・fileCount・convertedAt・status) は pipeline 実行時に使い捨て SQLite へ書かれる ephemeral で、ここには持たない。nameEn は KSJ API が出さないので持たない。新規データセットはここに 1 件足し、registry.ts に技術設定を足してから run-pipeline.ts を実行する。datasets.*.license は geo.ksj-license-policy の区分、stats47Category と rankingConfig[].categoryKey は categories.master のキー、rankingConfig[].rankingKey は指標のキー (config/datasets.mjs の refs が検査する)。",
   "type": "object",
   "required": ["datasets", "notes"],
   "additionalProperties": false,

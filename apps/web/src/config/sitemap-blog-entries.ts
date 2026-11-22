@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-11-20
- * 件数: blog 853 / tag 70 / survey 149
+ * 最終生成日: 2026-11-22
+ * 件数: blog 856 / tag 70 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -462,6 +462,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "landslide-special-warning-zone-count-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "landslide-warning-zone-count-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "late-elderly-medical-expense-prefecture-gap", lastModified: "2026-08-29" },
+  { slug: "laundry-detergent-consumption-expenditure-prefecture-gap", lastModified: "2026-11-22" },
   { slug: "layer-hen-count-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "lettuce-consumption-quantity-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "library-books-prefecture-gap", lastModified: "2026-06-10" },
@@ -581,6 +582,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "other-meat-consumption-quantity-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "other-mens-shirt-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
   { slug: "other-mushroom-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
+  { slug: "other-mushroom-consumption-quantity-prefecture-gap", lastModified: "2026-11-22" },
   { slug: "other-noodle-dining-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
   { slug: "other-processed-meat-consumption-expenditure-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "other-stationery-consumption-expenditure-prefecture-gap", lastModified: "2026-10-28" },
@@ -679,6 +681,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "regular-cash-salary-male-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "remittances-group-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
   { slug: "renewable-energy-regional-gap", lastModified: "2026-03-06" },
+  { slug: "rent-group-consumption-expenditure-prefecture-gap", lastModified: "2026-11-22" },
   { slug: "retail-establishments-by-prefecture", lastModified: "2026-06-14" },
   { slug: "retail-sales-amount-by-prefecture-prefecture-gap", lastModified: "2026-09-02" },
   { slug: "retail-store-count-vs-nurses-per-100k-population", lastModified: "2026-08-13" },

@@ -24,6 +24,51 @@
     "statsDataId": {
       "type": "string",
       "pattern": "^\\d{10}$"
+    },
+    "countByStatus": {
+      "description": "採否ごとの件数 (キーは採否)",
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/definitions/status"
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "itemCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "byStatus",
+        "undecidedByKind"
+      ],
+      "properties": {
+        "total": {
+          "description": "品目の数",
+          "type": "integer",
+          "minimum": 0
+        },
+        "byStatus": {
+          "$ref": "#/definitions/countByStatus"
+        },
+        "undecidedByKind": {
+          "description": "未判断の品目の種類ごとの件数 (キーは品目の種類)",
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "item",
+              "group",
+              "other"
+            ]
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
     }
   },
   "properties": {
@@ -71,7 +116,56 @@
       }
     },
     "summary": {
-      "type": "object"
+      "description": "台帳の行から数えた件数 (手で書かない)",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tables",
+        "tablesWithMeta",
+        "tablesByStatus",
+        "tablesByCycle",
+        "items"
+      ],
+      "properties": {
+        "tables": {
+          "description": "表の数",
+          "type": "integer",
+          "minimum": 0
+        },
+        "tablesWithMeta": {
+          "description": "年の範囲が取れた表の数",
+          "type": "integer",
+          "minimum": 0
+        },
+        "tablesByStatus": {
+          "$ref": "#/definitions/countByStatus"
+        },
+        "tablesByCycle": {
+          "description": "周期ごとの表の数 (キーは e-Stat の周期名。周期が無い表は unknown)",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "items": {
+          "description": "品目表 (金額・数量) ごとの品目の件数",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "amount",
+            "quantity"
+          ],
+          "properties": {
+            "amount": {
+              "$ref": "#/definitions/itemCounts"
+            },
+            "quantity": {
+              "$ref": "#/definitions/itemCounts"
+            }
+          }
+        }
+      }
     },
     "tables": {
       "type": "array",

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BRIDGE_INSPECTION_AGE_SOURCE as SOURCE } from '@stats47/data-configs/theme-catalog';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
@@ -130,21 +130,27 @@ describe('共通県選択に連動する架設年度表', () => {
     expect(screen.queryByRole('table')).toBeNull();
     expect(screen.getByRole('status').textContent).toContain('この地域');
   });
-  it('対象年度・年度差の限界・診断中除外・原表への出典を表示する', () => {
+  it('対象年度・年度差の限界・診断中除外・原表への出典を見出しの右端の Sheet に表示する', async () => {
     render(
       <Context>
         <ThemeBridgeInspectionAgeClient snapshot={snapshot} />
       </Context>
     );
-    for (const note of SOURCE.notes)
-      expect(screen.getByText(note)).toBeTruthy();
-    for (const s of SOURCE.sources)
-      expect(
-        screen.getByRole('link', { name: s.title }).getAttribute('href')
-      ).toBe(s.url);
+    // 図の周りには置かず、見出しの右端から開く Sheet の中 (2026-11-22)
+    expect(screen.queryByText(SOURCE.notes[0]!)).toBeNull();
     expect(screen.getByRole('table').parentElement?.className).toContain(
       'overflow-x-auto'
     );
+    fireEvent.click(screen.getByRole('button', { name: /読むときの注意/ }));
+    const sheet = within(await screen.findByRole('dialog'));
+    for (const note of SOURCE.notes)
+      expect(sheet.getByText(note)).toBeTruthy();
+    for (const s of SOURCE.sources)
+      expect(
+        sheet
+          .getByRole('link', { name: `出典: 原表（XLSX）${s.title}` })
+          .getAttribute('href')
+      ).toBe(s.url);
   });
 });
 describe('取得境界', () => {

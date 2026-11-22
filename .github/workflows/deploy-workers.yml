@@ -359,6 +359,8 @@ jobs:
       - name: 🔎 Smoke test (Production routes)
         env:
           DIFF_BASE: ${{ github.event.before }}
+          # 実行時 ISR の検査を失敗扱いにする (2026-11-21 の #1294 の反映で 2 回目以降が HIT になることを本番で確かめた。CF-CPU-ISR-01)
+          ISR_CHECK_STRICT: "1"
         run: |
           sleep 5
           bash .github/scripts/smoke-test-routes.sh https://stats47.jp

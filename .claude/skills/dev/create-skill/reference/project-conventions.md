@@ -84,6 +84,6 @@ const blog     = (await (await fetch(`${R2}/app/blog/all.json`)).json()).article
 | reference/ 分離 | `/generate-note-charts` | design-system.md, chart-patterns.md |
 | examples/ 同梱 | `/generate-note-charts` | 完成 SVG を保存 |
 | ワークフローチェーン | `/write-note-section` | validate → investigate → design → write → edit |
-| Phase 構成 | `/page-data-batch` | 4 Phase（事前確認→TS-config 追加→sync-metrics-cache→R2 投入→検証）|
+| Phase 構成 | `/page-data-batch` | 4 Phase（事前確認→TS-config 追加→R2 投入→検証）|
 | 決定的な並列収集 | `/weekly-plan` | 同一セッションでsnapshot/scriptを収集→分析 |
 | svg-builder 連携 | `/generate-article-charts` | パッケージ API リファレンス付き |

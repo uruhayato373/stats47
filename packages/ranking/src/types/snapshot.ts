@@ -245,21 +245,3 @@ export function rankingDownloadKeyPath(
   return `${RANKING_R2_PREFIX}/${encodeURIComponent(rankingKey)}/downloads/values${basisSuffix}${encodingSuffix}.${format}`;
 }
 
-/** @deprecated rankingValuesKeyPath を使用してください */
-export interface RankingValuesPartitionSnapshot {
-  generatedAt: string;
-  rankingKey: string;
-  areaType: string;
-  yearCode: string;
-  count: number;
-  values: RankingValue[];
-}
-
-/** @deprecated rankingValuesKeyPath を使用してください */
-export function rankingValuesPartitionPath(
-  rankingKey: string,
-  areaType: string,
-  yearCode: string,
-): string {
-  return `ranking-values/${encodeURIComponent(rankingKey)}/${encodeURIComponent(areaType)}/${encodeURIComponent(yearCode)}.json`;
-}

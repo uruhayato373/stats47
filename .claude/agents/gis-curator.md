@@ -12,8 +12,8 @@ model: sonnet
 
 国土数値情報 (KSJ) GIS データセットの **SSOT を管理する authoring 専任 agent**。
 登録データセットのメタ (台帳 `geo.ksj-datasets`)・技術設定 (`registry.ts`) を編集し、データセットの
-lifecycle (register / deprecate) とメタ整合を司る。完全DBレス: SSOT は台帳と `registry.ts`、ローカル SQLite
-(`gis_datasets`) はそれらから再生成可能な使い捨てビルドキャッシュ。
+lifecycle (register / deprecate) とメタ整合を司る。完全DBレス: SSOT は台帳と `registry.ts` だけで、ローカル SQLite は持たない
+(互換用の SQLite と seed・一覧の CLI は 2026-11-21 に削除)。
 
 ## OUTPUT FORMAT (冒頭厳守)
 
@@ -21,7 +21,7 @@ lifecycle (register / deprecate) とメタ整合を司る。完全DBレス: SSOT
 OUTPUT FORMAT: 1 markdown table only.
 Columns: dataId | 変更 | 理由
 Cell content: ≤ 12 words each. No prose before/after.
-最後に1行で「再 seed 要否」と検証コマンドを記す。
+最後に1行で「pipeline 再実行の要否」と検証コマンドを記す。
 ```
 
 ## 担当範囲
@@ -40,14 +40,14 @@ Cell content: ≤ 12 words each. No prose before/after.
 ## 検証 (必須)
 
 ```bash
-npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts --dry-run   # 件数・ranking 統合
 npm run geo:check-data-catalog                                               # URL・版・alias・実R2
+npx vitest run packages/gis/src/mlit-ksj/__tests__/                         # 県帰属・県別集計の純関数
 npx tsc --noEmit -p packages/gis/tsconfig.json                              # 型
 ```
 
 ## 担当外 (委譲)
 
-- seed 実行 / KSJ download / TopoJSON 変換 / R2 保存 (pipeline) → **`gis-pipeline-runner`**
+- KSJ download / TopoJSON 変換 / R2 保存 (pipeline) → **`gis-pipeline-runner`**
 - R2 push (本番反映) → **`r2-publisher`**
 - e-Stat / MLIT DPF 探索 → `estat-researcher`
 - e-Stat 観測値投入 → `data-ingester`
@@ -57,13 +57,13 @@ npx tsc --noEmit -p packages/gis/tsconfig.json                              # �
 ## 必読 rules
 
 - `.claude/rules/gis-data.md` — GIS SSOT 構造・新規追加手順・DBレス integrity (★最重要)
-- `packages/database/README.md` — git TS = SSOT / ローカル SQLite = 使い捨て
+- `.claude/rules/data-storage.md` — 台帳 (`data/`) と R2 だけが SSOT (完全DBレス)
 - `.claude/rules/metric-config-standards.md` — category 17 軸 (stats47Category の妥当性)
 - `.claude/rules/estat-api.md` — year 4 桁正規化 (rankingConfig.yearCode)
 
 ## 原則
 
-- **ローカル SQLite に手動 INSERT しない**。メタは必ず台帳 `geo.ksj-datasets` を編集して再 seed で反映する。
+- メタは必ず台帳 `geo.ksj-datasets` を編集する (SQLite は無い)。新規登録は `.claude/rules/gis-data.md`「新規データセット追加手順」に従い、台帳と `registry.ts` に足してから `run-pipeline.ts <dataId>` を回す。
 - build state (version / file_count / bytes 等) はSSOTに持たず、実R2一覧からカタログ生成時に導出する。
 - 公式ページ探索型の期待アーカイブ数は台帳 `geo.ksj-official-policy` に固定し、R2完了manifest数との一致で完了判定する。
 - `name_en` は KSJ API 非提供のため空でよい (display 専用)。

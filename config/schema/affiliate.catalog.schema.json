@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "3 ASP 横断の提携台帳",
+  "description": "data/affiliate/affiliate-catalog.json の形状契約。もしも・afb (と A8) で自社が配置する・配置を検討する案件ごとに、ASP ごとの識別子・提携の状態・単価・申請の履歴と、掲載適格性 (eligibility) を持つ。書き手: .claude/scripts/ads/affiliate-status.mjs --write (実機の一覧と突合して状態の正遷移・名前の補完・台帳に無い提携の取り込み) と packages/ops/src/ads/affiliate-apply.mjs --commit (申請の記録を 1 件ごとに保存)。どちらも読んで書き戻すので、ここに書いていない項目も残る。状態の語彙・vertical の 10 軸・識別子の有無の意味の検査は packages/ops/src/ads/lib/affiliate-status-core.mjs の validateCatalog (テスト affiliate-catalog-schema.test.mjs)、eligibility の検査は affiliate-eligibility-core.mjs が持つので、ここでは形だけを決める。読み手: packages/ops/src/ads/check-asp-apply-budget.cjs (週の申請上限)・.claude/scripts/ads/ の harvest / report 系・apps/admin/lib/server/ads.ts・affiliate.ts。",
+  "type": "object",
+  "required": ["schemaVersion", "updatedAt", "verifiedAt", "programs"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "_comment": { "type": "string" },
+    "_notMergedWith": { "type": "string" },
+    "_statusVocab": {
+      "type": "object",
+      "description": "ASP ごとの status の語 → 意味。validateCatalog はこのキーを語彙として使う",
+      "additionalProperties": { "type": "string" }
+    },
+    "_seedNote": { "type": "string" },
+    "updatedAt": { "type": "string", "minLength": 1, "description": "最後に書き込んだ時刻 (ISO 8601)" },
+    "verifiedAt": { "type": "string", "minLength": 1, "description": "最後に実機と突合した日 (YYYY-MM-DD)" },
+    "programs": {
+      "type": "object",
+      "description": "案件キー (<asp>-<識別子>) → 案件",
+      "additionalProperties": { "$ref": "#/definitions/program" }
+    }
+  },
+  "definitions": {
+    "program": {
+      "type": "object",
+      "required": ["name", "asps"],
+      "properties": {
+        "name": { "type": ["string", "null"], "description": "案件名。実機から取れないときは null (affiliate-status が後で補完する)" },
+        "vertical": { "type": ["string", "null"], "description": "意図軸 (affiliate-category.ts の 10 軸)。未判定は null か項目なし" },
+        "redLine": { "type": "boolean", "description": "true なら affiliate-apply が申請しない" },
+        "eligibility": {
+          "type": "object",
+          "description": "掲載適格性。無い案件は申請しない (fail-closed)。値の検査は affiliate-eligibility-core.mjs",
+          "properties": {
+            "status": { "type": "string" },
+            "riskFlags": { "type": "array", "items": { "type": "string" } },
+            "allowedPageTypes": { "type": "array", "items": { "type": "string" } },
+            "allowedRankingKeys": { "type": "array", "items": { "type": "string" } },
+            "allowedTagKeys": { "type": "array", "items": { "type": "string" } },
+            "minimumEligibleImpressions": { "type": ["number", "null"] },
+            "reviewedAt": { "type": ["string", "null"] },
+            "reviewedBy": { "type": ["string", "null"] },
+            "evidence": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "asps": {
+          "type": "object",
+          "description": "ASP の名前 (afb・moshimo など) → その ASP での状態",
+          "additionalProperties": { "$ref": "#/definitions/aspEntry" }
+        }
+      }
+    },
+    "aspEntry": {
+      "type": "object",
+      "required": ["status"],
+      "anyOf": [
+        { "required": ["promotionId"] },
+        { "required": ["pid"] },
+        { "required": ["programId"] }
+      ],
+      "properties": {
+        "promotionId": { "type": "string", "minLength": 1, "description": "ASP の案件 ID (affiliate-apply・もしも)" },
+        "pid": { "type": "string", "minLength": 1, "description": "afb の案件 ID (affiliate-status の取り込み)" },
+        "programId": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "description": "_statusVocab の語 (approved・applying・none・unavailable・unknown。registered・published も読み手が扱う)" },
+        "rewardYen": { "type": "number", "description": "成果 1 件の報酬 (円)" },
+        "appliedAt": { "type": "string", "description": "申請した時刻 (affiliate-apply)" },
+        "history": {
+          "type": "array",
+          "description": "状態の遷移と申請の履歴 (週の申請上限の入力)。書き手は at・status (・note) を書くが、2026-07-28 に手で足した注記の行 (at と note だけ) が 16 件残るので status は必須にしない",
+          "items": {
+            "type": "object",
+            "required": ["at"],
+            "properties": {
+              "at": { "type": "string", "minLength": 1 },
+              "status": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

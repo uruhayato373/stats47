@@ -340,12 +340,8 @@ const SEMANTIC_METRICS = [...TEMPLATE_LEVEL_METRICS, "small_text_count", "mobile
 export function semanticFixGuide(findings: readonly UiFinding[]): string[] {
   if (!SEMANTIC_METRICS.some((m) => hasMetric(findings, m))) return [];
   return [
-    "- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。" +
-      `全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 \`latest.json\` (\`npm run state:pull -- page-quality\` で \`${datasetDir("page-quality.findings")}/live/\` に取得) の \`violations\` にある。` +
-      "同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。" +
-      "内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。" +
-      "`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。" +
-      "文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。",
+    // 直し方の本文は規約の 1 か所に置く。カードごとに写すと backlog が 1 枚 1KB ずつ太る (2026-11-22)
+    "- **表示の意味 (定義単位で直す)**: 箇所は週次 `latest.json` の `ui_findings`、全 URL は `violations`。直し方は `.claude/rules/page-quality-standards.md`「表示の意味の検査」の「直し方」。",
   ];
 }
 
@@ -365,14 +361,14 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
     "",
     `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${refs.cli} --assert-handled ${file}] [起票:${today}] [領域:サイト]`,
     "",
-    `- **自動起票**: 週次のページ品質監査 (\`quality-suite-weekly.yml の page-quality job\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`${datasetDir("page-quality.findings")}/ui-findings-queue.json\`。正典は \`${refs.pageQualityRule}\`「UI 指摘のループ」。`,
+    `- **自動起票**: 対象 \`${file}\`・状態 \`${datasetDir("page-quality.findings")}/ui-findings-queue.json\`・正典 \`${refs.pageQualityRule}\`「UI 指摘のループ」。`,
     `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`${datasetDir("page-quality.metrics")}/LATEST.md\`。`,
     "- **対象**:",
     ...findings.flatMap(target),
     ...chartFixGuide(findings, file, refs),
     ...lineGridFixGuide(findings, refs),
     ...semanticFixGuide(findings),
-    "- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`packages/ops/src/page-quality/lib/screenshots.ts`) を直すか by-design にする。",
+    "- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す (撮影による誤検知の扱いは正典「UI 指摘のループ」)。",
     `- **記録**: 直した指摘は \`${refs.cli} --mark-fixed <key> --note "<何を変えたか>"\`、直さないと判断した指摘は \`--mark-by-design <key> --note "<理由>"\`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた \`[実行:対話]\` のカードを backlog に起票してから \`--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"\` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは \`@${file}\`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。`,
     "- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。",
     "- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。",

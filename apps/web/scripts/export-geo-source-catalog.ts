@@ -2,6 +2,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 import { PREFECTURE_LIST_2DIGIT } from '@stats47/area';
 import { GEO_SOURCE_PAGES } from '../../../packages/data-configs/src/business-plan/geo-source-pages';
@@ -123,7 +124,7 @@ export function writeGeoSourceCatalog(
 
 export function sourceMetadataFromGit(): SourceMetadata {
   const candidates = JSON.parse(
-    readFileSync('packages/database/seed/ksj-catalog.json', 'utf8')
+    readFileSync(datasetPath('geo.ksj-catalog'), 'utf8')
   ) as { id: string; source_url: string }[];
   return {
     items: candidates.map((candidate) => ({

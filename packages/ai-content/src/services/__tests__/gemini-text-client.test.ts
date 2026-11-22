@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
   GeminiTextError,
+  extractBadRequestDetail,
   extractQuotaDetails,
   generateContentText,
   isBillingExhausted,
@@ -110,6 +111,29 @@ describe("generateContentText", () => {
     ).rejects.toMatchObject({ classification: "billing", status: 429 } satisfies Partial<GeminiTextError>);
     expect(fetchImpl).toHaveBeenCalledTimes(1);
     expect(isBillingExhausted("Credit balance is too low")).toBe(true);
+  });
+
+  it("HTTP 400 は本文の status と message を detail に残し、キーに見える文字列を伏せる", async () => {
+    const body = JSON.stringify({
+      error: {
+        code: 400,
+        status: "INVALID_ARGUMENT",
+        message: "schema produces too many states. key=AIzaSyA1234567890abcdefghijklmnopqrstu",
+      },
+    });
+    const fetchImpl = vi.fn(async () => new Response(body, { status: 400 }));
+    const error = await generateContentText({
+      prompt: "test",
+      apiKey: "key",
+      fetchImpl: fetchImpl as typeof fetch,
+      maxAttempts: 3,
+    }).catch((e: unknown) => e);
+    expect(error).toMatchObject({ classification: "bad-request", status: 400 });
+    expect((error as GeminiTextError).detail).toBe("INVALID_ARGUMENT: schema produces too many states. key=<redacted>");
+    expect((error as Error).message).toContain("INVALID_ARGUMENT");
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+    expect(extractBadRequestDetail("not json")).toBeUndefined();
+    expect(extractBadRequestDetail(JSON.stringify({ error: { message: "x".repeat(500) } }))?.length).toBe(171);
   });
 
   it("HTTP 402 は本文に関係なく billing として再試行しない", async () => {

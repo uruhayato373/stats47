@@ -104,14 +104,14 @@ export type BookStatus =
   | "published"; // KDP 公開済
 
 /** 章の素材ソース種別。 */
-export type ChapterSource =
+type ChapterSource =
   | "blog" // R2 `app/blog/<slug>/article.md` を本文化 (画像は data/*.svg)
   | "ranking" // R2 `app/ranking/<key>/` から表 + ai-content 考察を組む (S2/S4)
   | "fresh"; // 書き下ろし (freshText 必須・30% ルールの実体)
 
 /** 1 章の定義。 */
 /** KDP セレクト専用の本の設定。本文はサイト・note・repo に出さない (KDP-ROYALTY-RATE-CHECK-01) */
-export interface KdpExclusive {
+interface KdpExclusive {
   /** Amazon の商品ページの内容紹介 (読者向けの文章) */
   readonly description: string;
   /** 生成 AI の申告 (共通の申告と違う本だけ。事実を書く) */
@@ -151,7 +151,7 @@ export type HarmAxis = "H" | "A" | "R" | "M";
 /** note 記事構成 (.claude/shared-policy/STRUCTURE.md) のタイトル 5 型。序列は付けない。 */
 export type TitleType = "検索・選択" | "数字・チェック" | "実証・体験" | "問い・気づき" | "資料・手順";
 /** 同 9 型 (本文の並べ方)。1 冊に複数を重ねてよい。 */
-export type BodyPattern =
+type BodyPattern =
   | "悩み直撃型"
   | "勘違い破壊型"
   | "Before→After型"

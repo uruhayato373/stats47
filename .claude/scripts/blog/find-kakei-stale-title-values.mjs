@@ -42,8 +42,12 @@ function localTitles(slug) {
   return { title: field("title") ?? "", seoTitle: field("seoTitle") };
 }
 
+/** 数の直後がこれなら差・比で、指標の値ではない (「福島と344円差」) */
+const DIFFERENCE_SUFFIX = /^(?:円|人|件|g|ml|%|％)?(?:差|の差|倍)/;
+
 function titleNumbers(title) {
   return [...title.matchAll(/([0-9][0-9,]*(?:\.[0-9]+)?)/g)]
+    .filter((m) => !DIFFERENCE_SUFFIX.test(title.slice(m.index + m[0].length)))
     .map((m) => Number(m[1].replace(/,/g, "")))
     .filter((n) => n >= MIN_VALUE && !(n >= YEAR_RANGE[0] && n <= YEAR_RANGE[1]));
 }
@@ -57,7 +61,10 @@ async function main() {
   const useLocal = process.argv.includes("--local");
   const bySlug = new Map(blog.articles.map((a) => [a.slug, useLocal ? { ...a, ...(localTitles(a.slug) ?? {}) } : a]));
 
-  const found = new Map();
+  // 1 本の記事は複数の指標を参照する (県の食卓の記事など)。題の数が「どれかの指標の最新年の値」なら古くない。
+  // 別の指標の過去の年の値と偶然一致しただけの数を拾わないよう、先に記事ごとの最新年の値を集める (2026-11-22 に 5 本すべてが誤検出だった)。
+  const targets = [];
+  const latestValuesBySlug = new Map(); // slug → [{ area, value }] (どれかの指標の最新年)
   for (const [key, slugs] of Object.entries(blog.rankingArticleIndex ?? {})) {
     if (!kakeiKeys.has(key)) continue;
     const candidates = slugs.map((slug) => bySlug.get(slug)).filter(Boolean);
@@ -65,9 +72,22 @@ async function main() {
     const values = await fetchJson(rankingR2Key(key, "values"));
     if (!values?.partitions?.length) continue;
     const latest = values.partitions.map((p) => p.yearCode).sort().at(-1);
+    const latestRounded = values.partitions.filter((p) => p.yearCode === latest).flatMap((p) => p.values.map((v) => ({ area: shortPrefName(v.areaName), value: Math.round(v.value) })));
+    for (const article of candidates) {
+      const list = latestValuesBySlug.get(article.slug) ?? [];
+      list.push(...latestRounded);
+      latestValuesBySlug.set(article.slug, list);
+    }
+    targets.push({ key, candidates, values, latest });
+  }
+
+  const found = new Map();
+  for (const { key, candidates, values, latest } of targets) {
     for (const article of candidates) {
       const title = `${article.title} ${article.seoTitle ?? ""}`;
       for (const n of titleNumbers(title)) {
+        // 同じ県の最新年の値と一致するときだけ外す (県を縛らないと、別の県の最新年の値と偶然一致した本物の古い値まで外す)
+        if ((latestValuesBySlug.get(article.slug) ?? []).some((v) => v.value === Math.round(n) && title.includes(v.area))) continue;
         const hits = values.partitions.flatMap((p) =>
           p.values
             .filter((v) => Math.round(v.value) === Math.round(n) && title.includes(shortPrefName(v.areaName)))

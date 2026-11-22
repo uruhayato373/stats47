@@ -76,12 +76,6 @@ if (typeof process !== "undefined") {
   process.env.VITEST = "true";
 }
 
-// 共通データベースモックをグローバルに設定
-vi.mock("@/features/database", async () => {
-  const mock = await import("@stats47/database/testing");
-  return mock;
-});
-
 // 共通R2ストレージモックをグローバルに設定
 // vi.mock("@/features/r2-storage/lib/r2-adapter", async () => {
 //   const mock = await import("@/features/r2-storage/__mocks__");

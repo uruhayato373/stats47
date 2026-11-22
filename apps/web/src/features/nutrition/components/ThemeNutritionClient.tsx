@@ -23,10 +23,16 @@ export function ThemeNutritionClient({ snapshot }: { snapshot: NutritionSnapshot
   return <div data-theme-component-key="nutrition" data-data-state="ready" data-area-code={selectedPrefectureCode ?? NATIONAL_AREA_CODE}>
     <ChartPanel title="栄養摂取量と推計の幅" description={`2024年 · ${area} · 20歳以上、男女とも59歳に年齢調整`}
       contentClassName="min-w-0 space-y-4"
-      footer={<ChartFooter source={NUTRITION_SOURCE.title} sourceLink={NUTRITION_SOURCE.url} />}>
+      action={
+        <ChartFooter
+          placement="header"
+          source={NUTRITION_SOURCE.title}
+          sourceLink={NUTRITION_SOURCE.url}
+          annotation={['平均と95%信頼区間は1日当たりのグラム数です。集計人数は推計人口ではありません。', ...snapshot.notes]}
+        />
+      }>
       <ValueTable fold
         ariaLabel={`${area}の栄養摂取量と95%信頼区間`}
-        caption="平均と95%信頼区間は1日当たりのグラム数です。集計人数は推計人口ではありません。"
         columns={[
           { key: 'metric', header: '指標', rowHeader: true },
           { key: 'mean', header: <>平均<br />（g/日）</> },
@@ -47,7 +53,6 @@ export function ThemeNutritionClient({ snapshot }: { snapshot: NutritionSnapshot
           };
         })}
       />
-      <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">{snapshot.notes.map(note => <li key={note}>{note}</li>)}</ul>
     </ChartPanel>
   </div>;
 }

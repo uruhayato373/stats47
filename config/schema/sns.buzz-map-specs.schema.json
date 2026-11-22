@@ -23,21 +23,90 @@
         "legend": {
           "type": "object",
           "required": ["title"],
+          "additionalProperties": false,
           "properties": {
             "title": { "type": "string" },
-            "rows": { "type": "array", "items": { "type": "object", "required": ["key", "label", "fill"] } }
+            "rows": {
+              "description": "型A: 区分行。型B: 省略 (ランプ凡例を自動描画)",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["key", "label", "fill"],
+                "additionalProperties": false,
+                "properties": {
+                  "key": { "type": "string", "description": "data.values の値 (型C は data.points のキー) と対応する" },
+                  "label": { "type": "string" },
+                  "fill": { "type": "string", "description": "accent / accent2 / land / 生 hex" },
+                  "count": { "type": "number", "description": "件数 (色だけに頼らないためのラベル。省略時は data から自動集計)" },
+                  "marker": { "enum": ["fill", "point", "line"], "description": "凡例マーカーの形 (型E で塗り・点・線が混在するとき行ごとに指定)" }
+                }
+              }
+            }
           }
         },
-        "data": { "type": "object" },
+        "data": {
+          "description": "コードは都道府県 = 2 桁 / 市区町村 = N03_007 の 5 桁",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "values": { "description": "型A: コード → 凡例 row の key", "type": "object", "additionalProperties": { "type": "string" } },
+            "series": {
+              "description": "型B: コード → { 年: 値 }",
+              "type": "object",
+              "additionalProperties": { "type": "object", "additionalProperties": { "type": "number" } }
+            },
+            "points": {
+              "description": "型C: 凡例 row の key → 点の [経度, 緯度] の配列",
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } }
+              }
+            },
+            "linesAsset": { "type": "string", "description": "型D: 線データの staticFile パス (topojson か GeoJSON)" },
+            "names": { "description": "コード → 表示名 (型B のサマリーの最大・最小ラベル用)", "type": "object", "additionalProperties": { "type": "string" } }
+          }
+        },
         "pointRadius": { "type": "number" },
         "lineYearProp": { "type": "string" },
         "lineWidth": { "type": "number" },
         "pointFill": { "type": "string" },
         "lineStroke": { "type": "string" },
-        "years": { "type": "object", "required": ["from", "to"] },
-        "speed": { "type": "array" },
-        "ramp": { "type": "object" },
-        "summary": { "type": "object" },
+        "years": {
+          "type": "object",
+          "required": ["from", "to"],
+          "additionalProperties": false,
+          "properties": { "from": { "type": "number" }, "to": { "type": "number" } }
+        },
+        "speed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["until", "yearsPerSec"],
+            "additionalProperties": false,
+            "properties": {
+              "until": { "type": "number", "description": "この年まで" },
+              "yearsPerSec": { "type": "number", "description": "再生速度 (年/秒)" }
+            }
+          }
+        },
+        "ramp": {
+          "type": "object",
+          "required": ["domain", "legendTitle", "ticks"],
+          "additionalProperties": false,
+          "properties": {
+            "domain": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+            "legendTitle": { "type": "string" },
+            "ticks": { "type": "array", "items": { "type": "number" } },
+            "unit": { "type": "string" }
+          }
+        },
+        "summary": {
+          "description": "型B: ラスト静止サマリー (最大・最小の直接ラベル)",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "max": { "type": "boolean" }, "min": { "type": "boolean" } }
+        },
         "holdSeconds": { "type": "number" }
       }
     }

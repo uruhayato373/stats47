@@ -15,8 +15,8 @@
  */
 
 import {
+  isNationalAreaCode as isNationalAreaCode5,
   isPrefectureAreaCode as isPrefectureAreaCode5,
-  NATIONAL_AREA_CODE,
   PREFECTURE_COUNT,
 } from "@stats47/area";
 
@@ -42,9 +42,9 @@ interface AreaValue {
 /** 合計と全国値の一致を判定する相対許容幅 (推計の丸め・非公表県の差を吸収) */
 const TOTAL_MATCH_TOLERANCE = 0.005;
 
-/** 全国行か (5 桁 00000 と 2 桁正規化後の 00) */
-export function isNationalAreaCode(code: string): boolean {
-  return code === NATIONAL_AREA_CODE || code === "00";
+/** 全国行か (5 桁 00000 と 2 桁正規化後の 00)。5 桁の判定は @stats47/area の正本に任せる */
+export function isNationalRow(code: string): boolean {
+  return isNationalAreaCode5(code) || code === "00";
 }
 
 /** 都道府県行か (2 桁 01-47 または XX000) */
@@ -81,7 +81,7 @@ export function resolveNationalFigure(values: AreaValue[]): NationalFigure | nul
   let national: number | null = null;
   for (const row of values) {
     if (!isFiniteNumber(row.value)) continue;
-    if (isNationalAreaCode(row.areaCode)) national = row.value;
+    if (isNationalRow(row.areaCode)) national = row.value;
     else if (isPrefectureAreaCode(row.areaCode)) prefValues.push(row.value);
   }
 

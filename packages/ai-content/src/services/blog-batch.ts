@@ -119,7 +119,7 @@ export function classifyIngest(output: string, exitCode: number | null): IngestO
     : "rejected";
 }
 
-export type BatchStatus = "ready" | "background-pending" | "revise" | "gate-rejected" | "fail" | "ingest-rejected" | "skipped";
+type BatchStatus = "ready" | "background-pending" | "revise" | "gate-rejected" | "fail" | "ingest-rejected" | "skipped";
 
 export interface BatchRow {
   slug: string;

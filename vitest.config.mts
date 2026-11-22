@@ -12,7 +12,6 @@ export default defineConfig({
       'packages/ranking/vitest.config.mts',
       'packages/r2-storage/vitest.config.mts',
       'packages/category/vitest.config.mts',
-      'packages/database/vitest.config.mts',
       'packages/estat-api/vitest.config.mts',
       'packages/gis/vitest.config.mts',
       'packages/product-factory/vitest.config.mts',

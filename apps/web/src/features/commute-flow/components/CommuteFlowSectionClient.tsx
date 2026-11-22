@@ -32,7 +32,6 @@ export function CommuteFlowSectionClient({ initialData }: Props) {
   return (
     <ChartPanel
       title="都道府県 通勤フロー（昼夜間人口）"
-      description="他県に住み焦点県へ通勤してくる人（流入）と、焦点県から他県へ通勤する人（流出）。流入が多い県は昼間人口が膨らみます。"
       action={
         <div className="flex flex-wrap items-center justify-end gap-2">
           {isNationalFallback && (
@@ -58,15 +57,15 @@ export function CommuteFlowSectionClient({ initialData }: Props) {
               ))}
             </SelectContent>
           </Select>
+          <ChartFooter
+            placement="header"
+            annotation="他県に住み焦点県へ通勤してくる人（流入）と、焦点県から他県へ通勤する人（流出）。流入が多い県は昼間人口が膨らみます。"
+            source="国勢調査 従業地・通学地集計"
+            sourceLinks={[{ label: "国勢調査", url: "/survey/census" }]}
+            rankingLink="/ranking/day-time-population-ratio"
+            rankingLabel="ランキングを見る"
+          />
         </div>
-      }
-      footer={
-        <ChartFooter
-          source="国勢調査 従業地・通学地集計"
-          sourceLinks={[{ label: "国勢調査", url: "/survey/census" }]}
-          rankingLink="/ranking/day-time-population-ratio"
-          rankingLabel="ランキングを見る"
-        />
       }
     >
       <CommuteSankey code={prefCode} initialData={initialData} />

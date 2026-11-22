@@ -14,7 +14,7 @@ import type { GeoshapeOptions } from "../types/geoshape-options";
 const GEOSHAPE_EXTERNAL_API_URL = "https://geoshape.ex.nii.ac.jp";
 
 /** 外部 API のデータバージョン（日付）。パスセグメントの先頭に付与する */
-export const GEOSHAPE_VERSION = "20230101";
+const GEOSHAPE_VERSION = "20230101";
 
 /** 都道府県 TopoJSON ファイル名（低解像度） */
 const PREFECTURE_FILENAME = "jp_pref.l.topojson";

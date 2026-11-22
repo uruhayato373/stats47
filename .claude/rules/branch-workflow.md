@@ -3,7 +3,7 @@ paths:
   - ".github/**"
   - ".husky/**"
   - ".claude/skills/{dev/deploy,db/publish-ranking,db/sync-snapshots,db/push-r2,blog/publish-bulk-articles}/**"
-  - ".claude/agents/{r2-publisher,devops-runner,ranking-publisher,db-schema-manager,data-ingester}.md"
+  - ".claude/agents/{r2-publisher,devops-runner,ranking-publisher,data-ingester}.md"
 ---
 # ブランチ運用ルール
 

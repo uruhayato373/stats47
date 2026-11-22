@@ -50,10 +50,16 @@ export function ThemeWaterQualityClient({
         title="水域ごとの水質と基準達成"
         description={`2023年度 · ${selectedPrefectureCode ? selectedAreaName : '全国'}`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source={WATER_QUALITY_SOURCE.title}
             sourceLink={WATER_QUALITY_SOURCE.url}
+            sourceLinks={[
+              { label: '全国集計の原表', url: `${WATER_QUALITY_SOURCE.mainUrl}#page=13` },
+              { label: '香川県の類型確認資料', url: WATER_QUALITY_SOURCE.anomaly.prefecturalSourceUrl },
+            ]}
+            annotation={snapshot.notes}
           />
         }
       >
@@ -167,26 +173,6 @@ export function ThemeWaterQualityClient({
             都道府県を選ぶと、水域名・類型・濃度・達成判定と原表へのリンクを確認できます。
           </p>
         )}
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {snapshot.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
-        <p className="text-xs">
-          <ExternalAnchor
-            href={`${WATER_QUALITY_SOURCE.mainUrl}#page=13`}
-            className="underline underline-offset-2"
-          >
-            全国集計の原表
-          </ExternalAnchor>
-          {' · '}
-          <ExternalAnchor
-            href={WATER_QUALITY_SOURCE.anomaly.prefecturalSourceUrl}
-            className="underline underline-offset-2"
-          >
-            香川県の類型確認資料
-          </ExternalAnchor>
-        </p>
       </ChartPanel>
     </div>
   );

@@ -21,8 +21,9 @@ export const VERIFIED_PRODUCT_LABELS: Readonly<Record<string, { statsDataId: str
     "label": "有効求人倍率"
   },
   "actual-income-worker-households-per-month": {
-    "statsDataId": "0000010212",
-    "cdCat01": "#L01201",
+    // 2026-11-22 に SSDS の #L01201 (千円) から元の基礎データ L3110 (円) へ付け替えた。#L01201 の算式は L3110 そのものなので定義・指標名は同じ
+    "statsDataId": "0000010112",
+    "cdCat01": "L3110",
     "label": "実収入（二人以上の世帯のうち勤労者世帯）（1世帯当たり1か月間）"
   },
   "acupuncture-moxibustion-count": {

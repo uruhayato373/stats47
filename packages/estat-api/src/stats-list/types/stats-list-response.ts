@@ -104,7 +104,7 @@ export interface EstatStatsListResponse {
 /**
  * getStatsList パラメータ
  */
-export interface EstatStatsListParameter {
+interface EstatStatsListParameter {
   LANG: "J" | "E";
   DATA_FORMAT: "X" | "J";
   SEARCH_KIND: "1" | "2" | "3"; // 検索種別

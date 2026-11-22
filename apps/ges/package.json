@@ -8,11 +8,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@stats47/area": "*",
-    "better-sqlite3": "^11.0.0"
+    "@stats47/area": "*"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.0",
     "tsx": "^4.19.0",
     "typescript": "^5.3.3"
   }

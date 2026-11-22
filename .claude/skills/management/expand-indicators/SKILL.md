@@ -99,7 +99,7 @@ npx tsx packages/data-configs/scripts/page-data-batch.ts --metric <key> --dry-ru
 
 ## 禁止
 
-- 削除済み `stats_prefecture` を使う `ingest-indicator.mjs`
+- 削除済み `stats_prefecture` を使う旧 `ingest-indicator.mjs` の手順を復元すること (スクリプトは 2026-11-21 に削除)
 - 永続・リモートD1をSSOTまたは観測値保存先にすること
 - 未検証IDの投入、候補全件の一括処理、失敗時の推測補正
 - TODO行を `done` / `failed` 履歴として残すこと

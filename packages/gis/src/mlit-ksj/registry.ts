@@ -6,13 +6,11 @@
  *
  * 純メタデータ (name / category / geometryType / coverage / license / stats47Category /
  * ranking 定義) は **`datasets.ts` (git TS SSOT)** が持つ (完全DBレス化・2026-06-21)。
- * `seed-from-registry.ts` が datasets.ts を使い捨て SQLite に決定的に再構築する。
  *
- * 新規データセットを stats47 に取り込む場合 (ローカル SQLite への手動 INSERT は廃止):
+ * 新規データセットを stats47 に取り込む場合:
  *   1. `datasets.ts` の GIS_DATASETS にメタ + ranking 定義を追加
  *   2. 本ファイル KSJ_CODE_CONFIG に技術設定 (downloadUrl 等) を追加
- *   3. `npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts` で SQLite を再 seed
- *   4. `npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts <ID>` を実行
+ *   3. `npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts <ID>` を実行
  *
  * 正典: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md`
  */

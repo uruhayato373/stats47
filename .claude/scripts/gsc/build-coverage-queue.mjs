@@ -67,6 +67,7 @@ import {
 } from "../../../packages/ops/src/gsc/lib/coverage-queue-state.mjs";
 import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -145,6 +146,8 @@ const loadQueue = () => {
   }
 };
 const saveQueue = (q) => {
+  // 書く前に台帳 gsc.coverage-queue の Schema で形を確かめる (合わなければ例外で止まり、書かない)
+  assertDatasetShape("gsc.coverage-queue", q);
   fs.mkdirSync(STATE_DIR, { recursive: true });
   fs.writeFileSync(QUEUE_PATH, JSON.stringify(q, null, 2) + "\n");
 };

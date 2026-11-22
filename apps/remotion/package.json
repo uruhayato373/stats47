@@ -35,13 +35,14 @@
     "react-dom": "^19.0.0",
     "remotion": "4.0.517",
     "sharp": "^0.35.5",
-    "tailwind-merge": "^2.2.2",
+    "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3",
     "topojson-client": "^3.1.0",
     "zod": "4.6.7"
   },
   "devDependencies": {
     "@remotion/cli": "4.0.517",
+    "@stats47/ops": "*",
     "@types/better-sqlite3": "^7.6.13",
     "@types/d3-geo": "^3.1.0",
     "@types/d3-scale": "^4.0.0",

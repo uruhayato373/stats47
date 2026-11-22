@@ -28,11 +28,15 @@ const SUPPORT_YEARS = 2;
 const DAY_MS = 86_400_000;
 const UNSUPPORTED_FLAG = "--dangerouslyUseUnsupportedNextVersion";
 /**
- * apps/web のビルドが使う OpenNext の helper.js の候補。npm が apps/web の下に写しを置いた場合はそちらが使われる
- * (2026-11-21 に @opennextjs/cloudflare 1.20.18 へ上げたとき、@opennextjs/aws 4.2.0 が apps/web/node_modules に入った)。
+ * apps/web のビルドが使う OpenNext の helper.js の候補。node が @opennextjs/cloudflare の位置から @opennextjs/aws を探す順に並べる
+ * (npm の置き方は版と依存の重なりで変わる。2026-11-21 は apps/web/node_modules の下、2026-11-22 に入れ子を root の 1 つへまとめた後は
+ * root の @opennextjs/cloudflare の下に入った)。デプロイの前提条件の検査 (.github/scripts/check-build-preconditions.mjs) は
+ * createRequire で同じものを解決する。
  */
 const HELPER_CANDIDATES = [
+  "apps/web/node_modules/@opennextjs/cloudflare/node_modules/@opennextjs/aws/dist/build/helper.js",
   "apps/web/node_modules/@opennextjs/aws/dist/build/helper.js",
+  "node_modules/@opennextjs/cloudflare/node_modules/@opennextjs/aws/dist/build/helper.js",
   "node_modules/@opennextjs/aws/dist/build/helper.js",
 ];
 const DEFAULT_PATHS = {

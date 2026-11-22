@@ -7,7 +7,6 @@ import { Button } from '@stats47/components/atoms/ui/button';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import Link from '@/components/atoms/SiteLink';
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ValueTable } from '@/components/surface';
@@ -70,10 +69,13 @@ export function GeoSnowDesignationSummary({
       title="豪雪指定区域と人口"
       description="2016年度の指定区域 · 2020年基準人口 · 250mメッシュ中心で判定"
       contentClassName="min-w-0 space-y-4"
-      footer={
+      action={
         <ChartFooter
+          placement="header"
           source={SNOW_DESIGNATION_SOURCE.snow.title}
           sourceLink={SNOW_DESIGNATION_SOURCE.snow.pageUrl}
+          sourceLinks={[{ label: '人口メッシュの出典', url: SNOW_DESIGNATION_SOURCE.population.pageUrl }]}
+          annotation={SNOW_DESIGNATION_SOURCE.notes}
         />
       }
     >
@@ -119,11 +121,6 @@ export function GeoSnowDesignationSummary({
           ],
         }))}
       />
-      <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-        {SNOW_DESIGNATION_SOURCE.notes.map((note) => (
-          <li key={note}>{note}</li>
-        ))}
-      </ul>
       <p className="text-sm">
         <Link
           className="underline underline-offset-2"
@@ -132,13 +129,6 @@ export function GeoSnowDesignationSummary({
         >
           指定区域・人口メッシュ・計算の根拠を見る
         </Link>
-        {' · '}
-        <ExternalAnchor
-          className="underline underline-offset-2"
-          href={SNOW_DESIGNATION_SOURCE.population.pageUrl}
-        >
-          人口メッシュの出典
-        </ExternalAnchor>
       </p>
     </ChartPanel>
   );

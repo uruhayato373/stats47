@@ -7,8 +7,34 @@
   "additionalProperties": false,
   "properties": {
     "schemaVersion": { "const": 1 },
-    "notebook": { "type": "object" },
-    "fees": { "type": "object" },
+    "notebook": {
+      "description": "戦略文書と台帳への質問に使う NotebookLM のノートブック",
+      "type": "object",
+      "required": ["name", "id", "use"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "description": "ノートブックの名前" },
+        "id": { "type": "string", "minLength": 1, "description": "ノートブックの ID (notebooklm ask -n に渡す)" },
+        "marketingNotebookId": { "type": "string", "minLength": 1, "description": "販促用に分けたノートブックの ID" },
+        "use": { "type": "string", "minLength": 1, "description": "使い方の約束" }
+      }
+    },
+    "fees": {
+      "description": "販売チャネルごとの手数料 (キーはチャネル名。note の手取りの計算に使う)",
+      "type": "object",
+      "required": ["note"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["cardProcessingRate", "platformRate", "source", "checkedOn"],
+        "additionalProperties": false,
+        "properties": {
+          "cardProcessingRate": { "type": "number", "minimum": 0, "maximum": 1, "description": "決済手数料率 (0〜1)" },
+          "platformRate": { "type": "number", "minimum": 0, "maximum": 1, "description": "プラットフォーム手数料率 (0〜1)" },
+          "source": { "type": "string", "minLength": 1, "description": "手数料率の出典 URL" },
+          "checkedOn": { "type": "string", "format": "date", "description": "出典を確かめた日" }
+        }
+      }
+    },
     "lines": {
       "type": "array",
       "minItems": 1,

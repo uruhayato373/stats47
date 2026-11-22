@@ -155,11 +155,11 @@
 
 ## CI・git・開発環境
 - [fetch origin first](feedback_fetch_origin_before_implementing.md) — 実装前に fetch と origin との差分確認
-- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 同じ作業ツリーの同時作業は worktree で分ける- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop の検査ゲートと preflight
+- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 同じ作業ツリーの同時作業は worktree で分ける
+- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop の検査ゲートと preflight
 - [run full web tests](feedback_run_full_web_tests_before_push.md) — 部品・route を変えたら push 前に vitest 全件
 - [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は related、全件は develop 前に 1 回
-- [ci speed is wait time](feedback_ci_speed_wait_time.md) — CI 短縮は人の待ち時間で測る
-- [ci cancelled looks like failure](feedback_ci_cancelled_looks_like_failure.md) — cancel は失敗に見える
+- [ci speed is wait time](feedback_ci_speed_wait_time.md)・[ci cancelled looks like failure](feedback_ci_cancelled_looks_like_failure.md) — CI 短縮は人の待ち時間で測る / cancel は失敗に見える
 - [ci foreign tree overlay](feedback_ci_foreign_tree_overlay.md) — main で生成して develop へ写すと巻き戻る
 - [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — 差分キャッシュが型エラーを隠す
 - [debt baseline shrink only](feedback_debt_baseline_shrink_only.md) — 負債の baseline は縮小専用
