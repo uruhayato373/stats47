@@ -1,22 +1,22 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-11-16T22:48:17.814Z",
+  "generatedAt": "2026-11-22T20:13:33.135Z",
   "inventorySnapshot": "data/affiliate/inventory-latest.json",
-  "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-11-14.json",
+  "ga4Snapshot": "data/affiliate/ga4-affiliate-2026-11-21.json",
   "freshness": {
-    "inventoryDays": 13,
+    "inventoryDays": 19,
     "ga4Days": 0
   },
   "measurementGate": {
     "status": "blocked",
     "reasons": [
-      "inventory-snapshot-stale(13d>10d)"
+      "inventory-snapshot-stale(19d>10d)"
     ]
   },
   "portfolioGate": {
     "status": "blocked",
     "reasons": [
-      "inventory-snapshot-stale(13d>10d)",
+      "inventory-snapshot-stale(19d>10d)",
       "a8-cross-check-shortfall",
       "a8-results-month-missing",
       "eligible-candidate-missing"
@@ -58,13 +58,13 @@
   "recommendedActions": [
     {
       "id": "fix-measurement-gate",
-      "reason": "inventory-snapshot-stale(13d>10d)",
+      "reason": "inventory-snapshot-stale(19d>10d)",
       "command": "gh workflow run affiliate-ga4-weekly.yml / GA4 custom dimension 登録 (rules §6)"
     }
   ],
   "ga4Totals": {
-    "impressions": 4676,
-    "clicks": 3,
-    "ctr": 0.0006415739948674081
+    "impressions": 46,
+    "clicks": 0,
+    "ctr": 0
   }
 }
