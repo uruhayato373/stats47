@@ -11418,6 +11418,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:laundry-detergent-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:laundry-detergent-consumption-expenditure",
           "kind": "ranking"
         }

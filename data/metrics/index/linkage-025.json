@@ -9536,6 +9536,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:rent-group-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:rent-group-consumption-expenditure",
           "kind": "ranking"
         }
