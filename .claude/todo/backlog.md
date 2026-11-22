@@ -23,18 +23,6 @@ updated: 2026-11-01
 
 並び順が着手順。上限 10 枚 (DG081)。2026-11-01 の月次計画で 13 枚 → 8 枚に整理した後、同日のオーナー判断で Gemini 無料枠の復旧を追加し、子育ての2枚を 🟡 へ移し、家計調査の1枚を 🔴 に上げて 8 枚。サイト重点は家計調査へ変更、商品重点は製造品出荷額を維持。10 月の重点の残り・30 日超の未着手・維持領域のカードは 🟡 へ送った。
 
-### [THEME-DASHBOARD-TEXT-TRIM-01] テーマページのデータの表とチャートの説明を畳み、ダッシュボードとして短くする
-タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-31] [領域:サイト]
-
-- **起点 (2026-10-31 オーナー指摘「文字が多すぎる。基本的には可視化、ダッシュボード」)**: 解説の章と白書の論点は開閉の部品で畳み、全 56 テーマを「読者の悩み → 問いの章 → 見せ方」で組み直し、47 都道府県の比較の図はテーマから外してランキングに任せた (オーナー決定)。それでも `/themes/living-housing` の見える文字は 6,930 → 4,180 字、高さは 10,278 → 10,124px でほぼ同じ (カードの数が多い)。残りの多くはデータの表とチャートの説明 (「指標の比較」31 行 約 1,650 字・「単身化と一人暮らし」約 760 字・「ひとり暮らし世帯の男女・年齢構成」約 590 字・「都道府県の分布」約 560 字・「空き家率の地図と表」約 480 字)。
-- **次**: ① 表は上位・下位の数行だけ見せ、残りは「全件を見る」で開く (HTML には残す) ② チャートごとの説明は出典の Sheet (SourcesSheet) へ寄せる ③ 全テーマで同じ測り方 (見える文字・高さ) をして、効果を比べる ④ 1 指標カードが 4 列の格子に 1 枚だけ並ぶ章 (空きが目立つ) の扱いを決める ⑤ 新しい構成比のチャートは page-components (R2) に入るまで本番に出ない。main へのマージ後の sync-snapshots (page-components) で反映する。
-- **② の一部 (2026-11-22・develop)**: 埋め込みの章 10 件 (ひとり暮らし・5 年前の居住地・県間移動・高校卒業後の進路・文化財・過疎集落・栄養・歩数・工場投資・業種特化) の説明を、見出しの右端の出典の Sheet (`ChartFooter placement="header"`、`annotation` は配列も可) へ寄せた。localhost の全国版で living-housing 2,267→2,143 字・5,480→5,332px、education-culture 3,370→2,753 字・6,702→6,220px、aging-society 2,855→2,487 字・6,421→6,150px (減り幅は文字 5〜18%・高さ 3〜7%)。web の vitest 3,179 件が通る。
-- **次**: ② の残りの埋め込み章 (地震動・地価分布・橋の架設年・津波・水質・貨物 OD・避難所・観光の季節性・空港・医療人材・シェルター・通勤と人口移動のフローの説明) へ広げる。本番で page-components 込みの値を測り直す。
-- **判断待ち (オーナー)**: ④ 1 枚だけのカードを横幅いっぱいにする案は、2026-10-29 の決定「枚数では変えない・1 マスの幅」と食い違うので入れていない。半分に届かない主因は、章ごとの商品導線 (約 100〜150 字)・AdSense の枠 (約 332px)・章の見出しを繰り返すカード見出しの 3 つで、どれもこのカードの範囲の外。完了条件の「半分程度」を据え置くか、この 3 つを範囲に入れるかを決める。
-- **レビューの指摘 (2026-11-22)**: Sheet は開くまで描画されないので、移した範囲・分母・「非公表の3県には順位を付けません」などの読み方の注意が、初期の HTML とスクリーンリーダーの表の説明 (`ValueTable` の caption を外した) に出なくなった。検索の評価と読み上げに要るなら、短い 1 行だけ図の下に残すか、caption を戻すかを決める。
-- **完了条件**: 代表のテーマページで、見える文字と高さが半分程度になり、最初の画面からチャートが続く。
-- **①③ 済み (2026-11-16)**: 共通の `ValueTable` に `fold` を足し、テーマページの 28 箇所で表を上下 3 行に畳んだ。
-
 ### [CONTENT-KAKEI-EXPANSION-01] 家計調査の展開の残り (反映待ちの 5 項目・実収入の付け替え・承認の要る修正)
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-19] [領域:サイト] [待ち:承認]
 
@@ -2239,6 +2227,7 @@ updated: 2026-11-01
 - **残り (判断)**: Item 5. On `/areas/13000/population-dynamics`, the chart 「合計特殊出生率と出生数の推移」 puts both lines on the left axis because `data/metrics/total-fertility-rate.ts` sets the unit to 「人」, the same as births, and `assignAxes` in MetricSwitcherPanel splits axes only by unit. Option A is to change the TFR unit to a rate-type value; the Kindle rules already treat 「（人）」 on TFR as an error. That change then needs metrics:regen-derived, the R2 snapshot republished, and the effect on ranking-page wording checked. Option B is to split axes when two same-unit series differ in size by 100 times or more. A is recommended because B adds a guessing rule.
 - **残り (計測)**: Item 7. Measure mobile CLS with PSI for the Sankey chart and the histogram, which change height after their width is measured (at 375px the Sankey goes from 116px to 359px). Record the result in `data/improvement/performance-improvement/improvement-log.md`.
 - **完了条件**: Items 4 and 5 are fixed according to the owner's decision and checked with before/after images at 375px and 1280px, and the PSI result for item 7 is recorded.
+- **追補 (2026-11-22・THEME-DASHBOARD-TEXT-TRIM-01 を閉じたときの残り)**: テーマの埋め込み章の説明は出典の Sheet へ寄せ終えた (24 章)。地図が主役で形の違う `apps/web/src/features/geo-analysis/components/` の土砂災害・公共施設・駅アクセスの章に、注記の段落と箇条書きが図の周りに残る。同じ形 (`ChartFooter placement="header"`) に寄せられるかを確かめる。
 
 ### [BLOG-FIGURE-FOLLOWUP-01] ブログの図の型に残る不具合 (第 3 波の実行で見つけた分)
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-11-14] [待ち:判断]
