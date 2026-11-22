@@ -62,12 +62,12 @@ const d = (
 export const KINDLE_COVER_BACKGROUND_BY_ID: Readonly<Record<string, KindleCoverBackgroundAsset>> = {
   "K-S1-01": {
     status: "published",
-    r2Key: "media/kindle-cover-assets/K-S1-01/a93ba23a42f1/background.jpg",
-    sha256: "a93ba23a42f103ad02c57b1425752fdeceedb07998e5bfb6658929ead685c1f0",
-    bytes: 880538,
+    r2Key: "media/kindle-cover-assets/K-S1-01/67ed707e0422/background.jpg",
+    sha256: "67ed707e042252ed0f9c90f713644f0bc37b5752dbd5b3c7705e54e8f38cddf2",
+    bytes: 868679,
     width: 1600,
     height: 2560,
-    textBaked: { checkedText: ["年収が高い県は、", "暮らしも豊かなのか", "47都道府県 × 6つの家計データ", "stats47"], checkedAt: "2026-11-03" },
+    textBaked: { checkedText: ["年収が高い県は、", "暮らしも豊かなのか", "47都道府県 × 9つの家計データ", "stats47"], checkedAt: "2026-11-22" },
   },
   "K-S1-02": {
     status: "published",
