@@ -488,7 +488,7 @@ export const DATASETS = [
   }),
   d("seo.keywords", "data/seo/keywords.json", "state", "site", "data", "キーワード改善サイクルの対象キーワード"),
   d("seo.selections", "data/seo/selections/{date}.json", "series", "site", "data", "週ごとの対象キーワードの選定"),
-  d("seo.rank-history", "data/seo/rank-history/{date}.json", "series", "site", "data", "対象キーワードの順位の観測", { retain: "seo-rank-history" }),
+  d("seo.rank-history", "data/seo/rank-history/{date}.json", "series", "site", "data", "対象キーワードの順位の観測 (寿命なし: seo.rank-history-summary がハッシュで全件をつなぎ、過去分の削除を禁じる)"),
   d("seo.rank-history-summary", "data/seo/rank-history.json", "state", "site", "data", "順位の観測の要約"),
   d("seo.proposals", "data/seo/proposals/{name}.json", "evidence", "site", "data", "キーワードごとの改善提案"),
   d("seo.improvement-log", "data/seo/improvement-log.json", "ledger", "site", "data", "キーワード改善の実施記録", { schema: "config/schema/seo.improvement-log.schema.json" }),

@@ -72,6 +72,14 @@ function listLocalFiles(dirAbs, prefix = "") {
 }
 
 /**
+ * 公開の CI が意図して R2 へ上げない作業ファイル (記事フォルダの直下だけ)。publish-blog.yml・blog-auto-publish.yml が
+ * 品質ゲートの後に `research.md`・`review.md`・`*.prompt.txt` を消してから push する (2026-10-28 `380042ccd`)。
+ * これを「R2 に無い」と数えると、公開済みの記事が 1 本も消えなくなる (2026-11-21 の週次で 257 本中 0 本)。
+ * review.md の BLOCK・MAJOR は、gitRm が消す前に record-critic-findings.mjs で台帳へ写す。
+ */
+const NOT_PUBLISHED_WORK_FILE = /^(research\.md|review\.md|[^/]+\.prompt\.txt)$/;
+
+/**
  * ★安全装置 2 (2026-07-29 追加): **ローカルにあるファイルが全て R2 に載っているか**を確認する。
  *
  * なぜ要るか: これまで article.md の内容一致だけを見て `data/` ごと削除していた。
@@ -85,14 +93,6 @@ function listLocalFiles(dirAbs, prefix = "") {
  *
  * @returns {Promise<string[]>} R2 に欠けている相対パス。空配列なら削除して安全。
  */
-/**
- * 公開の CI が意図して R2 へ上げない作業ファイル (記事フォルダの直下だけ)。publish-blog.yml・blog-auto-publish.yml が
- * 品質ゲートの後に `research.md`・`review.md`・`*.prompt.txt` を消してから push する (2026-10-28 `380042ccd`)。
- * これを「R2 に無い」と数えると、公開済みの記事が 1 本も消えなくなる (2026-11-21 の週次で 257 本中 0 本)。
- * review.md の BLOCK・MAJOR は、この掃除の前に record-critic-findings.mjs が台帳へ写す。
- */
-const NOT_PUBLISHED_WORK_FILE = /^(research\.md|review\.md|[^/]+\.prompt\.txt)$/;
-
 async function findMissingInR2(slug, slugDirAbs) {
   const files = listLocalFiles(slugDirAbs).filter((f) => f !== "article.md" && !NOT_PUBLISHED_WORK_FILE.test(f));
   if (files.length === 0) return [];
@@ -100,8 +100,12 @@ async function findMissingInR2(slug, slugDirAbs) {
   return files.filter((_, i) => !present[i]);
 }
 
-/** git rm -r (tracked のみ除去)。失敗は throw */
+/** git rm -r (tracked のみ除去)。失敗は throw。review.md の BLOCK・MAJOR は消す前に台帳へ写す (二重に呼んでも行は増えない) */
 function gitRm(relDir) {
+  const review = join(PROJECT_ROOT, relDir, "review.md");
+  if (existsSync(review)) {
+    execFileSync("node", [join(PROJECT_ROOT, ".claude/scripts/blog/record-critic-findings.mjs"), review], { cwd: PROJECT_ROOT, stdio: "pipe" });
+  }
   execFileSync("git", ["rm", "-r", "-q", relDir], { cwd: PROJECT_ROOT, stdio: "pipe" });
 }
 

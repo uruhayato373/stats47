@@ -160,12 +160,6 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
-  // 対象キーワードの順位の日次観測。26 週 = 182 日分を残す
-  "seo-rank-history": {
-    directory: datasetDir("seo.rank-history"),
-    pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
-    keep: 182,
-  },
   // SNS 投稿の指標の取得 (ほぼ週 1 回。取得した日ごとのディレクトリ)。26 回分を残す
   "sns-metric-snapshots": {
     directory: datasetDir("sns.metric-snapshots"),

@@ -120,8 +120,8 @@ export function ChartFooter({
 
   return (
     <div className="google-anno-skip space-y-1.5">
-      {notes.map((note) => (
-        <p key={note} className="text-left text-xs leading-relaxed text-muted-foreground">
+      {notes.map((note, index) => (
+        <p key={`${index}:${note}`} className="text-left text-xs leading-relaxed text-muted-foreground">
           {note}
         </p>
       ))}
