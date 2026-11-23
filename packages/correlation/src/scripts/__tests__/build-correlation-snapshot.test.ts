@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { compareCorrelation } from '../../selection-policy';
+import { AREA_CODES, buildYearSeries } from '../../utils/year-slices';
 import type {
   CorrelationByKeySnapshot,
   CorrelationStatsSnapshot,
@@ -365,37 +366,37 @@ describe('buildCorrelationSnapshot --skip-if-unchanged', () => {
 });
 
 describe('computeInputFingerprint', () => {
-  const rows = (values: number[], name = 'pref') =>
-    values.map((value, i) => ({ areaCode: `0${i + 1}000`, areaName: `${name}-${i + 1}`, value }));
+  const series = (values: number[], year = '2020') =>
+    buildYearSeries(values.map((value, i) => ({ areaCode: AREA_CODES[i], yearCode: year, value })), () => true, 1);
+  const names = (name = 'pref') => new Map(AREA_CODES.slice(0, 3).map((code, i) => [code, `${name}-${i + 1}`]));
   const meta = (title: string) =>
     new Map([['metric-a', { title, subtitle: null, unit: '件', normalizationBasis: null }]]);
 
-  it('並列 fetch の完了順 (Map の挿入順・行順) に依存しない', async () => {
+  it('並列 fetch の完了順 (Map の挿入順) に依存しない', async () => {
     const { computeInputFingerprint } = await import('../build-correlation-snapshot');
-    const a = { latestYear: '2020', rows: rows([1, 2, 3]) };
-    const b = { latestYear: '2020', rows: rows([4, 5, 6]) };
+    const a = series([1, 2, 3]);
+    const b = series([4, 5, 6]);
     const forward = new Map([['metric-a', a], ['metric-b', b]]);
-    const reversed = new Map([['metric-b', { ...b, rows: [...b.rows].reverse() }], ['metric-a', a]]);
+    const reversed = new Map([['metric-b', b], ['metric-a', a]]);
 
-    expect(computeInputFingerprint(forward, ['metric-a'], meta('A'), 'src')).toBe(
-      computeInputFingerprint(reversed, ['metric-a'], meta('A'), 'src')
+    expect(computeInputFingerprint(forward, ['metric-a'], meta('A'), 'src', names())).toBe(
+      computeInputFingerprint(reversed, ['metric-a'], meta('A'), 'src', names())
     );
   });
 
-  it('値・県名・表示タイトル・コードのどれが変わっても別の値になる', async () => {
+  it('値・県名・年・表示タイトル・コードのどれが変わっても別の値になる', async () => {
     const { computeInputFingerprint } = await import('../build-correlation-snapshot');
-    const base = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 3]) }]]);
-    const fp = computeInputFingerprint(base, ['metric-a'], meta('A'), 'src');
+    const base = new Map([['metric-a', series([1, 2, 3])]]);
+    const fp = computeInputFingerprint(base, ['metric-a'], meta('A'), 'src', names());
 
-    const changedValue = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 4]) }]]);
-    const changedName = new Map([['metric-a', { latestYear: '2020', rows: rows([1, 2, 3], 'x') }]]);
-    const changedYear = new Map([['metric-a', { latestYear: '2021', rows: rows([1, 2, 3]) }]]);
+    const changedValue = new Map([['metric-a', series([1, 2, 4])]]);
+    const changedYear = new Map([['metric-a', series([1, 2, 3], '2021')]]);
     for (const other of [
-      computeInputFingerprint(changedValue, ['metric-a'], meta('A'), 'src'),
-      computeInputFingerprint(changedName, ['metric-a'], meta('A'), 'src'),
-      computeInputFingerprint(changedYear, ['metric-a'], meta('A'), 'src'),
-      computeInputFingerprint(base, ['metric-a'], meta('B'), 'src'),
-      computeInputFingerprint(base, ['metric-a'], meta('A'), 'src2'),
+      computeInputFingerprint(changedValue, ['metric-a'], meta('A'), 'src', names()),
+      computeInputFingerprint(base, ['metric-a'], meta('A'), 'src', names('x')),
+      computeInputFingerprint(changedYear, ['metric-a'], meta('A'), 'src', names()),
+      computeInputFingerprint(base, ['metric-a'], meta('B'), 'src', names()),
+      computeInputFingerprint(base, ['metric-a'], meta('A'), 'src2', names()),
     ]) {
       expect(other).not.toBe(fp);
     }
@@ -555,3 +556,58 @@ describe('buildThemeLinks', () => {
     expect(links.map((link) => link.rankingKey)).toEqual(['related']);
   });
 });
+
+// 指標ごとの最新年どうしで組むと、年の違う値の相関を出してしまう
+// (2026-10-09: 農業産出額 2024 年 × 農業就業人口 2014 年で r=0.762。CORRELATION-SNAPSHOT-YEAR-ALIGN-01)。
+describe('buildCorrelationSnapshot の共通年', () => {
+  beforeEach(() => {
+    saved.clear();
+    fetchFromR2AsJsonMock.mockReset();
+    fetchFromR2AsJsonMock.mockImplementation(() => null);
+  });
+
+  const atYear = (rows: ReturnType<typeof makeRows>, yearCode: string) =>
+    rows.map((row) => ({ ...row, yearCode, yearName: `${yearCode}年` }));
+
+  it('ペアは両方に値のある最新の共通年で計算し、統制変数も同じ年の値だけを使う', async () => {
+    const a = METRICS.find((m) => m.key === 'metric-a')!;
+    const b = METRICS.find((m) => m.key === 'metric-b')!;
+    const pop = METRICS.find((m) => m.key === 'total-population')!;
+    const original = { a: STATS['metric-a'], b: STATS['metric-b'], pop: STATS['total-population'], aYears: a.years, bYears: b.years, popYears: pop.years };
+    a.years = 'all';
+    b.years = 'all';
+    pop.years = 'all';
+    // metric-a の 2024 年は b の 2014 年と逆向き。最新年どうしで組むと強い負の相関になる
+    STATS['metric-a'] = [...atYear(makeRows((i) => 47 - i), '2024'), ...atYear(makeRows((i) => i + 1), '2014')];
+    STATS['metric-b'] = atYear(makeRows((i) => (i + 1) * 2 + ((i * 13) % 17)), '2014');
+    // 総人口だけ 2014 年の値を持つ。ほかの統制変数は 2020 年だけなので、2014 年のペアには使わない
+    STATS['total-population'] = [...original.pop, ...atYear(makeRows((i) => 1000 + ((i * 19) % 47) * 7), '2014')];
+    try {
+      const { buildCorrelationSnapshot } = await import('../build-correlation-snapshot');
+      await buildCorrelationSnapshot({ dryRun: false });
+      const byKey = JSON.parse(saved.get('app/correlation/by-ranking-key-v2/metric-a.json')!) as CorrelationByKeySnapshot;
+      const pair = flatPairs(byKey).find((p) => p.rankingKey === 'metric-b')!;
+
+      expect(byKey.latestYear).toBe('2024');
+      expect(pair.year).toBe('2014');
+      expect(pair.pearsonR).toBeGreaterThan(0.9);
+      expect(pair.partialRPopulation).not.toBeNull();
+      expect(pair.partialRAging).toBeNull();
+      expect(pair.partialRArea).toBeNull();
+      // 散布図も同じ年の値
+      expect(pair.scatterData.find((p) => p.areaCode === '01000')).toMatchObject({ x: 1, y: 2 });
+
+      const top = JSON.parse(saved.get('app/correlation/top-pairs.json')!) as CorrelationTopPairsSnapshot;
+      const topPair = top.pairs.find((p) => [p.rankingKeyX, p.rankingKeyY].sort().join() === 'metric-a,metric-b');
+      expect(topPair?.year).toBe('2014');
+    } finally {
+      STATS['metric-a'] = original.a;
+      STATS['metric-b'] = original.b;
+      STATS['total-population'] = original.pop;
+      a.years = original.aYears;
+      b.years = original.bYears;
+      pop.years = original.popYears;
+    }
+  });
+});
+

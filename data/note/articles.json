@@ -348,8 +348,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-agricultural-employment-population",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "75d46bec06a3cbf9e24fc894642082c556eee407cbed863754354388ad15b356",
+          "files": 12,
+          "bytes": 317630,
+          "savedAt": "2026-11-23T00:42:02.347Z"
+        },
+        "verifiedAt": "2026-11-23T00:42:02.347Z"
       },
       "stats47Targets": [
         "/ranking/agricultural-employment-population"
@@ -367,8 +373,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-agricultural-output",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "a909ef6342afe7c8e8a2354002e4b8357e4e3a1284e2f5bff0eb4bffc4001faf",
+          "files": 9,
+          "bytes": 117294,
+          "savedAt": "2026-11-23T00:37:46.284Z"
+        },
+        "verifiedAt": "2026-11-23T00:37:46.284Z"
       },
       "stats47Targets": [
         "/ranking/agricultural-output"
@@ -386,8 +398,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-average-temperature",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "cd46f7ec914160058c37ce732b38ade5ad37fb991547628027cfce71e7289ebb",
+          "files": 9,
+          "bytes": 115788,
+          "savedAt": "2026-11-23T00:37:59.125Z"
+        },
+        "verifiedAt": "2026-11-23T00:37:59.125Z"
       },
       "stats47Targets": [
         "/ranking/average-temperature"
@@ -405,8 +423,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-avg-propensity-to-consume-worker-households",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "c76ea6fd161f207ca22724254d78fcb9dc3aade1bd2f3972c1190a86d475fb58",
+          "files": 9,
+          "bytes": 117907,
+          "savedAt": "2026-11-23T00:37:58.436Z"
+        },
+        "verifiedAt": "2026-11-23T00:37:58.436Z"
       },
       "stats47Targets": [
         "/ranking/avg-propensity-to-consume-worker-households"
@@ -424,8 +448,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-consumption-expenditure-multi-person-households-per-month",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "1e400ffa5fecb14adb179e359a57b54f37527af3414228948f3171e21e5d164c",
+          "files": 9,
+          "bytes": 116872,
+          "savedAt": "2026-11-23T00:37:57.980Z"
+        },
+        "verifiedAt": "2026-11-23T00:37:57.980Z"
       },
       "stats47Targets": [
         "/ranking/consumption-expenditure-multi-person-households-per-month"
@@ -443,8 +473,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-current-liabilities-balance-multi-person-households-per-household",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "e160e20d7fbb3610812f4e5c3adcdeb4d11d4c54f0694a1db6c591e1e038f1b1",
+          "files": 9,
+          "bytes": 117924,
+          "savedAt": "2026-11-23T00:37:57.597Z"
+        },
+        "verifiedAt": "2026-11-23T00:37:57.597Z"
       },
       "stats47Targets": [
         "/ranking/current-liabilities-balance-multi-person-households-per-household"
@@ -462,8 +498,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-day-time-population",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "cfd2766b33cacba917cf520ea56afcc5b27f7bbf72945de4f8a17703a9830c05",
+          "files": 9,
+          "bytes": 115524,
+          "savedAt": "2026-11-23T00:38:01.944Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:01.944Z"
       },
       "stats47Targets": [
         "/ranking/day-time-population"
@@ -481,8 +523,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-electricity-generation-capacity",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "cd16c4cb909f270bad73e6467bacfd30da3abcacf89295a3c1293d49ab9194c5",
+          "files": 9,
+          "bytes": 116530,
+          "savedAt": "2026-11-23T00:38:01.498Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:01.498Z"
       },
       "stats47Targets": [
         "/ranking/electricity-generation-capacity"
@@ -510,8 +558,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-general-households",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "1fe2f32dc33eb70b4efe6b833d5c8e84756121de387966baa444af5fa815e341",
+          "files": 9,
+          "bytes": 116495,
+          "savedAt": "2026-11-23T00:38:02.104Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:02.104Z"
       },
       "stats47Targets": [
         "/ranking/general-households"
@@ -529,8 +583,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-late-elderly-medical-expense-per-insured",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "9accb7143ea73cf1d9600a31cbaa954d1d09457e794a9c8f3f4c9fb51f01a8ca",
+          "files": 9,
+          "bytes": 121038,
+          "savedAt": "2026-11-23T00:38:01.830Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:01.830Z"
       },
       "stats47Targets": [
         "/ranking/late-elderly-medical-expense-per-insured"
@@ -548,8 +608,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-minimum-wage-by-region",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "f678feaa771efa15dffe5ef42a96273d6d82d3ec4362c9af71aba57792390385",
+          "files": 9,
+          "bytes": 119105,
+          "savedAt": "2026-11-23T00:38:05.072Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:05.072Z"
       },
       "stats47Targets": [
         "/ranking/minimum-wage-by-region"
@@ -567,8 +633,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-number-of-establishments-manufacturing",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "325a8370a4423f3bea7eedda232e47b0b3f6e72839f76ce3522f35580f1ee7a9",
+          "files": 9,
+          "bytes": 120247,
+          "savedAt": "2026-11-23T00:38:05.218Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:05.218Z"
       },
       "stats47Targets": [
         "/ranking/number-of-establishments-manufacturing"
@@ -586,8 +658,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-room-utilization-rate",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "6161a31dbd980af85d8121efd4a8870378c46bfde12de572612741a11dd4b18f",
+          "files": 9,
+          "bytes": 116528,
+          "savedAt": "2026-11-23T00:38:09.951Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:09.951Z"
       },
       "stats47Targets": [
         "/ranking/room-utilization-rate"
@@ -605,8 +683,14 @@
       "publishedAt": "2026-08-29",
       "r2Path": "note/stats47-note/a-total-fertility-rate",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "271a2aaa3c4a639441bcbdf1cb42c7ef10cc82ac04f8a462c5c74b72237a762f",
+          "files": 9,
+          "bytes": 118725,
+          "savedAt": "2026-11-23T00:38:10.016Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:10.016Z"
       },
       "stats47Targets": [
         "/ranking/total-fertility-rate"
@@ -4893,8 +4977,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-total-overnight-guests",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "64509f8d3597dbdd0d5a4552ba47e37a43a2ce4b8062ea99c8ffa631fd191237",
+          "files": 11,
+          "bytes": 499972,
+          "savedAt": "2026-11-23T00:38:10.012Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:10.012Z"
       },
       "stats47Targets": [
         "/ranking/total-overnight-guests"
@@ -4913,8 +5003,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-convenience-store-sales",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "7abccf89465abe35f9d6421b78a5d866d7798ad1c3b4586aab738b72ba611600",
+          "files": 11,
+          "bytes": 509199,
+          "savedAt": "2026-11-23T00:38:10.779Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:10.779Z"
       },
       "stats47Targets": [
         "/ranking/convenience-store-sales"
@@ -4933,8 +5029,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-vacant-housing-rate",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b8c088e32a8f45205519d5420afabc658a1767e48c06844640b71fe5a3cd9ecd",
+          "files": 11,
+          "bytes": 496169,
+          "savedAt": "2026-11-23T00:38:14.154Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:14.154Z"
       },
       "stats47Targets": [
         "/ranking/vacant-housing-rate"
@@ -4953,8 +5055,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-private-rental-housing-rent-per-3-3m2",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "79f5021d0c6a16aa6019a9db5212b66a49070946a249b8bab20ecf736692f8f3",
+          "files": 11,
+          "bytes": 485015,
+          "savedAt": "2026-11-23T00:38:14.363Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:14.363Z"
       },
       "stats47Targets": [
         "/ranking/private-rental-housing-rent-per-3-3m2"
@@ -4973,8 +5081,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-railway-station-count",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b43e057abbca9f371df661b3b92077f3aaa87d16653844a10ca530672c77406f",
+          "files": 11,
+          "bytes": 456077,
+          "savedAt": "2026-11-23T00:38:14.457Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:14.457Z"
       },
       "stats47Targets": [
         "/ranking/railway-station-count"
@@ -4993,8 +5107,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-road-total-length",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "ca92327c0d827b5cd5b5ab87fd5f226f1f118b8a63d4ded522048034c2fdc66e",
+          "files": 11,
+          "bytes": 509919,
+          "savedAt": "2026-11-23T00:38:15.795Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:15.795Z"
       },
       "stats47Targets": [
         "/ranking/road-total-length"
@@ -5013,8 +5133,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-electricity-demand",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "830707fdd34b1798e927fd15036fe54783422cca112c43d421f71279ddee0cdf",
+          "files": 11,
+          "bytes": 498824,
+          "savedAt": "2026-11-23T00:38:18.372Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:18.372Z"
       },
       "stats47Targets": [
         "/ranking/electricity-demand"
@@ -5033,8 +5159,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-final-energy-consumption-per-capita",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "01f5b7f4b277aac06722b39221febb19c52921262630175df41d4c37bad7b355",
+          "files": 11,
+          "bytes": 505900,
+          "savedAt": "2026-11-23T00:38:18.315Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:18.315Z"
       },
       "stats47Targets": [
         "/ranking/final-energy-consumption-per-capita"
@@ -5187,8 +5319,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-akita",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "bd7a7a6e851db3b4699231a432e48041f3d575b6292107210e17fa586ff0c9eb",
+          "files": 33,
+          "bytes": 3006516,
+          "savedAt": "2026-11-23T00:38:30.502Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:30.502Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5209,8 +5347,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-chiba",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b3b6ab3d672ada2460f0f46992df74fe6d1ec9f2faf17dd4c36abe784e4ef0b0",
+          "files": 33,
+          "bytes": 3019822,
+          "savedAt": "2026-11-23T00:38:31.402Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:31.402Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5231,8 +5375,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-ehime",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "369a812c2bd2d6f6290a5dfa4dc3c6712998a6746c28abcab7ff7c57e5e57026",
+          "files": 33,
+          "bytes": 3175661,
+          "savedAt": "2026-11-23T00:38:29.964Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:29.964Z"
       },
       "stats47Targets": [
         "/ranking/culture-recreation-expenditure-ratio-multi-person-households",
@@ -5253,8 +5403,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-fukui",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "489a9dd37b1ccd1a9a84cee368c34bb92eb6a63363480e81f2440ca873dea6cd",
+          "files": 33,
+          "bytes": 3017437,
+          "savedAt": "2026-11-23T00:38:30.738Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:30.738Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5275,8 +5431,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-fukuoka",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "5c0503144ca5b4c86c8b8cfd5cf49cd8fd8ab37a4fba6a7cf33343e30d26eb02",
+          "files": 33,
+          "bytes": 3092010,
+          "savedAt": "2026-11-23T00:38:43.445Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:43.445Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -5297,8 +5459,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-fukushima",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "42b7f8d1dfdd98d4cbd9166dbeff8fde36739b1571431618dffff904cee798dc",
+          "files": 33,
+          "bytes": 3001913,
+          "savedAt": "2026-11-23T00:38:43.609Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:43.609Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5319,8 +5487,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-gifu",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "996c725de611a9a8c1f4d43233c7d5ac98458aec80f6b33014ee1ecb0e9c3952",
+          "files": 33,
+          "bytes": 3016919,
+          "savedAt": "2026-11-23T00:38:44.925Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:44.925Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5341,8 +5515,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-gunma",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "13c162513553ef576cad5585a46e46505ee0140e782d4d6f878b9794d40db484",
+          "files": 33,
+          "bytes": 3043645,
+          "savedAt": "2026-11-23T00:38:44.733Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:44.733Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5363,8 +5543,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-hyogo",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "3479b081b203902b10ee8549f6cf868435066aa8ee8c7924e8c064579eceb141",
+          "files": 33,
+          "bytes": 3113884,
+          "savedAt": "2026-11-23T00:38:56.586Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:56.586Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -5385,8 +5571,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-ibaraki",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "62ed671551d49c18783fd4a9fa98433cfcf47795e1f72aa43fe4f1ae37f0b78e",
+          "files": 33,
+          "bytes": 3091253,
+          "savedAt": "2026-11-23T00:38:56.507Z"
+        },
+        "verifiedAt": "2026-11-23T00:38:56.507Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -5407,8 +5599,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-ishikawa",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "8b7b5a63a3be2ecb93152c52fe7e01ce82f23be8261754e4f8236b56efb8b509",
+          "files": 33,
+          "bytes": 3124552,
+          "savedAt": "2026-11-23T00:39:11.410Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:11.410Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -5429,8 +5627,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-iwate",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "6f8548639ff7ab9d9ee38b7b77059d9be1c4fd27f54c1d6f8fa0407845fcee06",
+          "files": 33,
+          "bytes": 3006357,
+          "savedAt": "2026-11-23T00:39:09.486Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:09.486Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5451,8 +5655,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-kagawa",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "ec64303cff28206d275a84099a84d6c1b079b5df240aedfd40dbf35639ea5d62",
+          "files": 33,
+          "bytes": 3040723,
+          "savedAt": "2026-11-23T00:39:11.360Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:11.360Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5473,8 +5683,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-kagoshima",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "3596b63d0532d2aac3be818d54574dec05c6f587987d97e60a199bbbe5dd5a5f",
+          "files": 33,
+          "bytes": 3102515,
+          "savedAt": "2026-11-23T00:39:10.013Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:10.013Z"
       },
       "stats47Targets": [
         "/ranking/furniture-household-goods-expenditure-ratio-multi-person-households",
@@ -5495,8 +5711,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-kanagawa",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "94f53e4a277dfd83e3bde65c43980fbc0ff39adee07ad5bc2e4861bc62eda9fd",
+          "files": 33,
+          "bytes": 2990864,
+          "savedAt": "2026-11-23T00:39:22.700Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:22.700Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5517,8 +5739,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-kochi",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "ddc509a8e19dc0c9b6cbc659fb4716eead721b9df4fa25f673083cebf00acdf3",
+          "files": 33,
+          "bytes": 3051911,
+          "savedAt": "2026-11-23T00:39:22.290Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:22.290Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5539,8 +5767,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-kumamoto",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "74cc268a84c24b830ebfc31201c52938789a0e9d7195b6828ec02a603265a904",
+          "files": 33,
+          "bytes": 3705230,
+          "savedAt": "2026-11-23T00:39:25.891Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:25.891Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5561,8 +5795,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-kyoto",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "e152ce65164819b3ddef309a8fdc30c16ed694f91e30d9a802022f617974689f",
+          "files": 33,
+          "bytes": 2994634,
+          "savedAt": "2026-11-23T00:39:24.389Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:24.389Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5583,8 +5823,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-mie",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "951b1411b6a9025fc9aabcde8e8293e8168a79dce39a11ce905a44d77e2ad125",
+          "files": 33,
+          "bytes": 3005205,
+          "savedAt": "2026-11-23T00:39:35.092Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:35.092Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5605,8 +5851,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-miyagi",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "a09867ec944d51476d356ecbd6adaed6308f5e9852cc670ed7920bb6a4a29b67",
+          "files": 33,
+          "bytes": 3002044,
+          "savedAt": "2026-11-23T00:39:35.985Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:35.985Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5627,8 +5879,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-miyazaki",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "4879077cb7b69eee0beec3aae80475e381067c411f63733095e96052b1259686",
+          "files": 33,
+          "bytes": 3004833,
+          "savedAt": "2026-11-23T00:39:51.470Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:51.470Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5649,8 +5907,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-nagano",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "5a1ed1c1782371c9980342d79b77a080929f76521925d9f60fd7ed6e67fd4bc1",
+          "files": 33,
+          "bytes": 3038096,
+          "savedAt": "2026-11-23T00:39:50.319Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:50.319Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5671,8 +5935,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-nagasaki",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b7643f974fff1e084f6549d3dc1693b64a4bae36defe54c695dad53b4151f23c",
+          "files": 33,
+          "bytes": 2995570,
+          "savedAt": "2026-11-23T00:39:51.038Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:51.038Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5693,8 +5963,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-nara",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "6081cc492dc97305f4720c357883e4b1a9abafcd1b7e6aa5c7f9e9b0a34dafe5",
+          "files": 33,
+          "bytes": 3024712,
+          "savedAt": "2026-11-23T00:39:51.697Z"
+        },
+        "verifiedAt": "2026-11-23T00:39:51.697Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5715,8 +5991,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-niigata",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "dd55af5a7d7a153a1c0615d94c074c6390efc362043f92f917fc3472483c6599",
+          "files": 33,
+          "bytes": 2960114,
+          "savedAt": "2026-11-23T00:40:04.925Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:04.925Z"
       },
       "stats47Targets": [
         "/ranking/healthcare-expenditure-ratio-multi-person-households",
@@ -5737,8 +6019,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-oita",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "022a643f4de56654bb66b32e6d003d578b1e66f214c7e12318114a61dbe7edb5",
+          "files": 33,
+          "bytes": 3107021,
+          "savedAt": "2026-11-23T00:40:06.394Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:06.394Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -5759,8 +6047,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-okayama",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "5a7e4bbc526f73ab62bda7019849645d0f88ad6c4e6670366c1a6d2f05c06f72",
+          "files": 33,
+          "bytes": 3101851,
+          "savedAt": "2026-11-23T00:40:04.355Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:04.355Z"
       },
       "stats47Targets": [
         "/ranking/furniture-household-goods-expenditure-ratio-multi-person-households",
@@ -5781,8 +6075,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-okinawa",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "20b15d105bb2b29ea6b54882c5837f108ad71b44bf901203a5d82b164669d125",
+          "files": 33,
+          "bytes": 3004031,
+          "savedAt": "2026-11-23T00:40:05.629Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:05.629Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5803,8 +6103,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-osaka",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "eea6a50905c60c510085acaacd7861045fd00ace76e9480a66420836a290f110",
+          "files": 33,
+          "bytes": 3095574,
+          "savedAt": "2026-11-23T00:40:18.368Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:18.368Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -5825,8 +6131,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-saga",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "d2b3d00e1484abe56cc67aec7d3882aa2972dd7405c461ef82a51f8da9679e08",
+          "files": 33,
+          "bytes": 3057502,
+          "savedAt": "2026-11-23T00:40:17.767Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:17.767Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5847,8 +6159,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-saitama",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "d17f68d137fa43adc823e0c2ea4e4a130f2ee23896fecf5dda8336b848908d81",
+          "files": 33,
+          "bytes": 3015235,
+          "savedAt": "2026-11-23T00:40:33.754Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:33.754Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5869,8 +6187,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-shiga",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "1516f5d1cac931a177d90854404f61e63a6f65de1769bfd352e02194e86d3b4e",
+          "files": 33,
+          "bytes": 3005410,
+          "savedAt": "2026-11-23T00:40:33.342Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:33.342Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5891,8 +6215,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-shimane",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "a71116a7a31ead7ca622bfc329ea7173eb022a4287dec1bb82226dc52645f9f8",
+          "files": 33,
+          "bytes": 3010456,
+          "savedAt": "2026-11-23T00:40:32.698Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:32.698Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5913,8 +6243,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-shizuoka",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "a7a7020e3ffe8d66091681d7946b1e89000ed16540ead44afe2bb4ab00e41af4",
+          "files": 33,
+          "bytes": 3014963,
+          "savedAt": "2026-11-23T00:40:32.204Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:32.204Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -5935,8 +6271,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-tochigi",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "7d9405ea2f7e0f26e30482aeef048569fe6e93201189f385d4b1b60afcc15b76",
+          "files": 33,
+          "bytes": 3087300,
+          "savedAt": "2026-11-23T00:40:44.259Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:44.259Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -5957,8 +6299,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-tokushima",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "c93372b3067a43875f3caeb75faf7061f725f8f5b26cda56bbdffc56d682fee4",
+          "files": 33,
+          "bytes": 2996739,
+          "savedAt": "2026-11-23T00:40:45.487Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:45.487Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -5979,8 +6327,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-tokyo",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "3562879bc597630264998510e708ff3f416be86c28ca177b233a090466c44ae7",
+          "files": 33,
+          "bytes": 3012036,
+          "savedAt": "2026-11-23T00:40:46.913Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:46.913Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -6001,8 +6355,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-tottori",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "d4c70be128db5c6f87dda040cc23fee32dd7ccb80a3674591ba7c20fdc97b0b0",
+          "files": 33,
+          "bytes": 3005840,
+          "savedAt": "2026-11-23T00:40:48.011Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:48.011Z"
       },
       "stats47Targets": [
         "/ranking/housing-expenditure-ratio-multi-person-households",
@@ -6023,8 +6383,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-toyama",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "152c56166e75c992e04dc705772ccb39e7978ce3872fd3e0c7256be103a4904f",
+          "files": 33,
+          "bytes": 3014526,
+          "savedAt": "2026-11-23T00:40:55.886Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:55.886Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -6045,8 +6411,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-wakayama",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "c81c6b1955e9bbfa5a55444bbfe7800af5553e1f8be6df5ebdd4887849fc9aa5",
+          "files": 33,
+          "bytes": 3018310,
+          "savedAt": "2026-11-23T00:40:58.467Z"
+        },
+        "verifiedAt": "2026-11-23T00:40:58.467Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -6067,8 +6439,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-yamagata",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "67fe3409797e4524eb3ae275ed632224c6439e8034b356ee3cab3671ee30ade9",
+          "files": 33,
+          "bytes": 2918434,
+          "savedAt": "2026-11-23T00:41:13.689Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:13.689Z"
       },
       "stats47Targets": [
         "/ranking/utilities-expenditure-ratio-multi-person-households",
@@ -6089,8 +6467,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-yamaguchi",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "457d9bf0a9fb680c5d15efd925e5cad3cbd4cae7c8edaec94a84c766d265a69c",
+          "files": 33,
+          "bytes": 2986618,
+          "savedAt": "2026-11-23T00:41:12.306Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:12.306Z"
       },
       "stats47Targets": [
         "/ranking/education-expenditure-ratio-multi-person-households",
@@ -6111,8 +6495,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/a-kakei-yamanashi",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "ec86f92c583060f738e95fd7e8881fafb3c2047ab3aa84c476b7e674dd9c1f86",
+          "files": 33,
+          "bytes": 3108940,
+          "savedAt": "2026-11-23T00:41:13.006Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:13.006Z"
       },
       "stats47Targets": [
         "/ranking/transport-communication-expenditure-ratio-multi-person-households",
@@ -6133,8 +6523,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-academic-food",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "3876ee27253ea149af766928e7aa328b166f7819c5ab809ac7183ff431a99528",
+          "files": 28,
+          "bytes": 1660950,
+          "savedAt": "2026-11-23T00:41:10.204Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:10.204Z"
       },
       "stats47Targets": [
         "/blog/spinach-consumption-ranking",
@@ -6154,8 +6550,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-advancement-employment",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "b8ac0686690361ff02afe9c8c7ba1cd8aa3fd6396198050fd13acb25dc8ffd0d",
+          "files": 28,
+          "bytes": 1665182,
+          "savedAt": "2026-11-23T00:41:20.904Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:20.904Z"
       },
       "stats47Targets": [
         "/blog/advancement-plus-employment-rate-prefecture",
@@ -6175,8 +6577,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-beer-peak-month",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "98954064cddaa789b2936c685ce61d967ac504f7bc3e148ee597c2dc9444494a",
+          "files": 25,
+          "bytes": 1711657,
+          "savedAt": "2026-11-23T00:41:22.920Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:22.920Z"
       },
       "stats47Targets": [
         "/blog/beer-peak-month-july-to-december",
@@ -6197,8 +6605,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-bread-giffen",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "bd93eda0ac78afd872e929e14d9e1e4aef57ff60820e0371f1168384a67d7022",
+          "files": 25,
+          "bytes": 1747325,
+          "savedAt": "2026-11-23T00:41:23.227Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:23.227Z"
       },
       "stats47Targets": [
         "/blog/white-bread-price-up-quantity-up",
@@ -6218,8 +6632,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-gyoza-counting",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "d348eac4b4ba7fb29b9022c285ddaeb9a103f1b5d80cf14d01e56e5c7ddcf60e",
+          "files": 20,
+          "bytes": 1586087,
+          "savedAt": "2026-11-23T00:41:23.017Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:23.017Z"
       },
       "stats47Targets": [
         "/blog/frozen-gyoza-spending-prefecture-gap",
@@ -6238,8 +6658,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-necktie-decline",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "14cd1b6efbb5e033016ad6b523ff7e650fc7e2066622e3becd4c08efe339b0a4",
+          "files": 25,
+          "bytes": 1651441,
+          "savedAt": "2026-11-23T00:41:32.509Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:32.509Z"
       },
       "stats47Targets": [
         "/blog/necktie-stockings-market-shrink",
@@ -6260,8 +6686,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-quantity-price",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "54964507563755a1043a4595e0512a366135b03e5533cf0f54c9488716af21b2",
+          "files": 19,
+          "bytes": 2172649,
+          "savedAt": "2026-11-23T00:41:32.119Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:32.119Z"
       },
       "stats47Targets": [
         "/blog/hokkaido-food-culture",
@@ -6281,8 +6713,14 @@
       "publishedAt": "2026-09-06",
       "r2Path": "note/stats47-note/b-kakei-winter-bargain",
       "body": {
-        "store": "note-only",
-        "manifest": null
+        "store": "r2-public",
+        "manifest": {
+          "sha256": "ee486cc15389148cd2f96d02798d25229d307d210af56af92f7190574d03cf22",
+          "files": 25,
+          "bytes": 1690351,
+          "savedAt": "2026-11-23T00:41:44.891Z"
+        },
+        "verifiedAt": "2026-11-23T00:41:44.891Z"
       },
       "stats47Targets": [
         "/blog/winter-coat-bargain-purchase-price",

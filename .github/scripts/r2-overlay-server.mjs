@@ -52,9 +52,16 @@ export function localPageComponentsFile(urlPath, localDir = LOCAL_DIR) {
  * 指標の公開 (deploy の exact manifest) には入れない。
  */
 const LOCAL_ONLY_SNAPSHOT_PATHS = new Set(["/app/affiliate-ads/all.json"]);
+/**
+ * 公開前の Geo 分析の bundle (`app/geo/<slug>/item.json`・`manifest.json`・`pref/<NN>.json` など。生成器が `.local/r2/` へ書く)。
+ * 本番の R2 にまだ無い slug を localhost の /geo/<slug> で確かめるため (GEO-DEV-LOCAL-R2-01)。
+ * JSON だけを返す (中継は content-type を JSON 固定で返すので、画像の thumbnails は本番へ取り次ぐ)。手元に無い key は本番へ取り次ぐ。
+ * 指標の公開 (deploy の exact manifest) には入れない。
+ */
+const LOCAL_ONLY_SNAPSHOT_PATTERNS = [/^\/app\/geo\/(?:[a-z0-9-]+\/)+[A-Za-z0-9_-]+\.json$/];
 
 export function localMetricSnapshotFile(urlPath, snapshotDir = LOCAL_SNAPSHOT_DIR) {
-  if (!OVERLAY_PATH_PATTERN.test(urlPath) && !LOCAL_ONLY_SNAPSHOT_PATHS.has(urlPath)) return null;
+  if (!OVERLAY_PATH_PATTERN.test(urlPath) && !LOCAL_ONLY_SNAPSHOT_PATHS.has(urlPath) && !LOCAL_ONLY_SNAPSHOT_PATTERNS.some((re) => re.test(urlPath))) return null;
   const target = path.resolve(snapshotDir, ...urlPath.slice(1).split('/'));
   if (!target.startsWith(path.resolve(snapshotDir) + path.sep)) return null;
   return fs.existsSync(target) ? target : null;

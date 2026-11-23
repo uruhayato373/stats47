@@ -150,6 +150,21 @@ const GOOGLE_AUTH_ALLOWED = new Map([
   [".claude/scripts/adsense/oauth-setup.js", "AdSense のリフレッシュトークンを発行する対話式ツール。リダイレクト付きの OAuth クライアントで同意画面を開く (取得には使わない)"],
 ]);
 
+// 型の `any` (2026-11-22 WEB-ANY-RATCHET-01)。tsconfig は全て strict だが、`any` で型を捨てた箇所が残っている。
+// 件数を baseline で止め、増やさない (縮小専用)。型の位置の `any` だけを数える (`: any` / `as any` / `<any>` / `any[]` / ユニオン内)。
+// 変数名の `any` (const any = …) と、コメント・テスト・型宣言ファイル・テスト基盤 (vitest.setup / vitest.shims) は数えない。
+// 触ったファイルの `any` はその改修で具体的な型に置き換える (置き換えた分だけ baseline から消える)。
+const ANY_TYPE_RE = /:\s*any\b|\bas\s+any\b|<any\s*[,>]|,\s*any\s*>|\bany\[\]|\bany\s*\||\|\s*any\b/;
+const ANY_TYPE_SCOPE_RE = /^(?:apps|packages)\/.*\.[cm]?tsx?$/;
+const ANY_TYPE_EXEMPT_RE = /\.d\.ts$|(?:^|\/)vitest\.(?:setup|shims)\.[cm]?ts$/;
+// baseline にまだ 1 件も無い規則を初めて入れるときだけ、既存の件数を baseline へ書くことを許す。
+// その規則の件数が main の baseline に入ったら、以降は他の規則と同じく縮小専用になる (増加は拒否)。
+const BOOTSTRAP_CODES = new Set(["ANY_TYPE"]);
+function codeOf(k) { return k.slice(0, k.indexOf(":")); }
+function isBootstrap(k, prev) {
+  return BOOTSTRAP_CODES.has(codeOf(k)) && !Object.keys(prev).some((p) => codeOf(p) === codeOf(k));
+}
+
 function inspect(file) {
   const results = [];
   const relative = rel(file);
@@ -243,6 +258,11 @@ function inspect(file) {
       results.push(finding("GOOGLE_AUTH_LOCAL", file, number,
         "Google API の認証の自前実装。packages/ops/src/google/google-client.cjs の create*Client を使う", line));
 
+    if (!isTest && ANY_TYPE_SCOPE_RE.test(relative) && !ANY_TYPE_EXEMPT_RE.test(relative) &&
+        !/^\s*(?:\/\/|\/\*|\*)/.test(line) && ANY_TYPE_RE.test(line))
+      results.push(finding("ANY_TYPE", file, number,
+        "型の any。unknown か具体的な型にする (件数は baseline で縮小専用)", line));
+
     if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !SITE_IDENTITY_ALLOWED.has(relative) &&
         !/^\s*(?:\/\/|\/\*|\*)/.test(line) && SITE_IDENTITY_LITERAL_RE.test(line))
       results.push(finding("SITE_IDENTITY_LITERAL", file, number,
@@ -296,7 +316,7 @@ function main() {
     // CI 側でも --ratchet-check が origin/main との比較で手編集による増加を拒否する。
     const prev = loadBaselineV2();
     if (prev) {
-      const added = Object.entries(counts).filter(([k, n]) => n > (prev[k] ?? 0));
+      const added = Object.entries(counts).filter(([k, n]) => n > (prev[k] ?? 0) && !isBootstrap(k, prev));
       const removed = Object.keys(prev).filter((k) => !(counts[k] > 0)).length;
       if (added.length) {
         console.error(`✗ baseline は縮小専用 — 追加 ${added.length} 件を拒否。実修正 (期限/削除条件/backlog 化) かルール修正 (誤検知の除外) で解消する:`);
@@ -334,7 +354,7 @@ function main() {
       else { console.log("ratchet-check: origin/main は v1 baseline — 移行コミットのため skip"); return; }
     } catch { console.log("ratchet-check: origin/main baseline parse 不可 — skip"); return; }
     const cur = loadBaselineV2() ?? {};
-    const grown = Object.entries(cur).filter(([k, n]) => n > (mainFindings[k] ?? 0));
+    const grown = Object.entries(cur).filter(([k, n]) => n > (mainFindings[k] ?? 0) && !isBootstrap(k, mainFindings));
     if (grown.length) {
       console.error(`✗ ratchet 違反: baseline が origin/main より ${grown.length} 件増えている (縮小専用。実修正かルール修正で解消する):`);
       grown.slice(0, 20).forEach(([k, n]) => console.error(`  + ${k.slice(0, 160)} (${mainFindings[k] ?? 0}→${n})`));

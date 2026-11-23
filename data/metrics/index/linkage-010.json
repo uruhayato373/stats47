@@ -4940,6 +4940,17 @@
           "filters": {
             "cdCat01": "I5102"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0004048420",
+          "filters": {
+            "cdCat01": "1",
+            "cdCat03": "1"
+          },
+          "years": [
+            2024
+          ]
         }
       ],
       "recipe": {
@@ -4948,8 +4959,26 @@
           "statsDataId": "0000010109",
           "cdCat01": "I5102"
         },
-        "derived": false,
-        "configHash": "4f80d6edf03821da"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2024
+              ],
+              "estatParams": {
+                "statsDataId": "0004048420",
+                "cdCat01": "1",
+                "cdCat03": "1"
+              },
+              "areaAxis": {
+                "axis": "cat02",
+                "scheme": "name"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "ab0013ccbe25ecaf"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -5629,6 +5658,17 @@
           "filters": {
             "cdCat01": "I521110"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0004048412",
+          "filters": {
+            "cdCat01": "1",
+            "cdCat03": "3"
+          },
+          "years": [
+            2024
+          ]
         }
       ],
       "recipe": {
@@ -5637,8 +5677,26 @@
           "statsDataId": "0000010109",
           "cdCat01": "I521110"
         },
-        "derived": false,
-        "configHash": "15db85e9bd7b969e"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2024
+              ],
+              "estatParams": {
+                "statsDataId": "0004048412",
+                "cdCat01": "1",
+                "cdCat03": "3"
+              },
+              "areaAxis": {
+                "axis": "cat02",
+                "scheme": "name"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "eaefb6310e136c80"
       },
       "dependencies": [],
       "normalizationDependencies": [
@@ -6316,6 +6374,17 @@
           "filters": {
             "cdCat01": "I510120"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0004048408",
+          "filters": {
+            "cdCat01": "1",
+            "cdCat03": "3"
+          },
+          "years": [
+            2024
+          ]
         }
       ],
       "recipe": {
@@ -6324,8 +6393,26 @@
           "statsDataId": "0000010109",
           "cdCat01": "I510120"
         },
-        "derived": false,
-        "configHash": "9c42604052caddf3"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2024
+              ],
+              "estatParams": {
+                "statsDataId": "0004048408",
+                "cdCat01": "1",
+                "cdCat03": "3"
+              },
+              "areaAxis": {
+                "axis": "cat02",
+                "scheme": "name"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "27fc22014a158748"
       },
       "dependencies": [],
       "normalizationDependencies": [

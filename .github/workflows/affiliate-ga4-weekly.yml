@@ -207,7 +207,11 @@ jobs:
 
       - name: 🔍 Rebuild local inventory/compliance inputs
         run: |
-          npx -y tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json --check-size > /dev/null
+          # 在庫の記録を作り直す呼び出しとサイズの検査を分ける。--check-size は記録を書かない
+          # (2026-11-13 dce7c7c6a)。同じ呼び出しにまとめると在庫の記録が古いまま残り、計測ゲートが
+          # inventory-snapshot-stale で毎週落ちる (2026-11-16・11-22 に観測。SIMPLIFY-FAILING-AUTOMATION-01)
+          npx -y tsx .claude/scripts/ads/audit-affiliate-inventory.ts --json > /dev/null
+          npx -y tsx .claude/scripts/ads/audit-affiliate-inventory.ts --check-size > /dev/null
           npx -y tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check > /tmp/affiliate-compliance.md
 
       - name: 🧮 Build portfolio + operations state (決定的判定 + validate)

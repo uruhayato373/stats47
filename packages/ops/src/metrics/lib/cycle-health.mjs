@@ -17,7 +17,6 @@ const strategyLanes = require("../../management/strategy-lanes.cjs");
 // (実装は .claude の基盤の検査を読むので packages からは import しない)
 
 import { CARD_ACTIONS as GSC_CARD_ACTIONS, CARD_PREFIX as GSC_PREFIX } from "../../gsc/lib/coverage-backlog.mjs";
-import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "../../data/lib/year-coverage-backlog.mjs";
 // 振り返りの段 (週次・月次レビューの期限と申し送りの振り分け) は check-review-cadence.mjs と同じ実装を読む
 import { handoffSummary, reviewCadence } from "../../management/review-cadence.mjs";
 
@@ -73,15 +72,21 @@ export function findStalePlanIds(planText, completedIds, liveIds) {
 }
 
 /**
- * 検出 → 起票: 自動起票する検出器ごとに、カードに載せる対象の残件と開いているカードの有無。
- * 残件があるのにカードが開いていなければ起票が止まっている (次の週次 sync で起票されるはず)。
+ * 検出 → 起票: 検出器ごとに、カードに載せる対象の残件と開いているカードの有無。
+ * 残件があるのにカードが開いていなければ起票が止まっている (GSC は次の週次 sync で起票されるはず)。
+ * e-Stat の実在年の台帳は自動起票しない。年の足し外しは sync-estat-years.ts が機械で合わせ、残るのは
+ * 人が判断する分類 (e-Stat に無い年・行の打ち切り・重複行・未判断の除外) だけなので、それが残るのに
+ * カードが無ければ止まっていると出す。取得失敗と台帳なしは次の週次で取り直すので数えない。
  */
-export function summarizeDetectors({ yearResults, yearByDesign, gscQueue, openIds }) {
+export const YEAR_AVAILABILITY_PREFIX = "ESTAT-YEARS";
+const YEAR_AVAILABILITY_JUDGED = ["notInEstat", "truncated", "duplicateRows", "inheritedExclusions"];
+
+export function summarizeDetectors({ yearSummary, gscQueue, openIds }) {
   const hasOpen = (prefix) => openIds.some((id) => id.startsWith(`${prefix}-`));
-  const yearPending = Object.values(yearResults ?? {}).filter((r) => r.verdict === "extend-candidate" && !yearByDesign[r.key]).length;
+  const yearPending = YEAR_AVAILABILITY_JUDGED.reduce((n, k) => n + (yearSummary?.[k] ?? 0), 0);
   const gscPending = (gscQueue ?? []).filter((e) => e.status === "pending" && e.action in GSC_CARD_ACTIONS).length;
   return [
-    { name: "年カバレッジ監査", pending: yearPending, open: hasOpen(YEAR_PREFIX), measured: yearResults != null },
+    { name: "e-Stat 実在年の台帳", pending: yearPending, open: hasOpen(YEAR_AVAILABILITY_PREFIX), measured: yearSummary != null },
     { name: "GSC カバレッジ是正", pending: gscPending, open: hasOpen(GSC_PREFIX), measured: gscQueue != null },
   ].map((d) => ({ ...d, stalled: d.measured && d.pending > 0 && !d.open }));
 }
@@ -132,11 +137,10 @@ export function readCycleHealth(root, today, { buildFlow, docsGovernancePath }) 
     completedIds = new Set(Object.entries(items).filter(([, v]) => v.status === "completed").map(([id]) => id));
   }
   const todoConfig = JSON.parse(readText(root, docsGovernancePath) ?? "{}").todo ?? {};
-  const yearText = readText(root, `${datasetDir("estat.year-coverage")}/queue.json`);
+  const yearText = readText(root, `${datasetDir("estat.availability")}/diff.json`);
   const gscText = readText(root, datasetPath("gsc.coverage-queue"));
   const detectors = summarizeDetectors({
-    yearResults: yearText ? JSON.parse(yearText).results : null,
-    yearByDesign: JSON.parse(readText(root, YEAR_BY_DESIGN) ?? "{}"),
+    yearSummary: yearText ? JSON.parse(yearText).summary : null,
     gscQueue: gscText ? JSON.parse(gscText).queue : null,
     openIds: cards.map((c) => c.id),
   });
@@ -185,7 +189,7 @@ export function formatCycleHealth(h) {
     ? "未計測"
     : !handoff.inContract
       ? `${handoff.period} は契約の開始 (review-wiring.json の contractFrom) より前のため未検査`
-      : `${handoff.period}: 振り分け済み ${handoff.routed} / ${handoff.total} 件${handoff.routed < handoff.total ? " ⚠️ `check-review-cadence.mjs` で行き先の無い項目を確認する" : ""}`;
+      : `${handoff.period}: 振り分け済み ${handoff.routed} / ${handoff.total} 件 (うちカード ID・EXP・Issue に結ばれた ${handoff.linked} 件、定常・見送り ${handoff.routed - handoff.linked} 件)${handoff.routed < handoff.total ? " ⚠️ `check-review-cadence.mjs` で行き先の無い項目を確認する" : ""}`;
   const contractLine = review ? (review.contractErrors ? `⚠️ ${review.contractErrors} 件 (\`check-review-cadence.mjs\`)` : "なし") : "未計測";
   const highLine = discipline
     ? `${discipline.highCount} / 上限 ${strategyLanes.MAX_HIGH_TIER_CARDS} 枚${discipline.highCount > strategyLanes.MAX_HIGH_TIER_CARDS ? " ⚠️ 月次計画で 🟡 へ下げる" : ""}` +

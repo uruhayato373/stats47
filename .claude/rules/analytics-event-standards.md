@@ -345,6 +345,15 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > を取り、`unlabeled` のうち `nav_href` が `pagePath` と同じ行の件数を数える (`nav_href` が GA4 に未登録で取れなければ、デプロイ後 2 週の `nav-click-surfaces.csv` の `unlabeled` × `geo` で読む)。
 > **検証期日**: デプロイから 2 週後の土曜の週次計測。**期日後の判定**: 同じ行が `unlabeled` × `geo` の半分以上なら仮説を支持、2 割未満なら棄却して、残った `unlabeled` を `nav_href` 別に読み直す。
 >
+> **nav_surface の値追加 (2026-11-23・NAV-CLICK-COVERAGE-01)**: 本番の 10 ページで全リンクに合成クリックを送り、送られた `nav_surface` を数えた
+> (手動の `trackNavClick` を持つ部品は共通の監視が重複を除くので、DOM を数えるだけでは実際の `unlabeled` が分からない)。`unlabeled` は
+> 県のページ 80・市区町村のページ 64・`/municipalities` 31・カテゴリ 11・トップ 8・ランキング 6・ブログとテーマ各 3・調査 1 本だった。
+> 多い部品に次の値を付けた: `area_cities` = 県・市区町村ページの「◯◯の市区町村」一覧 (`CitiesNavCard`)、`ranking_same_survey` = ランキングの右レール
+> 「同じ調査のランキング」(`SurveyCard`)、`scope_nav` = 地域単位の切り替え (`StatisticsScopeNav`)、`category_featured` = カテゴリの注目ランキングの
+> カルーセル (`HorizontalCardCarousel` の `navSurface`)。サイドバーのロゴは `sidebar`、県ページの Geo のカードは `geo_analysis_list` / `geo_evidence` にした。
+> 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。残る `unlabeled` は、カードの見出しの「すべて見る」(`card-action`)・
+> `/municipalities` のテーマのカード・ブログの体験記と運営者のカードなど、1 ページに 1〜6 本のもの。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

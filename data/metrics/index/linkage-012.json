@@ -2,6 +2,38 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "high-school-new-graduates-job-opening-ratio",
+      "pageId": "ranking:high-school-new-graduates-job-opening-ratio",
+      "title": "高等学校新規卒業者の求人倍率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F03304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F03304"
+        },
+        "derived": false,
+        "configHash": "6cee013b2de9f9c8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:high-school-new-graduates-job-opening-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "high-school-students",
       "pageId": null,
       "title": "高等学校生徒数",
@@ -15515,38 +15547,6 @@
         },
         {
           "pageId": "ranking:housing-cost-all-households",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "housing-expenditure-ratio-multi-person-households",
-      "pageId": "ranking:housing-expenditure-ratio-multi-person-households",
-      "title": "住居費割合",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010212",
-          "filters": {
-            "cdCat01": "#L02412"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010212",
-          "cdCat01": "#L02412"
-        },
-        "derived": false,
-        "configHash": "9d1da04de2f8cc26"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:housing-expenditure-ratio-multi-person-households",
           "kind": "ranking"
         }
       ],

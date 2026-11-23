@@ -98,6 +98,23 @@ test(".claude/worktrees 配下の別 checkout は走査しない", (t) => {
   ]);
 });
 
+test("git の追跡外の .local 配下 (ローカルの本番ビルドの出力) は走査しない", (t) => {
+  const fixture = createFixture();
+  t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));
+
+  const buildDir = path.join(fixture.fixtureRoot, "apps/web/.local/next-release/server");
+  fs.mkdirSync(buildDir, { recursive: true });
+  fs.writeFileSync(path.join(buildDir, "middleware.js"), "// docs/missing-from-build-output.md\n");
+
+  const result = runChecker(fixture, ["--json"]);
+  const output = JSON.parse(result.stdout);
+
+  assert.equal(result.status, 1);
+  assert.deepEqual(output.broken, [
+    { ref: "docs/missing-known.md", referrers: ["CLAUDE.md"] },
+  ]);
+});
+
 test("backlog ledgerの完了時点コマンドは現行docs参照として走査しない", (t) => {
   const fixture = createFixture();
   t.after(() => fs.rmSync(fixture.fixtureRoot, { recursive: true, force: true }));

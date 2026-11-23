@@ -2,6 +2,36 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "port-cargo-coastal-in",
+      "pageId": null,
+      "title": "移入貨物トン数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003130803",
+          "filters": {}
+        }
+      ],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "statsDataId": "0003130803"
+        },
+        "fetcherKey": "estat",
+        "configHash": "35db913a726be8f9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:port-cargo-coastal-in",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "port-cargo-coastal-out",
       "pageId": null,
       "title": "移出貨物トン数",
@@ -8823,38 +8853,6 @@
         },
         {
           "pageId": "ranking:private-rented-dwellings",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "private-rented-housing-ratio",
-      "pageId": "ranking:private-rented-housing-ratio",
-      "title": "民営借家比率",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000010208",
-          "filters": {
-            "cdCat01": "#H0130202"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000010208",
-          "cdCat01": "#H0130202"
-        },
-        "derived": false,
-        "configHash": "74c4d6a9a8ea81d2"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:private-rented-housing-ratio",
           "kind": "ranking"
         }
       ],

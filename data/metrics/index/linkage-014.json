@@ -2,6 +2,40 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "judo-therapist-rate",
+      "pageId": "ranking:judo-therapist-rate",
+      "title": "人口10万対柔道整復師数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026940",
+          "filters": {
+            "cdTab": "0180",
+            "cdCat01": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026940",
+          "cdCat01": "100",
+          "cdTab": "0180"
+        },
+        "derived": false,
+        "configHash": "51ba99ee490622d1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:judo-therapist-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "junior-college-capacity-index",
       "pageId": "ranking:junior-college-capacity-index",
       "title": "短期大学収容力指数",
@@ -11997,51 +12031,6 @@
         },
         {
           "pageId": "ranking:leek-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "leek-consumption-quantity",
-      "pageId": "ranking:leek-consumption-quantity",
-      "title": "ねぎ消費量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "010511040",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "010511040",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "d5a0f6892a50714e"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "blog:ehime-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:iwate-food-culture",
-          "kind": "blog"
-        },
-        {
-          "pageId": "ranking:leek-consumption-quantity",
           "kind": "ranking"
         }
       ],

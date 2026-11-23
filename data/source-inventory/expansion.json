@@ -18,6 +18,22 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "average-income-ranking-unknown-a05",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a06",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
       "analysis": "average-income-ranking-unknown-a06",
       "channel": "note",
       "status": "planned",
@@ -34,6 +50,14 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "average-income-ranking-unknown-a06",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
       "analysis": "average-income-ranking-unknown-a55",
       "channel": "note",
       "status": "planned",
@@ -48,6 +72,22 @@
       "target": "note:b-ref-inc-a55",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a55",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
+      "analysis": "capital-city-guide-unknown-a05",
+      "channel": "area",
+      "status": "done",
+      "target": "area:03000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "gis-business-guide-2022-a33",
@@ -138,6 +178,14 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "kakei-marketing-2015-a01-03",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
       "analysis": "kakei-marketing-2015-a01-04",
       "channel": "blog",
       "status": "done",
@@ -160,6 +208,14 @@
       "target": "note:b-ref-kakei-a01-04",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a01-04",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
     },
     {
       "analysis": "kakei-marketing-2015-a01-05",
@@ -243,6 +299,14 @@
     },
     {
       "analysis": "kakei-marketing-2015-a02-03",
+      "channel": "japan",
+      "status": "declined",
+      "reason": "年収階級別に品目を比べる問いで、全国のページは公式の全国の系列の値と推移を見せ、年収階級の切り口を持たない。この問いは全国のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-03",
       "channel": "note",
       "status": "done",
       "target": "note:b-rich-spending-patterns",
@@ -296,6 +360,14 @@
       "target": "note:b-ref-kakei-a02-05",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a02-05",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "年収階級別に品目を比べる問いで、テーマの「食卓と家計の支出」は地域ごとの値と推移を見せ、年収階級の切り口を持たない。この問いはテーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
     },
     {
       "analysis": "kakei-marketing-2015-a02-06",
@@ -448,6 +520,14 @@
       "target": "note:b-kakei-necktie-decline",
       "decidedAt": "2026-10-13",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a03-03",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "帽子・ネクタイ・婦人用ストッキングは衣類の品目で、テーマの「食卓と家計の支出」(食料と家計の支出の章) の範囲に無く、衣類のテーマも無い。この問いはテーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
     },
     {
       "analysis": "kakei-marketing-2015-a03-04",
@@ -672,6 +752,14 @@
       "target": "note:b-ref-kakei-a05-06",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "kakei-marketing-2015-a05-06",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
     },
     {
       "analysis": "kakei-marketing-2015-a06-00",
@@ -1834,6 +1922,30 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "money-health-ranking-unknown-a04",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a06",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a07",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
       "analysis": "money-health-ranking-unknown-a07",
       "channel": "note",
       "status": "planned",
@@ -1850,6 +1962,22 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "money-health-ranking-unknown-a07",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a08",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
       "analysis": "money-health-ranking-unknown-a08",
       "channel": "note",
       "status": "planned",
@@ -1864,6 +1992,14 @@
       "target": "note:b-ref-mh-a08",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a08",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
     },
     {
       "analysis": "money-health-ranking-unknown-a09",
@@ -1883,6 +2019,14 @@
     },
     {
       "analysis": "money-health-ranking-unknown-a10",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a10",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-mh-a10",
@@ -1896,6 +2040,30 @@
       "target": "note:b-ref-mh-a10",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a11",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a12",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "money-health-ranking-unknown-a14",
+      "channel": "area",
+      "status": "declined",
+      "reason": "県のページは 1 つの県の値と全国での位置を見せ、47 都道府県の比較・相関・差の推移は置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、県のページの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "prefecture-deviation-2018-a01",
@@ -2402,6 +2570,14 @@
       "decidedBy": "note-manager"
     },
     {
+      "analysis": "prefecture-ranking-consumption-2020-a15",
+      "channel": "theme",
+      "status": "declined",
+      "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "theme-designer"
+    },
+    {
       "analysis": "prefecture-ranking-consumption-2020-a16",
       "channel": "note",
       "status": "planned",
@@ -2867,6 +3043,62 @@
     },
     {
       "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "area",
+      "status": "done",
+      "target": "area:01000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "area",
+      "status": "done",
+      "target": "area:02000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "area",
+      "status": "done",
+      "target": "area:03000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "area",
+      "status": "done",
+      "target": "area:04000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "area",
+      "status": "done",
+      "target": "area:05000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "area",
+      "status": "done",
+      "target": "area:06000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
+      "channel": "area",
+      "status": "done",
+      "target": "area:07000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a47",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-prc-a47",
@@ -2883,6 +3115,62 @@
     },
     {
       "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "area",
+      "status": "done",
+      "target": "area:08000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "area",
+      "status": "done",
+      "target": "area:09000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "area",
+      "status": "done",
+      "target": "area:10000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "area",
+      "status": "done",
+      "target": "area:11000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "area",
+      "status": "done",
+      "target": "area:12000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "area",
+      "status": "done",
+      "target": "area:13000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
+      "channel": "area",
+      "status": "done",
+      "target": "area:14000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a48",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-prc-a48",
@@ -2899,6 +3187,78 @@
     },
     {
       "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:15000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:16000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:17000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:18000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:19000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:20000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:21000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:22000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
+      "channel": "area",
+      "status": "done",
+      "target": "area:23000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a49",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-prc-a49",
@@ -2915,6 +3275,62 @@
     },
     {
       "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "area",
+      "status": "done",
+      "target": "area:24000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "area",
+      "status": "done",
+      "target": "area:25000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "area",
+      "status": "done",
+      "target": "area:26000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "area",
+      "status": "done",
+      "target": "area:27000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "area",
+      "status": "done",
+      "target": "area:28000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "area",
+      "status": "done",
+      "target": "area:29000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
+      "channel": "area",
+      "status": "done",
+      "target": "area:30000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a50",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-prc-a50",
@@ -2931,6 +3347,78 @@
     },
     {
       "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:31000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:32000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:33000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:34000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:35000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:36000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:37000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:38000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
+      "channel": "area",
+      "status": "done",
+      "target": "area:39000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a51",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-prc-a51",
@@ -2944,6 +3432,70 @@
       "target": "note:b-ref-prc-a51",
       "decidedAt": "2026-10-14",
       "decidedBy": "note-manager"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:40000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:41000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:42000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:43000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:44000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:45000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:46000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
+    },
+    {
+      "analysis": "prefecture-ranking-consumption-2020-a52",
+      "channel": "area",
+      "status": "done",
+      "target": "area:47000",
+      "decidedAt": "2026-11-23",
+      "decidedBy": "area-curator"
     },
     {
       "analysis": "prefecture-ranking-consumption-2020-a52",

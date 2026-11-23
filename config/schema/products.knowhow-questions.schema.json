@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ノウハウ商品の質問台帳",
+  "description": "data/products/knowhow-questions.json の形状契約 (KNOWHOW-QA-BOARD-01)。公開の質問掲示板で見つけた統計・地図・e-Stat の困りごとを手作業で追記し、4 週後に theme 別に数えて商品化の判断 (KNOWHOW-PRODUCT-PILOT-01) へ渡す。個人を特定する語は入れない。自動巡回・自動投稿はしない。",
+  "type": "object",
+  "required": ["schemaVersion", "window", "queries", "sources", "questions"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "window": {
+      "description": "収集の期間 (4 週) と判定の下限。数値は観測の下限で、売れる証拠ではない",
+      "type": "object",
+      "required": ["startedOn", "weeks", "minQuestions", "productThemeMin"],
+      "additionalProperties": false,
+      "properties": {
+        "startedOn": { "type": ["string", "null"], "format": "date", "description": "収集を始めた日。始めるまでは null" },
+        "weeks": { "type": "integer", "minimum": 1 },
+        "minQuestions": { "type": "integer", "minimum": 1, "description": "4 週の合計がこの件数未満なら計器不成立" },
+        "productThemeMin": { "type": "integer", "minimum": 1, "description": "同じ theme がこの件数以上なら商品候補にする" }
+      }
+    },
+    "queries": {
+      "description": "検索語。テーマごとに 3 語を固定し、途中で入れ替えない",
+      "type": "object",
+      "required": ["kml-map", "estat-fetch", "excel-stats", "claude-code", "other"],
+      "additionalProperties": false,
+      "properties": {
+        "kml-map": { "$ref": "#/definitions/queryWords" },
+        "estat-fetch": { "$ref": "#/definitions/queryWords" },
+        "excel-stats": { "$ref": "#/definitions/queryWords" },
+        "claude-code": { "$ref": "#/definitions/queryWords" },
+        "other": { "$ref": "#/definitions/queryWords" }
+      }
+    },
+    "sources": {
+      "description": "掲示板ごとのリンク可否 (先に規約を読んで記録する)。キーは questions[].source と同じ名前",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["linkPolicy", "checkedOn"],
+        "additionalProperties": false,
+        "properties": {
+          "linkPolicy": { "enum": ["unchecked", "allowed", "not-allowed", "conditional"], "description": "回答にリンクを載せてよいか。unchecked のままリンクを載せない" },
+          "termsUrl": { "type": "string", "format": "uri", "description": "確かめた規約の URL" },
+          "checkedOn": { "type": ["string", "null"], "format": "date" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["collectedAt", "source", "url", "questionText", "theme", "answered", "reaction", "productCandidate"],
+        "additionalProperties": false,
+        "properties": {
+          "collectedAt": { "type": "string", "format": "date", "description": "台帳に追記した日" },
+          "source": { "type": "string", "minLength": 1, "description": "掲示板の名前。sources のキーと同じ" },
+          "url": { "type": "string", "format": "uri", "description": "質問の URL" },
+          "questionText": { "type": "string", "minLength": 1, "maxLength": 200, "description": "質問の要約。個人を特定する語・原文の転載を入れない" },
+          "theme": { "enum": ["kml-map", "estat-fetch", "excel-stats", "claude-code", "other"] },
+          "answered": { "type": "boolean", "description": "こちらが答えたか (週 2 件まで)" },
+          "reaction": { "type": ["string", "null"], "description": "回答への反応 (ベストアンサー・お礼・追加質問など)。無ければ null" },
+          "productCandidate": { "type": "boolean", "description": "ノウハウ商品の候補になる質問か" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "queryWords": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

@@ -347,6 +347,7 @@ export default async function CategoryPage({ params }: PageProps) {
           <HorizontalCardCarouselFrame title="注目のランキング" icon={<TrendingUp />}>
             <HorizontalCardCarousel
               ariaLabel={`${category.categoryName}の注目ランキング`}
+              navSurface="category_featured"
             >
               {featuredItems.map((item) => (
                 <FeaturedRankingCard

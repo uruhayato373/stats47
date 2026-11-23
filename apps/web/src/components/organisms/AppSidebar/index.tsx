@@ -46,6 +46,7 @@ import {
   themeHref,
 } from '@/features/theme-dashboard/config/theme-urls';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
 import { getIcon } from '@/lib/icons';
 
 import {
@@ -187,6 +188,7 @@ export function AppSidebar() {
           href="/"
           className="flex items-center gap-2"
           aria-label="stats47 ホーム"
+          {...navSurfaceProps('sidebar')}
         >
           <ThemeAwareImage
             lightSrc="/brand/atlas-v1/mark.svg"

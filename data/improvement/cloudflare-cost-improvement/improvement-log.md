@@ -58,6 +58,7 @@ hit していれば `effect/pending` に留まり、確定ラベルは付かな�
 - **検証コマンド**: 内部ブラウザで dash.cloudflare.com を開いた状態で、Workers → stats47 → Observability のクエリを `$workers.scriptName = stats47`、`$workers.event.request.url includes "pref="` (同様に `page=`)、計算 `sum($workers.cpuTimeMs)`、期間 24 時間で実行する。日次の合計は `node -e "const s=require('./data/cloudflare/snapshots/<日付>.json');console.log(s.workers.totalCpuTimeUs/1000)"`。
 - **判定**: effect/pending。**[仮説]** クエリ URL が消えれば `pref=`・`page=` 付きの CPU は 301 の分 (1 件あたり数 ms) まで下がる。**検証期日**: 本番反映の 3 日後。**期日後の判定**: `page=` 付きが 400 秒/日未満なら仮説支持。1,900 秒/日以上残るなら、robots と 301 を守らない UA を UA 別集計で特定し、Cloudflare の WAF カスタムルールを次の手にする。
 - **再発防止**: 日次の閾値検査に `workers_cpu_ms` (warning 4,500 万 ms/日・critical 8,000 万 ms/日) と請求サイクルの累計ペース検査を追加。R2 容量の 2 ルールは請求 $0 の実態に合わせて info に下げた。Cloudflare 側の予算アラートは $3.00 の 1 件だけ (今サイクル 1000%) で、段階化はオーナーの許可待ち。
+- **引き継ぎ (2026-11-22 棚卸し・backlog `CF-CPU-SURGE-01` を閉じた)**: 先読み (`_rsc`) の割合は 11-20 に 3.4% まで下がり、先読み停止は効いた。OCN 回線 (ASN 4713) から約 3 秒に 1 回アクセスする 1 端末 (10-16 の CPU の約 33%) が消えたかは未確認。この節の観測で Observability を読むときに、同じ ASN・UA の件数と CPU も取り直す。消えていなければ、レート制限の案をオーナーの承認に回す (人の閲覧の可能性を否定できないまま遮断しない)。
 
 ### [CF-CPU-ISR-01] R2 を読む動的 route を実行時 ISR にし、同じ URL の描き直しをやめる
 

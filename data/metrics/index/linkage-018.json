@@ -2,6 +2,41 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "new-graduate-starting-salary-college-female",
+      "pageId": "ranking:new-graduate-starting-salary-college-female",
+      "title": "新規学卒者初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0620304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0620304"
+        },
+        "derived": false,
+        "configHash": "2c9c85fe5bc88ead"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:new-graduate-starting-salary-college-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "new-graduate-starting-salary-college-male",
       "pageId": "ranking:new-graduate-starting-salary-college-male",
       "title": "新規学卒者初任給",
@@ -8074,6 +8109,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:nursery-shortage-urban-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:nursery-count-per-100k-0-5",
           "kind": "ranking"
         },
@@ -8916,6 +8955,10 @@
         },
         {
           "pageId": "blog:childcare-friendly-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nursery-shortage-urban-prefecture",
           "kind": "blog"
         },
         {
@@ -11217,42 +11260,6 @@
         },
         {
           "pageId": "ranking:nursing-welfare-facilities-basic-tabulation-6510-per",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "nursing-welfare-facilities-detailed-tabulation-6510-per",
-      "pageId": null,
-      "title": "介護老人福祉施設（詳細票）",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0000020310",
-          "filters": {
-            "cdCat01": "#J02205"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "estat",
-        "estatParams": {
-          "statsDataId": "0000020310",
-          "cdCat01": "#J02205"
-        },
-        "derived": false,
-        "configHash": "43d148997bae6512"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "municipality-ranking:nursing-welfare-facilities-detailed-tabulation-6510-per",
-          "kind": "municipality-ranking"
-        },
-        {
-          "pageId": "ranking:nursing-welfare-facilities-detailed-tabulation-6510-per",
           "kind": "ranking"
         }
       ],

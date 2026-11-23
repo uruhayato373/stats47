@@ -947,6 +947,21 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **観測期限と判定手順**: 2026-11-21 (after 窓 2026-10-22〜11-18 の 28 日 + 取得遅延 3 日)。active 施策の一覧 (`.claude/todo/improvements.md`) への登録は improvement-triage が行う。before と after の 28 日窓で、上の 3 群と対照群を並べる (差の差)。検索語群の CTR が対照群との差を半分以上縮めていれば title の効果ありとして記録する。市区町村ページの clicks が baseline 比 -10% 以下 (`thresholds.mjs` adverse.relativeDrop) で対照群が同方向に動いていなければ、title の形を戻す案を backlog `MUNI-PAGE-QUALITY-01` へ。
 - **未確定 / 仮説**: [仮説] 「◯◯市 人口」の検索で表示されているのは市区町村ページではなく市区町村ランキングやブログ。W41 の city ページ上位 (imp 順) に坂出市・岩国市が無いことが根拠。検証コマンド: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-11 --end 2026-10-08 --dims query,page --filter 'query~=坂出市 ?人口'`。検証期日: 次の木曜計測 (2026-10-29) の後。期日後の判定: ランキングやブログに当たっていれば、データブック化後に市区町村ページへ表示が移るかを after 窓で確かめる。
 - **交絡の記録 (2026-10-28)**: PR #1193 で県名×市区町村ランキング `/municipalities/ranking/<key>/<県コード>` (10 指標 × 47 県 = 470 URL) を足し、全国版の `?pref=` を 301 で県別ページへ移す。判定では `page*=/municipalities/ranking/` から 2 段の URL (`/municipalities/ranking/[^/]+/[0-9]{5}`) を除いて baseline と並べる。同じ PR でサイドバーの項目と東京都の地図も変わる (title・説明文は変えていない。市区町村ページと全国版の title の数字の整形は判定後に `MUNI-TITLE-MAGNITUDE-01` で変える)。
+- **判定 (2026-11-22・improvement-triage): effect/none として improvements.md の行を閉じた**。
+  - 取得コマンド: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-10-22 --end 2026-11-18 --dims query --filter 'query~=(市|町|村|区) ?人口' --limit 25000` と、同じ窓の `--dims page --limit 25000`。集計条件は baseline と同じ (fragment と query を除き、正規表現 `(市|町|村|区)\s*人口`、市区町村ページ `/areas/\d+/cities/\d+$`、ランキングは 1 段の `/municipalities/ranking/[^/]+$`)。対照群は W41 pages.csv から baseline と同じ条件で抽出した 19 URL で、baseline の値 168 / 11,870 と一致した。
+
+  | 群 | baseline (09-11〜10-08) | after (10-22〜11-18) |
+  |---|---|---|
+  | 検索語群 | 341 語 / 2 clicks / 1,840 imp / CTR 0.11% / pos 13.7 | 3,028 語 / 118 clicks / 77,425 imp / CTR 0.15% / pos 9.0 |
+  | 市区町村ページ | 373 URL / 13 / 2,214 / 0.59% | 913 URL / 948 / 161,919 / 0.59% / pos 8.6 |
+  | 市区町村ランキング (1 段) | 65 URL / 448 / 4,686 / 9.56% | 601 URL / 1,371 / 34,954 / 3.92% (MUNI-SSDS-EXPANSION-01 の新規 541 件と交絡) |
+  | 対照群 19 URL | 168 / 11,870 / 1.42% | 214 / 10,434 / 2.05% |
+
+  - 判定: title の効果は確認できなかった。検索語群と対照群の CTR の差は 1.31pt から 1.90pt へ広がり、基準の「差を半分以上縮める」を満たさない。effect/none。
+  - 量は大きく増えた (市区町村ページの clicks 13 → 948、imp は 73 倍)。adverse の条件 (clicks が -10% 以下) には当たらない。
+  - 量の増加は、索引対象の拡大 (364 → 1,741 件) と title の変更を分けられない。想定効果値を置いていなかったので、量の効果は判定せず記録だけを残す。
+  - 検索語群は表示が増え、順位も 13.7 から 9.0 に上がったのに、CTR は 0.15% にとどまった。
+  - 次の一手: annual.md のカード `MUNI-CITY-PAGE-SNIPPET-01` (本文で「◯◯市 人口」に文で答える) と `MUNI-TITLE-MAGNITUDE-01` (title の数字の丸め)。
 
 ### [MUNI-SSDS-EXPANSION-01] 市区町村ランキング 541 件・市区町村テーマ 10 件の追加と回遊の配線 (2026-10-22 デプロイ)
 
@@ -988,3 +1003,35 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **本番確認**: sitemap index と子 11 件は HTTP 200。公開 sitemap の URL は 9,137 件。代表 24 URL の Googlebot UA 応答は 23 件が 200、意図的廃止 1 件が 410。5xx・空本文・UA 差は検出されなかった。
 - **GSC 操作**: 2026-11-01 09:17 JST に `https://stats47.jp/sitemap.xml` を Search Console API で再送信。直後の API 応答は `lastSubmitted=2026-11-01T00:17:50.344Z`、`isPending=true`、warnings/errors は各 0。Google の再取得・登録増は未確認。
 - **検証と次の観測**: Web 型チェック、対象テスト 18 件、対象 ESLint、docs check は通過。GSC coverage の最新認証取得は `auth_required` で、比較可能な母集団は 2026-10-17 のまま。次回の認証付き週次取得後に対象 URL の URL Inspection 状態と `indexed_by_inspection` を比較し、効果を判定する。
+
+## [KAKEI-REFLECT-EFFECT-01] 家計調査の反映の検索指標・2 ページ目到達の観測 (2026-11-22 デプロイ)
+
+- **デプロイ日**: 2026-11-22 (PR #1296・main 3e302d305。sync-snapshots の master・ranking-items・blog)。変えたこと: 家計調査 850 指標の 2025 年値、記事 3 本 (laundry-detergent・other-mushroom-quantity・rent-group)、実収入の 2025 年への付け替え、テーマの年の統一。backlog `CONTENT-KAKEI-EXPANSION-01` の完了条件「対象 URL の検索指標と 2 ページ目到達の観測開始日が記録される」をここで満たす。
+- **観測開始日**: 2026-11-22。
+- **対象 URL**: 家計調査のランキング (`/ranking/` のうち家計調査の指標)・`/survey/kakei-chousa`・`/themes/real-income`・記事 3 本。
+- **baseline**: `data/gsc/snapshots/2026-W43/pages.csv` の同じ窓で、家計調査由来のランキング 580 URL = 2,817 click / 51,790 imp (月次計画 `.claude/todo/monthly.md` 重点 1)。
+- **想定効果**: 数値を置かない。年値の更新が検索の表示とクリックに与える効果の前例と計算式が無く、根拠を示せない。`[target:]` は付けず閾値エンジンの対象外とし、手動で判定する。
+- **検証コマンド**: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-11-22 --end 2026-12-19 --dims page --filter 'page*=/ranking/'` を公開前 `--start 2026-10-25 --end 2026-11-21` と同じ形で並べる (家計調査の指標に絞る)。2 ページ目到達は GA4 の週次 snapshot (`data/ga4/snapshots/`) の同じ URL 集合で比べる。
+- **期日**: 2026-12-20 (公開後 28 日 2026-11-22〜12-19 がそろう日の翌日)。
+- **期日に動かなかった場合の次の手**: click が増えず imp だけ増えるなら題名と説明文を見直す。imp も増えなければ [仮説] 2025 年値が再クロールされていない。検証期日 2026-12-20、検証は URL Inspection API で対象 20 URL の lastCrawlTime を取り、2026-11-22 より前なら再クロール待ちとして次の窓 (2027-01-16) へ延ばす。
+- **KPI**: `search-clicks`。
+- **実測**: 未取得 (2026-11-22 時点)。
+- **登録時の注意**: active が上限 5 を超えた状態 (DG080 の warning 対象) で、呼び元の指示により追加した。
+
+## [BLOG-SEO-TYPES-01] 記事型のポートフォリオ (A・B・D2・F・G) の検索の表示とクリックの型別比較 (2026-11-23)
+
+- **対象**: topic-queue (`data/blog/topic-queue.json`) の done 81 本 (A 29・B 12・D2 23・F 7・G 10)。いずれも公開から 4 週以上 (done_at が 2026-10-26 より前)。
+- **再開条件**: 各型で、公開から 4 週以上たち表示のある記事が 5 本以上 (A 20・B 12・D2 13・F 7・G 6) を満たした。索引に入ったかは表示の有無で代えた (URL Inspection は D2 の 23 本のうち 12 本しか日次の標本に入っていない)。
+- **実測 (`data/gsc/snapshots/2026-W46/pages.csv`)**:
+
+  | 型 | 本数 | 表示の計 | 1 本あたり | 表示の中央値 | 表示 0 | クリックの計 | CTR |
+  |---|---:|---:|---:|---:|---:|---:|---:|
+  | A | 29 | 7,560 | 261 | 89 | 9 | 152 | 2.01% |
+  | B | 12 | 1,957 | 163 | 79 | 0 | 34 | 1.74% |
+  | D2 | 23 | 2,560 | 111 | 42 | 10 | 88 | 3.44% |
+  | F | 7 | 2,445 | 349 | 330 | 0 | 66 | 2.70% |
+  | G | 10 | 1,162 | 116 | 80.5 | 4 | 42 | 3.61% |
+
+- **再現コマンド**: topic-queue の done を `archetype` で分け、`published_slug` を pages.csv の `https://stats47.jp/blog/<slug>` と突き合わせて clicks・impressions を集計する (2026-11-23 のセッションで実行した node の 1 行。比較の母集団と列は上の表のとおり)。
+- **判定**: 効果のラベルは付けない (型ごとの比較で、効果判定エンジンの対象外。型の間で題材・公開時期・本数が違い、型そのものの効果と切り分けられない)。F は全 7 本に表示があり中央値が最も高い。D2 は中央値が最も低く、23 本中 10 本が表示 0。
+- **[仮説]** D2 の表示 0 は、09-01〜09-02 に 23 本を一度に出して巡回が後回しになったため。**検証**: 表示 0 の 10 本を URL Inspection API で調べ、「検出 - インデックス未登録」「認識されていません」の数を数える。**期日** 2026-12-05 (週次の url-inspection の次の回)。10 本の過半が未登録なら仮説を支持し、内部リンクの追加を検討する。過半が登録済みなら題材の需要の問題として、D2 の新規作成を止めるかを週次レビューで決める。

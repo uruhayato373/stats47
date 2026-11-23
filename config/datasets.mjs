@@ -496,7 +496,7 @@ export const DATASETS = [
   d("seo.latest-review", "data/seo/latest-review.json", "report", "site", "data", "キーワード改善サイクルの最新レビュー"),
   d("seo.automation-rollout", "data/seo/automation-rollout.json", "state", "site", "data", "キーワード改善の自動化の展開状況"),
   d("seo.area-theme-audits", "data/seo/audits/{date}-area-theme-audit.md", "report", "site", "data", "area と theme の責務分離の棚卸しの報告 (page-components-audit.cjs が書く。手動・不定期)", { retain: "seo-audit-area-theme" }),
-  d("ai-content.staging", "data/ai-content-staging/{**}", "state", "data", "data", "ランキング AI 解説の公開待ち (develop への push で publish-ai-content が監査して R2 へ公開し、ファイルを消す outbox。正本は R2 で、普段は空)", { planned: true }),
+  d("ai-content.staging", "data/ai-content-staging/{**}", "state", "data", "data", "ランキング AI 解説の公開待ち (develop への push で publish-ai-content が監査して R2 へ公開し、ファイルを消す outbox。正本は R2 で、普段は空)", { transient: true }),
 
   // ── data/<取得元> : 計測 ──
   d("gsc.history", "data/gsc/history.csv", "series", "site", "data", "GSC の週次集約"),
@@ -712,6 +712,7 @@ export const DATASETS = [
       { field: "changes[].productKey", to: "products.landings", key: "articleKey" },
     ] }),
   d("products.free-sample-delivery", "data/products/free-sample-delivery.json", "ledger", "product", "data", "無料見本の配布の記録", { schema: "config/schema/products.free-sample-delivery.schema.json" }),
+  d("products.knowhow-questions", "data/products/knowhow-questions.json", "ledger", "product", "data", "ノウハウ商品の質問台帳 (公開の質問掲示板で見つけた統計・地図・e-Stat の困りごとを手作業で追記し、4 週後に theme 別に数える。検索語は 5 テーマ×3 語で固定。KNOWHOW-QA-BOARD-01)", { schema: "config/schema/products.knowhow-questions.schema.json" }),
   d("products.interviews", "data/products/admin-stat-interviews.json", "evidence", "product", "data", "行政実務向け商品の聞き取り"),
   d("kindle.archives", "data/products/kindle-archives.json", "ledger", "product", "data", "KDP へ送った版の暗号化保全の台帳", { schema: "config/schema/kindle.archives.schema.json", refs: [
       { field: "books.$keys", to: "products.kindle-books", key: "books.$keys" },
@@ -909,7 +910,6 @@ export const DATASETS = [
   d("estat.monthly-decisions-schema", "data/estat/monthly/decisions.schema.json", "schema", "data", "data", "上の判断の JSON Schema"),
   d("estat.monthly-ledger", "data/estat/monthly/ledger.json", "state", "data", "data", "e-Stat カタログから作る調査ごとの月次の表の数 (build-monthly-ledger.mjs の生成物)", { schema: "data/estat/monthly/ledger.schema.json" }),
   d("estat.monthly-ledger-schema", "data/estat/monthly/ledger.schema.json", "schema", "data", "data", "上の台帳の JSON Schema"),
-  d("estat.year-coverage", "data/estat/year-coverage/{**}", "state", "data", "data", "指標ごとの e-Stat 実在年の確認記録 (正本) と、単年設定の年カバレッジ監査キュー"),
   d("estat.availability", "data/estat/availability/{**}", "state", "data", "data", "e-Stat の表・取り出し条件ごとの実在年 (年ごとの値のある県の数) と、metric config の years との差分"),
   d("geo.sources", "data/geo/{name}", "state", "data", "data", "Geo 分析の出典ページとサムネイルの監査・公開"),
   d("geo.scope", "data/geo/scope/{name}", "evidence", "data", "data", "Geo の対象範囲の棚卸しと拡充の検証"),

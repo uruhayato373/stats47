@@ -462,6 +462,17 @@ function loadPreviousSnapshot(jsonOutPath: string | undefined): CountSnapshot | 
   }
 }
 
+const JSON_PRIMITIVE = String.raw`(?:"(?:[^"\\\n]|\\.)*"|-?\d[\d.eE+-]*|true|false|null)`;
+const PRIMITIVE_ARRAY = new RegExp(String.raw`\[\n\s+(${JSON_PRIMITIVE}(?:,\n\s+${JSON_PRIMITIVE})*)\n\s*\]`, "g");
+
+/**
+ * 2 段字下げの JSON で、値だけの配列 (配信年の一覧など) を 1 行に詰める。
+ * 1 年 1 行の整形では 2,596 指標の deliveredYears が 1 MiB を超え、repo hygiene が土曜の監査記録のコミットごと止めた (2026-11-21)。
+ */
+function stringifyInlinePrimitiveArrays(value: unknown): string {
+  return JSON.stringify(value, null, 2).replace(PRIMITIVE_ARRAY, (_, body: string) => `[${body.split(/,\n\s+/).join(", ")}]`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const jsonIdx = args.indexOf("--json");
@@ -1081,7 +1092,7 @@ async function main() {
 
   if (jsonOutPath) {
     fs.mkdirSync(path.dirname(jsonOutPath), { recursive: true });
-    fs.writeFileSync(jsonOutPath, JSON.stringify(report, null, 2));
+    fs.writeFileSync(jsonOutPath, stringifyInlinePrimitiveArrays(report));
     console.log(`\n書き出し: ${jsonOutPath}`);
   }
 

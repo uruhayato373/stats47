@@ -59,8 +59,8 @@ test("計画が参照する完了済み ID は、台帳にまだ残っていれ�
 
 test("残件があるのにカードが開いていない検出器を、起票が止まっているとして出す", () => {
   const [year, gsc] = summarizeDetectors({
-    yearResults: { a: { key: "a", verdict: "extend-candidate" }, b: { key: "b", verdict: "extend-candidate" }, c: { key: "c", verdict: "confirmed-single-year" } },
-    yearByDesign: { b: { note: "定義替え" } },
+    // 取得失敗・台帳なしは次の週次で取り直すので数えず、人が判断する分類だけを残件にする
+    yearSummary: { notInEstat: 1, truncated: 0, duplicateRows: 0, inheritedExclusions: 0, fetchError: 3, noLedger: 2, clean: 10 },
     gscQueue: [{ action: "fix-5xx", status: "pending" }, { action: "observe-after-fix", status: "pending" }],
     openIds: ["GSC-COV-5XX-20260920"],
   });
@@ -82,4 +82,19 @@ test("週次 Issue の表に起票 → 完了の行を出し、目安を超え�
   const within = formatCycleHealth({ ...base, flow: { week: "2026-W46", filed: 5, closed: 3, total: 150, target: 200, overTarget: false } });
   assert.match(within, /backlog 150 枚 \(目安 200 枚以内\)/);
   assert.match(formatCycleHealth({ ...base, flow: null }), /\| 起票 → 完了 \| .* \| 未計測 \|/);
+});
+
+test("振り返り → 起票の行は、申し送りの振り分け済みと ID に結ばれた件数を実数で出す", async () => {
+  const { handoffSummary } = await import("../../management/review-cadence.mjs");
+  const item = (routes, problem = null) => ({ text: "x", routes, problem });
+  const handoff = [item(["CYCLE-HEALTH-01"]), item(["EXP-007"]), item(["#42"]), item(["定常"]), item(["見送り"]), item([], "unrouted"), item(["NOPE-99"], "unknown-id:NOPE-99")];
+  const result = { reviews: { weekly: [{ period: "2026-W47", inContract: true, routed: 5, handoff }] } };
+  const summary = handoffSummary(result, "weekly");
+  assert.deepEqual(summary, { period: "2026-W47", inContract: true, routed: 5, linked: 3, total: 7 });
+  const base = { detectors: [], cards: { total: 0, unclassified: [], overdue: [] }, must: { latest: null, missStreak: 0, needsSplit: false }, stalePlanIds: [], discipline: null, flow: null };
+  const row = formatCycleHealth({ ...base, review: { handoff: summary, contractErrors: 0 } });
+  assert.match(row, /\| 振り返り → 起票 \| .* \| 2026-W47: 振り分け済み 5 \/ 7 件 \(うちカード ID・EXP・Issue に結ばれた 3 件、定常・見送り 2 件\) ⚠️/);
+  assert.match(formatCycleHealth({ ...base, review: { handoff: { ...summary, inContract: false }, contractErrors: 0 } }), /契約の開始 .* より前のため未検査/);
+  assert.match(formatCycleHealth({ ...base, review: { handoff: null, contractErrors: 0 } }), /\| 振り返り → 起票 \| .* \| 未計測 \|/);
+  assert.equal(handoffSummary({ reviews: { weekly: [] } }, "weekly"), null);
 });

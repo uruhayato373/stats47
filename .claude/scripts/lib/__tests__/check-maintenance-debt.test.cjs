@@ -247,3 +247,48 @@ test("git repo でないときは従来どおりディスクを辿って検出�
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
 });
+// WEB-ANY-RATCHET-01: 型の any を増やさない
+function anyFixture(files) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-maintenance-debt-any-"));
+  for (const [file, source] of Object.entries(files)) {
+    fs.mkdirSync(path.join(root, path.dirname(file)), { recursive: true });
+    fs.writeFileSync(path.join(root, file), source);
+  }
+  return root;
+}
+test("型の any (: any / as any / any[] / <any>) を検出する", (t) => {
+  const root = anyFixture({
+    "apps/web/src/a.ts": "export const f = (x: any) => x;\nexport const g = JSON.parse(\"1\") as any;\nconst h: any[] = [];\nconst i = new Map<string, any>();\n",
+  });
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const found = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "ANY_TYPE");
+  assert.equal(found.length, 4);
+});
+test("テスト・型宣言・コメント・変数名の any・unknown は数えない", (t) => {
+  const root = anyFixture({
+    "apps/web/src/__tests__/a.test.ts": "export const f = (x: any) => x;\n",
+    "packages/foo/src/b.d.ts": "declare const x: any;\n",
+    "packages/foo/vitest.setup.ts": "(globalThis as any).x = 1;\n",
+    "packages/foo/src/c.ts": "// 型が any だと壊れる: any\nconst any = 1;\nexport const d = (x: unknown) => x;\nexport const company = 1;\n",
+    ".claude/scripts/e.ts": "export const f = (x: any) => x;\n",
+  });
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+test("baseline にある any は通り、同じ内容の行が増えると止まる (件数の ratchet)", (t) => {
+  const line = "export const f = (x: any) => x;\n";
+  const root = anyFixture({ "apps/web/src/a.ts": line });
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const baseline = path.join(root, "baseline.json");
+  const env = { ...process.env, STATS47_SCAN_ROOT: root, MAINTENANCE_DEBT_BASELINE: baseline, MAINTENANCE_DEBT_CACHE: path.join(root, "cache.json") };
+  const exec = (...args) => spawnSync(process.execPath, [CHECKER, ...args], { encoding: "utf8", env });
+  assert.equal(exec("--write-baseline").status, 0);
+  assert.equal(exec("--baseline").status, 0);
+  fs.appendFileSync(path.join(root, "apps/web/src/a.ts"), line);
+  const grown = exec("--baseline");
+  assert.equal(grown.status, 1, grown.stdout + grown.stderr);
+  // 規則の件数が baseline に入った後は、write-baseline でも増加を吸収できない
+  const refused = exec("--write-baseline");
+  assert.equal(refused.status, 1, refused.stdout + refused.stderr);
+});

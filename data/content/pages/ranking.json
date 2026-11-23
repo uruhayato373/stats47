@@ -9490,6 +9490,14 @@
       "published": true
     },
     {
+      "id": "ranking:heatstroke-deaths-per-100k",
+      "kind": "ranking",
+      "key": "heatstroke-deaths-per-100k",
+      "title": "熱中症による死亡数",
+      "href": "/ranking/heatstroke-deaths-per-100k",
+      "published": false
+    },
+    {
       "id": "ranking:heatstroke-emergency-transports",
       "kind": "ranking",
       "key": "heatstroke-emergency-transports",

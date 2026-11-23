@@ -3,8 +3,8 @@
   "_comment": "A8 レポート CSV（fetch-a8-ui-csv.mjs）の正規化 SSOT。A8 は確定処理で過去分が遡及変化するため upsert 運用（最新 fetch が正）。手で編集しない。",
   "_siteScopeNote": "siteSummary のみ対象サイトに完全分離された実績（真実源）。monthly / daily / programPeriod は **口座横断**（doboku-note 込み）で、programPeriod は programIdMap の allowlist で対象サイト分だけを抽出したもの。crossCheck が siteSummary との突合結果。",
   "site": "統計で見る都道府県",
-  "updatedAt": "2026-11-14T04:41:35.346Z",
-  "lastRun": "2026-11-14T04-41-22Z",
+  "updatedAt": "2026-11-20T22:35:53.664Z",
+  "lastRun": "2026-11-20T22-35-45Z",
   "period": {
     "raw": "202611-202611",
     "start": "2026-11",
@@ -60,8 +60,8 @@
     },
     {
       "site": "統計で見る都道府県",
-      "impressions": 48017,
-      "clicks": 189,
+      "impressions": 48178,
+      "clicks": 273,
       "conversions": 0,
       "grossRevenueYen": 0,
       "approved": 0,
@@ -70,7 +70,7 @@
       "cancelledYen": 0,
       "pendingCount": 0,
       "pendingRevenueYen": 0,
-      "fetchedAt": "2026-11-14T04:41:22.738Z",
+      "fetchedAt": "2026-11-20T22:35:45.128Z",
       "period": "202611-202611"
     }
   ],
@@ -4877,22 +4877,22 @@
     "hasShortfall": true,
     "withinBounds": false,
     "shortfall": {
-      "clicks": 189,
+      "clicks": 273,
       "revenueYen": 0
     },
     "deltas": {
       "clicks": {
-        "site": 189,
+        "site": 273,
         "picked": 0,
         "exclusive": 0,
         "shared": 0,
         "lowerBound": 0,
         "upperBound": 0,
-        "delta": -189,
+        "delta": -273,
         "toleranceBasis": "other-site-clicks",
-        "otherSiteClicks": 123,
+        "otherSiteClicks": 304,
         "unmappedClicks": 0,
-        "tolerance": 123
+        "tolerance": 304
       },
       "conversions": {
         "site": 0,
@@ -4976,20 +4976,29 @@
     },
     {
       "site": "KAZU（X @uruhayato373）",
-      "clicks": 10,
+      "clicks": 12,
       "conversions": 0,
       "grossRevenueYen": 0,
       "revenueYen": 0,
-      "fetchedAt": "2026-11-14T04:41:22.738Z",
+      "fetchedAt": "2026-11-20T22:35:45.128Z",
+      "period": "202611-202611"
+    },
+    {
+      "site": "KAZU（kazu-note）",
+      "clicks": 2,
+      "conversions": 0,
+      "grossRevenueYen": 0,
+      "revenueYen": 0,
+      "fetchedAt": "2026-11-20T22:35:45.128Z",
       "period": "202611-202611"
     },
     {
       "site": "doboku-note",
-      "clicks": 111,
+      "clicks": 288,
       "conversions": 0,
       "grossRevenueYen": 0,
       "revenueYen": 0,
-      "fetchedAt": "2026-11-14T04:41:22.738Z",
+      "fetchedAt": "2026-11-20T22:35:45.128Z",
       "period": "202611-202611"
     },
     {
@@ -4998,7 +5007,7 @@
       "conversions": 0,
       "grossRevenueYen": 0,
       "revenueYen": 0,
-      "fetchedAt": "2026-11-14T04:41:22.738Z",
+      "fetchedAt": "2026-11-20T22:35:45.128Z",
       "period": "202611-202611"
     }
   ]
