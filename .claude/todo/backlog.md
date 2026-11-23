@@ -2275,6 +2275,7 @@ updated: 2026-11-01
 - **実測 (2026-11-05)**: 73 本はすべて無料の公開記事 (A 65 本・B 8 本) で、公開 API から読める。本文の図の台帳 (`data/note/body-figures.json`) は今は読むだけで、R2 へは保存していない。
 - **再発防止 (2026-11-05 オーナー指示)**: 回収で 0 にした後、`note-only` を増やせないようにする。`articles.schema.json` の語彙から `note-only` を外し、公開済みの記事に `body.manifest` が無いと `note:catalog:validate` が止める。新規公開は `note:article save` の後でないと公開済みにならないことを、公開の経路で確かめる。
 - **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。語彙から `note-only` が消え、公開済みで本文が R2 に無い記事を検査が止める。
+- **再確認 (2026-11-23)**: `npm run note:article -- status` は `note-only` 73 本のまま (r2-public 保存済み 274・r2-private 保存済み 147・未保存 5)。回収の `save` は R2 へ本文と画像を新しく保存するので、オーナーの承認を取ってから 10 本ずつ進める。
 
 ### [NOTE-PRODUCT-ZIP-ARCHIVE-01] note 有料記事の添付 ZIP (商品ファイル) を private R2 に保全する経路を作る
 タグ: [収益化] [種類:改善] [実行:別環境] [起票:2026-10-13] [領域:商品]
@@ -3489,6 +3490,7 @@ updated: 2026-11-01
 - **緩和済み**: Instagram は予約表の登録時に id を決める形にした (`register-ig-schedule.cjs`)。CI が新しい行を作るのは、予約表に無い投稿を記録するときだけになった。
 - **手順 (案)**: CI が書く行は採番せず、ローカルで登録済みの id だけを更新する。登録の無い投稿は CI では記録を保留し、検査で知らせる。どうしても足す場合は、id の範囲を CI とローカルで分ける。
 - **完了条件**: CI の workflow が新しい id を採番する経路が 0 本になり、`sns:trace:check` に検査が入っている。
+- **確認 (2026-11-23)**: 投稿台帳に新しい ID を振る CI の経路は `post-instagram-scheduled.yml` の 1 本だけ (`record-posted.cjs` が予約表に行の無い投稿のときだけ `store.insert` する)。この workflow は停止中 (`disabled_manually`) で、Instagram の自動投稿の再開はオーナー判断。再開するときに、CI では insert せず保留して `sns:trace:check` で知らせる形へ直す。
 
 ### [SSOT-CONSOLIDATION-REST-01] 2026-10-06 の定数集約で見送った重複を、挙動の差を解消してから寄せる
 
