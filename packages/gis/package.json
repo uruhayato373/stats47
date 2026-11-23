@@ -108,7 +108,7 @@
     "@types/topojson-simplify": "^3",
     "dotenv": "^17.2.3",
     "typescript": "^5.0.0",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.12"
   },
   "peerDependencies": {
     "typescript": ">=5.0.0"

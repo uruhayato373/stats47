@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "lucide-react": "^0.542.0",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.12"
   }
 }
