@@ -1,88 +1,16 @@
-<!-- data-source: elderly-welfare-expenditure-prefecture-gap-prefecture-rankings.json | generated: 2026-09-15T21:42:26.266Z -->
-<svg width="960" height="404" viewBox="0 0 960 404" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="老人福祉費">
-  <style>
-    .svg-bg{fill:#ffffff}
-    .svg-plot{fill:#f9fafb}
-    .svg-plot-border{stroke:#d1d5db}
-    .svg-title{fill:#1f2937}
-    .svg-axis{fill:#374151}
-    .svg-tick{fill:#6b7280}
-    .svg-grid{stroke:#e5e7eb}
-    @media (prefers-color-scheme:dark){
-    .svg-bg{fill:#0f172a}
-    .svg-plot{fill:#1e293b}
-    .svg-plot-border{stroke:#334155}
-    .svg-title{fill:#e2e8f0}
-    .svg-axis{fill:#cbd5e1}
-    .svg-tick{fill:#94a3b8}
-    .svg-grid{stroke:#334155}
-    }
-  </style>
-  <rect width="960" height="404" class="svg-bg"/>
-  <text x="480" y="40" text-anchor="middle" font-size="18" font-weight="bold" class="svg-title">老人福祉費　<tspan font-size="14" font-weight="normal" class="svg-tick">2022年</tspan></text>
-  <rect x="30" y="80" width="432" height="40" rx="8" fill="#dc2626"/>
-  <text x="246" y="106" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">上位</text>
-  <rect x="30" y="124" width="432" height="44" rx="6" fill="#fef2f2"/>
-  <circle cx="60" cy="146" r="14" fill="#dc2626"/>
-  <text x="60" y="150.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">1</text>
-  <text x="84" y="150.7" font-size="13" font-weight="bold" fill="#1f2937">徳島県</text>
-  <text x="229.68" y="150.3" text-anchor="end" font-size="14" font-weight="700" fill="#dc2626">267.1 千円</text>
-  <rect x="241.68" y="139" width="200" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
-  <rect x="30" y="168" width="432" height="44" rx="6" fill="#ffffff"/>
-  <circle cx="60" cy="190" r="14" fill="#dc2626"/>
-  <text x="60" y="194.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">2</text>
-  <text x="84" y="194.7" font-size="13" font-weight="bold" fill="#1f2937">高知県</text>
-  <text x="229.68" y="194.3" text-anchor="end" font-size="14" font-weight="700" fill="#dc2626">264.2 千円</text>
-  <rect x="241.68" y="183" width="197.829" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
-  <rect x="30" y="212" width="432" height="44" rx="6" fill="#fef2f2"/>
-  <circle cx="60" cy="234" r="14" fill="#dc2626"/>
-  <text x="60" y="238.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">3</text>
-  <text x="84" y="238.7" font-size="13" font-weight="bold" fill="#1f2937">島根県</text>
-  <text x="229.68" y="238.3" text-anchor="end" font-size="14" font-weight="700" fill="#dc2626">263.6 千円</text>
-  <rect x="241.68" y="227" width="197.379" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
-  <rect x="30" y="256" width="432" height="44" rx="6" fill="#ffffff"/>
-  <circle cx="60" cy="278" r="14" fill="#dc2626"/>
-  <text x="60" y="282.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">4</text>
-  <text x="84" y="282.7" font-size="13" font-weight="bold" fill="#1f2937">鹿児島県</text>
-  <text x="229.68" y="282.3" text-anchor="end" font-size="14" font-weight="700" fill="#dc2626">261.9 千円</text>
-  <rect x="241.68" y="271" width="196.106" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
-  <rect x="30" y="300" width="432" height="44" rx="6" fill="#fef2f2"/>
-  <circle cx="60" cy="322" r="14" fill="#dc2626"/>
-  <text x="60" y="326.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">5</text>
-  <text x="84" y="326.7" font-size="13" font-weight="bold" fill="#1f2937">和歌山県</text>
-  <text x="229.68" y="326.3" text-anchor="end" font-size="14" font-weight="700" fill="#dc2626">260.7 千円</text>
-  <rect x="241.68" y="315" width="195.208" height="14" rx="4" fill="#ef4444" opacity="0.8"/>
-  <rect x="498" y="80" width="432" height="40" rx="8" fill="#1565c0"/>
-  <text x="714" y="106" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">下位</text>
-  <rect x="498" y="124" width="432" height="44" rx="6" fill="#eff6ff"/>
-  <circle cx="528" cy="146" r="14" fill="#1565c0"/>
-  <text x="528" y="150.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">43</text>
-  <text x="552" y="150.7" font-size="13" font-weight="bold" fill="#1f2937">静岡県</text>
-  <text x="697.6800000000001" y="150.3" text-anchor="end" font-size="14" font-weight="700" fill="#1565c0">196.2 千円</text>
-  <rect x="709.6800000000001" y="139" width="146.911" height="14" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="498" y="168" width="432" height="44" rx="6" fill="#ffffff"/>
-  <circle cx="528" cy="190" r="14" fill="#1565c0"/>
-  <text x="528" y="194.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">44</text>
-  <text x="552" y="194.7" font-size="13" font-weight="bold" fill="#1f2937">茨城県</text>
-  <text x="697.6800000000001" y="194.3" text-anchor="end" font-size="14" font-weight="700" fill="#1565c0">195.9 千円</text>
-  <rect x="709.6800000000001" y="183" width="146.687" height="14" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="498" y="212" width="432" height="44" rx="6" fill="#eff6ff"/>
-  <circle cx="528" cy="234" r="14" fill="#1565c0"/>
-  <text x="528" y="238.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">45</text>
-  <text x="552" y="238.7" font-size="13" font-weight="bold" fill="#1f2937">埼玉県</text>
-  <text x="697.6800000000001" y="238.3" text-anchor="end" font-size="14" font-weight="700" fill="#1565c0">192.2 千円</text>
-  <rect x="709.6800000000001" y="227" width="143.916" height="14" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="498" y="256" width="432" height="44" rx="6" fill="#ffffff"/>
-  <circle cx="528" cy="278" r="14" fill="#1565c0"/>
-  <text x="528" y="282.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">46</text>
-  <text x="552" y="282.7" font-size="13" font-weight="bold" fill="#1f2937">千葉県</text>
-  <text x="697.6800000000001" y="282.3" text-anchor="end" font-size="14" font-weight="700" fill="#1565c0">186.0 千円</text>
-  <rect x="709.6800000000001" y="271" width="139.274" height="14" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <rect x="498" y="300" width="432" height="44" rx="6" fill="#eff6ff"/>
-  <circle cx="528" cy="322" r="14" fill="#1565c0"/>
-  <text x="528" y="326.3" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">47</text>
-  <text x="552" y="326.7" font-size="13" font-weight="bold" fill="#1f2937">栃木県</text>
-  <text x="697.6800000000001" y="326.3" text-anchor="end" font-size="14" font-weight="700" fill="#1565c0">183.3 千円</text>
-  <rect x="709.6800000000001" y="315" width="137.252" height="14" rx="4" fill="#42a5f5" opacity="0.8"/>
-  <text x="930" y="382" text-anchor="end" font-size="11" class="svg-tick">出典: 社会・人口統計体系</text>
-</svg>
+<!-- data-source: elderly-welfare-expenditure-prefecture-gap-prefecture-rankings.json | generated: 2026-11-23T01:50:46.383Z -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-label="老人福祉費ランキング" data-theme="light" data-image-template="bar" data-domain-min="183.3" data-domain-max="267.1">
+    <rect width="1080" height="1350" fill="#F8FAFC"/>
+    <g font-family="'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif" fill="#18283C">
+      <text x="64" y="120" font-size="72" font-weight="700">老人福祉費ランキング</text>
+      <text x="64" y="184" font-size="32" fill="#475569">2022年度 · 単位：万円 · 範囲：18.3–26.7</text>
+      <text x="64" y="230" font-size="30" fill="#475569">都道府県・市町村財政合計</text>
+      
+    <rect x="64" y="280" width="952" height="60" rx="14" fill="#0f579f"/>
+    <text x="92" y="321" font-size="32" font-weight="700" fill="#FFFFFF">上位5県</text>
+    <g data-rank="1" data-value="267.1"><rect x="64" y="350" width="952" height="78" rx="14" fill="#e7eef5"/><circle cx="116" cy="389" r="27" fill="#0f579f"/><text x="116" y="400" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">1</text><text x="196" y="394" font-size="38" font-weight="700" fill="#18283C">徳島県</text><text x="992" y="394" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">26.7<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="406" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="406" width="795.9999999999999" height="10" rx="5" fill="#0f579f"/></g><g data-rank="2" data-value="264.2"><circle cx="116" cy="473" r="27" fill="#0f579f"/><text x="116" y="484" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">2</text><text x="196" y="478" font-size="38" font-weight="700" fill="#18283C">高知県</text><text x="992" y="478" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">26.4<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="490" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="490" width="768.4534606205248" height="10" rx="5" fill="#0f579f"/></g><g data-rank="3" data-value="263.6"><rect x="64" y="518" width="952" height="78" rx="14" fill="#e7eef5"/><circle cx="116" cy="557" r="27" fill="#0f579f"/><text x="116" y="568" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">3</text><text x="196" y="562" font-size="38" font-weight="700" fill="#18283C">島根県</text><text x="992" y="562" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">26.4<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="574" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="574" width="762.7541766109786" height="10" rx="5" fill="#0f579f"/></g><g data-rank="4" data-value="261.9"><circle cx="116" cy="641" r="27" fill="#0f579f"/><text x="116" y="652" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">4</text><text x="196" y="646" font-size="38" font-weight="700" fill="#18283C">鹿児島県</text><text x="992" y="646" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">26.2<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="658" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="658" width="746.6062052505962" height="10" rx="5" fill="#0f579f"/></g><g data-rank="5" data-value="260.7"><rect x="64" y="686" width="952" height="78" rx="14" fill="#e7eef5"/><circle cx="116" cy="725" r="27" fill="#0f579f"/><text x="116" y="736" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">5</text><text x="196" y="730" font-size="38" font-weight="700" fill="#18283C">和歌山県</text><text x="992" y="730" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">26.1<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="742" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="742" width="735.2076372315032" height="10" rx="5" fill="#0f579f"/></g>
+    <rect x="64" y="772" width="952" height="60" rx="14" fill="#6a97c3"/>
+    <text x="92" y="813" font-size="32" font-weight="700" fill="#FFFFFF">下位5県</text>
+    <g data-rank="43" data-value="196.2"><rect x="64" y="842" width="952" height="78" rx="14" fill="#e7eef5"/><circle cx="116" cy="881" r="27" fill="#6a97c3"/><text x="116" y="892" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">43</text><text x="196" y="886" font-size="38" font-weight="700" fill="#18283C">静岡県</text><text x="992" y="886" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">19.6<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="898" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="898" width="122.53460620525038" height="10" rx="5" fill="#6a97c3"/></g><g data-rank="44" data-value="195.9"><circle cx="116" cy="965" r="27" fill="#6a97c3"/><text x="116" y="976" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">44</text><text x="196" y="970" font-size="38" font-weight="700" fill="#18283C">茨城県</text><text x="992" y="970" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">19.6<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="982" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="982" width="119.68496420047722" height="10" rx="5" fill="#6a97c3"/></g><g data-rank="45" data-value="192.2"><rect x="64" y="1010" width="952" height="78" rx="14" fill="#e7eef5"/><circle cx="116" cy="1049" r="27" fill="#6a97c3"/><text x="116" y="1060" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">45</text><text x="196" y="1054" font-size="38" font-weight="700" fill="#18283C">埼玉県</text><text x="992" y="1054" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">19.2<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="1066" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="1066" width="84.53937947494012" height="10" rx="5" fill="#6a97c3"/></g><g data-rank="46" data-value="186"><circle cx="116" cy="1133" r="27" fill="#6a97c3"/><text x="116" y="1144" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">46</text><text x="196" y="1138" font-size="38" font-weight="700" fill="#18283C">千葉県</text><text x="992" y="1138" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">18.6<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="1150" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="1150" width="25.646778042959312" height="10" rx="5" fill="#6a97c3"/></g><g data-rank="47" data-value="183.3"><rect x="64" y="1178" width="952" height="78" rx="14" fill="#e7eef5"/><circle cx="116" cy="1217" r="27" fill="#6a97c3"/><text x="116" y="1228" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">47</text><text x="196" y="1222" font-size="38" font-weight="700" fill="#18283C">栃木県</text><text x="992" y="1222" text-anchor="end" font-size="40" font-weight="700" fill="#0f579f">18.3<tspan font-size="30" dx="4">万円</tspan></text><rect data-bar-track="true" x="196" y="1234" width="796" height="10" rx="5" fill="#cfddec"/><rect data-bar-value="true" x="196" y="1234" width="0" height="10" rx="5" fill="#6a97c3"/><circle cx="196" cy="1239" r="6" fill="#6a97c3"/></g>
+      <text x="64" y="1310" font-size="30" fill="#475569">出典：社会・人口統計体系</text>
+    </g></svg>

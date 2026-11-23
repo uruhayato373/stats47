@@ -7,14 +7,14 @@ description: "65歳以上高齢者1人あたりの老人福祉費は、1位徳�
 archetype: A
 category: socialsecurity
 tags:
-  - 老人福祉費
+  - 福祉
   - 高齢化
   - 社会保障
   - 介護
-  - 老後の住まい
-publishedAt: 2026-09-16
-updatedAt: 2026-09-16
-published: false
+  - 高齢者
+publishedAt: 2026-11-23
+updatedAt: 2026-11-23
+published: true
 ogImage: /blog/elderly-welfare-expenditure-prefecture-gap/og.png
 ---
 

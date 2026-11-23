@@ -8,13 +8,13 @@ archetype: A
 category: construction
 tags:
   - 空き家率
-  - 相続
-  - 実家
+  - 空き家
+  - 住宅
   - 住宅・土地統計調査
   - 地方
-publishedAt: 2026-09-16
-updatedAt: 2026-09-16
-published: false
+publishedAt: 2026-11-23
+updatedAt: 2026-11-23
+published: true
 ogImage: /blog/vacant-housing-rate-inherited-home-risk/og.png
 ---
 

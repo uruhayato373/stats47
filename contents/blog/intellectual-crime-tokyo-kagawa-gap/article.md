@@ -9,12 +9,10 @@ category: safetyenvironment
 tags:
   - 治安
   - 犯罪率
-  - 知能犯
-  - 詐欺
   - 都道府県格差
-publishedAt: 2026-09-16
-updatedAt: 2026-09-16
-published: false
+publishedAt: 2026-11-23
+updatedAt: 2026-11-23
+published: true
 ogImage: /blog/intellectual-crime-tokyo-kagawa-gap/og.png
 ---
 

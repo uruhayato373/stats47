@@ -7,14 +7,13 @@ description: "個別避難計画の作成率は香川67.9%から神奈川4.2%ま
 archetype: D
 category: safetyenvironment
 tags:
-  - 個別避難計画
+  - 災害対応
   - 防災
-  - 避難行動要支援者
-  - 住む場所選び
+  - 高齢者
   - 都道府県格差
-publishedAt: 2026-09-16
-updatedAt: 2026-09-16
-published: false
+publishedAt: 2026-11-23
+updatedAt: 2026-11-23
+published: true
 ogImage: /blog/evacuation-plan-coverage-urban-prefecture-gap/og.png
 ---
 
