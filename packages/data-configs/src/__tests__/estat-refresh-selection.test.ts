@@ -76,6 +76,12 @@ describe("refresh union", () => {
     await expect(selectRefreshMetrics([metric("a")], { tableUpdates: [], readJson: async () => { throw new Error("HTTP 503"); } })).rejects.toThrow("503");
     await expect(selectRefreshMetrics([metric("a")], { tableUpdates: [], readJson: async () => ({ meta: { recipe: { configHash: 5 } } }) })).rejects.toThrow(/Invalid configHash/);
   });
+  it("公開 URL の読み込み口は、市区町村の値のファイルも読める (選び方が市区町村だけの指標で止まらない)", async () => {
+    const transport = vi.fn(async () => new Response(JSON.stringify({ meta: {} }), { status: 200 }));
+    const cityKey = statsR2Key("city-only", "city");
+    await expect(publicJsonReader(transport as unknown as typeof fetch)(cityKey)).resolves.toEqual({ meta: {} });
+    await expect(publicJsonReader(transport as unknown as typeof fetch)(cityKey.replace(/cities\.json$/, "other.json"))).rejects.toThrow(/Invalid input key/);
+  });
   it("only allows public GET paths, distinguishes 404 from service errors", async () => {
     const transport = vi.fn<typeof fetch>().mockResolvedValueOnce(new Response("", { status: 404 })).mockResolvedValueOnce(new Response("", { status: 503 }));
     const read = publicJsonReader(transport);
