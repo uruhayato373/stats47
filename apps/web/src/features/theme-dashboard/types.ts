@@ -147,8 +147,11 @@ export interface ThemeDashboardClientProps {
   /** Server-rendered visualizations, inserted into their editorial chapter. */
   embeddedSections?: Record<string, import("react").ReactNode>;
   sectionFooters?: Record<string, import("react").ReactNode>;
-  /** 全指標のプリロード済みデータ（rankingKey → data） */
-  indicatorDataMap: Record<string, ThemeIndicatorData>;
+  /**
+   * 全指標のプリロード済みデータ（rankingKey → data）。値の行は全行で同じ項目を 1 回にまとめた形で渡し、
+   * ThemeDashboardClient が元の行の形に戻す (lib/indicator-transport.ts・PERF-THEME-HTML-SIZE-01)
+   */
+  indicatorDataMap: Record<string, import("./lib/indicator-transport").PackedThemeIndicatorData>;
   /** DB 管理チャート（page_components + page_component_assignments） */
   pageCharts?: import("@/components/stat-charts/services/load-page-components").PageComponent[];
   /** componentKey ごとに survey taxonomy から解決した出典調査ハブ。 */

@@ -1,5 +1,9 @@
 "use client";
 
+import { useMemo } from "react";
+
+import { unpackIndicatorDataMap } from "../lib/indicator-transport";
+
 import { InitialThemeDataProvider } from "./InitialThemeDataContext";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { useThemePrefecture } from "./ThemePrefectureContext";
@@ -28,6 +32,7 @@ export function ThemeDashboardClient({
   initialThemeData,
 }: ThemeDashboardClientProps) {
   const { selectedPrefectureCode } = useThemePrefecture();
+  const unpackedIndicatorDataMap = useMemo(() => unpackIndicatorDataMap(indicatorDataMap), [indicatorDataMap]);
   return (
     <div className="min-w-0 space-y-4">
       <InitialThemeDataProvider value={initialThemeData}>
@@ -37,7 +42,7 @@ export function ThemeDashboardClient({
         sections={sections}
         embeddedSections={embeddedSections}
         sectionFooters={sectionFooters}
-        indicatorDataMap={indicatorDataMap}
+        indicatorDataMap={unpackedIndicatorDataMap}
         pageCharts={pageCharts}
         chartSourceLinks={chartSourceLinks}
         selectedPrefectureCode={selectedPrefectureCode}

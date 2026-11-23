@@ -35,6 +35,7 @@ import {
 } from '../config/theme-section-registry';
 import { THEME_SWITCHER_THEMES } from '../config/theme-switcher-themes';
 import { areaThemeDescription, getAreaThemeHighlights } from '../lib/area-theme-highlights';
+import { packIndicatorDataMap } from '../lib/indicator-transport';
 import { loadInitialThemeData } from '../lib/initial-theme-data';
 import { KAKEI_RANKING_DIRECTORY } from '../lib/kakei-ranking-directory.generated';
 import { prefectureCityOptions } from '../lib/prefecture-city-options';
@@ -287,7 +288,7 @@ export async function ThemePageLayout({
             sections={catalog?.sections}
             embeddedSections={embeddedSections}
             sectionFooters={sectionFooters}
-            indicatorDataMap={data.indicatorDataMap}
+            indicatorDataMap={packIndicatorDataMap(data.indicatorDataMap)}
             pageCharts={pageCharts}
             chartSourceLinks={chartSourceLinks}
             chapterAdRows={[chapterRow1, chapterRow2]}

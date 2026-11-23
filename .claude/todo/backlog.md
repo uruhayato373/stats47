@@ -3038,6 +3038,7 @@ updated: 2026-11-01
 - **完了条件**: 週次監査が 2 指標を計測して UI-FIX カードに振り分け手順が載り、`/areas/13000` の縦軸切れとビール SVG の重なりが本番で 0 件になっている。
 - **確認が要る (11-03 の棚卸し)**: 途中成果のブランチ `wip/ui-chart-text-loop-01` が手元の remote-tracking に無い (`git branch -r --list '*ui-chart-text*'` が空)。リモートに残っているか確かめる
 - **棚卸し (2026-11-22)**: 検出器 (`check-svg-text.ts`・`findChartTextIssues`) と予算 (`chart_text_issues`) は入っているが、`data/page-quality` に実測値が無く、ビールの SVG はリポジトリに無い。次は週次ページ品質監査を 1 回流して `chart_text_issues` を記録し、`/areas/13000` の縦軸とビールの SVG (note の R2 原稿) を検出器に通す。
+- **確認 (2026-11-23)**: 途中成果のブランチ `wip/ui-chart-text-loop-01` はリモートにも無い (`git ls-remote --heads origin 'wip/ui-chart-text*'` が空)。commit `f8344bf3c` の作業は失われたものとして、次は ① の検出から作り直す。
 
 ### [KINDLE-DATA-SOURCE-01] Kindle の章の出典をブログ本文の手書き節から切り離し、据え置き 61 本の本文も移行する
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [領域:商品] [待ち:判断]
@@ -3430,6 +3431,9 @@ updated: 2026-11-01
 - **[仮説]** 指標 136 件と、`comparisonYear` を持つ 30 グループの値をサーバー描画で HTML に埋め込んでいる。検証: HTML 内の RSC payload を指標キーごとに数え、グループ数を減らした版をローカルで測る。
 - **関連**: Workers CPU の増加調査 `CF-CPU-SURGE-01` の候補「テーマ拡充で 1 ページが重くなった」と同じ現象。
 - **完了条件**: 新テーマと healthcare の HTML が 900KB 以下、または目安を超える理由と新しい基準を page-quality-budgets.json に記録する。
+- **実測 (2026-11-23・本番・Googlebot UA)**: 悪化していた。`/themes/household-food-spending` 4,735KB・`/areas/13000/household-food-spending` 5,604KB・`/themes/healthcare` 1,596KB・`/themes/local-economy` 833KB。`household-food-spending` の 4.4MB のうち 3.7MB がブラウザへ渡すデータ (RSC) で、その 2.5MB は `ThemeDashboardClient` の `indicatorDataMap` (189 指標)。内訳は値の行 `rankingValues` 1,572KB・`rankingItem` 465KB・`nationalSeries` 173KB・`availableYears` 168KB (`rankingItem.availableYears` と同じ中身が 2 回)。値の行は 189 指標 × 47 行で、行ごとに `metricKey`・`areaType`・`yearCode`・`yearName`・`unit` をくり返していた。
+- **済み (2026-11-23・未デプロイ)**: 指標ごとに全行で同じ項目を 1 回にまとめて渡し、`ThemeDashboardClient` で元の行の形に戻すようにした (`features/theme-dashboard/lib/indicator-transport.ts`。読み手の部品は変えない)。localhost の同じページで RSC は 4,058KB → 2,843KB (値の行 1,572KB → 555KB)。テーマの部品のテスト 387 件と表示 (東京都の食卓と家計のページの数値タイル・順位) を確かめた。
+- **残り**: 900KB の目安には遠い。次の候補は ① `availableYears` の二重 (168KB) ② `rankingItem` をブラウザが使う項目だけにする (465KB) ③ 189 指標の値を全部先に渡すのをやめ、表示する章の分だけにする (設計の変更)。本番の大きさはリリース後に同じ curl で測る。
 
 ### [CI-SKIPCI-HEAD-BLOCKS-PR-01] 自動コミットが develop の先頭に積まれるたびに develop→main の PR の必須検査が外れる
 
