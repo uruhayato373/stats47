@@ -1,13 +1,13 @@
 # Ranking AI content / latest run
 
-- 更新日: 2026-11-22
-- run: 44974978002-1 (GitHub Actions run id、またはローカル batch の local-<date>-<time>)
+- 更新日: 2026-11-23
+- run: 45101807367-1 (GitHub Actions run id、またはローカル batch の local-<date>-<time>)
 - モデル: gemini-3.5-flash-lite
-- 対象: 3 / PASS: 0 / REJECT: 0 / FAIL: 3 / SKIP: 0
-- 通過率: 0.0%
-- APIリクエスト: author 0 / critic 0
+- 対象: 3 / PASS: 3 / REJECT: 0 / FAIL: 0 / SKIP: 0
+- 通過率: 100.0%
+- APIリクエスト: author 3 / critic 3
 - Preflight: ok / requests 1
-- トークン: input 14 / output 9 / thinking 0 / total 23
+- トークン: input 32824 / output 15515 / thinking 0 / total 48339
 - quota/billing 停止: 0
 - 費用 (API 換算。OAuth 実行では実請求ではない): $0
 
