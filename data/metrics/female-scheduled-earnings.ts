@@ -56,7 +56,5 @@ export const femaleScheduledEarnings: MetricConfig = {
     ],
   },
   "groupKey": "gender-wage",
-  "seoTitle": "女性所定内給与額 都道府県ランキング【2022年】｜1位東京都（311.2千円）",
-  "seoDescription": "2022年の女性所定内給与額を都道府県別に比較。1位は東京都（311.2千円）、最下位は山形県（211.4千円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

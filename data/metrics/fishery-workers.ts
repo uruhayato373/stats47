@@ -84,7 +84,5 @@ export const fisheryWorkers: MetricConfig = {
     ],
   },
   "groupKey": "fishery",
-  "seoTitle": "漁業就業者数ランキング都道府県【2023年】｜1位北海道（19,938人）",
-  "seoDescription": "2023年の漁業就業者数の都道府県別ランキング。1位北海道（19,938人）、最下位奈良県（0人）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

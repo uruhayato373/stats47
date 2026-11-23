@@ -97,7 +97,5 @@ export const publicPhoneCount: MetricConfig = {
     ],
   },
   "groupKey": "public-phone-count",
-  "seoTitle": "公衆電話の数 都道府県ランキング【2024年】全国96,126個・1位東京都10,717個｜推移と地図",
-  "seoDescription": "全国の公衆電話は2024年に96,126個。都道府県別の一覧と1975年からの推移、地図で比較できます。1位は東京都（10,717個）、最下位は徳島県（509個）です。",
   "isActive": true,
 };

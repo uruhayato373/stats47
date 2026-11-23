@@ -560,8 +560,10 @@ jobs:
           fi
           exit 1
 
-      - name: 🚨 Open issue on failure (schedule / push のみ)
-        if: failure() && github.event_name != 'workflow_dispatch'
+      # 人が手で起動したときは画面で結果を見るので立てない。デプロイの後に機械が起動した取り込み
+      # (deploy-workers.yml の ingest-changed-metrics。actor は github-actions[bot]) は誰も見ていないので立てる
+      - name: 🚨 Open issue on failure (schedule / push / 機械の起動)
+        if: failure() && (github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -602,7 +604,7 @@ jobs:
           fi
 
       - name: ✅ Close recovered data refresh alert
-        if: success() && github.event_name != 'workflow_dispatch'
+        if: success() && (github.event_name != 'workflow_dispatch' || github.actor == 'github-actions[bot]')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

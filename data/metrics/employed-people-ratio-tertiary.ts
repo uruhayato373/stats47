@@ -46,7 +46,5 @@ export const employedPeopleRatioTertiary: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "第3次産業就業者比率ランキング都道府県【2020年】｜1位東京都（81.1％）",
-  "seoDescription": "2020年の第3次産業就業者比率の都道府県別ランキング。1位東京都（81.1％）、最下位長野県（61.3％）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -53,6 +53,15 @@ const STRICT = process.argv.includes('--strict');
 const VALID_CATEGORIES = new Set<string>(CATEGORY_KEYS);
 
 /** データ注釈 (※系) かどうかを文面から判定する (UI の isCaveatNote と同基準)。 */
+
+/**
+ * 題・説明文に年 (「2023年」「2023年度」) か、順位の値 (「1位東京都（588施設）」「最下位島根県（37施設）」) を手で書いているか。
+ * 「（14～19歳人口千人当たり）」のような分母の括弧は値ではないので数えない
+ */
+export function hasHandWrittenSeoFact(text: string): boolean {
+  return /(19|20)\d{2}年/.test(text) || /(?:\d+位|最下位)[^（(、。]*[（(]-?[\d,.]+/.test(text);
+}
+
 function looksLikeNote(s: string): boolean {
   const t = s.trim();
   return (
@@ -83,6 +92,7 @@ interface Row {
   display: { conversionFactor?: number; displayUnit?: string } | null;
   seoTitle: string | null;
   seoDescription: string | null;
+  seoNote: string | null;
   /** 換算単位 (normalizationOptions[].unit) が「‐/10万人」のように「‐」で始まる件数 */
   normalizationUnitDash: number;
   /** source.kind (家計調査の判定に使う) */
@@ -156,6 +166,7 @@ function main() {
       display: metric.display ?? null,
       seoTitle: metric.seoTitle ?? null,
       seoDescription: metric.seoDescription ?? null,
+      seoNote: metric.seoNote ?? null,
       normalizationUnitDash: (
         metric.calculation?.normalizationOptions ?? []
       ).filter((option) => option.unit.startsWith('‐/')).length,
@@ -295,6 +306,23 @@ function main() {
       if (hits.length > 0) {
         errors.push(
           `[seo-unit-dash] ${r.file}: ${field} の数字の直後に「‐」(${hits.length} 箇所)。「‐」は単位ではないので外す`
+        );
+      }
+    }
+  }
+
+  // error: seoTitle / seoDescription に年か値を手で書いている (SEO-META-FROM-VALUES-01・2026-11-23 オーナー承認)。
+  // 題と説明文は、定義に無ければ項目の組み立てが最新年の観測値から作る (buildRankingSeoText)。定義に年と値を書くと、
+  // 新しい年を取り込んでも題が古い年のまま残る。定義に書けるのは、年と値を含まない言い回しの上書きだけ
+  for (const r of rows) {
+    for (const [field, text] of [
+      ['seoTitle', r.seoTitle],
+      ['seoDescription', r.seoDescription],
+      ['seoNote', r.seoNote],
+    ] as const) {
+      if (text && hasHandWrittenSeoFact(text)) {
+        errors.push(
+          `[seo-hand-written-fact] ${r.file}: ${field} に年か値を手で書いている。外すと最新年の観測値から作られる (年と値を含まない言い回しだけ上書きに残せる)`
         );
       }
     }

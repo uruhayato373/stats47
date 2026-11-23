@@ -34,7 +34,5 @@ export const currentLiabilitiesBalanceMultiPersonHouseholdsPerHousehold: MetricC
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "負債現在高ランキング都道府県【2019年】｜1位神奈川県（9,304千円）",
-  "seoDescription": "2019年の負債現在高の都道府県別ランキング。1位神奈川県（9,304千円）、最下位徳島県（3,472千円）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

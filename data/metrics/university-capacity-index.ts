@@ -38,7 +38,5 @@ export const universityCapacityIndex: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "大学収容力指数ランキング都道府県【2024年】｜1位京都府（238.3）",
-  "seoDescription": "2024年の大学収容力指数の都道府県別ランキング。1位京都府（238.3）、最下位三重県（46.7）で5.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

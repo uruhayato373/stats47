@@ -330,57 +330,61 @@ export default async function SurveyPage({ params }: PageProps) {
           ]}
         />
       }
+      // 見出しは本文ではなく header に渡す。パンくずと見出しを 1 つの区画に見せる指定 (PanelGrid の breadcrumb + 次のセル) は、
+      // パンくずの直後のセルにだけ効く。本文 (shell-main) の中に置くと間に線が出ていた (2026-11-23)
+      header={
+        <PageHeader
+          eyebrow="政府統計"
+          title={survey.name}
+          description={
+            <>
+              {/* 調査の規模と対象は数値タイルにせず 1 行にまとめ、最初の画面を問いと答えに使う (2026-11-03) */}
+              <span className="block">
+                <span className="font-medium text-foreground">{survey.organization}</span>
+                {` ・ ランキング ${rankingItems.length.toLocaleString('ja-JP')} 件`}
+                {latestYear && ` ・ 最新 ${latestYear} 年`}
+                {` ・ ${areaLabel}`}
+              </span>
+              {survey.description && (
+                <span className="mt-1 block">{survey.description}</span>
+              )}
+            </>
+          }
+          actions={
+            <>
+              {/* 読むときの注意・分かること・出典は、テーマのページと同じ共通のシートで開く (2026-11-03)。
+                  先頭に置き、ページの最初から誤読の注意 (県庁所在市の値など) に届くようにする */}
+              {editorial && (
+                <SourcesSheet
+                  id="survey-sources"
+                  groups={[
+                    {
+                      title: '数字を読むときの注意',
+                      notes: editorial.caveats,
+                      sources: [{ label: `${survey.organization}「${survey.name}」`, url: survey.url }],
+                      rankings: [],
+                    },
+                    { title: 'この調査で分かること', notes: editorial.whatYouCanLearn, sources: [], rankings: [] },
+                  ]}
+                />
+              )}
+              {survey.url && (
+                <a
+                  href={survey.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-slot="button"
+                  className={buttonVariants({ variant: 'outline', size: 'sm' })}
+                >
+                  公式サイト
+                  <ExternalLink data-icon="inline-end" aria-hidden />
+                </a>
+              )}
+            </>
+          }
+        />
+      }
     >
-      <PageHeader
-        eyebrow="政府統計"
-        title={survey.name}
-        description={
-          <>
-            {/* 調査の規模と対象は数値タイルにせず 1 行にまとめ、最初の画面を問いと答えに使う (2026-11-03) */}
-            <span className="block">
-              <span className="font-medium text-foreground">{survey.organization}</span>
-              {` ・ ランキング ${rankingItems.length.toLocaleString('ja-JP')} 件`}
-              {latestYear && ` ・ 最新 ${latestYear} 年`}
-              {` ・ ${areaLabel}`}
-            </span>
-            {survey.description && (
-              <span className="mt-1 block">{survey.description}</span>
-            )}
-          </>
-        }
-        actions={
-          <>
-            {/* 読むときの注意・分かること・出典は、テーマのページと同じ共通のシートで開く (2026-11-03)。
-                先頭に置き、ページの最初から誤読の注意 (県庁所在市の値など) に届くようにする */}
-            {editorial && (
-              <SourcesSheet
-                id="survey-sources"
-                groups={[
-                  {
-                    title: '数字を読むときの注意',
-                    notes: editorial.caveats,
-                    sources: [{ label: `${survey.organization}「${survey.name}」`, url: survey.url }],
-                    rankings: [],
-                  },
-                  { title: 'この調査で分かること', notes: editorial.whatYouCanLearn, sources: [], rankings: [] },
-                ]}
-              />
-            )}
-            {survey.url && (
-              <a
-                href={survey.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-slot="button"
-                className={buttonVariants({ variant: 'outline', size: 'sm' })}
-              >
-                公式サイト
-                <ExternalLink data-icon="inline-end" aria-hidden />
-              </a>
-            )}
-          </>
-        }
-      />
 
       {/* 読者の問いに地図付きのカードで答えるのを最初に置く。目次や分類の一覧を先に出さない (2026-11-03) */}
       {featuredItems.length > 0 && (

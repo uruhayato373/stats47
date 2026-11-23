@@ -52,7 +52,5 @@ export const nurseryChildrenPerNurseryTeacher: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "保育所等在所児数ランキング都道府県【2020年】｜1位福井県（13.58人）",
-  "seoDescription": "2020年の保育所等在所児数の都道府県別ランキング。1位福井県（13.58人）、最下位東京都（5.21人）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

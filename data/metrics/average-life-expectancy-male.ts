@@ -60,7 +60,5 @@ export const averageLifeExpectancyMale: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "平均余命 都道府県ランキング【2020年】｜1位長野県（63.07年）",
-  "seoDescription": "2020年の平均余命を都道府県別に比較。1位は長野県（63.07年）、最下位は青森県（59.66年）、最大と最小の差は1.1倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

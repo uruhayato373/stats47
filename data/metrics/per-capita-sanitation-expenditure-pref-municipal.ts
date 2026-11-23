@@ -52,7 +52,5 @@ export const perCapitaSanitationExpenditurePrefMunicipal: MetricConfig = {
     ],
   },
   "groupKey": "sanitation-expenses-prefecture",
-  "seoTitle": "衛生費ランキング都道府県【2022年】｜1位徳島県（146.5千円）",
-  "seoDescription": "2022年の衛生費の都道府県別ランキング。1位徳島県（146.5千円）、最下位神奈川県（74.5千円）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

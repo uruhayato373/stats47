@@ -77,8 +77,5 @@ export const portCount: MetricConfig = {
     ],
     isCalculated: false,
   },
-  seoTitle: "港湾調査の対象港数ランキング【2025年】｜甲種・乙種港湾",
-  seoDescription:
-    "2025年1月1日施行の港湾調査規則別表から、甲種・乙種の対象664港を都道府県別に集計。全国の全港湾数ではなく調査対象港数を47県で比較します。",
   isActive: true,
 };

@@ -33,7 +33,5 @@ export const mainRoadPavingRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "主要道路舗装率 都道府県ランキング【2023年】｜1位高知県（100.0％）",
-  "seoDescription": "2023年の主要道路舗装率を都道府県別に比較。1位は高知県（100.0％）、最下位は岩手県（92.1％）、最大と最小の差は1.1倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

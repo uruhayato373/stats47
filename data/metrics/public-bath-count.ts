@@ -100,7 +100,5 @@ export const publicBathCount: MetricConfig = {
     ],
   },
   "groupKey": "public-bath-count",
-  "seoTitle": "公衆浴場数ランキング都道府県【2023年】｜1位東京都（443所）",
-  "seoDescription": "2023年の公衆浴場数の都道府県別ランキング。1位東京都（443所）、最下位山形県（0所）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

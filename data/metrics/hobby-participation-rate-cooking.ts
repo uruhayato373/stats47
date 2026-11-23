@@ -33,7 +33,5 @@ export const hobbyParticipationRateCooking: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "趣味としての料理・菓子作りの行動者率ランキング都道府県【2021年】｜1位東京都（21.9％）",
-  "seoDescription": "2021年の趣味としての料理・菓子作りの行動者率の都道府県別ランキング。1位東京都（21.9％）、最下位青森県（13.9％）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

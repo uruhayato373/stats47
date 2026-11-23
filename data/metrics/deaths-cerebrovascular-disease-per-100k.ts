@@ -36,7 +36,5 @@ export const deathsCerebrovascularDiseasePer100k: MetricConfig = {
     "isCalculated": false
   },
   "groupKey": "deaths-cerebrovascular-disease",
-  "seoTitle": "脳血管疾患による死亡者数ランキング都道府県【2023年】｜1位秋田県（173.4人）",
-  "seoDescription": "2023年の脳血管疾患による死亡者数の都道府県別ランキング。1位秋田県（173.4人）、最下位滋賀県（62.7人）で2.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true
 };

@@ -91,7 +91,5 @@ export const physicalDisabilityRehabilitationFacilityCapacity: MetricConfig = {
     ],
   },
   "groupKey": "physical-disability-rehabilitation-facility-capacity",
-  "seoTitle": "身体障害者更生援護施設定員数ランキング都道府県【2011年】｜1位北海道（1,142人）",
-  "seoDescription": "2011年の身体障害者更生援護施設定員数の都道府県別ランキング。1位北海道（1,142人）、最下位茨城県（0人）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

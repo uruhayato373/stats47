@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T11:25:23.557Z",
+  "generatedAt": "2026-11-20T23:58:28.220Z",
   "platform": "mac",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
@@ -8,7 +8,7 @@
   },
   "scan": {
     "dirs": 9,
-    "transcripts": 124,
+    "transcripts": 142,
     "skipped": 0,
     "weeks": [
       "2026-W29",
@@ -920,13 +920,13 @@
       "model": "claude-fable-5-2",
       "effort": "high",
       "runs": 0,
-      "calls": 54,
+      "calls": 103,
       "tokens": {
-        "input": 108,
-        "output": 59040,
+        "input": 206,
+        "output": 135413,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 765598,
-        "cacheRead": 23618830
+        "cacheWrite1h": 878455,
+        "cacheRead": 49715138
       },
       "costUsd": null
     },
@@ -937,13 +937,13 @@
       "model": "claude-fable-5-2",
       "effort": "medium",
       "runs": 1,
-      "calls": 147,
+      "calls": 183,
       "tokens": {
-        "input": 294,
-        "output": 162675,
+        "input": 366,
+        "output": 218359,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 3506951,
-        "cacheRead": 56226904
+        "cacheWrite1h": 3751521,
+        "cacheRead": 75203069
       },
       "costUsd": null
     },
@@ -970,16 +970,16 @@
       "agentType": "(main)",
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "runs": 2,
-      "calls": 2063,
+      "runs": 3,
+      "calls": 2699,
       "tokens": {
-        "input": 4126,
-        "output": 1231660,
+        "input": 5398,
+        "output": 1637978,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 8156579,
-        "cacheRead": 891518658
+        "cacheWrite1h": 10144808,
+        "cacheRead": 1109558256
       },
-      "costUsd": 268.2061
+      "costUsd": 335.8513
     },
     {
       "week": "2026-W47",
@@ -1123,16 +1123,16 @@
       "agentType": "general-purpose",
       "model": "claude-sonnet-5-5",
       "effort": "high",
-      "runs": 5,
-      "calls": 303,
+      "runs": 6,
+      "calls": 333,
       "tokens": {
-        "input": 612,
-        "output": 209404,
-        "cacheWrite5m": 1049713,
+        "input": 676,
+        "output": 225436,
+        "cacheWrite5m": 1168113,
         "cacheWrite1h": 0,
-        "cacheRead": 51013226
+        "cacheRead": 54886349
       },
-      "costUsd": 14.9222
+      "costUsd": 16.1533
     },
     {
       "week": "2026-W47",
@@ -1140,16 +1140,16 @@
       "agentType": "general-purpose",
       "model": "claude-sonnet-5-5",
       "effort": "medium",
-      "runs": 6,
-      "calls": 258,
+      "runs": 20,
+      "calls": 725,
       "tokens": {
-        "input": 522,
-        "output": 169727,
-        "cacheWrite5m": 1113275,
+        "input": 1466,
+        "output": 427326,
+        "cacheWrite5m": 3173931,
         "cacheWrite1h": 0,
-        "cacheRead": 48628751
+        "cacheRead": 108345003
       },
-      "costUsd": 14.2073
+      "costUsd": 33.88
     },
     {
       "week": "2026-W47",
@@ -1174,16 +1174,16 @@
       "agentType": "improvement-triage",
       "model": "claude-sonnet-5-5",
       "effort": "medium",
-      "runs": 1,
-      "calls": 3,
+      "runs": 2,
+      "calls": 12,
       "tokens": {
-        "input": 8,
-        "output": 1509,
-        "cacheWrite5m": 120400,
+        "input": 26,
+        "output": 9221,
+        "cacheWrite5m": 244688,
         "cacheWrite1h": 0,
-        "cacheRead": 182117
+        "cacheRead": 1074526
       },
-      "costUsd": 0.3525
+      "costUsd": 0.9189
     },
     {
       "week": "2026-W47",
@@ -1252,6 +1252,23 @@
         "cacheRead": 490093
       },
       "costUsd": 0.384
+    },
+    {
+      "week": "2026-W47",
+      "scope": "sub",
+      "agentType": "strategy-advisor",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 39,
+      "tokens": {
+        "input": 82,
+        "output": 54366,
+        "cacheWrite5m": 299246,
+        "cacheWrite1h": 0,
+        "cacheRead": 7884158
+      },
+      "costUsd": 4.1607
     },
     {
       "week": "2026-W47",

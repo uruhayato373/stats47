@@ -52,7 +52,5 @@ export const postalSavingsBalance: MetricConfig = {
     ],
   },
   "groupKey": "postal-savings-balance",
-  "seoTitle": "郵便貯金残高ランキング都道府県【2024年】｜1位東京都（217,193億円）",
-  "seoDescription": "2024年の郵便貯金残高の都道府県別ランキング。1位東京都（217,193億円）、最下位鳥取県（6,821億円）で31.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

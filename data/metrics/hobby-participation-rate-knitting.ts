@@ -33,7 +33,5 @@ export const hobbyParticipationRateKnitting: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "編み物・手芸の行動者率ランキング都道府県【2021年】｜1位北海道（10.7％）",
-  "seoDescription": "2021年の編み物・手芸の行動者率の都道府県別ランキング。1位北海道（10.7％）、最下位沖縄県（6.7％）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -33,7 +33,5 @@ export const avgSavingsRateWorkerHouseholds: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "平均貯蓄率ランキング都道府県【2024年】｜1位埼玉県（44.6％）",
-  "seoDescription": "2024年の平均貯蓄率の都道府県別ランキング。1位埼玉県（44.6％）、最下位宮崎県（23.2％）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

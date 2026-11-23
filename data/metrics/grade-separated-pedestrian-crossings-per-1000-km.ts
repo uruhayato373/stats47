@@ -34,7 +34,5 @@ export const gradeSeparatedPedestrianCrossingsPer1000Km: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "立体横断施設数ランキング都道府県【2023年】｜1位東京都（46所）",
-  "seoDescription": "2023年の立体横断施設数の都道府県別ランキング。1位東京都（46所）、最下位北海道（3.2所）で14.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

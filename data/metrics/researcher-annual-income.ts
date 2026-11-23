@@ -59,7 +59,5 @@ export const researcherAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "研究者の平均年収 都道府県ランキング【2023年】｜1位山梨県（1,178.3万円）",
-  "seoDescription": "2023年の研究者の平均年収を都道府県別に比較。1位は山梨県（1,178.3万円）、最下位は鳥取県（435.7万円）、最大と最小の差は2.7倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

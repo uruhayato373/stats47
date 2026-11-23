@@ -59,8 +59,6 @@ export const dairyCattleCount: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "乳用牛飼養頭数 都道府県ランキング【2025年】｜1位北海道（816,800頭）",
-  "seoDescription": "2025年の乳用牛飼養頭数を都道府県別に比較。1位は北海道（816,800頭）、最下位は和歌山県（510頭）、最大と最小の差は1601.6倍です。地図やグラフで47都道府県の違いを確認できます。",
   "surveyId": "livestock-statistics",
   "isActive": true,
 };

@@ -35,7 +35,5 @@ export const physicalDisabilityCertificatesIssuedPer1000: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "physical-disability-certificates-issued",
-  "seoTitle": "身体障害者手帳交付数ランキング都道府県【2023年】｜1位和歌山県（58.2人）",
-  "seoDescription": "2023年の身体障害者手帳交付数の都道府県別ランキング。1位和歌山県（58.2人）、最下位埼玉県（27.2人）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

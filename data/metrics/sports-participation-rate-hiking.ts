@@ -33,7 +33,5 @@ export const sportsParticipationRateHiking: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "登山・ハイキングの行動者率 都道府県ランキング【2021年】｜1位東京都（9.8％）",
-  "seoDescription": "2021年の登山・ハイキングの行動者率を都道府県別に比較。1位は東京都（9.8％）、最下位は沖縄県（2.4％）、最大と最小の差は4.1倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

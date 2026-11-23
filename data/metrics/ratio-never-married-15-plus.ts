@@ -39,7 +39,5 @@ export const ratioNeverMarried15Plus: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "未婚者割合ランキング都道府県【2020年】｜1位東京都（32.68％）",
-  "seoDescription": "2020年の未婚者割合の都道府県別ランキング。1位東京都（32.68％）、最下位秋田県（22.79％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

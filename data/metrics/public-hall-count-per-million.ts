@@ -62,7 +62,5 @@ export const publicHallCountPerMillion: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "公民館数ランキング都道府県【2021年】｜1位長野県（880館）",
-  "seoDescription": "2021年の公民館数の都道府県別ランキング。1位長野県（880館）、最下位東京都（5.7館）で154.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true
 };

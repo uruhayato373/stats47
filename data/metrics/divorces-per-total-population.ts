@@ -34,8 +34,6 @@ export const divorcesPerTotalPopulation: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "離婚率ランキング都道府県【2022年】｜1位沖縄県（2.10人口千対）",
-  "seoDescription": "2022年の離婚率（人口千対）の都道府県別ランキング。1位は沖縄県（2.10人口千対）、最下位は富山県（1.06人口千対）で2.0倍の差。地図やグラフで47都道府県を比較。",
   "isActive": true,
   "subtitle": "人口千人当たり"
 };

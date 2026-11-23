@@ -83,7 +83,5 @@ export const pharmaceuticalSalesCountPer100km2: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "pharmaceutical-sales-count",
-  "seoTitle": "医薬品販売業数ランキング都道府県【2023年】｜1位東京都（346.1所）",
-  "seoDescription": "2023年の医薬品販売業数の都道府県別ランキング。1位東京都（346.1所）、最下位北海道（8.9所）で38.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -34,7 +34,5 @@ export const elderlyWelfareExpenditureRatioPrefFinance: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "老人福祉費割合ランキング都道府県【2022年】｜1位神奈川県（9.77％）",
-  "seoDescription": "2022年の老人福祉費割合の都道府県別ランキング。1位神奈川県（9.77％）、最下位沖縄県（4.1％）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

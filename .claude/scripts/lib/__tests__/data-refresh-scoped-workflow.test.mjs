@@ -367,3 +367,30 @@ test('auto で指標を渡すときも、GITHUB_OUTPUT へ渡す前に key の�
   assert.notEqual(result.status, 0);
   assert.equal(result.outputs, '');
 });
+
+// デプロイの後の取り込み (2026-11-23)。指標の設定を変えても、リリースの後に人が data-refresh を起動しないと本番に値が入らなかった。
+// 守る意図: (1) デプロイが通ってから走る (2) 変えた指標のうち R2 の記録と設定が違うものだけを渡す (全範囲に倒さない)
+// (3) 機械が起動した取り込みの失敗は Issue になる (誰も画面を見ていないので)
+test('デプロイの後に、設定を変えた指標だけを data-refresh へ渡す', () => {
+  const deploy = YAML.parse(fs.readFileSync(path.join(root, '.github/workflows/deploy-workers.yml'), 'utf8'));
+  const job = deploy.jobs['ingest-changed-metrics'];
+  assert.equal(job.needs, 'deploy');
+  assert.equal(job.permissions.actions, 'write');
+  const byId = Object.fromEntries(job.steps.filter(s => s.id).map(s => [s.id, s]));
+  assert.match(byId.changed.run, /plan-metric-ingest\.mjs "\$BEFORE" "\$GITHUB_SHA"/);
+  assert.match(byId.plan.run, /--select-only --metric "\$KEYS"/);
+  assert.match(byId.plan.run, /filter\(\(r\)=>r\.configHashChanged\)/);
+  const dispatch = job.steps.at(-1);
+  assert.equal(dispatch.if, "steps.plan.outputs.metric != ''");
+  assert.match(dispatch.run, /gh workflow run data-refresh\.yml [^\n]*--ref main -f metric="\$METRIC" -f dry_run=false -f snapshot_scope=auto/);
+  // 指標を空で渡すと data-refresh は自動選択 (表の更新 + 記録の差) になり、変えていない指標まで取り込む
+  assert.ok(job.steps.filter(s => s.if?.includes('keys')).length >= 3, '指標の定義を変えていない push で依存を入れない');
+});
+
+test('機械が起動した取り込みの失敗と回復は Issue で知らせ、人の手の起動では立てない', () => {
+  const open = step('Open issue on failure');
+  const close = step('Close recovered data refresh alert');
+  for (const entry of [open, close]) {
+    assert.match(entry.if, /github\.event_name != 'workflow_dispatch' \|\| github\.actor == 'github-actions\[bot\]'/);
+  }
+});

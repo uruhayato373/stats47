@@ -33,7 +33,5 @@ export const studyParticipationRateComputer: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "パソコンなどの情報処理の行動者率ランキング都道府県【2021年】｜1位東京都（23.2％）",
-  "seoDescription": "2021年のパソコンなどの情報処理の行動者率の都道府県別ランキング。1位東京都（23.2％）、最下位岩手県（10.3％）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

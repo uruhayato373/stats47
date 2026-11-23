@@ -34,7 +34,5 @@ export const cleaningShopCountPer100k: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "クリーニング業数ランキング都道府県【2023年】｜1位福井県（115.6所）",
-  "seoDescription": "2023年のクリーニング業数の都道府県別ランキング。1位福井県（115.6所）、最下位神奈川県（37.9所）で3.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

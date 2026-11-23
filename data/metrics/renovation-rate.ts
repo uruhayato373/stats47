@@ -42,7 +42,5 @@ export const renovationRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "リフォーム工事実施率 都道府県ランキング【2023年】｜1位新潟県（32.9％）",
-  "seoDescription": "2023年のリフォーム工事実施率を都道府県別に比較。1位は新潟県（32.9％）、最下位は沖縄県（21.2％）、最大と最小の差は1.6倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

@@ -39,7 +39,7 @@ interface PageShellProps {
  *
  * 2026-07-11: 1700px → 1280px に統一 (ArticleShell = blog/ranking 詳細と同一幅)。
  * 2026-10-27: 横の余白はテンプレートの p-4 に寄せた。本文の余白はルートレイアウトの
- * main#main-content (p-4) が持つので、PageShell / ArticleShell 自身は余白を持たない。
+ * 持たない。main#main-content も余白を持たない (本文の格子を外枠の線に接して置く。2026-11-23 オーナー決定)。
  * 2026-10-28: このトークンから px-4 を外した。main の中で使うと main の p-4 と重なり 32px になっていた。
  * main の外 (Footer) は自分で px-4 を足す。
  */
@@ -47,7 +47,7 @@ export const SHELL_WIDTH_CLASS = 'mx-auto w-full max-w-[1280px]';
 
 /**
  * PageShell / ArticleShell の外枠。幅の上限と、レール境界を判定する名前付きコンテナ
- * `@container/shell` を持つ。余白は main#main-content の p-4 に任せる。
+ * `@container/shell` を持つ。外側の余白は持たない (main#main-content も持たない)。
  *
  * サイドバーの開閉で本文の幅が変わるため、レールの出現はビューポートではなく
  * このコンテナの幅で決める (globals.css の rail:。本文 656px を保つ値)。

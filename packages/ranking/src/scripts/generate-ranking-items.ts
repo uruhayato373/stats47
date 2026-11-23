@@ -121,8 +121,9 @@ async function loadValuesContext(
     if (latestRows.every((r) => r.rank == null)) deriveRanks(latestRows);
 
     const latestTop = deriveFeaturedTop(latestRows);
+    const seoRows = latestRows.map((r) => ({ areaCode: r.areaCode, areaName: r.areaName, value: r.value, rank: r.rank ?? null }));
 
-    return { yearCodes: years, latestTop };
+    return { yearCodes: years, latestTop, latestRows: seoRows };
   } catch (error) {
     throw new Error(
       `Cannot derive metric metadata from observations: ${config.key}: ${error instanceof Error ? error.message : String(error)}`

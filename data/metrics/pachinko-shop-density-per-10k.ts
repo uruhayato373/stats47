@@ -60,9 +60,5 @@ export const pachinkoShopDensityPer10k: MetricConfig = {
   surveyScope: 'not-applicable',
   surveyScopeReason:
     '警察庁発表の営業所台帳を業界団体が集計した値で、統計調査を原典としないため',
-  seoTitle:
-    'パチンコ店密度ランキング都道府県【2025年】｜1位鹿児島県は本当か? 人口1万人あたりで比較',
-  seoDescription:
-    '都道府県別ぱちんこ店舗数を人口1万人あたりで比較。全日遊連公表の2025年データで鹿児島県が全国1位、東京都・神奈川県・奈良県が最下位クラス。地図とグラフで47都道府県を比較。',
   isActive: true,
 };

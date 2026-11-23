@@ -33,7 +33,5 @@ export const perTaxpayerIncome: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "納税義務者1人当たり課税所得ランキング市区町村【2024年】｜1位東京都 港区（17,808千円）",
-  "seoDescription": "2024年の納税義務者1人当たり課税所得の市区町村別ランキング。1位東京都 港区（17,808千円）、最下位青森県 西目屋村（2,447.9千円）で地図やグラフで市区町村を比較。",
   "isActive": true,
 };

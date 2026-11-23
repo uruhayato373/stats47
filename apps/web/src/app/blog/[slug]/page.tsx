@@ -31,7 +31,7 @@ import {
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
-import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
+import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, extractHeadings, generateBlogMetadata, migrateLegacyDataSourceSection, RailArticleToc } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
     listLatestArticles,
@@ -302,6 +302,14 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* 右レールの最後: 300×600 をヘッダーの下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
                 PC で下が約 5,000px 空いていた)。PC だけ。仕組みと Google の条件は RailAdSlot の sticky */}
             <RailAdSlot slot={BLOG_RAIL_STICKY} sticky />
+
+            {/* 追従する広告のすぐ下に追従する目次 (2026-11-23 オーナー指示)。右レールの中身を通り過ぎた後で見え、
+                今読んでいる節を強調する。広告と一緒に画面に収まらない高さの画面では出さない (RailArticleToc) */}
+            <RailArticleToc
+                headings={extractHeadings(renderedArticle.content)
+                    .filter((heading) => heading.level === 2)
+                    .map(({ id, text }) => ({ id, text }))}
+            />
         </div>
     );
     // レール末尾: ここまでが右レールの静的範囲 (check-ad-placement.cjs と広告配置の契約テストが範囲の終わりの目印に使う)
@@ -332,40 +340,43 @@ export default async function BlogPostPage({ params }: PageProps) {
                         </BreadcrumbList>
                     </Breadcrumb>
                 }
+                // 記事ヘッダー。本文の格子の header に渡し、パンくずと 1 つの区画に見せる (PanelGrid の breadcrumb + 次のセル)。
+                // 記事のカードの中に置くと、パンくずの直後が本文の列になり間に線が出ていた (2026-11-23)。
+                // 下線と下の余白は格子が持つ (線は格子の 1px、余白はセルの p-4)
+                header={
+                    <header className="google-anno-skip">
+                        {/* 肩書きと PR 表記は別の行の muted テキストにする (区切りの「・」が狭い幅で行末に残らない) */}
+                        <div className="mb-2 text-xs text-muted-foreground">
+                            <p>stats47 データジャーナル / 統計で読む地域ニュース</p>
+                            <p>PRを含む場合があります</p>
+                        </div>
+                        <h1 className="article-title mb-3 text-xl font-semibold text-foreground sm:text-2xl">{renderedArticle.title}</h1>
+                        {article.frontmatter.subtitle && (
+                            <p className="mb-3 text-sm text-muted-foreground sm:text-base">{normalizeUnitsInText(article.frontmatter.subtitle)}</p>
+                        )}
+                        {articleTagData.length > 0 && (
+                            <div className="mb-3 flex flex-wrap items-center gap-2">
+                                {articleTagData.map((t) => (
+                                    <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
+                                ))}
+                            </div>
+                        )}
+                        {/* 公開日とシェアは同じ行の左右に置く (390px でもシェアを次の行へ落とさない) */}
+                        <div className="flex items-center justify-between gap-3">
+                            {article.publishedAt ? (
+                                <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
+                                    公開日 {article.publishedAt.slice(0, 10)}
+                                </time>
+                            ) : (
+                                <span />
+                            )}
+                            <ShareButtons title={article.title} url={hrefFor("blog", { slug })} variant="simple" platforms={["X (Twitter)", "LINE"]} />
+                        </div>
+                    </header>
+                }
             >
                 <PanelGrid>
                     <ArticleCard>
-                            {/* 記事ヘッダー */}
-                            <header className="google-anno-skip border-b border-border pb-4">
-                                {/* 肩書きと PR 表記は別の行の muted テキストにする (区切りの「・」が狭い幅で行末に残らない) */}
-                                <div className="mb-2 text-xs text-muted-foreground">
-                                    <p>stats47 データジャーナル / 統計で読む地域ニュース</p>
-                                    <p>PRを含む場合があります</p>
-                                </div>
-                                <h1 className="article-title mb-3 text-xl font-semibold text-foreground sm:text-2xl">{renderedArticle.title}</h1>
-                                {article.frontmatter.subtitle && (
-                                    <p className="mb-3 text-sm text-muted-foreground sm:text-base">{normalizeUnitsInText(article.frontmatter.subtitle)}</p>
-                                )}
-                                {articleTagData.length > 0 && (
-                                    <div className="mb-3 flex flex-wrap items-center gap-2">
-                                        {articleTagData.map((t) => (
-                                            <TagBadge key={t.tagKey} tag={t.tagKey} tagKey={t.tagKey} />
-                                        ))}
-                                    </div>
-                                )}
-                                {/* 公開日とシェアは同じ行の左右に置く (390px でもシェアを次の行へ落とさない) */}
-                                <div className="flex items-center justify-between gap-3">
-                                    {article.publishedAt ? (
-                                        <time dateTime={article.publishedAt} className="text-xs text-muted-foreground">
-                                            公開日 {article.publishedAt.slice(0, 10)}
-                                        </time>
-                                    ) : (
-                                        <span />
-                                    )}
-                                    <ShareButtons title={article.title} url={hrefFor("blog", { slug })} variant="simple" platforms={["X (Twitter)", "LINE"]} />
-                                </div>
-                            </header>
-
                             {/* 目次 (全幅共通でタイトルの後・本文の前に 1 か所だけ) */}
                             <ArticleTableOfContents content={renderedArticle.content} />
 

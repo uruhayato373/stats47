@@ -46,7 +46,5 @@ export const jobChangeRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "転職率 都道府県ランキング【2022年】｜1位東京都（5.4％）",
-  "seoDescription": "2022年の転職率を都道府県別に比較。1位は東京都（5.4％）、最下位は愛媛県（3.3％）、最大と最小の差は1.6倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

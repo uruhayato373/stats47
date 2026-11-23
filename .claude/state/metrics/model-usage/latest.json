@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T11:25:23.764Z",
+  "generatedAt": "2026-11-20T23:58:28.512Z",
   "window": {
     "weeks": 4,
     "subWeeks": [
@@ -27,7 +27,7 @@
       },
       {
         "platform": "mac",
-        "generatedAt": "2026-11-19T11:25:23.557Z",
+        "generatedAt": "2026-11-20T23:58:28.220Z",
         "weeks": [
           "2026-W29",
           "2026-W30",
@@ -62,6 +62,28 @@
   },
   "agents": [
     {
+      "agentType": "general-purpose",
+      "runs": 32,
+      "calls": 1213,
+      "costUsd": 59.9014,
+      "unpricedCalls": 15,
+      "byModel": {
+        "claude-opus-5-5": 125,
+        "claude-sonnet-5-5": 1073,
+        "claude-haiku-5-5": 15
+      },
+      "byEffort": {
+        "high": 354,
+        "xhigh": 72,
+        "medium": 772,
+        "low": 15
+      },
+      "costPerRun": 1.8719,
+      "declaredModel": null,
+      "declaredEffort": null,
+      "custom": false
+    },
+    {
       "agentType": "blog-critic",
       "runs": 40,
       "calls": 543,
@@ -79,28 +101,6 @@
       "declaredModel": "sonnet",
       "declaredEffort": "high",
       "custom": true
-    },
-    {
-      "agentType": "general-purpose",
-      "runs": 17,
-      "calls": 716,
-      "costUsd": 38.9976,
-      "unpricedCalls": 15,
-      "byModel": {
-        "claude-opus-5-5": 125,
-        "claude-sonnet-5-5": 576,
-        "claude-haiku-5-5": 15
-      },
-      "byEffort": {
-        "high": 324,
-        "xhigh": 72,
-        "medium": 305,
-        "low": 15
-      },
-      "costPerRun": 2.294,
-      "declaredModel": null,
-      "declaredEffort": null,
-      "custom": false
     },
     {
       "agentType": "article-writer",
@@ -132,6 +132,23 @@
         "high": 172
       },
       "costPerRun": 3.2118,
+      "declaredModel": "opus",
+      "declaredEffort": null,
+      "custom": true
+    },
+    {
+      "agentType": "strategy-advisor",
+      "runs": 2,
+      "calls": 78,
+      "costUsd": 8.7516,
+      "unpricedCalls": 0,
+      "byModel": {
+        "claude-opus-5-5": 78
+      },
+      "byEffort": {
+        "medium": 78
+      },
+      "costPerRun": 4.3758,
       "declaredModel": "opus",
       "declaredEffort": null,
       "custom": true
@@ -171,23 +188,6 @@
       "declaredModel": null,
       "declaredEffort": null,
       "custom": false
-    },
-    {
-      "agentType": "strategy-advisor",
-      "runs": 1,
-      "calls": 39,
-      "costUsd": 4.5909,
-      "unpricedCalls": 0,
-      "byModel": {
-        "claude-opus-5-5": 39
-      },
-      "byEffort": {
-        "medium": 39
-      },
-      "costPerRun": 4.5909,
-      "declaredModel": "opus",
-      "declaredEffort": null,
-      "custom": true
     },
     {
       "agentType": "theme-ui-manager",
@@ -242,6 +242,24 @@
       "custom": true
     },
     {
+      "agentType": "improvement-triage",
+      "runs": 5,
+      "calls": 25,
+      "costUsd": 1.8345,
+      "unpricedCalls": 0,
+      "byModel": {
+        "claude-sonnet-5-5": 25
+      },
+      "byEffort": {
+        "medium": 17,
+        "low": 8
+      },
+      "costPerRun": 0.3669,
+      "declaredModel": "sonnet",
+      "declaredEffort": null,
+      "custom": true
+    },
+    {
       "agentType": "note-manager",
       "runs": 1,
       "calls": 43,
@@ -254,24 +272,6 @@
         "medium": 43
       },
       "costPerRun": 1.7734,
-      "declaredModel": "sonnet",
-      "declaredEffort": null,
-      "custom": true
-    },
-    {
-      "agentType": "improvement-triage",
-      "runs": 4,
-      "calls": 16,
-      "costUsd": 1.2681,
-      "unpricedCalls": 0,
-      "byModel": {
-        "claude-sonnet-5-5": 16
-      },
-      "byEffort": {
-        "medium": 8,
-        "low": 8
-      },
-      "costPerRun": 0.317,
       "declaredModel": "sonnet",
       "declaredEffort": null,
       "custom": true
@@ -383,8 +383,8 @@
     {
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "calls": 6433,
-      "costUsd": 832.0099
+      "calls": 7069,
+      "costUsd": 899.6551
     },
     {
       "model": "claude-opus-5-5",
@@ -395,46 +395,46 @@
     {
       "model": "claude-fable-5-2",
       "effort": "high",
-      "calls": 292,
+      "calls": 341,
       "costUsd": 0
     },
     {
       "model": "claude-fable-5-2",
       "effort": "medium",
-      "calls": 214,
+      "calls": 250,
       "costUsd": 0
     }
   ],
   "ci": [
     {
-      "workflow": "seo-keyword-cycle",
-      "runs": 7,
-      "items": 7,
-      "costUsd": 2.4899,
+      "workflow": "theme-chart-review",
+      "runs": 4,
+      "items": 4,
+      "costUsd": 2.8263,
       "errors": 0,
       "models": {
-        "claude-sonnet-5-5": 7
+        "claude-sonnet-5-5": 4
       },
       "efforts": {
-        "high": 7
+        "high": 4
       },
-      "costPerRun": 0.3557,
-      "costPerItem": 0.3557
+      "costPerRun": 0.7066,
+      "costPerItem": 0.7066
     },
     {
-      "workflow": "theme-chart-review",
-      "runs": 3,
-      "items": 3,
-      "costUsd": 2.1097,
+      "workflow": "seo-keyword-cycle",
+      "runs": 6,
+      "items": 6,
+      "costUsd": 2.181,
       "errors": 0,
       "models": {
-        "claude-sonnet-5-5": 3
+        "claude-sonnet-5-5": 6
       },
       "efforts": {
-        "high": 3
+        "high": 6
       },
-      "costPerRun": 0.7032,
-      "costPerItem": 0.7032
+      "costPerRun": 0.3635,
+      "costPerItem": 0.3635
     },
     {
       "workflow": "improvement-cycle",

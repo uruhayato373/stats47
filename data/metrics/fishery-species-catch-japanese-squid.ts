@@ -163,7 +163,5 @@ export const fisherySpeciesCatchJapaneseSquid: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "スルメイカ漁獲量ランキング都道府県【2023年】｜1位青森県（5,370トン）",
-  "seoDescription": "2023年のスルメイカ漁獲量を都道府県別に比較。1位は青森県（5,370トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };

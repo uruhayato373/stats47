@@ -56,7 +56,5 @@ export const alcoholSalesPerAdultSake: MetricConfig = {
     "isCalculated": false,
   },
   "surveyId": "nta-annual-statistics",
-  "seoTitle": "成人1人あたり日本酒(清酒)の販売量、都道府県で差｜1位新潟県8.1リットル【2023年度】",
-  "seoDescription": "国税庁の酒類販売(消費)数量を成人人口で割り、日本酒(清酒)の成人1人あたり販売量を都道府県別に比較。2023年度は1位新潟県8.1リットル、最下位鹿児島県1.1リットルで約7.3倍の差(沖縄県を除く46都道府県)。",
   "isActive": true,
 };

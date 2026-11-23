@@ -6,8 +6,6 @@ export const convenienceStoreSalesMonthly: MetricConfig = {
   "title": "コンビニエンスストア販売額（都道府県別・年計）",
   "subtitle": "月次",
   "unit": "百万円",
-  "seoTitle": "コンビニエンスストア販売額（都道府県別・年計） 都道府県ランキング【2024年】｜1位東京都（1,896,372.0百万円）",
-  "seoDescription": "2024年のコンビニエンスストア販売額（都道府県別・年計）を都道府県別に比較。1位は東京都（1,896,372.0百万円）、最下位は鳥取県（48,922.0百万円）、最大と最小の差は38.8倍です。地図やグラフで47都道府県の違いを確認できます。",
   "category": "commercial",
   "source": {
     "kind": "estat",

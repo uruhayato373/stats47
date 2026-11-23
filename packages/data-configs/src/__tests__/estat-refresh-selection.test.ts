@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 import { describe, expect, it, vi } from "vitest";
 import { buildRecipe } from "../recipe.js";
 import type { MetricConfig } from "../types.js";
@@ -59,6 +60,12 @@ describe("refresh union", () => {
     ]);
     expect(readJson).toHaveBeenCalledTimes(4);
   });
+  it("都道府県の値を持たない指標は、その指標が書く値のファイルの記録と比べる", async () => {
+    const city = { ...metric("city-only"), entities: ["city"] } as MetricConfig;
+    const readJson = vi.fn(async (key: string) => (key === statsR2Key("city-only", "city") ? { meta: { recipe: buildRecipe(city) } } : null));
+    expect((await selectRefreshMetrics([city], { tableUpdates: [], readJson })).metricKeys).toEqual([]);
+    expect(readJson.mock.calls).toEqual([[statsR2Key("city-only", "city")]]);
+  });
   it("does not default to all when no tables/hash changed", async () => {
     const config = metric("same");
     const result = await selectRefreshMetrics([config], { tableUpdates: [], readJson: async () => ({ meta: { recipe: buildRecipe(config) } }) });
@@ -68,6 +75,12 @@ describe("refresh union", () => {
     for (const value of [null, {}, { meta: {} }]) expect((await selectRefreshMetrics([metric("new")], { tableUpdates: [], readJson: async () => value })).metricKeys).toEqual(["new"]);
     await expect(selectRefreshMetrics([metric("a")], { tableUpdates: [], readJson: async () => { throw new Error("HTTP 503"); } })).rejects.toThrow("503");
     await expect(selectRefreshMetrics([metric("a")], { tableUpdates: [], readJson: async () => ({ meta: { recipe: { configHash: 5 } } }) })).rejects.toThrow(/Invalid configHash/);
+  });
+  it("公開 URL の読み込み口は、市区町村の値のファイルも読める (選び方が市区町村だけの指標で止まらない)", async () => {
+    const transport = vi.fn(async () => new Response(JSON.stringify({ meta: {} }), { status: 200 }));
+    const cityKey = statsR2Key("city-only", "city");
+    await expect(publicJsonReader(transport as unknown as typeof fetch)(cityKey)).resolves.toEqual({ meta: {} });
+    await expect(publicJsonReader(transport as unknown as typeof fetch)(cityKey.replace(/cities\.json$/, "other.json"))).rejects.toThrow(/Invalid input key/);
   });
   it("only allows public GET paths, distinguishes 404 from service errors", async () => {
     const transport = vi.fn<typeof fetch>().mockResolvedValueOnce(new Response("", { status: 404 })).mockResolvedValueOnce(new Response("", { status: 503 }));

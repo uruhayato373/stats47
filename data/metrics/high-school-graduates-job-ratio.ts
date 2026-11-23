@@ -33,7 +33,5 @@ export const highSchoolGraduatesJobRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "高等学校卒業者に占める就職者の割合 都道府県ランキング【2023年】｜1位山口県（27.6％）",
-  "seoDescription": "2023年の高等学校卒業者に占める就職者の割合を都道府県別に比較。1位は山口県（27.6％）、最下位は東京都（4.2％）、最大と最小の差は6.6倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

@@ -33,7 +33,5 @@ export const criminalRecognitionCountOfSeriousCrimeRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "刑法犯認知件数に占める凶悪犯の割合ランキング都道府県【2023年】｜1位岩手県（1.68％）",
-  "seoDescription": "2023年の刑法犯認知件数に占める凶悪犯の割合の都道府県別ランキング。1位岩手県（1.68％）、最下位奈良県（0.38％）で4.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

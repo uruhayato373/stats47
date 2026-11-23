@@ -74,7 +74,5 @@ export const athleticsStadiumCountPublic: MetricConfig = {
     ],
   },
   "surveyId": "sports-facilities-survey",
-  "seoTitle": "陸上競技場数ランキング都道府県【2024年度】｜1位北海道(90施設)",
-  "seoDescription": "2024年度の陸上競技場(公共スポーツ施設)の設置箇所数を都道府県別に比較。1位北海道(90施設)、最下位徳島県(6施設)で15倍の差。体育・スポーツ施設現況調査から。地図とグラフで47都道府県を比較。",
   "isActive": true,
 };

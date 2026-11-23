@@ -36,7 +36,5 @@ export const movingOutRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "転出率ランキング都道府県【2024年】｜1位東京都（2.7％）",
-  "seoDescription": "2024年の転出率の都道府県別ランキング。1位東京都（2.7％）、最下位北海道（1.18％）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

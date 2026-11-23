@@ -55,7 +55,6 @@ export const opendataAdoptionRateMunicipalities: MetricConfig = {
   },
   "surveyScope": "not-applicable",
   "surveyScopeReason": "デジタル庁へ報告のあった自治体の取組状況リストを県別に数えた行政台帳由来の値で、統計調査を原典としないため",
-  "seoTitle": "オープンデータに取り組む市区町村の割合、都道府県で差｜最下位山形県48.6% 【2026年】",
   "seoDescription": "オープンデータに取り組む市区町村の割合を都道府県別に比較。22県が100%に対し、山形県48.6%・佐賀県50.0%・鹿児島県53.5%など約2倍の差。令和8年6月30日時点、デジタル庁の取組済自治体リストから算出。",
   "isActive": true,
 };

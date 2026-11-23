@@ -1674,6 +1674,12 @@ updated: 2026-11-01
 - **停止条件**: 出典の書き換えが1件でも出たら即オリジナルに戻す。ページ数が-5%を超えて落ちたら止める。管理画面でリンクが再びオンなら即 `isAdIntentAllowedPath` を常にfalseへ戻す。週次レビューで管理画面の3つの形を読む。
 - **別件**: ブログ記事で `<div>` が `<p>` の子になるhydration警告 (広告枠が段落内に入る) が出る。本番で同じかは未確認。
 - **完了条件**: アンカーと全画面の2テストの結果 (1,000 PVあたり収益・ページ数・CWV) が記録され、適用するかの判断が収益化戦略 §3.1 に書かれている。
+- **観測 (2026-11-23・PC で自動広告がほぼ出ない件)**: 原因はサイトのレイアウトや実装ではなく、Google が stats47 の PC に自動広告の設定を配っていないこと。`adsbygoogle.js?client=ca-pub-9055416085403520` を PC の UA と stats47 の Referer で取ると、末尾の埋め込み設定が `["ca-pub-…",null,1,null,[null,null,null,1],…]` (配置・形式・広告量が空) になり、スマホと iPad の UA では配置と形式 `[1,3,2]`・広告量 `[0.5,null,2,8,480,1]` が入る。4 回とも同じ。doboku-note (`ca-pub-8504035087322664`) は PC でも設定が入る。curl は DOM を読まないので、ページの作りでは変わらない。本番を同じブラウザの 1440px で開くと、stats47 は全画面 (`data-vignette-loaded`) だけが読み込まれ、アンカーの `ins[data-anchor-status]` と本文の自動挿入は 0、アンカーの広告要求も出ない。doboku-note は同条件でアンカー `displayed` と本文 1 枠。html/body の overflow は visible、スクロールはウィンドウ (`scrollingElement` の高さ 3,371px)。
+  - **再現**: `curl -s -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/131.0 Safari/537.36" -e https://stats47.jp/ranking/total-population "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9055416085403520" | tail -c 300` (UA を Android にすると設定が入る)
+  - **次 (オーナー・管理画面を読むだけ)**: [仮説] 10-28〜11-04 のアンカーのテストの適用か、その後の設定の広がりが PC に効いていない。自動広告 > stats47.jp の編集画面のプレビューを PC 表示にしてアンカーと本文の広告が出るか、URL グループに stats47.jp の全体や PC を外す設定が無いか、「テスト」に進行中・適用済みのパターンが残っていないかを見る。期日 2026-11-25 の途中判定で、上の curl が PC でも設定を返すかを再観測する。設定を保存し直すかは収益の判断としてオーナーが決める。
+  - **補足 (2026-11-23 再調査)**: 5 ページ × 3 回と Windows の UA でも PC は全部空。旧アカウントの W31〜W33 も PC のアンカーは週 10〜30 表示で、10-28 のテストより前から PC だけ少ない。設定は Google がページを解析して作る (スマホの設定には `SECTION#theme-indicators` などの配置が入る) ので、PC のページの作りが Google の判断に効いている可能性は消えていない。見込み: スマホの 1 PV あたりの自動広告 (W46 アンカー 0.82・本文 1.30 表示) を PC の 7,840 PV と PC の実測単価 (アンカー ¥44・本文 ¥17〜28 / 1,000 表示) に当てると週 +¥460〜570、PC の 1,000 PV あたり ¥35 → ¥93〜107。
+  - **管理画面の確認 (2026-11-23・オーナー承認で読み取り)**: stats47.jp の設定は自動広告・自動最適化ともオン、除外ページ 0 件、アンカー・全画面・PC のアンカー・PC の全画面・ダイナミックアンカーがオン。Desktop のプレビューでは下部にアンカーが出る。テストは 2 件とも終了 (アンカーのテストはパターン適用済みでパターンも PC のアンカーがオン、広告インテントはオリジナル選択済み)。値を変えずに「サイトに適用」は「何も変更されていません」で保存されない。同日の curl も PC は空のまま。管理画面の設定と配信が食い違うので、Google 側の判断として扱う。
+  - **次**: AdSense のヘルプへ curl の結果を添えて問い合わせる (オーナー)。並行して、支払い保留の原因の住所確認 (11-13 に PIN を郵送済み・2〜4 週間で届く) の PIN を入力する。
 - **オーナー判断 (2026-11-16)**: 上部アンカーが画面上部を覆う UI 指摘 (`UI-FIX-GEO-ANALYSIS-LAYER-20261114`。/geo/layers/population-mesh の tablet-768) は、今は管理画面のアンカーも `/geo/layers` の広告も変えない。2026-11-25 の途中判定 (次の 2・3・5: アンカーが出た回と出ない回のスマホのランキングの CLS、1 セッションあたりページ数) で判定条件を外れたら、管理画面で上部アンカーを切る。`/geo/layers` だけを広告なしにする案は採らない (閲覧は W45 で週 約 100 PV・全体の 0.15% で効果が小さく、`ad-free-paths.ts` は GIS 台帳の利用条件から決める仕組みで、見た目の理由の手書きを入れないため)。
 
 ### [TRACKED-SECRET-FILE-CHECK-01] 秘密情報らしい名前の追跡ファイル 2 本に、本物の秘密が入っていないかを確かめる
@@ -2166,7 +2172,7 @@ updated: 2026-11-01
 - **追補 (2026-11-19)**: 地域コードの直書きの検査 (`packages/area/scripts/check-area-year-entrypoint.mjs`) の基準に、`.claude/scripts` の既存の直書きが載っている (apps と packages は 2026-11-19 に正本へ置き換え済み)。スクリプトを触ったときに `@stats47/area` か鏡 `lib/prefectures.cjs` の関数へ替え、基準を減らす。 ほかに 2 つの写しが残っている。`packages/area-profile/src/highlights/select-area-highlights.ts` の `PREFECTURE_COUNT = 47` は、SNS のスクリプトが相対パスで直接読む「パッケージの外を import しない」契約のため残した (契約を見直すか、`@stats47/area/area-code` だけは読んでよいことにする)。`packages/data-configs/src/open-data-catalog/normalized-table.ts` と `src/area-axis.ts` は `@stats47/area` ではなく `../../../area/src/constants/prefecture-codes` を相対パスで読んでいる (出口 `@stats47/area/area-code` に替えられるか確かめる)。
 - **追補 (2026-11-19)**: `npm run preflight:pr` は workspace の CI 契約 (`.claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`) を回さない。PR #1288 で `ops`・`ui-theme` にテストを移したのに `testPolicy` が `none` のままで、手元の preflight は通り CI の Static Gates で初めて落ちた。再現: `node --test .claude/scripts/lib/__tests__/workspace-ci-matrix-contract.test.cjs`。preflight の一覧に足すかを決める。
 - **追補 (2026-11-15)**: Codex のセッション (`OPENDATA-ARCHIVE-01`) は `agent:session` に cwd を本体 (`/Users/minamidaisuke/stats47`) として登録していたが、実際の編集は別 worktree `/Users/minamidaisuke/stats47-opendata` で行っていた。このため本体で登録する別セッションに毎回「重複の可能性」の警告が出て、実際に重なる場所は検知されない。登録時に `git rev-parse --show-toplevel` の値を cwd に使っているか (`.claude/hooks/session-guard.js`) を確かめる。
-- **追補 (2026-11-21・週次レビュー W46)**: 土曜 07:30 のスケジュール済みレビューは、02:00 の fetch-metrics-weekly が遅れて 07:35〜08:42 に走った週は W46 の GSC・GA4・AdSense の行が develop に無いまま収集を始める (2026-11-21 は review-input の 3 項目が FAIL → 08:42 の commit f38d92035 の取り込み後に全 PASS)。手元で先に作った `data/nsm/weekly-snapshots/<週>.json`・`data/google-admin/audits/<週>.json` が CI の commit と衝突して pull が止まる。収集の前に「当週の `chore(metrics): weekly snapshot <週>` が develop にあるか」を確かめ、無ければ待つ手順を weekly-review の SKILL.md の「無人で実行するとき」に足す。`npm run reference:expansion -- status --json` などの `--json` 出力は npm のバナー行 (`> ...`) が先頭に混ざり、そのまま JSON.parse できない (`npm run -s` で回避できるかを確かめ、手順書の例を直す)。`.claude/todo/weekly.md` が土曜のレビュー前に次週分へ上書きされ、前週の Must の checkbox の実績が git 履歴にしか残らない (W46 のレビューは 719098a3db の版から読んだ)。週次計画の上書きの時点をレビューの後に揃えるかを決める。
+- **追補 (2026-11-21・週次レビュー W46)**: `npm run reference:expansion -- status --json` などの `--json` 出力は npm のバナー行 (`> ...`) が先頭に混ざり、そのまま JSON.parse できない (`npm run -s` で回避できるかを確かめ、手順書の例を直す)。`.claude/todo/weekly.md` が土曜のレビュー前に次週分へ上書きされ、前週の Must の checkbox の実績が git 履歴にしか残らない (W46 のレビューは 719098a3db の版から読んだ)。週次計画の上書きの時点をレビューの後に揃えるかを決める。
 - **追補 (2026-11-21・週次レビュー W46)**: `audit-operations-cycle.mjs --stage plan --week 2026-W48` を週の途中に実行すると、まだ終わっていない週の snapshot・verdict・review を FAIL と出す。weekly-plan の SKILL.md の手順は `--week` を省いている。計画の段で渡す対象週 (レビューした週か計画する週か) を SKILL.md に書く。
 
 ### [HOOK-STOP-AUDIT-SCOPE-01] Stop hook の整合性監査が、他セッションの変更まで数えて同じ会話を何度も差し戻す
@@ -3373,20 +3379,12 @@ updated: 2026-11-01
 - **残り**: (a) `chicken-consumption-quantity` は「宮崎は最多になった年が無い」に期間を足して再審査する (実際は 2011 年に 1 位)。(b) `food-trio-prefecture-map` は 2025 年に前提が崩れた (豆腐の 1 位は富山、宮城の焼酎は 40 位) ので結論から書き直す。(c) `automotive-industry-transformation-map` (表示 14,289) の推移図を 2024 年まで手で延ばす。(d) refresh の対象外の図 (derived・estat・authored) を持つ記事約 7 本 (manufacturing-aichi-dominance・manufacturing-productivity・pharma-medical-device-production-map・welfare-expenses-squeeze・prefectural-debt-future-burden・library-museum-cultural-capital・local-tax-regional-gap) は図を手で取り直す。(e) 一覧の残り約 150 本を 15〜20 本ずつ処理する (1 本あたり critic 2 回)。(f) 例外 5 種 (healthy-life-expectancy-male-female-gap・physical-therapist-annual-income-prefecture-gap・dairy-cattle-count・it-industry-concentration・手順解説)。(g) `per-capita-income-gap` は 2020 年のデータで、quality-gate が止める「## データ出典」節を持ったまま公開されている。最低賃金の 2 本は 2024 年度のまま (BLOG-DUPLICATE-AUDIT-01 の差別化と同時に直す)。③ の年が 1 年だけのカードは `THEME-SINGLE-YEAR-CARDS-01` で扱う。
 - **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が作り直しの対象になり、古い年の記事が一覧とキューに出て、計算型のランキングとテーマの比較カードが新しい年を描く。加えて、一覧の件数が週次で減っていく。
 
-### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription に観測値を直書きするのをやめ、値から生成する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:サイト]
+### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription を値から作る形を本番に出して確かめる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:サイト] [待ち:承認]
 
-- **GSC案30 / P2（次に着手）**: title・本文・観測値の年/単位/分母を一致させ、最新年と調査年、全国値と県単純平均を区別する。blogの混合年はBLOG-SEOTITLE-MIXED-YEAR-01へ接続し、同じ修正を二重起票しない。観測値由来の必須是正とCTR目的の文言実験を分け、後者の一括置換はしない。
-- **背景**: metric config 2,606 件のうち 1,915 件の `seoTitle` / `seoDescription` が「1位東京都（113,685,917百万円）」のように
-- **次**: ① 直書きの型を分類する (年・1 位・最下位・倍率)。② builder (`build-ranking-item-from-metric.ts`) が R2 の値から
-  同じ型の文言を作る関数を用意し、config には値を含まない雛形か上書きだけを残す。③ 既存 1,915 件を一括で雛形へ置き換え、
-  検索結果の文言が変わる件数を事前に出してオーナーの承認を取る (タイトルの変更は検索順位に影響しうる)。
-- **禁止**: 承認前に R2 の item.json を一括で書き換えない。
-- **完了条件**: config の `seoTitle` / `seoDescription` に観測値を含むものが 0 件になり、item.json の文言が最新の値と一致する。
-- **実例 (2026-10-08)**: 物価地域差指数 12 指標に 2025 年を補ったあとも、本番の `/ranking/consumer-price-difference-index-overall` のタイトルは
-  「【2024年】｜1位東京」のまま (2024 年の値としては正しいので `audit-seo-meta-facts.ts` は通る)。魚種 12 指標は今回手で 2023 年に書き直した。
-  値から生成すれば、年を広げるたびにこの手作業は要らなくなる。
-- **観測 (2026-11-14)**: `audit-seo-meta-facts` は値の許容が相対 2% なので、seoTitle の 47.4 と実測 46.7 (1.5% の差・university-capacity-index) を検出できなかった。 (参照: d45468cb6)
+- **済み (2026-11-23・オーナー承認「全部承認」)**: 項目の組み立てが、定義に題が無ければ最新年の観測値から題と説明文を作る (`buildRankingSeoText`)。定義から年と値の題 1,256 件・説明文 1,259 件を外し、年と値を手で書くと `validate:config` の `seo-hand-written-fact` が止める。断りの文は `seoNote` に残した (5 指標)。見積もり (有効 2,624 指標): 題が変わる 1,104 件・新しく題が付く 501 件・手書きのまま 899 件。
+- **残り**: ① 次のリリース (main へのマージはオーナー判断) のデプロイで全指標の item.json が作り直されたら、本番の `/ranking/general-hospital-count` の `<title>` が「【2024年】」になることを確かめる ② 単位の書き方が粗い題 (酒類の「21.65l」、「104.2(全国=100)」など) を単位の表記の規則で直すか決める。
+- **完了条件**: 本番の代表 5 指標の `<title>` と `<meta name="description">` が R2 の最新年の値と一致する。
 
 ### [GEO-LOW-ELEV-MANIFEST-SHA-01] 標高の低い土地の Geo 分析の manifest が SHA 照合の対象外になっている
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run -s geo:audit-low-elevation] [起票:2026-10-08] [領域:データ] [待ち:承認]

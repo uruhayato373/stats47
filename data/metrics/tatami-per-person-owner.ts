@@ -44,7 +44,5 @@ export const tatamiPerPersonOwner: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "持ち家住宅の畳数ランキング都道府県【2023年】｜1位秋田県（19.83畳）",
-  "seoDescription": "2023年の持ち家住宅の畳数の都道府県別ランキング。1位秋田県（19.83畳）、最下位沖縄県（13.93畳）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

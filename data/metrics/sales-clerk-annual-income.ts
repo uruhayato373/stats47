@@ -61,7 +61,5 @@ export const salesClerkAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "販売店員の平均年収 都道府県ランキング【2023年】｜1位和歌山県（423.3万円）",
-  "seoDescription": "2023年の販売店員の平均年収を都道府県別に比較。1位は和歌山県（423.3万円）、最下位は徳島県（276.7万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

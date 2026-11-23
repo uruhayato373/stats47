@@ -49,7 +49,5 @@ export const softwareEngineerAnnualIncome: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "ソフトウェア作成者の平均年収 都道府県ランキング【2023年】｜1位京都府（608.4万円）",
-  "seoDescription": "2023年のソフトウェア作成者の平均年収を都道府県別に比較。1位は京都府（608.4万円）、最下位は沖縄県（402.6万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true
 };

@@ -33,7 +33,5 @@ export const nationalUniversityStudentRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "国立大学学生数割合ランキング都道府県【2024年】｜1位鳥取県（76.1％）",
-  "seoDescription": "2024年の国立大学学生数割合の都道府県別ランキング。1位鳥取県（76.1％）、最下位神奈川県（4.1％）で18.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

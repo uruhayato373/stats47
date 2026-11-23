@@ -64,7 +64,5 @@ export const bambooProduction: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "竹材生産量 都道府県ランキング【2007年】｜1位鹿児島県（426千束）",
-  "seoDescription": "2007年の竹材生産量を都道府県別に比較。1位は鹿児島県（426千束）、最下位は佐賀県（0千束）。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

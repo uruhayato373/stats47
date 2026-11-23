@@ -34,7 +34,5 @@ export const socialWelfareExpenditureRatioPrefFinance: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "社会福祉費割合ランキング都道府県【2022年】｜1位神奈川県（6.32％）",
-  "seoDescription": "2022年の社会福祉費割合の都道府県別ランキング。1位神奈川県（6.32％）、最下位富山県（3.07％）で2.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

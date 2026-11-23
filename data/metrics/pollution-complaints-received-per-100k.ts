@@ -34,7 +34,5 @@ export const pollutionComplaintsReceivedPer100k: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "公害苦情受付件数ランキング都道府県【2023年】｜1位愛知県（58.9件）",
-  "seoDescription": "2023年の公害苦情受付件数の都道府県別ランキング。1位愛知県（58.9件）、最下位富山県（12.6件）で4.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

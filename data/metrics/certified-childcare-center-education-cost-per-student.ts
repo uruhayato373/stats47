@@ -34,7 +34,5 @@ export const certifiedChildcareCenterEducationCostPerStudent: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "幼保連携型認定こども園教育費ランキング都道府県【2022年】｜1位佐賀県（3,681,518円）",
-  "seoDescription": "2022年の幼保連携型認定こども園教育費の都道府県別ランキング。1位佐賀県（3,681,518円）、最下位宮崎県（0円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

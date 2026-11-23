@@ -37,7 +37,5 @@ export const gdpGrowthRatePrefH17: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "県内総生産額対前年増加率 都道府県ランキング【2014年】｜1位宮城県（4.1％）",
-  "seoDescription": "2014年の県内総生産額対前年増加率を都道府県別に比較。1位は宮城県（4.1％）、最下位は長崎県（-1.3％）。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

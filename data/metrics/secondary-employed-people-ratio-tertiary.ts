@@ -36,7 +36,5 @@ export const secondaryEmployedPeopleRatioTertiary: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "第2次・第3次産業就業者比率ランキング都道府県【2020年】｜1位神奈川県（96％）",
-  "seoDescription": "2020年の第2次・第3次産業就業者比率の都道府県別ランキング。1位神奈川県（96％）、最下位高知県（86.7％）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

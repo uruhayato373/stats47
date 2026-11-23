@@ -49,7 +49,5 @@ export const electricityGenerationCapacity: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "発電電力量ランキング都道府県【2023年】｜1位千葉県（80,635,294MWh）",
-  "seoDescription": "2023年の発電電力量の都道府県別ランキング。1位千葉県（80,635,294MWh）、最下位埼玉県（537,679MWh）で150.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };
