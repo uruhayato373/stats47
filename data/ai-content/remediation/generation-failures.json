@@ -127,12 +127,6 @@
       "lastFailedAt": "2026-11-18",
       "firstFailedAt": "2026-11-16"
     },
-    "specific-health-checkup-participation-rate": {
-      "failCount": 2,
-      "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-20",
-      "firstFailedAt": "2026-11-19"
-    },
     "designated-difficult-disease": {
       "failCount": 1,
       "lastReason": "gemini-daily",
@@ -144,18 +138,6 @@
       "lastReason": "gemini-daily",
       "lastFailedAt": "2026-11-22",
       "firstFailedAt": "2026-11-20"
-    },
-    "bread-consumption-quantity": {
-      "failCount": 2,
-      "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-22",
-      "firstFailedAt": "2026-11-21"
-    },
-    "annual-sales-amount": {
-      "failCount": 2,
-      "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-22",
-      "firstFailedAt": "2026-11-21"
     }
   }
 }
