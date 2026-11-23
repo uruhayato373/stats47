@@ -2738,13 +2738,15 @@ updated: 2026-11-01
 - **確認が要る (11-03 の棚卸し)**: 4ed3ea4e9 (S1 12 冊の修正下書きの作成と読み戻しの検証 PASS) で手順が進んでいるが、この記述は古い。持ち主が進み具合を書き直す
 
 ### [AI-CONTENT-NATIONAL-AVERAGE-WORDING-01] 公開済みの AI 解説の「全国平均」を「47都道府県の単純平均」に直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [待ち:判断] [起票:2026-09-28] [領域:データ]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [進行中] [起票:2026-09-28] [領域:データ]
 
 - **次**: 「全国平均」を機械置換できる文脈 (値の直前) だけを置換し、`audit-ai-content.mjs` を通して outbox から 35 件ずつ公開する
   (2026-09-27 の年表記是正と同じ手順)。言い換えで文が崩れる文脈は再生成キューに回す。
 - **完了条件**: 公開中の ai-content の本文に「全国平均」が 0 件 (公表の全国値を使う指標を除く)。
 - **実測 (2026-11-23)**: R2 の `app/ranking/<key>/ai-content.json` を全件読んだ。公開中の 2,167 件のうち 2,163 件に「全国平均」があり、合計 103,089 回 (多いものは 1 件に 100 回超。県別解説の文に出る)。生成の側は 2026-09-27 から、公表の全国値があれば「全国値」、無ければ「47都道府県の単純平均」と呼ぶ (`ranking-content-prompt.ts` の `averageLabel`・`build-input.ts` の `resolveNationalFigure`)。残っているのはそれより前の公開分。
-- **判断 (オーナー)**: 置き換えると 2,163 件を出し直すことになり、送り箱から 35 件ずつで 62 回の公開になる。指標ごとに呼び名 (`resolveNationalFigure` が公表の全国値を返すか) を決めて機械置換し、`audit-ai-content.mjs` を通して出すか、定期の作り直し (Gemini の日次・stale-year) に任せて自然に置き換わるのを待つか。
+- **進行中 (2026-11-23・オーナー判断「機械置換で出し直す」)**: 10-10 より前の生成は常に都道府県の単純平均を「全国平均」と呼んでいたので、置き換え先は県別解説の件数から「N都道府県の単純平均」(47 県は 2,103 件、ほかは値のある県の数) にした。10-10 以降の生成 2 件は同じファイルの呼び名に合わせた。古い生成の「全国値」は分布や合計の意味で出るので呼び名に流用しない。置換は 103,089 か所で、置換後の「全国平均」は 0。ゲート (`audit-ai-content.mjs --file`) は 2,145 件が通り、18 件は置換の前から止まっていた (下) ので外した。2,145 件を送り箱に置いて push し (`3b26e2f3d`)、publish-ai-content を 1 本ずつ起動して 40 件ずつ公開している。
+- **置換の前から止まっている 18 件 (作り直しが要る)**: `freelance-count`・`non-regular-employment-rate`・`convenience-store-sales`・`gini-coefficient-disposable-income`・`treatment-rate-mental-disorder-inpatient`・`treatment-rate-asthma-outpatient`・`vacant-housing-rate`・`telework-rate`・`convenience-store-count-commercial`・`municipal-general-administration-staff`・`designated-difficult-disease`・`fiscal-strength-index-prefecture`・`actual-income-worker-households-per-month`・`treatment-rate-schizophrenia-inpatient`・`physical-therapist-annual-income`・`dairy-cattle-count`・`wooden-housing-ratio`・`doctor-annual-income`。多くは観測値の更新で県別解説の順位・値が合わない (`pref-data-mismatch`)。
+- **完了条件の確認**: 送り箱が空になった後、R2 の ai-content を全件読み、「全国平均」が 18 件の分だけになっていることを確かめる。
 
 ### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
 
