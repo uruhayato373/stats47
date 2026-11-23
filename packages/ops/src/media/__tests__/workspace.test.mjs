@@ -127,11 +127,17 @@ test('comparison plans preserve current candidates and their independent approva
  assert.throws(()=>saveImageComparison(root,image.id,image.revision,null),/再読込/);
 });
 test('all note records are visible including unavailable bodies; metrics do not invalidate reviews',t=>{
- const root=fixture(t),items=workspaceItems(root);
+ const root=fixture(t);
+ // 2026-11-23 に公開済みの本文を全件 R2 へ回収し、公開済みはマニフェスト必須になった (note-only を語彙から外した)。
+ // 本文の無い記事が一覧から消えないことは、下書き 1 本のマニフェストを外して確かめる (実データに頼らない)
+ const ledgerFile=path.join(root,'data/note/articles.json'),ledger=JSON.parse(fs.readFileSync(ledgerFile,'utf8'));
+ const missing=ledger.articles.find(a=>a.status!=='published'&&a.body?.manifest);
+ assert.ok(missing,'マニフェストのある下書きが台帳に無い (土台を作り直す)');
+ missing.body.manifest=null;fs.writeFileSync(ledgerFile,JSON.stringify(ledger));
+ const items=workspaceItems(root);
  // 記事数は決め打ちせず台帳から数える (台帳は記事の追加・削除で変わる)
- const ledgerCount=JSON.parse(fs.readFileSync(path.join(root,'data/note/articles.json'),'utf8')).articles.length;
- assert.equal(items.filter(x=>x.channel==='note').length,ledgerCount);
- assert.ok(items.some(x=>x.bodyStore==='note-only'&&!x.bodySaved));
+ assert.equal(items.filter(x=>x.channel==='note').length,ledger.articles.length);
+ assert.equal(items.find(x=>x.id==='note/'+missing.key)?.bodySaved,false);
  const item=items.find(x=>x.channel==='x');
  const file=path.join(root,'data/sns/posts.json'),posts=JSON.parse(fs.readFileSync(file));
  posts.posts.find(p=>'sns/'+p.id===item.id).impressions=1234;fs.writeFileSync(file,JSON.stringify(posts));
