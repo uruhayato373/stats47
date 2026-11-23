@@ -2718,7 +2718,7 @@ updated: 2026-11-01
 - **確認が要る (11-03 の棚卸し)**: 4ed3ea4e9 (S1 12 冊の修正下書きの作成と読み戻しの検証 PASS) で手順が進んでいるが、この記述は古い。持ち主が進み具合を書き直す
 
 ### [AI-CONTENT-NATIONAL-AVERAGE-WORDING-01] 公開済みの AI 解説の「全国平均」を「47都道府県の単純平均」に直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [進行中] [起票:2026-09-28] [領域:データ]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-28] [領域:データ]
 
 - **次**: 「全国平均」を機械置換できる文脈 (値の直前) だけを置換し、`audit-ai-content.mjs` を通して outbox から 35 件ずつ公開する
   (2026-09-27 の年表記是正と同じ手順)。言い換えで文が崩れる文脈は再生成キューに回す。
@@ -2727,6 +2727,7 @@ updated: 2026-11-01
 - **進行中 (2026-11-23・オーナー判断「機械置換で出し直す」)**: 10-10 より前の生成は常に都道府県の単純平均を「全国平均」と呼んでいたので、置き換え先は県別解説の件数から「N都道府県の単純平均」(47 県は 2,103 件、ほかは値のある県の数) にした。10-10 以降の生成 2 件は同じファイルの呼び名に合わせた。古い生成の「全国値」は分布や合計の意味で出るので呼び名に流用しない。置換は 103,089 か所で、置換後の「全国平均」は 0。ゲート (`audit-ai-content.mjs --file`) は 2,145 件が通り、18 件は置換の前から止まっていた (下) ので外した。2,145 件を送り箱に置いて push し (`3b26e2f3d`)、publish-ai-content を 1 本ずつ起動して 40 件ずつ公開している。
 - **置換の前から止まっている 18 件 (作り直しが要る)**: `freelance-count`・`non-regular-employment-rate`・`convenience-store-sales`・`gini-coefficient-disposable-income`・`treatment-rate-mental-disorder-inpatient`・`treatment-rate-asthma-outpatient`・`vacant-housing-rate`・`telework-rate`・`convenience-store-count-commercial`・`municipal-general-administration-staff`・`designated-difficult-disease`・`fiscal-strength-index-prefecture`・`actual-income-worker-households-per-month`・`treatment-rate-schizophrenia-inpatient`・`physical-therapist-annual-income`・`dairy-cattle-count`・`wooden-housing-ratio`・`doctor-annual-income`。多くは観測値の更新で県別解説の順位・値が合わない (`pref-data-mismatch`)。
 - **完了条件の確認**: 送り箱が空になった後、R2 の ai-content を全件読み、「全国平均」が 18 件の分だけになっていることを確かめる。
+- **済み (2026-11-23)**: 2,145 件を publish-ai-content で 54 回に分けて公開し終えた。R2 の 2,167 件を読み直すと、「全国平均」が残るのは置換の前から止まっていた 18 件だけ。残りはこの 18 件を作り直すこと (観測値の更新で県別解説が合わないので、置換ではなく作り直しの経路で直す)。
 
 ### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
 
