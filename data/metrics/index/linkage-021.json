@@ -2357,6 +2357,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:elderly-welfare-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
           "kind": "ranking"
         }

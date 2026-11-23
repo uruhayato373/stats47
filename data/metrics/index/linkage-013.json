@@ -2651,6 +2651,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:evacuation-plan-coverage-urban-prefecture-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:individual-evacuation-plan-coverage-rate",
           "kind": "ranking"
         },
@@ -3095,6 +3099,10 @@
         {
           "pageId": "area-theme:47000:safety",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:evacuation-plan-coverage-urban-prefecture-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:individual-evacuation-plan-listed-persons",
@@ -7073,6 +7081,10 @@
         {
           "pageId": "area-theme:47000:safety",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:intellectual-crime-tokyo-kagawa-gap",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:intellectual-crime-per-100k",

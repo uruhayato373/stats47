@@ -3562,6 +3562,24 @@
       ]
     },
     {
+      "id": "blog:elderly-welfare-expenditure-prefecture-gap",
+      "kind": "blog",
+      "key": "elderly-welfare-expenditure-prefecture-gap",
+      "title": "老人福祉費は県で1.5倍差｜なぜ千葉・埼玉は最下位なのか",
+      "href": "/blog/elderly-welfare-expenditure-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "per-capita-elderly-welfare-expenditure-65plus-pref-municipal"
+      ],
+      "tagIds": [
+        "tag:welfare",
+        "tag:aging-population",
+        "tag:social-security",
+        "tag:long-term-care",
+        "tag:t-5e631b14cc84"
+      ]
+    },
+    {
       "id": "blog:electricity-bill-hike-impact",
       "kind": "blog",
       "key": "electricity-bill-hike-impact",
@@ -3852,6 +3870,24 @@
         "tag:minimum-wage",
         "tag:t-14fd9d310d3f",
         "tag:t-3dfcbdc38d3e"
+      ]
+    },
+    {
+      "id": "blog:evacuation-plan-coverage-urban-prefecture-gap",
+      "kind": "blog",
+      "key": "evacuation-plan-coverage-urban-prefecture-gap",
+      "title": "避難計画の作成率、大都市ほど遅れる",
+      "href": "/blog/evacuation-plan-coverage-urban-prefecture-gap",
+      "published": true,
+      "rankingKeys": [
+        "individual-evacuation-plan-coverage-rate",
+        "individual-evacuation-plan-listed-persons"
+      ],
+      "tagIds": [
+        "tag:t-13d5b5de6762",
+        "tag:t-5960c302e68d",
+        "tag:t-5e631b14cc84",
+        "tag:t-735120cb7ebb"
       ]
     },
     {
@@ -6818,6 +6854,23 @@
       ]
     },
     {
+      "id": "blog:intellectual-crime-tokyo-kagawa-gap",
+      "kind": "blog",
+      "key": "intellectual-crime-tokyo-kagawa-gap",
+      "title": "知能犯トップは東京、人口比だと香川",
+      "href": "/blog/intellectual-crime-tokyo-kagawa-gap",
+      "published": true,
+      "rankingKeys": [
+        "intellectual-crime-per-100k",
+        "total-population"
+      ],
+      "tagIds": [
+        "tag:public-safety",
+        "tag:crime-rate",
+        "tag:t-735120cb7ebb"
+      ]
+    },
+    {
       "id": "blog:interior-furnishings-group-consumption-expenditure",
       "kind": "blog",
       "key": "interior-furnishings-group-consumption-expenditure",
@@ -9415,6 +9468,24 @@
         "tag:medical-care",
         "tag:wages",
         "tag:t-3dfcbdc38d3e"
+      ]
+    },
+    {
+      "id": "blog:nursery-shortage-urban-prefecture",
+      "kind": "blog",
+      "key": "nursery-shortage-urban-prefecture",
+      "title": "保育所数は東京より大阪が少ない?",
+      "href": "/blog/nursery-shortage-urban-prefecture",
+      "published": true,
+      "rankingKeys": [
+        "nursery-count-per-100k-0-5",
+        "nursery-utilization-rate",
+        "population-density-per-km2-total-area"
+      ],
+      "tagIds": [
+        "tag:t-c5df6550e8af",
+        "tag:t-45c5f2f012b7",
+        "tag:regional-disparity"
       ]
     },
     {
@@ -14067,6 +14138,24 @@
         "tag:t-180f8e2726c6",
         "tag:housing",
         "tag:population-decline"
+      ]
+    },
+    {
+      "id": "blog:vacant-housing-rate-inherited-home-risk",
+      "kind": "blog",
+      "key": "vacant-housing-rate-inherited-home-risk",
+      "title": "空き家1位は徳島、実家は他人事か",
+      "href": "/blog/vacant-housing-rate-inherited-home-risk",
+      "published": true,
+      "rankingKeys": [
+        "vacant-housing-rate"
+      ],
+      "tagIds": [
+        "tag:t-96b7af568d8e",
+        "tag:vacant-houses",
+        "tag:housing",
+        "tag:t-8288bae21e7c",
+        "tag:t-1462a7d8531e"
       ]
     },
     {

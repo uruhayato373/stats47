@@ -8109,6 +8109,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:nursery-shortage-urban-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:nursery-count-per-100k-0-5",
           "kind": "ranking"
         },
@@ -8951,6 +8955,10 @@
         },
         {
           "pageId": "blog:childcare-friendly-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nursery-shortage-urban-prefecture",
           "kind": "blog"
         },
         {

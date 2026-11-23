@@ -6373,6 +6373,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:nursery-shortage-urban-prefecture",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:population-density-per-km2-total-area",
           "kind": "ranking"
         }
