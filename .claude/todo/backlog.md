@@ -3379,12 +3379,12 @@ updated: 2026-11-01
 - **残り**: (a) `chicken-consumption-quantity` は「宮崎は最多になった年が無い」に期間を足して再審査する (実際は 2011 年に 1 位)。(b) `food-trio-prefecture-map` は 2025 年に前提が崩れた (豆腐の 1 位は富山、宮城の焼酎は 40 位) ので結論から書き直す。(c) `automotive-industry-transformation-map` (表示 14,289) の推移図を 2024 年まで手で延ばす。(d) refresh の対象外の図 (derived・estat・authored) を持つ記事約 7 本 (manufacturing-aichi-dominance・manufacturing-productivity・pharma-medical-device-production-map・welfare-expenses-squeeze・prefectural-debt-future-burden・library-museum-cultural-capital・local-tax-regional-gap) は図を手で取り直す。(e) 一覧の残り約 150 本を 15〜20 本ずつ処理する (1 本あたり critic 2 回)。(f) 例外 5 種 (healthy-life-expectancy-male-female-gap・physical-therapist-annual-income-prefecture-gap・dairy-cattle-count・it-industry-concentration・手順解説)。(g) `per-capita-income-gap` は 2020 年のデータで、quality-gate が止める「## データ出典」節を持ったまま公開されている。最低賃金の 2 本は 2024 年度のまま (BLOG-DUPLICATE-AUDIT-01 の差別化と同時に直す)。③ の年が 1 年だけのカードは `THEME-SINGLE-YEAR-CARDS-01` で扱う。
 - **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が作り直しの対象になり、古い年の記事が一覧とキューに出て、計算型のランキングとテーマの比較カードが新しい年を描く。加えて、一覧の件数が週次で減っていく。
 
-### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription を値から作る形を本番に出して確かめる
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:サイト] [待ち:承認]
+### [SEO-META-FROM-VALUES-01] 値から作るランキングの題の、単位の書き方の粗さを直すか決める
+タグ: [インフラ・計測] [種類:意思決定] [実行:対話] [起票:2026-10-07] [領域:サイト] [待ち:判断]
 
-- **済み (2026-11-23・オーナー承認「全部承認」)**: 項目の組み立てが、定義に題が無ければ最新年の観測値から題と説明文を作る (`buildRankingSeoText`)。定義から年と値の題 1,256 件・説明文 1,259 件を外し、年と値を手で書くと `validate:config` の `seo-hand-written-fact` が止める。断りの文は `seoNote` に残した (5 指標)。見積もり (有効 2,624 指標): 題が変わる 1,104 件・新しく題が付く 501 件・手書きのまま 899 件。
-- **残り**: ① 次のリリース (main へのマージはオーナー判断) のデプロイで全指標の item.json が作り直されたら、本番の `/ranking/general-hospital-count` の `<title>` が「【2024年】」になることを確かめる ② 単位の書き方が粗い題 (酒類の「21.65l」、「104.2(全国=100)」など) を単位の表記の規則で直すか決める。
-- **完了条件**: 本番の代表 5 指標の `<title>` と `<meta name="description">` が R2 の最新年の値と一致する。
+- **済み (2026-11-23・#1298)**: 題と説明文を最新年の観測値から作る形を本番に出し、一般病院数・歯科診療所数・合計特殊出生率・動物園数の `<title>` と description が R2 の最新年の値と一致することを確かめた。
+- **残り (判断)**: 一部の題の単位の書き方が粗い (酒類の「21.65l」、物価地域差指数の「104.2(全国=100)」、「0.66人口千対」など)。単位の表記の規則 (`formatUnitForDisplay`) で直すか、指標ごとの `display.displayUnit` で直すか、今のままにするかを決める。
+- **完了条件**: 決めた方針で直すか、今のままにすると決めてカードを消す。
 
 ### [GEO-LOW-ELEV-MANIFEST-SHA-01] 標高の低い土地の Geo 分析の manifest が SHA 照合の対象外になっている
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run -s geo:audit-low-elevation] [起票:2026-10-08] [領域:データ] [待ち:承認]

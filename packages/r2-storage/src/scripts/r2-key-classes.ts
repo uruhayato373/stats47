@@ -86,6 +86,8 @@ export const R2_KEY_CLASSES: readonly R2KeyClassRule[] = [
   row(P, "app/geo/", "Geo 分析の公開 bundle (最終集計・lineage・県別の途中 artifact)", "regenerable", "ci", ["infra-history-publish.yml", "geo-source-publish.yml"],
     `${DESIGN} Geo分析の最終集計と lineage (原典 SHA 照合で生成)`),
   row(P, "app/gis-cross/", "GIS 掛け合わせ (gis-cross) の配信 snapshot", "regenerable", "ci", ["sync-snapshots.yml"], `${DESIGN} URL→R2 キー対応表`),
+  row(P, "app/station-passengers/", "駅別乗降客数と鉄道路線の配信 snapshot (git の apps/remotion/public/station-passengers/ から生成)", "regenerable", "ci", ["sync-snapshots.yml"],
+    `入力は git (国土数値情報 S12・N02 の県別 JSON)。export-station-passengers-snapshot.ts が決定的に変換する`),
   row(P, "app/affiliate-ads/", "アフィリエイト広告の在庫の配信 snapshot (data/ から生成)", "regenerable", "ci", ["publish-affiliate-ads.yml"],
     `${ARCH} Authored/config (data/ から R2 snapshot)`),
 
