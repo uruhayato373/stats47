@@ -316,6 +316,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "health-checkup-sufficient-sleep-rate": { polarity: "higher-is-better", evidence: "睡眠で休養が十分とれていると回答した人の割合。健康日本21（第三次）は「睡眠で休養がとれている者の増加」を目標にしており、高い方向が目標に沿う（国立健康・栄養研究所 健康日本21（第三次）目標一覧 https://www.nibn.go.jp/eiken/kenkounippon21/kenkounippon21/mokuhyou3rd.html 2026-11-13 確認）。国の指標は年齢調整値で、特定健診受診者の粗割合とは母集団が異なる。" },
   "health-checkup-weight-gain-10kg-rate": { polarity: "neutral", evidence: "20歳の時から体重が10kg以上増えたという回答の割合。20歳時の体格や現在の体格を含まず、年齢調整もしていないので、肥満の多さや地域の良否へ直結させない。" },
   "heatstroke-deaths": { polarity: "higher-is-worse", evidence: "人口動態統計（確定数）で熱中症を死因とする死亡数であり、死亡の増加を望ましいとは扱わない。人口で割らない実数のため人口規模の影響を含み、県の対策の優劣は示さない。" },
+  "heatstroke-deaths-per-100k": { polarity: "higher-is-worse", evidence: "人口動態統計（確定数）の熱中症による死亡数を人口10万人当たりにしたもので、死亡は争いのない事象で増加を望ましいとは扱わない (heatstroke-deaths と同じ向き)。気候と高齢化の影響を含み、県の対策の優劣は示さない。" },
   "heatstroke-emergency-transports": { polarity: "higher-is-worse", evidence: "消防庁が熱中症として集計した救急搬送は健康被害による搬送で、件数増は被害負担の増加を示す。" },
   "heatstroke-emergency-transports-per-100k": { polarity: "higher-is-worse", evidence: "熱中症の救急搬送は健康被害による搬送で、人口当たりが多いほど被害負担が重い (heatstroke-emergency-transports と同じ向き)。" },
   "high-school-club-per100-rugby-male": { polarity: "neutral", evidence: "高校男子100人あたりのラグビー部員数は競技の普及と部活動の選択を表し、部員の多寡を生徒の健康や学校の優劣とはしない。" },

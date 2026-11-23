@@ -1,3 +1,4 @@
+import { NATIONAL_AREA_CODE } from '@stats47/area';
 import { describe, expect, it } from 'vitest';
 
 import { calculateMatchedPearsonR } from '../utils/calculate-pearson';
@@ -5,7 +6,7 @@ import { AREA_CODES, buildYearSeries, latestCommonYear, pairedPearsonR, ranksOf 
 
 const row = (year: string, i: number, value: number | null) => ({ areaCode: AREA_CODES[i], yearCode: year, value });
 const yearRows = (year: string, fn: (i: number) => number | null, n = 47) =>
-  Array.from({ length: n }, (_, i) => row(year, i, fn(i)));
+  AREA_CODES.slice(0, n).map((_, i) => row(year, i, fn(i)));
 const all = () => true;
 
 describe('buildYearSeries', () => {
@@ -15,7 +16,7 @@ describe('buildYearSeries', () => {
         ...yearRows('2020', (i) => i),
         ...yearRows('2021', (i) => (i < 10 ? i : null)), // 10 県だけ → 落とす
         ...yearRows('2019', (i) => i * 2),
-        { areaCode: '00000', yearCode: '2020', value: 999 },
+        { areaCode: NATIONAL_AREA_CODE, yearCode: '2020', value: 999 },
       ],
       (y) => y !== '2019',
       30
@@ -29,8 +30,8 @@ describe('buildYearSeries', () => {
 
 describe('pairedPearsonR', () => {
   it('行と Map で照合する calculateMatchedPearsonR と同じ r と件数を返す (欠けた県を飛ばす)', () => {
-    const xs = Array.from({ length: 47 }, (_, i) => (i % 5 === 0 ? NaN : (i * 7) % 13));
-    const ys = Array.from({ length: 47 }, (_, i) => (i % 7 === 0 ? NaN : i + ((i * 3) % 5)));
+    const xs = AREA_CODES.map((_, i) => (i % 5 === 0 ? NaN : (i * 7) % 13));
+    const ys = AREA_CODES.map((_, i) => (i % 7 === 0 ? NaN : i + ((i * 3) % 5)));
     const xRows = xs.flatMap((v, i) => (Number.isNaN(v) ? [] : [{ areaCode: AREA_CODES[i], value: v }]));
     const yMap = new Map(ys.flatMap((v, i) => (Number.isNaN(v) ? [] : [[AREA_CODES[i], v] as const])));
     const expected = calculateMatchedPearsonR(xRows, yMap);

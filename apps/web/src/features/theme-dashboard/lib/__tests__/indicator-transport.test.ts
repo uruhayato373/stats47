@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODES } from "@stats47/area";
 import { describe, expect, it } from "vitest";
 
 import { packRankingValues, unpackRankingValues } from "../indicator-transport";
@@ -8,7 +9,7 @@ const row = (i: number, overrides: Partial<RankingValue> = {}): RankingValue =>
   ({
     metricKey: "dining-out-consumption-expenditure",
     areaType: "prefecture",
-    areaCode: `${String(i + 1).padStart(2, "0")}000`,
+    areaCode: PREFECTURE_AREA_CODES[i],
     areaName: `県${i + 1}`,
     yearCode: "2025",
     yearName: "2025年",
@@ -20,12 +21,12 @@ const row = (i: number, overrides: Partial<RankingValue> = {}): RankingValue =>
 
 describe("indicator-transport (テーマのページがブラウザへ渡す値の行)", () => {
   it("詰めて戻すと元の行と同じになる", () => {
-    const values = Array.from({ length: 47 }, (_, i) => row(i));
+    const values = PREFECTURE_AREA_CODES.map((_, i) => row(i));
     expect(unpackRankingValues(packRankingValues(values))).toEqual(values);
   });
 
   it("全行で同じ項目だけを 1 回にまとめ、行ごとに違う項目は行に残す", () => {
-    const values = Array.from({ length: 47 }, (_, i) => row(i));
+    const values = PREFECTURE_AREA_CODES.map((_, i) => row(i));
     const packed = packRankingValues(values);
     expect(packed.shared).toEqual({
       metricKey: "dining-out-consumption-expenditure",
