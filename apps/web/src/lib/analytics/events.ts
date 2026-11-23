@@ -479,6 +479,8 @@ export type NavSurface =
   // 共通のクリック監視 (NavClickTracker) が拾うもの (2026-09-26 値追加。登録済み dimension の値追加):
   // ブログの目次 / 導線名の付いていないサイト内リンク
   | 'blog_toc'
+  // 右レールで追従する目次 (2026-11-23 値追加。本文の上の目次 blog_toc と分けて数える。登録済み dimension の値追加)
+  | 'blog_toc_rail'
   | 'unlabeled'
   // 全ページ共通の領域 (2026-09-26 値追加・NAV-CLICK-COVERAGE-01 P2。登録済み dimension の値追加)
   | 'footer'

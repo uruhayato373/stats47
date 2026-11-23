@@ -354,6 +354,11 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。残る `unlabeled` は、カードの見出しの「すべて見る」(`card-action`)・
 > `/municipalities` のテーマのカード・ブログの体験記と運営者のカードなど、1 ページに 1〜6 本のもの。
 >
+> **nav_surface の値追加 (2026-11-23・ブログの追従する目次)**: 記事ページの右レールで、追従する広告のすぐ下に追従する目次
+> (`RailArticleToc`) を足し、クリックを `blog_toc_rail` で数える (`nav_label` は見出しの文)。本文の上の目次 (`blog_toc`) と分けて、
+> 右レールの目次が読まれているかを比べるため。本文の上の目次は同じ日に、見出し 5 件以上の記事で最初の 3 件だけを見せる形に変えたので、
+> 反映日の前後で `blog_toc` の件数を単純比較しない。登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

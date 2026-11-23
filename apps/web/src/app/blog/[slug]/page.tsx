@@ -31,7 +31,7 @@ import {
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
-import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection } from "@/features/blog";
+import { adRowTargets, TagBadge, ArticleRenderer, ArticleTableOfContents, extractHeadings, generateBlogMetadata, migrateLegacyDataSourceSection, RailArticleToc } from "@/features/blog";
 import { blogR2Key } from "@/features/blog/r2-key";
 import {
     listLatestArticles,
@@ -302,6 +302,14 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* 右レールの最後: 300×600 をヘッダーの下に追従させる (2026-11-12 オーナー決定。右レールの中身が本文より短く、
                 PC で下が約 5,000px 空いていた)。PC だけ。仕組みと Google の条件は RailAdSlot の sticky */}
             <RailAdSlot slot={BLOG_RAIL_STICKY} sticky />
+
+            {/* 追従する広告のすぐ下に追従する目次 (2026-11-23 オーナー指示)。右レールの中身を通り過ぎた後で見え、
+                今読んでいる節を強調する。広告と一緒に画面に収まらない高さの画面では出さない (RailArticleToc) */}
+            <RailArticleToc
+                headings={extractHeadings(renderedArticle.content)
+                    .filter((heading) => heading.level === 2)
+                    .map(({ id, text }) => ({ id, text }))}
+            />
         </div>
     );
     // レール末尾: ここまでが右レールの静的範囲 (check-ad-placement.cjs と広告配置の契約テストが範囲の終わりの目印に使う)
