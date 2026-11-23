@@ -1,3 +1,4 @@
+import { statsR2Key } from "@stats47/r2-storage/keys";
 import { describe, expect, it, vi } from "vitest";
 import { buildRecipe } from "../recipe.js";
 import type { MetricConfig } from "../types.js";
@@ -58,6 +59,12 @@ describe("refresh union", () => {
       { key: "both", configHashChanged: true, updatedTables: [ID] }, { key: "drift", configHashChanged: true, updatedTables: [] }, { key: "updated", configHashChanged: false, updatedTables: [ID] },
     ]);
     expect(readJson).toHaveBeenCalledTimes(4);
+  });
+  it("都道府県の値を持たない指標は、その指標が書く値のファイルの記録と比べる", async () => {
+    const city = { ...metric("city-only"), entities: ["city"] } as MetricConfig;
+    const readJson = vi.fn(async (key: string) => (key === statsR2Key("city-only", "city") ? { meta: { recipe: buildRecipe(city) } } : null));
+    expect((await selectRefreshMetrics([city], { tableUpdates: [], readJson })).metricKeys).toEqual([]);
+    expect(readJson.mock.calls).toEqual([[statsR2Key("city-only", "city")]]);
   });
   it("does not default to all when no tables/hash changed", async () => {
     const config = metric("same");

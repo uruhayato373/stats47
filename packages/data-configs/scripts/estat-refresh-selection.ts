@@ -115,7 +115,10 @@ export async function selectRefreshMetrics(metrics: readonly MetricConfig[], opt
   await Promise.all(Array.from({ length: Math.min(4, active.length) }, async () => {
     while (next < active.length) {
       const metric = active[next++];
-      const value = await readJson(statsR2Key(metric.key, "prefecture"));
+      // 都道府県の値を持たない指標 (市区町村だけ等) は、その指標が書く値のファイルの記録と比べる。
+      // 2026-11-23 までは常に values.json を読み、市区町村だけの 562 件が毎回「記録なし」で選ばれていた
+      const entity = metric.entities.includes("prefecture") ? "prefecture" : metric.entities[0];
+      const value = await readJson(statsR2Key(metric.key, entity));
       let storedConfigHash: string | null = null;
       if (value !== null) {
         const meta = object(value).meta;

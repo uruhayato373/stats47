@@ -219,6 +219,22 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
 
+### 取り込みの確かめと反映 (2026-11-23 オーナー判断)
+
+指標の定義 (`data/metrics/<key>.ts`) を変えたら、次の 3 段で本番の値まで届ける。人が CI を起動する工程は無い。
+
+| 段 | いつ | コマンド・仕組み | 何を確かめるか |
+|---|---|---|---|
+| 1. 生成物 | commit の前 | `npm run metrics:regen-derived` → `npm run preflight:pr` | 指標から作る生成物 (schema・索引・出典の辞書・調査の分類・掲載価値など) の作り直しと古さ |
+| 2. 取り込み | push の前 | `npm run data:check` (`-- --metric a,b` で指定) | e-Stat から実際に取り、0 件・重複・打ち切り・県の欠け・公開中の値からの後退を見る。R2 には書かない |
+| 3. 反映 | main に入ったあと | `deploy-workers.yml` の job `ingest-changed-metrics` | その差分で変えた指標のうち、R2 の値の記録 (`meta.recipe.configHash`) が今の設定と違うものだけを `data-refresh.yml` に渡す |
+
+- 2 は R2 の書き込みの鍵を使わず、R2 は公開の URL から読む (app id は page-data-batch の既定どおり手元の設定ファイルから読む)。手元から R2 には書けない (書き込みの鍵は CI だけにあり、`_assert-ci-write` が止める)。
+- 3 の失敗は data-refresh が Issue (`data-refresh-alert`) を立てる。人が手で起動した data-refresh では立てない。
+- 3 は表の更新だけの指標と、記録が今の設定と同じ指標を取り込まない。全範囲の定期の更新は 2026-11-05 から止めている (カード DATA-REFRESH-SCHEDULE-RESUME-01)。
+- 対象の決め方は `packages/ops/src/ci/plan-metric-ingest.mjs` (直下の 1 ファイルを 1 指標として扱い、`policy/` などの下の階層と消したファイルは外す)。
+- 背景: 手で起動する data-refresh は main のコードで走るので、設定を変えた指標はリリースの後に人が起動する必要があった。2026-11-23 に医療施設の 6 指標へ補助の出典を足したときも、取り込みはリリースの後の手作業として残った。出典の辞書の作り直し忘れは 11-12・11-23 の 2 回、PR の CI で初めて分かった。
+
 ## SSDS の `yearFormat` は出典の期間から決める (2026-11-14)
 
 社会・人口統計体系 (SSDS) の表は時間軸の表示がどれも「◯年度」だが、中身は国勢調査 (10月1日)・犯罪統計 (暦年計)・
