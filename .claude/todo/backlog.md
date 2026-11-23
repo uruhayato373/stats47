@@ -2765,6 +2765,8 @@ updated: 2026-11-01
 - **次**: 5 本分の request-article → `$imagegen` (1本1回) → `ingest-article` → `generate-blog-thumbnails.ts --slug <5slugs>` → `/publish-bulk-articles` の Phase 4 (R2 push・all.json・purge) → Phase 5 (HTTP 検証)。公開後に X・IG の下書きを予約枠 (X は週 2-3 本) へ入れる。
 - **停止条件**: 画像なし(共有背景fallback)でR2にpushしない(OGP/カードが404で公開される事故を防ぐ設計)。
 - **完了条件**: 5記事すべてが本番で200 + OGP/thumbnail画像が正しく出る + SNS投稿(X/IG)まで実施されている。
+- **済み (2026-11-23・オーナー判断「画像を作って公開」)**: 5 本の記事固有の背景を Codex の imagegen で 1 枚ずつ作り (`assets/blog/fullbleed-backgrounds/<slug>.jpg`)、今の品質ゲートの指摘 (タグ台帳に無いタグ 9 個・スマホ用の図・保育所の地図の年の記載) を直して、公開日 11-23 で develop へ push した (`066c545ff`)。blog-auto-publish が R2 へ公開する。
+- **残り**: ① 本番の 410 が 200 になるのは、公開の CI が作り直す `sitemap-blog-entries.ts` が次のデプロイで main に入った後 (デプロイはオーナー判断)。② その後で 5 本の OGP・サムネイルを本番で確かめる。③ X・Instagram の下書き (`data/sns/pain-point-series-drafts.md`) の投稿は、オーナーの明示の許可を得てから行う。
 
 ### [STATE-R2-MIGRATION-01] 日次観測 state の残り 4 domain を R2 `state/` へ移す (psi → cloudflare → url-inspection → search-growth)
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:git log --since=4.weeks --name-only -- .claude/state/metrics | sort -u | wc -l が 230 未満、かつ curl -sI https://storage.stats47.jp/state/psi/index.json が 200] [起票:2026-09-14] [期日:2026-12-12] [領域:管理]
