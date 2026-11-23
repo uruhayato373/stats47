@@ -18,7 +18,8 @@
  *
  * レイアウト構造 (テンプレート shadcndashboard の dashboard-layout に寄せた・2026-10-27):
  * - SidebarProvider の中に AppSidebar と SidebarInset を兄弟で置く (sidebar.tsx の DOM 前提)
- * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content (p-4)・Footer を並べる
+ * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content・Footer を並べる。main は余白を持たない
+ *   (本文の格子を外枠の線に接して置く。2026-11-23 オーナー決定。それまでは p-4 で 16px 空いていた)
  * - ヘッダーとフッターをルートに置くので、画面遷移で再マウントされない
  * - SidebarProvider の defaultOpen は true 固定。開閉状態を cookies() で読まない (SSG 維持)
  * - SidebarInset は overflow-hidden ではなく overflow-clip にする (sticky ヘッダーと右レールの追従を壊さない)
@@ -165,7 +166,7 @@ export default function RootLayout({
               {/* ヘッダー（全ページ共通） */}
               <SiteHeader />
               {/* メインコンテンツエリア（ページで唯一の main。各ページが PageShell で幅を制御） */}
-              <main id="main-content" className="min-w-0 flex-1 p-4" tabIndex={-1}>
+              <main id="main-content" className="min-w-0 flex-1" tabIndex={-1}>
                 {children}
               </main>
               {/* フッター（全ページ共通） */}

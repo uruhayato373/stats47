@@ -71,7 +71,7 @@ describe('PageShell — leftRail', () => {
     expect(screen.queryByLabelText('left-rail')).toBeNull();
   });
 
-  it('余白はルートの main#main-content (p-4) に任せ、main を入れ子にしない', () => {
+  it('Shell は外側の余白を持たず、main を入れ子にしない', () => {
     const { container } = render(
       <PageShell leftRail={LEFT}>{MAIN}</PageShell>
     );

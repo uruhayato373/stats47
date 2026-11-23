@@ -90,7 +90,7 @@ describe('ArticleShell — leftRail', () => {
     expect(column?.contains(container.querySelector('aside'))).toBe(false);
   });
 
-  it('余白はルートの main#main-content (p-4) に任せる', () => {
+  it('Shell は外側の余白を持たない (本文の格子を外枠の線に接して置く)', () => {
     const { container } = render(<ArticleShell>{MAIN}</ArticleShell>);
     const shell = container.querySelector('.reading-zone')?.firstElementChild;
     expect(shell).toHaveClass('@container/shell');

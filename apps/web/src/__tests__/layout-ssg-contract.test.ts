@@ -54,6 +54,9 @@ describe("ルートレイアウトの SSG 契約", () => {
     expect(main).toBeGreaterThan(header);
     expect(footer).toBeGreaterThan(main);
     expect(source.match(/<main\b/g)).toHaveLength(1);
+    // 本文の格子は外枠の線に接して置く。main に余白を足すと、枠の外に 16px の空きが戻る (2026-11-23 オーナー決定)
+    const mainTag = inset.slice(main, inset.indexOf(">", main));
+    expect(mainTag).not.toMatch(/\b(?:p|px|py|pt|pb|pl|pr|ps|pe|m|mx|my)-\d/);
     // sticky ヘッダーと右レールの追従を壊さない
     expect(inset).not.toMatch(/overflow-hidden/);
   });
