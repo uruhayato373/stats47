@@ -2073,16 +2073,6 @@ updated: 2026-11-01
   指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
 - **完了条件**: `status --channel x` と `status --channel instagram` の未着手が 0。
 
-### [REFERENCE-EXPANSION-SITE-01] 教材の分析企画のうち県 (62 件)・テーマ (19 件)・全国 (10 件)・ランキング (5 件)・調査 (5 件) の未着手を振り分ける
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status] [起票:2026-10-13] [領域:データ]
-
-- **済み (2026-11-14・`7e5cbae59`)**: ランキング 5 件は公開されていない重複指標を公開中の指標へ差し替え、調査 5 件は `resolveSurveyTaxonomy` で調査を入れた (ranking・survey の未着手 0)。
-- **残りの内訳**: 県 15 件 (強み・弱みの索引 prefecture-ranking-consumption-2020-a47〜a52 の 6 件、money-health-ranking の県の章 a06・a07・a08・a10・a11・a12・a14 と capital-city-guide-unknown-a05 の 8 件、average-income-ranking-unknown-a06 の 1 件)。テーマ 12 件 (公開済みテーマに載っていない指標があるもの 11 件と、`volunteer-activity-annual-participation-rate-15plus` が載っていない prefecture-ranking-consumption-2020-a15)。全国 1 件 (kakei-marketing-2015-a02-03 の `sugar-consumption-expenditure`)。
-- **やること**: 県は問いを読み、同じ問いの公開済み `area-theme:<県コード>:<テーマ>` があれば `done` で結び、無ければ見送りの理由を書いて `declined` にする。テーマと全国は、載っていない指標を載せるか (`placement-decisions.json` に planned) 載せないか (`declined`) を指標ごとに theme-designer が決める。
-- **追補 (2026-11-14)**: kakei-marketing/2015 の inventory.json が analyses.json と 80 件ずれている (主に mapping.metricKeys。a01-01 は inventory.json が空で analyses.json に指標がある)。/content/references でこの本の指標のつながりが欠けていないかを確かめ、ずれを揃える。
-- **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
-- **完了条件**: `npm run reference:expansion -- status` で area・theme・japan の未着手が 0。
-
 ### [ACADEMIC-TEST-YEARS-01] 全国学力テストの都道府県別平均正答率が 2025 年の 1 年分しか無い
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:データ]
 
@@ -2092,6 +2082,7 @@ updated: 2026-11-01
 - **完了条件**: 3 年以上の 47 都道府県の値が R2 にあり、記事が複数年で答えている。
 - **調べたこと (2026-11-23)**: 都道府県別 (公立) の平均正答率は、2022・2023・2024 年度は国立教育政策研究所の「実施概況」の全国の PDF (例 https://www.nier.go.jp/24chousakekkahoukoku/factsheet/24P_101.pdf と 24m_101.pdf) の中の表にある。県別の xlsx は国会図書館のアーカイブに移っていて取れない。2025 年度は全国の PDF に県別の表が無く、県ごとの xlsx (今の取り込みと同じ) にある。2021 年度はアーカイブ経由で 403 になり確かめられなかった (2020 年度は中止)。国語と算数・数学は 2022〜2025 年度で同じ「平均正答率」だが、2025 年度の中学校の理科は IRT スコアで、平均正答率の系列とは別物。年ごとに問題が違うので、水準を年をまたいで比べてよいかの公式の注記はまだ確かめていない。
 - **次の手順**: ① 年をまたいだ比較について公式の注記を確かめる (比べられないなら、複数年は「その年の全国平均との差」で並べる)。② 2022〜2024 年度の全国の PDF から県別の表を抜く取り込みを作る (`national-assessment-*` の 4 教科と、4 教科を平均した `academic-achievement-test-average-rate`)。
+- **引き継ぎ (2026-11-23・旧 REFERENCE-EXPANSION-SITE-01 の追補)**: 家計調査の本 (kakei-marketing/2015) の台帳 `inventory.json` で、企画 a01-01 (学力テスト) のページ p0011〜p0014 が `new-metric` のまま指標に結ばれていない。指標 `academic-achievement-test-average-rate` ができたので、authored mapping に結んで `npm run source-vault:inventory -- build --profile <profile>` で作り直す (`analyses.json` との指標のずれはこの 1 件だけ。11-14 の 80 件から減った)。
 
 ### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
 タグ: [エージェント・SSOT] [種類:改善] [実行:別環境] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
