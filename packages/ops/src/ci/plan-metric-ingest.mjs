@@ -37,6 +37,9 @@ export function metricKeysFromPaths(paths) {
 /**
  * base から head までに足した・変えた指標の key。head を省くと手元の作業ツリー (未コミットを含む) と比べる。
  * base が空か 0 の SHA (新しいブランチの最初の push) のときは head の親と比べる。
+ *
+ * @param {{ base?: string, head?: string, cwd?: string, git?: (args: string[], cwd: string) => string }} [options]
+ * @returns {string[]}
  */
 export function changedMetricKeys({ base, head, cwd = process.cwd(), git = runGit } = {}) {
   const from = !base || ZERO_SHA.test(base) ? `${head ?? "HEAD"}~1` : base;

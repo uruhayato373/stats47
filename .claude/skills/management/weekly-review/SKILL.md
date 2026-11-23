@@ -25,6 +25,20 @@ primary_agent: strategy-advisor
 - 人の承認が要る選択 (KDP の公開・search-growth 候補の承認・構えの変更・実測が足りないマスの評価) は「見送り・承認待ち」を既定にし、選んだ理由を本文に残す。
 - Phase 4 の次週計画まで実行する (タスクの依頼範囲に含まれる)。
 - 分業は、決定的な収集 = sonnet の agent 1 回、施策の記録 = `improvement-triage`、本文と計画 = `strategy-advisor` 1 回。収集・再確認のための agent を足さない (`.claude/rules/model-prompting.md`)。
+- **CI の週次計測を待ってから集める。** 02:00 の `fetch-metrics-weekly` は遅れて 07 時台に走ることがある (2026-11-21 は 07:35〜08:42)。
+  `git fetch origin && git log origin/develop --oneline --grep "weekly snapshot <週>"` が空のうちは Phase 0/1 の収集を始めず、
+  `gh run list --workflow fetch-metrics-weekly.yml --limit 1` の run を `gh run watch <id> --interval 60` で待ってから取り込む。
+  先に集めると GSC・GA4・AdSense の当週の行が無く、手元で作った `data/nsm/weekly-snapshots/<週>.json` などが CI の commit とぶつかって pull が止まる。
+  `npm run weekly:collect` は CI と別の取得なので待たずに起動してよい。
+- **取り込みに `--autostash` を使わない** (stash が残り、別のセッションの作業と混ざるため)。途中の取り込みは `git fetch origin && git merge --ff-only origin/develop`
+  (作業中の変更と重なれば止まる)、push の前は自分の変更をコミットしてから `git pull --rebase origin develop` する。
+- **push 前の rebase で衝突したら:** 衝突が `.claude/todo/backlog.md` だけなら `node .claude/scripts/management/resolve-backlog-conflict.mjs` でカード単位に解き、
+  exit 0 なら `GIT_EDITOR=true git rebase --continue` で進める。exit 1 (同じカードを両側が別々に変えた)・exit 2 (ほかのファイルも衝突) なら
+  `git rebase --abort` して、commit をローカルに残したまま報告する。手で衝突を解かない。
+- **モデル使用量は commit の前に記録する** (`npm run model-usage:collect && npm run model-usage:report`)。`.claude/state/metrics/model-usage/` をレビューと同じ commit に入れる。
+- **自動アラートの回収は無人でも行う** (2026-11-23 オーナー決定)。下の「自動アラートの回収」のコメント (`gh issue comment <番号> --body "→ 振り分け: …"`) を付け、
+  元の workflow のファイルが `.github/workflows/` から消えているアラートは「→ 振り分け: 見送り (<撤去した commit>)」を付けて `gh issue close <番号> --reason "not planned"` で閉じる。
+  Issue のコメントと close 以外の GitHub への書き込み (PR・ラベル・本文の書き換え) はしない。
 
 ## 最初に: 週次の取得を起動する
 
@@ -87,7 +101,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 2. 計測 state を作り直す。02:00 の計測の後に入った認証付き計測を state に入れるため。
 
    ```bash
-   git pull --rebase --autostash origin develop   # weekly:collect が push した記録を取り込む
+   git fetch origin && git merge --ff-only origin/develop   # weekly:collect が push した記録を取り込む (作業中の変更と重なれば止まる。stash しない)
    bash .claude/scripts/metrics/refresh-measurement-cycle.sh [YYYY-Www]
    ```
 
