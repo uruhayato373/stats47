@@ -164,6 +164,5 @@ export const fisherySpeciesCatchTuna: MetricConfig = {
   },
   "groupKey": "fishery-species",
   "seoTitle": "マグロ類漁獲量ランキング｜なぜ静岡が1位?【2023】",
-  "seoDescription": "マグロの水揚げ日本一は静岡県で23,704トン──焼津・清水港を擁する静岡がなぜトップなのか。遠洋漁業の拠点構造と39都道府県の漁獲量を2023年データで解説します。",
   "isActive": true,
 };

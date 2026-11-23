@@ -44,7 +44,5 @@ export const restaurantCountPer1000: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "飲食店数ランキング都道府県【2006年】｜1位沖縄県（8.7店）",
-  "seoDescription": "2006年の飲食店数の都道府県別ランキング。1位沖縄県（8.7店）、最下位奈良県（3.59店）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

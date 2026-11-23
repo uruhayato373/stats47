@@ -489,9 +489,17 @@ export interface MetricConfig {
    * 手動付与の editorial データ。builder で { tagKey } 形に写像する。
    */
   tags?: string[];
-  /** SEO */
+  /**
+   * SEO。題と説明文は書かなければ、項目の組み立てが最新年の観測値から作る (年・1 位・最下位・倍率)。
+   * 書けるのは年と値を含まない言い回しの上書きだけ (`validate:config` の seo-hand-written-fact が止める)
+   */
   seoTitle?: string;
   seoDescription?: string;
+  /**
+   * 値から作る説明文の後ろに付ける断りの 1 文 (例: 「博物館類似施設は含みません。」)。年と値は書かない。
+   * seoDescription を書いた指標では使わない
+   */
+  seoNote?: string;
   /** 表示用 ON/OFF */
   isActive?: boolean;
 }

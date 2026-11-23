@@ -219,6 +219,14 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
 
+### ランキングの題と説明文は値から作る (2026-11-23 オーナー承認)
+
+`seoTitle` / `seoDescription` は書かない。書かなければ、項目の組み立て (`buildRankingItemFromMetric`) が最新年の観測値から
+「{名前}ランキング都道府県【{年}】｜1位{県}（{値}）」の形で作る (`packages/ranking/src/utils/ranking-seo-text.ts`)。
+定義に年や順位の値を手で書くと、新しい年を取り込んでも題が古い年のまま残るので、`validate:config` の `seo-hand-written-fact` が止める。
+対象の範囲の断りは `seoNote` (説明文の後ろに付ける 1 文・年と値は書かない) に書く。年と値を含まない言い回しの上書き
+(家計調査の「県庁所在市の二人以上世帯」など) だけは `seoTitle` に残してよい。
+
 ### 取り込みの確かめと反映 (2026-11-23 オーナー判断)
 
 指標の定義 (`data/metrics/<key>.ts`) を変えたら、次の 3 段で本番の値まで届ける。人が CI を起動する工程は無い。

@@ -64,6 +64,15 @@ describe("buildRankingSeoText", () => {
     expect(text?.seoDescription).toContain("2市を比較");
   });
 
+  it("指標の定義の断りの文 (seoNote) は説明文の後ろに付け、題には付けない", () => {
+    const text = buildRankingSeoText({ title: "登録・相当動物園数", unit: "館", valueDisplay: undefined }, "2015年", [
+      row("14000", "神奈川県", 4, 1),
+      row("31000", "鳥取県", 1, 2),
+    ], { note: "博物館類似施設は含みません。" });
+    expect(text?.seoDescription.endsWith("地図やグラフで2都道府県を比較。博物館類似施設は含みません。")).toBe(true);
+    expect(text?.seoTitle).not.toContain("博物館類似施設");
+  });
+
   it("順位の付いた値が 2 つ未満なら作らない (指標の名前だけの題に戻す)", () => {
     expect(buildRankingSeoText(item, "2024年", [row("13000", "東京都", 590, 1), row("01000", "北海道", null, null)])).toBeNull();
     expect(buildRankingSeoText(item, "2024年", [])).toBeNull();

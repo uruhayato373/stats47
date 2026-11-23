@@ -100,7 +100,5 @@ export const personsOnPublicAssistance: MetricConfig = {
     ],
   },
   "groupKey": "persons-on-public-assistance",
-  "seoTitle": "生活保護被保護実人員ランキング都道府県【2023年】｜1位東京都（276,179人）",
-  "seoDescription": "2023年の生活保護被保護実人員の都道府県別ランキング。1位東京都（276,179人）、最下位富山県（4,256人）で64.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

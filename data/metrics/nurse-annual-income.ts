@@ -49,7 +49,5 @@ export const nurseAnnualIncome: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "看護師の平均年収 都道府県ランキング【2023年】｜1位大阪府（568.1万円）",
-  "seoDescription": "2023年の看護師の平均年収を都道府県別に比較。1位は大阪府（568.1万円）、最下位は宮崎県（416.3万円）、最大と最小の差は1.4倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true
 };

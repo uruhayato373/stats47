@@ -47,7 +47,5 @@ export const unemploymentRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "完全失業率ランキング都道府県【2020年】｜1位沖縄県（5.5％）",
-  "seoDescription": "2020年の完全失業率の都道府県別ランキング。1位沖縄県（5.5％）、最下位島根県（2.7％）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

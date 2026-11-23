@@ -32,8 +32,6 @@ export const railwayPassengers: MetricConfig = {
   "yearFormat": "fiscal",
   "display": {
   },
-  "seoTitle": "鉄道駅 乗降客数ランキング都道府県【2023年度】",
-  "seoDescription": "2023年度の鉄道駅 乗降客数（県内合計）の都道府県別ランキング。国土数値情報「駅別乗降客数」をもとに47都道府県を地図とグラフで比較。",
   "isActive": true,
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

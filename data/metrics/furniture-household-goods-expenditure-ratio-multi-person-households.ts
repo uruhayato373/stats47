@@ -33,7 +33,5 @@ export const furnitureHouseholdGoodsExpenditureRatioMultiPersonHouseholds: Metri
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "家具・家事用品費割合ランキング都道府県【2024年】｜1位和歌山県（5％）",
-  "seoDescription": "2024年の家具・家事用品費割合の都道府県別ランキング。1位和歌山県（5％）、最下位鹿児島県（3.4％）で1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

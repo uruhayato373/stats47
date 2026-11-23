@@ -59,7 +59,5 @@ export const careManagerAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "ケアマネージャーの平均年収 都道府県ランキング【2023年】｜1位山口県（503.2万円）",
-  "seoDescription": "2023年のケアマネージャーの平均年収を都道府県別に比較。1位は山口県（503.2万円）、最下位は佐賀県（340.5万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

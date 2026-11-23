@@ -37,7 +37,5 @@ export const generalHospitalCountPer100k: MetricConfig = {
     "isCalculated": false
   },
   "groupKey": "general-hospital-count",
-  "seoTitle": "一般病院数ランキング都道府県【2023年】｜1位高知県（16.1施設）",
-  "seoDescription": "2023年の一般病院数の都道府県別ランキング。1位高知県（16.1施設）、最下位神奈川県（3.1施設）で5.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true
 };

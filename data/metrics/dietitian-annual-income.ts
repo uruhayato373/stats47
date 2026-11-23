@@ -61,7 +61,5 @@ export const dietitianAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "栄養士の平均年収 都道府県ランキング【2023年】｜1位和歌山県（470.3万円）",
-  "seoDescription": "2023年の栄養士の平均年収を都道府県別に比較。1位は和歌山県（470.3万円）、最下位は青森県（278.3万円）、最大と最小の差は1.7倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

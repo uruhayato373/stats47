@@ -163,7 +163,5 @@ export const fisherySpeciesCatchMackerel: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "サバ類漁獲量ランキング都道府県【2023年】｜1位長崎県（76,146トン）",
-  "seoDescription": "2023年のサバ類漁獲量を都道府県別に比較。1位は長崎県（76,146トン）、最下位は岡山県（0トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };

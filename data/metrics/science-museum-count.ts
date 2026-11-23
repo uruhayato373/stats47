@@ -51,7 +51,5 @@ export const scienceMuseumCount: MetricConfig = {
     ],
   },
   "groupKey": "museum-type-count",
-  "seoTitle": "科学博物館数ランキング都道府県【2015年】｜1位東京都（8館）",
-  "seoDescription": "2015年の科学博物館数の都道府県別ランキング。1位東京都（8館）、最下位沖縄県（0館）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -35,7 +35,5 @@ export const buildingFireDamageAmountPerPerson: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "building-fire-damage-amount-per-building-fire",
-  "seoTitle": "建物火災損害額ランキング都道府県【2023年】｜1位秋田県（1,946円）",
-  "seoDescription": "2023年の建物火災損害額の都道府県別ランキング。1位秋田県（1,946円）、最下位沖縄県（250円）で7.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

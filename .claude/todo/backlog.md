@@ -3379,21 +3379,12 @@ updated: 2026-11-01
 - **残り**: (a) `chicken-consumption-quantity` は「宮崎は最多になった年が無い」に期間を足して再審査する (実際は 2011 年に 1 位)。(b) `food-trio-prefecture-map` は 2025 年に前提が崩れた (豆腐の 1 位は富山、宮城の焼酎は 40 位) ので結論から書き直す。(c) `automotive-industry-transformation-map` (表示 14,289) の推移図を 2024 年まで手で延ばす。(d) refresh の対象外の図 (derived・estat・authored) を持つ記事約 7 本 (manufacturing-aichi-dominance・manufacturing-productivity・pharma-medical-device-production-map・welfare-expenses-squeeze・prefectural-debt-future-burden・library-museum-cultural-capital・local-tax-regional-gap) は図を手で取り直す。(e) 一覧の残り約 150 本を 15〜20 本ずつ処理する (1 本あたり critic 2 回)。(f) 例外 5 種 (healthy-life-expectancy-male-female-gap・physical-therapist-annual-income-prefecture-gap・dairy-cattle-count・it-industry-concentration・手順解説)。(g) `per-capita-income-gap` は 2020 年のデータで、quality-gate が止める「## データ出典」節を持ったまま公開されている。最低賃金の 2 本は 2024 年度のまま (BLOG-DUPLICATE-AUDIT-01 の差別化と同時に直す)。③ の年が 1 年だけのカードは `THEME-SINGLE-YEAR-CARDS-01` で扱う。
 - **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が作り直しの対象になり、古い年の記事が一覧とキューに出て、計算型のランキングとテーマの比較カードが新しい年を描く。加えて、一覧の件数が週次で減っていく。
 
-### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription に観測値を直書きするのをやめ、値から生成する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:サイト]
+### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription を値から作る形を本番に出して確かめる
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:サイト] [待ち:承認]
 
-- **GSC案30 / P2（次に着手）**: title・本文・観測値の年/単位/分母を一致させ、最新年と調査年、全国値と県単純平均を区別する。blogの混合年はBLOG-SEOTITLE-MIXED-YEAR-01へ接続し、同じ修正を二重起票しない。観測値由来の必須是正とCTR目的の文言実験を分け、後者の一括置換はしない。
-- **背景**: metric config 2,606 件のうち 1,915 件の `seoTitle` / `seoDescription` が「1位東京都（113,685,917百万円）」のように
-- **次**: ① 直書きの型を分類する (年・1 位・最下位・倍率)。② builder (`build-ranking-item-from-metric.ts`) が R2 の値から
-  同じ型の文言を作る関数を用意し、config には値を含まない雛形か上書きだけを残す。③ 既存 1,915 件を一括で雛形へ置き換え、
-  検索結果の文言が変わる件数を事前に出してオーナーの承認を取る (タイトルの変更は検索順位に影響しうる)。
-- **禁止**: 承認前に R2 の item.json を一括で書き換えない。
-- **完了条件**: config の `seoTitle` / `seoDescription` に観測値を含むものが 0 件になり、item.json の文言が最新の値と一致する。
-- **実例 (2026-10-08)**: 物価地域差指数 12 指標に 2025 年を補ったあとも、本番の `/ranking/consumer-price-difference-index-overall` のタイトルは
-  「【2024年】｜1位東京」のまま (2024 年の値としては正しいので `audit-seo-meta-facts.ts` は通る)。魚種 12 指標は今回手で 2023 年に書き直した。
-  値から生成すれば、年を広げるたびにこの手作業は要らなくなる。
-- **観測 (2026-11-14)**: `audit-seo-meta-facts` は値の許容が相対 2% なので、seoTitle の 47.4 と実測 46.7 (1.5% の差・university-capacity-index) を検出できなかった。 (参照: d45468cb6)
-- **観測 (2026-11-23)**: 医療施設の 6 指標 (一般病院数など) に 2024 年を取り込み、R2 の item.json の最新年は 2024 になったが、本番の `<title>` は config の seoTitle「【2023年】｜1位東京都（588施設）」のまま (作り直した描画でも同じ)。`audit-seo-meta-facts --only <6 指標>` は不一致 0 件で通る。年を書いた seoTitle は 1,253 指標。
+- **済み (2026-11-23・オーナー承認「全部承認」)**: 項目の組み立てが、定義に題が無ければ最新年の観測値から題と説明文を作る (`buildRankingSeoText`)。定義から年と値の題 1,256 件・説明文 1,259 件を外し、年と値を手で書くと `validate:config` の `seo-hand-written-fact` が止める。断りの文は `seoNote` に残した (5 指標)。見積もり (有効 2,624 指標): 題が変わる 1,104 件・新しく題が付く 501 件・手書きのまま 899 件。
+- **残り**: ① 次のリリース (main へのマージはオーナー判断) のデプロイで全指標の item.json が作り直されたら、本番の `/ranking/general-hospital-count` の `<title>` が「【2024年】」になることを確かめる ② 単位の書き方が粗い題 (酒類の「21.65l」、「104.2(全国=100)」など) を単位の表記の規則で直すか決める。
+- **完了条件**: 本番の代表 5 指標の `<title>` と `<meta name="description">` が R2 の最新年の値と一致する。
 
 ### [GEO-LOW-ELEV-MANIFEST-SHA-01] 標高の低い土地の Geo 分析の manifest が SHA 照合の対象外になっている
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run -s geo:audit-low-elevation] [起票:2026-10-08] [領域:データ] [待ち:承認]

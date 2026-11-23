@@ -164,6 +164,5 @@ export const fisherySpeciesCatchPollock: MetricConfig = {
   },
   "groupKey": "fishery-species",
   "seoTitle": "スケトウダラ漁獲量ランキング｜なぜ北海道に集中?【2023】",
-  "seoDescription": "スケトウダラの漁獲量は北海道が113,731トンで圧倒的1位──なぜ北海道にこれほど集中するのか。寒流域の漁場と加工産業の関係、39都道府県の分布を2023年データで解説します。",
   "isActive": true,
 };

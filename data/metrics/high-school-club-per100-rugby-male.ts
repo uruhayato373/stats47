@@ -55,7 +55,6 @@ export const highSchoolClubPer100RugbyMale: MetricConfig = {
     "isCalculated": false,
   },
   "surveyId": "school-basic-survey",
-  "seoTitle": "高校ラグビー部員の比率、都道府県で差｜1位山梨県2.27人 vs 最下位山形県0.29人【2025年度】",
   "seoDescription": "高校男子100人あたりのラグビー部員数(全国高体連の加盟登録人数÷学校基本調査の男子生徒数)を都道府県別に比較。1位山梨県2.27人、最下位山形県0.29人で約7.8倍の差。地図とグラフで47都道府県を比較。",
   "isActive": true,
 };

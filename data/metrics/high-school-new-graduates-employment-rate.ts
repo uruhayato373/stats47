@@ -33,7 +33,5 @@ export const highSchoolNewGraduatesEmploymentRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "高等学校新規卒業者の就職率 都道府県ランキング【2023年】｜1位青森県（100.0％）",
-  "seoDescription": "2023年の高等学校新規卒業者の就職率を都道府県別に比較。1位は青森県（100.0％）、最下位は京都府（94.5％）、最大と最小の差は1.1倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

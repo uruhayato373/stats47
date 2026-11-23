@@ -75,7 +75,5 @@ export const childConsultationCenterCases: MetricConfig = {
     ],
   },
   "groupKey": "child-consultation-center-cases",
-  "seoTitle": "児童相談所受付件数ランキング都道府県【2023年】｜1位大阪府（53,634件）",
-  "seoDescription": "2023年の児童相談所受付件数の都道府県別ランキング。1位大阪府（53,634件）、最下位大分県（1,709件）で31.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

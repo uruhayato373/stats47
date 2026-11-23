@@ -234,7 +234,7 @@ export function buildRankingItemFromMetric(
           { title: seoNameOf(config, ctx.registry), unit: config.unit, valueDisplay: buildValueDisplay(config) },
           latestYear.yearName,
           ctx.values.latestRows,
-          { capitalCities: isCapitalCityValueMetric(config, ctx.registry) },
+          { capitalCities: isCapitalCityValueMetric(config, ctx.registry), note: config.seoNote },
         )
       : null;
 

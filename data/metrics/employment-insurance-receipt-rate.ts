@@ -34,7 +34,5 @@ export const employmentInsuranceReceiptRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "雇用保険受給率ランキング都道府県【2023年】｜1位奈良県（1.8％）",
-  "seoDescription": "2023年の雇用保険受給率の都道府県別ランキング。1位奈良県（1.8％）、最下位東京都（0.4％）で4.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

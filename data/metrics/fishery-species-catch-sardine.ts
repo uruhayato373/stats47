@@ -163,7 +163,5 @@ export const fisherySpeciesCatchSardine: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "イワシ類漁獲量ランキング都道府県【2023年】｜1位茨城県（233,727トン）",
-  "seoDescription": "2023年のイワシ類漁獲量を都道府県別に比較。1位は茨城県（233,727トン）、最下位は山形県（2トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };

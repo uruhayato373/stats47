@@ -52,7 +52,6 @@ export const aquariumCount: MetricConfig = {
     ],
   },
   "groupKey": "museum-type-count",
-  "seoTitle": "登録・相当水族館数ランキング【2015年】｜1位北海道（3館）",
-  "seoDescription": "2015年の登録博物館・博物館相当施設に該当する水族館数を都道府県別に比較。博物館類似施設は含みません。",
+  "seoNote": "博物館類似施設は含みません。",
   "isActive": true,
 };

@@ -33,7 +33,5 @@ export const hobbyParticipationRateTeaCeremony: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "茶道の行動者率 都道府県ランキング【2021年】｜1位富山県（1.3％）",
-  "seoDescription": "2021年の茶道の行動者率を都道府県別に比較。1位は富山県（1.3％）、最下位は沖縄県（0.5％）、最大と最小の差は2.6倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

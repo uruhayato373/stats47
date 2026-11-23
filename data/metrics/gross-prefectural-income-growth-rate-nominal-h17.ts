@@ -37,7 +37,5 @@ export const grossPrefecturalIncomeGrowthRateNominalH17: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "県民総所得対前年増加率 都道府県ランキング【2014年】｜1位宮城県（3.5％）",
-  "seoDescription": "2014年の県民総所得対前年増加率を都道府県別に比較。1位は宮城県（3.5％）、最下位は栃木県（-1.0％）。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

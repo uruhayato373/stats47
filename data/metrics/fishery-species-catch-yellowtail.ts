@@ -163,7 +163,5 @@ export const fisherySpeciesCatchYellowtail: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "ブリ類漁獲量ランキング都道府県【2023年】｜1位北海道（13,659トン）",
-  "seoDescription": "2023年のブリ類漁獲量を都道府県別に比較。1位は北海道（13,659トン）、最下位は岡山県（17トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };

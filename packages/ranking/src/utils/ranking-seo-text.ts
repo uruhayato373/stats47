@@ -34,12 +34,13 @@ const MIN_RATIO_TO_WRITE = 1.05;
  * - 倍率は両方が正の値で、開きが 1.05 倍以上のときだけ書く (負の値・0 を含む指標で倍率を書かない)
  * - 県庁所在市の値の指標 (家計調査など) は県名を市の名前にし、「都道府県」と書かない
  * - 順位の付いた行が 2 つ未満なら作らない (null)。呼び出し側は指標の名前だけの題に戻す
+ * - note (指標の定義の seoNote) があれば説明文の後ろに付ける (対象の範囲の断りなど)
  */
 export function buildRankingSeoText(
   item: Pick<RankingItem, "title" | "unit" | "valueDisplay">,
   yearName: string,
   rows: readonly SeoValueRow[],
-  options: { capitalCities?: boolean } = {},
+  options: { capitalCities?: boolean; note?: string } = {},
 ): RankingSeoText | null {
   const ranked = rows
     .filter((row): row is SeoValueRow & { value: number; rank: number } =>
@@ -71,7 +72,8 @@ export function buildRankingSeoText(
     seoDescription:
       `${yearName}の${item.title}の${scope}別ランキング。` +
       `1位${name(top)}（${valueText(top)}）、最下位${name(bottom)}（${valueText(bottom)}）${ratioText}。` +
-      `地図やグラフで${count}を比較。`,
+      `地図やグラフで${count}を比較。` +
+      (options.note ? options.note : ""),
   };
 }
 

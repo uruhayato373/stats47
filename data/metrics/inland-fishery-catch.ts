@@ -50,7 +50,5 @@ export const inlandFisheryCatch: MetricConfig = {
     ],
   },
   "groupKey": "fishery",
-  "seoTitle": "内水面漁業漁獲量ランキング都道府県【2023年】｜1位北海道（8,277トン）",
-  "seoDescription": "2023年の内水面漁業漁獲量の都道府県別ランキング。1位北海道（8,277トン）、最下位沖縄県（0トン）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

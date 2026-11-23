@@ -39,7 +39,5 @@ export const employedPeopleRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "就業者比率ランキング都道府県【2020年】｜1位島根県（97.3％）",
-  "seoDescription": "2020年の就業者比率の都道府県別ランキング。1位島根県（97.3％）、最下位沖縄県（94.5％）で1.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

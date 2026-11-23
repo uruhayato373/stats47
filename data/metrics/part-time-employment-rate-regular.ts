@@ -34,7 +34,5 @@ export const partTimeEmploymentRateRegular: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "パートタイム就職率ランキング都道府県【2021年】｜1位秋田県（10.3％）",
-  "seoDescription": "2021年のパートタイム就職率の都道府県別ランキング。1位秋田県（10.3％）、最下位東京都（3.8％）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

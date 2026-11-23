@@ -81,7 +81,5 @@ export const industrialExclusiveAreaRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "工業専用地域面積比率ランキング都道府県【2023年】｜1位茨城県（17.6％）",
-  "seoDescription": "2023年の工業専用地域面積比率の都道府県別ランキング。1位茨城県（17.6％）、最下位奈良県（0.9％）で19.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

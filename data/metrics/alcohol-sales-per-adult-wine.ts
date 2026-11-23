@@ -56,7 +56,5 @@ export const alcoholSalesPerAdultWine: MetricConfig = {
     "isCalculated": false,
   },
   "surveyId": "nta-annual-statistics",
-  "seoTitle": "成人1人あたりワイン(果実酒)の販売量、都道府県で差｜1位東京都7.9リットル【2023年度】",
-  "seoDescription": "国税庁の酒類販売(消費)数量を成人人口で割り、ワイン(果実酒)の成人1人あたり販売量を都道府県別に比較。2023年度は1位東京都7.9リットル、最下位佐賀県1.4リットルで約5.6倍の差(沖縄県を除く46都道府県)。",
   "isActive": true,
 };

@@ -164,7 +164,5 @@ export const fisherySpeciesCatchBonito: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "カツオ漁獲量ランキング都道府県【2023年】｜1位静岡県（56,969トン）",
-  "seoDescription": "2023年のカツオ漁獲量を都道府県別に比較。1位は静岡県（56,969トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };

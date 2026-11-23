@@ -33,7 +33,5 @@ export const hobbyParticipationRateClassicalMusic: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "クラシック音楽鑑賞の行動者率ランキング都道府県【2021年】｜1位東京都（6.2％）",
-  "seoDescription": "2021年のクラシック音楽鑑賞の行動者率の都道府県別ランキング。1位東京都（6.2％）、最下位青森県（1.9％）で3.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

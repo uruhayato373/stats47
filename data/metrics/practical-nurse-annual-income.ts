@@ -61,7 +61,5 @@ export const practicalNurseAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "准看護師の平均年収 都道府県ランキング【2023年】｜1位東京都（480.8万円）",
-  "seoDescription": "2023年の准看護師の平均年収を都道府県別に比較。1位は東京都（480.8万円）、最下位は青森県（322.3万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

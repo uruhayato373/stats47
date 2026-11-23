@@ -34,7 +34,5 @@ export const seniorWelfareCenterCountPer100k65plus: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "老人福祉センター数ランキング都道府県【2017年】｜1位鳥取県（13.1所）",
-  "seoDescription": "2017年の老人福祉センター数の都道府県別ランキング。1位鳥取県（13.1所）、最下位和歌山県（0.7所）で18.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

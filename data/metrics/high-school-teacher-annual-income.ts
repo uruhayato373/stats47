@@ -59,7 +59,5 @@ export const highSchoolTeacherAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "高等学校教員の平均年収 都道府県ランキング【2023年】｜1位和歌山県（894.2万円）",
-  "seoDescription": "2023年の高等学校教員の平均年収を都道府県別に比較。1位は和歌山県（894.2万円）、最下位は秋田県（369.5万円）、最大と最小の差は2.4倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

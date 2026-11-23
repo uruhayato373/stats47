@@ -35,7 +35,5 @@ export const simpleLifeInsuranceContractCountPerPopulation: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "simple-life-insurance-contract-count",
-  "seoTitle": "簡易生命保険保有契約件数ランキング都道府県【2006年】｜1位山形県（609.8件）",
-  "seoDescription": "2006年の簡易生命保険保有契約件数の都道府県別ランキング。1位山形県（609.8件）、最下位沖縄県（177.5件）で3.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -46,8 +46,6 @@ export const nonAgriculturalIncomeRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "農外所得割合ランキング都道府県【2003年】｜1位東京都（79.8％）",
-  "seoDescription": "2003年の農外所得割合の都道府県別ランキング。1位東京都（79.8％）、最下位北海道（15.1％）で5.3倍の格差。地図やグラフで47都道府県を比較。",
   "surveyId": "agriculture-management-survey",
   "isActive": true,
 };

@@ -36,7 +36,5 @@ export const netDecreaseRateLandHouseLoansWorkerHouseholds: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "土地家屋借金純減率ランキング都道府県【2024年】｜1位大阪府（9.6％）",
-  "seoDescription": "2024年の土地家屋借金純減率の都道府県別ランキング。1位大阪府（9.6％）、最下位石川県（-6.4％）で-1.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

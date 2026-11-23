@@ -40,7 +40,5 @@ export const denselyPopulatedAreaChangeRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "人口集中地区面積の変化率ランキング都道府県【2020年】｜1位佐賀県（17.3％）",
-  "seoDescription": "2020年の人口集中地区面積の変化率の都道府県別ランキング。1位佐賀県（17.3％）、最下位秋田県（-3％）で-5.8倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

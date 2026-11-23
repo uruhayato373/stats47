@@ -40,7 +40,5 @@ export const crimeRatePer1k: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "刑法犯認知件数（人口千人当たり）ランキング市区町村【2005年】｜1位東京都 千代田区（130.26件）",
-  "seoDescription": "2005年の刑法犯認知件数（人口千人当たり）の市区町村別ランキング。1位東京都 千代田区（130.26件）、最下位沖縄県 北大東村（0件）で地図やグラフで市区町村を比較。",
   "isActive": true,
 };

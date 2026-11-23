@@ -37,7 +37,5 @@ export const cpiChangeRateTotal: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "消費者物価指数変化率ランキング都道府県【2024年】｜1位奈良県（3.5％）",
-  "seoDescription": "2024年の消費者物価指数変化率の都道府県別ランキング。1位奈良県（3.5％）、最下位和歌山県（2.2％）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

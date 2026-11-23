@@ -36,7 +36,5 @@ export const generalClinicCountPer100km2: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "general-clinic-count",
-  "seoTitle": "一般診療所数ランキング都道府県【2023年】｜1位東京都（1,042.5施設）",
-  "seoDescription": "2023年の一般診療所数の都道府県別ランキング。1位東京都（1,042.5施設）、最下位北海道（15施設）で69.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -163,7 +163,5 @@ export const fisherySpeciesCatchScallop: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "ホタテガイ漁獲量ランキング都道府県【2023年】｜1位北海道（330,176トン）",
-  "seoDescription": "2023年のホタテガイ漁獲量を都道府県別に比較。1位は北海道（330,176トン）、最下位は青森県（416トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };

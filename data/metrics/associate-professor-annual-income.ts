@@ -59,7 +59,5 @@ export const associateProfessorAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "大学准教授の平均年収 都道府県ランキング【2023年】｜1位東京都（974.6万円）",
-  "seoDescription": "2023年の大学准教授の平均年収を都道府県別に比較。1位は東京都（974.6万円）、最下位は宮崎県（676.5万円）、最大と最小の差は1.4倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

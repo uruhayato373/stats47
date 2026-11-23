@@ -51,7 +51,5 @@ export const marineFisheryOutputValue: MetricConfig = {
     ],
   },
   "groupKey": "fishery",
-  "seoTitle": "海面漁業産出額ランキング都道府県【2023年】｜1位北海道（239,620百万円）",
-  "seoDescription": "2023年の海面漁業産出額の都道府県別ランキング。1位北海道（239,620百万円）、最下位奈良県（0百万円）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

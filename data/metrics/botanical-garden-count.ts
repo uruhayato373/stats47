@@ -52,7 +52,6 @@ export const botanicalGardenCount: MetricConfig = {
     ],
   },
   "groupKey": "museum-type-count",
-  "seoTitle": "登録・相当植物園数ランキング【2015年】｜1位兵庫県（2館）",
-  "seoDescription": "2015年の登録博物館・博物館相当施設に該当する植物園数を都道府県別に比較。博物館類似施設は含みません。",
+  "seoNote": "博物館類似施設は含みません。",
   "isActive": true,
 };

@@ -65,7 +65,5 @@ export const physiciansInMedicalFacilitiesPer100k: MetricConfig = {
     "isCalculated": false
   },
   "groupKey": "physicians-in-medical-facilities",
-  "seoTitle": "医師数ランキング都道府県【2022年】｜1位徳島県（335.7人）",
-  "seoDescription": "2022年の医師数の都道府県別ランキング。1位徳島県（335.7人）、最下位埼玉県（180.2人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true
 };

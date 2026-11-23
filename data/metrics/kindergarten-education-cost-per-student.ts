@@ -34,7 +34,5 @@ export const kindergartenEducationCostPerStudent: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "幼稚園教育費ランキング都道府県【2022年】｜1位石川県（3,806,796円）",
-  "seoDescription": "2022年の幼稚園教育費の都道府県別ランキング。1位石川県（3,806,796円）、最下位滋賀県（1,096,931円）で3.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

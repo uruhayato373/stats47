@@ -163,7 +163,5 @@ export const fisherySpeciesCatchSeaBream: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "タイ類漁獲量ランキング都道府県【2023年】｜1位長崎県（4,121トン）",
-  "seoDescription": "2023年のタイ類漁獲量を都道府県別に比較。1位は長崎県（4,121トン）、最下位は東京都（4トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };

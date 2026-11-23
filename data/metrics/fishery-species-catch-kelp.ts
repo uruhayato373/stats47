@@ -163,7 +163,5 @@ export const fisherySpeciesCatchKelp: MetricConfig = {
     ],
   },
   "groupKey": "fishery-species",
-  "seoTitle": "コンブ類漁獲量ランキング都道府県【2023年】｜1位北海道（42,536トン）",
-  "seoDescription": "2023年のコンブ類漁獲量を都道府県別に比較。1位は北海道（42,536トン）、最下位は岩手県（270トン）。海のない8県を除く39都道府県を地図やグラフで確認できます。",
   "isActive": true,
 };
