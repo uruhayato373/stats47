@@ -37,7 +37,7 @@ from markdownify import markdownify as html2md
 ROOT = Path(__file__).resolve().parents[4]
 INDEX = ROOT / "data/note/note-published-urls.json"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
-TODAY = "2026-07-15"  # Date.now() は harness で使えないため固定
+TODAY = datetime.date.today().isoformat()
 
 
 def load_targets():
@@ -47,7 +47,9 @@ def load_targets():
         if v.get("status") != "note_only":
             continue
         r2_path = v.get("r2_path", "")
-        note_id = r2_path.rsplit("/", 1)[-1]  # n<hex>
+        # 保存先のパスの末尾が記事のキーになった台帳もあるので、ID は記事の URL の末尾 (n<hex>) を優先する
+        url_id = v.get("url", "").rstrip("/").rsplit("/", 1)[-1]
+        note_id = url_id if re.fullmatch(r"n[0-9a-f]+", url_id) else r2_path.rsplit("/", 1)[-1]
         out.append(
             {
                 "key": key,
@@ -230,7 +232,7 @@ def main():
             indent=2,
         )
     )
-    print(f"manifest: {manifest.relative_to(ROOT)}")
+    print(f"manifest: {manifest}")
 
 
 if __name__ == "__main__":

@@ -21,7 +21,7 @@ note の全記事 (公開済み + 下書き) を、**記事 ID (key) の台帳 1
 
 - **docs/31_note記事原稿 は作業場**で、git に何も置かない (`.gitignore` 済み)。作業コピーは `checkout` で取り出し、
   `save` で R2 へ戻すと消える。git には台帳 (所在とマニフェストの SHA) だけが残る。
-- 本文の所在 `body.store` は 3 種類。`r2-public` (無料記事)・`r2-private` (有料記事)・`note-only` (本文が note.com にしか無い回収待ち)。
+- 本文の所在 `body.store` は 2 種類。`r2-public` (無料記事)・`r2-private` (有料記事)。公開済みの記事は本文のマニフェストが必須 (旧 `note-only` は 2026-11-23 に廃止)。
   **有料記事を `r2-public` にする台帳は Schema が拒否する。** `body.manifest` が null なのは「まだ保存していない」記事
   (本文未作成の下書きなど)。公開済みで null は検査が止める。
 - `catalog/index.ts`・`magazines.ts` は台帳を読んで型を付けるだけの層。`NOTE_ARTICLES[].r2Body` は台帳に書かない派生値
@@ -66,11 +66,13 @@ npm run note:article -- adopt <key>                # 台帳の外で R2 に置�
 `validate-note-catalog.ts` の規則: **error** は key 重複 / 未登録マガジンキー / マガジンの vertical 不一致 / published なのに noteUrl 無し、
 **warn** は title 重複の疑い / 有料マガジンに無料記事 / isPaid だが priceJpy 未設定 / stats47Targets が KNOWN_RANKING_KEYS に不在。
 
-## 本文が note.com にしか無い記事 (`body.store: "note-only"`)
+## 本文が note.com にしか無い記事 (廃止・2026-11-23)
 
-`recovered-*` / `paid-*` の多くは、note.com から URL だけ回収した記事で、R2 に本文が無い (2026-10-13 時点 73 本)。
-`r2Path` は note ID から機械生成した予定地で、実体は無い。本文を note.com から取得して作業コピーに置き、
-`body.store` を `r2-public` (無料) か `r2-private` (有料) に変えてから `save` する。回収は `NOTE-BODY-RECOVERY-01`。
+以前は `body.store: "note-only"` で「本文が note.com にしか無い回収待ち」を表していた (2026-10-13 時点 73 本)。
+2026-11-23 に調べると 72 本は 7 月の取り込みの出力が公開 R2 にすでにあり、台帳の記録のほうが古かった。
+72 本は `npm run note:article -- adopt <key>` で R2 の本文をそのまま台帳に取り込み、1 本は note.com から取り直して `save` した
+(`restore-from-notecom.py`。note の ID は記事の URL の末尾から取る)。
+`note-only` は語彙から外し、公開済みの記事は本文のマニフェストが無いと Schema が止める (NOTE-BODY-RECOVERY-01)。
 同題の記事が 2 本あれば同一記事の再投稿の疑いがある (`validate` の title 重複 warn)。本文を照合して統廃合する。
 
 ## マガジン運用 (「類似記事を無料マガジンに束ねる」)

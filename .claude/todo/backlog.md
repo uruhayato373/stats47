@@ -2264,19 +2264,6 @@ updated: 2026-11-01
 - **起動しない workflow**: 13 日で 0 run の dispatch 専用が 10 本 (backlog-routing-policy-weekly・post-threads-scheduled・threads-token-refresh・commute-flow-ingest・google-admin-settings・infra-history-publish・kakei-axis-charts・ksj-aggregate-ingest・regenerate-blog-svgs・generate-ogp-images)。estat-ssds-enum は名前が weekly で schedule が無い。30 日の run 数で確かめ、名前と起動条件を合わせるか消す。
 - **完了条件**: 3 項目それぞれに、直した結果か残す理由が書いてある。
 
-### [NOTE-BODY-RECOVERY-01] 本文が note.com にしか無い 73 本を R2 へ回収する
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run note:article -- status] [起票:2026-10-13] [領域:商品]
-
-- **事実 (2026-10-13)**: 記事台帳で `body.store: "note-only"` の公開記事が 73 本 (`recovered-*` / `paid-*` の大半)。R2 にも git にも本文が無く、
-  note.com が唯一の実体。リライト・カバー再生成・リンク修復の作業コピーを作れない。
-- **次**: 所有者 API (`/api/v3/notes/<id>` の body。有料は所有者のセッションが要る) から本文を取り、作業コピー (draft.md + 画像) を組み立てて
-  `body.store` を `r2-public` (無料) か `r2-private` (有料) に変え、`npm run note:article -- save <key>` で保存する。既存の
-  `catalog/restore-from-notecom.py` の出力形式を確かめて使う。公開 API は大量取得で 403 になるので、1 回 10 本程度に区切る (`feedback_note_editor_autosave_drafts`)。
-- **実測 (2026-11-05)**: 73 本はすべて無料の公開記事 (A 65 本・B 8 本) で、公開 API から読める。本文の図の台帳 (`data/note/body-figures.json`) は今は読むだけで、R2 へは保存していない。
-- **再発防止 (2026-11-05 オーナー指示)**: 回収で 0 にした後、`note-only` を増やせないようにする。`articles.schema.json` の語彙から `note-only` を外し、公開済みの記事に `body.manifest` が無いと `note:catalog:validate` が止める。新規公開は `note:article save` の後でないと公開済みにならないことを、公開の経路で確かめる。
-- **完了条件**: `note:article status` で `note-only` が 0、`note:article verify` が全件合格。語彙から `note-only` が消え、公開済みで本文が R2 に無い記事を検査が止める。
-- **再確認 (2026-11-23)**: `npm run note:article -- status` は `note-only` 73 本のまま (r2-public 保存済み 274・r2-private 保存済み 147・未保存 5)。回収の `save` は R2 へ本文と画像を新しく保存するので、オーナーの承認を取ってから 10 本ずつ進める。
-
 ### [NOTE-PRODUCT-ZIP-ARCHIVE-01] note 有料記事の添付 ZIP (商品ファイル) を private R2 に保全する経路を作る
 タグ: [収益化] [種類:改善] [実行:別環境] [起票:2026-10-13] [領域:商品]
 
