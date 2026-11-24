@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { NATIONAL_AREA_CODE } from '@stats47/area';
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { MiniLineChart } from '@/components/charts/MiniCharts';
 
@@ -12,9 +11,9 @@ import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 import { MIN_TREND_YEARS, resolveMetricTrend, shouldFetchMetricTrend, type MetricTrend } from '../lib/metric-trend';
 
 import { useInitialMetricTimeseries } from './InitialThemeDataContext';
+import { metricDisplayUnit, scaleMetricPoints, type MetricKpi } from './metric-kpi';
 import { MetricStatTile } from './MetricStatTile';
 
-import type { MetricKpi } from './metric-kpi';
 
 interface SingleMetricCardProps {
   /** SSRとクライアントで同じ見出しIDを使うための固定キー */
@@ -148,10 +147,11 @@ export function SingleMetricCard({
         }
       >
         {trend.kind === 'chart' ? (
+          // 推移も数値タイルと同じ表示単位で書く (旧: タイルは「1,130億円」、推移のツールチップは「113,039,852千円」)
           <MiniLineChart
-            points={trend.points}
+            points={scaleMetricPoints(trend.points, metric.displayScale)}
             seriesName={trend.seriesName}
-            unit={formatUnitForDisplay(metric.unit)}
+            unit={metricDisplayUnit(metric)}
           />
         ) : null}
       </MetricStatTile>

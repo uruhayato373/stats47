@@ -88,4 +88,24 @@ describe("theme-seo", () => {
     expect(qa.q).toBe("秋田県の高齢化率は全国何位ですか？");
     expect(qa.a).toBe("2024年の秋田県の高齢化率は39.5%で、47都道府県中1位です。");
   });
+
+  // UNIT-NOTATION-FORMAT-01: 説明文と Q&A が「113,685,917百万円」「36,624,970人泊」と元の単位のまま書いていた
+  it("桁の多い値は、説明文と Q&A でも指標カードと同じ表示単位で書く", () => {
+    const big = { title: "県内総生産", unit: "百万円", latestYear: { yearCode: "2021000000", yearName: "2021年" } } as unknown as RankingItem;
+    const bigValues = [
+      { areaCode: "13000", areaName: "東京都", value: 113_685_917, rank: 1 },
+      { areaCode: "31000", areaName: "鳥取県", value: 1_900_000, rank: 47 },
+    ] as unknown as RankingValue[];
+    const fact = leadFactFromValues(big, bigValues)!;
+    const national = buildThemeDescription({ scope: "national", base: "説明。", labels: ["県内総生産"], fact });
+    const [, low] = buildThemeFaqItems([fact]);
+    for (const text of [national, low.a]) {
+      expect(text).not.toMatch(/\d{1,3}(,\d{3}){2,}/);
+      expect(text).not.toContain("百万円");
+    }
+    const [qa] = buildAreaThemeFaqItems("東京都", [
+      { itemName: "県内総生産", unit: "百万円", yearName: "2021年", value: 113_685_917, rank: 1, total: 47, display: fact.display },
+    ]);
+    expect(qa.a).not.toContain("113,685,917");
+  });
 });

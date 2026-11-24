@@ -1,12 +1,18 @@
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { isNationalAreaCode } from "@stats47/area/area-code";
+import { formatUnitForDisplay, type AuthoredDisplay } from "@stats47/data-configs/unit";
 
-import { formatMetricValue } from "../components/metric-kpi";
+import {
+  formatMetricValue,
+  metricDisplayUnit,
+  type MetricValueDisplay,
+  resolveMetricValueDisplay,
+} from "../components/metric-kpi";
 
 interface AreaThemeHighlightSource {
   indicatorDataMap: Record<
     string,
     {
-      rankingItem: { unit: string };
+      rankingItem: { unit: string; valueDisplay?: AuthoredDisplay | null };
       rankingValues: Array<{
         areaCode: string;
         value: number | null;
@@ -26,6 +32,8 @@ export interface AreaThemeHighlight {
   yearName: string;
   /** 47 都道府県の中の順位 (配信値の rank。無ければ null) */
   rank: number | null;
+  /** 値の書き方。指標カードの数値タイルと同じ単位・倍率・小数桁 (UNIT-NOTATION-FORMAT-01) */
+  display?: MetricValueDisplay;
 }
 
 /**
@@ -47,13 +55,24 @@ export function getAreaThemeHighlights(
       (value) => value.areaCode === areaCode && Number.isFinite(value.value),
     );
     if (target?.value === null || target?.value === undefined) continue;
+    const unit = target.unit || indicator.rankingItem.unit;
+    // 指標カードと同じく、同じ年の 47 都道府県の値 (全国の行を除く) から書き方を決める
+    const sameYearValues = indicator.rankingValues.flatMap((value) =>
+      value.yearName === target.yearName &&
+      !isNationalAreaCode(value.areaCode) &&
+      typeof value.value === 'number' &&
+      Number.isFinite(value.value)
+        ? [value.value]
+        : [],
+    );
     highlights.push({
       key,
       title: tabLabel,
       value: target.value,
-      unit: target.unit || indicator.rankingItem.unit,
+      unit,
       yearName: target.yearName,
       rank: typeof target.rank === 'number' ? target.rank : null,
+      display: resolveMetricValueDisplay({ unit, valueDisplay: indicator.rankingItem.valueDisplay }, sameYearValues),
     });
     if (highlights.length >= limit) break;
   }
@@ -72,7 +91,10 @@ export function areaThemeDescription(
 ): string {
   const facts = highlights.slice(0, 2).map((highlight) => {
     const rank = highlight.rank !== null ? `・全国${highlight.rank}位` : '';
-    return `${highlight.title}は${formatMetricValue(highlight.value)}${formatUnitForDisplay(highlight.unit)}（${highlight.yearName}${rank}）`;
+    const display = highlight.display;
+    const value = formatMetricValue(highlight.value, display?.precision, display?.displayScale);
+    const unit = display ? metricDisplayUnit({ unit: highlight.unit, displayScale: display.displayScale }) : formatUnitForDisplay(highlight.unit);
+    return `${highlight.title}は${value}${unit}（${highlight.yearName}${rank}）`;
   });
   const lead = facts.length > 0 ? `${areaName}の${facts.join('、')}。` : '';
   return `${lead}${areaName}における${themeDescription}全国47都道府県との比較で${areaName}の位置づけを確認できます。`;

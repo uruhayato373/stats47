@@ -11,6 +11,8 @@ import { formatUnitForDisplay, parseUnit } from "@stats47/data-configs/unit";
 import { filterOutNationalArea, getRankingTitle, type RankingItem, type RankingValue } from "@stats47/ranking";
 import { isOk } from "@stats47/types";
 
+import { formatMetricValue, type MetricValueDisplay, resolveMetricValueDisplay } from "../components/metric-kpi";
+
 import { readThemePrefectureValues, readThemeRankingItem } from "./theme-ranking-readers";
 
 /**
@@ -86,10 +88,17 @@ export interface ThemeLeadFact {
   bottom: { areaName: string; value: number };
   /** 1 位 ÷ 最下位 (どちらかが 0 以下なら null) */
   ratio: string | null;
+  /** 値の書き方。指標カードの数値タイルと同じ単位・倍率・小数桁 (UNIT-NOTATION-FORMAT-01) */
+  display?: MetricValueDisplay;
 }
 
-function formatValue(value: number): string {
-  return value.toLocaleString("ja-JP", { maximumFractionDigits: 2 });
+/**
+ * 文章に書く値と単位。表示単位に寄せる指標は寄せた単位で書く (旧: 「113,685,917百万円」「36,624,970人泊」と元の単位のまま)。
+ * unit は displayUnit を通した文字 (寄せない指標の単位)
+ */
+function valueText(value: number, unit: string, display?: MetricValueDisplay): string {
+  const shown = display ? formatMetricValue(value, display.precision, display.displayScale) : formatMetricValue(value);
+  return `${shown}${display?.displayScale ? display.displayScale.unit : unit}`;
 }
 
 /** 文章で値の後ろに付ける単位。「指数」のような次元の無い値には付けない (「1.06指数」と書かない) */
@@ -115,6 +124,10 @@ export function leadFactFromValues(item: RankingItem, values: RankingValue[]): T
     top: { areaName: top.areaName, value: top.value },
     bottom: { areaName: bottom.areaName, value: bottom.value },
     ratio,
+    display: resolveMetricValueDisplay(
+      { unit: item.unit, valueDisplay: item.valueDisplay },
+      prefValues.map((v) => v.value),
+    ),
   };
 }
 
@@ -167,7 +180,7 @@ export function buildThemeDescription(args: {
           : list && `${list}などを市区町村のランキングで比較できます。`;
   const factText =
     fact && scope === "national"
-      ? `${fact.yearName ? `${fact.yearName}の` : ""}${fact.itemName}は1位${fact.top.areaName}（${formatValue(fact.top.value)}${fact.unit}）、最下位${fact.bottom.areaName}（${formatValue(fact.bottom.value)}${fact.unit}）${fact.ratio ? `で${fact.ratio}倍の差` : ""}。`
+      ? `${fact.yearName ? `${fact.yearName}の` : ""}${fact.itemName}は1位${fact.top.areaName}（${valueText(fact.top.value, fact.unit, fact.display)}）、最下位${fact.bottom.areaName}（${valueText(fact.bottom.value, fact.unit, fact.display)}）${fact.ratio ? `で${fact.ratio}倍の差` : ""}。`
       : "";
   return [base, what, factText].filter(Boolean).join("");
 }
@@ -176,8 +189,8 @@ export function buildThemeDescription(args: {
 export function buildThemeFaqItems(facts: ThemeLeadFact[]): { q: string; a: string }[] {
   return facts.flatMap((f) => {
     const year = f.yearName ? `${f.yearName}の` : "";
-    const top = `${f.top.areaName}（${formatValue(f.top.value)}${f.unit}）`;
-    const bottom = `${f.bottom.areaName}（${formatValue(f.bottom.value)}${f.unit}）`;
+    const top = `${f.top.areaName}（${valueText(f.top.value, f.unit, f.display)}）`;
+    const bottom = `${f.bottom.areaName}（${valueText(f.bottom.value, f.unit, f.display)}）`;
     return [
       { q: `${f.itemName}が最も高い都道府県はどこですか？`, a: `${year}${f.itemName}の1位は${top}です。` },
       {
@@ -191,11 +204,19 @@ export function buildThemeFaqItems(facts: ThemeLeadFact[]): { q: string; a: stri
 /** 県のページの Q&A: 主な指標ごとの「この県は全国何位か」 */
 export function buildAreaThemeFaqItems(
   areaName: string,
-  rows: { itemName: string; unit: string; yearName: string; value: number; rank: number; total: number }[],
+  rows: {
+    itemName: string;
+    unit: string;
+    yearName: string;
+    value: number;
+    rank: number;
+    total: number;
+    display?: MetricValueDisplay;
+  }[],
 ): { q: string; a: string }[] {
   return rows.map((r) => ({
     q: `${areaName}の${r.itemName}は全国何位ですか？`,
-    a: `${r.yearName ? `${r.yearName}の` : ""}${areaName}の${r.itemName}は${formatValue(r.value)}${displayUnit(r.unit)}で、${r.total}都道府県中${r.rank}位です。`,
+    a: `${r.yearName ? `${r.yearName}の` : ""}${areaName}の${r.itemName}は${valueText(r.value, displayUnit(r.unit), r.display)}で、${r.total}都道府県中${r.rank}位です。`,
   }));
 }
 

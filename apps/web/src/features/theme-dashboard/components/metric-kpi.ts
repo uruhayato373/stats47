@@ -1,5 +1,11 @@
-import { formatChartValue, formatUnitForDisplay, type MetricDisplayScale } from "@stats47/data-configs/unit";
-import { formatValueWithPrecision } from "@stats47/utils";
+import {
+  formatChartValue,
+  formatUnitForDisplay,
+  type AuthoredDisplay,
+  type MetricDisplayScale,
+  resolveMetricDisplayScale,
+} from "@stats47/data-configs/unit";
+import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 
 import type {NumericDomainPolicy} from "@stats47/types";
 /**
@@ -74,6 +80,35 @@ export function formatMetricValue(
   // 47 県の値から決めた桁があればそれで揃える。無いと 33.0% が「33%」になり、隣の県の 33.6% と桁がずれる (2026-11-02)
   if (precision !== undefined) return formatValueWithPrecision(value, precision);
   return value.toLocaleString('ja-JP', { maximumFractionDigits: 2 });
+}
+
+/** 値の書き方 (表示単位・倍率・小数桁)。MetricKpi と同じ項目で、文章 (県の説明文・Q&A) も同じ決め方で書く */
+export type MetricValueDisplay = Pick<MetricKpi, "displayScale" | "precision">;
+
+/**
+ * 47 都道府県の値から、値の書き方を 1 回だけ決める (UNIT-NOTATION-FORMAT-01)。
+ * 数値タイル・表・章の答え (MetricKpi 経由) と、県のページの説明文・Q&A が同じ単位・倍率・小数桁で書く
+ * (旧: 文章だけ元の単位のまま「113,685,917百万円」)。決め方はランキングと同じ `resolveMetricDisplayScale`
+ * (指標の定義の表示単位、無ければ図の規則) で、寄せない指標は displayScale を持たない。
+ */
+export function resolveMetricValueDisplay(
+  metric: { unit: string | null | undefined; valueDisplay?: AuthoredDisplay | null },
+  values: readonly number[],
+): MetricValueDisplay {
+  const scale = resolveMetricDisplayScale({ unit: metric.unit, display: metric.valueDisplay }, values);
+  return {
+    displayScale: scale.factor !== 1 ? { unit: scale.unit, factor: scale.factor, decimals: scale.decimals } : undefined,
+    precision: resolveValuePrecision(values),
+  };
+}
+
+/** 推移の点を表示単位へ寄せる (図のツールチップを数値タイルと同じ単位で書く)。寄せない指標はそのまま */
+export function scaleMetricPoints<P extends { value: number }>(
+  points: readonly P[],
+  displayScale?: MetricKpi["displayScale"],
+): P[] {
+  if (!displayScale) return [...points];
+  return points.map((point) => ({ ...point, value: point.value * displayScale.factor }));
 }
 
 /** 値の横に書く単位。表示単位に寄せる指標はその単位 */
