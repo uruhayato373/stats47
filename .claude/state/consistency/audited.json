@@ -1,11 +1,5 @@
 {
-  "hash": "1a1a746fd9718ab2a59267eb2212f9bb17201c918825cad76b68c2f472f22834",
-  "audited_at": "2026-11-21T23:15:28",
-  "files": [
-    ".claude/scripts/estat/enumerate-ssds-indicators.mjs",
-    ".claude/scripts/gsc/build-coverage-queue.mjs",
-    ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
-    ".claude/scripts/lib/prune-state-snapshots.mjs",
-    ".claude/scripts/note/catalog/generate-note-catalog.ts"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-11-24T01:46:54",
+  "files": []
 }
