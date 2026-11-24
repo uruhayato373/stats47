@@ -21,6 +21,9 @@ import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
  * - source.json に `yearPinnedReason` がある図 (本文がその年そのものを主題として論じる図) は触らない
  * - 取り直せる図には、本文で図の年と最新年がそれぞれ何回出るかを付ける。図の年が 0 回なら本文は別の年を語っており、
  *   図だけが古い食い違い (固定せず取り直す)。判断の手順は /brushup-blog の focus 最新データ更新
+ * - 取り直した図には、元の年と新しい年の県別の値と順位 (`comparison`) を付ける。前年までの値は data JSON に残さず、
+ *   R2 の values.json (全年を持つ) から毎回作る (lib/refresh-chart-year.mjs の compareWithYear)。本文で「前年は何位か」を
+ *   書くときの接地にする
  * - SVG は取り直した図だけを一時ディレクトリで generate-article-charts.ts に描かせて戻す (ほかの図は再生成しない)
  *
  * オプション: --base <dir> (既定 contents/blog) / --pull (無いファイルを R2 公開 URL から取る) /
@@ -35,6 +38,7 @@ import { fileURLToPath } from "node:url";
 
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import {
+  compareWithYear,
   findYearMentions,
   latestPartition,
   planChartRefresh,
@@ -200,6 +204,8 @@ async function main() {
         .flatMap((year) => findStaleSourceFields(nextSource, year, REBUILT_SCATTER_SOURCE_FIELDS).map((field) => `${field} (${year}年)`));
     } else {
       ({ data, notes } = rebuildChartData(chart.data, chart.partition, chart));
+      // 元の年の値と順位は data JSON に残さず、R2 の全年の partition から比べる (BLOG-DATA-PRIOR-YEAR-KEEP-01)
+      chart.comparison = compareWithYear(valuesByKey.get(chart.rankingKey), chart.fromYear, chart.toYear);
       nextSource = rebuildSource(chart.source, chart, fetchedAt);
       staleFields = findStaleSourceFields(nextSource, chart.fromYear).map((field) => `${field} (${chart.fromYear}年)`);
     }
@@ -226,13 +232,14 @@ async function main() {
     article: path.relative(PROJECT_ROOT, articlePath),
     applied: APPLY,
     pulled,
-    charts: charts.map(({ base, rankingKey, status, reason, fromYear, toYear, notes }) => ({
+    charts: charts.map(({ base, rankingKey, status, reason, fromYear, toYear, notes, comparison }) => ({
       base,
       rankingKey,
       status,
       ...(reason ? { reason } : {}),
       ...(fromYear ? { fromYear, toYear } : {}),
       ...(notes?.length ? { notes } : {}),
+      ...(comparison ? { comparison } : {}),
     })),
     svgs,
     yearMentions: mentions,
@@ -252,6 +259,18 @@ async function main() {
         "本文も古い年で一貫していれば本文も書き直す。本文がその年そのものを主題にしているときだけ、" +
         "取り直さず source.json に `yearPinnedReason` を書く。",
     );
+    for (const c of summary.charts.filter((chart) => chart.comparison)) {
+      const { fromYear, toYear, rows } = c.comparison;
+      const movers = rows
+        .filter((row) => row.rankChange !== 0)
+        .sort((a, b) => Math.abs(b.rankChange) - Math.abs(a.rankChange) || a.rank - b.rank)
+        .slice(0, 5);
+      console.log(`\n## \`${c.base}\` の ${fromYear}年 → ${toYear}年 (R2 の全年の値から。全 ${rows.length} 県は --json の comparison)\n`);
+      console.log(`| 県 | ${fromYear}年 | ${toYear}年 |\n|---|---|---|`);
+      for (const row of [...rows.slice(0, 3), ...movers.filter((m) => m.rank > 3)]) {
+        console.log(`| ${row.areaName} | ${row.previousRank}位 (${row.previousValue}) | ${row.rank}位 (${row.value}) |`);
+      }
+    }
     console.log(`\n## 本文で古い年を書いた行 (${mentions.length} 行)\n`);
     for (const m of mentions) console.log(`- L${m.line}: ${m.text.trim().slice(0, 120)}`);
     console.log(

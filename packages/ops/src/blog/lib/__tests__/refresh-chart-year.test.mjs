@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import {
+  compareWithYear,
   findStaleSourceFields,
   findYearMentions,
   latestPartition,
@@ -369,5 +370,58 @@ describe("rebuildScatterData / rebuildScatterSource", () => {
     assert.equal(source.year, "x:2018/y:2025");
     // 計算式の文章は作り直さないので、古い年の残りとして手作業に出る
     assert.deepEqual(findStaleSourceFields(source, "2023", REBUILT_SCATTER_SOURCE_FIELDS), ["formula"]);
+  });
+});
+
+// 書き直しで年を進めた記事が「前年は何位だったか」を R2 の全年の値から持てること (BLOG-DATA-PRIOR-YEAR-KEEP-01)。
+// 元の年の値を data JSON に写さないので、比較は values.json の 2 つの partition から毎回作る。
+describe("compareWithYear", () => {
+  const values = {
+    partitions: [
+      {
+        yearCode: "2024000000",
+        values: [
+          { areaCode: "01000", areaName: "北海道", value: 30 },
+          { areaCode: "13000", areaName: "東京都", value: 20 },
+          { areaCode: "27000", areaName: "大阪府", value: 10 },
+          { areaCode: "00000", areaName: "全国", value: 60 },
+        ],
+      },
+      {
+        yearCode: "2025000000",
+        values: [
+          { areaCode: "01000", areaName: "北海道", value: 15 },
+          { areaCode: "13000", areaName: "東京都", value: 25 },
+          { areaCode: "27000", areaName: "大阪府", value: 25 },
+          { areaCode: "47000", areaName: "沖縄県", value: 5 },
+        ],
+      },
+    ],
+  };
+
+  it("元の年と新しい年の順位を県ごとに並べ、同じ値は同じ順位にする", () => {
+    const result = compareWithYear(values, "2024", "2025");
+    assert.equal(result.fromYear, "2024");
+    assert.equal(result.toYear, "2025");
+    assert.deepEqual(
+      result.rows.map((r) => [r.areaName, r.previousRank, r.rank, r.rankChange]),
+      [
+        ["東京都", 2, 1, 1],
+        ["大阪府", 3, 1, 2],
+        ["北海道", 1, 3, -2],
+      ],
+    );
+    assert.equal(result.rows.find((r) => r.areaName === "北海道").previousValue, 30);
+  });
+
+  it("全国の行と片方の年にしか無い県は比べない", () => {
+    const names = compareWithYear(values, "2024", "2025").rows.map((r) => r.areaName);
+    assert.ok(!names.includes("全国"));
+    assert.ok(!names.includes("沖縄県"));
+  });
+
+  it("どちらかの年が R2 に無ければ null", () => {
+    assert.equal(compareWithYear(values, "2023", "2025"), null);
+    assert.equal(compareWithYear(null, "2024", "2025"), null);
   });
 });
