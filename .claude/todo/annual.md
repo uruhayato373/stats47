@@ -247,6 +247,23 @@ updated: 2026-11-14
 - **判定 (2026-11-24)**: 完了条件は未達。Must の達成率は W40〜W47 が 2/2・1/2・1/2・3/3・— (W44 は記録なし)・2/3・2/3・3/3 で、「4 週連続で 2/3 以上」は W44 の欠けで数えられない (W45〜W47 の 3 週は満たす)。`[target:]` の無い施策は 5 件 (DG080)。W48 の期日超過 22 枚は処置を記録した (消す 4・今週やる 2・期日の引き直し 16)。総枚数は 357。次は W48 の Must の達成で 4 週連続を確かめ、`[target:]` なしを improvement-triage で減らす。
 - **期日の引き直し (2026-11-24)**: W48 の Must 1 の主 ID。W48 末に Must の達成率と [target:] なしの件数を読み直す
 
+### [AFF-GA4-WEEKLY-GATE-01] 週次のアフィリエイト計測 (affiliate-ga4-weekly) が計測ゲートで 6 回続けて落ち、アフィリエイトの観測が 11-14 で止まっている
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:gh run list --workflow affiliate-ga4-weekly.yml --limit 1] [起票:2026-11-21] [領域:アフィリエイト] [待ち:観測] [期日:2026-11-29]
+
+- **観測 (2026-11-21・週次レビュー W46)**: `affiliate-ga4-weekly.yml` は 6 回連続失敗・最終成功から 25 日 (`.local/weekly-audits/2026-11-21/ci-health.log`)。 (参照: run 43973234812・#1207)
+- **次**: ① 在庫 snapshot (Refresh Affiliate Inventory & Compliance) が 10 日を超えて古い理由を run 履歴で確かめる ② A8 の照合不足と当月の成果欠落が、土曜の認証付き計測 (a8 は 2026-11-20 に pass) の記録と workflow の読む場所の食い違いかを確かめる。
+- **完了条件**: `affiliate-ga4-weekly` の最新 run が success で、#1207 が閉じている。
+- **禁止**: ゲートの閾値を緩めて通さない (`.claude/config/` の基準はオーナー判断)。
+- **進捗 (2026-11-24・1cd4e2279)**: 原因は週次の A8 取得が site-summary だけを取っていたこと (11 月は案件別の行が 0 件で、ゲートが shortfall と month-missing で止まった)。取得を program-detail と合わせて 2 本にした。残りは次の土曜の `weekly:collect` の後に `gh run list --workflow affiliate-ga4-weekly.yml --limit 1` が success になるかの確認。
+
+### [PAGE-UI-REVIEW-COVERAGE-01] ページ UI の週次確認で読むべき画面の 9 割が読まれず、新しい指摘の行き先が無い
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-11-08] [領域:サイト] [待ち:観測] [期日:2026-11-29]
+
+- **観測 (2026-11-08・W44 週次レビュー)**: `data/page-quality/metrics/ui-review-latest.json` (監査 2026-10-30) は `reviewStatus: reviewed` だが、読んだ切り出しは 196 枚中 22 枚で、読み残し 63 画面・全部読めたページ 0。 (参照: #1015)
+- **次**: 読み残しの原因 (エージェントの読む上限か、切り出しの枚数か) を `quality-suite-weekly.yml` の page-quality job のログで確かめ、全ページを読める形にする。指摘 10 件のうち直すものはテンプレートごとの `UI-FIX-*` カードへ分ける。
+- **完了条件**: 次の週次確認で `readCoverage.unreadScreens` が 0 で、Issue #1015 の指摘がすべてカードか見送り理由に振り分けられている。
+- **進捗 (2026-11-24)**: 原因は、run 44829320471 で agent が 11 回のやり取り・20 秒で自分から終え、208 枚中 8 枚しか読まなかったこと (上限や時間切れではない)。プロンプト `.claude/prompts/ci/page-ui-review.md` に「全枚数を読み終えるまで返さない・読んだ枚数を summary に書く」を足した。残りは次の週次の run で読んだ枚数を確かめること。
+
 ## 2026-12
 
 ### [GEMINI-DAILY-EVAL-01] Gemini の日次の 7 回の結果で、1 日の件数を決める

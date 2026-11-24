@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T11:39:04.080Z",
+  "updatedAt": "2026-11-24T11:51:20.374Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14022,6 +14022,211 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T11:39:04.080Z"
+    },
+    "KINDLE-K-S1-02-STATUS-DRIFT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.068Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run products:kindle:validate --workspace packages/product-factory",
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (977150d52): 状態と章数の食い違いは着手前に解消済み。章に lensIds を足し、Schema と datasets の refs で切り口台帳へつないだ (存在しない id で check-datasets が error になることを確認)。kindle:validate OK・check-datasets error 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.068Z"
+    },
+    "ISSUE-PRODUCT-LINK-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.130Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "問いの台帳と商品の照合 (M01・K06・K08・K11)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 問いから企画したと根拠を示せる商品は既存の 4 本だけで、すべて台帳から辿れた (M01→note の製造品出荷額、K06/K08/K11→K-S1-15/16/14)。展開記録 439 件に kindle・商品のチャネルは 0。p-09 は M01 の分析の再利用なのでカードの境界どおり載せない。足すべき products は無い",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.130Z"
+    },
+    "METRIC-GATE-FOLLOWUP-02": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.190Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:catalog --workspace=@stats47/data-configs",
+              "npx vitest run packages/data-configs",
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (5d5f55539・0d268aedd・基準の記録): 観測年が 5 点未満の折れ線 6 図を数値タイルに替え、validateChartTemporalFit を MIN_TREND_YEARS 未満へ広げた。validate:catalog error 0 (chart-temporal-fit 0)、data-configs vitest 1511 件、調査の分類の検査は 6 図を themeBaselineFollowUps に記録して違反なし。テーマが参照する指標は前後とも 851 件",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.190Z"
+    },
+    "R2-WRITE-PENDING-DISPLACE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.251Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/ogp/__tests__/pending-ranking-ogp.test.mjs",
+              "audit-workflow-policy --strict"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (3d337c831): R2 書き込みの待ち枠を奪われた新規キーの OGP 生成を、ranking-ogp-new-keys.yml の 6 時間おきの実行で拾い直す。テスト 5 pass・workflow の方針の検査 0 件・既知キーで pending 0。実際の run での拾い直しは main への反映後",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.251Z"
+    },
+    "CI-CONTRACT-TESTS-DEVELOP-GAP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.312Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/ci/__tests__/contract-steps.test.mjs",
+              "手元で Contract Tests の全 28 段"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (a1552175f): main への PR の Contract Tests と同じ段を develop の push でも全段回すようにした。テスト 4 pass、手元で 28 段中 27 段 pass (残る 1 段は所要時間の予算超過で、単独で再実行して pass)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.312Z"
+    },
+    "AFF-AFB-REJECTED-STATUS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.374Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/ads/__tests__/*.test.mjs",
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (1968b08c3 + 台帳の語彙): 申請スクリプトの理由文に却下を入れ、rejected を負状態として扱う。台帳 affiliate-catalog.json の _statusVocab に rejected を足した。ads のテスト通過・check-datasets error 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.374Z"
     }
   }
 }
