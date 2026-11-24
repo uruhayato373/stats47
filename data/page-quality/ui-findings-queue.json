@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T10:35:31.547Z",
+  "generatedAt": "2026-11-24T11:09:49.177Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -282,14 +282,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目の最下部、「都道府県別ランキング」の節見出しと右隣の年選択(2025年): 見出しが「都道府県別ランキン/グ」のように途中で折り返され、年の選択ボックスに幅を取られて窮屈に見える。 → 見出しを1行に収めるか、年の選択を見出しの下の行へ回す。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-11-14",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T11:09:48.175Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "ChartPanel の見出しを、操作があり説明が無いときは折り返す横並び (flex-wrap) にし、入りきらない年の選択を次の行の右へ回す。題名を語の途中で折らない。ChartPanel.test に回帰テスト。見た目は手元で未確認 (dev サーバー不使用)"
     },
     {
       "key": "agent|ranking--index",
@@ -10363,14 +10363,14 @@
       "metric_key": "title_changed",
       "severity": "warning",
       "detail": "title_changed: 2 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/ranking/convenience-store-sales / https://stats47.jp/ranking/electricity-generation-capacity",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "選定入力の変化による変更で、選び方の非決定ではない。convenience-store-sales は指標を年計に限った修正 (3d5c87fd93) で定義の手書きの題を外したため、electricity-generation-capacity は単位の Ｍｗｈ→MWh 表記統一による。2026-11-23 以降の題は最新年の観測値から決定的に作る (a6f7537f00・buildRankingSeoText)"
     },
     {
       "key": "machine|ranking|unit_symbol_mixing",

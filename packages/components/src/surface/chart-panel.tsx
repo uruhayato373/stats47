@@ -44,6 +44,7 @@ export interface ChartPanelProps {
  */
 const TITLE_CLASS_NAME = 'flex min-w-0 items-center gap-2';
 const META_CLASS_NAME = 'flex flex-col px-4 text-xs text-muted-foreground';
+const HEADER_WRAP_CLASS_NAME = 'flex flex-wrap items-center justify-between';
 
 export function ChartPanel({
   id,
@@ -74,7 +75,9 @@ export function ChartPanel({
     >
       {hasHeader && (
         // 題名と図を線で分けない (2026-11-01 オーナー決定「タイトルとチャートを分離するのはやめる」。旧: 見出しの下に 1px の線)
-        <CardHeader>
+        // 操作 (年の選択など) があり説明が無いときは折り返す横並びにする。題名と操作が 1 行に収まらない幅 (スマホ) では
+        // 操作を次の行へ回し、題名を語の途中 (「都道府県別ランキン/グ」) で折らない (UI-FIX-RANKING-20261011)
+        <CardHeader className={cn(action && !description && HEADER_WRAP_CLASS_NAME)}>
           {(icon || (title && !hideTitle)) && (
             <CardTitle className={TITLE_CLASS_NAME}>
               {icon && (
@@ -98,7 +101,7 @@ export function ChartPanel({
           {action && (
             // 説明が無いときは見出しの 1 行だけにまたがらせ、見出しと縦の中央をそろえる
             // (CardAction 既定の row-span-2 だと空の 2 行目と gap の分だけ下にずれる)
-            <CardAction className={cn('self-center', !description && 'row-span-1')}>
+            <CardAction className={cn('self-center', !description && 'row-span-1 ml-auto')}>
               {action}
             </CardAction>
           )}
