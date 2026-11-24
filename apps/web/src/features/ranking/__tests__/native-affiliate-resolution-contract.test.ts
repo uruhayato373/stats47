@@ -48,7 +48,6 @@ vi.mock("@/features/ads", async () => ({
   ...await import("@/features/ads/lib/ad-row"),
   AdRow: () => null,
 }));
-vi.mock("../funnel/RankingFunnelCta", () => ({ RankingFunnelCta: () => null }));
 vi.mock("../components/RankingKeyPage/RankingKeyPageClient", () => ({ RankingKeyPageClient: () => null }));
 vi.mock("../components/RankingKeyPage/RankingPageAiSections", () => ({
   RankingPageFaqSection: () => null, RankingPageInsightsSection: () => null,
