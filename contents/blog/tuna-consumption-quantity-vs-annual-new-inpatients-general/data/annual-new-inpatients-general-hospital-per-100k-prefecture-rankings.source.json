@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "annual-new-inpatients-general-hospital-per-100k",
+  "year": "2023",
+  "unit": "人",
+  "label": "一般病院年間新入院患者数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/annual-new-inpatients-general-hospital-per-100k/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug tuna-consumption-quantity-vs-annual-new-inpatients-general --keys annual-new-inpatients-general-hospital-per-100k --data-name annual-new-inpatients-general-hospital-per-100k-prefecture-rankings",
+  "fetchedAt": "2026-08-03T20:44:10.071Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}
