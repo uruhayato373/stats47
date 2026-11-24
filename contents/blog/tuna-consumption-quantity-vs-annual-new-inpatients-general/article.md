@@ -5,7 +5,7 @@ description: まぐろの購入量が多い県ほど、一般病院の新入院�
 slug: tuna-consumption-quantity-vs-annual-new-inpatients-general
 publishedAt: 2026-08-03
 updatedAt: 2026-11-25
-published: false
+published: true
 tags: ["まぐろ", "病院", "医療", "相関"]
 ---
 

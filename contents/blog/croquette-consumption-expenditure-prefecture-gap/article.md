@@ -5,7 +5,7 @@ description: 総菜の定番コロッケに1年でいくら使うか──家計
 slug: croquette-consumption-expenditure-prefecture-gap
 publishedAt: 2026-08-31
 updatedAt: 2026-11-25
-published: false
+published: true
 tags: []
 ---
 
