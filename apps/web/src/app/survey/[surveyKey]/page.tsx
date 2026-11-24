@@ -56,6 +56,7 @@ import {
   selectSurveyRepresentativeRankings,
   surveyLatestYear,
   SurveyOutboundLinkArea,
+  yearCodeOf,
 } from '@/features/survey';
 import { themeHref } from "@/features/theme-dashboard/config/theme-href";
 import {
@@ -86,17 +87,6 @@ export const revalidate = 86400;
 
 interface PageProps {
   params: Promise<{ surveyKey: string }>;
-}
-
-function parseLatestYear(latestYear: unknown): string {
-  try {
-    const parsed =
-      typeof latestYear === 'string' ? JSON.parse(latestYear) : latestYear;
-    if (parsed?.yearCode) return parsed.yearCode;
-  } catch {
-    /* fallback */
-  }
-  return '2024';
 }
 
 export async function generateMetadata({
@@ -230,7 +220,8 @@ export default async function SurveyPage({ params }: PageProps) {
   const latestYear = surveyLatestYear(rankingItems, editorial?.surveyCycle);
 
   const allItems: CategoryRankingListItem[] = rankingItems.map((item) => {
-    const latestYear = parseLatestYear(item.latestYear);
+    // 年が読めない指標は年の列を「—」にする (決まった年を出さない)
+    const latestYear = yearCodeOf(item.latestYear) ?? '—';
     const config = isKakei ? METRICS_REGISTRY[item.rankingKey] : undefined;
     const topicKey = config && economyTopics
       ? resolveTopicKey(toTopicResolutionInput(config), economyTopics)
@@ -268,14 +259,12 @@ export default async function SurveyPage({ params }: PageProps) {
   );
   // home/category と同じカードモデルを、1 回の全47件 read から導出する。
   // (旧: 独自の縦型カード + baseThumbnailUrl の画像サムネイル)。
+  // 年が読めない指標は観測値を読みにいかない (決まった年で読むと、その年の値の無い指標が空のカードになる)
   const featuredValues = await Promise.all(
-    featuredRaw.map((item) =>
-      readRankingValuesFromR2(
-        item.rankingKey,
-        'prefecture',
-        parseLatestYear(item.latestYear)
-      )
-    )
+    featuredRaw.map((item) => {
+      const yearCode = yearCodeOf(item.latestYear);
+      return yearCode ? readRankingValuesFromR2(item.rankingKey, 'prefecture', yearCode) : null;
+    })
   );
   // 読者の問いは地図付きのカードで答える。カードの格子は 3 列なので、問いの数を 3 の倍数に切り上げる (最大 3 段)
   const readerQuestionCount = new Set(
@@ -286,9 +275,9 @@ export default async function SurveyPage({ params }: PageProps) {
   const featuredLimit = Math.min(9, Math.max(3, Math.ceil(readerQuestionCount / 3) * 3));
   const featuredItems = featuredRaw
     .flatMap((item, idx) => {
-      const latestYear = parseLatestYear(item.latestYear);
+      const latestYear = yearCodeOf(item.latestYear);
       const valuesResult = featuredValues[idx];
-      if (!isOk(valuesResult) || valuesResult.data.length === 0) return [];
+      if (!latestYear || !valuesResult || !isOk(valuesResult) || valuesResult.data.length === 0) return [];
 
       const title = metricDisplayName(item);
       const model = buildFeaturedRankingCardModel({

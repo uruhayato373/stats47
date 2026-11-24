@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
 
-import { surveyLatestYear } from './survey-latest-year';
+import { surveyLatestYear, yearCodeOf } from './survey-latest-year';
 
 const year = (yearCode: string) => ({ yearCode, yearName: `${yearCode}年` });
 
@@ -51,5 +51,19 @@ describe('surveyLatestYear (調査ハブの見出しの最新年)', () => {
     ];
     expect(surveyLatestYear(items, CENSUS_CYCLE)).toBe('2020');
     expect(surveyLatestYear([])).toBeNull();
+  });
+});
+
+// 旧 parseLatestYear は年が読めないと固定の '2024' を返し、その年の観測値を読みにいっていた (SURVEY-PAGES-01)
+describe('yearCodeOf (指標の latestYear の年)', () => {
+  it('JSON 文字列とオブジェクトの両方から 4 桁の年を読む', () => {
+    expect(yearCodeOf(JSON.stringify(year('2020')))).toBe('2020');
+    expect(yearCodeOf(year('2025'))).toBe('2025');
+  });
+
+  it('読めないときは決まった年を返さず null', () => {
+    for (const value of [null, undefined, '', 'not json', '{}', { yearCode: 2024 }, { yearCode: '24' }]) {
+      expect(yearCodeOf(value)).toBeNull();
+    }
   });
 });
