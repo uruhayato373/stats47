@@ -1,1 +1,0 @@
-../../../../../.claude/skills/management/nsm-experiment/reference/rubric.md

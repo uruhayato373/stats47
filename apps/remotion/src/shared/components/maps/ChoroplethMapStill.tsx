@@ -13,7 +13,6 @@ import { formatValueWithPrecision } from "@stats47/utils";
 import type { RankingEntry, RankingMeta } from "../../types/ranking";
 import type { ChoroplethPathInfo } from "../../utils/choropleth";
 import { ChoroplethMapSvg } from "./ChoroplethMapSvg";
-import { SITE } from "@stats47/types";
 import { DARK_PAPER_RGB } from "../../themes/brand";
 
 interface ChoroplethMapStillProps {
@@ -399,41 +398,8 @@ export const ChoroplethMapStill: React.FC<ChoroplethMapStillProps> = ({
         )}
       </div>
 
-      {/* フッター ブランドバー */}
-      <div
-        style={{
-          backgroundColor: isDark ? colors.card : "#F1F5F9",
-          borderTop: `1px solid ${colors.border}`,
-          padding: "10px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 12,
-          flexShrink: 0,
-        }}
-      >
-        <div
-          style={{
-            fontSize: 22,
-            fontWeight: FONT.weight.black,
-            color: BRAND.primary,
-            letterSpacing: 1,
-          }}
-        >
-          {SITE.domain}
-        </div>
-        <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
-        <div
-          style={{
-            fontSize: 20,
-            fontWeight: FONT.weight.medium,
-            color: colors.muted,
-            letterSpacing: 1,
-          }}
-        >
-          {SITE.name}
-        </div>
-      </div>
+      {/* フッターのブランド行 (stats47.jp・サイト名) は 2026-11-24 に外した。発行元は投稿文で名乗る
+          (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01) */}
     </AbsoluteFill>
   );
 };

@@ -159,6 +159,8 @@ jobs:
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
+          # 改稿版の公開で旧版の ISR のエントリが残らないよう、先に記事のエントリを消す (BLOG-ISR-STALE-ON-REVISE-01)
+          npx tsx packages/r2-storage/src/scripts/purge-isr-routes.ts --routes "/blog/$SLUG" --apply
           npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --urls \
             "https://stats47.jp/blog/$SLUG" \
             "https://stats47.jp/blog" \

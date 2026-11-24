@@ -1,1 +1,0 @@
-../../../../../.claude/skills/ads/manage-affiliate-experiment/reference/creative-ab-testing.md

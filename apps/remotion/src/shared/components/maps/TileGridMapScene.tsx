@@ -25,7 +25,6 @@ import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import { getGesVideoPath } from "@/features/ranking-youtube-ges/get-ges-video-path";
 import { PORTRAIT_TILE_LAYOUT } from "../../utils/video-tile-layout";
 import { to2DigitPrefCode } from "@stats47/area";
-import { SITE } from "@stats47/types";
 import { DARK_PAPER_RGB } from "../../themes/brand";
 
 // ---------------------------------------------------------------------------
@@ -842,41 +841,8 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
           </div>
         )}
 
-        {/* 静的モード: フッターブランドバー */}
-        {mode === "static" && (
-          <div
-            style={{
-              position: "absolute",
-              bottom: 100,
-              left: 0,
-              right: 0,
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 16,
-                padding: "12px 32px",
-                backgroundColor: isDark ? `rgba(${DARK_PAPER_RGB}, 0.8)` : "rgba(255, 255, 255, 0.9)",
-                borderRadius: 50,
-                border: `1px solid ${colors.border}`,
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 32,
-                  fontWeight: FONT.weight.black,
-                  color: BRAND.primaryLight,
-                }}
-              >
-                {SITE.domain}
-              </span>
-            </div>
-          </div>
-        )}
+        {/* 静的モードのフッターのブランド行 (stats47.jp) は 2026-11-24 に外した。発行元は投稿文で名乗る
+            (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01) */}
       </div>
     </AbsoluteFill>
   );

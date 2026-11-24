@@ -1,1 +1,0 @@
-../../../../../.claude/skills/management/knowledge/reference/legacy-lessons.md

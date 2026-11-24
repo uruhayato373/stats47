@@ -1,12 +1,14 @@
 // @vitest-environment node
 import { afterEach, expect, it, vi } from 'vitest';
 const io = vi.hoisted(() => ({ writes: new Map<string, string>(), existing: [] as string[], mkdir: vi.fn() }));
+// Windows はパスを `\` で区切るので、照合の前に `/` へ揃える (WINDOWS-LOCAL-GATES-01)
+const posix = vi.hoisted(() => (file: string) => file.replace(/\\/g, '/'));
 vi.mock('node:fs', async importOriginal => ({
   ...await importOriginal<object>(),
-  existsSync: (file: string) => io.existing.some(suffix => file.endsWith(suffix)),
+  existsSync: (file: string) => io.existing.some(suffix => posix(file).endsWith(suffix)),
   readFileSync: () => '---\ntitle: 全面の記事\ndescription: 要約\n---\n導入',
   mkdirSync: io.mkdir,
-  writeFileSync: (file: string, value: string) => io.writes.set(file, value),
+  writeFileSync: (file: string, value: string) => io.writes.set(posix(file), value),
 }));
 afterEach(() => { io.writes.clear(); io.existing = []; vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 

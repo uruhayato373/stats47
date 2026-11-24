@@ -1059,11 +1059,19 @@ jobs:
         continue-on-error: false # 型エラーで失敗させる
 
   test:
-    name: Unit Tests
+    # CI-PR-WAIT-01: web 250 秒 + packages 334 秒 + admin 83 秒を 1 job で直列にしていた (12.1 分)。
+    # develop-quality-gate.yml の unit-web / unit-packages と同じく suite ごとに並列で走らせる。
+    # job id は `test` のまま (quality-gates.json の prChecks・check-workspace-contract・
+    # critical-module-coverage-contract が job 名で配線を確かめる)。各 suite の段は matrix.suite で選ぶ。
+    name: Unit Tests (${{ matrix.suite }})
     needs: changes
     if: needs.changes.outputs.tests == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [web, packages, admin]
 
     steps:
       - name: 🧰 Checkout repository
@@ -1095,7 +1103,7 @@ jobs:
         run: npm ci
 
       - name: 🧪 Run Web Unit Tests
-        if: needs.changes.outputs.web == 'true'
+        if: matrix.suite == 'web' && needs.changes.outputs.web == 'true'
         run: npm run test:run -w apps/web
         continue-on-error: false # テスト失敗で止める
 
@@ -1106,12 +1114,12 @@ jobs:
       #   環境依存のレンダリング比較は packages/visualization/vitest.config.mts で
       #   RUN_RENDER_TESTS=1 の opt-in に分けてある。
       - name: 🧪 Run Package Unit Tests
-        if: needs.changes.outputs.packages == 'true'
+        if: matrix.suite == 'packages' && needs.changes.outputs.packages == 'true'
         run: npm run test:packages:ci
         continue-on-error: false
 
       - name: 🎯 Critical Pure Module Coverage
-        if: needs.changes.outputs.packages == 'true'
+        if: matrix.suite == 'packages' && needs.changes.outputs.packages == 'true'
         # 全体率を上げるための除外ではなく、shape/unit/dependency/validator/recipe/value/R2 parserの
         # shape/unit/dependency/validator/recipe/value/link/R2 parser/routeの
         # 実測module floorを個別に固定する。JSON/HTML成果物は保存せず、V8がメモリ上で判定する。
@@ -1124,7 +1132,7 @@ jobs:
       # active workspace の unit / route integration suite を明示実行し、失敗時は
       # required `test` job → 集約 `quality-check` を通じてPRを止める。
       - name: 🧪 Run Admin Unit Tests
-        if: needs.changes.outputs.admin == 'true'
+        if: matrix.suite == 'admin' && needs.changes.outputs.admin == 'true'
         run: npm run test --workspace=apps/admin
         continue-on-error: false
 
@@ -1584,6 +1592,25 @@ jobs:
             apps/web/server-logs/
           if-no-files-found: ignore
           retention-days: 30
+
+  stop-on-static-failure:
+    # CI-PR-WAIT-01: Static Gates (約 4 分) が落ちても、Build Check と E2E が終わる約 13 分後まで
+    # 集約 job が赤にならなかった。Static Gates が落ちたら run を止め、集約 job (if: always()) が
+    # cancelled を失敗として即座に赤を出す。
+    name: Stop run when Static Gates fail
+    needs: static-gates
+    if: failure()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Cancel the remaining jobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+          REPO: ${{ github.repository }}
+        run: gh run cancel "$RUN_ID" --repo "$REPO"
 
   quality-check:
     name: Code Quality Check

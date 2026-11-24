@@ -1,1 +1,0 @@
-../../../../../.claude/skills/product/build-data-pack/reference/multi-channel-content-product-factory.md

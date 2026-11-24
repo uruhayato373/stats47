@@ -4,7 +4,6 @@ import { AbsoluteFill } from "remotion";
 import { formatValueWithPrecision } from "@stats47/utils";
 import { BRAND, COLOR_SCHEMES, FONT, RADIUS, SPACING, type ThemeName } from "../../themes/brand";
 import type { RankingEntry, RankingMeta } from "../../types/ranking";
-import { SITE } from "@stats47/types";
 
 interface RankingTableSlideProps {
   meta: RankingMeta;
@@ -200,17 +199,7 @@ export const RankingTableSlide: React.FC<RankingTableSlideProps> = ({
           gap: 12,
         }}
       >
-        <div
-          style={{
-            fontSize: 22,
-            fontWeight: FONT.weight.black,
-            color: BRAND.primary,
-            letterSpacing: 1,
-          }}
-        >
-          {SITE.domain}
-        </div>
-        <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
+        {/* 発行元 (stats47.jp・サイト名) は画像に入れず投稿文で名乗る (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01) */}
         <div
           style={{
             fontSize: 20,
@@ -219,7 +208,7 @@ export const RankingTableSlide: React.FC<RankingTableSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          {meta.sourceLabel ? `出典：${meta.sourceLabel}` : SITE.name}
+          {meta.sourceLabel ? `出典：${meta.sourceLabel}` : null}
         </div>
       </div>
     </AbsoluteFill>

@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/post-instagram/reference/facebook-token-setup.md

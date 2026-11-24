@@ -1,1 +1,0 @@
-../../../../../../.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/README.md

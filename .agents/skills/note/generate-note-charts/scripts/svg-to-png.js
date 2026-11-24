@@ -1,1 +1,0 @@
-../../../../../.claude/skills/note/generate-note-charts/scripts/svg-to-png.js

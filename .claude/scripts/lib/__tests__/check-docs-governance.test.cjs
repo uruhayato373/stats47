@@ -438,6 +438,19 @@ test("DG072 fires when a rule is missing from CLAUDE.md or CLAUDE.md names a mis
   assert.ok(ghost.errors.some((item) => item.code === "DG072" && /ghost-standards\.md/.test(item.message)));
 });
 
+test("DG072 は rules の一覧 (docs-vs-issues.md) からの参照も数え、一覧が指す実在しない rule も止める", (t) => {
+  // ALWAYS-LOADED-TRIM-01: rules の表を常時読み込みの CLAUDE.md から paths: 付きの docs-vs-issues.md へ移した
+  const { root, config } = alwaysLoadedFixture(t);
+  write(root, "CLAUDE.md", "# project\n\n常時は `core-judgment.md`。一覧は `docs-vs-issues.md`。\n");
+  write(root, ".claude/rules/docs-vs-issues.md", "---\npaths:\n  - \"docs/21/**\"\n---\n# docs\n\n| `blog-standards.md` | docs/21 |\n");
+  const listed = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(!listed.errors.some((item) => item.code === "DG072"), JSON.stringify(listed.errors));
+  write(root, ".claude/rules/docs-vs-issues.md", "---\npaths:\n  - \"docs/21/**\"\n---\n# docs\n\n| `ghost-standards.md` | x |\n");
+  const report = inspectRepository({ root, config, now: "2026-07-30" });
+  assert.ok(report.errors.some((item) => item.code === "DG072" && item.file === ".claude/rules/docs-vs-issues.md" && /ghost-standards\.md/.test(item.message)));
+  assert.ok(report.errors.some((item) => item.code === "DG072" && /blog-standards\.md/.test(item.file)), "一覧から外れた rule は止まる");
+});
+
 test("related_backlog はカードの見出しで判定し、本文の言及だけでは通さない", (t) => {
   const { root, config } = fixture(t);
   const backlogPath = path.join(root, ".claude/todo/backlog.md");

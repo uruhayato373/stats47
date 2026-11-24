@@ -243,7 +243,7 @@ jobs:
           NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
 
-      - name: 🧹 Purge CDN (公開記事URL + 一覧/ホーム/sitemap のみ)
+      - name: 🧹 Purge ISR + CDN (公開記事URL + 一覧/ホーム/sitemap のみ)
         if: ${{ steps.detect.outputs.slugs != '' && env.PUBLISHED != '' }}
         run: |
           # 公開された記事だけをピンポイントパージ (全ゾーンパージは避ける)。
@@ -253,6 +253,12 @@ jobs:
           if [ ${#URLS[@]} -eq 0 ]; then
             echo "公開0件のため purge skip"; exit 0
           fi
+          # 改稿版の公開では、公開前に開かれた記事の ISR のエントリ (incremental-cache/<buildId>/) が旧版のまま残り、
+          # CDN を消しても Worker が旧版を返し続けた (2026-11-13 の 96 本のうち 18 本。BLOG-ISR-STALE-ON-REVISE-01)。
+          # 記事の ISR のエントリを消してから CDN を消す。エントリの無い新規の記事は「キャッシュ無し」で数えるだけ
+          ROUTES=()
+          for SLUG in $PUBLISHED; do ROUTES+=("/blog/$SLUG"); done
+          npx tsx packages/r2-storage/src/scripts/purge-isr-routes.ts --routes "${ROUTES[@]}" --apply
           # 記事追加で内容が変わる索引系もパージ
           URLS+=(https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml)
           echo "purge: ${URLS[*]}"

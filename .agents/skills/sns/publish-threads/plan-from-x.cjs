@@ -1,1 +1,0 @@
-../../../../.claude/skills/sns/publish-threads/plan-from-x.cjs

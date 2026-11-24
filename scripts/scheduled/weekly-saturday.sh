@@ -9,6 +9,9 @@
 #   3. ASP の巡回: scout-asp-weekly.sh (A8 の審査確認・精選・コード取得。作業フォルダに書く。従来どおり)
 #   4. 週次監査 11 本: 専用 clone で `npm run weekly:audits` を回し、監査が書いた記録を develop へ push する。
 #      要約とログは作業フォルダの .local/weekly-audits/<日付>/ にも写す (レビューはそこを読む)
+#   5. 広告の配置の撮影: 本番 (https://stats47.jp) を全ページの種類 × 3 幅で撮り、作業フォルダの .local/ad-layout/<日付>/ へ書く
+#      (管理画面 /affiliate/layout が読む)。広告・計測・アフィリエイトの通信はブラウザから出る前に止め、通った通信が
+#      1 件でもあれば失敗にする。古い撮影は直近 8 回だけ残す (AD-LAYOUT-WEEKLY-CAPTURE-01)
 # API で取れる計測 (GSC・GA4・AdSense・PSI・Cloudflare・Instagram Graph) は CI のまま (Mac が眠っていても欠けないように)。
 # 1 つが落ちても次へ進み、どれかが落ちたら最後に exit 1 (週次レビューの Phase 0b で拾う)。合計で 1〜2 時間かかるので、
 # レビューではバックグラウンドで起動し、終わるまでに Phase 0 を進める。
@@ -81,6 +84,18 @@ weekly_audits() (
   return "$rc"
 )
 
+# 広告の配置の撮影 (AD-LAYOUT-WEEKLY-CAPTURE-01・2026-11-24 オーナー決定 (a) 土曜ランナーで本番を撮る)。
+# 本番へは読むだけで、デプロイしない。広告・計測の通信は capture-ad-layout.ts が止め、通ったら exit 1 にする。
+AD_LAYOUT_KEEP=8
+ad_layout_capture() {
+  local rc=0
+  npx tsx .claude/scripts/ads/capture-ad-layout.ts --base-url https://stats47.jp || rc=$?
+  # 落ちた回の撮影も残す (レビューが manifest の error と adTraffic を読む)。古い日付の撮影だけを消す
+  find .local/ad-layout -mindepth 1 -maxdepth 1 -type d -name '????-??-??' 2>/dev/null | sort -r | tail -n +"$((AD_LAYOUT_KEEP + 1))" |
+    while IFS= read -r dir; do rm -rf "$dir"; done
+  return "$rc"
+}
+
 {
   echo ""
   echo "=== $(date -Iseconds) [weekly-saturday] start ==="
@@ -92,6 +107,7 @@ step measurement bash "$SCRIPTS/measurement-session-refresh.sh"
 step note-metrics bash "$SCRIPTS/fetch-note-metrics.sh"
 step scout-asp bash "$SCRIPTS/scout-asp-weekly.sh"
 step weekly-audits weekly_audits
+step ad-layout ad_layout_capture
 
 if [ "${#failed[@]}" -gt 0 ]; then
   echo "=== $(date -Iseconds) [weekly-saturday] FAILED: ${failed[*]} ===" >> "$LOG_DIR/weekly-saturday.log"

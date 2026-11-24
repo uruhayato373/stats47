@@ -1,1 +1,0 @@
-../../../../../.claude/skills/analytics/gsc-improvement/scripts/analyze-url-space.cjs

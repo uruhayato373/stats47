@@ -49,14 +49,14 @@ AdSense Management API は **OAuth 2.0** が必須（サービスアカウント
 
 ## 初回セットアップ: リフレッシュトークン取得
 
-**正典スクリプトは `.claude/scripts/adsense/oauth-setup.js`**（read-only scope で loopback redirect。使い捨て一時スクリプトを新たに書かない）。
+**正典スクリプトは `.claude/scripts/google-admin/oauth-setup.js`**（read-only scope で loopback redirect。使い捨て一時スクリプトを新たに書かない）。
 
 ```bash
 # Google Cloud Console 側の前提: AdSense Management API 有効・データアクセスに adsense.readonly・
 # 公開ステータス「本番環境」・OAuth クライアントは Desktop app タイプ（詳細はスクリプト冒頭のコメント）
 cd ~/stats47 && read -r CID && read -rs CSEC && \
   GOOGLE_ADSENSE_CLIENT_ID="$CID" GOOGLE_ADSENSE_CLIENT_SECRET="$CSEC" \
-  node .claude/scripts/adsense/oauth-setup.js; unset CID CSEC
+  node .claude/scripts/google-admin/oauth-setup.js; unset CID CSEC
 # → ブラウザで認可 (★ stats47 専用の Google アカウントを選ぶ) → refresh_token を stdout に 1 度だけ出力し accounts.list で実接続を検証する
 # Client ID は既存の Variable の値を使い回せる。Client Secret を手元に持っていなければ Console で「クライアント シークレットを追加」して新しい値を使う
 ```

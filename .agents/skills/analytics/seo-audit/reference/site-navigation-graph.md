@@ -1,1 +1,0 @@
-../../../../../.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md

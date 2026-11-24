@@ -4,11 +4,17 @@
 /**
  * Codex が読む生成物を Claude 側の SSOT から作り直す (二重管理のドリフト止め)。
  *
- *   .claude/skills/**            → .agents/skills/**        (SKILL.md は生成コピー、補助ファイルは相対 symlink)
+ *   .claude/skills/<群>/<skill>/ → .agents/skills/<群>/<skill> (skill のフォルダごとの相対 symlink。複製しない)
+ *   .claude/skills/** (skill の外) → .agents/skills/**        (learned/*.md など。ファイルごとの相対 symlink)
  *   .claude/agents/<name>.md     → .codex/agents/<name>.toml (frontmatter → キー、本文 → developer_instructions)
+ *   .claude/settings.json の hooks → .codex/hooks.json        (Codex で動かない hook を除いた生成物)
  *
  * 決定事項 (2026-09-14):
- *   - 正典は .claude 側。SKILL.md は検出用コピー、補助ファイルはリンク、agent TOML は形式変換した生成物。正典を二重管理しない。
+ *   - 正典は .claude 側。skill はフォルダのリンク、agent TOML と hooks.json は形式変換した生成物。正典を二重管理しない。
+ *   - 2026-11-24 (CODEX-MIRROR-SLIM-01): SKILL.md の複製 161 本 (1.43MB) をやめ、skill のフォルダを symlink にした。
+ *     根拠は Codex の公式文書 (https://learn.chatgpt.com/docs/build-skills、2026-11-24 取得) の
+ *     "Codex supports symlinked skill folders and follows the symlink target when scanning these locations."。
+ *     フォルダごとのリンクなので、skill の中のデータ (reference/snapshots など) もリンク越しに見える。
  *   - `.claude/` → `.Codex/` の書き換えはしない。Codex は AGENTS.md → CLAUDE.md 経由で .claude/rules を
  *     読むので原文が正しい (旧 mirror は存在しない .Codex/rules/… を 188 ファイルで指していた)。
  *   - 週次 snapshot・レビュー等のデータ (reference/snapshots, snapshots, reference/reviews,
@@ -32,6 +38,8 @@ const path = require("node:path");
 /** @type {string} */ let SKILLS_DST;
 /** @type {string} */ let AGENTS_SRC;
 /** @type {string} */ let AGENTS_DST;
+/** @type {string} */ let SETTINGS_SRC;
+/** @type {string} */ let HOOKS_DST;
 
 /** @param {string} root */
 function setRoot(root) {
@@ -40,6 +48,8 @@ function setRoot(root) {
   SKILLS_DST = path.join(ROOT, ".agents/skills");
   AGENTS_SRC = path.join(ROOT, ".claude/agents");
   AGENTS_DST = path.join(ROOT, ".codex/agents");
+  SETTINGS_SRC = path.join(ROOT, ".claude/settings.json");
+  HOOKS_DST = path.join(ROOT, ".codex/hooks.json");
 }
 setRoot(path.resolve(__dirname, "..", "..", ".."));
 
@@ -76,26 +86,54 @@ function isLinkInto(linkPath, targetRoot) {
 }
 
 // ── skills ─────────────────────────────────────────────────────────────────
+/** SKILL.md を持つフォルダ (.claude/skills からの相対パス)。この単位でリンクする */
+function skillFolders() {
+  const folders = new Set();
+  for (const src of walkFiles(SKILLS_SRC, [], { skipData: true })) {
+    if (path.basename(src) === "SKILL.md") folders.add(path.relative(SKILLS_SRC, path.dirname(src)));
+  }
+  return folders;
+}
+
+/** r (相対パス) を含む skill のフォルダ。無ければ null */
+function owningFolder(r, folders) {
+  let cur = path.dirname(r);
+  while (cur && cur !== ".") {
+    if (folders.has(cur)) return cur;
+    cur = path.dirname(cur);
+  }
+  return null;
+}
+
 function planSkills() {
+  const folders = skillFolders();
+  const actions = [];
+  // skill のフォルダは丸ごとリンクにする (Codex は symlink のフォルダを辿る)
+  for (const folder of folders) {
+    const dst = path.join(SKILLS_DST, folder);
+    const src = path.join(SKILLS_SRC, folder);
+    let linked = false;
+    try {
+      linked = fs.lstatSync(dst).isSymbolicLink() && fs.realpathSync(dst) === fs.realpathSync(src);
+    } catch { /* 無い */ }
+    if (!linked) actions.push({ op: "dirlink", path: dst, src });
+  }
+  // skill の外のファイル (learned/*.md など) はファイルごとのリンク
   const expected = new Map(); // dst relative → { src }
   for (const src of walkFiles(SKILLS_SRC, [], { skipData: true })) {
     const r = path.relative(SKILLS_SRC, src);
+    if (owningFolder(r, folders) !== null) continue;
     expected.set(r, { src });
   }
-  const actions = [];
   const seen = new Set();
   if (fs.existsSync(SKILLS_DST)) {
     for (const dst of walkFiles(SKILLS_DST)) {
       const r = path.relative(SKILLS_DST, dst);
+      // skill のフォルダ自体と、その中の古い複製は上の dirlink が置き換える
+      if (folders.has(r) || owningFolder(r, folders) !== null) continue;
       seen.add(r);
-      // Codex discovery requires a regular SKILL.md; support files may be links.
-      if (path.basename(r) === "SKILL.md" && expected.has(r)) {
-        const src = expected.get(r).src;
-        if (!fs.lstatSync(dst).isFile() || fs.readFileSync(dst, "utf8") !== fs.readFileSync(src, "utf8"))
-          actions.push({ op: "copy", path: dst, src });
-        continue;
-      }
       // 同名の原本を指すリンクだけを許可する。別 skill への誤リンクは修復する。
+      // .claude/skills の skill を指す既存のフォルダのリンク (generate-blog-images) は残す (E10 が要求する)。
       const source = path.join(SKILLS_SRC, r);
       if (isLinkInto(dst, SKILLS_SRC) && (fs.statSync(dst).isDirectory() ||
           (fs.existsSync(source) && fs.realpathSync(dst) === fs.realpathSync(source)))) continue;
@@ -104,7 +142,7 @@ function planSkills() {
         actions.push({ op: "delete", path: dst });
         continue;
       }
-      if (fs.lstatSync(want.src).isSymbolicLink()) continue; // src 側 symlink はコピーしない
+      if (fs.lstatSync(want.src).isSymbolicLink()) continue; // src 側 symlink はリンクしない
       actions.push({ op: "link", path: dst, src: want.src });
     }
   }
@@ -114,7 +152,7 @@ function planSkills() {
     // 生成物側に「ディレクトリ symlink」があり、その配下に該当する場合は既に届いている
     const dst = path.join(SKILLS_DST, r);
     if (coveredByDirLink(dst)) continue;
-    actions.push({ op: path.basename(r) === "SKILL.md" ? "copy" : "link", path: dst, src });
+    actions.push({ op: "link", path: dst, src });
   }
   return actions;
 }
@@ -187,6 +225,51 @@ function planAgents() {
   return actions;
 }
 
+// ── hooks ──────────────────────────────────────────────────────────────────
+// Codex で動かない hook。理由を書いたものだけを除き、残りは settings.json から機械的に写す。
+const CODEX_EXCLUDED_HOOKS = new Map([
+  // ブラウザの MCP (claude-in-chrome・Claude_Browser・chrome-devtools) は Codex に無い (.codex/config.toml で無効)
+  [".claude/hooks/pre-browser-admin-read.mjs", "Codex にブラウザの MCP が無い"],
+  // Claude Code の transcript (JSONL) の形を読む。Codex の transcript は形が違う
+  [".claude/hooks/check-unpushed-on-stop.js", "Claude Code の transcript の形を読む"],
+  [".claude/hooks/check-findings-on-stop.js", "Claude Code の transcript の形を読む"],
+]);
+
+/** `node "$CLAUDE_PROJECT_DIR"/.claude/hooks/x.js args` → `node '.claude/hooks/x.js' args` */
+function codexHookCommand(command) {
+  const m = /^node "\$CLAUDE_PROJECT_DIR"\/(\S+)(.*)$/.exec(command);
+  if (!m) throw new Error(`settings.json の hook command を Codex 用に写せない: ${command}`);
+  return { file: m[1], command: `node '${m[1]}'${m[2]}` };
+}
+
+function renderCodexHooks() {
+  const settings = JSON.parse(fs.readFileSync(SETTINGS_SRC, "utf8"));
+  /** @type {Record<string, any[]>} */
+  const out = {};
+  for (const [event, groups] of Object.entries(settings.hooks ?? {})) {
+    const kept = [];
+    for (const group of groups) {
+      const hooks = [];
+      for (const hook of group.hooks ?? []) {
+        const { file, command } = codexHookCommand(hook.command);
+        if (CODEX_EXCLUDED_HOOKS.has(file)) continue;
+        hooks.push({ ...hook, command });
+      }
+      if (hooks.length === 0) continue;
+      kept.push(group.matcher === undefined ? { hooks } : { matcher: group.matcher, hooks });
+    }
+    if (kept.length > 0) out[event] = kept;
+  }
+  return `${JSON.stringify({ hooks: out }, null, 2)}\n`;
+}
+
+function planHooks() {
+  if (!fs.existsSync(SETTINGS_SRC)) return [];
+  const want = renderCodexHooks();
+  const have = fs.existsSync(HOOKS_DST) ? fs.readFileSync(HOOKS_DST, "utf8").replace(/\r\n/g, "\n") : null;
+  return have === want ? [] : [{ op: "write", path: HOOKS_DST, content: want }];
+}
+
 // ── main ───────────────────────────────────────────────────────────────────
 function apply(actions) {
   for (const a of actions) {
@@ -201,7 +284,13 @@ function apply(actions) {
       continue;
     }
     fs.mkdirSync(path.dirname(a.path), { recursive: true });
-    if (a.op === "link") {
+    if (a.op === "dirlink") {
+      // 古い複製のフォルダ (中身はコピーとリンク) を消してからフォルダのリンクを張る。
+      // rmSync はリンクを辿らないので、原本 (.claude/skills) は消えない。
+      fs.rmSync(a.path, { recursive: true, force: true });
+      fs.symlinkSync(path.relative(path.dirname(a.path), a.src).split(path.sep).join("/"), a.path, "dir");
+    }
+    else if (a.op === "link") {
       // unlink のみ。既存リンクの原本へ書き込んだり、原本を削除したりしない。
       try { fs.unlinkSync(a.path); } catch (error) { if (error.code !== "ENOENT") throw error; }
       fs.symlinkSync(path.relative(path.dirname(a.path), a.src).split(path.sep).join("/"), a.path, "file");
@@ -225,12 +314,12 @@ function main(argv = process.argv.slice(2)) {
     }
     setRoot(root);
   }
-  const actions = [...planSkills(), ...planAgents()];
+  const actions = [...planSkills(), ...planAgents(), ...planHooks()];
   const stale = actions.filter((a) => a.op === "delete").length;
   const writes = actions.length - stale;
   if (check) {
     if (actions.length === 0) {
-      console.log("✓ codex mirror 一致 — .agents/skills と .codex/agents は .claude の SSOT と同一");
+      console.log("✓ codex mirror 一致 — .agents/skills・.codex/agents・.codex/hooks.json は .claude の SSOT と同一");
       return 0;
     }
     console.error(`✗ codex mirror ドリフト: write ${writes} / delete ${stale}。再生成: node .claude/scripts/lib/sync-codex-mirror.cjs`);
@@ -244,4 +333,4 @@ function main(argv = process.argv.slice(2)) {
 }
 
 if (require.main === module) process.exit(main());
-module.exports = { planSkills, planAgents, renderAgentToml, parseFrontmatter, tomlMultiline, setRoot };
+module.exports = { planSkills, planAgents, planHooks, renderAgentToml, renderCodexHooks, parseFrontmatter, tomlMultiline, setRoot };

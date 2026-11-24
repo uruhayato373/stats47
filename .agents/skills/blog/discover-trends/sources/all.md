@@ -1,1 +1,0 @@
-../../../../../.claude/skills/blog/discover-trends/sources/all.md

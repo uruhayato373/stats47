@@ -338,11 +338,14 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
 | 認証 | `gh auth login; codex login` (設定ファイルに token を書かない) | 同左 |
 | Codex mirror | `node .claude/scripts/lib/sync-codex-mirror.cjs --check` | 同左 |
 
-- `.agents/skills` の補助ファイルは **`.claude/skills` の同名原本への相対 symlink**。`SKILL.md` だけは Codex の検出に必要な通常ファイルとして自動生成する（ファイル symlink は検出されない）。原本は `.claude/skills` のみ。既存のフォルダー symlink は利用可能。
-  `.codex/agents/*.toml` は `.claude/agents/*.md` を形式変換した生成物。
+- `.agents/skills` の skill は **skill のフォルダごとの `.claude/skills` への相対 symlink** (2026-11-24 CODEX-MIRROR-SLIM-01 で
+  SKILL.md の複製をやめた。SKILL.md 単体のファイル symlink は Codex に検出されないが、フォルダの symlink は辿る。出典
+  https://learn.chatgpt.com/docs/build-skills 、2026-11-24 取得)。skill の外のファイル (`learned/*.md` など) はファイルごとの相対 symlink。
+  原本は `.claude/skills` のみ。`.codex/agents/*.toml` は `.claude/agents/*.md` を形式変換した生成物。
   手で直さず `node .claude/scripts/lib/sync-codex-mirror.cjs` で再生成する (E12 が CI と pre-commit で
   ドリフトを止める)。skills の本文更新はリンクへ即時反映され、ファイル追加・削除時だけ再生成する。
-  `type-check:scripts` はリンク一致確認後に原本だけを型検査する。`.codex/hooks.json` は `.claude/hooks/*.js` を直接指す (複製は 2026-09-14 に廃止)。
+  `type-check:scripts` はリンク一致確認後に原本だけを型検査する。`.codex/hooks.json` は `.claude/settings.json` の hooks から同じスクリプトで生成する (`.claude/hooks/*.js` を直接指す。
+  Codex で動かない hook は `sync-codex-mirror.cjs` の `CODEX_EXCLUDED_HOOKS` に理由付きで除く)。
 - `~/.claude/settings.json` は dotfiles への symlink、`~/.codex/config.toml` は dotfiles の
   `codex/base.toml` + `host.<os>.toml` を**セクション単位でマージ** (Codex デスクトップが書く
   `[projects.*]` / `[plugins.*]` / runtime パスを壊さない)。マシン固有の許可と `additionalDirectories` は

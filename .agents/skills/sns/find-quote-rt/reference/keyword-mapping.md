@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/find-quote-rt/reference/keyword-mapping.md

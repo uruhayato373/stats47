@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/preview-remotion/types/comparison.md

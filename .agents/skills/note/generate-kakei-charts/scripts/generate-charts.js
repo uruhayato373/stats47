@@ -1,1 +1,0 @@
-../../../../../.claude/skills/note/generate-kakei-charts/scripts/generate-charts.js

@@ -16,9 +16,15 @@ on:
       - "packages/ops/src/estat/build-monthly-ledger.mjs"
       - "packages/types/src/color-policy.ts"
       - ".github/workflows/ledgers-weekly.yml"
+  # CI-CRON-TIMING-01: 計測の後に動かす順序は時刻ずらしでなく workflow_run で保証する。
+  # workflows は glob なので `+` は `\\+` で逃がす (search-growth-weekly.yml と同じ)。
+  workflow_run:
+    workflows: ["📈 Fetch weekly metrics (GSC \\+ GA4 \\+ AdSense)"]
+    types: [completed]
   schedule:
-    # JST 土曜 05:00。計測 (02:00) と note の図の台帳 (04:00) の後、週次レビューの前
-    - cron: "0 20 * * 5"
+    # 予備。workflow_run が起動しなかった週の取りこぼしと、scheduled workflow の死活監視
+    # (workflow-health-core.mjs は schedule の run だけを見る) のために残す。JST 日曜 00:30
+    - cron: "30 15 * * 6"
 
 permissions:
   contents: write # 台帳の commit-back
