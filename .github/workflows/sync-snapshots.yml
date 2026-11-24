@@ -189,8 +189,10 @@ jobs:
 
       - name: ✅ Verify published git-TS snapshots
         if: inputs.dry_run != 'true'
+        env:
+          # inputs は run: へ直接展開せず env 経由で渡す (式インジェクション対策)
+          ONLY: ${{ inputs.only }}
         run: |
-          ONLY="${{ inputs.only }}"
           if [ -z "$ONLY" ] || [ "$ONLY" = "page-components" ] || [ "$ONLY" = "ranking-page-cards" ]; then
             npx tsx apps/web/scripts/verify-page-components-snapshot.ts
           fi
