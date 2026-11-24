@@ -1,5 +1,6 @@
 {
-  "generatedAt": "2026-11-14T04:19:51.112Z",
+  "generatedAt": "2026-11-24T11:20:41.844Z",
+  "source": "estat-catalog (index/tables/00200502.json の集計地域区分 2 + meta/<statsDataId>.json)",
   "ssdsTablesProbed": 26,
   "ssdsTablesFound": 26,
   "totalSsdsIndicators": 5356,
@@ -24,11 +25,11 @@
     ],
     [
       "千円",
-      189
+      190
     ],
     [
       "円",
-      169
+      168
     ],
     [
       "百万円",
@@ -158,7 +159,7 @@
       "statsDataId": "0000010112",
       "title": "Ｌ　家計",
       "indicators": 265,
-      "newCandidates": 245
+      "newCandidates": 244
     },
     {
       "statsDataId": "0000010113",
@@ -236,7 +237,7 @@
       "statsDataId": "0000010212",
       "title": "Ｌ　家計",
       "indicators": 79,
-      "newCandidates": 5
+      "newCandidates": 6
     },
     {
       "statsDataId": "0000010213",
