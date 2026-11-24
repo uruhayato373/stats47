@@ -1,0 +1,252 @@
+{
+  "title": "製造品出荷額等（全業種合計）",
+  "subtitle": "2023年・単位 兆円",
+  "label": "製造品出荷額等",
+  "readerLabel": "製造品出荷額等",
+  "hook": "製造品出荷額等が最も多い県は？",
+  "unit": "兆円",
+  "year": "2023",
+  "rankingKey": "manufacturing-shipment-amount",
+  "source": "経済センサス-活動調査 / 経済構造実態調査",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "chartType": "tile-grid",
+  "scheme": "Oranges",
+  "showValue": true,
+  "data": [
+    {
+      "pref": "愛知県",
+      "areaName": "愛知県",
+      "value": 58.02
+    },
+    {
+      "pref": "静岡県",
+      "areaName": "静岡県",
+      "value": 19.77
+    },
+    {
+      "pref": "大阪府",
+      "areaName": "大阪府",
+      "value": 19.34
+    },
+    {
+      "pref": "神奈川県",
+      "areaName": "神奈川県",
+      "value": 18.48
+    },
+    {
+      "pref": "兵庫県",
+      "areaName": "兵庫県",
+      "value": 18.46
+    },
+    {
+      "pref": "埼玉県",
+      "areaName": "埼玉県",
+      "value": 15.33
+    },
+    {
+      "pref": "千葉県",
+      "areaName": "千葉県",
+      "value": 15.29
+    },
+    {
+      "pref": "茨城県",
+      "areaName": "茨城県",
+      "value": 15.01
+    },
+    {
+      "pref": "三重県",
+      "areaName": "三重県",
+      "value": 12.31
+    },
+    {
+      "pref": "福岡県",
+      "areaName": "福岡県",
+      "value": 11.62
+    },
+    {
+      "pref": "広島県",
+      "areaName": "広島県",
+      "value": 11.48
+    },
+    {
+      "pref": "群馬県",
+      "areaName": "群馬県",
+      "value": 10.15
+    },
+    {
+      "pref": "栃木県",
+      "areaName": "栃木県",
+      "value": 9.89
+    },
+    {
+      "pref": "岡山県",
+      "areaName": "岡山県",
+      "value": 9.6
+    },
+    {
+      "pref": "滋賀県",
+      "areaName": "滋賀県",
+      "value": 9.18
+    },
+    {
+      "pref": "東京都",
+      "areaName": "東京都",
+      "value": 8.55
+    },
+    {
+      "pref": "山口県",
+      "areaName": "山口県",
+      "value": 7.78
+    },
+    {
+      "pref": "長野県",
+      "areaName": "長野県",
+      "value": 7.01
+    },
+    {
+      "pref": "北海道",
+      "areaName": "北海道",
+      "value": 6.77
+    },
+    {
+      "pref": "岐阜県",
+      "areaName": "岐阜県",
+      "value": 6.72
+    },
+    {
+      "pref": "京都府",
+      "areaName": "京都府",
+      "value": 6.46
+    },
+    {
+      "pref": "大分県",
+      "areaName": "大分県",
+      "value": 5.68
+    },
+    {
+      "pref": "福島県",
+      "areaName": "福島県",
+      "value": 5.66
+    },
+    {
+      "pref": "愛媛県",
+      "areaName": "愛媛県",
+      "value": 5.59
+    },
+    {
+      "pref": "宮城県",
+      "areaName": "宮城県",
+      "value": 5.47
+    },
+    {
+      "pref": "新潟県",
+      "areaName": "新潟県",
+      "value": 5.47
+    },
+    {
+      "pref": "富山県",
+      "areaName": "富山県",
+      "value": 4.13
+    },
+    {
+      "pref": "熊本県",
+      "areaName": "熊本県",
+      "value": 3.49
+    },
+    {
+      "pref": "山形県",
+      "areaName": "山形県",
+      "value": 3.36
+    },
+    {
+      "pref": "石川県",
+      "areaName": "石川県",
+      "value": 3.21
+    },
+    {
+      "pref": "岩手県",
+      "areaName": "岩手県",
+      "value": 3.12
+    },
+    {
+      "pref": "香川県",
+      "areaName": "香川県",
+      "value": 3.08
+    },
+    {
+      "pref": "和歌山県",
+      "areaName": "和歌山県",
+      "value": 2.89
+    },
+    {
+      "pref": "山梨県",
+      "areaName": "山梨県",
+      "value": 2.72
+    },
+    {
+      "pref": "福井県",
+      "areaName": "福井県",
+      "value": 2.65
+    },
+    {
+      "pref": "鹿児島県",
+      "areaName": "鹿児島県",
+      "value": 2.42
+    },
+    {
+      "pref": "徳島県",
+      "areaName": "徳島県",
+      "value": 2.33
+    },
+    {
+      "pref": "佐賀県",
+      "areaName": "佐賀県",
+      "value": 2.32
+    },
+    {
+      "pref": "奈良県",
+      "areaName": "奈良県",
+      "value": 2.02
+    },
+    {
+      "pref": "長崎県",
+      "areaName": "長崎県",
+      "value": 1.85
+    },
+    {
+      "pref": "宮崎県",
+      "areaName": "宮崎県",
+      "value": 1.84
+    },
+    {
+      "pref": "青森県",
+      "areaName": "青森県",
+      "value": 1.72
+    },
+    {
+      "pref": "秋田県",
+      "areaName": "秋田県",
+      "value": 1.56
+    },
+    {
+      "pref": "島根県",
+      "areaName": "島根県",
+      "value": 1.38
+    },
+    {
+      "pref": "鳥取県",
+      "areaName": "鳥取県",
+      "value": 0.89
+    },
+    {
+      "pref": "高知県",
+      "areaName": "高知県",
+      "value": 0.65
+    },
+    {
+      "pref": "沖縄県",
+      "areaName": "沖縄県",
+      "value": 0.51
+    }
+  ]
+}
