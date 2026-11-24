@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T12:05:18.910Z",
+  "generatedAt": "2026-11-24T12:06:43.357Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -129,14 +129,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目の「千代田区の主な指標」、「65歳以上人口割合」の「2020年度」: 同じ一覧で総人口・世帯数は「2025年」「2020年」なのに、国勢調査の時点統計である65歳以上人口割合だけ「2020年度」と表記され、年と年度が混在している。 → 時点統計(国勢調査由来)の指標は「年度」ではなく「年」で表記を統一する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:06:43.350Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "65歳以上人口割合の年は e21739f37c (SSDS-YEARFORMAT-SOURCE-01) で elderly-population-ratio を yearFormat calendar にした後の再取り込みで直っている。2026-11-24 に公開 R2 の app/stats/elderly-population-ratio/cities.json と app/areas/13000/cities/13101/databook.json が「2020年」であることを確認。指摘の観測 (10-31) は直す前"
     },
     {
       "key": "agent|municipality--village",
