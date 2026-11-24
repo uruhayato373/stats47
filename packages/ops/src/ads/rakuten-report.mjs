@@ -83,9 +83,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     for (const r of records) results = upsertRecord(results, r);
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, JSON.stringify(results, null, 2) + '\n');
-    if (process.env.MEASUREMENT_BROWSER_OUTPUT_STATE_PATH) {
-      writeFileSync(process.env.MEASUREMENT_BROWSER_OUTPUT_STATE_PATH, JSON.stringify(await context.storageState()), { mode: 0o600 });
-    }
     console.log(JSON.stringify({ status: 'pass', months: records.map((r) => ({ month: r.month, orders: r.orders, estimatedYen: r.estimatedYen, confirmedYen: r.confirmedYen })) }));
   } catch (error) {
     console.error(String(error.message).slice(0, 200));

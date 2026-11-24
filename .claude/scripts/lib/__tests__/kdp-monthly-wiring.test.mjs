@@ -15,7 +15,7 @@ import { listings, fixture, manualAugust, augustLedger } from '../../../../packa
 
 test('monthly collection and private archive are required before success; old daily success is insufficient', () => {
   const code = readFileSync('.claude/scripts/measurement/marketplace-status.mjs', 'utf8');
-  assert.ok(code.indexOf('monthlyRoyalties = await collectKdpMonthlyReport') < code.indexOf('markMeasurementAuthenticated(source)'));
+  assert.ok(code.indexOf('monthlyRoyalties = await collectKdpMonthlyReport') < code.indexOf("throw new Error('publication_status_incomplete')"));
   const collector = readFileSync('.claude/scripts/measurement/collect.mjs', 'utf8');
   const vaultWrite = collector.indexOf('await writeVault(vaultKey, {');
   assert.ok(vaultWrite > 0 && collector.indexOf('const vaultKey = kdpMonthlyVaultKey(') < vaultWrite);

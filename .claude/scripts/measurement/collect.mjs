@@ -52,7 +52,7 @@ async function command(script, args = [], timeout = 360000, acceptedCodes = []) 
   try {
     const { stdout, stderr } = await run(process.execPath, [script, ...args], { cwd: ROOT, env: {
       ...process.env, MEASUREMENT_BROWSER_SOURCE: name,
-      MEASUREMENT_BROWSER_STATE_PATH: join(work, 'state.json'), MEASUREMENT_BROWSER_OUTPUT_STATE_PATH: join(work, 'refreshed.json'),
+      MEASUREMENT_BROWSER_STATE_PATH: join(work, 'state.json'),
     }, timeout, maxBuffer: 12 * 1024 * 1024 });
     logs += stdout + stderr;
   } catch (error) {
