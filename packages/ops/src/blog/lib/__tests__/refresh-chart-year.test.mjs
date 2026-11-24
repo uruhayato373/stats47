@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
+import { NATIONAL_AREA_CODE } from "../../../../../area/mirror/prefectures.cjs";
+
 import {
   compareWithYear,
   findStaleSourceFields,
@@ -384,7 +386,7 @@ describe("compareWithYear", () => {
           { areaCode: "01000", areaName: "北海道", value: 30 },
           { areaCode: "13000", areaName: "東京都", value: 20 },
           { areaCode: "27000", areaName: "大阪府", value: 10 },
-          { areaCode: "00000", areaName: "全国", value: 60 },
+          { areaCode: NATIONAL_AREA_CODE, areaName: "全国", value: 60 },
         ],
       },
       {
