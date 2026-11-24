@@ -93,20 +93,10 @@ if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -q "^.claude/skills/db/sync-snapsho
   fi
 fi
 
-# 2.2b GIS 台帳の参照整合 (2026-10-29)。KSJ 台帳 (geo.ksj-datasets) を親表に、技術設定・公式利用条件・GIS 一覧・単体ページ・
-# 指標の ksjDataId・交通網の変遷の台帳が存在しない dataId を指していないかを R2 なしで検査する。
-# geo:check-data-catalog は R2 の在庫まで読むため手動で、台帳どうしのずれを commit 前に止める手段が無かった。
-stage "GIS 台帳の参照整合 (vitest)"
-if printf '%s\n' "$PRECOMMIT_PATHS_1" | grep -qE "^(packages/gis/src/(mlit-ksj|infra-history)/|packages/data-configs/src/(business-plan/geo-|registry\.ts)|data/metrics/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/)"; then
-  echo -e "${GREEN}🗂️  GIS 台帳の参照整合...${NC}"
-  if ! (cd "$GUARD_ROOT/packages/gis" && npx vitest run src/mlit-ksj/__tests__/dataset-references.test.ts > /tmp/gis-dataset-references.log 2>&1); then
-    tail -30 /tmp/gis-dataset-references.log
-    echo -e "${RED}❌ GIS 台帳の dataId の参照がずれています (存在しない ID・利用条件の食い違い・公式ページの欠けの増加)。${NC}"
-    ERROR_COUNT=$((ERROR_COUNT + 1))
-  else
-    echo -e "${GREEN}✅ GIS 台帳の参照整合 OK${NC}"
-  fi
-fi
+# 2.2b GIS 台帳の参照整合 (dataset-references.test.ts) は 2026-11-24 に pre-commit から外した
+# (CI-SPEED-PRECOMMIT-TRIM-01・オーナー決定 (a))。@stats47/gis は root の vitest.config.mts の project なので、
+# PR の Unit Tests (packages。data/metrics・data/geo・data/open-data・packages/* の差分で起動) と
+# develop-quality-gate の unit-packages (毎 push) が同じテストを走らせる。
 
 # 2.1b ドキュメントガバナンス
 # 文書の固定構成、frontmatter、TODO ID、実装計画INDEX、Claude/Codex共通SSOT、
@@ -135,22 +125,16 @@ if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(contents/blog/|data/note/art
   fi
 fi
 
-# Canonical metric and content contracts: reject schema, ID and generated-index drift.
-if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content|categories|ads)/|data/surveys/(master|analysis-units|editorial)/|data/site/url-history/|data/geo/(ksj|analyses|source-pages|infra-history)/|data/open-data/|data/municipalities/catalog/|data/areas/|data/products/(packs|kindle)/|data/note/series\.json$|data/blog/ledger/|data/business-plan/plan/|data/source-inventory/(policies/|japan-zue/[^/]+\.json$)|data/ranking/hooks/|data/data-quality/allowlists/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog|lib/blog-article-ledger)\.ts$|package\.json$)'; then
-  # 3 本は最初の失敗で残りを走らせない。段を分けるのは、どれが重いのかを内訳に残すため。
-  METRIC_CONTRACT_OK=1
-  stage "metric 契約: カテゴリ key (build:category-keys --check)"
-  (cd "$GUARD_ROOT" && npm run build:category-keys --workspace=@stats47/data-configs -- --check) || METRIC_CONTRACT_OK=0
-  if [ "$METRIC_CONTRACT_OK" = 1 ]; then
-    stage "metric 契約: metrics:check"
-    (cd "$GUARD_ROOT" && npm run metrics:check) || METRIC_CONTRACT_OK=0
-  fi
-  if [ "$METRIC_CONTRACT_OK" = 1 ]; then
-    stage "metric 契約: content:check"
-    (cd "$GUARD_ROOT" && npm run content:check) || METRIC_CONTRACT_OK=0
-  fi
-  if [ "$METRIC_CONTRACT_OK" = 0 ]; then
-    echo "Metric/content identity contract failed"
+# metric 契約の 3 本 (build:category-keys --check・metrics:check・content:check) は 2026-11-24 に pre-commit から外した
+# (CI-SPEED-PRECOMMIT-TRIM-01・オーナー決定 (a))。同じ検査は preflight:pr (Category Keys・R2 Keys Mirror・Year Code Mirror) と
+# PR の Static Gates (Metric and Content Identity Contracts: check-metric-contract・check-kakei-analysis-catalog・
+# content:check)・Catalog Gates (build:category-keys --check・R2 Keys Mirror Gate) が走らせる。
+# metrics:check のうち check-estat-entrypoint だけは PR の CI に無い (quality-gates.json の trigger が schedule だけ) ので、
+# 同じ差分のときにここで走らせ続ける。
+if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources)/|packages/(data-configs|types)/|package\.json$)'; then
+  stage "metric 契約: e-Stat の入口 (check-estat-entrypoint)"
+  if ! node "$GUARD_ROOT/packages/data-configs/scripts/check-estat-entrypoint.mjs" >/dev/null; then
+    echo "e-Stat entrypoint contract failed (node packages/data-configs/scripts/check-estat-entrypoint.mjs)"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
 fi
@@ -193,23 +177,8 @@ fi
 # 2.1d2 検査スクリプトの配線 (CHECKER-WIRING-PRECOMMIT-01)
 # 検査スクリプトを CI の blocking gate につながないまま push すると、Develop Quality Gate が
 # [NON_BLOCKING_GATE] / [MISSING_GATE_TRIGGER] で落ちる (2026-10-10 に check-post-trace.mjs で踏んだ)。
-# 全体を読むので約 9 秒かかる。検査スクリプト (名前の判定は check-checker-wiring.cjs の CHECKER_NAME と同じ)
-# か workflow を staged にした commit だけで走らせる。--staged で index に入っているファイルだけを見て、
-# staged の検査スクリプトと staged の workflow から辿れる指摘だけを判定する (PRECOMMIT-WIRING-STAGED-SCOPE-01:
-# 並行する作業者の未追跡の作りかけで無関係な commit が止まっていた)。全体の判定は CI が持つ。
-stage "検査スクリプトの CI 配線 (check-checker-wiring)"
-STAGED_CHECKER_WIRING=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E \
-  '(^|/)([^/]*[-_.])?(check|audit|validate|verify|lint|guard)([-_.][^/]*)?\.(c?js|mjs|ts|sh|py)$|^\.github/workflows/[^/]+\.ya?ml$' || true)
-if [ -n "$STAGED_CHECKER_WIRING" ]; then
-  echo -e "${GREEN}🔌 検査スクリプトの CI 配線...${NC}"
-  if ! node "$GUARD_ROOT/.claude/scripts/lib/check-checker-wiring.cjs" --baseline --staged; then
-    echo -e "${RED}❌ CI の blocking gate につながっていない検査スクリプトがあります。${NC}"
-    echo -e "${YELLOW}💡 workflow か preflight から blocking で呼ぶ (詳細は上の出力)${NC}"
-    ERROR_COUNT=$((ERROR_COUNT + 1))
-  else
-    echo -e "${GREEN}✅ 検査スクリプトの CI 配線チェック成功${NC}"
-  fi
-fi
+# check-checker-wiring は 2026-11-24 に pre-commit から外した (CI-SPEED-PRECOMMIT-TRIM-01・オーナー決定 (a)。実測 7.7 秒)。
+# PR の Static Gates (Checker Wiring Regression Guard) と preflight:pr (registry 由来の Checker Wiring) が全体を判定する。
 
 # 2.1e import.meta.dirname ガード
 # .ts は tsx が CJS 解決するため import.meta.dirname は undefined になる
@@ -260,7 +229,12 @@ if [ -n "$STAGED_ANY" ]; then
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   # 4 本は最初の失敗で残りを走らせない。段を分けるのは、どれが重いのかを内訳に残すため。
+  # CI-SPEED-PRECOMMIT-TRIM-01 (オーナー決定 (c)): note の台帳・資産・道具と、カバー制作が読む台帳
+  # (県のマスタ・画像の型・OGP の台帳・リリースの記録) が staged のときだけ走らせる。PR の Static Gates の
+  # note Image Asset Contract Guard (audit-note-image-assets・note:assets:validate) と Contract Tests の
+  # note:catalog:check が毎回全体を判定する。
   NOTE_ASSETS_OK=1
+  if printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -qE '^(docs/31_note記事原稿/|data/note/|data/ogp/|data/areas/master/|data/content-operations/image-templates\.json$|data/releases/|\.claude/scripts/note/|packages/ops/src/note/|config/datasets\.mjs$|package\.json$)'; then
   stage "note: 画像の追跡 (audit-note-image-assets)"
   node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || NOTE_ASSETS_OK=0
   if [ "$NOTE_ASSETS_OK" = 1 ]; then
@@ -274,6 +248,7 @@ if [ -n "$STAGED_ANY" ]; then
   if [ "$NOTE_ASSETS_OK" = 1 ]; then
     stage "note: 記事の索引 (generate-note-catalog --check)"
     (cd "$GUARD_ROOT" && node --import tsx .claude/scripts/note/catalog/generate-note-catalog.ts --check >/dev/null) || NOTE_ASSETS_OK=0
+  fi
   fi
   if [ "$NOTE_ASSETS_OK" = 0 ]; then
     echo -e "${RED}❌ note の台帳・資産の契約違反 (docs/31 の追跡・カバー台帳・記事台帳から生成した索引のずれ)。.claude/rules/note-image-assets.md を参照。${NC}"
@@ -303,16 +278,8 @@ if [ -n "$STAGED_IMAGE_PIPELINE" ]; then
     echo -e "${RED}❌ 画像の全件強制生成・prefix push・best-effort write が検出されました。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
-  stage "画像 pipeline: 契約テスト (test:image-pipeline)"
-  if ! (cd "$GUARD_ROOT" && npm run test:image-pipeline); then
-    echo -e "${RED}❌ 画像fingerprint / exact publisherの契約テストが失敗しました。${NC}"
-    ERROR_COUNT=$((ERROR_COUNT + 1))
-  fi
-  stage "画像 pipeline: 型チェック (type-check:image-pipeline)"
-  if ! (cd "$GUARD_ROOT" && npm run type-check:image-pipeline); then
-    echo -e "${RED}❌ 画像generator / publisherの型チェックが失敗しました。${NC}"
-    ERROR_COUNT=$((ERROR_COUNT + 1))
-  fi
+  # test:image-pipeline と type-check:image-pipeline (実測 10.0 + 7.5 秒) は 2026-11-24 に pre-commit から外した
+  # (CI-SPEED-PRECOMMIT-TRIM-01・オーナー決定 (a))。PR の Contract Tests の Image Generation Pipeline Contract Gate が両方を走らせる。
 fi
 
 # 2.3 ESLint (staged の apps/web TS/TSX) — CI と同じ eslint で import/order 等を事前に弾く
