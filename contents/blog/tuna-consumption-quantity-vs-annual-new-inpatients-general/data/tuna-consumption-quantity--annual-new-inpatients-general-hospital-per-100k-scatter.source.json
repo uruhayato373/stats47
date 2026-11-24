@@ -1,22 +1,23 @@
 {
-  "kind": "correlation",
-  "base": "tuna-consumption-quantity",
-  "pair": "annual-new-inpatients-general-hospital-per-100k",
-  "pearsonR": -0.6581949349067768,
-  "partialRPopulation": -0.6178092455974729,
-  "unit": "g × 人",
+  "kind": "scatter",
   "label": "まぐろ消費量 と 一般病院年間新入院患者数 の関係",
-  "source": "r2:app/correlation/by-ranking-key/tuna-consumption-quantity.json",
-  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug tuna-consumption-quantity-vs-annual-new-inpatients-general --base tuna-consumption-quantity --pair annual-new-inpatients-general-hospital-per-100k --data-name tuna-consumption-quantity--annual-new-inpatients-general-hospital-per-100k",
+  "xKey": "tuna-consumption-quantity",
+  "yKey": "annual-new-inpatients-general-hospital-per-100k",
+  "year": "x:2025/y:2023",
+  "generatedBy": ".claude/scripts/blog/rebuild-scatter-data.mjs",
+  "pearsonR": -0.6025777699560511,
+  "unit": "g × 人",
+  "restore": "node .claude/scripts/blog/rebuild-scatter-data.mjs --spec <[{\"slug\":\"tuna-consumption-quantity-vs-annual-new-inpatients-general\",\"base\":\"tuna-consumption-quantity--annual-new-inpatients-general-hospital-per-100k-scatter\",\"x\":[\"tuna-consumption-quantity\",\"2025\"],\"y\":[\"annual-new-inpatients-general-hospital-per-100k\",\"2023\"]}]> --out <dir>",
+  "source": "r2:app/stats/tuna-consumption-quantity/values.json + r2:app/stats/annual-new-inpatients-general-hospital-per-100k/values.json",
   "axes": {
     "x": {
       "metricKey": "tuna-consumption-quantity",
-      "year": "2024年",
+      "year": "2025年",
       "proof": "values"
     },
     "y": {
       "metricKey": "annual-new-inpatients-general-hospital-per-100k",
-      "year": "2023年度",
+      "year": "2023年",
       "proof": "values"
     }
   }
