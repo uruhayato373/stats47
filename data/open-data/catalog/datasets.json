@@ -6546,6 +6546,59 @@
         "verifiedFromUrls": [],
         "notes": "not-suitable: 書誌・画像アーカイブ。dl.ndl.go.jp の実在のみ確認。IIIFの仕様は公式文書を開いておらず未確認。"
       }
+    },
+    {
+      "id": "maff-prefecture-food-self-sufficiency",
+      "sourceId": "maff-food-self-sufficiency",
+      "name": "都道府県別食料自給率の推移 (カロリーベース・生産額ベース)",
+      "description": "「平成10年度以降の都道府県別自給率の推移」xlsx。シート「HP（カロリー推移）」と「HP（生産額推移）」に、1998〜2024 年度の全国と 47 都道府県の値 (％、整数) が年度を列に並ぶ。最新の 2024 年度 (令和6年度) の見出しだけに「概算値」の印があり、それより前は確定値。",
+      "landingPageUrl": "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/zikyu_10.html",
+      "downloadUrl": "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/attach/xls/zikyu_10-7.xlsx",
+      "accessMethods": [
+        "file-download"
+      ],
+      "formats": [
+        "xlsx"
+      ],
+      "geographicLevels": [
+        "prefecture"
+      ],
+      "hasGeometry": false,
+      "coverage": "all-japan",
+      "timeCoverage": "1998年度〜2024年度 (最新年度は概算値)",
+      "updateFrequency": "annual",
+      "license": {
+        "name": "公共データ利用規約 (第1.0版) (PDL1.0。農林水産省ウェブサイトの利用ルール)",
+        "commercialUse": "allowed",
+        "attributionRequired": true,
+        "modificationNoticeRequired": true,
+        "termsUrl": "https://www.maff.go.jp/j/use/link.html"
+      },
+      "stats47Uses": [
+        "ranking"
+      ],
+      "suggestedCategories": [
+        "agriculture"
+      ],
+      "existingMetricKeys": [
+        "food-self-sufficiency-rate-calorie"
+      ],
+      "existingGisDataIds": [],
+      "candidateMetricConcepts": [
+        "食料自給率（カロリーベース）の 2022 年度以降",
+        "食料自給率（生産額ベース）"
+      ],
+      "verification": {
+        "status": "verified",
+        "verifiedAt": "2026-11-24",
+        "verifiedFromUrls": [
+          "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/zikyu_10.html",
+          "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/attach/xls/zikyu_10-7.xlsx",
+          "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/attach/pdf/zikyu_10-20.pdf",
+          "https://www.maff.go.jp/j/use/link.html"
+        ],
+        "notes": "2026-11-24 に xlsx (SHA-256 354cc84ed26267de1067c06318e4e24f91786408c70f2bfe05bd6a03646b4890、38,202 bytes) を取得して開いた。カロリーベースの 2008〜2021 年度の 47 県 658 値は、公開中の指標 food-self-sufficiency-rate-calorie (社会・人口統計体系 I3301) の R2 の値とすべて一致 (差 0 件)。2022〜2024 年度は 47 県すべてに値がある。生産額ベースのシートにだけ「令和2・3・4年度の数値は算出に不備があったため修正 (令和7年10月)」の注記があり、カロリーベースのシートには注記が無い。同じページの PDF は令和6年度 (概算値)・令和5年度 (確定値) の公表資料。"
+      }
     }
   ]
 }

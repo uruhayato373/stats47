@@ -699,6 +699,19 @@
       "status": "partially-verified",
       "lastVerifiedAt": "2026-11-13",
       "notes": "着地ページの実在のみ確認した軽判定。"
+    },
+    {
+      "id": "maff-food-self-sufficiency",
+      "name": "食料自給率・食料自給力指標",
+      "publisher": "農林水産省 (大臣官房政策課食料安全保障室)",
+      "kind": "government-portal",
+      "homepageUrl": "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/",
+      "catalogUrl": "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/zikyu_10.html",
+      "termsUrl": "https://www.maff.go.jp/j/use/link.html",
+      "isOfficial": true,
+      "status": "verified",
+      "lastVerifiedAt": "2026-11-24",
+      "notes": "都道府県別食料自給率 (カロリーベース・生産額ベース) を毎年公表。最新年度は概算値で、翌年に確定値へ置き換わる。農水省サイトのコンテンツは公共データ利用規約 第1.0版 (PDL1.0) に準拠 (出典の記載・加工の記載が必要)"
     }
   ]
 }

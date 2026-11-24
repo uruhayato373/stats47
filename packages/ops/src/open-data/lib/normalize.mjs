@@ -10,6 +10,13 @@ import { datasetPath } from '../../../../../config/datasets.mjs';
 const { normalizeOpenDataArea, OPEN_DATA_NORMALIZED_TABLE_SCHEMA } = tsxRequire('../../../../data-configs/src/open-data-catalog/normalized-table.ts', import.meta.url);
 const prefectures = JSON.parse(fs.readFileSync(new URL(`../../../../../${datasetPath('areas.prefectures')}`, import.meta.url), 'utf8'));
 const prefectureCodesByName = new Map(prefectures.map((p) => [p.prefName, p.prefCode]));
+// 省庁の表は県名を「青　森」「鹿児島」のように都府県を省き、字の間に空白を入れて書く (農水省の都道府県別食料自給率など)。
+// 空白を除いた名前が正式名に無ければ、都府県を除いた短い名前で引く (北海道は短い名前も同じ)。
+const prefectureCodesByShortName = new Map(prefectures.map((p) => [p.prefName.replace(/[都府県]$/, ''), p.prefCode]));
+function prefectureCodeOf(name) {
+  const compact = name.replace(/[\s　]+/g, '');
+  return prefectureCodesByName.get(compact) ?? prefectureCodesByShortName.get(compact);
+}
 const ajv = new Ajv({ allErrors: true, strictNumbers: true });
 const validateTable = ajv.compile(OPEN_DATA_NORMALIZED_TABLE_SCHEMA);
 
@@ -210,8 +217,9 @@ function areaComponent(value, part) {
     code = part.mapping.values[code];
   }
   if (part.prefectureName) {
-    if (!prefectureCodesByName.has(code)) throw Error(`Unknown prefecture name: ${code}`);
-    code = prefectureCodesByName.get(code);
+    const prefCode = prefectureCodeOf(code);
+    if (!prefCode) throw Error(`Unknown prefecture name: ${code}`);
+    code = prefCode;
   }
   if (!code) throw Error('Empty area code');
   if (!part.width) return code;
