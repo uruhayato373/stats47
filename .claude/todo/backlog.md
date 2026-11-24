@@ -610,13 +610,14 @@ updated: 2026-11-01
 - **完了条件**: 2 本が本番で公開され、`issues:figures` の記事の行が消え、X の投稿の状態が台帳と一致している。
 
 ### [NOTE-PLAYWRIGHT-DIALOG-CRASH-01] note 公開中の Playwright 起動スクリプトがダイアログ処理の競合でブラウザごと落ちる
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-11-05] [領域:商品]
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-11-05] [領域:商品] [待ち:ログイン]
 
 - **済み (2026-11-14・0905a8308)**: 専用プロファイルを CDP 付きで起動する `.claude/scripts/note/launch-note-cdp.mjs` を足し、`Page.handleJavaScriptDialog: No dialog is showing` だけを無視してほかの例外では終了するようにした。
 - **残り**: ① オーナーが note の題名なしの下書き `n0ae79d01a60b` と `nbb8ef52bd1ff` を削除する。② 次に note を公開するとき、`node .claude/scripts/note/launch-note-cdp.mjs` で起動して `NOTE_BU_CDP` を付けて公開し、起動スクリプトが最後まで終了しないことを確かめる (実際の専用プロファイルでの起動はログインが要るので未確認)。
 - **止まっている理由**: どちらも note へのログインが要り、下書きの削除はオーナーの操作である。
 - **残り (追補・2026-11-14)**: `.claude/scripts/note/note-publish-lib.sh` の 8 行目の `NBU()` は Profile 5 を固定で開き `NOTE_BU_CDP` を読まないので、`publish-kakei-one.sh` が使う `np_install_publish_guard` と `np_update_published_hashtags` は、CDP で起動した専用プロファイルではなく Profile 5 を操作する。
 - **完了条件**: 2 本の下書きが note の下書き一覧に無く、launch-note-cdp.mjs 経由の公開が 1 回、ブラウザの終了なしで終わり、その公開の報告に `PUBLISH_RECORD: pushed <sha>` の行がある。
+- **進捗 (2026-11-24・2ee65602e)**: NBU() が NOTE_BU_CDP を読むようにした (偽の browser-use で両方の分岐を確認)。残りは専用プロファイルでの公開 1 回と下書き 2 本の削除で、どちらもオーナーと note へのログインが要る。
 
 ### [ISSUE-LEDGER-TOP10-01] 問いの台帳から、最初に記事にする10本を選ぶ
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [検証:npm run issues:check] [起票:2026-11-05] [領域:商品] [待ち:判断]
@@ -992,6 +993,7 @@ updated: 2026-11-01
 - **残り 3 — 再現手順**: `GEO-QUESTION-DESIGN-01` と `INFRA-TIMELINE-01` の「別の PC で再現する手順」から「`.local` を作り直す」を外し、R2 から読む形に書き換える。
 - **停止条件・禁止**: 原典 ZIP を公開バケットに置かない。`app/geo/` の広い prefix を同期しない。承認の前に反映・削除しない。
 - **完了条件**: 問いの計算結果を反映する (または反映しないと決めて理由を残す)、`app/highway-history/` が R2 に残らない、2 枚のカードの手順が R2 前提になる。
+- **前提の誤り (2026-11-24)**: 「`app/highway-history/` は読み手 0」は誤りで、buzz-map が N06 の元データとして読んでいる (`.claude/scripts/sns/build-buzz-map-catalog.ts:371`・`.claude/skills/sns/buzz-map/SKILL.md:102`)。RETENTION_TARGETS へ足す前に、この 2 か所の参照を付け替える。
 
 ### [GIS-ATTRIBUTE-LEDGER-01] GIS の属性 (各データが持つ項目と意味) と区分を data/geo/ の JSON 台帳 + Schema に集約し、地図・凡例・吹き出し・集計がそこから引く形にする
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-29] [領域:データ]
@@ -1641,14 +1643,12 @@ updated: 2026-11-01
 - **停止条件・禁止**: develop の検査の待ち時間を大きく延ばさない (CI の速さは人の待ち時間で測る。memory `feedback_ci_speed_wait_time`)。
 - **完了条件**: 契約テストを壊す変更が、main への PR より前に develop で赤になる。
 
-### [RANKING-INTEGRITY-AUDIT-FLAKE-01] ランキングの整合の監査が、同じコードで 1 回だけ「違反あり」になった
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-11]
+### [RANKING-INTEGRITY-VIOLATIONS-1124-01] ランキング整合の監査が落とす 2 件 (national-trend の鮮度 24 件・nurse-salary のレシピのずれ) を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts] [起票:2026-11-24] [領域:データ] [待ち:承認]
 
-2026-11-11 に `audit-ranking-data-integrity.ts` を本番の R2 に対して 4 回続けて実走したところ、1 回目だけ総合判定が「違反あり」(終了コード 1) で、2〜4 回目は全項目が通った。1 回目も、この日に足したカテゴリ一覧の所属漏れは 0 件だった。1 回目のログを消していたので、どの検査が落ちたかは分かっていない。この監査は週次の `ranking-integrity` (weekly:audits) が回すので、同じ揺れが週次レビューで偽の失敗になりうる。
-
-- **次 (実行順)**: ① 週次の実行で失敗したら、`--json` の出力のどの項目の `ok` が false かを記録する ② 取得の失敗 (タイムアウト・一時的な 5xx) を違反と数えている箇所が無いかを `fetchJson` の呼び出し元で確かめる ③ 取得の失敗と中身の違反を分けて出す。
-- **停止条件・禁止**: 原因を特定する前に、再試行で揺れを隠さない。
-- **完了条件**: 失敗の理由がログから分かり、取得の失敗だけで違反にならない。
+- **観測 (2026-11-24・本番 R2 に対する実走、取得の失敗 0 件)**: 総合判定が「違反あり」で、落ちた検査は 2 つ。(h) 鮮度: 職業別年収の 24 指標 (accountant-annual-income ほか) の `national-trend.json` が values.json より 9 日古い (相対 8 日の上限超え)。(k) レシピ: `nurse-salary` の R2 の値の隣のレシピが `ops: null` で、config は `sampleCount` (cdTab 13,45・factor 10・minimum 10) を持つ。
+- **次**: ① national-trend は作り直せる派生物なので、sync-snapshots の該当 task で再生成する (承認不要) ② nurse-salary は config に合わせて `app/stats` を作り直す (`page-data-batch --metric nurse-salary` → `diff-push-r2 --prefix app/stats`)。`app/stats` は正本なので書き込みはオーナーの承認の後。
+- **完了条件**: 監査の実走で (h)(k) が 0 件、総合判定が OK。
 
 ### [GSC-USER-ACTIONS-01] GSC の記録と Googlebot の集計に要る、オーナーだけの 2 つの作業
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-11-11] [期日:2026-12-05] [領域:サイト] [待ち:ログイン]
@@ -1821,7 +1821,7 @@ updated: 2026-11-01
 - **完了条件**: 6 図が 5 点以上の推移か数値タイルになり、validateChartTemporalFit が `MIN_TREND_YEARS` 未満を warn し、`npm run preflight:pr` と `npm run validate:catalog --workspace=@stats47/data-configs` が通る。
 
 ### [CI-TOOLING-FOLLOWUP-02] CI と検査の道具に残る穴 (第 3 波の実行で見つけた分)
-タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14]
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [待ち:承認]
 
 - **済み (2026-11-14・4d4f27027)**: 1 (check-runtime-budget.test.cjs を PR の CI に配線)、2 (check-*.cjs 28 本と preflight-commit.mjs が CLAUDE_PROJECT_DIR をルートにしない。)
 - **済み (2026-11-15・オーナー承認)**: `pre-bash-safety.js` の rm -rf の止めを案 (a) で直した。
@@ -1829,6 +1829,7 @@ updated: 2026-11-01
 - **完了条件**: 6 は、scratchpad 配下の rm -rf が通り、ルートとホームの削除は止まることを固定するテストがある。4 は、選んだ案がこのカードに書いてあり、(b) か (c) を選んだ場合は、直す前に落ちて直した後に通る検査がある。
 - **追補 (2026-11-15)**: `npm run test:packages` の全件で `packages/product-factory/tests/free-sample.test.ts` の「generates a complete-font PDF…」が 1 回だけ落ち、単独と再実行では通った (負荷のかかったときの時間切れとみられる)。再現: `npm run test:packages` を 2〜3 回。
 - **オーナー決定 (2026-11-24)**: 推奨どおり (b) ciSteps に予算を登録して増加を止める を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: 差分連動の step を別枠にする check-runtime-budgets.json の変更案とテストを作る。設定 (.claude/config/) の反映の実行はオーナーの承認の後
+- **進捗 (2026-11-24・39f5fc903)**: 差分連動の step を別枠 (scoped) にする checker とテスト (16 件。追加 5 件のうち 4 件は変更前の checker で落ちることを確認) を入れた。残りは設定の反映 (`scopedSuiteBudgetMs` 200000 と scoped-workflow-contracts の step の登録) と pr-quality-check.yml へ経過秒を渡す行の追加で、変更案はコミット本文にある。反映はオーナーの承認の後。
 
 ### [CI-TOOLING-FOLLOWUP-03] CI と開発の道具に残る穴 (第 4 波の実行で見つけた分)
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14]
@@ -1868,6 +1869,7 @@ updated: 2026-11-01
 - **事実 (11-08〜11-21 の 1,000 run)**: npm ci は 42〜83 秒、キャッシュの復元は 9〜14 秒 (develop gate・PR で実測)。deploy は 83 秒、fetch-metrics は 3 job とも約 80 秒。
 - **次**: 人が待つ deploy-workers・blog-auto-publish・data-refresh・sync-snapshots から復元を入れ、残りへ広げる。
 - **完了条件**: 4 本の run で npm ci の step が 20 秒未満になった実測を、このカードに書いた。
+- **進捗 (2026-11-24・fd7a9f7af)**: 人が待つ 4 本の workflow の 6 job に node_modules の復元だけのキャッシュを足した (key は develop gate と同じ)。残り: 4 本の実 run で npm ci の step が 20 秒未満になったかを実測する。キャッシュの key の名前が node20 のままで、全 workflow は Node 22 で動く (動作への影響は無いが名前と実体が合わない)。
 
 ### [CI-PR-WAIT-01] PR の検査は中央値 12.9 分で、安い検査で落ちても赤と分かるまで約 13 分かかる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
@@ -2764,6 +2766,7 @@ updated: 2026-11-01
 - **次**: 残りの `blog-auto-publish` / `publish-ai-content` / `sync-snapshots` を `env:` ブロック経由に書き換える (`data-refresh.yml` が手本)。併せて `languages` に `actions` を足すか判断する (足すと残件が一斉に critical で出るため、書き換えを先に済ませる)
 - **完了条件**: 上記走査で 0 件、かつ actionlint exit=0
 - **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
+- **進捗 (2026-11-24・ff887e273)**: publish-ai-content と sync-snapshots の inputs を env 経由にした (blog-auto-publish は既に env 経由)。残り: ① 変えた 2 本が次の実行で通ることを確かめる ② 同じ形がカードの 3 本の外にも自由文字列の inputs で残る (purge-cdn の prefix、publish-blog の slug・published_at、regenerate-blog-svgs の slugs、generate-ogp-images の slugs、sns-port-bubble-daily の metric など。走査で計 66 箇所) ③ actionlint はこの Mac に無く未実行。
 
 ### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失図表の手動系譜残件
 
@@ -3002,7 +3005,7 @@ updated: 2026-11-01
 - **完了条件**: 3 年度以上の 47 県の値が R2 に入り、ランキングページが公開されている。
 
 ### [SNS-LEDGER-ID-RACE-01] 投稿台帳の id を CI とローカルが同時に採番して衝突する経路を塞ぐ
-タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-10] [領域:SNS]
+タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-10] [領域:SNS] [待ち:判断]
 
 - **trigger**: 台帳の id 衝突がもう一度起きたとき。
 - **事象**: 2026-10-10 のリリースで、IG cron (CI) が `data/sns/posts.json` に新しい行を id 1076 で足した。
@@ -3010,6 +3013,7 @@ updated: 2026-11-01
 - **手順 (案)**: CI が書く行は採番せず、ローカルで登録済みの id だけを更新する。登録の無い投稿は CI では記録を保留し、検査で知らせる。どうしても足す場合は、id の範囲を CI とローカルで分ける。
 - **完了条件**: CI の workflow が新しい id を採番する経路が 0 本になり、`sns:trace:check` に検査が入っている。
 - **確認 (2026-11-23)**: 投稿台帳に新しい ID を振る CI の経路は `post-instagram-scheduled.yml` の 1 本だけ (`record-posted.cjs` が予約表に行の無い投稿のときだけ `store.insert` する)。この workflow は停止中 (`disabled_manually`) で、Instagram の自動投稿の再開はオーナー判断。再開するときに、CI では insert せず保留して `sns:trace:check` で知らせる形へ直す。
+- **棚卸し (2026-11-24)**: 直す対象は `.claude/scripts/instagram/record-posted.cjs` と `packages/ops/src/sns`。本文のとおり IG の自動投稿を再開するときに直すので、再開の判断を待つ。
 
 ### [SSOT-CONSOLIDATION-REST-01] 2026-10-06 の定数集約で見送った重複を、挙動の差を解消してから寄せる
 
@@ -3107,15 +3111,6 @@ updated: 2026-11-01
 - **追補 (2026-11-14)**: 型の台帳 `data/content-operations/image-templates.json` は、積み上げ棒と折れ線の renderer を `packages/svg-builder/src/` としているが、描画は `apps/admin/lib/template-composition-stacked.ts` と `template-trend-line.ts` が行っている。台帳を実装に合わせる。
 - **完了条件**: 記事に実データの積み上げ面の図 (明暗 2 枚) があり、quality-gate.mjs が通り、blog-critic が PASS を返していること。
 - **オーナー決定 (2026-11-24)**: 推奨どおり 図の単位を GWh に割る を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: e-Stat 表 0003409159 から値を取得し、source.json の transform に GWh への換算を書く。再公開の実行はオーナーの指示の後
-
-### [MODEL-OPT-MONITOR-01] effort を下げた 4 体と sonnet にした code-reviewer の実運用を見て、戻すかを決める
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:管理]
-
-- **済み (2026-11-14・コミット無し)**: 記録済みの model-usage (latest.json の 2026-11-12 生成分、窓は W42〜W46) と data/blog の審査記録から観察値を出した。
-- **残り (判断)**: 推奨は「5 体とも現状を据え置く」。根拠は、戻すべき悪化の証拠が 1 件も記録に無く、effort を high に下げても canary は recall 1.0 のままで費用だけ 5〜15% 減ったことと、code-reviewer は sonnet にして費用が半減したことである。選択肢は (a) 5 体とも据え置いて結論を記録する (推奨)、(b) 実行 0 件の 3 体について、最初の実行が記録される週まで結論を保留する、(c) canary の fixture を足して article-writer・blog-critic の見落としを測れるようにしてから決める、の 3 つ。
-- **残り (計測の穴)**: article-writer と blog-critic を effort 変更の前後で比べるには、agent 経由で書かれた review.md と、headless-critic が書いた review.md を `reviewer` フィールドで分けて集計する必要があるが、いまは 9 本しか agent 経由が無く、全部 10-08 より前。code-reviewer・open-data-curator・sns-renderer は、次に実行された週の `npm run model-usage:collect && npm run model-usage:report` の agents 欄に件数が出る。
-- **完了条件**: 4 体と code-reviewer のそれぞれについて、据え置くか戻すかの結論をオーナーが決め、結論 (と、保留する場合は再観察の期日と条件) を台帳か規約に記録している。戻す場合は frontmatter の effort を外すか model: opus に戻し、canary に課題を足している。
-- **オーナー決定 (2026-11-24)**: 推奨どおり (a) 5 体とも現状を据え置く を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: 据え置きの結論を台帳か規約へ記録する
 
 ### [SITE-RENEWAL-01] サイトをリニューアルする（Claude Design で検討した案を形にする）
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-10-19] [領域:サイト] [待ち:判断]

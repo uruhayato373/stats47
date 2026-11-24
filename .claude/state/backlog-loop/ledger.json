@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T10:29:46.606Z",
+  "updatedAt": "2026-11-24T10:41:44.608Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13555,6 +13555,74 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T10:29:46.606Z"
+    },
+    "MODEL-OPT-MONITOR-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:39:15.319Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 11-24 の決定 (a) 据え置き (effort high の 4 体と sonnet の code-reviewer) を規約に記録した (53fac2347)。docs:check errors 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:39:15.319Z"
+    },
+    "RANKING-INTEGRITY-AUDIT-FLAKE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:41:44.608Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsc --noEmit -p packages/ranking/tsconfig.json",
+              "npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts",
+              "R2_PUBLIC_FETCH_URL=http://127.0.0.1:9 npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: fetchJson が通信断・5xx を fetchFailures に記録し、item/values・national-trend・values-per-*・計算型の依存・home/survey/category の各判定で status 0 を欠落・件数違反と数えないようにした。ログに「取得の失敗」の一覧と「落ちた検査」の 1 行を出す。本番の実走は取得の失敗 0 件で、落ちた検査 (h)(k) は本物の違反 (RANKING-INTEGRITY-VIOLATIONS-1124-01 へ起票)。R2 に届かないときは all.",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:41:44.608Z"
     }
   }
 }
