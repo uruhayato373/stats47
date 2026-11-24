@@ -34,6 +34,7 @@ import { AdRow, composeAdRows, InFeedAdSlot } from '@/features/ads';
 import { groupThemesForListing } from '@/features/theme-dashboard/listing.server';
 import { ALL_THEMES } from '@/features/theme-dashboard/server';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
 import { HUB_INCONTENT, MUNICIPALITIES_INDEX_INFEED } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
@@ -196,7 +197,7 @@ export default async function MunicipalitiesHubPage() {
         />
       </div>
 
-      <section aria-labelledby="municipality-active-themes">
+      <section aria-labelledby="municipality-active-themes" {...navSurfaceProps('municipalities_theme')}>
         <div className="mb-3 flex items-baseline justify-between gap-4">
           <h2
             id="municipality-active-themes"
@@ -219,6 +220,7 @@ export default async function MunicipalitiesHubPage() {
                 href={hrefFor("municipality-theme", { themeSlug: theme.slug })}
                 className="group flex min-h-36 flex-col justify-between"
                 aria-label={`${theme.title}、${metricTitles.length}指標を見る`}
+                data-nav-label={`municipality-theme:${theme.slug}`}
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { trackAutoNavClick, wasNavClickSentSince } from "@/lib/analytics/events";
+import { trackAutoNavClick, wasNavClickSentSince, type NavSurface } from "@/lib/analytics/events";
 
 /**
  * サイト内リンクのクリックを 1 か所で拾い、nav_click として送る (NAV-CLICK-COVERAGE-01)。
@@ -35,6 +35,9 @@ export function NavClickTracker(): null {
   return null;
 }
 
+/** カードの見出し行の操作の導線名 (`NavSurface` の値) */
+const CARD_ACTION_SURFACE: NavSurface = "card_action";
+
 export interface ResolvedNavClick {
   label: string;
   href: string;
@@ -63,7 +66,11 @@ export function resolveNavClick(
   // /api/ (CSV のダウンロードなど) はページの移動ではない。ダウンロードは csv_download で数える (CONTENT-FOLLOWUP-01)
   if (url.pathname.startsWith("/api/")) return null;
 
-  const surface = anchor.closest<HTMLElement>("[data-nav-surface]")?.dataset.navSurface;
+  // 導線名の無いカードの見出し行の操作 (「すべて見る」など) は、カードごとに名前を付けなくても card_action で数える
+  // (外側に導線名があればそちらを優先する。NAV-CLICK-COVERAGE-01 ①)
+  const surface =
+    anchor.closest<HTMLElement>("[data-nav-surface]")?.dataset.navSurface ??
+    (anchor.closest('[data-slot="card-action"]') ? CARD_ACTION_SURFACE : undefined);
   // 同じページ内の移動 (#見出し) は、目次のように導線名が付いているものだけ数える。
   // `href="#"` (Leaflet の拡大・縮小のようなボタン代わりのリンク) は url.hash が空になるので、書かれた href で見分ける
   const isFragmentOnly = rawHref.trim().startsWith("#");

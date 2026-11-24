@@ -5,6 +5,8 @@ import { cn } from '@stats47/components';
 import Link from '@/components/atoms/SiteLink';
 import { RailCard } from '@/components/surface';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 import { OPERATOR_PROFILE } from '@/config/operator-profile';
 
 interface OperatorProfileCardProps {
@@ -49,15 +51,17 @@ export function OperatorProfileCard({
         e-Stat の公式統計をもとに、47
         都道府県の統計データをわかりやすく可視化しています。
       </p>
-      <div className="mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-3 text-xs">
+      <div className="mt-auto flex flex-wrap gap-x-3 gap-y-1 pt-3 text-xs" {...navSurfaceProps('operator_profile')}>
         <Link
           href={OPERATOR_PROFILE.links.story}
+          data-nav-label="operator:story"
           className="font-semibold text-primary underline underline-offset-2"
         >
           体験記を読む
         </Link>
         <Link
           href={OPERATOR_PROFILE.links.about}
+          data-nav-label="operator:about"
           className="text-muted-foreground underline underline-offset-2"
         >
           運営者について

@@ -6,6 +6,7 @@
 import { render } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { OperatorProfileCard } from "@/features/ads/components/OperatorProfileCard";
 import { GeoContentPublicationSection } from "@/features/geo-analysis/components/GeoContentPublicationSection";
 import { GeoSourceLinkCard } from "@/features/geo-analysis/components/GeoSourceLinkCard";
 import { manifestFixture } from "@/features/geo-analysis/lib/__tests__/geo-manifest-fixture";
@@ -79,6 +80,11 @@ describe("導線名を付けた部品", () => {
 
   // Geo への導線 (2026-11-14)。10-20〜10-31 の導線名なし 4,530 件のうち行き先が geo のものが 1,085 件あり、
   // 開発サーバーの HTML で数えると /geo のページ本文のリンクはほぼすべて導線名を持っていなかった
+  it("運営者のカードの体験記・運営者についてのリンクは operator_profile で送る (2026-11-24)", () => {
+    const { container } = render(<OperatorProfileCard />);
+    expect(surfacesOf(container)).toEqual(["operator_profile", "operator_profile"]);
+  });
+
   it("単体 GIS へのカードのリンクは geo_layer_list で送る", () => {
     const { container } = render(<GeoSourceLinkCard dataId="A52" name="砂防指定地" version="2023" />);
     expect(surfacesOf(container)).toEqual(["geo_layer_list"]);
