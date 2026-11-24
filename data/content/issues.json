@@ -850,7 +850,12 @@
       "axes": {
         "explanatory": {
           "label": "外国人住民の多さ",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "foreign-resident-count-per-100k"
+            }
+          ]
         },
         "outcome": {
           "label": "空き家の少なさ",
@@ -942,7 +947,12 @@
         },
         "outcome": {
           "label": "犯罪の多さ",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "penal-code-offenses-recognized-per-1000"
+            }
+          ]
         }
       }
     },
@@ -972,7 +982,12 @@
         },
         "outcome": {
           "label": "犯罪の多さ",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "penal-code-offenses-recognized-per-1000"
+            }
+          ]
         }
       }
     },
@@ -1186,7 +1201,12 @@
         },
         "outcome": {
           "label": "犯罪件数の増減",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "penal-code-offenses-recognized-per-1000"
+            }
+          ]
         }
       }
     },
@@ -1277,11 +1297,21 @@
       "axes": {
         "explanatory": {
           "label": "最低賃金の引き上げ",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "minimum-wage-by-region"
+            }
+          ]
         },
         "outcome": {
           "label": "雇用の増減",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "employed-people-ratio"
+            }
+          ]
         }
       }
     },
@@ -1665,7 +1695,12 @@
         "explanatory": null,
         "outcome": {
           "label": "ひとり親の母親の就業状況",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "single-mother-employment-rate"
+            }
+          ]
         }
       }
     },
@@ -1733,7 +1768,12 @@
         },
         "outcome": {
           "label": "負債の多さ",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "financial-debt-balance"
+            }
+          ]
         }
       }
     },
@@ -2358,11 +2398,21 @@
       "axes": {
         "explanatory": {
           "label": "病院のベッド数",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "general-hospital-bed-count-per-100k"
+            }
+          ]
         },
         "outcome": {
           "label": "住民1人あたり医療費",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "national-medical-expense-per-person"
+            }
+          ]
         }
       }
     },
@@ -2748,7 +2798,12 @@
         },
         "outcome": {
           "label": "特定健診の受診率",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "specific-health-checkup-participation-rate"
+            }
+          ]
         }
       }
     },
@@ -2770,7 +2825,12 @@
         "explanatory": null,
         "outcome": {
           "label": "都道府県別の医師数の推移",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "physicians-in-medical-facilities-per-100k"
+            }
+          ]
         }
       }
     },
@@ -3063,7 +3123,12 @@
         },
         "outcome": {
           "label": "生活保護の保護率",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "persons-on-public-assistance-per-1000"
+            }
+          ]
         }
       }
     },
@@ -3108,7 +3173,12 @@
       "axes": {
         "explanatory": {
           "label": "介護施設の定員数",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "nursing-home-capacity-per-1000-65plus"
+            }
+          ]
         },
         "outcome": {
           "label": "要介護認定率",
@@ -3134,7 +3204,12 @@
       "axes": {
         "explanatory": {
           "label": "介護職員の賃金水準",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "care-worker-annual-income"
+            }
+          ]
         },
         "outcome": {
           "label": "介護職員の離職率",
@@ -3187,7 +3262,12 @@
         },
         "outcome": {
           "label": "空き家率の推移",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "vacant-housing-ratio"
+            }
+          ]
         }
       }
     },
@@ -3442,7 +3522,12 @@
         },
         "outcome": {
           "label": "住民所得の推移",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "per-taxpayer-taxable-income"
+            }
+          ]
         }
       }
     },
@@ -3495,7 +3580,12 @@
       "axes": {
         "explanatory": {
           "label": "新設住宅の着工数",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "new-housing-starts"
+            }
+          ]
         },
         "outcome": {
           "label": "人口の増減",
@@ -3573,7 +3663,12 @@
         },
         "outcome": {
           "label": "自動車への依存度",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "car-ownership-multi-person-households-per-1000"
+            }
+          ]
         }
       }
     },
@@ -4647,7 +4742,15 @@
       "axes": {
         "explanatory": {
           "label": "津波避難場所の整備数",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "tsunami-evacuation-building-count"
+            },
+            {
+              "metric": "tsunami-evacuation-tower-count"
+            }
+          ]
         },
         "outcome": {
           "label": "津波に対する安全度",
@@ -4947,7 +5050,15 @@
       "axes": {
         "explanatory": {
           "label": "年収階級・世帯主年齢",
-          "pattern": "compose"
+          "pattern": "compose",
+          "data": [
+            {
+              "series": "food-income-quintile"
+            },
+            {
+              "series": "item-spending-age"
+            }
+          ]
         },
         "outcome": {
           "label": "エンゲル係数の推移",
@@ -5284,7 +5395,12 @@
         },
         "outcome": {
           "label": "製造業の強さ",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "manufacturing-shipment-amount"
+            }
+          ]
         }
       }
     },
@@ -5311,7 +5427,12 @@
         },
         "outcome": {
           "label": "農業・漁業の生産量",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "agricultural-output"
+            }
+          ]
         }
       }
     },
@@ -5379,11 +5500,21 @@
       "axes": {
         "explanatory": {
           "label": "建設業の就業者数",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "construction-employed-residents"
+            }
+          ]
         },
         "outcome": {
           "label": "公共工事の受注額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "public-construction-contract-amount"
+            }
+          ]
         }
       }
     },
@@ -5405,7 +5536,12 @@
       "axes": {
         "explanatory": {
           "label": "港湾の取扱規模",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "port-cargo-total"
+            }
+          ]
         },
         "outcome": {
           "label": "製造業の出荷額",
@@ -5431,7 +5567,12 @@
       "axes": {
         "explanatory": {
           "label": "観光客数の増減",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "total-overnight-guests"
+            }
+          ]
         },
         "outcome": {
           "label": "地元の収入の増減",
@@ -5485,7 +5626,12 @@
         },
         "outcome": {
           "label": "観光客数の増減",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "total-overnight-guests"
+            }
+          ]
         }
       }
     },
@@ -5510,7 +5656,12 @@
         },
         "outcome": {
           "label": "観光による稼ぎ",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "domestic-travel-consumption-by-destination"
+            }
+          ]
         }
       }
     },
@@ -5532,7 +5683,12 @@
       "axes": {
         "explanatory": {
           "label": "農家数の増減",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "agricultural-farm-count"
+            }
+          ]
         },
         "outcome": {
           "label": "担い手への農地集積",
@@ -5559,7 +5715,12 @@
         "explanatory": null,
         "outcome": {
           "label": "食料自給率の高い県の生産品目",
-          "pattern": "compose"
+          "pattern": "compose",
+          "data": [
+            {
+              "metric": "agricultural-output"
+            }
+          ]
         }
       }
     },
@@ -5609,11 +5770,21 @@
       "axes": {
         "explanatory": {
           "label": "森林面積の多さ",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "woodland-area"
+            }
+          ]
         },
         "outcome": {
           "label": "林業産出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "forestry-output-value"
+            }
+          ]
         }
       }
     },
@@ -6839,7 +7010,12 @@
         },
         "outcome": {
           "label": "品目別の支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -6869,7 +7045,12 @@
         },
         "outcome": {
           "label": "品目別の支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -6991,7 +7172,12 @@
         },
         "outcome": {
           "label": "食料・衣料・教育の支出シェア",
-          "pattern": "compose"
+          "pattern": "compose",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7018,7 +7204,12 @@
         },
         "outcome": {
           "label": "医薬品・医療関連の支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7045,7 +7236,15 @@
         },
         "outcome": {
           "label": "食料品目の支出額・数量",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            },
+            {
+              "series": "item-quantity-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7071,7 +7270,12 @@
         },
         "outcome": {
           "label": "自動車関連の支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7097,7 +7301,15 @@
         },
         "outcome": {
           "label": "家電の支出額・数量・平均価格",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            },
+            {
+              "series": "item-quantity-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7149,7 +7361,12 @@
         },
         "outcome": {
           "label": "旅行種別の支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7175,7 +7392,15 @@
         },
         "outcome": {
           "label": "衣料品の支出額・数量・平均価格",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            },
+            {
+              "series": "item-quantity-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7201,7 +7426,12 @@
         },
         "outcome": {
           "label": "身の回り品の支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7227,7 +7457,12 @@
         },
         "outcome": {
           "label": "外食業態別の支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "item-spending-income-quintile"
+            }
+          ]
         }
       }
     },
@@ -7259,7 +7494,12 @@
         },
         "outcome": {
           "label": "品目別の年間支出額",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "series": "food-single-households"
+            }
+          ]
         }
       }
     },
@@ -7405,7 +7645,15 @@
         "explanatory": null,
         "outcome": {
           "label": "ビール類の月次支出額・購入数量",
-          "pattern": "change"
+          "pattern": "change",
+          "data": [
+            {
+              "series": "beer-monthly-spending"
+            },
+            {
+              "series": "beer-monthly-quantity"
+            }
+          ]
         }
       }
     },
