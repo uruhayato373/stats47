@@ -1,4 +1,5 @@
 // @vitest-environment node
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 import { describe, expect, test } from "vitest";
 
 import { areaThemeDescription, getAreaThemeHighlights } from "../area-theme-highlights";
@@ -42,7 +43,7 @@ describe("getAreaThemeHighlights", () => {
         gdp: {
           rankingItem: { unit: "百万円" },
           rankingValues: [
-            { areaCode: "00000", value: 600_000_000, unit: "百万円", yearName: "2021年" },
+            { areaCode: NATIONAL_AREA_CODE, value: 600_000_000, unit: "百万円", yearName: "2021年" },
             { areaCode: "13000", value: 113_685_917, unit: "百万円", yearName: "2021年", rank: 1 },
             { areaCode: "31000", value: 1_900_000, unit: "百万円", yearName: "2021年", rank: 47 },
           ],
