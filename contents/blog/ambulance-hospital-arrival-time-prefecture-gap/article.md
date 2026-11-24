@@ -3,8 +3,8 @@ title: 119番から病院収容まで、東京は富山の1.83倍
 seoTitle: "救急搬送 病院収容所要時間の都道府県ランキング｜東京60.5分・富山33.1分（2024年）"
 description: 同じ119番通報でも、病院に収容されるまでの時間は住む県で大きく変わります。2024年は最も長い東京が60.5分、最も短い富山が33.1分でした。上位と下位に並ぶ県の顔ぶれと地図の偏りから、時間の差が生まれる背景を仮説として読み解きます。
 slug: ambulance-hospital-arrival-time-prefecture-gap
-publishedAt: 未定
-published: false
+publishedAt: 2026-11-25
+published: true
 archetype: A
 tags: []
 ---
