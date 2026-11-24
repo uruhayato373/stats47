@@ -76,7 +76,21 @@ jobs:
           node-version: "22"
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-NPM-CACHE-01: npm ci (実測 42〜83 秒) を lockfile hash キーの node_modules 復元 (9〜14 秒) で置き換える。
+        # key は cache-node-modules.yml / develop-quality-gate.yml と同一。restore だけで save しない
+        # (build 中に node_modules へ書かれた生成物を共有キャッシュへ混ぜないため。温めるのは cache-node-modules.yml)。
+        id: node-modules-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🔍 Resolve target published drafts
