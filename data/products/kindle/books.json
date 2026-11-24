@@ -152,32 +152,51 @@
         {
           "title": "第0章 データの読み方",
           "source": "fresh",
-          "freshFile": "src/channels/kindle/manuscripts/K-S1-02/10-how-to-read.md"
+          "freshFile": "src/channels/kindle/manuscripts/K-S1-02/10-how-to-read.md",
+          "lensIds": [
+            "kakei-definition-reading",
+            "kakei-price-quantity"
+          ]
         },
         {
           "title": "麺類への支出を地域で比べる",
           "source": "blog",
-          "blogSlug": "noodle-consumption-prefecture-character"
+          "blogSlug": "noodle-consumption-prefecture-character",
+          "lensIds": [
+            "kakei-city-comparison"
+          ]
         },
         {
           "title": "味噌の購入数量を読む",
           "source": "blog",
-          "blogSlug": "miso-consumption-quantity-prefecture-gap"
+          "blogSlug": "miso-consumption-quantity-prefecture-gap",
+          "lensIds": [
+            "kakei-city-comparison"
+          ]
         },
         {
           "title": "砂糖への支出と購入数量",
           "source": "blog",
-          "blogSlug": "sugar-consumption-prefecture-gap"
+          "blogSlug": "sugar-consumption-prefecture-gap",
+          "lensIds": [
+            "kakei-city-comparison"
+          ]
         },
         {
           "title": "かに支出の日本一",
           "source": "blog",
-          "blogSlug": "crab-expenditure-ranking"
+          "blogSlug": "crab-expenditure-ranking",
+          "lensIds": [
+            "kakei-city-comparison"
+          ]
         },
         {
           "title": "さばの食卓 — 支出額の地域差",
           "source": "blog",
-          "blogSlug": "mackerel-expenditure-ranking"
+          "blogSlug": "mackerel-expenditure-ranking",
+          "lensIds": [
+            "kakei-city-comparison"
+          ]
         },
         {
           "title": "終章",

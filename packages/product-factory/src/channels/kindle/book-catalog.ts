@@ -31,6 +31,7 @@ function joinRankingChapter(book: Omit<KindleBookDraft, "id">, id: string, chapt
     title: chapter.title,
     source: chapter.source,
     rankingKeys: BOOK_RANKING_KEYS[id] ?? PACK_RANKING_KEYS[pack] ?? [],
+    ...(chapter.lensIds ? { lensIds: chapter.lensIds } : {}),
   };
   if (chapter.highlightRegionLabel === undefined) return joined;
   return {

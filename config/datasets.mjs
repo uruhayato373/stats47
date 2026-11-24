@@ -641,7 +641,11 @@ export const DATASETS = [
   }),
   d("products.kindle-books", "data/products/kindle/books.json", "master", "product", "data", "Kindle 書籍の企画 (書籍 ID をキーにした書名・章立て・編集設計・状態。表紙設計と ranking の章のキーは読み込み口が結合する。notes は書籍ごとの判断の記録)。読み込みは packages/product-factory/src/channels/kindle/book-catalog.ts (KINDLE_BOOKS)", {
     schema: "config/schema/products.kindle-books.schema.json",
-    refs: [{ field: "books.*.chapters[].blogSlug", to: "blog.articles", key: "articles[].slug" }],
+    refs: [
+      { field: "books.*.chapters[].blogSlug", to: "blog.articles", key: "articles[].slug" },
+      // 章が答える切り口 (調査の持ち物)。KINDLE-K-S1-02-STATUS-DRIFT-01
+      { field: "books.*.chapters[].lensIds[]", to: "surveys.lenses", key: "lenses[].id" },
+    ],
   }),
   d("products.kindle-region-codes", "data/products/kindle/region-codes.json", "master", "product", "data", "Kindle S3 (地域別) の 8 地方ブロックの構成県コード (キーは書籍 K-S3-<キー> の接尾辞)。読み込みは packages/product-factory/src/channels/kindle/book-catalog.ts (S3_REGION_CODES)", {
     schema: "config/schema/products.kindle-region-codes.schema.json",
