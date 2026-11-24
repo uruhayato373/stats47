@@ -56,6 +56,7 @@ import {
 } from '../src/theme-catalog/registered-series-ref';
 import { collectColorFieldViolations } from '../src/theme-catalog/chart-color-role';
 import { metricYearCount } from '../src/theme-catalog/selection-viewpoints';
+import { MIN_TREND_YEARS } from '../src/display-semantics';
 import { isGenericChartDescription } from '../src/theme-catalog/transform';
 
 const STRICT = process.argv.includes('--strict');
@@ -604,9 +605,12 @@ export function validateSelectionEvidence(
 }
 
 /**
- * line-chart は時系列の推移を見せるためのチャート型。参照指標が 1 年分のデータしか
- * 持たない場合、折れ線は点1つにしかならず「推移」が原理的に描けない (チャート型と
- * データ形状の不一致)。まず warn で実測し、誤検知が無いことを確認してから昇格する
+ * line-chart は時系列の推移を見せるためのチャート型。参照指標の宣言年が MIN_TREND_YEARS
+ * (5・正典は display-semantics) に満たない場合、折れ線は数点しか結ばず「推移」として読めない
+ * (チャート型とデータ形状の不一致)。題に「推移」が無い図も対象にする (題に「推移」がある図は
+ * 週次の live 監査 trend-years-short が R2 の観測年で error にする)。2〜4 年の指標は数値タイル
+ * (metricGroups の view: tiles) へ替える (METRIC-GATE-FOLLOWUP-02、2026-11-24 に 1 年から広げた)。
+ * まず warn で実測し、誤検知が無いことを確認してから昇格する
  * (`metric-config-standards.md` の warn→error 昇格パターンに合わせる)。
  */
 export function validateChartTemporalFit(
@@ -619,9 +623,9 @@ export function validateChartTemporalFit(
     const metric = METRICS_REGISTRY[key];
     if (!metric) continue; // 実在チェックは別関数の責務
     const count = metricYearCount((metric as { years?: unknown }).years);
-    if (count !== null && count <= 1) {
+    if (count !== null && count < MIN_TREND_YEARS) {
       warns.push(
-        `[chart-temporal-fit] ${where}: line-chart が参照する "${key}" は年数 ${count} 件 — 推移を描けない (表示方法の再検討候補)`
+        `[chart-temporal-fit] ${where}: line-chart が参照する "${key}" は年数 ${count} 件 (${MIN_TREND_YEARS} 年未満) — 推移として読めない (数値タイルへの置き換え候補)`
       );
     }
   }

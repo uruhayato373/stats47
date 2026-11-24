@@ -435,187 +435,7 @@
       }
     }
   ],
-  "charts": [
-    {
-      "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart",
-      "title": "医療・福祉職の年収比較",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "doctor-annual-income",
-            "label": "医師",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "nurse-annual-income",
-            "label": "看護師",
-            "colorRole": "improve"
-          },
-          {
-            "metricKey": "care-worker-annual-income",
-            "label": "介護職員",
-            "colorRole": "count"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "doctor-annual-income",
-        "nurse-annual-income",
-        "care-worker-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "medical-care",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "theme-occ-it-trend",
-      "componentType": "line-chart",
-      "title": "IT・専門職の年収比較",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "system-consultant-annual-income",
-            "label": "SIer/コンサル",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "software-engineer-annual-income",
-            "label": "ソフトウェア作成者",
-            "colorRole": "special"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "system-consultant-annual-income",
-        "software-engineer-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "it-professional",
-      "sortOrder": 20
-    },
-    {
-      "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart",
-      "title": "教育職の年収比較",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "school-teacher-annual-income",
-            "label": "小中学校教員",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "university-professor-annual-income",
-            "label": "大学教授",
-            "colorRole": "danger"
-          },
-          {
-            "metricKey": "nursery-teacher-annual-income",
-            "label": "保育士",
-            "colorRole": "series-3"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "school-teacher-annual-income",
-        "university-professor-annual-income",
-        "nursery-teacher-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "education",
-      "sortOrder": 30
-    },
-    {
-      "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart",
-      "title": "運輸・建設職の年収比較",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "truck-driver-annual-income",
-            "label": "営業用大型貨物自動車運転者",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "taxi-driver-annual-income",
-            "label": "タクシー運転手",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "carpenter-annual-income",
-            "label": "大工",
-            "colorRole": "neutral"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "truck-driver-annual-income",
-        "taxi-driver-annual-income",
-        "carpenter-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "transport-construction",
-      "sortOrder": 40
-    },
-    {
-      "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart",
-      "title": "サービス職の年収比較",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "cook-annual-income",
-            "label": "調理従事者",
-            "colorRole": "count"
-          },
-          {
-            "metricKey": "barber-beautician-annual-income",
-            "label": "理容・美容師",
-            "colorRole": "special"
-          },
-          {
-            "metricKey": "security-guard-annual-income",
-            "label": "警備員",
-            "colorRole": "neutral"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "cook-annual-income",
-        "barber-beautician-annual-income",
-        "security-guard-annual-income"
-      ],
-      "sourceName": "厚生労働省「賃金構造基本統計調査」",
-      "sourceLink": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "medical-care",
-      "sortOrder": 50
-    }
-  ],
+  "charts": [],
   "metricGroups": [
     {
       "key": "medical-care-1",
@@ -625,7 +445,8 @@
       ],
       "defaultCheckedKeys": [
         "doctor-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "medical-care-2",
@@ -635,7 +456,8 @@
       ],
       "defaultCheckedKeys": [
         "nurse-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "medical-care-3",
@@ -645,7 +467,8 @@
       ],
       "defaultCheckedKeys": [
         "care-worker-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "medical-care-4",
@@ -665,7 +488,8 @@
       ],
       "defaultCheckedKeys": [
         "school-teacher-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "education-2",
@@ -675,7 +499,8 @@
       ],
       "defaultCheckedKeys": [
         "nursery-teacher-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "education-3",
@@ -687,7 +512,8 @@
       "defaultCheckedKeys": [
         "university-professor-annual-income",
         "associate-professor-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "transport-construction-1",
@@ -697,7 +523,8 @@
       ],
       "defaultCheckedKeys": [
         "truck-driver-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "transport-construction-2",
@@ -707,7 +534,8 @@
       ],
       "defaultCheckedKeys": [
         "taxi-driver-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "transport-construction-3",
@@ -717,17 +545,36 @@
       ],
       "defaultCheckedKeys": [
         "carpenter-annual-income"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "it-professional-1",
-      "title": "ソフトウェア作成者",
+      "title": "システムコンサルタント・ソフトウェア作成者",
       "rankingKeys": [
+        "system-consultant-annual-income",
         "software-engineer-annual-income"
       ],
       "defaultCheckedKeys": [
+        "system-consultant-annual-income",
         "software-engineer-annual-income"
-      ]
+      ],
+      "view": "tiles"
+    },
+    {
+      "key": "service-1",
+      "title": "調理従事者・理容美容師・警備員",
+      "rankingKeys": [
+        "cook-annual-income",
+        "barber-beautician-annual-income",
+        "security-guard-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "cook-annual-income",
+        "barber-beautician-annual-income",
+        "security-guard-annual-income"
+      ],
+      "view": "tiles"
     }
   ],
   "evidenceTopics": [
@@ -748,9 +595,6 @@
       "relatedThemeKeys": [
         "labor-wages",
         "healthcare"
-      ],
-      "relatedChartKeys": [
-        "theme-occ-medical-trend"
       ]
     },
     {
@@ -768,9 +612,6 @@
       ],
       "relatedThemeKeys": [
         "labor-wages"
-      ],
-      "relatedChartKeys": [
-        "theme-occ-it-trend"
       ]
     }
   ],
@@ -797,11 +638,8 @@
         "medical-care-1",
         "medical-care-2",
         "medical-care-3",
-        "medical-care-4"
-      ],
-      "chartKeys": [
-        "theme-occ-medical-trend",
-        "theme-occ-service-trend"
+        "medical-care-4",
+        "service-1"
       ]
     },
     {
@@ -812,9 +650,6 @@
         "education-1",
         "education-2",
         "education-3"
-      ],
-      "chartKeys": [
-        "theme-occ-edu-trend"
       ]
     },
     {
@@ -825,9 +660,6 @@
         "transport-construction-1",
         "transport-construction-2",
         "transport-construction-3"
-      ],
-      "chartKeys": [
-        "theme-occ-transport-trend"
       ]
     },
     {
@@ -836,9 +668,6 @@
       "concern": "ソフトウェア作成者など専門職の年収が、県によってどれくらい違うかを知りたい。",
       "metricGroupKeys": [
         "it-professional-1"
-      ],
-      "chartKeys": [
-        "theme-occ-it-trend"
       ]
     }
   ]

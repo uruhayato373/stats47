@@ -6,6 +6,7 @@ import {
   validateChartTemporalFit,
   validateHarmRelevance,
 } from "../../scripts/validate-theme-catalog";
+import { MIN_TREND_YEARS } from "../display-semantics";
 import { METRICS_REGISTRY } from "../registry";
 import type { CatalogChart, ThemeCatalog } from "../theme-catalog/types";
 
@@ -47,6 +48,8 @@ function findMetricByYearSpan(predicate: (span: number) => boolean): string {
 
 const SINGLE_YEAR_KEY = findMetricByYearSpan((n) => n === 1);
 const MULTI_YEAR_KEY = findMetricByYearSpan((n) => n > 5);
+const SHORT_SPAN_KEY = findMetricByYearSpan((n) => n >= 2 && n < MIN_TREND_YEARS);
+const EXACT_TREND_SPAN_KEY = findMetricByYearSpan((n) => n === MIN_TREND_YEARS);
 
 function chart(overrides: Partial<CatalogChart>): CatalogChart {
   return {
@@ -267,6 +270,28 @@ describe("validateChartTemporalFit", () => {
     expect(warns.some((w) => w.includes("[chart-temporal-fit]") && w.includes(SINGLE_YEAR_KEY))).toBe(
       true,
     );
+  });
+
+  it("題に「推移」が無い line-chart でも 2〜4 年しかない指標を参照すると warn (MIN_TREND_YEARS 未満)", () => {
+    const warns: string[] = [];
+    validateChartTemporalFit(
+      chart({ componentType: "line-chart", title: "年収の比較", relatedRankingKeys: [SHORT_SPAN_KEY] }),
+      "theme/chart",
+      warns,
+    );
+    expect(warns.some((w) => w.includes("[chart-temporal-fit]") && w.includes(SHORT_SPAN_KEY))).toBe(
+      true,
+    );
+  });
+
+  it("line-chart がちょうど MIN_TREND_YEARS 年の指標を参照すれば warn しない", () => {
+    const warns: string[] = [];
+    validateChartTemporalFit(
+      chart({ componentType: "line-chart", relatedRankingKeys: [EXACT_TREND_SPAN_KEY] }),
+      "theme/chart",
+      warns,
+    );
+    expect(warns).toEqual([]);
   });
 
   it("line-chart が複数年の指標を参照すれば warn しない", () => {

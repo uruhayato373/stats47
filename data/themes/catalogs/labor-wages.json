@@ -226,31 +226,6 @@
   ],
   "charts": [
     {
-      "componentKey": "labor-wages-gender-gap",
-      "componentType": "line-chart",
-      "title": "男女賃金格差の比較",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "gender-wage-gap",
-            "label": "男女賃金格差",
-            "colorRole": "female"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "gender-wage-gap"
-      ],
-      "sourceName": "賃金構造基本統計調査",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "wage-differences",
-      "sortOrder": 10
-    },
-    {
       "componentKey": "md-labor-wages-discussion",
       "componentType": "markdown-section",
       "title": "数値を比較するときの注意",
@@ -315,7 +290,8 @@
       ],
       "defaultCheckedKeys": [
         "gender-wage-gap"
-      ]
+      ],
+      "view": "tiles"
     },
     {
       "key": "wage-differences-2",
@@ -394,9 +370,6 @@
       ],
       "relatedThemeKeys": [
         "occupation-salary"
-      ],
-      "relatedChartKeys": [
-        "labor-wages-gender-gap"
       ]
     }
   ],
@@ -434,9 +407,6 @@
         "wage-differences-1",
         "wage-differences-2",
         "wage-differences-3"
-      ],
-      "chartKeys": [
-        "labor-wages-gender-gap"
       ]
     },
     {

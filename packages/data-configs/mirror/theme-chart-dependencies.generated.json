@@ -1,7 +1,7 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalMetricRefs": 266,
-  "distinctMetricRefs": 250,
+  "totalMetricRefs": 251,
+  "distinctMetricRefs": 235,
   "minTrendYears": 5,
   "trendCharts": [
     {
@@ -328,14 +328,6 @@
       "expectedConfigHash": "e4c323a2e9ed181d"
     },
     {
-      "metricKey": "barber-beautician-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "7e81ee45bdca984c"
-    },
-    {
       "metricKey": "beer-consumption-expenditure",
       "themeKey": "household-food-spending",
       "componentKey": "household-food-spending-alcohol-trend",
@@ -438,22 +430,6 @@
       "componentType": "line-chart",
       "expectedUnit": "円",
       "expectedConfigHash": "43fc1efbbf4194a0"
-    },
-    {
-      "metricKey": "care-worker-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "d1aceb9724c9d3f6"
-    },
-    {
-      "metricKey": "carpenter-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "f237deb652d992ad"
     },
     {
       "metricKey": "clam-consumption-expenditure",
@@ -600,14 +576,6 @@
       "expectedConfigHash": "b8d7011778907468"
     },
     {
-      "metricKey": "cook-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "9e1faa4600a8f289"
-    },
-    {
       "metricKey": "criminal-arrest-rate",
       "themeKey": "safety",
       "componentKey": "crime-count-arrest-rate-trend",
@@ -702,14 +670,6 @@
       "componentType": "composition-chart",
       "expectedUnit": "人",
       "expectedConfigHash": "3b4c4683883b0612"
-    },
-    {
-      "metricKey": "doctor-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "e6148375a7d83450"
     },
     {
       "metricKey": "domestic-package-tour-consumption-expenditure",
@@ -822,14 +782,6 @@
       "componentType": "line-chart",
       "expectedUnit": "円",
       "expectedConfigHash": "d0dcfd377be5e20c"
-    },
-    {
-      "metricKey": "gender-wage-gap",
-      "themeKey": "labor-wages",
-      "componentKey": "labor-wages-gender-gap",
-      "componentType": "line-chart",
-      "expectedUnit": "%",
-      "expectedConfigHash": "bedadbaa823d86cd"
     },
     {
       "metricKey": "general-hospital-count-per-100k",
@@ -1320,22 +1272,6 @@
       "expectedConfigHash": "651cbbb4315d7fdf"
     },
     {
-      "metricKey": "nurse-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "d1b2e988c2883b8b"
-    },
-    {
-      "metricKey": "nursery-teacher-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "b18bdd172d331876"
-    },
-    {
       "metricKey": "other-bread-consumption-expenditure",
       "themeKey": "household-food-spending",
       "componentKey": "household-food-spending-staple-trend",
@@ -1624,28 +1560,12 @@
       "expectedConfigHash": "465ae5fc63fd247f"
     },
     {
-      "metricKey": "school-teacher-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "53f15683b16debee"
-    },
-    {
       "metricKey": "sea-bream-consumption-quantity",
       "themeKey": "household-food-spending",
       "componentKey": "household-food-spending-trend-fish-white",
       "componentType": "line-chart",
       "expectedUnit": "g",
       "expectedConfigHash": "47bbd2c7eab85c14"
-    },
-    {
-      "metricKey": "security-guard-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "1ee990b763047232"
     },
     {
       "metricKey": "serious-crime-per-100k",
@@ -1736,14 +1656,6 @@
       "expectedConfigHash": "5e48c5b130b79c9a"
     },
     {
-      "metricKey": "software-engineer-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-it-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "f987cf3e60444f3d"
-    },
-    {
       "metricKey": "sports-spectating-consumption-expenditure",
       "themeKey": "household-food-spending",
       "componentKey": "household-food-spending-trend-leisure",
@@ -1784,28 +1696,12 @@
       "expectedConfigHash": "312f2f9b74fb1b44"
     },
     {
-      "metricKey": "system-consultant-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-it-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "3d2a783b2fcb262e"
-    },
-    {
       "metricKey": "table-salt-consumption-quantity",
       "themeKey": "household-food-spending",
       "componentKey": "household-food-spending-trend-seasonings",
       "componentType": "line-chart",
       "expectedUnit": "g",
       "expectedConfigHash": "19231c5608511535"
-    },
-    {
-      "metricKey": "taxi-driver-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "49454428045204c3"
     },
     {
       "metricKey": "theft-offenses-recognized",
@@ -2144,28 +2040,12 @@
       "expectedConfigHash": "16905be2fda40655"
     },
     {
-      "metricKey": "truck-driver-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "dab66a2ad799c5d5"
-    },
-    {
       "metricKey": "turnover-rate",
       "themeKey": "labor-mobility",
       "componentKey": "labor-mobility-turnover-vs-jobchange",
       "componentType": "line-chart",
       "expectedUnit": "％",
       "expectedConfigHash": "fa3d6b6af8b4d5a1"
-    },
-    {
-      "metricKey": "university-professor-annual-income",
-      "themeKey": "occupation-salary",
-      "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "05970f3f2aff6d72"
     },
     {
       "metricKey": "vacant-housing-excluding-rental-sale-secondary",
