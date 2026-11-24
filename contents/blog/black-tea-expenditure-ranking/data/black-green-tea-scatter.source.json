@@ -1,0 +1,24 @@
+{
+  "kind": "derived",
+  "note": "app/ranking/green-tea-consumption-expenditure と app/ranking/black-tea-consumption-expenditure の values.json (ともに2025年) を areaCode で結合し pearsonR を独自算出 (r2の相関snapshotに未収載のペアのため手動join)。",
+  "pearsonR": 0.079,
+  "unit": "円 × 円",
+  "label": "緑茶と紅茶の消費支出額の関係",
+  "source": [
+    "r2:app/ranking/green-tea-consumption-expenditure/values.json",
+    "r2:app/ranking/black-tea-consumption-expenditure/values.json"
+  ],
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug black-tea-expenditure-ranking --keys green-tea-consumption-expenditure,black-tea-consumption-expenditure --dry-run; その後 areaCode で join し pearsonR 再算出",
+  "axes": {
+    "x": {
+      "metricKey": "green-tea-consumption-expenditure",
+      "year": "2025年",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "black-tea-consumption-expenditure",
+      "year": "2025年",
+      "proof": "values"
+    }
+  }
+}
