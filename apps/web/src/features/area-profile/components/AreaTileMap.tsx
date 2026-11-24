@@ -8,6 +8,12 @@ import { regionStyle } from "../constants/region-styles.palette";
 
 import type { AreaTile } from "../utils";
 
+/**
+ * スマホの幅のマスの文字の大きさ。1 マスの幅は地図の幅 W の約 1/14.4 (14 列・隙間 1px) で、2 文字 (2em) が入る最大は
+ * 約 3.47cqw。3.4cqw を 9〜11px に収める: 本文が 324px 以上なら 11px (小さすぎる文字にならない)、それより狭い端末だけ縮める。
+ */
+export const TILE_FONT_SIZE_CLASS = "text-[length:clamp(9px,3.4cqw,11px)]";
+
 const FOCUS_RING =
   "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
@@ -71,8 +77,11 @@ export function AreaTileMap({
               gridColumn: `${tile.x + 1} / span ${tile.w}`,
               gridRow: `${tile.y + 1} / span ${tile.h}`,
             }}
+            // 文字の大きさは地図の幅に合わせて 9〜11px (TILE_FONT_SIZE_CLASS)。固定の 9px だとスマホで 47 マスすべてが
+            // 「小さすぎる文字」(11px 未満) になっていた (2026-11-14 の週次 UI 検査 category/landweather の small_text_count)
             className={cn(
-              "flex items-center justify-center overflow-hidden whitespace-nowrap rounded-none text-center text-[9px] @sm:px-0.5 @sm:text-[11px] font-medium leading-none transition-colors",
+              "flex items-center justify-center overflow-hidden whitespace-nowrap rounded-none text-center @sm:px-0.5 @sm:text-[11px] font-medium leading-none transition-colors",
+              TILE_FONT_SIZE_CLASS,
               regionStyle(tile.regionCode).tile,
               FOCUS_RING,
             )}

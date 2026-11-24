@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T06:56:59.694Z",
+  "generatedAt": "2026-11-24T10:29:06.724Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -9054,14 +9054,14 @@
       "metric_key": "small_text_count",
       "severity": "warning",
       "detail": "small_text_count = 49 (閾値 <= 18)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-14",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:29:06.698Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図 (AreaTileMap) のマスの文字をスマホの幅で固定 9px にしていたのを clamp(9px,3.4cqw,11px) にし、本文 324px 以上では 11px (検査の基準以上) にした。47 マスが小さすぎる文字に数えられていた"
     },
     {
       "key": "machine|https://stats47.jp/category/population|a11y_violations",
