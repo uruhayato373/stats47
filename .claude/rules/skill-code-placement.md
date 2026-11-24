@@ -59,6 +59,15 @@ paths:
 - 移す先に vitest の project があるときは、`node:test` のテストをその vitest が拾わないことを確かめる (`packages/ops` には無い)。
   `.claude` のパスを文字列で持つ本体は、基準や予算の場所を入口から渡すか、置き場の台帳の id で引く形に直してから移す。
 
+## skill は「Read する手順書」であり、Skill ツールには登録しない (2026-11-24 オーナー決定)
+
+`.claude/skills/<群>/<名前>/SKILL.md` は群の入れ子なので、Claude Code の Skill ツールには 1 本も登録されない
+(2026-09-14 に `Skill("weekly-plan")` が Unknown skill になった)。これを不具合として平坦化しない。skill は、CLAUDE.md・
+agent 定義・ほかの SKILL.md・カードから**パスで指されて Read する手順書**として扱い、起動時に一覧を読み込ませない
+(平坦にして登録すると、161 本の説明が会話ごとに約 2 万 token 載る概算で、使わない会話でも払う)。したがって、
+新しい skill は必ずどこかの手順・agent・rule からパスで参照させる (参照の無い skill は誰にも Read されない)。
+`/名前` で呼ぶ書き方は「その SKILL.md を Read して従う」の略記として読む。
+
 ## 判断フロー
 
 ```
