@@ -78,8 +78,10 @@ jobs:
 
       - name: 🔍 Resolve target keys
         id: detect
+        env:
+          # inputs は run: へ直接展開せず env 経由で渡す (式インジェクション対策)
+          INPUT_KEYS: ${{ inputs.keys }}
         run: |
-          INPUT_KEYS="${{ inputs.keys }}"
           if [ -n "$INPUT_KEYS" ]; then
             CANDIDATES=$(echo "$INPUT_KEYS" | tr ', ' '\n' | sed '/^$/d')
           else

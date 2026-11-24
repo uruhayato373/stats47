@@ -26,6 +26,9 @@ function appendSummary(results, total, suiteBudget) {
 // workflow の step が末尾で `--ci-step <name> --elapsed-sec "$SECONDS"` を呼び、bash が数えた経過秒を渡す。
 // budgetMs は目標値で、合計が ciSteps.suiteBudgetMs 以下であることを引数なしの実行が検査する。
 // runner の揺れで PR を落とさないよう、予算超過は警告に留め、予算の 2 倍 (静的 checker の打ち切りと同じ比) を超えたら落とす。
+// 差分連動の step (`scoped: true`。対象のファイルが変わった PR だけ走る) は常に走る step の合計に入れず、
+// 別枠の ciSteps.scopedSuiteBudgetMs と比べる (CI-TOOLING-FOLLOWUP-02)。常に走る step の 100 秒の枠を守ったまま、
+// 差分連動の step の増加も予算で止めるため。
 const CI_STEP_LIMIT_RATIO = 2;
 const escapeRegExp = (/** @type {string} */ value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -36,14 +39,23 @@ function validateCiSteps(config, root) {
   const errors = [];
   const names = new Set();
   let total = 0;
+  let scopedTotal = 0;
+  let scopedCount = 0;
   for (const step of section.steps ?? []) {
     if (typeof step.name !== "string" || !step.name || typeof step.workflow !== "string" || !(step.budgetMs > 0)) {
       errors.push(`ciSteps: name / workflow / budgetMs (正の数) が要る: ${JSON.stringify(step)}`);
       continue;
     }
+    if (step.scoped !== undefined && typeof step.scoped !== "boolean") {
+      errors.push(`ciSteps: ${step.name} の scoped は true / false で書く: ${JSON.stringify(step.scoped)}`);
+      continue;
+    }
     if (names.has(step.name)) errors.push(`ciSteps: ${step.name} が重複している`);
     names.add(step.name);
-    total += step.budgetMs;
+    if (step.scoped) {
+      scopedTotal += step.budgetMs;
+      scopedCount += 1;
+    } else total += step.budgetMs;
     const file = path.join(root, step.workflow);
     const source = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
     const line = new RegExp(`^\\s*node \\.claude/scripts/lib/check-runtime-budget\\.cjs --ci-step ${escapeRegExp(step.name)} --elapsed-sec "\\$SECONDS"\\s*$`, "m");
@@ -51,6 +63,10 @@ function validateCiSteps(config, root) {
   }
   if (!(section.suiteBudgetMs > 0)) errors.push("ciSteps: suiteBudgetMs (正の数) が要る");
   else if (total > section.suiteBudgetMs) errors.push(`ciSteps: 予算の合計 ${total}ms が suite の ${section.suiteBudgetMs}ms を超えている`);
+  if (scopedCount > 0) {
+    if (!(section.scopedSuiteBudgetMs > 0)) errors.push("ciSteps: 差分連動の step (scoped: true) があるときは scopedSuiteBudgetMs (正の数) が要る");
+    else if (scopedTotal > section.scopedSuiteBudgetMs) errors.push(`ciSteps: 差分連動の step の予算の合計 ${scopedTotal}ms が scopedSuiteBudgetMs の ${section.scopedSuiteBudgetMs}ms を超えている`);
+  }
   return errors;
 }
 
@@ -109,7 +125,13 @@ function main() {
   else {
     results.forEach((item) => console.log(`${item.status === "ok" ? "✓" : "✗"} ${item.name}: ${item.durationMs}ms / ${item.budgetMs}ms`));
     console.log(`static checker runtime: total=${total}ms p50=${report.p50Ms}ms p95=${report.p95Ms}ms budget=${config.suiteBudgetMs}ms`);
-    if (config.ciSteps) console.log(`ci step budgets: ${(config.ciSteps.steps ?? []).length} steps total=${(config.ciSteps.steps ?? []).reduce((sum, step) => sum + (step.budgetMs || 0), 0)}ms suite=${config.ciSteps.suiteBudgetMs}ms`);
+    if (config.ciSteps) {
+      const always = (config.ciSteps.steps ?? []).filter((step) => !step.scoped);
+      const scoped = (config.ciSteps.steps ?? []).filter((step) => step.scoped);
+      const sum = (/** @type {Array<{budgetMs?: number}>} */ steps) => steps.reduce((acc, step) => acc + (step.budgetMs || 0), 0);
+      console.log(`ci step budgets: ${always.length} steps total=${sum(always)}ms suite=${config.ciSteps.suiteBudgetMs}ms`);
+      if (scoped.length) console.log(`scoped ci step budgets: ${scoped.length} steps total=${sum(scoped)}ms suite=${config.ciSteps.scopedSuiteBudgetMs}ms`);
+    }
   }
   process.exitCode = failures.length || total > config.suiteBudgetMs || ciStepErrors.length ? 1 : 0;
 }

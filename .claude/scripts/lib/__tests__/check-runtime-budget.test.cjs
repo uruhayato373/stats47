@@ -30,12 +30,12 @@ test("percentileを計算する", () => {
 // workflow の step が末尾で自分の経過秒 ($SECONDS) を渡し、予算ファイルの登録と突き合わせる。
 const HEAVY_STEPS = ["workflow-commit-back", "seo-meta-factual", "image-generation-pipeline", "theme-portfolio-state"];
 const MEASURE_LINE = (name) => `          node .claude/scripts/lib/check-runtime-budget.cjs --ci-step ${name} --elapsed-sec "$SECONDS"\n`;
-function fixture({ steps, suiteBudgetMs = 100000, workflow }) {
+function fixture({ steps, suiteBudgetMs = 100000, scopedSuiteBudgetMs, workflow }) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "stats47-runtime-budget-ci-"));
   fs.mkdirSync(path.join(dir, ".github/workflows"), { recursive: true });
   fs.writeFileSync(path.join(dir, ".github/workflows/pr.yml"), workflow ?? steps.map((step) => MEASURE_LINE(step.name)).join(""));
   const config = path.join(dir, "config.json");
-  fs.writeFileSync(config, JSON.stringify({ version: 1, suiteBudgetMs: 5000, checks: [], ciSteps: { suiteBudgetMs, steps: steps.map((step) => ({ workflow: ".github/workflows/pr.yml", ...step })) } }));
+  fs.writeFileSync(config, JSON.stringify({ version: 1, suiteBudgetMs: 5000, checks: [], ciSteps: { suiteBudgetMs, ...(scopedSuiteBudgetMs === undefined ? {} : { scopedSuiteBudgetMs }), steps: steps.map((step) => ({ workflow: ".github/workflows/pr.yml", ...step })) } }));
   return { dir, config };
 }
 function runIn(f, args) {
@@ -44,12 +44,13 @@ function runIn(f, args) {
   const result = spawnSync(process.execPath, [CHECKER, ...args], { cwd: ROOT, encoding: "utf8", env });
   fs.rmSync(f.dir, { recursive: true, force: true }); return result;
 }
-test("実物の予算ファイルは CI の重い 4 step を登録し、予算の合計が 100 秒以下で、各 step が経過秒を渡す", () => {
+test("実物の予算ファイルは常に走る CI の重い 4 step を登録し、予算の合計が 100 秒以下で、各 step が経過秒を渡す", () => {
   const config = JSON.parse(fs.readFileSync(path.join(ROOT, ".claude/config/check-runtime-budgets.json"), "utf8"));
   assert.ok(config.ciSteps, "ciSteps が無い = 重い step の予算が未登録");
-  assert.deepEqual(config.ciSteps.steps.map((step) => step.name).sort(), [...HEAVY_STEPS].sort());
+  const always = config.ciSteps.steps.filter((step) => !step.scoped);
+  assert.deepEqual(always.map((step) => step.name).sort(), [...HEAVY_STEPS].sort());
   assert.equal(config.ciSteps.suiteBudgetMs, 100000, "完了条件は対象 step の合計 100 秒以下");
-  assert.ok(config.ciSteps.steps.reduce((sum, step) => sum + step.budgetMs, 0) <= 100000);
+  assert.ok(always.reduce((sum, step) => sum + step.budgetMs, 0) <= 100000);
   const { validateCiSteps } = require(CHECKER);
   assert.deepEqual(validateCiSteps(config, ROOT), []);
 });
@@ -90,4 +91,31 @@ test("引数なしの実行は、登録した step が workflow で経過秒を�
 test("引数なしの実行は、名前の重複と欠けた項目を落とす", () => {
   assert.equal(runIn(fixture({ steps: [{ name: "a", budgetMs: 1000 }, { name: "a", budgetMs: 1000 }] }), []).status, 1);
   assert.equal(runIn(fixture({ steps: [{ name: "a", budgetMs: 0 }] }), []).status, 1);
+});
+
+// ── 差分連動の step の別枠 (CI-TOOLING-FOLLOWUP-02) ──
+// Scoped Workflow Contract Gate は workflow とテスト自身が変わった PR だけ走り、2026-09-18 の 76 秒から 194 秒へ増えた。
+// 常に走る step の 100 秒の枠に入れると枠が壊れるので、scoped: true の step は別枠 scopedSuiteBudgetMs と比べる。
+test("差分連動の step (scoped: true) は常に走る step の合計に入れない", () => {
+  const steps = [{ name: "a", budgetMs: 60000 }, { name: "b", budgetMs: 40000 }, { name: "scoped", budgetMs: 200000, scoped: true }];
+  const result = runIn(fixture({ steps, scopedSuiteBudgetMs: 200000 }), []);
+  assert.equal(result.status, 0, result.stderr);
+});
+test("差分連動の step の予算の合計が scopedSuiteBudgetMs を超えると落とす", () => {
+  const steps = [{ name: "s1", budgetMs: 150000, scoped: true }, { name: "s2", budgetMs: 50001, scoped: true }];
+  const over = runIn(fixture({ steps, scopedSuiteBudgetMs: 200000 }), []);
+  assert.equal(over.status, 1); assert.match(over.stderr, /差分連動の step の予算の合計 200001ms/);
+});
+test("差分連動の step があるのに scopedSuiteBudgetMs が無いと落とす (別枠の上限なしで増えるのを止める)", () => {
+  const result = runIn(fixture({ steps: [{ name: "s", budgetMs: 1000, scoped: true }] }), []);
+  assert.equal(result.status, 1); assert.match(result.stderr, /scopedSuiteBudgetMs/);
+});
+test("scoped が真偽値でない登録を落とす", () => {
+  const result = runIn(fixture({ steps: [{ name: "s", budgetMs: 1000, scoped: "yes" }], scopedSuiteBudgetMs: 1000 }), []);
+  assert.equal(result.status, 1); assert.match(result.stderr, /scoped は true \/ false/);
+});
+test("--ci-step は差分連動の step も予算の 2 倍で落とす", () => {
+  const steps = [{ name: "scoped", budgetMs: 200000, scoped: true }];
+  assert.equal(runIn(fixture({ steps, scopedSuiteBudgetMs: 200000 }), ["--ci-step", "scoped", "--elapsed-sec", "194"]).status, 0);
+  assert.equal(runIn(fixture({ steps, scopedSuiteBudgetMs: 200000 }), ["--ci-step", "scoped", "--elapsed-sec", "401"]).status, 1);
 });
