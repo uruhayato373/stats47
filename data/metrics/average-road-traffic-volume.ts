@@ -37,8 +37,6 @@ export const averageRoadTrafficVolume: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "道路平均交通量ランキング都道府県【2020年】｜1位大阪府（16,472台/12h）",
-  "seoDescription": "2020年の道路平均交通量の都道府県別ランキング。1位大阪府（16,472台/12h）、最下位島根県（2,724台/12h）で6.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
   "subtitle": "昼間12時間の平均交通量"
 };

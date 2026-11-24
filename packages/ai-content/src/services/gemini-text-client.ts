@@ -83,13 +83,37 @@ export function extractQuotaDetails(raw: string): GeminiQuotaDetails | undefined
   }
 }
 
+/** 400 の本文の長さの上限。原因 (schema・引数) が読める長さだけを残す。 */
+const BAD_REQUEST_DETAIL_MAX = 170;
+
+/**
+ * 400 の本文から `error.status` と `error.message` だけを取り出す。
+ * 2026-11-10〜11-22 の日次で 400 の本文を読み捨てていたため、原因が run のログに残らなかった。
+ * キーに見える文字列 (AIza で始まる 35 字以上) は伏せる。prompt と生成本文は含まれない。
+ */
+export function extractBadRequestDetail(raw: string): string | undefined {
+  try {
+    const parsed = JSON.parse(raw) as { error?: { status?: unknown; message?: unknown } };
+    const status = typeof parsed.error?.status === "string" ? parsed.error.status : "";
+    const message = typeof parsed.error?.message === "string" ? parsed.error.message : "";
+    const joined = [status, message].filter(Boolean).join(": ").replace(/AIza[0-9A-Za-z_-]{30,}/g, "<redacted>");
+    if (!joined) return undefined;
+    return joined.length > BAD_REQUEST_DETAIL_MAX ? `${joined.slice(0, BAD_REQUEST_DETAIL_MAX)}…` : joined;
+  } catch {
+    return undefined;
+  }
+}
+
 export class GeminiTextError extends Error {
   constructor(
     readonly classification: GeminiTextErrorClass,
     readonly status?: number,
     readonly quota?: GeminiQuotaDetails,
+    readonly detail?: string,
   ) {
-    super(status ? `${classification} (HTTP ${status})` : classification);
+    super(
+      (status ? `${classification} (HTTP ${status})` : classification) + (detail ? ` — ${detail}` : ""),
+    );
     this.name = "GeminiTextError";
   }
 }
@@ -241,13 +265,14 @@ export async function generateContentText(
         const billing = response.status === 429 && isBillingExhausted(raw);
         const classification = billing ? "billing" : classify(response.status);
         const quota = response.status === 429 ? extractQuotaDetails(raw) : undefined;
+        const detail = classification === "bad-request" ? extractBadRequestDetail(raw) : undefined;
         options.onAttempt?.({
           attempt,
           status: response.status,
           classification,
           quota,
         });
-        const error = new GeminiTextError(classification, response.status, quota);
+        const error = new GeminiTextError(classification, response.status, quota, detail);
         if (isRetriable(classification) && attempt < maxAttempts) {
           lastError = error;
           await sleepImpl(retryDelayMs(classification, attempt, quota));

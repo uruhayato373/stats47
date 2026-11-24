@@ -40,7 +40,5 @@ export const bathroomHousingRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "浴室のある住宅比率 都道府県ランキング【2008年】｜1位島根県（98.6％）",
-  "seoDescription": "2008年の浴室のある住宅比率を都道府県別に比較。1位は島根県（98.6％）、最下位は東京都（91.4％）、最大と最小の差は1.1倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

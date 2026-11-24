@@ -1,0 +1,187 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
+/**
+ * 指標定義シート — 記事・書籍が使う指標の「単位・対象と分母・期間の型・調査・注意」を
+ * data-configs (git TS SSOT) から決定的に引き、執筆 (article-writer) と審査 (blog-critic) の
+ * 両方に同じ表を渡す。
+ *
+ * ★なぜ要るか (2026-09-19)
+ *   K-S1-01 の全章レビューで BLOCK 8 / MAJOR 19 のうち大半が「本文 2020 年値 vs 図 2021 年値」
+ *   「名目支出 ÷ 実質所得」「二人以上世帯全体と勤労者世帯の混同」「相関係数 0.39 を『4割』」の
+ *   ように、指標の定義を確かめれば防げる種類だった。quality-gate は形式、factual-check は
+ *   値の存在しか見ず、critic の rubric にも定義の項目が無かった。書く側・見る側のどちらも
+ *   metric config を読む手順になっていなかったので、その表をここで作る。
+ *
+ * 実行:
+ *   npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --slug <slug> [--slug ...]
+ *   npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --keys a,b,c
+ *   npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --article contents/blog/<slug>/article.md
+ *
+ * 指標の集め方 (--slug / --article):
+ *   本文の `/ranking/<key>` リンク + data/*.json の rankingKey (R2 または contents/blog のローカル)。
+ *   出力は markdown 表 (stdout)。`--out <path>` でファイルへ。
+ *
+ * 判定はしない。表を出すだけ (定義の矛盾を見つけるのは人 / critic の仕事)。
+ */
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { METRICS_REGISTRY } from "../../../data-configs/src/registry.ts";
+import type { MetricConfig } from "../../../data-configs/src/types.ts";
+import { resolveSurveyLinkage } from "../../../ranking/src/builders/build-ranking-item-from-metric.ts";
+import { R2_PUBLIC_BASE_URL } from "../../../types/mirror/site-config.cjs";
+
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
+
+/**
+ * 調査名は ranking item と同じ解決 (config.surveyId > statsDataId / cdCat01 の辞書導出) で引く。
+ * config.surveyId だけを見ると、辞書で解決済みの指標 (例: 賃金構造基本統計調査の職種別年収 39 指標)
+ * まで「未設定」と出ていた (METRIC-WAGE-SURVEY-01)。
+ */
+function surveyLabel(c: MetricConfig): string {
+  const { originalSurveys } = resolveSurveyLinkage(c, METRICS_REGISTRY);
+  const main = originalSurveys.length
+    ? originalSurveys.map((s) => s.name).join(" / ")
+    : c.surveyScope === "not-applicable" ? "調査対象外 (台帳等)" : "(調査を解決できない)";
+  return main + supplementalLabel(c);
+}
+
+/** 補助の出典から取る年を添える。記事がその年の値の出典を主の出典と取り違えないため (METRIC-SUPPLEMENTAL-SOURCE-DISPLAY-01) */
+export function supplementalLabel(c: Pick<MetricConfig, "supplementalSources">): string {
+  const parts = (c.supplementalSources ?? []).map((s) => {
+    const src = s.source as { displayName?: string; statsDataId?: string };
+    const table = src.statsDataId ? ` 表${src.statsDataId}` : "";
+    return `${s.years.map((y) => `${y}年`).join("・")}は${src.displayName ?? "補助の出典"}${table}`;
+  });
+  return parts.length ? ` (${parts.join(" / ")})` : "";
+}
+
+function argAll(name: string): string[] {
+  const out: string[] = [];
+  for (let i = 0; i < process.argv.length; i++) if (process.argv[i] === `--${name}` && process.argv[i + 1]) out.push(process.argv[i + 1]);
+  return out;
+}
+
+/** 本文と data/*.json から指標キーを集める (順序は出現順・重複なし)。 */
+export async function collectKeys(slug: string): Promise<string[]> {
+  const keys: string[] = [];
+  const push = (k: string) => {
+    if (k && !keys.includes(k)) keys.push(k);
+  };
+  const local = path.join(PROJECT_ROOT, "contents/blog", slug);
+  let md: string;
+  if (fs.existsSync(path.join(local, "article.md"))) {
+    md = fs.readFileSync(path.join(local, "article.md"), "utf8");
+    const dataDir = path.join(local, "data");
+    if (fs.existsSync(dataDir)) {
+      for (const f of fs.readdirSync(dataDir).filter((x) => x.endsWith(".json"))) {
+        try {
+          const j = JSON.parse(fs.readFileSync(path.join(dataDir, f), "utf8")) as { rankingKey?: string };
+          if (j.rankingKey) push(j.rankingKey);
+        } catch {
+          /* 図 JSON でないものは無視 */
+        }
+      }
+    }
+  } else {
+    const res = await fetch(`${R2_BASE}/app/blog/${slug}/article.md`);
+    if (!res.ok) throw new Error(`article not found: ${slug} (${res.status})`);
+    md = await res.text();
+    for (const m of md.matchAll(/!\[[^\]]*\]\(data\/([a-z0-9-]+)\.svg\)/g)) {
+      const jr = await fetch(`${R2_BASE}/app/blog/${slug}/data/${m[1]}.json`);
+      if (!jr.ok) continue;
+      const j = (await jr.json()) as { rankingKey?: string };
+      if (j.rankingKey) push(j.rankingKey);
+    }
+  }
+  for (const m of md.matchAll(/\/ranking\/([a-z0-9-]+)/g)) push(m[1]);
+  return keys;
+}
+
+function yearType(c: MetricConfig): string {
+  if (c.yearFormat === "fiscal") return "年度";
+  if (c.yearFormat === "calendar") return "暦年";
+  if (c.yearFormat === "plain") return "年 (表記のみ)";
+  return "未宣言 (config に yearFormat 無し。出典で確認)";
+}
+
+const NEGATION_AFTER = /^.{0,2}(ではな|でな|を除|を含まない|は含まない)/;
+
+/** 語が 1 回でも否定されずに出てくるか (直後 2 文字以内に否定が続く出現は数えない)。 */
+export function mentionsAffirmatively(text: string, word: string): boolean {
+  for (let i = text.indexOf(word); i !== -1; i = text.indexOf(word, i + 1)) {
+    if (!NEGATION_AFTER.test(text.slice(i + word.length, i + word.length + 8))) return true;
+  }
+  return false;
+}
+
+function scope(c: MetricConfig): string {
+  const text = `${c.subtitle ?? ""} ${c.description ?? ""} ${c.note ?? ""}`;
+  const hits = new Set<string>();
+  for (const w of ["二人以上の世帯", "二人以上世帯", "勤労者世帯", "単身世帯", "総世帯", "都道府県庁所在市", "県庁所在市", "都道府県庁所在地", "一般世帯", "高等学校卒業者", "大学入学者", "特別高圧・高圧・低圧", "労働力人口", "養護老人ホーム", "介護老人福祉施設", "軽費老人ホーム", "有料老人ホーム", "事業所", "企業", "一般労働者", "男女計", "人口10万人当たり", "人口千人当たり", "1世帯当たり", "1人当たり", "全国=100", "指数", "構成比", "割合"]) {
+    // 「法人企業数ではなく」のように否定して書いた語は対象に数えない (METRIC-DAIRY-CONFIG-01)
+    if (mentionsAffirmatively(text, w)) hits.add(w);
+  }
+  const calc = c.calculation;
+  if (calc?.isCalculated && calc.type === "ratio") {
+    hits.add(`比 = ${calc.numeratorKey ?? "?"} ÷ ${calc.denominatorKey ?? "?"}${calc.scaleFactor ? ` × ${calc.scaleFactor}` : ""}`);
+  }
+  return hits.size ? [...hits].join(" / ") : "(config に対象の記述なし)";
+}
+
+function cautions(c: MetricConfig): string {
+  const out: string[] = [];
+  if (/[%％]/.test(c.unit)) out.push("構成比・割合: 分母が減れば上がる。合計 100% の費目は他費目と負の相関が計算上出る");
+  if (c.calculation?.isCalculated && c.calculation.type === "ratio") out.push("分子と分母の対象・年・価格基準 (名目/実質) が同じかを確認");
+  if (/指数/.test(c.title)) {
+    // 基準 (全国=100 等) は単位・副題が宣言するときだけ書く。題名に「指数」があるだけでは基準を決められない
+    // (大学収容力指数は入学者数 ÷ 前年度進学者数 × 100 で、全国=100 の指数ではない。METRIC-GATE-FOLLOWUP-01)
+    const base = `${c.unit} ${c.subtitle ?? ""}`.normalize("NFKC").match(/[^\s()（）:：]+\s*=\s*100/)?.[0].replace(/\s/g, "");
+    out.push(base ? `指数 (${base}): 実額に換算しない` : "指数: 実額に換算しない。基準は定義の算式で確認する");
+  }
+  if (/相関|係数/.test(c.title)) out.push("相関係数 r は説明割合ではない (r² が寄与)");
+  if (/世帯/.test(scope(c))) out.push("世帯平均を個人の手取り・県民全体に置き換えない");
+  if (c.note) out.push(c.note);
+  return out.join("。") || "-";
+}
+
+export function buildSheet(keys: string[]): string {
+  const rows = keys.map((k) => {
+    const c = METRICS_REGISTRY[k];
+    if (!c) return `| \`${k}\` | (config 無し) | | | | | 実在しないキー。本文を確認 |`;
+    const survey = surveyLabel(c);
+    const cell = (s: string) => s.replace(/\|/g, "／").replace(/\n/g, " ");
+    return `| \`${k}\` | ${cell(c.title)}${c.subtitle ? `（${cell(c.subtitle)}）` : ""} | ${cell(c.unit)} | ${cell(scope(c))} | ${yearType(c)} | ${cell(survey)} | ${cell(cautions(c))} |`;
+  });
+  return [
+    "| key | 指標 | 単位 | 対象・分母 | 期間の型 | 調査 | 読み違い注意 |",
+    "|---|---|---|---|---|---|---|",
+    ...rows,
+  ].join("\n");
+}
+
+async function main(): Promise<void> {
+  const slugs = argAll("slug");
+  const articles = argAll("article");
+  const keysArg = argAll("keys").flatMap((s) => s.split(","));
+  const out = argAll("out")[0];
+  const keys: string[] = [...keysArg];
+  for (const a of articles) slugs.push(path.basename(path.dirname(path.resolve(a))));
+  for (const s of slugs) for (const k of await collectKeys(s)) if (!keys.includes(k)) keys.push(k);
+  if (keys.length === 0) {
+    console.error("usage: --slug <slug> | --article <path> | --keys a,b,c  [--out <path>]");
+    process.exit(2);
+  }
+  const header = slugs.length ? `# 指標定義シート — ${slugs.join(", ")}\n\n` : "# 指標定義シート\n\n";
+  const md = `${header}${buildSheet(keys)}\n\n出典: ${METRIC_DEFINITIONS_DIR}/<key>.ts (git TS SSOT)。表に無い前提を本文に書かない。「未宣言」は config 側の欠落なので、本文で年の型を書く前に出典 (e-Stat 表) で確かめて config へ反映する。\n`;
+  if (out) fs.writeFileSync(out, md);
+  else process.stdout.write(md);
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((e) => {
+    console.error(e instanceof Error ? e.message : String(e));
+    process.exit(1);
+  });
+}

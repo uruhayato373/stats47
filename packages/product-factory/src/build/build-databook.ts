@@ -26,6 +26,18 @@ import { LICENSE_REGISTRY, type LicenseId } from "../catalog/licenses";
 import { buildInputHash, sha256, type ProductManifest, type ManifestFile } from "../generators/manifest";
 import { reserveProductVersion, type ProductBuildOptions, type ProductBuildResult } from "./build-product";
 import { SITE } from "@stats47/data-configs";
+import type { SourceRow } from "../data/sources";
+import { compareSeriesWithDataset, fetchSeriesForDatasets, withRoundingNote, type MetricTimeSeries } from "../data/time-series";
+import { PREFECTURE_BOUNDARY_NOTICE, prefectureBoundarySourceRow } from "../maps/prefecture-boundary";
+import {
+  MAX_INDICATORS_PER_PART,
+  NOTE_ATTACHMENT_LIMIT_BYTES,
+  measureZipBreakdown,
+  measureZipBytes,
+  writeBundleFiles,
+  type ZipBreakdown,
+  type BundleResult,
+} from "./pack-bundle";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/data-packs");
@@ -48,7 +60,58 @@ export function resolveDatabook(product: ProductDefinition): Databook | null {
   return DATABOOKS[product.id] ?? null;
 }
 
-function renderDatabookReadiness(product: ProductDefinition, databook: Databook): string {
+/** 「比較表 + 時系列 + 塗り分け地図」のバンドルを作る指定。 */
+export interface DatabookBundleOptions {
+  /** 時系列 (datasets と同じ並び)。省略すると公開 R2 から取る。テスト用。 */
+  readonly series?: readonly MetricTimeSeries[];
+  readonly onProgress?: (done: number, total: number) => void;
+}
+
+export interface DatabookBuildOptions extends ProductBuildOptions {
+  readonly bundle?: DatabookBundleOptions;
+}
+
+interface BundleReadiness {
+  readonly result: BundleResult;
+  readonly zipBytes: number;
+  /** 全体が上限を超えるときだけ: 分野ごとに ZIP を分けた場合の大きさ。 */
+  readonly breakdown?: ZipBreakdown;
+}
+
+/** パート (分野・50 指標ごと) ごとに ZIP を分けた場合の大きさ (共通のファイルを足した値)。上限を超えるパートがあれば明記する。 */
+function zipBreakdownLines(z: ZipBreakdown): string[] {
+  const mb = (n: number): string => `${(n / 1024 / 1024).toFixed(1)} MB`;
+  const rows = [...z.byPart].map(([key, bytes]) => ({ key, total: bytes + z.commonBytes }));
+  const over = rows.filter((r) => r.total > NOTE_ATTACHMENT_LIMIT_BYTES);
+  const biggest = rows.reduce((m, r) => (r.total > m.total ? r : m), rows[0]);
+  return [
+    `- パートごとに ZIP を分けた場合（共通のファイル ${mb(z.commonBytes)} を各 ZIP に足す）: ${rows.length} 本・最大 ${biggest.key} ${mb(biggest.total)}`,
+    over.length > 0
+      ? `  - **上限を超えるパート: ${over.map((r) => r.key).join("、")}**（さらに分割が要る）`
+      : `  - どのパートも上限に収まる。note の添付のアップロードは 1 日 10 回までなので、${rows.length} 本を 1 つの記事に付けるなら複数日に分ける`,
+    `  - 全パート: ${rows.map((r) => `${r.key} ${mb(r.total)}`).join(" / ")}`,
+  ];
+}
+
+function bundleReadinessLines(b: BundleReadiness): string[] {
+  const mb = (n: number): string => `${(n / 1024 / 1024).toFixed(1)} MB`;
+  const s = b.result.summary;
+  const fits = b.zipBytes <= NOTE_ATTACHMENT_LIMIT_BYTES;
+  return [
+    "",
+    "## 比較表・時系列・塗り分け地図のバンドル",
+    `- 時系列: ${s.indicators} 指標（のべ ${s.seriesYearsTotal} 指標年）を CSV と Excel（分野ごと・${MAX_INDICATORS_PER_PART} 指標ごと）に収録。注記のある指標 ${s.seriesWithNotes} 件（timeseries/NOTES.csv）`,
+    `- 地図: PowerPoint ${s.pptxFiles} ファイル（分野ごと・${MAX_INDICATORS_PER_PART} 指標ごと・1 指標 1 スライド）と SVG ${s.svgFiles} ファイル。対応表は maps/INDEX.csv`,
+    `- 地図の境界: ${PREFECTURE_BOUNDARY_NOTICE}（SOURCES.csv・LICENSE-ja.txt・README.md に出どころを記載）`,
+    `- 全ファイルを ZIP（deflate）にした大きさ: ${mb(b.zipBytes)} ／ note の添付の上限 ${mb(NOTE_ATTACHMENT_LIMIT_BYTES)} → ${fits ? "収まる" : "**超える。分野ごとに ZIP を分けるか、添付を複数に分ける**"}`,
+    ...(b.breakdown ? zipBreakdownLines(b.breakdown) : []),
+    "- 時系列と比較表の基準年の値が全指標・全県で一致することを生成時に検査済み（不一致があれば生成が止まる）",
+    "- [ ] **PowerPoint（Windows/Mac 365）で実機確認**: 各スライドの県をクリックして塗りつぶし色を変えられるか・選択ウィンドウに県名が出るか・凡例の表示・日本語フォント（OOXML 構造の検査と実機検証は別。実機は未確認）",
+    "- [ ] SVG を Illustrator / Inkscape / ブラウザで開き、県ごとの id（pref-<5 桁コード>）で色を変えられるか",
+  ];
+}
+
+function renderDatabookReadiness(product: ProductDefinition, databook: Databook, bundle?: BundleReadiness): string {
   const lic = LICENSE_REGISTRY[product.licenseId as LicenseId];
   const n = databook.datasets.length;
   const LIST_CAP = 30;
@@ -99,6 +162,8 @@ function renderDatabookReadiness(product: ProductDefinition, databook: Databook)
     "- [ ] サムネイル・商品説明文の最終調整",
     "- [ ] **note への公開** ← アカウント操作。公開は note-manager がオーナー承認後に行う",
     "",
+    ...(bundle ? bundleReadinessLines(bundle) : []),
+    "",
     "## 免責",
     "- 公的統計の概況整理であり、医療・投資・防災等の意思決定結果を保証しません。",
     `- 利用範囲: ${lic.scope}（テンプレート・素材単体の再販売・再配布は禁止）。`,
@@ -110,29 +175,57 @@ function renderDatabookReadiness(product: ProductDefinition, databook: Databook)
 export async function buildDatabook(
   product: ProductDefinition,
   databook: Databook,
-  opts: ProductBuildOptions = {},
+  opts: DatabookBuildOptions = {},
 ): Promise<ProductBuildResult> {
   const version = opts.version ?? "v1";
   const outRoot = opts.outRoot ?? OUT_ROOT_DEFAULT;
   const generatedAt = opts.generatedAt ?? new Date().toISOString();
   const geo: PrefectureGeometry = opts.geo ?? loadPrefectureGeometry(1000, JAPAN_CLIP);
   const outDir = join(outRoot, product.id, version);
+  const datasets = databook.datasets;
+
+  // バンドル: 時系列を先に取り、比較表と食い違えば版のディレクトリを作る前に止める (欠けた版を残さない)
+  let series: readonly MetricTimeSeries[] | undefined;
+  if (opts.bundle) {
+    const fetched = opts.bundle.series ?? (await fetchSeriesForDatasets(datasets, { onProgress: opts.bundle.onProgress }));
+    if (fetched.length !== datasets.length) throw new Error(`バンドル: 時系列 ${fetched.length} 指標 ≠ 比較表 ${datasets.length} 指標`);
+    const mismatches: string[] = [];
+    series = fetched.map((sr, i) => {
+      const { mismatch, roundedDecimals } = compareSeriesWithDataset(sr, datasets[i]);
+      if (mismatch) mismatches.push(`${mismatch.rankingKey}: ${mismatch.reason}`);
+      return roundedDecimals === null ? sr : withRoundingNote(sr, datasets[i], roundedDecimals);
+    });
+    if (mismatches.length > 0) {
+      throw new Error(`時系列が比較表と一致しない ${mismatches.length} 指標 (R2 の取り直し後に pack-snapshot を作り直す):\n- ${mismatches.slice(0, 10).join("\n- ")}`);
+    }
+  }
+
   reserveProductVersion(outRoot, product.id, version);
   mkdirSync(join(outDir, "preview"), { recursive: true });
   mkdirSync(join(outDir, "listing"), { recursive: true });
 
-  const datasets = databook.datasets;
   const built: ProductFormat[] = [];
   const skipped: ProductFormat[] = [];
   const files: string[] = [];
   const has = (f: ProductFormat): boolean => product.formats.includes(f);
 
   // 常時同梱: 出典 (全指標) / 許諾 / 販売文 / データ本体 (横並び csv) / サムネイル
-  writeFileSync(join(outDir, "SOURCES.csv"), serializeSourcesCsv(datasets.map((d) => d.source)));
+  const sourceRows: SourceRow[] = datasets.map((d) => d.source);
+  if (opts.bundle) sourceRows.push(prefectureBoundarySourceRow());
+  writeFileSync(join(outDir, "SOURCES.csv"), serializeSourcesCsv(sourceRows));
   files.push("SOURCES.csv");
-  writeFileSync(join(outDir, "LICENSE-ja.txt"), renderLicenseText(product.licenseId, datasets.map((d) => d.source)));
+  writeFileSync(
+    join(outDir, "LICENSE-ja.txt"),
+    renderLicenseText(product.licenseId, sourceRows, opts.bundle ? [`地図の境界: ${PREFECTURE_BOUNDARY_NOTICE}。`] : []),
+  );
   files.push("LICENSE-ja.txt");
-  writeFileSync(join(outDir, "listing", "listing.md"), renderListing(product, datasets));
+  writeFileSync(
+    join(outDir, "listing", "listing.md"),
+    renderListing(product, datasets) +
+      (opts.bundle
+        ? "\n## 同梱の時系列と塗り分け地図\n- 時系列: 取れる全年を CSV（縦持ち）と Excel（指標ごとに年を列にしたシート）で収録\n- 塗り分け地図: 全指標を PowerPoint（県ごとに色を変えられる図形・1 指標 1 スライド）と SVG で収録\n- 地図の境界は e-Stat の国勢調査の境界データを加工したものです（出どころは README.md・LICENSE-ja.txt に記載）\n"
+        : ""),
+  );
   files.push("listing/listing.md");
   writeFileSync(join(outDir, "data.csv"), serializeDatabookCsv(datasets));
   files.push("data.csv");
@@ -182,6 +275,15 @@ export async function buildDatabook(
   }
   for (const f of product.formats) if (!SUPPORTED.has(f)) skipped.push(f);
 
+  // ② 時系列 ③ 塗り分け地図 ④ README
+  let bundle: BundleReadiness | undefined;
+  if (opts.bundle && series) {
+    const result = await writeBundleFiles(outDir, { packName: product.name, formats: product.formats, datasets, series, geo });
+    files.push(...result.files);
+    const zipBytes = await measureZipBytes(outDir, files);
+    bundle = { result, zipBytes, breakdown: zipBytes > NOTE_ATTACHMENT_LIMIT_BYTES ? await measureZipBreakdown(outDir, files) : undefined };
+  }
+
   // manifest
   const inputHash = buildInputHash({
     productId: product.id,
@@ -191,6 +293,7 @@ export async function buildDatabook(
     version,
     clip: JAPAN_CLIP,
     datasets: datasets.map((d) => ({ indicator: d.indicator, unit: d.unit, year: d.year, source: d.source, values: d.values })),
+    ...(series ? { bundle: { geometry: sha256(JSON.stringify(geo.shapes)), series: series.map((sr) => ({ key: sr.rankingKey, unit: sr.unit, years: sr.years })) } } : {}),
   });
   const manifestFiles: ManifestFile[] = files.map((rel) => {
     const buf = readFileSync(join(outDir, rel));
@@ -210,12 +313,12 @@ export async function buildDatabook(
     indicator: indicatorSummary,
     unit: "複数指標",
     year: years,
-    notice: `実データ（データブック・${datasets.length} 指標・基準年固定）。購入者情報・メッセージ本文は保存しません。`,
+    notice: `実データ（データブック・${datasets.length} 指標・基準年固定${bundle ? "・時系列と塗り分け地図つき" : ""}）。購入者情報・メッセージ本文は保存しません。`,
     files: manifestFiles,
   };
   writeFileSync(join(outDir, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 
-  writeFileSync(join(outDir, "READINESS.md"), renderDatabookReadiness(product, databook));
+  writeFileSync(join(outDir, "READINESS.md"), renderDatabookReadiness(product, databook, bundle));
 
   return { productId: product.id, family: product.theme, outDir, formatsBuilt: built, skippedFormats: skipped, manifest };
 }

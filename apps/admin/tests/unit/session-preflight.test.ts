@@ -14,9 +14,9 @@ const RESULT = JSON.stringify({
   warnDays: 3,
   sources: [
     { source: "x", label: "X", state: "expiring", reason: "期限まで 3 日以内", expiresAt: "2026-11-15T20:30:00.000Z",
-      lastSuccessAt: "2026-11-12T23:10:00.000Z", failedAt: null, recovery: "node .claude/scripts/measurement/refresh-session.mjs x --wait-human" },
+      lastSuccessAt: "2026-11-12T23:10:00.000Z", failedAt: null, recovery: "node packages/ops/src/measurement/refresh-session.mjs x --wait-human" },
     { source: "note", label: "note", state: "autologin_failed", reason: "前回の自動ログインが失敗", expiresAt: null,
-      lastSuccessAt: null, failedAt: "2026-11-08T00:00:00.000Z", recovery: "node .claude/scripts/measurement/refresh-session.mjs note --wait-human" },
+      lastSuccessAt: null, failedAt: "2026-11-08T00:00:00.000Z", recovery: "node packages/ops/src/measurement/refresh-session.mjs note --wait-human" },
     { source: "afb", label: "afb", state: "unknown", reason: "headless を拒否する", expiresAt: null, lastSuccessAt: null, failedAt: null, recovery: null },
     { source: "kdp", label: "KDP", state: "valid", reason: "期限内", expiresAt: "2027-11-07T23:20:05.052Z", lastSuccessAt: null, failedAt: null, recovery: "r" },
   ],

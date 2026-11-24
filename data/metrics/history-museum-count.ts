@@ -51,7 +51,5 @@ export const historyMuseumCount: MetricConfig = {
     ],
   },
   "groupKey": "museum-type-count",
-  "seoTitle": "歴史博物館数ランキング都道府県【2015年】｜1位東京都（35館）",
-  "seoDescription": "2015年の歴史博物館数の都道府県別ランキング。1位東京都（35館）、最下位秋田県（1館）で35.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

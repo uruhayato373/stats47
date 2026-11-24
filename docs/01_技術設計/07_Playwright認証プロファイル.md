@@ -15,7 +15,7 @@ Playwright を使う運用スクリプトのログイン状態、アカウント
 - サービスとアカウント用途ごとに profile を分離する。
 - 投稿、申請、公開、購入に関わる操作は実行前に対象アカウントを照合する。
 - 認証失敗を自動再登録や別アカウントで回避しない。人が headed browser で復旧する。
-- 例外: A8 / もしも / KDP の計測ログインと X の予約投稿用ログインだけは、オーナー承認 (A8・もしも 2026-09-26、KDP 2026-09-27、X 2026-09-30) により Mac 上で macOS キーチェーンの ID/PW による再ログインを 1 回だけ許す (`.claude/scripts/measurement/refresh-session.mjs`)。失敗・2FA・CAPTCHA は突破せず失敗印を残して停止し、人が確認して印を消すまで再試行しない。ID/PW を CI・git・ログへ置かない。KDP は本棚 → 既知 ASIN の口座照合 → Reports の順に通し、Amazon の 2FA (`/ap/mfa`)・追加確認 (`/ap/cvf`)・CAPTCHA が出たら同じく停止する。「ログインしたままにする」を付けて 2FA の再要求を減らすが、毎回 2FA を求められる口座では自動化できない。
+- 例外: A8 / もしも / KDP の計測ログインと X の予約投稿用ログインだけは、オーナー承認 (A8・もしも 2026-09-26、KDP 2026-09-27、X 2026-09-30) により Mac 上で macOS キーチェーンの ID/PW による再ログインを 1 回だけ許す (`packages/ops/src/measurement/refresh-session.mjs`)。失敗・2FA・CAPTCHA は突破せず失敗印を残して停止し、人が確認して印を消すまで再試行しない。ID/PW を CI・git・ログへ置かない。KDP は本棚 → 既知 ASIN の口座照合 → Reports の順に通し、Amazon の 2FA (`/ap/mfa`)・追加確認 (`/ap/cvf`)・CAPTCHA が出たら同じく停止する。「ログインしたままにする」を付けて 2FA の再要求を減らすが、毎回 2FA を求められる口座では自動化できない。
   - **資格情報の読み口 (2026-09-28)**: `packages/ops/src/measurement/credential-store.mjs` が唯一の入口。Mac はキーチェーン、Windows は資格情報マネージャー (`cmdkey /generic:stats47-measurement-<source> /user:<ID> /pass` で登録。Win32 `CredRead` を PowerShell 5.1 から読むので追加モジュール不要)、それ以外 (CI) は読まない。サービス名は両 OS で同じ。直接読む書き方は `credential-store-contract.test.mjs` が止める。Bitwarden 等の外部サービスは使わない (オーナー判断)。
   - **資格情報の正本 (2026-10-01 オーナー決定)**: ログインが必要な全サービスの一覧と自動ログインの可否は `.claude/config/auth-credentials.json` が正本 (ID/PW は書かない)。この PC の登録状況は管理画面 `/ops/auth`「ログインと資格情報」で見る (登録の有無と ID だけを読み、パスワードは読まない)。ログインは Mac だけが持ち、CI と GitHub Secrets には ID・パスワード・セッションを置かない (2026-10-20 オーナー判断。下の「Macでの認証付き計測」)。**楽天アフィリエイト (2026-10-01)**: 成果 API が無いので、`rakuten-report.mjs` がログイン済みセッションで管理画面と同じ JSON (`/api/report/monthly?overview=1`・`/api/report/reward`) を読み `rakuten-results.json` に当月・前月を書く。照合テストは `__tests__/auth-credential-ssot.test.mjs`。
   - **2FA は認証アプリ方式 (TOTP) だけ自動化する**: `stats47-measurement-<source>-totp` に秘密鍵 (base32) を登録した口座だけ、`/ap/mfa` の画面でコードを計算して 1 回入力する (RFC 6238 の試験値でテスト済み)。SMS / メールのコード、追加確認 (`/ap/cvf`)、CAPTCHA は従来どおり停止する。Amazon の MFA 画面のセレクタは実機未確認で、外れた場合も停止する。
@@ -101,7 +101,7 @@ noteだけは`node .claude/scripts/measurement/restore.mjs note --inventory-only
 # 週次の取得 (ログインの保ち直し → 取得 → develop への記録)。土曜の週次レビューの最初に回す。
 npm run weekly:collect
 # 切れた取得元に本人が入り直す (2FA を含め、開いたブラウザで最大 10 分待つ。KDP は Reports の認証まで待つ)
-node .claude/scripts/measurement/refresh-session.mjs kdp --wait-human
+node packages/ops/src/measurement/refresh-session.mjs kdp --wait-human
 # Googleは通常Chromeの専用profileで本人ログイン後、その専用Chromeを終了する。取得時に profile から取り出す。
 node .claude/scripts/google-admin/cli.mjs login
 # 入り直したあと、ログインの保ち直しと取得だけをやり直す

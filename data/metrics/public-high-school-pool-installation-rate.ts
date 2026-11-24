@@ -63,7 +63,5 @@ export const publicHighSchoolPoolInstallationRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "公立高等学校プール設置率ランキング都道府県【2006年】｜1位静岡県（99％）",
-  "seoDescription": "2006年の公立高等学校プール設置率の都道府県別ランキング。1位静岡県（99％）、最下位富山県（0％）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

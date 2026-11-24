@@ -18,4 +18,24 @@ describe("CorrelationSectionContainer", () => {
     const element = await CorrelationSectionContainer({ rankingKey: "base" });
     expect(element?.props.groups).toEqual({ positive: [summary], negative: [] });
   });
+
+  it("この指標の最新年と違う年で比べたペアにだけ年を渡す", async () => {
+    const base = {
+      subtitle: null, unit: "人", pearsonR: 0.9, populationAdjustedR: 0.8,
+      partialRPopulation: 0.8, partialRArea: null, partialRAging: null, partialRDensity: null, scatterData: [],
+    };
+    vi.mocked(readHighlyCorrelatedFromR2).mockResolvedValueOnce(ok({
+      latestYear: "2024",
+      positive: [
+        { ...base, rankingKey: "same", title: "同じ年", year: "2024" },
+        { ...base, rankingKey: "older", title: "古い年", year: "2014" },
+      ],
+      negative: [],
+    }));
+    const element = await CorrelationSectionContainer({ rankingKey: "base" });
+    expect(element?.props.groups.positive).toEqual([
+      { rankingKey: "same", title: "同じ年", populationAdjustedR: 0.8 },
+      { rankingKey: "older", title: "古い年", populationAdjustedR: 0.8, year: "2014" },
+    ]);
+  });
 });

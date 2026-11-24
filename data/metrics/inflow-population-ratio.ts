@@ -43,7 +43,5 @@ export const inflowPopulationRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "流入人口比率ランキング都道府県【2020年】｜1位東京都（19.67％）",
-  "seoDescription": "2020年の流入人口比率の都道府県別ランキング。1位東京都（19.67％）、最下位北海道（0.07％）で281.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

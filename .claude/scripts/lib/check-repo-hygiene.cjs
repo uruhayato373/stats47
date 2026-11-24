@@ -54,7 +54,7 @@ function inspect(files) {
       forbiddenBasenames.has(basename) ||
       forbiddenSuffixes.some((suffix) => basename.endsWith(suffix)) ||
       segments.some((segment) => forbiddenDirs.has(segment)) ||
-      (/^[^/]+\.(?:db|sqlite|sqlite3)$/.test(file) && !file.startsWith("packages/database/seed/"))
+      (/^[^/]+\.(?:db|sqlite|sqlite3)$/.test(file))
     ) {
       findings.push(finding("FORBIDDEN_ARTIFACT", file, "temporary/build/database artifact is tracked"));
     }

@@ -59,8 +59,10 @@ export function ThemeFreightOdClient({
         title="貨物の発地と着地"
         description={`${period} · ${mode.label} · ${area} · 単位：${formatUnitForDisplay(mode.unit)}`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
+            annotation={snapshot.notes}
             source={FREIGHT_OD_SOURCE.title}
             sourceLink={
               modeKey === 'air'
@@ -131,11 +133,6 @@ export function ThemeFreightOdClient({
             選択した地域の確認済みデータを取得できません。
           </p>
         )}
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {snapshot.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
       </ChartPanel>
     </div>
   );

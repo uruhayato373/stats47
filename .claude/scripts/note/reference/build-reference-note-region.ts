@@ -14,8 +14,8 @@ import path from 'node:path';
 import { selectAreaHighlights, type AreaHighlight } from '../../../../packages/area-profile/src/highlights/select-area-highlights.ts';
 import { R2_PUBLIC_BASE_URL } from '../../../../packages/types/mirror/site-config.cjs';
 import { expansionStatus, loadAnalyses, loadChannelIndex, loadExpansion } from '../../../../packages/ops/src/source-vault/lib/reference-expansion.mjs';
-import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
-import { qualifyLabel } from './lib/estat-denominator';
+import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from '../../../../packages/ops/src/note/reference/build-reference-note';
+import { qualifyLabel } from '../../../../packages/ops/src/note/reference/lib/estat-denominator';
 
 const ROOT = path.resolve(__dirname, '../../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;

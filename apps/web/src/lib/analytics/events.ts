@@ -479,6 +479,8 @@ export type NavSurface =
   // 共通のクリック監視 (NavClickTracker) が拾うもの (2026-09-26 値追加。登録済み dimension の値追加):
   // ブログの目次 / 導線名の付いていないサイト内リンク
   | 'blog_toc'
+  // 右レールで追従する目次 (2026-11-23 値追加。本文の上の目次 blog_toc と分けて数える。登録済み dimension の値追加)
+  | 'blog_toc_rail'
   | 'unlabeled'
   // 全ページ共通の領域 (2026-09-26 値追加・NAV-CLICK-COVERAGE-01 P2。登録済み dimension の値追加)
   | 'footer'
@@ -518,7 +520,14 @@ export type NavSurface =
   | 'geo_pref_table'
   | 'geo_evidence'
   | 'geo_layer_list'
-  | 'geo_map_control';
+  | 'geo_map_control'
+  // 本番の合成クリックで unlabeled と確かめた部品 (2026-11-23 値追加・NAV-CLICK-COVERAGE-01。登録済み dimension の値追加):
+  // 県・市区町村ページの「◯◯県の市区町村」一覧 / ランキングの右レール「同じ調査のランキング」 /
+  // 地域単位の切り替え (都道府県・市区町村・日本) / カテゴリの注目ランキングのカルーセル
+  | 'area_cities'
+  | 'ranking_same_survey'
+  | 'scope_nav'
+  | 'category_featured';
 
 /**
  * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。

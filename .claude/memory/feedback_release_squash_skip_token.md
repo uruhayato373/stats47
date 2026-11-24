@@ -10,4 +10,6 @@ CI の書き戻しコミット (キーワード観測の記録など) の skip-c
 
 **Why:** 2026-11-13 の PR #1257 で起きた。マージは成功表示なので気づきにくい。`.husky/commit-msg` の検査はローカルのコミットしか見ない。
 
-**How to apply:** release のマージ後は `gh run list --workflow deploy-workers.yml --branch main --limit 1` で run ができたかを必ず確かめる。無ければ `OWNER_APPROVED_RELEASE=1 gh workflow run deploy-workers.yml --ref main` で手動起動する (手動は常にデプロイする)。恒久対策はカード RELEASE-SQUASH-SKIP-TOKEN-01。関連: [[no-deploy-per-iteration]]
+**How to apply (2026-11-20 追記):** 見張りの workflow がデプロイを自動で起動するようになった (PR #1289 で観測)。ただし、そのデプロイのあとは Post-Deploy Smoke が走らないので、デプロイの成功を確かめたら `gh workflow run post-deploy-smoke.yml --ref main` を手で起動する (カード RELEASE-SQUASH-SKIP-TOKEN-01)。2026-11-20 に `deploy-workers.yml` へ自動で起動する job を足し、2026-11-21 の PR #1290 で効いたことを確かめた (デプロイ 44868373784 → smoke 44869553869)。今は、見張りの起動したデプロイのあとに Post-Deploy Smoke の run ができたことを確かめるだけでよい。smoke は最初の死活の確認で落ちると画面の確認を飛ばすので、死活だけの失敗でも画面の確認が走ったかを見る。
+
+**How to apply (元の手順):** release のマージ後は `gh run list --workflow deploy-workers.yml --branch main --limit 1` で run ができたかを必ず確かめる。無ければ `OWNER_APPROVED_RELEASE=1 gh workflow run deploy-workers.yml --ref main` で手動起動する (手動は常にデプロイする)。恒久対策はカード RELEASE-SQUASH-SKIP-TOKEN-01。関連: [[no-deploy-per-iteration]]

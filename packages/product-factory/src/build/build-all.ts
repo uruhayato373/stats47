@@ -22,6 +22,8 @@ export interface BuildAllOptions {
   readonly version?: string;
   readonly outRoot?: string;
   readonly generatedAt?: string;
+  /** true なら、データブックのパックに時系列と全指標の塗り分け地図を付ける (公開 R2 から時系列を取る)。 */
+  readonly bundle?: boolean;
   readonly onProgress?: (done: number, total: number, res: ProductBuildResult) => void;
 }
 
@@ -33,7 +35,7 @@ export async function buildAll(opts: BuildAllOptions = {}): Promise<ProductBuild
     const buildOpts = { version: opts.version, outRoot: opts.outRoot, generatedAt: opts.generatedAt, geo };
     const databook = resolveDatabook(product);
     const res = databook
-      ? await buildDatabook(product, databook, buildOpts)
+      ? await buildDatabook(product, databook, { ...buildOpts, bundle: opts.bundle ? {} : undefined })
       : await buildProduct(product, resolveDataset(product), buildOpts);
     results.push(res);
     done += 1;

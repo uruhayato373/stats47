@@ -34,7 +34,5 @@ export const middleAgedEmploymentRate45plus: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "中高年齢者就職率 都道府県ランキング【2018年】｜1位福井県（10.9％）",
-  "seoDescription": "2018年の中高年齢者就職率を都道府県別に比較。1位は福井県（10.9％）、最下位は神奈川県（4.3％）、最大と最小の差は2.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

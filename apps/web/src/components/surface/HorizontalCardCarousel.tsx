@@ -16,6 +16,8 @@ import {
 import { Button, cn, SectionCard } from '@stats47/components';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+import type { NavSurface } from '@/lib/analytics/events';
+
 
 const SCROLL_EDGE_TOLERANCE = 2;
 
@@ -165,6 +167,8 @@ function scrollByVisibleCards(
 
 interface HorizontalCardCarouselProps {
   ariaLabel: string;
+  /** 中のカードのクリックを nav_click で数えるときの導線名 (共通のクリック監視が読む) */
+  navSurface?: NavSurface;
   children: ReactNode;
   className?: string;
 }
@@ -181,6 +185,7 @@ interface HorizontalCardCarouselProps {
  */
 export function HorizontalCardCarousel({
   ariaLabel,
+  navSurface,
   children,
   className,
 }: HorizontalCardCarouselProps) {
@@ -234,6 +239,7 @@ export function HorizontalCardCarousel({
         aria-label={`${ariaLabel}（左右の矢印で移動できます）`}
         tabIndex={0}
         data-carousel={framed ? 'cells' : 'cards'}
+        data-nav-surface={navSurface}
         onScroll={updateScrollState}
         onKeyDown={(event) => {
           if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;

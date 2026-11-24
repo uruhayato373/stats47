@@ -10,13 +10,30 @@ vi.mock('@/features/theme-dashboard', () => ({
   useThemePrefecture: () => ({ selectedPrefectureCode: selection.code }),
 }));
 vi.mock('@/components/charts/ChartFooter', () => ({
+  // 注意と出典のリンクは見出しの右端の Sheet に入る (2026-11-22)。ここでは Sheet の中身をそのまま描く
   ChartFooter: ({
     source,
     sourceLink,
+    sourceLinks = [],
+    annotation = [],
   }: {
     source: string;
     sourceLink: string;
-  }) => <a href={sourceLink}>{source}</a>,
+    sourceLinks?: { label: string; url: string }[];
+    annotation?: string | string[];
+  }) => (
+    <div>
+      <a href={sourceLink}>{source}</a>
+      {sourceLinks.map((l) => (
+        <a key={l.url + l.label} href={l.url}>
+          {l.label}
+        </a>
+      ))}
+      {([] as string[]).concat(annotation).map((n) => (
+        <p key={n}>{n}</p>
+      ))}
+    </div>
+  ),
 }));
 afterEach(() => {
   cleanup();

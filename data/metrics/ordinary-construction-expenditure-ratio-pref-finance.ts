@@ -34,7 +34,5 @@ export const ordinaryConstructionExpenditureRatioPrefFinance: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "普通建設事業費割合ランキング都道府県【2022年】｜1位福井県（22.55％）",
-  "seoDescription": "2022年の普通建設事業費割合の都道府県別ランキング。1位福井県（22.55％）、最下位大阪府（4.76％）で4.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

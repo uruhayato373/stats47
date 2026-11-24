@@ -14,6 +14,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, appendFileSync } 
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { renderMarkdown as renderRouteCpu } from "../../../packages/ops/src/cloudflare/route-cpu.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const STATE_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.cost-snapshots"));
@@ -136,6 +137,12 @@ function writeLatest() {
     ? (latest.workers.totalErrors / latest.workers.totalRequests * 100).toFixed(2)
     : "0.00";
   lines.push(`**Error rate**: ${errorRate}% (${latest.workers.totalErrors}/${latest.workers.totalRequests})`);
+  lines.push("");
+
+  // route 別 CPU (Workers Observability。CF-CPU-ISR-01)。フル描画 = 1 リクエストの CPU が 200 ms 超
+  lines.push("### Route 別 CPU");
+  lines.push("");
+  lines.push(latest.routeCpu?.status === "ok" ? renderRouteCpu(latest.routeCpu) : `取得不能: ${latest.routeCpu?.reason ?? "記録なし"}`);
   lines.push("");
 
   // R2

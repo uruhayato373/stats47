@@ -54,11 +54,11 @@ import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { auditRow } from "./audit-ai-content.mjs";
-import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
-import { applyYearFreshness } from "./lib/year-freshness.mjs";
-import { loadFailureState, quarantinedKeys } from "./record-generation-outcome.mjs";
-import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+import { auditRow } from "../../../packages/ops/src/ai-content/audit-ai-content.mjs";
+import { checkValueHealth, latestPartition } from "../../../packages/ops/src/ai-content/lib/value-health.mjs";
+import { applyYearFreshness } from "../../../packages/ops/src/ai-content/lib/year-freshness.mjs";
+import { loadFailureState, quarantinedKeys } from "../../../packages/ops/src/ai-content/record-generation-outcome.mjs";
+import { isAnchorRow } from "../../../packages/ops/src/gsc/analyze-ctr-seesaw.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

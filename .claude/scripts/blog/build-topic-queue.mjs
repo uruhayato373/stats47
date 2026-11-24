@@ -37,7 +37,7 @@ import {
   correlationTitle,
   parseMetricConfigSource,
   spuriousReasons,
-} from "./lib/topic-queue-spurious-core.mjs";
+} from "../../../packages/ops/src/blog/lib/topic-queue-spurious-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 

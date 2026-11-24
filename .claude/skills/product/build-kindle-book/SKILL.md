@@ -48,7 +48,7 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    **レビューは書き下ろし章だけでなく全章 (ブログ由来章・図の数値を含む) を対象にする** — 2026-09-19 の K-S1-01 で、
    書き下ろしだけを見た初回 PASS のあとに、ブログ由来 9 章から BLOCK 8 / MAJOR 19 が出た。critic には
    (a) 章テキスト (EPUB を展開したもの) (b) 図の数値 JSON (R2 `app/blog/<slug>/data/<name>.json`)
-   (c) **指標定義シート** `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <blogSlug…>` を渡し、
+   (c) **指標定義シート** `npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --slug <blogSlug…>` を渡し、
    `blog-quality-standards.md`「定義整合」を BLOCK 基準にする。findings の before は章本文の逐語で受け取り、
    ブログ由来章は台帳 `products.kindle-editorial-corrections` (書籍版のみの校訂・公開ブログは変えない)、書き下ろし章は
    `manuscripts/<id>/*.md`、**図の中の文字 (図題・年の型・軸ラベル) は台帳 `products.kindle-figure-corrections`** (PNG 化の直前に

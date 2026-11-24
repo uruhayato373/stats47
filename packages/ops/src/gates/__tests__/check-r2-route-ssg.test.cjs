@@ -45,3 +45,38 @@ test("実際の出典カタログもR2をビルド時に固定しないroute契�
   assert.match(source, /export\s+const\s+dynamic\s*=\s*['"]force-dynamic['"]/);
   assert.equal(checkCatalog(source).exitCode, 0);
 });
+
+function checkRoute(route, source) {
+  const errors = [];
+  let exitCode = 0;
+  const stopped = {};
+  try {
+    vm.runInNewContext(guard, {
+      __dirname: path.dirname(guardPath),
+      require: (name) => name === "fs" ? {
+        existsSync: (file) => file.split(path.sep).join("/").endsWith(route),
+        readFileSync: () => source,
+      } : require(name),
+      console: { log: () => {}, error: (message) => errors.push(message) },
+      process: { exit: (code) => { exitCode = code; throw stopped; } },
+    });
+  } catch (error) {
+    if (error !== stopped) throw error;
+  }
+  return { exitCode, errors: errors.join("\n") };
+}
+
+// ランキングのページのパスは R2 の key と同じ文字列を含み check-r2-entrypoint が数えるので、地域のページで確かめる
+const areaRoute = "apps/web/src/app/areas/[areaCode]/page.tsx";
+
+test("R2 依存 route は空配列を返す generateStaticParams を許可する (実行時 ISR に要る。CF-CPU-ISR-01)", () => {
+  const source = "export async function generateStaticParams(): Promise<Array<{ areaCode: string }>> {\n  return [];\n}\nexport const revalidate = 86400;";
+  assert.equal(checkRoute(areaRoute, source).exitCode, 0);
+});
+
+test("R2 依存 route の generateStaticParams がキー列を返したら拒否する (2026-06-22 の notFound 固着)", () => {
+  const source = "export async function generateStaticParams() {\n  return PREFECTURE_CODES.map((areaCode) => ({ areaCode }));\n}\nexport const revalidate = 86400;";
+  const result = checkRoute(areaRoute, source);
+  assert.equal(result.exitCode, 1);
+  assert.match(result.errors, /areas\/\[areaCode\]/);
+});

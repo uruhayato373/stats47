@@ -56,7 +56,5 @@ export const alcoholSalesPerAdultBeer: MetricConfig = {
     "isCalculated": false,
   },
   "surveyId": "nta-annual-statistics",
-  "seoTitle": "成人1人あたりビールの販売量、都道府県で差｜1位東京都35.9リットル【2023年度】",
-  "seoDescription": "国税庁の酒類販売(消費)数量を成人人口で割り、ビールの成人1人あたり販売量を都道府県別に比較。2023年度は1位東京都35.9リットル、最下位滋賀県12.8リットルで約2.8倍の差(沖縄県を除く46都道府県)。",
   "isActive": true,
 };

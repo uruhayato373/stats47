@@ -2,6 +2,42 @@
   "version": 1,
   "entries": [
     {
+      "metricKey": "restaurant-count-per-1000-alt",
+      "pageId": null,
+      "title": "飲食店数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06130"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06130"
+        },
+        "derived": false,
+        "configHash": "a28b658f2373b7b0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:restaurant-count-per-1000-alt",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "ranking:restaurant-count-per-1000-alt",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
       "metricKey": "restaurants-per",
       "pageId": null,
       "title": "飲食店数",
@@ -9680,43 +9716,6 @@
       "consumers": [
         {
           "pageId": "ranking:school-bag-consumption-expenditure",
-          "kind": "ranking"
-        }
-      ],
-      "themes": []
-    },
-    {
-      "metricKey": "school-bag-consumption-quantity",
-      "pageId": "ranking:school-bag-consumption-quantity",
-      "title": "通学用かばん購入数量",
-      "sources": [
-        {
-          "role": "primary",
-          "statsDataId": "0004023606",
-          "filters": {
-            "cdCat01": "100132020",
-            "cdCat02": "03"
-          }
-        }
-      ],
-      "recipe": {
-        "kind": "kakei-chousa",
-        "estatParams": {
-          "statsDataId": "0004023606",
-          "cdCat01": "100132020",
-          "cdCat02": "03"
-        },
-        "ops": {
-          "areaRemap": "kakei-capital-city"
-        },
-        "derived": true,
-        "configHash": "f866b9442207ce67"
-      },
-      "dependencies": [],
-      "normalizationDependencies": [],
-      "consumers": [
-        {
-          "pageId": "ranking:school-bag-consumption-quantity",
           "kind": "ranking"
         }
       ],

@@ -9,7 +9,7 @@
  */
 
 /** 家計調査の調査方法 (対象の都市・世帯・期間) を書いた subtitle の書き出し */
-export const SURVEY_METHOD_SUBTITLE_PREFIX = "都道府県庁所在市の二人以上世帯の年間";
+const SURVEY_METHOD_SUBTITLE_PREFIX = "都道府県庁所在市の二人以上世帯の年間";
 
 /** subtitle が調査方法の書き出しで始まるか。後ろに title や括弧書きが続いても、調査方法を subtitle に書いた形として数える。 */
 export function isSurveyMethodSubtitle(subtitle: string | null | undefined): boolean {

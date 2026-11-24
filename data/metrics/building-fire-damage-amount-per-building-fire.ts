@@ -35,7 +35,5 @@ export const buildingFireDamageAmountPerBuildingFire: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "building-fire-damage-amount-per-building-fire",
-  "seoTitle": "建物火災損害額ランキング都道府県【2023年】｜1位福井県（1,224.5万円）",
-  "seoDescription": "2023年の建物火災損害額の都道府県別ランキング。1位福井県（1,224.5万円）、最下位東京都（153.9万円）で8.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

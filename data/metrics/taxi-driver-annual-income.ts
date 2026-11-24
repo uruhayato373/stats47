@@ -49,7 +49,5 @@ export const taxiDriverAnnualIncome: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "タクシー運転者の平均年収 都道府県ランキング【2023年】｜1位東京都（586.0万円）",
-  "seoDescription": "2023年のタクシー運転者の平均年収を都道府県別に比較。1位は東京都（586.0万円）、最下位は石川県（230.5万円）、最大と最小の差は2.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true
 };

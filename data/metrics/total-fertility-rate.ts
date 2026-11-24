@@ -73,7 +73,5 @@ export const totalFertilityRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "合計特殊出生率 都道府県ランキング【2023年】1位沖縄1.60・最下位東京0.99｜推移と地図",
-  "seoDescription": "2023年の合計特殊出生率を47都道府県で比較。1位は沖縄県（1.60）、最下位は東京都（0.99）です。1980年からの推移と地図で地域差を確かめられます。",
   "isActive": true,
 };

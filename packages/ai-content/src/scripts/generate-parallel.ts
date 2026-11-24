@@ -616,7 +616,7 @@ async function processOne(
       const generated = await callAI({
         model: opts.model,
         prompt: authorPrompt,
-        responseJsonSchema: buildAiContentResponseSchema(meta.totalCount),
+        responseJsonSchema: buildAiContentResponseSchema(),
       });
       authorRequests += generated.attempts;
       addUsage(usage, generated.usage);

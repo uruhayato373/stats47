@@ -52,7 +52,5 @@ export const marineAquacultureHarvest: MetricConfig = {
     ],
   },
   "groupKey": "fishery",
-  "seoTitle": "海面養殖業収獲量ランキング都道府県【2023年】｜1位北海道（114,359トン）",
-  "seoDescription": "2023年の海面養殖業収獲量の都道府県別ランキング。1位北海道（114,359トン）、最下位奈良県（0トン）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

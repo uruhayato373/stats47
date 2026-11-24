@@ -42,8 +42,17 @@ export function ThemeTsunamiExposureClient({
             : '確認済みの想定条件を選んで確認できます'
         }
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
+            annotation={[
+              `現在は${source.scenarios.length}都道府県の固定版の想定を集計しています。想定の年・波源・堤防条件が異なるため、全国合計や県別の安全順位は示していません。`,
+              ...(row && scenario
+                ? [
+                    '浸水ポリゴン非該当でも浸水が起こる可能性があります。東京都の非該当・未対象区分は浸水区域外の確定値ではありません。人口は被害人数の予測ではなく、施設は津波避難施設や避難容量ではありません。2050年の施設の存続や将来の津波を予測した値でもありません。',
+                  ]
+                : []),
+            ]}
             sourceLinks={
               scenario
                 ? [
@@ -68,10 +77,6 @@ export function ThemeTsunamiExposureClient({
           />
         }
       >
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          現在は{source.scenarios.length}
-          都道府県の固定版の想定を集計しています。想定の年・波源・堤防条件が異なるため、全国合計や県別の安全順位は示していません。
-        </p>
         {!row && (
           <>
             <p className="text-sm leading-relaxed" role="status">
@@ -169,9 +174,6 @@ export function ThemeTsunamiExposureClient({
                 ],
               }))}
             />
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              浸水ポリゴン非該当でも浸水が起こる可能性があります。東京都の非該当・未対象区分は浸水区域外の確定値ではありません。人口は被害人数の予測ではなく、施設は津波避難施設や避難容量ではありません。2050年の施設の存続や将来の津波を予測した値でもありません。
-            </p>
           </>
         )}
         <details className="text-xs leading-relaxed text-muted-foreground">

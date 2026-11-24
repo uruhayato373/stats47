@@ -67,6 +67,10 @@ function walk(dir, out = []) {
     const p = path.join(dir, e.name);
     if (e.isDirectory()) {
       if (e.name === "node_modules" || e.name === ".git" || e.name === ".next") continue;
+      // `.local/` は git の追跡外の作業出力 (ローカルの本番ビルド `apps/web/.local/next-release` など)。
+      // ビルドの出力には記事の旧パスを持つ生成物が入り、リリース確認の後のコミットが「新規 broken」で
+      // 止まる (2026-11-23 に 21 件)。追跡しているファイルは 1 つも無い。
+      if (e.name === ".local") continue;
       // 別 checkout は現在の working tree と独立した履歴を持つため、リンク検査へ混ぜない。
       // 混ぜると docs 整理のたびに古い worktree 内の参照が「新規 broken」扱いになる。
       if (rel(p) === ".claude/worktrees") continue;

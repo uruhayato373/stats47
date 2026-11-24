@@ -407,7 +407,7 @@ Instagram は予約表のエントリを `register-ig-schedule.cjs` で登録し
 
 SNS 投稿の stats47.jp リンクには UTM を付ける。note は付けない (素の URL)。
 
-> **★生成の単一実装 = `.claude/scripts/lib/sns-utm.cjs`** (2026-07-17 一本化)。post-x-batch の
+> **★生成の単一実装 = `packages/ops/src/sns/sns-utm.cjs`** (2026-07-17 一本化)。post-x-batch の
 > register-drafts / buzz-map (`lib/buzz-map-utm-core.mjs` は薄い adapter) ともこれに委譲する。
 > UTM 形式を変えるときはこのファイル 1 箇所。buzz-map は `utm_campaign=buzz-map-<ideaId>` /
 > `utm_content=<variant>`。**canonical URL (catalog/spec/sitemap) に UTM を混入させない**。
@@ -550,7 +550,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 - 投稿台帳ストア: `packages/ops/src/sns/sns-posts-store.cjs`
 - **X 量産カタログ API**: `packages/ops/src/sns/x-catalog.cjs` (台帳 `sns.x-catalog` の quota / templates / affinity / imageKinds を読む)
 - **X 量産スキル**: `.claude/skills/sns/post-x-batch/` (候補選定 `select-candidates.cjs` / lint `lint-x-captions.cjs` / 登録 `register-drafts.cjs`)
-- **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
+- **X 頻度ガード**: `packages/ops/src/sns/check-x-post-budget.cjs`
 - **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`
 - **X 画像最短経路**: `.claude/scripts/sns/quick-still.ts` / SVG→PNG `packages/ops/src/media/svg-to-png.cjs`
 - **バズ地図カード (日本地図×統計)**: 規約 `.claude/rules/buzz-map-standards.md` / スキル `.claude/skills/sns/buzz-map/SKILL.md` / Remotion feature `apps/remotion/src/features/buzz-map/` (owner: sns-renderer、co: X配信=x-strategist / IG配信=instagram-strategist / 地理データ=gis-curator)

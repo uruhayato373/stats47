@@ -153,7 +153,7 @@ tags: [competitor, sns]
 示唆を `sns-content-standards.md` §2 や `buzz-map-standards.md` §4 (curated ideas / テーマ台帳) に
 反映するときは **§2-10 の手順に従う** (diff 提案 → ユーザー承認 → 編集 → `x-catalog.cjs --check`)。
 本スキルが rules を直接書き換えることは無い。buzz-map の新テーマ案は
-`.claude/scripts/sns/data/buzz-map-curated-ideas.ts` への追加提案として提示する (追加も承認後)。
+台帳 `data/sns/buzz-map-curated-ideas.json` への追加提案として提示する (追加も承認後)。
 
 ## やらないこと (意図的)
 

@@ -33,7 +33,5 @@ export const publicKindergartenRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "公立幼稚園割合ランキング都道府県【2024年】｜1位徳島県（88.1％）",
-  "seoDescription": "2024年の公立幼稚園割合の都道府県別ランキング。1位徳島県（88.1％）、最下位石川県（0％）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

@@ -101,7 +101,7 @@ jobs:
             #   (実際に 2 本が滞留)。ブログ是正ループの出力は全てこの経路を通るので、
             #   塞がっていると是正キューの成果が本番に届かない。
             #
-            #   判定は pruner と同じ .claude/scripts/blog/lib/outbox-r2.mjs を使う。
+            #   判定は pruner と同じ packages/ops/src/blog/lib/outbox-r2.mjs を使う。
             #   prune (消す) と publish (出す) は裏表で、片方だけズレると同じ事故が再発する。
             if [ -z "$(echo "$CANDIDATES" | xargs)" ]; then
               echo "変更検出 0 → 公開待ち backfill (reconcile) モード"

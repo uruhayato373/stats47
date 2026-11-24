@@ -18,6 +18,8 @@ export { TagCloud } from './components/tag-cloud';
 export { ArticleRenderer } from './components/article-renderer';
 export { migrateLegacyDataSourceSection } from './components/md-preprocessor';
 export { ArticleTableOfContents } from './components/ArticleTableOfContents';
+export { RailArticleToc } from './components/RailArticleToc';
+export { extractHeadings } from './lib/heading-slug';
 
 // ユーティリティ
 export { generateBlogMetadata } from './utils/generate-blog-metadata';

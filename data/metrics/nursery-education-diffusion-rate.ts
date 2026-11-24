@@ -70,7 +70,5 @@ export const nurseryEducationDiffusionRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "教育普及度ランキング都道府県【2020年】｜1位福井県（85.8％）",
-  "seoDescription": "2020年の教育普及度の都道府県別ランキング。1位福井県（85.8％）、最下位千葉県（35.4％）で2.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": false,
 };

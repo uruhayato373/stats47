@@ -4,14 +4,14 @@
 
 export type NotePriceTier = "lite" | "business" | "data-pack" | "magazine" | "free";
 
-export interface NotePriceRange {
+interface NotePriceRange {
   readonly tier: NotePriceTier;
   readonly label: string;
   readonly minYen: number;
   readonly maxYen: number;
 }
 
-export const NOTE_PRICE_TIERS: Readonly<Record<NotePriceTier, NotePriceRange>> = {
+const NOTE_PRICE_TIERS: Readonly<Record<NotePriceTier, NotePriceRange>> = {
   free: { tier: "free", label: "無料", minYen: 0, maxYen: 0 },
   lite: { tier: "lite", label: "Lite テンプレート＋解説", minYen: 500, maxYen: 1980 },
   business: { tier: "business", label: "業務テンプレート＋詳細手順", minYen: 1980, maxYen: 4980 },

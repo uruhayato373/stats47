@@ -70,8 +70,24 @@ export const psychiatricHospitalCount: MetricConfig = {
       2021,
       2022,
       2023,
+      2024,
     ],
   },
+  "supplementalSources": [
+    {
+      "years": [2024],
+      "source": {
+        "kind": "estat",
+        "statsDataId": "0004048408",
+        "cdCat01": "1",
+        "cdCat03": "2",
+        "areaAxis": { "axis": "cat02", "scheme": "name" },
+        "displayName": "医療施設調査",
+        "url": "https://www.mhlw.go.jp/toukei/list/79-1.html",
+      },
+      "reason": "社会・人口統計体系 (0000010109) は医療施設調査の項目が 2023 年で止まるため、原典の医療施設 (静態・動態) 調査の 2024 年の第9表 病院数 (開設者・都道府県・精神科病院－一般病院別)から取る。開設者は総数。都道府県が分類軸にあるので areaAxis で県に写す。2023 年版の同じ表 (2024 年は 0004048408、2023 年は同名の表) の 47 都道府県の値が SSDS の 2023 年の値とすべて一致することを 2026-11-23 に確かめた (DATA-MEDICAL-FACILITY-SOURCE-01)",
+    },
+  ],
   "yearFormat": "calendar",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
@@ -102,7 +118,5 @@ export const psychiatricHospitalCount: MetricConfig = {
     ],
   },
   "groupKey": "psychiatric-hospital-count",
-  "seoTitle": "精神科病院数ランキング都道府県【2023年】｜1位北海道（70施設）",
-  "seoDescription": "2023年の精神科病院数の都道府県別ランキング。1位北海道（70施設）、最下位鳥取県（4施設）で17.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

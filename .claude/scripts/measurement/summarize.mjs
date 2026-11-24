@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { SOURCES } from './sources.mjs';
+import { SOURCES } from '../../../packages/ops/src/measurement/sources.mjs';
 import { mergeSalesCoverage, mergeSalesObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";

@@ -15,7 +15,9 @@ describe("博物館系指標の対象範囲", () => {
       });
       expect(config.title).toContain("登録・相当");
       expect(config.subtitle).toContain("博物館類似施設を除く");
-      expect(config.seoDescription).toContain("博物館類似施設は含みません");
+      // 説明文は最新年の観測値から作り、対象の範囲の断りは seoNote として後ろに付ける (SEO-META-FROM-VALUES-01)
+      expect(config.seoDescription).toBeUndefined();
+      expect(config.seoNote).toContain("博物館類似施設は含みません");
     },
   );
 });

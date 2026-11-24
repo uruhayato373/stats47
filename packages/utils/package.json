@@ -20,12 +20,11 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "build": "tsc",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.12"
   },
   "peerDependencies": {
     "typescript": ">=5.0.0"

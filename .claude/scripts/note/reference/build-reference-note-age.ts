@@ -14,12 +14,12 @@ import { rankingR2Key } from '../../../../packages/r2-storage/mirror/r2-keys.mjs
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from './lib/figure-renderer';
-import { writeReferenceFigure } from './lib/figure-files';
+import { renderReferenceBarSvg, REFERENCE_FIGURE_RENDERER_VERSION } from '../../../../packages/ops/src/note/reference/lib/figure-renderer';
+import { writeReferenceFigure } from '../../../../packages/ops/src/note/reference/lib/figure-files';
 import { R2_PUBLIC_BASE_URL } from '../../../../packages/types/mirror/site-config.cjs';
 const ESTAT_STATS_DATA_URL = `${ESTAT_API.BASE_URL}${ESTAT_ENDPOINTS.GET_STATS_DATA}`;
 import { loadAnalyses } from '../../../../packages/ops/src/source-vault/lib/reference-expansion.mjs';
-import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from './build-reference-note';
+import { type Analysis, articleKeyOf, fmt, mergeWritten, registerArticle } from '../../../../packages/ops/src/note/reference/build-reference-note';
 
 const ROOT = path.resolve(__dirname, '../../../..');
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -101,7 +101,7 @@ async function build(a: Analysis) {
   writeFileSync(path.join(dir, 'data-provenance.json'), `${JSON.stringify({
     analysisId: a.id, estat: { amount: AMOUNT_TABLE, quantity: QUANTITY_TABLE, cdCat02: TWO_PERSON, year, codes: [FOOD, CONSUMPTION, ...built.map((b) => b.code)] },
     primarySources: a.primarySources ?? [], restore: `npx tsx .claude/scripts/note/reference/build-reference-note-age.ts --analysis ${a.id}`,
-    images: ['engel-coefficient-age',...built.map(item=>`${item.key}-price-age`)].map(file=>({file:`images/${file}.png`,year,generator:'.claude/scripts/note/reference/lib/figure-renderer.ts',rendererVersion:REFERENCE_FIGURE_RENDERER_VERSION})),
+    images: ['engel-coefficient-age',...built.map(item=>`${item.key}-price-age`)].map(file=>({file:`images/${file}.png`,year,generator:'packages/ops/src/note/reference/lib/figure-renderer.ts',rendererVersion:REFERENCE_FIGURE_RENDERER_VERSION})),
   }, null, 2)}\n`);
   const list = (vals: number[], unit: string, d = 0) => AGES.map(([, n], i) => `${n}が${fmt(vals[i], d)}${unit}`).join('、');
   const body = [

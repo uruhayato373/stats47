@@ -14,8 +14,8 @@ tags: [search-growth, gsc, ga4, crux, psi, cloudflare, mcp]
 一つの証拠チェーンへ統合し、決定的な改善候補を生成する。
 
 - 運用入口・コマンド: `../SKILL.md`
-- Observationの機械契約: `.claude/scripts/search-growth/lib/contracts.mjs`
-- scoreとcandidate生成: `.claude/scripts/search-growth/lib/scoring.mjs`
+- Observationの機械契約: `packages/ops/src/search-growth/lib/contracts.mjs`
+- scoreとcandidate生成: `packages/ops/src/search-growth/lib/scoring.mjs`
 - 週次期間・承認契約: `weekly-cycle-contract.md`
 - 実装状況・未完了作業: `.claude/todo/backlog.md`の
   `SEARCH-OBSERVABILITY-RELEASE-01`
@@ -87,7 +87,7 @@ type Observation = {
 ```
 
 - raw snapshotは既存配置を尊重し、normalized stateは再生成可能なderived dataとする。
-- URL結合は`.claude/scripts/search-growth/lib/join-url.mjs`へ集約する。
+- URL結合は`packages/ops/src/search-growth/lib/join-url.mjs`へ集約する。
 - trailing slash、query、fragment、canonical、domain/propertyを決定的に扱う。
 - `missing` / `partial` / `stale`を0へ変換しない。
 - API失敗はsource単位で隔離し、過去snapshotへfallbackした場合は`stale`にする。
@@ -178,7 +178,7 @@ source failureが他sourceを巻き込まないようにし、日次・週次・
 
 - pipeline: `.claude/scripts/search-growth/{collect,normalize,analyze,report,cli}.mjs`
 - core: `.claude/scripts/search-growth/lib/`
-- MCP: `.claude/scripts/search-growth/mcp/server.mjs`
+- MCP: `packages/ops/src/search-growth/mcp/server.mjs`
 - state: `data/search-growth/`
 - CI: `.github/workflows/search-growth-weekly.yml`
 - tests: `.claude/scripts/search-growth/__tests__/`

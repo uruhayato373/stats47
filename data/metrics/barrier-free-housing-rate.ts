@@ -42,7 +42,5 @@ export const barrierFreeHousingRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "バリアフリー化住宅率ランキング都道府県【2023年】｜1位島根県（63.3％）",
-  "seoDescription": "2023年のバリアフリー化住宅率の都道府県別ランキング。1位島根県（63.3％）、最下位沖縄県（36.5％）で1.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

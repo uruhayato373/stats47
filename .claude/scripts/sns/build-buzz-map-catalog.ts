@@ -35,6 +35,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 import { listAllMetrics, getMetricMeta } from "@stats47/data-configs";
 import type { MetricConfig } from "@stats47/data-configs";
@@ -52,8 +53,8 @@ import {
   findMachineDuplicate,
   curatedToCatalogEntry,
   resolveMergedStatus,
-} from "./lib/buzz-map-router-core.mjs";
-import { loadInventory } from "./lib/buzz-map-inventory-core.mjs";
+} from "../../../packages/ops/src/sns/lib/buzz-map-router-core.mjs";
+import { loadInventory } from "../../../packages/ops/src/sns/lib/buzz-map-inventory-core.mjs";
 
 // x-catalog / sns-posts-store は .cjs (require)
 import { createRequire } from "node:module";
@@ -386,7 +387,7 @@ function ksjAvailability(dataId: string, latestVersion: string): {
 function buildKsjEntries(prevByKey: Map<string, CatalogEntry>): CatalogEntry[] {
   // 登録済み 42 件 + 候補 superset (ksj-catalog.json 126 件、dataId 重複は登録優先)
   const catalogRaw = JSON.parse(
-    readFileSync(join(PROJECT_ROOT, "packages/database/seed/ksj-catalog.json"), "utf8"),
+    readFileSync(join(PROJECT_ROOT, datasetPath("geo.ksj-catalog")), "utf8"),
   ) as { id: string; name: string; category2_name?: string }[];
   const registered = new Map(GIS_DATASETS.map((d) => [d.dataId, d]));
 

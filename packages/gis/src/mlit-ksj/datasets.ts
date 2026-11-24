@@ -5,9 +5,8 @@
  * KSJ データセットの純メタ (name / category / geometryType / coverage / license / stats47Category /
  * ranking 定義) を持つ。ここは型を付けて export するだけで、記録を持たない。
  * 技術設定 (downloadUrlPattern / propertyMap / simplifyOptions) は `registry.ts` (KSJ_CODE_CONFIG)。
- * 候補メタの superset は `packages/database/seed/ksj-catalog.json`。
- * 新規データセット追加: JSON に 1 件足し、`registry.ts` に技術設定を足して
- * `npx tsx packages/gis/src/mlit-ksj/scripts/seed-from-registry.ts` で再 seed する。
+ * 候補メタの superset は台帳 `geo.ksj-catalog` (data/geo/ksj/catalog.json)。
+ * 新規データセット追加: JSON に 1 件足し、`registry.ts` に技術設定を足して pipeline を実行する。
  *
  * 正典: `.claude/rules/gis-data.md` / `packages/gis/src/mlit-ksj/README.md`
  */
@@ -69,7 +68,7 @@ export interface GisDatasetMeta {
   /** stats47 カテゴリ (17 軸の CategoryKey)。地図のみで ranking 化しない場合は null */
   stats47Category: string | null;
   isRankingTarget: boolean;
-  /** ranking 対象データセットの ranking 定義 (旧 seed-from-registry.ts RANKINGS を統合) */
+  /** ranking 対象データセットの ranking 定義 */
   rankingConfig?: readonly GisDatasetRankingConfig[];
   /** ranking 集計の基準バージョン (旧 RANKINGS.version)。pipeline download の {VERSION} 既定値 */
   latestVersion?: string;

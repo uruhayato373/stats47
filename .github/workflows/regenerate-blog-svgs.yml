@@ -182,7 +182,7 @@ jobs:
           import {
             parseSourceRepairPayload,
             resolveCasJsonWrite,
-          } from './.claude/scripts/blog/lib/source-repair-core.mjs';
+          } from './packages/ops/src/blog/lib/source-repair-core.mjs';
 
           // tsx + Node 20 では package.json の module type により、TS/CJS の named export が
           // default namespace 配下へ入る。local と GitHub Actions の両方で同じ解決にする。

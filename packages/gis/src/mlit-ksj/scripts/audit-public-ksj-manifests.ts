@@ -3,6 +3,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { datasetPath } from '../../../../../config/datasets.mjs';
 
 import { discoverOfficialKsjArchives } from '../official-download-discovery';
 import {
@@ -17,10 +18,7 @@ const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../../../..'
 );
-const CANDIDATE_PATH = path.join(
-  PROJECT_ROOT,
-  'packages/database/seed/ksj-catalog.json'
-);
+const CANDIDATE_PATH = path.join(PROJECT_ROOT, datasetPath('geo.ksj-catalog'));
 
 async function main(): Promise<void> {
   const candidates = JSON.parse(await readFile(CANDIDATE_PATH, 'utf8')) as Candidate[];

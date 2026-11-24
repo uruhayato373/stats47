@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-13T23:33:25.113Z",
-  "auditGeneratedAt": "2026-11-13T22:02:29.493Z",
+  "generatedAt": "2026-11-20T23:53:06.063Z",
+  "auditGeneratedAt": "2026-11-20T22:41:51.639Z",
   "reviewStatus": "reviewed",
   "reviewError": null,
   "reviewedPages": [],
   "readCoverage": {
-    "expectedTiles": 206,
-    "readTiles": 10,
+    "expectedTiles": 208,
+    "readTiles": 8,
     "unreadScreens": [
       "home|mobile-390",
       "home|tablet-768",
@@ -17,12 +17,9 @@
       "geo-analysis|mobile-390",
       "geo-analysis|tablet-768",
       "geo-analysis|desktop-1440",
-      "geo-analysis--layer|mobile-390",
-      "geo-analysis--layer|tablet-768",
-      "geo-analysis--layer|desktop-1440",
-      "geo-analysis--analysis|mobile-390",
-      "geo-analysis--analysis|tablet-768",
-      "geo-analysis--analysis|desktop-1440",
+      "geo-analysis--analysis-pref|mobile-390",
+      "geo-analysis--analysis-pref|tablet-768",
+      "geo-analysis--analysis-pref|desktop-1440",
       "other--product-item|mobile-390",
       "other--product-item|tablet-768",
       "other--product-item|desktop-1440",
@@ -59,65 +56,60 @@
       "survey--police|mobile-390",
       "survey--police|tablet-768",
       "survey--police|desktop-1440",
+      "municipality--designated-city|mobile-390",
+      "municipality--designated-city|tablet-768",
+      "municipality--designated-city|desktop-1440",
       "municipality|mobile-390",
       "municipality|tablet-768",
       "municipality|desktop-1440",
-      "other--japan|mobile-390",
-      "other--japan|tablet-768",
-      "other--japan|desktop-1440",
-      "other--municipalities-pref-ranking-tokyo|mobile-390",
-      "other--municipalities-pref-ranking-tokyo|tablet-768",
-      "other--municipalities-pref-ranking-tokyo|desktop-1440",
+      "other--municipalities-ranking|mobile-390",
+      "other--municipalities-ranking|tablet-768",
+      "other--municipalities-ranking|desktop-1440",
       "other|mobile-390",
       "other|tablet-768",
-      "other|desktop-1440"
+      "other|desktop-1440",
+      "other--japan-theme|mobile-390",
+      "other--japan-theme|tablet-768",
+      "other--japan-theme|desktop-1440"
     ],
     "fullyReadPages": []
   },
-  "summary": "3幅の各ページの1枚目を中心に確認した。最も重大なのは、地理レイヤーのタブレット画面で外国語の広告が画面上部を覆っていた点。北海道のスマホ画面では順位列が切れていた。内部用語の露出などの軽い指摘もある。2枚目以降のタイルは一部しか見ていない。",
+  "summary": "全 20 テンプレートのうち、変化の大きい mobile-390 の 1 枚目を中心に 8 画面を確認した。tablet-768・desktop-1440 のタイルと各ページの 2 枚目以降は大半を読んでいない。読んだ範囲で読者が目的を果たせなくなる崩れはなく、軽い表記・見た目の指摘が 4 件ある。",
   "findings": [
     {
-      "template": "geo-analysis--layer",
-      "device": "tablet-768",
-      "severity": "high",
-      "location": "タブレット1枚目の最上部、ページ上端を全幅で覆う広告バナー(トルコ語「STM Savunma Teknolojileri / Bilgi Edinin」)",
-      "issue": "外国語の大型広告が最初の画面の上部を覆っている。ページの見出しやパンくずが見えず、何のページか分からない。直下の「人口メッシュ」ヘッダーも広告に重なって途切れている。",
-      "suggestion": "広告枠の高さと位置を固定し、見出しに重ならないようにする。ページ上端への全幅オーバーレイ表示は避ける。"
+      "template": "geo-analysis--analysis-pref",
+      "device": "mobile-390",
+      "severity": "medium",
+      "location": "スマホ 1 枚目、タイトル下のメタ行「データ生成 2026/09/05 ・ coverage 47/47 ・ 47都道府県 ・ 2020-2050 ・ %」",
+      "issue": "「coverage 47/47」という英語の運用用語と、単位だけの「%」が読者向けの説明なしに並んでいる。何の % か、coverage が何を数えているかが画面から分からない。",
+      "suggestion": "「coverage 47/47」は「47 都道府県すべて対応」のように日本語で言い換え、「%」は「単位: %(人口割合)」など何の値かが分かる形にする。"
     },
     {
       "template": "prefecture-detail--hokkaido",
       "device": "mobile-390",
-      "severity": "high",
-      "location": "スマホ1枚目の下部、「北海道が全国上位」の表の右端(「全国順位」列)",
-      "issue": "表が画面幅からはみ出し、右端の「全国順位」列が見出しも順位の数字も「1…」「3…」のように途中で切れている。順位は北海道の特徴を示す中心情報なのに読み取れない。",
-      "suggestion": "スマホでは指標・値・順位を縦積みのカード表示にするか、列を詰めて順位列を画面内に収める。"
+      "severity": "low",
+      "location": "スマホ 1 枚目と 2 枚目、「北海道が全国下位」表の「年間収入(1世帯当たり) 448.8万円 / 2019年」の行",
+      "issue": "同じ表の他の行が 2024〜2025 年の中で、この行だけ 2019 年で、年が小さな灰色文字のため古さに気づきにくい。順位 44 位が現在の比較に見えてしまう。",
+      "suggestion": "他の行と年が離れている指標は、年を目立たせるか「2019年(古い調査)」のように注記する。"
     },
     {
-      "template": "geo-analysis--analysis",
+      "template": "prefecture-detail--hokkaido",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ1枚目、見出し下のメタ情報行(「データ生成 2026/09/05・coverage 47/47」「47都道府県・2020-2050・%」)",
-      "issue": "「coverage 47/47」のような運用用語が読者向けの画面に出ている。「・%」だけの単位表記も何の値か分からない。",
-      "suggestion": "「47都道府県すべてを収録」のような平易な表現に置き換え、単位は指標名と併記する。"
+      "location": "スマホ 1 枚目、「北海道の特徴」上のカテゴリ一覧(人口・世帯 / 暮らし / 世帯 / 学校・施設 など)",
+      "issue": "「人口・世帯」と「世帯」が別カテゴリとして並んでおり、違いが分からない。また各項目が枠なしの灰色テキストで、押せるリンクに見えない。",
+      "suggestion": "「世帯」の重複を整理し、リンクだと分かるようにチップ形状や下線を付ける。"
     },
     {
-      "template": "ranking",
+      "template": "survey--police",
       "device": "mobile-390",
       "severity": "low",
-      "location": "スマホ1枚目の最下部、「都道府県別ランキング」の節見出しと右隣の年選択(2025年)",
-      "issue": "見出しが「都道府県別ランキン/グ」のように途中で折り返され、年の選択ボックスに幅を取られて窮屈に見える。",
-      "suggestion": "見出しを1行に収めるか、年の選択を見出しの下の行へ回す。"
-    },
-    {
-      "template": "theme",
-      "device": "mobile-390",
-      "severity": "low",
-      "location": "スマホ1枚目、「総人口 123,802,000人 2025年」のカード内の折れ線グラフ",
-      "issue": "値は2025年と表示されているのに、グラフの横軸は1975〜2024で終わっている。同じカード内で年の表記が食い違い、最新値がグラフに含まれているか分からない。",
-      "suggestion": "グラフの終点の年を値の年に合わせるか、値とグラフで年が違う理由を一言添える。"
+      "location": "スマホ 1 枚目、見出し直下の「出典・指標の定義」ボタン左のアイコン",
+      "issue": "アイコンの左上に黒い丸が重なっており、通知バッジのように見えて意図が分からない。",
+      "suggestion": "黒い点の重なりが意図したものか確認し、不要なら取り除くか、バッジなら意味が分かる表示にする。"
     }
   ],
   "rejected": [],
-  "newViolationCount": 195,
+  "newViolationCount": 167,
   "firstRun": false
 }

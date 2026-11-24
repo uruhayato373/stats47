@@ -35,6 +35,5 @@ export const projectedPopulation2030: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "将来推計人口（2030年）",
   "isActive": false,
 };

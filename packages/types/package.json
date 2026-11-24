@@ -7,5 +7,9 @@
   "types": "./src/index.ts",
   "scripts": {
     "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "lucide-react": "^0.542.0",
+    "vitest": "^4.1.12"
   }
 }

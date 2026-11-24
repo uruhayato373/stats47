@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-11-21",
+  "generatedAt": "2026-11-21T01:00:36.192Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-11-12",
+      "periodEnd": "2026-11-18",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1425,
+    "rows": [
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 11.364864864864865,
+        "impressions": 74,
+        "clicks": 1
+      },
+      {
+        "keyword": "中2男子 平均身長",
+        "targetPath": "/blog/middle-school-height-east-west-puzzle",
+        "rank": 21,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 7,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 9,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 1,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.928571428571429,
+        "impressions": 28,
+        "clicks": 0
+      },
+      {
+        "keyword": "漁港が多い県",
+        "targetPath": "/ranking/fishing-port-count-by-type",
+        "rank": 8.333333333333332,
+        "impressions": 6,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 7,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "金沢市 人口",
+        "targetPath": "/areas/17000/cities/17201",
+        "rank": 43,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "阿波市 人口",
+        "targetPath": "/areas/36000/cities/36206",
+        "rank": 7.147058823529412,
+        "impressions": 68,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.775862068965517,
+        "impressions": 58,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 40,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 75,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "鳥取市 人口",
+        "targetPath": "/areas/31000/cities/31201",
+        "rank": 7.735449735449736,
+        "impressions": 189,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-11-05",
+      "periodEnd": "2026-11-11",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2620,
+    "rows": [
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 5.87426326129666,
+        "impressions": 509,
+        "clicks": 11
+      },
+      {
+        "keyword": "中2男子 平均身長",
+        "targetPath": "/blog/middle-school-height-east-west-puzzle",
+        "rank": 8.288590604026846,
+        "impressions": 298,
+        "clicks": 1
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 4.5,
+        "impressions": 6,
+        "clicks": 1
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 3.8125,
+        "impressions": 16,
+        "clicks": 1
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 10.666666666666666,
+        "impressions": 3,
+        "clicks": 0
+      },
+      {
+        "keyword": "公衆電話の数 日本",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 3.5,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "漁港が多い県",
+        "targetPath": "/ranking/fishing-port-count-by-type",
+        "rank": 6.555555555555555,
+        "impressions": 9,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 8.225806451612904,
+        "impressions": 31,
+        "clicks": 0
+      },
+      {
+        "keyword": "金沢市 人口",
+        "targetPath": "/areas/17000/cities/17201",
+        "rank": 7.251552795031056,
+        "impressions": 322,
+        "clicks": 0
+      },
+      {
+        "keyword": "阿波市 人口",
+        "targetPath": "/areas/36000/cities/36206",
+        "rank": 6.939110070257612,
+        "impressions": 854,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.493827160493828,
+        "impressions": 162,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 15,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 24.4,
+        "impressions": 5,
+        "clicks": 0
+      },
+      {
+        "keyword": "鳥取市 人口",
+        "targetPath": "/areas/31000/cities/31201",
+        "rank": 8.741772151898735,
+        "impressions": 395,
+        "clicks": 0
+      }
+    ]
+  }
+}

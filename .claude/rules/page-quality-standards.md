@@ -98,6 +98,8 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 そのカードが開いている間は起票しない。配線 (週次が同期して commit・ループがキューを commit) は
 `__tests__/ui-findings.test.mjs` が固定する。
 
+**Claude の指摘が描画前の撮影による誤検知のとき**は、撮影側 (`packages/ops/src/page-quality/lib/screenshots.ts`) を直すか by-design にする (2026-11-22 にカードの定型文から移した)。
+
 ## チャートの文字の検査と修正の振り分け (2026-09-25)
 
 目盛りの数値が画面から切れる・凡例と目盛りが重なる・単位が重複する、といったチャートの崩れは
@@ -143,6 +145,13 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
    本文の列の格子が無い画面 (`noColumn`) は対象外で 0 件。
 
 4. **Claude のスクショ確認 (指摘止まり)**: `.claude/prompts/ci/page-ui-review.md` の「データの意味」の観点で、見出し・説明文と画面上の単位・値・グラフの形の食い違い、画面に出た内部用語を指摘させる (`__tests__/ui-review.test.mjs` がプロンプトの観点を固定)。
+
+**直し方 (UI 指摘のカードはこの節を指す・2026-11-22 にカードの定型文から移した)**: 具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings`、
+該当 URL の全件は同じ `latest.json` の `violations` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) にある。
+同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。
+内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。
+`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。
+文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
 
 **重さ**: 全コーパスで該当率を測ってから決めた (初回の実測は `page-quality-budgets.json` の各 note)。誤検知の出る規則は blocker にしない。
 
@@ -194,11 +203,11 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 
 広告リンクは `<a rel="sponsored">` (`TrackedAffiliateLink`の既存規約) とAdSenseの`ins.adsbygoogle`を
 検出に使う。新しいdata属性は追加していない。重複は正規化した`href`の一致で数える
-(`.claude/scripts/page-quality/lib/measure-static.ts`)。
+(`packages/ops/src/page-quality/lib/measure-static.ts`)。
 
 ## 会社ネットワークからの手動実行
 
-`fetch()`は`.claude/scripts/page-quality/lib/http-dispatcher.ts`の`resolveDispatcher()`で
+`fetch()`は`packages/ops/src/page-quality/lib/http-dispatcher.ts`の`resolveDispatcher()`で
 `HTTPS_PROXY`環境変数があればundici `ProxyAgent`を自動で使う(`local-environment.md`の
 `resolveDispatcher`パターンと同一)。CIには`HTTPS_PROXY`が無いため通常のfetchのまま動く。
 これが無いと会社Windows PCから本番へ直接fetchすると`SELF_SIGNED_CERT_IN_CHAIN`で全滅する

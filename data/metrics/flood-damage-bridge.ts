@@ -53,7 +53,5 @@ export const floodDamageBridge: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "水害橋梁被害額 都道府県ランキング【2014年】｜1位岐阜県（574.0百万円）",
-  "seoDescription": "2014年の水害橋梁被害額を都道府県別に比較。1位は岐阜県（574.0百万円）、最下位は三重県（0.0百万円）。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

@@ -36,7 +36,5 @@ export const privateLifeInsuranceAmountPerContract: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "private-life-insurance-amount-per-contract",
-  "seoTitle": "民間生命保険保険金額ランキング都道府県【2024年】｜1位富山県（496.7万円）",
-  "seoDescription": "2024年の民間生命保険保険金額の都道府県別ランキング。1位富山県（496.7万円）、最下位東京都（211.5万円）で2.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

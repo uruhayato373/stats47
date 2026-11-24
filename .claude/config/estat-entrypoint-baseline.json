@@ -22,11 +22,6 @@
       "appId": 2,
       "reason": "テストの環境注入・リテラル検証"
     },
-    ".claude/scripts/management/ingest-indicator.mjs": {
-      "url": 0,
-      "appId": 1,
-      "reason": "利用者向けのapp ID設定案内・再現コマンド"
-    },
     ".claude/scripts/management/weekly-audits/blog-remediation.sh": {
       "url": 0,
       "appId": 1,
@@ -181,11 +176,6 @@
       "url": 0,
       "appId": 7,
       "reason": "テストの環境注入・リテラル検証"
-    },
-    "packages/estat-api/src/scripts/warm-cache.ts": {
-      "url": 0,
-      "appId": 1,
-      "reason": "既存クライアントの環境読み込み順コメント"
     },
     "packages/estat-api/src/stats-data/__tests__/repositories/api/manual-download.test.ts": {
       "url": 0,

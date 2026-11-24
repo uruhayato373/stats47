@@ -43,7 +43,5 @@ export const solarPanelHousingRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "太陽光発電機のある住宅率 都道府県ランキング【2023年】｜1位佐賀県（11.2％）",
-  "seoDescription": "2023年の太陽光発電機のある住宅率を都道府県別に比較。1位は佐賀県（11.2％）、最下位は東京都（1.9％）、最大と最小の差は5.9倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

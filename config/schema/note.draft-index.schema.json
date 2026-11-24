@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "note 下書きの索引",
+  "description": "data/note/note-draft-index.json の形状契約。記事台帳 data/note/articles.json の status: draft の記事から .claude/scripts/note/catalog/generate-note-catalog.ts --apply が作る派生インデックス (記事キー → 系統・本文の R2 の所在)。内容は台帳だけで決まり、--check が手編集と再生成漏れを検出する。手で編集しない。読み手: .claude/scripts/note/generate-note-covers.mjs・generate-note-hashtags.mjs・aggregate-koumuin-metrics.cjs、.claude/scripts/ads/audit-affiliate-compliance.ts、apps/web/scripts/generate-ogp-images.ts、apps/admin/lib/content-operations/load.ts、packages/ops/src/media/gallery-collectors.mjs。",
+  "type": "object",
+  "required": ["_meta", "drafts"],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "description": "生成元の記録",
+      "required": ["generated_by", "source"],
+      "properties": {
+        "generated_by": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1, "description": "正本 (記事台帳) のパス" },
+        "note": { "type": "string" }
+      }
+    },
+    "drafts": {
+      "type": "object",
+      "description": "記事キー (note.articles の key) → 下書きの所在",
+      "additionalProperties": { "$ref": "#/definitions/draft" }
+    }
+  },
+  "definitions": {
+    "draft": {
+      "type": "object",
+      "required": ["vertical", "r2_path", "status"],
+      "properties": {
+        "vertical": { "type": "string", "minLength": 1, "description": "記事の系統 (note.articles の vertical)" },
+        "r2_path": { "type": ["string", "null"], "description": "本文の R2 の置き場。本文を R2 に持たない (r2Body: false) 記事は null" },
+        "status": { "type": "string", "description": "生成器は draft だけを書く" }
+      }
+    }
+  }
+}

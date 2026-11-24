@@ -24,7 +24,11 @@ export const AD_FREE_PATH_PREFIXES: readonly string[] = [
   '/geo/map',
   ...INFRA_NETWORKS.filter(isInfraNetworkAdFree).map((network) => `/geo/history/${network.key}`),
   ...AD_FREE_THEME_KEYS.map((themeKey) => hrefFor('theme', { themeSlug: themeKey })),
-  ...GIS_DATASETS.filter(
-    (dataset) => getKsjLicensePolicy(dataset.license).commercialUse !== 'allowed-with-attribution',
-  ).map((dataset) => `/geo/datasets/${dataset.dataId}`),
+  // 単体 GIS ページが存在するデータ (public-r2-eligible。/geo/datasets/[dataId] の notFound と同じ条件) だけを載せる。
+  // この一覧は全ページの RSC データに入るので、存在しないページを載せると Googlebot がそこから URL を拾い、
+  // GSC の 404 に 22 件が並んでいた (2026-11-23・GSC-404-VALUE-TRIAGE-01)
+  ...GIS_DATASETS.filter((dataset) => {
+    const policy = getKsjLicensePolicy(dataset.license);
+    return policy.sourcePublication === 'public-r2-eligible' && policy.commercialUse !== 'allowed-with-attribution';
+  }).map((dataset) => `/geo/datasets/${dataset.dataId}`),
 ];

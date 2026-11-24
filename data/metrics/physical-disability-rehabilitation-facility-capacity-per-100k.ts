@@ -36,7 +36,5 @@ export const physicalDisabilityRehabilitationFacilityCapacityPer100k: MetricConf
     "isCalculated": false,
   },
   "groupKey": "physical-disability-rehabilitation-facility-capacity",
-  "seoTitle": "身体障害者更生援護施設定員数ランキング都道府県【2011年】｜1位高知県（94.9人）",
-  "seoDescription": "2011年の身体障害者更生援護施設定員数の都道府県別ランキング。1位高知県（94.9人）、最下位茨城県（0人）で地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

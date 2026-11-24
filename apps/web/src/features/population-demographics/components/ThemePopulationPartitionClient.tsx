@@ -15,7 +15,7 @@ import {
   type PopulationSex,
 } from '../lib/population-profile-view';
 
-import { PopulationPartitionTable } from './PopulationPartitionTable';
+import { PopulationPartitionTable, partitionDenominatorNote } from './PopulationPartitionTable';
 import { PopulationSexSelect } from './PopulationProfileControls';
 
 import type {
@@ -60,25 +60,27 @@ export function ThemePopulationPartitionClient({
         title={title}
         description={`2020年10月1日 · ${areaLabel} · ${SEX_LABELS[sex]} · ${isHousehold ? '単独世帯' : '5歳以上の常住者'}`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source={
               isHousehold
                 ? '令和2年国勢調査 人口等基本集計 第12-1表'
                 : '令和2年国勢調査 移動人口の男女・年齢等集計 第1表'
             }
             sourceLink={snapshot.sources[0].url}
+            annotation={[
+              isHousehold
+                ? '1人で暮らす一般世帯の構成です。施設等の世帯を含みません。年齢不詳も1つの区分として残しています。'
+                : '2020年の住民を2015年の常住地と比較しています。5年間の引越し回数ではありません。5歳未満と年齢不詳を含まず、居住地・移動状況が不詳の人は別区分に残しています。',
+              partitionDenominatorNote(view.total, snapshot.unit),
+            ]}
           />
         }
       >
         <div className="flex flex-wrap gap-3">
           <PopulationSexSelect value={sex} onChange={setSex} />
         </div>
-        <p className="text-sm text-muted-foreground">
-          {isHousehold
-            ? '1人で暮らす一般世帯の構成です。施設等の世帯を含みません。年齢不詳も1つの区分として残しています。'
-            : '2020年の住民を2015年の常住地と比較しています。5年間の引越し回数ではありません。5歳未満と年齢不詳を含まず、居住地・移動状況が不詳の人は別区分に残しています。'}
-        </p>
         <PopulationPartitionTable
           areaName={`${areaLabel}・${SEX_LABELS[sex]}`}
           category={isHousehold ? '年齢' : '5年前の常住地'}

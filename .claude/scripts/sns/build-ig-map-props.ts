@@ -32,7 +32,7 @@ import {
   buildMapTiles,
   computeTopBottom,
   validateMapData,
-} from "./lib/ig-map-props.ts";
+} from "../../../packages/ops/src/sns/lib/ig-map-props.ts";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");

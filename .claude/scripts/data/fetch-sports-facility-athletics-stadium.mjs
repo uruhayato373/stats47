@@ -19,7 +19,7 @@
  * 正典: .claude/rules/data-provenance-standards.md
  */
 import ExcelJS from "exceljs";
-import { fetchBuffer, toFullPrefName, writeStatsValues, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, toFullPrefName, writeStatsValues, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const DL = (id) => `https://www.e-stat.go.jp/stat-search/file-download?statInfId=${id}&fileKind=0`;
 const EDITIONS = [

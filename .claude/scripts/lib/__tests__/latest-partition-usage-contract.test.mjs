@@ -13,13 +13,13 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", ".
 test("agent 定義と scripts に「末尾 = 最新年」の手順が残っていない", () => {
   const targets = [
     path.join(ROOT, ".claude/agents/article-writer.md"),
-    path.join(ROOT, ".claude/scripts/note/build-kakei-note-evidence-data.mjs"),
+    path.join(ROOT, "packages/ops/src/note/build-kakei-note-evidence-data.mjs"),
   ];
   for (const file of targets) {
     assert.doesNotMatch(fs.readFileSync(file, "utf8"), /partitions\[partitions\.length - 1\]/, file);
   }
   assert.match(
-    fs.readFileSync(path.join(ROOT, ".claude/scripts/note/build-kakei-note-evidence-data.mjs"), "utf8"),
+    fs.readFileSync(path.join(ROOT, "packages/ops/src/note/build-kakei-note-evidence-data.mjs"), "utf8"),
     /latestPartition\(values\.partitions\)/,
   );
 });

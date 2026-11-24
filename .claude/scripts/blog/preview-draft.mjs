@@ -15,7 +15,7 @@ import { createRequire } from "node:module";
 import { extname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { buildPreviewEntry, parseFrontmatter } from "./lib/preview-draft-core.mjs";
+import { buildPreviewEntry, parseFrontmatter } from "../../../packages/ops/src/blog/lib/preview-draft-core.mjs";
 
 const ROOT = resolve(fileURLToPath(import.meta.url), "../../../..");
 const { R2_PUBLIC_BASE_URL } = createRequire(import.meta.url)("../../../packages/types/mirror/site-config.cjs");

@@ -18,7 +18,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { buildCompareCaption, tallyWins, type CompareDuelItem } from "./lib/ig-compare-props.ts";
+import { buildCompareCaption, tallyWins, type CompareDuelItem } from "../../../packages/ops/src/sns/lib/ig-compare-props.ts";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const REMOTION_DIR = join(PROJECT_ROOT, "apps/remotion");

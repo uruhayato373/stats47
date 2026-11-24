@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { checkKeywordState } from './keyword-cycle.mjs';
+import { checkKeywordState } from '../../../packages/ops/src/search-growth/keyword-cycle.mjs';
 
 const args = process.argv.slice(2);
 const option = (name, fallback) => args.includes(name) ? args[args.indexOf(name) + 1] : fallback;

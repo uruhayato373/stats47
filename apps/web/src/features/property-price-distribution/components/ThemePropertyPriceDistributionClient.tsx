@@ -60,10 +60,16 @@ export function ThemePropertyPriceDistributionClient({
         title="住宅地の価格分布"
         description={`2025年 · ${area} · 公表面積100㎡以上300㎡未満`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source="不動産情報ライブラリ・国土数値情報（地価公示）"
             sourceLink="https://www.reinfolib.mlit.go.jp/"
+            sourceLinks={PROPERTY_PRICE_DISTRIBUTION_SOURCE.sources.map((s) => ({ label: s.title, url: s.url }))}
+            annotation={[
+              '取引価格は2025年の土地のみの取引、公示価格は2025年1月1日時点の標準地です。同じ土地の比較や時系列の値上がり率ではありません。全国値は対象標本をまとめて集計し、県別中央値を平均していません。',
+              ...PROPERTY_PRICE_DISTRIBUTION_SOURCE.notes,
+            ]}
           />
         }
       >
@@ -132,29 +138,6 @@ export function ThemePropertyPriceDistributionClient({
             </div>
           ))}
         </details>
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          取引価格は2025年の土地のみの取引、公示価格は2025年1月1日時点の標準地です。同じ土地の比較や時系列の値上がり率ではありません。全国値は対象標本をまとめて集計し、県別中央値を平均していません。
-        </p>
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {PROPERTY_PRICE_DISTRIBUTION_SOURCE.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
-        <p className="text-xs text-muted-foreground">
-          {PROPERTY_PRICE_DISTRIBUTION_SOURCE.sources.map((source, i) => (
-            <span key={source.id}>
-              {i > 0 && ' / '}
-              <a
-                href={source.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-              >
-                {source.title}
-              </a>
-            </span>
-          ))}
-        </p>
       </ChartPanel>
     </div>
   );

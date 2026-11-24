@@ -58,7 +58,5 @@ export const retailStoreCount: MetricConfig = {
     ],
   },
   "groupKey": "retail-store-count",
-  "seoTitle": "小売店数ランキング都道府県【2021年】｜1位東京都（86,800店）",
-  "seoDescription": "2021年の小売店数の都道府県別ランキング。1位東京都（86,800店）、最下位鳥取県（4,688店）で18.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

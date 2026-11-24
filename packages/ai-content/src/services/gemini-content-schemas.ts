@@ -1,13 +1,18 @@
 /**
  * Gemini API の structured output に渡す JSON Schema。
  *
- * JSON の構文だけでなく、FAQ と県別解説の件数も API 応答時点で固定する。
- * 意味・数値の正しさは audit-ai-content.mjs が別に判定する。
+ * JSON の構文と FAQ の件数を API 応答時点で固定する。県別解説の件数・順位・値と、意味・数値の正しさは
+ * audit-ai-content.mjs が別に判定する (件数の不一致は blocker)。
+ *
+ * 県別解説の配列に件数 (minItems/maxItems) と順位の範囲 (minimum/maximum) を付けると、47 件の key だけが
+ * HTTP 400 で落ちた (gemini-3.5-flash-lite・2026-11-10〜11-22 の日次。26・38・39 件の key は生成できた)。
+ * [仮説] 制約付きの配列が長いと structured output の schema が受け付けられない。400 の本文は
+ * 2026-11-22 から GeminiTextError の detail に残るので、次の run のログで確かめる。
  */
 
 export type GeminiJsonSchema = Record<string, unknown>;
 
-export function buildAiContentResponseSchema(totalCount: number): GeminiJsonSchema {
+export function buildAiContentResponseSchema(): GeminiJsonSchema {
   return {
     type: "object",
     additionalProperties: false,
@@ -45,15 +50,13 @@ export function buildAiContentResponseSchema(totalCount: number): GeminiJsonSche
         properties: {
           items: {
             type: "array",
-            minItems: totalCount,
-            maxItems: totalCount,
             items: {
               type: "object",
               additionalProperties: false,
               properties: {
                 areaCode: { type: "string" },
                 areaName: { type: "string" },
-                rank: { type: "integer", minimum: 1, maximum: Math.max(1, totalCount) },
+                rank: { type: "integer" },
                 value: { type: "number" },
                 commentary: { type: "string" },
               },

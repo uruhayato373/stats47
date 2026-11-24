@@ -2,28 +2,21 @@
   "version": 1,
   "policy": "縮小専用。パス・出現数の追加は禁止。HEAD・親commit・origin/developとのmerge-baseからの増加を検査する。--baseで比較基準を追加できる。",
   "exceptions": {
-    ".claude/hooks/check-local-db.js": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
-    },
-    ".claude/scripts/ads/__tests__/ad-traffic-block.test.mjs": {
+    ".claude/scripts/lib/__tests__/ad-traffic-block.test.mjs": {
       "stats": 0,
       "ranking": 1,
       "origin": 4,
       "s3Client": 0,
       "reason": "Exact key/host fixtures and expectations exercise path parsing, validation, or publication contracts."
     },
-    ".claude/scripts/analysis/__tests__/analysis-draft.test.mjs": {
+    "packages/ops/src/analysis/__tests__/analysis-draft.test.mjs": {
       "stats": 3,
       "ranking": 0,
       "origin": 0,
       "s3Client": 0,
       "reason": "キー・URL契約を検査するテストの固定入力・期待値"
     },
-    ".claude/scripts/audit/__tests__/theme-chart-live-audit.test.mjs": {
+    "packages/ops/src/audit/__tests__/theme-chart-live-audit.test.mjs": {
       "stats": 1,
       "ranking": 0,
       "origin": 0,
@@ -68,13 +61,6 @@
     ".claude/scripts/blog/fetch-migration-flow.mjs": {
       "stats": 2,
       "ranking": 0,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
-    },
-    ".claude/scripts/blog/find-chart-metric.mjs": {
-      "stats": 0,
-      "ranking": 1,
       "origin": 0,
       "s3Client": 0,
       "reason": "Path/URL documentation or source-path literal; no runtime R2 object construction."
@@ -646,13 +632,6 @@
       "s3Client": 0,
       "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
     },
-    "apps/web/scripts/extract-page-components-from-r2.ts": {
-      "stats": 0,
-      "ranking": 0,
-      "origin": 1,
-      "s3Client": 0,
-      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
-    },
     "apps/web/scripts/generate-finance-flow.ts": {
       "stats": 0,
       "ranking": 0,
@@ -792,13 +771,6 @@
       "origin": 0,
       "s3Client": 0,
       "reason": "キー・URL契約を検査するテストの固定入力・期待値"
-    },
-    "apps/web/src/app/ranking/[rankingKey]/page.tsx": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
     },
     "apps/web/src/components/layout/page-heroes.ts": {
       "stats": 0,
@@ -1069,13 +1041,6 @@
     "packages/data-configs/src/theme-catalog/stat-series-ref.ts": {
       "stats": 0,
       "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
-    },
-    "packages/database/src/schema/index.ts": {
-      "stats": 2,
-      "ranking": 0,
       "origin": 0,
       "s3Client": 0,
       "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
@@ -1538,13 +1503,6 @@
     "packages/ranking/src/utils/resolve-national-figure.ts": {
       "stats": 1,
       "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."
-    },
-    "packages/stats-r2/src/scripts/export-stats-to-r2.ts": {
-      "stats": 1,
-      "ranking": 0,
       "origin": 0,
       "s3Client": 0,
       "reason": "Path/URL documentation or diagnostic example; no runtime R2 object construction."

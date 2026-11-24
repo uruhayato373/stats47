@@ -16,7 +16,7 @@ import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { datasetPath } from "../../../config/datasets.mjs";
-import { MAX_ROUNDS, buildWriterPacket, draftBlockers, nextStep, reviewMode } from "./analysis-run-core.mjs";
+import { MAX_ROUNDS, buildWriterPacket, draftBlockers, nextStep, reviewMode } from "../../../packages/ops/src/analysis/analysis-run-core.mjs";
 import { reviewedArticleText } from "../../../packages/ops/src/analysis/analysis-cycle-core.mjs";
 import { checkAnalyses } from "../../../packages/ops/src/analysis/check-analysis-cycle.mjs";
 
@@ -274,7 +274,8 @@ const STEPS = {
     const analysis = loadAnalysis();
     writeFileSync(paths.packet, buildWriterPacket({
       question: issue.question, terms: (analysis.questionTerms ?? []).join("・"), analysis, figures: figuresOf(),
-      summaryPath: rel(summaryPath), articlePath: rel(articlePath), reason, findings, unmatchedNumbers: existsSync(articlePath) ? unmatchedNumbers() : [],
+      summaryPath: rel(summaryPath), articlePath: rel(articlePath), reason,
+      rules: [".claude/rules/blog-quality-standards.md", ".claude/rules/content-type-standards.md"], findings, unmatchedNumbers: existsSync(articlePath) ? unmatchedNumbers() : [],
     }));
     if (reason === "改稿" && existsSync(articlePath)) run.rewriteFrom = sha256(readFileSync(articlePath));
     run.rounds.draft += 1;

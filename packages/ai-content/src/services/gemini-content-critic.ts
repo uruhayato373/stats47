@@ -5,7 +5,7 @@ import {
 import { REGIONS, fetchPrefectures } from "@stats47/area";
 import { GEMINI_CRITIC_RESPONSE_SCHEMA } from "./gemini-content-schemas";
 
-export interface GeminiCriticIssue {
+interface GeminiCriticIssue {
   section: "faq" | "regionalAnalysis" | "insights" | "prefectureCommentary" | "overall";
   severity: "BLOCK" | "MAJOR" | "MINOR";
   message: string;

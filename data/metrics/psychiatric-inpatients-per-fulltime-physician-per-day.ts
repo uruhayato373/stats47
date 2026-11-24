@@ -34,7 +34,5 @@ export const psychiatricInpatientsPerFulltimePhysicianPerDay: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "精神科病院在院患者数ランキング都道府県【2023年】｜1位高知県（53.4人）",
-  "seoDescription": "2023年の精神科病院在院患者数の都道府県別ランキング。1位高知県（53.4人）、最下位福井県（19.9人）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

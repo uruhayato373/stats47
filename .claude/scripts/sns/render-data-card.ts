@@ -28,7 +28,7 @@ import {
   type DataCardProps,
 } from '../../../apps/remotion/src/features/data-cards/model';
 import { buildDataCard } from '../../../apps/remotion/src/features/data-cards/data-card-input';
-import { prefectureShape } from './lib/data-card-shape';
+import { prefectureShape } from '../../../apps/remotion/scripts/lib/data-card-shape';
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../../../packages/types/mirror/site-config.cjs';
 import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 

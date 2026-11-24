@@ -110,3 +110,13 @@ it('unavailable snapshot fails visibly without rendering invented empty counts',
   );
   expect(screen.queryByRole('table')).not.toBeInTheDocument();
 });
+it('3種類の対象範囲と所在地の注意は図の周りに出さず、見出しの右端の Sheet で読める (2026-11-22)', async () => {
+  show();
+  expect(screen.queryByText(/この一覧は国が指定した3種類/)).not.toBeInTheDocument();
+  fireEvent.click(
+    screen.getByRole('button', { name: '出典・指標の定義・読むときの注意' })
+  );
+  const sheet = within(await screen.findByRole('dialog'));
+  expect(sheet.getByText(/この一覧は国が指定した3種類/)).toBeInTheDocument();
+  expect(sheet.getByText(/訪問先の入口・公開可否/)).toBeInTheDocument();
+});

@@ -37,7 +37,7 @@ effort: high
 各要素が「読者に何を足すか」を問う。特に以下を厳しく見る:
 
 - **定義整合 (BLOCK・正典 `blog-quality-standards.md`「定義整合」)**: 審査の最初に
-  `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <slug>` (書籍は `--keys`) で指標定義シートを
+  `npx tsx packages/ops/src/blog/build-metric-definition-sheet.ts --slug <slug>` (書籍は `--keys`) で指標定義シートを
   作り、本文の解釈をその表に照らす。(a) 値・順位・年が図 JSON と一致するか (b) 対象 (二人以上世帯全体 / 勤労者世帯 /
   事業所…) と分母の取り違え (c) 名目と実質、暦年と年度の混在 (d) 構成比の差の実額換算・平均の個人への置き換え
   (e) 相関を因果・説明割合として書く記述。どれか 1 つでも BLOCK。finding には突合した JSON / config の値を書く。

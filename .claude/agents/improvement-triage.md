@@ -56,8 +56,8 @@ node .claude/scripts/lib/write-past-effects.mjs --dry-run   # 差分確認
 node .claude/scripts/lib/write-past-effects.mjs             # 反映
 ```
 
-read 側: `.claude/scripts/search-growth/lib/scoring.mjs` (confidence ×0.6 / ×0.3) /
-`.claude/scripts/metrics/lib/adsense-diagnostics.mjs` (同様)。
+read 側: `packages/ops/src/search-growth/lib/scoring.mjs` (confidence ×0.6 / ×0.3) /
+`packages/ops/src/metrics/lib/adsense-diagnostics.mjs` (同様)。
 key を解決できなかった行は writer が `unmapped` として報告するので、対象 URL または
 candidate key (`<rule>::<key>`) をバックログ行に明記して解決する (黙って捨てない)。
 
@@ -86,8 +86,8 @@ KPI ごとの今週の値とぶら下がる施策は `data/measurement-cycle/LAT
 ```bash
 node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run   # 今週の確定/保留を確認
 npm run effect-verdict:test                                 # 閾値ゲートの回帰テスト
-# = node --test packages/ops/src/effect-verdict/__tests__/effect-verdict.test.mjs (engine) + .claude/scripts/lib/__tests__/effect-verdict-cli.test.mjs (CLI) + write-past-effects.test.mjs
-#          .claude/scripts/lib/__tests__/write-past-effects.test.mjs
+# = node --test packages/ops/src/effect-verdict/__tests__/effect-verdict.test.mjs (engine) + packages/ops/src/effect-verdict/__tests__/effect-verdict-cli.test.mjs (CLI) + write-past-effects.test.mjs
+#          packages/ops/src/effect-verdict/__tests__/write-past-effects.test.mjs
 ```
 
 想定効果値は `[target: ±N 単位]` を backlog 行またはタイトルに書いたときだけ機械可読になる。
@@ -96,10 +96,10 @@ npm run effect-verdict:test                                 # 閾値ゲートの
 
 GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス完全一致・複数可。`/` で終えると配下すべて) と
 `デプロイ済 YYYY-MM-DD` も揃うと `gsc-improvement` adapter
-(`.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs`) が週次 snapshot の clicks で判定する。
+(`packages/ops/src/metrics/lib/gsc-improvements-adapter.mjs`) が週次 snapshot の clicks で判定する。
 欠けている目印は `data/measurement-cycle/latest.json` の `engine.gsc.missing` に出る。
 GA4 施策 (Metric に ga4) は `[ga4-page: /path]` と `デプロイ済 YYYY-MM-DD`・`[target: +N pageviews]` が揃うと
-`ga4-improvement` adapter (`.claude/scripts/metrics/lib/ga4-improvements-adapter.mjs`) が週次 snapshot の
+`ga4-improvement` adapter (`packages/ops/src/metrics/lib/ga4-improvements-adapter.mjs`) が週次 snapshot の
 `pages-clean.csv` (Japan・rolling28d) の PV で判定する。2026-09-26 の page_view 二重計測是正をまたぐ窓は
 `confounded` で pending に留まる (release 記録 `data/releases/2026-09-26-ga4-measurement-v2.json`)。
 施策固有の内訳の照会は `node .claude/scripts/metrics/gsc-query.mjs` / `ga4-query.mjs` (再現コマンドとしてログに書く)。

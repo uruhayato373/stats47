@@ -22,10 +22,10 @@ import {
   setKdpPricing, kdpSelectChecked,
   saveDraft,
 } from "./kdp-form.mjs";
-import { ROOT, writeBackDraftId, writeBackListing, writeBackPublicationStage, shotPath, sleep } from "./kdp-session.mjs";
-import { kdpSelectMismatch, normalizeKdpStatus } from "./kdp-status.mjs";
+import { ROOT, writeBackDraftId, writeBackListing, writeBackPublicationStage, shotPath, sleep } from "../../../../packages/ops/src/kdp/lib/kdp-session.mjs";
+import { kdpSelectMismatch, normalizeKdpStatus } from "../../../../packages/ops/src/kdp/lib/kdp-status.mjs";
 import { assertKindleReleaseReady } from "./kdp-release-gate.mjs";
-import { captureKindleUpload } from "./kdp-archive-gate.mjs";
+import { captureKindleUpload } from "../../../../packages/ops/src/kdp/lib/kdp-archive-gate.mjs";
 import { resolve } from "node:path";
 
 const BASE = "https://kdp.amazon.co.jp/ja_JP";

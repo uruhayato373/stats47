@@ -51,7 +51,7 @@ function populationChangeRate(population2020: number, population2050: number): n
 }
 
 /** 配信用座標精度で半開区間[西,東)×[南,北)を使い、境界点を一意に接続する。 */
-export function joinLandPricePointsToMeshes(
+function joinLandPricePointsToMeshes(
   meshes: readonly GeoPopulationMeshCell[],
   points: readonly GeoLandPricePoint[]
 ): (string | null)[] {
@@ -77,7 +77,7 @@ export function joinLandPricePointsToMeshes(
   });
 }
 
-export function summarizeLandPriceJoin(
+function summarizeLandPriceJoin(
   meshes: readonly GeoPopulationMeshCell[],
   points: readonly GeoLandPricePoint[],
   pointMeshIds: readonly (string | null)[]

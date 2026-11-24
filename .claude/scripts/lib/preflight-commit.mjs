@@ -232,6 +232,13 @@ export const PR_GATES = [
     hint: "npm run build:registry --workspace=@stats47/data-configs",
   },
   {
+    // CI では Unit Tests (packages) の estat-provenance-fresh.test.ts で初めて分かり、2026-11-12・11-23 に PR で落ちた
+    name: "Estat Provenance",
+    why: "指標の出典・補助の出典を変えると、統計表 ID → 調査の辞書 (estat-provenance.generated.json) が古くなる",
+    run: () => tryRun("npx", ["tsx", "scripts/ssds/build-estat-provenance.ts", "--check"], { cwd: path.join(SCAN_ROOT, "packages", "data-configs") }),
+    hint: "npm run metrics:regen-derived",
+  },
+  {
     name: "Category Keys",
     why: "カテゴリマスタ (categories.json) を変えると CategoryKey の型 (category-keys.generated.ts) が古くなる",
     run: () => tryRun("npm", ["run", "build:category-keys", "--workspace=@stats47/data-configs", "--", "--check"]),

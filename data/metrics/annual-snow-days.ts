@@ -78,7 +78,6 @@ export const annualSnowDays: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "年間雪日数ランキング【2020年・観測方法の変更後に値のある20都道府県】｜1位北海道（118日）",
-  "seoDescription": "2020年の年間雪日数の都道府県別ランキング。観測方法の変更で値があるのは20都道府県のみ。1位北海道（118日）、最下位沖縄県（0日）。観測地点は県庁所在地の気象台。",
+  "seoNote": "観測地点は県庁所在地の気象台。",
   "isActive": true
 };

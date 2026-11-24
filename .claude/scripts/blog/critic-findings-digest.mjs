@@ -17,7 +17,7 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
 import { datasetDir } from "../../../config/datasets.mjs";
-import { insertCards } from "../gsc/lib/coverage-backlog.mjs";
+import { insertCards } from "../../../packages/ops/src/gsc/lib/coverage-backlog.mjs";
 import { aggregateByType, LEDGER_DIRNAME, planPatternCards, readLedgerRows, renderLatest } from "./lib/critic-findings.mjs";
 
 const require = createRequire(import.meta.url);

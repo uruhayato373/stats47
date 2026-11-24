@@ -359,6 +359,8 @@ jobs:
       - name: 🔎 Smoke test (Production routes)
         env:
           DIFF_BASE: ${{ github.event.before }}
+          # 実行時 ISR の検査を失敗扱いにする (2026-11-21 の #1294 の反映で 2 回目以降が HIT になることを本番で確かめた。CF-CPU-ISR-01)
+          ISR_CHECK_STRICT: "1"
         run: |
           sleep 5
           bash .github/scripts/smoke-test-routes.sh https://stats47.jp
@@ -370,3 +372,82 @@ jobs:
       # だったのを、index の件数ハードコードとして発見した (どの監視も緑のままだった)。
       - name: 🗺️ Sitemap index の整合性
         run: bash .github/scripts/check-sitemap-index.sh https://stats47.jp
+
+  # 見張り役 (pr-skip-ci-head-guard.yml) が GITHUB_TOKEN で起動したデプロイは、完了しても Post-Deploy Smoke の
+  # workflow_run が作られない (GITHUB_TOKEN が起こしたイベントは workflow_dispatch と repository_dispatch を除いて新しい run を
+  # 作らない。GitHub の文書「Automatic token authentication」)。11-18・11-19・11-20 の 3 回、確認が走らなかった
+  # (RELEASE-SQUASH-SKIP-TOKEN-01)。そのときだけ、確認を workflow_dispatch で起動する。人が起動したデプロイと push の
+  # デプロイは workflow_run で走るので起動しない (二重にしない)。
+  post-deploy-smoke:
+    needs: deploy
+    if: github.event_name == 'workflow_dispatch' && github.actor == 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    name: Start Post-Deploy Smoke
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Dispatch post-deploy-smoke.yml on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run post-deploy-smoke.yml --repo "$GITHUB_REPOSITORY" --ref main
+
+  # 設定 (data/metrics/<key>.ts) を変えた指標の観測値を、デプロイの後に取り込む (2026-11-23 オーナー判断)。
+  # 手で起動する data-refresh は main のコードで走るので、指標の設定を変えたらリリースの後に人が起動する必要があり、
+  # 忘れると本番に値が入らないまま残る (11-23 に補助の出典を足した医療施設の 6 指標も、取り込みが手作業として残った)。
+  # 選ぶのは「この差分で変えた指標」のうち、R2 の値の記録 (meta.recipe.configHash) と今の設定が違うものだけ。
+  # 表の更新だけの指標や、記録が今の設定と同じ指標は取り込まない (全範囲の定期の更新は 11-05 から止めている)。
+  # 取り込みの前の確かめは手元の npm run data:check が受け持つ。取り込み自体も data-refresh の形の検査を通る。
+  # 失敗は data-refresh が Issue (data-refresh-alert) を立てる。正典: .claude/rules/metric-config-standards.md「取り込みの確かめと反映」
+  ingest-changed-metrics:
+    needs: deploy
+    runs-on: ubuntu-latest
+    name: Ingest changed metrics
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Changed metric files
+        id: changed
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # push は before..after、見張り役・人の起動 (workflow_dispatch) は before が無いので squash の親と比べる
+          KEYS=$(node packages/ops/src/ci/plan-metric-ingest.mjs "$BEFORE" "$GITHUB_SHA")
+          echo "変えた指標の定義: ${KEYS:-(なし)}"
+          echo "keys=$KEYS" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node.js
+        if: steps.changed.outputs.keys != ''
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        if: steps.changed.outputs.keys != ''
+        run: npm ci
+
+      - name: Keep metrics whose stored recipe differs
+        id: plan
+        if: steps.changed.outputs.keys != ''
+        env:
+          KEYS: ${{ steps.changed.outputs.keys }}
+        run: |
+          npx tsx packages/data-configs/scripts/page-data-batch.ts --select-only --metric "$KEYS" > /tmp/selection.json
+          METRIC=$(node -e 'const s=require("/tmp/selection.json");process.stdout.write(s.reasons.filter((r)=>r.configHashChanged).map((r)=>r.key).join(","))')
+          echo "取り込む指標: ${METRIC:-(なし。R2 の記録が今の設定と同じ)}"
+          echo "metric=$METRIC" >> "$GITHUB_OUTPUT"
+
+      - name: Dispatch data-refresh.yml on main
+        if: steps.plan.outputs.metric != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          METRIC: ${{ steps.plan.outputs.metric }}
+        run: gh workflow run data-refresh.yml --repo "$GITHUB_REPOSITORY" --ref main -f metric="$METRIC" -f dry_run=false -f snapshot_scope=auto

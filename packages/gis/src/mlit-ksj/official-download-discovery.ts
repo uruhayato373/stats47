@@ -1,5 +1,5 @@
 import { NATIONAL_OR_PREFECTURE_AREA_CODE_RE, to2DigitPrefCode } from '@stats47/area';
-export type KsjArchiveFormat = 'geojson' | 'shp' | 'gml';
+type KsjArchiveFormat = 'geojson' | 'shp' | 'gml';
 
 export type KsjOfficialArchive = {
   dataId: string;

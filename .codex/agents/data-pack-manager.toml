@@ -13,7 +13,7 @@ note チャネルを単一所有**する。Kindle チャネルは `kindle-publis
 - 商品定義は **台帳 `products.packs` (JSON + Schema) が SSOT** (`src/catalog/` は読み込み口と型)。実データは **R2 → 台帳 `products.pack-datasets` のスナップショット・基準年固定**。
   生成バイナリは **`.local/data-packs/`（git 管理外・公開 R2 へ置かない・30 日で掃除）**。永続/リモート D1 は持たない。
 - note で売る納品版は **`data/products/note-pack-deliveries.json` の `_delivery`（成果物ディレクトリ + manifest SHA）で固定**し、
-  照合は `.claude/scripts/products/lib/pack-evidence.mjs`。公開済みの本文と添付の正本は private R2（`note:article save/verify`）。
+  照合は `packages/ops/src/products/lib/pack-evidence.mjs`。公開済みの本文と添付の正本は private R2（`note:article save/verify`）。
 - **Office 実機検証はしない**（人間工程）。「生成成功」を「互換性検証済み」と書かない（`evidence-based-judgment.md`）。
 - **note への公開はしない**。公開・公開後の記録は `note-manager`、公開の承認はオーナー。
 - 架空サンプルは `Dataset.isSample` で明示分離。欠損は 0 埋めしない。地図は都道府県コードで結合。

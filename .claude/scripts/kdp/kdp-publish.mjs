@@ -22,12 +22,12 @@ import { datasetPath } from "../../../config/datasets.mjs";
 import { KDP_COVER_THUMBNAIL_CHECKS, KDP_LISTING_COPY } from "../../../config/paths.mjs";
 import {
   ROOT, launchContext, waitForLogin, assertAccount, readListings, resolveAsset, shotPath, sleep,
-} from "./lib/kdp-session.mjs";
+} from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft } from "./lib/kdp-flow.mjs";
 import { assertKindleReleaseReady } from "./lib/kdp-release-gate.mjs";
-import { runKdpPreflight, validateKdpListingMetadata } from "./lib/kdp-preflight.mjs";
+import { runKdpPreflight, validateKdpListingMetadata } from "../../../packages/ops/src/kdp/lib/kdp-preflight.mjs";
 import { publicationCopyIssues } from "../../../packages/product-factory/src/channels/kindle/kdp-listing-copy.mjs";
-import { coverThumbnailIssues } from "./lib/kdp-cover-thumbnail.mjs";
+import { coverThumbnailIssues } from "../../../packages/ops/src/kdp/lib/kdp-cover-thumbnail.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };

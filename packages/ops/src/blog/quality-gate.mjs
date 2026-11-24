@@ -198,12 +198,22 @@ function countMarkdownTables(text) {
 // charCount は「読者が読む地の文 (prose)」のみを数える。
 // 表・画像参照・タグ (source-link 等)・リンクURL・見出し/引用記号・コード等の markup は
 // 読者価値を伴わない水増し要因なので除外する (2026-06-02: 表で字数を稼ぐ gaming を封じる)。
+/** 取り除けなくなるまで繰り返す。1 回の置換だと、入れ子のタグが置換のあとで組み上がって残る (CodeQL の指摘) */
+function replaceUntilStable(text, pattern, replacement = '') {
+  let previous;
+  do {
+    previous = text;
+    text = text.replace(pattern, replacement);
+  } while (text !== previous);
+  return text;
+}
+
 function getCharCount(text) {
   let t = text.replace(/^---[\s\S]*?\n---\n/, ''); // frontmatter
   t = t.replace(/```[\s\S]*?```/g, ''); // code fence
   t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, ''); // 画像参照
-  t = t.replace(/<[^>]+>[\s\S]*?<\/[^>]+>/g, ''); // ペアHTML/カスタムタグ (source-link/affiliate-banner 等)
-  t = t.replace(/<[^>]+>/g, ''); // 単独タグ
+  t = replaceUntilStable(t, /<[^>]+>[\s\S]*?<\/[^>]+>/g); // ペアHTML/カスタムタグ (source-link/affiliate-banner 等)
+  t = replaceUntilStable(t, /<[^>]+>/g); // 単独タグ
   t = t
     .split('\n')
     .filter((l) => !/^\s*\|/.test(l)) // 表行
@@ -254,8 +264,8 @@ function hasSourceLineage(text) {
 function getProseForTone(text) {
   let t = text.replace(/^---[\s\S]*?\n---\n/, ''); // frontmatter
   t = t.replace(/```[\s\S]*?```/g, ''); // code fence
-  t = t.replace(/<[^>]+>[\s\S]*?<\/[^>]+>/g, ''); // ペアタグ
-  t = t.replace(/<[^>]+>/g, ''); // 単独タグ
+  t = replaceUntilStable(t, /<[^>]+>[\s\S]*?<\/[^>]+>/g); // ペアタグ
+  t = replaceUntilStable(t, /<[^>]+>/g); // 単独タグ
   t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, ''); // 画像
   t = t
     .split('\n')

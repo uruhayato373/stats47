@@ -19,7 +19,7 @@ import sharp from "sharp";
 import { CHART_THEMES, type ChartTheme } from "../../../apps/remotion/src/features/data-cards/chart-theme";
 import { renderGroupedBarsChart, type GroupedBarChart } from "../../../apps/admin/lib/template-grouped-bars";
 import { renderRelationshipScatterChart, type ScatterChart } from "../../../apps/admin/lib/template-relationship-scatter";
-import { correlation } from "./analysis-frame-core.mjs";
+import { correlation } from "../../../packages/ops/src/analysis/analysis-frame-core.mjs";
 
 const MIN_POPULATION = 30_000;
 const ROBUSTNESS_POPULATIONS = [10_000, 30_000, 100_000];

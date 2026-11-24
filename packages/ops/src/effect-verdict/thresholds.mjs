@@ -3,7 +3,7 @@
  *
  * 正典: `.claude/rules/evidence-based-judgment.md` §状況 1「閾値エンジン経由の確定」。
  * 数値は**全部ここに集約**し、engine.mjs 側にリテラルを書かない (書けば SSOT が二重化する)。
- * 形は `.claude/scripts/search-growth/lib/scoring.mjs` の `DEFAULT_CONFIG` に倣う。
+ * 形は `packages/ops/src/search-growth/lib/scoring.mjs` の `DEFAULT_CONFIG` に倣う。
  *
  * 閾値を変えるときは `version` を上げる。verdict JSON に `thresholdsVersion` が残るので、
  * 「どの境界で確定したラベルか」が後から復元できる。

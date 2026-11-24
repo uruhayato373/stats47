@@ -33,7 +33,5 @@ export const hobbyParticipationRatePachinko: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "パチンコの行動者率 都道府県ランキング【2021年】｜1位佐賀県（8.6％）",
-  "seoDescription": "2021年のパチンコの行動者率を都道府県別に比較。1位は佐賀県（8.6％）、最下位は沖縄県（3.6％）、最大と最小の差は2.4倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

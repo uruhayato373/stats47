@@ -28,6 +28,11 @@ export interface CorrelatedItem {
   title: string;
   subtitle: string | null;
   unit: string;
+  /**
+   * 相関を計算した年 (両方に値のある最新の共通年)。相関・偏相関・散布図はすべてこの年の値。
+   * 2026-11-23 より前の snapshot には無い。
+   */
+  year?: string;
   pearsonR: number;
   /**
    * 並び順と画面表示の基準。人口規模の影響を除いた順位相関 (x・y・総人口を県ごとの順位に
@@ -53,6 +58,8 @@ export interface CorrelatedItem {
 export interface TopCorrelation {
   rankingKeyX: string;
   rankingKeyY: string;
+  /** 相関を計算した年 (両方に値のある最新の共通年)。2026-11-23 より前の snapshot には無い */
+  year?: string;
   titleX: string | null;
   titleY: string | null;
   normalizationBasisX: string | null;
@@ -81,6 +88,8 @@ export interface CorrelationStatsSnapshot {
 export interface CorrelationByKeySnapshot {
   generatedAt: string;
   rankingKey: string;
+  /** この指標の最新年。ペアの year がこれと違えば、画面は比べた年を出す。2026-11-23 より前の snapshot には無い */
+  latestYear?: string;
   selectionPolicyVersion: number;
   groups: CorrelationGroups<CorrelatedItem>;
 }
@@ -129,6 +138,7 @@ function parseTopCorrelation(value: unknown, index: number): TopCorrelation {
   return {
     rankingKeyX: assertString(value.rankingKeyX, `pairs[${index}].rankingKeyX`),
     rankingKeyY: assertString(value.rankingKeyY, `pairs[${index}].rankingKeyY`),
+    ...(value.year === undefined ? {} : { year: assertString(value.year, `pairs[${index}].year`) }),
     titleX: assertNullableString(value.titleX, `pairs[${index}].titleX`),
     titleY: assertNullableString(value.titleY, `pairs[${index}].titleY`),
     normalizationBasisX: assertNullableString(value.normalizationBasisX, `pairs[${index}].normalizationBasisX`),
@@ -183,6 +193,7 @@ function parseCorrelatedItem(value: unknown, index: number): CorrelatedItem {
     title: assertString(value.title, `pairs[${index}].title`),
     subtitle: assertNullableString(value.subtitle, `pairs[${index}].subtitle`),
     unit: assertString(value.unit, `pairs[${index}].unit`),
+    ...(value.year === undefined ? {} : { year: assertString(value.year, `pairs[${index}].year`) }),
     ...correlations,
     populationAdjustedR: assertNumber(value.populationAdjustedR, `pairs[${index}].populationAdjustedR`),
     scatterData: value.scatterData.map((point, pointIndex) => {
@@ -218,6 +229,7 @@ export function parseCorrelationByKeySnapshot(value: unknown): CorrelationByKeyS
   return {
     generatedAt: assertGeneratedAt(value.generatedAt),
     rankingKey,
+    ...(value.latestYear === undefined ? {} : { latestYear: assertString(value.latestYear, "latestYear") }),
     selectionPolicyVersion: CORRELATION_SELECTION_POLICY.version,
     groups,
   };

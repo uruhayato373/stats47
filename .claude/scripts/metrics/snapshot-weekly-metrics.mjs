@@ -10,7 +10,7 @@
  * 記録先の統一原則（.claude/rules/data-storage.md）:
  *   計測蓄積は .claude/ 配下のファイル。旧パス docs/03_レビュー/weekly-metrics/ は 2026-04-17 に廃止。
  *
- * 参照: .claude/scripts/lib/metrics-reader.mjs
+ * 参照: packages/ops/src/metrics/metrics-reader.mjs
  *       .claude/skills/management/nsm-experiment/
  *       .claude/skills/management/weekly-review/SKILL.md (Phase 0)
  *
@@ -27,7 +27,7 @@ import { join } from "node:path";
 import {
   fetchWeeklyNsmMetrics,
   formatNsmSection,
-} from "../lib/metrics-reader.mjs";
+} from "../../../packages/ops/src/metrics/metrics-reader.mjs";
 import { jstDateOf, isoWeekOf } from "../../../packages/ops/src/metrics/periods.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 

@@ -21,9 +21,9 @@ export interface KdpWeeklyListing {
  * - prepare: 公開を待つ検証済みの本が無い。型ごとに次の本を作る
  * - ready-for-owner-approval: 検証済みの本がある。1 冊ずつオーナーの明示承認で出す
  */
-export type KdpWeeklyGateStatus = "hold" | "prepare" | "ready-for-owner-approval";
+type KdpWeeklyGateStatus = "hold" | "prepare" | "ready-for-owner-approval";
 
-export interface KdpCohortMeasurement {
+interface KdpCohortMeasurement {
   readonly cohort: "expansion";
   readonly requiredBookIds: readonly string[];
   readonly requiredPeriodByBook: Readonly<Record<string, { start: string; end: string }>>;
@@ -38,7 +38,7 @@ export interface KdpCohortMeasurement {
 }
 
 /** 型ごとの進み具合。続ける・増やす・止めるはオーナーが決める (ここは材料だけ) */
-export interface KdpFormatProgress {
+interface KdpFormatProgress {
   readonly id: string;
   readonly concept: string;
   readonly liveBookIds: readonly string[];

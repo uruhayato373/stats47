@@ -39,19 +39,19 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseCsv } from "csv-parse/sync";
-import { parseCoverageDrilldown } from './lib/coverage-csv.mjs';
-import { probeCoverageUrls } from "./lib/coverage-probe.mjs";
-import { extractLocs } from "../search-growth/lib/live-sitemap.mjs";
+import { parseCoverageDrilldown } from '../../../packages/ops/src/gsc/lib/coverage-csv.mjs';
+import { probeCoverageUrls } from "../../../packages/ops/src/gsc/lib/coverage-probe.mjs";
+import { extractLocs } from "../../../packages/ops/src/search-growth/lib/live-sitemap.mjs";
 
 import {
   isIntentionallyNonIndexableResource,
   readCanonicalUrl,
   readHtmlIndexSignals,
-} from "./coverage-policy.mjs";
+} from "../../../packages/ops/src/gsc/coverage-policy.mjs";
 import {
   assertFreshCoverageSource,
   getCoverageSourceFreshness,
-} from "./lib/coverage-source-freshness.mjs";
+} from "../../../packages/ops/src/gsc/lib/coverage-source-freshness.mjs";
 import {
   applyContentVerdict,
   applyInspectionObservations,
@@ -64,9 +64,10 @@ import {
   sitemapKey,
   summarizeCoverageQueue,
   upsertTotalsHistoryRow,
-} from "./lib/coverage-queue-state.mjs";
+} from "../../../packages/ops/src/gsc/lib/coverage-queue-state.mjs";
 import { SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -145,6 +146,8 @@ const loadQueue = () => {
   }
 };
 const saveQueue = (q) => {
+  // 書く前に台帳 gsc.coverage-queue の Schema で形を確かめる (合わなければ例外で止まり、書かない)
+  assertDatasetShape("gsc.coverage-queue", q);
   fs.mkdirSync(STATE_DIR, { recursive: true });
   fs.writeFileSync(QUEUE_PATH, JSON.stringify(q, null, 2) + "\n");
 };

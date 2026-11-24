@@ -75,7 +75,7 @@ export const STATS47_USES = [
 export type Stats47Use = (typeof STATS47_USES)[number];
 
 export const GEOMETRY_TYPES = ["point", "line", "polygon", "mesh", "3d"] as const;
-export type GeometryType = (typeof GEOMETRY_TYPES)[number];
+type GeometryType = (typeof GEOMETRY_TYPES)[number];
 
 export const UPDATE_FREQUENCIES = [
   "realtime",
@@ -87,14 +87,14 @@ export const UPDATE_FREQUENCIES = [
   "static",
   "unknown",
 ] as const;
-export type UpdateFrequency = (typeof UPDATE_FREQUENCIES)[number];
+type UpdateFrequency = (typeof UPDATE_FREQUENCIES)[number];
 
 export const DATASET_COVERAGES = [
   "all-japan",
   "partial",
   "prefecture-specific",
 ] as const;
-export type DatasetCoverage = (typeof DATASET_COVERAGES)[number];
+type DatasetCoverage = (typeof DATASET_COVERAGES)[number];
 
 export interface OpenDataSource {
   /** kebab-case の安定 ID (例 "mhlw-medical-info") */
@@ -124,7 +124,7 @@ export interface OpenDatasetLicense {
   readonly termsUrl: string;
 }
 
-export interface OpenDatasetVerification {
+interface OpenDatasetVerification {
   readonly status: VerificationStatus;
   readonly verifiedAt: string;
   readonly verifiedFromUrls: readonly string[];

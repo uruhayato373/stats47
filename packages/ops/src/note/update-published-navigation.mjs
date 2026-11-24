@@ -1,0 +1,883 @@
+#!/usr/bin/env node
+
+/**
+ * catalog の nextBestArticle を持つ公開記事へ、次の記事 + マガジンの回遊フッターを追加する。
+ * 既定は audit-only。note.com へ書くには --commit が必要。
+ *
+ * Usage:
+ *   node .claude/scripts/note/update-published-navigation.mjs
+ *   node .claude/scripts/note/update-published-navigation.mjs --slug recovered-nf962c6702b93 --commit
+ *   node .claude/scripts/note/update-published-navigation.mjs --all-planned --commit
+ *   node .claude/scripts/note/update-published-navigation.mjs --all --commit
+ *   node .claude/scripts/note/update-published-navigation.mjs --products [--commit]
+ *   node .claude/scripts/note/update-published-navigation.mjs --products --check
+ *   node .claude/scripts/note/update-published-navigation.mjs --magazine s47-kakei-reading [--commit]
+ *     (そのマガジンの無料記事だけに footer を適用。magazine.datasetArticle の有料記事カードもここで付く)
+ */
+
+import { execFileSync } from "node:child_process";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  applyNavigationFooter,
+  applyPublishedLinkRepairs,
+  applyVisibleNavigationBeforeSeparator,
+  buildNoteProductCardUrl,
+  canonicalizeNoteEditorBody,
+  collapseDuplicateFooterHeadings,
+  includesExactUrl,
+  resolveProductCardText,
+  datasetCardLead,
+} from "./lib/navigation-footer.mjs";
+import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
+import { SITE_ORIGIN } from "../../../types/mirror/site-config.cjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
+import { assertRegisteredCards, cardEntries, registerMissingCards, unregisteredCards, verifyPublicCards } from './lib/native-cards.mjs';
+import { resolvePaidProduct, rewriteProductCards } from './lib/product-cards.mjs';
+import { readApprovedCardImageRefresh } from './lib/card-image-refresh.mjs';
+import { indexEnabled, preservePublishedIndex } from './lib/publish-card-body.mjs';
+
+// --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
+// (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
+let FORCE_REGENERATE_CARDS = false;
+let approvedImageRefresh = null;
+
+const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(SCRIPT_DIR, "../../../..");
+const RUN_DATE = new Date().toISOString().slice(0, 10);
+const REPORT_PATH = join(ROOT, datasetDir("note.navigation-pilot"), `note-navigation-pilot-${RUN_DATE}.json`);
+const METRICS_PATH = join(ROOT, datasetDir("note.metrics"), `note-${RUN_DATE}.json`);
+const CIRCULATION_AUDIT_PATH = join(ROOT, datasetDir("note.operation-evidence"), `note-circulation-audit-${RUN_DATE}.json`);
+
+function parseArgs(argv) {
+  const slugIndex = argv.indexOf("--slug");
+  const slug = slugIndex >= 0 ? argv[slugIndex + 1] : null;
+  const allPlanned = argv.includes("--all-planned");
+  const allFree = argv.includes("--all-free") || argv.includes("--all");
+  const repairRedirects = argv.includes("--repair-redirects") || argv.includes("--all");
+  const products = argv.includes("--products");
+  const magazineIndex = argv.indexOf("--magazine");
+  const magazine = magazineIndex >= 0 ? argv[magazineIndex + 1] : null;
+  if (magazineIndex >= 0 && !magazine) throw new Error("--magazine <key> を指定してください");
+  const check = argv.includes("--check");
+  const repairsOnly = argv.includes("--repairs-only");
+  if (repairsOnly && !slug) throw new Error("--repairs-only は --slug <key> と同時に指定してください");
+  if (check && !products) throw new Error("--check は --products と同時に指定してください");
+  const forceRegenerateCards = argv.includes("--force-regenerate-cards");
+  if (forceRegenerateCards && !products) {
+    throw new Error("--force-regenerate-cards は --products と同時に指定してください");
+  }
+  if (forceRegenerateCards && !argv.includes("--commit")) {
+    throw new Error("--force-regenerate-cards は --commit と同時に指定してください (audit-only では意味がない)");
+  }
+  if (slug && (allPlanned || allFree)) {
+    throw new Error("--slug と --all-planned/--all-free/--all は同時指定できません");
+  }
+  if (argv.includes("--commit") && !slug && !allPlanned && !allFree && !repairRedirects && !products && !magazine) {
+    throw new Error("書き込み時は --slug <key> または一括オプションを指定してください");
+  }
+  return {
+    slug,
+    allPlanned,
+    allFree,
+    repairRedirects,
+    products,
+    magazine,
+    check,
+    forceRegenerateCards,
+    repairsOnly,
+    commit: argv.includes("--commit"),
+  };
+}
+
+function catalog(catalogScript) {
+  const raw = execFileSync(process.execPath, ["--import", "tsx", join(ROOT, catalogScript)], {
+    cwd: ROOT,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "inherit"],
+  });
+  return JSON.parse(raw);
+}
+
+function noteKeyFromUrl(url) {
+  const key = new URL(url).pathname.match(/\/n\/(n[0-9a-f]+)$/i)?.[1];
+  if (!key) throw new Error(`note key を抽出できません: ${url}`);
+  return key;
+}
+
+function fnv1a(value) {
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < String(value || "").length; index += 1) {
+    hash = Math.imul(hash ^ String(value).charCodeAt(index), 0x01000193);
+  }
+  return (hash >>> 0).toString(16);
+}
+
+function sleep(milliseconds) {
+  return new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds));
+}
+
+async function fetchNote(noteKey, attempts = 5, requestContext = null) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const url = `https://note.com/api/v3/notes/${noteKey}?ts=${Date.now()}`;
+      const response = requestContext
+        ? await requestContext.get(url, { headers: { "User-Agent": UA } })
+        : await fetch(url, { headers: { "user-agent": "stats47-note-navigation/1.0" } });
+      const status = requestContext ? response.status() : response.status;
+      if (status === 403 || status === 429) {
+        throw new Error(`HTTP ${status} (rate limit)`);
+      }
+      if (status < 200 || status >= 300) throw new Error(`HTTP ${status}`);
+      const json = await response.json();
+      if (!json?.data) throw new Error("note API response has no data");
+      return json.data;
+    } catch (error) {
+      lastError = error;
+      if (attempt < attempts) {
+        const rateLimited = /HTTP (?:403|429)/.test(String(error?.message || error));
+        await sleep(rateLimited ? attempt * 5_000 : attempt * 700);
+      }
+    }
+  }
+  throw lastError;
+}
+
+function snapshot(note) {
+  return {
+    status: note.status,
+    account: note.user?.urlname || "",
+    price: Number(note.price || 0),
+    separator: note.separator || null,
+    hashtagCount: Array.isArray(note.hashtag_notes) ? note.hashtag_notes.length : 0,
+    hashtags: Array.isArray(note.hashtag_notes)
+      ? note.hashtag_notes.map((item) => item?.hashtag?.name).filter(Boolean)
+      : [],
+    hasDraft: Boolean(note.has_draft),
+    embeddedContents: Array.isArray(note.embedded_contents) ? note.embedded_contents : null,
+    index: note.index,
+    body: String(note.body || ""),
+    bodySignature: fnv1a(note.body || ""),
+  };
+}
+
+function latestViews() {
+  try {
+    const json = JSON.parse(readFileSync(METRICS_PATH, "utf8"));
+    return new Map((json.articles || []).map((article) => [article.noteId, article.views]));
+  } catch {
+    return new Map();
+  }
+}
+
+function targetFamily(article) {
+  const target = article.stats47Targets?.[0] || "";
+  const match = target.match(/^\/ranking\/(sports|hobby|study|travel|volunteer)-/);
+  return match?.[1] || article.magazine || article.vertical;
+}
+
+function chooseRelatedArticle(article, source, views) {
+  const manual = article.nextBestArticle
+    ? source.articles.find((candidate) => candidate.key === article.nextBestArticle)
+    : null;
+  if (manual) return manual;
+  if (!article.magazine) return null;
+  const family = targetFamily(article);
+  const candidates = source.articles.filter(
+    (candidate) => candidate.key !== article.key
+      && candidate.magazine === article.magazine
+      && targetFamily(candidate) === family,
+  );
+  const fallback = candidates.length > 0
+    ? candidates
+    : source.articles.filter(
+      (candidate) => candidate.key !== article.key && candidate.magazine === article.magazine,
+    );
+  return fallback.sort((left, right) => {
+    const rightViews = views.get(noteKeyFromUrl(right.noteUrl)) ?? -1;
+    const leftViews = views.get(noteKeyFromUrl(left.noteUrl)) ?? -1;
+    if (rightViews !== leftViews) return rightViews - leftViews;
+    return String(left.publishedAt || "").localeCompare(String(right.publishedAt || ""))
+      || left.key.localeCompare(right.key);
+  })[0] || null;
+}
+
+function auditRemediation() {
+  try {
+    const audit = JSON.parse(readFileSync(CIRCULATION_AUDIT_PATH, "utf8"));
+    return new Map(audit.articles.map((article) => {
+      const forceNormalizeLegacy = article.warnings.some((warning) => warning.code === "non_https_site_link");
+      const repairs = article.warnings
+        .filter((warning) => warning.code === "redirected_site_link")
+        .flatMap((warning) => warning.detail || [])
+        .filter((detail) => {
+          try {
+            const from = new URL(detail.url);
+            const to = new URL(detail.finalUrl);
+            return from.protocol === "https:"
+              && to.protocol === "https:"
+              && ["stats47.jp", "www.stats47.jp"].includes(from.hostname)
+              && to.hostname === "stats47.jp"
+              && !to.search
+              && !to.hash
+              && detail.finalStatus === 200;
+          } catch {
+            return false;
+          }
+        })
+        .map((detail) => ({ mode: "replace-url", fromUrl: detail.url, toUrl: detail.finalUrl }));
+      return [article.key, { forceNormalizeLegacy, repairs }];
+    }));
+  } catch {
+    return new Map();
+  }
+}
+
+/**
+ * 無料記事 article の末尾に載せる同マガジンの有料データ商品を選ぶ (決定的)。
+ *  - 商品 (価格降順・key 昇順) ごとに、無料記事 (key 昇順) を回しながら最大 INBOUND_TARGET 本へ割り当てる
+ *  - 無料記事 1 本に載せるカードは MAX_CARDS_PER_ARTICLE 枚まで (満杯の記事は飛ばす)
+ *  73 本の無料記事に ¥200 の CSV カードを全部載せる、7 商品を 1 本に積む、の両方を避けつつ全商品に流入を作る。
+ */
+export const DATASET_INBOUND_TARGET = 5;
+export const DATASET_MAX_CARDS_PER_ARTICLE = 3;
+export function chooseDatasetArticles(article, source) {
+  const free = source.articles
+    .filter((candidate) => candidate.magazine === article.magazine && !candidate.isPaid && candidate.noteUrl)
+    .map((candidate) => candidate.key).sort();
+  const paid = source.articles
+    .filter((candidate) => candidate.magazine === article.magazine && candidate.isPaid && candidate.noteUrl)
+    .sort((a, b) => (Number(b.priceJpy || 0) - Number(a.priceJpy || 0)) || a.key.localeCompare(b.key));
+  if (paid.length === 0 || free.length === 0) return [];
+  const load = new Map(free.map((key) => [key, []]));
+  const count = new Map(paid.map((product) => [product.key, 0]));
+  let cursor = 0;
+  const place = (product) => {
+    for (let step = 0; step < free.length; step += 1) {
+      const key = free[(cursor + step) % free.length];
+      const cards = load.get(key);
+      if (cards.length >= DATASET_MAX_CARDS_PER_ARTICLE || cards.includes(product)) continue;
+      cards.push(product);
+      count.set(product.key, count.get(product.key) + 1);
+      cursor = (cursor + step + 1) % free.length;
+      return true;
+    }
+    return false;
+  };
+  // 第 1 巡: 全商品に流入 1 本を保証する。第 2 巡以降: 空きがある限り目標本数まで増やす
+  for (const product of paid) place(product);
+  for (let round = 1; round < Math.min(DATASET_INBOUND_TARGET, free.length); round += 1) {
+    for (const product of paid) if (count.get(product.key) < Math.min(DATASET_INBOUND_TARGET, free.length)) place(product);
+  }
+  return load.get(article.key) || [];
+}
+
+export function buildPlans(source, views, options) {
+  const articles = new Map(source.articles.map((article) => [article.key, article]));
+  const magazines = new Map(source.magazines.map((magazine) => [magazine.key, magazine]));
+  const remediation = auditRemediation();
+  return source.articles
+    .filter((article) => {
+      if (options.products) return !article.isPaid && Boolean(magazines.get(article.magazine)?.productTarget || magazines.get(article.magazine)?.paidProductId);
+      const liveRepair = remediation.get(article.key);
+      return article.nextBestArticle
+        || article.publishedLinkRepairs?.length
+        || (options.slug === article.key && !article.isPaid)
+        || (options.allFree && !article.isPaid)
+        || (options.magazine && article.magazine === options.magazine && !article.isPaid && Boolean(article.noteUrl))
+        || (options.products && !article.isPaid && Boolean(magazines.get(article.magazine)?.productTarget || magazines.get(article.magazine)?.paidProductId))
+        || (options.repairRedirects && (liveRepair?.forceNormalizeLegacy || liveRepair?.repairs.length));
+    })
+    .map((article) => {
+      const includeFooter = !options.products && !options.repairsOnly && (
+        (options.allFree || options.slug === article.key || options.magazine === article.magazine)
+          && !article.isPaid || Boolean(article.nextBestArticle)
+      );
+      const next = includeFooter ? chooseRelatedArticle(article, source, views) : null;
+      const magazineRecord = magazines.get(article.magazine);
+      const magazine = includeFooter ? magazineRecord : null;
+      // 同じ無料マガジンに入っている有料データ商品へのカード。手書きリストを持たず catalog から導出する
+      // (2026-09-20: 38 商品のうち 23 本が他記事からの流入 0 だった)。有料記事自身には付けない。
+      const datasets = includeFooter && !article.isPaid && magazineRecord && !magazineRecord.isPaid
+        ? chooseDatasetArticles(article, source)
+        : [];
+      const productTarget = options.products && !article.isPaid
+        ? magazineRecord?.productTarget || null
+        : null;
+      // マガジン名の代用ではなく、実商品SSOT (storefront.generated.ts) からnote商品カードの
+      // title/descriptionを解決する。マガジン単位ではなく商品単位の事実 (2026-09-16: 全189本で
+      // カードがマガジン名を表示し実商品と不一致だったことを実測)。
+      const paidProduct = (includeFooter || options.products) ? resolvePaidProduct(article, source) : null;
+      const productUrl = paidProduct?.noteUrl || (productTarget ? buildNoteProductCardUrl(productTarget, article.noteUrl) : null);
+      const productCardText = paidProduct ? { title: paidProduct.title, description: `「${paidProduct.title}」で、収録内容・サンプル・価格を確認できます。` }
+        : productTarget ? resolveProductCardText(productTarget, options.storefrontPath) : null;
+      if (includeFooter && article.nextBestArticle && !next?.noteUrl)
+        throw new Error(`${article.key}: nextBestArticle が未公開`);
+      // マガジンが note 上で未公開 (noteUrl null) なら footer からマガジンカードを省くだけ。
+      // 未知のマガジン id だけを止める (a-kakei 47 本は s47-kakei-reading が未公開のまま運用中)。
+      if (article.nextBestArticle && article.magazine && !magazineRecord)
+        throw new Error(`${article.key}: magazine が catalog に無い (${article.magazine})`);
+      const liveRepair = remediation.get(article.key) || { forceNormalizeLegacy: false, repairs: [] };
+      const repairs = [
+        ...(options.products ? [] : article.publishedLinkRepairs || []),
+        ...(options.repairRedirects ? liveRepair.repairs : []),
+        // あるべき商品カード状態を常に計算し、公開済み本文との差分だけを直す。
+        // catalog へ記事ごとに手書きしない (是正対象は productTarget を持つ記事すべて)。
+        ...(productUrl && !paidProduct
+          ? [{
+              mode: "regenerate-card",
+              fromUrl: productUrl,
+              title: productCardText.title,
+              description: productCardText.description,
+            }]
+          : []),
+      ].filter((repair, index, values) => values.findIndex(
+        (candidate) => candidate.mode === repair.mode
+          && candidate.fromUrl === repair.fromUrl
+          && candidate.toUrl === repair.toUrl,
+      ) === index);
+      const target = article.stats47Targets?.[0];
+      const siteUrl = target ? `${SITE_ORIGIN}${target}` : SITE_ORIGIN;
+      return {
+        article,
+        productOnly: Boolean(options.products),
+        next,
+        magazine,
+        repairs,
+        forceNormalizeLegacy: options.repairRedirects && liveRepair.forceNormalizeLegacy,
+        desiredSeparator: article.publishedSeparator ?? null,
+        paidProduct,
+        footer: includeFooter || productTarget || paidProduct
+          ? {
+              sourceNoteKey: article.noteUrl ? noteKeyFromUrl(article.noteUrl) : null,
+              nextNoteUrl: next?.noteUrl || null,
+              nextNoteKey: next?.noteUrl ? noteKeyFromUrl(next.noteUrl) : null,
+              nextNoteLead: next ? `「${next.title}」も同じテーマで読まれています。` : null,
+              magazineUrl: magazine?.noteUrl || null,
+              magazineName: magazine?.name || null,
+              magazineDescription: magazine?.description || null,
+              siteUrl: options.products ? null : siteUrl,
+              siteTitle: target ? `${article.title}｜47都道府県データ` : "統計で見る都道府県 stats47",
+              siteDescription: target
+                ? "47都道府県の順位・数値・グラフを無料で確認できます。"
+                : "公的統計を47都道府県のランキング・地図・グラフで確認できます。",
+              productUrl,
+              productNoteUrl: paidProduct?.noteUrl || null,
+              productTitle: productCardText?.title ?? null,
+              productDescription: productCardText?.description ?? null,
+              datasets: datasets.map((dataset) => ({
+                noteUrl: dataset.noteUrl,
+                noteKey: noteKeyFromUrl(dataset.noteUrl),
+                lead: datasetCardLead(dataset.title),
+              })),
+            }
+          : null,
+      };
+    });
+}
+
+export function applyPlanBody(body, plan) {
+  const productBody = rewriteProductCards(body, plan.paidProduct);
+  if (plan.productOnly && plan.paidProduct) {
+    return { body: productBody, changed: productBody !== body, normalizedLegacyLinks: false,
+      addedNextNote: false, addedMagazine: false, addedSite: false,
+      addedProduct: productBody !== body, addedDataset: false, dedupedFooterHeading: false, repairs: [] };
+  }
+  const repaired = applyPublishedLinkRepairs(productBody, plan.repairs, {
+    forceRegenerateCards: FORCE_REGENERATE_CARDS,
+  });
+  const navigation = plan.footer
+      ? applyNavigationFooter(repaired.body, plan.footer)
+    : {
+        body: repaired.body,
+        changed: false,
+        normalizedLegacyLinks: false,
+        addedNextNote: false,
+        addedMagazine: false,
+        addedSite: false,
+        addedProduct: false,
+        addedDataset: false,
+        dedupedFooterHeading: false,
+      };
+  return {
+    body: navigation.body,
+    changed: navigation.body !== body,
+    normalizedLegacyLinks: repaired.normalizedLegacyLinks || navigation.normalizedLegacyLinks,
+    addedNextNote: navigation.addedNextNote,
+    addedMagazine: navigation.addedMagazine,
+    addedSite: navigation.addedSite,
+    addedProduct: navigation.addedProduct,
+    addedDataset: navigation.addedDataset,
+    dedupedFooterHeading: navigation.dedupedFooterHeading,
+    rewroteDatasetWording: navigation.rewroteDatasetWording,
+    repairs: repaired.repairs,
+  };
+}
+
+function saveReport(report) {
+  mkdirSync(dirname(REPORT_PATH), { recursive: true });
+  writeFileSync(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+}
+
+async function installPatch(page, before, updatedBody, plan, visibilityNudge = null) {
+  const state = { installed: true };
+  await page.route("**/api/v1/text_notes/**", async (route) => {
+    const request = route.request();
+    if (request.method() !== "PUT") {
+      await route.continue();
+      return;
+    }
+    try {
+      const payload = preservePublishedIndex(request.postDataJSON(), before);
+      if (Number(payload.price || 0) !== before.price) throw new Error("price changed before update");
+      const targetSeparator = visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")
+        ? visibilityNudge.restoreSeparator
+        : before.separator;
+      if (visibilityNudge && Object.hasOwn(visibilityNudge, "restoreSeparator")) {
+        payload.separator = targetSeparator;
+      }
+      const legacyFreeBoundary = before.price === 0 && Boolean(targetSeparator);
+      if (!legacyFreeBoundary && (payload.separator || null) !== targetSeparator) {
+        throw new Error("separator changed before update");
+      }
+      if (!Array.isArray(payload.hashtags)) throw new Error("hashtags are missing");
+      if (payload.hashtags.length !== before.hashtagCount) {
+        throw new Error("hashtags changed before update");
+      }
+      if (typeof payload.free_body !== "string") throw new Error("free body is missing");
+      if (before.price > 0 && typeof payload.pay_body !== "string") throw new Error("paid body is missing");
+      if (legacyFreeBoundary && String(payload.pay_body || "").length > 0) {
+        throw new Error("legacy free article unexpectedly has paid body");
+      }
+      const currentBody = before.price > 0
+        ? `${payload.free_body}${payload.pay_body}`
+        : payload.free_body;
+      if (visibilityNudge) {
+        if (payload.exclude_from_creator_top !== visibilityNudge.expectedExclude) {
+          throw new Error("クリエイターページ表示の一時変更を確認できません");
+        }
+        payload.exclude_from_creator_top = visibilityNudge.restoreExclude;
+      }
+      const sameAuthoredBody = canonicalizeNoteEditorBody(currentBody)
+        === canonicalizeNoteEditorBody(before.body);
+      if (!legacyFreeBoundary && fnv1a(currentBody) !== before.bodySignature && !sameAuthoredBody) {
+        throw new Error("published body changed before update");
+      }
+      const payBodySignature = before.price > 0 ? fnv1a(payload.pay_body) : null;
+      if (legacyFreeBoundary) payload.separator = targetSeparator;
+      if (before.price > 0) {
+        const freeRepairs = plan.repairs.filter(
+          (repair) => includesExactUrl(payload.free_body, repair.fromUrl) || includesExactUrl(payload.free_body, repair.toUrl),
+        );
+        const updatedFreeBody = applyPublishedLinkRepairs(payload.free_body, freeRepairs).body;
+        if (!updatedBody.startsWith(updatedFreeBody)) {
+          throw new Error("有料境界を保持したまま本文を分割できません");
+        }
+        payload.free_body = updatedFreeBody;
+        payload.pay_body = updatedBody.slice(updatedFreeBody.length);
+      } else {
+        payload.free_body = updatedBody;
+      }
+      Object.assign(state, {
+        status: "sending",
+        beforeBodySignature: before.bodySignature,
+        sentBodySignature: fnv1a(updatedBody),
+        sentBodyLength: updatedBody.length,
+        price: Number(payload.price || 0),
+        separator: payload.separator || null,
+        hashtagCount: payload.hashtags.length,
+        payBodySignature,
+        payBodyLength: payload.pay_body?.length || 0,
+        restoredLegacyFreeSeparator: legacyFreeBoundary,
+      });
+      await route.continue({
+        postData: JSON.stringify(payload),
+        headers: { ...request.headers(), "content-type": "application/json" },
+      });
+    } catch (error) {
+      Object.assign(state, { status: 409, guardError: error.message });
+      await route.fulfill({ status: 409, contentType: "application/json", body: '{"error":"blocked by navigation guard"}' });
+    }
+  });
+  page.on("response", (response) => {
+    const request = response.request();
+    if (request.method() === "PUT" && request.url().includes("/api/v1/text_notes/")) {
+      state.status = response.status();
+    }
+  });
+  return state;
+}
+
+async function publishPlan(ctx, plan, before, publicBefore) {
+  let identicalDraft = false;
+  let draftCompatibility = "none";
+  let source = before;
+  if (before.hasDraft) {
+    const noteKey = noteKeyFromUrl(plan.article.noteUrl);
+    const response = await ctx.request.get(
+      `https://note.com/api/v3/notes/${noteKey}?draft=true&draft_reedit=false&ts=${Date.now()}`,
+      { headers: { "User-Agent": UA } },
+    );
+    const draft = snapshot((await response.json())?.data || {});
+    if (JSON.stringify(draft.index ?? null) !== JSON.stringify(before.index ?? null)) {
+      throw new Error('未公開下書きの目次設定が公開版と異なるため本文更新を停止');
+    }
+    identicalDraft = draft.bodySignature === before.bodySignature
+      && draft.price === before.price
+      && draft.separator === before.separator
+      && draft.hashtagCount === before.hashtagCount;
+    const sameAuthoredBody = canonicalizeNoteEditorBody(draft.body) === canonicalizeNoteEditorBody(before.body);
+    const legacyFreeSeparatorRemoval = before.price === 0
+      && Boolean(before.separator)
+      && !draft.separator
+      && sameAuthoredBody;
+    const presentationOnlyDraft = draft.price === before.price
+      && (draft.separator === before.separator || legacyFreeSeparatorRemoval)
+      && draft.hashtagCount === before.hashtagCount
+      && sameAuthoredBody;
+    if (!identicalDraft && !presentationOnlyDraft) {
+      throw new Error("未公開下書きが公開版と実内容で異なるため本文更新を停止");
+    }
+    source = draft;
+    draftCompatibility = identicalDraft
+      ? "identical"
+      : legacyFreeSeparatorRemoval ? "legacy_free_separator_removed" : "card_metadata_only";
+  }
+  let application;
+  if (source.price === 0 && source.separator && plan.footer) {
+    const repaired = applyPublishedLinkRepairs(rewriteProductCards(source.body, plan.paidProduct), plan.repairs, {
+      forceRegenerateCards: FORCE_REGENERATE_CARDS,
+    });
+    const publicRepairs = plan.repairs.filter(
+      (repair) => includesExactUrl(publicBefore.body, repair.fromUrl) || includesExactUrl(publicBefore.body, repair.toUrl),
+    );
+    const repairedPublic = applyPublishedLinkRepairs(rewriteProductCards(publicBefore.body, plan.paidProduct), publicRepairs, {
+      forceRegenerateCards: FORCE_REGENERATE_CARDS,
+    });
+    const visible = applyVisibleNavigationBeforeSeparator(
+      repaired.body,
+      repairedPublic.body,
+      source.separator,
+      plan.footer,
+    );
+    application = visible.changed
+      ? {
+          ...visible,
+          normalizedLegacyLinks: repaired.normalizedLegacyLinks || repairedPublic.normalizedLegacyLinks,
+          repairs: repaired.repairs,
+        }
+      : applyPlanBody(source.body, plan);
+  } else {
+    application = applyPlanBody(source.body, plan);
+  }
+  if (plan.desiredSeparator && source.separator !== plan.desiredSeparator && !application.changed) {
+    application = { ...application, changed: true };
+  }
+  if (approvedImageRefresh) {
+    const body = approvedImageRefresh.rewriteBody(application.body);
+    application = { ...application, body, changed: application.changed || body !== application.body };
+  }
+  const missingEmbeds = unregisteredCards(application.body, source.embeddedContents);
+  if (!application.changed && !missingEmbeds.length) return { status: "already_compliant", ...application };
+
+  const apiPage = await ctx.newPage();
+  let native;
+  try {
+    await apiPage.goto('https://note.com', { waitUntil: 'domcontentloaded' });
+    native = await registerMissingCards(apiPage, noteKeyFromUrl(plan.article.noteUrl), application.body, source.embeddedContents,
+      () => {}, (native, card) => approvedImageRefresh?.verifyFresh(native, card.url));
+    application = { ...application, body: native.body, changed: true };
+  } finally { await apiPage.close(); }
+
+  const noteKey = noteKeyFromUrl(plan.article.noteUrl);
+  const page = await ctx.newPage();
+  try {
+    let visibilityNudge = null;
+    await page.goto(`https://editor.note.com/notes/${noteKey}/edit?draft_reedit=true`, {
+      waitUntil: "domcontentloaded",
+      timeout: 30_000,
+    });
+    await page.waitForTimeout(2_800);
+    const editorCount = await page.locator('[contenteditable="true"][role="textbox"]').count();
+    if (editorCount !== 1) throw new Error(`記事編集画面を確認できません: editor=${editorCount}`);
+    await page.getByRole("button", { name: "公開に進む" }).click();
+    await page.locator('[placeholder="ハッシュタグを追加する"]').waitFor({ state: "visible", timeout: 15_000 });
+    if (source.price > 0) {
+      const areaButton = page.getByRole("button", { name: "有料エリア設定", exact: true });
+      if (await areaButton.count() !== 1) throw new Error("有料エリア設定ボタンを確認できません");
+      await areaButton.click();
+      await page.waitForTimeout(1_500);
+      const boundary = page.locator("#paywall-line");
+      if (await boundary.count() !== 1 || await boundary.getAttribute("aria-pressed") !== "true") {
+        throw new Error("有料境界の既存選択状態を確認できません");
+      }
+    } else if (before.price === 0 && (source.separator || before.separator || plan.desiredSeparator)) {
+      // 旧形式の無料記事は本文を直接変更しても publish 画面が dirty にならない。
+      // クリエイターページ表示を一時反転し、installPatch が元の値と separator を復元する。
+      const visibilitySwitch = page.getByRole("switch", { name: "クリエイターページに表示" });
+      if (await visibilitySwitch.count() !== 1) throw new Error("クリエイターページ表示設定を確認できません");
+      const wasVisible = await visibilitySwitch.getAttribute("aria-checked") === "true";
+      await visibilitySwitch.click();
+      await page.waitForTimeout(500);
+      visibilityNudge = {
+        expectedExclude: wasVisible,
+        restoreExclude: !wasVisible,
+        restoreSeparator: plan.desiredSeparator || source.separator,
+      };
+      const areaButton = page.getByRole("button", { name: "試し読みエリアを設定", exact: true });
+      if (await areaButton.count() !== 1) throw new Error("試し読みエリア設定ボタンを確認できません");
+      await areaButton.click();
+      await page.waitForTimeout(1_500);
+      if (source.separator) {
+        const lines = page.getByRole("button", { name: "ラインをこの場所に変更", exact: true });
+        const selectedIndex = await lines.evaluateAll((buttons) => buttons.findIndex((button) => button.id === "paywall-line"));
+        if (selectedIndex < 0) {
+          throw new Error("無料記事の既存試し読み境界を確認できません");
+        }
+      }
+    }
+    const installed = await installPatch(page, source, application.body, plan, visibilityNudge);
+    if (!installed?.installed) throw new Error("本文送信パッチの初期化に失敗");
+    await page.getByRole("button", { name: "更新する" }).click();
+    const patch = installed;
+    for (let attempt = 0; attempt < 16; attempt += 1) {
+      await page.waitForTimeout(500);
+      if (Number.isInteger(patch?.status)) break;
+    }
+    if (!Number.isInteger(patch?.status)) {
+      throw new Error(`更新APIが発火しません: api=${JSON.stringify(patch)}`);
+    }
+    if (patch.status < 200 || patch.status >= 300) {
+      throw new Error(patch.guardError || `更新APIが失敗しました: api=${JSON.stringify(patch)}`);
+    }
+
+    let live;
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      live = snapshot(await fetchNote(noteKey, 5, ctx.request));
+      // 検証は「この run で実際に足したカード」だけを見る。次の 1 本は views で選び直されるため、既に別記事への
+      // 深掘りカードがある本文では追加されず、plan の URL は本文に無いのが正しい (2026-09-20 に 3 本連続 FAIL で実測)。
+      const footerOk = !plan.footer || (
+        (!application.addedNextNote || live.body.includes(plan.footer.nextNoteUrl))
+        && (!application.addedMagazine || live.body.includes(plan.footer.magazineUrl))
+        && (!application.addedSite || live.body.includes(plan.footer.siteUrl))
+        && (!application.addedProduct || live.body.includes(plan.footer.productUrl))
+        && (plan.footer.datasets || []).every((dataset) => live.body.includes(dataset.noteUrl))
+      );
+      const repairsOk = plan.repairs.every(
+        (repair) => repair.mode === "regenerate-card"
+          || (!includesExactUrl(live.body, repair.fromUrl) && includesExactUrl(live.body, repair.toUrl)),
+      );
+      if (footerOk && repairsOk) break;
+      await sleep(1_000);
+    }
+    if (!live || live.account !== "stats47" || live.status !== "published") throw new Error("更新後の記事帰属または公開状態が不正");
+    const expectedSeparator = plan.desiredSeparator || source.separator;
+    if (live.price !== source.price || live.separator !== expectedSeparator) throw new Error("価格または有料境界が変化");
+    if (live.hashtagCount !== before.hashtagCount) throw new Error(`タグ数が変化: ${before.hashtagCount} -> ${live.hashtagCount}`);
+    if (indexEnabled(live) !== indexEnabled(before)) throw new Error('公開記事の目次表示設定が変化');
+    if (plan.footer && (
+      (application.addedNextNote && !live.body.includes(plan.footer.nextNoteUrl))
+      || (application.addedMagazine && !live.body.includes(plan.footer.magazineUrl))
+      || (application.addedSite && !live.body.includes(plan.footer.siteUrl))
+      || (application.addedProduct && !live.body.includes(plan.footer.productUrl))
+      || (plan.footer.datasets || []).some((dataset) => !live.body.includes(dataset.noteUrl))
+    )) {
+      throw new Error(`更新後本文で回遊URLを確認できません: api=${JSON.stringify(patch)}`);
+    }
+    // regenerate-card は URL を維持したままカード文言だけを直すため toUrl を持たず、
+    // fromUrl は成功後も本文に残り続ける (replace-url/replace-card とは逆の成立条件)。
+    // 正しさは末尾の bodySignature 完全一致チェックが保証するので、ここでは対象外にする。
+    for (const repair of plan.repairs) {
+      if (repair.mode === "regenerate-card") continue;
+      if (includesExactUrl(live.body, repair.fromUrl) || !includesExactUrl(live.body, repair.toUrl)) {
+        throw new Error(`更新後本文でリンク修復を確認できません: ${repair.fromUrl}`);
+      }
+    }
+    if (plan.forceNormalizeLegacy && /http:\/\/(?:www\.)?stats47\.jp/i.test(live.body)) {
+      throw new Error(`更新後本文に非HTTPSのstats47リンクが残存: api=${JSON.stringify(patch)}`);
+    }
+    if (live.bodySignature !== fnv1a(application.body)) throw new Error("送信した無料本文と公開本文が一致しません");
+    assertRegisteredCards(live.body, live.embeddedContents);
+    if (approvedImageRefresh) for (const card of cardEntries(live.body)) {
+      await approvedImageRefresh.verifyFresh(live.embeddedContents.find((entry) => entry.key === card.key) || {}, card.url);
+    }
+    const readers = await ctx.browser().newContext();
+    try {
+      const publicLive = await fetchNote(noteKey, 5, readers.request);
+      const visibleKeys = new Set(cardEntries(publicLive.body).map((card) => card.key));
+      await verifyPublicCards(readers, plan.article.noteUrl, native.registered.filter((key) => visibleKeys.has(key)));
+    }
+    finally { await readers.close(); }
+    return {
+      status: "updated",
+      beforeBodySignature: before.bodySignature,
+      afterBodySignature: live.bodySignature,
+      hashtagCount: live.hashtagCount,
+      apiStatus: patch?.status ?? null,
+      identicalDraft,
+      draftCompatibility,
+      paidBodyPreservedByPayload: before.price > 0 && Boolean(patch?.payBodySignature),
+      ...application,
+      body: undefined,
+    };
+  } finally {
+    await page.close().catch(() => {});
+  }
+}
+
+/**
+ * @param {{catalogScript: string, storefrontPath: string}} paths
+ *   catalogScript = catalog を JSON で出す CLI の、リポジトリのルートからのパス / storefrontPath = storefront.generated.ts のパス
+ *   (どちらも .claude に残る入口が渡す。packages はリポジトリの配置を持たない)
+ */
+export async function main({ catalogScript, storefrontPath }) {
+  const options = { ...parseArgs(process.argv.slice(2)), storefrontPath };
+  FORCE_REGENERATE_CARDS = options.forceRegenerateCards;
+  approvedImageRefresh = readApprovedCardImageRefresh(join(ROOT, datasetDir('ogp.inventory'), 'link-card-rollout.json'));
+  const source = catalog(catalogScript);
+  const views = latestViews();
+  let plans = buildPlans(source, views, options);
+  if (options.slug) plans = plans.filter((plan) => plan.article.key === options.slug);
+  // --magazine は対象をそのマガジンの記事に限定する (nextBestArticle 由来の他マガジン plan を混ぜない)。
+  if (options.magazine) plans = plans.filter((plan) => plan.article.magazine === options.magazine);
+  if (options.slug && plans.length !== 1) throw new Error(`navigation plan が見つかりません: ${options.slug}`);
+
+  const report = {
+    generatedAt: new Date().toISOString(),
+    account: "stats47",
+    mode: options.commit ? "commit" : "audit-only",
+    measurementContract: {
+      site: "GA4 sessionSource=note.com × landingPagePlusQueryString（計測用UTMは付けず、検証済み画像版s47_ogpだけを付与）",
+      noteToNote: "遷移先記事のnote月間views差分（noteは記事間clickを提供しない）",
+      magazine: "note側の直接click指標なし。所属一致と遷移先記事viewsを代替指標にする",
+      product: "有料noteへの直接カードはnote内遷移（記事間clickは取得不可）。サイト商品ページ経由のカードは /products/<slug>/from/note/<noteId> と検証済み画像版s47_ogpを使い、サイト側で utm_source=note / utm_campaign=note_product / utm_content=<noteId> へ転送して記事単位で集計",
+    },
+    articles: [],
+  };
+
+  const audited = [];
+  for (const plan of plans) {
+    const noteKey = noteKeyFromUrl(plan.article.noteUrl);
+    const before = snapshot(await fetchNote(noteKey));
+    if (before.account !== "stats47" || before.status !== "published") throw new Error(`${plan.article.key}: 記事帰属または公開状態が不正`);
+    let application = applyPlanBody(before.body, plan);
+    if (approvedImageRefresh) {
+      const body = approvedImageRefresh.rewriteBody(application.body);
+      application = { ...application, body, changed: application.changed || body !== application.body };
+    }
+    const item = {
+      key: plan.article.key,
+      noteKey,
+      noteUrl: plan.article.noteUrl,
+      baselineViews: views.get(noteKey) ?? null,
+      nextBestArticle: plan.next?.key ?? null,
+      nextNoteUrl: plan.footer?.nextNoteUrl ?? null,
+      nextBaselineViews: plan.footer ? views.get(plan.footer.nextNoteKey) ?? null : null,
+      magazine: plan.magazine?.key ?? plan.article.magazine ?? null,
+      magazineUrl: plan.footer?.magazineUrl ?? null,
+      siteUrl: plan.footer?.siteUrl ?? null,
+      productUrl: plan.footer?.productUrl ?? null,
+      datasetNoteUrls: (plan.footer?.datasets || []).map((dataset) => dataset.noteUrl),
+      linkRepairs: plan.repairs,
+      forceNormalizeLegacy: plan.forceNormalizeLegacy,
+      before: {
+        bodySignature: before.bodySignature,
+        hashtagCount: before.hashtagCount,
+        price: before.price,
+        separator: before.separator,
+        hasDraft: before.hasDraft,
+      },
+      pending: application.changed || unregisteredCards(application.body, before.embeddedContents).length > 0,
+      wouldAddNextNote: application.addedNextNote,
+      wouldAddMagazine: application.addedMagazine,
+      wouldAddSite: application.addedSite,
+      wouldAddProduct: application.addedProduct,
+      wouldAddDataset: application.addedDataset,
+      wouldDedupeFooterHeading: application.dedupedFooterHeading,
+      wouldRewriteDatasetWording: Boolean(application.rewroteDatasetWording),
+      wouldNormalizeLegacyLinks: application.normalizedLegacyLinks,
+    };
+    if (application.addedSite) {
+      // 「サイトカードが無い」判定の根拠を残す (2026-09-20: CI だけ 22 本で AddSite になり、ローカルでは 0 本)
+      const body = before.body;
+      const at = body.search(/stats47\.jp/);
+      const repairedResult = applyPublishedLinkRepairs(body, plan.repairs);
+      const repairedBody = repairedResult.body;
+      const navigation = applyNavigationFooter(repairedBody, plan.footer);
+      const linkAttr = /\b(?:href|data-src)="https?:\/\/(?:www\.)?stats47\.jp(?:[\/"?#]|$)/i;
+      item.stats47Diagnostics = {
+        refs: (body.match(/stats47\.jp/g) || []).length,
+        sample: at >= 0 ? body.slice(Math.max(0, at - 120), at + 60).replace(/\s+/g, " ") : null,
+        bodyLength: body.length,
+        repairedLength: repairedBody.length,
+        linkAttrInBefore: linkAttr.test(body),
+        linkAttrInRepaired: linkAttr.test(repairedBody),
+        repairedSample: (() => { const i = repairedBody.search(/stats47\.jp/); return i >= 0 ? repairedBody.slice(Math.max(0, i - 120), i + 60).replace(/\s+/g, " ") : null; })(),
+        embeddedContents: Array.isArray(before.embeddedContents) ? before.embeddedContents.length : null,
+        siteUrl: plan.footer?.siteUrl ?? null,
+        productUrl: plan.footer?.productUrl ?? null,
+        productUrlInBody: plan.footer?.productUrl ? body.includes(`data-src="${plan.footer.productUrl}"`) : null,
+        productFigures: (body.match(/data-src="https:\/\/stats47\.jp\/products\/[^"]*"/g) || []).slice(0, 3),
+        magazineUrl: plan.footer?.magazineUrl ?? null,
+        magazineUrlInBody: plan.footer?.magazineUrl ? body.includes(`data-src="${plan.footer.magazineUrl}"`) : null,
+        repairedChanged: repairedResult.changed,
+        additions: navigation.additionsPreview,
+        collapsedLength: collapseDuplicateFooterHeadings(repairedBody).length,
+      };
+    }
+    if (options.commit && !item.pending) item.result = { status: "already_compliant" };
+    report.articles.push(item);
+    audited.push({ plan, before, item });
+  }
+  saveReport(report);
+  const pendingCount = report.articles.filter((article) => article.pending).length;
+  console.log(`audit: planned=${plans.length} pending=${pendingCount}`);
+  console.log(`report: ${REPORT_PATH}`);
+  if (!options.commit) {
+    if (options.check && pendingCount > 0) {
+      // CI では report ファイルを読めないので、何が pending なのかをログに出す (環境差の切り分け用)
+      for (const article of report.articles.filter((entry) => entry.pending)) {
+        const flags = ["wouldAddNextNote", "wouldAddMagazine", "wouldAddSite", "wouldAddProduct", "wouldAddDataset", "wouldDedupeFooterHeading", "wouldRewriteDatasetWording", "wouldNormalizeLegacyLinks"]
+          .filter((flag) => article[flag]).map((flag) => flag.replace("would", ""));
+        const repairs = article.linkRepairs.map((repair) => `${repair.mode}:${repair.fromUrl}`);
+        console.log(`  pending ${article.key}: ${flags.join(",") || "-"} repairs=${repairs.join(" ") || "-"}`);
+        if (article.stats47Diagnostics) console.log(`    stats47: ${JSON.stringify(article.stats47Diagnostics)}`);
+      }
+      process.exitCode = 1;
+    }
+    return;
+  }
+
+  const ctx = await launchContext({ headless: true });
+  try {
+    console.log(`account gate: ${await assertAccount(ctx)}`);
+    let consecutiveFailures = 0;
+    for (const { plan, before, item } of audited.filter(({ item }) => item.pending)) {
+      try {
+        const fresh = snapshot(await fetchNote(item.noteKey, 5, ctx.request));
+        const result = await publishPlan(ctx, plan, fresh, before);
+        item.result = result;
+        consecutiveFailures = 0;
+        console.log(`${item.key}: ${result.status}`);
+      } catch (error) {
+        item.result = { status: "failed", error: error.message };
+        consecutiveFailures += 1;
+        console.error(`${item.key}: FAIL ${error.message}`);
+        if (consecutiveFailures >= 3) {
+          console.error("systemic stop: 3件連続失敗");
+          break;
+        }
+      } finally {
+        report.generatedAt = new Date().toISOString();
+        saveReport(report);
+        await sleep(1_500);
+      }
+    }
+  } finally {
+    await ctx.close();
+  }
+  if (report.articles.some((article) => article.result?.status === "failed")) process.exitCode = 1;
+}
+

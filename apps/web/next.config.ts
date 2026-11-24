@@ -125,7 +125,6 @@ const nextConfig: NextConfig = {
     "@stats47/area-profile",
     "@stats47/category",
     "@stats47/components",
-    "@stats47/database",
     "@stats47/estat-api",
     "@stats47/gis",
     "@stats47/logger",

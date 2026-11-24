@@ -33,7 +33,5 @@ export const sportsParticipationRateTennis: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "テニスの行動者率ランキング都道府県【2021年】｜1位神奈川県（4.7％）",
-  "seoDescription": "2021年のテニスの行動者率の都道府県別ランキング。1位神奈川県（4.7％）、最下位新潟県（1.8％）で2.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

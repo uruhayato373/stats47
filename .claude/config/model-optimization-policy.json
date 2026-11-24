@@ -16,11 +16,11 @@
   },
   "driftShare": 0.5,
   "latestModels": {
-    "_doc": "系統ごとの最新版 (2026-10-02 時点、出典 https://platform.claude.com/docs/en/about-claude/pricing)。新モデルが出たらここだけ更新する",
-    "haiku": "claude-haiku-4-5",
+    "_doc": "系統ごとの最新版 (2026-11-22 時点、出典 https://platform.claude.com/docs/en/about-claude/models/overview の Claude API ID)。新モデルが出たらここだけ更新する",
+    "haiku": "claude-haiku-5-5",
     "sonnet": "claude-sonnet-5-5",
     "opus": "claude-opus-5-5",
-    "fable": "claude-fable-5-1"
+    "fable": "claude-fable-5-2"
   },
   "canary": {
     "_doc": "候補設定が合格する条件。recall = 既知の正解 (仕込んだ欠陥など) をどれだけ見つけたか。baseline と同じ fixture・同じ回数で比べる。baselineEffort は --baseline-effort 省略時の値で、ローカル実測で agent が継承していた effort (xhigh が 6 割強、2026-10-02)。maxCostRatio 1.1 は同一設定 2 回の揺れを不合格にしないため (2026-10-02 実測: 同じ設定で出力トークンが 2093 と 2516、約 20% 揺れた)",

@@ -42,7 +42,7 @@ export interface FaqItem {
   readonly answer: string;
 }
 
-export interface PrefCommentary {
+interface PrefCommentary {
   readonly areaCode: string;
   readonly areaName: string;
   readonly rank?: number;

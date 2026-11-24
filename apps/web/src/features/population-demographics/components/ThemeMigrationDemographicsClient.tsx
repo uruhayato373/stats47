@@ -80,8 +80,9 @@ export function ThemeMigrationDemographicsClient({
         title="年齢・男女別の県間移動"
         description={`2025年中 · ${areaLabel} · ${SEX_LABELS[sex]} · ${view.ageLabel} · 外国人を含む移動者`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source="住民基本台帳人口移動報告 2025年"
             sourceLinks={snapshot.sources.map((source, index) => ({
               label:
@@ -90,6 +91,13 @@ export function ThemeMigrationDemographicsClient({
                   : '年報第9表：年齢・男女別の転入・転出',
               url: source.url,
             }))}
+            annotation={[
+              `${view.isNational
+                ? '全国の県間移動の計を示します。県のページでは、相手の県ごとの移動を示します。'
+                : `${view.area.areaName}への移動が転入、${view.area.areaName}からの移動が転出です。`}転入超過が負数の場合は転出超過です。進学・就職などの転居理由は区別していません。`,
+              `${isTopOnly ? `転入と転出の合計が多い相手県の上位 ${TOP_PARTNER_ROWS} 県。ほかの県は「相手の都道府県」で選べます。` : ''}県内移動と海外との移動を含みません。年齢は移動時の年齢です。総数と年齢計の差も選択できます。`,
+              '総数と年齢計の差は、全国の県間移動で2人、県内移動で2人です。年齢階級に配分せず別に残しています。',
+            ]}
           />
         }
       >
@@ -116,17 +124,10 @@ export function ThemeMigrationDemographicsClient({
             />
           )}
         </div>
-        <p className="text-sm text-muted-foreground">
-          {view.isNational
-            ? '全国の県間移動の計を示します。県のページでは、相手の県ごとの移動を示します。'
-            : `${view.area.areaName}への移動が転入、${view.area.areaName}からの移動が転出です。`}
-          転入超過が負数の場合は転出超過です。進学・就職などの転居理由は区別していません。
-        </p>
         <ValueTable fold
           ariaLabel={`${areaLabel}の県間移動・${SEX_LABELS[sex]}・${view.ageLabel}`}
           className="min-w-96"
           scrollRegion
-          caption={`${isTopOnly ? `転入と転出の合計が多い相手県の上位 ${TOP_PARTNER_ROWS} 県。ほかの県は「相手の都道府県」で選べます。` : ''}県内移動と海外との移動を含みません。年齢は移動時の年齢です。総数と年齢計の差も選択できます。`}
           columns={[
             { key: 'area', header: tableLabel, rowHeader: true },
             { key: 'inbound', header: '転入（人）' },
@@ -165,9 +166,6 @@ export function ThemeMigrationDemographicsClient({
             人（同じ男女・年齢条件）。相手県の選択条件には含まれません。
           </p>
         )}
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          総数と年齢計の差は、全国の県間移動で2人、県内移動で2人です。年齢階級に配分せず別に残しています。
-        </p>
       </ChartPanel>
     </div>
   );

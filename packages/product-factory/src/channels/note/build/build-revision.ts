@@ -32,7 +32,7 @@ function preparationListings(root: string): Record<string, Listing> {
   const free = readFreeSampleDelivery(root);
   return { ...ledger.packs, ...(free ? { 'P-13': free } : {}) };
 }
-export interface NoteRevisionItem {
+interface NoteRevisionItem {
   productId: string; slug: string; access: string; proposedPriceYen: number;
   status: 'draft-blocked'; readyToPublish: false; outDir: string;
   sourceRevision: string | null; sourceDirectory: string | null; sourceManifestSha256: string | null;
@@ -69,7 +69,7 @@ async function verifyInput(root: string, pid: string, listing: Listing): Promise
     contained(dir, resolve(dir, file.path));
     contained(realpathSync(dir), realpathSync(resolve(dir, file.path)));
   }
-  const audit = await import(pathToFileURL(join(ROOT, '.claude/scripts/products/lib/pack-evidence.mjs')).href) as {
+  const audit = await import(pathToFileURL(join(ROOT, 'packages/ops/src/products/lib/pack-evidence.mjs')).href) as {
     inspectPack(root: string, listing: Listing): Promise<PackEvidence>;
   };
   return audit.inspectPack(root, listing);

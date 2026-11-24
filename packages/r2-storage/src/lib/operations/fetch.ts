@@ -55,7 +55,7 @@ async function fetchFromS3(key: string): Promise<Buffer | null> {
   }
 }
 
-export function decodeStoredBody(
+function decodeStoredBody(
   body: Buffer,
   contentEncoding: string | null | undefined
 ): Buffer {

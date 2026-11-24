@@ -80,7 +80,7 @@
 - [listmodels not proof](feedback_listmodels_is_not_proof_of_usable.md) — API の一覧は使える証拠でない。1 回叩く
 
 ## サイト (Next.js・UI)
-- [generatestaticparams r2 notfound](feedback_generatestaticparams_r2_notfound_stuck.md) — R2 依存 route に gSP を付けると notFound 固着
+- [generatestaticparams r2 notfound](feedback_generatestaticparams_r2_notfound_stuck.md) — R2 依存 route の gSP は空配列だけ (キー列は notFound 固着・関数なしは毎回描画)
 - [nextjs ssg cookies](feedback_nextjs_ssg_cookies.md) — layout 配下で cookies() を呼ぶと SSG 崩れ
 - [home pure ssg r2 empty](feedback_home_pure_ssg_r2_empty.md) — トップは force-dynamic
 - [workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番で空なら CLOUDFLARE_WORKERS の R2 skip を疑う
@@ -155,11 +155,11 @@
 
 ## CI・git・開発環境
 - [fetch origin first](feedback_fetch_origin_before_implementing.md) — 実装前に fetch と origin との差分確認
-- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 同じ作業ツリーの同時作業は worktree で分ける- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop の検査ゲートと preflight
+- [shared working copy git race](feedback_shared_working_copy_git_race.md) — 同じ作業ツリーの同時作業は worktree で分ける
+- [develop had no ci gate](feedback_develop_had_no_ci_gate.md) — develop の検査ゲートと preflight
 - [run full web tests](feedback_run_full_web_tests_before_push.md) — 部品・route を変えたら push 前に vitest 全件
 - [test and ci wait budget](feedback_test_and_ci_wait_budget.md) — 開発中は related、全件は develop 前に 1 回
-- [ci speed is wait time](feedback_ci_speed_wait_time.md) — CI 短縮は人の待ち時間で測る
-- [ci cancelled looks like failure](feedback_ci_cancelled_looks_like_failure.md) — cancel は失敗に見える
+- [ci speed is wait time](feedback_ci_speed_wait_time.md)・[ci cancelled looks like failure](feedback_ci_cancelled_looks_like_failure.md) — CI 短縮は人の待ち時間で測る / cancel は失敗に見える
 - [ci foreign tree overlay](feedback_ci_foreign_tree_overlay.md) — main で生成して develop へ写すと巻き戻る
 - [typecheck scripts cache](feedback_typecheck_scripts_cache.md) — 差分キャッシュが型エラーを隠す
 - [debt baseline shrink only](feedback_debt_baseline_shrink_only.md) — 負債の baseline は縮小専用
@@ -189,7 +189,7 @@
 - [workflow worktree base and deps](feedback_workflow_worktree_base_and_deps.md) — Workflow の worktree は古い起点で deps 無し
 - [tmp worktree lost on resume](feedback_tmp_worktree_lost_on_resume.md) — scratchpad の worktree は再開で消える
 - [worktree junction deletes target](feedback_worktree_junction_deletes_target.md) — junction の worktree remove が本体を消す
-- [worktree node modules resolve main](feedback_worktree_symlinked_node_modules_resolve_main.md) — @stats47 だけ worktree へ張る
+- [worktree node modules resolve main](feedback_worktree_symlinked_node_modules_resolve_main.md)・[move script staged renames](feedback_move_script_staged_renames.md) — @stats47 だけ worktree へ張る / 移動の道具は改名を index に載せる。移動の commit を最初に作る
 
 ## Windows・会社 PC
 - [windows script portability](feedback_windows_script_portability.md) — Windows で落ちる書き方

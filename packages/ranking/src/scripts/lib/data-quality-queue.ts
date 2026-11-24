@@ -1,7 +1,7 @@
 /**
  * データ品質キューの判定 (純粋関数)。DATA-QUALITY-LOOP-01 ①②。
  *
- * 既存の週次監査 (ranking-integrity = 配信年 / estat-year-coverage = e-Stat 実在年) の結果を
+ * 既存の週次監査 (ranking-integrity = 配信年 / e-Stat 実在年の台帳 = data/estat/availability) の結果を
  * 全 active metric について 1 つのキューへまとめ、上から最初に当てはまる処置を付ける。
  *
  *   1 誤り     — 年・年度の表記の誤り (時点統計なのに yearFormat: "fiscal")
@@ -126,7 +126,7 @@ export function classifyQueueEntry(params: {
     reason = `時点統計 (${(params.sources ?? [params.surveyId]).join("・")}) なのに yearFormat: fiscal`;
   } else if (params.estatExtendCandidate) {
     treatment = 2;
-    reason = "e-Stat に config より多くの年が実在 (estat-year-coverage)";
+    reason = "e-Stat に全県の値がある年が config に無い (e-Stat 実在年の台帳)";
   } else if (f.verdict === "stale") {
     treatment = 2;
     reason = `最新 ${f.latest} 年・推定周期 ${f.cadence} 年に対し ${f.lagCycles} 周期遅れ (推定)`;

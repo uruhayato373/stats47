@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p /tmp/ksj
           # 旧 snapshot を退避
-          cp packages/database/seed/ksj-catalog.json /tmp/ksj/old.json 2>/dev/null || echo "[]" > /tmp/ksj/old.json
+          cp data/geo/ksj/catalog.json /tmp/ksj/old.json 2>/dev/null || echo "[]" > /tmp/ksj/old.json
           # 新規取得 (失敗時はワークフロー失敗で異常を可視化)
           curl -sS -m 30 -o /tmp/ksj/new.json \
             -A "stats47-gha-ksj-catalog/1.0" \
@@ -47,7 +47,7 @@ jobs:
             exit 1
           fi
           echo "new_count=${NEW_COUNT}" >> "$GITHUB_OUTPUT"
-          cp /tmp/ksj/new.json packages/database/seed/ksj-catalog.json
+          cp /tmp/ksj/new.json data/geo/ksj/catalog.json
 
       - name: 🔍 Diff old vs new
         id: diff
@@ -94,7 +94,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/database/seed/ksj-catalog.json
+          git add data/geo/ksj/catalog.json
           if git diff --cached --quiet; then
             echo "No file changes after diff detection (unexpected)"
             exit 0
@@ -122,20 +122,11 @@ jobs:
           - **削除**: ${{ steps.diff.outputs.removed }} 件
 
           詳細: workflow run の Step Summary を参照。
-          コミット: \`packages/database/seed/ksj-catalog.json\` を develop に push 済み。
+          コミット: \`data/geo/ksj/catalog.json\` を develop に push 済み。
 
-          ### 反映手順 (ローカル)
-
-          \`\`\`bash
-          git pull origin develop
-          npx tsx packages/gis/src/mlit-ksj/scripts/seed-ksj-catalog.ts --offline
-          npx tsx packages/gis/src/mlit-ksj/scripts/generate-docs.ts
-          \`\`\`
-
-          新規 dataset は status='available' で D1 に登録されます。stats47 で取り込む場合は
-          1) registry.ts に code config 追加 2) D1 を status='registered' に UPDATE 3) pipeline 実行。
-
-          plan: \`~/.claude/plans/stateless-stargazing-teapot.md\`
+          この一覧は候補の全量 (台帳 geo.ksj-catalog) で、取り込む判断はしていません。stats47 で取り込む場合は
+          \`.claude/rules/gis-data.md\` の「新規データセット追加手順」に従い、台帳 geo.ksj-datasets と registry.ts に足して
+          pipeline を実行します。
           EOF
 
           # ラベルが無いと gh issue create が "could not add label" で落ち、**アラート自体が飛ばない**

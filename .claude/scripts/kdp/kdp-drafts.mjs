@@ -15,7 +15,7 @@
  *   listings に記録された draftId と、公開済み (asin あり) の本は絶対に触らない。
  *   削除は不可逆なので、既定は dry-run。`--apply` を明示したときだけ実行する。
  */
-import { launchContext, waitForLogin, assertAccount, readListings, shotPath, sleep } from "./lib/kdp-session.mjs";
+import { launchContext, waitForLogin, assertAccount, readListings, shotPath, sleep } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
 
 const PRUNE = process.argv.includes("--prune");
 const APPLY = process.argv.includes("--apply");

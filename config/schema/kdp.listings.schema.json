@@ -20,6 +20,22 @@
       "description": "出版工程の状態機械 (一方向)。KDP_PUBLICATION_STAGES と同じ並び",
       "enum": ["prepared", "details_filled", "files_processed", "verified", "submitted", "live", "previous_unpublished"]
     },
+    "stageEvidence": {
+      "description": "工程の read-back の証拠 (advancePublicationStage が { at, ...evidence } で書く)。evidence の中身は呼び手 (kdp-flow.mjs・kdp-status.mjs・kdp-session.mjs) と工程で変わるので閉じず、出てくる項目の型だけを決める",
+      "type": "object",
+      "required": ["at"],
+      "properties": {
+        "at": { "$ref": "common.schema.json#/$defs/datetime" },
+        "mode": { "type": "string", "description": "prepared: 新規 (first) か販売中の本の修正 (update) か" },
+        "title": { "type": "string", "description": "details_filled: 書誌欄に入れた題" },
+        "editionNumber": { "type": "integer", "minimum": 1, "description": "details_filled: 版の番号" },
+        "manuscriptUploaded": { "type": "boolean", "description": "files_processed: 原稿を上げたか" },
+        "coverUploaded": { "type": "boolean", "description": "files_processed: 表紙を上げたか" },
+        "draftId": { "type": "string", "description": "verified: KDP の下書き ID" },
+        "statusLabel": { "type": "string", "description": "submitted 以降: 本棚の状態の表示" },
+        "asin": { "anyOf": [{ "type": "null" }, { "$ref": "common.schema.json#/$defs/asin" }], "description": "submitted 以降: 本棚の ASIN" }
+      }
+    },
     "edition": {
       "description": "書誌と出品状態 (現行版と previousEditions の旧版で共通)",
       "type": "object",
@@ -105,16 +121,13 @@
           "description": "工程ごとの read-back の証拠。中身は工程により異なるので at だけを必須にする",
           "type": "object",
           "propertyNames": { "$ref": "#/definitions/publicationStage" },
-          "additionalProperties": {
-            "type": "object",
-            "required": ["at"],
-            "properties": { "at": { "$ref": "common.schema.json#/$defs/datetime" } }
-          }
+          "additionalProperties": { "$ref": "#/definitions/stageEvidence" }
         },
         "publicationStageLastAttempt": {
           "description": "後退する工程を試みて保持した記録 (advancePublicationStage)",
           "type": "object",
           "required": ["at", "attemptedStage", "retainedStage"],
+          "allOf": [{ "$ref": "#/definitions/stageEvidence" }],
           "properties": {
             "at": { "$ref": "common.schema.json#/$defs/datetime" },
             "attemptedStage": { "$ref": "#/definitions/publicationStage" },
@@ -129,7 +142,7 @@
       }
     },
     "listing": {
-      "description": "status (判断)・kdpStatus (本棚の観測)・publicationStage (作業の到達点) の整合は下の allOf で固定する (2026-10-27)。書き手 (.claude/scripts/kdp/lib/kdp-status.mjs の mergeKdpOperationalState) は観測が in_review / live なら status を listed にし、publicationStage を submitted / live へ進める",
+      "description": "status (判断)・kdpStatus (本棚の観測)・publicationStage (作業の到達点) の整合は下の allOf で固定する (2026-10-27)。書き手 (packages/ops/src/kdp/lib/kdp-status.mjs の mergeKdpOperationalState) は観測が in_review / live なら status を listed にし、publicationStage を submitted / live へ進める",
       "allOf": [
         { "$ref": "#/definitions/edition" },
         {

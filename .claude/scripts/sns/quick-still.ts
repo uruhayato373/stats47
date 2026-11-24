@@ -38,7 +38,7 @@ import { fileURLToPath } from "node:url";
 import { PREF_CAPITAL_COORDS } from '../../../packages/migration-flow/src/lib/pref-capitals';
 import { renderAll47TileSvg } from "../../../apps/remotion/src/features/data-cards/all47-svg";
 import { resolveTileScale, type TileValueDisplay } from "../../../apps/remotion/src/features/data-cards/tile-scale";
-import { STORY_LAYOUTS, renderRankingStoryCard } from "./lib/ranking-story-card.ts";
+import { STORY_LAYOUTS, renderRankingStoryCard } from "../../../packages/ops/src/sns/lib/ranking-story-card.ts";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);

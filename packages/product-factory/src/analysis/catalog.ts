@@ -9,7 +9,7 @@ import { PREFECTURE_CODE_2DIGIT_RE } from '@stats47/area';
 import type { AnalysisRevision } from './compute';
 import type { AnalysisAxis } from './coverage';
 
-export type AnalysisScope = 'prefecture' | 'municipality' | 'capital-city';
+type AnalysisScope = 'prefecture' | 'municipality' | 'capital-city';
 export interface AnalysisInput { metricKey: string; variantId?: string }
 export interface SourceVariant {
   id: string; metricKey: string; scope: 'prefecture' | 'municipality';

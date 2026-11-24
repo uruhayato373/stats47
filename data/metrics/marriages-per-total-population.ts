@@ -34,8 +34,6 @@ export const marriagesPerTotalPopulation: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "婚姻率ランキング都道府県【2022年】｜1位東京都（5.36人口千対）",
-  "seoDescription": "2022年の婚姻率（人口千対）の都道府県別ランキング。1位は東京都（5.36人口千対）、最下位は秋田県（2.63人口千対）で2.0倍の差。地図やグラフで47都道府県を比較。",
   "isActive": true,
   "subtitle": "人口千人当たり"
 };

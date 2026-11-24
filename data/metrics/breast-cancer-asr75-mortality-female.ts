@@ -54,7 +54,5 @@ export const breastCancerAsr75MortalityFemale: MetricConfig = {
     "isCalculated": false,
   },
   "surveyId": "age-adjusted-mortality-statistics",
-  "seoTitle": "乳がん死亡率の都道府県ランキング｜1位北海道12.81 vs 最下位徳島県5.13(75歳未満・年齢調整)【2024年】",
-  "seoDescription": "女性の乳がん75歳未満年齢調整死亡率(人口10万人対)を都道府県別に比較。2024年は1位北海道12.81、最下位徳島県5.13で約2.5倍の差。1995年からの推移を地図とグラフで確認。",
   "isActive": true,
 };

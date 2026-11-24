@@ -35,7 +35,5 @@ export const bankDepositBalancePerPerson: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "domestic-bank-deposit-balance",
-  "seoTitle": "国内銀行預金残高ランキング都道府県【2024年】｜1位東京都（2,641.1万円）",
-  "seoDescription": "2024年の国内銀行預金残高の都道府県別ランキング。1位東京都（2,641.1万円）、最下位鹿児島県（379.3万円）で7.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

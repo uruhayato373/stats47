@@ -29,6 +29,7 @@ Kindle の規約は `kindle-publishing-standards.md` で、データパックと
 | 実データ（観測値） | R2 `app/ranking/<key>/values.json` | 既存 R2 | 取得は `src/data/load-ranking-values.ts` |
 | 商品に焼く実データ | 台帳 `products.pack-datasets` | JSON + Schema のスナップショット | **基準年固定**。R2 から取得して手記の出典の行を添える。正規化は読み込み口 `src/data/datasets/<key>.ts` |
 | 生成バイナリ（pptx/xlsx/pdf/png…） | `.local/data-packs/<id>/<version>/` | 派生物・**git 管理外** | 手編集を正典にしない・公開 R2 へ置かない |
+| 地図の境界（売る地図の図形） | `.local/data-packs/_boundary/prefecture-r2census-2020.geojson` | 派生物・git 管理外 | e-Stat「令和 2 年国勢調査 町丁・字等別境界データ」を都道府県で結合。`scripts/build-prefecture-boundary.mts` が検査して作る。**国土数値情報 N03 系の `prefecture.topojson` を売る地図に使わない**（2026-11-22 オーナー決定）。出どころは SOURCES.csv・LICENSE-ja.txt・README.md に書く |
 | リリース台帳（生成状況） | `data/products/catalog-status.json` | 機械状態 | `products:report` で再生成 |
 
 - **商品定義=台帳 `products.packs` が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
@@ -55,6 +56,9 @@ npm run test:run   --workspace=@stats47/product-factory
   値編集で再計算する RANK 数式**。ネイティブチャート/塗り分け地図は不可 → Excel 側の挿入手順を案内）/ csv(BOM) /
   svg+png / manual.pdf（pdf-lib + NotoSansJP subset）/ listing / manifest / readiness。
 - 地図結合は**都道府県コード**（名称文字列をキーにしない）。全図表にタイトル・単位・基準年・出典を持たせる。
+- `generate --bundle` は比較表に加えて時系列 (`timeseries/`) と全指標の塗り分け地図 (`maps/`) を付ける (`DATA-PACK-BUNDLE-01`)。
+  時系列は R2 `app/stats/<key>/values.json` から、年は 4 桁・単位は `data-configs` の単位の正典で比較表にそろえる。
+  年の定義が変わった指標は注記する。ZIP の大きさを READINESS.md で note の添付の上限 (50MiB) と照合する。
 
 ---
 
@@ -176,6 +180,6 @@ npm run test:run   --workspace=@stats47/product-factory
 
 - 商品案の由来: 台帳 `products.packs` の `sourceIds`（旧調査はGit履歴）
 - モジュール: `packages/product-factory/`（README + `src/`）
-- 納品版の固定値: `data/products/note-pack-deliveries.json` / 照合: `.claude/scripts/products/lib/pack-evidence.mjs`
+- 納品版の固定値: `data/products/note-pack-deliveries.json` / 照合: `packages/ops/src/products/lib/pack-evidence.mjs`
 - 完全DBレス: `.claude/rules/data-storage.md` / データ保存先: `.claude/rules/data-storage.md`
 - 実証判定: `.claude/rules/evidence-based-judgment.md` / 収益化戦略: `docs/00_プロジェクト管理/02_収益化戦略.md`

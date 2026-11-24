@@ -226,6 +226,35 @@ check_redirect() {
 check_redirect "/municipalities/ranking/manufacturing-shipment-amount?pref=23000&page=2&utm_source=smoke" "/municipalities/ranking/manufacturing-shipment-amount/23000?utm_source=smoke"
 check_redirect "/municipalities/ranking/manufacturing-shipment-amount?page=2" "/municipalities/ranking/manufacturing-shipment-amount"
 
+# 実行時 ISR の検査 (2026-11-21 CF-CPU-ISR-01):
+#   /ranking/* と /areas/* は revalidate を持ちながら generateStaticParams が無く、5 か月毎回描画になっていた
+#   (Workers CPU 課金の約 7 割)。HTTP 200・title が正常なので上の検査ではすり抜ける。
+#   Workers Cache を避けるクエリ付きで同じパスを 2 回取り、2 回目が ISR から返る (x-nextjs-cache: HIT / STALE) かを見る。
+#   ISR の保存先はパスで決まりクエリを含まないので、2 回目は描画しないで返るはず。
+#   ISR_CHECK_STRICT=1 で fail、既定は warning。deploy-workers.yml は 2026-11-21 から 1 を渡す (本番で HIT を確かめた)。
+echo ""
+echo "🧊 runtime ISR check (2 回目が ISR から返るか)"
+ISR_PATHS=(
+  "$(pick '/ranking/[a-z]' || echo "${BASE_URL}/ranking/annual-sunshine-duration")"
+  "${BASE_URL}/areas/13000"
+)
+for isr_url in "${ISR_PATHS[@]}"; do
+  [ -z "$isr_url" ] && continue
+  probe="isr_probe=${GITHUB_RUN_ID:-local}-$(date +%s)"
+  curl -s -o /dev/null --max-time 30 -A "$UA" "${isr_url}?${probe}-1" || true
+  isr_cache="$(curl -s -o /dev/null -D - --max-time 30 -A "$UA" "${isr_url}?${probe}-2" 2>/dev/null \
+    | tr -d '\r' | awk -F': ' 'tolower($1)=="x-nextjs-cache"{print toupper($2)}')"
+  checked=$((checked + 1))
+  if [ "$isr_cache" = "HIT" ] || [ "$isr_cache" = "STALE" ]; then
+    echo "  ✅ [isr] ${isr_url} → x-nextjs-cache: ${isr_cache}"
+  elif [ "${ISR_CHECK_STRICT:-0}" = "1" ]; then
+    echo "  ❌ [isr] ${isr_url} → x-nextjs-cache: ${isr_cache:-<none>} (2 回目も描画している。generateStaticParams の空配列を確認)"
+    fail=$((fail + 1))
+  else
+    echo "::warning::[isr] ${isr_url} → x-nextjs-cache: ${isr_cache:-<none>} (2 回目も描画している可能性。render-mode-contract.test.ts と open-next.config.ts を確認)"
+  fi
+done
+
 # home/featured.json の件数検査 (2026-07-27 障害の再発防止):
 #   master export (exportRankingItemsPerUrl) が R2 item.json を部分列挙して「全件」と
 #   誤認し、トップページの注目ランキングが count:0 で消えた。title/HTTPステータスは

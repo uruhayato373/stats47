@@ -159,8 +159,9 @@ test.describe("breakpoint 別レイアウト", () => {
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       await assertNoHorizontalScroll(page);
       const overview = page.getByRole('region', { name: '商品内容と購入' });
-      await expect(overview.getByRole('heading', { name: '含まれるもの' })).toBeVisible();
       const product = findStorefrontProduct(slug)!;
+      // 見出しは商品ページ (ProductOverview) と同じ条件で選ぶ。Kindle の本は「この本の内容」(2026-11-14 PRODUCTS-PAGE-CONTENT-01)
+      await expect(overview.getByRole('heading', { name: product.channel === 'kindle' ? 'この本の内容' : '含まれるもの' })).toBeVisible();
       const useCases = product.useCases;
       await expect(overview.getByRole('heading', { name: useCases?.length ? 'こんな用途に' : 'こんな方へ' })).toBeVisible();
       for (const item of useCases ?? []) {

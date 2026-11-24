@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "地図カード (buzz-map) の企画の台帳",
+  "description": "data/sns/buzz-map-curated-ideas.json の形状契約。人が選んで足す地図カードの企画 (1 件 1 企画)。build-buzz-map-catalog.ts が機械の候補と統合して data/sns/buzz-map-catalog.json を作る。metricKeys は実在を確かめた key だけを持ち、確かめられないときは [] と feasibility: needs-data にする。型の正本は .claude/scripts/sns/data/buzz-map-curated-ideas.ts (読み込み口)。",
+  "type": "object",
+  "required": ["schemaVersion", "ideas"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "ideas": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/idea" }
+    }
+  },
+  "definitions": {
+    "idea": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ideaId", "title", "subtitle", "hook", "question", "level", "recommendedType", "category", "sourceKind",
+        "metricKeys", "dataRefs", "viralPatterns", "externalEvidence", "gscEvidence", "competitorOverlap",
+        "feasibility", "capability", "commercialUse", "sensitivity", "priority", "score", "scoreBreakdown",
+        "blockers", "channels", "renderPlan", "landingPlan"
+      ],
+      "properties": {
+        "ideaId": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "hook": { "type": "string" },
+        "question": { "type": "string" },
+        "level": { "enum": ["pref", "muni", "mesh"] },
+        "recommendedType": { "enum": ["A", "B", "C", "D", "E", "F", "flow"] },
+        "category": { "type": "string" },
+        "sourceKind": { "enum": ["estat", "ksj", "mlit-dpf", "gsi", "derived", "external"] },
+        "metricKeys": { "type": "array", "items": { "type": "string" } },
+        "aliases": { "type": "array", "items": { "type": "string" }, "description": "同義の候補を 1 件へまとめたときの別名" },
+        "dataRefs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "license"],
+            "properties": {
+              "id": { "type": "string" },
+              "version": { "type": "string" },
+              "year": { "type": "string" },
+              "license": { "type": "string" },
+              "sourceUrl": { "type": "string" }
+            }
+          }
+        },
+        "viralPatterns": { "type": "array", "items": { "type": "string" } },
+        "externalEvidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["url", "note", "surveyedAt"],
+            "properties": {
+              "url": { "type": "string" },
+              "note": { "type": "string" },
+              "surveyedAt": { "type": "string" }
+            }
+          }
+        },
+        "gscEvidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["query"],
+            "properties": {
+              "query": { "type": "string" },
+              "impressions": { "type": "number" },
+              "clicks": { "type": "number" },
+              "week": { "type": "string" }
+            }
+          }
+        },
+        "competitorOverlap": { "enum": ["none", "partial", "exact"] },
+        "feasibility": { "enum": ["now", "needs-pipeline", "needs-renderer", "needs-data"] },
+        "capability": { "type": "string" },
+        "commercialUse": { "enum": ["allowed", "review-required", "blocked"] },
+        "sensitivity": { "enum": ["low", "medium", "high"] },
+        "priority": { "enum": ["P0", "P1", "P2", "P3"] },
+        "score": { "type": "number" },
+        "scoreBreakdown": { "type": "object", "additionalProperties": { "type": "number" } },
+        "blockers": { "type": "array", "items": { "type": "string" } },
+        "channels": { "type": "array", "items": { "enum": ["x", "instagram"] } },
+        "renderPlan": { "type": "string" },
+        "landingPlan": { "$ref": "#/definitions/landingPlan" }
+      }
+    },
+    "landingPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy", "readiness", "primaryUrl", "primaryKey", "secondaryUrls", "articleSlug", "themeSlug",
+        "landingPromise", "ctaLabel", "searchIntent", "monetizationVertical", "attributionByChannel", "blockers"
+      ],
+      "properties": {
+        "strategy": { "enum": ["existing-ranking", "existing-blog", "existing-theme", "extend-theme", "create-blog", "create-theme", "blocked"] },
+        "readiness": { "enum": ["ready", "needs-content", "draft", "review-passed", "publish-pending", "live", "blocked"] },
+        "primaryUrl": { "type": ["string", "null"] },
+        "primaryKey": { "type": ["string", "null"] },
+        "secondaryUrls": { "type": "array", "items": { "type": "string" } },
+        "articleSlug": { "type": ["string", "null"] },
+        "themeSlug": { "type": ["string", "null"] },
+        "landingPromise": { "type": "string" },
+        "ctaLabel": { "type": "string" },
+        "searchIntent": { "type": ["string", "null"] },
+        "monetizationVertical": { "enum": ["none", "housing", "mobility", "labor", "education"] },
+        "attributionByChannel": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "x": { "enum": ["direct", "profile", "unattributed"] },
+            "instagram": { "enum": ["direct", "profile", "unattributed"] }
+          }
+        },
+        "blockers": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ paths:
   - "config/local-resources.json"
   - ".claude/scripts/lib/local-resource*"
   - "scripts/scheduled/local-resources.ps1"
-  - ".claude/agents/{db-schema-manager,data-ingester,r2-publisher,devops-runner}.md"
+  - ".claude/agents/{data-ingester,r2-publisher,devops-runner}.md"
 ---
 # ローカル開発環境
 
@@ -47,8 +47,7 @@ packages/
 ## ストレージ
 
 - **データ層は「完全DBレス」が正典** → `.claude/rules/data-storage.md`。本番は R2 snapshot のみ読む。SSOT は **git TS (設定・運用エンティティ) と R2 (観測値・配信) の二つだけ**。Derived (area_profiles / correlations) は **エフェメラル計算 → R2**。**永続/リモート D1 は廃止。クラウド/ローカルとも git TS 編集 + R2 直接反映で作業する (D1 認証は不要)。**
-- **ローカルビルド DB (SQLite)**: `packages/database/.data/stats47.sqlite`（旧 batch / エフェメラル集計が建てる**使い捨てビルドキャッシュ**。SSOT ではない）。git 管理外。**不在でも git TS 編集 / R2 直接反映 / エフェメラル集計は可能 = 基本「正常」**。R2 を読みたいだけなら公開 URL 経由で認証なしに取得できる。
-  - これは **Cloudflare D1 サービスではない**。本番は R2 snapshot のみ読み、DB を一切 query しない。
+- **ローカルビルド DB (SQLite) は 2026-11-21 に廃止した** (旧 `packages/database/.data/stats47.sqlite` と、それを開くスクリプト・skill)。集計に SQLite / DuckDB を使うときは `:memory:` に限る。R2 を読みたいだけなら公開 URL 経由で認証なしに取得できる。
 - **dev server の miniflare**: `next.config.ts` の `initOpenNextCloudflareForDev({ persist: { path: "../../.local/d1" } })` は **R2 dev binding cache** (`.local/d1/r2/stats47/blobs/`) のために残置。`[[d1_databases]]` binding (STATS47_STATIC_DB) は app が read しないため vestigial（miniflare が `.local/d1/.../miniflare-D1DatabaseObject/*.sqlite` を作るが、batch は参照しない）。**`apps/web/.wrangler/state/` は使わない。**
 - **R2 読み取り (標準)**: ビルド/集計スクリプトは **公開 URL 経由**で R2 を読める →
   `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp`（GET のみ・list 不可）+ `NODE_OPTIONS='--conditions react-server'`。
@@ -70,15 +69,9 @@ packages/
 - CI シークレット: `CLOUDFLARE_R2_ACCESS_KEY_ID` / `CLOUDFLARE_R2_SECRET_ACCESS_KEY` / `CLOUDFLARE_ACCOUNT_ID` は設定済。
 - 新規 R2 書き込みスクリプトは先頭で `assertR2WriteAllowed()` を呼ぶこと（呼び出し元への通知のため）。
 
-## ローカルビルド DB (SQLite) パス固定値
+## SQLite を開くとき
 
-`better-sqlite3` は存在しないパスで `new Database()` すると**空ファイルを自動作成する**。下記以外で開かないこと。中央定義は `packages/database/src/config/local-db-paths.ts` の `LOCAL_DB_PATHS.STATIC.getPath()`（全 batch がこれ経由 or 同一パスを解決）。
-
-```
-packages/database/.data/stats47.sqlite
-```
-
-（旧 miniflare ハッシュパス `.local/d1/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite` は廃止。dev server の miniflare が同名ファイルを作る場合があるが batch は参照しない。）
+`better-sqlite3` は存在しないパスで `new Database()` すると**空ファイルを自動作成する**。永続のファイルを開かず、`new Database(":memory:")` だけを使う (ローカルビルド DB は 2026-11-21 に廃止)。dev server の miniflare が `.local/d1/` に作る `.sqlite` は R2 dev binding のためのもので、スクリプトから読まない。
 
 ## ネットワーク
 
@@ -645,6 +638,22 @@ npm run admin
 > 完全DBレスでは観測値・配信は R2 が SSOT、設定/運用は git TS が SSOT で履歴は git に残る。
 
 未公開データのローカル確認では `WEB_DEV_HOST=127.0.0.1 npm run dev:web` を使い、Next.jsの待受をループバックに限定する。WEB_DEV_HOSTはdev-serverが--hostnameへ渡す（未指定時は既存のNext.js既定値）。
+
+### 手元で生成した snapshot (公開前の Geo bundle・指標メタ・広告台帳) を dev で見る (2026-11-22 GEO-DEV-LOCAL-R2-01)
+
+`scripts/dev-server.ts` が R2 を `.local/r2` で上書きする仕組みは Windows の gateway だけで、Mac の dev サーバーは本番の公開 R2 を読む。手元で作っただけの snapshot は、PR の E2E と同じ読み取り中継 `.github/scripts/r2-overlay-server.mjs` を挟んで見る。中継は `.local/r2/` にある key だけ手元から返し、それ以外は本番へそのまま取り次ぐ。返す key は `.github/scripts/metric-release-paths.mjs` の `overlay: true` の種類と、中継の `LOCAL_ONLY_SNAPSHOT_*` (広告台帳 `app/affiliate-ads/all.json`・公開前の Geo bundle の JSON `app/geo/<slug>/**.json`) に限る。
+
+```bash
+# 1. 生成器で .local/r2/app/geo/<slug>/{item,manifest}.json と pref/<NN>.json を作る (Geo は /build-geo-analysis)
+# 2. 中継を背景で起動し、dev サーバーの R2 を中継へ向ける。S3 の認証情報があると公開 URL より S3 を先に読むので R2_S3_ENDPOINT を空にする
+node .github/scripts/r2-overlay-server.mjs 4790 &
+R2_S3_ENDPOINT= R2_PUBLIC_FETCH_URL=http://127.0.0.1:4790 WEB_DEV_HOST=127.0.0.1 npm run dev:web
+# 3. http://127.0.0.1:3000/geo/<slug> と ?pref=28&stage=population を開く。終わったら中継を止める (kill %1)
+```
+
+- `.claude/launch.json` の `web-r2-overlay` は 2・3 と同じ起動 (中継 + dev)。
+- 中継は JSON だけを返す。Geo の画像 (`app/geo/datasets/**/thumbnails/*.webp` など) は手元にあっても本番へ取り次ぐので、公開前の slug の画像は 404 になる。
+- R2 には書かない。公開は検証結果と exact key を `r2-publisher` / CI へ渡す。自作の中継を書かない (返す範囲が CI とずれる)。契約テストは `.claude/scripts/lib/__tests__/r2-overlay-server.test.mjs`。
 
 ### Codex / Claude の作業共有
 

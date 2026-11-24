@@ -33,7 +33,5 @@ export const hobbyParticipationRateJapaneseDance: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "邦舞・おどりの行動者率 都道府県ランキング【2021年】｜1位東京都（1.5％）",
-  "seoDescription": "2021年の邦舞・おどりの行動者率を都道府県別に比較。1位は東京都（1.5％）、最下位は山口県（0.6％）、最大と最小の差は2.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

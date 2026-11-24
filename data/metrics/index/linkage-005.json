@@ -11452,6 +11452,17 @@
           "filters": {
             "cdCat01": "I5103"
           }
+        },
+        {
+          "role": "supplemental",
+          "statsDataId": "0004048426",
+          "filters": {
+            "cdCat02": "100",
+            "cdCat03": "1"
+          },
+          "years": [
+            2024
+          ]
         }
       ],
       "recipe": {
@@ -11460,8 +11471,26 @@
           "statsDataId": "0000010109",
           "cdCat01": "I5103"
         },
-        "derived": false,
-        "configHash": "2dc7745437e8dbcf"
+        "ops": {
+          "supplements": [
+            {
+              "years": [
+                2024
+              ],
+              "estatParams": {
+                "statsDataId": "0004048426",
+                "cdCat02": "100",
+                "cdCat03": "1"
+              },
+              "areaAxis": {
+                "axis": "cat01",
+                "scheme": "name"
+              }
+            }
+          ]
+        },
+        "derived": true,
+        "configHash": "37b2979fc01fe142"
       },
       "dependencies": [],
       "normalizationDependencies": [

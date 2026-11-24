@@ -78,8 +78,5 @@ export const fishingPortCountKsj: MetricConfig = {
   surveyScope: 'not-applicable',
   surveyScopeReason:
     '水産庁の指定漁港レジストリを都道府県別に集計した値で、統計調査を原典としないため',
-  seoTitle: '漁港数ランキング都道府県【2026年】',
-  seoDescription:
-    '水産庁の2026年4月1日現在の指定漁港数を47都道府県で比較。第1種から第4種までの総数を、湖沼漁港も含めて表示します。',
   isActive: true,
 };

@@ -3,6 +3,8 @@ import { municipalityLeafName } from "@stats47/ranking";
 
 import { RailNavRow, SectionCard } from "@/components/surface";
 
+import { navSurfaceProps } from "@/lib/analytics/events";
+
 import { listPublishableCitiesInPrefecture } from "../constants/publishable-cities";
 
 /** 最初から並べる件数。旧版の固定の高さ (4 列 × 約 10 行) と同じ量。超える県だけ残りを「すべて見る」で開く */
@@ -46,7 +48,7 @@ export function CitiesNavCard({
         </>
       }
     >
-      <nav aria-label={`${areaName}の市区町村`}>
+      <nav aria-label={`${areaName}の市区町村`} {...navSurfaceProps("area_cities")}>
         <CityGrid cities={visible} areaCode={areaCode} activeCityCode={activeCityCode} />
         {hidden.length > 0 && (
           <details open={activeInHidden} className="mt-1 border-t border-dashed border-border">

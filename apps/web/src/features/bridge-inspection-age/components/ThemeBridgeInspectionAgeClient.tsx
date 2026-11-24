@@ -36,10 +36,13 @@ export function ThemeBridgeInspectionAgeClient({
         title="当年度点検橋の架設年度分布"
         description={`${snapshot.year}年度点検 · ${area} · 年度末時点で診断中の施設を除く`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source="国土交通省「道路メンテナンス年報」施設名一覧をstats47が集計"
             sourceLink={SOURCE.indexUrl}
+            sourceLinks={SOURCE.sources.map((s) => ({ label: `原表（XLSX）${s.title}`, url: s.url }))}
+            annotation={['割合は表示時に丸めるため合計100%にならない場合があります。', ...SOURCE.notes]}
           />
         }
       >
@@ -105,28 +108,7 @@ export function ThemeBridgeInspectionAgeClient({
           {selected.managerCounts.highway.toLocaleString('ja-JP')}
           橋、地方公共団体{' '}
           {selected.managerCounts.local.toLocaleString('ja-JP')}
-          橋。割合は表示時に丸めるため合計100%にならない場合があります。
-        </p>
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {SOURCE.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
-        <p className="text-xs text-muted-foreground">
-          原表（XLSX）：
-          {SOURCE.sources.map((s, i) => (
-            <span key={s.id}>
-              {i > 0 && ' / '}
-              <a
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-              >
-                {s.title}
-              </a>
-            </span>
-          ))}
+          橋。
         </p>
       </ChartPanel>
     </div>

@@ -43,7 +43,7 @@ export const ARTICLE_RAIL_CLASS =
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。
  *
  * 寸法: 1280px コンテナ / gap 16px / 右レール 316px。余白はルートレイアウトの
- * main#main-content (py-4) が持つ (2026-10-27 にテンプレートの p-4 へ寄せ、2026-11-20 に左右の余白をなくした)。
+ * 持たない。main#main-content も余白を持たず、本文の格子は外枠の線に接する (2026-11-23 オーナー決定。それまでは main の p-4)。
  * 300×250 の `SidebarPromoBanner` は Card で囲まず、このレール内に等倍で表示する。
  *
  * PageShell との違い:

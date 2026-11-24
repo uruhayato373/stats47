@@ -25,6 +25,20 @@ primary_agent: strategy-advisor
 - 人の承認が要る選択 (KDP の公開・search-growth 候補の承認・構えの変更・実測が足りないマスの評価) は「見送り・承認待ち」を既定にし、選んだ理由を本文に残す。
 - Phase 4 の次週計画まで実行する (タスクの依頼範囲に含まれる)。
 - 分業は、決定的な収集 = sonnet の agent 1 回、施策の記録 = `improvement-triage`、本文と計画 = `strategy-advisor` 1 回。収集・再確認のための agent を足さない (`.claude/rules/model-prompting.md`)。
+- **CI の週次計測を待ってから集める。** 02:00 の `fetch-metrics-weekly` は遅れて 07 時台に走ることがある (2026-11-21 は 07:35〜08:42)。
+  `git fetch origin && git log origin/develop --oneline --grep "weekly snapshot <週>"` が空のうちは Phase 0/1 の収集を始めず、
+  `gh run list --workflow fetch-metrics-weekly.yml --limit 1` の run を `gh run watch <id> --interval 60` で待ってから取り込む。
+  先に集めると GSC・GA4・AdSense の当週の行が無く、手元で作った `data/nsm/weekly-snapshots/<週>.json` などが CI の commit とぶつかって pull が止まる。
+  `npm run weekly:collect` は CI と別の取得なので待たずに起動してよい。
+- **取り込みに `--autostash` を使わない** (stash が残り、別のセッションの作業と混ざるため)。途中の取り込みは `git fetch origin && git merge --ff-only origin/develop`
+  (作業中の変更と重なれば止まる)、push の前は自分の変更をコミットしてから `git pull --rebase origin develop` する。
+- **push 前の rebase で衝突したら:** 衝突が `.claude/todo/backlog.md` だけなら `node .claude/scripts/management/resolve-backlog-conflict.mjs` でカード単位に解き、
+  exit 0 なら `GIT_EDITOR=true git rebase --continue` で進める。exit 1 (同じカードを両側が別々に変えた)・exit 2 (ほかのファイルも衝突) なら
+  `git rebase --abort` して、commit をローカルに残したまま報告する。手で衝突を解かない。
+- **モデル使用量は commit の前に記録する** (`npm run model-usage:collect && npm run model-usage:report`)。`.claude/state/metrics/model-usage/` をレビューと同じ commit に入れる。
+- **自動アラートの回収は無人でも行う** (2026-11-23 オーナー決定)。下の「自動アラートの回収」のコメント (`gh issue comment <番号> --body "→ 振り分け: …"`) を付け、
+  元の workflow のファイルが `.github/workflows/` から消えているアラートは「→ 振り分け: 見送り (<撤去した commit>)」を付けて `gh issue close <番号> --reason "not planned"` で閉じる。
+  Issue のコメントと close 以外の GitHub への書き込み (PR・ラベル・本文の書き換え) はしない。
 
 ## 最初に: 週次の取得を起動する
 
@@ -87,7 +101,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 2. 計測 state を作り直す。02:00 の計測の後に入った認証付き計測を state に入れるため。
 
    ```bash
-   git pull --rebase --autostash origin develop   # weekly:collect が push した記録を取り込む
+   git fetch origin && git merge --ff-only origin/develop   # weekly:collect が push した記録を取り込む (作業中の変更と重なれば止まる。stash しない)
    bash .claude/scripts/metrics/refresh-measurement-cycle.sh [YYYY-Www]
    ```
 
@@ -132,7 +146,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | AdSense の配置 | `data/adsense/LATEST.md`・`history-units.csv`・`impact-LATEST.md` と KPI `ad-yield`。運用は `/adsense-improvement`。再開後 4 週 (W42〜W45) はベースライン期間で配置を変えない。取得が 0 行 (`manifest.json` の `status: error`) なら Blockers へ (`ADSENSE-RESTART-01` 手順⑤) |
 | 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎週土曜。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `data/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `data/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
-| 計測→記録→改善サイクル | `data/measurement-cycle/LATEST.md`（Phase 0b で作り直したもの。週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・Phase 0b の記録を終えていない週は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs`。GSC は毎週、送信済みビューの登録済み・未登録と前週差、理由別の件数と検証の状態、「ブロックされましたが登録」の件数、Googlebot の POST と HTML の件数を読む（表の行は runbook の「計測→記録→改善サイクル」。未取得は 0 と書かない） |
+| 計測→記録→改善サイクル | `data/measurement-cycle/LATEST.md`（Phase 0b で作り直したもの。週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・Phase 0b の記録を終えていない週は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs`。Cloudflare の行は Worker の CPU の 1 日平均と月換算額・route 上位 3 (CPU 割合と 1 URL あたりの描画回数) を読み、月換算が $10 を超えるか `workers-route-*` の違反がある週は performance-auditor に切り分けを頼む (CF-CPU-ISR-01)。GSC は毎週、送信済みビューの登録済み・未登録と前週差、理由別の件数と検証の状態、「ブロックされましたが登録」の件数、Googlebot の POST と HTML の件数を読む（表の行は runbook の「計測→記録→改善サイクル」。未取得は 0 と書かない） |
 | 商品 | `data/products/PRODUCT-LEDGER.md` (Phase 0b で作り直す)。期日の来た価格実験と商品群は、`data/products/price-history.json` の判定基準で続ける・変える・止めるを決め、決定を `data/products/product-strategy.json` の `decisions` に書く |
 | GA4の設定 | `data/measurement-cycle/LATEST.md` の「GA4 の設定の変化」(週次の記録は `data/google-admin/audits/<週>.json`)。追加・削除・問題があれば意図した変更か確かめ、意図しないものはバックログへ起票して改善につなげる |
 | SEOの提案 | `data/seo/latest-review.json` と `data/seo/proposals/`。サイトを変えない提案は PR を作らず develop へ記録されるので、ここで読み、担当へ渡すものを起票する |

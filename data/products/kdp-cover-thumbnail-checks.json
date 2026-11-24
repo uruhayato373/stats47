@@ -98,15 +98,16 @@
       "checkedBy": "Claude (120px・220px を目視、2026-11-14)"
     },
     "K-S1-01": {
-      "coverSha256": "7f2eb2364586816397663071ccee2e03fd93af86a7718d5c13e3b972ad38519b",
-      "coverPath": ".local/kindle-books/K-S1-01/v10-20261103-final/cover.jpg",
+      "coverSha256": "22d8ba5674e09db2d90e2f0c593e6d2a86b8ad94adaa542560fd17249b2b064a",
+      "coverPath": ".local/kindle-books/K-S1-01/v11-20261122-cover9/cover.jpg",
       "heightsPx": [
         120,
         220
       ],
       "verdict": "readable",
-      "checkedAt": "2026-11-13",
-      "checkedBy": "Claude (120px を 13 冊並べて目視、2026-11-14)"
+      "note": "表紙を「9つ」に描き直した版。120px/220px の縮小で題名・副題の 9 を目視確認",
+      "checkedAt": "2026-11-22",
+      "checkedBy": "Claude (kindle-publisher, 120px/220px 目視)"
     },
     "K-S1-02": {
       "coverSha256": "1fa05d52389fc65d325a82dcf20fb1a08f12ea60ea308649528151cc740edb5b",

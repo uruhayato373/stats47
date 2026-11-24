@@ -22,7 +22,7 @@ const BIG_UNITS: ReadonlyArray<readonly [string, number]> = [
 
 /** 漢数字として解釈しうる文字。 */
 const KANJI_NUM_CHARS = "〇零一二三四五六七八九十百千万億兆";
-export const KANJI_NUMERAL_PATTERN = new RegExp(`[${KANJI_NUM_CHARS}]+`, "g");
+const KANJI_NUMERAL_PATTERN = new RegExp(`[${KANJI_NUM_CHARS}]+`, "g");
 
 /**
  * 万未満の塊を解釈する (「五百二十一」→ 521 / 「千」→ 1000)。

@@ -13,7 +13,7 @@
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { DEBUG_DIR, assertAccount, launchContext, sleep, waitForLogin } from "./lib/kdp-session.mjs";
+import { DEBUG_DIR, assertAccount, launchContext, sleep, waitForLogin } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
 
 // KDP のレポートは別ドメイン (kdpreports.amazon.com・KDP Reports) に移っている。旧 URL は 404 (2026-09-19 実測)。
 const REPORTS_URLS = [

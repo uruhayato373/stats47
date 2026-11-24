@@ -36,7 +36,7 @@ function SessionSection({ view }: { view: Wrapped<SessionPreflightView> }) {
         </p>
         <p className="text-xs text-muted-foreground">
           launchd の scripts/scheduled/session-preflight.sh が毎日書く。手で回すときは
-          <code className="font-mono"> node .claude/scripts/measurement/session-preflight.mjs --write</code>
+          <code className="font-mono"> node packages/ops/src/measurement/session-preflight.mjs --write</code>
         </p>
       </Section>
     );

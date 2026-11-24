@@ -158,7 +158,7 @@ values.json が取得できない場合は照合をスキップする (fail-open
 ありません」と正直に書いており捏造ではない。**嘘は無いが読者価値も無い**ページを 1 枠使って作った
 ことが問題で、thin content のリスクでもある。
 
-判定は `.claude/scripts/ai-content/lib/value-health.mjs` の `checkValueHealth` (純関数・テスト付き)。
+判定は `packages/ops/src/ai-content/lib/value-health.mjs` の `checkValueHealth` (純関数・テスト付き)。
 
 | 検査 | tier | 理由 |
 |---|---|---|
@@ -176,7 +176,7 @@ done でも接地が不健全な key は `dataBlockers` を付けて LATEST.md �
 **解説の年が古い key は作り直しに戻す (`stale-year`、2026-10-07〜)。** ai-content.json は生成時の年を
 `yearCode` に持つが、`auditRow` は本文の形しか見ないので、取り込みで新しい年が増えても `done` のまま
 古い年を語り続けていた。キューは values.json の最新年と比べ、違えば `needs-regen` (reason `stale-year`) にする
-(`.claude/scripts/ai-content/lib/year-freshness.mjs`)。初回実測で GSC 流入のある 1,504 件中 43 件が該当した。
+(`packages/ops/src/ai-content/lib/year-freshness.mjs`)。初回実測で GSC 流入のある 1,504 件中 43 件が該当した。
 
 **ブログ側の `checkGroundedRows` (`packages/ai-content/src/services/blog-topic-gate.ts`) との差は意図的**。
 blocker の 4 検査は同じ判断だが、40 行未満をブログは reject・ai-content は warn に留める。問うている
@@ -257,7 +257,7 @@ verify セマンティクス (日次 CI と対話セッションの共通規律)
 での再是正やプロンプト/データ是正が要る。blog は新規記事で同じ slug を再ピックしないため
 quarantine は持たない。
 
-再発防止テスト: `.claude/scripts/ai-content/__tests__/generation-outcome.test.mjs`
+再発防止テスト: `packages/ops/src/ai-content/__tests__/generation-outcome.test.mjs`
 (quarantine の積み上げ・PASS でのリセット) / `packages/ai-content/src/services/__tests__/`
 (Gemini API・structured output・preflight・生成 0 件 gate)。
 
@@ -272,7 +272,7 @@ quarantine は持たない。
 
 1. `build-ai-content-queue.mjs --scope all` で R2 から対象を再導出する。
 2. 極小の structured generateContent で preflight する。ListModels は失敗時の候補提示にしか使わない。
-3. author は response schema で FAQ 5 件・観測地域全件を固定する。既存の決定的監査に落ちた候補は公開しない。
+3. author は response schema で FAQ 5 件を固定する。県別解説の件数・順位は schema に持たせず (47 件の制約付き配列は 2026-11-22 まで HTTP 400 だった)、`audit-ai-content.mjs` の blocker が観測地域全件を検査する。既存の決定的監査に落ちた候補は公開しない。
 4. 生成と別の Gemini リクエストが意味品質を `PASS | REVISE` で審査する。`REVISE` は指摘付きで最大 1 回だけ全体再生成する。
 5. PASS 分だけ outbox へ書き、develop へコミットする。CI からの push は後続 workflow を発火しないため、`publish-ai-content.yml` を明示 dispatch し、run 成功まで待つ。
 6. 件数・通過率・author/critic リクエスト数・トークン数を `data/ai-content/` へ記録する。生成本文と prompt は記録しない。
@@ -552,7 +552,7 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 - 戦略・KPI: `docs/00_プロジェクト管理/03_マーケティング戦略.md`（T1〜T4・SEO品質レバー）
 - ai-content 是正キュー: memory `project_ai_content_remediation_queue` / `.claude/scripts/ai-content/build-ai-content-queue.mjs`
 - 決定的ゲート: `.claude/scripts/ai-content/audit-ai-content.mjs` (生成物) /
-  `.claude/scripts/ai-content/lib/value-health.mjs` (接地データ)。テストは
+  `packages/ops/src/ai-content/lib/value-health.mjs` (接地データ)。テストは
   `.claude/scripts/ai-content/__tests__/*.test.mjs`、CI 配線は `pr-quality-check.yml` の AI Content Gate Guard
 - 生成 0 件ゲート: `packages/ai-content/src/services/generation-outcome.ts` (`src/services/__tests__/` にテスト)
 - セッション側の入口: skill `/generate-ai-content` (agent: `ranking-content-author`) / prompt 取得: `build-input.ts --prompt-only`

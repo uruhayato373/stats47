@@ -78,7 +78,7 @@ test("別scriptから参照される非critical checkerは配線済み", (t) => 
 test("拡張子を省いたTS相対importで参照されるcheckerは配線済み", (t) => {
   const item = fixture();
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
-  add(item.root, ".claude/scripts/page-quality/lib/audit-url.ts", "export function auditUrl() {}\n");
+  add(item.root, "packages/ops/src/page-quality/lib/audit-url.ts", "export function auditUrl() {}\n");
   add(item.root, ".claude/scripts/page-quality/run-representative.ts", 'import { auditUrl } from "./lib/audit-url";\n');
   const result = run(item);
   assert.equal(result.status, 0, result.stderr);
@@ -381,4 +381,33 @@ test("--staged: git の作業ツリーでなければ exit 2 で止まる (検�
   t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
   const result = spawnSync(process.execPath, [item.checker, "--json", "--staged"], { cwd: item.root, encoding: "utf8" });
   assert.equal(result.status, 2);
+});
+
+test("登録済みの入口が import する同じ名前の本体は、入口の登録で覆われる (本体だけ未登録と数えない)", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const entry = ".claude/scripts/blog/audit-x.ts";
+  const body = "apps/admin/scripts/audit-x.ts";
+  add(item.root, "apps/admin/package.json", "{}\n");
+  add(item.root, body, "export function main() {}\n");
+  add(item.root, entry, 'import { main } from "../../../apps/admin/scripts/audit-x";\nmain();\n');
+  add(item.root, ".github/workflows/x.yml", `name: x\non:\n  pull_request:\njobs:\n  x:\n    steps:\n      - run: npx tsx ${entry}\n`);
+  writeRegistry(item.root, [gate("audit-x", entry, { command: `npx tsx ${entry}` })]);
+  const result = run(item);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(result.output.findings.filter((f) => f.code === "UNDECLARED_CRITICAL_CHECKER"), []);
+});
+
+test("[mutation] 入口が import しない同じ名前の別ファイルは、引き続き未登録として止める", (t) => {
+  const item = fixture();
+  t.after(() => fs.rmSync(item.root, { recursive: true, force: true }));
+  const entry = ".claude/scripts/blog/audit-x.ts";
+  const body = "apps/admin/scripts/audit-x.ts";
+  add(item.root, "apps/admin/package.json", "{}\n");
+  add(item.root, body, "export function main() {}\n");
+  add(item.root, entry, "console.log(1);\n");
+  add(item.root, ".github/workflows/x.yml", `name: x\non:\n  pull_request:\njobs:\n  x:\n    steps:\n      - run: npx tsx ${entry}\n`);
+  writeRegistry(item.root, [gate("audit-x", entry, { command: `npx tsx ${entry}` })]);
+  const result = run(item);
+  assert.ok(result.output.findings.some((f) => f.code === "UNDECLARED_CRITICAL_CHECKER" && f.file === body), JSON.stringify(result.output.findings));
 });

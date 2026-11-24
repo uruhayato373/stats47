@@ -36,4 +36,13 @@ describe("CorrelationSectionClient", () => {
     const { container } = render(<CorrelationSectionClient groups={{ positive: [], negative: [] }} />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  it("別の年で比べたペアにだけ比べた年を出す", () => {
+    render(<CorrelationSectionClient groups={{
+      positive: [item("same", "同じ年の指標", 0.8), { ...item("older", "古い年の指標", 0.7), year: "2014" }],
+      negative: [],
+    }} />);
+    expect(screen.getByText("（2014年の値）")).toBeInTheDocument();
+    expect(screen.getAllByText(/年の値）/)).toHaveLength(1);
+  });
 });

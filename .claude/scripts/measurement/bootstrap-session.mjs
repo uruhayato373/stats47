@@ -8,9 +8,9 @@ import { randomBytes } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { chromium } from 'playwright';
 import { createInterface } from 'node:readline/promises';
-import { sourceFor, scopedState } from './sources.mjs';
-import { openKdpReports } from './kdp-reports.mjs';
-import { assertClosedNativeProfile } from './native-profile.mjs';
+import { sourceFor, scopedState } from '../../../packages/ops/src/measurement/sources.mjs';
+import { openKdpReports } from '../../../packages/ops/src/measurement/kdp-reports.mjs';
+import { assertClosedNativeProfile } from '../../../packages/ops/src/measurement/native-profile.mjs';
 
 const [sourceName, ...args] = process.argv.slice(2);
 if (!sourceName || args.includes('--help')) {

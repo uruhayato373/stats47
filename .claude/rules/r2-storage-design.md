@@ -183,7 +183,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 | **出典** | `response` は e-Stat 生レスポンス丸ごと。`TABLE_INF` に統計表名・政府機関・調査年が自己記述されているため、この 1 ファイルから出典を再現できる（整形後だけを保存しない理由） |
 | 鮮度 | `CACHE_TTL_DAYS = 30`。超過・`cachedAt` 欠落は read 時に miss 扱い → 再取得・上書き。**統計表は年次更新されるので無期限キャッシュにしない** |
 | 保持 | TTL で自己更新するため GC 不要（`r2-retention.ts` の削除対象にしない） |
-| 書き込み経路 | `fetch-stats-data.ts`（await して保存、失敗は warn ログ）/ `warm-cache.ts`（`--refresh` で既存上書き） |
+| 書き込み経路 | `fetch-stats-data.ts`（await して保存、失敗は warn ログ）。一括の事前作成 (旧 `warm-cache.ts`) は SQLite の表を入力にしていたので 2026-11-21 に削除 |
 
 **禁止**: 整形後 (`StatsSchema[]`) だけを保存する / `params` を省く / TTL 無しで書き込む /
 `app/` 配下にキャッシュを置く（配信 snapshot と混ざる）。

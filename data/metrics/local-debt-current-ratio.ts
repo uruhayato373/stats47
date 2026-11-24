@@ -34,7 +34,5 @@ export const localDebtCurrentRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "地方債現在高の割合ランキング都道府県【2022年】｜1位静岡県（208.5％）",
-  "seoDescription": "2022年の地方債現在高の割合の都道府県別ランキング。1位静岡県（208.5％）、最下位東京都（41.6％）で5.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

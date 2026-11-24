@@ -36,7 +36,5 @@ export const tertiaryIndustryEstablishmentRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "第3次産業事業所数構成比ランキング都道府県【2014年】｜1位沖縄県（88.25％）",
-  "seoDescription": "2014年の第3次産業事業所数構成比の都道府県別ランキング。1位沖縄県（88.25％）、最下位岐阜県（75.3％）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

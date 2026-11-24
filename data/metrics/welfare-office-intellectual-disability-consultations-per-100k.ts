@@ -35,7 +35,5 @@ export const welfareOfficeIntellectualDisabilityConsultationsPer100k: MetricConf
     "isCalculated": false,
   },
   "groupKey": "welfare-office-intellectual-disability-consultations",
-  "seoTitle": "福祉事務所知的障害者相談実人員ランキング都道府県【2002年】｜1位東京都（439.1人）",
-  "seoDescription": "2002年の福祉事務所知的障害者相談実人員の都道府県別ランキング。1位東京都（439.1人）、最下位石川県（42.5人）で10.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

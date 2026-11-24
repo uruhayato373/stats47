@@ -35,7 +35,5 @@ export const dentalCheckupGuidancePersonsPer1000: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "dental-checkup-guidance-persons",
-  "seoTitle": "歯科健診・保健指導延人員ランキング都道府県【2020年】｜1位鹿児島県（50.5人）",
-  "seoDescription": "2020年の歯科健診・保健指導延人員の都道府県別ランキング。1位鹿児島県（50.5人）、最下位京都府（15.9人）で3.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

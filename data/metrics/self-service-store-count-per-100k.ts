@@ -47,7 +47,5 @@ export const selfServiceStoreCountPer100k: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "self-service-store-count",
-  "seoTitle": "セルフサービス事業所数ランキング都道府県【2014年】｜1位山梨県（130.8所）",
-  "seoDescription": "2014年のセルフサービス事業所数の都道府県別ランキング。1位山梨県（130.8所）、最下位奈良県（79.7所）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

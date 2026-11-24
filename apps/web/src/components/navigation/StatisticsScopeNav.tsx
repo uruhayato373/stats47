@@ -4,6 +4,8 @@ import { buttonVariants, cn } from '@stats47/components';
 
 import Link from '@/components/atoms/SiteLink';
 
+import { navSurfaceProps } from '@/lib/analytics/events';
+
 
 export type StatisticsScope = 'prefectures' | 'municipalities' | 'japan';
 
@@ -60,13 +62,13 @@ export function LinkRowFrame({
 }) {
   if (wrap) {
     return (
-      <nav aria-label={label} className={cn(LINK_ROW_WRAP_CLASS, className)}>
+      <nav aria-label={label} className={cn(LINK_ROW_WRAP_CLASS, className)} {...navSurfaceProps('scope_nav')}>
         {children}
       </nav>
     );
   }
   return (
-    <nav aria-label={label} className={cn('relative w-full min-w-0', className)}>
+    <nav aria-label={label} className={cn('relative w-full min-w-0', className)} {...navSurfaceProps('scope_nav')}>
       <div className={LINK_ROW_SCROLL_CLASS}>
         <div className={LINK_ROW_LIST_CLASS}>{children}</div>
       </div>
@@ -146,7 +148,7 @@ export function StatisticsScopeNav({
   }
 
   return (
-    <nav aria-label="統計の地域単位" className={className}>
+    <nav aria-label="統計の地域単位" className={className} {...navSurfaceProps('scope_nav')}>
       <p className="text-xs font-medium text-muted-foreground">比較単位</p>
       <div className="mt-1 border-y border-border">
         {items.map((item) => (

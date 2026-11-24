@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "実験の台帳 (PDCA)",
-  "description": "data/business/experiments.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。",
+  "description": "data/business/experiments.json の形状契約。2026-10-11 に実データ 1 件から推論して作成。新しい項目は properties へ足す (additionalProperties は既定で許す)。 実験の項目と採点 (rubric)・HARM・比較の腕 (arms)・pilot 動画の行は閉じる (additionalProperties: false。2026-11-22)。実験ごとに観測値の名前が変わる baseline / measuring_observations / evidence / success_criteria / experiment_window と、遷移の meta を足す history の行は開けておく。新しい項目は properties へ足す。",
   "type": "object",
   "properties": {
     "version": {
@@ -54,7 +54,8 @@
               "reason": {
                 "type": "string"
               }
-            }
+            },
+            "additionalProperties": false
           },
           "baseline": {
             "type": "object",
@@ -334,11 +335,16 @@
                 },
                 "summary": {
                   "type": "string"
+                },
+                "note": {
+                  "type": "string",
+                  "description": "遷移の経緯"
                 }
               },
               "required": [
                 "date"
-              ]
+              ],
+              "description": "状態の遷移 1 回分 (experiments-state.mjs の transitionStatus が { date, action, ...meta } を足す。meta は呼び手が決めるので閉じない)"
             }
           },
           "verification_command": {
@@ -494,7 +500,8 @@
               },
               "required": [
                 "slug"
-              ]
+              ],
+              "additionalProperties": false
             }
           },
           "stop_conditions": {
@@ -515,12 +522,100 @@
               "result": {
                 "type": "string"
               }
+            },
+            "additionalProperties": false
+          },
+          "card": {
+            "type": "string",
+            "description": "この実験を進める作業カードの ID (.claude/todo)"
+          },
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "関係する作業カードの ID"
+          },
+          "source": {
+            "type": "string",
+            "description": "企画の出典 (調査メモ・蔵書など)"
+          },
+          "harm": {
+            "description": "共通事業方針の HARM (誰の・どんな悩みを・なぜ払うか)",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "reader": {
+                "type": "string",
+                "description": "読者 (悩みを持つ人)"
+              },
+              "pain": {
+                "type": "string",
+                "description": "悩み"
+              },
+              "harm": {
+                "type": "string",
+                "description": "HARM の分類"
+              },
+              "payWhy": {
+                "type": "string",
+                "description": "払う理由"
+              },
+              "evidence": {
+                "type": "string",
+                "description": "需要の根拠"
+              },
+              "payer": {
+                "type": "string",
+                "description": "払う人"
+              }
+            }
+          },
+          "measurement": {
+            "type": "string",
+            "description": "週次で読む指標と判定日"
+          },
+          "kgi": {
+            "type": "string",
+            "description": "最終の目標指標"
+          },
+          "arms": {
+            "description": "比べる腕 (案内の置き方ごと)",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "腕の識別子"
+                },
+                "product": {
+                  "type": "string",
+                  "description": "案内する商品"
+                },
+                "placements": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "置き場の名前"
+                },
+                "source_blogs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "案内を置くブログの slug"
+                }
+              }
             }
           }
         },
         "required": [
           "id"
-        ]
+        ],
+        "additionalProperties": false
       }
     }
   },
@@ -528,5 +623,6 @@
     "version",
     "updated_at",
     "experiments"
-  ]
+  ],
+  "additionalProperties": false
 }

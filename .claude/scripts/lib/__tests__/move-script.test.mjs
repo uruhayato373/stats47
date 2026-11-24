@@ -89,3 +89,32 @@ test("main の定義で動き develop を checkout する workflow の jobs だ�
   assert.match(mainDefinitionJobsText(["on: [\n broken .claude/scripts/x/y.mjs"]), /y\.mjs/);
   assert.equal(mainDefinitionJobsText([""]), "");
 });
+
+test("正規表現に埋めたパス (\\. の形) も置き換える", () => {
+  const moves = [{ from: ".claude/scripts/sns/lib/a-core.mjs", to: "packages/ops/src/sns/lib/a-core.mjs" }];
+  const text = "grep -E '^(\\.claude/scripts/sns/lib/a-core\\.mjs|x)'";
+  assert.equal(replaceRepoPaths(text, "apps/web/scripts/pre-commit-checks.sh", moves), "grep -E '^(packages/ops/src/sns/lib/a-core\\.mjs|x)'");
+});
+
+test("run: の中のシェルのコメント行は名指しと数えない", () => {
+  const wf = "on:\n  schedule:\n    - cron: '0 0 * * *'\njobs:\n  a:\n    steps:\n      - uses: actions/checkout@v4\n        with: { ref: develop }\n      - run: |\n          # 判定は .claude/scripts/x/commented.mjs と同じ\n          node .claude/scripts/x/real.mjs";
+  const text = mainDefinitionJobsText([wf]);
+  assert.match(text, /real\.mjs/);
+  assert.doesNotMatch(text, /commented\.mjs/);
+});
+
+test("相対パスに式を埋めたテンプレート文字列は、付け替えないので人が確かめる行に出す", () => {
+  const text = [
+    "const a = JSON.parse(readFileSync(new URL(`../../../../${datasetPath(\"areas.prefectures\")}`, import.meta.url)));",
+    "const b = `${name}/../x`;",
+    "const c = `../fixtures/${name}`;",
+  ].join("\n");
+  assert.deepEqual(reviewLines(text).map((line) => Number(line.split(":")[0])), [1, 3]);
+});
+
+test("checkout の ref が式の中で develop を指す workflow も見る (ai-content-gemini-daily の形)", () => {
+  const wf = "on:\n  schedule:\n    - cron: '15 22 * * *'\njobs:\n  a:\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ inputs.verify_only && github.ref_name || 'develop' }}\n      - run: node .claude/scripts/x/expr.mjs";
+  assert.match(mainDefinitionJobsText([wf]), /expr\.mjs/);
+  const mainRef = wf.replace("'develop'", "'main'");
+  assert.equal(mainDefinitionJobsText([mainRef]), "");
+});

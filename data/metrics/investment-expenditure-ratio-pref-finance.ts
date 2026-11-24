@@ -35,7 +35,5 @@ export const investmentExpenditureRatioPrefFinance: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "投資的経費の割合 都道府県ランキング【2022年】｜1位福井県（23.5％）",
-  "seoDescription": "2022年の投資的経費の割合を都道府県別に比較。1位は福井県（23.5％）、最下位は大阪府（4.8％）、最大と最小の差は4.9倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

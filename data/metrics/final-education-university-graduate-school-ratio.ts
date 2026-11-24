@@ -39,8 +39,6 @@ export const finalEducationUniversityGraduateSchoolRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "最終学歴が大学・大学院卒の者の割合ランキング都道府県【2020年】｜1位東京都（31.6％）",
-  "seoDescription": "2020年の最終学歴が大学・大学院卒の者の割合の都道府県別ランキング。1位東京都（31.6％）、最下位青森県（11.8％）で2.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
   "subtitle": "卒業者総数に占める割合"
 };

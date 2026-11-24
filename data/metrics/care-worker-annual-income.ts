@@ -49,7 +49,5 @@ export const careWorkerAnnualIncome: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "介護職員の平均年収 都道府県ランキング【2023年】｜1位広島県（411.3万円）",
-  "seoDescription": "2023年の介護職員の平均年収を都道府県別に比較。1位は広島県（411.3万円）、最下位は大分県（308.6万円）、最大と最小の差は1.3倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true
 };

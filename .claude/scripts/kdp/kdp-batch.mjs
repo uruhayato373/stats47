@@ -15,9 +15,9 @@
  *   - publish は verify を内蔵する: read-back 全項目 PASS の本だけ公開する
  *   - 公開済み (status=listed) はどの phase でも触らない
  */
-import { launchContext, waitForLogin, assertAccount, readListings, resolveAsset, writeBackKdpState, sleep } from "./lib/kdp-session.mjs";
+import { launchContext, waitForLogin, assertAccount, readListings, resolveAsset, writeBackKdpState, sleep } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
 import { ensureDraft, verifyDraft, publishDraft, readBookshelfState } from "./lib/kdp-flow.mjs";
-import { runKdpPreflight, validateKdpListingMetadata } from "./lib/kdp-preflight.mjs";
+import { runKdpPreflight, validateKdpListingMetadata } from "../../../packages/ops/src/kdp/lib/kdp-preflight.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (n) => {

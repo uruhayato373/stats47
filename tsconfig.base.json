@@ -18,7 +18,6 @@
       "@stats47/data-configs": ["packages/data-configs/src"],
       "@stats47/data-configs/registry": ["packages/data-configs/src/registry"],
       "@stats47/data-configs/evidence-inventory": ["packages/data-configs/src/evidence-inventory"],
-      "@stats47/database": ["packages/database/src"],
       "@stats47/estat-api": ["packages/estat-api/src"],
       "@stats47/gis": ["packages/gis/src"],
       "@stats47/logger": ["packages/logger/src"],

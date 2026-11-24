@@ -76,8 +76,5 @@ export const roadsideStationCount: MetricConfig = {
   surveyScope: 'not-applicable',
   surveyScopeReason:
     '国土交通省の道の駅登録レジストリを都道府県別に集計した値で、統計調査を原典としないため',
-  seoTitle: '道の駅数ランキング都道府県【2026年】',
-  seoDescription:
-    '国土交通省の2026年9月4日現在の登録一覧を集計した道の駅数。47都道府県の登録駅数を地図やグラフで比較します。',
   isActive: true,
 };

@@ -34,7 +34,5 @@ export const sewerageCoverageRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "下水道処理人口普及率ランキング都道府県【2023年】｜1位東京都（99.7％）",
-  "seoDescription": "2023年の下水道処理人口普及率の都道府県別ランキング。1位東京都（99.7％）、最下位徳島県（19.5％）で5.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

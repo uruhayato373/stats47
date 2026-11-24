@@ -686,20 +686,6 @@
       "sourcePageSha256": "cba9da8d708f848651518032bac5933cc68a0b356856c634a0ecd5ed7aa423b4"
     },
     {
-      "key": "actual-income-worker-households-per-month",
-      "code": "L3110",
-      "unit": "円",
-      "subtitle": "二人以上の勤労者世帯・1世帯当たり月額",
-      "requiredLabel": "実収入（勤労者世帯・1世帯当たり月額）",
-      "denominator": "1世帯当たり月額",
-      "formula": "L3110",
-      "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/L",
-      "normalizationOptionsRemoved": 2,
-      "recipeHash": "aa621ff7fb15cf9c",
-      "sourceRow": "#L01201 実収入（二人以上の世帯のうち勤労者世帯）（１世帯当たり１か月間） 千円 実収入（二人以上の世帯のうち勤労者世帯） L3110",
-      "sourcePageSha256": "cba9da8d708f848651518032bac5933cc68a0b356856c634a0ecd5ed7aa423b4"
-    },
-    {
       "key": "annual-income-per-household",
       "code": "#L07601",
       "unit": "千円",

@@ -35,7 +35,7 @@ import {
   normalizePrefCode,
   toAreaCarouselItem,
   validateGroup,
-} from "./lib/ig-area-props.ts";
+} from "../../../packages/ops/src/sns/lib/ig-area-props.ts";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../../../packages/types/mirror/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");

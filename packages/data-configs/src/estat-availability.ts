@@ -168,7 +168,7 @@ export function formatYearList(years: readonly number[]): string {
 // ---- 台帳から years を決める (第 2 段) ----
 
 /** 年を外してよい理由の種類 (`YearExclusionKind` と同じ並び)。 */
-export const YEAR_EXCLUSION_KINDS = ['series-break', 'definition-change', 'value-error', 'cadence-alignment'] as const;
+const YEAR_EXCLUSION_KINDS = ['series-break', 'definition-change', 'value-error', 'cadence-alignment'] as const;
 
 /**
  * 除外の書き方の誤りを返す (空なら問題なし)。理由の種類が無い・語彙外・理由が空・未判断の文言の除外を止める
@@ -189,7 +189,7 @@ export function yearExclusionProblems(exclusions: readonly { years?: readonly nu
 }
 
 /** 全県の値がある年 (その条件で最も多く値が出た年の県の数に届く年)。 */
-export function fullLedgerYears(ledgerYears: Readonly<Record<string, number>>): number[] {
+function fullLedgerYears(ledgerYears: Readonly<Record<string, number>>): number[] {
   const full = Math.max(0, ...Object.values(ledgerYears));
   return Object.entries(ledgerYears)
     .filter(([, count]) => full > 0 && count === full)

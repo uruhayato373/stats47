@@ -1,6 +1,6 @@
 /**
  * page-quality 監査の共通型。
- * .claude/scripts/page-quality/ 配下のすべてのスクリプトがこれを読む (重複定義しない)。
+ * page-quality の部品 (packages/ops/src/page-quality/) と CLI (.claude/scripts/page-quality/) がすべてこれを読む (重複定義しない)。
  */
 
 /** ページテンプレート種別。url-policy.ts の名前空間とは独立した監査専用の分類。 */

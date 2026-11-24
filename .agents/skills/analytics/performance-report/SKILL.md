@@ -13,7 +13,7 @@ co_agents: [gsc-analyst]
 `data/psi/` に蓄積された PSI 計測履歴からパフォーマンス総合レポートを生成する。
 トレンド分析・バジェット監査・ページ種別比較・改善提案を含む。
 
-> **2026-06-21 PSI 統合**。旧版は `packages/database/scripts/performance-report.ts`（削除済）を実行し
+> **2026-06-21 PSI 統合**。旧版は旧 database パッケージの `performance-report.ts`（削除済）を実行し
 > `performance-improvement/snapshots/*/metrics.csv`（writer 消滅で枯渇）を読んでいた。CWV 監視は PSI 日次
 > ワークフローに一本化済（→ `/lighthouse-audit`）。本スキルは **`data/psi/history.csv`
 > （日次トレンド）+ `LATEST.md`（最新前日比）** を入力に、エージェントがレポートを生成する（専用 D1 スクリプトは不要）。

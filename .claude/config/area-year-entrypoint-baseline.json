@@ -2,7 +2,7 @@
   "version": 2,
   "policy": "縮小専用。パス・出現数の追加は禁止。HEAD・親commit・origin/developとのmerge-baseからの増加を検査する。--baseで比較基準を追加できる。",
   "exceptions": {
-    ".claude/scripts/ai-content/__tests__/value-health.test.mjs": {
+    "packages/ops/src/ai-content/__tests__/value-health.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -17,7 +17,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/ai-content/audit-ai-content.mjs": {
+    "packages/ops/src/ai-content/audit-ai-content.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -32,7 +32,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/ai-content/lib/value-health.mjs": {
+    "packages/ops/src/ai-content/lib/value-health.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -47,7 +47,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/analysis/__tests__/analysis-frame.test.mjs": {
+    "packages/ops/src/analysis/__tests__/analysis-frame.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -62,7 +62,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/analysis/analysis-frame-core.mjs": {
+    "packages/ops/src/analysis/analysis-frame-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -92,7 +92,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/audit/__tests__/theme-chart-live-audit.test.mjs": {
+    "packages/ops/src/audit/__tests__/theme-chart-live-audit.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -107,7 +107,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/audit/theme-chart-live-audit-core.mjs": {
+    "packages/ops/src/audit/theme-chart-live-audit-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -122,7 +122,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/audit-chart-axes.ts": {
+    "apps/admin/scripts/audit-chart-axes.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -212,21 +212,6 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/find-chart-metric.mjs": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
-    },
     ".claude/scripts/blog/generate-article-charts.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
@@ -242,7 +227,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/generate-article-charts-ranks.test.mjs": {
+    ".claude/scripts/lib/__tests__/generate-article-charts-ranks.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -257,7 +242,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/ranking-year-label.test.mjs": {
+    ".claude/scripts/lib/__tests__/ranking-year-label.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -272,7 +257,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs": {
+    "packages/ops/src/blog/lib/__tests__/refresh-chart-year.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -287,7 +272,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/__tests__/topic-queue-spurious-core.test.mjs": {
+    "packages/ops/src/blog/lib/__tests__/topic-queue-spurious-core.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -302,7 +287,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/lib/topic-queue-spurious-core.mjs": {
+    "packages/ops/src/blog/lib/topic-queue-spurious-core.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -332,7 +317,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/blog/rebuild-scatter-data.mjs": {
+    "packages/ops/src/blog/rebuild-scatter-data.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -392,7 +377,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs": {
+    "packages/ops/src/data/__tests__/fetch-japanese-instruction-students.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -587,7 +572,7 @@
       "topoPrefCode": 3,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/lib/__tests__/chart-recurrence-guards.test.mjs": {
+    "packages/ops/src/blog/__tests__/chart-recurrence-guards.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -872,7 +857,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/reference/build-reference-note.ts": {
+    "packages/ops/src/note/reference/build-reference-note.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -887,7 +872,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/note/reference/lib/figure-renderer.ts": {
+    "packages/ops/src/note/reference/lib/figure-renderer.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -902,7 +887,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/open-data/__tests__/normalize.test.mjs": {
+    "packages/ops/src/open-data/__tests__/normalize.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -917,7 +902,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/__tests__/muni-data-product.test.mjs": {
+    "packages/ops/src/products/__tests__/muni-data-product.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -932,7 +917,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/__tests__/muni-industry-product.test.mjs": {
+    "packages/ops/src/products/__tests__/muni-industry-product.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -947,7 +932,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/__tests__/pack-evidence.test.mjs": {
+    "packages/ops/src/products/__tests__/pack-evidence.test.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -977,7 +962,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/fetch-estat-muni-industry.mjs": {
+    "packages/ops/src/products/fetch-estat-muni-industry.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -992,7 +977,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/products/lib/muni-data-product.mjs": {
+    "packages/ops/src/products/lib/muni-data-product.mjs": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1007,7 +992,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/all47-svg.test.ts": {
+    "apps/remotion/scripts/__tests__/all47-svg.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1022,7 +1007,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/correlation-carousel-core.test.ts": {
+    "packages/ops/src/sns/__tests__/correlation-carousel-core.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1037,7 +1022,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/data-card-input.test.ts": {
+    "apps/remotion/scripts/__tests__/data-card-input.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1052,7 +1037,7 @@
       "topoPrefCode": 3,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/ig-map-props.test.ts": {
+    "packages/ops/src/sns/__tests__/ig-map-props.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1067,7 +1052,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/ranking-story-card.test.ts": {
+    "packages/ops/src/sns/__tests__/ranking-story-card.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1082,7 +1067,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/__tests__/tile-change.test.ts": {
+    "apps/remotion/scripts/__tests__/tile-change.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1172,7 +1157,7 @@
       "topoPrefCode": 1,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/buzz-map-area-code.ts": {
+    "packages/ops/src/sns/lib/buzz-map-area-code.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1187,7 +1172,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/correlation-carousel-core.ts": {
+    "packages/ops/src/sns/lib/correlation-carousel-core.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1217,7 +1202,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-area-props.ts": {
+    "packages/ops/src/sns/lib/ig-area-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1232,7 +1217,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-compare-props.ts": {
+    "packages/ops/src/sns/lib/ig-compare-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -1247,7 +1232,7 @@
       "topoPrefCode": 0,
       "reason": "スクリプトの既存の直書き。触ったときに減らす (2026-11-19)"
     },
-    ".claude/scripts/sns/lib/ig-map-props.ts": {
+    "packages/ops/src/sns/lib/ig-map-props.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
       "yearCheck": 0,
@@ -2604,21 +2589,6 @@
       "prefectureNames": 0,
       "prefSlice": 1,
       "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
-    },
-    "apps/web/scripts/extract-page-components-from-r2.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 2,
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
@@ -4178,7 +4148,7 @@
       "yearCheck": 0,
       "prefectureNames": 0,
       "prefSlice": 0,
-      "pref5Build": 3,
+      "pref5Build": 2,
       "prefRegex": 0,
       "nationalLiteral": 0,
       "pref2Compare": 0,
@@ -4320,36 +4290,6 @@
       "prefCount47": 0,
       "prefArrayGen": 0,
       "topoPrefCode": 0,
-      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
-    },
-    "packages/gis/src/export/export-geojson-kml.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 3,
-      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
-    },
-    "packages/gis/src/export/merge-topojson.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 3,
       "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
     "packages/gis/src/geo-analysis/landslide-exposure.ts": {
@@ -4577,21 +4517,6 @@
       "topoPrefCode": 0,
       "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
     },
-    "packages/product-factory/src/maps/prefecture-geometry.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 3,
-      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
-    },
     "packages/product-factory/tests/analysis-capital-city.test.ts": {
       "prefCheck": 0,
       "cityCheck": 0,
@@ -4646,21 +4571,6 @@
       "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 1,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
-    },
-    "packages/product-factory/tests/delivery-integrity.test.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 2,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 0,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,
@@ -4751,21 +4661,6 @@
       "pref5Build": 0,
       "prefRegex": 0,
       "nationalLiteral": 0,
-      "pref2Compare": 0,
-      "prefCount47": 0,
-      "prefArrayGen": 0,
-      "topoPrefCode": 0,
-      "reason": "地域コードでない形 (メッシュ・版番号・月・市区町村 ID・属性名の定数) か、正本を通さない理由のある箇所。2026-11-19 に置き換えの後に確認"
-    },
-    "packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts": {
-      "prefCheck": 0,
-      "cityCheck": 0,
-      "yearCheck": 0,
-      "prefectureNames": 0,
-      "prefSlice": 0,
-      "pref5Build": 0,
-      "prefRegex": 0,
-      "nationalLiteral": 1,
       "pref2Compare": 0,
       "prefCount47": 0,
       "prefArrayGen": 0,

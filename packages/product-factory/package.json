@@ -11,15 +11,14 @@
     "@stats47/area": "*",
     "@stats47/data-configs": "*",
     "@stats47/estat-api": "*",
-    "@stats47/gis": "*",
+    "@stats47/ops": "*",
     "@stats47/r2-storage": "*",
     "@stats47/svg-builder": "*",
     "jszip": "^3.10.1",
     "pdf-lib": "^1.17.1",
     "pptxgenjs": "^4.0.1",
     "satori": "^0.33.5",
-    "sharp": "^0.35.5",
-    "topojson-client": "^3"
+    "sharp": "^0.35.5"
   },
   "scripts": {
     "products:catalog": "tsx src/cli.ts catalog",
@@ -55,10 +54,12 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/geojson": "^7946.0.16",
     "@types/topojson-client": "^3",
+    "d3-scale-chromatic": "^3.1.0",
     "exceljs": "^4.4.0",
     "tsx": "^4.21.0",
     "typescript": "^5.0.0",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.12"
   }
 }

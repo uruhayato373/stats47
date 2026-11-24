@@ -54,7 +54,5 @@ export const convenienceStoreCountCommercial: MetricConfig = {
     ],
   },
   "groupKey": "convenience-store-count",
-  "seoTitle": "コンビニエンスストア店舗数 都道府県ランキング【2024年】｜1位東京都（7,055店）",
-  "seoDescription": "2024年のコンビニエンスストア店舗数を都道府県別に比較。1位は東京都（7,055店）、最下位は鳥取県（258店）、最大と最小の差は27.3倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

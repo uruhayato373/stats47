@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { BUSINESS_PLAN_2026, buildKpiTree } from '../src/business-plan';
 import { lastChanged as lastChangedAt } from '../src/business-plan/data-freshness';
 import { datasetDir } from "../../../config/datasets.mjs";
+import { assertDatasetShape } from "../../ops/src/datasets/dataset-shape.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -79,14 +80,18 @@ const state = {
     '未計測・手動・部分計測を0として扱わない。GA4イベントはコード・登録台帳・反映確認の3点が揃って初めてmeasuredとする。',
 };
 
+// 書く前に台帳 business-plan.state の Schema で形を確かめる (合わなければ例外で止まり、書かない)
+assertDatasetShape("business-plan.state", state);
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
 // KPI ツリーは .mjs / .cjs (計測サイクル・CI ゲート・docs:check) が TS を import せずに読むための写し。
 // 時刻を含めない決定的出力にし、catalog とのずれは validate-business-plan.ts が検出する。
 const kpiTreePath = path.join(repoRoot, KPI_TREE_PATH);
+const kpiTree = { schemaVersion: 1, source: 'packages/data-configs/src/business-plan/catalog.ts', nodes: buildKpiTree(BUSINESS_PLAN_2026.metrics) };
+assertDatasetShape("business-plan.state", kpiTree);
 fs.writeFileSync(
   kpiTreePath,
-  `${JSON.stringify({ schemaVersion: 1, source: 'packages/data-configs/src/business-plan/catalog.ts', nodes: buildKpiTree(BUSINESS_PLAN_2026.metrics) }, null, 2)}\n`,
+  `${JSON.stringify(kpiTree, null, 2)}\n`,
   'utf8'
 );
 if (snapshot) {

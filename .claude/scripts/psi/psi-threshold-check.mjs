@@ -18,7 +18,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { datasetDir } from "../../../config/datasets.mjs";
-import { loadLatestPsiBatch } from "./lib/latest-batch.mjs";
+import { loadLatestPsiBatch } from "../../../packages/ops/src/psi/lib/latest-batch.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const BUDGETS_PATH = join(

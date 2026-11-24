@@ -23,7 +23,7 @@ metadata:
 ## DBレス発見パイプライン (旧 D1 estat_metainfo 廃止・再構築済)
 - (2026-09-16 削除) `discover-prefecture-candidates.mjs` — collectArea=2列挙+既存config突合→JSON。候補列挙は R2 estat-catalog `index/tables/` へ
 - `.claude/scripts/estat/fetch-estat-meta.mjs` — getMetaInfoで次元構造 (キュレーション素材)。sampleValues12件cap
-- deprecated: `expand-indicators` skill / `ingest-indicator.mjs` (削除済 stats_prefecture 依存)。投入は `page-data-batch.ts` (R2直行) が現役
+- `ingest-indicator.mjs` (削除済みの `stats_prefecture` に書いていた) は 2026-11-21 に削除した。`expand-indicators` skill は git TS → e-Stat → R2 の経路で現役で、観測値の投入は `page-data-batch.ts` (R2 直行) が担う
 - **e-Stat の取得は Mac と CI の両方** (オーナー決定 2026-11-14: `NEXT_PUBLIC_ESTAT_APP_ID` は公開の値で `apps/web/.env.development` にある。旧記述「CI専任」は誤り)。CI 側は secrets.NEXT_PUBLIC_ESTAT_APP_ID
 - **workflow_dispatch は default(main)ブランチ限定** → main デプロイ無しで回すため専用ブランチ push トリガーにした: `discover-estat-candidates.yml`(branch `estat-discovery-run`) / `estat-fetch-meta.yml`(branch `estat-meta-run`)。該当ブランチへ push=発火。結果は artifact + ログ ※`estat-fetch-meta.yml`+branch `estat-meta-run`、`discover-estat-candidates.yml`+branch `estat-discovery-run` は 2026-09-16 退役 (collectArea 2,3 の getMetaInfo は R2 estat-catalog `meta/<id>.json`。全国表は catalog 未対応で CI 経由の取得は無し。ローカル `fetch-estat-meta.mjs` は残置、APP_ID があれば可)
 - 投入=`data-refresh.yml`(page-data-batch→R2)、公開=KNOWN/sitemap再生成→deploy→本番200実測

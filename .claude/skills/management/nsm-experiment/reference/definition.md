@@ -13,7 +13,7 @@
 | 項目 | 値 |
 |---|---|
 | **定義** | GA4 の `engagedSessions` 全チャネル合計（週次） |
-| **実装** | `.claude/scripts/lib/metrics-reader.mjs` の `ga4.total.thisEngagedSessions` |
+| **実装** | `packages/ops/src/metrics/metrics-reader.mjs` の `ga4.total.thisEngagedSessions` |
 | **3 ヶ月目標** | 週 2,000 セッション |
 | **判断根拠** | `docs/00_プロジェクト管理/02_収益化戦略.md` |
 
@@ -84,7 +84,7 @@ NSM（週間エンゲージドセッション数）
 - **実装スクリプト**:
   - `.claude/skills/analytics/fetch-gsc-data/` — GSC snapshot + ad hoc
   - `.claude/skills/analytics/fetch-ga4-data/` — GA4 snapshot + ad hoc
-  - `.claude/scripts/lib/metrics-reader.mjs` — NSM 統合計算
+  - `packages/ops/src/metrics/metrics-reader.mjs` — NSM 統合計算
   - `.claude/scripts/metrics/snapshot-weekly-metrics.mjs` — 週次 JSON snapshot 保存
 - **週次スナップショット**: `data/nsm/weekly-snapshots/YYYY-Www.json`
 - **改善ログ**:

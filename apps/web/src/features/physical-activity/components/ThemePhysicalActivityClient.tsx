@@ -35,16 +35,20 @@ export function ThemePhysicalActivityClient({
         title="歩数と推計の幅"
         description={`2024年 · ${area} · 20〜64歳、男女とも46歳に年齢調整`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source={PHYSICAL_ACTIVITY_SOURCE.title}
             sourceLink={PHYSICAL_ACTIVITY_SOURCE.url}
+            annotation={[
+              '平均と95%信頼区間は1日当たりの歩数です。集計人数は推計人口ではありません。',
+              ...snapshot.notes,
+            ]}
           />
         }
       >
         <ValueTable fold
           ariaLabel={`${area}の歩数と95%信頼区間`}
-          caption="平均と95%信頼区間は1日当たりの歩数です。集計人数は推計人口ではありません。"
           columns={[
             { key: 'metric', header: '指標', rowHeader: true },
             {
@@ -102,11 +106,6 @@ export function ThemePhysicalActivityClient({
             };
           })}
         />
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {snapshot.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
       </ChartPanel>
     </div>
   );

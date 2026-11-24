@@ -52,7 +52,7 @@ export function findTableUpdates(ledger: readonly SnapshotVersion[], catalog: re
 type ReadJson = (key: string) => Promise<unknown | null>;
 export function publicJsonReader(transport: typeof fetch = globalThis.fetch): ReadJson {
   return async (key) => {
-    if (!/^(estat-catalog\/index\/tables\/\d+\.json|app\/stats\/[a-z0-9-]+\/values\.json)$/.test(key)) throw new Error(`Invalid input key: ${key}`);
+    if (!/^(estat-catalog\/index\/tables\/\d+\.json|app\/stats\/[a-z0-9-]+\/(values|cities)\.json)$/.test(key)) throw new Error(`Invalid input key: ${key}`);
     const response = await transport(`${SITE.r2PublicBaseUrl.replace(/\/+$/, "")}/${key}`,
       { method: "GET", redirect: "error", signal: AbortSignal.timeout(60_000) });
     if (response.status === 404) return null;
@@ -115,7 +115,11 @@ export async function selectRefreshMetrics(metrics: readonly MetricConfig[], opt
   await Promise.all(Array.from({ length: Math.min(4, active.length) }, async () => {
     while (next < active.length) {
       const metric = active[next++];
-      const value = await readJson(statsR2Key(metric.key, "prefecture"));
+      // 都道府県の値を持たない指標 (市区町村だけ等) は、その指標が書く値のファイルの記録と比べる。
+      // 2026-11-23 までは常に values.json を読み、市区町村だけの 562 件が毎回「記録なし」で選ばれていた
+      // 港・県間移動の値は記録の置き場が違うので、従来どおり都道府県のキーを読む (記録なし = 選ぶ)
+      const entity = metric.entities.includes("prefecture") || !metric.entities.includes("city") ? "prefecture" : "city";
+      const value = await readJson(statsR2Key(metric.key, entity));
       let storedConfigHash: string | null = null;
       if (value !== null) {
         const meta = object(value).meta;

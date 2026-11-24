@@ -16,15 +16,15 @@ import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-s
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { evaluateRules, flatten } from "../../../packages/ops/src/cloudflare/threshold-check.mjs";
-import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
+import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import {
   summarizeAdminAuditChanges,
   countOpsImprovements, parseCsv, renderCycleMarkdown, summarizeCloudflare, summarizeDimensionGaps, summarizeEngine,
   summarizeDataQuality, summarizeJourney, summarizeKpiTree, summarizePaidPurchases, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
-} from "./lib/measurement-cycle.mjs";
-import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
-import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
-import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
+} from "../../../packages/ops/src/metrics/lib/measurement-cycle.mjs";
+import { judgeability } from "../../../packages/ops/src/metrics/lib/gsc-improvements-adapter.mjs";
+import { parseDimensionLedger } from "../../../packages/ops/src/google/dimension-ledger.mjs";
+import { parseBacklog } from "../../../packages/ops/src/effect-verdict/scan-pending-improvements.mjs";
 import { summarizeWeeklyRevenue } from "../../../packages/ops/src/metrics/weekly-revenue.mjs";
 import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
@@ -102,10 +102,16 @@ function buildOperations(week, asOf, pending) {
   const rules = JSON.parse(readFileSync(join(PROJECT_ROOT, ".claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json"), "utf8")).rules;
   const snapshotsDir = join(cfDir, "snapshots");
   const evaluated = existsSync(snapshotsDir)
-    ? readdirSync(snapshotsDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).map((f) => ({
-      date: f.slice(0, 10),
-      violations: evaluateRules(flatten(JSON.parse(readFileSync(join(snapshotsDir, f), "utf8"))), rules).violations,
-    }))
+    ? readdirSync(snapshotsDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).map((f) => {
+      const snapshot = JSON.parse(readFileSync(join(snapshotsDir, f), "utf8"));
+      const metrics = flatten(snapshot);
+      return {
+        date: f.slice(0, 10),
+        violations: evaluateRules(metrics, rules).violations,
+        cpuMs: metrics.workers_cpu_ms,
+        topRoutes: snapshot.routeCpu?.status === "ok" ? snapshot.routeCpu.routes.slice(0, 3) : undefined,
+      };
+    })
     : [];
   const { startDate, endDate } = isoWeekToDateRange(week);
   const snsStore = createRequire(import.meta.url)("../../../packages/ops/src/sns/sns-metrics-store.cjs");

@@ -15,6 +15,7 @@
  */
 import { metricPresentation } from '@stats47/data-configs/color-policy';
 import {
+  isCapitalCityValueMetric,
   rankingHookAreaNoun,
   resolveAttribution,
   resolveMetricPrimaryProvenance,
@@ -40,6 +41,7 @@ import type {
   ValueDisplayConfig,
   VisualizationConfig,
 } from "../types/ranking-item";
+import { buildRankingSeoText, type SeoValueRow } from "../utils/ranking-seo-text";
 
 /** values.json (app/stats/<key>/values.json) から導出した、ビルドに必要な観測値メタ */
 export interface ValuesContext {
@@ -47,6 +49,8 @@ export interface ValuesContext {
   yearCodes: string[];
   /** 最新年の「1位」(deriveFeaturedTop)。取れなければnull */
   latestTop?: FeaturedValue | null;
+  /** 最新年の全県の行。題と説明文を値から作るのに使う (buildRankingSeoText) */
+  latestRows?: SeoValueRow[];
 }
 
 export interface BuildContext {
@@ -125,6 +129,18 @@ function buildYears(
     yearName: yearNameOf(yearCode, config.yearFormat),
   }));
   return { latestYear: availableYears[0], availableYears };
+}
+
+/**
+ * 題に使う指標の名前。同じ名前 (title) の有効な指標が別にあるときだけ、副題を付けて区別する
+ * (酒類の販売量の 6 指標は title が同じで副題だけが違い、名前だけでは題が同じになる)。
+ */
+function seoNameOf(config: MetricConfig, registry?: MetricRegistry): string {
+  if (!config.subtitle || !registry) return config.title;
+  const shared = Object.values(registry).some(
+    (other) => other.key !== config.key && other.isActive !== false && other.title === config.title,
+  );
+  return shared ? `${config.title}（${config.subtitle}）` : config.title;
 }
 
 function buildValueDisplay(config: MetricConfig): ValueDisplayConfig {
@@ -210,6 +226,17 @@ export function buildRankingItemFromMetric(
   const { latestYear, availableYears } = buildYears(config, ctx.values);
   const { surveyIds, originalSurveys } = resolveSurveyLinkage(config, ctx.registry);
   const sourceConfig = buildSourceProvenance(config);
+  // 題と説明文は、定義に書いてあればそれ (年と値を含まない言い回しの上書き)、無ければ最新年の観測値から作る。
+  // 定義に年と値を手で書くと、新しい年を取り込んでも題が古い年のまま残る (SEO-META-FROM-VALUES-01)
+  const generatedSeo =
+    latestYear && ctx.values?.latestRows && (!config.seoTitle || !config.seoDescription)
+      ? buildRankingSeoText(
+          { title: seoNameOf(config, ctx.registry), unit: config.unit, valueDisplay: buildValueDisplay(config) },
+          latestYear.yearName,
+          ctx.values.latestRows,
+          { capitalCities: isCapitalCityValueMetric(config, ctx.registry), note: config.seoNote },
+        )
+      : null;
 
   return {
     rankingKey: config.key,
@@ -243,8 +270,8 @@ export function buildRankingItemFromMetric(
     //   generator が後から走ると attribution が消えていた (書き手が 2 系統あった)。
     //   exporter 側は焼かれた値をそのまま尊重する。
     attribution: resolveAttribution(sourceConfig?.recipe.estatParams?.statsDataId ?? sourceConfig?.recipe.refetch?.statsDataId, sourceConfig?.recipe.estatParams?.cdCat01 ?? sourceConfig?.recipe.refetch?.cdCat01),
-    seoTitle: config.seoTitle ?? null,
-    seoDescription: config.seoDescription ?? null,
+    seoTitle: config.seoTitle ?? generatedSeo?.seoTitle ?? null,
+    seoDescription: config.seoDescription ?? generatedSeo?.seoDescription ?? null,
     hook: resolveRankingHook({
       rankingKey: config.key,
       title: config.title,

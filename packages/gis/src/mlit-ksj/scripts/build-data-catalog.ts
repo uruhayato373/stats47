@@ -26,7 +26,7 @@ import { KSJ_CODE_CONFIG } from "../registry";
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
 config({ path: path.join(PROJECT_ROOT, ".env.local"), quiet: true });
 
-const CANDIDATE_PATH = path.join(PROJECT_ROOT, "packages/database/seed/ksj-catalog.json");
+const CANDIDATE_PATH = path.join(PROJECT_ROOT, datasetPath("geo.ksj-catalog"));
 const LOCAL_GIS_ROOT = path.join(PROJECT_ROOT, ".local/r2/gis/mlit-ksj");
 const LOCAL_GEO_ROOT = path.join(PROJECT_ROOT, ".local/r2/app/geo");
 const LOCAL_OPEN_DATA_ROOT = path.join(PROJECT_ROOT, ".local/r2/gis/open-data");
@@ -426,7 +426,7 @@ export async function buildCatalog() {
     schemaVersion: 2,
     generatedAt: new Date().toISOString(),
     source: {
-      candidateCatalog: "packages/database/seed/ksj-catalog.json",
+      candidateCatalog: datasetPath("geo.ksj-catalog"),
       registeredCatalog: datasetPath("geo.ksj-datasets"),
       openDataCatalog: datasetPath("open-data.datasets"),
       r2Prefix: R2_PREFIX,

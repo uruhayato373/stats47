@@ -17,8 +17,8 @@ import { existsSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { config } from 'dotenv';
-import { SOURCES } from './sources.mjs';
-import { tailLines } from './tail-lines.mjs';
+import { SOURCES } from '../../../packages/ops/src/measurement/sources.mjs';
+import { tailLines } from '../../../packages/ops/src/measurement/tail-lines.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const args = process.argv.slice(2);

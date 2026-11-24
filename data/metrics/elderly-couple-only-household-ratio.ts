@@ -43,7 +43,5 @@ export const elderlyCoupleOnlyHouseholdRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "高齢夫婦のみの世帯の割合ランキング都道府県【2020年】｜1位奈良県（15.94％）",
-  "seoDescription": "2020年の高齢夫婦のみの世帯の割合の都道府県別ランキング。1位奈良県（15.94％）、最下位東京都（7.82％）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

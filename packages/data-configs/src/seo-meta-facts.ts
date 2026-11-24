@@ -40,7 +40,7 @@ import { prefectureShortName } from "@stats47/area";
 import { isScalePrefixPartOfUnit, scalePrefixMultiplier } from "./unit/unit-semantics";
 
 /** 順位の主張 1 件 */
-export interface RankClaim {
+interface RankClaim {
   readonly role: "top" | "bottom";
   readonly areaName: string;
   /** 県名に添えられていた数値。無ければ null */
@@ -68,9 +68,9 @@ export interface SeoFactFinding {
 }
 
 /** 値の照合に使う相対誤差 (seoTitle は丸めた表記を書くため) */
-export const VALUE_TOLERANCE = 0.02;
+const VALUE_TOLERANCE = 0.02;
 /** 倍率の照合に使う相対誤差 (最大/最小それぞれの丸めが乗るので緩める) */
-export const RATIO_TOLERANCE = 0.05;
+const RATIO_TOLERANCE = 0.05;
 
 function toNumber(raw: string): number | null {
   const n = Number(raw.replace(/,/g, ""));

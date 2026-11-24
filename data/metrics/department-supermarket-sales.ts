@@ -54,7 +54,5 @@ export const departmentSupermarketSales: MetricConfig = {
     ],
   },
   "groupKey": "department-supermarket-sales",
-  "seoTitle": "百貨店・スーパー販売額 都道府県ランキング【2025年】｜1位東京都（137,051百万円）",
-  "seoDescription": "2025年の百貨店・スーパー販売額を都道府県別に比較。1位は東京都（137,051百万円）、最下位は鳥取県（4,135百万円）、最大と最小の差は33.1倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

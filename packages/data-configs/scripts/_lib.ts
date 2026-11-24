@@ -7,10 +7,6 @@ export const REPO_ROOT = resolve(__dirname, "../../..");
 export const PACKAGE_ROOT = resolve(__dirname, "..");
 export const METRICS_DIR = resolve(REPO_ROOT, METRIC_DEFINITIONS_DIR);
 export const REGISTRY_FILE = resolve(PACKAGE_ROOT, "src/registry.ts");
-export const D1_PATH = resolve(
-  REPO_ROOT,
-  "packages/database/.data/stats47.sqlite",
-);
 
 /** kebab-case key → camelCase identifier (for TS variable name) */
 export function keyToIdentifier(key: string): string {

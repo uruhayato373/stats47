@@ -34,7 +34,5 @@ export const nursesPer100kPopulation: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "人口10万対看護師数 都道府県ランキング【2020年】｜1位高知県（1,623.4人）",
-  "seoDescription": "2020年の人口10万対看護師数を都道府県別に比較。1位は高知県（1,623.4人）、最下位は埼玉県（736.9人）、最大と最小の差は2.2倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

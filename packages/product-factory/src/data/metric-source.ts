@@ -133,7 +133,7 @@ function periodTerm(from: unknown, to: unknown): string {
  * 配信値の作り方を「加工式」の文にする。指標定義から作る決定的なレシピ (`buildRecipe`) が正本で、
  * 算出指標は親指標の名前・指標キーと演算子・期間の換算・倍率まで書く。主出典以外の年 (補完出典) の行は抽出だけを書く。
  */
-export function describeTransform(cfg: Cfg, key: string, year: string, registry: MetricRegistry): string {
+function describeTransform(cfg: Cfg, key: string, year: string, registry: MetricRegistry): string {
   const base = `都道府県別・基準年（${year}）を stats47 が R2 (${rankingR2Key(key, "values")}) から抽出。`;
   if (effectiveSource(cfg, year) !== asRecord(cfg.source)) return base;
   const ops = buildRecipe(cfg as unknown as MetricConfig).ops;
@@ -199,7 +199,7 @@ export function buildSourceRow(
 }
 
 /** license 欄でこの印が付いた指標は、再配布・商用利用の許諾が確認できていない。 */
-export const LICENSE_UNCONFIRMED_MARK = "[要確認]";
+const LICENSE_UNCONFIRMED_MARK = "[要確認]";
 
 /**
  * 権利状態が要確認 (許諾が確認できない) の指標なら、その license 欄の文を返す。そうでなければ null。

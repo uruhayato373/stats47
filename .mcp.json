@@ -8,7 +8,7 @@
     "seo-observability": {
       "type": "stdio",
       "command": "node",
-      "args": [".claude/scripts/search-growth/mcp/server.mjs"]
+      "args": ["packages/ops/src/search-growth/mcp/server.mjs"]
     },
     "codex": {
       "type": "stdio",

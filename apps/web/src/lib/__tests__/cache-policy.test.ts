@@ -5,6 +5,7 @@ import {
   createPageCachePurgeTags,
   enforcePageCacheBypass,
   isFlightResponse,
+  ISR_REVALIDATE_REQUEST_HEADER,
   NEXT_FLIGHT_REQUEST_HEADERS,
   PAGE_CACHE_TAG,
   PAGE_BROWSER_CACHE_CONTROL,
@@ -13,6 +14,7 @@ import {
   RSC_CONTENT_TYPE,
   RSC_VARY,
   resolvePageCacheHeaders,
+  shouldBypassPageCache,
 } from "../cache-policy";
 
 function request(method = "GET", headers: HeadersInit = {}): Pick<Request, "headers" | "method"> {
@@ -97,6 +99,19 @@ describe("resolvePageCacheHeaders", () => {
   it("Authorization requestをno-storeにする", () => {
     const headers = resolvePageCacheHeaders(request("GET", { authorization: "Bearer token" }), "/");
     expect(headers.cacheControl).toBe(PRIVATE_PAGE_CACHE_CONTROL);
+  });
+});
+
+describe("shouldBypassPageCache: ISR の再描画要求", () => {
+  // memory queue (open-next.config.ts) は x-prerender-revalidate 付きの HEAD を自分自身へ投げる。
+  // Workers Cache が答えると Next.js に届かず、期限切れの描画が作り直されない
+  it("x-prerender-revalidate 付きの HEAD は Workers Cache を通さない", () => {
+    expect(shouldBypassPageCache(request("HEAD", { [ISR_REVALIDATE_REQUEST_HEADER]: "preview-id" }))).toBe(true);
+  });
+
+  it("ヘッダーの無い HEAD / GET は従来どおり Workers Cache を通す", () => {
+    expect(shouldBypassPageCache(request("HEAD"))).toBe(false);
+    expect(shouldBypassPageCache(request("GET"))).toBe(false);
   });
 });
 

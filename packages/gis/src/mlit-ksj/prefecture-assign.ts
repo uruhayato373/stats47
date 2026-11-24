@@ -313,7 +313,7 @@ export function createPrefectureLocator(
 
 // ─── 解決 ──────────────────────────────────────────────────────
 
-export type PrefectureAssignMethod = "attribute" | "polygon" | "coastline";
+type PrefectureAssignMethod = "attribute" | "polygon" | "coastline";
 
 export interface PrefectureAssignment {
   readonly prefCode: string;

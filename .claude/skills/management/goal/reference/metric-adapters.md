@@ -6,7 +6,7 @@
 
 | metric | 連携 improvement skill | 計測コマンド | improvement-log パス | budget ファイル | metrics state | min_wait_days |
 |---|---|---|---|---|---|---|
-| psi | performance-improvement | `node .claude/scripts/psi/fetch-psi-audit.mjs --urls <comma-separated> --strategy mobile --out <path>` | `data/improvement/performance-improvement/improvement-log.md` | `.claude/skills/analytics/performance-improvement/budgets.json` | `data/psi/` | 1 |
+| psi | performance-improvement | `node packages/ops/src/psi/fetch-psi-audit.mjs --urls <comma-separated> --strategy mobile --out <path>` | `data/improvement/performance-improvement/improvement-log.md` | `.claude/skills/analytics/performance-improvement/budgets.json` | `data/psi/` | 1 |
 | gsc | gsc-improvement | `/fetch-gsc-data last28d page snapshot YYYY-Www` | `data/improvement/gsc-improvement/improvement-log.md` | `.claude/config/budgets/gsc-improvement/budgets.json` | `.claude/state/metrics/gsc/` | 7 |
 | ga4 | ga4-improvement | `/fetch-ga4-data last28d eventName,pagePath` | (skill 内に未整備、必要なら新設) | `.claude/config/budgets/ga4-improvement/budgets.json` | `data/ga4/` | 7 |
 | adsense | adsense-improvement | (skill 内既存スクリプト経由) | (skill 内に未整備、必要なら新設) | `.claude/config/budgets/adsense-improvement/budgets.json` | `data/adsense/` | 7 |

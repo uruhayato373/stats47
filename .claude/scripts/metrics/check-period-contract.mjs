@@ -18,9 +18,9 @@
  */
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { PROJECT_ROOT, parseWeekArg } from "./lib/auth.mjs";
+import { PROJECT_ROOT, parseWeekArg } from "../../../packages/ops/src/metrics/lib/auth.mjs";
 import { jstDateOf, isoWeekOf, addDays } from "../../../packages/ops/src/metrics/periods.mjs";
-import { SUMMARY_FILE } from "./lib/weekly-summary.mjs";
+import { SUMMARY_FILE } from "../../../packages/ops/src/metrics/lib/weekly-summary.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const SNAPSHOT_DIRS = {

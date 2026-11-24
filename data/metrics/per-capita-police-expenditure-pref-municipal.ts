@@ -52,7 +52,5 @@ export const perCapitaPoliceExpenditurePrefMunicipal: MetricConfig = {
     ],
   },
   "groupKey": "police-expenses-prefecture",
-  "seoTitle": "警察費ランキング都道府県【2022年】｜1位東京都（44.8千円）",
-  "seoDescription": "2022年の警察費の都道府県別ランキング。1位東京都（44.8千円）、最下位埼玉県（20.1千円）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

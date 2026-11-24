@@ -97,11 +97,10 @@
       ],
       "properties": {
         "store": {
-          "description": "r2-public = 無料記事の本文を公開 R2 に置く / r2-private = 有料記事の本文を private R2 に置く / note-only = 本文が note.com にしか無い (回収待ち)",
+          "description": "r2-public = 無料記事の本文を公開 R2 に置く / r2-private = 有料記事の本文を private R2 に置く。本文が note.com にしか無い状態 (旧 note-only) は 2026-11-23 に 73 本を回収して廃止した (NOTE-BODY-RECOVERY-01)",
           "enum": [
             "r2-public",
-            "r2-private",
-            "note-only"
+            "r2-private"
           ]
         },
         "manifest": {
@@ -118,20 +117,6 @@
         "verifiedAt": {
           "type": "string",
           "format": "date-time"
-        }
-      },
-      "if": {
-        "properties": {
-          "store": {
-            "const": "note-only"
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "manifest": {
-            "type": "null"
-          }
         }
       }
     },
@@ -244,8 +229,18 @@
           "then": {
             "required": [
               "noteUrl"
-            ]
-          }
+            ],
+            "properties": {
+              "body": {
+                "properties": {
+                  "manifest": {
+                    "$ref": "#/definitions/manifest"
+                  }
+                }
+              }
+            }
+          },
+          "description": "公開済みの記事は note の URL と、R2 に保存した本文のマニフェストを持つ (本文が note.com にしか無い記事を作らない)"
         },
         {
           "description": "有料記事の本文を公開 R2 に置かない",

@@ -11,7 +11,7 @@
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
-import { launchContext, waitForLogin, ACCOUNT_LOCAL_PATH, sleep } from "./lib/kdp-session.mjs";
+import { launchContext, waitForLogin, ACCOUNT_LOCAL_PATH, sleep } from "../../../packages/ops/src/kdp/lib/kdp-session.mjs";
 
 const WRITE = process.argv.includes("--write");
 const ctx = await launchContext({ headless: false });

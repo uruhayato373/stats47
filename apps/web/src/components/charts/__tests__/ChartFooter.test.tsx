@@ -50,6 +50,22 @@ describe('ChartFooter', () => {
     expect(sheet.getByRole('link', { name: '関連指標の定義・ランキング' })).toHaveAttribute('href', '/ranking/secondary');
   });
 
+  it('注記を配列で渡すと、footer は段落で並べ、header は Sheet の先頭に全件並べる (2026-11-22)', async () => {
+    const notes = ['分母は総数です。', '不詳を含みます。'];
+    const { unmount } = render(<ChartFooter annotation={notes} source="国勢調査" />);
+    expect(screen.getByText('分母は総数です。')).toBeVisible();
+    expect(screen.getByText('不詳を含みます。')).toBeVisible();
+    unmount();
+
+    render(<ChartFooter placement="header" annotation={notes} source="国勢調査" />);
+    expect(screen.queryByText('分母は総数です。')).toBeNull();
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('button', { name: '出典・指標の定義・読むときの注意' }));
+    const sheet = within(await screen.findByRole('dialog'));
+    expect(sheet.getByText('分母は総数です。')).toBeVisible();
+    expect(sheet.getByText('不詳を含みます。')).toBeVisible();
+  });
+
   it('固定 ID を渡すとボタンの id に使う', () => {
     render(<ChartFooter id="theme-ports-footer" rankingLinks={[{ label: '輸出', url: '/ranking/export' }]} />);
     expect(screen.getByRole('button', { name: '出典・指標の定義' })).toHaveAttribute(

@@ -19,7 +19,7 @@
  */
 import { createHash } from "node:crypto";
 import ExcelJS from "exceljs";
-import { fetchBuffer, toFullPrefName, writeStatsValues, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, toFullPrefName, writeStatsValues, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const XLSX_URL = "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/tokusyu/necchusho24/xls/R06necchusho.xlsx";
 const XLSX_SHA256 = "b59c31b00f45cb70d47bb2e83a761c6beb7b241dc57160524f6f618b35afefc4";

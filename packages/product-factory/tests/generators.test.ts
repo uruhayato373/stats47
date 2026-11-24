@@ -8,6 +8,7 @@ import { SAMPLE_DATASET } from "../src/fixtures/sample-dataset";
 import { JAPANESE_POPULATION_2024 } from "../src/data/datasets/japanese-population";
 import { validateDataset } from "../src/validators/dataset-validator";
 import { JAPAN_CLIP } from "../src/maps/prefecture-geometry";
+import { syntheticGeometry } from "./helpers/synthetic-geometry";
 import { ALL_PRODUCTS } from "../src/catalog/products";
 import { serializeDatasetCsv } from "../src/generators/csv";
 import { renderListing } from "../src/generators/listing";
@@ -38,6 +39,7 @@ describe("pack build pipeline (integration)", () => {
       const res = await buildProduct(product, JAPANESE_POPULATION_2024, {
         outRoot,
         generatedAt: "2026-07-18T00:00:00.000Z",
+        geo: syntheticGeometry(),
       });
 
       for (const f of REL) {

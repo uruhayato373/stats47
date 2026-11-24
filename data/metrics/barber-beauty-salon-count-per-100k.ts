@@ -35,7 +35,5 @@ export const barberBeautySalonCountPer100k: MetricConfig = {
     "isCalculated": false,
   },
   "groupKey": "barber-beauty-salon-count",
-  "seoTitle": "理容・美容所数ランキング都道府県【2023年】｜1位秋田県（561.4所）",
-  "seoDescription": "2023年の理容・美容所数の都道府県別ランキング。1位秋田県（561.4所）、最下位神奈川県（188.7所）で3.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

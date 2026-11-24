@@ -4,8 +4,8 @@ import { NATIONAL_AREA_CODE, PREFECTURE_AREA_CODE_RE, PREFECTURE_CODE_2DIGIT_RE 
 
 declare const areaCodeKind: unique symbol;
 /** Codes receive these types only after format validation. */
-export type OpenDataPrefectureCode = string & { readonly [areaCodeKind]: "prefecture" };
-export type OpenDataMunicipalityCode = string & { readonly [areaCodeKind]: "municipality" };
+type OpenDataPrefectureCode = string & { readonly [areaCodeKind]: "prefecture" };
+type OpenDataMunicipalityCode = string & { readonly [areaCodeKind]: "municipality" };
 type AreaCodes = {
   prefecture: OpenDataPrefectureCode;
   municipality: OpenDataMunicipalityCode;
@@ -32,7 +32,7 @@ export function normalizeOpenDataArea<L extends GeographicLevel>(areaLevel: L, i
   return { areaLevel, areaCode: code as AreaCodes[L] };
 }
 
-export type OpenDataNormalizedRow = NormalizedArea & {
+type OpenDataNormalizedRow = NormalizedArea & {
   readonly time: string;
   readonly dims: Readonly<Record<string, string>>;
   readonly value: number;

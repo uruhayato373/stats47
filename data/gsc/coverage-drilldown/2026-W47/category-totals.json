@@ -1,0 +1,55 @@
+{
+  "week": "2026-W47",
+  "date": "2026-11-21",
+  "totals": {
+    "not-found-404": 11734,
+    "alt-canonical": 4688,
+    "noindex-excluded": 4603,
+    "robots-blocked": 3596,
+    "redirect": 3269,
+    "soft-404": 209,
+    "duplicate-no-user-canonical": 80,
+    "server-error-5xx": 13,
+    "redirect-error": 8,
+    "crawled-not-indexed": 4280,
+    "duplicate-google-chose-other": 8,
+    "discovered-not-indexed": 692,
+    "robots-blocked-indexed": 17,
+    "indexed-submitted": 8611
+  },
+  "raw": {
+    "見つかりませんでした（404）": 11734,
+    "代替ページ（適切な canonical タグあり）": 4688,
+    "noindex タグによって除外されました": 4603,
+    "robots.txt によりブロックされました": 3596,
+    "ページにリダイレクトがあります": 3269,
+    "ソフト 404": 209,
+    "重複しています。ユーザーにより、正規ページとして選択されていません": 80,
+    "サーバーエラー（5xx）": 13,
+    "リダイレクト エラー": 8,
+    "クロール済み - インデックス未登録": 4280,
+    "重複しています。Google により、ユーザーがマークしたページとは異なるページが正規ページとして選択されました": 8,
+    "検出 - インデックス未登録": 692,
+    "robots.txt によりブロックされましたが、インデックスに登録しました": 17
+  },
+  "index_status": {
+    "date": "2026-11-16",
+    "indexed": 8611,
+    "not_indexed": 33180
+  },
+  "validation": {
+    "not-found-404": "開始前",
+    "alt-canonical": "開始前",
+    "noindex-excluded": "開始前",
+    "robots-blocked": "開始前",
+    "redirect": "開始前",
+    "soft-404": "開始前",
+    "duplicate-no-user-canonical": "開始前",
+    "server-error-5xx": "開始前",
+    "redirect-error": "開始前",
+    "crawled-not-indexed": "開始前",
+    "duplicate-google-chose-other": "開始前",
+    "discovered-not-indexed": "合格",
+    "robots-blocked-indexed": "失敗しました"
+  }
+}

@@ -27,11 +27,27 @@ const WARN_DAYS = 60;
 const SUPPORT_YEARS = 2;
 const DAY_MS = 86_400_000;
 const UNSUPPORTED_FLAG = "--dangerouslyUseUnsupportedNextVersion";
+/**
+ * apps/web のビルドが使う OpenNext の helper.js の候補。node が @opennextjs/cloudflare の位置から @opennextjs/aws を探す順に並べる
+ * (npm の置き方は版と依存の重なりで変わる。2026-11-21 は apps/web/node_modules の下、2026-11-22 に入れ子を root の 1 つへまとめた後は
+ * root の @opennextjs/cloudflare の下に入った)。デプロイの前提条件の検査 (.github/scripts/check-build-preconditions.mjs) は
+ * createRequire で同じものを解決する。
+ */
+const HELPER_CANDIDATES = [
+  "apps/web/node_modules/@opennextjs/cloudflare/node_modules/@opennextjs/aws/dist/build/helper.js",
+  "apps/web/node_modules/@opennextjs/aws/dist/build/helper.js",
+  "node_modules/@opennextjs/cloudflare/node_modules/@opennextjs/aws/dist/build/helper.js",
+  "node_modules/@opennextjs/aws/dist/build/helper.js",
+];
 const DEFAULT_PATHS = {
-  helper: "node_modules/@opennextjs/aws/dist/build/helper.js",
   nextPackage: "node_modules/next/package.json",
   webPackage: "apps/web/package.json",
 };
+
+/** 候補のうち最初に在るものを返す (どれも無ければ最後の候補。読み取りで判定不能になる)。 */
+function resolveHelperPath(root = ROOT) {
+  return HELPER_CANDIDATES.find((rel) => fs.existsSync(path.join(root, rel))) ?? HELPER_CANDIDATES[HELPER_CANDIDATES.length - 1];
+}
 
 /** helper.js の `const NEXT_RELEASE_DATES = { 16: "2025-10-21", ... }` を読む。 */
 function parseReleaseDates(helperSource) {
@@ -81,7 +97,7 @@ function argValue(name) {
 
 function main() {
   const paths = {
-    helper: argValue("--helper") ?? DEFAULT_PATHS.helper,
+    helper: argValue("--helper") ?? resolveHelperPath(),
     nextPackage: argValue("--next-package") ?? DEFAULT_PATHS.nextPackage,
     webPackage: argValue("--web-package") ?? DEFAULT_PATHS.webPackage,
   };
@@ -107,4 +123,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { main, parseReleaseDates, evaluateSupportWindow, WARN_DAYS, UNSUPPORTED_FLAG };
+module.exports = { main, parseReleaseDates, evaluateSupportWindow, WARN_DAYS, UNSUPPORTED_FLAG, resolveHelperPath };

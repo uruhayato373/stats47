@@ -28,7 +28,7 @@
  * (`config-insufficient`)。これは別の対処が要るので混同しない。
  */
 
-export type ReingestVerdict =
+type ReingestVerdict =
   /** config を直した後にデータが再生成されていない。再取り込みで直る */
   | "stale-delivery"
   /** 是正後に取り込んでも壊れている。config の直しが足りない (再取り込みでは直らない) */

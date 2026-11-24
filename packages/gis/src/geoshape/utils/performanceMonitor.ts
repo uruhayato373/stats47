@@ -21,7 +21,7 @@ export function startPerformanceMeasurement(): number {
  * @param startTime - 開始時刻
  * @returns 処理時間（ミリ秒）
  */
-export function getPerformanceMeasurement(startTime: number): number {
+function getPerformanceMeasurement(startTime: number): number {
   return performance.now() - startTime;
 }
 

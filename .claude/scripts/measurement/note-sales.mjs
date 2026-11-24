@@ -5,8 +5,8 @@
  * セッションを渡し、その直後の収集で読む。切れていれば verification_required を書いて終わる (値は作らない)。
  */
 import { writeFileSync } from 'node:fs';
-import { measurementContext, markMeasurementAuthenticated } from './browser-session.mjs';
-import { parseNoteSales, parseNoteSalesHistory } from './report-parsers.mjs';
+import { measurementContext, markMeasurementAuthenticated } from '../../../packages/ops/src/measurement/browser-session.mjs';
+import { parseNoteSales, parseNoteSalesHistory } from '../../../packages/ops/src/measurement/report-parsers.mjs';
 
 const output = process.argv[2];
 

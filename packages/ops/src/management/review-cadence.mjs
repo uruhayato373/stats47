@@ -474,11 +474,17 @@ export function formatCadence(result) {
   return lines.join("\n");
 }
 
-/** 申し送りの振り分け率 (週次メトリクス Issue の「振り返り → 起票」行) */
+/**
+ * 申し送りの振り分け率 (週次メトリクス Issue の「振り返り → 起票」行)。
+ * linked = 行き先がカード ID・EXP・#Issue のどれかに結ばれた件 (台帳に実在するもの)。
+ * routed - linked は「定常」「見送り」だけで閉じた件で、カードを作らない決定として数える。
+ */
 export function handoffSummary(result, cadence = "weekly") {
   const latest = result.reviews[cadence]?.[0];
   if (!latest) return null;
-  return { period: latest.period, inContract: latest.inContract, routed: latest.routed, total: latest.handoff.length };
+  const isLink = (r) => CARD_ID.test(r) || EXP_ID.test(r) || ISSUE_REF.test(r);
+  const linked = latest.handoff.filter((h) => !h.problem && (h.routes ?? []).some(isLink)).length;
+  return { period: latest.period, inContract: latest.inContract, routed: latest.routed, linked, total: latest.handoff.length };
 }
 
 

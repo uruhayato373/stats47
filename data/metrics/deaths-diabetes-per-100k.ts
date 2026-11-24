@@ -36,7 +36,5 @@ export const deathsDiabetesPer100k: MetricConfig = {
     "isCalculated": false
   },
   "groupKey": "deaths-diabetes",
-  "seoTitle": "糖尿病による死亡者数ランキング都道府県【2023年】｜1位青森県（20.6人）",
-  "seoDescription": "2023年の糖尿病による死亡者数の都道府県別ランキング。1位青森県（20.6人）、最下位愛知県（8.1人）で2.5倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true
 };

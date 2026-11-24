@@ -18,9 +18,13 @@ run() { echo "▶ $*"; "$@"; }
 run npm --workspace packages/data-configs run metrics:generate-schema
 run npm run content:sync
 run npm run metrics:build-index
+# 出典の辞書 (統計表 ID → 調査)。補助の出典 (supplementalSources) を足したときも古くなる (2026-11-12・11-23 に PR の CI で落ちた)
+(cd packages/data-configs && run npx tsx scripts/ssds/build-estat-provenance.ts)
 run npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --json data/surveys/taxonomy.json
 run npm run generate:catalog --workspace=@stats47/data-configs
 run npx tsx packages/data-configs/scripts/generate-theme-dependency-mirror.ts
+# 家計調査の全ランキングへのリンク一覧 (指標の追加・isActive の変更で増減する。値は読まない)
+run npx tsx .claude/scripts/themes/generate-kakei-ranking-directory.ts
 (cd apps/web && run npx tsx scripts/generate-ranking-prominence.ts)
 
 echo "▶ 変わった生成物"

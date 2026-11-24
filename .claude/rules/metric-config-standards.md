@@ -165,17 +165,12 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 - **既存 metric を触るとき**も、単年設定 (`years.from === years.to`) を見つけたら「本当に
   1 年しかないか」を疑い、ついでに確認する (触ったついでの是正。全件一括の棚卸しは別途)。
 - 単年判定を回避するために存在しない年を書かない。確認できた年だけを列挙する。
-- **既存 755 件の棚卸しは 週次レビューの `npm run weekly:audits` (estat-year-coverage) が少しずつ巡回する**
-  (`packages/ranking/src/scripts/audit-estat-year-coverage.ts`、都道府県1件をサンプルに
-  `getStatsData` で実測し config と比較。755 件を一括では照会しない)。候補は
-  `data/estat/year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
-  config の `years` を拡張し、`data/data-refresh-requests.json` push で再取り込みする。
-- **e-Stat の実在年を確かめた結果の正本は `data/estat/year-coverage/queue.json` の `results`** (指標ごと。
-  2026-10-08 オーナー判断)。テーマの提案文書・カード・memory へ年の一覧を写さず、この記録を引く。
-  新規登録や `years` の拡張で確かめたときは、手で数えず
-  `npx tsx packages/ranking/src/scripts/audit-estat-year-coverage.ts --metrics <key1,key2>` で記録する
-  (`cdArea` なしで全都道府県を取り、年ごとの都道府県数 `prefectureCountsByYear` と `scope: "all-prefectures"` を残す)。
-  記録は年を広げても消えず、週次の巡回が今の config と照らして判定 (`extend-candidate` / `config-covers` 等) を付け直す。
+- **既存の棚卸しと実在年の確認結果の正本は、e-Stat の実在年の台帳 `data/estat/availability/`** (表・取り出し条件ごとに、
+  取り込みと同じ条件で年ごとの値のある県の数を数えたもの。下の「`years` は台帳から合わせる」)。テーマの提案文書・カード・memory へ
+  年の一覧を写さず、台帳 (`tables/<statsDataId>.json`) と差分 (`diff.json`・`LATEST.md`) を引く。
+  北海道 1 県をサンプルにした旧監査 (`audit-estat-year-coverage.ts`・`data/estat/year-coverage/`・`YEAR-COV-*` の自動起票) は
+  2026-11-23 に廃止した。旧監査の要拡張候補 29 件は台帳ではどれも足す年が 0 件で、北海道だけに値のある年や取り込みと違う
+  取得条件の年も数えていた (ESTAT-YEAR-AVAILABILITY-01)。
 
 ## `years` は台帳から合わせる (2026-10〜)
 
@@ -223,6 +218,30 @@ npm run sync:estat-years --workspace=@stats47/data-configs
 ```
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。
+
+### ランキングの題と説明文は値から作る (2026-11-23 オーナー承認)
+
+`seoTitle` / `seoDescription` は書かない。書かなければ、項目の組み立て (`buildRankingItemFromMetric`) が最新年の観測値から
+「{名前}ランキング都道府県【{年}】｜1位{県}（{値}）」の形で作る (`packages/ranking/src/utils/ranking-seo-text.ts`)。
+定義に年や順位の値を手で書くと、新しい年を取り込んでも題が古い年のまま残るので、`validate:config` の `seo-hand-written-fact` が止める。
+対象の範囲の断りは `seoNote` (説明文の後ろに付ける 1 文・年と値は書かない) に書く。年と値を含まない言い回しの上書き
+(家計調査の「県庁所在市の二人以上世帯」など) だけは `seoTitle` に残してよい。
+
+### 取り込みの確かめと反映 (2026-11-23 オーナー判断)
+
+指標の定義 (`data/metrics/<key>.ts`) を変えたら、次の 3 段で本番の値まで届ける。人が CI を起動する工程は無い。
+
+| 段 | いつ | コマンド・仕組み | 何を確かめるか |
+|---|---|---|---|
+| 1. 生成物 | commit の前 | `npm run metrics:regen-derived` → `npm run preflight:pr` | 指標から作る生成物 (schema・索引・出典の辞書・調査の分類・掲載価値など) の作り直しと古さ |
+| 2. 取り込み | push の前 | `npm run data:check` (`-- --metric a,b` で指定) | e-Stat から実際に取り、0 件・重複・打ち切り・県の欠け・公開中の値からの後退を見る。R2 には書かない |
+| 3. 反映 | main に入ったあと | `deploy-workers.yml` の job `ingest-changed-metrics` | その差分で変えた指標のうち、R2 の値の記録 (`meta.recipe.configHash`) が今の設定と違うものだけを `data-refresh.yml` に渡す |
+
+- 2 は R2 の書き込みの鍵を使わず、R2 は公開の URL から読む (app id は page-data-batch の既定どおり手元の設定ファイルから読む)。手元から R2 には書けない (書き込みの鍵は CI だけにあり、`_assert-ci-write` が止める)。
+- 3 の失敗は data-refresh が Issue (`data-refresh-alert`) を立てる。人が手で起動した data-refresh では立てない。
+- 3 は表の更新だけの指標と、記録が今の設定と同じ指標を取り込まない。全範囲の定期の更新は 2026-11-05 から止めている (カード DATA-REFRESH-SCHEDULE-RESUME-01)。
+- 対象の決め方は `packages/ops/src/ci/plan-metric-ingest.mjs` (直下の 1 ファイルを 1 指標として扱い、`policy/` などの下の階層と消したファイルは外す)。
+- 背景: 手で起動する data-refresh は main のコードで走るので、設定を変えた指標はリリースの後に人が起動する必要があった。2026-11-23 に医療施設の 6 指標へ補助の出典を足したときも、取り込みはリリースの後の手作業として残った。出典の辞書の作り直し忘れは 11-12・11-23 の 2 回、PR の CI で初めて分かった。
 
 ## SSDS の `yearFormat` は出典の期間から決める (2026-11-14)
 

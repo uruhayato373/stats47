@@ -31,6 +31,5 @@ export const healthyLifeExpectancyFemale: MetricConfig = {
   surveyScopeReason:
     '厚生労働科学研究の算定結果であり、独立した統計調査を原典としないため',
   seoTitle: '健康寿命（女性）ランキング都道府県',
-  seoDescription: '都道府県別の女性の健康寿命を比較。2019年・2022年の推計値と原資料を確認できます。',
   isActive: true,
 };

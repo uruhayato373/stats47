@@ -74,7 +74,7 @@ export function planCategoryTicks(
 }
 
 /** 0, step, 2·step … と最後の要素。最後が直前の目盛りと近すぎる場合は直前を落とす。 */
-export function thinIndices(n: number, step: number): number[] {
+function thinIndices(n: number, step: number): number[] {
   if (n <= 0) return [];
   const out: number[] = [];
   for (let i = 0; i < n; i += step) out.push(i);

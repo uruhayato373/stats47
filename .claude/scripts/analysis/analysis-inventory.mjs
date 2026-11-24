@@ -14,7 +14,7 @@ import { R2_PUBLIC_ORIGIN, STATS_R2_PREFIX } from "../../../packages/r2-storage/
 import { parseArgs } from "node:util";
 
 import { datasetDir } from "../../../config/datasets.mjs";
-import { parseMetric, selectMetrics, summarizeRows } from "./analysis-inventory-core.mjs";
+import { parseMetric, selectMetrics, summarizeRows } from "../../../packages/ops/src/analysis/analysis-inventory-core.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const R2_PUBLIC = `${R2_PUBLIC_ORIGIN}/${STATS_R2_PREFIX}`;

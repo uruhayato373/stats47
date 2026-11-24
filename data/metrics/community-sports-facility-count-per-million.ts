@@ -63,7 +63,5 @@ export const communitySportsFacilityCountPerMillion: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "社会体育施設数ランキング都道府県【2021年】｜1位秋田県（906.9施設）",
-  "seoDescription": "2021年の社会体育施設数の都道府県別ランキング。1位秋田県（906.9施設）、最下位大阪府（135.6施設）で6.7倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

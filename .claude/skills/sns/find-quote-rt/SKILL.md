@@ -222,7 +222,7 @@ DB にピッタリの ranking_items が無いときのみ実行。e-Stat API で
 curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=$ESTAT_KEY&searchWord=職種+賃金&limit=5"
 ```
 
-e-Stat で良いデータが見つかった場合は TS-config (`data/metrics/<key>.ts`) を追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録することを提案する。
+e-Stat で良いデータが見つかった場合は TS-config (`data/metrics/<key>.ts`) を追加 + `/page-data-batch --metric <key>` で登録することを提案する。
 
 ### Phase 5: 候補リスト提示
 

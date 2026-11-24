@@ -28,7 +28,7 @@
  * 正典: .claude/rules/data-provenance-standards.md
  */
 import ExcelJS from "exceljs";
-import { fetchBuffer, writeStatsValues, roundTo, assertClose, PREF_NAMES } from "./lib/stats-values-writer.mjs";
+import { fetchBuffer, writeStatsValues, roundTo, assertClose, PREF_NAMES } from "../../../packages/ops/src/data/lib/stats-values-writer.mjs";
 
 const BASE = "https://www.nier.go.jp/25chousakekkahoukoku/factsheet";
 const INDEX_URL = `${BASE}/prefecture_city.html`;

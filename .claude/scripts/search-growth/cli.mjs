@@ -11,9 +11,9 @@
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { status, next, measure } from "./lib/service.mjs";
-import { selectTriage, applyApproval, applyDismiss, WEEKLY_APPROVAL_MAX } from "./lib/triage.mjs";
-import { PATHS, readJson, writeJson, getArg, hasFlag } from "./lib/state.mjs";
+import { status, next, measure } from "../../../packages/ops/src/search-growth/lib/service.mjs";
+import { selectTriage, applyApproval, applyDismiss, WEEKLY_APPROVAL_MAX } from "../../../packages/ops/src/search-growth/lib/triage.mjs";
+import { PATHS, readJson, writeJson, getArg, hasFlag } from "../../../packages/ops/src/search-growth/lib/state.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);

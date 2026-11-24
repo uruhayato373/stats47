@@ -18,14 +18,12 @@
  *
  * レイアウト構造 (テンプレート shadcndashboard の dashboard-layout に寄せた・2026-10-27):
  * - SidebarProvider の中に AppSidebar と SidebarInset を兄弟で置く (sidebar.tsx の DOM 前提)
- * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content・Footer を並べる
- *   main の余白は上下 16px だけで、左右は持たない (パネル内の余白で足りる。2026-11-20 オーナー決定)。
- *   main の -mx-px は、パネルの格子の外周の線を SidebarInset の overflow-clip で隠し、外枠の線と 2 本並ばないようにする
- *   SidebarInset の m-2 と外枠の線は sm 以上だけに付け、スマホではパネルを画面の端まで広げる
+ * - SidebarInset の中に SiteHeader・ページで唯一の main#main-content・Footer を並べる。main は余白を持たない
+ *   (本文の格子を外枠の線に接して置く。2026-11-23 オーナー決定。それまでは p-4 で 16px 空いていた)
  * - ヘッダーとフッターをルートに置くので、画面遷移で再マウントされない
  * - SidebarProvider の defaultOpen は true 固定。開閉状態を cookies() で読まない (SSG 維持)
  * - SidebarInset は overflow-hidden ではなく overflow-clip にする (sticky ヘッダーと右レールの追従を壊さない)
- * - AppSidebar は variant="inset"。SidebarInset はテンプレートの layout.tsx と同じ outline + m-2 + 角丸なしにする
+ * - AppSidebar は variant="inset"。SidebarInset は sm 以上でテンプレートの layout.tsx と同じ outline + m-2 + 角丸なし。スマホは外の余白と線を持たず画面の端まで広げる (2026-11-20 オーナー決定)
  * - Cookie 同意は SidebarInset の最後の子に置く画面下端の帯 (sticky bottom-0)。流れの中に高さを持つので、
  *   ページの末尾が帯に隠れない
  * - サイドバー部品と AdSenseScript は sidebar-shell.tsx (1 つの client モジュール) から import する
@@ -168,7 +166,7 @@ export default function RootLayout({
               {/* ヘッダー（全ページ共通） */}
               <SiteHeader />
               {/* メインコンテンツエリア（ページで唯一の main。各ページが PageShell で幅を制御） */}
-              <main id="main-content" className="-mx-px min-w-0 flex-1 py-4" tabIndex={-1}>
+              <main id="main-content" className="min-w-0 flex-1" tabIndex={-1}>
                 {children}
               </main>
               {/* フッター（全ページ共通） */}

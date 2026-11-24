@@ -20,7 +20,7 @@ export const PRODUCT_EXCLUDED_RANKING_KEYS: ReadonlySet<string> = new Set([
 ]);
 
 /** e-Stat カテゴリ (17 分類) → 主テーマ。economy は既定 P-09、物価/地価/家賃は P-07 へ振り分ける。 */
-export const CATEGORY_PACK: Readonly<Record<string, PackTheme>> = {
+const CATEGORY_PACK: Readonly<Record<string, PackTheme>> = {
   population: "population-household", // P-01
   laborwage: "income-wage-hiring", // P-02
   tourism: "tourism-lodging", // P-03

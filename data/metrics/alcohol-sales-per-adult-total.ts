@@ -56,7 +56,5 @@ export const alcoholSalesPerAdultTotal: MetricConfig = {
     "isCalculated": false,
   },
   "surveyId": "nta-annual-statistics",
-  "seoTitle": "成人1人あたり酒類全体の販売量、都道府県で差｜1位東京都100.8リットル【2023年度】",
-  "seoDescription": "国税庁の酒類販売(消費)数量を成人人口で割り、酒類全体の成人1人あたり販売量を都道府県別に比較。2023年度は1位東京都100.8リットル、最下位滋賀県55.1リットルで約1.8倍の差(沖縄県を除く46都道府県)。",
   "isActive": true,
 };

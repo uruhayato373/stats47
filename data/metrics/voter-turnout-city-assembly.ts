@@ -38,7 +38,5 @@ export const voterTurnoutCityAssembly: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "市区町村議会議員選挙投票率ランキング都道府県【2019年】｜1位島根県（88.8％）",
-  "seoDescription": "2019年の市区町村議会議員選挙投票率の都道府県別ランキング。1位島根県（88.8％）、最下位京都府（40.03％）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

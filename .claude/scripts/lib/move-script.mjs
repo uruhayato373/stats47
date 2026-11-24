@@ -77,7 +77,11 @@ export function replaceRepoPaths(text, file, moves) {
   let next = text;
   for (const { from, to, keepEntry } of moves) {
     if (keepEntry && !BASELINE.test(file)) continue;
-    next = keepEntry ? next.split(`"${from}"`).join(`"${to}"`) : next.split(from).join(to);
+    if (keepEntry) { next = next.split(`"${from}"`).join(`"${to}"`); continue; }
+    next = next.split(from).join(to);
+    // 正規表現に埋めたパス (pre-commit の起動条件など) は "." を "\\." と書く。同じ形で置き換える (2026-11-20 に取りこぼした)
+    const escape = (p) => p.replace(/\./g, "\\.");
+    next = next.split(escape(from)).join(escape(to));
   }
   return next;
 }
@@ -89,7 +93,9 @@ export function reviewLines(text) {
     // 点と斜線だけの文字列 ("..", "../../..") は ROOT を求める式の一部。複数行に分かれていても出す
     const root = /["'`](?:\.\.?\/?)+["'`]/.test(line);
     const claude = /["'`][^"'`]*\.claude(?:[/"'`]|$)/.test(line);
-    return root || claude ? [`${index + 1}: ${line.trim().slice(0, 140)}`] : [];
+    // 相対パスに式を埋めたテンプレート文字列 (`../../${datasetPath(id)}`) は道具が付け替えないので、人が確かめる
+    const template = /`(?:\.\.?\/)+[^`]*\$\{/.test(line);
+    return root || claude || template ? [`${index + 1}: ${line.trim().slice(0, 140)}`] : [];
   });
 }
 
@@ -131,8 +137,9 @@ export function mainDefinitionJobsText(texts) {
     try { doc = /** @type {any} */ (yaml.load(text)); } catch { return [text]; } // 読めない YAML は全文を見る (止める側に倒す)
     const on = doc?.on ?? doc?.true;
     const triggers = typeof on === "string" ? [on] : Array.isArray(on) ? on : Object.keys(on ?? {});
-    const jobs = yaml.dump(doc?.jobs ?? {}, { lineWidth: -1 });
-    return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*['"]?develop\b/.test(jobs) ? [jobs] : [];
+    // シェルのコメント行 (run: の中の "# ...") は実行しないので見ない (2026-11-20。blog-auto-publish がコメントで部品を名指しする)
+    const jobs = yaml.dump(doc?.jobs ?? {}, { lineWidth: -1 }).split("\n").filter((line) => !/^\s*#/.test(line)).join("\n");
+    return triggers.some((name) => MAIN_DEFINITION_TRIGGERS.includes(name)) && /ref:\s*(?:['"]?develop\b|\$\{\{[^}\n]*['"]develop['"])/.test(jobs) ? [jobs] : [];
   }).join("\n");
 }
 

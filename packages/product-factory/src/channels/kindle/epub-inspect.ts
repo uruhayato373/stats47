@@ -66,7 +66,7 @@ function textOf(html: string): string {
 }
 
 /** 全県表とみなす行数 (見出し 1 行 + 47 県)。 */
-export const FULL_TABLE_ROWS = 48;
+const FULL_TABLE_ROWS = 48;
 
 /**
  * 図の出どころ。`<slug>__<name>.png` はブログの図 (R2 の SVG を PNG 化。ブログの共通の型を通る)、

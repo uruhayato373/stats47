@@ -145,6 +145,20 @@ function readSafe(file) {
   }
 }
 
+/** 入口のファイルが相対 import で読む、同じファイル名の本体 (リポジトリ直下からのパス)。入口が無い・読めないときは空 */
+function entryTargets(entryFile) {
+  const text = readSafe(path.join(ROOT, entryFile));
+  if (!text) return [];
+  const out = [];
+  for (const [, spec] of text.matchAll(/(?:from|import\(|require\()\s*["'](\.{1,2}\/[^"']+)["']/g)) {
+    const base = path.join(path.dirname(path.join(ROOT, entryFile)), spec);
+    const hit = ["", ".mjs", ".cjs", ".js", ".ts", ".tsx"].map((ext) => base + ext).find((file) => fs.existsSync(file) && fs.statSync(file).isFile());
+    // 入口と本体は同じファイル名 (拡張子を除く)。部品の import は入口の登録で覆わない
+    if (hit && path.basename(hit).replace(/\.[^.]+$/, "") === path.basename(entryFile).replace(/\.[^.]+$/, "")) out.push(rel(hit));
+  }
+  return out;
+}
+
 function includesChecker(text, checkerFile) {
   if (text.includes(checkerFile) || text.includes(path.basename(checkerFile))) return true;
   // TS の相対 import は拡張子を省く (`import { auditUrl } from "./lib/audit-url"`) ので、
@@ -482,6 +496,11 @@ function inspect() {
   const registryResult = readRegistry();
   const registry = registryResult.registry;
   const gateByChecker = new Map(registry.gates.map((gate) => [gate.checker, gate]));
+  // 登録済みの入口が相対 import で読む本体 (packages・apps へ移した検査) は、その入口の登録で覆われる。
+  // 入口と本体は同じファイル名なので、本体も workflow から名前で起動されているように見える (SCRIPTS-TO-PACKAGES-02)
+  for (const gate of registry.gates) {
+    for (const target of entryTargets(gate.checker)) if (!gateByChecker.has(target)) gateByChecker.set(target, gate);
+  }
   const findings = [...registryResult.findings, ...validateGates(registry)];
   const classifications = [];
   const staged = STAGED ? stagedFiles() : null;

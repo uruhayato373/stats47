@@ -78,8 +78,10 @@ export function ThemeTourismSeasonalityClient({ snapshot, notes }: Props) {
         description={`${snapshot.year}年の確定値 · ${areaLabel} · ${formatUnitForDisplay(snapshot.unit)}`}
         className="min-w-0"
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
+            annotation={notes}
             source={snapshot.source.title}
             sourceLink={snapshot.source.url}
           />
@@ -122,9 +124,6 @@ export function ThemeTourismSeasonalityClient({ snapshot, notes }: Props) {
             }))}
           />
         )}
-        <ul className="space-y-1 text-xs leading-relaxed text-muted-foreground">
-          {notes.map((note) => <li key={note}>{note}</li>)}
-        </ul>
       </ChartPanel>
     </div>
   );

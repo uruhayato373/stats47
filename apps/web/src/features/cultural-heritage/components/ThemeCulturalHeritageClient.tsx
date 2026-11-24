@@ -35,7 +35,6 @@ function LocationsTable({
       ariaLabel={label}
       scrollRegion
       className="min-w-96"
-      caption="文化庁の収録名称・種類・所在地を表示しています。所在地は訪問先の入口・公開可否を示すものではありません。"
       columns={[
         { key: 'name', header: '名称・公式詳細', rowHeader: true, className: 'min-w-40' },
         { key: 'kinds', header: '種類', align: 'left', className: 'whitespace-normal!' },
@@ -139,16 +138,19 @@ function HeritageView({
         title="文化財の種類と所在地"
         description={`2026年9月11日のDB収録 · ${view.areaName} · 特別史跡・特別名勝・特別天然記念物`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
             source={`${source.title}を加工して作成`}
             sourceLink={source.url}
+            annotation={[
+              'この一覧は国が指定した3種類の文化財を対象としています。県指定文化財の件数・保護費カードとは対象が異なり、国宝や通常の史跡・名勝・天然記念物も含みません。',
+              '文化庁の収録名称・種類・所在地を表示しています。所在地は訪問先の入口・公開可否を示すものではありません。',
+              '全国の一意件数は167件、種類別の延べ件数は177件です。複数県にまたがる6件を各県に表示するため、県別件数の合計162件は、地域を定めない14件を除いた全国153件より多くなります。DB収録件数は法的な指定総数と一致しない場合があります。',
+            ]}
           />
         }
       >
-        <p className="text-sm text-muted-foreground">
-          この一覧は国が指定した3種類の文化財を対象としています。県指定文化財の件数・保護費カードとは対象が異なり、国宝や通常の史跡・名勝・天然記念物も含みません。
-        </p>
         <p className="text-sm" data-unique-total={view.total}>
           {view.areaName}の収録は{view.total}件。
           {view.categories
@@ -227,9 +229,6 @@ function HeritageView({
             件は、この県の一覧には配分していません。ページ共通の地域選択を全国にすると別表で確認できます。
           </p>
         )}
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          全国の一意件数は167件、種類別の延べ件数は177件です。複数県にまたがる6件を各県に表示するため、県別件数の合計162件は、地域を定めない14件を除いた全国153件より多くなります。DB収録件数は法的な指定総数と一致しない場合があります。
-        </p>
         <Link
           href={view.tourismHref}
           className="inline-block text-sm text-primary underline underline-offset-4"

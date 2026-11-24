@@ -22,7 +22,6 @@
  *   | generate-unpublished-blog-slugs | 同上 | なし |
  *   | generate-sitemap-blog-entries | bulk fetch 2 本 + throw + 空ガード | なし |
  *   | .claude/scripts/gsc/build-sitemap-ranking-keys.cjs | ネットワーク無し (KNOWN から導出) | なし |
- *   | sync-known-keys-from-remote.ts | 廃止済み remote D1 依存の死んだコード | 実行不能 (maintenance-debt baseline 登録済) |
  *
  *   人が気づくためのゲートは `sync-snapshots.yml` の「Open PR if keys changed」が持つ
  *   (キー数の増減を Step Summary と PR 本文に出し、減少に ⚠️ を付ける)。

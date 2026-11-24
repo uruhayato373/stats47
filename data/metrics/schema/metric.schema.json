@@ -1698,6 +1698,9 @@
     "seoDescription": {
       "type": "string"
     },
+    "seoNote": {
+      "type": "string"
+    },
     "isActive": {
       "enum": [
         false,

@@ -102,4 +102,4 @@ status: active
 - `packages/ops/src/sns/sns-metrics-store.cjs` — CSV スナップショット I/O ヘルパ
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット + improvement-log
 - `data/sns/posts.json`（`packages/ops/src/sns/sns-posts-store.cjs` 経由）— 投稿台帳 SSOT。投稿実績・メトリクスキャッシュはここから集計（完全DBレス。旧 D1 sns_posts は廃止）
-- `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）
+- `data/sns/posts.schema.json` — 投稿台帳のレコードの形（カラム名の参照用）

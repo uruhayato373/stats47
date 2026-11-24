@@ -14,9 +14,10 @@
  *
  * 出力: src/ssds/estat-provenance.generated.json
  * 実行: cd packages/data-configs && npx tsx scripts/ssds/build-estat-provenance.ts
+ * 検査: --check で書かずに比べ、古ければ exit 1 (npm run preflight:pr が呼ぶ。2026-11-12・11-23 に作り直し忘れが PR の CI で落ちた)
  */
 
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -28,12 +29,18 @@ const OUT = join(__dirname, "../../src/ssds/estat-provenance.generated.json");
 function main(): void {
   const { index, conflicts } = buildEstatProvenance();
   const { ssdsTableIds, statsDataIdToSurvey } = index;
+  const next = JSON.stringify(index, null, 0);
 
-  writeFileSync(
-    OUT,
-    JSON.stringify(index, null, 0),
-    "utf-8",
-  );
+  if (process.argv.includes("--check")) {
+    if (readFileSync(OUT, "utf-8") === next) {
+      console.log("✓ estat-provenance.generated.json は指標の定義と一致");
+      return;
+    }
+    console.error("✗ estat-provenance.generated.json が古い。作り直す: npm run metrics:regen-derived");
+    process.exit(1);
+  }
+
+  writeFileSync(OUT, next, "utf-8");
 
   console.log(`SSDS テーブル ID: ${ssdsTableIds.length}`);
   console.log(`statsDataId→survey: ${Object.keys(statsDataIdToSurvey).length} 件`);

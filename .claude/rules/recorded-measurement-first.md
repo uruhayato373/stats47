@@ -27,7 +27,7 @@ paths:
 | 週次の計測→記録→改善サイクル | 毎週土曜 JST 02:00 (計測)。施策の記録は土曜の週次レビューの中 | `fetch-metrics-weekly.yml` (GSC・GA4 は API。ログイン不要)・`/weekly-review` Phase 0b |
 
 認証付き計測は土曜の週次レビューの最初に `npm run weekly:collect` で手で取り、同じレビューが計測 state を作り直して読む (2026-10-26 に木曜 17:30 から土曜 07:00 の自動実行へ移し、2026-11-08 に自動実行をやめてレビューの中へ移した。無人だとログイン切れ・時間切れで 2 週続けて落ち、誰も気づかなかったため。オーナーがいればその場で入り直せる。やっていない週は review-cadence-guard が Issue にする)。記録は次の取得まで 8 日間「今の値」として使う
-(鮮度の判定と保管庫からの復元が共有する `.claude/scripts/measurement/sources.mjs` の `MEASUREMENT_MAX_AGE_MS`)。
+(鮮度の判定と保管庫からの復元が共有する `packages/ops/src/measurement/sources.mjs` の `MEASUREMENT_MAX_AGE_MS`)。
 セッションが切れて取得に失敗した取得元は、レビューの場でオーナーが入り直して取り直す。取り直さなければ次の土曜までその取得元が「判定不能」になる。それを毎日の取得で埋めない。
 
 ## 判断に使う記録

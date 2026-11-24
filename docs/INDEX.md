@@ -106,7 +106,7 @@ Issues: PR で close
 
 | ドキュメント              | 配置先                                                                        |
 | ------------------------- | ----------------------------------------------------------------------------- |
-| DB 操作・スキーマ・シード | `packages/database/README.md`                                                 |
+| データの置き場 (完全DBレス) | `.claude/rules/data-storage.md`                                            |
 | R2 ストレージ             | `packages/r2-storage/README.md` / `packages/r2-storage/src/scripts/README.md` |
 | CI/CD・デプロイ           | `.github/workflows/README.md`                                                 |
 | Pre-commit フック         | `.husky/README.md`                                                            |

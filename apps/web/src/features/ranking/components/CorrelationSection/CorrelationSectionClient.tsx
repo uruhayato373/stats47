@@ -10,7 +10,8 @@ import { SectionCard, ValueTable } from "@/components/surface";
 import { navSurfaceProps } from "@/lib/analytics/events";
 import { correlationColorClass, formatCorrelation } from "@/lib/correlation-display";
 
-export type CorrelationListItem = Pick<CorrelatedItem, "rankingKey" | "title" | "populationAdjustedR">;
+/** year はこの指標の最新年と違う年で比べたペアにだけ入る */
+export type CorrelationListItem = Pick<CorrelatedItem, "rankingKey" | "title" | "populationAdjustedR" | "year">;
 
 export function CorrelationSectionClient({ groups }: { groups: CorrelationGroups<CorrelationListItem> }) {
   const directions = CORRELATION_DIRECTIONS.filter(direction => groups[direction].length > 0);
@@ -35,7 +36,10 @@ export function CorrelationSectionClient({ groups }: { groups: CorrelationGroups
                 rows={groups[direction].map(item => ({
                   key: item.rankingKey,
                   cells: [
-                    <Link key="metric" href={hrefFor("ranking", { rankingKey: item.rankingKey })}>{item.title}</Link>,
+                    <span key="metric">
+                      <Link href={hrefFor("ranking", { rankingKey: item.rankingKey })}>{item.title}</Link>
+                      {item.year && <span className="ml-1 text-xs text-muted-foreground">（{item.year}年の値）</span>}
+                    </span>,
                     <span key="r" className={correlationColorClass(item.populationAdjustedR)}>{formatCorrelation(item.populationAdjustedR)}</span>,
                   ],
                 }))}

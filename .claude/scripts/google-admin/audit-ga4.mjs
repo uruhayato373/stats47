@@ -12,7 +12,7 @@
  * - 値の取得は主に本文テキスト (innerText) の走査 — CSS class への依存を避け、
  *   決定的な文字列 (property ID / sc-domain:stats47.jp) の有無で判定する。
  */
-import { isLoginUrl, waitForLogin } from "./browser-context.mjs";
+import { isLoginUrl, waitForLogin } from "../../../packages/ops/src/google-admin/browser-context.mjs";
 import { GA4_PROPERTY_ID as SITE_GA4_PROPERTY_ID } from "../../../packages/types/mirror/site-config.cjs";
 
 export const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID || SITE_GA4_PROPERTY_ID;

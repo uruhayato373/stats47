@@ -33,7 +33,5 @@ export const sportsParticipationRateGymTraining: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "器具を使ったトレーニングの行動者率 都道府県ランキング【2021年】｜1位東京都（15.0％）",
-  "seoDescription": "2021年の器具を使ったトレーニングの行動者率を都道府県別に比較。1位は東京都（15.0％）、最下位は長崎県（8.3％）、最大と最小の差は1.8倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

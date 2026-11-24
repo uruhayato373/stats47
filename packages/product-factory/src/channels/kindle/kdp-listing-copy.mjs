@@ -7,8 +7,8 @@
  * キーワードの規則は https://kdp.amazon.com/en_US/help/topic/G201298500 (同日確認) に合わせる。
  */
 
-export const KDP_DESCRIPTION_MAX_CHARS = 4000;
-export const KDP_KEYWORD_SLOTS = 7;
+const KDP_DESCRIPTION_MAX_CHARS = 4000;
+const KDP_KEYWORD_SLOTS = 7;
 /** 定型の【データについて】が紹介文に占める割合の上限。これを超えると本ごとの内容が薄い */
 const MAX_DATA_BLOCK_RATIO = 0.35;
 
@@ -102,7 +102,7 @@ export function hasCurrentReview(copy, facts) {
  * KDP へ送った原稿 (status: submitted / reflected) は、台帳の紹介文・キーワードと一致し続ける。
  * 台帳を手で直すとここで止まる (台帳は原稿から apply で作る)。
  */
-export function ledgerDriftIssues(copy, listing, description) {
+function ledgerDriftIssues(copy, listing, description) {
   if (!["submitted", "reflected"].includes(copy?.status)) return [];
   const issues = [];
   if (listing?.description !== description) issues.push("台帳の紹介文が原稿と違う (台帳を手で直さず、原稿を直して apply する)");

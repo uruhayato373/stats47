@@ -52,8 +52,13 @@ export function ThemeEarthquakeExposureClient({
         title="地震動の震度帯別にみる地域人口"
         description={`${area} · 地震動は2024年基準、人口は2020年・2050年推計`}
         contentClassName="min-w-0 space-y-4"
-        footer={
+        action={
           <ChartFooter
+            placement="header"
+            annotation={[
+              '各地点で30年間に3%の確率で超える地震動の水準ごとに、地域人口を集計しています。',
+              '同じ2024年基準の地震動に人口を重ねた比較です。特定の地震の被害人数や2050年の地震を予測した値ではありません。住宅棟数・建築時期の分布は含みません。',
+            ]}
             sourceLinks={[
               {
                 label: '防災科学技術研究所 J-SHIS 2024年版',
@@ -67,9 +72,6 @@ export function ThemeEarthquakeExposureClient({
           />
         }
       >
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          各地点で30年間に3%の確率で超える地震動の水準ごとに、地域人口を集計しています。
-        </p>
         <ValueTable fold
           ariaLabel={`${area}の震度帯別人口`}
           caption="各年の総人口を分母にした割合です。人口は小数第1位まで表示し、丸めにより合計が一致しない場合があります。"
@@ -137,9 +139,6 @@ export function ThemeEarthquakeExposureClient({
             },
           ]}
         />
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          同じ2024年基準の地震動に人口を重ねた比較です。特定の地震の被害人数や2050年の地震を予測した値ではありません。住宅棟数・建築時期の分布は含みません。
-        </p>
         <details className="text-xs leading-relaxed text-muted-foreground">
           <summary className="cursor-pointer py-2 font-medium text-foreground">
             集計方法と再現情報

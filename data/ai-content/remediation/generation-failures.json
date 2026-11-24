@@ -127,11 +127,17 @@
       "lastFailedAt": "2026-11-18",
       "firstFailedAt": "2026-11-16"
     },
-    "specific-health-checkup-participation-rate": {
+    "designated-difficult-disease": {
       "failCount": 1,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-19",
-      "firstFailedAt": "2026-11-19"
+      "lastFailedAt": "2026-11-20",
+      "firstFailedAt": "2026-11-20"
+    },
+    "icecream-consumption-expenditure": {
+      "failCount": 3,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-22",
+      "firstFailedAt": "2026-11-20"
     }
   }
 }

@@ -9,7 +9,7 @@ const test = require("node:test");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
 const CHECKER = path.join(ROOT, "packages/ops/src/gates/check-next-support-window.cjs");
-const { parseReleaseDates, UNSUPPORTED_FLAG } = require(CHECKER);
+const { parseReleaseDates, resolveHelperPath, UNSUPPORTED_FLAG } = require(CHECKER);
 
 /** OpenNext の helper.js と同じ形の期限表・next の package.json・apps/web の package.json を一時ディレクトリに作って checker を走らせる。 */
 function run({ releaseDates, nextVersion, buildScript, now }) {
@@ -63,7 +63,8 @@ test("期限表に無い major は判定不能 (exit 2)", () => {
 });
 
 test("導入中の OpenNext の helper.js から期限表を読める (表の書式が変わったら落ちる)", () => {
-  const helper = path.join(ROOT, "node_modules/@opennextjs/aws/dist/build/helper.js");
+  // apps/web が使う写し (apps/web/node_modules) を先に、無ければ root を読む (npm の置き方は版で変わる)
+  const helper = path.join(ROOT, resolveHelperPath(ROOT));
   const dates = parseReleaseDates(fs.readFileSync(helper, "utf8"));
   assert.ok(dates && dates[15] === "2024-10-21", JSON.stringify(dates));
 });

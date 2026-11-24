@@ -35,7 +35,5 @@ export const judoTherapistRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "人口10万対柔道整復師数 都道府県ランキング【2020年】｜1位大阪府（105.5人）",
-  "seoDescription": "2020年の人口10万対柔道整復師数を都道府県別に比較。1位は大阪府（105.5人）、最下位は鳥取県（16.8人）、最大と最小の差は6.3倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

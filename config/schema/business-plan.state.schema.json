@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "事業計画の派生状態と KPI ツリー",
+  "description": "data/business-plan/{name}.json の形状契約。事業計画のカタログ (data/business-plan/plan/*.json を packages/data-configs/src/business-plan/catalog.ts が束ねたもの) から packages/data-configs/scripts/build-business-plan-state.ts (npm run business-plan:build-state) が 2 つのファイルを作る。latest.json は件数・状態の集計・データの鮮度・次の施策 (時刻入り)、kpi-tree.json は KPI ツリーの写し (時刻を含めない決定的出力)。手で編集しない。読み手: apps/admin/lib/server/business-plan.ts・kpi.ts (管理画面)、packages/ops/src/metrics/lib/measurement-cycle.mjs・packages/ops/src/management/strategy-lanes.cjs (kpi-tree.json の nodes の id を参照)、packages/data-configs/scripts/validate-business-plan.ts (catalog とのずれの検出)。",
+  "anyOf": [
+    { "$ref": "#/definitions/latest" },
+    { "$ref": "#/definitions/kpiTree" }
+  ],
+  "definitions": {
+    "countMap": {
+      "type": "object",
+      "description": "状態の語 → 件数",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "latest": {
+      "type": "object",
+      "description": "latest.json (と --snapshot のときの history/{date}.json と同じ形)",
+      "required": [
+        "schemaVersion", "generatedAt", "catalogId", "catalogVersion", "sourceSha256", "coverage",
+        "statusCounts", "eventCounts", "sourceFreshness", "nextActions", "measurementWarning"
+      ],
+      "properties": {
+        "schemaVersion": { "type": "integer", "minimum": 1 },
+        "generatedAt": { "type": "string", "minLength": 1, "description": "生成時刻 (new Date().toISOString())" },
+        "catalogId": { "type": "string", "minLength": 1, "description": "事業計画カタログの ID" },
+        "catalogVersion": { "type": "string", "minLength": 1, "description": "事業計画カタログの版" },
+        "sourceSha256": { "type": "string", "description": "取り込んだ原本の SHA-256 (catalog.source.sourceSha256)" },
+        "coverage": {
+          "type": "object",
+          "description": "カタログの各一覧の件数",
+          "additionalProperties": { "type": "integer", "minimum": 0 },
+          "properties": {
+            "decisions": { "type": "integer", "minimum": 0 },
+            "documents": { "type": "integer", "minimum": 0 },
+            "initiatives": { "type": "integer", "minimum": 0 },
+            "pilotSpecs": { "type": "integer", "minimum": 0 },
+            "contentOpportunities": { "type": "integer", "minimum": 0 },
+            "xIdeas": { "type": "integer", "minimum": 0 },
+            "noteProducts": { "type": "integer", "minimum": 0 },
+            "metrics": { "type": "integer", "minimum": 0 },
+            "events": { "type": "integer", "minimum": 0 },
+            "m1Routes": { "type": "integer", "minimum": 0 },
+            "m1XPosts": { "type": "integer", "minimum": 0 },
+            "m1NoteProducts": { "type": "integer", "minimum": 0 },
+            "m1Tasks": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "statusCounts": { "$ref": "#/definitions/countMap", "description": "25 章の採否 (decisions[].status) ごとの件数" },
+        "eventCounts": { "$ref": "#/definitions/countMap", "description": "行動イベントの計測状況 (events[].status) ごとの件数" },
+        "sourceFreshness": {
+          "type": "object",
+          "description": "取得元 (ga4・x・note・affiliate・products・ci など) → データが最後に変わった時刻。取れないときは null",
+          "additionalProperties": { "type": ["string", "null"] }
+        },
+        "nextActions": {
+          "type": "array",
+          "description": "status が ready / in-progress の施策",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "owner", "gate"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "title": { "type": "string" },
+              "owner": { "type": "string" },
+              "gate": { "type": "string", "description": "着手の条件 (initiatives[].readinessGate)" }
+            }
+          }
+        },
+        "measurementWarning": { "type": "string" }
+      }
+    },
+    "kpiTree": {
+      "type": "object",
+      "description": "kpi-tree.json。kpiTier を持つ指標だけを nsm → driver → guardrail の順に並べた写し",
+      "required": ["schemaVersion", "source", "nodes"],
+      "properties": {
+        "schemaVersion": { "type": "integer", "minimum": 1 },
+        "source": { "type": "string", "minLength": 1, "description": "写しの正本 (catalog.ts のパス)" },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "tier", "cadence", "measurementStatus", "unit", "source"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1, "description": "指標 ID (business-plan.metrics の metrics[].id)。施策とレーンが [kpi: id] で指す" },
+              "label": { "type": "string" },
+              "tier": { "type": "string", "description": "KPI の階層 (metrics[].kpiTier)" },
+              "cadence": { "type": "string" },
+              "measurementStatus": { "type": "string" },
+              "unit": { "type": "string" },
+              "source": { "type": "string", "description": "値の取得元" },
+              "target": {
+                "type": "object",
+                "description": "KPI の目標 (metrics[].kpiTarget があるときだけ)",
+                "required": ["value", "dueWeek", "basis"],
+                "properties": {
+                  "value": { "type": "number" },
+                  "dueWeek": { "type": "string" },
+                  "basis": { "type": "string", "description": "目標値の根拠" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

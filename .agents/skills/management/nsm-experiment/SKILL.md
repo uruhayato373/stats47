@@ -98,7 +98,7 @@ abandoned  abandoned  running (re-measure)
 
 ### propose: 候補提案
 
-1. `node .claude/scripts/lib/metrics-reader.mjs --json` で現状取得（今週 vs 前週、チャネル別、トップクエリ）
+1. `node packages/ops/src/metrics/metrics-reader.mjs --json` で現状取得（今週 vs 前週、チャネル別、トップクエリ）
 2. `reference/playbook.md` を Read してパターンカタログを読み込む
 3. `reference/rubric.md` を Read して評価軸を読み込む
 4. 現状メトリクスと playbook を突き合わせ、適用可能な実験を洗い出す
@@ -180,7 +180,7 @@ abandoned  abandoned  running (re-measure)
 | 連携先 | 役割 |
 |---|---|
 | **`.claude/scripts/lib/experiments-state.mjs`** | state I/O 本体 |
-| **`.claude/scripts/lib/metrics-reader.mjs`** | baseline と current の計測 |
+| **`packages/ops/src/metrics/metrics-reader.mjs`** | baseline と current の計測 |
 | **`.claude/scripts/metrics/snapshot-weekly-metrics.mjs`** | 週次スナップショット（propose 時の背景データ） |
 | **`.claude/skills/management/weekly-plan/SKILL.md`** | Phase で実験提案を自動化 |
 | **`.claude/skills/management/weekly-review/SKILL.md`** | 実験進捗セクションで running を自動表示 |
@@ -217,7 +217,7 @@ abandoned  abandoned  running (re-measure)
 
 - [ ] 検証コマンドを実行したか（実験のメトリクス取得元 API を直接叩く）:
   - 該当する `/fetch-{gsc,ga4,adsense}-data` でメトリクスを取得
-  - `.claude/scripts/lib/metrics-reader.mjs` で statefile から取得
+  - `packages/ops/src/metrics/metrics-reader.mjs` で statefile から取得
   - 比較期間（before / experiment 中 / after）を明確に CSV に
 - [ ] 想定効果値の根拠（過去類似実験 / 計算式 / 参照論文）を `propose` 段階で書いたか
 - [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を使っていないか
@@ -234,4 +234,4 @@ abandoned  abandoned  running (re-measure)
 - `reference/rubric.md` — 優先順位評価軸
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM の完全な定義
 - `.claude/scripts/lib/experiments-state.mjs` — state 実装
-- `.claude/scripts/lib/metrics-reader.mjs` — 計測実装
+- `packages/ops/src/metrics/metrics-reader.mjs` — 計測実装

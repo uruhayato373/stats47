@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-16T22:48:18.638Z",
+  "generatedAt": "2026-11-22T20:13:33.947Z",
   "plan": {
     "experimentId": "ranking-labor-lane-pilot-2026w39",
     "kind": "creative",
@@ -46,29 +46,32 @@
     "closedAt": "2026-10-19"
   },
   "feasibility": {
-    "status": "feasible",
-    "reasons": [],
-    "baselineCtr": 0.0006415739948674081,
-    "requiredImpressions": 31174,
-    "requiredClicks": 20,
-    "projectedDays": 47
+    "status": "blocked",
+    "reasons": [
+      "baselineClicks-invalid"
+    ],
+    "baselineCtr": null,
+    "requiredImpressions": null,
+    "projectedDays": null
   },
   "readiness": {
     "status": "blocked",
     "reasons": [
-      "inventory-snapshot-stale(13d>10d)",
+      "inventory-snapshot-stale(19d>10d)",
       "a8-cross-check-shortfall",
       "a8-results-month-missing",
-      "eligible-candidate-missing"
+      "eligible-candidate-missing",
+      "baselineClicks-invalid"
     ]
   },
   "verdict": {
     "status": "pending",
     "reasons": [
-      "inventory-snapshot-stale(13d>10d)",
+      "inventory-snapshot-stale(19d>10d)",
       "a8-cross-check-shortfall",
       "a8-results-month-missing",
-      "eligible-candidate-missing"
+      "eligible-candidate-missing",
+      "baselineClicks-invalid"
     ],
     "comparison": null,
     "winnerVariantId": null
@@ -76,10 +79,11 @@
   "recommendedAction": {
     "id": "resolve-pilot-start-gates",
     "reasons": [
-      "inventory-snapshot-stale(13d>10d)",
+      "inventory-snapshot-stale(19d>10d)",
       "a8-cross-check-shortfall",
       "a8-results-month-missing",
-      "eligible-candidate-missing"
+      "eligible-candidate-missing",
+      "baselineClicks-invalid"
     ]
   }
 }

@@ -101,7 +101,7 @@ export function SurveyCard({
           <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
             同じ調査のランキング
           </p>
-          <nav aria-label="同じ調査のランキング" className={`mt-1 ${ROW_LIST_CLASS}`}>
+          <nav aria-label="同じ調査のランキング" className={`mt-1 ${ROW_LIST_CLASS}`} {...navSurfaceProps("ranking_same_survey")}>
             {relatedItems.map((item) => (
               <RailNavRow
                 key={item.rankingKey}

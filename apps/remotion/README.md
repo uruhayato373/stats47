@@ -41,7 +41,7 @@ Studio で表示されるデータは `src/utils/preview-data.ts` が提供す�
 
 実データ生成と投稿への受け渡しは[render-sns-stills](../../.claude/skills/sns/render-sns-stills/SKILL.md)が正典。
 データ接地・欠測・単位・recipeの更新漏れ・同順位・都市名の検査は
-`node --import tsx --test .claude/scripts/sns/__tests__/data-card-input.test.ts`（リポジトリルート）で検証する。
+`node --import tsx --test apps/remotion/scripts/__tests__/data-card-input.test.ts`（リポジトリルート）で検証する。
 
 ## コンポジション一覧
 

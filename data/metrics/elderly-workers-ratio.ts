@@ -39,7 +39,5 @@ export const elderlyWorkersRatio: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "高齢就業者割合ランキング都道府県【2020年】｜1位長野県（30.6％）",
-  "seoDescription": "2020年の高齢就業者割合の都道府県別ランキング。1位長野県（30.6％）、最下位奈良県（21.6％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

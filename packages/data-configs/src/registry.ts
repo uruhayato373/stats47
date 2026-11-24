@@ -1190,6 +1190,7 @@ import { healthyLifeExpectancyMale } from "../../../data/metrics/healthy-life-ex
 import { heaterConsumptionExpenditure } from "../../../data/metrics/heater-consumption-expenditure";
 import { heaterConsumptionQuantity } from "../../../data/metrics/heater-consumption-quantity";
 import { heatingCoolingAppliancesGroupConsumptionExpenditure } from "../../../data/metrics/heating-cooling-appliances-group-consumption-expenditure";
+import { heatstrokeDeathsPer100k } from "../../../data/metrics/heatstroke-deaths-per-100k";
 import { heatstrokeDeaths } from "../../../data/metrics/heatstroke-deaths";
 import { heatstrokeEmergencyTransportsPer100k } from "../../../data/metrics/heatstroke-emergency-transports-per-100k";
 import { heatstrokeEmergencyTransports } from "../../../data/metrics/heatstroke-emergency-transports";
@@ -4546,6 +4547,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "heater-consumption-expenditure": heaterConsumptionExpenditure,
   "heater-consumption-quantity": heaterConsumptionQuantity,
   "heating-cooling-appliances-group-consumption-expenditure": heatingCoolingAppliancesGroupConsumptionExpenditure,
+  "heatstroke-deaths-per-100k": heatstrokeDeathsPer100k,
   "heatstroke-deaths": heatstrokeDeaths,
   "heatstroke-emergency-transports-per-100k": heatstrokeEmergencyTransportsPer100k,
   "heatstroke-emergency-transports": heatstrokeEmergencyTransports,

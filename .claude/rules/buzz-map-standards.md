@@ -100,7 +100,7 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 > （builder `.claude/scripts/sns/build-buzz-map-catalog.ts` が全供給源をスコアリング・status upsert 保持）。
 > **5 レーン**で「利用できるものすべて」を採録する。うち `curated` が SNS 企画の主レーン
 > （人が選定した企画 SSOT）、`muni`〜`mlit-dpf` は機械採録の素材レーン:
-> - `curated` … **人が選定した企画 SSOT `.claude/scripts/sns/data/buzz-map-curated-ideas.ts`（160件）**。
+> - `curated` … **人が選定した企画の台帳 `sns.buzz-map-curated-ideas` (`data/sns/buzz-map-curated-ideas.json` + Schema・160件)**。読み込み口は `.claude/scripts/sns/data/buzz-map-curated-ideas.ts` (型だけを持つ)。
 >   各 idea を score gate（8要素 + landing 補正）・hard gate（license/sensitivity/hook）・
 >   landing router（§5 inventory 突合で strategy/readiness 解決）に通し、machine レーンとは
 >   `metricKeys`/`aliases` で dedup（`aliasesOf` に被マッチ key を記録）。既存 generated/posted へ dedup した
@@ -352,7 +352,7 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
   確認ダイアログ・allowlist)。(5) **2 パターン比較モード** を spec-gsi に追加 (`--pattern-a/--pattern-b` — 谷 vs 沢・澤
   等の対比。kind 2 色と別分岐・単一 pattern は不変)。初回レンダが admin/nature 既定色で「谷vs沢」の問いに答えて
   いなかった目視差し戻しから生まれた教訓: **比較系ネタは凡例が問いの 2 項になっているかを目視必須**。
-  (6) **UTM 一本化** — 生成は `.claude/scripts/lib/sns-utm.cjs` が全 SNS ドメインの単一実装 (buzz-map は
+  (6) **UTM 一本化** — 生成は `packages/ops/src/sns/sns-utm.cjs` が全 SNS ドメインの単一実装 (buzz-map は
   campaign=buzz-map-<ideaId> / content=<variant>。canonical に query 混入禁止)。(7) **GA4 計測**
   `buzz-map-attribution.mjs` + score 還流 (evidence-based: session 0 = 加点 0)。tests 108 (node --test)。
   P1 記事 30 本は全件終端 (drafted-pass 16 / blocked-data 14・published:false)

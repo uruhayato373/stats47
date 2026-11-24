@@ -45,7 +45,7 @@ import {
   crossCheckAgainstSite,
   suggestMissingPrograms,
 } from "../../../packages/ops/src/ads/lib/a8-report-csv.mjs";
-import { repoRoot } from "./lib/asp-browser-base.mjs";
+import { repoRoot } from "../../../packages/ops/src/ads/lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 import { datasetDir } from "../../../config/datasets.mjs";
 import { assertDatasetShape } from "../../../packages/ops/src/datasets/dataset-shape.mjs";

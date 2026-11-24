@@ -12,7 +12,7 @@ import { PREFECTURE_COUNT } from '@stats47/area/area-code';
  *
  * 注意: 生成物は `points`（47点。フィールド名 `prefCode`）と `highlights.trendAnchors` /
  * `highlights.outliers`（フィールド名 `areaCode`）でキー名が異なる
- * (`.claude/scripts/sns/lib/correlation-carousel-core.ts` の `JoinRow` 型由来)。
+ * (`packages/ops/src/sns/lib/correlation-carousel-core.ts` の `JoinRow` 型由来)。
  * ここではそのまま踏襲し、resolveCorrelationCarousel でハイライトが points に実在するかを検証する。
  *
  * 因果を示唆しない規約は .claude/rules/evidence-based-judgment.md の通り、props にある

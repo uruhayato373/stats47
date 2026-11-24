@@ -30,7 +30,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../../../packages/types/mirror/site-config.cjs";
-import { yearLabelOf } from "./lib/ranking-year-label.mjs";
+import { yearLabelOf } from "../../../packages/ops/src/blog/lib/ranking-year-label.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

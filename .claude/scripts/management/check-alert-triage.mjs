@@ -16,7 +16,7 @@ import { appendFileSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { formatTriage, triageAlerts } from "./lib/alert-triage.mjs";
+import { formatTriage, triageAlerts } from "../../../packages/ops/src/management/lib/alert-triage.mjs";
 import { loadIdIndex, loadWiring } from "../../../packages/ops/src/management/review-cadence.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");

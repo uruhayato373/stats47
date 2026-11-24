@@ -28,7 +28,7 @@ user-invocable: false
 
 | キーワード・文脈 | スキル | 例 |
 |---|---|---|
-| ランキングを登録したい | TS-config 追加 + `/sync-metrics-cache` + `/page-data-batch` | 「出生率のランキング登録して」 |
+| ランキングを登録したい | TS-config 追加 + `/page-data-batch` | 「出生率のランキング登録して」 |
 | e-Stat からデータ取得 | `/search-estat` → `/fetch-estat-data` | 「e-Statで犯罪データ探して」 |
 | メトリクスデータ更新 | `/page-data-batch` | 「データ更新して」 |
 | スナップショット更新・本番反映 | `/sync-snapshots` | 「データ反映して」「スナップショット更新して」 |
@@ -74,7 +74,7 @@ user-invocable: false
 1つの指示に複数のスキルが必要な場合、依存関係を解析して順序付けする。
 
 例: 「新しいランキングを登録してSNS投稿まで全部やって」
-1. data-ingester: TS-config 追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>`
+1. data-ingester: TS-config 追加 + `/page-data-batch --metric <key>`
 2. snapshot-exporter + r2-publisher: `/sync-snapshots`
 3. SNS: X は `/post-x` → `/publish-x`、IG は `/generate-instagram-schedule`、動画は `/bar-chart-race` (週次は `/sns-weekly-plan`)
 4. sns-renderer: `/render-sns-stills`

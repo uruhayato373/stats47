@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "window": { "startedOn": null, "weeks": 4, "minQuestions": 10, "productThemeMin": 3 },
+  "queries": {
+    "kml-map": ["KML Googleマイマップ 取り込み", "都道府県 色分け 地図 作り方", "KML 作成 エクセル"],
+    "estat-fetch": ["e-Stat API 使い方", "e-Stat データ 取得 Python", "e-Stat 統計表 ダウンロード"],
+    "excel-stats": ["エクセル 統計 都道府県 比較", "エクセル 人口 データ 整形", "エクセル 相関 散布図 都道府県"],
+    "claude-code": ["Claude Code 統計 データ", "Claude Code e-Stat", "Claude Code エクセル 自動化"],
+    "other": ["都道府県 統計 データ 探し方", "統計 グラフ 作り方 初心者", "オープンデータ 地図 可視化"]
+  },
+  "sources": {},
+  "questions": []
+}

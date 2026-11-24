@@ -338,3 +338,36 @@ describe("resolveSurveyLinkage: 調査のページへ並べるのは主出典 (�
     }
   });
 });
+
+// 題と説明文は、定義に書いてあればそれを使い、無ければ最新年の観測値から作る (SEO-META-FROM-VALUES-01)。
+// 定義に年と値を手で書くと、新しい年を取り込んでも題が古い年のまま残った (2026-11-23 医療施設の 6 指標)
+describe("buildRankingItemFromMetric の題と説明文", () => {
+  const latestRows = [
+    { areaCode: "13000", areaName: "東京都", value: 14_000_000, rank: 1 },
+    { areaCode: "31000", areaName: "鳥取県", value: 540_000, rank: 2 },
+  ];
+
+  it("定義に題が無ければ、最新年の観測値から作る", () => {
+    const item = buildRankingItemFromMetric(baseConfig, {
+      values: { yearCodes: ["2024", "2023"], latestRows },
+      now: NOW,
+    });
+    expect(item.seoTitle).toMatch(/^総人口ランキング都道府県【2024年度】｜1位東京都（/);
+    expect(item.seoDescription).toMatch(/^2024年度の総人口の都道府県別ランキング。1位東京都（.+）、最下位鳥取県（.+）で25\.9倍の格差。/);
+  });
+
+  it("定義に書いた題と説明文は、観測値があってもそのまま使う (年と値を含まない言い回しの上書き)", () => {
+    const item = buildRankingItemFromMetric(
+      { ...baseConfig, seoTitle: "総人口ランキング｜手書き", seoDescription: "手書きの説明" },
+      { values: { yearCodes: ["2024"], latestRows }, now: NOW },
+    );
+    expect(item.seoTitle).toBe("総人口ランキング｜手書き");
+    expect(item.seoDescription).toBe("手書きの説明");
+  });
+
+  it("観測値が無い指標は題を作らない (ページは指標の名前に戻す)", () => {
+    const item = buildRankingItemFromMetric(baseConfig, { values: null, now: NOW });
+    expect(item.seoTitle).toBeNull();
+    expect(item.seoDescription).toBeNull();
+  });
+});

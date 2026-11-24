@@ -1,34 +1,31 @@
 ---
 name: feedback_generatestaticparams_r2_notfound_stuck
-description: R2依存の動的routeに generateStaticParams を付けると ● SSG 化→build時R2不可で notFound が永久固着。撤去して ƒ オンデマンドISR化が正解
+description: R2依存の動的routeの generateStaticParams はキー列を返すと notFound 固着、関数なしだと ISR が効かず毎回描画。空配列 + revalidate が正解 (2026-11-21 訂正)
 metadata: 
   node_type: memory
   type: feedback
   originSessionId: dd984b85-3da3-487f-8187-c5fbd2088407
+  modified: 2026-11-21
 ---
 
-R2 snapshot を読んで描画する動的 route に **`generateStaticParams` を付けてはならない**。付けると
-`● SSG` 化され、**`next build` 時点では R2 を読めない**(Worker binding なし・build env に S3 creds /
-公開URL 無し) ため、ページ描画の R2 read が `ok(null)` に落ちて **notFound として prerender** される。
-この OpenNext 構成では **ISR 再生成が効かない**(`x-nextjs-stale-time: 4294967294`=実質無限) ため、
-notFound prerender が再デプロイまで配信され続ける。
+R2 snapshot を読んで描画する動的 route の `generateStaticParams` は **空配列だけを返す** (`return [];`) + `revalidate`。
 
-**Why**: 2026-06-22、本番で `/ranking/*` 全件「ランキングが見つかりません」・`/areas/[areaCode]`
-「地域の特徴が見つかりません」・`/areas/*/cities/*`「市区町村が見つかりません」が永久配信される障害。
-原因は3 route が `generateStaticParams`(KNOWN_RANKING_KEYS / 47県 / PHASE_1_SSG_CITIES) を返し ● SSG 化
-していたこと。`readRankingItemFromR2` は build 時 `ok(null)` を返す設計で notFound prerender になる。
-ランタイムの R2 binding 自体は正常(home/category/areas-[themeSlug] は稼働中)。
+- **キー列を返す** → `● SSG` でビルド時に描かれるが、`next build` 時点では R2 を読めず (`readRankingItemFromR2` は
+  build 時 `ok(null)`) **notFound が焼かれて再デプロイまで固着**する (2026-06-22 障害。`/ranking/*` 全件「見つかりません」)。
+- **関数ごと外す** → `ƒ` になり **`revalidate` を書いても毎リクエスト描画**。2026-06-22 の修正 (#504) はこちらを選び、
+  「ƒ でも ISR キャッシュされる」と書いたが誤りだった。2026-11-21 に、`/ranking/*`・`/areas/*` が 5 か月毎回 1.7 秒の
+  CPU で描かれ、Workers CPU 課金の約 7 割を占めていたと分かった (CF-CPU-ISR-01)。Next.js 公式: 実行時の ISR には
+  空配列か force-static が要る (https://nextjs.org/docs/app/api-reference/functions/generate-static-params 、2026-11-21 確認)。
+
+**Why**: 2 つの失敗は「ビルド時に描くか」と「実行時に保存するか」を 1 つの関数で切り替えていると気づかずに、
+片方の症状だけを見て直したことから来た。
 
 **How to apply**:
-- R2 を読む動的 route は **generateStaticParams を付けず `revalidate` だけ** → `ƒ`(オンデマンドISR)。
-  ランタイムに R2 を読んで初回描画→ISRキャッシュ。category / areas/[areaCode]/[themeSlug] と同方式(稼働実績)。
-- 例外: blog/[slug]・survey/[surveyKey] は generateStaticParams 持ちだが build 時に R2 を読んで GOOD な
-  内容を prerender できる(build ガード無し)ため ● SSG のままで正常。「build 時に実データを読めるか」で判定。
-- 診断: レスポンスヘッダ `x-nextjs-prerender:1` + `x-nextjs-cache:STALE` + `x-nextjs-stale-time:4294967294`
-  が notFound 固着のサイン。`curl -A Googlebot <url> | grep '<title>'` で「〜が見つかりません」を確認。
-- 修正は本番デプロイが必須(build 産物の問題)。デプロイ後 stale-while-revalidate で 1-2 リクエストで自己回復。
-- 検証時の注意: city ルートは政令指定都市のみ(`/areas/14000/cities/14130` 川崎市)。特別区(13101 千代田区,
-  parent=13100)は対象外で notFound が正常。non-existent key の notFound も正常(R2 item.json が 404 か確認)。
+- `next build` の表で `ƒ` なら ISR は効いていない。空配列なら `●` でビルド時の件数 (prerender-manifest の routes) は増えない。
+- 本番での確かめ方: Workers Cache を避けるクエリ付きで同じ URL を 2 回取る。2 回目も秒単位なら毎回描画。
+- ISR は描いた結果を保存するので、主データの読み取り失敗は `notFound()` にせず例外を投げる (500 は保存されない)。
+- 機械の止め: 関数なし → `apps/web/src/__tests__/render-mode-contract.test.ts`、キー列 → `check-r2-route-ssg.cjs`。
+- 診断 (notFound 固着): `x-nextjs-prerender:1` + `x-nextjs-cache:STALE` + `x-nextjs-stale-time:4294967294`。
 
-正典: `.claude/rules/nextjs-ssg-preservation.md` §generateStaticParams 固着。修正 commit `52d2910a` (PR #504)。
-関連: [[feedback_cloudflare_workers_env_r2_skip]] [[feedback_home_pure_ssg_r2_empty]] [[feedback_nextjs_ssg_cookies]]
+正典: `.claude/rules/nextjs-ssg-preservation.md` §generateStaticParams 固着。
+関連: [[feedback_cloudflare_workers_env_r2_skip]] [[feedback_home_pure_ssg_r2_empty]] [[feedback_nextjs_ssg_cookies]] [[feedback_blog_revise_isr_stale_entry]]
