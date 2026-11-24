@@ -104,33 +104,6 @@ function getSlotIndex(mouseX: number, count: number, slot: number, padX: number,
   return Math.max(0, Math.min(count - 1, Math.floor((bounded - padX) / slot)));
 }
 
-function appendEdgeYearLabels(
-  svg: ReturnType<typeof select<SVGSVGElement, unknown>>,
-  points: ChartPoint[],
-  xForIndex: (index: number) => number,
-  height: number,
-) {
-  if (points.length === 0) return;
-
-  svg
-    .append("text")
-    .attr("x", xForIndex(0))
-    .attr("y", height - 4)
-    .attr("font-size", YEAR_LABEL_FONT_SIZE)
-    .attr("fill", MUTED)
-    .attr("text-anchor", "start")
-    .text(points[0].year);
-
-  svg
-    .append("text")
-    .attr("x", xForIndex(points.length - 1))
-    .attr("y", height - 4)
-    .attr("font-size", YEAR_LABEL_FONT_SIZE)
-    .attr("fill", MUTED)
-    .attr("text-anchor", "end")
-    .text(points[points.length - 1].year);
-}
-
 function appendCompactYearLabels(
   selection: ReturnType<typeof select<SVGGElement, unknown>>,
   point: { year: number },
@@ -203,7 +176,11 @@ export function MiniLineChart({
   useEffect(() => {
     if (!svgRef.current || points.length === 0) return;
 
-    const layout = getMiniChartLayout(height, width);
+    // 年の目盛りも点も描かない線だけの推移 (2026-11-24 オーナー指示)。年と値はホバーのツールチップで読む。
+    // 年のラベル用に空けていた下の余白を線に使う
+    const baseLayout = getMiniChartLayout(height, width);
+    const plotBottom = baseLayout.height - baseLayout.padTop;
+    const layout = { ...baseLayout, plotBottom, plotHeight: plotBottom - baseLayout.padTop };
     const ys = points.map((p) => p.value);
     let minY = Math.min(...ys);
     let maxY = Math.max(...ys);
@@ -234,18 +211,6 @@ export function MiniLineChart({
         .attr("stroke-width", 1.8)
         .attr("d", lineFn);
     }
-
-    svg
-      .append("g")
-      .selectAll("circle")
-      .data(points)
-      .join("circle")
-      .attr("cx", (_, i) => xScale(i))
-      .attr("cy", (d) => yScale(d.value))
-      .attr("r", (_, i) => (i === n - 1 ? 3 : 1.8))
-      .attr("fill", PRIMARY);
-
-    appendEdgeYearLabels(svg, points, xScale, layout.height);
 
     const crosshair = svg
       .append("line")

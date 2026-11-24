@@ -1,5 +1,7 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-11-24T01:46:54",
-  "files": []
+  "hash": "305e9f0123246622726cc259ae32bba76d868fe24691a617e09b77164ab2ae1c",
+  "audited_at": "2026-11-24T03:35:26",
+  "files": [
+    ".claude/rules/chart-component-standards.md"
+  ]
 }
