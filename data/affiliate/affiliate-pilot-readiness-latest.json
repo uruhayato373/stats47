@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-22T20:13:33.947Z",
+  "generatedAt": "2026-11-24T00:39:41.709Z",
   "plan": {
     "experimentId": "ranking-labor-lane-pilot-2026w39",
     "kind": "creative",
@@ -57,7 +57,6 @@
   "readiness": {
     "status": "blocked",
     "reasons": [
-      "inventory-snapshot-stale(19d>10d)",
       "a8-cross-check-shortfall",
       "a8-results-month-missing",
       "eligible-candidate-missing",
@@ -67,7 +66,6 @@
   "verdict": {
     "status": "pending",
     "reasons": [
-      "inventory-snapshot-stale(19d>10d)",
       "a8-cross-check-shortfall",
       "a8-results-month-missing",
       "eligible-candidate-missing",
@@ -79,7 +77,6 @@
   "recommendedAction": {
     "id": "resolve-pilot-start-gates",
     "reasons": [
-      "inventory-snapshot-stale(19d>10d)",
       "a8-cross-check-shortfall",
       "a8-results-month-missing",
       "eligible-candidate-missing",
