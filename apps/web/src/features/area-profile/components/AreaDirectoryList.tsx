@@ -11,6 +11,14 @@ import type { AreaRegionGroup } from "../utils";
 const FOCUS_RING =
   "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
+/**
+ * comfortable の一覧の列。一覧の幅が 320px 以上なら 3 列 (1 列 約 100px に 4 文字の県名と矢印が入る)。
+ * スマホ (/areas は地図の下に一覧) で 2 列だと 26 行になり、ページの高さが予算 2600px を超えていた
+ * (2026-11-21 の週次 mobile_page_height 2906)。3 列で 19 行、約 350px 縮む。
+ * 地図と左右に並ぶ幅 (一覧 約 300px) は 2 列のまま、xl のビューポートでは従来どおり 3 列。
+ */
+export const COMFORTABLE_GRID_CLASS = "grid grid-cols-2 gap-1.5 @min-[20rem]:grid-cols-3 xl:grid-cols-3";
+
 interface AreaDirectoryListProps {
   regionGroups: AreaRegionGroup[];
   /** リンククリック時の計測フック（遷移は Link 自身が行う） */
@@ -39,7 +47,7 @@ export function AreaDirectoryList({
   return (
     <nav
       aria-label="都道府県一覧"
-      className={cn("flex flex-col", compact ? "gap-3" : "gap-5", className)}
+      className={cn("@container flex flex-col", compact ? "gap-3" : "gap-5", className)}
     >
       {regionGroups.map((region) => {
         return (
@@ -58,7 +66,7 @@ export function AreaDirectoryList({
               className={cn(
                 compact
                   ? "flex flex-wrap gap-x-1 gap-y-0.5"
-                  : "grid grid-cols-2 gap-1.5 xl:grid-cols-3",
+                  : COMFORTABLE_GRID_CLASS,
               )}
             >
               {region.prefectures.map((pref) => (

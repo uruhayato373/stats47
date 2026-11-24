@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T10:30:23.293Z",
+  "generatedAt": "2026-11-24T10:33:03.618Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -1353,14 +1353,14 @@
       "metric_key": "mobile_page_height",
       "severity": "warning",
       "detail": "mobile_page_height = 2906 (閾値 <= 2600)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:33:03.607Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "地図の下の都道府県一覧 (AreaDirectoryList の comfortable) を一覧の幅 320px 以上で 2 列から 3 列にした (26 行 → 19 行、1 行 50px で約 350px 縮む見込み = 2906 → 約 2556)。描いた高さの実測は未確認で、週次の監査が確かめる"
     },
     {
       "key": "machine|https://stats47.jp/blog/2050-population-flood-exposure|broken_images",
