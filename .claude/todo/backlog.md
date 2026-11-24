@@ -166,6 +166,7 @@ updated: 2026-11-01
 - **対象 18 本**: aichi-food-culture banana-consumption-quantity bonito-vs-oyster-fish-map earthquake-insurance-prefecture-gap garden-plants-expenditure-ranking ishikawa-food-culture iwate-food-culture kagoshima-food-culture kumamoto-food-culture mayonnaise-consumption-expenditure mie-food-culture nagano-food-culture nara-food-culture natto-production-vs-consumption sea-bream-expenditure-ranking strawberry-consumption-prefecture-gap tottori-food-culture yokan-expenditure-ranking
 - **次**: 公開 CI の CDN 消去の前に `packages/r2-storage/src/scripts/purge-isr-routes.ts --routes /blog/<slug> --apply` を足すか、OpenNext に再生成の queue を設定する。足した後は改稿 1 本で、公開前に開いたページがデプロイなしで新版になるかを確かめる。
 - **完了条件**: 改稿版の公開後、デプロイなしで本番ページの h1 と本文が新版になる。18 本は次の本番デプロイで新版になったことを確かめる。
+- **進捗 (2026-11-24・640da68f4)**: 記事の公開の CI で、ISR のエントリを消してから CDN を消すようにした。残りは CI での実行と、デプロイなしに新版が出るかの確認 (main への反映の後)。
 
 ### [OPENDATA-ARCHIVE-01] e-Stat 外の原本を非公開 R2 に一度だけ固定し、共通スキーマ経由で展開する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-14] [領域:データ]
@@ -292,6 +293,7 @@ updated: 2026-11-01
 - **追補 (2026-11-14)**: `config/datasets.mjs` の `ai-content.staging` の行は planned:true のままだが、置き場は outbox である。check-datasets は planned の行に追跡ファイルが当たると error にするので、ランキング解説の公開待ち JSON を push する commit が止まる。transient に替える。
 - **完了条件**: 上の置き場が無くなり、npm run check-datasets と npm run preflight:pr が通り、移した workflow が新しい置き場へ書くことを手動起動で確かめています。
 - **DATA-LAYOUT-MOVE-01 から移した未決 (2026-11-24)**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。 2026-11-22 に 182 件の寿命を付けて外した: 索引 `seo.rank-history-summary` が全件のハッシュをつなぎ過去分の削除を禁じるので、寿命を付けるなら索引を縮める処理と一緒に入れる。
+- **進捗 (2026-11-24・e604c688c)**: 1 本だけの `adsense/` を `google-admin/` へまとめた。instagram/ と threads/ は main の cron が名指ししているので、main への反映と同時に移す。残りのスクリプトとデータ 3 件は別の場所の変更を伴う。
 
 ### [GOAL-PSI-LCP-STALE-01] 性能目標 `psi-mobile-lcp-2500` の記録が ACTIVE のまま 2026-05-15 から止まっている
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理] [待ち:判断]
@@ -448,6 +450,7 @@ updated: 2026-11-01
 - **観測 (2026-11-14・Mac)**: `attachment-dom.test.cjs` の 1 件は Mac でも落ちるので、Windows 固有ではない。
 - **再観測 (2026-11-15・R2 Stage 3 batch B)**: `node --import tsx --test .claude/scripts/note/__tests__/attachment-dom.test.cjs` の同じ 1 件が `ERR_ASSERTION` (`/keys Home|index\(\$0,h\)|startsWith/` に一致) で失敗。
 - **再観測 (2026-11-20・Mac)**: 同じ 1 件が同じ assert で失敗 (note のテストを packages へ移す作業中に確認。) (参照: d3ce3bac09)
+- **進捗 (2026-11-24・2782b6684)**: ins_file を attachment-dom の式へ戻し、パス区切りに依存する 2 本のテストを直した。残り: note エディタでの ins_file の実地確認、admin と web/src のテスト、CRLF の 3 ゲート、spawn の件、Windows での確認。
 
 ### [AFFILIATE-PUBLISH-PROFILE-TRIGGER-01] 案件の台帳だけを変えた push で、広告の R2 への反映が走らない
 タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-11-11] [領域:アフィリエイト] [待ち:判断]
@@ -649,6 +652,7 @@ updated: 2026-11-01
 - **停止条件・禁止**: 撮影のために本番へデプロイしない。launchd の plist は変えない (既存の土曜の 1 本の段として足す)。本番の撮影で「通った」が 1 件でも出たら本番の撮影をやめ、Mac で開発サーバーを立てて撮る案へ戻してオーナーに聞く。
 - **完了条件**: 土曜ランナーが 1 回本番を撮り切り、管理画面に新しい日付の 63 枚が出て、撮影のログと manifest の `adTraffic` で広告・計測の通信が通った件数 0 を示せ、週次レビューの手順に確認が入っている。
 - **オーナー決定 (2026-11-24)**: 推奨どおり (a) 土曜ランナーで本番を撮る を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: 残りの 1 (本番で 1 ページ・1 幅だけ撮って通信が通らないことを確かめる) から始める
+- **進捗 (2026-11-24・ce9b2c623)**: 土曜ランナーに本番の広告の配置を撮る段を足した (本番で 63 枚・エラー 0・止めた通信 252 件・通った通信 0)。撮影で見つかった Cloudflare の計測の beacon も止める対象に足した。撮影結果の保持 (`config/local-resources.json`) を直近 8 回に合わせて 63 日にした。残り: 土曜ランナーでの初回の実行と、管理画面の警告の読み取り。
 
 ### [BLOG-FIGURE-REDRAW-REGRESSION-01] ブログの図の一括の描き直しで出た型の不具合 (出典欄が空・題の右端が切れる・年度が「年」) をサイト側で直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
@@ -741,6 +745,7 @@ updated: 2026-11-01
 - **残り (判断)**: (1) 予約中の IG カルーセル素材を再レンダーして R2 を差し替えるか。推奨は差し替える。根拠は、予約の本文・日時・ID を変えずに画像だけを替えられ、決定後に出る投稿へ発行元入りの画像が出続けるのを止められること。(2) 旧画像で予約済みの X 12 件を差し替えるか。X の予約操作が要るのでオーナーの判断を待つ。(3) YouTube のアウトロ (`NormalOutro.tsx`) は統計画像ではないので発行元を残すか。推奨は残す。(4) 地図カルーセルで塗り分けと上位・下位の 2 枚がタイル地図で重なる点を統合するか。
 - **停止条件**: 予約中投稿の差し替えで本文・日時・ID が変わる場合と、公開済み投稿の素材を上書きする場合は止める。
 - **完了条件**: 今も使う生成経路の可視テキストに発行元が無く、各経路の出力に `assertMinimalChartCopy` 相当の検査が掛かり、予約中の素材の扱いが決まって記録されている。
+- **進捗 (2026-11-24・e936389a9)**: データカード・X のタイル地図・Geo の画像・IG のランキングカルーセルから発行元を外した (remotion の vitest 88 件)。残り: 発行元が残る経路 7 本、変更前後の画像の目視、予約中の素材の扱い (判断)。DataCard の表紙の「スワイプして」は画像内の文言の契約 (`chart-image-copy.md`) に反している。
 
 ### [REMOTION-RSPACK-WIN-01] Windows で Remotion の描画が rspack のネイティブ部品欠落で起動しない
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [起票:2026-11-02] [領域:SNS]
@@ -1353,6 +1358,7 @@ updated: 2026-11-01
 - **追記 (2026-10-27)**: 管理画面 `/ops/agents` は週ごとの推移を TrendChart で出せない。`apps/admin/lib/server/agent-models.ts` の `UsageReport` が週別の値を持たないため。記録が 4 週分そろったら週別の配列を足し、`/ops/agents` にチャートを置く (`.claude/rules/admin-ui.md` の規約: 3 点以上の時系列はチャート)。
 - **追補 (2026-11-22)**: `config/model-pricing.json` に `claude-fable-5-2` と `claude-haiku-5-5` の単価が無い (このセッションで Fable 5.2 を使った)。料金ページの読み取りでは Haiku 5.5 が 10 万トークンを境に単価が変わる段階料金で、`costOf` は段階に対応していない。Sonnet 5.5 の cache read もページ 0.10・表 0.2 と食い違って見えた (要約経由の読み取りなので、表を開き直して確かめてから直す)。`latestModels` は 11-22 に fable-5-2・haiku-5-5 へ直した。
 - **棚卸し (2026-11-22)**: `config/model-pricing.json` に Fable 5.2 と Haiku 5.5 の単価を公式ページ (platform.claude.com の pricing、11-22 取得) から足し、Sonnet 5.5 のキャッシュ読みの単価を 0.1 に直した。Haiku 5.5 は 10 万トークン超の応答で単価が上がるが、`costOf` は合計で換算するので段階に対応できず、超過分を安く見積もる。応答ごとに換算する改修と、①〜③ (Windows・CI の記録、4 週後の統合候補) が残る。
+- **棚卸し (2026-11-24)**: 段階料金の単価は `config/model-pricing.json` に置き、CI の記録は書き戻しの配線を足す必要がある。
 
 ### [X-METRICS-WEEKLY-RECORD-01] X の指標を週次で記録する定期実行を作り、管理画面を読みに行く操作を止める hook の対象に X を加える
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-10-20] [領域:SNS]
@@ -1360,6 +1366,7 @@ updated: 2026-11-01
 - **背景 (2026-10-20)**: Instagram の指標は週次の CI (`sns-metrics-weekly.yml`) が記録するが、X の指標は `/update-sns-metrics --platform x` が browser-use でその都度取るしかない。
 - **次**: X の指標を週 1 回 (認証付き計測と同じ土曜の Mac) で `data/sns/metric-snapshots/` に記録し、`.claude/scripts/measurement/sources.mjs` の `readUrls` に X の分析画面を足す。
 - **完了条件**: X の指標が週次で記録され、セッションがブラウザで取りに行く必要が無くなっている。
+- **棚卸し (2026-11-24)**: X の指標を無人で取る決定的なスクリプトが無く、作るのに半日を超える。カードの `sources.mjs` の `readUrls` はもう存在しない。
 
 ### [MONETIZE-BROAD-ROLLOUT-01] 収益の打ち手 12 本を先に広く並走させ、4 週の配置別 CTR・成約・ad-yield で絞る (2026-10-19 オーナー指示「まず広く展開してから絞る」)
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-19] [期日:2026-12-31] [領域:アフィリエイト] [待ち:判断]
@@ -1726,6 +1733,7 @@ updated: 2026-11-01
 - **事実**: `pr-quality-check.yml` の Unit Tests は web 250 秒 + packages 334 秒 + admin 83 秒を 1 job で直列 (12.1 分)。
 - **次**: ①Unit Tests を develop gate と同じ並列の job に分ける ②metadata の生成を build と並べる ③Static Gates が落ちたら残りを止める ④preflight に Web unit と Catalog Gates を足すかを決める (`CI-TOOLING-FOLLOWUP-03` の preflight の追補と合わせる)。
 - **完了条件**: PR の run の中央値と、Static Gates の失敗が赤になるまでの時間を、前後の実測で比べて書いた。
+- **進捗 (2026-11-24・a622ab186)**: Unit Tests を suite ごとの並列にし、Static Gates が落ちたら run を止めるようにした (変更前は Static Gates の失敗が 3.5 分なのに赤になるのは約 14 分後)。残り: push 後の PR で所要を実測する。metadata の生成を build と並べる案は見送った。actionlint は手元に無く未実行。
 
 ### [CI-CRON-TIMING-01] 定期実行が R2 の鍵と時刻で人の作業・互いの計測とぶつかる
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
@@ -1733,14 +1741,16 @@ updated: 2026-11-01
 - **事実**: ①11-14 23:29 の手動 deploy が、`r2-isr-gc` (最大 25.6 分) と `cleanup-r2-sns-videos` の直後で開始まで 21.8 分待った ②schedule の起動は cron より 3.3〜7.5 時間遅い (fetch-metrics は 01:00 JST の予定が 06:53・07:35) ③`fetch-metrics-weekly` と `quality-suite-weekly` が同じ cron `0 16 * * 5` で、13 job と本番への巡回が重なる。
 - **次**: ①GC と cleanup を実際に動く時刻で人の作業時間から外す (鍵を prefix で分ける案は、書き込み先の照合が先) ②後段 (note-figure・ledgers・seo-keyword・smoke) を時刻ずらしでなく workflow_run でつなぐ ③品質系を計測の後へつなぐ。
 - **完了条件**: 2 週の run で、後段が計測の完了の後に起動し、手動 deploy の鍵待ちが 5 分未満だった記録がある。
+- **進捗 (2026-11-24・d6a5d415b)**: R2 の GC と動画の掃除を人の作業の時間帯の外へ出し、台帳 2 本を計測の後へ workflow_run でつないだ。残り: 2 週分の run の記録で効果を確かめる。seo-keyword・smoke・quality-suite を計測の後へつなぐ件は未着手。
 
 ### [ALWAYS-LOADED-TRIM-01] 毎会話に読み込む指示 (概算 3.1 万 token) を減らす
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-11-22] [領域:管理]
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-11-22] [領域:管理] [待ち:判断]
 
 - **事実**: CLAUDE.md 187 行・常時 rules 2 本 366 行 (553/600 行・DG070)、MEMORY.md 200 行。
 - **次**: ①rules の表を docs-vs-issues.md へ移し、DG072 の検査を同じ差分で直す ②MEMORY.md の索引を領域ごとにまとめ直して 170 行以下にする。
 - **禁止**: 常時 rules の追加・削除はオーナー判断。
 - **完了条件**: CLAUDE.md + 常時 rules が 500 行以下、MEMORY.md が 170 行以下で `npm run docs:check` が通る。
+- **進捗 (2026-11-24・ec72f2337)**: CLAUDE.md の rules の表を `docs-vs-issues.md`「rules の一覧」へそのまま移し (187 → 134 行)、常時読み込みは 553 → 500 行 (余裕 0。1 行足すと条件を割る)。MEMORY.md は 200 → 165 行だが、隣り合う行を 2 行ずつまとめただけで、カードの「領域ごとにまとめ直す」とは違う。この形で完了とするかを決める。
 
 ### [AGENT-DORMANT-CONSOLIDATE-01] 起動の記録が無い agent 40 本を、統合するか休眠にするかを決める
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理] [待ち:判断]
@@ -1757,13 +1767,6 @@ updated: 2026-11-01
 - **完了条件**: 前提が `skill-code-placement.md` か skills の README に 1 段落で書かれ、8 本と重なる組の残す・統合・削除が決まって反映された。
 - **オーナー決定 (2026-11-24)**: 推奨どおり 「Read する文書」の前提を明文化する (平坦にして登録しない) を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: skill-code-placement.md か skills の README に前提を 1 段落書き、8 本と重なる組の残す・統合・削除を洗う
 - **進捗 (2026-11-24・0d40b31fb)**: 前提の段落 (skill は Skill ツールに登録しない「Read する手順書」) を `skill-code-placement.md` に書いた。残りの「使われていない 8 本」はカードに名前が無く、静的な参照が 0 本なのは `dev/strategic-compact` と `ges/render-ges-ports` の 2 本だけ。`/名前` で呼ぶ使い方は参照に残らないので、消してよい証拠にならない。どれを消すかを決める。
-
-### [CODEX-MIRROR-SLIM-01] Codex 向けの写し (.agents/skills・.codex) の複製と手保守をやめる
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:管理]
-
-- **事実**: `.agents/skills` は SKILL.md の複製 161 本 (1.43MB) + symlink 153 本。
-- **次**: ①SKILL.md も symlink にするか写しをやめる ②hooks.json を `sync-codex-mirror.cjs` で settings.json から生成する。
-- **完了条件**: 写しの複製が 0 本で、hooks.json が生成物になり、`sync-codex-mirror.cjs --check` が差分を止める。
 
 ### [WEB-PUBLIC-UNUSED-ASSETS-01] apps/web/public に、参照の無い土木の画像 19 枚 (36.3MB) がデプロイのたびに送られている
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]
@@ -1789,6 +1792,7 @@ updated: 2026-11-01
 - **起動しない workflow**: 13 日で 0 run の dispatch 専用が 10 本 (backlog-routing-policy-weekly・post-threads-scheduled・threads-token-refresh・commute-flow-ingest・google-admin-settings・infra-history-publish・kakei-axis-charts・ksj-aggregate-ingest・regenerate-blog-svgs・generate-ogp-images)。estat-ssds-enum は名前が weekly で schedule が無い。30 日の run 数で確かめ、名前と起動条件を合わせるか消す。
 - **完了条件**: 3 項目それぞれに、直した結果か残す理由が書いてある。
 - **進捗 (2026-11-24・a1c5d1d00)**: 起動しない workflow の名前を起動条件に合わせ、CodeQL は既定の設定が登録を持つので workflow 側を `upload: never` にして job summary への出力用に残した。残りは、公開があった run の索引の差分更新 (今は全記事を読む作り)。
+- **追加 (2026-11-24)**: `check-estat-entrypoint` は `quality-gates.json` の trigger に pull_request が無く、PR の CI で走っていない (CI-SPEED-PRECOMMIT-TRIM-01 で pre-commit に残した)。PR でも走らせる。
 
 ### [NOTE-PRODUCT-ZIP-ARCHIVE-01] note 有料記事の添付 ZIP (商品ファイル) を private R2 に保全する経路を作る
 タグ: [収益化] [種類:改善] [実行:別環境] [起票:2026-10-13] [領域:商品]
@@ -2382,17 +2386,6 @@ updated: 2026-11-01
 - **次**: 週次結果から欠落の全リストを出し、台帳 `areas.editorial` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 - **決定 (2026-10-26 オーナー)**: 頭文字タイルの正式化はせず、欠けている画像を用意する。次は週次監査の `degraded_images` から欠落の全リストを出し、image-prompt-curator で生成する。
-
-### [CI-SPEED-PRECOMMIT-TRIM-01] pre-commit を「秒単位のもの」だけに削り、metric config 時の `npx tsx` 直列 6 本と image pipeline 検査を preflight:pr / CI へ寄せる
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs] [起票:2026-09-18] [期日:2026-11-30] [領域:管理]
-
-- **済み (2026-11-14・9f041b983)**: pre-commit は終了時に全段の所要時間を重い順で出す (`apps/web/scripts/pre-commit-stage-timer.sh` の `stage "名前"` で段を切る。)
-- **実測 (Mac・2026-11-14・metric config 1 件 + workflow 1 件を staged)**: 合計 49.9 秒。
-- **残り (判断)**: どの段を pre-commit から外すかをオーナーが決める。選択肢は、(a) Mac と Windows の両方で、上位の段 (画像 pipeline の 2 本、check-checker-wiring、metric 契約の 3 本、GIS 台帳の vitest、note の 4 本) を `preflight:pr` と CI に任せる、(b) 同じ段を Windows だけで外す、(c) 外さずに trigger を狭める (note の 4 本を note 関係のパスが staged のときだけ走らせる、など)。推奨は (a) と (c) の組み合わせである。根拠は、上記の段の合計が約 43 秒で、外すと残りが約 7 秒になり完了条件に届くことと、2 台で検査の内容を変えると片方だけ通る commit が生まれることである。
-- **残り (実装)**: 判断の後、外す段ごとに CI 側 (develop-quality-gate または Static Gates) で同じ検査が走ることを workflow の記述で確かめてから外す。2026-11-14 のリテラル検索では、test:image-pipeline・type-check:image-pipeline・check-checker-wiring・metrics:check・content:check・build:category-keys は `pr-quality-check.yml` に見つかり、cover-production と dataset-references は `develop-quality-gate.yml`・`pr-quality-check.yml`・`quality-gates.json`・`preflight-commit.mjs` に見つからなかった。見つからなかった 2 本は、CI へ配線するか trigger を狭めるまで外さない。Windows PC でも同じ commit の内訳を 1 回取り、Mac と上位の段が違うかを確かめる。
-- **停止条件**: 外した検査が CI 側に無いものは外さない (`CI-DEVELOP-GATE-COVERAGE-01` の症状を再発させない)。
-- **完了条件**: metric config 1 件 + workflow 1 件を staged した commit の pre-commit が Mac で 10 秒以内であることを、commit の出力に出る段ごとの内訳の合計で確かめる。
-- **オーナー決定 (2026-11-24)**: 推奨どおり (a) と (c) の組み合わせ (上位の段を preflight:pr と CI へ寄せ、note の 4 本は trigger を狭める) を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: CI 側に同じ検査があるかを workflow で確かめ、見つからなかった 2 本の配線か trigger の絞り込みから始める
 
 ### [MEDIA-AFFILIATE-RELEASE-01] 媒体別画像と記事別アフィリエイト監査を公開まで完了する
 

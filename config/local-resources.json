@@ -221,7 +221,7 @@
     },
     {
       "path": ".local/ad-layout",
-      "ageDays": 14
+      "ageDays": 63
     },
     {
       "path": ".local/theme-qa/*",

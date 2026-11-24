@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T12:29:48.354Z",
+  "updatedAt": "2026-11-24T12:36:42.863Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14328,6 +14328,74 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T12:29:48.354Z"
+    },
+    "CI-SPEED-PRECOMMIT-TRIM-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:36:42.800Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs",
+              "Mac で metric config と workflow を staged にした pre-commit の所要"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (42b557e7d): 11-24 決定 (a)(c) どおり、CI と preflight:pr にある重い段を pre-commit から外し、note の 4 本は note の差分だけで走らせる。テスト 33 件通過、pre-commit 49.9 → 7.5 秒。check-estat-entrypoint は PR の CI に無いので残した (CI-TOOLING-FOLLOWUP-04 へ)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:36:42.800Z"
+    },
+    "CODEX-MIRROR-SLIM-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:36:42.863Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "node --test check-agent-skill-consistency.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (83cfce91b): .agents/skills の SKILL.md の複製 161 本を skill フォルダの相対 symlink にし (複製 0 本)、.codex/hooks.json を settings.json から生成するようにした (今の hooks.json と diff 0)。--check 一致、関連テスト 30 件。Codex の実機と Windows でリンク越しに skill が一覧に出るかは未確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:36:42.863Z"
     }
   }
 }
