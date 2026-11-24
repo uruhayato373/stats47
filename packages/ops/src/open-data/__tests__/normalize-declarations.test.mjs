@@ -33,6 +33,13 @@ test('sheet name capture resolves prefecture names through the shared master and
   assert.throws(() => build({ areas: table.areas }, [csv('pref,value\n架空県,2')]), /Unknown prefecture/);
 });
 
+test('prefecture names written without 都府県 and with spaces (「青　森」「東　京」) resolve through the shared master', () => {
+  const areas = [{ level: 'prefecture', column: 'pref', prefectureName: true }];
+  const result = build({ areas }, [csv('pref,value\n北海道,1\n青　森,2\n東　京,3\n京　都,4\n鹿児島,5\n大阪府,6')]);
+  assert.deepEqual(result.rows.map((r) => [r.areaCode, r.value]), [['01000', 1], ['02000', 2], ['13000', 3], ['26000', 4], ['27000', 6], ['46000', 5]]);
+  assert.throws(() => build({ areas }, [csv('pref,value\n全　国,2')]), /Unknown prefecture/);
+});
+
 test('merged multi-row headers retain sex and age distinctions without duplicating merged labels', () => {
   const workbook = new ExcelJS.Workbook(); const sheet = workbook.addWorksheet('data');
   sheet.getCell('A1').value = 'pref'; sheet.mergeCells('A1:A3');

@@ -104,6 +104,48 @@ export function rebuildChartData(data, partition, { fromYear, toYear }) {
   return { data: next, notes };
 }
 
+/**
+ * 図を取り直したときの、元の年と新しい年の都道府県別の値と順位の比較 (BLOG-DATA-PRIOR-YEAR-KEEP-01)。
+ *
+ * 前年までの値は data JSON に残さない。R2 の values.json は全年の partition を持つので、取り直しのたびに
+ * そこから作る (元の年の値を別ファイルに写すと、R2 の再取り込み・訂正に追従しない二重管理になる)。
+ * 順位は値の降順で、同じ値は同じ順位。両方の年に値のある県だけを返す (値の大きい新しい年の順)。
+ *
+ * @returns {{ fromYear: string, toYear: string, rows: Array<{ areaCode: string, areaName: string,
+ *   value: number, rank: number, previousValue: number, previousRank: number, rankChange: number }> } | null}
+ *   rankChange は正なら順位が上がった (数字が小さくなった) 数。どちらかの年が R2 に無ければ null。
+ */
+export function compareWithYear(values, fromYear, toYear) {
+  const partitions = prefecturePartitions(values);
+  const from = partitions.find((p) => p.year === String(fromYear));
+  const to = partitions.find((p) => p.year === String(toYear));
+  if (!from || !to) return null;
+  const ranksOf = (byName) => {
+    const sorted = [...byName.values()].map((v) => v.value).sort((a, b) => b - a);
+    return (value) => 1 + sorted.findIndex((v) => v === value);
+  };
+  const rankFrom = ranksOf(from.byName);
+  const rankTo = ranksOf(to.byName);
+  const rows = [];
+  for (const [name, now] of to.byName) {
+    const before = from.byName.get(name);
+    if (!before) continue;
+    const rank = rankTo(now.value);
+    const previousRank = rankFrom(before.value);
+    rows.push({
+      areaCode: now.areaCode,
+      areaName: now.areaName,
+      value: now.value,
+      rank,
+      previousValue: before.value,
+      previousRank,
+      rankChange: previousRank - rank,
+    });
+  }
+  rows.sort((a, b) => a.rank - b.rank || a.areaCode.localeCompare(b.areaCode));
+  return { fromYear: String(fromYear), toYear: String(toYear), rows };
+}
+
 /** source.json の年を新しい年にし、取り直した元の年を残す。 */
 export function rebuildSource(source, { fromYear, toYear }, fetchedAt) {
   return {

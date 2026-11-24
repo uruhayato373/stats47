@@ -273,12 +273,18 @@ const KINDLE_COVER_REVIEW_STATUS_BY_ID: Readonly<Partial<Record<string, KindleCo
  * 商品ごとの表紙設計 SSOT。背景は同テーマでも具体物と構図を変え、同一画像の使い回しをしない。
  * タイトルや dataLabels は画像へ焼き込まず cover.ts が実テキストで合成する。
  */
+/**
+ * 表紙上部の共通の帯 (KDP-COVER-47PREF-DECISION-01)。見本の 2 冊 (K-S1-05・K-S1-13) で試し、4 週後の検索順位と
+ * 既読ページで残りの S1 へ広げるかを決める。題名・副題には「47都道府県」を足さない (公開後に変えられないため)
+ */
+export const KDP_COVER_SHARED_BAND = "47都道府県のデータで比べる";
+
 export const KINDLE_COVER_DESIGN_BY_ID: Readonly<Record<string, KindleCoverDesign>> = {
   "K-S1-01": d("issue-pop", "household-money", "navy-yellow", ["可処分所得", "光熱費", "貯蓄", "食費", "通信費", "地域財政"], "日本地図を中心に、硬貨、住宅、買い物かご、電気メーター、貯金箱、スマートフォンを配置する"),
   "K-S1-02": d("issue-pop", "food-consumption", "coral-cream", ["麺類", "味噌", "砂糖", "かに", "さば"], "日本地図を食卓に見立て、麺、味噌、砂糖、かに、さばの買い物かごを地域別に配置する"),
   "K-S1-03": d("issue-pop", "population-households", "blue-orange", ["人口減少", "未婚率", "単身世帯", "高齢世帯", "東京集中"], "世帯の異なる住宅群と人物ピクト、地方から都市へ向かう人口移動の流れを日本地図上に描く"),
   "K-S1-04": d("issue-pop", "health-care", "teal-red", ["健康寿命", "自殺", "介護", "医療資源", "2040推計"], "病院、聴診器、介護施設、年齢構成グラフを日本地図の周囲に配置する"),
-  "K-S1-05": d("issue-pop", "education-childcare", "blue-orange", ["教育費", "進学率", "子育て", "学校", "学力"], "学校、教科書、ランドセル、親子、進学を示す階段グラフを日本地図と組み合わせる"),
+  "K-S1-05": { ...d("issue-pop", "education-childcare", "blue-orange", ["教育費", "進学率", "子育て", "学校", "学力"], "学校、教科書、ランドセル、親子、進学を示す階段グラフを日本地図と組み合わせる"), topBand: KDP_COVER_SHARED_BAND },
   "K-S1-06": d("issue-pop", "public-finance", "green-gold", ["財政力", "地方債", "将来負担", "歳入", "歳出"], "自治体庁舎、予算書、硬貨、天秤、増減グラフを日本地図の上に配置する"),
   "K-S1-07": d("issue-pop", "tourism", "sky-coral", ["宿泊者数", "外国人客", "国籍", "観光回復", "客室"], "旅行かばん、ホテル、飛行機、温泉、観光客の流れを日本地図の周囲に描く"),
   "K-S1-08": d("issue-pop", "energy-infrastructure", "orange-navy", ["電力", "再生可能エネルギー", "都市ガス", "インフラ", "地域差"], "送電塔、太陽光、風力発電、ガスメーター、橋を日本地図上のネットワークとして描く"),
@@ -289,7 +295,7 @@ export const KINDLE_COVER_DESIGN_BY_ID: Readonly<Record<string, KindleCoverDesig
   "K-S1-14": d("issue-pop", "food-consumption", "coral-cream", ["47都市", "19年", "家計調査", "食卓", "地域差"], "日本地図の上に47都市の食卓の皿を並べ、昔と今の二つの食卓を左右に見比べる構図"),
   "K-S1-15": d("issue-pop", "household-money", "navy-yellow", ["年収階級", "食料費", "品目", "世帯", "家計調査"], "年収の段を表す階段の上に、買い物かごと食卓の皿を段ごとに並べた構図"),
   "K-S1-16": d("issue-pop", "food-consumption", "coral-cream", ["品目", "推移", "伸びた", "縮んだ", "家計調査"], "昔の買い物かごと今の買い物かごを左右に並べ、入っている品が入れ替わっている構図"),
-  "K-S1-13": d("issue-pop", "migration-living", "blue-orange", ["家賃", "賃金", "子育て", "医療", "災害"], "引っ越しの段ボール、家の鍵、日本地図、書き込みのある比較表を机の上に置いた構図"),
+  "K-S1-13": { ...d("issue-pop", "migration-living", "blue-orange", ["家賃", "賃金", "子育て", "医療", "災害"], "引っ越しの段ボール、家の鍵、日本地図、書き込みのある比較表を机の上に置いた構図"), topBand: KDP_COVER_SHARED_BAND },
 
   "K-S2-01": d("theme-databook-pop", "population-households", "blue-orange", ["総人口", "世帯", "出生", "死亡", "年齢構成"], "47都道府県の人口ピクトと世帯住宅、人口ピラミッドを日本地図の周囲に配置する"),
   "K-S2-02": d("theme-databook-pop", "household-money", "navy-yellow", ["所得", "賃金", "求人", "雇用", "採用"], "給与明細、硬貨、求人票、働く人、棒グラフを日本地図上に配置する"),

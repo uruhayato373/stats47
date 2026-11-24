@@ -125,6 +125,12 @@ export function mainTitleSize(main: string): number {
   return Math.max(96, Math.min(220, ideal));
 }
 
+/**
+ * 共通の帯 (coverDesign.topBand) を 2 番目に大きく描くときの文字の大きさ。主題 (最大 166px) より小さく、
+ * 書名の後半はこれより小さくする (帯が 2 番目、後半が 3 番目)。14 字の「47都道府県のデータで比べる」が帯の幅 1504px に収まる上限に近い
+ */
+const TOP_BAND_FONT_PX = 96;
+
 /** 添付の基準案に合わせた、極太見出し・マーカー強調・データ枠・黄色フッターのポップ表紙。 */
 async function buildPopCoverPng(
   input: CoverInput & { readonly coverDesign: KindleCoverDesign },
@@ -206,12 +212,13 @@ async function buildPopCoverPng(
               border: `5px solid ${c.ink}`,
               borderRadius: "22px",
               padding: "16px 30px 20px",
-              fontSize: "47px",
+              fontSize: `${input.coverDesign.topBand ? TOP_BAND_FONT_PX : 47}px`,
               fontWeight: 700,
               letterSpacing: "0.02em",
               marginBottom: "42px",
             },
-            `${input.coverDesign.scopeLabel ?? "47都道府県"} × ${input.coverDesign.dataLabels.length}つの${THEME_BADGE[input.coverDesign.visualTheme]}データ`,
+            input.coverDesign.topBand ??
+              `${input.coverDesign.scopeLabel ?? "47都道府県"} × ${input.coverDesign.dataLabels.length}つの${THEME_BADGE[input.coverDesign.visualTheme]}データ`,
           ),
           node(
             "div",
@@ -246,7 +253,7 @@ async function buildPopCoverPng(
                       {
                         position: "relative",
                         color: c.ink,
-                        fontSize: `${Math.min(142, mainTitleSize(rest))}px`,
+                        fontSize: `${Math.min(input.coverDesign.topBand ? TOP_BAND_FONT_PX - 12 : 142, mainTitleSize(rest))}px`,
                         fontWeight: 700,
                         lineHeight: 1.04,
                         letterSpacing: "-0.035em",

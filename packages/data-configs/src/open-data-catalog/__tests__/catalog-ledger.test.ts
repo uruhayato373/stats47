@@ -49,9 +49,9 @@ const DPF_DATASET_IDS = [
 ];
 
 describe("公開データの台帳 (open-data.sources / open-data.datasets) と読み込み口", () => {
-  it("提供元56件とデータセット136件を台帳の並びのまま出す", () => {
-    expect(OPEN_DATA_SOURCES).toHaveLength(56);
-    expect(OPEN_DATASETS).toHaveLength(136);
+  it("提供元57件とデータセット137件を台帳の並びのまま出す", () => {
+    expect(OPEN_DATA_SOURCES).toHaveLength(57);
+    expect(OPEN_DATASETS).toHaveLength(137);
     expect(OPEN_DATA_SOURCES.map((source) => source.id)).toEqual([
       'fdma-heatstroke',
       'mhlw-medical-info',
@@ -109,8 +109,9 @@ describe("公開データの台帳 (open-data.sources / open-data.datasets) と�
       'jpn-archives-da',
       'artmuseums-union-catalog',
       'ndl-digital-collections',
+      'maff-food-self-sufficiency',
     ]);
-    expect(new Set(OPEN_DATASETS.map((dataset) => dataset.id)).size).toBe(136);
+    expect(new Set(OPEN_DATASETS.map((dataset) => dataset.id)).size).toBe(137);
   });
 
   it("DPFの36件のIDを固定している", () => {
@@ -123,7 +124,7 @@ describe("公開データの台帳 (open-data.sources / open-data.datasets) と�
         OPEN_DATASETS.filter((dataset) => dataset.sourceId === source.id).map((dataset) => dataset.id),
       );
     }
-    expect(OPEN_DATA_SOURCES.reduce((sum, source) => sum + source.datasetIds.length, 0)).toBe(136);
+    expect(OPEN_DATA_SOURCES.reduce((sum, source) => sum + source.datasetIds.length, 0)).toBe(137);
   });
 
   it("IDで引け、無いIDは空で返す", () => {

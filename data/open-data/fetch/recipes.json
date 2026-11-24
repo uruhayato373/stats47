@@ -2582,6 +2582,152 @@
         "note": "2026-11-14 確認: トップと https://dl.ndl.go.jp/guide/iiif.html はJavaScriptアプリのHTMLを返した。個別資料IDに対応するIIIF manifestの掲載URLは未特定。 確認URL: https://dl.ndl.go.jp/"
       },
       "version": "initial"
+    },
+    {
+      "datasetId": "maff-prefecture-food-self-sufficiency",
+      "fetch": {
+        "type": "http-file",
+        "urls": [
+          "https://www.maff.go.jp/j/zyukyu/zikyu_ritu/attach/xls/zikyu_10-7.xlsx"
+        ]
+      },
+      "version": "fy2024-provisional",
+      "normalize": {
+        "tables": [
+          {
+            "table": "calorie-confirmed",
+            "filePattern": "^zikyu_10-7\\.xlsx$",
+            "xlsx": {
+              "sheet": "HP（カロリー推移）",
+              "headerRow": 5,
+              "columns": {
+                "prefecture": 2,
+                "FY1998": 3,
+                "FY1999": 4,
+                "FY2000": 5,
+                "FY2001": 6,
+                "FY2002": 7,
+                "FY2003": 8,
+                "FY2004": 9,
+                "FY2005": 10,
+                "FY2006": 11,
+                "FY2007": 12,
+                "FY2008": 13,
+                "FY2009": 14,
+                "FY2010": 15,
+                "FY2011": 16,
+                "FY2012": 17,
+                "FY2013": 18,
+                "FY2014": 19,
+                "FY2015": 20,
+                "FY2016": 21,
+                "FY2017": 22,
+                "FY2018": 23,
+                "FY2019": 24,
+                "FY2020": 25,
+                "FY2021": 26,
+                "FY2022": 27,
+                "FY2023": 28
+              },
+              "dataStartRow": 7,
+              "dataEndRow": 53
+            },
+            "unpivot": {
+              "columns": {
+                "FY1998": "1998",
+                "FY1999": "1999",
+                "FY2000": "2000",
+                "FY2001": "2001",
+                "FY2002": "2002",
+                "FY2003": "2003",
+                "FY2004": "2004",
+                "FY2005": "2005",
+                "FY2006": "2006",
+                "FY2007": "2007",
+                "FY2008": "2008",
+                "FY2009": "2009",
+                "FY2010": "2010",
+                "FY2011": "2011",
+                "FY2012": "2012",
+                "FY2013": "2013",
+                "FY2014": "2014",
+                "FY2015": "2015",
+                "FY2016": "2016",
+                "FY2017": "2017",
+                "FY2018": "2018",
+                "FY2019": "2019",
+                "FY2020": "2020",
+                "FY2021": "2021",
+                "FY2022": "2022",
+                "FY2023": "2023"
+              },
+              "areaColumn": "fiscalYear",
+              "valueColumn": "rate"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "prefecture",
+                "prefectureName": true
+              }
+            ],
+            "time": "1998-2023",
+            "timeColumn": "fiscalYear",
+            "dims": {
+              "basis": {
+                "value": "カロリーベース"
+              },
+              "estimate": {
+                "value": "確定値"
+              }
+            },
+            "aggregation": "sum",
+            "valueColumn": "rate",
+            "unit": "％"
+          },
+          {
+            "table": "calorie-provisional",
+            "filePattern": "^zikyu_10-7\\.xlsx$",
+            "xlsx": {
+              "sheet": "HP（カロリー推移）",
+              "headerRow": 5,
+              "columns": {
+                "prefecture": 2,
+                "FY2024": 29
+              },
+              "dataStartRow": 7,
+              "dataEndRow": 53
+            },
+            "unpivot": {
+              "columns": {
+                "FY2024": "2024"
+              },
+              "areaColumn": "fiscalYear",
+              "valueColumn": "rate"
+            },
+            "areas": [
+              {
+                "level": "prefecture",
+                "column": "prefecture",
+                "prefectureName": true
+              }
+            ],
+            "time": "2024",
+            "timeColumn": "fiscalYear",
+            "dims": {
+              "basis": {
+                "value": "カロリーベース"
+              },
+              "estimate": {
+                "value": "概算値"
+              }
+            },
+            "aggregation": "sum",
+            "valueColumn": "rate",
+            "unit": "％"
+          }
+        ]
+      }
     }
   ]
 }

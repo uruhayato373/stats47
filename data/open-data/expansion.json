@@ -3007,6 +3007,70 @@
       "reason": "今回の正規化表は地域コード付き集計で、座標・道路区間形状・施設位置を保持していない。既存GISレイヤーに接続する入力と空間演算の系譜がなく、この表から新しいGIS分析を作らない。",
       "decidedAt": "2026-11-15",
       "decidedBy": "codex / local normalized-table and metric-registry audit"
+    },
+    {
+      "datasetId": "maff-prefecture-food-self-sufficiency",
+      "table": "calorie-confirmed",
+      "slice": {
+        "version": "fy2024-provisional",
+        "areaLevel": "prefecture",
+        "dims": {
+          "basis": [
+            "カロリーベース"
+          ],
+          "estimate": [
+            "確定値"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2023"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "食料自給率（カロリーベース）",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "公開中の指標 food-self-sufficiency-rate-calorie (社会・人口統計体系 I3301、2008〜2021年度) と同じ値の系列で、2008〜2021年度の47県658値はxlsxと全件一致した。取り込むには原本を非公開R2へ保存し (open-data-source-archive.yml)、正規化表を作り、指標の source を external へ替えて2022年度以降を足す必要があり、R2への書き込みと公開中の指標の差し替えの判断が要るため blocked に保つ (DATA-FOOD-SELF-SUFFICIENCY-MAFF-01)。",
+      "decidedAt": "2026-11-24",
+      "decidedBy": "claude / local normalization of the downloaded xlsx and comparison with published R2 values"
+    },
+    {
+      "datasetId": "maff-prefecture-food-self-sufficiency",
+      "table": "calorie-provisional",
+      "slice": {
+        "version": "fy2024-provisional",
+        "areaLevel": "prefecture",
+        "dims": {
+          "basis": [
+            "カロリーベース"
+          ],
+          "estimate": [
+            "概算値"
+          ]
+        },
+        "time": {
+          "kind": "point",
+          "value": "2024"
+        },
+        "dimensionAggregation": "none",
+        "timeAggregation": "none"
+      },
+      "channel": "prefecture-ranking",
+      "status": "blocked",
+      "title": "食料自給率（カロリーベース）",
+      "unit": "％",
+      "aggregation": {
+        "type": "identity"
+      },
+      "reason": "公開中の指標 food-self-sufficiency-rate-calorie (社会・人口統計体系 I3301、2008〜2021年度) と同じ値の系列で、2008〜2021年度の47県658値はxlsxと全件一致した。取り込むには原本を非公開R2へ保存し (open-data-source-archive.yml)、正規化表を作り、指標の source を external へ替えて概算値の年度に印を付けて2022年度以降を足す必要があり、R2への書き込みと公開中の指標の差し替えの判断が要るため blocked に保つ (DATA-FOOD-SELF-SUFFICIENCY-MAFF-01)。",
+      "decidedAt": "2026-11-24",
+      "decidedBy": "claude / local normalization of the downloaded xlsx and comparison with published R2 values"
     }
   ]
 }
