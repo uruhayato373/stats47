@@ -6,7 +6,7 @@ export const consumerPriceDifferenceIndexHousing: MetricConfig = {
   "title": "消費者物価地域差指数",
   "subtitle": "住居",
   "description": "全国平均の住居価格水準を100とし、都道府県ごとの住居費目の物価水準を比較した年平均指数です。",
-  "note": "住居指数にも「持家の帰属家賃」は含まれず、消費者物価指数（CPI）の住居とは対象が異なります。",
+  "note": "都道府県の指数は、県庁所在市だけでなく、動向編の調査市町村と構造編の地域別価格差調査の調査市 (各都道府県の人口の50%をカバーすることを目標に選定) の価格から作る都道府県の値で、同じ公表の都道府県庁所在市の指数 (東京都は東京都区部) とは別系列。住居指数にも「持家の帰属家賃」は含まれず、消費者物価指数（CPI）の住居とは対象が異なります。出典: 総務省「消費者物価地域差指数－小売物価統計調査（構造編）2024年結果－」https://www.stat.go.jp/data/kouri/kouzou/pdf/g_2024.pdf と調査の概要 https://www.stat.go.jp/data/kouri/kouzou/k_1.html (2026-11-24 確認)",
   "unit": "（全国=100）",
   "category": "economy",
   "source": {
