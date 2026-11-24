@@ -214,6 +214,16 @@ describe('readBlogIndexPageFromR2', () => {
     ]);
   });
 
+  it('右レールの人気記事の題は単位を半角へそろえて返す (ページの % と ％ の混在を作らない)', async () => {
+    const { readPopularArticlesFromR2 } = await importReader();
+    loadSnapshot.mockResolvedValueOnce({
+      ...SNAPSHOT,
+      articles: [{ ...article('local-government-debt-burden', '2025-02-01'), title: '舗装率100％の県が4つ' }],
+    });
+    const [first] = await readPopularArticlesFromR2('a1', 1);
+    expect(first.title).toBe('舗装率100%の県が4つ');
+  });
+
   it('先頭・途中・最終ページで hasNextPage を正しく判定する', async () => {
     const { readBlogIndexPageFromR2 } = await importReader();
 

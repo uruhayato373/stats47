@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T12:06:43.357Z",
+  "generatedAt": "2026-11-24T12:10:02.441Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -384,14 +384,14 @@
       "metric_key": "abnormal_value_strings",
       "severity": "warning",
       "detail": "abnormal_value_strings: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/cc-estat-12-housing-treemap",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "cc-estat-12-housing-treemap の undefined は Claude Code で D3 の集計を説明する技術記事の地の文 (sum((d) => d.value ?? 0) で undefined を 0 に倒す)。描画の失敗ではなく code 要素の外に書かれた語。本文を直すなら R2 の記事の改稿 (承認が要る)"
     },
     {
       "key": "machine|blog-article|internal_jargon_terms",
@@ -435,14 +435,14 @@
       "metric_key": "title_changed",
       "severity": "warning",
       "detail": "title_changed: 31 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/aichi-food-culture / https://stats47.jp/blog/air-conditioner-consumption-quantity-prefecture-gap / https://stats47.jp/blog/banana-consumption-quantity",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-14 の週次で再検出)"
+      "note": "2026-11-20 の週次の 31 URL はすべて記事の書き直し (2024→2025 の家計調査の取り直しと本文の改稿) で題を変えたもの。選定入力 (データ年・本文) が変わっており、規約の「入力が変わらないのに変わった」に当たらない"
     },
     {
       "key": "machine|blog-article|unit_symbol_mixing",
@@ -452,14 +452,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 2 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/main-road-paving-rate-vs-apple-consumption-quantity / https://stats47.jp/blog/traffic-accident-deaths-regional-risk",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:10:00.645Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "2 URL の ％ は右レール「よく読まれている記事」の他記事の題 (主要道路舗装率100％…)。readPopularArticlesFromR2 が題を normalizeUnitsInText で半角にそろえるようにした (テスト追加)"
     },
     {
       "key": "machine|blog|unit_symbol_mixing",
@@ -2356,14 +2356,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "BLOG-FIGURE-REDRAW-REGRESSION-01",
+      "note": "plan-svg-text-fix で regen-fixes (題が右に 208px はみ出す。今の生成器で作り直すと直る)。regenerate-blog-svgs.yml の R2 への反映は同カードの描き直し (オーナーの指示) で行う"
     },
     {
       "key": "machine|https://stats47.jp/blog/commercial-sales-productivity-gap|blog_svg_text_issues",
