@@ -39,7 +39,8 @@ test.describe("サイドバーナビゲーション", () => {
   });
 
   test("サイドバーのテーマ一覧リンクから遷移する", async ({ page }) => {
-    const allThemesLink = sidebar(page).getByRole("link", { name: "すべてのテーマ", exact: true });
+    // テーマ一覧 (/themes) は主要ナビの「テーマ」から入る (2026-10-28 にサイドバー下端の「すべてのテーマ」を外した)
+    const allThemesLink = sidebar(page).getByRole("link", { name: "テーマ", exact: true });
     await expect(allThemesLink).toHaveAttribute("href", "/themes");
     await allThemesLink.scrollIntoViewIfNeeded();
     await expect(allThemesLink).toBeInViewport();
@@ -97,7 +98,7 @@ test.describe("サイドバーナビゲーション", () => {
       ["/ranking", "ランキング"],
       ["/category/laborwage", "労働・賃金"],
       ["/areas", "都道府県"],
-      ["/themes", "すべてのテーマ"],
+      ["/themes", "テーマ"],
       ["/blog", "統計ブログ"],
     ] as const;
 
