@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T06:56:59.694Z",
+  "generatedAt": "2026-11-24T10:35:31.547Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -112,14 +112,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[desktop-1440/medium] デスクトップ1枚目、右レールの「広告」カード(「詳細を見る」「地図を見る」「データ管理を比較」「統計ソフトを試す」): 見出しの「広告」が小さく、リンクは本文のサイト内ナビより大きな文字で青系の背景を使っている。サイト内の導線に見え、広告とサイト内リンクを取り違えやすい。 → 広告の表記をカード上部に目立つ形で付け、リンク文字をサイト内リンクと同程度の大きさ・色に抑える。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-31",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "修正の本番反映後も 2026-10-11 の週次で再検出 (前回: カード横スクロールの右端に続きを示すフェードを追加 (HorizontalCardCarousel)。タイル地図の県名を折り返さない (whitespace-nowrap)。左上の空白はタイル配置が列島の形を写すため現状維持)"
+      "note": "右レールの該当カードは AdSense の枠 (RailAdSlot → AdCell)。「詳細を見る」等のリンクの文字・青系の地は Google が配信する広告の原稿でサイト側から変えられない。左上の小さな「広告」表記は 2026-10-30 オーナー決定 (AdCell 案 A・全ての広告の枠で共通) で、ホームだけ大きくしない"
     },
     {
       "key": "agent|municipality",
@@ -180,14 +180,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、各指標カードの灰色ヒストグラム(「65歳以上人口割合」「高齢夫婦のみの世帯数」): ヒストグラムに軸の数値も最大・最小のラベルもなく、何の分布か分からない。「高齢夫婦のみの世帯数」は左端1本だけ高く残りは線に見え、図の意味が読み取れない。 → 横軸の最小値と最大値、または「多くの自治体は〇〇付近」のような一言をヒストグラムの下に添える。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:35:31.541Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "市区町村テーマの指標カードの分布の棒 (MiniDistributionBars) の下に横軸の最小・最大を単位つきで添えた (裾を畳んだビンは「未満」「以上」)。端の値の書式はランキングのヒストグラムと共通の distribution-edge-labels"
     },
     {
       "key": "agent|prefecture-detail",
@@ -1353,14 +1353,14 @@
       "metric_key": "mobile_page_height",
       "severity": "warning",
       "detail": "mobile_page_height = 2906 (閾値 <= 2600)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:33:03.607Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "地図の下の都道府県一覧 (AreaDirectoryList の comfortable) を一覧の幅 320px 以上で 2 列から 3 列にした (26 行 → 19 行、1 行 50px で約 350px 縮む見込み = 2906 → 約 2556)。描いた高さの実測は未確認で、週次の監査が確かめる"
     },
     {
       "key": "machine|https://stats47.jp/blog/2050-population-flood-exposure|broken_images",
@@ -9054,14 +9054,14 @@
       "metric_key": "small_text_count",
       "severity": "warning",
       "detail": "small_text_count = 49 (閾値 <= 18)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-14",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:29:06.698Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図 (AreaTileMap) のマスの文字をスマホの幅で固定 9px にしていたのを clamp(9px,3.4cqw,11px) にし、本文 324px 以上では 11px (検査の基準以上) にした。47 マスが小さすぎる文字に数えられていた"
     },
     {
       "key": "machine|https://stats47.jp/category/population|a11y_violations",

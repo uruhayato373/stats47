@@ -4,7 +4,7 @@ import { describe, it, expect, vi } from "vitest";
 
 
 import { buildAreaDirectoryData } from "../../utils/build-area-directory-data";
-import { AreaDirectoryList } from "../AreaDirectoryList";
+import { AreaDirectoryList, COMFORTABLE_GRID_CLASS } from "../AreaDirectoryList";
 
 const { regionGroups } = buildAreaDirectoryData(fetchPrefectures());
 
@@ -30,6 +30,15 @@ describe("AreaDirectoryList", () => {
     render(<AreaDirectoryList regionGroups={regionGroups} onSelect={onSelect} />);
     fireEvent.click(screen.getByRole("link", { name: "東京都の統計を見る" }));
     expect(onSelect).toHaveBeenCalledWith("13000", "東京都");
+  });
+
+  it("comfortable の一覧は幅 320px 以上で 3 列にする (スマホのページの高さの予算)", () => {
+    render(<AreaDirectoryList regionGroups={regionGroups} />);
+    const nav = screen.getByRole("navigation", { name: "都道府県一覧" });
+    expect(nav).toHaveClass("@container");
+    const list = screen.getByRole("link", { name: "東京都の統計を見る" }).closest("ul");
+    expect(list?.className).toBe(COMFORTABLE_GRID_CLASS);
+    expect(COMFORTABLE_GRID_CLASS).toContain("@min-[20rem]:grid-cols-3");
   });
 
   it("compact は境界線カードではなく地方別テキストリンクを描画する", () => {

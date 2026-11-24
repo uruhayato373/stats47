@@ -6,10 +6,18 @@ import { ChartFooter } from '../ChartFooter';
 
 // 2026-10-30 オーナー決定: 注記はチャートの下に見せ、出典・指標の定義・ランキングへのリンクは
 // 「出典・指標の定義」のボタン 1 つから開く Sheet にまとめる (旧: 「出典」「ランキング」のリンクと件数付きのメニュー)
+
+/**
+ * Sheet の部品は初めて押されたときに読み込む (SourcesSheet の loadSheet・配信サイズ策 D)。ファイルで最初に開くテストは
+ * この読み込みを待つので、テストを束ねて流すと findByRole の既定 1 秒を超えて「role=dialog が見つからない」で落ちた
+ * (CHART-FOOTER-MENU-TEST-01・2026-11-24 の観測)。開くのを待つ時間だけを延ばす (中身の検査は変えない)。
+ */
+const SHEET_OPEN_TIMEOUT = { timeout: 5000 };
+
 async function openSheet() {
   const user = userEvent.setup();
   await user.click(screen.getByRole('button', { name: '出典・指標の定義' }));
-  return screen.findByRole('dialog');
+  return screen.findByRole('dialog', undefined, SHEET_OPEN_TIMEOUT);
 }
 
 describe('ChartFooter', () => {
@@ -61,7 +69,7 @@ describe('ChartFooter', () => {
     expect(screen.queryByText('分母は総数です。')).toBeNull();
     const user = userEvent.setup();
     await user.click(screen.getByRole('button', { name: '出典・指標の定義・読むときの注意' }));
-    const sheet = within(await screen.findByRole('dialog'));
+    const sheet = within(await screen.findByRole('dialog', undefined, SHEET_OPEN_TIMEOUT));
     expect(sheet.getByText('分母は総数です。')).toBeVisible();
     expect(sheet.getByText('不詳を含みます。')).toBeVisible();
   });
