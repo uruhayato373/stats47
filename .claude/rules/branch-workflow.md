@@ -175,7 +175,9 @@ schedule を **default branch のファイルから読む**ので、main に残�
 
 **「develop は完全に無検査」ではなくなった。** `develop-quality-gate.yml` が push ごとに
 fast-gates (ESLint / env registry / maintenance debt / warning ratchet / card census / design system /
-ad placement) と、別 job の unit-web / unit-packages (vitest 全件・coverage なし) を並列に走らせる。
+ad placement) と、別 job の unit-web / unit-packages (vitest 全件・coverage なし)・catalog-gates (`preflight:pr`)・
+contract-tests (main への PR の Contract Tests と同じ段を `pr-quality-check.yml` から読んで全段回す。
+`packages/ops/src/ci/contract-steps.mjs`。2026-11-24 CI-CONTRACT-TESTS-DEVELOP-GAP-01) を並列に走らせる。
 **fast-gates は実測 102 秒** (2026-09-18、node_modules キャッシュ hit 時。miss 時 195〜223 秒)。
 node_modules は lockfile hash キーの `actions/cache` で復元する (`cache-node-modules.yml` が main scope を温める)。
 

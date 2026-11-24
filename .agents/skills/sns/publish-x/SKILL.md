@@ -98,13 +98,8 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts total-fertility-rate \
   --quote-url "https://x.com/xxx/status/123456" \
   --caption /tmp/quote-rt-caption.txt --domain ranking
 
-# 県動画を opt-in 添付（migration-flow → gis-cross 遷移）
-npx tsx .claude/skills/sns/publish-x/publish-x.ts migration-flow-aichi \
-  --quote-url "https://x.com/xxx/status/123456" \
-  --caption /tmp/quote-rt-caption.txt \
-  --media .local/r2/sns/migration-flow/aichi/x/stills/reel.mp4 --domain gis-cross
 ```
-引用RTでも初回 / セレクタ更新後は `--dry-run` を先に通すこと（誤即時投稿の fail-safe は引用RT経路にも適用される）。
+引用RT は テキストのみ (動画は添付しない。sns-content-standards §2-2)。引用RTでも初回 / セレクタ更新後は `--dry-run` を先に通すこと（誤即時投稿の fail-safe は引用RT経路にも適用される）。
 
 **承認 (2026-10-09〜)**: 直接指定・引用RT の本番実行には `--approve` を付ける (オーナーの指示をこの実行で台帳に承認として記録する。`--dry-run` は不要)。`--from-queue` は承認済みの draft だけを予約する (承認: `node .claude/scripts/sns/approve-posts.cjs --list` → `--ids`)。予約・投稿した行の素材は最後に Google Drive へ自動保全される。正典 `.claude/rules/sns-content-standards.md` §3-1。
 

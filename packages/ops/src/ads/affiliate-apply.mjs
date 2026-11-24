@@ -325,7 +325,8 @@ async function applyAfbOne(page, asp, root, siteLabel, id, commit, { catalog, pl
 
   // ★ 検索結果ページには status badge テキストが出ない (rel=non 一覧と別レイアウト・2026-07-28 実測)。
   //   状態は文言でなく **申請ボタンの有無 (DOM 状態)** で判定する:
-  //   ボタンあり = 未提携 (申請可) / 行はあるがボタン無し = 申請済みか提携済み。
+  //   ボタンあり = 未提携 (申請可) / 行はあるがボタン無し = 却下・解除・申請済み・提携済みのいずれか
+  //   (2026-10-31 に未提携 32 件のうち確かめた 14108・16418 は「提携却下」だった。AFF-AFB-REJECTED-STATUS-01)。
   const searchPid = async () => {
     const input = page.locator('input[name="pm_search"]').first();
     if (!(await input.count().catch(() => 0))) throw new Error("検索欄 pm_search が見つからない (UI 変更?)");
@@ -352,7 +353,7 @@ async function applyAfbOne(page, asp, root, siteLabel, id, commit, { catalog, pl
 
   if (first.applyHrefs.length === 0) {
     // 既申請/既提携は「今週の申請」ではないので budget に数えない (取り込みは affiliate-status --write の担当)
-    return { id, title, action: "skip", reason: "申請ボタン無し = 申請済みか提携済み (status --write で確定)" };
+    return { id, title, action: "skip", reason: "申請ボタン無し (却下・解除・申請済み・提携済みのいずれか。status --write で確定)" };
   }
   if (first.applyHrefs.length > 1) {
     // 小ボタン (btn_app) と大ボタン (btn_application) が同一 href で並ぶのは正常。

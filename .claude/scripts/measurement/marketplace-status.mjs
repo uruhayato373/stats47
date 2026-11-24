@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { measurementContext, markMeasurementAuthenticated } from '../../../packages/ops/src/measurement/browser-session.mjs';
+import { measurementContext } from '../../../packages/ops/src/measurement/browser-session.mjs';
 import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { collectKdpReport, openKdpReports } from '../../../packages/ops/src/measurement/kdp-reports.mjs';
 import { collectKdpMonthlyReport } from '../../../packages/ops/src/measurement/kdp-monthly-reports.mjs';
@@ -41,7 +41,6 @@ try {
       records.push({ id, found: value.found, status: value.status ?? null, asin: value.asin ?? null });
     }
     if (records.length === 0 || records.some(r => !r.found || !r.status || r.status === '不明')) throw new Error('publication_status_incomplete');
-    markMeasurementAuthenticated(source);
   } else throw new Error('unknown_source');
   writeFileSync(output, JSON.stringify({ generatedAt: new Date().toISOString(), source, accountVerified: true, records,
     analytics, coverage, monthlyRoyalties, revenue, sales: sales ?? (analytics ? { status: 'collected', scope: 'account-total' } : { status: 'not_collected' }) }, null, 2));

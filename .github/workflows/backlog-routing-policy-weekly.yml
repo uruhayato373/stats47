@@ -1,4 +1,4 @@
-name: 🧭 Backlog Routing Policy (weekly)
+name: 🧭 Backlog Routing Policy (手動・定期実行は停止中)
 
 # backlog-loop ledger の class×model 成功率と Claude usage 実測を週次評価する。
 # minSamples 未満は policy を変えず、変更時も develop への提案 commit まで。

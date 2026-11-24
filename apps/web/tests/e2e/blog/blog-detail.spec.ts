@@ -10,9 +10,9 @@ test.describe("ブログ記事詳細ページ", () => {
     // 一覧ページから最初の記事へ遷移
     await page.goto("/blog", { waitUntil: "domcontentloaded" });
 
+    // 一覧の記事カード (ArticleTeaserCard)。見出しの段 (h2/h3) ではなく部品の印で選ぶ
     const firstArticle = page
-      .locator("main a[href^='/blog/']")
-      .filter({ has: page.locator("h2") })
+      .locator("main a[href^='/blog/'][data-slot-kind='article-teaser-card']")
       .first();
     await expect(firstArticle).toBeVisible({ timeout: 10000 });
 
