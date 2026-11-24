@@ -21,50 +21,32 @@ updated: 2026-11-14
 
 
 ### [GSC-SOURCE-FRESHNESS-01] GSCのUI監査と既存計測の観測日・取得範囲を揃える
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-11-14] [領域:サイト] [待ち:観測]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-11-28] [領域:サイト] [待ち:観測]
 
 - **済み**: 週次CIのHTML index signal検査の12分上限超過を直して全量2,751 URLを保存した (2026-10-17)。送信済みビューの概要export (`export-coverage-playwright.mjs`) と、`submitted-totals.json`・`data/gsc/coverage-submitted-history.csv` (台帳 `gsc.coverage-submitted`) への記録、鮮度検査 `submitted-view-freshness` (`submittedViewMaxAgeDays: 8`)、KPI `index-coverage-rate` を実装した (11-11、画面操作は未検証)。
 - **基準値 (GSC 11-06更新)**: 送信済みは登録6,729・未登録1,977 (検出-未登録1,134 / noindex 578 / クロール済-未登録127 / robots 58 / 404 48 / リダイレクト17 / リダイレクトエラー10 / 5xx 5)、未送信は登録764。追う指標は送信済みの登録率 6,729 / 8,706。
 - **次 (11-14の取得の後)**:
-  1. `submitted-totals.json` ができ、値が登録6,729・未登録1,977と桁が合うかを確かめる。合わなければzipの中身を読みingestを直す。`~/Downloads` の最後のzipを採るだけで週との照合が無いので、古いzipの混入に注意する。
-  2. 最初の行がdevelopに入ったら、`config/datasets.mjs` の `gsc.coverage-submitted` から `planned: true` を外し、その後で `.claude/config/review-wiring.json` の週次・月次入力に `read` を足す (先に足すと `wiring-broken`)。
+  1・2 は済み (2026-11-24): 11-21 の取得で `data/gsc/coverage-drilldown/2026-W47/submitted-totals.json` と 2026-W47 の行 (登録 7,967・未登録 1,448) ができ、基準 (11-06 の 6,729 / 1,977) と同じ桁。`planned` の印は `d9e312314` で外れ、`.claude/config/review-wiring.json` の週次・月次入力に read を足した。
   3. 概要zipに「確認」列があれば `ingest-gsc-export.py` に足す。
-  4. KPIの値が6,729 / 8,706と同じ桁で `data/measurement-cycle/LATEST.md` に出るかを確かめる。
+  4. KPIの値が同じ桁で `data/measurement-cycle/LATEST.md` に出るかを確かめる (11-24 時点の LATEST.md は 2026-W46 の窓で missing。11-28 の計測の後に読む)。
   5. 送信済みビューの理由別ドリルダウンも週次の取得に足す。
 - **効果観測の登録 (improvementsの枠待ち)**: activeが5 / 5で空きが無い。枠が空いたら `improvement-triage` で `GSC-THEME-POST-EFFECT-01` (`[kpi: operating-cost]`・`[target: -262 requests]`・期日2026-11-18、基準は11-10〜11-11の24時間のテーマPOST 262件、観測は `data/cloudflare/snapshots/<日付>.json` の `googlebot`) と `GSC-SUBMITTED-INDEX-EFFECT-01` (`[kpi: index-coverage-rate]`・targetなし・期日2026-12-09、基準は登録6,729・未登録1,977) を足す。`NOTE-FISCAL-PEER-SALES-01` は11-15に判定不能で、期日を12-07へ延ばしたため枠は空かない。最短は `RELATED-ARTICLES-EFFECT-01` など他の施策を判定して閉じること。詳細は `data/improvement/gsc-improvement/improvement-log.md`。
 - **元の順序の残り**: sourceごとに観測日・取得日・母集団・標本数・欠測を照合し、最新coverageを既存CSV/manifest gateで取り込むか部分UI監査 (`data/gsc/ui-audits/2026-10-16.json`) を補助証拠に留めるかを決める。HTTP/sitemap collectorの出力との接続を検証して既存キューを保持したまま再構築し、修正版のmain週次CIで新queueとsourceの取得範囲を照合する。集計期間はsearch-growthのObservationと元summaryで照合し、週フォルダ名から推定しない。owner は gsc-analyst。
 - **停止条件**: UI例示を全件データと扱わない。欠測を0で埋めない。認証情報を監査JSONへ保存しない。古い入力で新しい状態を巻き戻さない。pendingを母集団の違う旧件数と単純比較しない。
 - **完了条件**: 各sourceの鮮度・取得範囲・成功/部分成功/欠測が追跡でき、キュー更新の前後差分とgate結果が残る。source未取得を成功扱いしない。
+- **期日の引き直し (2026-11-24)**: 1・2 は済み。11-28 の計測の後に KPI の出方 (4) を読み、3・5 に進む
 
 ### [MEASUREMENT-MAC-DIRECT-01] 認証付き計測を土曜の Mac の取得だけにし、残っている CI 専用のコードと Secrets を撤去する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run measurement:test] [起票:2026-10-19] [期日:2026-11-14] [領域:管理] [待ち:観測]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run measurement:test] [起票:2026-10-19] [期日:2026-11-28] [領域:管理] [待ち:観測]
 
 - **済み (2026-11-14・13071e5ef)**: CI 専用のコードを撤去した。collect.mjs の CI の分岐、refresh-session.mjs の --ci と --publish、bootstrap-session.mjs の --publish、set-ci-secret.mjs、auth-recovery.mjs、npm script の auth:ci-secret、auth-credentials.json の ciCredential・ciStored、管理画面 /ops/auth の CI 欄、env-registry.json の 12 行を消し、docs 07 を Mac の取得の仕様に書き直した。入口が残っていないことは measurement.test.mjs のテストが固定している。GitHub Secrets は 2026-11-14 の gh secret list で、MEASUREMENT_SESSION_*・STATS47_AUTH_*・AFB_API_KEY・MOSHIMO の名前が無く、残す方針の MEASUREMENT_VAULT_KEY だけがあることを確かめた。
 - **残り**: 上のコミットが develop に入ったあとの最初の土曜の取得 (npm run weekly:collect) を、撤去後のコードで回す。取得のコードを Mac と共有していて、撤去後のコードではまだ実際の取得を回していないため、この 1 回を確認する。失敗した場合は clone (~/stats47-measurement) の git branch --list 'unpushed/*' と ~/Library/Logs/stats47/measurement-collect-local.log を読む。
 - **停止条件**: 2 段階認証・CAPTCHA・規約同意を自動化しない。Cookie・API キーを git・ログに出さない。
 - **完了条件**: 撤去後のコードでの取得のあと、develop に「authenticated measurement status (Mac)」のコミットが入り、npm run measurement:status に stale と失敗が無い。
-
-### [CI-LEAD-TIME-01] デプロイの skip と指標生成の省略の効果を実測する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:gh run list --workflow deploy-workers.yml] [起票:2026-11-06] [領域:管理] [待ち:観測] [期日:2026-11-20]
-
-- **起点**: 2026-11-06 に `scope` job・`needsMetricMetadata`・`.husky/pre-push`・PR を開く時機の規則を入れた (`.claude/rules/branch-workflow.md`「待ち時間を増やさない運用」)。push から本番まで約 40 分が基準値で、skip の判定と PR の短縮は本番でまだ動いていない。
-- **やること**: ① main へ入ったあと、本番に関係しない push で Deploy job が skip されることを run で確かめる ② 関係する push で必ずデプロイされることを確かめる ③ 指標に無関係な PR の Build Check が 10.9 分から約 6.7 分になるかを測る (算式: 10.9 − 生成 4.2) ④ PR 検査の cancel の割合が 21/34 から下がるかを 2 週間後に見る。
-- **完了条件**: 4 点の実測を `.claude/rules/branch-workflow.md` に記録している。
-
-### [MINIMUM-WAGE-2026-01] 2026年度地域別最低賃金
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [領域:データ] [待ち:時期] [期日:2026-11-21]
-
-- **owner**: open-data-curator
-- **source**: GitHub #652
-- **trigger**: 厚生労働省または各地方最低賃金審議会が2026年度の47都道府県別実額を正式公表したとき。
-- **次**: 目安額ではなく正式決定額の一次資料を確認し、既存 `minimum-wage-by-region` の年次追加として扱う。
-- **完了条件**: 47県の正式額・発効日・前年差を一次資料で照合し、既存keyのR2観測値を更新する。
-- **禁止**: 中央審議会の目安額や新聞表を正式額として公開しない。
-- **再確認日 (2026-11-14 設定)**: 期日は契機を確かめる日である (2026 年度の決定額が公表済みかを見る)。まだなら期日を延ばす。
+- **期日の引き直し (2026-11-24)**: 11-21 の Mac の取得 (8512b1f34) は gsc・a8・note・rakuten が pass、kdp が failed。kdp の再認証の後の取得で完了条件を読む
 
 ### [MUNI-CITY-PAGE-SNIPPET-01] 市区町村ページに、データブックの値から決まった文で組む要約・よくある質問・近い自治体との比較を足す (LLM で書かない)
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト] [待ち:時期] [期日:2026-11-21]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-28] [領域:サイト] [待ち:時期] [期日:2026-11-27]
 
 - **経緯**: 2026-10-28 のオーナーとの壁打ち。市区町村ページ `/areas/<県>/cities/<市区町村>` (1,741 件) はデータブック化済み (`MUNI-PAGE-QUALITY-01`) だが、本文は値の表と強みのカードだけで、「◯◯市 人口」の問いに文で答える箇所と近い自治体へ移る導線が無い。JSON-LD は `BreadcrumbList` だけ。
 - **証拠 (baseline は `MUNI-PAGE-SEO-01` と同じ GSC 2026-W41 rolling28d)**: 市区町村ページ 373 URL = 13 clicks / 2,214 imp / CTR 0.59%。「市・町・村・区 + 人口」の検索語 341 語 = 1,840 imp / CTR 0.11%。
@@ -76,32 +58,26 @@ updated: 2026-11-14
 - **停止条件**: 市区町村ページの clicks が直前 28 日比 -10% 以下で、対照群が同じ方向に動いていなければ要約と FAQ を外す。
 - **読者の課題 / HARM**: 住んでいる・引っ越し先の市の人口や順位をすぐ確かめたい (M・H)。支払う理由はこの段では無く、PV は AdSense の先行指標。需要の証拠は上の検索語 1,840 imp。要約で CTR が上がるかは未検証。
 - **完了条件**: 1,741 件に要約・Q&A・比較・`Place` が出て、28 日の判定がこのカードと `PV-100K-LEVERS-01` のレバー 2 に記録されている。
+- **期日の引き直し (2026-11-24)**: 着手条件の MUNI-PAGE-SEO-01 の判定が W48 の Should (11-26)
 
 ### [MUNI-TITLE-MAGNITUDE-01] 市区町村ランキングの title・説明文で、1 万〜10 万の値が「1万人」のように丸まって見える
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト] [待ち:時期] [期日:2026-11-21]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:サイト] [待ち:時期] [期日:2026-11-27]
 
 - **証拠 (2026-10-28 localhost)**: 北海道の出生数の県別ページの title が「1位 札幌市（1万人）」になる (実値 10,352 人)。共通の整形 `formatReadableMagnitude` (`packages/data-configs/src/unit/unit-display.ts`) が小数 1 桁で丸め、末尾の 0 を落とすため。全国版の title (`buildMunicipalityRankingMeta`) と県別ページ (`buildMunicipalityPrefectureRankingMeta`・要約文) が同じ整形を使う。
 - **次**: ① 万の位に切り替える下限を決める (案: 10 万未満は「10,352人」のように桁区切りで書く) ② 整形は単位の正典 (`.claude/rules/unit-semantics-standards.md`) の部品なので、変えるとほかのページの表示も変わる。影響するページを数えてから直すか、市区町村の title だけ別の整形にするかを決める ③ テストで「10,352人」を固定する。
 - **同じ整形の別の症状 (2026-10-28)**: 単位が「指数」の指標で「1位 武蔵野市（1.48指数）」「飛島村（2.1指数）」と単位名がそのまま付く。直すときに一緒に扱う。
 - **完了条件**: 1 万〜10 万の値が title・説明文で丸めずに読め、テストで固定されている。
 - **進捗 (2026-10-28)**: 県別ページ (`/municipalities/ranking/<key>/<県>`) の title・要約は develop の `formatMunicipalityValueText` で「10,352人」「1.48」(指数を付けない) になっており、ページ単位のテスト 2 件で固定した (共通の整形に戻すと落ちる)。**残り**: 全国版の `buildMunicipalityRankingMeta` (`municipality-page-meta.ts`) は `formatReadableMagnitude` のままで「1万人」「1.48指数」が出る。`MUNI-PAGE-SEO-01` の 2026-11-21 の判定の後に同じ整形へ替える (1 行)。
-
-### [THEME-CPI-503-01] テーマ品質監査で consumer-prices ページが 503・タイムアウトになる
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト] [待ち:観測] [期日:2026-11-21]
-
-- **事象**: テーマ品質監査 #1069 (2026-10-05) で `/themes/consumer-prices` (幅 1440) が HTTP 503・h1 の待機タイムアウト・チャート 2 つ欠落 (theme-cpi-heatmap・theme-cpi-profile)。
-- **次**: 本番の該当 URL を Googlebot UA で取得して今も 503 かを確かめる。続いていれば Workers の CPU 制限 ([CF-CPU-SURGE-01]) との関係を見る。一時的なら次回監査で解消を確認する。
-- **完了条件**: 次のテーマ品質監査で consumer-prices の表示検査が通る。
-- **2026-10-23 確認**: Googlebot UA で 3 回とも 200 (3.6〜6.8 秒)、CPI の R2 は 47 県・13 年分ある。次のテーマ品質監査で #1069 が閉じるかを見る。
-- **再確認日 (2026-11-14 設定)**: 期日は契機を確かめる日である (次のテーマ品質監査で Issue #1069 が閉じるかを見る)。まだなら期日を延ばす。
+- **期日の引き直し (2026-11-24)**: 着手条件の MUNI-PAGE-SEO-01 の判定が W48 の Should (11-26)
 
 ### [UI-FOLLOWUP-01] 第 3 波の画面変更で見つけた表示の残り (検算欄の式・タップ領域など)
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [起票:2026-11-14] [待ち:観測] [期日:2026-11-21]
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [起票:2026-11-14] [待ち:観測] [期日:2026-11-28]
 
 - **済み (2026-11-14・3025556f8)**: 表示の 5 件を直した。Geo の検算欄は結果を値に、内訳の式を補足に分け、折り返しの指定を数値タイルの側へ移した。県別の検算ページの人口は整数に丸めた。LinkRowNav のリンクは sm 未満の幅で高さ 44px にした。運営者の写真は 2 ページとも 48px にそろえた。ランキング詳細の「推移」カードは観測が 2 点だけのとき 0 を含む縦軸にした。変更の前後は幅 375px と 1280px の画像で確かめた。
 - **残り (計測)**: ranking/total-population の mobile の field LCP は 2026-11-06 の p75 で 4,943ms のままで、lab の LCP 要素は地図でなくバナーや見出しである。初期表示に地図が入る幅で、実ユーザーの LCP と地図の発見の遅れを取り直す。実ユーザーの値は週次 (土曜) の記録から読むので、次の記録が出るまで着手できない。
 - **完了条件**: 取り直した計測の結果 (LCP の p75・LCP 要素・取得日・取得コマンド) を `data/improvement/performance-improvement/improvement-log.md` に記録している。
 - **再確認日 (2026-11-14 設定)**: 期日は契機を確かめる日である (次の週次記録で LCP を取り直す)。まだなら期日を延ばす。
+- **期日の引き直し (2026-11-24)**: 実ユーザーの LCP は土曜の週次記録から読む
 
 ### [GSC-INTERNAL-DISCOVERY-01] 未登録候補の孤立ページとHTMLリンクの到達経路を是正する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-16] [期日:2026-11-25] [領域:サイト] [待ち:観測]
@@ -189,7 +165,7 @@ updated: 2026-11-14
 - **完了条件**: 週次の run が 2 週続けて成功し、処理したカードが優先順位どおりである。
 
 ### [SEO-KEYWORD-EDITABLE-PATH-01] キーワード改善サイクルが ranking / themes の定義ファイルを見つけられず、改善案を自動適用できない
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト] [期日:2026-11-21] [待ち:観測]
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [起票:2026-10-19] [領域:サイト] [期日:2026-11-28] [待ち:観測]
 
 - **経緯**: `.claude/scripts/search-growth/keyword-cycle.mjs` の `editableFile()` が古い置き場 (`packages/data-configs/src/{metrics,theme-catalog}/<key>.ts`) を探していたため、`/ranking/*`・`/themes/*` 向けの改善案はすべて `editableFile: null` の提案だけの PR になっていた。実際の定義は ranking が `data/metrics/<key>.ts`、テーマが `data/themes/catalogs/<key>.json`。
 - **済み (2026-10-19)**: `editableFile()` を現在の置き場へ直し、テスト (`keyword-cycle.test.mjs` の 3 件) を足した。
@@ -197,6 +173,7 @@ updated: 2026-11-14
 - **禁止**: 自動適用の対象を広げる目的で、検査や `validate:config` を緩めない。
 - **完了条件**: `/ranking/general-hospital-count` と既存テーマ 1 件で `editableFile()` が実在ファイルを返すテストが通り、次回の `seo-keyword-cycle-daily` で ranking 向けの案が `editableFile` 付きで出る。
 - **本番反映 (2026-11-15・#1275)**: 次の `seo-keyword-cycle-daily` (土曜 06:00 JST、2026-11-21) の結果で、ranking 向けの案が `editableFile` 付きで出るかを確かめる。
+- **期日の引き直し (2026-11-24)**: main 反映後の seo-keyword-cycle-daily の出力に editableFile が付くかを確かめる
 
 ### [GSC-DEMAND-REPORT-01] 「何にアクセスが集まっているか」に記録 1 枚で答えられるよう、GSC 記録をカテゴリ別・長期で集計して残す
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-29] [領域:管理] [期日:2026-11-29] [待ち:観測]
@@ -205,16 +182,6 @@ updated: 2026-11-14
 - **残り**: main への反映後、週次 CI (fetch-metrics-weekly) が、確定 7 日の明細 queries-finalized7d.csv と pages-finalized7d.csv を保存するかを確かめます。あわせて、summary.json の details に、期間と捕捉率が入るかを確かめます。2 週続けて保存された後、DEMAND-LATEST.md の「3. 前週比」にカテゴリ別の表が出て、data/gsc/demand-weekly.csv ができることを確かめます。demand-weekly.csv ができたら、config/datasets.mjs の gsc.demand-weekly から planned を外します。
 - **完了条件**: 連続する 2 週の snapshot に確定 7 日の明細がそろい、DEMAND-LATEST.md にカテゴリ別の前週比の表が出ていること。demand-weekly.csv が台帳に planned なしで登録され、npm run check-datasets が通ること。
 - **本番反映 (2026-11-15・#1275)**: 11-21・11-28 の週次 CI (fetch-metrics-weekly) で確定 7 日の明細が 2 週続けて保存されたかを 2026-11-29 に確かめる。
-
-### [SNS-WEEKLY-REPORT-MIRROR-01] SNS 週次レポートの workflow が Codex ミラーのリンクを足さず develop の品質ゲートを落とす
-タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs --no-orphan] [起票:2026-10-26] [期日:2026-11-16] [待ち:観測]
-
-- **症状**: `sns-weekly-report.yml` はレポートだけを `git add` し、`.agents/` のミラーのリンクが入らない。W43 (`2df9acbe6`) で整合性検査 E12 が出て品質ゲート run 40251621046 が失敗した (`467802415` で手で直した)。
-- **次**: 書き戻しの前に `node .claude/scripts/lib/sync-codex-mirror.cjs` を実行し、`.agents/skills/sns/sns-weekly-report/reference/reports` も `git add` に入れる。
-- **完了条件**: 手動起動でレポートとリンクが同じコミットに入り、次の品質ゲートで E12 が出ない。
-- **2026-10-26 実装 (develop・main 未反映)**: 書き戻しの前に `sync-codex-mirror.cjs` を実行し、`.agents/` のレポートの置き場も `git add` に入れた。手元の `sync-codex-mirror --check` と整合性検査 (`--no-orphan`) は通る。workflow の変更は main へ反映されるまで動かないので、完了条件 (手動起動でレポートとリンクが同じコミットに入る) は main 反映後の次の起動で確かめる。
-- **前提の変化 (2026-11-14・`550309b88`)**: レポートは skill の配下を出て `data/sns/weekly-reports/` に入り、workflow は Codex 用ミラーの再生成と `.agents/` の git add をしなくなった。完了条件は「手動起動でレポートが `data/sns/weekly-reports/` に入り、次の品質ゲートで E12 が出ない」に読み替える。
-- **本番反映 (2026-11-15・#1275)**: 次の `sns-weekly-report` (日曜 21:00 JST、2026-11-15) の run で、レポートが `data/sns/weekly-reports/` に入り、その後の品質ゲートで E12 が出ないかを 2026-11-16 に確かめる。
 
 ## 2026-12
 
@@ -365,6 +332,38 @@ updated: 2026-11-14
 - **関連カード (ここで重複実装しない)**: `UI-REVIEW-LOOP-VERIFY-01`、`DATA-QUALITY-LOOP-01`、`EFFECT-TARGET-MARKERS-01`、`STRATEGY-FOCUS-2026-10-01`。
 - **完了条件**: 週次メトリクス Issue に 6 信号が 4 週続けて出て、検出 → 起票の未結び件数と Due 超過が減り、Must の連続未達が 2 週以内に解消されている。
 - **棚卸し (2026-11-22)**: 「振り返り → 起票」の行に、カード ID・EXP・Issue に結ばれた件数を出すようにした (`packages/ops/src/metrics/lib/cycle-health.mjs`、テスト 8 件)。残りは完了条件の 4 週の観測なので、12-19 に 4 週分の出力を確かめる。
+
+### [CI-LEAD-TIME-01] デプロイの skip と指標生成の省略の効果を実測する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:gh run list --workflow deploy-workers.yml] [起票:2026-11-06] [領域:管理] [待ち:観測] [期日:2026-12-04]
+
+- **起点**: 2026-11-06 に `scope` job・`needsMetricMetadata`・`.husky/pre-push`・PR を開く時機の規則を入れた (`.claude/rules/branch-workflow.md`「待ち時間を増やさない運用」)。push から本番まで約 40 分が基準値で、skip の判定と PR の短縮は本番でまだ動いていない。
+- **やること**: ① main へ入ったあと、本番に関係しない push で Deploy job が skip されることを run で確かめる ② 関係する push で必ずデプロイされることを確かめる ③ 指標に無関係な PR の Build Check が 10.9 分から約 6.7 分になるかを測る (算式: 10.9 − 生成 4.2) ④ PR 検査の cancel の割合が 21/34 から下がるかを 2 週間後に見る。
+- **完了条件**: 4 点の実測を `.claude/rules/branch-workflow.md` に記録している。
+- **実測 (2026-11-24・`gh run list --workflow deploy-workers.yml --branch main`)**: 11-06〜11-23 の 20 run は push 4・手動起動 16。② 本番に効く push (11-13・11-14・11-21 の 2 回) は 4 回とも Deploy が success で、必ずデプロイされた。① 本番に関係しないパスだけの push が main に 1 回も無く、skip はまだ観測できていない。③ (Build Check の時間) と ④ (PR 検査の cancel 率) は未計測。
+- **期日の引き直し (2026-11-24)**: ①② は 11-24 に実測を記録した。③④ (Build Check の時間・PR 検査の cancel 率) は 2 週の観測の後
+
+### [MINIMUM-WAGE-2026-01] 2026年度地域別最低賃金
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [領域:データ] [待ち:時期] [期日:2026-12-01]
+
+- **owner**: open-data-curator
+- **source**: GitHub #652
+- **trigger**: 厚生労働省または各地方最低賃金審議会が2026年度の47都道府県別実額を正式公表したとき。
+- **次**: 目安額ではなく正式決定額の一次資料を確認し、既存 `minimum-wage-by-region` の年次追加として扱う。
+- **完了条件**: 47県の正式額・発効日・前年差を一次資料で照合し、既存keyのR2観測値を更新する。
+- **禁止**: 中央審議会の目安額や新聞表を正式額として公開しない。
+- **再確認日 (2026-11-14 設定)**: 期日は契機を確かめる日である (2026 年度の決定額が公表済みかを見る)。まだなら期日を延ばす。
+- **期日の引き直し (2026-11-24)**: データ領域で 11 月の重点外。12 月の月次計画で取り込むかを決める
+
+### [THEME-CPI-503-01] テーマ品質監査で consumer-prices ページが 503・タイムアウトになる
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:サイト] [待ち:観測] [期日:2026-12-05]
+
+- **事象**: テーマ品質監査 #1069 (2026-10-05) で `/themes/consumer-prices` (幅 1440) が HTTP 503・h1 の待機タイムアウト・チャート 2 つ欠落 (theme-cpi-heatmap・theme-cpi-profile)。
+- **次**: 本番の該当 URL を Googlebot UA で取得して今も 503 かを確かめる。続いていれば Workers の CPU 制限 ([CF-CPU-SURGE-01]) との関係を見る。一時的なら次回監査で解消を確認する。
+- **完了条件**: 次のテーマ品質監査で consumer-prices の表示検査が通る。
+- **2026-10-23 確認**: Googlebot UA で 3 回とも 200 (3.6〜6.8 秒)、CPI の R2 は 47 県・13 年分ある。次のテーマ品質監査で #1069 が閉じるかを見る。
+- **再確認日 (2026-11-14 設定)**: 期日は契機を確かめる日である (次のテーマ品質監査で Issue #1069 が閉じるかを見る)。まだなら期日を延ばす。
+- **期日の引き直し (2026-11-24)**: Issue #1069 がまだ OPEN (2026-11-24 確認)。次のテーマ品質監査で閉じるかを見る
 
 ## 2027-01
 

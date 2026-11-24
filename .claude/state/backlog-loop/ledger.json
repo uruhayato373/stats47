@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-20T23:46:42.055Z",
+  "updatedAt": "2026-11-24T05:28:48.638Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3958,8 +3958,8 @@
       "completedAt": null
     },
     "PRODUCT-SALES-READINESS-01": {
-      "class": "impl-large",
-      "status": "open",
+      "class": "stale",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
@@ -4001,6 +4001,24 @@
           "evidence": "route.class=impl-large (delegate=agent:backlog-solver-hard, apply=draft-pr)。CI run では着手対象外、行削除もしない。",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-11-24T05:14:05.373Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c 旧 PRODUCT-SALES-READINESS-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 オーナー判断: 前提 (ココナラ撤退・KDP の型ごとの 8 週実売) が変わった。まだ有効な行動 3 件を KINDLE-K-S1-02-RESEARCH-CYCLE-01・BLOG-KAKEI-PUBLISHED-FACT-FIX-01・CONTENT-FOLLOWUP-01 へ移した (grep で 3 行を確認)",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -4008,8 +4026,14 @@
         "lastReason": null,
         "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": null
+      "reclassifiedFrom": [
+        {
+          "from": "impl-large",
+          "to": "stale",
+          "at": "2026-11-24T05:14:05.373Z"
+        }
+      ],
+      "completedAt": "2026-11-24T05:14:05.373Z"
     },
     "BLOG-BACKGROUND-BATCH-01": {
       "class": "impl-small",
@@ -12299,6 +12323,106 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-20T23:46:42.055Z"
+    },
+    "CONTENT-PAINPOINT-PUBLISH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T05:13:54.216Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -s -o /dev/null -w %{http_code} https://stats47.jp/blog/<5 slugs>"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 5 本 (nursery-shortage-urban-prefecture ほか) とも本番 200。11-23 のリリース #1297 で公開。SNS 投稿はオーナー判断 (11-24) で完了条件から外した。下書きは data/sns/pain-point-series-drafts.md",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T05:13:54.216Z"
+    },
+    "SNS-WEEKLY-REPORT-MIRROR-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T05:13:54.477Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run list --workflow sns-weekly-report.yml",
+              "gh run list --workflow develop-quality-gate.yml --branch develop"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: W46・W47 のレポートが data/sns/weekly-reports/ に入り (f93b27baf ほか)、sns-weekly-report は 11-15・11-22 とも success。その後の develop の品質ゲートに E12 は出ていない (11-23 04 時台の失敗は workspace contract と seo-meta-facts で別件、以降は success)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T05:13:54.477Z"
+    },
+    "THEME-EXPANSION-D56-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T05:28:48.638Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node packages/ops/src/themes/evaluate-theme-experiments.mjs --check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 55 テーマ拡充の d56 は data/themes/experiments.json に記録済み (launch-reviewed 34・継続などの判断は 11-14 の launchReview、標本不足 insufficient-data 12、中止 aborted 10)。--check の再実行で新しく記録する期日到達の pending は 0 件 (残る pending 23 件は別の実験で d56 が 12-02〜2027-01-07)。theme:portfolio:audit は会社 PC のプロキシ越しで 1",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T05:28:48.638Z"
     }
   }
 }
