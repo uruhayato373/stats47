@@ -313,7 +313,7 @@ export function decideYearFormat(source, index, rules = buildRules()) {
  * 生成器は判定できない指標を書かないので、増えるのは人が手で指標を足したときだけ。そのときは一覧へ足す前に、
  * 調査の呼び方 (surveyNaming) を一次資料で確かめて決められないかを先に調べる。
  */
-export const UNDETERMINED_CEILING = 136;
+export const UNDETERMINED_CEILING = 71;
 
 /**
  * 指標の定義の yearFormat を、定義から決めた区切りと突き合わせる (pure)。
