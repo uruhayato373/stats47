@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T11:10:56.135Z",
+  "generatedAt": "2026-11-24T12:05:18.910Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -197,14 +197,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目、「東京都が全国上位」の4項目の年表記: 「警察官数(2024年度)」だけ年度で、他の3項目は「2024年」「2023年」と年表記。「教養娯楽費割合 11%」は何に対する割合か分からず、「平均初婚年齢（妻）（妻の年齢）」は括弧が重複して意味が取りにくい。 → 年／年度の表記を指標の性質に合わせて統一し、割合には分母(例: 消費支出に占める)を添え、重複した括弧を整理する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:05:18.904Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "① buildQualifiedLabel が label の括弧と重なる修飾語を付けないようにした (平均初婚年齢（妻）（妻の年齢）→平均初婚年齢（妻）。databook.json の再生成で反映) ② 教養娯楽費割合に subtitle「二人以上の世帯の消費支出に占める割合」を足した (item.json・databook の再生成で反映) ③ 年と年度の混在は by-design: 警察官数は年度の統計で、出典の期間 (yearFormat) どおりに表記している"
     },
     {
       "key": "agent|prefecture-detail--hokkaido",
