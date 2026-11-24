@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T12:58:17.886Z",
+  "updatedAt": "2026-11-24T21:39:13.070Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14464,6 +14464,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T12:58:17.886Z"
+    },
+    "BLOG-CHART-FILES-MISSING-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T21:39:13.070Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -s -o /dev/null -w %{http_code} https://stats47.jp/blog/<slug> (8 件); grep unpublished-blog-slugs.ts; R2 app/blog/all.json の全記事で article.md と本文が指す図の有無を数えた"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: all.json 871 記事 (公開 861)。公開中の 861 記事は本文が指す図 2,297 枚に欠け 0。article.md 欠け 6 件と図欠け 2 件 (7 枚) はすべて published:false で unpublished-blog-slugs.ts に載り、本番は 8 件とも HTTP 410 (意図どおり)。公開ページの欠けは無い",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T21:39:13.070Z"
     }
   }
 }

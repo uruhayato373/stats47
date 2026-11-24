@@ -727,6 +727,7 @@ updated: 2026-11-01
 - **起点**: MEDIA-WORKSPACE-ORPHAN-01 を 2026-11-24 に閉じたとき (c164ae0e8 で 9 件を外した)、在庫の索引ありの状態での pass は未確認だった。同じ日に索引を取り直して (`npm run media:state:pull`。private R2 の状態は 2026-10-17 の push のまま) 流すと、`Orphan image: IMG-ea19010e6c9b25a368d42ad3` で落ちる。索引に無い画像を指す品質記録は 10 件 (ranking・bar 2・choropleth 2・boxplot 2・summary-card 2・table)。CI には索引が無いので CI では通る。
 - **次**: 10 件の画像 ID が、10-17 より後に作って索引へ push していない画像か、消えた画像かを確かめる。前者なら在庫の索引を作り直して push し、後者なら記録を外す。12 件は持ち主を確かめていない (MEDIA-WORKSPACE-ORPHAN-01 の記録)。
 - **完了条件**: 索引を取り直した状態で `npm run media:check` が通る。
+- **観測 (2026-11-25)**: 記事の書き直しラウンドの取り込み後も `npm run media:check` が同じ `Orphan image: IMG-ea19010e6c9b25a368d42ad3` で落ちる (起点 `bc5da6187` でも同じ。手元に在庫の索引がある Mac だけ)。契約テストの段 Verify article and image workspace が手元で落ちるのもこれ。
 
 ### [IMAGE-PUBLISHER-REMOVAL-01] 統計画像の生成経路から発行元表記（stats47・stats47.jp）を外し、地図をタイル・実形状の2型へ寄せる
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
@@ -971,7 +972,7 @@ updated: 2026-11-01
 - **完了条件**: 1 本が公開され、4 週の GSC 実測が記録され、型を広げるか決まっている。
 
 ### [BLOG-WHITEPAPER-METRIC-GAP-01] 白書が地域差を論じているのに記事が無い指標で書き、データの無い論点は取り込み元を決める
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト] [待ち:承認]
 
 - **済み (2026-11-14・d8fad9579)**: 救急搬送の病院収容時間の型A の下書き `contents/blog/ambulance-hospital-arrival-time-prefecture-gap/` を published: false で作り、quality-gate と factual gate を blocker 0 で通した。
 - **残り**: 救急の下書きを別プロセスの critic で審査し、REVISE なら直して review.md を PASS にする。headless の critic を使うか blog-critic agent を使うかは実行者が決める。
@@ -980,6 +981,9 @@ updated: 2026-11-01
 - **残り (取り込み・特殊詐欺は見送る)**: 警察庁「令和6年における特殊詐欺及びSNS型投資・ロマンス詐欺の認知・検挙状況等について (確定値版)」(2025-05-23) では、都道府県別の件数は東京など上位の県の文中の記述だけで、47 都道府県の表は確認できなかった。都道府県警察は自県の件数と全国順位を個別に出している (兵庫県警の令和6年確定値など) が、47 本を集める取り込みは出典の形がそろわないため見送る。警察庁か警察白書の統計資料に 47 都道府県の表が見つかれば再検討する。
 - **完了条件**: 救急の下書きが審査 PASS で outbox にあり、交通事故死傷者と保育の待機の扱いが決まって実行され、放課後児童クラブの待機児童の指標が取り込まれているか、取り込みのカードが起票されている。
 - **オーナー決定 (2026-11-24)**: 推奨どおり (b) 新記事は書かず既存 2 記事の brushup でランキングへのリンクと図を足す を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: traffic-accident-deaths-regional-risk と waiting-children-progress の brushup を起こす
+- **済み (2026-11-25)**: 救急の下書きを blog-critic で審査し、因果の断定を弱めて PASS にした (`3928e4f86`)。(b) を実行し、`traffic-accident-deaths-regional-risk` に死傷者数のランキングの図とリンク・交通量×死者数の散布図を足し、出典を確かめられない記述を外した (`f85633c9f`)。`waiting-children-progress` に待機児童数のランキングの図とリンクを足し、元データを失った図を R2 から作り直した (`3880d313a`)。3 本とも published:false で送り箱にあり、quality-gate blocker 0・ci-factual-gate 通過・critic PASS。
+- **残り (承認)**: 救急の新記事の公開と 2 本の再公開 (承認後に published: true にして push)。
+- **残り**: 放課後児童クラブの待機児童の指標の取り込み (上の「取り込み」の項)。
 
 ### [BLOG-RELEASE-CALENDAR-FOLLOWUP-01] 公表暦で見つかった年次更新待ちの取り込みと、国勢調査の集計ごとの公表
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-14] [領域:サイト] [待ち:承認]
@@ -997,8 +1001,10 @@ updated: 2026-11-01
 - **決めること**: 総合の 1 本の 4 週の実績を見てから作るか、今作るか。合成指標は恣意的に見えるので、重みの根拠を書けない目的は作らない。
 
 ### [BLOG-REGION-PUBLISHED-FIX-01] 公開済み 10 本の地方のくくりと題の約束の誤りを直す
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-11-04] [領域:サイト]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-11-04] [領域:サイト] [待ち:承認]
 
+- **済み (2026-11-25)**: 公開版で今も blocker が出る 4 本を直し、送り箱に published:false で置いた (quality-gate blocker 0・ci-factual-gate 通過): `assembly-answer-chatgpt-5steps` (題の「10 倍」を本文で示す・`10710d6e2`)、`croquette-consumption-expenditure-prefecture-gap` (三重を近畿へ・`e1149b225`)、`school-nonattendance-pattern` (福井を北陸へ・`4b3342c55`)、`tuna-consumption-quantity-vs-annual-new-inpatients-general` (山梨を関東から外す・`db1d604f0`)。残る 6 本は R2 の公開版がすでに blocker 0 だった。
+- **残り (承認)**: 4 本の再公開。承認されたら各 article.md を `published: true` にして develop へ push する (blog-auto-publish が公開する)。公開後に本番の quality-gate で 0 を確かめてカードを閉じる。
 - **背景 (2026-11-04)**: `region-claim-lint.mjs` と `title-promise-lint.mjs` を公開済み 767 本に掛けると、blocker の形が 10 本で見つかった。
 - **対象**: `assembly-answer-chatgpt-5steps` `croquette-consumption-expenditure-prefecture-gap` `hospital-bed-utilization-map` `nagano-food-culture` `pork-consumption-quantity` `school-nonattendance-pattern` `sugar-consumption-prefecture-gap` `tochigi-food-culture` `tuna-consumption-quantity-vs-annual-new-inpatients-general` `yamagata-food-culture`
 - **完了条件**: 各記事の quality-gate で `地方のくくり` と `題の約束` の blocker が 0。`/brushup-blog --target article` で本文を直す。
@@ -1115,16 +1121,6 @@ updated: 2026-11-01
   - タグは中央値 99 個 (上限 100)。意図した運用かを決め、違うなら採点の項目に足す。有料記事 98 本は本文が API に出ず型の寸法を測っていない。
 - **道具の癖**: `update-published-navigation.mjs` は途中で止まると下書きが残り、次の実行が止まる。文言の置き換えは dry-run の `wouldRewriteDatasetWording` で見る。
 - **完了条件**: 採点が週次で更新され、59 点以下の記事が 0 本になり、「元データ」カードの扱いが決まって台帳で確かめられる。
-
-### [BLOG-CHART-FILES-MISSING-01] 公開中のブログ本文が指す図が R2 に無い
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-05] [領域:サイト]
-
-- **証拠 (2026-11-05)**: R2 の `app/blog/all.json` の全記事を数えた。
-- **未確認**: 公開ページの表示はまだ見ていない。
-- **次**: 2 記事と 6 記事を本番のページで開き、図の欠けと 404 を確かめる。原因を調べ、図の再生成か一覧からの除外を決める。
-- **完了条件**: 一覧の全記事に `article.md` があり、本文が指す図がすべて R2 にある。
-- **追補 (2026-11-14)**: konbu-consumption-prefecture-gap は `b855b6122` で書き直した (2026-11-16 に公開した。是正キューでは clean になりキューから外れた)。公開した後に、このカードの対象からこの記事を外す。
-- **統合 (2026-11-24・旧 BLOG-ALLJSON-MISSING-BODY-01)**: 2026-10-28 の本文の初回退避で、`app/blog/all.json` の 619 記事のうち 6 記事に `article.md` が無かった。完了条件「全記事に article.md がある」は同じなので、ここで 6 記事の slug を出して本番の応答と掲載理由を確かめる。
 
 ### [BLOG-SCATTER-LABEL-SIDE-01] 散布図の県名が、点と重なる側しか試さず消える
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-05] [領域:サイト] [待ち:承認]
@@ -1305,9 +1301,12 @@ updated: 2026-11-01
 - **完了条件**: ブログのサムネイル工程が週次で成功し、リンクカード台帳が配信物と一致している (ranking分の条件は `990e1d6b9` で不要になった)。
 
 ### [BLOG-AUTOMOTIVE-BIRTHDEATH-FOLLOWUP-01] 自動車産業の記事の題名と中身のずれ、出生と死亡の記事に残る critic の MAJOR 6 件を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-26] [領域:サイト]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-26] [領域:サイト] [待ち:承認]
 
-- **automotive-industry-transformation-map**: 輸送用機械の県別の図 4 枚を e-Stat から取り直せず外し、全業種合計の製造品出荷額で書き直したため、本文に自動車の数値が無く、題名「自動車産業の県別勢力図」とずれる。CI の app id で輸送用機械の県別出荷額を取り直すか、題名と背景画像を作り直すかを決める。
+- **済み (2026-11-25)**: 2 記事の書き直しを送り箱に published:false で置いた (quality-gate blocker 0・ci-factual-gate 通過・blog-critic PASS)。automotive は輸送用機械の県別出荷額の指標が R2 に無いので、題名と説明を全業種合計の製造品出荷額に合わせた (`79e44458b`)。birth-death は出典を R2 で確かめられない全国値 (出生率 1.20・人口置換水準・50歳時未婚割合・婚外子 2% 台・初婚年齢) を削って県別の値に置き換え、婚姻率と出生率の散布図を足し、本番で 410 の `/correlation` リンクを外した (`ba34bdb9e`)。
+- **残り (承認)**: 2 本の再公開 (承認後に published: true にして push)。
+- **残り (automotive の続き)**: 背景画像 `assets/blog/article-backgrounds/automotive-industry-transformation-map.jpg` が自動車の絵柄のまま。critic の MAJOR 2 件 (図と本文が 2023 年のまま。R2 には 2024 年があり 2 位が大阪に替わる / `/blog/manufacturing-aichi-dominance` と第 1 節が重なる) は再公開の前か後に直す。
+- **(旧) automotive-industry-transformation-map**: 輸送用機械の県別の図 4 枚を e-Stat から取り直せず外し、全業種合計の製造品出荷額で書き直したため、本文に自動車の数値が無く、題名「自動車産業の県別勢力図」とずれる。CI の app id で輸送用機械の県別出荷額を取り直すか、題名と背景画像を作り直すかを決める。
 - **birth-death-gap-decline**: critic の MAJOR が 6 件残る。うち 2 件は全国値 1.20・50 歳時未婚割合・婚外子 2% 台の出典が R2 に無く未確認。
 - **完了条件**: 2 記事で上の点が解消し、`quality-gate.mjs` が blocker 0・critic PASS。
 
@@ -1406,6 +1405,7 @@ updated: 2026-11-01
 - **残り 1**: 判定できない 136 指標 (`data/estat/ssds-year-format/decisions.json` の undetermined)。件数の多い調査は、市町村税課税状況等の調 (7月1日) 16 件、全国家計構造調査と全国消費実態調査 計 32 件、地方公共団体定員管理調査 (4月1日) 8 件、完全生命表・都道府県別生命表 8 件、選挙結果調 8 件。調査の表題での年の呼び方を一次資料で確かめて surveyNaming に足す。呼び方が暦年だと、いま fiscal の指標 (地方公共団体定員管理調査の 8 件など) は calendar に変わるので、その指標を読む取り込みスクリプトのテストも回す。
 - **残り 2**: 市区町村の指標 total-area-prefecture-ratio (#B01101) は、市区町村の表の項目名が「総面積（都道府県面積に占める割合）」で、都道府県の指標「面積割合（全国面積に占める割合）」と分母が違う。市区町村の指標の計算式は公開ページに無いので、yearFormat は fiscal のまま判定していない。基礎項目を確かめられる一次資料が見つかれば決める。
 - **残り 3**: 統合元の完了条件「S1-01 の 9 slug で定義シートの期間の型が本文と一致する」は、1 slug (real-disposable-income-reversal) でしか確かめていない。残りの 8 slug を確かめる。
+- **追補 (2026-11-25)**: `data/metrics/natural-increase-rate.ts` (SSDS A4401) の `source.displayName` が「人口動態統計」なのに、description と定義シートは「人口推計」で食い違い、ブログの図の出典欄にも人口動態統計と出る。SSDS の基礎データ A4401 の出典を e-Stat のメタ情報で確かめてから displayName を直す (description の「当たり」の印は変えない)。
 - **完了条件**: undetermined がさらに減り (上限の定数も同じ数に下げる)、`npm run estat:ssds-year-format:check` と `node --test .claude/scripts/lib/__tests__/ssds-year-format.test.mjs` が通り、S1-01 の 9 slug すべてで定義シートの期間の型が本文と一致する。
 - **進捗 (2026-11-24・815e3423d)**: 一次資料で表題の年の呼び方を確かめた 7 調査 (全国家計構造調査・全国消費実態調査・地方公共団体定員管理調査・市町村税課税状況等の調・地方選挙結果調ほか) を surveyNaming に足し、判定できない指標を 136 → 71 件にした。残り: 71 件と、S1-01 の残り 8 slug の定義シートの確認。
 
@@ -1666,6 +1666,7 @@ updated: 2026-11-01
 - **完了条件**: 2・3 の対象記事を是正キューか該当カードで扱っている。6 のオーナー確認の結果が台帳に反映されている。観測の 2 点が実測で確かめられている。
 - **追補 (2026-11-14・古い年の記事の取り直しで見つけた分)**: 是正キュー (22:53 生成) が古い年の一覧 (23:59 生成) より先に作られ、data-refresh レーンの 126 件が今の一覧に無い古い判定のまま残る (キューを一覧の後に作る順に直す)。`bonito-catch-prefecture` は一覧に古いと載るのに、`refresh-article-data-years.mjs` は取り直す図を見つけない。`article-factual-check` は「2024年の1位は兵庫」「前年は20位」のような過去年の順位も最新年の data と照らして RANK_MISMATCH にする (今回 5 本で言い回しを避けた)。本文に書く過去年の順位や回数を R2 の全年値と照らす検査が無い (critic が 3 本で数え間違いを見つけた)。R2 の values.json の rank は同じ値の県で順位が割れる年がある。`fresh-udon-soba-consumption-prefecture-gap` の本文に内部ラベル「[仮説B]」が残る。
 - **追補 (2026-11-14・品質検査の誤検知の修正で見つけた分)**: `article-factual-check` の `mentionsForeignMetric` は指標名を拾う正規表現に県名と助詞まで入り、「埼玉県の出荷額は42.4兆円」のように指標名を書いた誤った値を検出しない。公開記事 254 本に VALUE_MISMATCH が 118 件 (47 本) 残り、うち 48 件は単位「人（人口10万対）」の「万」を桁の接頭辞として読んだ 10000 倍の誤検知 (`unit-semantics-standards.md` §5 の「誤検出 0」と食い違う)。CORRELATION_MISMATCH は、一部の県を除いて計算し直した相関係数を散布図全体の値と比べて警告する (fertility-rate-prefecture-gap の −0.44)。
+- **追補 (2026-11-25・記事の書き直しラウンドで見つけた分)**: `bonito-catch-prefecture` の公開版は今の ci-factual-gate で RANK_MISMATCH 4 件になり、再公開すると止まる。「漁獲量4位の東京都は868グラムで19位」の 19 位 (購入数量の順位) を漁獲量の順位として照らす誤検知。quality-gate の VALUE_MISMATCH は、増減額・過去年の値・同じ県の別の指標を最新年の同じ指標の値と照らして warning を出す (automotive-industry-transformation-map で 6 件、birth-death-gap-decline で 3 件。後者は東京の出生数・死亡数を婚姻率と照らした)。 quality-gate のリンク検査は、R2 に値の無い `/ranking/nursery-waiting-children-rate` (本番 404) へのリンクを見逃した (waiting-children-progress の書き直しで critic が見つけて外した)。
 - **追補 (2026-11-17・学力×生活習慣の記事を書いて見つけた分)**: `npm run content-types:check` が「個別の指定の宛先が無い」を 6 件出す (blog:general-hospital-bed-occupancy-rate・inpatient-rate-aging-burden・software-engineer-income-gap・telework-gap-tokyo-6x・total-fertility-rate・wheat-flour-consumption-food-culture-gap)。6 本とも公開 R2 の article.md は 200 で、非公開の一覧にも無いので、検査が宛先を引く一覧 (記事台帳か all.json) に入っていない理由を調べ、台帳側を直すか指定を消す。ブログの散布図の型は、指標名が長いと題が枠の右端を超える (`academic-achievement-lifestyle-habits` の tutoring-math-scatter.svg で推定 1054 > 1016)。題を型の側で折り返すか短縮する。散布図の SVG の題は、data の JSON の `title` ではなく指標のラベルから組まれている。軸名も定義名のままなので、合算の指標 (朝食の「している」+「どちらかといえば、している」) に「毎日食べている」が残る。生成側に題の短縮と表示名の上書き口を足す。同じ記事の残り: critic の再審査で PASS (MINOR 2 件。冒頭の「東京都や上位 5 都府県を外すと」の掛かり方、中 3 の節の「2 学年で同じ向き」の主語を通塾率に限る) は本文を直すと審査の SHA が変わるので未対応。公開後、既存記事 `academic-achievement-test-prefecture-ranking` の学習塾の [仮説] の箇所からこの記事へリンクを足す (公開済み記事の改稿なので審査を通して再公開する。R2 の記事本文の上書きなのでオーナーの承認待ち。関連記事の欄からの相互リンクは 2026-11-17 に本番で両方向とも確認済み)。
 品質ゲートの VALUE_MISMATCH は、図の無い指標の本文の値 (自己肯定感の 89.3 / 89.0 / 88.2) を、近くにある別の指標 (朝食) の図の値と照らして誤検知する。
 - **移した残り (2026-11-24・旧 PRODUCT-SALES-READINESS-01)**: Kindle S2-01 旧版のレビューで、ランキングの公開本文に誤りが見つかったまま残る (DID 可住地分母、死亡率と件数、従属人口指数と就労者、都道府県率の合算、単純平均と全国値、相関からの因果・算術の誤り)。原典で計算し直し、ランキングの解説の担当 (ranking-content-author) へ直しを渡す。
@@ -1904,12 +1905,12 @@ updated: 2026-11-01
   | かつお節 | `/ranking/katsuobushi-consumption-quantity` | ランキング → blog `katsuobushi-expenditure-ranking` |
   | ぎょうざ | `/blog/frozen-gyoza-spending-prefecture-gap` | 双方向にある。足さない |
   - ranking の「関連記事」は blog snapshot の `rankingRefs` と相関記事から自動で出る (`RelatedArticlesCard.tsx`)ので、どちらも**記事の書き換えと公開** (contents/blog の送り箱 → publish-blog。オーナー承認) で足す。
-- **⑤ ぎょうざの品目**: `gyoza-frozen-consumption-expenditure` (`cdCat01: 010920070`) は「371 ぎょうざ」で、総務省「家計調査 収支項目分類及びその内容例示」2020年改定版により冷凍品は 370 冷凍調理食品へ除外される。metric の subtitle・note は直した (`62a5fe9e1`)。**残り**: blog 本文の「冷凍餃子・持ち帰りの支出を数える」7 か所を「持ち帰りの生・焼きぎょうざ (冷凍品は別品目の冷凍調理食品)」に直して公開し (承認)、ランキングの AI 解説の冷凍の記述も直す。key と slug は URL なので変えない (変えるなら 301 を同時に入れる)。
+- **⑤ ぎょうざの品目**: `gyoza-frozen-consumption-expenditure` (`cdCat01: 010920070`) は「371 ぎょうざ」で、総務省「家計調査 収支項目分類及びその内容例示」2020年改定版により冷凍品は 370 冷凍調理食品へ除外される。metric の subtitle・note は直した (`62a5fe9e1`)。**確認 (2026-11-25)**: blog `frozen-gyoza-spending-prefecture-gap` の公開版はすでに冷凍品の除外を明記し、「冷凍餃子を数える」記述は 0 件。② の `bonito-catch-prefecture` の「食べる側」の節とかつお購入数量へのリンク、`katsuobushi-expenditure-ranking` の rankingRefs も公開版にある。**残り**: ランキングの AI 解説の冷凍の記述を直す。key と slug は URL なので変えない (変えるなら 301 を同時に入れる)。
 - **停止条件**: 需要の証拠 (検索表示) が無い品目は作らない。47 都道府県分の薄い記事を一括で作らない。家計調査は県庁所在市の世帯の値であり県全体ではないことを表題と本文で崩さない。
 - **完了条件**: 品目の突き合わせ表が残り、追加したページそれぞれの 4 週後の検索表示とクリックが記録されている。
 
 ### [BLOG-DUPLICATE-AUDIT-01] 同じ主題・同じ数値のブログが 2 本ずつ公開されている組を洗い出し、1 本にまとめる
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:サイト]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:サイト] [待ち:承認]
 
 - **済み (2026-11-14・`644802821`)**: 食文化マップ (`udon-soba-food-culture-prefecture-map`) をオーナー決定どおり差別化した (題「近畿は家、関東は外食｜生うどん・そばの地図」、家庭の購入量と外食の支出の 2 枚の地図)。
 - **オーナー決定 (2026-11-14)**: 推奨の統合 9 組を進めてよい。
@@ -1920,6 +1921,10 @@ updated: 2026-11-01
 - **完了条件**: 統合 9 組がすべて 301 で本番に効き、差別化 4 組が直って公開され、残す組の理由がこのカードに記録されている。
 - **済み (2026-11-14)**: 統合 9 組の手順 ① (まとめる側にしか無い節を残す記事へ移す) を終え、9 本とも critic PASS・quality-gate の blocker 0 で送り箱に置いた (`83d1094e0` 出生率〜`592cd9812` 小麦粉)。
 - **確認 (2026-11-23)**: 統合 9 組はすべて本番で効いている。まとめる側の 9 URL は 301 で残す記事へ転送し (Location が残す記事と一致)、残す記事は 200。残りは差別化 4 組 (紅茶 `black-tea-expenditure-ranking`・`black-tea-income-gap`、`engineer-telework-prefecture`、最低賃金の 2 本) の書き直しと審査で、どれも 11-14 以降に手が入っていない。
+- **済み (2026-11-25)**: 差別化のうち 3 本を書き直し、送り箱に published:false で置いた (quality-gate blocker 0・ci-factual-gate 通過・blog-critic PASS)。`black-tea-expenditure-ranking` は大都市と緑茶の切り口に寄せ順位の節を短縮 (`8fbd2a66a`)、`black-tea-income-gap` は年収と量・単価の切り口に寄せ姉妹記事と重なる図と節を削除 (`5ec0ec04e`)、`engineer-telework-prefecture` はテレワーク実施率×ソフトウェア作成者の年収 (2022) の散布図に書き直し題も変更 (`d9911782e`)。
+- **残り (承認)**: 3 本の再公開 (承認後に published: true にして push)。
+- **残り (最低賃金の 2 本)**: `minimum-wage-1000yen-prefecture`・`minimum-wage-increase-rate-prefecture-gap` は、R2 の `minimum-wage-by-region` が 2010〜2024 年度までで 2025 年度が無いため書き直せない。先に 2025 年度の地域別最低賃金 (厚生労働省の正式決定額) を取り込み、その後に 2 本を取り直す。
+- **残り (任意)**: `black-tea-income-gap` の題の「飲む」は中身 (購入額・量) とずれる。「買う」に寄せるには背景画像の作り直しが要るので据え置いた。
 
 ### [NOTE-FREE-DEFAULT-01] note の雑学・ランキングの有料記事を無料に戻し、送客の変化を前後で測る
 タグ: [収益化] [種類:改善] [実行:ユーザー] [起票:2026-10-07] [領域:商品]
@@ -2852,13 +2857,14 @@ updated: 2026-11-01
 - **完了条件**: 公開 R2 の values.json と item.json の unit が「MWh」になり、ランキングページの単位が半角の MWh で表示され、npm run check:display-units --workspace=@stats47/data-configs が electricity-demand の unit-changed の警告を出さない。
 
 ### [BLOG-CC14-STACKED-AREA-FIGURE-01] cc-estat-14 (積み上げ面の記事) に、実データの積み上げ面の図を載せる
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs contents/blog/cc-estat-14-energy-area-chart/article.md] [起票:2026-10-08] [領域:サイト]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs contents/blog/cc-estat-14-energy-area-chart/article.md] [起票:2026-10-08] [領域:サイト] [待ち:承認]
 
 - **済み (2026-11-14・4bed48943)**: 積み上げ棒の型に積み上げ面の形 (data-form="area"、renderStackedAreaChart) を足しました。
 - **残り**: 公開中の記事 cc-estat-14-energy-area-chart の article.md と data を R2 から取り出し、outbox に置いてください。e-Stat の表 0003409159 の電力量 (tab 160) から、2013 年 4 月〜2016 年 3 月の電灯需要計 (cat01 120)・電力需要計 (200)・特定規模需要計 (310) を取得します。取得した値は energy-demand-stacked.json ("form": "area"、series 3 本、単位は GWh などの読みやすい桁にそろえる) と source.json (kind estat、statsDataId 0003409159) にしてください。generate-article-charts で図を描き、本文の「仮の値」のサンプルの節に図と解釈の段落を足します。そのあと quality-gate と blog-critic を通し、オーナーの指示で再公開します。
 - **残り (判断)**: e-Stat の値は MWh 単位で月 2,000 万を超えます。そのため図の単位を、GWh に割る (推奨。目盛りと右端の値が 5 桁に収まる) か、MWh のまま描くかを決めてください。GWh に割る場合は、source.json の transform に換算を書きます。
 - **追補 (2026-11-14)**: 型の台帳 `data/content-operations/image-templates.json` は、積み上げ棒と折れ線の renderer を `packages/svg-builder/src/` としているが、描画は `apps/admin/lib/template-composition-stacked.ts` と `template-trend-line.ts` が行っている。台帳を実装に合わせる。
 - **完了条件**: 記事に実データの積み上げ面の図 (明暗 2 枚) があり、quality-gate.mjs が通り、blog-critic が PASS を返していること。
+- **済み (2026-11-25・`d72b5664f`)**: e-Stat 表 0003409159 から 3 系列を取得し GWh に換算して積み上げ面の図 (明暗) を描き、本文に図と解釈を足して送り箱に published:false で置いた。月次の合計は表の年度計と ±1 GWh で一致。quality-gate blocker 0・ci-factual-gate 通過・blog-critic PASS (2 周目)。残りは再公開の承認だけ (承認後に published: true にして push)。MINOR 2 件 (冬と夏の山の時期のずれの解釈・Step 2 への戻り) は任意。
 - **オーナー決定 (2026-11-24)**: 推奨どおり 図の単位を GWh に割る を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: e-Stat 表 0003409159 から値を取得し、source.json の transform に GWh への換算を書く。再公開の実行はオーナーの指示の後
 
 ### [SITE-RENEWAL-01] サイトをリニューアルする（Claude Design で検討した案を形にする）
