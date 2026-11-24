@@ -1,11 +1,11 @@
 {
-  "title": "不登校による中学校長期欠席生徒比率",
+  "title": "中学校の不登校比率",
   "subtitle": "2023年",
   "label": "不登校による中学校長期欠席生徒比率",
   "unit": "生徒千対",
   "year": "2023",
   "rankingKey": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
-  "source": "e-Stat（政府統計の総合窓口）",
+  "source": "社会・人口統計体系",
   "generatedBy": "fetch-ranking-data-r2.mjs",
   "data": [
     {
