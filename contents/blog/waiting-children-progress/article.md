@@ -11,7 +11,7 @@ category: economy
 archetype: C
 publishedAt: 2026-03-04
 updatedAt: 2026-11-25
-published: false
+published: true
 ---
 
 保育所等利用待機児童数は、2024年度に47都道府県の合計で2,567人でした。2001年度以降で最も多かった年は2万6千人を超えていたので、10分の1を下回るところまで減ったことになります。待機児童がゼロの県は16県にのぼります。

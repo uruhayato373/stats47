@@ -6,7 +6,7 @@ description: "製造業の出荷額で、愛知県だけが他県の3倍近い�
 category: miningindustry
 archetype: A
 tags: [製造業, 産業構造変化]
-published: false
+published: true
 publishedAt: 2026-06-07
 updatedAt: 2026-11-25
 ---

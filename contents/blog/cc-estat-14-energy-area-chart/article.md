@@ -13,7 +13,7 @@ tags:
   - D3
 publishedAt: 2026-05-17
 updatedAt: 2026-11-25
-published: false
+published: true
 ogImage: /blog/cc-estat-14-energy-area-chart/og.png
 ---
 
