@@ -13,6 +13,8 @@
  *   4. である調が混ざっていないか (ですます調で統一)
  *   5. 煽り語が無いか
  *   6. **本文の数値が SSOT (values.json) と整合するか** — ai-content 側と同じ number-audit で判定
+ *   7. 1県1章の本で、指標名を書いた章に注記の要点 (県庁所在市・帰属家賃) があるか、指標名の前後の年が
+ *      指標定義の yearFormat (年度 / 年) と合うか (src/channels/kindle/fresh-caution-check.ts)
  *
  * Usage:
  *   npx tsx packages/product-factory/scripts/verify-fresh.mts            # 全書籍
@@ -28,6 +30,7 @@ import { fetchRankingValues } from "../src/data/load-ranking-values";
 import { PREFECTURE_BY_CODE5 } from "../src/data/prefectures";
 import { extractKanjiClaims } from "../src/text/kanji-numeral";
 import { judgeField, type ValueRow } from "../src/channels/kindle/ai-content-composer";
+import { checkFreshCautions, type CautionMetric } from "../src/channels/kindle/fresh-caution-check";
 import { METRICS_REGISTRY } from "@stats47/data-configs";
 
 const PF_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -139,6 +142,18 @@ async function verifyBook(bookId: string): Promise<Finding[]> {
   }
 
   const gate = await buildGate(bookId);
+
+  if (guide) {
+    // 7. 注記の要点と年の書き分け (1県1章の本。KINDLE-FRESH-CAUTION-CHECK-01)
+    const metrics = (BOOK_RANKING_KEYS[bookId] ?? []).map((key) => ({
+      key,
+      ...((METRICS_REGISTRY as Record<string, Omit<CautionMetric, "key"> | undefined>)[key] ?? {}),
+    }));
+    const manuscripts = files.map((file) => ({ file, text: readFileSync(join(dir, file), "utf8") }));
+    for (const c of checkFreshCautions(manuscripts, metrics)) {
+      out.push({ file: `${bookId}/${c.file}`, level: c.level, msg: `[${c.code}] ${c.msg}` });
+    }
+  }
 
   for (const f of files) {
     const raw = readFileSync(join(dir, f), "utf8");
