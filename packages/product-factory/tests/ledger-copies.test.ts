@@ -50,3 +50,34 @@ describe("kindle-status.json は書籍カタログから作った値と一致す
     expect(file).not.toEqual(buildKindleStatus(renamed, file.generatedAt));
   });
 });
+
+describe("章の切り口 id (lensIds) は調査の切り口台帳に実在する (KINDLE-K-S1-02-STATUS-DRIFT-01)", () => {
+  const lensDir = datasetDir("surveys.lenses");
+  const lensIds = new Set<string>(
+    (readJson(`${lensDir}/kakei-chousa.json`).lenses as { id: string }[]).map((l) => l.id),
+  );
+
+  it("実データ: どの書籍の章の lensIds も台帳の lenses[].id にある", () => {
+    const unknown = KINDLE_BOOKS.flatMap((b) =>
+      b.chapters.flatMap((c) =>
+        (c.lensIds ?? []).filter((id) => !lensIds.has(id)).map((id) => `${b.id}/${c.title}: ${id}`),
+      ),
+    );
+    expect(unknown).toEqual([]);
+  });
+
+  it("K-S1-02 (家計調査の本) のブログ章はすべて切り口を持ち、元定義の状態・章数が状態ファイルと一致する", () => {
+    const book = KINDLE_BOOKS.find((b) => b.id === "K-S1-02");
+    expect(book).toBeDefined();
+    const blogChapters = book!.chapters.filter((c) => c.source === "blog");
+    expect(blogChapters.length).toBeGreaterThan(0);
+    for (const c of blogChapters) expect(c.lensIds?.length ?? 0).toBeGreaterThan(0);
+    const status = readJson(`${datasetDir("kindle.archives")}/kindle-status.json`).books.find(
+      (b: { id: string }) => b.id === "K-S1-02",
+    );
+    expect({ status: status.status, chapters: status.chapters }).toEqual({
+      status: book!.status,
+      chapters: book!.chapters.length,
+    });
+  });
+});

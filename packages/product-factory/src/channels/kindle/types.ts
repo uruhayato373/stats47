@@ -144,6 +144,11 @@ export interface BookChapter {
    * (TS 文字列リテラルの肥大を避ける)。freshText と併用時は freshFile を優先。
    */
   readonly freshFile?: string;
+  /**
+   * この章が答える統計調査の切り口の id (台帳 surveys.lenses の lenses[].id。例 "kakei-city-comparison")。
+   * 切り口は本ではなく調査の持ち物なので、章は id で参照するだけ。実在は check-datasets の refs が見る。
+   */
+  readonly lensIds?: readonly string[];
 }
 
 /** 共通事業方針 (.claude/shared-policy/POLICY.md) の HARM 分類。 */

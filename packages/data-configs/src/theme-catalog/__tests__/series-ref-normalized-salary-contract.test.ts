@@ -28,17 +28,25 @@ describe("CROSS-PAGE-DATA-SSOT-01 normalized salary migration", () => {
     }
   });
 
-  it("4 chart はraw e-Statでなく正規化済みR2 metricだけを参照する", () => {
+  // 2026-11-24 (METRIC-GATE-FOLLOWUP-02): 4 枚の折れ線は観測年が 2 年 (2020・2023) しか無く推移として読めないので、
+  // 同じ正規化済み指標を数値タイル (metricGroups の view: "tiles") に替えた。元の図の key は fixture に記録として残す。
+  it("4 組の正規化済みR2 metricは数値タイルのカードに載り、図はraw e-Statを参照しない", () => {
+    const groups = OCCUPATION_SALARY_CATALOG.metricGroups ?? [];
     for (const row of contract) {
-      const chart = OCCUPATION_SALARY_CATALOG.charts.find(
-        (candidate) => candidate.componentKey === row.componentKey,
-      );
-      expect(chart, row.componentKey).toBeDefined();
-      const props = chart?.componentProps ?? {};
-      const refs = parseStatSeriesRefs(props.seriesRefs) ?? [];
-      expect(refs.map((ref) => ref.metricKey)).toEqual(row.metricKeys);
-      expect(refs.every((ref) => ref.label && ref.colorRole)).toBe(true);
-      expect(JSON.stringify(props)).not.toContain("estatParams");
+      expect(
+        OCCUPATION_SALARY_CATALOG.charts.some((candidate) => candidate.componentKey === row.componentKey),
+        `${row.componentKey} は数値タイルへ替えた`,
+      ).toBe(false);
+      for (const metricKey of row.metricKeys) {
+        const group = groups.find((candidate) => candidate.rankingKeys.includes(metricKey));
+        expect(group, metricKey).toBeDefined();
+        expect(group?.view, metricKey).toBe("tiles");
+      }
+    }
+    for (const chart of OCCUPATION_SALARY_CATALOG.charts) {
+      expect(JSON.stringify(chart.componentProps ?? {}), chart.componentKey).not.toContain("estatParams");
+      const refs = parseStatSeriesRefs(chart.componentProps?.seriesRefs) ?? [];
+      expect(refs.every((ref) => ref.label && ref.colorRole), chart.componentKey).toBe(true);
     }
   });
 });

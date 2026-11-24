@@ -57,7 +57,33 @@
       "month": 7,
       "everyYears": 5,
       "anchorYear": 2020,
-      "release": "基本集計の最後の従業地・通学地集計。通勤・就業・共働きの指標はここまで出ないので、人口等基本集計 (令和7年は 2026-09-29) ではなく最後の集計で数える。人口と世帯だけの指標はこれより早く出るが、この暦では検出が遅れる",
+      "release": "基本集計の最後の従業地・通学地集計。通勤・就業・共働きの指標はここまで出ないので、既定はこの集計で数える。人口・世帯・外国人の指標は tabulations の人口等基本集計で数える",
+      "tabulations": [
+        {
+          "id": "population-basic",
+          "lagYears": 1,
+          "month": 9,
+          "release": "人口等基本集計 (人口、世帯、住居に関する結果及び外国人、高齢者世帯、母子・父子世帯、親子の同居等に関する結果)。令和2年は 2021-11-30、令和7年は 2026-09-29 に公表。載せたのは公表の内容の表記で世帯・外国人・高齢者世帯に当たると確かめた指標だけで、配偶関係 (未婚者割合) と人口集中地区は表記に無いので既定 (最後の集計) のまま数える",
+          "rankingKeys": [
+            "general-households",
+            "average-persons-per-general-household",
+            "ratio-of-general-households-to-national",
+            "nuclear-family-households-ratio",
+            "single-person-household-ratio",
+            "single-person-household-old-population-ratio",
+            "foreign-resident-count-per-100k",
+            "foreign-resident-count-china",
+            "foreign-resident-count-korea",
+            "foreign-resident-count-usa"
+          ],
+          "evidence": {
+            "releasedOn": "2026-09-29",
+            "title": "令和7年国勢調査 人口等基本集計",
+            "url": "https://www.stat.go.jp/data/kokusei/2025/kekka.html",
+            "observedAt": "2026-11-24"
+          }
+        }
+      ],
       "evidence": {
         "releasedOn": "2022-07-22",
         "title": "令和2年国勢調査 従業地・通学地による人口・就業状態等集計",

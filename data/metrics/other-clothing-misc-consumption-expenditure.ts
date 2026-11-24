@@ -43,5 +43,6 @@ export const otherClothingMiscConsumptionExpenditure: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
+  "seriesEnd": { "lastYear": 2024, "reason": "家計調査の 2025 年の品目分類の改定でネクタイ・婦人用ストッキングを統合して範囲が広がり、2025 年以降の「他の被服のその他」とは接続しない", "successorKey": "other-clothing-misc-2025-group-consumption-expenditure" },
   "isActive": true,
 };
