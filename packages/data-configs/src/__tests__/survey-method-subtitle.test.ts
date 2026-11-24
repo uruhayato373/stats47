@@ -29,8 +29,19 @@ describe("isSurveyMethodSubtitle", () => {
     expect(isSurveyMethodSubtitle("乳用牛(めす)の飼養頭数合計")).toBe(false);
   });
 
-  it("世帯あたりの額や割合の定義を書いた subtitle は、書き出しが違うので定型文に数えない", () => {
-    expect(isSurveyMethodSubtitle("都道府県庁所在市の二人以上世帯の1世帯当たり年間消費支出総額")).toBe(false);
-    expect(isSurveyMethodSubtitle("都道府県庁所在市の二人以上世帯の消費支出に占める教育の割合（用途分類の年平均1か月）")).toBe(false);
+  // 2026-11-24 (METRIC-SUBTITLE-KAKEI-NOTE-01 の残り 25 指標): 書き出しが「…の年間」でない形も調査方法を書いていた。
+  // 旧実装はこの 2 文を「定型文に数えない」と固定していたので、lint をすり抜けていた。
+  it("家計調査の取得レシピの指標は、1世帯当たりの額・割合・現在高の書き出しも定型文と判定する", () => {
+    const kakei = { sourceKind: "kakei-chousa" };
+    expect(isSurveyMethodSubtitle("都道府県庁所在市の二人以上世帯の1世帯当たり年間消費支出総額", kakei)).toBe(true);
+    expect(isSurveyMethodSubtitle("都道府県庁所在市の二人以上世帯の消費支出に占める教育の割合（用途分類の年平均1か月）", kakei)).toBe(true);
+    expect(isSurveyMethodSubtitle("都道府県庁所在市の二人以上世帯の1世帯当たりの負債現在高", kakei)).toBe(true);
+    expect(isSurveyMethodSubtitle("家計調査（二人以上世帯）の調査世帯に占める持家世帯の割合", kakei)).toBe(true);
+    expect(isSurveyMethodSubtitle("家賃・設備修繕など住居への支出総額", kakei)).toBe(false);
+  });
+
+  it("家計調査から計算する external の指標 (エンゲル係数) は、広い書き出しでは止めない (図の表記の読み手が subtitle を見る)", () => {
+    expect(isSurveyMethodSubtitle("都道府県庁所在市の二人以上世帯の消費支出に占める食料費の割合", { sourceKind: "external" })).toBe(false);
+    expect(isSurveyMethodSubtitle("都道府県庁所在市の二人以上世帯の年間納豆消費支出額", { sourceKind: "external" })).toBe(true);
   });
 });

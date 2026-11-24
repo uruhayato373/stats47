@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const otherLivingExpenditureTotal: MetricConfig = {
   "key": "other-living-expenditure-total",
   "title": "その他の消費支出",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間その他の消費支出（理美容・たばこ・交際費・仕送りなどへの支出総額）",
+  "subtitle": "理美容・たばこ・交際費・仕送りなどへの支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "description": "家計調査（二人以上世帯）における年間のその他の消費支出の総額。諸雑費（理美容・たばこ等）、こづかい、交際費、仕送り金を含む。十大費目のうち他の9費目に含まれない支出をまとめたものである。",
   "unit": "円",
   "category": "economy",

@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const housingExpenditureTotal: MetricConfig = {
   "key": "housing-expenditure-total",
   "title": "住居費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間住居費（家賃・設備修繕など住居への支出総額）",
+  "subtitle": "家賃・設備修繕など住居への支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "description": "家計調査（二人以上世帯）における年間の住居への支出総額。家賃地代と設備修繕・維持を含む。持ち家世帯は家賃が計上されないため、持ち家率の高い県ほど小さく出る点に注意する。",
   "unit": "円",
   "category": "economy",

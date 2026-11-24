@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const utilitiesExpenditureTotal: MetricConfig = {
   "key": "utilities-expenditure-total",
   "title": "光熱・水道費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間光熱・水道費（電気・ガス・他の光熱・上下水道への支出総額）",
+  "subtitle": "電気・ガス・他の光熱・上下水道への支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "description": "家計調査（二人以上世帯）における年間の光熱・水道への支出総額。電気代・ガス代・灯油等・上下水道料を含み、気候と住宅事情の影響を受ける。",
   "unit": "円",
   "category": "economy",
