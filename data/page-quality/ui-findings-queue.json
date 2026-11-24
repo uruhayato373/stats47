@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T23:53:07.268Z",
+  "generatedAt": "2026-11-24T06:56:59.694Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -44,14 +44,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[tablet-768/medium] タブレット1枚目、「調べたい問いから選ぶ」3枚の地図サムネイルの右端(駅×人口): 右のカードの地図は黒い塊でほぼ塗りつぶされ、形も駅の位置も読み取れない。左の2枚が淡い塗りなのに対し1枚だけ濃く、見た目が揃っていない。 → 駅メッシュの描画を淡色にするか、サムネイル用に濃度を下げて3枚の見た目を揃える。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:59.678Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "2026-11-03 の再設計 (d62967ff1) で、サムネイルは左の小枠でなくカード上端の全幅 SVG (375px 幅で 373x195) になり、駅名ラベルは重なりを検出して優先順に間引く。2026-11-24 に localhost の /geo で 375px 幅の 3 枚とも駅名 3 つが重ならず描かれることを確認 (未デプロイ分あり)"
     },
     {
       "key": "agent|geo-analysis--analysis",
@@ -61,14 +61,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、見出し下のメタ情報行(「データ生成 2026/09/05・coverage 47/47」「47都道府県・2020-2050・%」): 「coverage 47/47」のような運用用語が読者向けの画面に出ている。「・%」だけの単位表記も何の値か分からない。 → 「47都道府県すべてを収録」のような平易な表現に置き換え、単位は指標名と併記する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-18",
       "last_seen": "2026-11-14",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:35.895Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "修正の本番反映後も 2026-11-14 の週次で再検出 (前回: GeoSpatialEvidenceExplorer で地図をタブの直下に置き、凡例の説明・距離帯の凡例を地図の後ろへ移した。本番の 375x812 で同じ並べ替えを当てると地図の上端が 765px→640px (最初の画面に地図が 172px 入る)。未デプロイ)"
+      "note": "同上 (GeoCrossAnalysisArticle): coverage を「47都道府県すべて収録」に、単位は指標名と併記「<指標名>（単位: %）」に変更 (未デプロイ)"
     },
     {
       "key": "agent|geo-analysis--analysis-pref",
@@ -78,14 +78,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ 1 枚目、タイトル下のメタ行「データ生成 2026/09/05 ・ coverage 47/47 ・ 47都道府県 ・ 2020-2050 ・ %」: 「coverage 47/47」という英語の運用用語と、単位だけの「%」が読者向けの説明なしに並んでいる。何の % か、coverage が何を数えているかが画面から分からない。 → 「coverage 47/47」は「47 都道府県すべて対応」のように日本語で言い換え、「%」は「単位: %(人口割合)」など何の値かが分かる形にする。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-21",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:29.000Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "GeoCrossAnalysisArticle のメタ行を日本語化: 「coverage 47/47」を「47都道府県すべて収録」に、単位だけの「%」を「<指標名>（単位: %）」に変更 (未デプロイ)"
     },
     {
       "key": "agent|geo-analysis--layer",
@@ -214,14 +214,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ 1 枚目と 2 枚目、「北海道が全国下位」表の「年間収入(1世帯当たり) 448.8万円 / 2019年」の行: 同じ表の他の行が 2024〜2025 年の中で、この行だけ 2019 年で、年が小さな灰色文字のため古さに気づきにくい。順位 44 位が現在の比較に見えてしまう。 → 他の行と年が離れている指標は、年を目立たせるか「2019年(古い調査)」のように注記する。\n[mobile-390/low] スマホ 1 枚目、「北海道の特徴」上のカテゴリ一覧(人口・世帯 / 暮らし / 世帯 / 学校・施設 など): 「人口・世帯」と「世帯」が別カテゴリとして並んでおり、違いが分からない。また各項目が枠なしの灰色テキストで、押せるリンクに見えない。 → 「世帯」の重複を整理し、リンクだと分かるようにチップ形状や下線を付ける。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-14",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:41.521Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "修正の本番反映後も 2026-11-21 の週次で再検出 (前回: AreaHighlightList の指標名の列から min-w-40 を外し ValueTable 既定 (min-w-24) に。390px で表 308px に収まり全国順位の列が見出し・数字とも読める (360px も収まる)。未デプロイ)"
+      "note": "AreaHighlightList.tsx の指標列の min-w-40 (160px) を外し、390px 幅で順位列が収まる形に修正済み (2026-11-16 main 反映)。コードが現状その形であることを 2026-11-24 に確認"
     },
     {
       "key": "agent|prefecture-detail--theme-geo",
@@ -248,14 +248,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ 2 枚目、「総人口」カードの推移グラフ: グラフの軸の年ラベル (1975 / 2025) が極小で、縦軸の目盛りもありません。値の範囲が分かりません。 → 軸ラベルを読めるサイズにし、最小値と最大値を添える。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-10-11",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "2026-11-24 オーナー決定: 推移は線と面だけで、年と値はホバーで読む"
     },
     {
       "key": "agent|prefecture-list",
@@ -350,14 +350,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ 1 枚目、見出し直下の「出典・指標の定義」ボタン左のアイコン: アイコンの左上に黒い丸が重なっており、通知バッジのように見えて意図が分からない。 → 黒い点の重なりが意図したものか確認し、不要なら取り除くか、バッジなら意味が分かる表示にする。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-11-21",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "SourcesSheet の右上の小さな点は、シートに「読むときの注意」が入っていることを示す意図した印 (hasNotes のとき data-sources-notes-marker)。通知バッジではない"
     },
     {
       "key": "agent|theme",

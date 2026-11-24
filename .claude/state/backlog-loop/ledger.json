@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T06:45:32.691Z",
+  "updatedAt": "2026-11-24T07:02:27.909Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -12919,6 +12919,210 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T06:45:32.691Z"
+    },
+    "UI-FIX-SURVEY-POLICE-20261121": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:26.558Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:26.558Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:26.812Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:26.812Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.094Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.094Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.390Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.390Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-THEME-POPULATION-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.642Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-POPULATION-20261011.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.642Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.909Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261011.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.909Z"
     }
   }
 }

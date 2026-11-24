@@ -85,6 +85,12 @@ export async function GeoCrossAnalysisArticle({
     timeZone: 'Asia/Tokyo',
   }).format(new Date(snapshot.generatedAt));
 
+  const { actualAreas, expectedAreas } = snapshot.dataQuality;
+  const coverageLabel =
+    actualAreas === expectedAreas
+      ? `${expectedAreas}都道府県すべて収録`
+      : `${expectedAreas}都道府県のうち${actualAreas}都道府県を収録`;
+
   return (
     <PageShell>
       <GeoAnalysisTracker
@@ -104,8 +110,8 @@ export async function GeoCrossAnalysisArticle({
         eyebrow={config.eyebrow}
         title={snapshot.title}
         description={snapshot.question}
-        stats={`${snapshot.rows.length}都道府県 ・ ${snapshot.dataVersion} ・ ${formatUnitForDisplay(primaryMetric.unit)}`}
-        meta={`データ生成 ${generatedDate} ・ coverage ${snapshot.dataQuality.actualAreas}/${snapshot.dataQuality.expectedAreas}`}
+        stats={`${snapshot.rows.length}都道府県 ・ ${snapshot.dataVersion} ・ ${primaryMetric.label}（単位: ${formatUnitForDisplay(primaryMetric.unit)}）`}
+        meta={`データ生成 ${generatedDate} ・ ${coverageLabel}`}
       />
 
       {config.hazardMapUrl ? (
