@@ -149,6 +149,7 @@ updated: 2026-11-01
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [検証:node --test .claude/scripts/backlog-loop/__tests__/record-backlog-outcome.test.cjs] [起票:2026-11-16] [領域:管理]
 
 - **起点 (2026-11-16 観測)**: この会社の Windows PC で、`record-backlog-outcome.test.cjs` の「並行して記録しても 1 件も欠けない」が単独で 3 回中 1 回落ち、push の前の検査 (`pre-push-tests.mjs`) では 2 回続けて落ちて push が止まった。
+- **観測 (2026-11-24)**: 同じ PC の push の前の検査で再び落ちた (記録の 1 件が欠けた)。単独では 3 回中 1 回落ちた。同じ検査で `data-refresh-scoped-workflow.test.mjs` も Windows で必ず落ちる (`WINDOWS-LOCAL-GATES-01`) ので、この PC からは検査を飛ばさないと develop へ push できない。
 - **[仮説]** 同時に 24 本がロックを取り合い、待ちの上限で諦めたプロセスが 1 で終わる。負荷の高い push 前の検査で落ちやすい。**検証**: 失敗したプロセスの stderr を残すよう `stdio` を変えて再現し、理由を読む。
 - **次**: 理由を確かめてから、ロックの待ち方 (record-backlog-outcome.mjs) かテストの並列数のどちらを直すかを決める。テストを消したり並列数を 1 にしたりして通すのは禁止 (同時書き込みで欠けないことを守るテストのため)。
 - **完了条件**: 単独で 20 回続けて通り、push の前の検査でも落ちない。
