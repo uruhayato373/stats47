@@ -1265,7 +1265,10 @@ export const DATASETS = [
   d("surveys.editorial-schema", "data/surveys/editorial/editorial.schema.json", "schema", "data", "data", "上の調査ハブの本文の JSON Schema"),
   d("surveys.release-calendar", "data/surveys/release-calendar/release-calendar.json", "ledger", "data", "data", "統計の公表暦 (主要統計が都道府県別の年次の値を何月に公表するか。1 調査 1 件で、確かめた実際の公表 1 件を証拠に持つ)。調査の名前・機関・URL は持たない。build-stale-data-years.mjs が読み、公表済みなのに古い年のままの公開記事を週次の一覧に出す (判定は packages/ops/src/blog/lib/release-calendar.mjs)", {
     schema: "data/surveys/release-calendar/release-calendar.schema.json",
-    refs: [{ field: "entries[].surveyId", to: "surveys.master", key: "[].id" }],
+    refs: [
+      { field: "entries[].surveyId", to: "surveys.master", key: "[].id" },
+      { field: "entries[].tabulations[].rankingKeys[]", to: "registry:metrics" },
+    ],
   }),
   d("surveys.release-calendar-schema", "data/surveys/release-calendar/release-calendar.schema.json", "schema", "data", "data", "上の公表暦の JSON Schema"),
   d("surveys.master", "data/surveys/master/surveys.json", "master", "data", "data", "調査マスタ (/survey/<id> の正本。id・名前・機関・URL・親の出典。調査の名前・機関・URL を持つのはここだけで、出典名の対応表や切り口台帳は id で指す)", { schema: "data/surveys/master/surveys.schema.json" }),

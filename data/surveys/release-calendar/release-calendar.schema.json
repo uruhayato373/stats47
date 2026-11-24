@@ -14,6 +14,37 @@
     }
   },
   "definitions": {
+    "tabulation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "lagYears", "month", "release", "rankingKeys", "evidence"],
+      "properties": {
+        "id": { "description": "集計の id (調査の中で一意)", "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "lagYears": { "description": "データの年から、この集計を公表する年までの年数", "type": "integer", "minimum": 0, "maximum": 5 },
+        "month": { "description": "この集計を公表する月 (1〜12)", "type": "integer", "minimum": 1, "maximum": 12 },
+        "release": { "description": "この集計が何を公表するか (公表予定の一覧の内容の表記)", "type": "string", "minLength": 1 },
+        "rankingKeys": {
+          "description": "この集計の公表で値が出る指標キー (registry:metrics)。集計の内容の表記で確かめたものだけを載せる",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evidence": { "$ref": "#/definitions/evidence" }
+      }
+    },
+    "evidence": {
+      "description": "公表月を確かめた実際の公表 1 件",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["releasedOn", "title", "url", "observedAt"],
+      "properties": {
+        "releasedOn": { "description": "実際の公表日", "$ref": "common.schema.json#/$defs/date" },
+        "title": { "description": "公表の題 (公表予定の一覧の表記のまま)", "type": "string", "minLength": 1 },
+        "url": { "description": "公表日を確かめたページ", "$ref": "common.schema.json#/$defs/httpsUrl" },
+        "observedAt": { "description": "ページを見た日", "$ref": "common.schema.json#/$defs/date" }
+      }
+    },
     "entry": {
       "type": "object",
       "additionalProperties": false,
@@ -36,6 +67,12 @@
         "skipEveryYears": { "description": "公表しない年の周期 (人口推計は国勢調査の年に 10 月 1 日現在の推計を出さない)。skipAnchorYear と組で書く", "type": "integer", "minimum": 2 },
         "skipAnchorYear": { "description": "公表しない年の 1 つ", "type": "integer" },
         "release": { "description": "どの公表を「都道府県の年次の値が出た」とみなすか (速報か確定か、どの集計か)", "type": "string", "minLength": 1 },
+        "tabulations": {
+          "description": "調査の行 (最後の集計) より早く公表する集計。載せた指標キーはこの集計の公表日で数え、載っていない指標は調査の行で数える (国勢調査の人口等基本集計など)",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/tabulation" }
+        },
         "evidence": {
           "description": "公表月を確かめた実際の公表 1 件",
           "type": "object",

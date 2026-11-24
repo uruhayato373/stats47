@@ -8,6 +8,11 @@
  *
  * 指標 → 調査は ranking item の surveyIds (主出典) で引く。調査が 1 つでも公表暦に無い指標と、調査の分からない
  * 指標は判定しない (古いと決めつけない)。複数の調査を継いだ系列 (国勢調査と人口推計) は新しい方の年まで公表済み。
+ *
+ * 1 つの調査が集計ごとに公表日を分ける場合 (国勢調査の人口等基本集計と従業地・通学地集計) は、調査の行の
+ * lagYears / month を最後の集計 (既定) とし、早く出る集計を tabulations に指標キーの一覧つきで持つ。
+ * 指標がどの集計から来るかは tabulations[].rankingKeys で決め、載っていない指標は既定 (最後の集計) で数える
+ * (BLOG-RELEASE-CALENDAR-FOLLOWUP-01)。
  */
 
 const MAX_LOOKBACK_YEARS = 12;
@@ -32,6 +37,18 @@ export function latestReleasedDataYear(entry, asOf) {
  */
 export function findReleaseDue(articles, { asOf, calendar, latestYearByKey, surveyIdsByKey }) {
   const releasedBySurvey = new Map(calendar.map((entry) => [entry.surveyId, latestReleasedDataYear(entry, asOf)]));
+  /** 集計ごとに公表日を分けた調査: `${surveyId}|${rankingKey}` → その集計で公表済みの最新の年 */
+  const releasedByTabulation = new Map();
+  for (const entry of calendar) {
+    for (const tab of entry.tabulations ?? []) {
+      const year = latestReleasedDataYear({ ...entry, lagYears: tab.lagYears, month: tab.month }, asOf);
+      for (const key of tab.rankingKeys) releasedByTabulation.set(`${entry.surveyId}|${key}`, year);
+    }
+  }
+  const releasedFor = (surveyId, rankingKey) => {
+    const tabKey = `${surveyId}|${rankingKey}`;
+    return releasedByTabulation.has(tabKey) ? releasedByTabulation.get(tabKey) : releasedBySurvey.get(surveyId);
+  };
   const out = [];
   for (const article of articles) {
     if (article.published !== true) continue;
@@ -39,8 +56,8 @@ export function findReleaseDue(articles, { asOf, calendar, latestYearByKey, surv
     for (const ref of article.rankingRefs ?? []) {
       if (!/^\d{4}$/.test(ref.year ?? "")) continue;
       const surveyIds = surveyIdsByKey.get(ref.rankingKey) ?? [];
-      if (surveyIds.length === 0 || !surveyIds.every((id) => releasedBySurvey.get(id) != null)) continue;
-      const releasedYear = Math.max(...surveyIds.map((id) => releasedBySurvey.get(id)));
+      if (surveyIds.length === 0 || !surveyIds.every((id) => releasedFor(id, ref.rankingKey) != null)) continue;
+      const releasedYear = Math.max(...surveyIds.map((id) => releasedFor(id, ref.rankingKey)));
       if (Number(ref.year) >= releasedYear) continue;
       const siteLatestYear = latestYearByKey.get(ref.rankingKey) ?? null;
       due.push({

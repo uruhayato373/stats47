@@ -64,6 +64,69 @@ test("公表済みの年より古い年の図を持つ公開記事を、指標�
   ]);
 });
 
+test("国勢調査の人口と世帯の指標は人口等基本集計の公表日で、通勤の指標は最後の集計で数える (BLOG-RELEASE-CALENDAR-FOLLOWUP-01)", () => {
+  // 令和7年の人口等基本集計は 2026-09-29、従業地・通学地集計は 2027 年 (最後の集計 = 調査の行の lagYears 2・month 7)
+  const censusByTabulation = {
+    surveyId: "census",
+    lagYears: 2,
+    month: 7,
+    everyYears: 5,
+    anchorYear: 2020,
+    tabulations: [{ id: "population-basic", lagYears: 1, month: 9, rankingKeys: ["general-households"] }],
+  };
+  const articles = [
+    {
+      slug: "households",
+      published: true,
+      rankingRefs: [
+        { rankingKey: "general-households", year: "2020" },
+        { rankingKey: "commute-by-train", year: "2020" },
+      ],
+    },
+  ];
+  const ctx = (asOf) => ({
+    asOf,
+    calendar: [censusByTabulation],
+    latestYearByKey: new Map([
+      ["general-households", "2020"],
+      ["commute-by-train", "2020"],
+    ]),
+    surveyIdsByKey: new Map([
+      ["general-households", ["census"]],
+      ["commute-by-train", ["census"]],
+    ]),
+  });
+  // 公表月 (9 月) の中はまだ数えない
+  assert.deepEqual(findReleaseDue(articles, ctx("2026-09-30")), []);
+  // 10 月 1 日から世帯の指標だけが公表済み。通勤の指標は 2027 年 8 月まで 2020 年のまま
+  assert.deepEqual(findReleaseDue(articles, ctx("2026-11-24")), [
+    {
+      slug: "households",
+      title: undefined,
+      due: [
+        { rankingKey: "general-households", surveyIds: ["census"], articleYear: "2020", siteLatestYear: "2020", releasedYear: "2025", action: "ingest-metric" },
+      ],
+    },
+  ]);
+  assert.deepEqual(
+    findReleaseDue(articles, ctx("2027-08-01"))[0].due.map((d) => d.rankingKey),
+    ["commute-by-train", "general-households"],
+  );
+});
+
+test("実データ: 公表暦の国勢調査は人口等基本集計を 2026-09 公表の集計として持ち、世帯の指標を載せている", async () => {
+  const { readFileSync } = await import("node:fs");
+  const calendar = JSON.parse(
+    readFileSync(new URL("../../../../../../data/surveys/release-calendar/release-calendar.json", import.meta.url), "utf8"),
+  ).entries;
+  const census = calendar.find((e) => e.surveyId === "census");
+  const basic = census.tabulations.find((t) => t.id === "population-basic");
+  assert.equal(basic.evidence.releasedOn, "2026-09-29");
+  assert.ok(basic.rankingKeys.includes("general-households"));
+  assert.equal(latestReleasedDataYear({ ...census, ...basic }, "2026-11-24"), 2025);
+  assert.equal(latestReleasedDataYear(census, "2026-11-24"), 2020);
+});
+
 test("下書き・年の無い参照・公表暦に無い調査を含む指標・調査の分からない指標は判定しない (古いと決めつけない)", () => {
   const out = findReleaseDue(
     [
