@@ -1,1 +1,0 @@
-../../../../../.claude/skills/management/goal/reference/goal-template.md

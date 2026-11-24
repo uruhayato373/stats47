@@ -1,1 +1,0 @@
-../../../../.claude/skills/db/sync-snapshots/run.sh

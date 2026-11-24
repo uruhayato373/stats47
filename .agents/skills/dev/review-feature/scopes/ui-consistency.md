@@ -1,1 +1,0 @@
-../../../../../.claude/skills/dev/review-feature/scopes/ui-consistency.md

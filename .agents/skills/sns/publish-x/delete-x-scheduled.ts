@@ -1,1 +1,0 @@
-../../../../.claude/skills/sns/publish-x/delete-x-scheduled.ts

@@ -1,1 +1,0 @@
-../../../../../.claude/skills/note/publish-note/references/editor-operations.md

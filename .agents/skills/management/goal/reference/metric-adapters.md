@@ -1,1 +1,0 @@
-../../../../../.claude/skills/management/goal/reference/metric-adapters.md

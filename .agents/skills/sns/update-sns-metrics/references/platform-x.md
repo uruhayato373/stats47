@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/update-sns-metrics/references/platform-x.md

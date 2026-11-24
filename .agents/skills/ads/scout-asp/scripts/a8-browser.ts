@@ -1,1 +1,0 @@
-../../../../../.claude/skills/ads/scout-asp/scripts/a8-browser.ts
