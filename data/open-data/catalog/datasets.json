@@ -345,7 +345,7 @@
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xit001/",
           "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
@@ -388,7 +388,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xit002/"
         ],
@@ -437,7 +437,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xct001/"
         ],
@@ -488,7 +488,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt001/"
         ],
@@ -550,7 +550,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xpt002/",
           "https://www.reinfolib.mlit.go.jp/help/termsOfUse/"
@@ -604,7 +604,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt001/"
         ],
@@ -653,7 +653,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt014/"
         ]
@@ -702,7 +702,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt013/"
         ],
@@ -751,7 +751,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt016/"
         ],
@@ -800,7 +800,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt020/"
         ],
@@ -851,7 +851,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.reinfolib.mlit.go.jp/help/apiManual/xkt031/"
         ],
@@ -2716,7 +2716,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.gsi.go.jp/bousaichiri/hinanbasho.html"
         ],
@@ -2762,7 +2762,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
           "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/0d6cbe5f/20250501_resources_open_data_municipal-standard-open-dataset_table_a.xlsx"
@@ -3577,7 +3577,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
           "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/c08bd12b/20231206_resources_open_data_municipal-standard-open-dataset_table_b.xlsx"
@@ -3624,7 +3624,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
           "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/37cd38b5/20250501_resources_open_data_municipal-standard-open-dataset_table_c.xlsx"
@@ -3668,7 +3668,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.digital.go.jp/resources/open_data/municipal-standard-data-set-test",
           "https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/5345f63e-62aa-4ef5-b979-287b6f343e2a/4652c2fc/20250501_resources_open_data_municipal-standard-open-dataset_table_d.xlsx"
@@ -3716,7 +3716,7 @@
       ],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/sa/index.html",
           "https://www.maff.go.jp/j/tokei/census/shuraku_data/"
@@ -3764,7 +3764,7 @@
       "candidateMetricConcepts": [],
       "verification": {
         "status": "partially-verified",
-        "verifiedAt": "2026-07-18",
+        "verifiedAt": "2026-11-24",
         "verifiedFromUrls": [
           "https://www.maff.go.jp/j/tokei/census/shuraku_data/2025/mb/index.html"
         ],
