@@ -1,15 +1,15 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-11-23T02:46:19.841Z
+- 生成: 2026-11-24T06:01:27.720Z
 - GSC snapshot: 2026-W46 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 727 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
 
 ## サマリ (active ranking 全件 2624 件)
 
-- ✅ done: 1360 件 (51.8% / impressions 計 135382)
-- ⏳ needs-regen: 1264 件 (impressions 計 107613)
-  - 内訳: stale-year 805 / missing 458 / incomplete 1
+- ✅ done: 1357 件 (51.7% / impressions 計 137223)
+- ⏳ needs-regen: 1267 件 (impressions 計 105772)
+  - 内訳: stale-year 810 / missing 456 / incomplete 1
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
 ## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (11 件)
@@ -33,13 +33,16 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **10.0 件/日** (2026-07-30 からの平均)
-- 残り 1264 件 → **完了見込み 約 126 日**
+- 消化ペース: **9.9 件/日** (2026-07-30 からの平均)
+- 残り 1267 件 → **完了見込み 約 128 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Mon, 23 Nov 2026 02:48:49 GMT | bread-consumption-quantity | 1251 |
+| Mon, 23 Nov 2026 02:48:49 GMT | annual-sales-amount | 1192 |
+| Mon, 23 Nov 2026 02:48:49 GMT | specific-health-checkup-participation-rate | 1139 |
 | Mon, 23 Nov 2026 02:23:44 GMT | traffic-accident-count | 31 |
 | Mon, 23 Nov 2026 02:23:44 GMT | smartphone-usage-students | 5 |
 | Mon, 23 Nov 2026 02:23:44 GMT | usage-fees-prefecture | 2 |
@@ -52,9 +55,6 @@
 | Mon, 23 Nov 2026 02:23:43 GMT | physical-disability-rehabilitation-cases-per-1000 | 1 |
 | Mon, 23 Nov 2026 02:23:42 GMT | floor-area-per-dwelling-owner | 250 |
 | Mon, 23 Nov 2026 02:23:42 GMT | education-expenses-prefecture | 31 |
-| Mon, 23 Nov 2026 02:23:42 GMT | general-clinic-count-per-100k | 3 |
-| Mon, 23 Nov 2026 02:23:42 GMT | annual-new-inpatients-general-hospital-per-100k | 0 |
-| Mon, 23 Nov 2026 02:23:42 GMT | hobby-participation-rate-karaoke | 0 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
@@ -69,17 +69,17 @@
 | 1414 | rice-consumption-quantity | stale-year | 🟠手動是正候補 | - |
 | 1286 | icecream-consumption-expenditure | stale-year | 🟠手動是正候補 | - |
 | 1256 | food-manufacturing-establishments | missing | 🟠手動是正候補 | - |
-| 1251 | bread-consumption-quantity | missing | 🟠手動是正候補 | - |
-| 1192 | annual-sales-amount | stale-year | 🟠手動是正候補 | - |
-| 1139 | specific-health-checkup-participation-rate | missing | 🟠手動是正候補 | - |
 | 1065 | convenience-store-count-commercial | stale-year | 🟠手動是正候補 | - |
 | 1017 | pig-count | missing | 🟠手動是正候補 | - |
 | 1008 | soba-udon-dining-consumption-expenditure | stale-year | 🟠手動是正候補 | - |
 | 918 | fishery-species-catch-bonito | stale-year | 🟠手動是正候補 | - |
 | 849 | designated-difficult-disease | stale-year | 🟠手動是正候補 | - |
+| 818 | general-hospital-count | stale-year | 🟠手動是正候補 | - |
 | 815 | pork-consumption-quantity | stale-year | 🟠手動是正候補 | - |
 | 812 | fishery-species-catch-sardine | stale-year | 🟠手動是正候補 | - |
 | 801 | consumer-price-difference-index-housing | stale-year | 🟠手動是正候補 | - |
+| 797 | beef-consumption-quantity | stale-year | 🟠手動是正候補 | - |
+| 784 | table-salt-consumption-quantity | stale-year | 🟠手動是正候補 | - |
 
 > 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、
 > 既定 3件を outbox 経由で R2 へ公開する。個別の独自考察改善はローカルの headless author+critic、

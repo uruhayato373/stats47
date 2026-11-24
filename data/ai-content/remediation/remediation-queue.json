@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-11-23T02:46:19.841Z",
+  "generatedAt": "2026-11-24T06:01:27.720Z",
   "gscSnapshot": "2026-W46",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
     "total": 2624,
-    "done": 1360,
-    "needsRegen": 1264,
+    "done": 1357,
+    "needsRegen": 1267,
     "needsByReason": {
-      "stale-year": 805,
-      "missing": 458,
+      "stale-year": 810,
+      "missing": 456,
       "incomplete": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 135382,
-    "needsImpressions": 107613,
+    "doneImpressions": 137223,
+    "needsImpressions": 105772,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -382,25 +382,31 @@
       "impressions": 1251,
       "clicks": 44,
       "position": 5.36,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Mon, 23 Nov 2026 02:48:49 GMT",
+      "updatedAt": "2026-11-23T02:46:43.509Z"
     },
     {
       "rankingKey": "annual-sales-amount",
       "impressions": 1192,
       "clicks": 74,
       "position": 5.74,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Mon, 23 Nov 2026 02:18:49 GMT",
-      "updatedAt": "2026-11-22T23:59:56.717Z",
-      "contentYear": "2022",
-      "dataYear": "2023",
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "causal-insights",
+        "pref-len"
+      ],
+      "lastModified": "Mon, 23 Nov 2026 02:48:49 GMT",
+      "updatedAt": "2026-11-23T02:46:57.830Z"
     },
     {
       "rankingKey": "public-bath-count-per-100k",
@@ -423,10 +429,16 @@
       "impressions": 1139,
       "clicks": 118,
       "position": 5.74,
-      "status": "needs-regen",
-      "reason": "missing",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "manual-escalation"
+      "warns": [
+        "length-short",
+        "length-short",
+        "pref-len"
+      ],
+      "lastModified": "Mon, 23 Nov 2026 02:48:49 GMT",
+      "updatedAt": "2026-11-23T02:47:10.654Z"
     },
     {
       "rankingKey": "school-teacher-annual-income",
@@ -597,12 +609,15 @@
       "impressions": 818,
       "clicks": 17,
       "position": 6.22,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [],
       "lastModified": "Mon, 23 Nov 2026 01:11:17 GMT",
-      "updatedAt": "2026-11-22T23:59:56.901Z"
+      "updatedAt": "2026-11-22T23:59:56.901Z",
+      "contentYear": "2023",
+      "dataYear": "2024",
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "pork-consumption-quantity",
@@ -960,7 +975,7 @@
       "updatedAt": "2026-11-22T23:59:56.804Z",
       "contentYear": "2024",
       "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "golf-course-public",
@@ -987,7 +1002,7 @@
       "updatedAt": "2026-11-22T23:59:56.778Z",
       "contentYear": "2024",
       "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "tissue-paper-consumption-expenditure",
@@ -1099,12 +1114,15 @@
       "impressions": 565,
       "clicks": 19,
       "position": 5.42,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [],
       "lastModified": "Mon, 23 Nov 2026 02:08:30 GMT",
-      "updatedAt": "2026-11-22T23:59:57.139Z"
+      "updatedAt": "2026-11-22T23:59:57.139Z",
+      "contentYear": "2023",
+      "dataYear": "2024",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "municipal-resident-tax",
@@ -3860,14 +3878,17 @@
       "impressions": 192,
       "clicks": 14,
       "position": 4.7,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [
         "causal-insights"
       ],
       "lastModified": "Mon, 23 Nov 2026 01:16:32 GMT",
-      "updatedAt": "2026-11-22T23:59:57.140Z"
+      "updatedAt": "2026-11-22T23:59:57.140Z",
+      "contentYear": "2023",
+      "dataYear": "2024",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "voter-turnout-governor",
@@ -6005,14 +6026,17 @@
       "impressions": 117,
       "clicks": 0,
       "position": 6.76,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [
         "causal-insights"
       ],
       "lastModified": "Mon, 23 Nov 2026 02:08:28 GMT",
-      "updatedAt": "2026-11-22T23:59:56.817Z"
+      "updatedAt": "2026-11-22T23:59:56.817Z",
+      "contentYear": "2023",
+      "dataYear": "2024",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "tempura-fry-consumption-expenditure",
@@ -6514,6 +6538,9 @@
       "updatedAt": "2026-11-22T23:59:56.758Z",
       "contentYear": "2022",
       "dataYear": "2023",
+      "dataWarns": [
+        "thin-coverage"
+      ],
       "reviewTier": "gemini-auto"
     },
     {
@@ -12404,12 +12431,15 @@
       "impressions": 34,
       "clicks": 0,
       "position": 10.94,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [],
       "lastModified": "Mon, 23 Nov 2026 01:44:52 GMT",
-      "updatedAt": "2026-11-22T23:59:56.900Z"
+      "updatedAt": "2026-11-22T23:59:56.900Z",
+      "contentYear": "2023",
+      "dataYear": "2024",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "hobby-participation-rate-western-dance",
@@ -16770,12 +16800,15 @@
       "impressions": 15,
       "clicks": 0,
       "position": 5.67,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "stale-year",
       "blockers": [],
       "warns": [],
       "lastModified": "Mon, 23 Nov 2026 01:00:54 GMT",
-      "updatedAt": "2026-11-22T23:59:56.898Z"
+      "updatedAt": "2026-11-22T23:59:56.898Z",
+      "contentYear": "2023",
+      "dataYear": "2024",
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "green-beans-consumption-expenditure",
