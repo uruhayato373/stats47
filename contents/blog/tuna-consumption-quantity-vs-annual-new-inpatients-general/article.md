@@ -4,6 +4,7 @@ seoTitle: "まぐろ消費量と一般病院年間新入院患者数の県別ラ
 description: 静岡や群馬などまぐろをよく食べる県ほど、一般病院の年間新入院患者数が少ない傾向にあります。家計調査と社会・人口統計体系のデータから、見かけの相関とその背景にある別々の要因を読み解きます。
 slug: tuna-consumption-quantity-vs-annual-new-inpatients-general
 publishedAt: 2026-08-03
+updatedAt: 2026-11-25
 published: false
 tags: ["まぐろ", "病院", "医療", "相関"]
 ---
