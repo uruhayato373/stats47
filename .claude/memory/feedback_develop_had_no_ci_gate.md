@@ -42,3 +42,4 @@ maintenance debt 1 件が origin/develop に入ったまま残り、マージ担
 - **対策**: `preflight-commit.mjs --pr`へCard Census / Ad Placement / Static Accessibilityを追加。
   14ゲートをfail-fastせず並列実行し、実測6.1秒で全件PASS。通常commit用の軽量3ゲートは維持する。
   hidden入力は支援技術に露出しないため名前検査から除外し、可視・動的typeの検査は回帰テストで維持する。
+- 追記 (2026-11-24): develop の Develop Quality Gate は preflight:pr に加えて、pr-quality-check の契約テストの 28 段も回す (CI-CONTRACT-TESTS-DEVELOP-GAP-01)。preflight:pr が通っても契約テストで落ちることがあった (土曜ランナーの段の並び)。push の前に `node packages/ops/src/ci/contract-steps.mjs` も流す。手元では在庫の索引があるため `media:check` だけ CI と結果が違うことがある。
