@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T11:51:20.374Z",
+  "updatedAt": "2026-11-24T12:29:48.354Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14227,6 +14227,107 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T11:51:20.374Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:29:48.234Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20261011.txt",
+              "npm run validate:config --workspace=@stats47/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (b5feb202a): 県の特徴の括弧の重複を止め、教養娯楽費割合の分母を明記した。assert-handled 5 件とも処理済み、validate:config error 0、area-profile のテスト 28 件、classifyMetric の判定は前後とも rate/null。年と年度の混在は警察官数が年度の統計なので by-design。databook は次の snapshot の作り直しで反映",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:29:48.234Z"
+    },
+    "UI-FIX-MUNICIPALITY-20261011": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:29:48.294Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-20261011.txt",
+              "curl 公開 R2 の cities.json と 13101 の databook.json"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (5f82a17a3): 公開 R2 の cities.json と 13101 の databook.json は既に「2020年」と表示しており、指標の定義の変更は不要。assert-handled 2 件とも処理済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:29:48.294Z"
+    },
+    "UI-FIX-BLOG-ARTICLE-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:29:48.354Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20261011.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (60ff495fd): 右レールの人気記事の題の単位を半角にそろえ 7 件を処理。記事の改稿が要る 3 件 (保存則・child-height の図・cc-estat-04 の図) は --mark-owner で CONTENT-FOLLOWUP-01 へ渡した。assert-handled 10 件すべて処理済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:29:48.354Z"
     }
   }
 }

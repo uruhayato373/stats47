@@ -18,3 +18,4 @@ metadata:
 - 指標定義の文言を一括で変えるときは、変更前 (`git archive <sha>^ data/metrics`) と変更後で `classifyMetric` の `basis`・`period` を比べ、変わる指標が 0 件であることを確かめる。印を subtitle から外すなら description へ移す。
 - 指標定義を変えたら `packages/data-configs` に加えて `packages/ranking` の vitest も流す。サブエージェントに指標定義を触らせるときは、この 2 つを完了条件に書く。
 - 関連: [[feedback-metric-display-state]]
+- 同じ型 (2026-11-24): テーマのカタログ (`data/themes/catalogs/*.json`) で指標カードを章へ足したとき、`metricGroups` の配列の位置を章の並びに合わせず、`apps/web` の `all-theme-panel-kinds.test.tsx` (定義順どおりに現れる) が develop で落ちた。カタログを変えたら data-configs だけでなく `apps/web` の vitest も流す。

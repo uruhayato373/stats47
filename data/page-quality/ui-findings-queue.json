@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T12:10:02.441Z",
+  "generatedAt": "2026-11-24T12:29:22.415Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -401,14 +401,14 @@
       "metric_key": "internal_jargon_terms",
       "severity": "warning",
       "detail": "internal_jargon_terms: 3 URL (最大 8、閾値 <= 0)。例: https://stats47.jp/blog/2050-population-flood-exposure / https://stats47.jp/blog/2050-population-map-reading / https://stats47.jp/blog/2050-station-access-population",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "CONTENT-FOLLOWUP-01",
+      "note": "公開記事の本文と図の書き直しが要る (R2 の article.md の改稿と再公開)。2050 の Geo 記事の「保存則」、child-height-regional-gap の図のデータ欠け、cc-estat-04-aging-heatmap の図の文字は CONTENT-FOLLOWUP-01 で是正する"
     },
     {
       "key": "machine|blog-article|same_shop_ad_duplicates",
@@ -2067,14 +2067,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "CONTENT-FOLLOWUP-01",
+      "note": "公開記事の本文と図の書き直しが要る (R2 の article.md の改稿と再公開)。2050 の Geo 記事の「保存則」、child-height-regional-gap の図のデータ欠け、cc-estat-04-aging-heatmap の図の文字は CONTENT-FOLLOWUP-01 で是正する"
     },
     {
       "key": "machine|https://stats47.jp/blog/cc-estat-07-birthrate-line|blog_svg_text_issues",
@@ -2237,14 +2237,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "CONTENT-FOLLOWUP-01",
+      "note": "公開記事の本文と図の書き直しが要る (R2 の article.md の改稿と再公開)。2050 の Geo 記事の「保存則」、child-height-regional-gap の図のデータ欠け、cc-estat-04-aging-heatmap の図の文字は CONTENT-FOLLOWUP-01 で是正する"
     },
     {
       "key": "machine|https://stats47.jp/blog/childrens-socks-consumption-expenditure-prefecture-gap|blog_svg_text_issues",
