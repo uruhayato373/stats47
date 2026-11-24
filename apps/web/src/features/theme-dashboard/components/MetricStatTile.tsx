@@ -19,7 +19,7 @@ import { formatMetricValue, metricDisplayUnit, type MetricKpi } from './metric-k
  * - 全国のページ: 全国の値 (e-Stat の全国行) + 年。全国行の無い指標は値を出さない (47 県の平均や 1 位の県で埋めない。2026-10-31)
  * - 右上に出典・指標の定義の Sheet を開く枠なしのアイコン (2026-10-30。旧: 下端の出典・ランキングのリンク行)。
  *   hideSources で外す (切り替えカードはチャートの下の Sheet に 1 か所でまとめる)。
- *   推移の小さなチャートは children で受け、出すかは呼び出し側が決める
+ *   推移の小さなチャートは children で受け、出すかは呼び出し側が決める。StatTile の chart に渡し、タイルの端まで描く
  * - toggle を渡すと、タイル全体がグラフに系列を出し入れするボタンになる (見本の元の shadcn「Line Chart - Interactive」の
  *   数値のボタン。押している間は背景を muted にし、名前の左の色の印が凡例を兼ねる。2026-10-29)
  */
@@ -102,8 +102,8 @@ export function MetricStatTile({
           />
         )
       }
+      chart={children}
     >
-      {children}
       {toggle && (
         // タイルの中の文字は読めるまま、上に全面のボタンを重ねる (button の中に dl を入れない)。
         // ボタンはカードの内側に置く。外側の div で包むとカードが格子 (PanelGrid) の直下から外れ、

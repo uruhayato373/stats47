@@ -5,12 +5,12 @@
  * D3 の描画ロジックは各チャートに閉じつつ、寸法・空表示・hover 判定は共通化する。
  */
 
-import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { type RefObject, useCallback, useEffect, useId, useRef, useState } from "react";
 
 import { useD3Tooltip } from "@stats47/visualization";
 import { scaleLinear } from "d3-scale";
 import { pointer, select } from "d3-selection";
-import { curveMonotoneX, line } from "d3-shape";
+import { area, curveMonotoneX, line } from "d3-shape";
 
 export interface ChartPoint {
   year: number;
@@ -21,6 +21,12 @@ export interface ChartPoint {
 const PRIMARY = "hsl(var(--primary))";
 const MUTED = "hsl(var(--muted-foreground))";
 const MUTED_FILL = "hsl(var(--muted))";
+/** 推移の線と面の色。テーマのほかの図の 1 本目の系列と同じ色 (ChartPalette の CHART_COLORS[0]) */
+const MINI_LINE_COLOR = "hsl(var(--chart-1))";
+/** 面の塗りの上端の濃さ。線が主役で、面は形を見やすくする補助 (縦軸が 0 から始まらないので量に見せない) */
+const MINI_LINE_FILL_OPACITY = 0.2;
+/** 最小の値の下にとる余白 (値の幅に対する割合)。線が下端に付かないようにする */
+const MINI_LINE_BOTTOM_HEADROOM = 0.15;
 
 /** 親の幅を測る前 (SSR・初回描画) に使う描画幅。測れたら親の幅いっぱいに描き直す */
 const FALLBACK_MINI_CHART_WIDTH = 320;
@@ -172,15 +178,18 @@ export function MiniLineChart({
   const svgRef = useRef<SVGSVGElement>(null);
   const { width, attachRef } = useMiniChartWidth(svgRef);
   const { showStackedTooltip, hideTooltip } = useD3Tooltip();
+  // 面の塗りのグラデーションの id。同じページに何枚並んでも互いに参照しないよう部品ごとに分ける
+  const gradientId = `mini-line-fill-${useId().replace(/:/g, "")}`;
 
   useEffect(() => {
     if (!svgRef.current || points.length === 0) return;
 
-    // 年の目盛りも点も描かない線だけの推移 (2026-11-24 オーナー指示)。年と値はホバーのツールチップで読む。
-    // 年のラベル用に空けていた下の余白を線に使う
-    const baseLayout = getMiniChartLayout(height, width);
-    const plotBottom = baseLayout.height - baseLayout.padTop;
-    const layout = { ...baseLayout, plotBottom, plotHeight: plotBottom - baseLayout.padTop };
+    // 線と、下へ向けて透明になる面だけの推移 (2026-11-24 オーナー指示)。年の目盛りと各年の点は描かず、
+    // 年と値はホバーのツールチップで読む。左右と下の余白は持たず、置き場 (StatTile の chart) の端まで描く。
+    const layout = getMiniChartLayout(height, width);
+    const plotLeft = 0;
+    const plotRight = layout.width;
+    const plotBottom = layout.height;
     const ys = points.map((p) => p.value);
     let minY = Math.min(...ys);
     let maxY = Math.max(...ys);
@@ -188,26 +197,44 @@ export function MiniLineChart({
       minY -= 1;
       maxY += 1;
     }
+    // 縦軸は 0 から始めない (最小〜最大)。面は量ではなく形を見せる補助なので、最小の値でも
+    // 線が下端に付かないよう下に余白をとり、塗りは薄くして下へすぐ透明にする
+    const headroom = (maxY - minY) * MINI_LINE_BOTTOM_HEADROOM;
 
     const n = points.length;
-    const xScale = scaleLinear()
-      .domain([0, n - 1])
-      .range([layout.padX, layout.width - layout.padX]);
+    const xScale = scaleLinear().domain([0, Math.max(n - 1, 1)]).range([plotLeft, plotRight]);
     const yScale = scaleLinear()
-      .domain([minY, maxY])
-      .range([layout.plotBottom, layout.padTop]);
+      .domain([minY - headroom, maxY])
+      .range([plotBottom, layout.padTop]);
     // 点を越えない曲線 (年と年の間に実際より高い山・低い谷を描かない。2026-11-03)
     const lineFn = line<ChartPoint>((_, i) => xScale(i), (d) => yScale(d.value)).curve(curveMonotoneX);
+    const areaFn = area<ChartPoint>()
+      .x((_, i) => xScale(i))
+      .y0(plotBottom)
+      .y1((d) => yScale(d.value))
+      .curve(curveMonotoneX);
 
     const svg = select(svgRef.current);
     svg.selectAll("*").remove();
 
     if (n > 1) {
+      const gradient = svg
+        .append("defs")
+        .append("linearGradient")
+        .attr("id", gradientId)
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", 0)
+        .attr("y2", 1);
+      gradient.append("stop").attr("offset", "0%").attr("stop-color", MINI_LINE_COLOR).attr("stop-opacity", MINI_LINE_FILL_OPACITY);
+      gradient.append("stop").attr("offset", "100%").attr("stop-color", MINI_LINE_COLOR).attr("stop-opacity", 0);
+
+      svg.append("path").datum(points).attr("fill", `url(#${gradientId})`).attr("stroke", "none").attr("d", areaFn);
       svg
         .append("path")
         .datum(points)
         .attr("fill", "none")
-        .attr("stroke", PRIMARY)
+        .attr("stroke", MINI_LINE_COLOR)
         .attr("stroke-width", 1.8)
         .attr("d", lineFn);
     }
@@ -215,7 +242,7 @@ export function MiniLineChart({
     const crosshair = svg
       .append("line")
       .attr("y1", layout.padTop)
-      .attr("y2", layout.plotBottom)
+      .attr("y2", plotBottom)
       .attr("stroke", MUTED)
       .attr("stroke-width", 1)
       .attr("stroke-dasharray", "3 2")
@@ -224,17 +251,17 @@ export function MiniLineChart({
     const dot = svg
       .append("circle")
       .attr("r", 4)
-      .attr("fill", PRIMARY)
+      .attr("fill", MINI_LINE_COLOR)
       .attr("stroke", "white")
       .attr("stroke-width", 1.5)
       .attr("opacity", 0);
 
     svg
       .append("rect")
-      .attr("x", layout.padX)
-      .attr("y", layout.padTop)
-      .attr("width", layout.plotWidth)
-      .attr("height", layout.plotHeight)
+      .attr("x", plotLeft)
+      .attr("y", 0)
+      .attr("width", plotRight - plotLeft)
+      .attr("height", plotBottom)
       .attr("fill", "transparent")
       .attr("data-mini-chart-hit-area", "line")
       .style("cursor", "crosshair")
@@ -258,7 +285,7 @@ export function MiniLineChart({
         showStackedTooltip(
           event,
           String(current.year),
-          [{ name: seriesName, value: current.value, color: PRIMARY }],
+          [{ name: seriesName, value: current.value, color: MINI_LINE_COLOR }],
           { unit },
         );
       })
@@ -267,7 +294,7 @@ export function MiniLineChart({
         dot.attr("opacity", 0);
         hideTooltip();
       });
-  }, [points, width, height, seriesName, unit, showStackedTooltip, hideTooltip]);
+  }, [points, width, height, seriesName, unit, gradientId, showStackedTooltip, hideTooltip]);
 
   if (points.length === 0) {
     return <EmptyMiniChart height={height} />;
