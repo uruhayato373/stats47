@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T07:45:07.834Z",
+  "updatedAt": "2026-11-24T10:22:01.360Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13334,6 +13334,141 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T07:45:07.834Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-LAYER-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.158Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 検証コマンドが [ok] 1 件すべて処理済み で exit 0 (残りは ADSENSE-OVERLAY-AB-01 へ --mark-owner 済み)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.158Z"
+    },
+    "OPENDATA-RANKING-PILOT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.228Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -A Googlebot https://stats47.jp/ranking/health-checkup-{smoking",
+              "sufficient-sleep",
+              "weight-gain-10kg}-rate",
+              "grep OPENDATA-NDB-EFFECT-01 .claude/todo/improvements.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 本番の 3 本を Googlebot UA で取り 200・title が指標名。取り込み run 43972559111 で 10 本の values.json が 200。4 週の計測は improvements の OPENDATA-NDB-EFFECT-01 (期日 12-15) へ引き渡し済み。関連の未着手は OPENDATA-ARCHIVE-01 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.228Z"
+    },
+    "BLOG-PUBLIC-REVIEW-MD-CLEANUP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.293Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep r2-maintenance run 43871460492 deleted=718 remainder=0 (カード本文)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: r2-maintenance の実削除 run 43871460492 が deleted=718・errors=0・remote remainder=0、抜き出し 11 件が 404・本文 200 (11-16 の記録)。完了条件 (公開 R2 に review.md・research.md・prompt が 0 件) を満たす",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.293Z"
+    },
+    "CF-CPU-ROUTE-WEEKLY-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.360Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep CF-CPU-ROUTE-WEEKLY-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 残りは CF-CPU-FOLLOWUP-01 の 6 (トークンへの Observability 読み取り権限) と同じ作業。完了条件を CF-CPU-FOLLOWUP-01 へ 1 行で移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.360Z"
     }
   }
 }
