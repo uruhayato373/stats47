@@ -26,4 +26,8 @@ metadata:
 
 **残タスク (未実装・将来):** publish-article SKILL の cloud-first 化、quality-gate.mjs の draft モード対応。
 
+**公開後に本番で新版が見えるまで (2026-11-25 実測):**
+- 既存 slug の改稿は、公開 CI の ISR 削除 (`purge-isr-routes.ts`) でデプロイなしに新版になる。Next.js 16.3.8 以上では OpenNext の ISR のキーが `/route-cache/APP_PAGE/<sha256(app の項目名)>/$<パス>` になり、旧形式 (パスそのもの) だけを探していた削除は「どの buildId にもない」で止まって CDN の削除・送り箱の掃除まで飛んだ。キーは `packages/r2-storage/src/lib/utils/isr-route-cache-key.ts` が OpenNext の関数と一致することをテストで固定している。Next.js か OpenNext を上げたらこのテストを流す。
+- **新しい slug は次の main へのデプロイまで本番で 410。** middleware の `isKnownPublished` がビルド時の sitemap 一覧を読むため。新記事の公開をオーナーに伝えるときは「デプロイ後に見える」と添える。
+
 関連: [[project_blog_brushup_risk_2026_05_25]] [[project_dbless_migration_2026_05_29]] [[feedback_bulk_blog_publish_isr_404]]

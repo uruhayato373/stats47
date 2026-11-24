@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T21:39:13.070Z",
+  "updatedAt": "2026-11-24T23:13:33.389Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14497,6 +14497,105 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T21:39:13.070Z"
+    },
+    "BLOG-ISR-STALE-ON-REVISE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T23:13:33.275Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/r2-storage/src/lib/utils/__tests__/isr-route-cache-key.test.ts; curl 本番 /blog/<slug> の h1 と R2 article.md の title を比較"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: purge-isr-routes.ts が Next.js 16.4.6 の route-cache 形式のキーを探さず止まっていたのを直した。run 45503915410 で削除 4、run 45503927335 で削除 8。デプロイなしで改稿 12 本の本番 h1 が R2 の題と一致。11-13 の 18 本も 18/18 一致",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T23:13:33.275Z"
+    },
+    "BLOG-REGION-PUBLISHED-FIX-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T23:13:33.333Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs contents/blog/<slug>/article.md (published:true); curl https://stats47.jp/blog/<slug>"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: 4 本 (assembly・croquette・school・tuna) を地方のくくりと critic の BLOCK/MAJOR まで直し、quality-gate blocker 0・critic PASS で公開 (run 45503915410)。本番 200・h1 が R2 の題と一致。残る 6 本は公開版がすでに blocker 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T23:13:33.333Z"
+    },
+    "BLOG-CC14-STACKED-AREA-FIGURE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T23:13:33.389Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs contents/blog/cc-estat-14-energy-area-chart/article.md; curl https://stats47.jp/blog/cc-estat-14-energy-area-chart"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: e-Stat 0003409159 の 3 系列を GWh で積み上げ面 (明暗) に描き、quality-gate blocker 0・critic PASS で公開 (d72b5664f・run 45503927335)。本番 200・h1 一致",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T23:13:33.389Z"
     }
   }
 }
