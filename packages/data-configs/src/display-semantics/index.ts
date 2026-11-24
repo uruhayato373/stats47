@@ -56,6 +56,11 @@ const SHARE_DECLARATION = /(割合|比率|率|構成比|シェア|倍率)/;
 const MONTHLY_DECLARATION = /(1\s*[かカヶケ]月|一[かカヶケ]月|月額|月平均|月当たり|月あたり|月間)/;
 const ANNUAL_DECLARATION = /(年間|年額|1\s*年当たり|1\s*年あたり|年計)/;
 
+/** 文言が「◯当たり」「人口千対」など分母つきの宣言を含むか (classifyMetric と同じ規則)。 */
+export function textDeclaresDenominator(text: string | null | undefined): boolean {
+  return PER_DECLARATION.test((text ?? "").normalize("NFKC"));
+}
+
 function declaredText(m: MetricDeclaration): string {
   return [m.title, m.subtitle, m.description].filter(Boolean).join(" ").normalize("NFKC");
 }
