@@ -47,6 +47,11 @@ jobs:
       - name: 🔍 Reject every runtime vulnerability
         run: npm audit --omit=dev --audit-level=low
 
+      # ★CodeQL の結果の登録 (Security タブ) は既定の設定 (default setup、2026-08-06 から有効) が持つ。既定の設定が
+      #   有効な間は、この workflow からの SARIF の登録は「advanced configurations cannot be processed when the default
+      #   setup is enabled」で毎回拒否されていた (run 45281823184 ほか。continue-on-error で見えていなかった)。
+      #   ここでは登録せず (upload: never)、解析結果を下の step で job summary に出すことだけに使う
+      #   (CI-TOOLING-FOLLOWUP-04。既定の設定の結果は Security タブ・API が読めないセッションでは見えないため残す)。
       - name: 🛡️ Initialize CodeQL
         uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         with:
@@ -64,6 +69,7 @@ jobs:
           #   実際に 3 回外した (workflow の式インジェクション → prototype 汚染 →
           #   execSync の command injection)。job summary に出せば誰でも読める。
           output: sarif-results
+          upload: never
 
       # ★ロジックはスクリプトに置く。workflow に node -e でインライン展開すると
       #   shellcheck が SC2016 (単一引用符内の ${} は展開されない) を出して

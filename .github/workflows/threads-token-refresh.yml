@@ -1,4 +1,4 @@
-name: 🔄 Threads token refresh (weekly)
+name: 🔄 Threads token refresh (手動・定期実行は停止中)
 
 # Threads 長期トークン (60 日で失効) を th_refresh_token で延長し、GitHub Secret
 # THREADS_ACCESS_TOKEN を差し替える。更新できるのは発行から 24 時間以上・失効前のトークンのみで、
