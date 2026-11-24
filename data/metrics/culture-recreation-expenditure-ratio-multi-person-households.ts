@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const cultureRecreationExpenditureRatioMultiPersonHouseholds: MetricConfig = {
   "key": "culture-recreation-expenditure-ratio-multi-person-households",
   "title": "教養娯楽費割合",
+  "subtitle": "二人以上の世帯の消費支出に占める割合",
   "unit": "％",
   "category": "economy",
   "source": {

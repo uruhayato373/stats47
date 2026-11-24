@@ -187,7 +187,8 @@ export function NumericTrendChart({
       ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       className={fillHeight ? 'min-h-32 w-full flex-1' : 'h-32 w-full'}
-      role="img"
+      // 中に操作できる slider を持つので img にしない (img の子は読み上げられず、axe の nested-interactive になる。UI-FOLLOWUP-02)
+      role="group"
       aria-label={`${label}の推移。${formatYear(data[0].year)}から${formatYear(data[data.length - 1].year)}。単位: ${unit}${hasIndependentArea ? `。${areaSeries?.label}と${label}は別の縦軸スケール` : ''}${outside.length ? `。表示範囲外: ${outside.length}点` : ''}`}
       data-chart="numeric-trend"
       data-domain-min={domain[0]}

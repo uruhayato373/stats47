@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import type { DatabookMetricValue } from "../../types/databook-snapshot";
 import {
+  buildQualifiedLabel,
+  buildSubtitleQualifier,
   collectHighlightCandidateKeys,
   computeMargin,
   familyKeyOf,
@@ -147,6 +149,13 @@ describe("焼き込み・市区町村の補助関数", () => {
     expect(computeMargin(values, 1)).toBeCloseTo(100 / 99);
     expect(computeMargin(values, 47)).toBeCloseTo(55 / 54);
     expect(computeMargin(values, 99)).toBe(0);
+  });
+
+  it("buildQualifiedLabel は label の括弧と重なる修飾語を付けない", () => {
+    expect(buildQualifiedLabel("平均初婚年齢（妻）", buildSubtitleQualifier("妻の年齢", false))).toBe("平均初婚年齢（妻）");
+    expect(buildQualifiedLabel("教養娯楽費割合", "消費支出に占める割合")).toBe("教養娯楽費割合（消費支出に占める割合）");
+    expect(buildQualifiedLabel("総人口", "総人口")).toBe("総人口");
+    expect(buildQualifiedLabel("就業者数（男）", "15歳以上")).toBe("就業者数（男）（15歳以上）");
   });
 
   it("familyKeyOf は測定量の接尾辞を剥がす", () => {

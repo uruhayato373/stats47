@@ -37,7 +37,7 @@ interface AdRowProps {
  *
  * 表記は枠ごと (AdSense は「広告」、アフィリエイトは「PR」。景品表示法のステマ告示の表示を兼ねる)。
  * 出していない枠の AdSense は display:none なので遅延読み込みが発火せず、広告のリクエストも飛ばない
- * (manual-ad-policy.ts と同じ仕組み)。AdSense は自動広告なしで再開しているので (2026-10-11)、モバイルの先頭の枠にも出す。
+ * (manual-ad-policy.ts と同じ仕組み)。モバイルの先頭の枠にも AdSense を出す (2026-11-03 オーナー決定。自動広告は 2026-11-04 からオン)。
  */
 export function AdRow({ cells, position, trackingCategory, wide = false }: AdRowProps) {
   const visible = wide ? cells.filter((cell) => cell.kind === "adsense").slice(0, 1) : cells.slice(0, 3);

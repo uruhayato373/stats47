@@ -527,7 +527,12 @@ export type NavSurface =
   | 'area_cities'
   | 'ranking_same_survey'
   | 'scope_nav'
-  | 'category_featured';
+  | 'category_featured'
+  // 合成クリックで残った unlabeled (2026-11-24 値追加・NAV-CLICK-COVERAGE-01 ①。登録済み dimension の値追加なので GA4 側の作業は不要):
+  // 運営者のプロフィールのカード (体験記・運営者について) / カードの見出し行の操作 (「すべて見る」など。
+  // 外側に導線名が無いときだけ共通のクリック監視が当てる)
+  | 'operator_profile'
+  | 'card_action';
 
 /**
  * 共通のクリック監視 (NavClickTracker) に導線名を渡す属性。リンクかその外側の要素に展開する。

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T11:10:56.135Z",
+  "generatedAt": "2026-11-24T12:10:02.441Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -129,14 +129,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目の「千代田区の主な指標」、「65歳以上人口割合」の「2020年度」: 同じ一覧で総人口・世帯数は「2025年」「2020年」なのに、国勢調査の時点統計である65歳以上人口割合だけ「2020年度」と表記され、年と年度が混在している。 → 時点統計(国勢調査由来)の指標は「年度」ではなく「年」で表記を統一する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:06:43.350Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "65歳以上人口割合の年は e21739f37c (SSDS-YEARFORMAT-SOURCE-01) で elderly-population-ratio を yearFormat calendar にした後の再取り込みで直っている。2026-11-24 に公開 R2 の app/stats/elderly-population-ratio/cities.json と app/areas/13000/cities/13101/databook.json が「2020年」であることを確認。指摘の観測 (10-31) は直す前"
     },
     {
       "key": "agent|municipality--village",
@@ -197,14 +197,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目、「東京都が全国上位」の4項目の年表記: 「警察官数(2024年度)」だけ年度で、他の3項目は「2024年」「2023年」と年表記。「教養娯楽費割合 11%」は何に対する割合か分からず、「平均初婚年齢（妻）（妻の年齢）」は括弧が重複して意味が取りにくい。 → 年／年度の表記を指標の性質に合わせて統一し、割合には分母(例: 消費支出に占める)を添え、重複した括弧を整理する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:05:18.904Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "① buildQualifiedLabel が label の括弧と重なる修飾語を付けないようにした (平均初婚年齢（妻）（妻の年齢）→平均初婚年齢（妻）。databook.json の再生成で反映) ② 教養娯楽費割合に subtitle「二人以上の世帯の消費支出に占める割合」を足した (item.json・databook の再生成で反映) ③ 年と年度の混在は by-design: 警察官数は年度の統計で、出典の期間 (yearFormat) どおりに表記している"
     },
     {
       "key": "agent|prefecture-detail--hokkaido",
@@ -384,14 +384,14 @@
       "metric_key": "abnormal_value_strings",
       "severity": "warning",
       "detail": "abnormal_value_strings: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/cc-estat-12-housing-treemap",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "cc-estat-12-housing-treemap の undefined は Claude Code で D3 の集計を説明する技術記事の地の文 (sum((d) => d.value ?? 0) で undefined を 0 に倒す)。描画の失敗ではなく code 要素の外に書かれた語。本文を直すなら R2 の記事の改稿 (承認が要る)"
     },
     {
       "key": "machine|blog-article|internal_jargon_terms",
@@ -435,14 +435,14 @@
       "metric_key": "title_changed",
       "severity": "warning",
       "detail": "title_changed: 31 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/aichi-food-culture / https://stats47.jp/blog/air-conditioner-consumption-quantity-prefecture-gap / https://stats47.jp/blog/banana-consumption-quantity",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-14 の週次で再検出)"
+      "note": "2026-11-20 の週次の 31 URL はすべて記事の書き直し (2024→2025 の家計調査の取り直しと本文の改稿) で題を変えたもの。選定入力 (データ年・本文) が変わっており、規約の「入力が変わらないのに変わった」に当たらない"
     },
     {
       "key": "machine|blog-article|unit_symbol_mixing",
@@ -452,14 +452,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 2 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/main-road-paving-rate-vs-apple-consumption-quantity / https://stats47.jp/blog/traffic-accident-deaths-regional-risk",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:10:00.645Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "2 URL の ％ は右レール「よく読まれている記事」の他記事の題 (主要道路舗装率100％…)。readPopularArticlesFromR2 が題を normalizeUnitsInText で半角にそろえるようにした (テスト追加)"
     },
     {
       "key": "machine|blog|unit_symbol_mixing",
@@ -2356,14 +2356,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "BLOG-FIGURE-REDRAW-REGRESSION-01",
+      "note": "plan-svg-text-fix で regen-fixes (題が右に 208px はみ出す。今の生成器で作り直すと直る)。regenerate-blog-svgs.yml の R2 への反映は同カードの描き直し (オーナーの指示) で行う"
     },
     {
       "key": "machine|https://stats47.jp/blog/commercial-sales-productivity-gap|blog_svg_text_issues",
