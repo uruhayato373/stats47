@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T12:36:42.863Z",
+  "updatedAt": "2026-11-24T12:58:17.886Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14396,6 +14396,74 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T12:36:42.863Z"
+    },
+    "PROVENANCE-LINK-CHECK-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:58:17.822Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check:open-data-links --workspace=@stats47/data-configs",
+              "npm run check:prefecture-statistics-links --workspace=@stats47/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (e05503726): 週次の error はリンク切れではなく全件の検証期限切れだった。各ページを開き直して確認日を更新し、移転した 8 県の URL を直した。再実行で open-data 150 URL は ok 143・bot-block 7・gone/stale 0 (exit 0)、都道府県統計 47 URL は全件到達 (exit 0)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:58:17.822Z"
+    },
+    "BLOG-DATA-PRIOR-YEAR-KEEP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:58:17.886Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/blog/lib/__tests__/refresh-chart-year.test.mjs",
+              "web vitest 全件"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (42d761eb3・80f60dca8): 2 案を比べ R2 から作る案を採った。refresh-chart-year.mjs の compareWithYear が両年の県別の値・順位・順位の変化を R2 の全年の値から返し、refresh-article-data-years.mjs が取り直す図ごとに比較を出す。年を進めた記事が手作業なしに前年との比較を持てる",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:58:17.886Z"
     }
   }
 }
