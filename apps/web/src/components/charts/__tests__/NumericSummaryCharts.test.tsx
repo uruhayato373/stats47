@@ -9,6 +9,8 @@ describe('Numeric summary charts preserve scale meaning',()=>{
   const {container,rerender}=render(<NumericTrendChart points={points} policy={{mode:'extent'}} selectedYear={2021} label="単純平均" unit="時間" formatValue={String} formatYear={(year)=>`${year}年度`} showAxes={false}/>);
   expect(container.querySelectorAll('svg text')).toHaveLength(0);
   const slider=screen.getByRole('slider');
+  // slider を含む svg は img ではなく group (img の子の操作要素は axe の nested-interactive)
+  expect(slider.closest('svg')?.getAttribute('role')).toBe('group');
   fireEvent.focus(slider);
   const tooltip=document.getElementById('prefecture-map-tooltip')!;
   expect(tooltip.textContent).toContain('2021年度');
