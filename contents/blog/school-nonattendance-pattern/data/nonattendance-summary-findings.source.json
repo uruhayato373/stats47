@@ -1,7 +1,0 @@
-{
-  "kind": "authored",
-  "year": "2023",
-  "source": "記事本文の要点を集約 (数値はSSOT照合済: 84.58/49.73/32.69/14.50)",
-  "generatedBy": "article-writer",
-  "note": "findings card は authored (観測値ではない)。factual-check/チャート生成の ground-truth 対象外 (§1.5)"
-}
