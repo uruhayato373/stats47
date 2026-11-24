@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "45351527681-1",
+  "status": "implementation-needed",
+  "keyword": "鳥取市 人口",
+  "targetPath": "/areas/31000/cities/31201",
+  "needs": "鳥取市の現在の人口と、その数字が国勢調査と住民基本台帳のどちらに基づくか、減少の度合いを知りたい人が検索すると考えます。県庁所在地の人口として、直近の値と過去からの変化をまず確認したい意図です。",
+  "gap": "対象ページは17.9万人(179,243人・2025年)と2020年比-4.89%を示しますが、出典の表記がありません。複数年の推移や将来推計はなく、住民基本台帳(2024年179,215人)との違いも説明していません。比較先は国勢調査2020年(188,465人)と住民基本台帳2025年(179,215人)を併記しますが、差の説明はありません。",
+  "done": "今回は適用なしです。selected.editableFileがnullで、置換できる文字列がないためpatchesは空です。残る実装は、鳥取市ページの人口ブロックに出典(総務省統計局の国勢調査、住民基本台帳)と調査年を明記し、国勢調査と住民基本台帳の違いを一文で説明する本文追加です。追加するファイルは市区町村ページのテンプレートで、事前に所有者の確認が要ります。人口値は既存の209指標の値だけを使い、新しい観測値は入れません。完了条件は公開本文に出典と違いの説明が出ることです。",
+  "method": "content",
+  "competitors": [
+    {
+      "url": "https://www.seikatsu-guide.com/keyword/1500/31/31201/",
+      "findings": "検索ニーズへの回答は、国勢調査2020年の総人口188,465人(全国815市区中145位)と、住民基本台帳2025年1月1日の179,215人を並べて示す形です。各数値に出典名と用語解説が付き、男女別、世帯数、昼間人口、年齢3区分、外国人人口を載せます。対象範囲は鳥取市のみで、隣接地域として津山市も並べます。国勢調査と住民基本台帳の差の説明はなく、将来推計も指数の定義だけで数値は表示されません。対象ページは最新値と全国1,741市区町村内の順位で優位ですが、出典の明記が弱いです。"
+    }
+  ],
+  "patches": [],
+  "research": {
+    "targetPage": {
+      "url": "https://stats47.jp/areas/31000/cities/31201",
+      "status": 200,
+      "fetchedAt": "2026-11-24T07:55:15.522Z",
+      "inputHash": "f155d34727df6b4bec651befa6496f9d7e4c2714bdfcbb5be01437354d9b2dbb",
+      "htmlFile": ".local/seo-rank-watch/target-page.html",
+      "htmlSha256": "5529545c7de2fba3b12ec8ada58be5336f967e99b232270ae8544673764279e2",
+      "textFile": ".local/seo-rank-watch/target-page.txt",
+      "textSha256": "80a79f5ec745fe79e98c09b5f1eabc8a7cc2e1cf27252b6c168c25c54b197ce0"
+    },
+    "toolCalls": [
+      {
+        "name": "WebSearch",
+        "target": "鳥取市 人口"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://stats47.jp/areas/31000/cities/31201"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.seikatsu-guide.com/keyword/1500/31/31201/"
+      },
+      {
+        "name": "WebFetch",
+        "target": "https://www.city.tottori.lg.jp/uploaded/attachment/45818.pdf"
+      },
+      {
+        "name": "WebSearch",
+        "target": "鳥取市 人口 推計人口 月別 鳥取市公式"
+      }
+    ]
+  },
+  "selectedAt": "2026-11-24",
+  "inputHash": "f155d34727df6b4bec651befa6496f9d7e4c2714bdfcbb5be01437354d9b2dbb",
+  "methods": [],
+  "files": []
+}
