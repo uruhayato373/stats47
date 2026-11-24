@@ -1541,6 +1541,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:birth-death-gap-decline",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:mothers-age-at-first-birth",
           "kind": "ranking"
         },

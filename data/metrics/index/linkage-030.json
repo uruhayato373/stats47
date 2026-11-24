@@ -7586,6 +7586,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "blog:traffic-accident-deaths-regional-risk",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:traffic-accident-casualties-per-population",
           "kind": "ranking"
         }
@@ -8274,10 +8278,6 @@
         },
         {
           "pageId": "blog:safe-driving-5-features",
-          "kind": "blog"
-        },
-        {
-          "pageId": "blog:traffic-accident-deaths-regional-risk",
           "kind": "blog"
         },
         {
