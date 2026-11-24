@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T11:00:41.889Z",
+  "updatedAt": "2026-11-24T11:39:04.080Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13953,6 +13953,75 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T11:00:41.889Z"
+    },
+    "UI-FIX-RANKING-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:39:03.998Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-20261011.txt",
+              "cd apps/web && npx vitest run ChartPanel.test",
+              "localhost:3000/ranking/total-population (375px)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (b4814b6cc): 操作があり説明の無いパネルの見出しを折り返す横並びにした。assert-handled exit 0、ChartPanel.test 通過、375px の実画面で 3 つのパネルの題名が 1 行 (高さ 22px)。題名の変化の指摘は定義の修正と単位の表記統一による by-design",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:39:03.998Z"
+    },
+    "UI-FIX-OTHER-20261031": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:39:04.080Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-OTHER-20261031.txt",
+              "axe (本番 4 URL・390px と 1440px・広告と計測を止めて)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (3dfc0a3ff): assert-handled exit 0。a11y の 4 件は AdSense などの第三者が差し込む要素で、広告と計測を止めると本番 4 URL で 0 件。題名の変化は年の名前の「年度→年」と指標名の改名 2 件。コードの変更なし。自前の要素の違反 2 件は UI-FOLLOWUP-02 へ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:39:04.080Z"
     }
   }
 }

@@ -70,6 +70,7 @@
 - [survey linkage ssot](project_survey_linkage_ssot.md) — ranking↔調査の紐付けの正本
 - [ssds denominator evidence](feedback_ssds_denominator_evidence.md) — SSDS の分母は公式算式で確定
 - [metric display state](feedback_metric_display_state.md) — 計算方法・年・地域は表示状態を一括確定
+- [metric text edit changes semantics](feedback_metric_text_edit_changes_semantics.md) — 指標の文言を変えたら分母・期間の判定を前後で比べ、ranking のテストも流す
 - [ranking publish pipeline gap](project_ranking_publish_pipeline_gap.md) — 公開は isActive 以外に KNOWN・R2・OGP が要る
 - [ranking download onthefly](project_ranking_download_onthefly.md) — ダウンロードは route でその場生成
 - [backlog ranking key audit](feedback_backlog_ranking_key_audit.md) — backlog の ranking_key は実在確認してから
