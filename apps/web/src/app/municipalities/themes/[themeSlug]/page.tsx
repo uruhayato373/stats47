@@ -133,6 +133,7 @@ export default async function MunicipalityThemePage({
               {item.distribution && item.distribution.length > 0 && (
                 <MiniDistributionBars
                   bins={item.distribution}
+                  unit={item.unit}
                   className="mt-3"
                 />
               )}

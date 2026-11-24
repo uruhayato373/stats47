@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T10:33:03.618Z",
+  "generatedAt": "2026-11-24T10:35:31.547Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -180,14 +180,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、各指標カードの灰色ヒストグラム(「65歳以上人口割合」「高齢夫婦のみの世帯数」): ヒストグラムに軸の数値も最大・最小のラベルもなく、何の分布か分からない。「高齢夫婦のみの世帯数」は左端1本だけ高く残りは線に見え、図の意味が読み取れない。 → 横軸の最小値と最大値、または「多くの自治体は〇〇付近」のような一言をヒストグラムの下に添える。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:35:31.541Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "市区町村テーマの指標カードの分布の棒 (MiniDistributionBars) の下に横軸の最小・最大を単位つきで添えた (裾を畳んだビンは「未満」「以上」)。端の値の書式はランキングのヒストグラムと共通の distribution-edge-labels"
     },
     {
       "key": "agent|prefecture-detail",
