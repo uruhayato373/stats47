@@ -110,7 +110,9 @@ test("土曜ランナー: GSC の入り直しと認証付き計測の後に週�
   const runnerSh = readFileSync(join(ROOT, "scripts/scheduled/weekly-saturday.sh"), "utf8");
   const steps = [...runnerSh.matchAll(/^step ([a-z-]+) /gm)].map((m) => m[1]);
   // gsc-login は認証付き計測より前 (GSC のセッションが切れていれば、取得の前に入り直す。2026-11-16)
-  assert.deepEqual(steps, ["gsc-login", "measurement", "note-metrics", "scout-asp", "weekly-audits"]);
+  // ad-layout は本番の広告の配置の撮影で、作業フォルダ .local/ad-layout だけに書く (git に入れる記録は無い。
+  // AD-LAYOUT-WEEKLY-CAPTURE-01・2026-11-24 オーナー決定 (a))
+  assert.deepEqual(steps, ["gsc-login", "measurement", "note-metrics", "scout-asp", "weekly-audits", "ad-layout"]);
   const records = runnerSh.match(/AUDIT_RECORDS=\(([\s\S]*?)\n\)/)[1].split(/\s+/).filter(Boolean);
   // 各台本の「出力:」に書いたパスが、どれかの記録パスの下にある (無いと監査の結果がコミットされず消える)
   for (const id of readdirSync(join(ROOT, DIR)).filter((f) => f.endsWith(".sh"))) {

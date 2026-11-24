@@ -721,6 +721,13 @@ updated: 2026-11-01
 - **停止条件**: ライセンス `review-required` の候補（26件）は確認前に公開しない。投稿・公開・R2 反映はオーナー承認後。
 - **完了条件**: 候補台帳が最新の公開物で判定し直され、P0 候補のうち少なくとも1件がブログまたは note の記事として公開され、その地図画像が SNS に投稿されている。
 
+### [MEDIA-WORKSPACE-ORPHAN-02] 画像の品質記録 10 件が、在庫の索引に無い画像を指している (索引ありの media:check が落ちる)
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run media:state:pull && npm run media:check] [起票:2026-11-24] [領域:SNS]
+
+- **起点**: MEDIA-WORKSPACE-ORPHAN-01 を 2026-11-24 に閉じたとき (c164ae0e8 で 9 件を外した)、在庫の索引ありの状態での pass は未確認だった。同じ日に索引を取り直して (`npm run media:state:pull`。private R2 の状態は 2026-10-17 の push のまま) 流すと、`Orphan image: IMG-ea19010e6c9b25a368d42ad3` で落ちる。索引に無い画像を指す品質記録は 10 件 (ranking・bar 2・choropleth 2・boxplot 2・summary-card 2・table)。CI には索引が無いので CI では通る。
+- **次**: 10 件の画像 ID が、10-17 より後に作って索引へ push していない画像か、消えた画像かを確かめる。前者なら在庫の索引を作り直して push し、後者なら記録を外す。12 件は持ち主を確かめていない (MEDIA-WORKSPACE-ORPHAN-01 の記録)。
+- **完了条件**: 索引を取り直した状態で `npm run media:check` が通る。
+
 ### [IMAGE-PUBLISHER-REMOVAL-01] 統計画像の生成経路から発行元表記（stats47・stats47.jp）を外し、地図をタイル・実形状の2型へ寄せる
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
 
