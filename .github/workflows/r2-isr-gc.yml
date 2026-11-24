@@ -18,7 +18,10 @@ on:
     workflows: ["Deploy to Cloudflare Workers"]
     types: [completed]
   schedule:
-    - cron: "30 18 * * 6" # JST 日曜 03:30 (デプロイ時 GC の取りこぼし回収)
+    # デプロイ時 GC の取りこぼし回収。CI-CRON-TIMING-01: 日曜 03:30 JST の予定が実際は 07:30〜08:30 に
+    # 発火し、人の手動 deploy が r2-write の鍵を待った (11-14 に 21.8 分)。schedule は 3.3〜7.5 時間
+    # 遅れるので、予定を水曜 00:00 JST に置き、実際の発火を 03:00〜07:30 の人の作業の外へ出す。
+    - cron: "0 15 * * 2"
   workflow_dispatch:
     inputs:
       dry_run:

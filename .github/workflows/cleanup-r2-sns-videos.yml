@@ -13,7 +13,8 @@ name: 🧹 Cleanup posted SNS videos (R2)
 
 on:
   schedule:
-    - cron: "0 19 * * 6" # JST 日曜 04:00 (UTC 土曜 19:00)
+    # CI-CRON-TIMING-01: r2-isr-gc.yml と同じく、遅延込みの発火を人の作業の外 (水曜 03:30〜08:00 JST) へ出す
+    - cron: "30 15 * * 2" # JST 水曜 00:30 (UTC 火曜 15:30)
   workflow_dispatch:
     inputs:
       dry_run:
