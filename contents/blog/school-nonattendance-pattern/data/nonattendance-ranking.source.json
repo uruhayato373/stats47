@@ -1,0 +1,21 @@
+{
+  "kind": "ranking",
+  "rankingKey": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+  "year": "2023",
+  "unit": "生徒千対",
+  "label": "不登校による中学校長期欠席生徒比率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug school-nonattendance-pattern --keys junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000 --data-name nonattendance-ranking",
+  "fetchedAt": "2026-06-20T21:51:29.922Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "verifiedMatchRate": 100,
+  "restoredFrom": "restore-ranking-from-svg.mjs",
+  "svgVerification": {
+    "matchedPrefs": 20,
+    "scale": 1,
+    "method": "raw",
+    "note": "旧SVG表示値とSSOT再取得値を相対2%で自己照合し確定 (捏造なし)"
+  }
+}
