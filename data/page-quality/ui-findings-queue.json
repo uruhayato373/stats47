@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T11:09:49.177Z",
+  "generatedAt": "2026-11-24T11:10:56.135Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -9343,14 +9343,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/ranking/junior-high-school-count|a11y_violations",
@@ -9394,14 +9394,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/ranking/manufacturing-shipment-amount/23000|clipped_text",
@@ -9496,14 +9496,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/municipalities|a11y_violations",
@@ -9513,14 +9513,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/privacy|a11y_violations",
@@ -10244,14 +10244,14 @@
       "metric_key": "title_changed",
       "severity": "warning",
       "detail": "title_changed: 103 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/municipalities/ranking/crime-rate-per-1k / https://stats47.jp/municipalities/ranking/elderly-population-ratio / https://stats47.jp/municipalities/ranking/elderly-population-ratio/01000",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "選定入力の変化による変更で、選び方の非決定ではない。2026-11-20 の週次の 103 URL は、市区町村ランキングの年の名前が観測値の yearName で「年度」→「年」に変わったもの、指標の題の改名 (製造品出荷額等（総額）→製造品出荷額等、納税義務者1人当たり課税所得→課税対象所得（所得割の納税義務者1人当たり）) の 3 種だけ。題は municipality-page-meta.ts が観測値から決定的に作る"
     },
     {
       "key": "machine|other|unit_symbol_mixing",
