@@ -52,11 +52,7 @@
 ## 作業の節目で記録する
 
 完了時に以下を更新する。コミットメッセージ・セッション内メモリだけに閉じ込めない (次エージェントは git log と下記ファイルしか見られない)。
-
-## 検証コマンドの粒度
-
-変更規模に応じた検査範囲・重複回避・依存関係操作の排他は `.claude/rules/local-environment.md`
-「検証コマンドの粒度」が正典。詳細をここに複製しない。
+検証コマンドの粒度 (変更規模に応じた検査範囲・重複回避・依存関係操作の排他) は `.claude/rules/local-environment.md`「検証コマンドの粒度」が正典。詳細をここに複製しない。
 
 | 種別 | 記録先 |
 |---|---|
@@ -83,56 +79,7 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 ### 規約・ルール (`.claude/rules/`)
 
 読み込みは 2 種。**常時** = 起動時に必ず載る (CLAUDE.md 込みで合計 600 行上限・DG070)。**条件付き** = frontmatter `paths:` の対象ファイルを Read したときだけ載る (Write / Bash 直打ちでは載らない)。新規 rule は必ず `paths:` を付ける → `docs-vs-issues.md`「rules の読み込み条件」。
-
-| ルール | 適用場面 | 読み込み |
-|---|---|---|
-| `agent-output-contract.md` | Agent tool 起動時の prompt 設計 (Task Capsule + Output Format) | 常時 |
-| `evidence-based-judgment.md` | improvement / 判定系 (effect/* 更新・仕様主張・原因推定)。閾値の SSOT は `packages/ops/src/effect-verdict/thresholds.mjs` | 常時 |
-| `coding-standards.md` | TypeScript / React / Next.js コード全般 | apps・packages の ts/tsx |
-| `content-type-standards.md` | コンテンツの 4 型 (全コンテンツが参照型・教科書型・論文型・ノウハウ型のどれかに属する。型の約束・宣言・機械の止め・洗い出し) | contents/blog・skills の blog/note/sns/product/content・content-types |
-| `blog-quality-standards.md` | ブログ記事の新規作成 / brushup (curiosity gap・図あたり字数・critic 必須) | contents/blog・scripts/blog・skills/blog |
-| `blog-data-schema.md` | ブログ data/*.json の統一 schema・3 点セット系譜・wave 命名 | 同上 |
-| `blog-svg-chart-standards.md` | ブログ SVG チャート (svg-builder カタログ・サイズ gate) | packages/svg-builder・contents/blog data |
-| `chart-image-copy.md` | 4媒体の統計画像内テキスト最小化・冗長説明の再混入防止 | admin型見本・Remotion・svg-builder・画像生成 |
-| `sns-content-standards.md` | SNS 投稿 (X/IG/YouTube pilot/note) の企画・生成・投稿・計測。管理コンソールは `npm run admin` (skill `/admin-console`) | scripts/sns・skills/sns・apps/remotion・admin |
-| `buzz-map-standards.md` | 日本地図×統計のバズカード (型A〜E・spec・カタログ) | remotion buzz-map・skills/sns/buzz-map |
-| `analytics-event-standards.md` | GA4 計装イベント追加・変更 (custom dimension 登録台帳) | apps/web/src/lib/analytics |
-| `admin-ui.md` | 管理画面 apps/admin の UI 規約 (Tailwind v4・shadcn 公式部品・組み立て部品・parity/debt 検査) | apps/admin・scripts/admin-ui |
-| `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) | apps/web の tsx・skills/ui |
-| `chart-component-standards.md` | D3 / shadcn チャートコンポーネントのカタログ・監査 | packages/visualization・components/charts |
-| `nextjs-ssg-preservation.md` | layout / page / route 変更 (cookies() 禁止・generateStaticParams と R2 の関係) | apps/web/src/app・middleware |
-| `note-image-assets.md` | note 原稿の画像・データ資産の置き場 (派生 PNG を git に置かない・ランキング記事の chart-data.json 契約・PNG 予算) | docs/31・scripts/note・skills/note |
-| `ogp-image-standards.md` | OGP / リンクカード / note カバー画像の生成・差分反映 | features/ogp・scripts/ogp・skills/image-prompt |
-| `r2-storage-design.md` | snapshot 追加・変更・R2 キー設計・保持ポリシー | packages/r2-storage・skills/db/push-r2 等 |
-| `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |
-| `page-quality-standards.md` | ページ肥大化・重複・速度の継続監視 (変更時代表URL/週次全URL、PSI/Cloudflare監視とは別系統) | .claude/scripts/page-quality・apps/admin/app/quality/page-audit |
-| `data-storage.md` | データの置き場の規則 (DB は `data/`・設定は `config/`・カタログと検査・置き場を移す手順) | .claude/skills・state・todo・docs |
-| `gis-data.md` | 国土数値情報 (KSJ) GIS の取り込み・管理 (台帳 geo.ksj-datasets / ライセンス境界) | packages/gis・skills/gis |
-| `recorded-measurement-first.md` | ログインが要る計測は週次 (土曜) に Mac が記録し、セッションではブラウザで取りに行かず記録から判断する (hook が止める) | skills/{ads,analytics,management,product,sns,note}・計測/ASP系 agent・scripts/{measurement,ads,note,gsc,kdp}・計測の data |
-| `geo-analysis-standards.md` | Geo/GIS 掛け合わせコンテンツ (lineage / 保存則 / canonical / X・note 境界) | app/geo・features/geo-analysis・skills/gis |
-| `estat-api.md` | e-Stat API 利用 (年の 4 桁正規化・cdArea 禁止) | packages/estat-api・metrics・skills/estat |
-| `unit-semantics-standards.md` | 単位の解釈・換算・検証。正典 `packages/data-configs/src/unit/`、自前のスケール表を書かない | data-configs unit/metrics・skills/db/audit-units |
-| `metric-config-standards.md` | metric config 作成・編集 (category 17 軸・形状ゲート・レシピ・公開の多段依存) | data-configs metrics・skills/db/publish-ranking |
-| `data-provenance-standards.md` | データ出典・再現性 (provenance 9 点セット・非 e-Stat 投入時必読) | data-configs metrics/provenance・skills/db/audit-provenance |
-| `reference-source-standards.md` | 参考文献の private Drive 保全と利用実装仕様書 | scripts/source-vault・docs/02 |
-| `theme-catalog-standards.md` | テーマページの指標×チャート統合カタログ (ThemeCatalog SSOT) | data-configs theme-catalog・skills/theme |
-| `area-databook-standards.md` | area 県データブック (テンプレ・editorial) | data-configs area-databook・skills/area |
-| `survey-linkage-standards.md` | ranking↔統計調査の紐付け (surveys.json / provenance 辞書 / 監査) | packages/ranking survey・skills/db/audit-survey-linkage |
-| `survey-content-standards.md` | survey ハブの編集コンテンツ | features/survey・skills/survey |
-| `ranking-content-standards.md` | ランキング AI 解説の生成パイプライン (都道府県専用) | packages/ai-content・scripts/ai-content |
-| `affiliate-ads-standards.md` | アフィリエイト広告 (vertical ハブ・配置・ASP 運用・計測) | features/ads・scripts/ads・skills/ads |
-| `data-pack-standards.md` | データパック (P-01〜P-14) の生成と note 販売 | product-factory の catalog・build・note チャネル・skills/product/build-data-pack |
-| `kindle-publishing-standards.md` | Kindle 書籍の生成・検証と KDP 出品 | product-factory の kindle チャネル・scripts/kdp・skills の kindle/kdp |
-| `branch-workflow.md` | PR・デプロイ・DB データ反映 (develop→main・skip-ci トークン・main 同期) | .github・.husky・skills/dev/deploy |
-| `local-environment.md` | 環境セットアップ・モノレポ構成・頻用コマンド・Windows の罠 | package.json・turbo.json・dev-server |
-| `docs-vs-issues.md` | 文書作成・配置・整理・削除と docs / skill / state / Issues の使い分け (文書変更時必読) | docs・.claude/todo・skills/management |
-| `todo-standards.md` | `.claude/todo` のカード構文・タグ語彙 (doboku-note と共通) | .claude/todo・backlog-lib |
-| `backlog-loop.md` | バックログ自動処理ループ (class・completion gate・quarantine) | scripts/backlog-loop・skills/management/process-backlog |
-| `skill-code-placement.md` | スクリプト新規作成の置き場 | .claude/scripts・scripts |
-| `model-prompting.md` | Claude モデル別の task capsule・effort・委譲設計 | .claude/agents・skills の SKILL.md |
-| `critic-review-protocol.md` | critic 系 agent のレビュー共通プロトコル | agents/*-critic・review.md |
-| `codex-mcp.md` | Claude Code から codex MCP を呼ぶとき (セカンドオピニオン・画像生成) | skills/blog/generate-blog-images・.mcp.json |
-| `browser-use-cleanup.md` | browser-use を使うスキル (daemon 停止 + タブクローズ) | scripts/note・kdp |
+常時は `agent-output-contract.md` (Agent の prompt 設計) と `evidence-based-judgment.md` (判定・仕様主張・原因推定) の 2 本。**全 rule の適用場面と読み込み条件の一覧は `docs-vs-issues.md`「rules の一覧」** (DG072 が一覧と実物の一致を検査する)。
 
 ### コアドキュメント
 

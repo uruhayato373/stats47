@@ -1,89 +1,54 @@
 # Memory Index
 
 ## 働き方・オーナーの好み
-- [reply in japanese](feedback_reply_in_japanese.md) — 返答は常に日本語
-- [periodic progress reports](feedback_periodic_progress_reports.md) — 長い作業は約5分おきに実測で進捗を伝える
-- [bypass permissions](feedback_bypass_permissions.md) — Agent は確認なしで最後まで処理
-- [autonomous execution](feedback_autonomous_execution.md) — スキル実行は確認不要で自動処理
+- [reply in japanese](feedback_reply_in_japanese.md)・[periodic progress reports](feedback_periodic_progress_reports.md) — 返答は常に日本語 / 長い作業は約5分おきに実測で進捗を伝える
+- [bypass permissions](feedback_bypass_permissions.md)・[autonomous execution](feedback_autonomous_execution.md) — Agent は確認なしで最後まで処理 / スキル実行は確認不要で自動処理
 - [agent output contract](feedback_agent_output_contract.md)・[codex delegation](feedback_codex_delegation_token_saving.md) — Agent prompt 冒頭に Task Capsule と OUTPUT FORMAT。読み取りの確認・調査は Codex に分担
-- [commit in batches](feedback_commit_in_batches.md) — 修正を重ねる間は毎回コミットせず、まとまりで 1 回
-- [no deploy per iteration](feedback_no_deploy_per_iteration.md) — 指示なしに main へ出さない。本番は 1 日 1 回
-- [release squash skip token](feedback_release_squash_skip_token.md) — squash 本文の skip-ci 印で本番デプロイが起動しない。マージ後に run を確認
-- [batch production builds](feedback_batch_production_builds.md) — 本番ビルドは修正ごとに回さず節目に 1 回
-- [file backlog as you go](feedback_file_backlog_as_you_go.md) — 範囲外の課題は見つけた時点で backlog へ
-- [portfolio keep decision](feedback_portfolio_keep_decision_2026_10.md) — SNS・テーマ・Geo・商品は継続。簡素化は系統内の是正で
-- [business vs content issues](feedback_business_vs_content_issues.md) — 事業イシューと問いの台帳を混ぜない
-- [content four types](feedback_content_four_types.md) — 全コンテンツは 4 型のどれか。未分類で作らない
-- [reference ui measure live](feedback_reference_ui_measure_live.md) — 見本 UI は実物の computed style を測ってから
-- [kindle check by agent](feedback_kindle_check_by_agent.md) — Kindle の表示確認はオーナーに頼まず自分で撮る
+- [commit in batches](feedback_commit_in_batches.md)・[no deploy per iteration](feedback_no_deploy_per_iteration.md) — 修正を重ねる間は毎回コミットせず、まとまりで 1 回 / 指示なしに main へ出さない。本番は 1 日 1 回
+- [release squash skip token](feedback_release_squash_skip_token.md)・[batch production builds](feedback_batch_production_builds.md) — squash 本文の skip-ci 印で本番デプロイが起動しない。マージ後に run を確認 / 本番ビルドは修正ごとに回さず節目に 1 回
+- [file backlog as you go](feedback_file_backlog_as_you_go.md)・[portfolio keep decision](feedback_portfolio_keep_decision_2026_10.md) — 範囲外の課題は見つけた時点で backlog へ / SNS・テーマ・Geo・商品は継続。簡素化は系統内の是正で
+- [business vs content issues](feedback_business_vs_content_issues.md)・[content four types](feedback_content_four_types.md) — 事業イシューと問いの台帳を混ぜない / 全コンテンツは 4 型のどれか。未分類で作らない
+- [reference ui measure live](feedback_reference_ui_measure_live.md)・[kindle check by agent](feedback_kindle_check_by_agent.md) — 見本 UI は実物の computed style を測ってから / Kindle の表示確認はオーナーに頼まず自分で撮る
 - [permission grant owner only](feedback_permission_grant_owner_only.md) — GA4/GCP の権限付与は最後をオーナーへ
 
 ## 事業・収益化
-- [monetization contract](project_monetization_contract.md) — AdSense の現行と口座。商品の需要は KDP を型ごとに出して 8 週の実売で確かめる (2026-11-14 に行政実務向け商品の本線をやめた)。ほかは正本への参照
-- [affiliate strategy](affiliate-strategy.md) — 広告の停止・文脈・重複・可視 1 秒の検証
-- [business plan adaptation](project_business_plan_adaptation_contract.md) — 外部事業計画は 25 章の適合差分で取り込む
-- [product ledger](project_product_ledger.md) — 商品の判断・価格実験の台帳。12-30 判定まで価格固定
-- [coconala withdrawal](project_coconala_withdrawal.md) — 2026-10-19 撤退、11-08 に台帳と自動化を削除
-- [product catalog contract](project_coconala_product_factory.md) — 商品定義・公開記録・納品版・販売準備を分ける
-- [note product rollout](project_note_product_rollout.md) — note 商品は固定 SHA の納品版から作る
-- [kindle publishing factory](project_kindle_publishing_factory.md) — EPUB3 生成・30% 書き下ろし必須・KDP は人手
+- [monetization contract](project_monetization_contract.md)・[affiliate strategy](affiliate-strategy.md) — AdSense の現行と口座。商品の需要は KDP を型ごとに出して 8 週の実売で確かめる (2026-11-14 に行政実務向け商品の本線をやめた)。ほかは正本への参照 / 広告の停止・文脈・重複・可視 1 秒の検証
+- [business plan adaptation](project_business_plan_adaptation_contract.md)・[product ledger](project_product_ledger.md) — 外部事業計画は 25 章の適合差分で取り込む / 商品の判断・価格実験の台帳。12-30 判定まで価格固定
+- [coconala withdrawal](project_coconala_withdrawal.md)・[product catalog contract](project_coconala_product_factory.md) — 2026-10-19 撤退、11-08 に台帳と自動化を削除 / 商品定義・公開記録・納品版・販売準備を分ける
+- [note product rollout](project_note_product_rollout.md)・[kindle publishing factory](project_kindle_publishing_factory.md) — note 商品は固定 SHA の納品版から作る / EPUB3 生成・30% 書き下ろし必須・KDP は人手
 - [kdp bookshelf archived view](reference_kdp_bookshelf_archived_view.md)・[kdp weekly title limit](reference_kdp_weekly_title_limit.md) — 本棚の既定表示はアーカイブ済みを出さない / 新規タイトルは週の作成数に上限 (日曜 9:00 JST に戻る)
-- [asp site attribution](project_asp_site_attribution.md) — 共用 ASP 口座のサイト帰属を assert
-- [affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — text 広告は locationCode で弾かれる
-- [competitor indicator benchmark](project_competitor_indicator_benchmark.md) — 指標数は競合超え。課題は需要と CTR
-- [competitor riskmap jp](project_competitor_riskmap_jp.md) — SNS 直接競合 @riskmap.jp
+- [asp site attribution](project_asp_site_attribution.md)・[affiliate banner text asymmetry](project_affiliate_banner_text_asymmetry.md) — 共用 ASP 口座のサイト帰属を assert / text 広告は locationCode で弾かれる
+- [competitor indicator benchmark](project_competitor_indicator_benchmark.md)・[competitor riskmap jp](project_competitor_riskmap_jp.md) — 指標数は競合超え。課題は需要と CTR / SNS 直接競合 @riskmap.jp
 
 ## 計測・分析
-- [measurement weekly recorded first](feedback_measurement_weekly_recorded_first.md) — ログイン計測は土曜の記録から読む
-- [measurement cycle ci](project_measurement_cycle_ci.md) — 土曜 CI 計測→Mac 認証計測→レビュー
-- [review cadence wiring](project_review_cadence_wiring.md) — 週次・月次レビューの配線と判定
-- [ga4 setup](project_ga4_setup.md) — GA4 のイベント・Consent Mode
-- [ga4 double pageview](feedback_ga4_double_pageview.md) — SPA の手動 page_view と拡張計測の二重計測
-- [ga4 history unreliable wow](feedback_ga4_history_unreliable_wow.md) — WoW は GA4 でなく GSC clicks で
-- [ga4 journey referrer](feedback_ga4_journey_referrer_over_navclick.md) — 回遊は nav_click でなく referrer で読む
-- [gsc export false positive](feedback_gsc_export_false_positive.md) — GSC の ZIP は内容・件数・帰属まで照合
-- [gsc coverage remediation loop](project_gsc_coverage_remediation_loop.md) — カバレッジ是正。入力週の鮮度を fail-closed で
-- [gsc coverage drilldown](project_gsc_coverage_drilldown.md) — 6 種別の drilldown CSV を週次集約
-- [lcp optimization](feedback_lcp_optimization.md) — LCP は要素の特定が先
-- [scan pending improvements](reference_scan_pending_improvements.md) — 改善ログから pending を抽出するスクリプト
-- [model usage cycle](project_model_usage_cycle.md) — モデル/effort 最適化と canary
-- [weekly plan content over sns](feedback_weekly_plan_content_over_sns.md) — 週次 Must は記事と SEO、SNS は下げる
-- [analysis question drift](feedback_analysis_question_drift.md) — 分析は台帳の問いの語で答える
-- [analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 反証は計算手順つきの必須試験に
+- [measurement weekly recorded first](feedback_measurement_weekly_recorded_first.md)・[measurement cycle ci](project_measurement_cycle_ci.md) — ログイン計測は土曜の記録から読む / 土曜 CI 計測→Mac 認証計測→レビュー
+- [review cadence wiring](project_review_cadence_wiring.md)・[ga4 setup](project_ga4_setup.md) — 週次・月次レビューの配線と判定 / GA4 のイベント・Consent Mode
+- [ga4 double pageview](feedback_ga4_double_pageview.md)・[ga4 history unreliable wow](feedback_ga4_history_unreliable_wow.md) — SPA の手動 page_view と拡張計測の二重計測 / WoW は GA4 でなく GSC clicks で
+- [ga4 journey referrer](feedback_ga4_journey_referrer_over_navclick.md)・[gsc export false positive](feedback_gsc_export_false_positive.md) — 回遊は nav_click でなく referrer で読む / GSC の ZIP は内容・件数・帰属まで照合
+- [gsc coverage remediation loop](project_gsc_coverage_remediation_loop.md)・[gsc coverage drilldown](project_gsc_coverage_drilldown.md) — カバレッジ是正。入力週の鮮度を fail-closed で / 6 種別の drilldown CSV を週次集約
+- [lcp optimization](feedback_lcp_optimization.md)・[scan pending improvements](reference_scan_pending_improvements.md) — LCP は要素の特定が先 / 改善ログから pending を抽出するスクリプト
+- [model usage cycle](project_model_usage_cycle.md)・[weekly plan content over sns](feedback_weekly_plan_content_over_sns.md) — モデル/effort 最適化と canary / 週次 Must は記事と SEO、SNS は下げる
+- [analysis question drift](feedback_analysis_question_drift.md)・[analysis refute mandatory tests](feedback_analysis_refute_mandatory_tests.md) — 分析は台帳の問いの語で答える / 反証は計算手順つきの必須試験に
 
 ## データ・e-Stat・R2
-- [authored ledgers in data](feedback_authored_ledgers_in_data.md) — 判断して書く台帳は data/ に JSON+Schema
-- [r2 writes ci only](project_r2_writes_ci_only.md) — remote R2 が唯一の正本。ローカルミラーなし
-- [r2-write pending replaced](feedback_r2_write_pending_replaced.md) — r2-write の待機は 1 本だけ
-- [data refresh cancel mismatch](feedback_data_refresh_cancel_mismatch.md) — 同期中に止めると画面が空。監査と再実行
-- [check ci job scope](feedback_check_ci_job_scope_before_launch.md) — 長い CI は起動前に範囲と所要を確認
-- [sync snapshots checks out main](feedback_sync_snapshots_checks_out_main.md) — sync-snapshots は main を checkout する
-- [sync-snapshots task names](feedback_sync_snapshots_task_names.md) — カテゴリ一覧は only=master
-- [snapshot gap audit first](feedback_snapshot_gap_audit_first.md) — 欠落に見えたら生成側の関数で 1 件確かめる
-- [local r2 overlay](feedback_local_r2_overlay_for_generated_snapshots.md) — 手元生成 snapshot は r2-overlay-server で見る
-- [estat expansion pipeline](project_estat_expansion_pipeline_2026_07.md) — e-Stat 全展開は不可能。需要ファースト
-- [estat backfill lessons](project_estat_backfill_lessons.md) — backfill は UPSERT（他ソース年度を消さない）
-- [estat wage survey](reference_estat_wage_survey.md) — 賃金構造基本統計の表構造と登録キー
-- [kakei expansion gotchas](project_kakei_expansion_pipeline_gotchas.md) — 家計調査の地域コード写像・export の罠・市別の長い系列の比べ方
-- [kakei marketing book](project_kakei_marketing_book_pipeline.md) — 家計調査の本を全ページ解決・企画台帳
-- [lens belongs to survey](feedback_lens_belongs_to_survey.md) — 切り口は本でなく調査の持ち物
-- [survey linkage ssot](project_survey_linkage_ssot.md) — ranking↔調査の紐付けの正本
+- [authored ledgers in data](feedback_authored_ledgers_in_data.md)・[r2 writes ci only](project_r2_writes_ci_only.md) — 判断して書く台帳は data/ に JSON+Schema / remote R2 が唯一の正本。ローカルミラーなし
+- [r2-write pending replaced](feedback_r2_write_pending_replaced.md)・[data refresh cancel mismatch](feedback_data_refresh_cancel_mismatch.md) — r2-write の待機は 1 本だけ / 同期中に止めると画面が空。監査と再実行
+- [check ci job scope](feedback_check_ci_job_scope_before_launch.md)・[sync snapshots checks out main](feedback_sync_snapshots_checks_out_main.md) — 長い CI は起動前に範囲と所要を確認 / sync-snapshots は main を checkout する
+- [sync-snapshots task names](feedback_sync_snapshots_task_names.md)・[snapshot gap audit first](feedback_snapshot_gap_audit_first.md) — カテゴリ一覧は only=master / 欠落に見えたら生成側の関数で 1 件確かめる
+- [local r2 overlay](feedback_local_r2_overlay_for_generated_snapshots.md)・[estat expansion pipeline](project_estat_expansion_pipeline_2026_07.md) — 手元生成 snapshot は r2-overlay-server で見る / e-Stat 全展開は不可能。需要ファースト
+- [estat backfill lessons](project_estat_backfill_lessons.md)・[estat wage survey](reference_estat_wage_survey.md) — backfill は UPSERT（他ソース年度を消さない） / 賃金構造基本統計の表構造と登録キー
+- [kakei expansion gotchas](project_kakei_expansion_pipeline_gotchas.md)・[kakei marketing book](project_kakei_marketing_book_pipeline.md) — 家計調査の地域コード写像・export の罠・市別の長い系列の比べ方 / 家計調査の本を全ページ解決・企画台帳
+- [lens belongs to survey](feedback_lens_belongs_to_survey.md)・[survey linkage ssot](project_survey_linkage_ssot.md) — 切り口は本でなく調査の持ち物 / ranking↔調査の紐付けの正本
 - [ssds denominator evidence](feedback_ssds_denominator_evidence.md) — SSDS の分母は公式算式で確定
 - [metric display state](feedback_metric_display_state.md)・[metric text edit](feedback_metric_text_edit_changes_semantics.md) — 計算方法・年・地域は表示状態を一括確定 / 指標の文言を変えたら分母・期間の判定を前後で比べ ranking のテストも流す
-- [ranking publish pipeline gap](project_ranking_publish_pipeline_gap.md) — 公開は isActive 以外に KNOWN・R2・OGP が要る
-- [ranking download onthefly](project_ranking_download_onthefly.md) — ダウンロードは route でその場生成
-- [backlog ranking key audit](feedback_backlog_ranking_key_audit.md) — backlog の ranking_key は実在確認してから
-- [theme selection backfill](project_theme_selection_backfill_pipeline.md) — テーマ選定の夜間 backfill と決定的 gate
-- [theme indicator research](feedback_theme_indicator_research_pattern.md) — テーマ指標は一次資料と e-Stat ID を同時に解決
-- [source vault layout](project_source_vault_expanded_layout.md) — 参考文献は Drive の版フォルダへ展開配置
-- [open data skip local portals](feedback_open_data_skip_local_portals.md) — 特定の市・県だけのオープンデータは取得・展開しない
-- [listmodels not proof](feedback_listmodels_is_not_proof_of_usable.md) — API の一覧は使える証拠でない。1 回叩く
+- [ranking publish pipeline gap](project_ranking_publish_pipeline_gap.md)・[ranking download onthefly](project_ranking_download_onthefly.md) — 公開は isActive 以外に KNOWN・R2・OGP が要る / ダウンロードは route でその場生成
+- [backlog ranking key audit](feedback_backlog_ranking_key_audit.md)・[theme selection backfill](project_theme_selection_backfill_pipeline.md) — backlog の ranking_key は実在確認してから / テーマ選定の夜間 backfill と決定的 gate
+- [theme indicator research](feedback_theme_indicator_research_pattern.md)・[source vault layout](project_source_vault_expanded_layout.md) — テーマ指標は一次資料と e-Stat ID を同時に解決 / 参考文献は Drive の版フォルダへ展開配置
+- [open data skip local portals](feedback_open_data_skip_local_portals.md)・[listmodels not proof](feedback_listmodels_is_not_proof_of_usable.md) — 特定の市・県だけのオープンデータは取得・展開しない / API の一覧は使える証拠でない。1 回叩く
 
 ## サイト (Next.js・UI)
-- [generatestaticparams r2 notfound](feedback_generatestaticparams_r2_notfound_stuck.md) — R2 依存 route の gSP は空配列だけ (キー列は notFound 固着・関数なしは毎回描画)
-- [nextjs ssg cookies](feedback_nextjs_ssg_cookies.md) — layout 配下で cookies() を呼ぶと SSG 崩れ
-- [home pure ssg r2 empty](feedback_home_pure_ssg_r2_empty.md) — トップは force-dynamic
-- [workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — 本番で空なら CLOUDFLARE_WORKERS の R2 skip を疑う
+- [generatestaticparams r2 notfound](feedback_generatestaticparams_r2_notfound_stuck.md)・[nextjs ssg cookies](feedback_nextjs_ssg_cookies.md) — R2 依存 route の gSP は空配列だけ (キー列は notFound 固着・関数なしは毎回描画) / layout 配下で cookies() を呼ぶと SSG 崩れ
+- [home pure ssg r2 empty](feedback_home_pure_ssg_r2_empty.md)・[workers env r2 skip](feedback_cloudflare_workers_env_r2_skip.md) — トップは force-dynamic / 本番で空なら CLOUDFLARE_WORKERS の R2 skip を疑う
 - [workers self fetch](feedback_workers_self_fetch_unbundle.md) — 自ドメイン fetch は ASSETS binding で
 - [sticky aside max h](feedback_sticky_aside_max_h.md) — grid 内 sticky aside は max-h と overflow 必須
 - [page semantic dedup](feedback_page_semantic_dedup_contract.md) — 同じ意味の UI の描画担当を 1 つに
