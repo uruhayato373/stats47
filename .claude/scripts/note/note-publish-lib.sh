@@ -5,7 +5,9 @@
 #   * タブが about:blank に落ちることがある → 各段階で location.href を必ず確認する
 #   * タグ候補(suggestion)と確定チップ(chip)は [aria-label=削除] の有無で区別する
 export PATH="$HOME/.browser-use-env/bin:$HOME/.browser-use/bin:$HOME/.local/bin:$PATH"
-NBU(){ browser-use --headed --profile "Profile 5" "$@"; }
+# NOTE_BU_CDP=http://127.0.0.1:<port> drives an already-running Chrome (launch-note-cdp.mjs の専用プロファイル)
+# instead of Profile 5 (publish-new-note.sh / editor-helpers.sh の BU() と同じ切り替え)
+NBU(){ if [ -n "${NOTE_BU_CDP:-}" ]; then browser-use --cdp-url "$NOTE_BU_CDP" "$@"; else browser-use --headed --profile "Profile 5" "$@"; fi; }
 
 # 現在 URL を返す
 np_href(){ NBU eval "location.href" 2>&1 | sed -n 's/^result: //p' | head -1; }
