@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-11-24
- * 件数: blog 861 / tag 72 / survey 149
+ * 件数: blog 862 / tag 73 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -46,6 +46,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "alcohol-prefecture-map", lastModified: "2026-03-04" },
   { slug: "alcoholic-beverages-group-consumption-expenditure", lastModified: "2026-11-04" },
   { slug: "allocation-tax-area", lastModified: "2026-08-28" },
+  { slug: "ambulance-hospital-arrival-time-prefecture-gap", lastModified: "2026-11-25" },
   { slug: "annual-precipitation-rainy-season-gap", lastModified: "2026-06-07" },
   { slug: "annual-sales-amount-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "annual-sunshine-duration-prefecture-gap", lastModified: "2026-09-02" },
@@ -919,6 +920,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "市区町村", lastModified: "2026-11-07" },
   { tagKey: "年収", lastModified: "2026-11-09" },
   { tagKey: "年収五分位", lastModified: "2026-11-09" },
+  { tagKey: "所得", lastModified: "2026-10-23" },
   { tagKey: "所得格差", lastModified: "2026-07-19" },
   { tagKey: "教育", lastModified: "2026-09-05" },
   { tagKey: "教育格差", lastModified: "2026-11-09" },
