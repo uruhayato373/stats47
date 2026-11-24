@@ -407,7 +407,7 @@ skill には詳細を複製せず本節への参照だけを置く。
 | 小規模 UI 変更 | 対象テスト または `npm run type-check --workspace apps/web`。両方が同じ事実を重複検査する場合は片方でよい |
 | ロジック変更・変換処理・共通ユーティリティ | 対象テスト + 影響 workspace の型検査 |
 | route / metadata / generateStaticParams / SSG / R2 snapshot 参照 | 対象 route と関連契約テストを検査 (`nextjs-ssg-preservation.md` のチェックリスト参照) |
-| 生成テンプレート変更 (git TS → R2 反映スクリプト等) | 生成 dry-run または差分確認 + validator (実例: `sync-snapshots.yml` の `dry_run=true` 入力、`npm run page-quality:validate`) |
+| 生成テンプレート変更 (git TS → R2 反映スクリプト等) | 生成 dry-run または差分確認 + validator (実例: `npm run page-quality:validate`。`sync-snapshots.yml` の `dry_run=true` は task の表示だけで生成しないので、生成の確認には使えない) |
 | リリース (develop→main) | CI (`pr-quality-check.yml`) を権威とし、ローカルで同じ全体検査を重複実行しない |
 | ブラウザ実測 | ユーザーが求めた場合・視覚的な判断が必要な場合・静的検査では判定できない場合に限定する |
 

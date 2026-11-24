@@ -88,7 +88,7 @@ URL → R2 パス対応は `.claude/rules/r2-storage-design.md` を参照。
 gh workflow run sync-snapshots.yml -f only=page-components          # 1 task
 gh workflow run sync-snapshots.yml -f only=municipality-ranking     # 市区町村ランキング
 gh workflow run sync-snapshots.yml                                  # 全 task
-gh workflow run sync-snapshots.yml -f dry_run=true                  # 生成のみ (確認)
+gh workflow run sync-snapshots.yml -f dry_run=true                  # task と順序の表示のみ (生成も R2 反映もしない)
 gh run watch                                                        # 進捗確認
 ```
 

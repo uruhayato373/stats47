@@ -143,14 +143,6 @@ updated: 2026-11-01
 - **完了条件**: 管理画面のホームで週次収益と有料購入が金額と件数で出る週があり、土曜のタスクがレビューと計画の保存まで 1 回通った。
 - **`revenueDaily` が空の理由 (2026-11-24)**: `summarize.mjs` は取得元が `quality.daily` を渡したときだけ明細を書く。11-21 の Mac の取得 (`8512b1f34`・`data/authenticated/latest.json`) では、note の販売履歴が `revenueStatus: verification_required` (再確認を求められた) で `daily` が null、kdp は failed、a8・rakuten・gsc は `daily` を出す実装がまだ無い (次の 3)。コードの不具合ではなく認証待ち。note の再確認と kdp の再認証の後、11-28 の取得で次の 2 (note の `dailyRows`) を読む。
 
-### [SYNC-SNAPSHOTS-DRYRUN-DESC-01] sync-snapshots の試走の説明と実装を合わせる
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-14] [領域:サイト]
-
-`sync-snapshots.yml` の入力 `dry_run` は「生成のみ」と説明しているが、`.claude/skills/db/sync-snapshots/run.sh` (81 行目付近) は試走のとき生成も R2 反映も省き、予定のコマンドを表示するだけである (2026-11-14 Codex の読み取りレビューで確認)。試走で生成物を確かめられると思って起動すると何も得られない。
-
-- 次: 説明を実装に合わせるか、試走で生成までを行うよう run.sh を直す (どちらかを選んで理由を残す)
-- 完了条件: workflow の説明と run.sh の動作が一致し、試走の run のログで確かめた
-
 ### [THEME-PAGE-REVIEW-01] テーマページを、全ルート込みの実績で採点し、共通の UI と指標を見直す
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run theme:portfolio:audit] [起票:2026-11-14] [領域:サイト] [進行中]
 
@@ -217,13 +209,6 @@ updated: 2026-11-01
 - **起点 (2026-11-13・家計調査 96 本の審査)**: ① 題の「N位」の検査 (`quality-gate.mjs` の `NG_PATTERNS`) は `title: "…"` の形だけに掛かり、引用符なしの題は素通りする (`title: もやし消費量1位山形、沖縄の2.8倍差` など 3 本が通った)。
 - **次**: 題の検査は引用符の有無に依らない形にし、公開済みの題で該当数を測ってから blocker にするかを決める。順位の照合は「N位以内」「N位を引き離し」「前年」「AのN位からBのM位へ」を対象から外し、非検出のテストで固定する。
 - **完了条件**: 上の 4 文が blocker にならず、引用符なしの題も検査に掛かる。
-
-### [BLOG-AUTO-PUBLISH-DETECT-01] 公開対象の検出が push の先頭コミット 1 つの差分しか見ない
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト]
-
-- **起点**: `blog-auto-publish.yml` は `git diff HEAD~1 HEAD` で変更された article.md を公開対象にし、それが空のときだけ送り箱の総ざらい (`select-republish-slugs.mjs`) に回る。
-- **次**: 検出を push の before..after の差分にするか、差分の検出に加えて常に総ざらいを足す。
-- **完了条件**: 記事を含む複数コミットの push で、全コミットの公開待ちが 1 回の run の対象になる。
 
 ### [OPENDATA-DEMAND-WAVE-01] 検索の需要の手がかりがある未展開の題材を、公的統計から波で足す
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-17] [領域:データ] [期日:2026-12-15]
@@ -506,15 +491,6 @@ updated: 2026-11-01
 - **次**: 置き場・形・手順を文章で説明している定義を数え (`LEDGER-DB-UNIFY-01` の移行で `RETIRED` が指した文書が最初の材料)、検査へ移せる規則と、消せる説明を分ける
 - **禁止**: 検査を作らずに文章だけを消さない (規則が消える)
 - **完了条件**: 対象にした定義ごとに、規則が検査かテストに移り、説明の節が消えている
-
-### [BLOG-LEDGER-PUBLISH-SYNC-01] ブログを公開した直後に、記事台帳・ページの索引・指標の逆引きを進める
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run content:check] [起票:2026-11-10] [領域:サイト]
-
-- **済み (2026-11-14・`f71680fe4`)**: 自動公開の書き戻しに content:sync --from-r2 と metrics:build-index を足し、sync-snapshots にも逆引きを足した。
-- **済み (2026-11-14・`aa67dd39c`)**: 手動公開 `publish-blog.yml` の書き戻しを自動公開と同じ中身 (sitemap・タグのキー・未公開の slug の一覧・記事台帳・ページの索引・指標の逆引き) にした。
-- **残り (観測)**: 次の自動公開か手動公開の後、手で何も起動せずに `npm run content:check` と `npm run metrics:check --workspace packages/data-configs` が develop で通ることを確かめる。未公開だった記事を再公開した回なら、書き戻しのコミットに `apps/web/src/config/unpublished-blog-slugs.ts` が入っていることも見る。通らなければ、その run の「Remove published draft」の段のログで、`::warning::` と `::error::` の行を読む。この 2 本の workflow は fixture でしか実行しておらず、実機では未確認である。
-- **残り (追補・2026-11-14)**: 手動公開 `publish-blog.yml` は draft を消す前に `record-critic-findings.mjs` を呼ばないので、手動で公開した記事の review.md の指摘が台帳 `data/blog/critic-findings` に残らない (`blog-auto-publish.yml` の同じ step は呼んでいる)。
-- **完了条件**: 公開の run が 1 回成功し、その書き戻しのコミットの後に develop で `npm run content:check` と `npm run metrics:check --workspace packages/data-configs` が通る。
 
 ### [WINDOWS-LOCAL-GATES-01] 会社の Windows PC でだけ落ちる検査を直す (パス区切り・改行)
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-10] [領域:管理]
@@ -1089,6 +1065,7 @@ updated: 2026-11-01
 - **現状 (2026-10-29)**: `npx vitest run src/components/charts/__tests__/ChartFooter.test.tsx` (apps/web) で「固定IDのメニューを開くと操作ボタンと内容が相互に対応する」が `Unable to find role="menu"` で失敗する (4 件中 1 件)。交通網の変遷の作業中に見つけた。ChartFooter とそのテストはこの作業で触っておらず、直近の変更は 2026-10-28 の lyra の書き込み (5392747f7・410b2948e)。
 - **次**: メニューを開く操作 (Base UI の DropdownMenu) がテスト環境で開かなくなった原因を、上の 2 コミットの前後でテストを流して切り分ける。
 - **完了条件**: 同テストが 4 件とも通り、web の vitest 全件が緑。
+- **観測 (2026-11-24・この Windows PC)**: メニューのテストは 3 回とも通った。代わりに「ボタンを押すと、複数の出典とランキングを省略せず Sheet に並べる」が 3 回中 1 回 `Unable to find role="dialog"` で落ちる (Sheet が開くのを待たずに探している可能性。未確認)。web の一部を束ねて流したときにも同じテストが 1 回落ちた。
 
 ### [INFRA-HISTORY-R2-PUBLISH-01] 交通網の変遷の R2 反映の残り (問いのページの計算結果・旧高速道路データの削除・再現手順の書き換え)
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-29] [領域:データ]
@@ -1683,13 +1660,6 @@ updated: 2026-11-01
   - **次**: ② 296 件の data JSON と図を作り直し、ブログの公開経路 (contents/blog → CI → R2) で出す。
   - **完了条件**: 年度の指標を使う公開記事で、図の見出しが「YYYY年度」になっている (件数を再集計して 0 件)。
 - **範囲の追加 (2026-11-14)**: `d8db2df63` で calendar に直した 12 指標も対象に足す。表示 (「◯年度」から「◯年」) は R2 の再生成後に変わる。これらを「◯年度」と書いているブログ・note・商品の本文があるかは調べていない。
-
-### [TURBOPACK-DEV-WINDOWS-01] 会社の Windows PC で開発サーバーが Turbopack で動くことを確かめる
-タグ: [インフラ・計測] [種類:改善] [実行:windows] [起票:2026-10-21] [領域:管理]
-
-- **背景**: 2026-10-21 に `npm run dev:web` の既定を Turbopack にした (`apps/web/scripts/dev-server.ts`)。
-- **次**: 会社 PC で `npm run dev:web` を起動し、ランキング詳細・テーマ詳細・県ページが 200 で表示され、データ (R2) とチャートが出ることを確かめる。動かなければ `WEB_DEV_BUNDLER=webpack npm run dev:web` で従来どおり起動し、原因をこのカードに書く。
-- **完了条件**: Windows でも Turbopack で主要ページが表示されるか、webpack に戻す条件が `local-environment.md` に書かれている。
 
 ### [THEME-DETAIL-CLIENT-PRELOAD-01] テーマ詳細が全テーマの client 部品を先読みしている (約 2,267KB) のを、route 別に分ける
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-11-14]
@@ -3252,20 +3222,6 @@ updated: 2026-11-01
   ③ 機能別の固定値を metric config / attribution 由来に置き換える。④ 系譜 URL の到達性を定期監査に入れるか検討する。
 - **trigger**: 出典リンク切れ・誤表記の指摘、または図の出典の書式を変えるとき。
 - **完了条件**: 図ごとの出典がデータから導出され、手書きの出典 URL が監査対象になっている。
-
-### [WIN-PREFLIGHT-NPM-SPAWN-01] Windows で preflight:pr の 3 gate が `spawnSync npm ENOENT` で判定前に落ちる
-
-タグ: [インフラ・計測] [種類:不具合] [実行:windows] [検証:npm run preflight:pr] [起票:2026-09-25] [領域:管理]
-
-- **再現確認 (2026-10-02)**: noteカバー台帳の統合後も3 gateが同じ起動エラーで未判定。対象checkerは今回未変更。
-  全体は41/45合格、残る1件は公開blog snapshotのHTTP503。note関連・全25package/8scriptの型検査・管理画面テストは合格。
-  実測は `data/note/cover-operations-latest.json` の `validation.preflightPr`。
-
-- **背景**: 2026-09-25 にこの Windows PC で `npm run preflight:pr` を実行すると、`check-japan-zue-evidence-inventory.mjs` と
-- **次**: 3 スクリプトの npm/npx 起動を、Windows でも動く形 (node で npm-cli を直接起動するか `shell` 指定) に揃える。
-  共通の起動ヘルパーがあればそれを使う。
-- **完了条件**: この PC で上記 3 gate が判定まで進む (成功・失敗は中身次第)。
-- **確認が要る (11-03 の棚卸し)**: 対象の 3 スクリプトは win32 では既に npm-cli を起動する形になっている。Windows で一度通せば閉じられる見込み
 
 ### [BLOG-MUNI-SOURCE-LINK-01] ブログの図の直下カードから市区町村ランキングへ張れない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:サイト]

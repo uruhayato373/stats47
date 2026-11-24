@@ -187,6 +187,12 @@ jobs:
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
+          # outbox ごと消える前に、最後の review.md の指摘を台帳に残す (二重に記録しても行は増えない。
+          # blog-auto-publish.yml の同じ step と同じ呼び出し)
+          if [ -f "contents/blog/$SLUG/review.md" ]; then
+            node .claude/scripts/blog/record-critic-findings.mjs "contents/blog/$SLUG" || echo "::warning::critic の指摘の記録に失敗 ($SLUG)"
+          fi
+          if [ -d data/blog/critic-findings ]; then git add data/blog/critic-findings; fi
           if [ -d "contents/blog/$SLUG" ]; then
             git rm -r -q "contents/blog/$SLUG"
           fi

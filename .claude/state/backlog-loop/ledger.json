@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T07:02:27.909Z",
+  "updatedAt": "2026-11-24T07:15:34.509Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13123,6 +13123,118 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T07:02:27.909Z"
+    },
+    "CHART-FOOTER-MENU-TEST-01": {
+      "class": "misconception-close",
+      "status": "open",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:12:50.711Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run src/components/charts/__tests__/ChartFooter.test.tsx"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 単独で 3 回流して 6 件とも pass (メニューのテストを含む)。web の一部を束ねて流した 1 回だけ別のケースが落ちたが、単独では通る (負荷による一時の失敗)",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-11-24T07:15:34.509Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "failed",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "2026-11-24 訂正: 直前の completed の記録は誤り。再実行すると ChartFooter.test.tsx は 3 回中 1 回「ボタンを押すと、複数の出典とランキングを省略せず Sheet に並べる」が Unable to find role=dialog で落ちる。カードを戻した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 1,
+        "lastReason": null,
+        "since": "2026-11-24T07:15:34.509Z"
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:12:50.711Z"
+    },
+    "WIN-PREFLIGHT-NPM-SPAWN-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:12:51.221Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-20 この Windows PC の preflight:pr で 68 検査すべてが判定まで進み、spawn・EINVAL・npm ENOENT の起動エラーは 0 件 (japan-zue-evidence-inventory は ✅ 89.9s)。落ちた 6 件は CRLF とプロキシが原因で WINDOWS-LOCAL-GATES-01 に記録済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:12:51.221Z"
+    },
+    "TURBOPACK-DEV-WINDOWS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:12:51.823Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl localhost:3000 / /ranking/total-population /areas/01000 /themes/aging-society"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 この Windows PC で npm run dev:web (既定の Turbopack) を起動し、トップ・ランキング詳細・県ページ・テーマが 200。/themes/real-income と /areas で R2 のデータとチャートの表示も画面で確かめた",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:12:51.823Z"
     }
   }
 }

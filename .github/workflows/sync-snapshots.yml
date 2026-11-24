@@ -8,7 +8,7 @@ name: 🗂️ Sync Snapshots → R2
 #
 # 使い方: Actions タブ → この workflow → Run workflow。
 #   only=<task>   で 1 task だけ再生成 (例: page-components / blog / master)。空なら全 task。
-#   dry_run=true  で生成のみ (R2 push しない) — 初回や確認時に推奨。
+#   dry_run=true  で実行する task と順序を表示するだけ (生成も R2 反映もしない) — 初回や確認時に推奨。
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ on:
         required: false
         default: ''
       dry_run:
-        description: 'true: 生成のみ (R2 push しない)'
+        description: 'true: 実行する task と順序を表示するだけ (生成も R2 反映もしない)'
         required: false
         default: 'false'
       ranking_keys:

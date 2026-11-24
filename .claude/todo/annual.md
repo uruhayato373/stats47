@@ -391,6 +391,36 @@ updated: 2026-11-14
 
 
 
+### [SYNC-SNAPSHOTS-DRYRUN-DESC-01] sync-snapshots の試走の説明と実装を合わせる
+タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [起票:2026-11-14] [領域:サイト] [待ち:観測] [期日:2026-12-01]
+
+`sync-snapshots.yml` の入力 `dry_run` は「生成のみ」と説明しているが、`.claude/skills/db/sync-snapshots/run.sh` (81 行目付近) は試走のとき生成も R2 反映も省き、予定のコマンドを表示するだけである (2026-11-14 Codex の読み取りレビューで確認)。試走で生成物を確かめられると思って起動すると何も得られない。
+
+- 次: 説明を実装に合わせるか、試走で生成までを行うよう run.sh を直す (どちらかを選んで理由を残す)
+- 完了条件: workflow の説明と run.sh の動作が一致し、試走の run のログで確かめた
+- **済み (2026-11-24・未コミットの手元)**: 動作は変えず、`sync-snapshots.yml` の dry_run の説明・SKILL.md・local-environment.md を「task と順序を表示するだけ (生成も R2 反映もしない)」に揃えた。契約テスト 17 件 pass。残りは main 反映後に試走の run のログで表示だけになることを確かめる。
+- **年間計画へ移した (2026-11-24)**: main 反映後の run の確認待ち。
+
+### [BLOG-AUTO-PUBLISH-DETECT-01] 公開対象の検出が push の先頭コミット 1 つの差分しか見ない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:サイト] [待ち:観測] [期日:2026-12-01]
+
+- **起点**: `blog-auto-publish.yml` は `git diff HEAD~1 HEAD` で変更された article.md を公開対象にし、それが空のときだけ送り箱の総ざらい (`select-republish-slugs.mjs`) に回る。
+- **次**: 検出を push の before..after の差分にするか、差分の検出に加えて常に総ざらいを足す。
+- **完了条件**: 記事を含む複数コミットの push で、全コミットの公開待ちが 1 回の run の対象になる。
+- **済み (2026-11-24・未コミットの手元)**: push では `github.event.before..github.sha` の差分で公開対象を検出し、before が全 0・取得不可・祖先でないときと手動起動は `HEAD~1..HEAD` に戻す。fetch-depth 100。式は env 経由。契約テスト pass。残りは main 反映後、記事を含む複数コミットの push で全コミットの記事が 1 回の run の対象になるかを確かめる。
+- **年間計画へ移した (2026-11-24)**: main 反映後の run の確認待ち。
+
+### [BLOG-LEDGER-PUBLISH-SYNC-01] ブログを公開した直後に、記事台帳・ページの索引・指標の逆引きを進める
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run content:check] [起票:2026-11-10] [領域:サイト] [待ち:観測] [期日:2026-12-01]
+
+- **済み (2026-11-14・`f71680fe4`)**: 自動公開の書き戻しに content:sync --from-r2 と metrics:build-index を足し、sync-snapshots にも逆引きを足した。
+- **済み (2026-11-14・`aa67dd39c`)**: 手動公開 `publish-blog.yml` の書き戻しを自動公開と同じ中身 (sitemap・タグのキー・未公開の slug の一覧・記事台帳・ページの索引・指標の逆引き) にした。
+- **残り (観測)**: 次の自動公開か手動公開の後、手で何も起動せずに `npm run content:check` と `npm run metrics:check --workspace packages/data-configs` が develop で通ることを確かめる。未公開だった記事を再公開した回なら、書き戻しのコミットに `apps/web/src/config/unpublished-blog-slugs.ts` が入っていることも見る。通らなければ、その run の「Remove published draft」の段のログで、`::warning::` と `::error::` の行を読む。この 2 本の workflow は fixture でしか実行しておらず、実機では未確認である。
+- **残り (追補・2026-11-14)**: 手動公開 `publish-blog.yml` は draft を消す前に `record-critic-findings.mjs` を呼ばないので、手動で公開した記事の review.md の指摘が台帳 `data/blog/critic-findings` に残らない (`blog-auto-publish.yml` の同じ step は呼んでいる)。
+- **完了条件**: 公開の run が 1 回成功し、その書き戻しのコミットの後に develop で `npm run content:check` と `npm run metrics:check --workspace packages/data-configs` が通る。
+- **済み (2026-11-24・未コミットの手元)**: 手動公開 `publish-blog.yml` にも draft を消す前の `record-critic-findings.mjs` と台帳の `git add` を足した (workflow-commit-back の契約テスト 42 件 pass)。残りは上の観測と同じ (次の公開の run の後に content:check と metrics:check が通るか)。
+- **年間計画へ移した (2026-11-24)**: main 反映後の run の確認待ち。
+
 ## 2027-01
 
 ### [NOTE-PAID-MANUSCRIPT-SYNC-01] API パッチで変えた有料記事 6 本の private R2 原稿を live 本文に追従させる
