@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T10:29:06.724Z",
+  "generatedAt": "2026-11-24T10:30:23.293Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -112,14 +112,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[desktop-1440/medium] デスクトップ1枚目、右レールの「広告」カード(「詳細を見る」「地図を見る」「データ管理を比較」「統計ソフトを試す」): 見出しの「広告」が小さく、リンクは本文のサイト内ナビより大きな文字で青系の背景を使っている。サイト内の導線に見え、広告とサイト内リンクを取り違えやすい。 → 広告の表記をカード上部に目立つ形で付け、リンク文字をサイト内リンクと同程度の大きさ・色に抑える。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-31",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "修正の本番反映後も 2026-10-11 の週次で再検出 (前回: カード横スクロールの右端に続きを示すフェードを追加 (HorizontalCardCarousel)。タイル地図の県名を折り返さない (whitespace-nowrap)。左上の空白はタイル配置が列島の形を写すため現状維持)"
+      "note": "右レールの該当カードは AdSense の枠 (RailAdSlot → AdCell)。「詳細を見る」等のリンクの文字・青系の地は Google が配信する広告の原稿でサイト側から変えられない。左上の小さな「広告」表記は 2026-10-30 オーナー決定 (AdCell 案 A・全ての広告の枠で共通) で、ホームだけ大きくしない"
     },
     {
       "key": "agent|municipality",
