@@ -275,7 +275,7 @@ function main() {
       errors.push(
         `[subtitle-redundant] ${r.file}: subtitle が title と冗長 「${s.slice(0, 30)}」`
       );
-    } else if (isSurveyMethodSubtitle(s)) {
+    } else if (isSurveyMethodSubtitle(s, { sourceKind: r.sourceKind })) {
       // 上の包含の許容をすり抜ける形: 調査方法の書き出し + title など。家計調査の 825 件がこの形だった。
       errors.push(
         `[subtitle-survey-method] ${r.file}: subtitle が調査方法の定型文 「${s.slice(0, 30)}」 (調査方法は note へ。subtitle は区別子だけ)`

@@ -4,8 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const otherConsumptionBudgetShareKakei: MetricConfig = {
   "key": "other-consumption-budget-share-kakei",
   "title": "消費支出に占めるその他の消費支出の割合",
-  "subtitle": "都道府県庁所在市の二人以上世帯の消費支出に占めるその他の消費支出の割合（用途分類の年平均1か月）",
-  "note": "県全体の値ではなく県庁所在市の値。割合は同じ表のその他の消費支出 ÷ 消費支出で、金額の多さそのものではない",
+  "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表のその他の消費支出 ÷ 消費支出で、金額の多さそのものではない",
   "description": "家計調査の用途分類によるその他の消費支出の支出が消費支出に占める割合。諸雑費・こづかい・交際費・仕送り金への支出。",
   "unit": "％",
   "category": "economy",

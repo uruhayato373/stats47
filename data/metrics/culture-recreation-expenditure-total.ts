@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const cultureRecreationExpenditureTotal: MetricConfig = {
   "key": "culture-recreation-expenditure-total",
   "title": "教養娯楽費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間教養娯楽費（教養娯楽用耐久財・書籍・月謝・旅行などへの支出総額）",
+  "subtitle": "教養娯楽用耐久財・書籍・月謝・旅行などへの支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
   "description": "家計調査（二人以上世帯）における年間の教養娯楽への支出総額。教養娯楽用耐久財、教養娯楽用品、書籍・他の印刷物、教養娯楽サービス（旅行・月謝等）を含む。",
   "unit": "円",
   "category": "economy",
