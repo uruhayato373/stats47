@@ -542,3 +542,47 @@ describe("県名の直後でも、その県単独の値ではない数値 (差�
     });
   });
 });
+
+// BLOG-GATE-RANK-CONTEXT-01 (2026-11-13 家計調査 96 本の審査): 正しい文が県の順位の誤りとして止まった 4 文の固定。
+// 「N位を引き離し」は他県の順位、「N位以内」は範囲、「前年も」は data に無い年、「AのN位からBのM位へ」は移り変わりを語る。
+describe("県の順位ではない順位の書き方を照合しない (BLOG-GATE-RANK-CONTEXT-01)", () => {
+  const CONTEXT_FILES = {
+    "spend.json": {
+      label: "支出金額",
+      unit: "円",
+      year: "2025",
+      data: [
+        { rank: 1, areaName: "島根県", pref: "島根県", value: 9000 },
+        { rank: 2, areaName: "鳥取県", pref: "鳥取県", value: 7000 },
+        { rank: 4, areaName: "福島県", pref: "福島県", value: 6500 },
+        { rank: 5, areaName: "静岡県", pref: "静岡県", value: 6400 },
+        { rank: 9, areaName: "熊本県", pref: "熊本県", value: 6000 },
+        { rank: 12, areaName: "愛知県", pref: "愛知県", value: 5800 },
+      ],
+    },
+    "spend.source.json": { label: "支出金額", unit: "円", year: "2025" },
+  };
+  const OK_SENTENCES = [
+    "島根県は2位を大きく引き離しています。",
+    "福島県を含む東北6県はすべて11位以内です。",
+    "熊本は前年も11位でした。",
+    "中央の県は静岡の20位から愛知の30位へ移りました。",
+  ];
+  for (const s of OK_SENTENCES) {
+    it(`★「${s}」は止めない`, () => {
+      withFiles(CONTEXT_FILES, (gt) => {
+        assert.deepEqual(checkRankClaims(s, gt), []);
+        assert.deepEqual(checkInverseRankClaims(s, gt), []);
+      });
+    });
+  }
+
+  it("★同じ県の順位の誤りは従来どおり検出する (mutation)", () => {
+    withFiles(CONTEXT_FILES, (gt) => {
+      assert.equal(checkRankClaims("島根県は2位です。", gt).length, 1);
+      assert.equal(checkRankClaims("熊本は11位でした。", gt).length, 1);
+      assert.equal(checkRankClaims("福島県は11位です。", gt).length, 1);
+      assert.equal(checkRankClaims("愛知は30位へ下がりました。", gt).length, 1);
+    });
+  });
+});
