@@ -136,3 +136,17 @@ visible output量、token/cost、所要時間。保存する場合は
   `fixtureVersion` を上げる (版の違う結果どうしは比べない)。
 - 週次では `/weekly-review` が `latest.json` の提案を読み、採否と canary の要否を決める。
 
+### 決定の記録: effort `high` の 4 体と sonnet の code-reviewer は据え置く (2026-11-24 オーナー決定)
+
+`article-writer`・`blog-critic`・`open-data-curator`・`sns-renderer` の frontmatter `effort: high` と、
+`code-reviewer` の `model: sonnet` を据え置く (MODEL-OPT-MONITOR-01 の選択肢 a)。根拠は、model-usage の記録
+(`latest.json` 2026-11-12 生成分・窓 W42〜W46) と blog の審査記録に戻すべき悪化が 1 件も無く、effort を `high` に
+下げても canary の recall は 1.0 のまま費用が 5〜15% 減り、code-reviewer は sonnet で費用が半減したこと。
+
+- 窓 W42〜W46 で実行 0 件だった `code-reviewer`・`open-data-curator`・`sns-renderer` は、実行が記録された最初の週の
+  `npm run model-usage:collect && npm run model-usage:report` の agents 欄で、失敗・やり直しの増加が無いかを `/weekly-review` が見る。
+- 戻すのは、記録に悪化 (canary の recall 低下、審査の差し戻し率の上昇、同じ課題のやり直し) が出たときだけ。戻すときは
+  frontmatter の `effort` を外すか `model: opus` に戻し、見落とした課題を canary に足す。
+- article-writer・blog-critic の effort 変更前後の比較は、agent 経由の review.md (`reviewer` フィールド) が 10-08 以降に
+  無いので未測定。比べられる件数が溜まるまでは、上の悪化の兆しだけで判断する。
+
