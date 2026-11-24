@@ -4,7 +4,7 @@ type: implementation-spec
 date: 2026-08-29
 updated: 2026-10-26
 status: active
-related_backlog: PREFECTURE-DEVIATION-S5-01
+related_backlog: null
 owner: open-data-curator
 tags: [evidence, provenance, ocr, crop, source-vault, content-pipeline]
 ---

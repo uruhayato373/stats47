@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T07:41:19.244Z",
+  "updatedAt": "2026-11-24T07:45:07.834Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13301,6 +13301,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T07:41:19.244Z"
+    },
+    "PREFECTURE-DEVIATION-S5-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:45:07.834Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c オーナー決定 (2026-11-24) .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 オーナーの指示 (推奨があれば推奨どおり) で本文の推奨 A を採った: 解決ラベルは combined-analysis のまま据え置きカードを閉じる。実装は 5ae5502e4 で済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:45:07.834Z"
     }
   }
 }
