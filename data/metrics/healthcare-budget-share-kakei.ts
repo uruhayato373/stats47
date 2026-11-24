@@ -5,7 +5,7 @@ export const healthcareBudgetShareKakei: MetricConfig = {
   "key": "healthcare-budget-share-kakei",
   "title": "消費支出に占める保健医療の割合",
   "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表の保健医療 ÷ 消費支出で、金額の多さそのものではない",
-  "description": "家計調査の用途分類による保健医療の支出が消費支出に占める割合。医薬品・保健医療サービスなどへの支出。",
+  "description": "家計調査の用途分類による年平均1か月の保健医療の支出が消費支出に占める割合。医薬品・保健医療サービスなどへの支出。",
   "unit": "％",
   "category": "economy",
   "source": {

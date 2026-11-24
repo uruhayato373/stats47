@@ -5,7 +5,7 @@ export const clothingFootwearBudgetShareKakei: MetricConfig = {
   "key": "clothing-footwear-budget-share-kakei",
   "title": "消費支出に占める被服及び履物の割合",
   "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表の被服及び履物 ÷ 消費支出で、金額の多さそのものではない",
-  "description": "家計調査の用途分類による被服及び履物の支出が消費支出に占める割合。衣類・履物とその関連サービスへの支出。",
+  "description": "家計調査の用途分類による年平均1か月の被服及び履物の支出が消費支出に占める割合。衣類・履物とその関連サービスへの支出。",
   "unit": "％",
   "category": "economy",
   "source": {

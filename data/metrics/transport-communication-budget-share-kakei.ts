@@ -5,7 +5,7 @@ export const transportCommunicationBudgetShareKakei: MetricConfig = {
   "key": "transport-communication-budget-share-kakei",
   "title": "消費支出に占める交通・通信の割合",
   "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表の交通・通信 ÷ 消費支出で、金額の多さそのものではない",
-  "description": "家計調査の用途分類による交通・通信の支出が消費支出に占める割合。交通・自動車等関係費・通信への支出。",
+  "description": "家計調査の用途分類による年平均1か月の交通・通信の支出が消費支出に占める割合。交通・自動車等関係費・通信への支出。",
   "unit": "％",
   "category": "economy",
   "source": {

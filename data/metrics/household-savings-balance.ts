@@ -6,6 +6,7 @@ export const householdSavingsBalance: MetricConfig = {
   "title": "貯蓄現在高",
   "subtitle": "家計調査の貯蓄・負債編",
   "note": "家計調査の貯蓄・負債編 (二人以上の世帯) の県庁所在市の値で、県全体の値ではない。平均値なので一部の高額世帯に引っ張られる。全国消費実態調査・全国家計構造調査の貯蓄現在高とは別系列",
+  "description": "二人以上世帯の1世帯当たりの貯蓄現在高。",
   "unit": "万円",
   "category": "economy",
   "source": {

@@ -5,7 +5,7 @@ export const cultureRecreationBudgetShareKakei: MetricConfig = {
   "key": "culture-recreation-budget-share-kakei",
   "title": "消費支出に占める教養娯楽の割合",
   "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表の教養娯楽 ÷ 消費支出で、金額の多さそのものではない",
-  "description": "家計調査の用途分類による教養娯楽の支出が消費支出に占める割合。教養娯楽用品・書籍・旅行などへの支出。",
+  "description": "家計調査の用途分類による年平均1か月の教養娯楽の支出が消費支出に占める割合。教養娯楽用品・書籍・旅行などへの支出。",
   "unit": "％",
   "category": "economy",
   "source": {

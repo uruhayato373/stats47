@@ -5,7 +5,7 @@ export const consumptionExpenditureTotal: MetricConfig = {
   "key": "consumption-expenditure-total",
   "title": "消費支出総額",
   "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
-  "description": "家計調査（二人以上世帯）における年間の消費支出総額。食料・住居・光熱水道・被服・教育・教養娯楽などすべての生活費の合計で、都市ごとの生活費水準を示す。",
+  "description": "家計調査（二人以上世帯）における1世帯当たり年間の消費支出総額。食料・住居・光熱水道・被服・教育・教養娯楽などすべての生活費の合計で、都市ごとの生活費水準を示す。",
   "unit": "円",
   "category": "economy",
   "source": {

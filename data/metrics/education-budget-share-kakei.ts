@@ -5,7 +5,7 @@ export const educationBudgetShareKakei: MetricConfig = {
   "key": "education-budget-share-kakei",
   "title": "消費支出に占める教育の割合",
   "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表の教育 ÷ 消費支出で、金額の多さそのものではない",
-  "description": "家計調査の用途分類による教育の支出が消費支出に占める割合。授業料・教科書・補習教育への支出。",
+  "description": "家計調査の用途分類による年平均1か月の教育の支出が消費支出に占める割合。授業料・教科書・補習教育への支出。",
   "unit": "％",
   "category": "economy",
   "source": {

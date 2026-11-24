@@ -5,7 +5,7 @@ export const furnitureHouseholdGoodsBudgetShareKakei: MetricConfig = {
   "key": "furniture-household-goods-budget-share-kakei",
   "title": "消費支出に占める家具・家事用品の割合",
   "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表の家具・家事用品 ÷ 消費支出で、金額の多さそのものではない",
-  "description": "家計調査の用途分類による家具・家事用品の支出が消費支出に占める割合。家具・家電・家事用消耗品などへの支出。",
+  "description": "家計調査の用途分類による年平均1か月の家具・家事用品の支出が消費支出に占める割合。家具・家電・家事用消耗品などへの支出。",
   "unit": "％",
   "category": "economy",
   "source": {

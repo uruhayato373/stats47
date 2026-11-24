@@ -6,7 +6,7 @@ export const furnitureHouseholdExpenditureTotal: MetricConfig = {
   "title": "家具・家事用品費",
   "subtitle": "家庭用耐久財・寝具・家事雑貨などへの支出総額",
   "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
-  "description": "家計調査（二人以上世帯）における年間の家具・家事用品への支出総額。冷蔵庫等の家庭用耐久財、寝具、家事雑貨、家事サービスを含む。",
+  "description": "家計調査（二人以上世帯）における1世帯当たり年間の家具・家事用品への支出総額。冷蔵庫等の家庭用耐久財、寝具、家事雑貨、家事サービスを含む。",
   "unit": "円",
   "category": "economy",
   "source": {

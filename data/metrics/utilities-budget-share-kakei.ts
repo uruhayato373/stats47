@@ -5,7 +5,7 @@ export const utilitiesBudgetShareKakei: MetricConfig = {
   "key": "utilities-budget-share-kakei",
   "title": "消費支出に占める光熱・水道の割合",
   "note": "値は都道府県庁所在市（二人以上世帯）の用途分類による年平均1か月の割合で、県全体の値ではない。割合は同じ表の光熱・水道 ÷ 消費支出で、金額の多さそのものではない",
-  "description": "家計調査の用途分類による光熱・水道の支出が消費支出に占める割合。電気・ガス・他の光熱・上下水道料への支出。",
+  "description": "家計調査の用途分類による年平均1か月の光熱・水道の支出が消費支出に占める割合。電気・ガス・他の光熱・上下水道料への支出。",
   "unit": "％",
   "category": "economy",
   "source": {
