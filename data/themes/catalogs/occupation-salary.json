@@ -481,6 +481,21 @@
       ]
     },
     {
+      "key": "service-1",
+      "title": "調理従事者・理容美容師・警備員",
+      "rankingKeys": [
+        "cook-annual-income",
+        "barber-beautician-annual-income",
+        "security-guard-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "cook-annual-income",
+        "barber-beautician-annual-income",
+        "security-guard-annual-income"
+      ],
+      "view": "tiles"
+    },
+    {
       "key": "education-1",
       "title": "小中学校教員",
       "rankingKeys": [
@@ -558,21 +573,6 @@
       "defaultCheckedKeys": [
         "system-consultant-annual-income",
         "software-engineer-annual-income"
-      ],
-      "view": "tiles"
-    },
-    {
-      "key": "service-1",
-      "title": "調理従事者・理容美容師・警備員",
-      "rankingKeys": [
-        "cook-annual-income",
-        "barber-beautician-annual-income",
-        "security-guard-annual-income"
-      ],
-      "defaultCheckedKeys": [
-        "cook-annual-income",
-        "barber-beautician-annual-income",
-        "security-guard-annual-income"
       ],
       "view": "tiles"
     }
