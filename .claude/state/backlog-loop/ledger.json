@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T10:45:24.692Z",
+  "updatedAt": "2026-11-24T11:00:41.889Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13784,6 +13784,175 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T10:45:24.632Z"
+    },
+    "BLOG-GATE-RANK-CONTEXT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.611Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/blog/lint/__tests__/*.test.mjs",
+              "node --test packages/ops/src/blog/__tests__/quality-gate.*.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (7452cdacf): 県の順位ではない順位を照合から外す非検出テスト 4 件を先に足して赤を確認し、修正後に lint 147 pass・quality-gate 33 pass。同じ県の誤った順位は今までどおり検出する mutation テストも pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.611Z"
+    },
+    "METRIC-DEFINITION-GAPS-BOOK-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.679Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "npx vitest run packages/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (1ed0943d4): 民営家賃の東京都は東京都区部 (統計局 shityou-k2025.pdf)、地域差指数は都道府県の値で県庁所在市とは別系列 (g_2024.pdf・k_1.html) と一次資料で確認し、公開 R2 の 2024 年の値が PDF の都道府県の表と一致。validate:config error 0・vitest 1509 pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.679Z"
+    },
+    "XLSX-FURIGANA-INGEST-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.745Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/ingest-nier-achievement.ts --year 25 --dry-run (差し替え前後)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (81abf088d): NIER の xlsx 94 個で、差し替え後と差し替え前 (2c28508cd^) の dry-run の出力 51 行が一致 (diff 0 行)。結果をスクリプト冒頭に記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.745Z"
+    },
+    "MEDIA-WORKSPACE-ORPHAN-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.817Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/media/check-workspace.mjs",
+              "node --test (media 43 件)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (c164ae0e8): 原因は 10-24 に公開済み記事へ統合した note の下書き 3 本の画像の品質記録 9 件の残りと確定し、分類だけの記録なので外した。check-workspace pass (在庫索引なし)・media テスト 43 pass。在庫索引ありの pass は private R2 の鍵が要り未確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.817Z"
+    },
+    "BLOG-PUBLISH-AUDIT-KAKEI-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.889Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run list --workflow blog-auto-publish.yml",
+              "node .claude/scripts/blog/prune-published-outbox.mjs --apply"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 11-05 の失敗は 9 指標の有効化 (863c80cd6) と R2 への値の投入 (11-15) の 10 日のずれ。9 指標は 200、11-14 以降の公開の run は成功。たまっていた送り箱 236 本を prune で消した。掃除がサイト全体の検査に結びついている構造の問題は BLOG-OUTBOX-PASS-PUBLISH-01 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.889Z"
     }
   }
 }

@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
-  "checkedAt": "2026-11-08T01:12:32.694Z",
+  "checkedAt": "2026-11-24T10:59:52.662Z",
   "selectedRevisions": {
     "kindle": "v3-20260906-r4",
     "note": "v3-20260906-r1"
   },
   "scope": "既存14パック・Kindle 本・Geo note15企画。販路は note と Kindle だけ (2026-11-08 にココナラを撤去)。販売先違いは同一商品内のvariant。その他の未定義商品は含まない。",
   "summary": {
-    "total": 62,
-    "existing": 57,
+    "total": 67,
+    "existing": 62,
     "candidates": 5,
     "free": 1,
     "hashVerified": 10
@@ -458,12 +458,14 @@
       "free": false,
       "candidate": false,
       "buildStatus": "invalid",
-      "artifactDirectory": ".local/data-packs/P-14/v4-20261024-mac-r2",
+      "artifactDirectory": ".local/data-packs/P-14/v5-20261104-mac-r1",
       "artifactSha256": null,
       "blockers": [
-        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-14/v4-20261024-mac-r2/manifest.json'"
+        "ENOENT: no such file or directory, open '/Users/minamidaisuke/stats47/.local/data-packs/P-14/v5-20261104-mac-r1/manifest.json'"
       ],
-      "ownerGates": [],
+      "ownerGates": [
+        "配布前にOffice実機の表示・編集を確認する"
+      ],
       "evidencePaths": [
         "data/products/note-pack-deliveries.json",
         "data/note/articles.json"
@@ -510,7 +512,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-01/v3-20260906-r4/READINESS.md"
@@ -570,7 +572,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-02/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-02/v3-20260906-r4/READINESS.md"
@@ -630,7 +632,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-03/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-03/v3-20260906-r4/READINESS.md"
@@ -690,7 +692,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-04/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-04/v3-20260906-r4/READINESS.md"
@@ -750,7 +752,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-05/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-05/v3-20260906-r4/READINESS.md"
@@ -763,9 +765,7 @@
           "url": "https://www.amazon.co.jp/dp/B0HKF5MMF9",
           "priceYen": 800,
           "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -810,7 +810,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-06/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-06/v3-20260906-r4/READINESS.md"
@@ -870,7 +870,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-07/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-07/v3-20260906-r4/READINESS.md"
@@ -930,7 +930,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-08/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-08/v3-20260906-r4/READINESS.md"
@@ -990,7 +990,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-09/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-09/v3-20260906-r4/READINESS.md"
@@ -1050,7 +1050,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-10/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-10/v3-20260906-r4/READINESS.md"
@@ -1110,7 +1110,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-11/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-11/v3-20260906-r4/READINESS.md"
@@ -1170,7 +1170,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-12/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-12/v3-20260906-r4/READINESS.md"
@@ -1230,7 +1230,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S1-13/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-13/v3-20260906-r4/READINESS.md"
@@ -1261,10 +1261,184 @@
       "artifactLinks": []
     },
     {
+      "id": "K-S1-14",
+      "title": "47都市の食卓は似てきたのか — 家計調査で読む19年の変化",
+      "kind": "book",
+      "catalogStatus": "generated",
+      "scope": "家計調査の県庁所在市・二人以上の世帯の品目別支出を、食料費に占める割合に直して 2007〜09 年と 2023〜25 年で比べ、47 都市の食卓が似てきたかを確かめる本。数字はすべて .local/kindle-private/K-S1-14/facts.json から取る。",
+      "free": false,
+      "candidate": false,
+      "buildStatus": "missing",
+      "artifactDirectory": ".local/kindle-books/K-S1-14/v3-20260906-r4",
+      "artifactSha256": null,
+      "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing",
+        "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
+      ],
+      "ownerGates": [
+        "対象EPUBのSHAに紐付くKindle Previewer確認",
+        "権利・AI生成申告・価格/印税条件・最終公開承認"
+      ],
+      "evidencePaths": [
+        "data/products/kdp/listings.json",
+        "data/products/kindle-archives.json",
+        ".local/kindle-books/K-S1-14/v3-20260906-r4/metadata.json",
+        ".local/kindle-books/K-S1-14/v3-20260906-r4/READINESS.md"
+      ],
+      "channels": [
+        {
+          "channel": "kindle",
+          "publicationStatus": "in_review",
+          "checkedAt": "2026-11-13T23:07:16.409Z",
+          "url": null,
+          "priceYen": 500,
+          "priceStatus": "recorded",
+          "blockers": []
+        }
+      ],
+      "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
+      "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing"
+      ],
+      "artifactLinks": []
+    },
+    {
+      "id": "K-S1-15",
+      "title": "年収で食卓はどう変わるのか — 家計調査で読む世帯の買い方",
+      "kind": "book",
+      "catalogStatus": "idea",
+      "scope": "家計調査の全国の年収階級別 (五分位・十分位) の品目別支出で、年収が上がると増える品目・変わらない品目・減る品目を読む本の候補。切り口台帳 kakei-income-class。都道府県別の値ではない。",
+      "free": false,
+      "candidate": false,
+      "buildStatus": "missing",
+      "artifactDirectory": ".local/kindle-books/K-S1-15/v3-20260906-r4",
+      "artifactSha256": null,
+      "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing",
+        "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
+      ],
+      "ownerGates": [
+        "対象EPUBのSHAに紐付くKindle Previewer確認",
+        "権利・AI生成申告・価格/印税条件・最終公開承認"
+      ],
+      "evidencePaths": [
+        "data/products/kdp/listings.json",
+        "data/products/kindle-archives.json",
+        ".local/kindle-books/K-S1-15/v3-20260906-r4/metadata.json",
+        ".local/kindle-books/K-S1-15/v3-20260906-r4/READINESS.md"
+      ],
+      "channels": [
+        {
+          "channel": "kindle",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
+          "priceYen": 500,
+          "priceStatus": "proposal",
+          "blockers": []
+        }
+      ],
+      "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
+      "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing"
+      ],
+      "artifactLinks": []
+    },
+    {
+      "id": "K-S1-16",
+      "title": "食卓から消えた品、増えた品 — 家計調査で読む品目の盛衰",
+      "kind": "book",
+      "catalogStatus": "idea",
+      "scope": "家計調査の全国の年次の系列で、品目の支出と数量が伸びた・縮んだ・置き換わった流れを読む本の候補。切り口台帳 kakei-long-term-trend。都道府県別の値ではない。",
+      "free": false,
+      "candidate": false,
+      "buildStatus": "missing",
+      "artifactDirectory": ".local/kindle-books/K-S1-16/v3-20260906-r4",
+      "artifactSha256": null,
+      "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing",
+        "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
+      ],
+      "ownerGates": [
+        "対象EPUBのSHAに紐付くKindle Previewer確認",
+        "権利・AI生成申告・価格/印税条件・最終公開承認"
+      ],
+      "evidencePaths": [
+        "data/products/kdp/listings.json",
+        "data/products/kindle-archives.json",
+        ".local/kindle-books/K-S1-16/v3-20260906-r4/metadata.json",
+        ".local/kindle-books/K-S1-16/v3-20260906-r4/READINESS.md"
+      ],
+      "channels": [
+        {
+          "channel": "kindle",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
+          "priceYen": 500,
+          "priceStatus": "proposal",
+          "blockers": []
+        }
+      ],
+      "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
+      "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing"
+      ],
+      "artifactLinks": []
+    },
+    {
       "id": "K-S2-01",
       "title": "データで見る47都道府県 人口・世帯",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "人口・世帯に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1288,7 +1462,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-01/v3-20260906-r4/READINESS.md"
@@ -1296,14 +1470,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:39:58.744Z",
-          "url": "https://www.amazon.co.jp/dp/B0HG543VG9",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1324,7 +1496,7 @@
       "id": "K-S2-02",
       "title": "データで見る47都道府県 所得・賃金・採用",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "所得・賃金・採用に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1348,7 +1520,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-02/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-02/v3-20260906-r4/READINESS.md"
@@ -1356,14 +1528,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:40:41.401Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH8D631S",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1408,7 +1578,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-03/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-03/v3-20260906-r4/READINESS.md"
@@ -1444,7 +1614,7 @@
       "id": "K-S2-04",
       "title": "データで見る47都道府県 自治体財政",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "自治体財政に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1468,7 +1638,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-04/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-04/v3-20260906-r4/READINESS.md"
@@ -1476,14 +1646,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:01:18.283Z",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
           "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1504,7 +1672,7 @@
       "id": "K-S2-05",
       "title": "データで見る47都道府県 医療・介護",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "医療・介護に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1528,7 +1696,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-05/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-05/v3-20260906-r4/READINESS.md"
@@ -1536,14 +1704,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:42:07.581Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH8JHDSZ",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1564,7 +1730,7 @@
       "id": "K-S2-06",
       "title": "データで見る47都道府県 教育・子育て",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "教育・子育てに関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1588,7 +1754,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-06/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-06/v3-20260906-r4/READINESS.md"
@@ -1596,14 +1762,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:42:49.950Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH91VJZD",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1624,7 +1788,7 @@
       "id": "K-S2-07",
       "title": "データで見る47都道府県 移住・生活",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "移住・生活に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1648,7 +1812,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-07/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-07/v3-20260906-r4/READINESS.md"
@@ -1656,14 +1820,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:06.670Z",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
           "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1684,7 +1846,7 @@
       "id": "K-S2-08",
       "title": "データで見る47都道府県 出店・商圏",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "出店・商圏に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1708,7 +1870,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-08/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-08/v3-20260906-r4/READINESS.md"
@@ -1716,14 +1878,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:06.686Z",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
           "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1744,7 +1904,7 @@
       "id": "K-S2-09",
       "title": "データで見る47都道府県 産業・経済",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "産業・経済に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1768,7 +1928,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-09/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-09/v3-20260906-r4/READINESS.md"
@@ -1776,14 +1936,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:06.688Z",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
           "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1804,7 +1962,7 @@
       "id": "K-S2-10",
       "title": "データで見る47都道府県 防災・インフラ",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "防災・インフラに関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1828,7 +1986,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-10/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-10/v3-20260906-r4/READINESS.md"
@@ -1836,14 +1994,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:06.702Z",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
           "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1864,7 +2020,7 @@
       "id": "K-S2-11",
       "title": "データで見る47都道府県 家計・消費",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "家計・消費に関わる主要な統計を、上位・下位の図と全県の数値表で確かめるデータブック。対象・分母・年次と比較の限界を、書き下ろし章で読み解きます。分布だけから原因を断定するものではありません。",
       "free": false,
       "candidate": false,
@@ -1888,7 +2044,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S2-11/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-11/v3-20260906-r4/READINESS.md"
@@ -1896,14 +2052,70 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:43:32.077Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH8H3WXV",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
+        }
+      ],
+      "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
+      "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing"
+      ],
+      "artifactLinks": []
+    },
+    {
+      "id": "K-S2-12",
+      "title": "47都道府県の総合スコア — 指標を束ねて県の姿を読む",
+      "kind": "book",
+      "catalogStatus": "idea",
+      "scope": "分野をまたぐ指標を合成したスコアで 47 都道府県を並べる本の候補 (公開計画の第 3 パイロット)。合成の方法と限界を先に示す。参考文献 prefecture-deviation は型の参照だけに使い、文言・構成は写さない。",
+      "free": false,
+      "candidate": false,
+      "buildStatus": "missing",
+      "artifactDirectory": ".local/kindle-books/K-S2-12/v3-20260906-r4",
+      "artifactSha256": null,
+      "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing",
+        "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
+      ],
+      "ownerGates": [
+        "対象EPUBのSHAに紐付くKindle Previewer確認",
+        "権利・AI生成申告・価格/印税条件・最終公開承認"
+      ],
+      "evidencePaths": [
+        "data/products/kdp/listings.json",
+        "data/products/kindle-archives.json",
+        ".local/kindle-books/K-S2-12/v3-20260906-r4/metadata.json",
+        ".local/kindle-books/K-S2-12/v3-20260906-r4/READINESS.md"
+      ],
+      "channels": [
+        {
+          "channel": "kindle",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
+          "priceYen": 500,
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1924,7 +2136,7 @@
       "id": "K-S3-01",
       "title": "北海道データブック — 統計で読む県の横顔",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "北海道の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
       "free": false,
       "candidate": false,
@@ -1948,7 +2160,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-01/v3-20260906-r4/READINESS.md"
@@ -1956,14 +2168,12 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:44:14.235Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH89XZKS",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
           "priceYen": 500,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -1982,10 +2192,10 @@
     },
     {
       "id": "K-S3-02",
-      "title": "東北データブック — 統計で読む県の横顔",
+      "title": "東北 移住の県選びデータブック",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "東北の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "scope": "東北の6県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -2008,7 +2218,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-02/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-02/v3-20260906-r4/READINESS.md"
@@ -2016,8 +2226,8 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:34.429Z",
+          "publicationStatus": "in_review",
+          "checkedAt": "2026-11-18T10:43:24.674Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2042,10 +2252,10 @@
     },
     {
       "id": "K-S3-03",
-      "title": "関東データブック — 統計で読む県の横顔",
+      "title": "関東 移住の県選びデータブック",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "関東の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "scope": "関東の1都6県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -2068,7 +2278,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-03/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-03/v3-20260906-r4/READINESS.md"
@@ -2076,9 +2286,9 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:44:56.048Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH8JF9PC",
+          "publicationStatus": "in_review",
+          "checkedAt": "2026-11-18T10:53:38.077Z",
+          "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -2102,10 +2312,10 @@
     },
     {
       "id": "K-S3-04",
-      "title": "中部データブック — 統計で読む県の横顔",
+      "title": "中部 移住の県選びデータブック",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "中部の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "scope": "中部の9県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -2128,7 +2338,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-04/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-04/v3-20260906-r4/READINESS.md"
@@ -2137,7 +2347,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:50.631Z",
+          "checkedAt": "2026-11-18T08:32:30.879Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2162,10 +2372,10 @@
     },
     {
       "id": "K-S3-05",
-      "title": "近畿データブック — 統計で読む県の横顔",
+      "title": "近畿 移住の県選びデータブック",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "近畿の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "scope": "近畿の2府5県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -2188,7 +2398,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-05/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-05/v3-20260906-r4/READINESS.md"
@@ -2197,7 +2407,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:50.643Z",
+          "checkedAt": "2026-11-18T08:32:32.380Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2222,10 +2432,10 @@
     },
     {
       "id": "K-S3-06",
-      "title": "中国データブック — 統計で読む県の横顔",
+      "title": "中国 移住の県選びデータブック",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "中国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "scope": "中国の5県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -2248,7 +2458,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-06/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-06/v3-20260906-r4/READINESS.md"
@@ -2257,7 +2467,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:50.659Z",
+          "checkedAt": "2026-11-18T08:32:33.878Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2282,10 +2492,10 @@
     },
     {
       "id": "K-S3-07",
-      "title": "四国データブック — 統計で読む県の横顔",
+      "title": "四国 移住の県選びデータブック",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "四国の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "scope": "四国の4県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -2308,7 +2518,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-07/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-07/v3-20260906-r4/READINESS.md"
@@ -2317,7 +2527,7 @@
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T02:02:50.679Z",
+          "checkedAt": "2026-11-18T08:35:28.784Z",
           "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
@@ -2342,10 +2552,10 @@
     },
     {
       "id": "K-S3-08",
-      "title": "九州・沖縄データブック — 統計で読む県の横顔",
+      "title": "九州・沖縄 移住の県選びデータブック",
       "kind": "book",
       "catalogStatus": "generated",
-      "scope": "九州・沖縄の各県が、全国の主要ランキングのなかでどこに位置するかを一望する地域別データブック。全国順位と地域内順位の両面から県の横顔を描く。",
+      "scope": "九州・沖縄の8県を、移住・転勤で住む県を選ぶ人の判断軸 (暮らしの費用・仕事・住まい・子育てと医療・安全・将来の人口) の同じ14指標で並べ、1県1章で県ごとの暮らしの姿を読む。",
       "free": false,
       "candidate": false,
       "buildStatus": "missing",
@@ -2368,7 +2578,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S3-08/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-08/v3-20260906-r4/READINESS.md"
@@ -2377,8 +2587,8 @@
         {
           "channel": "kindle",
           "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:45:38.019Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH8FWJVV",
+          "checkedAt": "2026-11-18T08:39:44.542Z",
+          "url": null,
           "priceYen": 500,
           "priceStatus": "recorded",
           "blockers": [
@@ -2404,7 +2614,7 @@
       "id": "K-S4-01",
       "title": "47都道府県ランキング大全 — 意外な1位・最下位",
       "kind": "book",
-      "catalogStatus": "generated",
+      "catalogStatus": "planned",
       "scope": "分野をまたいで集めた統計のなかから、思わず人に話したくなる「意外な1位・最下位」を選び抜いた一冊。人口の多い県が上位に来るとはかぎらない指標を並べ、その理由を産業や地理から読み解きます。",
       "free": false,
       "candidate": false,
@@ -2428,7 +2638,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        "config/kdp-listings.json",
+        "data/products/kdp/listings.json",
         "data/products/kindle-archives.json",
         ".local/kindle-books/K-S4-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S4-01/v3-20260906-r4/READINESS.md"
@@ -2436,14 +2646,70 @@
       "channels": [
         {
           "channel": "kindle",
-          "publicationStatus": "draft",
-          "checkedAt": "2026-09-19T08:46:20.705Z",
-          "url": "https://www.amazon.co.jp/dp/B0HH8667TM",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
           "priceYen": 1000,
-          "priceStatus": "recorded",
-          "blockers": [
-            "70%設定は日本での70%収益を保証しない。Select未加入の条件で収益計画を再確認する"
-          ]
+          "priceStatus": "proposal",
+          "blockers": []
+        }
+      ],
+      "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
+      "contentBlockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing"
+      ],
+      "artifactLinks": []
+    },
+    {
+      "id": "K-S4-02",
+      "title": "意外な1位の県 — 数字で読む47都道府県の県民性",
+      "kind": "book",
+      "catalogStatus": "idea",
+      "scope": "指標ごとの意外な 1 位・最下位を、1 テーマ 1 話の読み物にする本の候補 (公開計画の第 2 パイロット。取り下げた K-S4-01 の置き換え)。順位の理由を断定せず、定義と読み違えを添える。",
+      "free": false,
+      "candidate": false,
+      "buildStatus": "missing",
+      "artifactDirectory": ".local/kindle-books/K-S4-02/v3-20260906-r4",
+      "artifactSha256": null,
+      "blockers": [
+        "改訂EPUB未生成（公開版archiveとは別管理）",
+        "書き下ろし比率の内部品質ゲート未達または未検証",
+        "本文量の内部品質ゲート未達または未検証",
+        "機械品質ゲート未達または未検証（表紙・欠落も含む）",
+        "対象版のEPUB仕様・構造検査が未完了または不一致",
+        "指標別出典・全予定キーの採否を記録した改訂metadataが必要",
+        "生成版と現行原稿・書誌が不一致または未照合。再生成が必要",
+        "実EPUB本文とmetadataの全章ハッシュ照合が未完了または不一致",
+        "全本文の独立意味レビュー未完了: independent semantic review missing",
+        "改訂版の暗号化R2保全・出品台帳切替が未完了（旧版保持）"
+      ],
+      "ownerGates": [
+        "対象EPUBのSHAに紐付くKindle Previewer確認",
+        "権利・AI生成申告・価格/印税条件・最終公開承認"
+      ],
+      "evidencePaths": [
+        "data/products/kdp/listings.json",
+        "data/products/kindle-archives.json",
+        ".local/kindle-books/K-S4-02/v3-20260906-r4/metadata.json",
+        ".local/kindle-books/K-S4-02/v3-20260906-r4/READINESS.md"
+      ],
+      "channels": [
+        {
+          "channel": "kindle",
+          "publicationStatus": "unknown",
+          "checkedAt": null,
+          "url": null,
+          "priceYen": 500,
+          "priceStatus": "proposal",
+          "blockers": []
         }
       ],
       "nextAction": "改訂EPUBの欠落・定義・本文検査→独立レビュー→Previewer→版保全→公開承認",
@@ -2941,8 +3207,8 @@
       "nextAction": "対応する無料分析の需要とデータ品質を確認してから本文制作を開始する"
     }
   ],
-  "generatedAt": "2026-11-08T01:12:32.694Z",
-  "total": 62,
+  "generatedAt": "2026-11-24T10:59:52.662Z",
+  "total": 67,
   "packCount": 14,
   "note": "商品定義TSと出品記録を結合した派生カタログ。公開記録と改訂版の品質は別管理。生成済みを販売準備完了としない。",
   "products": [
