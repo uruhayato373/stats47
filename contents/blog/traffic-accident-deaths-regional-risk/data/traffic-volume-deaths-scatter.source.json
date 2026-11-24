@@ -1,0 +1,29 @@
+{
+  "kind": "derived",
+  "note": "app/ranking/average-road-traffic-volume (2020年度) と app/ranking/traffic-accident-deaths-per-100k (2024年) の values.json を areaCode で結合し pearsonR を算出。道路平均交通量は2020年度が最新のため年がそろわない。",
+  "pearsonR": -0.595,
+  "unit": "台/12h × 人",
+  "label": "道路平均交通量と交通事故死者数の関係",
+  "source": [
+    "r2:app/ranking/average-road-traffic-volume/values.json",
+    "r2:app/ranking/traffic-accident-deaths-per-100k/values.json"
+  ],
+  "relatedCorrelations": {
+    "road-length-per-km2(2023年度)×traffic-accident-deaths-per-100k(2024年)": -0.52,
+    "private-auto-insurance-penetration-rate-vehicle(2023年度)×traffic-accident-deaths-per-100k(2024年)": -0.306,
+    "traffic-accident-casualties-per-population(2024年)×traffic-accident-deaths-per-100k(2024年)": -0.086
+  },
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug traffic-accident-deaths-regional-risk --keys average-road-traffic-volume,traffic-accident-deaths-per-100k --dry-run; その後 areaCode で join し pearsonR を再算出",
+  "axes": {
+    "x": {
+      "metricKey": "average-road-traffic-volume",
+      "year": "2020年度",
+      "proof": "values"
+    },
+    "y": {
+      "metricKey": "traffic-accident-deaths-per-100k",
+      "year": "2024年",
+      "proof": "values"
+    }
+  }
+}

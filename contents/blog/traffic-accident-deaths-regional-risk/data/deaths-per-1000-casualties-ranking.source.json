@@ -1,0 +1,22 @@
+{
+  "kind": "calculated",
+  "year": "2024",
+  "unit": "人",
+  "label": "交通事故の死傷者1,000人当たりの死者数",
+  "inputs": [
+    {
+      "rankingKey": "traffic-accident-deaths-per-100k",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "traffic-accident-casualties-per-population",
+      "year": "2024"
+    }
+  ],
+  "formula": "traffic-accident-deaths-per-100k ÷ traffic-accident-casualties-per-population × 1000 (どちらも人口10万人当たり・同年なので人口が約分される。小数1桁に丸め)",
+  "source": [
+    "r2:app/ranking/traffic-accident-deaths-per-100k/values.json",
+    "r2:app/ranking/traffic-accident-casualties-per-population/values.json"
+  ],
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)"
+}

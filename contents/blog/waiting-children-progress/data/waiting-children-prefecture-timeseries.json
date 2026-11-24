@@ -1,0 +1,248 @@
+{
+  "title": "保育所等利用待機児童数の推移（年度・5都県）",
+  "label": "保育所等利用待機児童数",
+  "unit": "人",
+  "source": "社会・人口統計体系",
+  "data": [
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2017",
+      "value": 8586
+    },
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2018",
+      "value": 5414
+    },
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2019",
+      "value": 3690
+    },
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2020",
+      "value": 2343
+    },
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2021",
+      "value": 969
+    },
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2022",
+      "value": 300
+    },
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2023",
+      "value": 286
+    },
+    {
+      "areaName": "東京都",
+      "areaCode": "13000",
+      "year": "2024",
+      "value": 361
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2017",
+      "value": 1787
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2018",
+      "value": 1392
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2019",
+      "value": 1020
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2020",
+      "value": 833
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2021",
+      "value": 428
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2022",
+      "value": 250
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2023",
+      "value": 140
+    },
+    {
+      "areaName": "千葉県",
+      "areaCode": "12000",
+      "year": "2024",
+      "value": 83
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2017",
+      "value": 2247
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2018",
+      "value": 1870
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2019",
+      "value": 1702
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2020",
+      "value": 1365
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2021",
+      "value": 564
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2022",
+      "value": 439
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2023",
+      "value": 411
+    },
+    {
+      "areaName": "沖縄県",
+      "areaCode": "47000",
+      "year": "2024",
+      "value": 356
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2017",
+      "value": 356
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2018",
+      "value": 439
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2019",
+      "value": 459
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2020",
+      "value": 495
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2021",
+      "value": 184
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2022",
+      "value": 118
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2023",
+      "value": 169
+    },
+    {
+      "areaName": "滋賀県",
+      "areaCode": "25000",
+      "year": "2024",
+      "value": 353
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2017",
+      "value": 100
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2018",
+      "value": 80
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2019",
+      "value": 109
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2020",
+      "value": 81
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2021",
+      "value": 50
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2022",
+      "value": 64
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2023",
+      "value": 103
+    },
+    {
+      "areaName": "三重県",
+      "areaCode": "24000",
+      "year": "2024",
+      "value": 108
+    }
+  ]
+}

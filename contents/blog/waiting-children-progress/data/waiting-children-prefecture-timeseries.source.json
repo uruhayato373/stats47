@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "nursery-waiting-children-count",
+  "year": "2017-2024",
+  "unit": "人",
+  "label": "保育所等利用待機児童数の推移（5都県）",
+  "transform": "2017〜2024年度の東京都・千葉県・沖縄県・滋賀県・三重県の値を年度ごとに並べる",
+  "source": "r2:app/ranking/nursery-waiting-children-count/values.json",
+  "yearPinnedReason": "2017年度から2024年度までの県ごとの減り方そのものを描く図で、最新年への取り直しの対象ではないため"
+}
