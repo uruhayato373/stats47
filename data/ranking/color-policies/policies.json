@@ -274,7 +274,7 @@
     {
       "metricKey": "actual-income-worker-households-per-month",
       "grain": "prefecture",
-      "year": "2024",
+      "year": "2025",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -7077,7 +7077,7 @@
     {
       "metricKey": "dental-clinic-count",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -13151,7 +13151,7 @@
     {
       "metricKey": "general-clinic-count",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -13301,7 +13301,7 @@
     {
       "metricKey": "general-hospital-bed-count",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -13332,7 +13332,7 @@
     {
       "metricKey": "general-hospital-count",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -31408,7 +31408,7 @@
     {
       "metricKey": "psychiatric-bed-count",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
@@ -31449,7 +31449,7 @@
     {
       "metricKey": "psychiatric-hospital-count",
       "grain": "prefecture",
-      "year": "2023",
+      "year": "2024",
       "areaCount": 47,
       "colorSchemeType": "sequential",
       "classification": {
