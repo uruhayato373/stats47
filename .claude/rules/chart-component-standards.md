@@ -147,7 +147,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `fetchTopology` / `topologyFeatures` / `fitGeoSvgMercator` / `GEO_SVG_MAP` | `@/components/charts/geo-topology` | d3-geo で描く SVG の地図の共通の補助。TopoJSON の取得・地物の取り出し・640×640 (余白 16) へのメルカトル図法の合わせ方。§2-D の d3-geo の地図 (交通網の変遷・主題の地図・問いの地図) が使う |
 | `ReelPlayer` | `@/components/charts/ReelPlayer` | Remotion の composition (1920×1080) をページの中でループ再生する共通のプレイヤー。県の選択・県ごとの読み込み・30fps 相当のフレーム送り・コンテナ幅への縮小・読み込み中/失敗の表示を持ち、feature は読み込み (`load`) と描画 (`renderFrame`) だけを渡す (2026-11-03。人口移動フロー・駅別乗降客数) |
 | `DistributionHistogram` | `@/components/charts/DistributionHistogram` | 全国分布ヒストグラム（市区町村ランキング 1,718 自治体用）。**サーバー側でビン化済みの集計配列**（`binMunicipalityValues`、右裾は overflow ビンへ畳む）だけを受け取り、生の観測行は受け取らない。選択都道府県は基線上のラグ（縦ティック）で重ねる（全国と地域は件数スケールが 2 桁違うため棒の重ね描きは不可視になる）。中央値の破線・`useD3Tooltip`（ビン範囲 + 全国/県の件数）付き |
-| `MiniDistributionBars` | `@/components/charts/MiniDistributionBars` | カード内埋め込みの分布スパークバー（市区町村テーマ一覧カード用）。item.json に**焼き込み済みの分布ビン**（builder が `binMunicipalityValues` で生成）を描くだけの装飾チャート。カード全体がリンクのため**非インタラクティブ・aria-hidden**（tooltip をリンク内に置かない。数値情報はカードのテキストが持つ） |
+| `MiniDistributionBars` | `@/components/charts/MiniDistributionBars` | カード内埋め込みの分布スパークバー（市区町村テーマ一覧カード用）。item.json に**焼き込み済みの分布ビン**（builder が `binMunicipalityValues` で生成）を描く装飾チャート。棒の下に横軸の最小・最大の値を単位つきで添える（裾のビンは「未満」「以上」。書式はランキングのヒストグラムと共通の `distribution-edge-labels.ts`）。カード全体がリンクのため棒は**非インタラクティブ・aria-hidden**（tooltip をリンク内に置かない。数値情報はカードのテキストが持つ） |
 
 #### カードフレームの役割分担（重複と誤判定しないこと）
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T10:41:44.608Z",
+  "updatedAt": "2026-11-24T10:45:24.692Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13125,8 +13125,8 @@
       "completedAt": "2026-11-24T07:02:27.909Z"
     },
     "CHART-FOOTER-MENU-TEST-01": {
-      "class": "misconception-close",
-      "status": "open",
+      "class": "test-fix",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
@@ -13160,15 +13160,40 @@
           "evidence": "2026-11-24 訂正: 直前の completed の記録は誤り。再実行すると ChartFooter.test.tsx は 3 回中 1 回「ボタンを押すと、複数の出典とランキングを省略せず Sheet に並べる」が Unable to find role=dialog で落ちる。カードを戻した",
           "failReason": null,
           "followUps": []
+        },
+        {
+          "at": "2026-11-24T10:45:24.692Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run ChartFooter.test (前後 3 回ずつ)",
+              "cd apps/web && npx vitest run (全件)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: Sheet が開くのを待つ時間を 5 秒にした (de47f2093)。ChartFooter.test は前後 3 回とも 6/6、web の vitest 全件 410 ファイル・3192 件通過。原因 (初回の Sheet の読み込みが findByRole の既定 1 秒を超える) は計測からの仮説で、Windows での再現は未確認",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
-        "failCount": 1,
+        "failCount": 0,
         "lastReason": null,
-        "since": "2026-11-24T07:15:34.509Z"
+        "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": "2026-11-24T07:12:50.711Z"
+      "reclassifiedFrom": [
+        {
+          "from": "misconception-close",
+          "to": "test-fix",
+          "at": "2026-11-24T10:45:24.692Z"
+        }
+      ],
+      "completedAt": "2026-11-24T10:45:24.692Z"
     },
     "WIN-PREFLIGHT-NPM-SPAWN-01": {
       "class": "misconception-close",
@@ -13623,6 +13648,142 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T10:41:44.608Z"
+    },
+    "UI-FIX-HOME-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.444Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-HOME-20261011.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: assert-handled exit 0 (b71296a90)。右レールは AdSense の枠と運営者のプロフィールだけで、指摘の文字は Google の広告原稿。広告の表記は 10-30 のオーナー決定の形なので意図どおりと記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.444Z"
+    },
+    "UI-FIX-CATEGORY-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.509Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt",
+              "cd apps/web && npx vitest run AreaTileMap.test",
+              "localhost:3000/areas (375px)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: タイル地図の文字を clamp(9px,3.4cqw,11px) にした (fec637672)。assert-handled exit 0、テスト 5/5、375px の実画面で北海道のマスが 11px",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.509Z"
+    },
+    "UI-FIX-PREFECTURE-LIST-20261031": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.571Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-LIST-20261031.txt",
+              "localhost:3000/areas (375px) の scrollHeight"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 都道府県一覧を 320px 以上で 3 列にした (d91fdaeb4)。assert-handled exit 0、375px の実画面で 3 列・ページの高さ 2,568px (指摘時 2,906px)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.571Z"
+    },
+    "UI-FIX-OTHER-MUNICIPALITIES-THEME-20261031": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.632Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-OTHER-MUNICIPALITIES-THEME-20261031.txt",
+              "cd apps/web && npx vitest run MiniDistributionBars.test"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 分布の棒の下に最小・最大を単位つきで添えた (d25115720)。assert-handled exit 0、テスト通過。部品カタログの行も合わせて直した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.632Z"
     }
   }
 }
