@@ -193,7 +193,7 @@ test("スキル・エージェントの手順書 (.claude) のコード例の自
 });
 test("正本の google-client.cjs・トークン発行ツール・テストの認証は検出しない", (t) => {
   const root = fixture("export const ok = 1;\n");
-  for (const file of ["packages/ops/src/google/google-client.cjs", ".claude/scripts/adsense/oauth-setup.js", "packages/ops/src/google/__tests__/google-client.test.cjs"]) {
+  for (const file of ["packages/ops/src/google/google-client.cjs", ".claude/scripts/google-admin/oauth-setup.js", "packages/ops/src/google/__tests__/google-client.test.cjs"]) {
     fs.mkdirSync(path.join(root, path.dirname(file)), { recursive: true });
     fs.writeFileSync(path.join(root, file), "const auth = new google.auth.GoogleAuth({ credentials, scopes });\n");
   }

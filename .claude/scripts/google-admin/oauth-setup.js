@@ -26,7 +26,7 @@
  * 使い方 (プロジェクトルートで実行):
  *   cd ~/stats47 && read -r CID && read -rs CSEC && \
  *     GOOGLE_ADSENSE_CLIENT_ID="$CID" GOOGLE_ADSENSE_CLIENT_SECRET="$CSEC" \
- *     node .claude/scripts/adsense/oauth-setup.js; unset CID CSEC
+ *     node .claude/scripts/google-admin/oauth-setup.js; unset CID CSEC
  *
  * 取得後:
  *   read -r CID && printf '%s' "$CID" | gh variable set GOOGLE_ADSENSE_CLIENT_ID; unset CID
