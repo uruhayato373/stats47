@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T07:15:34.509Z",
+  "updatedAt": "2026-11-24T07:41:19.244Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13235,6 +13235,72 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T07:12:51.823Z"
+    },
+    "SEO-KEYWORD-OBSERVATION-TIMEOUT-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:41:18.912Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/search-growth/__tests__/keyword-cycle.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: reviewDue に OBSERVATION_TIMEOUT_DAYS=28 を足し、判定日から 28 日を過ぎて query-page-not-reported のままの観測を insufficient-data (observation-timeout) で閉じる。直す前は新テストが fail、直した後 18/18 pass。観測中ページの止めは未変更",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:41:18.912Z"
+    },
+    "KDP-PROMOTE-STALE-PROPOSAL-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:41:19.244Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/product-factory/tests/kindle-listing-revision.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: export の照合を assertEpubMatchesCurrentBook に切り出し、promote も提案を写す前に今の書籍の sha を EPUB と提案の両方と照合する。古い提案で promote すると error のテストを含め 8/8 pass (直す前は 3 件 fail)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:41:19.244Z"
     }
   }
 }

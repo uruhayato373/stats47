@@ -34,6 +34,16 @@ test('due review uses unrounded position and leaves incomplete post-publication 
   assert.equal(result.log.entries[3].lastReview.outcome,'no-improvement');
   assert.equal(log.entries[0].status,'observing','input history was not mutated');
 });
+test('観測は判定日から 28 日を過ぎても実績が無ければ insufficient-data で閉じ、期限前は観測を続ける', () => {
+  // observing(k, age): nextReviewDate = today - (age - 7)。age 35 = 判定日から 28 日 (期限ちょうど)、age 36 = 29 日 (超過)。
+  const log={schemaVersion:1,entries:[observing('expired',36),observing('on-limit',35),observing('before',20)]};
+  const result=reviewDue(log,snapshot([]));
+  assert.deepEqual(result.log.entries.map(e=>e.status),['active','observing','observing']);
+  const closed=result.log.entries[0];
+  assert.equal(closed.lastReview.outcome,'insufficient-data'); assert.equal(closed.nextReviewDate,null);
+  assert.equal(result.log.entries[2].lastReview,undefined);
+  assert.equal(log.entries[0].status,'observing','input history was not mutated');
+});
 test('selection follows the requested priority and excludes achieved, cooldown and pending pages', () => {
   const rows=[row('near',2),row('far',9,1000),row('second',12,3000),row('new-query',3,5000)];
   const keywords={keywords:rows.slice(0,3)};

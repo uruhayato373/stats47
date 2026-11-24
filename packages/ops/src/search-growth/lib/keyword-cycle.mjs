@@ -5,6 +5,9 @@ import { addDays, jstDateOf, resolvePeriods } from '../../metrics/periods.mjs';
 import { GSC_PROPERTY, SITE_ORIGIN } from '../../../../types/mirror/site-config.cjs';
 
 export const METHODS = ['title', 'description', 'intro', 'faq', 'content', 'internal-links', 'data'];
+// 判定日から 28 日を過ぎても検索語とページの組の実績が出ない観測は `insufficient-data` で閉じる。
+// 28 日 = 28 日の窓を丸ごと取り直して 1 回再判定できる長さ (これ以上待っても同じ条件で結論は変わらない)。
+export const OBSERVATION_TIMEOUT_DAYS = 28;
 export const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 export const pairKey = row => JSON.stringify([row.keyword, row.targetPath]);
 export function sitePath(value) {
@@ -58,6 +61,15 @@ export function reviewDue(log, snapshot, today = snapshot.asOf) {
     // Deployment day is partial, so the entire finalized window must be later.
     const reason = snapshot.current.period.periodStart <= action.date ? 'post-deployment-window-incomplete'
       : !row ? 'query-page-not-reported' : null;
+    if (reason === 'query-page-not-reported' && today > addDays(entry.nextReviewDate, OBSERVATION_TIMEOUT_DAYS)) {
+      // 閉じた観測は active に戻るので、観測中のページの変更を止める検査は結果として外れる (検査自体は緩めない)。
+      entry.status = 'active';
+      entry.nextReviewDate = null;
+      entry.lastReview = { date: today, outcome: 'insufficient-data', reason: 'observation-timeout', before: action.rankAtAction, after: null,
+        period: snapshot.current.period, snapshotHash: hash(snapshot), attribution: 'observed-change-only' };
+      entry.reviews ??= []; entry.reviews.push(entry.lastReview);
+      verdicts.push({ keyword: entry.keyword, status: entry.status, ...entry.lastReview }); continue;
+    }
     if (reason) {
       const attempt = { date: today, outcome: 'insufficient-data', reason, period: snapshot.current.period, snapshotHash: hash(snapshot) };
       entry.reviews ??= [];

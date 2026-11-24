@@ -1,9 +1,12 @@
 import { spawnSync } from "node:child_process";
-import { readFileSync, existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync, existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { prepareFirst, prepareNewEdition, prepareUpdate } from "../src/channels/kindle/promote-kdp-listing";
+import { assertProposalMatchesCurrentBook, prepareFirst, prepareNewEdition, prepareUpdate } from "../src/channels/kindle/promote-kdp-listing";
+import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
+import { authoredBookSha256 } from "../src/channels/kindle/revision-evidence";
 import { KDP_LISTINGS } from "../../../config/paths.mjs";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
@@ -95,5 +98,43 @@ describe("KDP revision promotion", () => {
     expect(out.publicationStageEvidence).toEqual({ prepared: { at: "2026-11-14T00:00:00.000Z", mode: "first" } });
     // [mutation] 行がある本に first を使うと、販売中の記録を上書きしてしまうので止める
     expect(() => prepareFirst(live, candidate, "2026-11-14T00:00:00.000Z")).toThrow(/no ledger row/);
+  });
+});
+
+describe("KDP promote refuses a proposal made before the book's ledger/manuscript changed", () => {
+  const factoryRoot = resolve(root, "packages/product-factory");
+  const version = "v-stale-test";
+  const book = KINDLE_BOOKS[0];
+  const setup = () => {
+    const booksRoot = mkdtempSync(join(tmpdir(), "kdp-promote-"));
+    const dir = join(booksRoot, book.id, version);
+    mkdirSync(dir, { recursive: true });
+    const sha = authoredBookSha256(book, factoryRoot);
+    writeFileSync(join(dir, "metadata.json"), JSON.stringify({ version, title: book.title, authoredSha256: sha }));
+    return { booksRoot, sha };
+  };
+
+  it("通常の流れ (EPUB・提案・今の書籍が同じ版) では通る", () => {
+    const { booksRoot, sha } = setup();
+    try {
+      expect(() => assertProposalMatchesCurrentBook({ authoredSha256ByBook: { [book.id]: sha } }, book, version, booksRoot, factoryRoot)).not.toThrow();
+    } finally { rmSync(booksRoot, { recursive: true, force: true }); }
+  });
+
+  it("書籍の台帳を変えたあとに古い提案で promote すると error になる", () => {
+    const { booksRoot, sha } = setup();
+    try {
+      const changed = { ...book, concept: `${book.concept} (台帳を変更)` };
+      expect(() => assertProposalMatchesCurrentBook({ authoredSha256ByBook: { [book.id]: sha } }, changed, version, booksRoot, factoryRoot))
+        .toThrow(/differs from the requested EPUB edition/);
+    } finally { rmSync(booksRoot, { recursive: true, force: true }); }
+  });
+
+  it("提案の照合値が今の書籍と違う・無いときも error になる", () => {
+    const { booksRoot } = setup();
+    try {
+      expect(() => assertProposalMatchesCurrentBook({ authoredSha256ByBook: { [book.id]: "0".repeat(64) } }, book, version, booksRoot, factoryRoot)).toThrow(/stale/);
+      expect(() => assertProposalMatchesCurrentBook({}, book, version, booksRoot, factoryRoot)).toThrow(/stale/);
+    } finally { rmSync(booksRoot, { recursive: true, force: true }); }
   });
 });

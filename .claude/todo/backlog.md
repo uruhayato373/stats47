@@ -810,16 +810,6 @@ updated: 2026-11-01
 - **実行役の見立て**: 人口を分母にした率と違い、日あたり・m² あたりは分子に万を付けても意味が変わらない (3,638万人/日、42.0万円/m²) ので寄せてよい。kg/日 は「20.6万kg/日」になり読みにくいので、寄せるならトン/日へ直す。
 - **完了条件**: 判断が規約 2.6 に入り、`unparsedLarge` が 0 件か、残す理由が台帳にある。
 
-### [CONVENIENCE-STORE-SALES-SCALE-CHECK-01] コンビニ販売額の値の桁 (東京都 155,869百万円) が年間か月間かを確かめる
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ]
-
-- **済み (2026-11-15・オーナー承認)**: main の `data-refresh.yml` を `metric=convenience-store-sales`・`dry_run=false` で実行し (run 43667621239)、R2 の値を年計に入れ替えた。
-- **済み (2026-11-13・`3d5c87fd9`)**: e-Stat `0004032502` は年計・四半期・月次を 1 つの表に持ち、`timeScope` 未指定のため 2025 年 1 月の月間値 (東京都 155,869 百万円) を年の値として採っていた。
-- **残り (R2 への書き込みが要る)**: main へ入った後に CI で再取り込みする。配信中の値はそれまで月間値のまま。再取り込み後に、表示単位の台帳 (`data/metrics/display-units/ledger.json`・週次生成) と、値を含む SEO 文字列を作り直す (`seo-meta-facts` のゲートは R2 の配信値と照合するので、それまで値を載せられない)。
-- **再観測 (2026-11-15)**: 表切片との一致検査で、公開2025年度の47県値が原表の `2025000101` (2025年1月) と全件一致。 (参照: 0004032502)
-- **あわせて確かめる**: 百貨店・スーパー販売額 (`department-supermarket-sales`・`0004032493`) は台帳で 2025 年が 20 県分しか無い。同じ取り出し条件の問題かは未確認。
-- **完了条件**: 配信中の値が年計になり、値・単位・説明・SEO 文字列が一致している。
-
 ### [THEME-R2-FETCH-FANOUT-01] 指標の多いテーマの読み込みで R2 の取得がときどき落ちる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:サイト]
 
@@ -1592,15 +1582,6 @@ updated: 2026-11-01
 - **背景 (2026-10-20)**: Instagram の指標は週次の CI (`sns-metrics-weekly.yml`) が記録するが、X の指標は `/update-sns-metrics --platform x` が browser-use でその都度取るしかない。
 - **次**: X の指標を週 1 回 (認証付き計測と同じ土曜の Mac) で `data/sns/metric-snapshots/` に記録し、`.claude/scripts/measurement/sources.mjs` の `readUrls` に X の分析画面を足す。
 - **完了条件**: X の指標が週次で記録され、セッションがブラウザで取りに行く必要が無くなっている。
-
-### [SEO-KEYWORD-OBSERVATION-TIMEOUT-01] キーワード改善の観測が、検索語の実績が出ないと判定日を過ぎても終わらない
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/search-growth/__tests__/*.test.mjs] [起票:2026-11-14] [領域:サイト]
-
-`lib/keyword-cycle.mjs` の `reviewDue` は、Search Console に検索語とページの組の実績が無いと `query-page-not-reported` で観測を続ける。終わる条件が無いため、「40代 未婚 割合 日本 国勢調査」(/survey/census) は判定日 9-20 を過ぎて 161 回判定できず、観測中のページを変えない検査が、そのページの正当な修正 (7d417cfbc) を 11-14 の本番反映で止めた。オーナー承認でこの 1 件は手で「判定不能」として閉じた (`data/seo/improvement-log.json` の reviews の最後)。
-
-- 次: 判定日から一定日数 (例: 28 日) 実績が出なければ `insufficient-data` で閉じる規則を `reviewDue` に足し、テストで固定する。日数は 28 日の窓の取り直しが 1 回できる長さを根拠にする
-- 禁止: 観測中のページの変更を止める検査そのものは緩めない
-- 完了条件: 判定日から期限を過ぎて実績の無い観測が `active` に戻るテストが通る
 
 ### [MONETIZE-BROAD-ROLLOUT-01] 収益の打ち手 12 本を先に広く並走させ、4 週の配置別 CTR・成約・ad-yield で絞る (2026-10-19 オーナー指示「まず広く展開してから絞る」)
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-19] [期日:2026-12-31] [領域:アフィリエイト] [待ち:判断]
@@ -3371,6 +3352,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **停止条件・禁止**: 新しい本・シリーズを作らない。販売中の版の差し替えはオーナー承認と `KDP-K-S1-08-REUPLOAD-01` の手順を通す。評価済みの図・章をもう一度評価しない (sha256 で記録)。NotebookLM に入れるのは自分の本だけ (他人の本や参考文献の全文を入れない)。
 - **完了条件**: 機械の検査が全冊を毎週記録し、2 冊で 3 段の試行の結果 (指摘・トークン・直した箇所) が残り、残りの冊へ広げるかをオーナーが決めた。
 - **追補 (2026-11-22)**: K-S1-01 の第 9 章の素材のブログ `black-tea-income-gap` は 2026-11-13 に公開 R2 から撤去された (`5324d040ef`)。v11 は表紙だけを差し替えて本文を v10 のまま保ったが、次に `products:kindle:generate --id K-S1-01` で作り直すと紅茶の章が消え、章ごとに「データ出典」の節も増える。作り直す前に、章を差し替えるか残すかを決める。
+- **追補 (2026-11-24・KDP-PROMOTE-STALE-PROPOSAL-01 の修正から)**: promote が提案を写す前に今の書籍の `authoredBookSha256` を EPUB と提案の両方と照合するようにした。この修正より前に書き出した `.local/kindle-listing-revisions/*.json` は `authoredSha256ByBook` を持たないので promote が stale で止まる (意図した止め)。次に出品を更新するときは `export-kdp-listings.ts` で提案を作り直す。`export-kdp-listings.ts` は import すると `main()` が走るので、CLI の経路を通すテストが書けない (main を関数に分ければ書ける)。
 
 ### [KDP-REGION-BOOKS-MAC-01] 地域データブック 7 冊 (K-S3-02〜08) を KDP で公開する
 タグ: [収益化] [種類:制作] [実行:対話] [検証:node .claude/scripts/kdp/kdp-listing-copy.mjs check] [起票:2026-11-14] [領域:商品]
@@ -3391,13 +3373,6 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
   ⑤ KDP の下書き: K-S3-02・03 は 2026-11-18 に作成・読み戻し検証済み (verified)。K-S3-04〜08 の 5 冊は KDP の週間タイトル作成数の上限 (「本の作成数上限に達しました」、リセットは日曜 00:00 UTC) で作れなかったので、2026-11-22 (日) 9:00 JST 以降に `kdp-publish --id <ID>` で作る (失敗の回は下書きを残していない。表紙・価格が 1 回目で入らないことがあるので、verified にならなければ 1 回だけ再実行する)。
   ⑥ K-S3-02・03 は 2026-11-18 にオーナーの指示「全部公開」で `kdp-weekly-publish --week 2026-W47 --id <ID> --owner-approved <ID> --commit` を実行し、審査に提出した (本棚 status レビュー中・ASIN 割当待ち)。KDP の審査後に本棚の状態を取り直し (`kdp-batch --phase status`)、販売中と ASIN を台帳に記録する。K-S3-04〜08 は ⑤ の下書きのあと、1 冊ずつオーナーの公開承認を得て出す (11-18 の「全部公開」はその時点で下書きのあった 2 冊への承認として扱った) (`kdp-weekly-publish -- --week <週> --id <ID> --owner-approved <ID> --commit`)。KDP の未公開は約 10 冊までなので、7 冊を一度に下書きにしない。
 - **完了条件**: 7 冊が KDP で販売中になり、出品台帳の `kdpStatus` が live。
-### [KDP-PROMOTE-STALE-PROPOSAL-01] 出品台帳へ写す道具が、書籍の台帳とずれた古い提案を写さないようにする
-タグ: [収益化] [種類:不具合] [実行:sweep] [検証:npx vitest run packages/product-factory/tests/kindle-listing-revision.test.ts] [起票:2026-11-14] [領域:商品]
-
-- **起点 (2026-11-14)**: K-S3-08 で表紙の設計 (`cover-design.ts`) を直したあと、提案の書き出し (`export-kdp-listings.ts`) は「原稿・台帳が EPUB の版と違う」で止まったのに、`promote-kdp-listing.ts --apply` は同じ版名の古い提案ファイル (`.local/kindle-listing-revisions/<版>.<ID>.json`) をそのまま出品台帳へ写した。
-- **次**: promote でも、提案を写す前に今の書籍の台帳・原稿から `authoredBookSha256` を計算し、EPUB の `metadata.json` と提案の両方と一致することを確かめる (export と同じ照合を共有する)。
-- **完了条件**: 書籍の台帳を変えたあとに古い提案で promote すると error になるテストがあり、通常の流れでは通る。
-
 ### [KINDLE-FRESH-CAUTION-CHECK-01] 書き下ろし原稿の検査で、指標の注記 (⚠) を書いたかを機械で確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:npx tsx packages/product-factory/scripts/verify-fresh.mts --book K-S3-08] [起票:2026-11-14] [領域:商品]
 
