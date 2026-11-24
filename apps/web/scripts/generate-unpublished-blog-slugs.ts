@@ -9,7 +9,7 @@
  *   notFound を prerender として焼き付け `x-nextjs-stale-time: 4294967294` で固着させるため
  *   (.claude/rules/nextjs-ssg-preservation.md)。middleware で前段短絡すれば確実に潰せる。
  *
- *   手編集の GONE_BLOG_SLUGS と分けているのは、未公開は**状態であって決定ではない**から。
+ *   台帳 site.gone-blog-slugs (GONE_BLOG_SLUGS) と分けているのは、未公開は**状態であって決定ではない**から。
  *   記事を再公開したら次回の生成でこの集合から自動的に消える (手動メンテ不要)。
  *
  * 使い方: `cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts [--check]`
@@ -44,7 +44,7 @@ async function run() {
   const slugs = articles
     .filter((a) => typeof a.slug === "string" && a.slug.length > 0 && a.published === false)
     .map((a) => a.slug as string)
-    // 恒久削除が確定している slug は gone-blog-slugs.ts (手編集) の責務。
+    // 恒久削除が確定している slug は台帳 site.gone-blog-slugs (data/site/url-history/gone-blog-slugs.json) の責務。
     // 両方に入れても挙動は同じ 410 だが、「状態」と「決定」を混ぜないため除外する。
     .filter((slug) => !GONE_BLOG_SLUGS.has(slug));
   slugs.sort();
@@ -62,7 +62,7 @@ async function run() {
  * 真実源: R2 \`app/blog/all.json\` の \`published === false\`。
  * 記事を再公開したら次回生成でこの集合から自動的に消える (手動メンテ不要)。
  *
- * 恒久削除が確定した slug は \`gone-blog-slugs.ts\` (手編集) に置く。
+ * 恒久削除が確定した slug は台帳 \`site.gone-blog-slugs\` (\`data/site/url-history/gone-blog-slugs.json\`) に置く。
  *
  * 更新方法: \`cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts\`
  *
