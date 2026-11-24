@@ -316,6 +316,7 @@ updated: 2026-11-01
 - **残り (本番の確認)**: main のマージの後、移した workflow (publish-ai-content・ai-content-gemini-daily・Threads と Instagram の投稿) を手動起動し、新しい置き場へ読み書きすることを確かめます。
 - **追補 (2026-11-14)**: `config/datasets.mjs` の `ai-content.staging` の行は planned:true のままだが、置き場は outbox である。check-datasets は planned の行に追跡ファイルが当たると error にするので、ランキング解説の公開待ち JSON を push する commit が止まる。transient に替える。
 - **完了条件**: 上の置き場が無くなり、npm run check-datasets と npm run preflight:pr が通り、移した workflow が新しい置き場へ書くことを手動起動で確かめています。
+- **DATA-LAYOUT-MOVE-01 から移した未決 (2026-11-24)**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。 2026-11-22 に 182 件の寿命を付けて外した: 索引 `seo.rank-history-summary` が全件のハッシュをつなぎ過去分の削除を禁じるので、寿命を付けるなら索引を縮める処理と一緒に入れる。
 
 ### [GOAL-PSI-LCP-STALE-01] 性能目標 `psi-mobile-lcp-2500` の記録が ACTIVE のまま 2026-05-15 から止まっている
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-13] [領域:管理] [待ち:判断]
@@ -646,30 +647,6 @@ updated: 2026-11-01
 - **次**: ① 🔴 高のカードをデータ商品に効くものとそれ以外に分ける ② 記事の量産のカードを止めるか下げるかを本人が決める ③ 製造品出荷額の商品 (EXP-007) の次に出すデータ商品の候補を挙げる
 - **完了条件**: 配分の判断を backlog の並びに反映した。
 - **禁止**: 判断の前にカードを消さない。
-
-### [STRATEGY-ISSUE-MAP-01] 事業のイシューマップ（コンテンツの4型×3収益源）を管理画面で管理し、レビューのたびに更新する
-タグ: [収益化] [種類:改善] [実行:対話] [検証:npm run check-datasets && npm run docs:check] [起票:2026-11-05] [領域:戦略] [進行中]
-
-- **起点**: 2026-11-05 にオーナーと『イシューからはじめよ』の型（イシュー → 分解 → 絵コンテ → ストーリーライン）で事業戦略を分解した。
-- **図の中身（Artifact が読めないときはこれを正本にする）**:
-  - 主イシュー: stats47 のコンテンツは、どの型をどの収益源で回収すれば、運営費と改善の工数を賄えるか。
-  - 仮説: 参照型で集め、ノウハウ型で売り、論文型で信頼を作る。売れた実績はノウハウ型だけで、統計の内容（教科書型・データ）で売れるかはこれから確かめる。
-  - 行（コンテンツの型）: 参照型（ランキング・雑学）／教科書型（家計調査でわかること、財政指標の定義と各地の状況、調査ハブ）／論文型（Geo 分析など問いへの答え）／ノウハウ型（e-Stat × Claude Code の実務、再現手順・テンプレート）。
-  - 列（収益源）: 広告（AdSense・アフィリエイト・物販）／コンテンツ販売（note・KDP）／データ販売（CSV・Excel・GeoJSON）。
-  - 12 マスの評価: 参照×広告 ◎・参照×販売 ✕・参照×データ ○／教科書×広告 ○・教科書×販売 ○・教科書×データ ○（`ADMIN-STAT-PILOT-01` (2026-11-14 廃止) はここ）／論文×広告 ○・論文×販売 △・論文×データ ○／作り方×広告 △・作り方×販売 ◎・作り方×データ ○。
-  - 前提の帯: 売上を内訳つきで測れているか（判定不能）、「届いた」と言える線（工数の時間単価は未決）、工数がイシューに向いているか。
-  - 絵コンテ: 月 ¥1 万に要る PV（効率 ¥12〜22 / 1,000 PV で 45〜83 万 PV、今は約 5.2 万）と、マスごとの判定日の表。
-  - 起点の悩み（マップ全体の出発点。新しい行・列ではない）: 統計は探すのに半日・加工にもう半日かかり、資料に使う図を作るのにも手間がかかる（オーナーの県庁職員の経験。`01_プロジェクト定義.md` のキャッチフレーズ）。この悩みを回収するマスは三つに分かれる。手間を減らすやり方を売る＝ノウハウ型×販売（売れた実績はここだけ）、加工済みのデータ・比較表を売る＝教科書型×データ（`ADMIN-STAT-PILOT-01` (2026-11-14 廃止)）、資料にそのまま使える図・CSV＝参照・教科書×データ。オーナーの経験は仮説を作る材料で、需要の証拠ではない（`04_ターゲットペルソナ.md` §5）。体験談そのものを物語の入口にするかは群 D の境界の決定に従う（`STRATEGY-SSOT-ALIGN-4X3-01`）。
-  - ストーリーライン（本の 4 段）: ① 問題意識（起点の悩みを入口にする。そのうえで、集客は伸びたが収益は小さく、測れてもいない）→ ② 主張「参照型で集めて広告で回収し、ノウハウ型で売る。統計の内容で売れるかは 12 月末までに確かめる」とサブイシュー 3 本（1. 参照型は広告でしか回収できず量だけでは 1 桁足りない／2. 払う理由は時間が減ることで、今売れているのはノウハウ型だけ／3. 統計の内容で売れるかは 12 月末までの実験で白黒がつく）→ ③ サブイシューごとの仮説・根拠・絵コンテ・判定日（サブイシュー 2 の絵コンテは、資料作りを 1 業務に絞り（例: 類似団体と比べた人件費の 5 年推移）、従来の手順と stats47 + Claude Code を使った手順の作業時間を実測した表とする。時間の削減は実測値として示し、約束しない）→ ④ 意味合い（計器を戻す・参照型は広告の密度・ノウハウ型の 1 商品・統計の内容は判定日で決める）と分岐。
-- **初期データに入れる注記（2026-11-05 の確認結果）**: ① 売れた note の件数と中身が文書ごとに食い違う（vault の販売実績台帳は 2 件 ¥600、`02_収益化戦略.md` §3.5 は 3 件 ¥900、`KNOWHOW-QA-BOARD-01` は Ollama オフライン 1 件を含む）。e-Stat × Claude Code の 2 件は確定。② `NOTE-FISCAL-PEER-SALES-01` の財政比較 2 本は「コードを書く層 / 書かない層」の比較で、ノウハウ型に近く、教科書型の販売の検証にはならない。③ KDP の 7〜9 月 ¥17,780（vault `memos/家計/収入_2026.csv`）は doboku-note と共用のアカウントで、stats47 の本の分が分かっていない。分かるまで「参照×販売 ✕」は保留扱いにする。
-- **別物との区別**: `data/content/issues.json`（社会の問いの台帳＝記事の素材）とは別のものである。こちらは事業の問いを扱う。ID の体系と名前を分け（例: `biz:` の接頭辞、画面名は「事業イシューマップ」）、論文型の行から問いの台帳へリンクするだけにする。
-- **次（実行順）**:
-  ① データ: `data/business/issue-map.json` と `config/schema/business.issue-map.schema.json` を作り、`config/datasets.mjs` に 1 行足す（`business.pilot-board` と同じ形）。持つのは、起点の悩み・主イシュー・仮説・前提・行と列の定義・12 マス（評価・状態・根拠の一文・参照する台帳 ID）・ストーリーライン・注記。判定日と進み具合は improvements・pilot-board・experiments・backlog を ID で参照し、日付や状態を写さない。
-  ② 画面: 管理画面に `/strategy/issue-map` を読み取り専用で足す（`.claude/rules/admin-ui.md` に従う）。12 マスの表（スマホでは行ごとに縦に積む）、前提の帯、参照先から解決した判定日の表、ストーリーラインの 4 段（問題意識・イシューとサブイシュー・サブイシューごとの仮説と絵コンテ・意味合い）を出す。必要 PV のグラフは KPI `site-pageviews`・`ad-yield` から計算できる場合だけ載せる。
-  ③ 更新の仕組み: `/weekly-review` に「判定日を過ぎたマスの評価と状態を実測で更新する」段を、`/monthly-plan` に「主イシューと仮説を見直す」段を足す。評価の変更は `.claude/rules/evidence-based-judgment.md` に従い、変更の履歴は git に任せる。
-  ④ 文書との接続: `docs/00_プロジェクト管理/02_収益化戦略.md` §2 に「今の主イシューと仮説の正本は `data/business/issue-map.json`」と 1 行で参照を足す（中身は写さない）。`ISSUE-PAYING-NEED-01` は教科書×データのマスの問いとしてマップから参照し、重複する記述をまとめる。
-- **完了条件**: `npm run check-datasets`・`npm run docs:check`・`npm run type-check`・管理画面のテストが通る。localhost の管理画面で 12 マス・前提・判定日の表・ストーリーラインが表示される（スクリーンショットで確認）。週次レビューと月次計画のスキルに更新の段がある。収益化戦略から参照がある。
-- **禁止**: 図の構成（4 型 × 3 収益源）をオーナーの判断なしに変えない。マスの評価を実測なしに変えない。マップの中身を戦略文書・月次計画へ写さない。管理画面はローカルなので本番デプロイはしない。
 
 ### [STRATEGY-SSOT-ALIGN-4X3-01] 事業イシューマップと食い違う stats47 の SSOT・agent・スキル・台帳を直す（85 件）
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run docs:check] [起票:2026-11-05] [領域:戦略]
@@ -2621,14 +2598,23 @@ updated: 2026-11-01
 - **棚卸し (2026-11-22)**: 検出器 (`check-svg-text.ts`・`findChartTextIssues`) と予算 (`chart_text_issues`) は入っているが、`data/page-quality` に実測値が無く、ビールの SVG はリポジトリに無い。次は週次ページ品質監査を 1 回流して `chart_text_issues` を記録し、`/areas/13000` の縦軸とビールの SVG (note の R2 原稿) を検出器に通す。
 - **確認 (2026-11-23)**: 途中成果のブランチ `wip/ui-chart-text-loop-01` はリモートにも無い (`git ls-remote --heads origin 'wip/ui-chart-text*'` が空)。commit `f8344bf3c` の作業は失われたものとして、次は ① の検出から作り直す。
 
+### [KINDLE-SOURCE-REVIEW-9-01] 本文が書き直されて Kindle の校訂が当たらない 9 本を、新しい本文に合わせて校閲し直す
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:npm run products:kindle:validate --workspace packages/product-factory] [起票:2026-11-24] [領域:商品]
+
+- **起点**: KINDLE-DATA-SOURCE-01 のオーナー決定 (2026-11-24・推奨 (a)) で、一括移行と切り離した。
+- **対象**: black-tea-income-gap、crab-expenditure-ranking、earthquake-insurance-prefecture-gap、mackerel-expenditure-ranking、miso-consumption-quantity-prefecture-gap、movie-theater-expenditure-ranking、personal-computer-expenditure-ranking、sugar-consumption-prefecture-gap、university-advancement-capacity。R2 の本文が書き直されたため、台帳 `products.kindle-editorial-corrections` の校訂が当たらない。black-tea-income-gap は公開 R2 から撤去済みで、KINDLE-K-S1-01-REPUBLISH-01 の判断と関係する。
+- **次**: 1 本ずつ R2 の今の本文を読み、校訂の差分を新しい本文に合わせて書き直す。書けない校訂は理由を台帳に残して外す。
+- **停止条件**: 本の章の本文を勝手に変えない (校訂は台帳だけを直す)。KDP への反映はオーナーの承認の後。
+- **完了条件**: 9 本すべてで校訂が当たり、書籍の生成と検証が通る。
+
 ### [KINDLE-DATA-SOURCE-01] Kindle の章の出典をブログ本文の手書き節から切り離し、据え置き 61 本の本文も移行する
-タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [領域:商品]
+タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [領域:商品] [待ち:承認]
 
 - **済み (2026-11-14・3c808f65a)**: Kindle の 46 章の旧「データ出典」節を、台帳 `products.kindle-editorial-corrections` の `sourceSections` に逐語で写しました。
 - **残り (判断)**: 次の 9 記事は R2 の本文が書き直されたため、移行とは関係なく校訂が当たりません: black-tea-income-gap、crab-expenditure-ranking、earthquake-insurance-prefecture-gap、mackerel-expenditure-ranking、miso-consumption-quantity-prefecture-gap、movie-theater-expenditure-ranking、personal-computer-expenditure-ranking、sugar-consumption-prefecture-gap、university-advancement-capacity。この 9 本には旧節が無く、一括移行の対象にもなりません。選択肢は (a) 9 本を別カードで新しい本文に合わせて校閲し直し、一括移行は先に進める、(b) 9 本が直るまで一括移行を止める、の 2 つです。推奨は (a) です。移行しても 9 本の生成は良くも悪くもならず、移行する 46 本の章の本文は変わらないことを確かめてあるためです。
 - **残り (実行)**: オーナーが (a) を選んだら、`blog-data-source-migration.yml` を mode=migrate-bodies で実行し、46 本の本文から手書き節を消します。その後の週次監査の実測で、`survey-taxonomy-ratchet.json` の `maxLegacyDataSourceSectionArticles` を 58 から実測値まで下げます。移行後に残る見込みは 12 本で、目標の 6 本にするには出典が未解決の 4 本などを別に片付ける必要があります。
 - **完了条件**: 46 本の本文から手書き節が消え、Kindle の 64 章すべてで校訂が当たって書籍を生成でき、ratchet の上限が 6 で `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check` が exit 0 になること。
-- **オーナー決定 (2026-11-24)**: 推奨どおり (a) 9 本は別カードで校閲し直し、一括移行は先に進める を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: 9 本の校閲のカードを起票し、blog-data-source-migration.yml の mode=migrate-bodies を準備する。実行 (R2 の本文の書き換え) はオーナーの承認の後
+- **オーナー決定 (2026-11-24)**: 推奨どおり (a)。9 本の校閲は KINDLE-SOURCE-REVIEW-9-01 へ分けた。`blog-data-source-migration.yml` の mode=migrate-bodies は dry-run を起動済み (run 45374576671)。残りは dry-run の結果を確かめたうえでの実行 (dry_run=false で R2 の本文を書き換える) で、オーナーの承認を待つ
 
 ### [AREA-SPECIALTY-IMAGES-01] 都道府県ページの特産品画像が未生成で頭文字タイルのまま
 
@@ -2933,20 +2919,6 @@ updated: 2026-11-01
 - **次**: ① 道路統計年報 2025 年版 (表 2 道路現況総括表・表 3 道路実延長内訳の総括表など。国交省のページは xlsx だけ) から 2024 年 3 月 31 日時点の都道府県別の値を取り込むか、SSDS の次の更新を待つかを決める。取り込むなら取得元の切り替えと provenance を先に設計し (`DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` と同じ進め方)、SSDS と重なる年は値の一致を検査する ② 年の表記を時点に合わせるか (例: 「2023 年 3 月 31 日現在」)、注記を直すかをオーナーが決める。10 指標と SEO タイトルに効くので一括で行う。
 - **停止条件**: 年の表記は、オーナーが決めるまで変えない。R2 への反映はオーナー承認後。
 - **完了条件**: 10 指標が最新の年報の時点まで R2 に入るか、待つと決めて理由が書かれている。年の表記が時点と食い違わない。
-
-### [DATA-LAYOUT-MOVE-01] 置き場を data/<取得元>/ へ移した後、定期実行が新しい置き場へ書くことを確かめる
-
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-06] [進行中] [領域:管理]
-
-- **済み (2026-10-06〜07)**: 移動は 2 段階とも main まで反映した (PR #1086・#1088、`npm run check-datasets -- --moves` が 0 行)。
-- **次**: 次の定期実行が新しい置き場に書き、旧置き場に書いていないことを、run の commit-back の差分で確かめる。
-  日次: GSC URL 検査 (`data/gsc/coverage-remediation`・`data/gsc/url-inspection`)・Instagram 投稿 (`data/sns/ig-posted-log.jsonl`・
-  `data/sns/posts.json`)・Threads 確認・AI 解説 (`data/ai-content`)・workflow 健全性 (`data/ci`)・backlog-loop (`data/gsc`・`data/page-quality`)。
-  週次: 土曜の page-quality・内部リンク・出典・ランキング整合・e-Stat 年カバレッジ、日曜の `fetch-metrics-weekly` (`data/` 全体) と
-  search-growth・affiliate GA4、月曜の improvement-cycle。
-  オーナーの Mac / Windows の launchd ジョブ (SNS・A8) は `git pull` 後に新しい置き場へ書く。
-- **未決**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。 2026-11-22 に 182 件の寿命を付けて外した: 索引 `seo.rank-history-summary` が全件のハッシュをつなぎ過去分の削除を禁じるので、寿命を付けるなら索引を縮める処理と一緒に入れる。
-- **完了条件**: 上の日次・週次の定期実行がすべて新しい置き場へ書いた (期日 2026-10-13)。
 
 ### [ESTAT-YEAR-AVAILABILITY-01] e-Stat の実在年を data/ の台帳で管理し、設定の years を「除外だけ」にする
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [待ち:承認] [起票:2026-10-07] [領域:データ]

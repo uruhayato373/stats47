@@ -154,8 +154,8 @@
         {
           "picture": "調査ハブの入口 URL のクリックと 2 ページ目への到達（公開後 4 週）",
           "ref": {
-            "kind": "backlog",
-            "id": "CONTENT-KAKEI-EXPANSION-01"
+            "kind": "improvement",
+            "id": "KAKEI-REFLECT-EFFECT-01"
           }
         }
       ]

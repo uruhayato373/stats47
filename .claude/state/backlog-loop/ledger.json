@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T10:22:01.360Z",
+  "updatedAt": "2026-11-24T10:29:46.606Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -13469,6 +13469,92 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T10:22:01.360Z"
+    },
+    "DATA-LAYOUT-MOVE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:25:23.642Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets -- --moves",
+              "git log --since=2026-10-08 -- <旧置き場 .claude/state/{gsc",
+              "ci",
+              "ai-content",
+              "sns",
+              "page-quality",
+              "search-growth}>",
+              "git log -1 --since=2026-10-08 -- data/{gsc/coverage-remediation",
+              "gsc/url-inspection",
+              "ai-content",
+              "ci",
+              "seo",
+              "affiliate",
+              "search-growth",
+              "estat",
+              "blog",
+              "themes}"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: --moves は 0 行。10-08 以降に旧置き場への書き込みは 0 件。新しい置き場には日次 (GSC URL 検査 11-20・AI 解説 11-24・CI 11-15) と週次 (fetch-metrics 11-20・search-growth 11-21・seo 11-24・affiliate 11-24・themes 11-20) の bot の書き戻しがある。Instagram は 10-27 から停止中で、最後の書き込み (10-26) も新しい置き場。保持期間の未決は DIR-PLACEMENT-CLEANU",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:25:23.642Z"
+    },
+    "STRATEGY-ISSUE-MAP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:29:46.606Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "npm run docs:check",
+              "npm run type-check",
+              "cd apps/admin && npx vitest run tests/unit/issue-map.test.ts",
+              "localhost:4747/strategy/issue-map"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: ①〜④の成果物 (issue-map.json・schema・/strategy/issue-map・weekly-review の段 13・monthly-plan の段 5・収益化戦略 74 行の参照) がある。check-datasets error 0・docs:check errors 0・type-check 通過・issue-map のテスト 13 件通過。localhost で 12 マス・前提・判定日・ストーリーラインの表示を確かめ、閉じたカード CONTENT-KAKEI-EXPANSION-01 への参照を改",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:29:46.606Z"
     }
   }
 }
