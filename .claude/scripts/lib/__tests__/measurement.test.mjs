@@ -317,8 +317,7 @@ test('KDP auth recovery points to a human login on the Mac instead of re-exporti
   try {
     const input = join(temp, 'input'); mkdirSync(input);
     writeFileSync(join(input, 'kdp-2.json'), JSON.stringify({ source: 'kdp', capability: SOURCES.kdp.capability,
-      observedAt: new Date().toISOString(), status: 'failed', code: 'auth_required', runId: 'kdp-recovery', runAttempt: 2,
-      relogin: 'human_required' }));
+      observedAt: new Date().toISOString(), status: 'failed', code: 'auth_required', runId: 'kdp-recovery', runAttempt: 2 }));
     execFileSync(process.execPath, [resolve('.claude/scripts/measurement/summarize.mjs'), input], {
       cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'kdp-recovery', GITHUB_RUN_ATTEMPT: '2' },
     });
@@ -327,10 +326,9 @@ test('KDP auth recovery points to a human login on the Mac instead of re-exporti
     assert.match(summary, /measurement-session-refresh\.sh で取り直す/);
     assert.doesNotMatch(summary, /--publish|Secret|CI/);
     assert.match(summary, /再ログインを反復せず停止/);
-    // relogin の欄は記録の形として残す。値を書かなかった取得元は null で、結果を推測で埋めない
+    // 撤去した CI の再ログイン欄 (relogin・recovery) を記録に書き戻さない
     const sources = JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources;
-    assert.equal(sources.find(s => s.source === 'kdp').relogin, 'human_required');
-    assert.equal(sources.find(s => s.source === 'a8').relogin, null);
+    for (const source of sources) assert.deepEqual(Object.keys(source).filter(k => k === 'relogin' || k === 'recovery'), []);
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 

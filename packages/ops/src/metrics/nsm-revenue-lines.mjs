@@ -36,8 +36,7 @@ function findSource(authLatest, name) {
 function unusableReason(source, asOf) {
   if (!source) return "認証付き収集の結果に記録が無い";
   if (source.status !== "pass") {
-    const since = source.recovery?.blockedSince ? `（${source.recovery.blockedSince.slice(0, 10)} から）` : "";
-    return source.code === "auth_required" ? `認証切れ${since}。再ログインが必要` : `収集失敗 ${source.code ?? "理由不明"}`;
+    return source.code === "auth_required" ? "認証切れ。再ログインが必要" : `収集失敗 ${source.code ?? "理由不明"}`;
   }
   const age = ageDays(source.observedAt, asOf);
   if (age == null) return "観測日時が読めない";
