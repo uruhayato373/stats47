@@ -586,3 +586,60 @@ describe("県の順位ではない順位の書き方を照合しない (BLOG-GAT
     });
   });
 });
+
+// CONTENT-FOLLOWUP-01 (2026-11-25): 正しい文を RANK_MISMATCH にする誤検知 2 点と、本当の誤りを見逃さない固定
+describe("複数県の列挙と過去年の順位を、最新年の 1 県の順位と取り違えない", () => {
+  const rows = (year) =>
+    [
+      ["東京都", 1],
+      ["神奈川県", 3],
+      ["千葉県", 5],
+      ["埼玉県", 6],
+      ["愛知県", 2],
+    ].map(([areaName, rank]) => ({ areaName, rank, value: 100 - rank, label: "平均年収", unit: "万円", year }));
+  const META = { kind: "ranking", rankingKey: "avg-income", year: "2025", label: "平均年収", unit: "万円" };
+
+  it("★(a) 「東京・千葉・埼玉・神奈川の4都県がそろって上位10位」を、東京の 10 位とは読まない", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.deepEqual(checkRankClaims("東京・千葉・埼玉・神奈川の4都県がそろって上位10位に入った。", gt), []);
+        assert.deepEqual(checkRankClaims("東京都と神奈川県が上位10位にそろって入った。", gt), []);
+      },
+      META,
+    );
+  });
+
+  it("★(a) 単独の県の順位違いは従来どおり検出する", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.equal(checkRankClaims("東京は10位だった。", gt).length, 1);
+        assert.equal(checkRankClaims("千葉・埼玉は上位だが、東京は10位だった。", gt).length, 1);
+      },
+      META,
+    );
+  });
+
+  it("★(b) 過去年 (2024年) の順位を、最新年 (2025年) の data と照らさない", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.deepEqual(checkInverseRankClaims("2024年の1位は愛知県だった。", gt), []);
+        assert.deepEqual(checkRankClaims("2024年の調査では、愛知県は1位だった。", gt), []);
+      },
+      META,
+    );
+  });
+
+  it("★(b) 最新年の順位違いは従来どおり検出する", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.equal(checkInverseRankClaims("2025年の1位は愛知県だった。", gt).length, 1);
+        assert.equal(checkRankClaims("2025年の調査では、愛知県は1位だった。", gt).length, 1);
+      },
+      META,
+    );
+  });
+});

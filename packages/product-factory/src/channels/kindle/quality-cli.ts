@@ -13,7 +13,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { parseEpub } from "./epub-inspect";
-import { bookQuality, qualitySummary } from "./kindle-quality";
+import { bookQuality, carryOverMissing, qualitySummary, type BookQuality } from "./kindle-quality";
 import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 import { datasetPath } from "../../../../../config/datasets.mjs";
 
@@ -45,12 +45,23 @@ const books = Object.entries(listings)
     });
   });
 
+/** 前回の記録。EPUB の無い PC で --write しても、前回測れた本を epub-missing で上書きしない。 */
+function readPreviousBooks(): BookQuality[] {
+  if (!existsSync(OUT_PATH)) return [];
+  try {
+    return (JSON.parse(readFileSync(OUT_PATH, "utf8")) as { books?: BookQuality[] }).books ?? [];
+  } catch {
+    return [];
+  }
+}
+
+const recorded = process.argv.includes("--write") ? carryOverMissing(books, readPreviousBooks()) : books;
 const report = {
   schemaVersion: 1 as const,
   generatedAt: new Date().toISOString(),
   baselineBookId: BASELINE_BOOK_ID,
-  summary: qualitySummary(books, BASELINE_BOOK_ID),
-  books,
+  summary: qualitySummary(recorded, BASELINE_BOOK_ID),
+  books: recorded,
 };
 
 for (const book of books) {
@@ -66,5 +77,7 @@ console.log(JSON.stringify(report.summary));
 if (process.argv.includes("--write")) {
   mkdirSync(dirname(OUT_PATH), { recursive: true });
   writeFileSync(OUT_PATH, `${JSON.stringify(report, null, 2)}\n`);
+  const kept = recorded.filter((book, index) => book !== books[index]).map((book) => book.id);
+  if (kept.length > 0) console.error(`kindle quality: EPUB が無いので前回の測定を残した: ${kept.join(", ")}`);
   console.error(`kindle quality: wrote ${OUT_PATH}`);
 }

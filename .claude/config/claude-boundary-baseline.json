@@ -5,10 +5,6 @@
       "count": 1,
       "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"
     },
-    "apps/web/scripts/export-yoy-timeseries.ts": {
-      "count": 1,
-      "reason": "パッケージのスクリプトが .claude/scripts の道具を呼ぶ。呼ぶ側を .claude/scripts へ移すか、道具を packages へ移す (SCRIPTS-TO-PACKAGES-01)"
-    },
     "apps/web/scripts/lib/internal-link-lint.mjs": {
       "count": 1,
       "reason": ".claude のパスを判定・表示の入力として持つだけで読まない (パスの分類・禁止のディレクトリの名前)。恒久の例外"

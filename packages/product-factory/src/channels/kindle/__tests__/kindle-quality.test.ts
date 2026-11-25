@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { chapterMetrics, figureSource, fullTableIndicator, rankingTableIndicator, type EpubChapter } from "../epub-inspect";
-import { bookQuality, chapterFlags, qualitySummary } from "../kindle-quality";
+import { bookQuality, carryOverMissing, chapterFlags, qualitySummary } from "../kindle-quality";
 
 function chapter(id: string, body: string): EpubChapter {
   return { id, href: `${id}.xhtml`, title: id, body, ...chapterMetrics(body) };
@@ -104,5 +104,20 @@ describe("ランキング章 (ranking-databook) の全県表の指標 (2026-11-1
     expect(metrics.fullTableIndicators).toHaveLength(1);
     expect(metrics.householdCityNotes).toBe(1);
     expect(chapterMetrics(RANKING_CHAPTER.replace("家計調査の都道府県庁所在市の値で、", "")).householdCityNotes).toBe(0);
+  });
+
+  it("--write で EPUB の無い本を epub-missing で上書きせず、前回の測定を残す (Mac 以外の実行で記録を消さない)", () => {
+    const previous = bookQuality({ id: "K-S1-02", epubPath: "x.epub", epubSha256: "a", parsed: { title: "t", modified: null, chapters: [chapter("c", `${LONG_TEXT}${FIGURE}<p>説明</p>`)] } });
+    const missingNow = bookQuality({ id: "K-S1-02", epubPath: "x.epub", epubSha256: null, parsed: null });
+    const neverMeasured = bookQuality({ id: "K-S1-03", epubPath: null, epubSha256: null, parsed: null });
+    const merged = carryOverMissing([missingNow, neverMeasured], [previous]);
+    expect(merged[0]).toBe(previous);
+    // 前回も無い本は欠測のまま。0 で埋めない
+    expect(merged[1]).toMatchObject({ id: "K-S1-03", status: "epub-missing" });
+    // 今回測れた本は前回の値でなく今回の値
+    const measuredNow = bookQuality({ id: "K-S1-02", epubPath: "x.epub", epubSha256: "b", parsed: { title: "t2", modified: null, chapters: [chapter("c", LONG_TEXT)] } });
+    expect(carryOverMissing([measuredNow], [previous])[0]).toBe(measuredNow);
+    // 前回が欠測だった本は何も残さない
+    expect(carryOverMissing([missingNow], [neverMeasured])[0]).toBe(missingNow);
   });
 });

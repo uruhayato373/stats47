@@ -19,6 +19,11 @@ export interface PackedRankingValues {
 
 export type PackedThemeIndicatorData = Omit<ThemeIndicatorData, "rankingValues"> & {
   rankingValues: PackedRankingValues;
+  /**
+   * `rankingItem.availableYears` が `availableYears` と同じ中身だったので `rankingItem` 側を外した印。
+   * ブラウザ側で `availableYears` から戻す (2026-11-23 の本番で二重の分が約 168KB だった)。
+   */
+  rankingItemYearsShared?: true;
 };
 
 const sameValue = (a: unknown, b: unknown) => a === b || (a !== null && typeof a === "object" && JSON.stringify(a) === JSON.stringify(b));
@@ -45,18 +50,34 @@ export function unpackRankingValues(packed: PackedRankingValues): RankingValue[]
   return packed.rows.map((row) => ({ ...packed.shared, ...row }) as RankingValue);
 }
 
+function packIndicator(data: ThemeIndicatorData): PackedThemeIndicatorData {
+  const packed: PackedThemeIndicatorData = { ...data, rankingValues: packRankingValues(data.rankingValues) };
+  const years = data.rankingItem.availableYears;
+  if (years && data.availableYears && sameValue(years, data.availableYears)) {
+    const { availableYears: _dup, ...rankingItem } = data.rankingItem;
+    packed.rankingItem = rankingItem as ThemeIndicatorData["rankingItem"];
+    packed.rankingItemYearsShared = true;
+  }
+  return packed;
+}
+
+function unpackIndicator(data: PackedThemeIndicatorData): ThemeIndicatorData {
+  const { rankingItemYearsShared, rankingValues, ...rest } = data;
+  const unpacked: ThemeIndicatorData = { ...rest, rankingValues: unpackRankingValues(rankingValues) };
+  if (rankingItemYearsShared && data.availableYears) {
+    unpacked.rankingItem = { ...unpacked.rankingItem, availableYears: data.availableYears } as ThemeIndicatorData["rankingItem"];
+  }
+  return unpacked;
+}
+
 export function packIndicatorDataMap(
   map: Record<string, ThemeIndicatorData>,
 ): Record<string, PackedThemeIndicatorData> {
-  return Object.fromEntries(
-    Object.entries(map).map(([key, data]) => [key, { ...data, rankingValues: packRankingValues(data.rankingValues) }]),
-  );
+  return Object.fromEntries(Object.entries(map).map(([key, data]) => [key, packIndicator(data)]));
 }
 
 export function unpackIndicatorDataMap(
   map: Record<string, PackedThemeIndicatorData>,
 ): Record<string, ThemeIndicatorData> {
-  return Object.fromEntries(
-    Object.entries(map).map(([key, data]) => [key, { ...data, rankingValues: unpackRankingValues(data.rankingValues) }]),
-  );
+  return Object.fromEntries(Object.entries(map).map(([key, data]) => [key, unpackIndicator(data)]));
 }
