@@ -43,8 +43,8 @@ const content: MunicipalityAiContent = {
     '上位100位に入った自治体を県ごとに数えると、石川県が2自治体で最も多く、福島県・東京都・北海道が1自治体ずつでした。下位も同じ顔ぶれです。比べた自治体が少ないので、県ごとの傾向を読むには件数が足りません。',
   population: '順位を付けたのは5自治体です。政令指定都市の区など1自治体は、市全体の値と重なるため順位から外しています。値の欠けている自治体はありません。',
   faq: [
-    { question: '人口が最も増えた市区町村は？', answer: '大熊町で、5年間の増加率は81.0％でした。' },
-    { question: '人口が最も減った市区町村は？', answer: '珠洲市で、34.6％減でした。' },
+    { question: '人口の増加率が最も高い市区町村は？', answer: '大熊町で、5年間の増加率は81.0％でした。' },
+    { question: '人口の減少率が最も大きい市区町村は？', answer: '珠洲市で、34.6％減でした。' },
     { question: '中央値はどれくらい？', answer: '比べた5自治体の中央値は-0.4％です。' },
   ],
 };
@@ -57,6 +57,31 @@ describe('市区町村ランキングの解説の監査', () => {
   it('値を 1 つ書き換えると根拠の無い数として止める', () => {
     const broken = { ...content, summary: content.summary.replace('81.0％', '18.0％') };
     expect(auditMunicipalityAiContent(broken, item, values, ['2020年→2025年']).blockers.join()).toContain('根拠の無い数「18.0」');
+  });
+
+  it('率・割合の指標で、FAQ の質問が率を言わず件数の言い方で「最も増えた」と聞くのを止める', () => {
+    const counted = {
+      ...content,
+      faq: [{ question: '人口が最も増えた市区町村は？', answer: '大熊町です。' }, ...content.faq.slice(1)],
+    };
+    const blockers = auditMunicipalityAiContent(counted, item, values, ['2020年→2025年']).blockers.join();
+    expect(blockers).toContain('faq[0].question');
+    expect(blockers).toContain('率');
+  });
+
+  it('率を言う質問と、自治体の数を聞く質問は止めない。件数の指標 (単位が率でない) の「最も増えた」も止めない', () => {
+    const ok = {
+      ...content,
+      faq: [...content.faq.slice(0, 2), { question: '人口が増えた市区町村はどれくらいある？', answer: '2自治体です。' }],
+    };
+    expect(auditMunicipalityAiContent(ok, item, values, ['2020年→2025年']).blockers).toEqual([]);
+    const countMetric = {
+      ...content,
+      faq: [{ question: '人口が最も増えた市区町村は？', answer: '大熊町で、81.0人でした。' }, ...content.faq.slice(1)],
+    };
+    expect(
+      auditMunicipalityAiContent(countMetric, item, { ...values, unit: '人' }, ['2020年→2025年']).blockers.join()
+    ).not.toContain('faq[0].question');
   });
 
   it('配信値の年か件数が変わったら書き直すまで公開しない', () => {
