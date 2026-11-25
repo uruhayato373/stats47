@@ -33,6 +33,13 @@ export const socialWelfareExpensesPrefecture: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "per-capita-social-welfare-expenditure-pref-municipal",
+        "label": "都道府県・市町村財政合計",
+      },
+    ],
   },
   "groupKey": "social-welfare-expenses-prefecture",
   "isActive": true,

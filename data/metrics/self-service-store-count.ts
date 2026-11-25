@@ -60,6 +60,11 @@ export const selfServiceStoreCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "self-service-store-count-per-100k",
+        "label": "人口10万人当たり",
+      },
     ],
   },
   "groupKey": "self-service-store-count",

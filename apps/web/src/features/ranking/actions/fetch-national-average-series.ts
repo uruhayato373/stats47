@@ -1,12 +1,17 @@
 "use server";
 
-import { readAllYearsNormalizedRankingValuesFromR2 } from "@stats47/ranking/server";
+import {
+  readAllYearsNormalizedRankingValuesFromR2,
+  readAllYearsRankingValuesFromR2,
+  readRankingItemFromR2,
+} from "@stats47/ranking/server";
 import { err, isOk, ok, type Result } from "@stats47/types";
 
 import {
   buildNationalAverageSeries,
   type NationalAveragePoint,
 } from "../lib/build-national-average-series";
+import { findSeriesOption } from "../utils";
 
 import { sanitizeNormalizationType } from "./normalization-types";
 
@@ -21,6 +26,7 @@ import type { AreaType } from "@stats47/area";
  *
  * 正規化版スナップショットが存在しない指標 (R2 で 404) は空配列を返し、
  * 呼び出し側は推移を非表示にする。総数の推移を出し続けて別単位の線を見せない。
+ * series (別の指標の公表値を出す見方) は、その指標の全年の値から組み直す。
  */
 export async function fetchNationalAverageSeriesAction(
   rankingKey: string,
@@ -29,6 +35,14 @@ export async function fetchNationalAverageSeriesAction(
 ): Promise<Result<NationalAveragePoint[], Error>> {
   try {
     const safeNormalizationType = sanitizeNormalizationType(normalizationType);
+    if (!safeNormalizationType && normalizationType) {
+      const itemResult = await readRankingItemFromR2(rankingKey, areaType);
+      const seriesOption = isOk(itemResult) && itemResult.data ? findSeriesOption(itemResult.data, normalizationType) : undefined;
+      if (!seriesOption) return ok([]);
+      const result = await readAllYearsRankingValuesFromR2(seriesOption.metric, areaType);
+      if (!isOk(result)) return ok([]);
+      return ok(buildNationalAverageSeries(result.data));
+    }
     if (!safeNormalizationType) {
       // 総数の系列はサーバー側 (loadRankingPageModel) が持っているので取り直さない
       return ok([]);

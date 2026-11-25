@@ -7406,7 +7406,7 @@
     },
     {
       "metricKey": "university-count-per-100k",
-      "pageId": "ranking:university-count-per-100k",
+      "pageId": null,
       "title": "大学数",
       "sources": [
         {
@@ -8369,7 +8369,7 @@
     },
     {
       "metricKey": "urban-park-area-per-person",
-      "pageId": "ranking:urban-park-area-per-person",
+      "pageId": null,
       "title": "都市公園面積",
       "sources": [
         {
@@ -8409,7 +8409,7 @@
     },
     {
       "metricKey": "urban-park-count-per-100km2",
-      "pageId": "ranking:urban-park-count-per-100km2",
+      "pageId": null,
       "title": "都市公園数",
       "sources": [
         {
@@ -8472,7 +8472,8 @@
       "dependencies": [],
       "normalizationDependencies": [
         "total-area-including-northern-territories-and-takeshima",
-        "total-population"
+        "total-population",
+        "urban-park-count-per-100km2"
       ],
       "consumers": [
         {

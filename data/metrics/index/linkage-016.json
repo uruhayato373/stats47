@@ -6788,7 +6788,7 @@
     },
     {
       "metricKey": "middle-school-students-1-per",
-      "pageId": "ranking:middle-school-students-1-per",
+      "pageId": null,
       "title": "中学校生徒数",
       "sources": [
         {
@@ -8772,7 +8772,7 @@
     },
     {
       "metricKey": "miscellaneous-school-count-per-100k",
-      "pageId": "ranking:miscellaneous-school-count-per-100k",
+      "pageId": null,
       "title": "各種学校数",
       "sources": [
         {
@@ -8826,6 +8826,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "miscellaneous-school-students-per-1000",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -8843,7 +8844,7 @@
     },
     {
       "metricKey": "miscellaneous-school-students-per-1000",
-      "pageId": "ranking:miscellaneous-school-students-per-1000",
+      "pageId": null,
       "title": "各種学校生徒数",
       "sources": [
         {

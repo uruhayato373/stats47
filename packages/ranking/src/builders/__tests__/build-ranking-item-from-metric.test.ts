@@ -2,6 +2,7 @@ import { buildRecipe, getMetricConfig, METRICS_REGISTRY, type MetricConfig } fro
 import { describe, expect, it } from "vitest";
 
 import {
+  buildNormalizationOptions,
   buildRankingItemFromMetric,
   resolveSurveyLinkage,
   usesAllSourcesLinkageFallback,
@@ -370,5 +371,25 @@ describe("buildRankingItemFromMetric の題と説明文", () => {
     const item = buildRankingItemFromMetric(baseConfig, { values: null, now: NOW });
     expect(item.seoTitle).toBeNull();
     expect(item.seoDescription).toBeNull();
+  });
+});
+
+describe("buildNormalizationOptions — series (別の指標の公表値を出す見方)", () => {
+  it("定義には指標と名前だけを書き、単位・桁・色はその指標の定義から焼く (2026-11-25)", () => {
+    const parent = METRICS_REGISTRY["manufacturing-shipment-amount"];
+    const child = METRICS_REGISTRY["manufacturing-shipment-amount-per-employee"];
+    const series = buildNormalizationOptions(parent, METRICS_REGISTRY)?.find(
+      (option) => option.type === "series" && option.metric === child.key,
+    );
+    expect(series).toMatchObject({ type: "series", label: "従業者1人当たり", unit: child.unit });
+    expect(series && series.type === "series" ? series.valueDisplay?.decimalPlaces : null).toBe(child.display?.decimalPlaces ?? 0);
+  });
+
+  it("series の指標が registry に無ければ例外にする (黙って空の見方を配信しない)", () => {
+    const parent = {
+      ...baseConfig,
+      calculation: { isCalculated: false, normalizationOptions: [{ type: "series" as const, metric: "no-such-metric", label: "存在しない" }] },
+    };
+    expect(() => buildNormalizationOptions(parent, METRICS_REGISTRY)).toThrow(/no-such-metric/);
   });
 });

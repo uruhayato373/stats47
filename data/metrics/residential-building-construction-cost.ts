@@ -50,6 +50,11 @@ export const residentialBuildingConstructionCost: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "planned-construction-cost-per-m2",
+        "label": "1m²当たり",
+      },
     ],
   },
   "groupKey": "residential-building-construction-cost",

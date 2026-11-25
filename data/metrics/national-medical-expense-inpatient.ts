@@ -61,6 +61,11 @@ export const nationalMedicalExpenseInpatient: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "national-medical-expense-total",
+        "label": "総額",
+      },
     ],
   },
   "groupKey": "medical-expense",

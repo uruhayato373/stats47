@@ -33,6 +33,13 @@ export const specialSupportSchoolExpensesPrefecture: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "per-child-student-special-support-school-expenditure-pref-municipal",
+        "label": "都道府県・市町村財政合計",
+      },
+    ],
   },
   "groupKey": "special-support-school-expenses-prefecture",
   "isActive": true,

@@ -572,7 +572,7 @@
     },
     {
       "metricKey": "child-consultation-center-cases-per-1000",
-      "pageId": "ranking:child-consultation-center-cases-per-1000",
+      "pageId": null,
       "title": "児童相談所受付件数",
       "sources": [
         {
@@ -1312,7 +1312,9 @@
         "configHash": "3b60f7acb00594ff"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "per-capita-child-welfare-expenditure-under17-pref-municipal"
+      ],
       "consumers": [
         {
           "pageId": "area-theme:01000:local-finance",

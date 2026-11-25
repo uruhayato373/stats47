@@ -33,6 +33,13 @@ export const publicAssistanceExpensesPrefecture: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "per-capita-public-assistance-expenditure-protected-pref-municipal",
+        "label": "都道府県・市町村財政合計",
+      },
+    ],
   },
   "groupKey": "public-assistance-expenses-prefecture",
   "isActive": true,

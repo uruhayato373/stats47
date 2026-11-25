@@ -43,6 +43,832 @@
       "to": "population-density-per-km2-inhabitable-area",
       "since": "2026-11-16",
       "reason": "観測値が完全一致の重複として 2026-11-14 に外し 410 になっていた都道府県ページを、公開中の同じ指標へ 301 にした (2026 年 6〜9 月に毎週 2〜23 回表示されていた。MUNI-DATA-DEDUP-01)"
+    },
+    {
+      "from": "annual-sales-amount-per-employee",
+      "to": "annual-sales-amount",
+      "norm": "annual-sales-amount-per-employee",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "annual-sales-amount-per-establishment",
+      "to": "annual-sales-amount",
+      "norm": "annual-sales-amount-per-establishment",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "barber-beauty-salon-count-per-100k",
+      "to": "barber-beauty-salon-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "block-park-count-per-100km2",
+      "to": "block-park-count",
+      "norm": "block-park-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "book-magazine-retail-annual-sales-per-capita",
+      "to": "book-magazine-retail-annual-sales",
+      "norm": "book-magazine-retail-annual-sales-per-capita",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "building-fire-damage-amount-per-person",
+      "to": "building-fire-damage-amount-per-building-fire",
+      "norm": "building-fire-damage-amount-per-person",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "child-consultation-center-cases-per-1000",
+      "to": "child-consultation-center-cases",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "to": "child-welfare-expenses-prefecture",
+      "norm": "per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "complainant-rate-per-1000",
+      "to": "complainant-count",
+      "norm": "complainant-rate-per-1000",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "penal-code-offenses-recognized-per-1000",
+      "to": "criminal-recognition-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "cultivated-land-area-per-household",
+      "to": "cultivated-area",
+      "norm": "cultivated-land-area-per-household",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "accidental-deaths-per-100k",
+      "to": "death-accident",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "deaths-cerebrovascular-disease-per-100k",
+      "to": "deaths-cerebrovascular-disease",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "deaths-diabetes-per-100k",
+      "to": "deaths-diabetes",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "deaths-hypertensive-diseases-per-100k",
+      "to": "deaths-hypertensive-diseases",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "deaths-lifestyle-diseases-per-100k",
+      "to": "deaths-lifestyle-diseases",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "dental-checkup-guidance-persons-per-1000",
+      "to": "dental-checkup-guidance-persons",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "dental-checkup-persons-per-1000",
+      "to": "dental-checkup-persons",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "dental-clinic-count-per-100k",
+      "to": "dental-clinic-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "dental-clinic-count-per-100km2",
+      "to": "dental-clinic-count",
+      "norm": "dental-clinic-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "dental-guidance-persons-per-1000",
+      "to": "dental-guidance-persons",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "dentists-in-medical-facilities-per-100k",
+      "to": "dentists-in-medical-facilities",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "department-supermarket-count-per-100k",
+      "to": "department-supermarket-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "deposit-balance-per-person",
+      "to": "deposit-balance",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "disaster-damage-amount-per-person",
+      "to": "disaster-damage-amount",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-disaster-recovery-expenditure-pref-municipal",
+      "to": "disaster-recovery-expenses-prefecture",
+      "norm": "per-capita-disaster-recovery-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "bank-deposit-balance-per-person",
+      "to": "domestic-bank-deposit-balance",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "drug-enforcement-arrest-count-per-population",
+      "to": "drug-enforcement-arrest-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-education-expenditure-pref-municipal",
+      "to": "education-expenses-prefecture",
+      "norm": "per-capita-education-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
+      "to": "elderly-welfare-expenses-prefecture",
+      "norm": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "elementary-school-children-1-per",
+      "to": "elementary-school-children-count",
+      "norm": "elementary-school-children-1-per",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "elementary-school-students-per-teacher",
+      "to": "elementary-school-children-count",
+      "norm": "elementary-school-students-per-teacher",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "elementary-school-count-per-100k-6-11",
+      "to": "elementary-school-count",
+      "norm": "elementary-school-count-per-100k-6-11",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "elementary-school-count-per-100km2-habitable",
+      "to": "elementary-school-count",
+      "norm": "elementary-school-count-per-100km2-habitable",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "fire-damage-casualties-per-population",
+      "to": "fire-damage-casualties-per-accident",
+      "norm": "fire-damage-casualties-per-population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "per-capita-firefighting-expenditure-tokyo-municipal",
+      "to": "firefighting-expenses-prefecture",
+      "norm": "per-capita-firefighting-expenditure-tokyo-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "food-business-facility-penalties-per-1000",
+      "to": "food-business-facility-penalties",
+      "norm": "food-business-facility-penalties-per-1000",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "foreign-resident-count-per-100k",
+      "to": "foreign-resident-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "foreign-resident-count-china-per-100k",
+      "to": "foreign-resident-count-china",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "foreign-resident-count-korea-per-100k",
+      "to": "foreign-resident-count-korea",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "foreign-resident-count-usa-per-100k",
+      "to": "foreign-resident-count-usa",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "general-clinic-count-per-100k",
+      "to": "general-clinic-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "general-clinic-count-per-100km2",
+      "to": "general-clinic-count",
+      "norm": "general-clinic-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "general-hospital-bed-count-per-100k",
+      "to": "general-hospital-bed-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "general-hospital-count-per-100k",
+      "to": "general-hospital-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "general-hospital-count-per-100km2",
+      "to": "general-hospital-count",
+      "norm": "general-hospital-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "high-school-count-per-100k-15-17",
+      "to": "high-school-count",
+      "norm": "high-school-count-per-100k-15-17",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "high-school-count-per-100km2-habitable",
+      "to": "high-school-count",
+      "norm": "high-school-count-per-100km2-habitable",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "households-on-public-assistance-per-1000",
+      "to": "households-on-public-assistance",
+      "norm": "households-on-public-assistance-per-1000",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "intellectual-disability-rehabilitation-center-cases-per-100k",
+      "to": "intellectual-disability-rehabilitation-center-cases",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "intellectual-disability-support-facility-capacity-per-100k",
+      "to": "intellectual-disability-support-facility-capacity",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "intellectual-disability-support-facility-residents-per-100k",
+      "to": "intellectual-disability-support-facility-residents",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "junior-college-count-per-100k",
+      "to": "junior-college-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "junior-high-school-count-per-100k-12-14",
+      "to": "junior-high-school-count",
+      "norm": "junior-high-school-count-per-100k-12-14",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "junior-high-school-count-per-100km2-habitable",
+      "to": "junior-high-school-count",
+      "norm": "junior-high-school-count-per-100km2-habitable",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "junior-high-school-students-per-teacher",
+      "to": "junior-high-school-students-count",
+      "norm": "junior-high-school-students-per-teacher",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "middle-school-students-1-per",
+      "to": "junior-high-school-students-count",
+      "norm": "middle-school-students-1-per",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "juvenile-criminal-arrest-person-per-population",
+      "to": "juvenile-criminal-arrest-person",
+      "norm": "juvenile-criminal-arrest-person-per-population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "kidney-failure-death-rate",
+      "to": "kidney-failure-death-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "liver-disease-death-rate",
+      "to": "liver-disease-death-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "manufacturing-shipment-amount-per-employee",
+      "to": "manufacturing-shipment-amount",
+      "norm": "manufacturing-shipment-amount-per-employee",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "manufacturing-shipment-amount-per-establishment",
+      "to": "manufacturing-shipment-amount",
+      "norm": "manufacturing-shipment-amount-per-establishment",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "miscellaneous-school-count-per-100k",
+      "to": "miscellaneous-school-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "miscellaneous-school-students-per-1000",
+      "to": "miscellaneous-school-students",
+      "norm": "miscellaneous-school-students-per-1000",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "municipal-intellectual-disability-consultations-per-100k",
+      "to": "municipal-intellectual-disability-consultations",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "national-medical-expense-total",
+      "to": "national-medical-expense-inpatient",
+      "norm": "national-medical-expense-total",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "neighborhood-park-count-per-100km2",
+      "to": "neighborhood-park-count",
+      "norm": "neighborhood-park-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "outpatient-rate-per-1000",
+      "to": "outpatient-count",
+      "norm": "outpatient-rate-per-1000",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "persons-on-public-assistance-per-1000",
+      "to": "persons-on-public-assistance",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "pharmaceutical-sales-count-per-100k",
+      "to": "pharmaceutical-sales-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "pharmaceutical-sales-count-per-100km2",
+      "to": "pharmaceutical-sales-count",
+      "norm": "pharmaceutical-sales-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "physical-disability-certificates-issued-per-1000",
+      "to": "physical-disability-certificates-issued",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "physical-disability-rehabilitation-cases-per-1000",
+      "to": "physical-disability-rehabilitation-cases",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "physical-disability-rehabilitation-center-cases-per-1000",
+      "to": "physical-disability-rehabilitation-center-cases",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "physical-disability-rehabilitation-facility-capacity-per-100k",
+      "to": "physical-disability-rehabilitation-facility-capacity",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "physical-disability-rehabilitation-facility-residents-per-100k",
+      "to": "physical-disability-rehabilitation-facility-residents",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "physicians-in-medical-facilities-per-100k",
+      "to": "physicians-in-medical-facilities",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "pneumonia-death-rate",
+      "to": "pneumonia-death-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-police-expenditure-pref-municipal",
+      "to": "police-expenses-prefecture",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "police-officer-count-per-population",
+      "to": "police-officer-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "post-office-count-per-100km2",
+      "to": "post-office-count",
+      "norm": "post-office-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "postal-savings-balance-per-capita",
+      "to": "postal-savings-balance",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "private-life-insurance-contract-amount-per-household",
+      "to": "private-life-insurance-amount-per-contract",
+      "norm": "private-life-insurance-contract-amount-per-household",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "private-life-insurance-contracts-per-1000",
+      "to": "private-life-insurance-contracts",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "psychiatric-bed-count-per-100k",
+      "to": "psychiatric-bed-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "psychiatric-hospital-count-per-100k",
+      "to": "psychiatric-hospital-count",
+      "norm": "psychiatric-hospital-count-per-100k",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "per-capita-public-assistance-expenditure-protected-pref-municipal",
+      "to": "public-assistance-expenses-prefecture",
+      "norm": "per-capita-public-assistance-expenditure-protected-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "public-bath-count-per-100k",
+      "to": "public-bath-count",
+      "norm": "public-bath-count-per-100k",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "public-health-nurse-count-per-100k",
+      "to": "public-health-nurse-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "public-phone-count-per-1000",
+      "to": "public-phone-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-public-works-expenditure-pref-municipal",
+      "to": "public-works-expenses-prefecture",
+      "norm": "per-capita-public-works-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "planned-construction-cost-per-m2",
+      "to": "residential-building-construction-cost",
+      "norm": "planned-construction-cost-per-m2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "retail-store-count-per-1000",
+      "to": "retail-store-count",
+      "norm": "retail-store-count-per-1000",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "per-capita-sanitation-expenditure-pref-municipal",
+      "to": "sanitation-expenses-prefecture",
+      "norm": "per-capita-sanitation-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "self-service-store-count-per-100k",
+      "to": "self-service-store-count",
+      "norm": "self-service-store-count-per-100k",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "senility-death-rate",
+      "to": "senility-death-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "simple-life-insurance-contract-count-per-population",
+      "to": "simple-life-insurance-contract-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-social-education-expenditure-pref-municipal",
+      "to": "social-education-expenses-prefecture",
+      "norm": "per-capita-social-education-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "per-capita-social-welfare-expenditure-pref-municipal",
+      "to": "social-welfare-expenses-prefecture",
+      "norm": "per-capita-social-welfare-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "special-law-criminal-arrest-count-per-population",
+      "to": "special-law-criminal-arrest-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-child-student-special-support-school-expenditure-pref-municipal",
+      "to": "special-support-school-expenses-prefecture",
+      "norm": "per-child-student-special-support-school-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "specialized-school-count-per-100k",
+      "to": "specialized-school-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "specialized-school-students-per-1000",
+      "to": "specialized-school-students",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "sports-park-count-per-100km2",
+      "to": "sports-park-count",
+      "norm": "sports-park-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "suicides-per-100k",
+      "to": "suicide-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "telephone-subscription-count-per-1000",
+      "to": "telephone-subscription-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "theft-offenses-recognized-per-1000",
+      "to": "theft-offenses-recognized",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-total-expenditure-pref-municipal",
+      "to": "total-expenditure-prefecture",
+      "norm": "per-capita-total-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "traffic-accident-casualties-per-population",
+      "to": "traffic-accident-casualties-per-100-accidents",
+      "norm": "traffic-accident-casualties-per-population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "traffic-accident-count-per-1000-km",
+      "to": "traffic-accident-count",
+      "norm": "traffic-accident-count-per-1000-km",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "traffic-accident-count-per-population",
+      "to": "traffic-accident-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "traffic-accident-deaths-per-100k",
+      "to": "traffic-accident-deaths-per-100-accidents",
+      "norm": "traffic-accident-deaths-per-100k",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "traffic-accident-injuries-per-100k",
+      "to": "traffic-accident-injuries",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "university-count-per-100k",
+      "to": "university-count",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "urban-park-count-per-100km2",
+      "to": "urban-parks",
+      "norm": "urban-park-count-per-100km2",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "urban-park-area-per-person",
+      "to": "urban-parks-area",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
+    },
+    {
+      "from": "per-capita-welfare-expenditure-pref-municipal",
+      "to": "welfare-expenses-prefecture",
+      "norm": "per-capita-welfare-expenditure-pref-municipal",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+    },
+    {
+      "from": "welfare-office-intellectual-disability-consultations-per-100k",
+      "to": "welfare-office-intellectual-disability-consultations",
+      "norm": "per_population",
+      "since": "2026-11-25",
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (dev の値で比の変動係数 3% 未満)。"
     }
   ]
 }

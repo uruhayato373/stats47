@@ -10,6 +10,7 @@ import { SIDEBAR_PROMO_BANNERS } from "@/features/ads/constants/sidebar-banners"
 import { RANKING_MAKING_OF_KEYS } from "@/features/ranking/components/RankingKeyPage/RankingMakingOfLink";
 
 import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
+import { RANKING_SLUG_REDIRECTS } from "@/config/ranking-redirects";
 
 
 /**
@@ -24,8 +25,16 @@ function literalKeys(relPath: string, pattern: RegExp): string[] {
   return [...source.matchAll(pattern)].map((match) => match[1]!);
 }
 
+/**
+ * 配信中のキーか、転送の台帳にあって転送先が配信中のキーなら可。後者は同じ指標の見方違いのページを親の計算方法へ
+ * 統合したキー (2026-11-25) で、リンクは 301 で親のページのその見方 (?norm=) を開く
+ */
 function unknown(keys: Iterable<string>): string[] {
-  return [...keys].filter((key) => !KNOWN_RANKING_KEYS.has(key));
+  return [...keys].filter((key) => {
+    if (KNOWN_RANKING_KEYS.has(key)) return false;
+    const destination = RANKING_SLUG_REDIRECTS[key];
+    return !(destination && KNOWN_RANKING_KEYS.has(destination));
+  });
 }
 
 describe("直書きの ranking key が KNOWN_RANKING_KEYS に実在する", () => {

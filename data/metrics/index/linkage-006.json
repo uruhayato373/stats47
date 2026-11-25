@@ -1543,7 +1543,7 @@
     },
     {
       "metricKey": "disaster-damage-amount-per-person",
-      "pageId": "ranking:disaster-damage-amount-per-person",
+      "pageId": null,
       "title": "災害被害額",
       "sources": [
         {
@@ -2062,7 +2062,9 @@
         "configHash": "9d8b949152347d3a"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "per-capita-disaster-recovery-expenditure-pref-municipal"
+      ],
       "consumers": [
         {
           "pageId": "area-theme:01000:safety",
@@ -5879,7 +5881,7 @@
     },
     {
       "metricKey": "drug-enforcement-arrest-count-per-population",
-      "pageId": "ranking:drug-enforcement-arrest-count-per-population",
+      "pageId": null,
       "title": "覚醒剤取締検挙件数",
       "sources": [
         {
@@ -9181,6 +9183,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "per-capita-education-expenditure-pref-municipal",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],

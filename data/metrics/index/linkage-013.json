@@ -7136,7 +7136,7 @@
     },
     {
       "metricKey": "intellectual-disability-rehabilitation-center-cases-per-100k",
-      "pageId": "ranking:intellectual-disability-rehabilitation-center-cases-per-100k",
+      "pageId": null,
       "title": "知的障害者更生相談所取扱実人員",
       "sources": [
         {
@@ -7211,7 +7211,7 @@
     },
     {
       "metricKey": "intellectual-disability-support-facility-capacity-per-100k",
-      "pageId": "ranking:intellectual-disability-support-facility-capacity-per-100k",
+      "pageId": null,
       "title": "知的障害者援護施設定員数",
       "sources": [
         {
@@ -7706,7 +7706,7 @@
     },
     {
       "metricKey": "intellectual-disability-support-facility-residents-per-100k",
-      "pageId": "ranking:intellectual-disability-support-facility-residents-per-100k",
+      "pageId": null,
       "title": "知的障害者援護施設在所者数",
       "sources": [
         {

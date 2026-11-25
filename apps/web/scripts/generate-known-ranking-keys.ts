@@ -23,6 +23,7 @@ import path from "node:path";
 import { listAllMetrics } from "@stats47/data-configs";
 import { rankingR2Key } from '@stats47/r2-storage/keys';
 import { SITE } from "@stats47/types";
+import { REDIRECTED_RANKING_KEYS } from "@stats47/ranking/config";
 
 import { checkPresence, type Presence } from "./lib/r2-presence";
 
@@ -32,8 +33,9 @@ const OUT_PATH = path.resolve(
   "../../../packages/ranking/src/config/known-ranking-keys.ts",
 );
 
+// 転送の台帳にあるキーはランキングのページを持たない (指標は有効のまま。2026-11-25 見方違いのページの統合)
 const activeMetrics = listAllMetrics()
-  .filter((m) => m.isActive && m.entities.includes("prefecture"))
+  .filter((m) => m.isActive && m.entities.includes("prefecture") && !REDIRECTED_RANKING_KEYS.has(m.key))
   .map((m) => m.key);
 console.log(
   `[generate-known-ranking-keys] checking ${activeMetrics.length} active prefecture metrics...`,

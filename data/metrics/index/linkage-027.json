@@ -2684,6 +2684,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "self-service-store-count-per-100k",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -2697,7 +2698,7 @@
     },
     {
       "metricKey": "self-service-store-count-per-100k",
-      "pageId": "ranking:self-service-store-count-per-100k",
+      "pageId": null,
       "title": "セルフサービス事業所数",
       "sources": [
         {
@@ -2768,7 +2769,7 @@
     },
     {
       "metricKey": "senility-death-rate",
-      "pageId": "ranking:senility-death-rate",
+      "pageId": null,
       "title": "老衰による死亡者数",
       "sources": [
         {
@@ -7269,7 +7270,7 @@
     },
     {
       "metricKey": "simple-life-insurance-contract-count-per-population",
-      "pageId": "ranking:simple-life-insurance-contract-count-per-population",
+      "pageId": null,
       "title": "簡易生命保険保有契約件数",
       "sources": [
         {

@@ -49,6 +49,11 @@ export const cultivatedArea: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "cultivated-land-area-per-household",
+        "label": "農家1戸当たり",
+      },
     ],
   },
   "groupKey": "cultivated-area",

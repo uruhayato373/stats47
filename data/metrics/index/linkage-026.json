@@ -1231,6 +1231,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "retail-store-count-per-1000",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -1295,7 +1296,7 @@
     },
     {
       "metricKey": "retail-store-count-per-1000",
-      "pageId": "ranking:retail-store-count-per-1000",
+      "pageId": null,
       "title": "小売店数",
       "sources": [
         {
@@ -7424,6 +7425,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "per-capita-sanitation-expenditure-pref-municipal",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],

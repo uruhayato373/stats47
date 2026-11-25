@@ -833,7 +833,7 @@
     },
     {
       "metricKey": "planned-construction-cost-per-m2",
-      "pageId": "ranking:planned-construction-cost-per-m2",
+      "pageId": null,
       "title": "着工居住用建築物工事費予定額",
       "sources": [
         {
@@ -1854,7 +1854,7 @@
     },
     {
       "metricKey": "pneumonia-death-rate",
-      "pageId": "ranking:pneumonia-death-rate",
+      "pageId": null,
       "title": "肺炎による死亡者数",
       "sources": [
         {
@@ -2265,7 +2265,7 @@
     },
     {
       "metricKey": "police-officer-count-per-population",
-      "pageId": "ranking:police-officer-count-per-population",
+      "pageId": null,
       "title": "警察官数",
       "sources": [
         {

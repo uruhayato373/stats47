@@ -53,6 +53,16 @@ export const manufacturingShipmentAmount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "manufacturing-shipment-amount-per-employee",
+        "label": "従業者1人当たり",
+      },
+      {
+        "type": "series",
+        "metric": "manufacturing-shipment-amount-per-establishment",
+        "label": "1事業所当たり",
+      },
     ],
   },
   "groupKey": "manufacturing-shipment-amount",

@@ -11,6 +11,13 @@ describe('All ranking views use the selected observation units',()=>{
  it('accepts only normalization options supported by the current metric',()=>{expect(supportedRankingNormalization(item,'per_population')).toBe('per_population');expect(supportedRankingNormalization(item,'not-supported')).toBeUndefined();expect(supportedRankingNormalization(item,'per_area')).toBeUndefined();});
 });
 
+// 2026-11-25: 分母が人口・面積でない見方は、別の指標の公表値をそのまま出す選択肢 (series) として同じ 1 列に並べる
+const withSeries={...item,title:'製造品出荷額等',calculation:{normalizationOptions:[...(item.calculation?.normalizationOptions??[]),{type:'series',metric:'manufacturing-shipment-amount-per-employee',label:'従業者1人当たり',unit:'万円',valueDisplay:{conversionFactor:1,decimalPlaces:1},visualization:{colorScheme:'interpolateGreens',colorSchemeType:'sequential',classification:{method:'equal-interval'},domain:{mode:'extent'},trendDomain:{mode:'extent'},comparisonDomain:{mode:'extent'}}}]}} as RankingItem;
+describe('A series view shows another metric\'s published values with that metric\'s unit and precision',()=>{
+ it('is selected by the metric key and takes the unit, digits and colours baked from that metric',()=>{const v=resolveRankingPresentation(withSeries,'manufacturing-shipment-amount-per-employee');expect(v.title).toBe('製造品出荷額等（従業者1人当たり）');expect(v.unit).toBe('万円');expect(v.valueDisplay?.decimalPlaces).toBe(1);expect(v.visualization.colorScheme).toBe('interpolateGreens');});
+ it('accepts a series key only when the metric lists it (the key is never taken from the URL as is)',()=>{expect(supportedRankingNormalization(withSeries,'manufacturing-shipment-amount-per-employee')).toBe('manufacturing-shipment-amount-per-employee');expect(supportedRankingNormalization(withSeries,'total-population')).toBeUndefined();});
+});
+
 describe('Ranking values are written in the display unit the page resolved', () => {
  it('multiplies by the factor only when writing (可処分所得 639,356 円 → 63.9 万円, 事業税 → 15,450 億円)', () => {
   expect(formatRankingValue(639_356, 1, 0.0001)).toBe('63.9');

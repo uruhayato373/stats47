@@ -1,3 +1,4 @@
+import { isRatioNormalizationOption } from "@stats47/types";
 import { logger } from "@stats47/logger/server";
 import type { AreaType } from "@stats47/types";
 import { readRankingItemByKeyFromR2 } from "../repositories/ranking-item";
@@ -22,7 +23,8 @@ export async function computeNormalization(
 ): Promise<RankingValue[]> {
   const { rankingKey, areaType, calculation } = rankingItem;
 
-  const option = calculation?.normalizationOptions?.find(opt => opt.type === normalizationType);
+  // 人口・面積で割る選択肢だけを計算する (series は別の指標の値をそのまま読むので、ここには来ない)
+  const option = calculation?.normalizationOptions?.filter(isRatioNormalizationOption).find(opt => opt.type === normalizationType);
   if (!option) {
     logger.warn({ rankingKey, normalizationType }, "computeNormalization: 正規化オプションが見つかりません");
     return [];

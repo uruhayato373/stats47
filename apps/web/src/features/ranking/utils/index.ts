@@ -12,3 +12,6 @@ export {
   generateRankingFAQStructuredData,
   generateRankingPageStructuredData,
 } from "./generate-structured-data";
+
+// 計算方法の選択肢 (人口・面積で割る見方と、別の指標の公表値を出す見方 series)
+export { findNormalizationOption, findSeriesOption } from "./resolve-ranking-presentation";

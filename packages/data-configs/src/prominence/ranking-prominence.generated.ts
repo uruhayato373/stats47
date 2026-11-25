@@ -43,7 +43,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "landweather",
     "categoryName": "国土・気象",
-    "count": 41,
+    "count": 40,
     "representatives": [
       {
         "rankingKey": "total-area-excluding-northern-territories-and-takeshima",
@@ -89,7 +89,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 156,
+    "count": 144,
     "representatives": [
       {
         "rankingKey": "total-population",
@@ -180,7 +180,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "agriculture",
     "categoryName": "農林水産業",
-    "count": 75,
+    "count": 74,
     "representatives": [
       {
         "rankingKey": "fishery-species-catch-mackerel",
@@ -223,7 +223,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "miningindustry",
     "categoryName": "鉱工業",
-    "count": 9,
+    "count": 7,
     "representatives": [
       {
         "rankingKey": "manufacturing-shipment-amount",
@@ -270,7 +270,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "commercial",
     "categoryName": "商業・サービス業",
-    "count": 77,
+    "count": 69,
     "representatives": [
       {
         "rankingKey": "annual-sales-amount",
@@ -286,13 +286,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "製造業事業所数が最も多い県は？"
       },
       {
-        "rankingKey": "public-bath-count-per-100k",
-        "title": "公衆浴場数",
-        "readerLabel": "公衆浴場数",
-        "subtitle": "人口10万人当たり",
-        "hook": "公衆浴場数が最も多い県は？"
-      },
-      {
         "rankingKey": "barber-beauty-salon-count",
         "title": "理容・美容所数",
         "readerLabel": "理容・美容所数",
@@ -306,6 +299,13 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "hook": "製造業事業所敷地面積が最も広い県は？"
       },
       {
+        "rankingKey": "public-bath-count",
+        "title": "公衆浴場数",
+        "readerLabel": "公衆浴場数",
+        "subtitle": "総数",
+        "hook": "公衆浴場数が最も多い県は？"
+      },
+      {
         "rankingKey": "convenience-store-count-commercial",
         "title": "コンビニエンスストア店舗数",
         "readerLabel": "コンビニエンスストア店舗数",
@@ -316,7 +316,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 1022,
+    "count": 1016,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
@@ -361,7 +361,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "construction",
     "categoryName": "住宅・土地・建設",
-    "count": 83,
+    "count": 82,
     "representatives": [
       {
         "rankingKey": "new-condo-starts",
@@ -495,7 +495,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 289,
+    "count": 268,
     "representatives": [
       {
         "rankingKey": "avg-height-high-school-2nd-male",
@@ -544,7 +544,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "administrativefinancial",
     "categoryName": "行財政",
-    "count": 143,
+    "count": 139,
     "representatives": [
       {
         "rankingKey": "local-allocation-tax-prefecture",
@@ -592,7 +592,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 149,
+    "count": 130,
     "representatives": [
       {
         "rankingKey": "garbage-total-output",
@@ -636,7 +636,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 301,
+    "count": 265,
     "representatives": [
       {
         "rankingKey": "physical-disability-certificates-issued",
@@ -697,7 +697,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "infrastructure",
     "categoryName": "社会基盤施設",
-    "count": 60,
+    "count": 56,
     "representatives": [
       {
         "rankingKey": "port-container-count",
@@ -741,7 +741,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "ict",
     "categoryName": "情報通信・科学技術",
-    "count": 24,
+    "count": 21,
     "representatives": [
       {
         "rankingKey": "public-phone-count",
@@ -902,9 +902,9 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "food-manufacturing-employees",
   "annual-sales-amount",
   "manufacturing-establishments",
-  "public-bath-count-per-100k",
   "barber-beauty-salon-count",
   "manufacturing-establishment-site-area",
+  "public-bath-count",
   "convenience-store-count-commercial",
   "natto-consumption-expenditure",
   "soba-udon-dining-consumption-expenditure",
@@ -991,7 +991,6 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "average-weight-high-school-second-grade-female": 0.6487,
   "average-weight-high-school-second-grade-male": 0.48,
   "avg-height-high-school-2nd-male": 1,
-  "barber-beauty-salon-count-per-100k": 0.6487,
   "beef-cattle-count": 0.6875,
   "beef-consumption-quantity": 0.8841,
   "certified-childcare-center-count-per-100k-0-5": 0.6725,
@@ -1008,7 +1007,6 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "culture-recreation-expenditure-ratio-multi-person-households": 0.8875,
   "current-savings-balance-multi-person-households": 0.3813,
   "dairy-cattle-count": 0.6313,
-  "disaster-damage-amount-per-person": 0.705,
   "education-expenditure-ratio-multi-person-households": 0.775,
   "elderly-couple-only-household-ratio": 0.5451,
   "employee-ratio-10-29-employee-establishments-private": 0.4762,
@@ -1019,19 +1017,14 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "floor-area-per-dwelling-owner": 0.785,
   "food-expenditure-ratio-multi-person-households": 0.6625,
   "food-self-sufficiency-rate-calorie": 0.7488,
-  "foreign-resident-count-per-100k": 0.3704,
   "forest-area-ratio": 0.4049,
   "fresh-udon-soba-consumption-expenditure": 0.775,
   "future-population-change-rate-2050": 0.575,
   "gas-station-count-per-100km": 0.6625,
-  "general-clinic-count-per-100k": 0.5363,
-  "general-hospital-bed-count-per-100k": 0.48,
-  "general-hospital-count-per-100k": 0.48,
   "green-tea-consumption-expenditure": 0.775,
   "healthy-life-expectancy-female": 0.6288,
   "healthy-life-expectancy-male": 0.5588,
   "households": 0.6725,
-  "households-on-public-assistance-per-1000": 0.48,
   "kindergarten-count-per-100k-3-5": 0.775,
   "layer-hen-count": 0.6313,
   "library-count-per-million": 0.7375,
@@ -1041,20 +1034,15 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "manufacturing-establishments": 0.9437,
   "manufacturing-industry-added-value": 0.8313,
   "manufacturing-shipment-amount": 1,
-  "manufacturing-shipment-amount-per-employee": 0.48,
   "marine-aquaculture-harvest": 0.7188,
   "marine-fishery-catch": 0.8313,
   "minimum-wage-by-region": 0.7558,
   "museum-count-per-million": 0.7789,
   "nature-park-area-ratio": 0.55,
   "owner-occupied-housing-ratio": 0.785,
-  "penal-code-offenses-recognized-per-1000": 0.705,
   "per-capita-prefectural-income-h27": 0.6912,
-  "physicians-in-medical-facilities-per-100k": 0.7425,
   "pig-count": 0.7437,
-  "police-officer-count-per-population": 0.8175,
   "population-density-per-km2-total-area": 0.8313,
-  "post-office-count-per-100km2": 0.48,
   "residential-land-price-change-rate": 0.6625,
   "rice-harvest-volume": 0.5563,
   "room-utilization-rate": 0.7601,

@@ -2889,7 +2889,7 @@
     },
     {
       "metricKey": "municipal-intellectual-disability-consultations-per-100k",
-      "pageId": "ranking:municipal-intellectual-disability-consultations-per-100k",
+      "pageId": null,
       "title": "市町村における知的障害者相談実人員",
       "sources": [
         {
@@ -5606,6 +5606,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "national-medical-expense-total",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -5861,7 +5862,7 @@
     },
     {
       "metricKey": "national-medical-expense-total",
-      "pageId": "ranking:national-medical-expense-total",
+      "pageId": null,
       "title": "国民医療費",
       "sources": [
         {
@@ -9595,6 +9596,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "neighborhood-park-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -9612,7 +9614,7 @@
     },
     {
       "metricKey": "neighborhood-park-count-per-100km2",
-      "pageId": "ranking:neighborhood-park-count-per-100km2",
+      "pageId": null,
       "title": "近隣公園数",
       "sources": [
         {

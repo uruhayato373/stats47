@@ -129,7 +129,8 @@ export function metricNormalizationDependencies(
   return [
     ...new Set(
       (metric.calculation?.normalizationOptions ?? []).flatMap((option) =>
-        metric.entities.flatMap((entity) => {
+        // series は別の指標の値をそのまま出す見方なので、その指標に依存する
+        option.type === 'series' ? [option.metric] : metric.entities.flatMap((entity) => {
           const spec = WELL_KNOWN_DENOMINATORS[option.type]?.[entity];
           return spec ? [spec.key] : [];
         })

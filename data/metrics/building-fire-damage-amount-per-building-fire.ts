@@ -33,6 +33,13 @@ export const buildingFireDamageAmountPerBuildingFire: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "building-fire-damage-amount-per-person",
+        "label": "人口当たり",
+      },
+    ],
   },
   "groupKey": "building-fire-damage-amount-per-building-fire",
   "isActive": true,

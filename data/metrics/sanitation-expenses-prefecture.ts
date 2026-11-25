@@ -48,6 +48,11 @@ export const sanitationExpensesPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "per-capita-sanitation-expenditure-pref-municipal",
+        "label": "都道府県・市町村財政合計",
+      },
     ],
   },
   "groupKey": "sanitation-expenses-prefecture",

@@ -35,7 +35,7 @@ model: sonnet
 ## 公開判定の前提（★これを満たして初めて 200）
 
 `MetricConfig.isActive:true` は出発点にすぎない。本番アプリは R2 snapshot と派生リストと整合して 200 を返す。
-ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも GONE にも無い）は素通り → page で `notFound()`=404。
+ranking の middleware は、転送の台帳 (`data/site/url-history/ranking-redirects.json`) にあるキーを 301、GONE にあるキーと KNOWN に無いキーを 410 にする (page の `notFound()` には委譲しない)。
 いずれも **200 ではない**ので、下記を整合再生成する必要がある（正典: `.claude/rules/metric-config-standards.md`
 「isActive:true ≠ 本番公開」/ memory `project_ranking_publish_pipeline_gap`）。
 
@@ -76,7 +76,7 @@ ranking の middleware は `isGone` のみ 410、未登録キー（KNOWN にも 
 curl -s -o /dev/null -w "%{http_code}\n" \
   -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
   "https://stats47.jp/ranking/<key>"
-# → 200 で初めて公開成功。410=GONE 残存、404=KNOWN 未登録/未デプロイ、空 200=stale prerender
+# → 200 で初めて公開成功。410=GONE 残存か KNOWN 未登録/未デプロイ、301=転送の台帳にある、空 200=stale prerender
 ```
 
 ## activate 量産時の鉄則

@@ -60,7 +60,6 @@ export function RankingPageClientShell({
       areaType={model.areaType}
       selectedYear={model.selectedYear}
       cityRankingItem={model.cityRankingItem?.isActive ? model.cityRankingItem : undefined}
-      groupMembers={model.groupMembers}
       nowYear={new Date().getFullYear()}
       municipalityLink={model.areaType === "prefecture" ? (
         <Suspense fallback={null}>

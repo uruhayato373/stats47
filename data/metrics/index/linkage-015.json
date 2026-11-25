@@ -3746,7 +3746,7 @@
     },
     {
       "metricKey": "liver-disease-death-rate",
-      "pageId": "ranking:liver-disease-death-rate",
+      "pageId": null,
       "title": "肝疾患による死亡者数",
       "sources": [
         {
@@ -10252,6 +10252,8 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "manufacturing-shipment-amount-per-employee",
+        "manufacturing-shipment-amount-per-establishment",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -10727,7 +10729,7 @@
     },
     {
       "metricKey": "manufacturing-shipment-amount-per-employee",
-      "pageId": "ranking:manufacturing-shipment-amount-per-employee",
+      "pageId": null,
       "title": "製造品出荷額等",
       "sources": [
         {
@@ -11153,7 +11155,7 @@
     },
     {
       "metricKey": "manufacturing-shipment-amount-per-establishment",
-      "pageId": "ranking:manufacturing-shipment-amount-per-establishment",
+      "pageId": null,
       "title": "製造品出荷額等",
       "sources": [
         {

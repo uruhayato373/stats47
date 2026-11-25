@@ -33,6 +33,13 @@ export const trafficAccidentCasualtiesPer100Accidents: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "traffic-accident-casualties-per-population",
+        "label": "人口当たり",
+      },
+    ],
   },
   "groupKey": "traffic-accident-casualties-per-100-accidents",
   "isActive": true,

@@ -1820,7 +1820,9 @@
         "configHash": "af76c3e137f40060"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "per-capita-elderly-welfare-expenditure-65plus-pref-municipal"
+      ],
       "consumers": [
         {
           "pageId": "ranking:elderly-welfare-expenses-prefecture",
@@ -3541,7 +3543,7 @@
     },
     {
       "metricKey": "elementary-school-children-1-per",
-      "pageId": "ranking:elementary-school-children-1-per",
+      "pageId": null,
       "title": "小学校児童数",
       "sources": [
         {
@@ -3595,6 +3597,8 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "elementary-school-children-1-per",
+        "elementary-school-students-per-teacher",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -3685,6 +3689,8 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "elementary-school-count-per-100k-6-11",
+        "elementary-school-count-per-100km2-habitable",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -3912,7 +3918,7 @@
     },
     {
       "metricKey": "elementary-school-count-per-100k-6-11",
-      "pageId": "ranking:elementary-school-count-per-100k-6-11",
+      "pageId": null,
       "title": "小学校数",
       "sources": [
         {
@@ -3944,7 +3950,7 @@
     },
     {
       "metricKey": "elementary-school-count-per-100km2-habitable",
-      "pageId": "ranking:elementary-school-count-per-100km2-habitable",
+      "pageId": null,
       "title": "小学校数",
       "sources": [
         {
@@ -4971,7 +4977,7 @@
     },
     {
       "metricKey": "elementary-school-students-per-teacher",
-      "pageId": "ranking:elementary-school-students-per-teacher",
+      "pageId": null,
       "title": "小学校児童数",
       "sources": [
         {

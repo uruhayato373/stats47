@@ -13627,6 +13627,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "households-on-public-assistance-per-1000",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -13834,7 +13835,7 @@
     },
     {
       "metricKey": "households-on-public-assistance-per-1000",
-      "pageId": "ranking:households-on-public-assistance-per-1000",
+      "pageId": null,
       "title": "生活保護被保護実世帯数",
       "sources": [
         {

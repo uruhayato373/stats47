@@ -45,6 +45,13 @@ export const complainantCount: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "complainant-rate-per-1000",
+        "label": "人口1000人当たり",
+      },
+    ],
   },
   "groupKey": "complainant-count",
   "isActive": true,

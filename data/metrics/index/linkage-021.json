@@ -1765,7 +1765,7 @@
     },
     {
       "metricKey": "penal-code-offenses-recognized-per-1000",
-      "pageId": "ranking:penal-code-offenses-recognized-per-1000",
+      "pageId": null,
       "title": "刑法犯認知件数",
       "sources": [
         {
@@ -2230,7 +2230,7 @@
     },
     {
       "metricKey": "per-capita-child-welfare-expenditure-under17-pref-municipal",
-      "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "pageId": null,
       "title": "児童福祉費",
       "sources": [
         {
@@ -2266,7 +2266,7 @@
     },
     {
       "metricKey": "per-capita-disaster-recovery-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+      "pageId": null,
       "title": "災害復旧費",
       "sources": [
         {
@@ -2298,7 +2298,7 @@
     },
     {
       "metricKey": "per-capita-education-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
+      "pageId": null,
       "title": "教育費",
       "sources": [
         {
@@ -2333,7 +2333,7 @@
     },
     {
       "metricKey": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
-      "pageId": "ranking:per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
+      "pageId": null,
       "title": "老人福祉費",
       "sources": [
         {
@@ -2369,7 +2369,7 @@
     },
     {
       "metricKey": "per-capita-firefighting-expenditure-tokyo-municipal",
-      "pageId": "ranking:per-capita-firefighting-expenditure-tokyo-municipal",
+      "pageId": null,
       "title": "消防費",
       "sources": [
         {
@@ -3005,7 +3005,7 @@
     },
     {
       "metricKey": "per-capita-police-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-police-expenditure-pref-municipal",
+      "pageId": null,
       "title": "警察費",
       "sources": [
         {
@@ -3699,7 +3699,7 @@
     },
     {
       "metricKey": "per-capita-public-assistance-expenditure-protected-pref-municipal",
-      "pageId": "ranking:per-capita-public-assistance-expenditure-protected-pref-municipal",
+      "pageId": null,
       "title": "生活保護費",
       "sources": [
         {
@@ -3731,7 +3731,7 @@
     },
     {
       "metricKey": "per-capita-public-works-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-public-works-expenditure-pref-municipal",
+      "pageId": null,
       "title": "土木費",
       "sources": [
         {
@@ -3766,7 +3766,7 @@
     },
     {
       "metricKey": "per-capita-sanitation-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-sanitation-expenditure-pref-municipal",
+      "pageId": null,
       "title": "衛生費",
       "sources": [
         {
@@ -3801,7 +3801,7 @@
     },
     {
       "metricKey": "per-capita-social-education-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-social-education-expenditure-pref-municipal",
+      "pageId": null,
       "title": "社会教育費",
       "sources": [
         {
@@ -3833,7 +3833,7 @@
     },
     {
       "metricKey": "per-capita-social-welfare-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-social-welfare-expenditure-pref-municipal",
+      "pageId": null,
       "title": "社会福祉費",
       "sources": [
         {
@@ -3873,7 +3873,7 @@
     },
     {
       "metricKey": "per-capita-total-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-total-expenditure-pref-municipal",
+      "pageId": null,
       "title": "歳出決算総額",
       "sources": [
         {
@@ -4099,7 +4099,7 @@
     },
     {
       "metricKey": "per-capita-welfare-expenditure-pref-municipal",
-      "pageId": "ranking:per-capita-welfare-expenditure-pref-municipal",
+      "pageId": null,
       "title": "民生費",
       "sources": [
         {
@@ -4212,7 +4212,7 @@
     },
     {
       "metricKey": "per-child-student-special-support-school-expenditure-pref-municipal",
-      "pageId": "ranking:per-child-student-special-support-school-expenditure-pref-municipal",
+      "pageId": null,
       "title": "特別支援学校費",
       "sources": [
         {
@@ -6285,7 +6285,7 @@
     },
     {
       "metricKey": "persons-on-public-assistance-per-1000",
-      "pageId": "ranking:persons-on-public-assistance-per-1000",
+      "pageId": null,
       "title": "生活保護被保護実人員",
       "sources": [
         {
@@ -6615,6 +6615,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "pharmaceutical-sales-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -6628,7 +6629,7 @@
     },
     {
       "metricKey": "pharmaceutical-sales-count-per-100k",
-      "pageId": "ranking:pharmaceutical-sales-count-per-100k",
+      "pageId": null,
       "title": "医薬品販売業数",
       "sources": [
         {
@@ -6660,7 +6661,7 @@
     },
     {
       "metricKey": "pharmaceutical-sales-count-per-100km2",
-      "pageId": "ranking:pharmaceutical-sales-count-per-100km2",
+      "pageId": null,
       "title": "医薬品販売業数",
       "sources": [
         {
@@ -7433,7 +7434,7 @@
     },
     {
       "metricKey": "physical-disability-certificates-issued-per-1000",
-      "pageId": "ranking:physical-disability-certificates-issued-per-1000",
+      "pageId": null,
       "title": "身体障害者手帳交付数",
       "sources": [
         {
@@ -7742,7 +7743,7 @@
     },
     {
       "metricKey": "physical-disability-rehabilitation-cases-per-1000",
-      "pageId": "ranking:physical-disability-rehabilitation-cases-per-1000",
+      "pageId": null,
       "title": "身体障害者更生援護取扱実人員",
       "sources": [
         {
@@ -7809,7 +7810,7 @@
     },
     {
       "metricKey": "physical-disability-rehabilitation-center-cases-per-1000",
-      "pageId": "ranking:physical-disability-rehabilitation-center-cases-per-1000",
+      "pageId": null,
       "title": "身体障害者更生相談所取扱実人員",
       "sources": [
         {
@@ -7884,7 +7885,7 @@
     },
     {
       "metricKey": "physical-disability-rehabilitation-facility-capacity-per-100k",
-      "pageId": "ranking:physical-disability-rehabilitation-facility-capacity-per-100k",
+      "pageId": null,
       "title": "身体障害者更生援護施設定員数",
       "sources": [
         {
@@ -7995,7 +7996,7 @@
     },
     {
       "metricKey": "physical-disability-rehabilitation-facility-residents-per-100k",
-      "pageId": "ranking:physical-disability-rehabilitation-facility-residents-per-100k",
+      "pageId": null,
       "title": "身体障害者更生援護施設在所者数",
       "sources": [
         {
@@ -8363,7 +8364,7 @@
     },
     {
       "metricKey": "physicians-in-medical-facilities-per-100k",
-      "pageId": "ranking:physicians-in-medical-facilities-per-100k",
+      "pageId": null,
       "title": "医師数",
       "sources": [
         {

@@ -1711,7 +1711,7 @@
     },
     {
       "metricKey": "psychiatric-bed-count-per-100k",
-      "pageId": "ranking:psychiatric-bed-count-per-100k",
+      "pageId": null,
       "title": "精神病床数",
       "sources": [
         {
@@ -1869,6 +1869,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "psychiatric-hospital-count-per-100k",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -1894,7 +1895,7 @@
     },
     {
       "metricKey": "psychiatric-hospital-count-per-100k",
-      "pageId": "ranking:psychiatric-hospital-count-per-100k",
+      "pageId": null,
       "title": "精神科病院数",
       "sources": [
         {
@@ -2351,7 +2352,9 @@
         "configHash": "863dc85b42020a3a"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "per-capita-public-assistance-expenditure-protected-pref-municipal"
+      ],
       "consumers": [
         {
           "pageId": "area-theme:01000:public-assistance",
@@ -3021,6 +3024,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "public-bath-count-per-100k",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -3034,7 +3038,7 @@
     },
     {
       "metricKey": "public-bath-count-per-100k",
-      "pageId": "ranking:public-bath-count-per-100k",
+      "pageId": null,
       "title": "公衆浴場数",
       "sources": [
         {
@@ -4901,7 +4905,7 @@
     },
     {
       "metricKey": "public-health-nurse-count-per-100k",
-      "pageId": "ranking:public-health-nurse-count-per-100k",
+      "pageId": null,
       "title": "保健師数",
       "sources": [
         {
@@ -5474,7 +5478,7 @@
     },
     {
       "metricKey": "public-phone-count-per-1000",
-      "pageId": "ranking:public-phone-count-per-1000",
+      "pageId": null,
       "title": "公衆電話設置台数",
       "sources": [
         {

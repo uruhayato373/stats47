@@ -97,6 +97,11 @@ export const juvenileCriminalArrestPerson: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "juvenile-criminal-arrest-person-per-population",
+        "label": "14～19歳人口千人当たり",
+      },
     ],
   },
   "groupKey": "juvenile-criminal-arrest-person",

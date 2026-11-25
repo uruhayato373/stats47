@@ -98,6 +98,11 @@ export const postOfficeCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "post-office-count-per-100km2",
+        "label": "可住地面積100km²当たり",
+      },
     ],
   },
   "groupKey": "post-office-count",

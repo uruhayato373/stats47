@@ -3049,6 +3049,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "block-park-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -3062,7 +3063,7 @@
     },
     {
       "metricKey": "block-park-count-per-100km2",
-      "pageId": "ranking:block-park-count-per-100km2",
+      "pageId": null,
       "title": "街区公園数",
       "sources": [
         {
@@ -4030,6 +4031,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "book-magazine-retail-annual-sales-per-capita",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -4043,7 +4045,7 @@
     },
     {
       "metricKey": "book-magazine-retail-annual-sales-per-capita",
-      "pageId": "ranking:book-magazine-retail-annual-sales-per-capita",
+      "pageId": null,
       "title": "書籍・雑誌小売業年間商品販売額",
       "sources": [
         {
@@ -6038,7 +6040,9 @@
         "configHash": "dc40fe79ee3679a6"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "building-fire-damage-amount-per-person"
+      ],
       "consumers": [
         {
           "pageId": "ranking:building-fire-damage-amount-per-building-fire",
@@ -6049,7 +6053,7 @@
     },
     {
       "metricKey": "building-fire-damage-amount-per-person",
-      "pageId": "ranking:building-fire-damage-amount-per-person",
+      "pageId": null,
       "title": "建物火災損害額",
       "sources": [
         {

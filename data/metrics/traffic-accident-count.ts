@@ -102,6 +102,11 @@ export const trafficAccidentCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "traffic-accident-count-per-1000-km",
+        "label": "道路1000km当たり",
+      },
     ],
   },
   "groupKey": "traffic-accident-count",

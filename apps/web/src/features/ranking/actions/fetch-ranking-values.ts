@@ -10,6 +10,8 @@ import {
 } from "@stats47/ranking/server";
 import { err, isOk, ok, type Result } from "@stats47/types";
 
+import { findSeriesOption } from "../utils";
+
 import { sanitizeNormalizationType } from "./normalization-types";
 
 import type { RankingValue } from "@stats47/ranking";
@@ -39,9 +41,31 @@ export async function fetchRankingValuesAction(
     // normalizationType は ?norm= query param 由来でユーザー制御値。
     // 後続の R2 キーパス生成に流入するため、固定 whitelist でのみ受理する。
     const safeNormalizationType = sanitizeNormalizationType(normalizationType);
+    // 別の指標の公表値を出す見方 (series)。指標のキーは item の選択肢と一致したものだけを使う (?norm= の値をキーに直接使わない)
+    const seriesOption = findSeriesOption(rankingItem, normalizationType);
 
-    // 正規化が指定されている場合
-    if (safeNormalizationType) {
+    if (seriesOption) {
+      const result = await readRankingValuesFromR2(seriesOption.metric, areaType, yearCode);
+      if (!isOk(result)) return result;
+      values = result.data;
+      // 系列の年は親と揃わないことがある (製造品出荷額等は 2024 年、従業者1人当たりは 2023 年まで)。
+      // 選んだ年の値が無ければ、その系列の選んだ年以前で最も新しい年を返す。行の yearCode で画面の年も合わせる
+      if (values.length === 0) {
+        const seriesItem = await readRankingItemFromR2(seriesOption.metric, areaType);
+        const fallbackYear = isOk(seriesItem)
+          ? (seriesItem.data?.availableYears ?? [])
+              .map((year) => year.yearCode)
+              .filter((code) => code.slice(0, 4) <= yearCode.slice(0, 4))
+              .sort()
+              .at(-1)
+          : undefined;
+        if (fallbackYear) {
+          const fallback = await readRankingValuesFromR2(seriesOption.metric, areaType, fallbackYear);
+          if (isOk(fallback)) values = fallback.data;
+        }
+      }
+    } else if (safeNormalizationType) {
+      // 人口・面積で割る見方
       // 事前計算済み R2 スナップショットを優先使用
       const normResult = await readNormalizedRankingValuesFromR2(
         rankingKey,

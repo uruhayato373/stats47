@@ -195,6 +195,19 @@ describe('旧 ranking slug の現行ページ移行', () => {
         '?utm_source=x&utm_medium=social'
     );
   });
+
+  // 2026-11-25: 同じ指標の見方違いのページを、親のページの計算方法 (?norm=) へ統合した
+  test.each([
+    ['manufacturing-shipment-amount-per-employee', 'manufacturing-shipment-amount', 'manufacturing-shipment-amount-per-employee'],
+    ['kidney-failure-death-rate', 'kidney-failure-death-count', 'per_population'],
+  ])('見方違いのページ %s を親 %s の見方 %s へ一段で301する', (source, destination, norm) => {
+    const response = middleware(request('/ranking/' + source + '?utm_source=x'));
+
+    expect(response.status).toBe(301);
+    expect(response.headers.get('location')).toBe(
+      'https://stats47.jp/ranking/' + destination + '?utm_source=x&norm=' + norm
+    );
+  });
 });
 
 describe('同じ調査の別ハブの統合', () => {

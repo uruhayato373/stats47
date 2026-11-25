@@ -8519,6 +8519,8 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "high-school-count-per-100k-15-17",
+        "high-school-count-per-100km2-habitable",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -8734,7 +8736,7 @@
     },
     {
       "metricKey": "high-school-count-per-100k-15-17",
-      "pageId": "ranking:high-school-count-per-100k-15-17",
+      "pageId": null,
       "title": "高等学校数",
       "sources": [
         {
@@ -8766,7 +8768,7 @@
     },
     {
       "metricKey": "high-school-count-per-100km2-habitable",
-      "pageId": "ranking:high-school-count-per-100km2-habitable",
+      "pageId": null,
       "title": "高等学校数",
       "sources": [
         {
