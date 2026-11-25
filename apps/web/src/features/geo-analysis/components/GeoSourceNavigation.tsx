@@ -5,7 +5,6 @@ import {
 } from '@stats47/components/atoms/ui/sidebar';
 
 import Link from '@/components/atoms/SiteLink';
-import { ContentDisclosure } from '@/components/content';
 import { RailCard } from '@/components/surface';
 
 import { getGeoSourceNavigation } from '../lib/geo-source-navigation';
@@ -26,7 +25,15 @@ const RELATED_LINKS = [
   { href: '/geo', label: '重ね合わせた地域分析を見る' },
 ] as const;
 
-/** Same complete list in the desktop rail and the mobile top disclosure. */
+/** 一覧の置き場所 (レールのカード) の id。モバイルの先頭の入口はここへ飛ぶ。 */
+export const GEO_SOURCE_NAVIGATION_ID = 'geo-source-navigation';
+
+/**
+ * 一覧の本体は右レールのカード 1 つだけを描く (モバイルでは PageShell が本文の下へ置く)。
+ * 以前はモバイル先頭の開閉と右レールの両方が同じ 50 件を描き、同じリンクが HTML に 2 回出て
+ * ページ品質の duplicate_link_ratio が error になっていた (2026-11-20 の監査で /geo/datasets/* 50 件)。
+ * `mobile` は本文の先頭に置く、一覧への入口 (ページ内リンク) だけを描く。
+ */
 export function GeoSourceNavigation({
   catalog,
   currentDataId,
@@ -60,14 +67,18 @@ export function GeoSourceNavigation({
   );
   if (mobile) {
     return (
-      <ContentDisclosure title={title} className="mb-3 rail:hidden">
-        {body}
-      </ContentDisclosure>
+      <p className="mb-3 rail:hidden">
+        <a
+          href={`#${GEO_SOURCE_NAVIGATION_ID}`}
+          className="inline-flex min-h-11 items-center text-sm text-primary underline"
+        >
+          {title}へ移動する
+        </a>
+      </p>
     );
   }
-  // PageShell also places its rail below the article on mobile; use the top disclosure there.
   return (
-    <div className="hidden rail:block">
+    <div id={GEO_SOURCE_NAVIGATION_ID}>
       <RailCard title={title}>{body}</RailCard>
     </div>
   );
