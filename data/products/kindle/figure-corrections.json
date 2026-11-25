@@ -388,13 +388,6 @@
         "after": ">人口が少ない県ほど1人当たり教育費が高い──小規模校の維持費が一因の可能性<",
         "reason": "[K-S1-05 v7 M01] 因果の断定 (本章に学校規模のデータは無い)"
       }
-    ],
-    "university-advancement-capacity/capacity-index-map": [
-      {
-        "before": ">2024年<",
-        "after": ">2024年度<",
-        "reason": "[K-S1-05 v7 B03] 学校基本調査の年度値 (title と表示の 2 か所)"
-      }
     ]
   },
   "notes": {
