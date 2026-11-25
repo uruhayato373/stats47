@@ -28,8 +28,8 @@
  * Usage:
  *   node .claude/scripts/lib/check-agent-skill-consistency.cjs            # 全検査 (report)。error あれば exit 1
  *   node .claude/scripts/lib/check-agent-skill-consistency.cjs --json     # JSON 出力
- *   node .claude/scripts/lib/check-agent-skill-consistency.cjs --gate     # Stop hook 用。未監査の関連変更があれば exit 2
- *   node .claude/scripts/lib/check-agent-skill-consistency.cjs --mark-audited  # 現在の関連変更を監査済みとして記録
+ *   node .claude/scripts/lib/check-agent-skill-consistency.cjs --gate [--transcript <jsonl>]  # Stop hook 用。未監査の関連変更があれば exit 2 (transcript 指定時はこの会話で Edit/Write した分だけ)
+ *   node .claude/scripts/lib/check-agent-skill-consistency.cjs --mark-audited [--transcript <jsonl>]  # 現在の関連変更を監査済みとして記録 (gate と同じ範囲で)
  *
  * 正典: docs/01_技術設計 ではなく運用ガード。関連: .claude/hooks/check-consistency-on-stop.js /
  *       .claude/skills/dev/audit-consistency/SKILL.md / memory project_recurrence_guard_scripts
@@ -871,6 +871,41 @@ function relevantChangedFiles() {
   return [...new Set(files)].sort();
 }
 
+/**
+ * この会話の transcript (JSONL) で Edit / Write / MultiEdit / NotebookEdit したファイルを ROOT 相対で返す。
+ * check-findings-on-stop.js と同じく、関係しそうな行だけを JSON として解く (50MB 級でも速い)。
+ * 読めなければ null (呼び出し側は作業ツリー全体の差分に戻す)。
+ */
+function editedFilesFromTranscript(transcriptPath) {
+  let text;
+  try {
+    text = fs.readFileSync(transcriptPath, "utf8");
+  } catch {
+    return null;
+  }
+  const edited = new Set();
+  const editTools = new Set(["Edit", "Write", "MultiEdit", "NotebookEdit"]);
+  for (const line of text.split("\n")) {
+    if (!line.includes('"tool_use"') || !(line.includes("file_path") || line.includes("notebook_path"))) continue;
+    let entry;
+    try {
+      entry = JSON.parse(line);
+    } catch {
+      continue;
+    }
+    if (entry.type !== "assistant" || !Array.isArray(entry.message?.content)) continue;
+    for (const block of entry.message.content) {
+      if (block.type !== "tool_use" || !editTools.has(block.name)) continue;
+      const target = String(block.input?.file_path ?? block.input?.notebook_path ?? "");
+      if (!target) continue;
+      const abs = path.isAbsolute(target) ? target : path.join(ROOT, target);
+      const rel = path.relative(ROOT, abs).split(path.sep).join("/");
+      if (rel && !rel.startsWith("..")) edited.add(rel);
+    }
+  }
+  return edited;
+}
+
 function changesetHash(files) {
   const h = crypto.createHash("sha256");
   for (const f of files) {
@@ -915,8 +950,16 @@ function runChecks({ orphan, scope }) {
   return findings;
 }
 
+/** --transcript <path> があれば、関連変更をこの会話で Edit/Write した分に絞る。transcript が読めなければ null。 */
+function transcriptEdits() {
+  const index = args.indexOf("--transcript");
+  return index >= 0 ? editedFilesFromTranscript(args[index + 1] ?? "") : null;
+}
+
 if (has("--mark-audited")) {
-  const files = relevantChangedFiles() || [];
+  const all = relevantChangedFiles() || [];
+  const mineForMark = transcriptEdits();
+  const files = mineForMark ? all.filter((f) => mineForMark.has(f)) : all;
   fs.mkdirSync(path.dirname(AUDIT_MARKER), { recursive: true });
   const hash = changesetHash(files);
   fs.writeFileSync(
@@ -929,8 +972,15 @@ if (has("--mark-audited")) {
 
 if (has("--gate")) {
   // Stop hook 用。出力は最小・人間/agent 向け。
-  const files = relevantChangedFiles();
+  let files = relevantChangedFiles();
   if (files === null || files.length === 0) process.exit(0); // git無し or 関連変更なし → 黙る
+  // --transcript <path>: この会話で Edit/Write したファイルだけを数える (HOOK-STOP-AUDIT-SCOPE-01)。
+  // 他セッションだけが変えた状態では差し戻さない。transcript が読めなければ作業ツリー全体の差分のまま。
+  const mine = transcriptEdits();
+  if (mine) {
+    files = files.filter((f) => mine.has(f));
+    if (files.length === 0) process.exit(0);
+  }
   const marker = readMarker();
   const hash = changesetHash(files);
   if (marker && marker.hash === hash) process.exit(0); // 監査済み → 黙る
@@ -938,14 +988,15 @@ if (has("--gate")) {
   const findings = runChecks({ orphan: false, scope: new Set(files) });
   const errs = findings.filter((f) => f.level === "error");
   const lines = [];
-  // ★「この会話で」ではない: 見ているのは git status = **作業ツリー全体の未コミット差分**。
-  // 並行セッションが同じツリーを触ると件数が増え続け、--mark-audited しても指紋が変わって
-  // また止まる (2026-09-06 に 18 → 26 → 34 件と 3 回発火した)。文言を実態に合わせる。
-  // 恒久対処は worktree 分離 (memory feedback_shared_working_copy_git_race)。
+  // --transcript 無しのときは git status = 作業ツリー全体の未コミット差分を数える。並行セッションが
+  // 同じツリーを触ると件数が増え続け、--mark-audited しても指紋が変わってまた止まる
+  // (2026-09-06 に 18 → 26 → 34 件と 3 回発火した)。hook は --transcript を渡して会話の分に絞る。
   lines.push(
-    `⚠️ 整合性監査が未実施です。作業ツリーに未コミットの agent/skill/script/hook 変更が ${files.length} 件あります。`
+    mine
+      ? `⚠️ 整合性監査が未実施です。この会話で変更した未コミットの agent/skill/script/hook ファイルが ${files.length} 件あります。`
+      : `⚠️ 整合性監査が未実施です。作業ツリーに未コミットの agent/skill/script/hook 変更が ${files.length} 件あります。`
   );
-  lines.push(`(並行セッションと作業ツリーを共有している場合、他セッションの変更も数に入ります)`);
+  if (!mine) lines.push(`(transcript が無いため作業ツリー全体を数えています。並行セッションの変更も数に入ります)`);
   lines.push(`完了前に確認してください (CLAUDE.md 行動原則8「書く前に読む」)。`);
   lines.push(``);
   lines.push(`1) 機械チェック: node .claude/scripts/lib/check-agent-skill-consistency.cjs`);
@@ -958,7 +1009,8 @@ if (has("--gate")) {
   lines.push(`   - 消費側の前提 (ファイル名規約 / glob / スキーマ) は実装上ほんとうに成立するか?`);
   lines.push(`   - doc/memory に書いた「○○は××しない」を実装で確認したか?`);
   lines.push(`   - 新規 skill/agent を参照すべき index/agent doc/cadence (weekly-review 等) を更新したか?`);
-  lines.push(`3) 解除: node .claude/scripts/lib/check-agent-skill-consistency.cjs --mark-audited`);
+  const transcriptArg = mine ? ` --transcript ${args[args.indexOf("--transcript") + 1]}` : "";
+  lines.push(`3) 解除: node .claude/scripts/lib/check-agent-skill-consistency.cjs --mark-audited${transcriptArg}`);
   lines.push(``);
   lines.push(`変更: ${files.slice(0, 12).join(", ")}${files.length > 12 ? " …" : ""}`);
   process.stdout.write(lines.join("\n") + "\n");

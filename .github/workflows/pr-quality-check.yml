@@ -932,6 +932,8 @@ jobs:
           npx tsx packages/r2-storage/scripts/generate-r2-keys-mirror.ts --check
           # 入口 (keys.ts・鏡・r2-key-classes・接続の部品) の外での R2 のキー・公開 URL・S3 クライアントの直書きを止める (縮小専用)
           node packages/r2-storage/scripts/check-r2-entrypoint.mjs
+          # e-Stat の入口 (取得・年・地域の部品の外での直書きを止める。縮小専用)
+          node packages/data-configs/scripts/check-estat-entrypoint.mjs
           node --import tsx packages/data-configs/scripts/generate-year-code-mirror.ts --check
           node packages/area/scripts/check-area-year-entrypoint.mjs
           # apps・packages・config が .claude を読まない (本番コードもテストも。例外は管理画面が運用の状態をデータとして読むものだけ。縮小専用)

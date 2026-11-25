@@ -11,7 +11,6 @@ const AS_OF = new Date("2026-09-27T00:00:00Z");
 const pass = (source, extra = {}) => ({ source, status: "pass", code: null, observedAt: "2026-09-24T14:15:00Z", ...extra });
 const authRequired = (source) => ({
   source, status: "failed", code: "auth_required", observedAt: "2026-09-24T14:15:00Z",
-  recovery: { state: "awaiting_reauthentication", blockedSince: "2026-09-21T12:30:00Z" },
 });
 const A8 = { records: [
   { month: "2026-08", conversions: 9, approved: 9, revenueYen: 900 },
@@ -26,7 +25,7 @@ test("成功した ASP は最新月の発生と確定を件数と金額で出す
 test("認証切れは 0 円ではなく判定不能と理由を出す (記録ファイルが残っていても使わない)", () => {
   const [a8] = aspRevenueLines({ authLatest: { sources: [authRequired("a8")] }, a8Results: A8, asOf: AS_OF });
   assert.match(a8, /判定不能/);
-  assert.match(a8, /認証切れ（2026-09-21 から）/);
+  assert.match(a8, /認証切れ。再ログインが必要/);
   assert.doesNotMatch(a8, /¥/);
 });
 

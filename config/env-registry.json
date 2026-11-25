@@ -80,13 +80,6 @@
       ]
     },
     {
-      "name": "MEASUREMENT_BROWSER_OUTPUT_STATE_PATH",
-      "visibility": "server",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
       "name": "MEASUREMENT_VAULT_KEY",
       "visibility": "secret",
       "contexts": [

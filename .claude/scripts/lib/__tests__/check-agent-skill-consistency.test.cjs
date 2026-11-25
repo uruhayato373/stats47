@@ -575,3 +575,48 @@ test("E13: 4 体以上の agent に同じ方針の行を写すと止め、正典
   t.after(() => fs.rmSync(fewRoot, { recursive: true }));
   assert.doesNotMatch(run(fewRoot).stdout, /\[E13\]/);
 });
+
+test("gate: --transcript を渡すと、この会話で Edit/Write したファイルだけを数え、他セッションだけの変更では差し戻さない (HOOK-STOP-AUDIT-SCOPE-01)", (t) => {
+  const root = fixture({
+    ".claude/skills/mine/SKILL.md": "# mine\n",
+    ".claude/skills/other/SKILL.md": "# other\n",
+  });
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  spawnSync("git", ["init", "-q"], { cwd: root, encoding: "utf8" });
+  const edit = (name, filePath) =>
+    JSON.stringify({ type: "assistant", message: { role: "assistant", content: [{ type: "tool_use", id: "t1", name, input: { file_path: filePath } }] } });
+  const transcript = (lines) => {
+    const file = path.join(os.tmpdir(), `stats47-transcript-${process.pid}-${Math.random().toString(36).slice(2)}.jsonl`);
+    fs.writeFileSync(file, lines.join("\n") + "\n");
+    t.after(() => fs.rmSync(file, { force: true }));
+    return file;
+  };
+  const invoke = (...flags) =>
+    spawnSync(process.execPath, [CHECKER, ...flags], {
+      cwd: root,
+      encoding: "utf8",
+      env: { ...process.env, STATS47_SCAN_ROOT: root },
+    });
+
+  // 他セッションだけが変えた状態: この会話は関連ファイルを触っていない → 黙る (transcript 無しは従来どおり差し戻す)
+  const untouched = transcript([edit("Edit", path.join(root, "docs/unrelated.md"))]);
+  assert.equal(invoke("--gate", "--transcript", untouched).status, 0);
+  assert.equal(invoke("--gate").status, 2);
+
+  // この会話で 1 件だけ触った → その 1 件だけを数えて差し戻す
+  const touched = transcript([edit("Write", path.join(root, ".claude/skills/mine/SKILL.md"))]);
+  const blocked = invoke("--gate", "--transcript", touched);
+  assert.equal(blocked.status, 2);
+  assert.match(blocked.stdout, /この会話で変更した.*1 件/);
+  assert.match(blocked.stdout, /mine\/SKILL\.md/);
+  assert.doesNotMatch(blocked.stdout, /other\/SKILL\.md/);
+
+  // 同じ範囲で監査済みにすると通る。他セッションが別のファイルを変えても指紋は変わらない
+  assert.equal(invoke("--mark-audited", "--transcript", touched).status, 0);
+  assert.equal(invoke("--gate", "--transcript", touched).status, 0);
+  fs.writeFileSync(path.join(root, ".claude/skills/other/SKILL.md"), "# other changed by another session\n");
+  assert.equal(invoke("--gate", "--transcript", touched).status, 0);
+
+  // transcript が読めなければ作業ツリー全体に戻る
+  assert.equal(invoke("--gate", "--transcript", path.join(root, "missing.jsonl")).status, 2);
+});
