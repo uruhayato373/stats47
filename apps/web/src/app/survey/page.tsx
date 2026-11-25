@@ -10,15 +10,13 @@ import {
   readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
-import { Building2 } from "lucide-react";
 
 import Link from "@/components/atoms/SiteLink";
 import { PageShell, PageHeader, PanelGrid, Breadcrumbs } from "@/components/layout";
-import { LinkRowNav } from "@/components/navigation/StatisticsScopeNav";
 import { SectionHeader } from "@/components/section";
-import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
 import { AdRow, composeAdRows, InFeedAdSlot } from "@/features/ads";
+import { SurveyMinistryNav } from "@/features/survey";
 import { groupSurveysByMinistry } from "@/features/survey/group-surveys-by-ministry";
 
 import { CONTENT_FOOTER, SURVEY_INDEX_INFEED } from "@/lib/google-adsense";
@@ -88,11 +86,7 @@ export default async function SurveyIndexPage() {
 
   // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
   const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
-  const ministryItems = groups.map((group) => ({
-    key: group.id,
-    label: `${group.label} ${group.surveys.length}`,
-    href: `#${group.id}`,
-  }));
+  const ministryItems = groups.map((group) => ({ id: group.id, label: group.label, count: group.surveys.length }));
 
   const header = (
     <>
@@ -112,19 +106,12 @@ export default async function SurveyIndexPage() {
   );
 
   // 府省庁から探す (2026-11-26 オーナー決定): 本文の横に右レールがある幅は右レールに追従させ、
-  // 右レールが本文の下に回る幅 (モバイル・タブレット) はヘッダーの下に横に送れる列で追従させる
+  // 右レールが本文の下に回る幅 (モバイル・タブレット) はヘッダーの下に横に送れる列で追従させる。
+  // どちらも今いる府省庁を強調するので、本文の府省庁の見出しは画面に出さない
   const rightRail =
     groups.length > 1 ? (
       <div className="hidden rail:sticky rail:top-14 rail:block">
-        <RailCard title="府省庁から探す" icon={<Building2 />}>
-          <RailLinkList aria-label="府省庁から探す">
-            {groups.map((group) => (
-              <RailNavRow key={group.id} href={`#${group.id}`} trailing={group.surveys.length} chevron={false}>
-                {group.label}
-              </RailNavRow>
-            ))}
-          </RailLinkList>
-        </RailCard>
+        <SurveyMinistryNav items={ministryItems} variant="rail" />
       </div>
     ) : undefined;
 
@@ -132,7 +119,7 @@ export default async function SurveyIndexPage() {
     <PageShell header={header} rightRail={rightRail}>
       {groups.length > 1 && (
         <div data-cell="flush" className="sticky top-14 z-10 bg-background px-4 py-2 rail:hidden">
-          <LinkRowNav label="府省庁から探す" items={ministryItems} />
+          <SurveyMinistryNav items={ministryItems} variant="chips" />
         </div>
       )}
 
@@ -140,10 +127,11 @@ export default async function SurveyIndexPage() {
         const start = groupStarts[position] ?? 0;
         return (
           <PanelGrid as="section" key={group.id} id={group.id} className="scroll-mt-28" aria-labelledby={`${group.id}-title`}>
+            {/* 見出しは読み上げと検索エンジン向けだけに残す (画面では府省庁の一覧の強調が今いる府省庁を示す) */}
             <SectionHeader
-              title={<span id={`${group.id}-title`}>{group.label}</span>}
-              description={`${group.surveys.length} 調査`}
+              title={<span id={`${group.id}-title`}>{group.label}（{group.surveys.length} 調査）</span>}
               hideRule
+              className="sr-only p-0!"
             />
             <PanelGrid className="@md:grid-cols-2 @lg:grid-cols-3">
               {group.surveys.map((survey, groupIndex) => {
