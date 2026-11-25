@@ -28,6 +28,8 @@ import {
   partitionByLimits,
   saveTopoJson,
 } from '../converter';
+import { datasetPath } from '../../../../../config/datasets.mjs';
+import { observeGeoJsonFile, recordObservedAttributes } from '../attribute-inventory';
 import { GIS_DATASETS_BY_ID, type GisDatasetMeta } from '../datasets';
 import { cleanupTempFiles, downloadZip, extractGeoJson } from '../downloader';
 import {
@@ -190,6 +192,17 @@ async function processArchive(options: {
     }> = [];
     try {
       const geojsonFiles = await extractGeoJson(sourceZipPath, '', getCodeConfig(dataset.dataId)?.shapefileEncoding);
+      // 公式の GeoJSON が実際に持っていた属性名を記録する (GIS-ATTRIBUTE-LEDGER-01)
+      const observedAttributes = [];
+      for (const file of geojsonFiles) {
+        observedAttributes.push(
+          await observeGeoJsonFile(file, { dataId: dataset.dataId, version: sourceArchive.version })
+        );
+      }
+      recordObservedAttributes(
+        path.join(PROJECT_ROOT, datasetPath('geo.ksj-attribute-inventory')),
+        observedAttributes
+      );
       const groups = partitionByLimits(
         geojsonFiles,
         (file) => statSync(file).size,

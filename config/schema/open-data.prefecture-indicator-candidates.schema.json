@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "都道府県の公式統計から拾う指標候補の台帳",
+  "description": "data/open-data/prefecture-statistics/indicator-candidates.json の形状契約 (PREF-OFFICIAL-STATS-01)。入口の台帳 open-data.prefecture-statistics (resources.json) が持つ県の公式統計の入口から、実ページをたどって拾った指標候補を 1 行 1 候補で記録する。入口の URL だけでは指標の定義が分からないので、統計名と指標候補の名前は実ページの原文のまま書く。hasPrefectureGranularity は、47 都道府県そろって同じ定義で比べられるデータが一次資料にあるかの確認結果で、確かめていない間は行を足さない。overlappingMetricKeys は既存の指標 (registry) と重なるキー。重ならないときは空配列で、確認日 verifiedAt はその重なりを調べた日。列を足すときは先にここへ足す。",
+  "type": "object",
+  "required": ["candidates"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "prefectureCode", "resourceId", "entryUrl", "statName", "indicatorCandidate", "hasPrefectureGranularity", "overlappingMetricKeys", "verifiedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "description": "<都道府県コード>-<候補の名前>。候補の移転・改名でも維持する", "type": "string", "pattern": "^\\d{2}-[a-z][a-z0-9-]*$" },
+          "prefectureCode": { "description": "候補を見つけた県。JIS X 0401 の 2 桁コード", "type": "string", "pattern": "^\\d{2}$" },
+          "resourceId": { "description": "どの入口 (resources.json の id) から見つけたか", "type": "string", "minLength": 1 },
+          "entryUrl": { "description": "候補が載っている実ページの URL", "type": "string", "pattern": "^https://" },
+          "statName": { "description": "実ページに出ている統計名 (原文)", "type": "string", "minLength": 1 },
+          "indicatorCandidate": { "description": "指標候補の名前 (原文)", "type": "string", "minLength": 1 },
+          "hasPrefectureGranularity": { "description": "47 都道府県そろって同じ定義で取れる一次資料があるか", "type": "boolean" },
+          "overlappingMetricKeys": {
+            "description": "重なる既存の指標のキー (registry)。重ならないときは空配列",
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "verifiedAt": { "description": "実ページと既存指標との重なりを確認した日", "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "notes": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

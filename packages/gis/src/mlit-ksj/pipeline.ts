@@ -20,6 +20,7 @@ import type {
   KsjResolvedDataset,
   KsjSimplifyOptions,
 } from "./types";
+import { observeGeoJsonFile, type ObservedAttributes } from "./attribute-inventory";
 import { getCodeConfig } from "./registry";
 import { GIS_DATASETS_BY_ID } from "./datasets";
 import {
@@ -153,8 +154,10 @@ export async function runKsjPipeline(
 
   // 3. 変換 & 保存
   const outputFiles: KsjPipelineResult["outputFiles"] = [];
+  const observedAttributes: ObservedAttributes[] = [];
 
   for (const geojsonPath of geojsonFiles) {
+    observedAttributes.push(await observeGeoJsonFile(geojsonPath, { dataId: def.dataId, version }));
     const { topology, featureCount } = convertGeoJsonToTopoJson(
       geojsonPath,
       def.dataId,
@@ -224,5 +227,6 @@ export async function runKsjPipeline(
     meshCode: options.meshCode,
     outputFiles,
     totalDurationMs,
+    observedAttributes,
   };
 }
