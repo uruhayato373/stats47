@@ -21,7 +21,7 @@
  *   | generate-known-tag-keys | 単一 bulk fetch + throw + 空ガード | なし |
  *   | generate-unpublished-blog-slugs | 同上 | なし |
  *   | generate-sitemap-blog-entries | bulk fetch 2 本 + throw + 空ガード | なし |
- *   | .claude/scripts/gsc/build-sitemap-ranking-keys.cjs | ネットワーク無し (KNOWN から導出) | なし |
+ *   | .claude/scripts/gsc/build-sitemap-ranking-keys.cjs | キー集合はネットワーク無し (KNOWN から導出)。lastmod だけ per-key HEAD (values.json) | なし (取れなかった日付は前回値を据え置き、キー集合は触らない) |
  *
  *   人が気づくためのゲートは `sync-snapshots.yml` の「Open PR if keys changed」が持つ
  *   (キー数の増減を Step Summary と PR 本文に出し、減少に ⚠️ を付ける)。

@@ -18,7 +18,16 @@
  * さらに既存 INDEXABLE_RANKING_KEYS も和集合に含め、過去に indexable 判定された
  * キーの取りこぼしを防ぐ (二重の安全弁)。
  *
+ * ## キーごとの lastmod (GSC-SITEMAP-LASTMOD-01・2026-11-25)
+ * 出力には SITEMAP_RANKING_LASTMOD (key → YYYY-MM-DD) も別ファイルへ出す。値は R2 の
+ * `app/stats/<key>/values.json` の Last-Modified (R2_PUBLIC_FETCH_URL 経由の HEAD)。
+ * 差分 push (packages/r2-storage/src/scripts/diff-push-r2.ts) は R2 上の size と ETag(md5) が
+ * 同じ object を送り直さないため、この日付は「values.json の中身が最後に変わった日」を指す。
+ * 判定できないキー (404・5xx・Last-Modified 無し) は前回の値を残し、前回も無ければ載せない
+ * (根拠の無い日付を作らない)。R2_PUBLIC_FETCH_URL が無いときは全キー前回の値を残す。
+ *
  * 出力: apps/web/src/config/sitemap-ranking-keys.ts (SITEMAP_RANKING_KEYS)
+ *       apps/web/src/config/sitemap-ranking-lastmod.ts (SITEMAP_RANKING_LASTMOD)
  * 再生成: node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs
  */
 
@@ -34,6 +43,12 @@ const SNAPSHOTS_DIR = path.join(
 const OUT_FILE = path.join(
   PROJECT_ROOT,
   "apps/web/src/config/sitemap-ranking-keys.ts",
+);
+
+/** キーごとの lastmod は別ファイル。SITEMAP_RANKING_KEYS は middleware (Edge) の束にも入るため、日付 2,600 行を同じファイルに足さない */
+const LASTMOD_OUT_FILE = path.join(
+  PROJECT_ROOT,
+  "apps/web/src/config/sitemap-ranking-lastmod.ts",
 );
 
 const IMPRESSION_THRESHOLD = 1;
@@ -92,7 +107,68 @@ function knownRankingKeys() {
   return keys;
 }
 
-function main() {
+/** 前回の出力から SITEMAP_RANKING_LASTMOD を読む (取得できなかったキーの据え置き用) */
+function previousLastmod() {
+  const map = new Map();
+  if (!fs.existsSync(LASTMOD_OUT_FILE)) return map;
+  const text = fs.readFileSync(LASTMOD_OUT_FILE, "utf8");
+  const re = /^ {2}\["([a-z0-9][a-z0-9-]*)", "(\d{4}-\d{2}-\d{2})"\],$/gm;
+  let m;
+  while ((m = re.exec(text))) map.set(m[1], m[2]);
+  return map;
+}
+
+/** Last-Modified ヘッダを YYYY-MM-DD (UTC) にする。読めなければ null */
+function toIsoDay(header) {
+  if (!header) return null;
+  const t = Date.parse(header);
+  return Number.isFinite(t) ? new Date(t).toISOString().slice(0, 10) : null;
+}
+
+/** values.json の Last-Modified を 1 キー分取る。判定できなければ null (呼び出し側が前回値を残す) */
+async function fetchValuesLastmod(baseUrl, key) {
+  const url = `${baseUrl.replace(/\/$/, "")}/app/stats/${encodeURIComponent(key)}/values.json`;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(url, { method: "HEAD" });
+      if (res.ok) return toIsoDay(res.headers.get("last-modified"));
+      if (res.status === 404) return null;
+    } catch {
+      // ネットワーク由来の失敗はリトライし、尽きたら null
+    }
+    await new Promise((r) => setTimeout(r, 500 * attempt));
+  }
+  return null;
+}
+
+/** キーごとの lastmod。取得できたものは新しい値、できなかったものは前回の値を残す */
+async function buildLastmod(keys, previous) {
+  const baseUrl = process.env.R2_PUBLIC_FETCH_URL;
+  const result = new Map();
+  let fetched = 0;
+  let kept = 0;
+  let missing = 0;
+  const queue = [...keys];
+  const worker = async () => {
+    while (queue.length > 0) {
+      const key = queue.shift();
+      const day = baseUrl ? await fetchValuesLastmod(baseUrl, key) : null;
+      if (day) {
+        result.set(key, day);
+        fetched++;
+      } else if (previous.has(key)) {
+        result.set(key, previous.get(key));
+        kept++;
+      } else {
+        missing++;
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: 16 }, worker));
+  return { result, fetched, kept, missing, networked: Boolean(baseUrl) };
+}
+
+async function main() {
   const weeks = fs
     .readdirSync(SNAPSHOTS_DIR)
     .filter((d) => /^\d{4}-W\d{2}$/.test(d))
@@ -136,6 +212,8 @@ function main() {
   // KNOWNは active・prefecture対応・R2 item実在を満たす現在の配信集合。
   const sorted = [...union].filter((key) => knownKeys.has(key)).sort();
 
+  const lastmod = await buildLastmod(sorted, previousLastmod());
+
   const header = `/**
  * SITEMAP_RANKING_KEYS — sitemap.ts /ranking 出力対象キー (自動生成・手動編集禁止)
  *
@@ -160,13 +238,36 @@ ${sorted.map((k) => `  "${k}",`).join("\n")}
 `;
 
   fs.writeFileSync(OUT_FILE, header);
+
+  const lastmodHeader = `/**
+ * SITEMAP_RANKING_LASTMOD — sitemap の /ranking の lastmod の出所 (自動生成・手動編集禁止)
+ *
+ * **生成: node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs** (build-sitemap-ranking-keys.cjs の docstring を参照)
+ *
+ * key → R2 values.json の Last-Modified (UTC の日付)。差分 push は中身が同じ object を送り直さないので、
+ * values.json の中身が最後に変わった日を表す。取得できなかったキーは前回の値を据え置き、前回も無ければ載せない。
+ * 生成日・取得件数の行は書かない (日付が変わらない限り差分を作らないため)。
+ * sitemap-ranking-keys.ts と分けているのは、あちらが middleware (Edge) の束に入るため。
+ */
+export const SITEMAP_RANKING_LASTMOD: ReadonlyMap<string, string> = new Map<string, string>([
+${sorted.filter((k) => lastmod.result.has(k)).map((k) => `  ["${k}", "${lastmod.result.get(k)}"],`).join("\n")}
+]);
+`;
+  fs.writeFileSync(LASTMOD_OUT_FILE, lastmodHeader);
   console.log(
-    `[build-sitemap-ranking-keys] wrote ${sorted.length} keys to ${path.relative(PROJECT_ROOT, OUT_FILE)}`,
+    `[build-sitemap-ranking-keys] wrote ${sorted.length} keys to ${path.relative(PROJECT_ROOT, OUT_FILE)} (+ ${path.relative(PROJECT_ROOT, LASTMOD_OUT_FILE)})`,
   );
   console.log(`  weeks: ${weeks.join(", ")}`);
   console.log(`  per-week: ${perWeek.join(" / ")}`);
   console.log(`  added from INDEXABLE: ${addedFromIndexable}`);
   console.log(`  added from KNOWN (isActive): ${addedFromKnown}`);
+  console.log(
+    `  lastmod: fetched ${lastmod.fetched} / kept ${lastmod.kept} / missing ${lastmod.missing}` +
+      (lastmod.networked ? "" : " (R2_PUBLIC_FETCH_URL 未設定のため全件前回値)"),
+  );
 }
 
-main();
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

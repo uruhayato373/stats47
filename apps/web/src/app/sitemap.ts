@@ -47,6 +47,7 @@ import {
   SITEMAP_SURVEY_IDS,
   SITEMAP_TAG_ENTRIES,
 } from '@/config/sitemap-blog-entries';
+import { SITEMAP_RANKING_LASTMOD } from '@/config/sitemap-ranking-lastmod';
 import {
   SITEMAP_SEGMENTS,
   type SitemapSegment,
@@ -173,25 +174,40 @@ const AREA_PAGES: MetadataRoute.Sitemap = [
 ];
 
 /**
- * deploy 日を ranking ページの lastmod 下限として使う。
- * D-redesign deploy (2026-05-23) で全 ranking 詳細の本文構造が変わったため、
- * row.updatedAt (DB の updatedAt、データ更新時のみ進む) よりも実コンテンツ
- * 更新を反映できる SITEMAP_BASELINE を採用する。
+ * ranking ページの lastmod の下限 (D-redesign deploy・2026-05-23 に全 ranking 詳細の本文構造が変わった日)。
  * 大幅な UI / 構造変更があったらこの定数を更新する。
- *
  */
 const SITEMAP_BASELINE = new Date('2026-05-25T00:00:00.000Z');
 
-/** 同じ条件で重複排除した上で、既知キーから作る退避用の一覧 (lastModified は SITEMAP_BASELINE) */
+/**
+ * ranking の lastmod = max(SITEMAP_BASELINE, values.json が最後に変わった日)。
+ * 出所は SITEMAP_RANKING_LASTMOD (R2 values.json の Last-Modified。差分 push は中身が同じ object を
+ * 送り直さないので、変更日を表す。生成は .claude/scripts/gsc/build-sitemap-ranking-keys.cjs)。
+ * 出所が 1 つなのは、all.json の updatedAt は一括再出力で 1 日に 1,700 件が同じ日付になり実更新と
+ * ずれるため。日付が取れていないキーは lastmod を出さない (根拠の無い日付を作らない)。
+ */
+function rankingLastModified(rankingKey: string): Date | undefined {
+  const day = SITEMAP_RANKING_LASTMOD.get(rankingKey);
+  if (!day) return undefined;
+  const changed = new Date(`${day}T00:00:00.000Z`);
+  return changed > SITEMAP_BASELINE ? changed : SITEMAP_BASELINE;
+}
+
+function rankingEntry(rankingKey: string): MetadataRoute.Sitemap[number] {
+  const lastModified = rankingLastModified(rankingKey);
+  return {
+    url: `${BASE_URL}${hrefFor("ranking", { rankingKey })}`,
+    ...(lastModified ? { lastModified } : {}),
+    changeFrequency: 'monthly' as const,
+    priority: 0.9,
+  };
+}
+
+/** 同じ条件で重複排除した上で、既知キーから作る退避用の一覧 */
 function rankingPagesFromGit(): MetadataRoute.Sitemap {
   return [...KNOWN_RANKING_KEYS]
     .filter((rankingKey) => UrlPolicy.ranking.shouldIncludeInSitemap(rankingKey))
-    .map((rankingKey) => ({
-      url: `${BASE_URL}${hrefFor("ranking", { rankingKey })}`,
-      lastModified: SITEMAP_BASELINE,
-      changeFrequency: 'monthly' as const,
-      priority: 0.9,
-    }));
+    .map(rankingEntry);
 }
 
 async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
@@ -211,20 +227,7 @@ async function getRankingPages(): Promise<MetadataRoute.Sitemap> {
       seen.add(row.rankingKey);
       return true;
     })
-    .map((row) => {
-      // row.updatedAt と SITEMAP_BASELINE のうち新しい方を採用
-      const rowUpdated = row.updatedAt ? new Date(row.updatedAt) : null;
-      const lastModified =
-        rowUpdated && rowUpdated > SITEMAP_BASELINE
-          ? rowUpdated
-          : SITEMAP_BASELINE;
-      return {
-        url: `${BASE_URL}${hrefFor("ranking", { rankingKey: row.rankingKey })}`,
-        lastModified,
-        changeFrequency: 'monthly' as const,
-        priority: 0.9,
-      };
-    });
+    .map((row) => rankingEntry(row.rankingKey));
   return live.length > 0 ? live : rankingPagesFromGit();
 }
 
