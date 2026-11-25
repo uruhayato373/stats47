@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-25T02:41:07.181Z",
+  "updatedAt": "2026-11-25T07:29:58.623Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -15025,6 +15025,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-25T02:41:07.181Z"
+    },
+    "KINDLE-SOURCE-REVIEW-9-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T07:29:58.623Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run products:kindle:validate --workspace packages/product-factory"
+            ],
+            "pass": true
+          },
+          "evidence": "c6f44c950: 残り 4 本 (movie-theater・personal-computer・sugar-consumption・university-advancement) の校訂を今の R2 本文に合わせ、4 本の校訂 9/6/4/2 件が 1 回ずつ当たることを実測。black-tea の R2 残置は KINDLE-K-S1-01-REPUBLISH-01 が扱う",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T07:29:58.623Z"
     }
   }
 }

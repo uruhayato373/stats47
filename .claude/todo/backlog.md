@@ -2237,16 +2237,6 @@ updated: 2026-11-01
   見出しと 1 文だけの中身の無い節、カード名に節の名前が繰り返される、人口移動フローの県選択が空欄、5 枚目のカードが単独で残る。
   `/areas/02000/landslide-exposure` で「0 区域」が 2 位 (順位の向きが不明)、「単年データのため推移グラフはありません」のカードが 8 枚続く。
 
-### [KINDLE-SOURCE-REVIEW-9-01] 本文が書き直されて Kindle の校訂が当たらない 9 本を、新しい本文に合わせて校閲し直す
-タグ: [収益化] [種類:不具合] [実行:対話] [検証:npm run products:kindle:validate --workspace packages/product-factory] [起票:2026-11-24] [領域:商品]
-
-- **起点**: KINDLE-DATA-SOURCE-01 のオーナー決定 (2026-11-24・推奨 (a)) で、一括移行と切り離した。
-- **対象**: black-tea-income-gap、crab-expenditure-ranking、earthquake-insurance-prefecture-gap、mackerel-expenditure-ranking、miso-consumption-quantity-prefecture-gap、movie-theater-expenditure-ranking、personal-computer-expenditure-ranking、sugar-consumption-prefecture-gap、university-advancement-capacity。R2 の本文が書き直されたため、台帳 `products.kindle-editorial-corrections` の校訂が当たらない。black-tea-income-gap は公開 R2 から撤去済みで、KINDLE-K-S1-01-REPUBLISH-01 の判断と関係する。
-- **次**: 1 本ずつ R2 の今の本文を読み、校訂の差分を新しい本文に合わせて書き直す。書けない校訂は理由を台帳に残して外す。
-- **停止条件**: 本の章の本文を勝手に変えない (校訂は台帳だけを直す)。KDP への反映はオーナーの承認の後。
-- **完了条件**: 9 本すべてで校訂が当たり、書籍の生成と検証が通る。
-- **進捗 (2026-11-25・b4bb7eb06)**: 9 本のうち 5 本 (black-tea・crab・earthquake・mackerel・miso) の校訂を新しい本文に合わせた (`products:kindle:validate` exit 0)。残り 4 本: movie-theater・personal-computer・sugar-consumption・university-advancement。公開 R2 に `black-tea-income-gap` の article.md が 200 で残っている (「撤去済み」の記述と食い違う)。
-
 ### [KINDLE-DATA-SOURCE-01] Kindle の章の出典をブログ本文の手書き節から切り離し、据え置き 61 本の本文も移行する
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [領域:商品] [待ち:承認]
 
@@ -2403,6 +2393,7 @@ updated: 2026-11-01
 - **進捗 (2026-11-24・ff887e273)**: publish-ai-content と sync-snapshots の inputs を env 経由にした (blog-auto-publish は既に env 経由)。残り: ① 変えた 2 本が次の実行で通ることを確かめる ② 同じ形がカードの 3 本の外にも自由文字列の inputs で残る (purge-cdn の prefix、publish-blog の slug・published_at、regenerate-blog-svgs の slugs、generate-ogp-images の slugs、sns-port-bubble-daily の metric など。走査で計 66 箇所) ③ actionlint はこの Mac に無く未実行。
 - **進捗 (2026-11-25・83f9462d1)**: purge-cdn・regenerate-blog-svgs・generate-ogp-images・sns-port-bubble-daily の 4 本を `env:` 経由にした (`run:` 内の式は全 workflow で 79 → 64)。残り: publish-blog 15 件 (slug・published_at で注入面が最大。次の先頭)・affiliate-ga4-weekly 11 件・r2-maintenance 6 件ほか。変えた 4 本の次の実行での成否は未確認。actionlint は Mac に無く未実行。
 - **進捗 (2026-11-25・54474eeb8)**: publish-blog (15)・affiliate-ga4-weekly (17。カードの 11 は旧式の数え方)・r2-maintenance (6) の `run:` 内の入力の式を `env:` 経由にした (workflow の契約テスト 256 件通過)。レーンの走査で残りは 26 件。変えた 7 本の実発火と actionlint は未実施。
+- **進捗 (2026-11-25・937d46486)**: estat-catalog-monthly・ksj-aggregate-ingest・cloudflare-monthly-snapshot・ctr-improvement-monthly の `inputs.*` を `env:` 経由にした (4 本で 17→0。workflow の契約テスト 256 件通過)。`inputs.*` を含む残り: cleanup-r2-sns-videos・commute-flow-ingest・infra-history-publish・r2-isr-gc・google-admin-settings・ai-content-gemini-daily ほか。`github.run_id` などの注入面でない式は数えない。変えた 11 本の実発火と actionlint は未実施。
 
 ### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失図表の手動系譜残件
 
@@ -2538,6 +2529,7 @@ updated: 2026-11-01
 - **停止条件**: 「-」の意味を確かめずに 0 で埋めない。R2 への反映はオーナー承認後。
 - **完了条件**: 取り込むか見送るかを決め、取り込む場合は 9 指標が公式の最新年まで R2 に入っている。
 - **調べたこと (2026-11-23)**: e-Stat の水害統計 (統計コード 00600590) はファイルで年ごとに公表されている (令和5年は 78 ファイル、Excel が主)。令和6年の確報は公表日が未定で、2023 年が最新。国交省の資料に 2014〜2023 年の 47 都道府県別の水害被害額 (平成27年価格・百万円) の PDF 表があり、被害のない県は「0」と書かれ「-」は使われていない (https://www.mlit.go.jp/river/toukei_chousa/kasen_db/pdf/2026/2-4-5.pdf)。ただし e-Stat の Excel の表の名前と「-」の注記は、一覧が動的表示のため取得できず未確認。次は、9 指標それぞれの項目が e-Stat の年ごとの Excel のどの表にあるかを、ブラウザか e-Stat API (getDataCatalog) で確かめる。
+- **調べたこと (2026-11-25)**: ① 令和5年 (tstat=000001222080) の都道府県別の表は、表-2 都道府県別水害被害・表-11-1〜3 主要異常気象別・表-15〜18 河川等種類別被害額・表-21〜24 水害原因別・表-31/32 過去10年の被害額 (名目と平成27年価格)。いずれも Excel。令和5年確報の 47 県別被害額 (当年価格) は https://www.mlit.go.jp/report/press/content/001902643.pdf 。③「-」は国交省の PDF 2 本と調査概要の利用上の注意に出てこず、意味は未確認。**取り込み設計の注意**: 価格基準が 2 通りある (令和5年の秋田は平成27年価格 149,236 百万円、当年価格 158,593 百万円)。次: 表-2 の Excel を 1 本開いて「-」の有無と凡例を確かめる (e-Stat のダウンロード)。
 
 ### [DATA-ROAD-LENGTH-SOURCE-01] 道路統計年報の 10 指標を最新の年報まで取り、年の表記を時点に合わせる
 
@@ -2782,6 +2774,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **残り**: ① 当たらなかった MINOR 2 件 (manufacturing の注意書きの重複、「効率」の言い方) ② 置換元の無い構造の指摘 (K-S1-06 の散布図の解説・ふるさと納税の節、K-S1-09 の一般論の節) は本文を書き足す判断が要るので未着手 ③ 正式の版 (承認済みの表紙)・保全・`kdp-publish --update` はオーナー承認 (`KDP-K-S1-08-REUPLOAD-01` と同じ便)。
 - **停止条件**: 「準備中」の章が入った版を入稿しない。校訂を当たる形に機械的に書き換えない (レビュー済みの判断が消える)。
 - **完了条件**: 4 冊とも章の欠けなしで生成でき、`verify-epub` の warn が前の版より増えず、改ページの取り残しが 0。
+- **進捗 (2026-11-25・dc2b95216)**: ① manufacturing の注意の重複と「効率」は 2026-11-03 に足した校訂 2 件が今の本文に当たっている。注意書きに残っていた「地域の効率」を校訂 1 件で直した (manufacturing の校訂 28 件が当たることを実測)。「当たらなかった 2 件」がこの 2 件を指すかは確かめられていない。残り: ②・③。
 
 ### [KINDLE-QUALITY-LOOP-01] 既刊 Kindle の中身を、機械の検査 → 図のスクショ評価 → NotebookLM の通読の 3 段で安く直し続ける仕組みを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-03] [領域:商品]
