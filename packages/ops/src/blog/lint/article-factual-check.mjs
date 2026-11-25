@@ -402,6 +402,24 @@ function rankFactsForNamedMetric(facts, leadText) {
   return named.length > 0 && named.length < ranked.length ? named : ranked;
 }
 
+/** 文中で最後に出てくる年 (「2024年の調査では」の 2024)。無ければ undefined。 */
+function lastYearIn(text) {
+  const years = [...text.matchAll(/((?:19|20)\d{2})\s*年/g)];
+  return years.length > 0 ? years[years.length - 1][1] : undefined;
+}
+
+/**
+ * 本文が語る年の順位を、data の年と照合してよいか。
+ * data の年が分かっていて、本文がそれと違う年 (過去年) の順位を語っているなら照合しない。
+ * 年ごとの値だけを持つ系列 (順位なし) の年も、その年の順位は照合できない。
+ */
+function isComparableYear(claimYear, facts) {
+  const dataYears = facts.map((f) => f.year).filter(Boolean);
+  if (!claimYear || dataYears.length === 0) return true;
+  if (!dataYears.includes(claimYear)) return false;
+  return facts.some((f) => f.year === claimYear && f.rank !== null);
+}
+
 // ============================================================================
 // Rank claim checks
 // ============================================================================
@@ -440,6 +458,8 @@ export function checkRankClaims(content, gt) {
     ) continue;
     const nextPrefRe = new RegExp(`^[・、の/\\s]{0,3}(${prefPattern})(?:都|府|県)?`);
     if (nextPrefRe.test(tailContext)) continue;
+    // 「東京・千葉・埼玉・神奈川の4都県がそろって上位10位」は複数県の列挙で、最初の県だけの順位ではない
+    if (new RegExp(`^(?:都|府|県)?[・･と](?:${prefPattern})`).test(m[0].slice(pref.length))) continue;
     const leadContext = body.slice(Math.max(0, m.index - 300), m.index);
     const trailingContext = body.slice(m.index + m[0].length, m.index + m[0].length + 60);
     if (
@@ -471,12 +491,9 @@ export function checkRankClaims(content, gt) {
     if (ranks.length === 0) continue;
     // data の年が分かっていて、本文がそれと違う年の順位を語っているなら照合しない (「1972 年は 2 位」)
     // 年ごとの値だけを持つ系列 (順位なし) の年も、その年の順位は照合できない
-    const claimYear = m[0].match(/((?:19|20)\d{2})\s*年/)?.[1];
-    const dataYears = facts.map((f) => f.year).filter(Boolean);
-    if (claimYear && dataYears.length > 0) {
-      if (!dataYears.includes(claimYear)) continue;
-      if (!facts.some((f) => f.year === claimYear && f.rank !== null)) continue;
-    }
+    // 年は主張の中、無ければ同じ文の前置き (「2024年の調査では、愛知県は1位」) から読む
+    const claimYear = m[0].match(/((?:19|20)\d{2})\s*年/)?.[1] ?? lastYearIn(rankContext);
+    if (!isComparableYear(claimYear, facts)) continue;
 
     if (!ranks.includes(claimedRank)) {
       const actualList = rankedFacts
@@ -540,6 +557,8 @@ export function checkInverseRankClaims(content, gt) {
 
     const facts = claimFacts(gt[pref] || [], { cityScope, averageScope });
     if (!facts || facts.length === 0) continue;
+    // 過去年の順位 (「2024年の1位は愛知県」) は、data の年と違えば照合しない (checkRankClaims と同じ)
+    if (!isComparableYear(lastYearIn(body.slice(sentenceStart, m.index)), facts)) continue;
     const ranks = rankFactsForNamedMetric(facts, body.slice(Math.max(0, m.index - 12), m.index)).map((f) => f.rank);
     if (ranks.length === 0) continue;
 
