@@ -7,6 +7,7 @@
 // - own-border: 格子の段 (格子の直下の要素) が自分でも枠を持つ。格子の線のすぐ内側にもう 1 本の線が出て 2 重に見える
 //   (2026-11-18 市区町村ランキングの「分布の要点」と商品の案内の段)。段の内側に余白を空けて置いた枠付きの表は数えない
 // - edge-double: 外枠の線 (ヘッダー下線・フッター上線・SidebarInset の outline) と本文の格子・右レールのカードの線が 1px ずれて並ぶ
+// - rail-gap: 右レールと本文の間・右レールのカードや広告のセルの間に 2px 以上の隙間がある (右レールは線だけで区切る。2026-11-25)
 // 静的な検査 (design-system:check の panels-in-line-grid) は書き方を止め、こちらは描いた結果を見る。
 
 /**
@@ -112,12 +113,13 @@ export function collectLineGridIssues() {
     for (const card of inset.querySelectorAll("[data-slot=shell-rail] [data-slot=card]")) {
       if (!visible(card)) continue;
       const r = card.getBoundingClientRect();
-      contentLines.push(
-        { el: card, o: "H", pos: r.top, a: r.left, b: r.right },
-        { el: card, o: "H", pos: r.bottom - 1, a: r.left, b: r.right },
-        { el: card, o: "V", pos: r.left, a: r.top, b: r.bottom },
-        { el: card, o: "V", pos: r.right - 1, a: r.top, b: r.bottom }
-      );
+      // 右レールのカードは下と右の線だけを持つ (2026-11-25)。実際に線を持つ辺だけを数える
+      const cst = getComputedStyle(card);
+      const has = (side) => parseFloat(cst[`border${side}Width`]) > 0 && cst[`border${side}Style`] !== "none";
+      if (has("Top")) contentLines.push({ el: card, o: "H", pos: r.top, a: r.left, b: r.right });
+      if (has("Bottom")) contentLines.push({ el: card, o: "H", pos: r.bottom - 1, a: r.left, b: r.right });
+      if (has("Left")) contentLines.push({ el: card, o: "V", pos: r.left, a: r.top, b: r.bottom });
+      if (has("Right")) contentLines.push({ el: card, o: "V", pos: r.right - 1, a: r.top, b: r.bottom });
     }
     const seen = new Set();
     for (const s of shellLines) {
@@ -128,6 +130,31 @@ export function collectLineGridIssues() {
         if (seen.has(s.name)) continue;
         seen.add(s.name);
         issues.push(`edge-double   ${s.name} ${label(c.el)}`);
+      }
+    }
+    // (5) 右レールは本文と余白を空けず、1px の線だけで区切る (2026-11-25 オーナー決定)。本文との間・カードや広告のセルの間に
+    // 2px 以上の隙間が残っていたら数える。追従する要素 (sticky) は位置が動くので対象外
+    const rail = inset.querySelector("[data-slot=shell-rail]");
+    if (rail && visible(rail)) {
+      const rr = rail.getBoundingClientRect();
+      const cr = outer.getBoundingClientRect();
+      const beside = rr.left >= cr.right - 2;
+      const between = beside ? rr.left - cr.right : rr.top - cr.bottom;
+      if (between > 1) issues.push(`rail-gap      本文と右レールの間 ${Math.round(between)}px`);
+      if (beside) {
+        const isSticky = (el) => {
+          for (let e = el; e && e !== rail; e = e.parentElement) if (getComputedStyle(e).position === "sticky") return true;
+          return false;
+        };
+        const items = [...rail.querySelectorAll("[data-slot=card],[data-ad-cell]")]
+          .filter((el) => visible(el) && !el.parentElement?.closest("[data-slot=card],[data-ad-cell]") && !isSticky(el))
+          .map((el) => ({ el, r: el.getBoundingClientRect() }))
+          .sort((x, y) => x.r.top - y.r.top);
+        let bottom = rr.top;
+        for (const { el, r } of items) {
+          if (r.top - bottom > 1) issues.push(`rail-gap      ${Math.round(r.top - bottom)}px ${label(el)}`);
+          bottom = Math.max(bottom, r.bottom);
+        }
       }
     }
   }

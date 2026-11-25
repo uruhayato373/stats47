@@ -28,7 +28,11 @@ describe("right rail scroll contract", () => {
     expect(source).not.toContain("railSticky");
     // 右レールは本文の横で本文と同じ高さまで伸びる flex の列。最後に追従する広告 (RailAdSlot の sticky) は親の高さの中でしか
     // 動けず、中身の高さで終わる格子のままでは追従しなかった (2026-11-12 にブログ・ランキング・市区町村のランキングで実測)
-    expect(classSource).toContain("rail:self-stretch");
+    // 伸ばす指定は PageShell と共通の外枠 SHELL_RAIL_FRAME_CLASS が持つ (2026-11-25)
+    expect(classSource).toContain("SHELL_RAIL_FRAME_CLASS");
+    const frameSource = readSource("apps/web/src/components/layout/PageShell.tsx");
+    const frameStart = frameSource.indexOf("export const SHELL_RAIL_FRAME_CLASS");
+    expect(frameSource.slice(frameStart, frameSource.indexOf(";", frameStart))).toContain("rail:self-stretch");
     expect(classSource).toContain("rail:flex-col");
     // flex の列では items-start が横幅を縮めるので、本文の横では子を幅いっぱいに伸ばす (2026-11-13 本番のスモークテストで検出)
     expect(classSource).toContain("rail:items-stretch");

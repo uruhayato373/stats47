@@ -50,16 +50,25 @@ export const SHELL_WIDTH_CLASS = 'mx-auto w-full max-w-[1280px]';
  * `@container/shell` を持つ。外側の余白は持たない (main#main-content も持たない)。
  *
  * サイドバーの開閉で本文の幅が変わるため、レールの出現はビューポートではなく
- * このコンテナの幅で決める (globals.css の rail:。本文 656px を保つ値)。
+ * このコンテナの幅で決める (globals.css の rail:。本文 672px を保つ値)。
  */
 export const SHELL_CONTAINER_CLASS = '@container/shell mx-auto w-full max-w-[1280px]';
 
 /**
  * 右レールの列幅。PageShell / ArticleShell で共有する。表示境界は globals.css の rail:。
- * 988px = 本文 656px + gap 16px + 右レール 316px。
+ * 988px = 本文 672px + 右レール 316px (間は 1px の線。2026-11-25 までは gap 16px で本文 656px)。
  */
 export const RIGHT_RAIL_GRID_CLASS =
-  'rail:grid rail:grid-cols-[minmax(0,1fr)_316px] rail:gap-4 rail:items-start';
+  'rail:grid rail:grid-cols-[minmax(0,1fr)_316px] rail:gap-0 rail:items-start';
+
+/**
+ * 右レールの外枠 (PageShell / ArticleShell 共通。2026-11-25 オーナー決定)。右レールは本文と余白を空けず、1px の線だけで区切る。
+ * - 本文の横にあるとき: 左に縦線 1 本 (本文の下端まで)。中のカード・広告のセルは下と右の線だけを持ち (CARD_SURFACE_CLASS・
+ *   RAIL_AD_CELL_CLASS の in-data-[slot=shell-rail]:)、右の線は 1px 外へ出して SidebarInset の outline に重ねる
+ * - 本文の下に積むとき: 上に横線 1 本。最後の段の下の線はフッターの上線に重ねる (-mb-px)
+ */
+export const SHELL_RAIL_FRAME_CLASS =
+  '-mr-px -mb-px border-t border-border rail:self-stretch rail:border-t-0 rail:border-l';
 
 /**
  * 全ページ共通の単一レイアウト Shell。
@@ -113,7 +122,7 @@ export function PageShell({
         <div className={RIGHT_RAIL_GRID_CLASS}>
           {column}
           {/* 本文の横にあるときは本文と同じ高さまで伸ばす (追従する広告が動ける範囲。2026-11-12) */}
-          <div data-slot="shell-rail" className="-mx-px -mb-px mt-4 space-y-4 rail:-mt-px rail:ml-0 rail:self-stretch">
+          <div data-slot="shell-rail" className={SHELL_RAIL_FRAME_CLASS}>
             {rightRail}
           </div>
         </div>

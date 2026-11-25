@@ -89,10 +89,11 @@ describe('PageShell — rightRail', () => {
     render(<PageShell rightRail={RIGHT}>{MAIN}</PageShell>);
     const rail = screen.getAllByLabelText('right-rail');
     expect(rail).toHaveLength(1);
+    // 右レールは余白を空けず 1px の線で区切る (2026-11-25。SHELL_RAIL_FRAME_CLASS): 下に積むときは上の線、横の列のときは左の線
     expect(rail[0].parentElement).toHaveClass(
-      'mt-4',
-      '-mx-px -mb-px rail:-mt-px rail:ml-0'
+      '-mr-px -mb-px border-t rail:border-t-0 rail:border-l rail:self-stretch'
     );
+    expect(rail[0].parentElement).not.toHaveClass('mt-4', 'space-y-4');
   });
 
   it('右レールの列は shell コンテナ 988px 境界で出す (ビューポート境界を使わない)', () => {
@@ -103,7 +104,7 @@ describe('PageShell — rightRail', () => {
     expect(grid).toHaveClass(
       'rail:grid',
       'rail:grid-cols-[minmax(0,1fr)_316px]',
-      'rail:gap-4'
+      'rail:gap-0'
     );
     expect(grid).not.toHaveClass('lg:grid', 'xl:grid');
   });

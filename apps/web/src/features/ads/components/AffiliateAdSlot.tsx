@@ -8,7 +8,7 @@ import {
 
 import { CATEGORY_AFFILIATE_MAP, type AffiliateVertical } from "../constants/affiliate-category";
 import { isAffiliateDestinationExcluded, type AffiliateDestination } from "../constants/affiliate-delivery-policy";
-import { RAIL_AD_BESIDE_BODY_ONLY_CLASS } from "../constants/manual-ad-policy";
+import { RAIL_AD_CELL_CLASS } from "../constants/manual-ad-policy";
 import {
   resolveAffiliateBannersByVertical,
   resolveAffiliateTextAdsByVertical,
@@ -168,7 +168,7 @@ export async function AffiliateAdSlot({
   return (
     // カードで囲まない (2026-10-31)。右レールは余白 0 で 300px の幅を残し、ページ末は本文の広告のセルと同じ余白
     // 右レールの AdSense は右レールが本文の横にあるときだけ出す (本文の下に回ると見られない。2026-11-03)
-    <AdCell label="広告" className={position === "footer" ? undefined : `p-0 ${RAIL_AD_BESIDE_BODY_ONLY_CLASS}`}>
+    <AdCell label="広告" className={position === "footer" ? undefined : RAIL_AD_CELL_CLASS}>
       <AdSenseAdWrapper
         format={adSlot.format}
         slotId={adSlot.slotId}

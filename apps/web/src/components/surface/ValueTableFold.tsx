@@ -21,7 +21,8 @@ export function ValueTableFold({ hiddenCount, children }: ValueTableFoldProps) {
   return (
     <div data-folded={!open} className="data-[folded=true]:[&_tr[data-fold]]:hidden">
       {children}
-      <div className="flex justify-center border-t border-border py-1">
+      {/* 上の線は表の最後の行の下線が兼ねる (自分でも border-t を持つと 2 重になる。2026-11-25) */}
+      <div className="flex justify-center py-1">
         <Button type="button" variant="ghost" size="sm" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
           {open ? '折りたたむ' : `全件を見る（残り ${hiddenCount} 件）`}
         </Button>

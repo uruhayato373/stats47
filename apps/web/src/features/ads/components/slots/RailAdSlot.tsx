@@ -5,7 +5,7 @@ import {
   type AdSlotConfig,
 } from "@/lib/google-adsense";
 
-import { RAIL_AD_BESIDE_BODY_ONLY_CLASS } from "../../constants/manual-ad-policy";
+import { RAIL_AD_CELL_CLASS } from "../../constants/manual-ad-policy";
 
 import { AdCell } from "./AdCell";
 
@@ -25,8 +25,9 @@ interface RailAdSlotProps {
  * 右レール内の広告枠 (rectangle 想定)。
  *
  * 2026-10-31 (オーナー判断「広告や PR というカードで囲む必要はない」): 見出し「広告」のカード (RailCard) をやめ、
- * 本文と同じ広告のセル (左上に小さな「広告」・枠の線なし) にした。余白は 0 にする: 右レール 316px の中で
+ * 本文と同じ広告のセルにした。左右の余白は 8px まで: 右レール 316px の中で
  * 300×250 の在庫が配信され得る幅 (300px 以上) を残すため (p-4 だと 284px になり 250 幅の枠へ落ちる)。
+ * 2026-11-25 (オーナー決定): 「広告」の表記をやめ、上下も 8px の余白にして四辺をそろえた (RAIL_AD_CELL_CLASS)。
  * multiplex は入れない (全幅専用のため)。slot.slotId が空文字なら何も描画しない。
  */
 export function RailAdSlot({ slot, sticky = false }: RailAdSlotProps) {
@@ -34,7 +35,8 @@ export function RailAdSlot({ slot, sticky = false }: RailAdSlotProps) {
   return (
     <AdCell
       label="広告"
-      className={`overflow-hidden p-0 ${RAIL_AD_BESIDE_BODY_ONLY_CLASS}${sticky ? " sticky top-20" : ""}`}
+      // 追従する枠はヘッダー (56px) の線の直下で止める (2026-11-25。それまでは 80px で、線から 24px 浮いていた)
+      className={`${RAIL_AD_CELL_CLASS}${sticky ? " sticky top-14" : ""}`}
     >
       <AdSenseAd
         format={slot.format}

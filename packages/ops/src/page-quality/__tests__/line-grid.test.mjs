@@ -48,19 +48,20 @@ test("格子の段が自分でも枠を持つと own-border として数え、�
 });
 
 // 実物の骨組み (SidebarInset の outline・ヘッダーの下線・フッターの上線) の中に本文の格子と右レールを置く
-const shell = ({ columnPadding, railMargin }) => {
+const shell = ({ columnPadding, railMargin, railCardBorder = "border:1px solid #e5e5e5", gap = "16px", cardGap = "0" }) => {
   const line = "#e5e5e5";
   return `<body style="margin:0"><div class="relative" style="padding:8px">
     <div data-slot="sidebar-inset" style="outline:1px solid ${line};overflow:clip;width:800px">
       <header style="height:56px;border-bottom:1px solid ${line};box-sizing:border-box"></header>
-      <div style="display:grid;grid-template-columns:1fr 200px;gap:16px;align-items:start">
+      <div style="display:grid;grid-template-columns:1fr 200px;gap:${gap};align-items:start">
         <div data-slot="panel-grid" style="display:grid;gap:1px;padding:${columnPadding}">
           <div data-slot="shell-main" style="display:contents"></div>
           <section style="box-shadow:0 0 0 1px ${line};padding:16px">見出し</section>
           <section style="box-shadow:0 0 0 1px ${line};padding:16px">本文</section>
         </div>
         <aside data-slot="shell-rail" style="margin:${railMargin}">
-          <div data-slot="card" style="border:1px solid ${line};height:80px">レール</div>
+          <div data-slot="card" style="${railCardBorder};height:80px">レール</div>
+          <div data-slot="card" style="${railCardBorder};height:80px;margin-top:${cardGap}">レール 2</div>
         </aside>
       </div>
       <footer style="border-top:1px solid ${line};height:40px"></footer>
@@ -76,9 +77,22 @@ test("外枠の線と本文の格子・右レールのカードの線が 1px ず
   });
 });
 
-test("一番外側の格子が外枠を持たず、レールを上と右に 1px 出すと edge-double は 0 件", async (t) => {
-  await withPage(t, shell({ columnPadding: "0", railMargin: "-1px -1px 0 0" }), async (page) => {
+// 2026-11-25 の形: 右レールは本文と隙間を空けず、カードは下と右の線だけを持ち、右と下を 1px 外へ出して外枠・フッターの線に重ねる
+const lineRail = { columnPadding: "0", railMargin: "0 -1px -1px 0", railCardBorder: "border-bottom:1px solid #e5e5e5;border-right:1px solid #e5e5e5", gap: "0" };
+
+test("一番外側の格子が外枠を持たず、右レールが線だけで本文につながると違反は 0 件", async (t) => {
+  await withPage(t, shell(lineRail), async (page) => {
     assert.deepEqual(await evaluateLineGridIssues(page), { issues: [] });
+  });
+});
+
+test("右レールと本文の間・右レールのカードの間に隙間が残ると rail-gap として数える", async (t) => {
+  await withPage(t, shell({ ...lineRail, gap: "16px", cardGap: "12px" }), async (page) => {
+    const { issues } = await evaluateLineGridIssues(page);
+    const gaps = issues.filter((i) => i.startsWith("rail-gap"));
+    assert.equal(gaps.length, 2, JSON.stringify(issues));
+    assert.match(gaps[0], /本文と右レールの間 16px/);
+    assert.match(gaps[1], /12px .*レール 2/);
   });
 });
 

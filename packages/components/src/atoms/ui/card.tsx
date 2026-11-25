@@ -15,7 +15,8 @@ import { cn } from "../../lib/cn"
  * 線の格子 (apps/web の PanelGrid。data-slot="panel-grid") の中では線を持たない。線は格子の 1px の隙間が引く。
  */
 export const CARD_SURFACE_CLASS =
-  "rounded-card border border-card-outline bg-background text-card-foreground in-data-[slot=panel-grid]:border-0"
+  // 右レール (Shell の [data-slot=shell-rail]) の中では四辺の枠をやめ、下と右の線だけで隣と区切る (2026-11-25)
+  "rounded-card border border-card-outline bg-background text-card-foreground in-data-[slot=panel-grid]:border-0 in-data-[slot=shell-rail]:border-0 in-data-[slot=shell-rail]:border-r in-data-[slot=shell-rail]:border-b"
 
 function Card({
   className,

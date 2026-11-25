@@ -11,10 +11,10 @@ export interface RailTocHeading {
   text: string;
 }
 
-/** 追従する広告と同じヘッダーの下の位置 (右レールの広告の枠の sticky top-20) */
-const STICKY_TOP_PX = 80;
-/** 右レールのまとまりの間 (ARTICLE_RAIL_CLASS の rail:gap-3) */
-const RAIL_GAP_PX = 12;
+/** 追従する広告と同じヘッダーの下の位置 (右レールの広告の枠の sticky top-14 = ヘッダーの高さ) */
+const STICKY_TOP_PX = 56;
+/** 右レールのまとまりの間 (余白なし・線で区切る。2026-11-25) */
+const RAIL_GAP_PX = 0;
 /** 今読んでいる節と見なす、画面の上からの距離 (ヘッダーの下に少し余裕を足す) */
 const ACTIVE_LINE_PX = 120;
 /** これより見出しが多い記事は、今読んでいる節の前後だけを出す (高さを抑えて広告と一緒に画面に収める) */

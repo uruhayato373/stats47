@@ -33,7 +33,8 @@ export async function RelatedArticlesCard({ rankingKey, areaType, placement }: P
   if (placement === 'rail') {
     return <>
       <ContentNavigation title="このランキングを読み解く" items={items} surface="ranking_blog" />
-      {productLink(railNavRowClassName({}))}
+      {/* カードでない行も右レールの 1 セルにする (余白と下・右の線。右レールは線で区切る。2026-11-25) */}
+      {product && <div className="border-b border-r border-border px-4 py-1">{productLink(railNavRowClassName({}))}</div>}
     </>;
   }
   return (
