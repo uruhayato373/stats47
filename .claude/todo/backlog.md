@@ -668,12 +668,13 @@ updated: 2026-11-01
 - **完了条件**: 候補台帳が最新の公開物で判定し直され、P0 候補のうち少なくとも1件がブログまたは note の記事として公開され、その地図画像が SNS に投稿されている。
 
 ### [MEDIA-WORKSPACE-ORPHAN-02] 画像の品質記録 10 件が、在庫の索引に無い画像を指している (索引ありの media:check が落ちる)
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run media:state:pull && npm run media:check] [起票:2026-11-24] [領域:SNS]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run media:state:pull && npm run media:check] [起票:2026-11-24] [領域:SNS] [待ち:承認]
 
 - **起点**: MEDIA-WORKSPACE-ORPHAN-01 を 2026-11-24 に閉じたとき (c164ae0e8 で 9 件を外した)、在庫の索引ありの状態での pass は未確認だった。同じ日に索引を取り直して (`npm run media:state:pull`。private R2 の状態は 2026-10-17 の push のまま) 流すと、`Orphan image: IMG-ea19010e6c9b25a368d42ad3` で落ちる。索引に無い画像を指す品質記録は 10 件 (ranking・bar 2・choropleth 2・boxplot 2・summary-card 2・table)。CI には索引が無いので CI では通る。
 - **次**: 10 件の画像 ID が、10-17 より後に作って索引へ push していない画像か、消えた画像かを確かめる。前者なら在庫の索引を作り直して push し、後者なら記録を外す。12 件は持ち主を確かめていない (MEDIA-WORKSPACE-ORPHAN-01 の記録)。
 - **完了条件**: 索引を取り直した状態で `npm run media:check` が通る。
 - **観測 (2026-11-25)**: 記事の書き直しラウンドの取り込み後も `npm run media:check` が同じ `Orphan image: IMG-ea19010e6c9b25a368d42ad3` で落ちる (起点 `bc5da6187` でも同じ。手元に在庫の索引がある Mac だけ)。契約テストの段 Verify article and image workspace が手元で落ちるのもこれ。
+- **進捗 (2026-11-25・b36ad0334)**: 10 件の持ち主を 10-16 の在庫から逆引きした。3 件 (`d1-kakei-prefecture-consumption`) は 10-24 に記事台帳から外した記事の画像で、記録を外した。残り 7 件 (volunteer-activity の 6 枚・`recovered-n80e58a01f660` の 1 枚) は画像は残っていて、在庫の索引が 27 本の記事で古いだけ。索引の作り直しと push (`node .claude/scripts/media/sync-image-inventory.mjs --all --apply`。R2 への書き込み) で `media:check` が通る見込みで、実行は未。
 
 ### [IMAGE-PUBLISHER-REMOVAL-01] 統計画像の生成経路から発行元表記（stats47・stats47.jp）を外し、地図をタイル・実形状の2型へ寄せる
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [起票:2026-11-02] [領域:SNS]
@@ -938,6 +939,7 @@ updated: 2026-11-01
 - **確認が要る (11-03 の棚卸し)**: 「`_city_dc` を読むコードは 0 件」とあるが、`git grep -l _city_dc` で `apps/web/src/app/api/mf-topo/[code]/route.ts` と `apps/remotion/src/features/population-choropleth/usePopulationData.ts` が出る。コメントだけか実際に読むかを確かめる
 - **削除の前に直す案内 (2026-11-24 の棚卸し)**: `packages/gis/src/geoshape/README.md` (32・44・47・74 行目) とジオシェイプの URL ビルダーのテストが、今も `_city_dc` の統合版を正規の形として案内している。R2 から消す前にこの案内を分割版 (`_city`) へ直す
 - **本番の確認 (2026-11-25)**: `https://stats47.jp/api/mf-topo/13` は 200 で、23 区 (13101〜13123) が個別に入り 13100 は無い。`_city_dc` の path を組み立てるコードが `packages/gis/src/mlit/utils/mlit-r2-path.ts` (wardMode が merged のとき)・`geoshape-url-builder.ts`・`geoshape-r2-path.ts`・`build-national-city-topology.mjs` に残るので、「読むコードが 0 件」はまだ成り立たない。移動フローの地図の色と Remotion の描画は未確認。
+- **進捗 (2026-11-25・d76f853af)**: 呼び手の無い `fetchAllCitiesTopology` と全国の統合版 (jp_city_dc) の path を消した。残る読み手: `build-national-city-topology.mjs` (`npm run gis:national-city-topology` が R2 の jp_city_dc.topojson を取得し、`apps/web/public/municipalities.topojson` の生成元になっている)。これがある限り R2 の `_city_dc` は消せない。`fetchMunicipalityTopology` の既定値 merged は公開 API なので変えていない。
 
 ### [METRIC-HOUSEHOLD-ASSET-SUBTITLE-01] 家計の金融資産と農家総所得の指標に「1世帯当たり」の印が無く、総額と判定される
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-28] [領域:データ]
@@ -2347,6 +2349,7 @@ updated: 2026-11-01
 - **完了条件**: 未検証が 0 か、残りに指標が無い理由が書かれている。②③④ の検査が PR CI で走る
 - **進捗 (2026-11-24・d0f11ceaa)**: 未検証の問い 133 件のうち 42 件の、データの無い側に指標・系列を足した (軸が測る量と指標の定義が一致するものだけ)。残り 91 件は、選べる指標が無いか近いだけのもの。残りに指標が無い理由を書くのと、②③④ の検査を PR CI で走らせるのが残り。
 - **進捗 (2026-11-25)**: ⓪ の「別粒度」33 件を市区町村の指標と突き合わせた。置き換えられるのは J05 の「1人あたりごみ排出量」→ `waste-per-capita-per-day` (city) の 1 件だけ (台帳への反映は未実施)。残り 32 件は同じ意味の指標も分析単位も無い。
+- **進捗 (2026-11-25・f9394986c)**: J05 の結果の軸を `waste-per-capita-per-day` (city) に結んだ。J05 は説明側に県粒度の指標が混ざるので、状態は未検証 → 別粒度 (未検証は 106 → 105)。
 
 ### [KAKEI-EXPANSION-02] 家計調査2025 refreshと残品目
 
@@ -2377,6 +2380,7 @@ updated: 2026-11-01
 - **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
 - **進捗 (2026-11-24・ff887e273)**: publish-ai-content と sync-snapshots の inputs を env 経由にした (blog-auto-publish は既に env 経由)。残り: ① 変えた 2 本が次の実行で通ることを確かめる ② 同じ形がカードの 3 本の外にも自由文字列の inputs で残る (purge-cdn の prefix、publish-blog の slug・published_at、regenerate-blog-svgs の slugs、generate-ogp-images の slugs、sns-port-bubble-daily の metric など。走査で計 66 箇所) ③ actionlint はこの Mac に無く未実行。
 - **進捗 (2026-11-25・83f9462d1)**: purge-cdn・regenerate-blog-svgs・generate-ogp-images・sns-port-bubble-daily の 4 本を `env:` 経由にした (`run:` 内の式は全 workflow で 79 → 64)。残り: publish-blog 15 件 (slug・published_at で注入面が最大。次の先頭)・affiliate-ga4-weekly 11 件・r2-maintenance 6 件ほか。変えた 4 本の次の実行での成否は未確認。actionlint は Mac に無く未実行。
+- **進捗 (2026-11-25・54474eeb8)**: publish-blog (15)・affiliate-ga4-weekly (17。カードの 11 は旧式の数え方)・r2-maintenance (6) の `run:` 内の入力の式を `env:` 経由にした (workflow の契約テスト 256 件通過)。レーンの走査で残りは 26 件。変えた 7 本の実発火と actionlint は未実施。
 
 ### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失図表の手動系譜残件
 
@@ -2674,6 +2678,7 @@ updated: 2026-11-01
 - **完了条件**: Mac でも `.local/r2` を優先して読む dev server の起動方法が手順書にあり、公開前の Geo ページを表示できる。
 - **棚卸し (2026-11-22)**: 手順を `.claude/rules/local-environment.md` に書き、中継 (`.github/scripts/r2-overlay-server.mjs`) が公開前の Geo の JSON (`app/geo/<slug>/**.json`) を `.local/r2` から返すようにした (テスト 7 件)。残りは localhost で公開前の `/geo/<slug>` を開いて表示を確かめること。画像 (webp) は中継しないので 404 になる。
 - **棚卸し (2026-11-25)**: 手順は `local-environment.md` にあり、`r2-overlay-server.mjs`・launch 設定 `web-r2-overlay`・契約テストも実在する。手順書が参照する `scripts/dev-server.ts` は存在しないので記述を直す。公開前の Geo ページを localhost で開く確認が残る。
+- **進捗 (2026-11-25・c88de7a4e)**: 同日の棚卸しの「`scripts/dev-server.ts` は存在しない」は誤りで、実体は `apps/web/scripts/dev-server.ts` にある。`local-environment.md` の 2 か所を完全な path に直した。残り: 公開前の Geo ページを localhost で開く確認。
 
 ### [REFERENCE-METRIC-FOLLOWUP-01] 参考文献由来の指標の追補 (熱中症の人口当たり・男女比の 2025 年国勢調査)
 
