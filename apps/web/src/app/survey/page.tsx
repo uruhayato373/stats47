@@ -1,40 +1,37 @@
 import { Fragment } from "react";
 
-/**
- * 調査名一覧ページ（Server Component）
- *
- * `/survey` でアクセスされ、全調査の一覧を表示。
- */
 
+import { listCategories } from "@stats47/data-configs";
 import { canonicalSurveyHubKey, hrefFor } from "@stats47/data-configs/content/href";
+import { SURVEY_PROMINENCE } from "@stats47/data-configs/prominence/survey";
+import { metricDisplayName } from "@stats47/ranking";
 import {
   readRankingItemsBySurveyFromR2,
   readSurveysFromR2,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
+import { Building2 } from "lucide-react";
 
-import { PageShell, PageHeader, Breadcrumbs } from "@/components/layout";
+import Link from "@/components/atoms/SiteLink";
+import { PageShell, PageHeader, PanelGrid, Breadcrumbs } from "@/components/layout";
 import { LinkRowNav } from "@/components/navigation/StatisticsScopeNav";
 import { SectionHeader } from "@/components/section";
-import { SurfaceLinkCard } from "@/components/surface";
+import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
 import { AdRow, composeAdRows, InFeedAdSlot } from "@/features/ads";
 import { groupSurveysByMinistry } from "@/features/survey/group-surveys-by-ministry";
 
 import { CONTENT_FOOTER, SURVEY_INDEX_INFEED } from "@/lib/google-adsense";
+import { getIcon } from "@/lib/icons";
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
 import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
 
 import type { Metadata } from "next";
 
+/** カテゴリのキー → lucide のアイコン名 (サイドバーのカテゴリと同じアイコン) */
+const CATEGORY_ICON_NAME = new Map(listCategories().map((category) => [category.categoryKey, category.icon]));
 
-/**
- * R2 依存ページのため build 時 prerender を禁止する (force-dynamic)。
- * 旧実装は静的 prerender で build 時に R2 を読めず「空の調査一覧」が永久固着した
- * (x-nextjs-stale-time=4294967294、本 OpenNext 構成は ISR 再生成が効かない)。
- * 正典: .claude/rules/nextjs-ssg-preservation.md / app/page.tsx (home) と同パターン。
- */
 export const dynamic = "force-dynamic";
 
 export function generateMetadata(): Metadata {
@@ -91,8 +88,14 @@ export default async function SurveyIndexPage() {
 
   // 広告の段: ページの最後に AdSense 1 つを本文の幅いっぱい (上限 580px) に出す (2026-11-12 オーナー決定でアフィリエイトを止め、PR を外した)
   const [indexRow] = composeAdRows([['adsense']], [CONTENT_FOOTER], []);
-  return (
-    <PageShell>
+  const ministryItems = groups.map((group) => ({
+    key: group.id,
+    label: `${group.label} ${group.surveys.length}`,
+    href: `#${group.id}`,
+  }));
+
+  const header = (
+    <>
       <Breadcrumbs
         items={[
           { label: "ホーム", href: "/" },
@@ -102,72 +105,112 @@ export default async function SurveyIndexPage() {
       <PageHeader
         eyebrow="政府統計"
         title="調査別ランキング一覧"
-        description="政府統計調査ごとに、都道府県別ランキングを分類しています。各調査をクリックすると、その調査データに基づくランキングの一覧を閲覧できます。"
+        description="政府統計調査ごとに、都道府県別ランキングを分類しています。調査ごとに、その調査で分かる代表的な指標を 3 つまで示します。"
         stats={`全 ${visibleSurveys.length} 調査 ・ 並び順: 作成した府省庁ごと、その中はランキングの多い順`}
       />
+    </>
+  );
 
+  // 府省庁から探す (2026-11-26 オーナー決定): 本文の横に右レールがある幅は右レールに追従させ、
+  // 右レールが本文の下に回る幅 (モバイル・タブレット) はヘッダーの下に横に送れる列で追従させる
+  const rightRail =
+    groups.length > 1 ? (
+      <div className="hidden rail:sticky rail:top-14 rail:block">
+        <RailCard title="府省庁から探す" icon={<Building2 />}>
+          <RailLinkList aria-label="府省庁から探す">
+            {groups.map((group) => (
+              <RailNavRow key={group.id} href={`#${group.id}`} trailing={group.surveys.length} chevron={false}>
+                {group.label}
+              </RailNavRow>
+            ))}
+          </RailLinkList>
+        </RailCard>
+      </div>
+    ) : undefined;
+
+  return (
+    <PageShell header={header} rightRail={rightRail}>
       {groups.length > 1 && (
-        <LinkRowNav
-          label="府省庁から探す"
-          items={groups.map((group) => ({
-            key: group.id,
-            label: `${group.label} ${group.surveys.length}`,
-            href: `#${group.id}`,
-          }))}
-          wrap
-        />
+        <div data-cell="flush" className="sticky top-14 z-10 bg-background px-4 py-2 rail:hidden">
+          <LinkRowNav label="府省庁から探す" items={ministryItems} />
+        </div>
       )}
 
-      {groups.flatMap((group, position) => {
+      {groups.map((group, position) => {
         const start = groupStarts[position] ?? 0;
-        return [
-          <div key={`${group.id}-heading`} id={group.id} className="scroll-mt-24">
+        return (
+          <PanelGrid as="section" key={group.id} id={group.id} className="scroll-mt-28" aria-labelledby={`${group.id}-title`}>
             <SectionHeader
-              title={group.label}
+              title={<span id={`${group.id}-title`}>{group.label}</span>}
               description={`${group.surveys.length} 調査`}
               hideRule
             />
-          </div>,
-          <div key={group.id} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {group.surveys.map((survey, groupIndex) => {
-              const index = start + groupIndex;
-              const count = countMap.get(survey.id) ?? 0;
-              return (
-                <Fragment key={survey.id}>
-                <SurfaceLinkCard
-                  href={hrefFor("survey", { surveyKey: survey.id })}
-                  className="block"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="min-w-0 flex-1">
-                      <h3 className="font-semibold text-base">
-                        {survey.name}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {survey.organization}
-                      </p>
-                    </div>
-                    <span className="ml-2 shrink-0 bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded">
-                      {count}件
-                    </span>
-                  </div>
-                  {survey.description && (
-                    <p className="mt-2 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                      {survey.description}
-                    </p>
-                  )}
-                </SurfaceLinkCard>
-                {/* 一覧が 1 列のとき (スマホ) 25 件目の後から 30 件ごとにインフィード広告 (2026-11-13 オーナー決定。一覧は約 15,000px 続く) */}
-                {index + 1 >= SURVEY_INDEX_INFEED_START &&
-                  (index + 1 - SURVEY_INDEX_INFEED_START) % SURVEY_INDEX_INFEED_EVERY === 0 &&
-                  visibleSurveys.length - (index + 1) >= 3 && (
-                  <div className="md:hidden"><InFeedAdSlot slot={SURVEY_INDEX_INFEED} /></div>
-                )}
-                </Fragment>
-              );
-            })}
-          </div>,
-        ];
+            <PanelGrid className="@md:grid-cols-2 @lg:grid-cols-3">
+              {group.surveys.map((survey, groupIndex) => {
+                const index = start + groupIndex;
+                const count = countMap.get(survey.id) ?? 0;
+                const prominence = SURVEY_PROMINENCE[survey.id];
+                const Icon = getIcon(CATEGORY_ICON_NAME.get(prominence?.categoryKey ?? "") ?? "");
+                const representatives = prominence?.representatives ?? [];
+                return (
+                  <Fragment key={survey.id}>
+                    <article className="flex min-w-0 flex-col gap-3">
+                      <div className="flex items-start gap-3">
+                        <span
+                          aria-hidden="true"
+                          className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground"
+                        >
+                          <Icon className="size-5" />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-base font-semibold leading-snug">
+                            <Link href={hrefFor("survey", { surveyKey: survey.id })} className="hover:text-primary hover:underline">
+                              {survey.name}
+                            </Link>
+                          </h3>
+                          <p className="mt-0.5 text-xs text-muted-foreground">
+                            {survey.organization} ・ {count}件
+                          </p>
+                        </div>
+                      </div>
+                      {/* 説明はモバイルでは出さない (代表の指標で何が分かるかを示し、一覧の長さを抑える) */}
+                      {survey.description && (
+                        <p className="hidden text-xs leading-relaxed text-muted-foreground line-clamp-2 sm:block">
+                          {survey.description}
+                        </p>
+                      )}
+                      {representatives.length > 0 && (
+                        // モバイルは「・」区切りの 1 行 (入りきらない分は末尾を省く。一覧の長さを今と同程度に保つ)、sm 以上は 1 行 1 指標
+                        <ul
+                          aria-label={`${survey.name}で分かる指標`}
+                          className="truncate border-t border-border pt-2 text-sm sm:flex sm:flex-col sm:gap-1 sm:whitespace-normal"
+                        >
+                          {representatives.map((representative, representativeIndex) => (
+                            <li key={representative.rankingKey} className="inline min-w-0 sm:block sm:truncate">
+                              {representativeIndex > 0 && <span aria-hidden="true" className="text-muted-foreground sm:hidden">・</span>}
+                              <Link
+                                href={hrefFor("ranking", { rankingKey: representative.rankingKey })}
+                                className="text-foreground hover:text-primary hover:underline"
+                              >
+                                {metricDisplayName(representative)}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </article>
+                    {/* 一覧が 1 列のとき (スマホ) 25 件目の後から 30 件ごとにインフィード広告 (2026-11-13 オーナー決定) */}
+                    {index + 1 >= SURVEY_INDEX_INFEED_START &&
+                      (index + 1 - SURVEY_INDEX_INFEED_START) % SURVEY_INDEX_INFEED_EVERY === 0 &&
+                      visibleSurveys.length - (index + 1) >= 3 && (
+                        <div data-cell="flush" className="md:hidden"><InFeedAdSlot slot={SURVEY_INDEX_INFEED} /></div>
+                      )}
+                  </Fragment>
+                );
+              })}
+            </PanelGrid>
+          </PanelGrid>
+        );
       })}
 
       {/* コンテンツ末尾の全幅フッター広告 */}

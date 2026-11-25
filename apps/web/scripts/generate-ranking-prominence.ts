@@ -38,6 +38,8 @@ import {
   METRICS_REGISTRY,
   rankingHookAreaNoun,
 } from "@stats47/data-configs";
+import { canonicalSurveyHubKey } from "@stats47/data-configs/content/href";
+import { getSurveyEditorialContent } from "@stats47/data-configs/survey-editorial";
 import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 import {
   auditDerivedHooks,
@@ -51,12 +53,22 @@ import {
   type ProminenceResult,
 } from "@stats47/data-configs/prominence";
 
+// server-only の barrel (@stats47/ranking/server) を通さず、指標→調査の紐付けの純関数だけを読む
+import { resolveSurveyLinkage } from "../../../packages/ranking/src/builders/build-ranking-item-from-metric";
+
 // 生成物は data-configs 側に置く。apps/web (索引・ヘッダー・カテゴリ) だけでなく
 // packages/ranking の exporter も読むため、apps/web に置くと参照方向が逆流する。
 const OUT_PATH = path.resolve(
   __dirname,
   "../../../packages/data-configs/src/prominence/ranking-prominence.generated.ts",
 );
+// 調査一覧 (/survey) だけが読む。ヘッダーが読む上のファイルに混ぜると、調査 148 件分がブラウザの JS に入る
+const SURVEY_OUT_PATH = path.resolve(
+  __dirname,
+  "../../../packages/data-configs/src/prominence/survey-prominence.generated.ts",
+);
+/** 調査一覧のカードに出す代表の指標の数 (2026-11-26 オーナー決定) */
+const REPRESENTATIVES_PER_SURVEY = 3;
 const GSC_SNAPSHOT_DIR = path.resolve(
   __dirname,
   "../../..",
@@ -231,7 +243,99 @@ function toRepresentative(
   };
 }
 
-function build(): string {
+/**
+ * 調査ごとの代表の指標とアイコンのカテゴリ (調査一覧のカード)。
+ * - 代表: 調査の解説の台帳の「読者の問い」の指標 (公開中のものだけ・台帳の順) を先に、足りない分を掲載価値の高い順で埋める
+ * - カテゴリ: その調査の公開中の指標で最も多いカテゴリ (同数なら掲載価値の合計が大きい方)
+ * 調査は表示するハブの ID (canonicalSurveyHubKey) にまとめる。紐付けは配信の組み立てと同じ resolveSurveyLinkage
+ */
+function buildSurveyProminence(
+  results: readonly ProminenceResult[],
+  subtitles: Map<string, string>,
+): string {
+  const resultByKey = new Map(results.map((result) => [result.rankingKey, result]));
+  const bySurvey = new Map<string, ProminenceResult[]>();
+  for (const result of results) {
+    const config = METRICS_REGISTRY[result.rankingKey];
+    if (!config) continue;
+    const hubs = new Set(resolveSurveyLinkage(config, METRICS_REGISTRY).surveyIds.map(canonicalSurveyHubKey));
+    for (const hub of hubs) bySurvey.set(hub, [...(bySurvey.get(hub) ?? []), result]);
+  }
+
+  const surveys = Object.fromEntries(
+    [...bySurvey.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([surveyId, members]) => {
+        const memberKeys = new Set(members.map((member) => member.rankingKey));
+        const editorialKeys = (getSurveyEditorialContent(surveyId)?.readerQuestions ?? [])
+          .map((question) => question.rankingKey)
+          .filter((key) => memberKeys.has(key));
+        const byScore = [...members]
+          .sort((a, b) => b.score - a.score || a.rankingKey.localeCompare(b.rankingKey))
+          .map((member) => member.rankingKey);
+        const picked = [...new Set([...editorialKeys, ...byScore])].slice(0, REPRESENTATIVES_PER_SURVEY);
+
+        const categoryWeight = new Map<string, { count: number; score: number }>();
+        for (const member of members) {
+          const current = categoryWeight.get(member.categoryKey) ?? { count: 0, score: 0 };
+          categoryWeight.set(member.categoryKey, { count: current.count + 1, score: current.score + member.score });
+        }
+        const [categoryKey] = [...categoryWeight.entries()].sort(
+          ([ka, a], [kb, b]) => b.count - a.count || b.score - a.score || ka.localeCompare(kb),
+        )[0];
+
+        return [
+          surveyId,
+          {
+            categoryKey,
+            representatives: picked.map((rankingKey) => {
+              const result = resultByKey.get(rankingKey)!;
+              const subtitle = subtitles.get(rankingKey);
+              return {
+                rankingKey,
+                title: result.title,
+                readerLabel: resolveRankingReaderLabel({ rankingKey, title: result.title }),
+                ...(subtitle ? { subtitle } : {}),
+              };
+            }),
+          },
+        ] as const;
+      }),
+  );
+
+  return `/**
+ * AUTO-GENERATED — 手編集禁止
+ *
+ * 生成コマンド: npm run generate:ranking-prominence --workspace apps/web
+ * 真実源: data/metrics/*.ts + data/surveys/editorial/editorial.json (読者の問い) + GSC snapshot
+ *
+ * 調査一覧 (/survey) のカードに出す、調査ごとの代表の指標 (${REPRESENTATIVES_PER_SURVEY} 件) とアイコンのカテゴリ。
+ * 代表は調査の解説の台帳の「読者の問い」の指標を先に、足りない分を掲載価値の高い順で埋める。
+ * サーバーの調査一覧だけが読む (ヘッダーが読む ranking-prominence.generated.ts とは分ける)。
+ */
+
+export interface SurveyRepresentative {
+  rankingKey: string;
+  /** 正準な統計名 */
+  title: string;
+  /** 読者向けの平易な指標名 */
+  readerLabel?: string;
+  /** 分母・内訳 (config の subtitle)。名前は metricDisplayName で組み立てる */
+  subtitle?: string;
+}
+
+export interface SurveyProminence {
+  /** アイコンに使うカテゴリ (その調査の公開中の指標で最も多いカテゴリ) */
+  categoryKey: string;
+  representatives: ReadonlyArray<SurveyRepresentative>;
+}
+
+export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
+  ${JSON.stringify(surveys, null, 2)};
+`;
+}
+
+function build(): { main: string; survey: string } {
   const snapshot = findLatestGscPagesCsv();
   const impressions = snapshot
     ? readImpressionsByRankingKey(snapshot.filePath)
@@ -290,7 +394,7 @@ function build(): string {
 
   const json = (value: unknown) => JSON.stringify(value, null, 2);
 
-  return `/**
+  const main = `/**
  * AUTO-GENERATED — 手編集禁止
  *
  * 生成コマンド: npm run generate:ranking-prominence --workspace apps/web
@@ -355,6 +459,7 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
 export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   ${json(areaHighlightProminence)};
 `;
+  return { main, survey: buildSurveyProminence(results, subtitles) };
 }
 
 function runAudit(): void {
@@ -406,31 +511,39 @@ function main(): void {
   }
 
   const isCheck = process.argv.includes("--check");
-  const next = build();
-  const current = fs.existsSync(OUT_PATH) ? fs.readFileSync(OUT_PATH, "utf8") : null;
+  const built = build();
+  const outputs = [
+    { path: OUT_PATH, next: built.main },
+    { path: SURVEY_OUT_PATH, next: built.survey },
+  ].map((output) => ({
+    ...output,
+    current: fs.existsSync(output.path) ? fs.readFileSync(output.path, "utf8") : null,
+  }));
 
   if (isCheck) {
-    if (current === next) {
+    const stale = outputs.filter((output) => output.current !== output.next);
+    if (stale.length === 0) {
       console.log("[ranking-prominence] up to date");
       return;
     }
-    console.error(
-      `[ranking-prominence] ${current === null ? "生成物がありません" : "生成物が SSOT とずれています"}。\n` +
-        "  npm run generate:ranking-prominence --workspace apps/web を実行して commit してください。",
-    );
+    for (const output of stale)
+      console.error(
+        `[ranking-prominence] ${output.current === null ? "生成物がありません" : "生成物が SSOT とずれています"}: ${path.relative(process.cwd(), output.path)}`,
+      );
+    console.error("  npm run generate:ranking-prominence --workspace apps/web を実行して commit してください。");
     process.exit(1);
   }
 
-  // 内容が同じなら書かない (mtime を動かさず、hot reload と CI cache を無駄に壊さない)。
-  if (current === next) {
-    console.log("[ranking-prominence] no change");
-    return;
+  for (const output of outputs) {
+    // 内容が同じなら書かない (mtime を動かさず、hot reload と CI cache を無駄に壊さない)。
+    if (output.current === output.next) {
+      console.log(`[ranking-prominence] no change: ${path.relative(process.cwd(), output.path)}`);
+      continue;
+    }
+    fs.mkdirSync(path.dirname(output.path), { recursive: true });
+    fs.writeFileSync(output.path, output.next);
+    console.log(`[ranking-prominence] wrote ${path.relative(process.cwd(), output.path)}`);
   }
-  fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
-  fs.writeFileSync(OUT_PATH, next);
-  console.log(
-    `[ranking-prominence] wrote ${path.relative(process.cwd(), OUT_PATH)}`,
-  );
 }
 
 main();
