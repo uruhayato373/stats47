@@ -8,6 +8,5 @@
 export {
   fetchPrefectureTopology,
   fetchMunicipalityTopology,
-  fetchAllCitiesTopology,
   type Logger,
 } from "./geoshape-service";
