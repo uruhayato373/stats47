@@ -88,7 +88,7 @@
     },
     {
       "issue": "issue:B01",
-      "page": "ranking:foreign-resident-count-per-100k",
+      "page": "ranking:foreign-resident-count",
       "role": "evidence"
     },
     {
@@ -103,7 +103,7 @@
     },
     {
       "issue": "issue:B03",
-      "page": "ranking:foreign-resident-count-per-100k",
+      "page": "ranking:foreign-resident-count",
       "role": "evidence"
     },
     {
@@ -273,7 +273,7 @@
     },
     {
       "issue": "issue:F02",
-      "page": "ranking:physicians-in-medical-facilities-per-100k",
+      "page": "ranking:physicians-in-medical-facilities",
       "role": "evidence"
     },
     {
@@ -288,7 +288,7 @@
     },
     {
       "issue": "issue:F04",
-      "page": "ranking:deaths-cerebrovascular-disease-per-100k",
+      "page": "ranking:deaths-cerebrovascular-disease",
       "role": "evidence"
     },
     {
@@ -418,7 +418,7 @@
     },
     {
       "issue": "issue:J03",
-      "page": "ranking:disaster-damage-amount-per-person",
+      "page": "ranking:disaster-damage-amount",
       "role": "evidence"
     },
     {
@@ -653,7 +653,7 @@
     },
     {
       "issue": "issue:D09-1",
-      "page": "ranking:persons-on-public-assistance-per-1000",
+      "page": "ranking:persons-on-public-assistance",
       "role": "evidence"
     },
     {
