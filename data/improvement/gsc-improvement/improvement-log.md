@@ -926,6 +926,7 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 
 - **判定 (2026-11-01・improvement-triage): 判定不能として improvements.md の行を閉じた**。理由: 想定効果値 `[target:]` に置ける根拠が無い。このログ内の前例 (BLOG-WAVE-2026-05-25-auto の clicks 127→94、BLOG-CTR-05 の 59→11) はどちらも effect/none で上向きでなく、`PV-100K-LEVERS-01` の CTR 4.0% は目標であって実測ではない。根拠の無い値を足すと `.claude/rules/evidence-based-judgment.md` 状況 4 に反するため付けない。W43 verdict (`data/effect-verdict/verdicts-2026-W43.json`) は `insufficient-target` と `insufficient-window` (経過 0 週)。効果ラベルは付けていない。
 - **引き継ぎ**: 観測の手順 (上の baseline・対照群 123 ページ・検証コマンド・期日 2026-11-24 と「動かなかった場合の次」) はこの節に残す。実施する場合は、行を立て直さずに 11-21 以降にこの節のコマンドで 10 ページを取り、差の差を追記する。search-growth 台帳の 2 件 (11-03・11-17・12-15) は `npm run search-growth:measure` が別系統で測るので影響しない。
+- **オーナー決定 (2026-11-25・SEO-TITLE-CTR-CLOSE-01 の選択肢 a)**: 判定不能のまま終了として `closed-waves.json` に記録した。近傍ページとの比較観測 (差の差) は続けない。
 
 ### [MUNI-PAGE-SEO-01] 市区町村ページのデータブック化・title の人口化・索引対象の全市区町村化 (2026-10-21 デプロイ)
 

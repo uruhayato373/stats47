@@ -8,11 +8,8 @@
       "cadence": "weekly",
       "source": "data/",
       "measurementStatus": "partially-measured",
-      "targetM3": 30000,
-      "targetM6": 187000,
-      "targetM12": 1030000,
       "unit": "円/月換算",
-      "note": "現行の収益化NSM。目標値は増分の仮説で、予測ではない。"
+      "note": "現行の収益化NSM。M3・M6・M12 の目標値は戦略に根拠が無いため 2026-11-25 のオーナー決定で消した。「届いた」の線は収益化戦略 §3.4 の月の確定売上 ¥1,846。"
     },
     {
       "id": "regional-decision-sessions",
@@ -21,8 +18,6 @@
       "cadence": "monthly",
       "source": "GA4",
       "measurementStatus": "not-instrumented",
-      "targetM3": 5000,
-      "targetM6": 20000,
       "unit": "セッション/月",
       "note": "地域比較・地図操作・DL等の意思決定行動を含む先行指標。"
     },
@@ -33,7 +28,6 @@
       "cadence": "weekly",
       "source": "GA4",
       "measurementStatus": "not-instrumented",
-      "targetM3": 25,
       "unit": "%",
       "note": "地域分析ページ公開後にイベント登録・反映確認して計測する。"
     },
@@ -44,9 +38,6 @@
       "cadence": "monthly",
       "source": "lead ledger",
       "measurementStatus": "not-instrumented",
-      "targetM3": 150,
-      "targetM6": 700,
-      "targetM12": 2500,
       "unit": "件",
       "note": "同意・配信停止・個人情報運用の設計後に開始。"
     },
@@ -58,7 +49,6 @@
       "cadence": "weekly",
       "source": "note / product ledger",
       "measurementStatus": "partially-measured",
-      "targetM3": 10,
       "unit": "件/累計",
       "note": "有料noteとデータ商品の実購入。"
     },
@@ -69,9 +59,6 @@
       "cadence": "monthly",
       "source": "inquiry ledger",
       "measurementStatus": "manual",
-      "targetM3": 1,
-      "targetM6": 3,
-      "targetM12": 6,
       "unit": "件/累計",
       "note": "プラットフォーム投資判断は月3件以上等の需要ゲートを優先。"
     },
@@ -82,7 +69,6 @@
       "cadence": "weekly",
       "source": "data/sns/metric-snapshots/",
       "measurementStatus": "measured",
-      "targetM3": 3,
       "unit": "1万表示以上の投稿数",
       "note": "X直収益ではなく分析テーマの需要信号。"
     },

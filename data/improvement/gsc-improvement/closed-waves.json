@@ -56,6 +56,14 @@
       "decision": "EFFECT-TARGET-MARKERS-01 の選択肢 (a) 終了",
       "reason": "是正から 16 週。before の clicks が 0 (W23 0 → W40 67) で伸び率を出せず、標本も不足 (insufficient-sample)。同じ期間のサイト全体は 8.2 倍で、wave の効果を切り分けられない。事前の目標値が無く、後付けは状況 4 で書けない",
       "evidence": { "before": "W23 clicks 0 / imp 37", "after": "W40 clicks 67 / imp 5,226", "siteGrowth": "W23 1,349 → W40 11,023 (8.2 倍)", "guards": ["insufficient-target", "insufficient-sample"] }
+    },
+    {
+      "waveId": "SEO-TITLE-CTR-EFFECT-01",
+      "closedAt": "2026-11-25",
+      "decidedBy": "owner",
+      "decision": "SEO-TITLE-CTR-CLOSE-01 の選択肢 (a) 終了。近傍ページとの比較観測 (差の差) は続けない",
+      "reason": "title を変えた 10 ページは事前の想定効果値に置ける根拠が無く、2026-11-01 に判定不能として improvements.md の行を閉じていた。ブログ是正 wave と同じ扱いで終了を記録する",
+      "evidence": { "before": "09-11〜10-08 の 10 ページ合計 clicks 701 / imp 55,048 / CTR 1.27% (improvement-log の SEO-TITLE-CTR-EFFECT-01)", "after": "未取得 (after 窓 10-21〜11-17 は取得していない)", "guards": ["insufficient-target"] }
     }
   ],
   "reproduce": "node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run (終了前の値。数値の出典は backlog EFFECT-TARGET-MARKERS-01 の 2026-10-05 の表と data/gsc/history.csv)"

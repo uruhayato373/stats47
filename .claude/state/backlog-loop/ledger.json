@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T23:13:33.389Z",
+  "updatedAt": "2026-11-25T02:26:37.037Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14596,6 +14596,204 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-24T23:13:33.389Z"
+    },
+    "BUSINESS-PLAN-TARGETS-CONFLICT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:26:36.711Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: 消す。data/business-plan/plan/metrics.json の targetM3/M6/M12 14 件を削除 (残 0)。check-datasets error 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:26:36.711Z"
+    },
+    "PRODUCT-LINEUP-2026-11": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:26:36.780Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: ココナラの受注は始めない。収益化戦略 §3.4 と data/products/product-strategy.json の decisions に記録、agenda の未決を削除",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:26:36.780Z"
+    },
+    "TRADE-AREA-REPORT-DECISION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:26:36.843Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: 商圏の参考資料の受注は始めない (PRODUCT-LINEUP-2026-11 と同じ決定)。収益化戦略 §3.4 と product-strategy.json に記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:26:36.843Z"
+    },
+    "AFF-MOBILE-PR-GAP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:26:36.912Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: 11-12 の PR 停止の決定で閉じる。①モバイル先頭は AdSense のまま ②検索ページに PR を出さない ③AI Agent Camp の枠に PR を出さない、を収益化戦略 §3.1 に記録。④題の修正は PR 停止中で対象なし",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:26:36.912Z"
+    },
+    "AFF-RANKING-SLOT-DECISION-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:26:36.975Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: 11-12 にランキングの枠は AdSense へ替わったので閉じる。続けるかは ADSENSE-FORMAT-EXPERIMENT-01 の形式の比較で見る、と収益化戦略 §3.1 に記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:26:36.975Z"
+    },
+    "SEO-TITLE-CTR-CLOSE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:26:37.037Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input --week 2026-W44"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: 選択肢 (a)。closed-waves.json に decidedBy owner で終了を記録、近傍比較は続けない。effect-target-ratchet は PASS (想定効果値欠落0)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:26:37.037Z"
     }
   }
 }
