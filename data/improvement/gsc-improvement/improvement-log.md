@@ -19,8 +19,9 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **baseline (GSC スナップショット 2026-W46・28 日 = `data/gsc/snapshots/2026-W46/pages.csv`)**: 転送した 118 ページは計 131 クリック・5,453 表示 (データのあったのは 54 ページ)。親 106 ページは計 903 クリック・17,563 表示。ランキングページ全体は 9,342 クリック。118 ページのうち 18 件は親より表示が多い (例: public-bath-count-per-100k 1,190 表示・8 クリック、middle-school-students-1-per 776 表示・19 クリック)。
 - **想定効果**: 置かない。転送で見方の中身が検索エンジンに渡る HTML に出なくなる (計算方法の切替はブラウザ側) ので減る可能性があるが、このログに同じ型の過去事例が無い。`[target]` も置かない (effect-verdict は insufficient-target で pending に留まる)。
 - **検証コマンド**: 反映から 28 日後の週次スナップショット `data/gsc/snapshots/<週>/pages.csv` で、親 106 ページ + 旧 118 ページの合計クリック・表示を baseline と比べる。旧 URL の転送は `curl -sI -A "Mozilla/5.0 (compatible; Googlebot/2.1)" https://stats47.jp/ranking/manufacturing-shipment-amount-per-employee` が `301` と `location: /ranking/manufacturing-shipment-amount?norm=manufacturing-shipment-amount-per-employee` を返すこと。
-- **実測**: 未取得 (本番未反映)。
-- **判定期日**: 本番反映日 + 28 日。合計クリックが baseline の 1,034 (903 + 131) から 10% 以上減っていれば、表示が多かった 18 件の見方を HTML に出す方法 (サーバーで描く見方の別 URL) を検討する。減っていなければ記録して終了。
+- **本番反映**: 2026-11-25 21:05Z (PR #1304 のマージ 30d4f6ca5・デプロイ run 45701103895)。反映直後に 118 件すべてが `301` で `/ranking/<親>?norm=<見方>` を返すことを curl で確かめた。本番の `app/ranking/manufacturing-shipment-amount/item.json` に series の選択肢 2 件が入っていることも確かめた。
+- **実測**: 未取得 (判定は 2026-12-23 以降の週次スナップショット)。
+- **判定期日**: 2026-12-23 (本番反映 + 28 日)。合計クリックが baseline の 1,034 (903 + 131) から 10% 以上減っていれば、表示が多かった 18 件の見方を HTML に出す方法 (サーバーで描く見方の別 URL) を検討する。減っていなければ記録して終了。
 - **交絡**: 同じ週に 2 件の UI 変更 (fd8dee3ba の線の 2 重・c645f1159 の右レールと AdSense の表記) を develop に入れている。ページの見た目の変更で、検索結果の順位には直接効かない想定だが分けて測れない。
 
 ## [GSC-CRAWL-WASTE-01] テーマ・県×テーマの表示直後の POST の廃止 (2026-11-11 デプロイ)
