@@ -1,15 +1,15 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-11-24T06:01:27.720Z
+- 生成: 2026-11-25T04:56:26.876Z
 - GSC snapshot: 2026-W46 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 727 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
 
 ## サマリ (active ranking 全件 2624 件)
 
-- ✅ done: 1357 件 (51.7% / impressions 計 137223)
-- ⏳ needs-regen: 1267 件 (impressions 計 105772)
-  - 内訳: stale-year 810 / missing 456 / incomplete 1
+- ✅ done: 1359 件 (51.8% / impressions 計 139149)
+- ⏳ needs-regen: 1265 件 (impressions 計 103846)
+  - 内訳: stale-year 808 / missing 456 / incomplete 1
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
 ## 🚧 quarantine — critic 常習不合格で自動生成を停止中 (11 件)
@@ -34,12 +34,14 @@
 ## 進捗 (progress-history.csv より)
 
 - 消化ペース: **9.9 件/日** (2026-07-30 からの平均)
-- 残り 1267 件 → **完了見込み 約 128 日**
+- 残り 1265 件 → **完了見込み 約 129 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
 | R2 last-modified | key | impressions |
 |---|---|---|
+| Tue, 24 Nov 2026 06:04:13 GMT | soba-udon-dining-consumption-expenditure | 1008 |
+| Tue, 24 Nov 2026 06:04:13 GMT | fishery-species-catch-bonito | 918 |
 | Mon, 23 Nov 2026 02:48:49 GMT | bread-consumption-quantity | 1251 |
 | Mon, 23 Nov 2026 02:48:49 GMT | annual-sales-amount | 1192 |
 | Mon, 23 Nov 2026 02:48:49 GMT | specific-health-checkup-participation-rate | 1139 |
@@ -53,8 +55,6 @@
 | Mon, 23 Nov 2026 02:23:43 GMT | junior-high-school-expenses-prefecture | 8 |
 | Mon, 23 Nov 2026 02:23:43 GMT | maritime-import-export-cargo | 7 |
 | Mon, 23 Nov 2026 02:23:43 GMT | physical-disability-rehabilitation-cases-per-1000 | 1 |
-| Mon, 23 Nov 2026 02:23:42 GMT | floor-area-per-dwelling-owner | 250 |
-| Mon, 23 Nov 2026 02:23:42 GMT | education-expenses-prefecture | 31 |
 
 ## 次にやるべき上位20 (impressions 降順)
 
@@ -71,8 +71,6 @@
 | 1256 | food-manufacturing-establishments | missing | 🟠手動是正候補 | - |
 | 1065 | convenience-store-count-commercial | stale-year | 🟠手動是正候補 | - |
 | 1017 | pig-count | missing | 🟠手動是正候補 | - |
-| 1008 | soba-udon-dining-consumption-expenditure | stale-year | 🟠手動是正候補 | - |
-| 918 | fishery-species-catch-bonito | stale-year | 🟠手動是正候補 | - |
 | 849 | designated-difficult-disease | stale-year | 🟠手動是正候補 | - |
 | 818 | general-hospital-count | stale-year | 🟠手動是正候補 | - |
 | 815 | pork-consumption-quantity | stale-year | 🟠手動是正候補 | - |
@@ -80,6 +78,8 @@
 | 801 | consumer-price-difference-index-housing | stale-year | 🟠手動是正候補 | - |
 | 797 | beef-consumption-quantity | stale-year | 🟠手動是正候補 | - |
 | 784 | table-salt-consumption-quantity | stale-year | 🟠手動是正候補 | - |
+| 777 | cup-noodles-consumption-expenditure | stale-year | 🟠手動是正候補 | - |
+| 750 | foreign-worker-count | missing | 🟠手動是正候補 | - |
 
 > 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、
 > 既定 3件を outbox 経由で R2 へ公開する。個別の独自考察改善はローカルの headless author+critic、
