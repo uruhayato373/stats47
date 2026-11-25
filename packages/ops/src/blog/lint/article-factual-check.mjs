@@ -477,6 +477,13 @@ export function checkRankClaims(content, gt) {
     const rankContext = body.slice(rankSentenceStart, m.index) + m[0].slice(0, m[0].lastIndexOf(m[2]));
     if (mentionsForeignMetric(rankContext, knownLabels)) continue;
 
+    // 「漁獲量4位の東京都は868グラムで19位」の 19位 は、先頭で名指しした指標 (4位) とは別の指標の順位。
+    // 県名の直前が「N位の」で N が違い、県名から順位までの間に記事の既知の指標名が無いなら、対象指標の順位ではない
+    // (先頭の 4位 は checkInverseRankClaims が照合する。県名から順位までの間に既知の指標名があれば従来どおり照合する)
+    const sentenceLead = body.slice(Math.max(rankSentenceStart, m.index - 30), m.index);
+    const leadRankN = sentenceLead.match(/(\d+)\s*位の\s*$/)?.[1];
+    if (leadRankN && parseInt(leadRankN, 10) !== claimedRank && !knownLabels.some((l) => beforeRank.includes(l))) continue;
+
     // 県名の直後が「市」なら都市の主張、文が期間の平均を語るなら平均の系列も照合先に足す。平均の系列が無ければ照合しない
     const cityScope = new RegExp(`^${pref}(?:都|府|県)?(?:市|区部)`).test(m[0]);
     const averageScope = PERIOD_AVERAGE_RE.test(rankContext);
