@@ -98,8 +98,8 @@
       {
         "metricKey": "total-population",
         "scope": "municipality",
-        "decision": "investigate",
-        "reason": "住宅の変化と人口の変化を比較する候補。実在する共通年と境域を確認してから採用する。"
+        "decision": "exclude",
+        "reason": "住宅・土地統計調査の年は2003・2008・2013・2018・2023年で、総人口の市区町村値の年は国勢調査の1980〜2025年の5年ごと (2026-11-25に公開R2の app/stats の vacant-houses-city・total-dwellings・total-population の cities.json で確認) のため、同じ年の組が無い。年を補う推計はせず、人口の変化との比較は採用しない。"
       },
       {
         "metricKey": "total-dwellings",
