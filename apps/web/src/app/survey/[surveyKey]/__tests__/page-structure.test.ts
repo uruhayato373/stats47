@@ -26,4 +26,9 @@ describe('survey page header latest year', () => {
     // 全指標の最新年の最大を見出しに出すと、他の調査が原典の年 (人口推計の 2024 年など) が国勢調査の最新回に読める
     expect(PAGE).not.toMatch(/\.map\(\(i\) => parseLatestYear\(i\.latestYear\)\)\s*\.filter/);
   });
+
+  it('年が読めない指標に決まった年 (旧 parseLatestYear の 2024) を当てない', () => {
+    expect(PAGE).not.toContain("return '2024'");
+    expect(PAGE).toContain('yearCodeOf(item.latestYear)');
+  });
 });

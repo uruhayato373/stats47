@@ -50,6 +50,18 @@ test('★N位を含むだけで、N位で終わらない題は止めない (旧�
   assert.equal(titleBlocked('"1位の県と最下位の県、差は何倍か"'), false);
 });
 
+// BLOG-GATE-RANK-CONTEXT-01: 旧実装は `title: "…"` の形だけに掛かり、引用符なしの題が素通りした
+test('★引用符なし・一重引用符の題も、N位で終わり gap が無ければ止める', () => {
+  assert.equal(titleBlocked('穀類への支出、愛知県が1位で鳥取県が47位'), true);
+  assert.equal(titleBlocked("'キャンプ場と高速道路、北海道が両方1位'"), true);
+});
+
+test('★引用符なしの題でも、gap の要素があるか N位で終わらなければ止めない', () => {
+  assert.equal(titleBlocked('もやし消費量1位山形、沖縄の2.8倍差'), false);
+  assert.equal(titleBlocked('人口は4位なのに空き家は37位'), false);
+  assert.equal(titleBlocked('あさり消費量1位は、山梨県なのか'), false);
+});
+
 test('gap の要素 (なぜ・？・倍) を含む題は、N位で終わっても止めない', () => {
   assert.equal(titleBlocked('"なぜ山梨が1位なのか、そして47位は"'), false);
   assert.equal(titleBlocked('"1位と47位は約3.8倍"'), false);

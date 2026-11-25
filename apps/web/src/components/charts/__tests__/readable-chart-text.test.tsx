@@ -181,10 +181,14 @@ describe("HubSankey — 縮小表示でも読める文字", () => {
 describe("MiniCharts — 年のラベル", () => {
   const points = Array.from({ length: 30 }, (_, index) => ({ year: 1996 + index, value: 100 + index }));
 
-  it("折れ線の両端の年は 10px 以上で描く (viewBox は表示幅と同じなので等倍)", async () => {
+  it("折れ線は年の目盛りも各年の点も描かず、線だけを描く (年と値はホバーで読む。2026-11-24)", async () => {
     const { container } = render(<MiniLineChart points={points} />);
-    await waitFor(() => expect(container.querySelectorAll("svg text").length).toBe(2));
-    for (const text of texts(container)) expect(text.fontSize).toBeGreaterThanOrEqual(10);
+    await waitFor(() => expect(container.querySelector("svg path")).not.toBeNull());
+    expect(container.querySelectorAll("svg text")).toHaveLength(0);
+    // 残る円はホバーで出す 1 つだけで、最初は見えない
+    const circles = [...container.querySelectorAll("svg circle")];
+    expect(circles).toHaveLength(1);
+    expect(circles[0].getAttribute("opacity")).toBe("0");
   });
 
   it("棒ごとの年は 10px 以上で描き、棒が多いときは重ならないよう等間隔に間引いて最新の年を残す", async () => {

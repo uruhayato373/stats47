@@ -172,7 +172,7 @@ export async function AffiliateAdSlot({
       <AdSenseAdWrapper
         format={adSlot.format}
         slotId={adSlot.slotId}
-        // 箱は広告の枠の台帳 (本番の実測): ページ末は関連コンテンツ型、それ以外は右レールのレクタングル
+        // 箱は広告の枠の台帳: ページ末は adsense-footer (固定 300×250)、それ以外は右レールのレクタングル
         slotBox={adSlotBox(position === "footer" ? "adsense-footer" : "adsense-rail-rect")}
       />
     </AdCell>

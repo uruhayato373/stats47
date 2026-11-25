@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-20T23:46:42.055Z",
+  "updatedAt": "2026-11-24T23:13:33.389Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -3958,8 +3958,8 @@
       "completedAt": null
     },
     "PRODUCT-SALES-READINESS-01": {
-      "class": "impl-large",
-      "status": "open",
+      "class": "stale",
+      "status": "completed",
       "sourceFile": null,
       "title": null,
       "attempts": [
@@ -4001,6 +4001,24 @@
           "evidence": "route.class=impl-large (delegate=agent:backlog-solver-hard, apply=draft-pr)。CI run では着手対象外、行削除もしない。",
           "failReason": "class-needs-pr",
           "followUps": []
+        },
+        {
+          "at": "2026-11-24T05:14:05.373Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c 旧 PRODUCT-SALES-READINESS-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 オーナー判断: 前提 (ココナラ撤退・KDP の型ごとの 8 週実売) が変わった。まだ有効な行動 3 件を KINDLE-K-S1-02-RESEARCH-CYCLE-01・BLOG-KAKEI-PUBLISHED-FACT-FIX-01・CONTENT-FOLLOWUP-01 へ移した (grep で 3 行を確認)",
+          "failReason": null,
+          "followUps": []
         }
       ],
       "quarantine": {
@@ -4008,8 +4026,14 @@
         "lastReason": null,
         "since": null
       },
-      "reclassifiedFrom": [],
-      "completedAt": null
+      "reclassifiedFrom": [
+        {
+          "from": "impl-large",
+          "to": "stale",
+          "at": "2026-11-24T05:14:05.373Z"
+        }
+      ],
+      "completedAt": "2026-11-24T05:14:05.373Z"
     },
     "BLOG-BACKGROUND-BATCH-01": {
       "class": "impl-small",
@@ -12299,6 +12323,2279 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-20T23:46:42.055Z"
+    },
+    "CONTENT-PAINPOINT-PUBLISH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T05:13:54.216Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -s -o /dev/null -w %{http_code} https://stats47.jp/blog/<5 slugs>"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 5 本 (nursery-shortage-urban-prefecture ほか) とも本番 200。11-23 のリリース #1297 で公開。SNS 投稿はオーナー判断 (11-24) で完了条件から外した。下書きは data/sns/pain-point-series-drafts.md",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T05:13:54.216Z"
+    },
+    "SNS-WEEKLY-REPORT-MIRROR-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T05:13:54.477Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run list --workflow sns-weekly-report.yml",
+              "gh run list --workflow develop-quality-gate.yml --branch develop"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: W46・W47 のレポートが data/sns/weekly-reports/ に入り (f93b27baf ほか)、sns-weekly-report は 11-15・11-22 とも success。その後の develop の品質ゲートに E12 は出ていない (11-23 04 時台の失敗は workspace contract と seo-meta-facts で別件、以降は success)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T05:13:54.477Z"
+    },
+    "THEME-EXPANSION-D56-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T05:28:48.638Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node packages/ops/src/themes/evaluate-theme-experiments.mjs --check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 55 テーマ拡充の d56 は data/themes/experiments.json に記録済み (launch-reviewed 34・継続などの判断は 11-14 の launchReview、標本不足 insufficient-data 12、中止 aborted 10)。--check の再実行で新しく記録する期日到達の pending は 0 件 (残る pending 23 件は別の実験で d56 が 12-02〜2027-01-07)。theme:portfolio:audit は会社 PC のプロキシ越しで 1",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T05:28:48.638Z"
+    },
+    "BLOG-ALLJSON-MISSING-BODY-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:31:29.951Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c 旧 BLOG-ALLJSON-MISSING-BODY-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 完了条件が BLOG-CHART-FILES-MISSING-01 と同じ (全記事に article.md)。6 記事の調査を BLOG-CHART-FILES-MISSING-01 へ 1 行で移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:31:29.951Z"
+    },
+    "REFERENCE-EXPANSION-NOTE-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:31:30.311Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c 旧 REFERENCE-EXPANSION-NOTE-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 完了条件 (企画中と未着手が 0) は 2026-10-15 に達成。残りのマガジン作成・下書き削除は NOTE-OWNER-ACTIONS-01 の 1・3 にあり、③ の指標の判断を同カードの 4 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:31:30.311Z"
+    },
+    "KAKEI-MULTIAXIS-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:31:30.677Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c KAKEI-MULTIAXIS-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 全国の比較図 17 枚は本番に出ており (11-09 確認)、残り 1 件 (貯蓄・負債の都市比較) は KAKEI-PRODUCTION-REMAINS-01 の ③ と重複",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:31:30.677Z"
+    },
+    "AFFILIATE-COMMON-PRODUCTS-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:31:31.160Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c 旧 AFFILIATE-COMMON-PRODUCTS-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 2026-11-12 のオーナー決定で試験を打ち切り。残りの枠と実測を ADSENSE-FORMAT-EXPERIMENT-01 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:31:31.160Z"
+    },
+    "KDP-MANUSCRIPT-PUBLIC-REPO-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:31:31.651Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c PUBLIC-REPO-CONTENT-DECISION-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 同じ判断を問う 3 枚を PUBLIC-REPO-CONTENT-DECISION-01 へ統合した (事実・選択肢・禁止を移した)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:31:31.651Z"
+    },
+    "NOTE-PAID-HISTORY-EXPOSURE-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:31:31.969Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c PUBLIC-REPO-CONTENT-DECISION-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 同じ判断を問う 3 枚を PUBLIC-REPO-CONTENT-DECISION-01 へ統合した (事実・選択肢・禁止を移した)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:31:31.969Z"
+    },
+    "GIT-HISTORY-SECRET-PURGE-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:31:32.319Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c PUBLIC-REPO-CONTENT-DECISION-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 同じ判断を問う 3 枚を PUBLIC-REPO-CONTENT-DECISION-01 へ統合した (事実・選択肢・禁止を移した)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:31:32.319Z"
+    },
+    "THEME-THUMBNAIL-ROLLOUT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:31.108Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c images/themes/ apps/web/src/app/themes/page.tsx"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: apps/web/src/app/themes/page.tsx にテーマのサムネイルがあり origin/main に入っている (96095cccb #1281)。theme-thumbnails status は元画像・配信画像とも 56/56",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:31.108Z"
+    },
+    "BLOG-ENGEL-VALUE-MISMATCH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:31.357Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "git show b88e1e2f5^:contents/blog/household-spending-before-after-inflation/article.md | grep -c 28.3%"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 改稿が出典の表 0002070003 の値 (2019 年 25.7%・2024 年 28.3%) に合い公開済み (82fff7298)、送り箱の掃除 b88e1e2f5・49854b8ff。分類が 3 通りの件は BLOG-KAKEI-PUBLISHED-FACT-FIX-01 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:31.357Z"
+    },
+    "ADSENSE-FIXED-UNITS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:31.567Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep slotId constants.ts | sort | uniq -d",
+              "grep -rc BORROWED apps/web/src"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: constants.ts の slotId 49 個に重複 0、apps/web/src の BORROWED 0 件。差し替えは 50258e1d4。比較の注意は ADSENSE-FORMAT-BY-PAGE-01 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:31.567Z"
+    },
+    "REVIEW-CADENCE-HANDOFF-PARSE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:31.807Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/management/__tests__/review-cadence.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: review-cadence.mjs の parseRoutes が括弧の中を除いてから区切り、括弧内の「、」の fixture を含むテスト 22 件が pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:31.807Z"
+    },
+    "GSC-COVERAGE-TOTALS-DUP-ROW-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:32.038Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c ^2026-W45 data/gsc/coverage-totals-history.csv"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: e86342e35 で W44 と同値の W45 行を消し、前週と全列同じなら行を足さないようにした (テスト付き)。今の CSV に W45 行は 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:32.038Z"
+    },
+    "ADSENSE-LATEST-PERIOD-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:32.267Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node -e ranges.adsense of data/nsm/weekly-snapshots/2026-W46.json"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 2026-W46 の週次 snapshot の ranges.adsense に 2026-11-08〜11-14 が入り、data/adsense/LATEST.md にも期間の行がある",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:32.267Z"
+    },
+    "NOTE-FIGURE-FIX-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:32.476Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node -e count valueCheck changed/body-differs in data/note/body-figures.json"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 0b00ba964 (11-19) で台帳を作り直し、valueCheck が changed・body-differs の記事は 0。照らせない 2 記事は NOTE-PUBLISHED-AUDIT-01 にある",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:32.476Z"
+    },
+    "KEYS-SYNC-PROMINENCE-REGEN-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T06:45:32.691Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 5bbdd916f (11-18) のキー同期で ranking-prominence.generated.ts も作り直され、--check は up to date",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T06:45:32.691Z"
+    },
+    "UI-FIX-SURVEY-POLICE-20261121": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:26.558Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-SURVEY-POLICE-20261121.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:26.558Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:26.812Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-PREF-20261121.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:26.812Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.094Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-ANALYSIS-20261114.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.094Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.390Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-HOKKAIDO-20261114.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.390Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-THEME-POPULATION-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.642Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-POPULATION-20261011.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.642Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:02:27.909Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261011.txt",
+              "npx vitest run src/features/geo-analysis"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 指摘を ui-findings に記録し --assert-handled が exit 0 (geo のメタ行は GeoCrossAnalysisArticle.tsx で日本語の収録表記と単位に直した・未デプロイ。点と推移グラフは by-design、北海道と geo 一覧は修正済みを確認)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:02:27.909Z"
+    },
+    "CHART-FOOTER-MENU-TEST-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:12:50.711Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run src/components/charts/__tests__/ChartFooter.test.tsx"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 単独で 3 回流して 6 件とも pass (メニューのテストを含む)。web の一部を束ねて流した 1 回だけ別のケースが落ちたが、単独では通る (負荷による一時の失敗)",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-11-24T07:15:34.509Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "failed",
+          "turns": null,
+          "costUsd": null,
+          "gate": null,
+          "evidence": "2026-11-24 訂正: 直前の completed の記録は誤り。再実行すると ChartFooter.test.tsx は 3 回中 1 回「ボタンを押すと、複数の出典とランキングを省略せず Sheet に並べる」が Unable to find role=dialog で落ちる。カードを戻した",
+          "failReason": null,
+          "followUps": []
+        },
+        {
+          "at": "2026-11-24T10:45:24.692Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "cd apps/web && npx vitest run ChartFooter.test (前後 3 回ずつ)",
+              "cd apps/web && npx vitest run (全件)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: Sheet が開くのを待つ時間を 5 秒にした (de47f2093)。ChartFooter.test は前後 3 回とも 6/6、web の vitest 全件 410 ファイル・3192 件通過。原因 (初回の Sheet の読み込みが findByRole の既定 1 秒を超える) は計測からの仮説で、Windows での再現は未確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [
+        {
+          "from": "misconception-close",
+          "to": "test-fix",
+          "at": "2026-11-24T10:45:24.692Z"
+        }
+      ],
+      "completedAt": "2026-11-24T10:45:24.692Z"
+    },
+    "WIN-PREFLIGHT-NPM-SPAWN-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:12:51.221Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-20 この Windows PC の preflight:pr で 68 検査すべてが判定まで進み、spawn・EINVAL・npm ENOENT の起動エラーは 0 件 (japan-zue-evidence-inventory は ✅ 89.9s)。落ちた 6 件は CRLF とプロキシが原因で WINDOWS-LOCAL-GATES-01 に記録済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:12:51.221Z"
+    },
+    "TURBOPACK-DEV-WINDOWS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:12:51.823Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl localhost:3000 / /ranking/total-population /areas/01000 /themes/aging-society"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 この Windows PC で npm run dev:web (既定の Turbopack) を起動し、トップ・ランキング詳細・県ページ・テーマが 200。/themes/real-income と /areas で R2 のデータとチャートの表示も画面で確かめた",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:12:51.823Z"
+    },
+    "SEO-KEYWORD-OBSERVATION-TIMEOUT-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:41:18.912Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/search-growth/__tests__/keyword-cycle.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: reviewDue に OBSERVATION_TIMEOUT_DAYS=28 を足し、判定日から 28 日を過ぎて query-page-not-reported のままの観測を insufficient-data (observation-timeout) で閉じる。直す前は新テストが fail、直した後 18/18 pass。観測中ページの止めは未変更",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:41:18.912Z"
+    },
+    "KDP-PROMOTE-STALE-PROPOSAL-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:41:19.244Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/product-factory/tests/kindle-listing-revision.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: export の照合を assertEpubMatchesCurrentBook に切り出し、promote も提案を写す前に今の書籍の sha を EPUB と提案の両方と照合する。古い提案で promote すると error のテストを含め 8/8 pass (直す前は 3 件 fail)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:41:19.244Z"
+    },
+    "PREFECTURE-DEVIATION-S5-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T07:45:07.834Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep -c オーナー決定 (2026-11-24) .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 オーナーの指示 (推奨があれば推奨どおり) で本文の推奨 A を採った: 解決ラベルは combined-analysis のまま据え置きカードを閉じる。実装は 5ae5502e4 で済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T07:45:07.834Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-LAYER-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.158Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-LAYER-20261114.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 検証コマンドが [ok] 1 件すべて処理済み で exit 0 (残りは ADSENSE-OVERLAY-AB-01 へ --mark-owner 済み)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.158Z"
+    },
+    "OPENDATA-RANKING-PILOT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.228Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -A Googlebot https://stats47.jp/ranking/health-checkup-{smoking",
+              "sufficient-sleep",
+              "weight-gain-10kg}-rate",
+              "grep OPENDATA-NDB-EFFECT-01 .claude/todo/improvements.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 本番の 3 本を Googlebot UA で取り 200・title が指標名。取り込み run 43972559111 で 10 本の values.json が 200。4 週の計測は improvements の OPENDATA-NDB-EFFECT-01 (期日 12-15) へ引き渡し済み。関連の未着手は OPENDATA-ARCHIVE-01 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.228Z"
+    },
+    "BLOG-PUBLIC-REVIEW-MD-CLEANUP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.293Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep r2-maintenance run 43871460492 deleted=718 remainder=0 (カード本文)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: r2-maintenance の実削除 run 43871460492 が deleted=718・errors=0・remote remainder=0、抜き出し 11 件が 404・本文 200 (11-16 の記録)。完了条件 (公開 R2 に review.md・research.md・prompt が 0 件) を満たす",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.293Z"
+    },
+    "CF-CPU-ROUTE-WEEKLY-01": {
+      "class": "stale",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:22:01.360Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep CF-CPU-ROUTE-WEEKLY-01 .claude/todo/backlog.md"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 残りは CF-CPU-FOLLOWUP-01 の 6 (トークンへの Observability 読み取り権限) と同じ作業。完了条件を CF-CPU-FOLLOWUP-01 へ 1 行で移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:22:01.360Z"
+    },
+    "DATA-LAYOUT-MOVE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:25:23.642Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets -- --moves",
+              "git log --since=2026-10-08 -- <旧置き場 .claude/state/{gsc",
+              "ci",
+              "ai-content",
+              "sns",
+              "page-quality",
+              "search-growth}>",
+              "git log -1 --since=2026-10-08 -- data/{gsc/coverage-remediation",
+              "gsc/url-inspection",
+              "ai-content",
+              "ci",
+              "seo",
+              "affiliate",
+              "search-growth",
+              "estat",
+              "blog",
+              "themes}"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: --moves は 0 行。10-08 以降に旧置き場への書き込みは 0 件。新しい置き場には日次 (GSC URL 検査 11-20・AI 解説 11-24・CI 11-15) と週次 (fetch-metrics 11-20・search-growth 11-21・seo 11-24・affiliate 11-24・themes 11-20) の bot の書き戻しがある。Instagram は 10-27 から停止中で、最後の書き込み (10-26) も新しい置き場。保持期間の未決は DIR-PLACEMENT-CLEANU",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:25:23.642Z"
+    },
+    "STRATEGY-ISSUE-MAP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:29:46.606Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "npm run docs:check",
+              "npm run type-check",
+              "cd apps/admin && npx vitest run tests/unit/issue-map.test.ts",
+              "localhost:4747/strategy/issue-map"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: ①〜④の成果物 (issue-map.json・schema・/strategy/issue-map・weekly-review の段 13・monthly-plan の段 5・収益化戦略 74 行の参照) がある。check-datasets error 0・docs:check errors 0・type-check 通過・issue-map のテスト 13 件通過。localhost で 12 マス・前提・判定日・ストーリーラインの表示を確かめ、閉じたカード CONTENT-KAKEI-EXPANSION-01 への参照を改",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:29:46.606Z"
+    },
+    "MODEL-OPT-MONITOR-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:39:15.319Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 11-24 の決定 (a) 据え置き (effort high の 4 体と sonnet の code-reviewer) を規約に記録した (53fac2347)。docs:check errors 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:39:15.319Z"
+    },
+    "RANKING-INTEGRITY-AUDIT-FLAKE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:41:44.608Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsc --noEmit -p packages/ranking/tsconfig.json",
+              "npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts",
+              "R2_PUBLIC_FETCH_URL=http://127.0.0.1:9 npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: fetchJson が通信断・5xx を fetchFailures に記録し、item/values・national-trend・values-per-*・計算型の依存・home/survey/category の各判定で status 0 を欠落・件数違反と数えないようにした。ログに「取得の失敗」の一覧と「落ちた検査」の 1 行を出す。本番の実走は取得の失敗 0 件で、落ちた検査 (h)(k) は本物の違反 (RANKING-INTEGRITY-VIOLATIONS-1124-01 へ起票)。R2 に届かないときは all.",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:41:44.608Z"
+    },
+    "UI-FIX-HOME-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.444Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-HOME-20261011.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: assert-handled exit 0 (b71296a90)。右レールは AdSense の枠と運営者のプロフィールだけで、指摘の文字は Google の広告原稿。広告の表記は 10-30 のオーナー決定の形なので意図どおりと記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.444Z"
+    },
+    "UI-FIX-CATEGORY-20261114": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.509Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-CATEGORY-20261114.txt",
+              "cd apps/web && npx vitest run AreaTileMap.test",
+              "localhost:3000/areas (375px)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: タイル地図の文字を clamp(9px,3.4cqw,11px) にした (fec637672)。assert-handled exit 0、テスト 5/5、375px の実画面で北海道のマスが 11px",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.509Z"
+    },
+    "UI-FIX-PREFECTURE-LIST-20261031": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.571Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-LIST-20261031.txt",
+              "localhost:3000/areas (375px) の scrollHeight"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 都道府県一覧を 320px 以上で 3 列にした (d91fdaeb4)。assert-handled exit 0、375px の実画面で 3 列・ページの高さ 2,568px (指摘時 2,906px)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.571Z"
+    },
+    "UI-FIX-OTHER-MUNICIPALITIES-THEME-20261031": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T10:45:24.632Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-OTHER-MUNICIPALITIES-THEME-20261031.txt",
+              "cd apps/web && npx vitest run MiniDistributionBars.test"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 分布の棒の下に最小・最大を単位つきで添えた (d25115720)。assert-handled exit 0、テスト通過。部品カタログの行も合わせて直した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T10:45:24.632Z"
+    },
+    "BLOG-GATE-RANK-CONTEXT-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.611Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/blog/lint/__tests__/*.test.mjs",
+              "node --test packages/ops/src/blog/__tests__/quality-gate.*.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (7452cdacf): 県の順位ではない順位を照合から外す非検出テスト 4 件を先に足して赤を確認し、修正後に lint 147 pass・quality-gate 33 pass。同じ県の誤った順位は今までどおり検出する mutation テストも pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.611Z"
+    },
+    "METRIC-DEFINITION-GAPS-BOOK-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.679Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:config --workspace=@stats47/data-configs",
+              "npx vitest run packages/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (1ed0943d4): 民営家賃の東京都は東京都区部 (統計局 shityou-k2025.pdf)、地域差指数は都道府県の値で県庁所在市とは別系列 (g_2024.pdf・k_1.html) と一次資料で確認し、公開 R2 の 2024 年の値が PDF の都道府県の表と一致。validate:config error 0・vitest 1509 pass",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.679Z"
+    },
+    "XLSX-FURIGANA-INGEST-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.745Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/ingest-nier-achievement.ts --year 25 --dry-run (差し替え前後)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (81abf088d): NIER の xlsx 94 個で、差し替え後と差し替え前 (2c28508cd^) の dry-run の出力 51 行が一致 (diff 0 行)。結果をスクリプト冒頭に記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.745Z"
+    },
+    "MEDIA-WORKSPACE-ORPHAN-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.817Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/media/check-workspace.mjs",
+              "node --test (media 43 件)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (c164ae0e8): 原因は 10-24 に公開済み記事へ統合した note の下書き 3 本の画像の品質記録 9 件の残りと確定し、分類だけの記録なので外した。check-workspace pass (在庫索引なし)・media テスト 43 pass。在庫索引ありの pass は private R2 の鍵が要り未確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.817Z"
+    },
+    "BLOG-PUBLISH-AUDIT-KAKEI-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:00:41.889Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "gh run list --workflow blog-auto-publish.yml",
+              "node .claude/scripts/blog/prune-published-outbox.mjs --apply"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 11-05 の失敗は 9 指標の有効化 (863c80cd6) と R2 への値の投入 (11-15) の 10 日のずれ。9 指標は 200、11-14 以降の公開の run は成功。たまっていた送り箱 236 本を prune で消した。掃除がサイト全体の検査に結びついている構造の問題は BLOG-OUTBOX-PASS-PUBLISH-01 へ移した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:00:41.889Z"
+    },
+    "UI-FIX-RANKING-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:39:03.998Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-RANKING-20261011.txt",
+              "cd apps/web && npx vitest run ChartPanel.test",
+              "localhost:3000/ranking/total-population (375px)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (b4814b6cc): 操作があり説明の無いパネルの見出しを折り返す横並びにした。assert-handled exit 0、ChartPanel.test 通過、375px の実画面で 3 つのパネルの題名が 1 行 (高さ 22px)。題名の変化の指摘は定義の修正と単位の表記統一による by-design",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:39:03.998Z"
+    },
+    "UI-FIX-OTHER-20261031": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:39:04.080Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-OTHER-20261031.txt",
+              "axe (本番 4 URL・390px と 1440px・広告と計測を止めて)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (3dfc0a3ff): assert-handled exit 0。a11y の 4 件は AdSense などの第三者が差し込む要素で、広告と計測を止めると本番 4 URL で 0 件。題名の変化は年の名前の「年度→年」と指標名の改名 2 件。コードの変更なし。自前の要素の違反 2 件は UI-FOLLOWUP-02 へ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:39:04.080Z"
+    },
+    "KINDLE-K-S1-02-STATUS-DRIFT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.068Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run products:kindle:validate --workspace packages/product-factory",
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (977150d52): 状態と章数の食い違いは着手前に解消済み。章に lensIds を足し、Schema と datasets の refs で切り口台帳へつないだ (存在しない id で check-datasets が error になることを確認)。kindle:validate OK・check-datasets error 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.068Z"
+    },
+    "ISSUE-PRODUCT-LINK-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.130Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets",
+              "問いの台帳と商品の照合 (M01・K06・K08・K11)"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24: 問いから企画したと根拠を示せる商品は既存の 4 本だけで、すべて台帳から辿れた (M01→note の製造品出荷額、K06/K08/K11→K-S1-15/16/14)。展開記録 439 件に kindle・商品のチャネルは 0。p-09 は M01 の分析の再利用なのでカードの境界どおり載せない。足すべき products は無い",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.130Z"
+    },
+    "METRIC-GATE-FOLLOWUP-02": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.190Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run validate:catalog --workspace=@stats47/data-configs",
+              "npx vitest run packages/data-configs",
+              "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (5d5f55539・0d268aedd・基準の記録): 観測年が 5 点未満の折れ線 6 図を数値タイルに替え、validateChartTemporalFit を MIN_TREND_YEARS 未満へ広げた。validate:catalog error 0 (chart-temporal-fit 0)、data-configs vitest 1511 件、調査の分類の検査は 6 図を themeBaselineFollowUps に記録して違反なし。テーマが参照する指標は前後とも 851 件",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.190Z"
+    },
+    "R2-WRITE-PENDING-DISPLACE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.251Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/ogp/__tests__/pending-ranking-ogp.test.mjs",
+              "audit-workflow-policy --strict"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (3d337c831): R2 書き込みの待ち枠を奪われた新規キーの OGP 生成を、ranking-ogp-new-keys.yml の 6 時間おきの実行で拾い直す。テスト 5 pass・workflow の方針の検査 0 件・既知キーで pending 0。実際の run での拾い直しは main への反映後",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.251Z"
+    },
+    "CI-CONTRACT-TESTS-DEVELOP-GAP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.312Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/ci/__tests__/contract-steps.test.mjs",
+              "手元で Contract Tests の全 28 段"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (a1552175f): main への PR の Contract Tests と同じ段を develop の push でも全段回すようにした。テスト 4 pass、手元で 28 段中 27 段 pass (残る 1 段は所要時間の予算超過で、単独で再実行して pass)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.312Z"
+    },
+    "AFF-AFB-REJECTED-STATUS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T11:51:20.374Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/ads/__tests__/*.test.mjs",
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (1968b08c3 + 台帳の語彙): 申請スクリプトの理由文に却下を入れ、rejected を負状態として扱う。台帳 affiliate-catalog.json の _statusVocab に rejected を足した。ads のテスト通過・check-datasets error 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T11:51:20.374Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:29:48.234Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20261011.txt",
+              "npm run validate:config --workspace=@stats47/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (b5feb202a): 県の特徴の括弧の重複を止め、教養娯楽費割合の分母を明記した。assert-handled 5 件とも処理済み、validate:config error 0、area-profile のテスト 28 件、classifyMetric の判定は前後とも rate/null。年と年度の混在は警察官数が年度の統計なので by-design。databook は次の snapshot の作り直しで反映",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:29:48.234Z"
+    },
+    "UI-FIX-MUNICIPALITY-20261011": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:29:48.294Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-20261011.txt",
+              "curl 公開 R2 の cities.json と 13101 の databook.json"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (5f82a17a3): 公開 R2 の cities.json と 13101 の databook.json は既に「2020年」と表示しており、指標の定義の変更は不要。assert-handled 2 件とも処理済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:29:48.294Z"
+    },
+    "UI-FIX-BLOG-ARTICLE-20261011": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:29:48.354Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled data/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20261011.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (60ff495fd): 右レールの人気記事の題の単位を半角にそろえ 7 件を処理。記事の改稿が要る 3 件 (保存則・child-height の図・cc-estat-04 の図) は --mark-owner で CONTENT-FOLLOWUP-01 へ渡した。assert-handled 10 件すべて処理済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:29:48.354Z"
+    },
+    "CI-SPEED-PRECOMMIT-TRIM-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:36:42.800Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/pre-commit-guard-paths.test.cjs",
+              "Mac で metric config と workflow を staged にした pre-commit の所要"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (42b557e7d): 11-24 決定 (a)(c) どおり、CI と preflight:pr にある重い段を pre-commit から外し、note の 4 本は note の差分だけで走らせる。テスト 33 件通過、pre-commit 49.9 → 7.5 秒。check-estat-entrypoint は PR の CI に無いので残した (CI-TOOLING-FOLLOWUP-04 へ)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:36:42.800Z"
+    },
+    "CODEX-MIRROR-SLIM-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:36:42.863Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/sync-codex-mirror.cjs --check",
+              "node --test check-agent-skill-consistency.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (83cfce91b): .agents/skills の SKILL.md の複製 161 本を skill フォルダの相対 symlink にし (複製 0 本)、.codex/hooks.json を settings.json から生成するようにした (今の hooks.json と diff 0)。--check 一致、関連テスト 30 件。Codex の実機と Windows でリンク越しに skill が一覧に出るかは未確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:36:42.863Z"
+    },
+    "PROVENANCE-LINK-CHECK-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:58:17.822Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check:open-data-links --workspace=@stats47/data-configs",
+              "npm run check:prefecture-statistics-links --workspace=@stats47/data-configs"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (e05503726): 週次の error はリンク切れではなく全件の検証期限切れだった。各ページを開き直して確認日を更新し、移転した 8 県の URL を直した。再実行で open-data 150 URL は ok 143・bot-block 7・gone/stale 0 (exit 0)、都道府県統計 47 URL は全件到達 (exit 0)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:58:17.822Z"
+    },
+    "BLOG-DATA-PRIOR-YEAR-KEEP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T12:58:17.886Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test packages/ops/src/blog/lib/__tests__/refresh-chart-year.test.mjs",
+              "web vitest 全件"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-24 (42d761eb3・80f60dca8): 2 案を比べ R2 から作る案を採った。refresh-chart-year.mjs の compareWithYear が両年の県別の値・順位・順位の変化を R2 の全年の値から返し、refresh-article-data-years.mjs が取り直す図ごとに比較を出す。年を進めた記事が手作業なしに前年との比較を持てる",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T12:58:17.886Z"
+    },
+    "BLOG-CHART-FILES-MISSING-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T21:39:13.070Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl -s -o /dev/null -w %{http_code} https://stats47.jp/blog/<slug> (8 件); grep unpublished-blog-slugs.ts; R2 app/blog/all.json の全記事で article.md と本文が指す図の有無を数えた"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: all.json 871 記事 (公開 861)。公開中の 861 記事は本文が指す図 2,297 枚に欠け 0。article.md 欠け 6 件と図欠け 2 件 (7 枚) はすべて published:false で unpublished-blog-slugs.ts に載り、本番は 8 件とも HTTP 410 (意図どおり)。公開ページの欠けは無い",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T21:39:13.070Z"
+    },
+    "BLOG-ISR-STALE-ON-REVISE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T23:13:33.275Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run packages/r2-storage/src/lib/utils/__tests__/isr-route-cache-key.test.ts; curl 本番 /blog/<slug> の h1 と R2 article.md の title を比較"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: purge-isr-routes.ts が Next.js 16.4.6 の route-cache 形式のキーを探さず止まっていたのを直した。run 45503915410 で削除 4、run 45503927335 で削除 8。デプロイなしで改稿 12 本の本番 h1 が R2 の題と一致。11-13 の 18 本も 18/18 一致",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T23:13:33.275Z"
+    },
+    "BLOG-REGION-PUBLISHED-FIX-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T23:13:33.333Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs contents/blog/<slug>/article.md (published:true); curl https://stats47.jp/blog/<slug>"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: 4 本 (assembly・croquette・school・tuna) を地方のくくりと critic の BLOCK/MAJOR まで直し、quality-gate blocker 0・critic PASS で公開 (run 45503915410)。本番 200・h1 が R2 の題と一致。残る 6 本は公開版がすでに blocker 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T23:13:33.333Z"
+    },
+    "BLOG-CC14-STACKED-AREA-FIGURE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-24T23:13:33.389Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/blog/quality-gate.mjs contents/blog/cc-estat-14-energy-area-chart/article.md; curl https://stats47.jp/blog/cc-estat-14-energy-area-chart"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25: e-Stat 0003409159 の 3 系列を GWh で積み上げ面 (明暗) に描き、quality-gate blocker 0・critic PASS で公開 (d72b5664f・run 45503927335)。本番 200・h1 一致",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-24T23:13:33.389Z"
     }
   }
 }

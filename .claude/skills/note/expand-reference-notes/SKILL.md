@@ -66,6 +66,13 @@ npm run note:article -- save <key...>                                           
 
 生成器・検査の契約は `npm run note:reference:test` が固定する (PR の note Catalog Contract Gate)。
 
+図の描画を直したあと、本文と数値を変えずに図だけを描き直すときは、記事ごとに保存した `chart-data.json` から本文が参照する図だけを作り直す
+(最新値を取り直さない・本文を書き換えない):
+
+```bash
+node --import tsx .claude/scripts/note/reference/render-reference-figures.ts --keys <key,...> [--output-dir .local/<確認用>]
+```
+
 公開前に `note-critic` で意味のレビューを必ず受ける。執筆と同じ agent にレビューさせない。数値照合の検査は数字の出どころしか見ないので、
 次は検査を通ってしまう (2026-10-13 の 92 本では 30 本が REVISE。見つかったのはほぼこの 4 種):
 数字を含まない順位の主張の誤り (「福井県は所得の上位に入らない」→ 実際は 7 位)、同じ値の県・地方の書き落とし、

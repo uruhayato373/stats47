@@ -42,25 +42,17 @@ test.describe("地域間比較ページ", () => {
     await expect(vsBadge).toBeVisible({ timeout: 10000 });
   });
 
-  test("カテゴリタブで表示を切り替えられる", async ({ page }) => {
+  test("カテゴリの選択で表示を切り替えられる", async ({ page }) => {
     await page.goto("/category/population/compare?areas=13000,27000", { waitUntil: "domcontentloaded" });
 
-    // カテゴリタブのボタンが表示される（2件以上）
-    const categoryButtons = page.locator("button").filter({ hasText: /人口|労働|経済|住宅|教育|産業|家計|健康/i });
-    await expect(categoryButtons.first()).toBeVisible({ timeout: 10000 });
+    // カテゴリはタブ (?cat=) ではなくセレクト (RegionComparisonClient) で選び、/category/<key>/compare へ移る。
+    // 選んだ地域 (areas) は引き継ぐ
+    const categorySelect = page.getByRole("combobox", { name: "比較カテゴリを選択" });
+    await expect(categorySelect).toBeVisible({ timeout: 10000 });
+    await categorySelect.click();
+    await page.getByRole("option", { name: "労働・賃金", exact: true }).click();
 
-    // 2番目のタブをクリック
-    const secondTab = categoryButtons.nth(1);
-    if (await secondTab.isVisible({ timeout: 3000 }).catch(() => false)) {
-      const tabText = await secondTab.textContent();
-      await secondTab.click();
-
-      // URL の cat パラメータが更新される
-      await expect(page).toHaveURL(/[?&]cat=/, { timeout: 5000 });
-
-      // クリックしたタブのテキストが URL に反映される（カテゴリキーで）
-      expect(tabText).toBeTruthy();
-    }
+    await expect(page).toHaveURL(/\/category\/laborwage\/compare\?(?:.*&)?areas=13000(?:%2C|,)27000/, { timeout: 10000 });
   });
 
   test("比較テーブルが正しく表示される", async ({ page }) => {

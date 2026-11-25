@@ -1,1 +1,0 @@
-../../../../../.claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md

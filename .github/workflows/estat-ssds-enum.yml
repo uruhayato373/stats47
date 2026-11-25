@@ -1,4 +1,4 @@
-name: 🧮 Enumerate SSDS Indicators (weekly)
+name: 🧮 Enumerate SSDS Indicators (手動・週次は weekly:audits)
 
 # SSDS (社会・人口統計体系) 都道府県テーブルの全 cat01 を列挙し、既存 config と突合して
 # 未使用 cdCat01 = クリーンに追加できるランキング候補を洗い出す。read-only (R2/D1 非書込)。

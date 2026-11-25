@@ -741,7 +741,7 @@
       "id": "municipality-ranking:densely-inhabited-district-population-density",
       "kind": "municipality-ranking",
       "key": "densely-inhabited-district-population-density",
-      "title": "人口集中地区人口密度の市区町村ランキング",
+      "title": "人口集中地区人口密度（人口集中地区面積1km²当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/densely-inhabited-district-population-density",
       "published": true
     },
@@ -789,7 +789,7 @@
       "id": "municipality-ranking:department-store-count-per-100k",
       "kind": "municipality-ranking",
       "key": "department-store-count-per-100k",
-      "title": "百貨店数の市区町村ランキング",
+      "title": "百貨店数（人口10万人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/department-store-count-per-100k",
       "published": true
     },
@@ -1605,7 +1605,7 @@
       "id": "municipality-ranking:floor-area-per-dwelling-owner",
       "kind": "municipality-ranking",
       "key": "floor-area-per-dwelling-owner",
-      "title": "持ち家住宅の延べ面積の市区町村ランキング",
+      "title": "持ち家住宅の延べ面積（1住宅当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/floor-area-per-dwelling-owner",
       "published": true
     },
@@ -1613,7 +1613,7 @@
       "id": "municipality-ranking:floor-area-per-dwelling-rented",
       "kind": "municipality-ranking",
       "key": "floor-area-per-dwelling-rented",
-      "title": "借家住宅の延べ面積の市区町村ランキング",
+      "title": "借家住宅の延べ面積（1住宅当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/floor-area-per-dwelling-rented",
       "published": true
     },
@@ -5437,7 +5437,7 @@
       "id": "municipality-ranking:tatami-per-dwelling-owner",
       "kind": "municipality-ranking",
       "key": "tatami-per-dwelling-owner",
-      "title": "持ち家住宅の居住室の畳数の市区町村ランキング",
+      "title": "持ち家住宅の居住室の畳数（1住宅当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-dwelling-owner",
       "published": true
     },
@@ -5445,7 +5445,7 @@
       "id": "municipality-ranking:tatami-per-dwelling-rented",
       "kind": "municipality-ranking",
       "key": "tatami-per-dwelling-rented",
-      "title": "借家住宅の居住室の畳数の市区町村ランキング",
+      "title": "借家住宅の居住室の畳数（1住宅当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/tatami-per-dwelling-rented",
       "published": true
     },

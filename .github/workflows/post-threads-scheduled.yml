@@ -1,4 +1,4 @@
-name: 🧵 Threads scheduled post (hourly)
+name: 🧵 Threads scheduled post (手動・定期実行は停止中)
 
 # Threads API のコンテナ作成に予約公開のパラメータが無いため
 # (https://developers.facebook.com/docs/threads/reference/publishing/ ・アクセス日 2026-09-23)、

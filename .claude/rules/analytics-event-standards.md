@@ -133,6 +133,13 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > **商品詳細 LP の配置別計測 (2026-11-12)**: `ProductPurchase` は登録済み `cta_id` に `product_detail_top` / `product_detail_bottom` を入れ、`product_impression` と `product_click` の双方で送る。`link_position` は詳細へ来る前の導線（直接流入は `product_detail`）を維持する。表示は画像・ボタンを含む案内全体が50%以上・1秒連続見えた場合にマウントごと1回。画像とボタンの表示を重複計上しない。週次 `product-referrals` は `cta_id` 列で配置別に記録する。配置ごとのクリック率は同じ `cta_id` の表示を分母にし、従来の案内表示（`cta_id` 未設定）とは合算しない。計測開始はデプロイ後。上下の比較だけで画像の有無による効果を断定せず、note上の購入成立とも区別する。
 
 > **楽天市場のカードの計測 (2026-11-06 撤去)**: `rakuten-items` と `*-furusato-*`・`rakuten-*` の `link_position` は過去の記録にだけ残る。
+> **nav_surface の値追加 (2026-11-24・名前の無かったサイト内リンク)**: NAV-CLICK-COVERAGE-01 ① (4db50ce7d)。
+> カードの見出し行の操作 (`data-slot="card-action"`。「すべて見る」など) は、外側に導線名が無ければ共通のクリック監視が
+> `card_action` で送る (外側の導線名を優先)。運営者のカード (体験記を読む・運営者について) は `operator_profile`
+> (`nav_label` は `operator:story` / `operator:about`)。`/municipalities` の「公開中のテーマ」のカードは既存の
+> `municipalities_theme` を使い、`nav_label` は `municipality-theme:<slug>`。登録済みの `nav_surface` / `nav_label` に
+> 値を足すだけで、新しいカスタムディメンションは不要。本番での送信は反映後に確かめる。
+>
 > **nav_surface の値追加 (2026-09-15・県ページ回遊導線)**: 都道府県ページ右レールの
 > 共通カテゴリ一覧を `area_sidebar` として追加した。登録済み `nav_surface` / `nav_label` の
 > 値追加であり、新しい custom dimension はない。

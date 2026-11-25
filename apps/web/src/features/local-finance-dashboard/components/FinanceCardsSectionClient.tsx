@@ -133,9 +133,11 @@ export function FinanceCardsSectionClient({ cards, part }: Props) {
             footer={`${latestYear}年度`}
           />
 
-          <StatTile label="実質収支" value={latest ? oku(latest.realBalance) : null}>
-            <MiniLineChart points={lineSeries('realBalance', OKU)} unit="億円" />
-          </StatTile>
+          <StatTile
+            label="実質収支"
+            value={latest ? oku(latest.realBalance) : null}
+            chart={<MiniLineChart points={lineSeries('realBalance', OKU)} unit="億円" />}
+          />
 
           <StatTile label="積立金現在高" value={latest ? oku(fundTotalLatest) : null}>
             <div>
@@ -176,9 +178,8 @@ export function FinanceCardsSectionClient({ cards, part }: Props) {
                       rankingLabel={`${meta.label}の定義・ランキング`}
                     />
                   }
-                >
-                  <MiniLineChart points={points} unit={meta.unit} />
-                </StatTile>
+                  chart={<MiniLineChart points={points} unit={meta.unit} />}
+                />
               </div>
             );
           })}

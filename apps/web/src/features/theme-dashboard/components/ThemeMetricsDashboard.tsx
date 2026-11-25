@@ -9,7 +9,6 @@ import { ChartPanel } from '@stats47/components';
 import { hrefFor } from '@stats47/data-configs/content/href';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
 import { resolveChartColorHex, type CatalogMetricGroup, type CatalogSection } from '@stats47/data-configs/theme-catalog';
-import { resolveMetricDisplayScale } from '@stats47/data-configs/unit';
 import { metricDisplayName } from "@stats47/ranking";
 import { resolveValuePrecision } from "@stats47/utils";
 
@@ -36,6 +35,7 @@ import {
   isSingleMetricGroup,
   type MetricKpi,
   type MultiMetricGroup,
+  resolveMetricValueDisplay,
   type SingleMetricGroup,
 } from './metric-kpi';
 import { MetricSwitcherPanel } from './MetricSwitcherPanel';
@@ -212,8 +212,8 @@ export function ThemeMetricsDashboard({
       const prefectureValues = d.rankingValues.flatMap((v) => (typeof v.value === 'number' ? [v.value] : []));
       // 桁の多い値は読める単位に寄せる (ランキングと同じ入口。値は元の単位のまま持ち、表示のときだけ寄せる)。
       // 全国のページは全国の値も収まる単位を選ぶ
-      const scale = resolveMetricDisplayScale(
-        { unit, display: d.rankingItem.valueDisplay },
+      const { displayScale } = resolveMetricValueDisplay(
+        { unit, valueDisplay: d.rankingItem.valueDisplay },
         selectedPrefectureCode === null && nationalValue !== undefined
           ? [...prefectureValues, nationalValue]
           : prefectureValues
@@ -222,7 +222,7 @@ export function ThemeMetricsDashboard({
         metricKey: key,
         title: metricDisplayName(d.rankingItem),
         unit,
-        displayScale: scale.factor !== 1 ? { unit: scale.unit, factor: scale.factor, decimals: scale.decimals } : undefined,
+        displayScale,
         yearName: observed?.yearName ?? d.rankingItem.latestYear?.yearName,
         value: selectedPrefectureCode
           ? typeof target?.value === 'number' ? target.value : null

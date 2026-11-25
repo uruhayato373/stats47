@@ -49,6 +49,10 @@
           "requireInSkill": true
         },
         {
+          "label": "GSC 送信済みビューの登録率の推移",
+          "read": "data/gsc/coverage-submitted-history.csv"
+        },
+        {
           "label": "GSC是正・Google検証の詳細ログ",
           "read": "data/improvement/gsc-improvement/improvement-log.md",
           "requireInSkill": true
@@ -134,6 +138,10 @@
         {
           "label": "計測サイクルの週次履歴",
           "read": "data/measurement-cycle/history.csv"
+        },
+        {
+          "label": "GSC 送信済みビューの登録率の推移",
+          "read": "data/gsc/coverage-submitted-history.csv"
         },
         {
           "label": "効果判定 (閾値エンジン)",

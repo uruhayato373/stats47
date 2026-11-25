@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/preview-remotion/types/correlation.md

@@ -67,7 +67,8 @@
                 "highlightRegionLabel": { "description": "source が ranking (S3 地域別) で、この地域の県を考察で強調する", "type": "string", "minLength": 1 },
                 "regionBlockLabel": { "description": "ai-content の regionalAnalysis から抜き出す地方ブロックの見出し語。S3 で「その地域の段落」だけを章に載せる (全冊同一本文の再発防止)。見出し語が一致しないと抽出できない", "type": "string", "minLength": 1 },
                 "freshText": { "description": "source が fresh の書き下ろし本文 (markdown)。freshFile と併用時は freshFile を優先。freshFile が無い書籍は freshText の導入へ degrade する", "type": "string", "minLength": 1 },
-                "freshFile": { "description": "source が fresh の書き下ろし本文の markdown ファイル (product-factory ルート相対。KDP セレクト専用の本は repo の外の .local/kindle-private)", "type": "string", "minLength": 1 }
+                "freshFile": { "description": "source が fresh の書き下ろし本文の markdown ファイル (product-factory ルート相対。KDP セレクト専用の本は repo の外の .local/kindle-private)", "type": "string", "minLength": 1 },
+                "lensIds": { "description": "この章が答える統計調査の切り口 (台帳 surveys.lenses の lenses[].id。check-datasets の refs が実在を見る)。切り口は本ではなく調査の持ち物なので、章はこの id で参照するだけで切り口を定義しない", "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" } }
               }
             }
           },

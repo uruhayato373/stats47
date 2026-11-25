@@ -84,6 +84,12 @@ export interface KindleCoverDesign {
   /** 表紙左上の帯に出す対象の範囲 (省略時「47都道府県」)。地方の本は「九州・沖縄8県」のように書く */
   readonly scopeLabel?: string;
   /**
+   * 表紙上部の共通の帯の文言。指定すると、帯を主題 (書名の前半) の次に大きく描き、書名の後半を 3 番目にする
+   * (2026-11-13 オーナー決定: 「47都道府県」を最大にはせず、主題を最大・共通の帯を 2 番目にする。KDP-COVER-47PREF-DECISION-01)。
+   * 書名ごと描いた表紙 (backgroundAsset.textBaked) では、次に背景を作り直すときの文字の指定として使う
+   */
+  readonly topBand?: string;
+  /**
    * 背景の出どころ。省略時は生成 AI の画像として KDP に申告する。実際の県境データから描いた地図
    * (build-cover-background.mts) は "data-map" とし、KDP の AI 使用の申告で画像を「なし」にする (申告は事実を書く)
    */
@@ -144,6 +150,11 @@ export interface BookChapter {
    * (TS 文字列リテラルの肥大を避ける)。freshText と併用時は freshFile を優先。
    */
   readonly freshFile?: string;
+  /**
+   * この章が答える統計調査の切り口の id (台帳 surveys.lenses の lenses[].id。例 "kakei-city-comparison")。
+   * 切り口は本ではなく調査の持ち物なので、章は id で参照するだけ。実在は check-datasets の refs が見る。
+   */
+  readonly lensIds?: readonly string[];
 }
 
 /** 共通事業方針 (.claude/shared-policy/POLICY.md) の HARM 分類。 */

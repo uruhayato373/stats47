@@ -61,6 +61,8 @@ export const R2_KEY_CLASSES: readonly R2KeyClassRule[] = [
     ["data-refresh.yml", "sync-snapshots.yml (calculated-stats)", "ksj-aggregate-ingest.yml"],
     `${ARCH} Observation (真実源 R2) / ${DESIGN} 観測値ストア`),
   row(P, "app/commute-flow/", "通勤流動の観測値 (地域間の流れ)", "authoritative", "ci", ["commute-flow-ingest.yml"], UNLISTED),
+  row(P, "app/japan/", "公式の全国の系列 (指標ごとの series.json)。e-Stat の全国の行か、県の観測値の足し上げ", "authoritative", "ci",
+    ["data-refresh.yml (refresh-japan-series.ts)"], `${ARCH} Observation と同じく外部統計の値。${UNLISTED}`),
 
   // ── 配信 snapshot (Derived)。git と観測値から作り直せる ──
   row(P, "app/ranking/", "都道府県ランキングの配信 snapshot (指標ごとの item.json・values.json)。観測値から決定的に作る", "regenerable", "ci",

@@ -52,7 +52,7 @@ async function command(script, args = [], timeout = 360000, acceptedCodes = []) 
   try {
     const { stdout, stderr } = await run(process.execPath, [script, ...args], { cwd: ROOT, env: {
       ...process.env, MEASUREMENT_BROWSER_SOURCE: name,
-      MEASUREMENT_BROWSER_STATE_PATH: join(work, 'state.json'), MEASUREMENT_BROWSER_OUTPUT_STATE_PATH: join(work, 'refreshed.json'),
+      MEASUREMENT_BROWSER_STATE_PATH: join(work, 'state.json'),
     }, timeout, maxBuffer: 12 * 1024 * 1024 });
     logs += stdout + stderr;
   } catch (error) {
@@ -78,9 +78,14 @@ try {
   result.collectionAttempted = true;
   if (name === 'a8') {
     const yesterday = new Date(Date.now() + 9 * 3600000 - 86400000).toISOString().slice(0, 10);
-    await command('packages/ops/src/ads/fetch-a8-ui-csv.mjs', ['--reports', 'site-summary', '--month', yesterday.slice(0, 7)]);
+    // サイト別の行 (site-summary) と案件別の行 (program-detail) を同じ月で取る。計測ゲート (evaluateA8OutcomeGate) は
+    // サイト別のクリックを案件別の行で説明できるか (crossCheck) と、その月の成果 (a8-results の records) を見るので、
+    // site-summary だけでは月が替わるたびに a8-cross-check-shortfall と a8-results-month-missing で必ず止まる
+    // (2026-11 は site-summary の 273 クリックに対して案件別の行が 0 件。AFF-GA4-WEEKLY-GATE-01)
+    const a8Reports = ['site-summary', 'program-detail'];
+    await command('packages/ops/src/ads/fetch-a8-ui-csv.mjs', ['--reports', a8Reports.join(','), '--month', yesterday.slice(0, 7)]);
     const marker = JSON.parse(/** @type {any} */ (readFileSync(join(ROOT, datasetPath("a8.ui-last-run")))));
-    if (marker.status !== 'ok' || marker.downloadedUnits !== 1 || marker.collectedAt < now) throw new Error('collection_incomplete');
+    if (marker.status !== 'ok' || marker.downloadedUnits !== a8Reports.length || marker.collectedAt < now) throw new Error('collection_incomplete');
     await command('.claude/scripts/ads/normalize-a8-csv.mjs', ['--run', marker.lastRun]);
     const normalized = join(ROOT, '.local/a8-ui', marker.lastRun, 'normalized');
     for (const file of readdirSync(normalized).filter(f => f.endsWith('.rejects.json'))) {

@@ -137,7 +137,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
 | `ChartLegend` | `@/components/charts/ChartLegend` | チャート・地図の凡例。`inline` (色の説明だけ) と `list` (1 行 1 項目・右端に値)。`onToggle` を渡すと項目が表示の切り替えボタンになる (`aria-pressed`)。`scale` (色の段 + ラベル) を渡すと連続色の帯の凡例になる (2026-11-03。地図・コロプレスのグラデーションを手書きしない)。地物の区分の凡例は台帳 `@stats47/gis/mlit-ksj/classifications` の区分をそのまま渡す |
 | `BreakdownDonut` / `BreakdownList` | `@/components/charts/BreakdownDonut` | 内訳の図 (共通の D3 のドーナツ + `ChartLegend` の一覧で名前・値・割合)。テーマの構成比 (`composition-chart`) とドーナツ (`donut-chart`) はこれ 1 つで描く。一覧だけの所は `BreakdownList`。部品の中で D3 の円や色の点を手書きしない (`design-system:check` の `no-inline-d3-pie`・`legend-swatch-uses-chart-legend`。2026-11-01) |
-| `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
+| `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（点を越えない曲線の線だけ。年の目盛り・各年の点は描かない）。D3インタラクティブ（ホバーで年と値） |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |
 | `HubSankey` | `@/components/charts/HubSankey` | 焦点 hub 型 Sankey（左ノード群 → 中央 → 右ノード群）。財政フロー / 人口移動フロー / 通勤フローで共有。`chrome`（`card`=自前カード枠 + SVG 内に title/subtitle/footer を描く / `bare`=枠と SVG 内テキストを持たず `ChartPanel` に委ねる）と `usableHeight`（ノード列の高さ = 縦横比。既定 616 は 1 カラム用、2 カラムは 340）で見た目を切り替える |
@@ -147,7 +147,7 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | `fetchTopology` / `topologyFeatures` / `fitGeoSvgMercator` / `GEO_SVG_MAP` | `@/components/charts/geo-topology` | d3-geo で描く SVG の地図の共通の補助。TopoJSON の取得・地物の取り出し・640×640 (余白 16) へのメルカトル図法の合わせ方。§2-D の d3-geo の地図 (交通網の変遷・主題の地図・問いの地図) が使う |
 | `ReelPlayer` | `@/components/charts/ReelPlayer` | Remotion の composition (1920×1080) をページの中でループ再生する共通のプレイヤー。県の選択・県ごとの読み込み・30fps 相当のフレーム送り・コンテナ幅への縮小・読み込み中/失敗の表示を持ち、feature は読み込み (`load`) と描画 (`renderFrame`) だけを渡す (2026-11-03。人口移動フロー・駅別乗降客数) |
 | `DistributionHistogram` | `@/components/charts/DistributionHistogram` | 全国分布ヒストグラム（市区町村ランキング 1,718 自治体用）。**サーバー側でビン化済みの集計配列**（`binMunicipalityValues`、右裾は overflow ビンへ畳む）だけを受け取り、生の観測行は受け取らない。選択都道府県は基線上のラグ（縦ティック）で重ねる（全国と地域は件数スケールが 2 桁違うため棒の重ね描きは不可視になる）。中央値の破線・`useD3Tooltip`（ビン範囲 + 全国/県の件数）付き |
-| `MiniDistributionBars` | `@/components/charts/MiniDistributionBars` | カード内埋め込みの分布スパークバー（市区町村テーマ一覧カード用）。item.json に**焼き込み済みの分布ビン**（builder が `binMunicipalityValues` で生成）を描くだけの装飾チャート。カード全体がリンクのため**非インタラクティブ・aria-hidden**（tooltip をリンク内に置かない。数値情報はカードのテキストが持つ） |
+| `MiniDistributionBars` | `@/components/charts/MiniDistributionBars` | カード内埋め込みの分布スパークバー（市区町村テーマ一覧カード用）。item.json に**焼き込み済みの分布ビン**（builder が `binMunicipalityValues` で生成）を描く装飾チャート。棒の下に横軸の最小・最大の値を単位つきで添える（裾のビンは「未満」「以上」。書式はランキングのヒストグラムと共通の `distribution-edge-labels.ts`）。カード全体がリンクのため棒は**非インタラクティブ・aria-hidden**（tooltip をリンク内に置かない。数値情報はカードのテキストが持つ） |
 
 #### カードフレームの役割分担（重複と誤判定しないこと）
 
@@ -269,7 +269,7 @@ SVG の中の文字 (軸の目盛り・単位・ラベル) は、画面上で 10
 - 文字を大きくした分の余白は文字サイズから決める (`leftMarginForTickLabels` / `rightMarginForTickLabels` / `bottomMarginForTickLabels` / `topMarginForAxisUnit`)。上下の余白は viewBox を縦に伸ばして足し、プロット領域の高さを削らない。左右は viewBox を広げず描画領域を詰める (広げると表示倍率が下がり文字が小さくなる)
 - 時系列の横軸の目盛りは `fitCategoryAxis` で選ぶ。5 年ごとを基本に、ラベルの幅と位置から重なるときは 10 年・20 年と等間隔のまま広げ、両端の年ラベルがはみ出すときは描画領域の左右を詰める。各チャートに「5 年ごと」の間引きを手書きしない
 - 縦軸の頭には単位を出す (`text.axis-unit`)。目盛りの文字に単位が入っている 100% 積み上げだけは出さない
-- 対応済み: `LineChart` / `StackedAreaChart` / `MixedChart` / `DistributionHistogram` / `HubSankey` (狭い幅では名前と値を 2 行に分ける) / `HorizontalDivergingBarChart` (行の高さと左右の余白を文字サイズから決める) / `CategoryHeatmap` (年の目盛りは重なる分を等間隔に間引き、セルに値が入らない幅ではツールチップに任せる)。viewBox を表示幅に合わせて等倍で描く `MiniCharts` は年のラベルを 10px で描く。契約テストは `readable-axis-text.test.tsx` (visualization) と `readable-chart-text.test.tsx` (web)
+- 対応済み: `LineChart` / `StackedAreaChart` / `MixedChart` / `DistributionHistogram` / `HubSankey` (狭い幅では名前と値を 2 行に分ける) / `HorizontalDivergingBarChart` (行の高さと左右の余白を文字サイズから決める) / `CategoryHeatmap` (年の目盛りは重なる分を等間隔に間引き、セルに値が入らない幅ではツールチップに任せる)。viewBox を表示幅に合わせて等倍で描く `MiniCharts` の棒は年のラベルを 10px で描く (折れ線 `MiniLineChart` は年の目盛りも各年の点も描かず、年と値はホバーのツールチップで読む。2026-11-24)。契約テストは `readable-axis-text.test.tsx` (visualization) と `readable-chart-text.test.tsx` (web)
 
 ### アクセシビリティ
 

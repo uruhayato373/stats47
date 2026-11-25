@@ -15,16 +15,16 @@ const fmt = (v: number) =>
   v.toLocaleString('ja-JP', { maximumFractionDigits: 6 });
 const shortSource = (card: Card) =>
   [...new Set(card.sources.map((s) => s.name))].join('、');
+// 発行元 (stats47・stats47.jp) は画像に入れず投稿文で名乗る (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01)
 const Header = ({ tag }: { tag: string }) => (
   <div
     style={{
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-end',
       alignItems: 'center',
       fontSize: 25,
     }}
   >
-    <strong style={{ fontSize: 42, letterSpacing: -2 }}>stats47</strong>
     <span style={{ color: C.muted }}>{tag}</span>
   </div>
 );
@@ -171,7 +171,7 @@ function Receipt({
       <Footer>
         出典：{shortSource(card)}
         <br />
-        {card.period}　/　stats47.jp
+        {card.period}
       </Footer>
     </Shell>
   );
@@ -277,7 +277,7 @@ function Atlas({ card }: { card: Extract<Card, { kind: 'area-atlas' }> }) {
       <Footer>
         出典：{shortSource(card)}
         <br />
-        項目ごとの対象年を併記　/　stats47.jp{card.canonicalPath}
+        項目ごとの対象年を併記
       </Footer>
     </Shell>
   );
@@ -505,8 +505,6 @@ function CarouselPage({
         {cover
           ? '保存して、地域の違いを見比べよう。'
           : '詳しいデータと出典リンクは、プロフィールのリンクから。'}
-        <br />
-        stats47.jp{card.canonicalPath}
       </Footer>
     </Shell>
   );

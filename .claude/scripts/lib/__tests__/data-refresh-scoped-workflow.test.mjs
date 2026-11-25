@@ -16,6 +16,7 @@ const resolveScope = step('Resolve snapshot scope');
 const validate = step('Validate ranking refresh scope');
 const batch = step('page-data-batch');
 const observations = step('Push observations');
+const japan = step('Regenerate official national series');
 const ranking = step('Regenerate scoped ranking');
 const full = step('Regenerate derived');
 const municipality = step('Regenerate scoped municipality');
@@ -76,6 +77,10 @@ if (has('page-data-batch.ts') && args.includes('city')) {
     }
     if (fixture.extraStats) write('.local/r2/app/stats/extra-key/values.json', {});
   }
+}
+if (has('refresh-japan-series.ts')) {
+  if (fixture.japanFails) process.exit(1);
+  if (fixture.japanKey) write('.local/r2/app/japan/' + fixture.japanKey + '/series.json', {});
 }
 if (has('generate-ranking-items.ts')) {
   if (fixture.itemsFail) process.exit(1);
@@ -170,6 +175,24 @@ test('ranking scope fetches official observations before exact stats and derived
     assert.ok(index > result.calls.findIndex(args => args.includes('app/stats/annual-precipitation/')));
     assert.deepEqual(result.calls[index].slice(-2), ['--only', keys]);
   }
+});
+
+test('national series is pushed after observations and before ranking snapshots, only for keys that have one', () => {
+  const result = run([validate, batch, observations, japan, ranking].map(entry => entry.run).join('\n'), {}, { japanKey: 'annual-clear-days' });
+  assert.equal(result.status, 0, result.stderr);
+  const prefixes = puts(result).map(args => args.at(-1));
+  // 観測値 2 件の後、ranking の 3 件の前に 1 件だけ (系列の無い annual-precipitation は送らない)
+  assert.equal(prefixes.length, 6);
+  assert.equal(prefixes.indexOf('app/japan/annual-clear-days/'), 2);
+  assert.equal(prefixes.filter(prefix => prefix.startsWith('app/japan/')).length, 1);
+  assert.ok(puts(result)[2].includes('--allow-authoritative-overwrite'));
+});
+
+test('failed national series refresh stops before ranking snapshots', () => {
+  const result = run([validate, batch, observations, japan, ranking].map(entry => entry.run).join('\n'), {}, { japanFails: true });
+  assert.notEqual(result.status, 0);
+  // 送ったのは観測値の 2 件だけ
+  assert.equal(puts(result).length, 2);
 });
 
 for (const metric of ['', '../key', 'annual-clear-days,', 'annual-clear-days,annual-clear-days', 'annual-clear-days\n', 'unknown-key', 'projected-population-2045', 'ambulance-hospital-arrival-time', Array.from({ length: 51 }, (_, i) => `key-${i}`).join(',')]) {

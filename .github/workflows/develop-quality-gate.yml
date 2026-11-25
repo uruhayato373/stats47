@@ -140,6 +140,44 @@ jobs:
         run: node apps/web/scripts/lib/check-ad-placement.cjs
         continue-on-error: false
 
+  # ★main への PR の Contract Tests と同じ段を develop 着地点でも走らせる (CI-CONTRACT-TESTS-DEVELOP-GAP-01、2026-11-24)。
+  #   2026-11-11 の PR #1251 で、約 1 日前に develop へ入った台帳の整理が契約テスト (prune-state-snapshots) を壊していたのに、
+  #   develop では誰も気づけなかった。段の一覧は pr-quality-check.yml の contract-tests job から読み (二重管理にしない)、
+  #   `if:` の付いた段 (依存の入れ直し・差分連動) は外す。1 段が落ちても後ろを続け、落ちた段を全部出す。
+  #   所要の実測 (run 45281823389): 差分連動の段を除いて約 3 分。別 job なので壁時計は Unit Tests (packages) の約 5 分に収まる。
+  contract-tests:
+    name: Contract Tests (pr-quality-check と同じ段)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: 'npm'
+
+      - name: 📦 Restore node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
+      - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: 🧾 Contract steps from pr-quality-check.yml
+        run: node packages/ops/src/ci/contract-steps.mjs
+        continue-on-error: false
+
   # ★unit test を develop 着地点でも走らせる (CI-SPEED-UNIT-TESTS-EARLY-01、2026-09-18)。
   #   fast-gates とは別 job なので、上の「1 job 3 分」予算に乗らない (壁時計は並列)。
   #   それまで unit test は develop→main の PR で初めて走り、PR #974 で 2 回、2026-09-17 には

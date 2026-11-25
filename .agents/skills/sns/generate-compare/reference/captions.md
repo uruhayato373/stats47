@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/generate-compare/reference/captions.md

@@ -1,1 +1,0 @@
-../../../../../.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md

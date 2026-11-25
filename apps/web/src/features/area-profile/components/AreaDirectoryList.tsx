@@ -11,14 +11,16 @@ import type { AreaRegionGroup } from "../utils";
 const FOCUS_RING =
   "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
+/**
+ * comfortable の一覧の列。一覧の幅が 320px 以上なら 3 列 (1 列 約 100px に 4 文字の県名と矢印が入る)。
+ * スマホ (/areas は地図の下に一覧) で 2 列だと 26 行になり、ページの高さが予算 2600px を超えていた
+ * (2026-11-21 の週次 mobile_page_height 2906)。3 列で 19 行、約 350px 縮む。
+ * 地図と左右に並ぶ幅 (一覧 約 300px) は 2 列のまま、xl のビューポートでは従来どおり 3 列。
+ */
+export const COMFORTABLE_GRID_CLASS = "grid grid-cols-2 gap-1.5 @min-[20rem]:grid-cols-3 xl:grid-cols-3";
+
 interface AreaDirectoryListProps {
   regionGroups: AreaRegionGroup[];
-  /**
-   * デスクトップの地方フィルタ。`"all"` 以外を指定するとその地方以外の section を
-   * `hidden`（display:none）にする。全 section は常に DOM に描画するため、初期 HTML
-   * には常に全 47 県リンクが含まれる（クローラから県リンクが消えない）。
-   */
-  activeRegionCode?: string;
   /** リンククリック時の計測フック（遷移は Link 自身が行う） */
   onSelect?: (prefCode: string, prefName: string) => void;
   /** embedded 面では境界線カードを省き、地方別テキストリンクとして密度を上げる。 */
@@ -31,12 +33,11 @@ interface AreaDirectoryListProps {
  *
  * `<nav>` > 地方 `<section>` > `<ul><li><Link>` の構造で、全県がキーボードだけで到達可能。
  * comfortable の各リンクは最低44px、embedded向けcompactは32pxのインラインリンク。
- * 同一ページ内で複数箇所（デスクトップ 2 ペイン / モバイルタブ）に描画されるため、
+ * 地図と同じページに並ぶため、
  * 重複 id を避けて `aria-label` で見出しを与える。
  */
 export function AreaDirectoryList({
   regionGroups,
-  activeRegionCode = "all",
   onSelect,
   density = "comfortable",
   className,
@@ -46,17 +47,11 @@ export function AreaDirectoryList({
   return (
     <nav
       aria-label="都道府県一覧"
-      className={cn("flex flex-col", compact ? "gap-3" : "gap-5", className)}
+      className={cn("@container flex flex-col", compact ? "gap-3" : "gap-5", className)}
     >
       {regionGroups.map((region) => {
-        const isHidden =
-          activeRegionCode !== "all" && activeRegionCode !== region.regionCode;
         return (
-          <section
-            key={region.regionCode}
-            aria-label={region.regionName}
-            className={cn(isHidden && "hidden")}
-          >
+          <section key={region.regionCode} aria-label={region.regionName}>
             <h3 className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold text-foreground">
               <span
                 aria-hidden="true"
@@ -71,7 +66,7 @@ export function AreaDirectoryList({
               className={cn(
                 compact
                   ? "flex flex-wrap gap-x-1 gap-y-0.5"
-                  : "grid grid-cols-2 gap-1.5 xl:grid-cols-3",
+                  : COMFORTABLE_GRID_CLASS,
               )}
             >
               {region.prefectures.map((pref) => (

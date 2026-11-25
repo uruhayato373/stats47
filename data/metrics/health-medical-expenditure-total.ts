@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const healthMedicalExpenditureTotal: MetricConfig = {
   "key": "health-medical-expenditure-total",
   "title": "保健医療費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間保健医療費（医薬品・健康保持用摂取品・医療サービスへの支出総額）",
-  "description": "家計調査（二人以上世帯）における年間の保健医療への支出総額。医薬品、健康保持用摂取品、保健医療用品・器具、保健医療サービスを含む。公的保険の給付分は含まない自己負担ベースである。",
+  "subtitle": "医薬品・健康保持用摂取品・医療サービスへの支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
+  "description": "家計調査（二人以上世帯）における1世帯当たり年間の保健医療への支出総額。医薬品、健康保持用摂取品、保健医療用品・器具、保健医療サービスを含む。公的保険の給付分は含まない自己負担ベースである。",
   "unit": "円",
   "category": "economy",
   "source": {

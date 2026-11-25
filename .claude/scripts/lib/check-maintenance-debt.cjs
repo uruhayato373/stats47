@@ -147,7 +147,7 @@ const GOOGLE_AUTH_LOCAL_RE = /\bgoogle\.auth\.(?:GoogleAuth|OAuth2|JWT|fromJSON)
 const GOOGLE_AUTH_DOC_RE = /^\.claude\/(?:skills|agents)\/.*\.md$/;
 const GOOGLE_AUTH_ALLOWED = new Map([
   ["packages/ops/src/google/google-client.cjs", "Google API の認証とクライアント生成の正本"],
-  [".claude/scripts/adsense/oauth-setup.js", "AdSense のリフレッシュトークンを発行する対話式ツール。リダイレクト付きの OAuth クライアントで同意画面を開く (取得には使わない)"],
+  [".claude/scripts/google-admin/oauth-setup.js", "AdSense のリフレッシュトークンを発行する対話式ツール。リダイレクト付きの OAuth クライアントで同意画面を開く (取得には使わない)"],
 ]);
 
 // 型の `any` (2026-11-22 WEB-ANY-RATCHET-01)。tsconfig は全て strict だが、`any` で型を捨てた箇所が残っている。

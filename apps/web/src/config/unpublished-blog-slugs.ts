@@ -10,11 +10,11 @@
  * 真実源: R2 `app/blog/all.json` の `published === false`。
  * 記事を再公開したら次回生成でこの集合から自動的に消える (手動メンテ不要)。
  *
- * 恒久削除が確定した slug は `gone-blog-slugs.ts` (手編集) に置く。
+ * 恒久削除が確定した slug は台帳 `site.gone-blog-slugs` (`data/site/url-history/gone-blog-slugs.json`) に置く。
  *
  * 更新方法: `cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts`
  *
- * 最終生成日: 2026-11-23
+ * 最終生成日: 2026-11-24
  * 件数: 10
  */
 export const UNPUBLISHED_BLOG_SLUGS: ReadonlySet<string> = new Set([

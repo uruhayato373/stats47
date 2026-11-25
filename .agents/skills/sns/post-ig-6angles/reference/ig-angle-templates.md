@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/post-ig-6angles/reference/ig-angle-templates.md

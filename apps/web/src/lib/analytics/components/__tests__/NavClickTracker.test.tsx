@@ -53,6 +53,15 @@ describe("resolveNavClick", () => {
     });
   });
 
+  it("導線名の無いカードの見出し行の操作は card_action、外側に導線名があればそちらを優先する", () => {
+    const bare = dom('<section data-slot="card"><div data-slot="card-action"><a href="/ranking">すべて見る</a></div></section>');
+    expect(resolveNavClick(bare.querySelector("a"), LOCATION)?.surface).toBe("card_action");
+    const named = dom(
+      '<div data-nav-surface="category_featured"><div data-slot="card-action"><a href="/ranking">すべて見る</a></div></div>',
+    );
+    expect(resolveNavClick(named.querySelector("a"), LOCATION)?.surface).toBe("category_featured");
+  });
+
   it("専用イベントの領域・外部リンク・導線名の無い同じページ内の移動は送らない", () => {
     const root = dom(
       '<div data-click-owner="rail"><a id="a" href="/ranking/bar">関連</a></div>' +

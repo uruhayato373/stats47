@@ -51,7 +51,10 @@ export function compareThemeObservation(previous, current) {
   const changes = [];
   if (current.latestYear > previous.latestYear) changes.push({ code: "new-data-year", severity: "info", from: previous.latestYear, to: current.latestYear });
   if (current.latestYear < previous.latestYear) changes.push({ code: "year-regression", severity: "error", from: previous.latestYear, to: current.latestYear });
-  const lostYears = previous.years.filter((year) => !current.years.includes(year));
+  // 値を持つ県が 0 だった年 (全県が空の年) は、消えても失った観測が無いので履歴消失に数えない。
+  // coverageByYear が無い古い記録は、今までどおり年の有無だけで判定する。
+  const hadValues = (year) => previous.coverageByYear?.[year] === undefined || previous.coverageByYear[year] > 0;
+  const lostYears = previous.years.filter((year) => !current.years.includes(year) && hadValues(year));
   if (lostYears.length) changes.push({ code: "history-loss", severity: "error", years: lostYears });
   // Legitimate partial coverage is not an error; a decline from a previous observation is.
   for (const [year, count] of Object.entries(previous.coverageByYear ?? {})) {

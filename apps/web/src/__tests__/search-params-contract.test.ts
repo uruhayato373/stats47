@@ -59,16 +59,49 @@ const ALLOWED_SEARCH_PARAMS_PAGES: ReadonlyArray<{ file: string; reason: string 
   },
 ];
 
+/**
+ * クエリを読む route handler (`route.ts`) の許可リスト (URL-QUERY-INVENTORY-01 の「検査の穴」)。
+ * route handler は `request.nextUrl.searchParams` や `new URL(request.url).searchParams` でクエリを読み、page.tsx の
+ * 検査では見えなかった。ページの描画ではなくデータの取得口なので、クエリの用途と検索への露出 (robots.ts) を理由に書く。
+ * 縮小専用で、増減どちらも落ちる。
+ */
+const ALLOWED_SEARCH_PARAMS_ROUTES: ReadonlyArray<{ file: string; reason: string }> = [
+  {
+    file: "api/geo/analysis/[analysisSlug]/[prefCode]/route.ts",
+    reason: "Geo 地図の描画データの版の照合 (?v= / ?sha=)。中身は版ごとに不変で長期キャッシュする。robots.ts が描画のため取得を許可している。",
+  },
+  {
+    file: "api/geo/analysis/[analysisSlug]/[prefCode]/snow-source/route.ts",
+    reason: "雪の分析の出典データの版の照合 (?v= / ?sha=)。中身は版ごとに不変で長期キャッシュする。",
+  },
+  {
+    file: "api/geo/source/[dataId]/[assetIndex]/route.ts",
+    reason: "出典の資産のファイル名の照合 (?file=)。一致しなければ 404 で、描き分けはしない。robots.ts の /api/* で検索に出さない。",
+  },
+  {
+    file: "api/ranking-data/[rankingKey]/route.ts",
+    reason: "ブログ本文の表が読む年の指定 (?year=)。robots.ts の /api/* で検索に出さない。",
+  },
+  {
+    file: "api/ranking/[rankingKey]/download/route.ts",
+    reason: "ダウンロードの形式・計算方法・文字コード (?format= / ?basis= / ?encoding=)。ファイルの配信で、ページではない。",
+  },
+];
+
 const MUNICIPALITY_RANKING_PAGE = "municipalities/ranking/[rankingKey]/page.tsx";
 
-function findPageFiles(directory: string): string[] {
+function findFiles(directory: string, name: RegExp): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const path = resolve(directory, entry.name);
     if (entry.isDirectory()) {
-      return entry.name === "node_modules" || entry.name === "__tests__" ? [] : findPageFiles(path);
+      return entry.name === "node_modules" || entry.name === "__tests__" ? [] : findFiles(path, name);
     }
-    return /^page\.(tsx|ts|jsx|js)$/.test(entry.name) ? [path] : [];
+    return name.test(entry.name) ? [path] : [];
   });
+}
+
+function findPageFiles(directory: string): string[] {
+  return findFiles(directory, /^page\.(tsx|ts|jsx|js)$/);
 }
 
 /** コメントの中の語で誤検出しないよう、ブロックコメントと行コメントを除く (URL の `://` は行コメントとみなさない) */
@@ -76,11 +109,19 @@ function stripComments(source: string): string {
   return source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:\\])\/\/.*$/gm, "$1");
 }
 
-function pagesReadingSearchParams(): string[] {
-  return findPageFiles(APP_DIR)
+function readingSearchParams(files: string[]): string[] {
+  return files
     .filter((path) => /\bsearchParams\b/.test(stripComments(readFileSync(path, "utf8"))))
     .map((path) => relative(APP_DIR, path).split("\\").join("/"))
     .sort();
+}
+
+function pagesReadingSearchParams(): string[] {
+  return readingSearchParams(findPageFiles(APP_DIR));
+}
+
+function routesReadingSearchParams(): string[] {
+  return readingSearchParams(findFiles(APP_DIR, /^route\.(tsx|ts|jsx|js)$/));
 }
 
 describe("searchParams を読む page.tsx の契約", () => {
@@ -100,5 +141,20 @@ describe("searchParams を読む page.tsx の契約", () => {
   it("市区町村ランキングの全国版は searchParams を読まず、許可リストにも載せない", () => {
     expect(ALLOWED_SEARCH_PARAMS_PAGES.map((entry) => entry.file)).not.toContain(MUNICIPALITY_RANKING_PAGE);
     expect(pagesReadingSearchParams()).not.toContain(MUNICIPALITY_RANKING_PAGE);
+  });
+});
+
+describe("クエリを読む route.ts の契約 (URL-QUERY-INVENTORY-01)", () => {
+  it("searchParams を読む route handler の集合が許可リストと完全一致する (増減どちらも落ちる)", () => {
+    const allowed = ALLOWED_SEARCH_PARAMS_ROUTES.map((entry) => entry.file).sort();
+    expect(routesReadingSearchParams()).toEqual(allowed);
+  });
+
+  it("許可リストの各項目は理由を持ち、重複しない", () => {
+    const files = ALLOWED_SEARCH_PARAMS_ROUTES.map((entry) => entry.file);
+    expect(new Set(files).size).toBe(files.length);
+    for (const entry of ALLOWED_SEARCH_PARAMS_ROUTES) {
+      expect(entry.reason.trim().length, entry.file).toBeGreaterThan(0);
+    }
   });
 });

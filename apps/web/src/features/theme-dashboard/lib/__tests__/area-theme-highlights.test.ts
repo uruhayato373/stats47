@@ -1,4 +1,5 @@
 // @vitest-environment node
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 import { describe, expect, test } from "vitest";
 
 import { areaThemeDescription, getAreaThemeHighlights } from "../area-theme-highlights";
@@ -29,10 +30,31 @@ describe("getAreaThemeHighlights", () => {
   ];
 
   test("テーマの指標の並びと短い名前で、指定県に存在する実測値だけを返す", () => {
-    expect(getAreaThemeHighlights(data, "28000", indicators)).toEqual([
+    expect(getAreaThemeHighlights(data, "28000", indicators)).toMatchObject([
       { key: "ratio", title: "求人倍率", value: 1.2, unit: "倍", yearName: "2023年", rank: null },
       { key: "income", title: "実収入", value: 620, unit: "千円", yearName: "2024年", rank: 9 },
     ]);
+  });
+
+  // UNIT-NOTATION-FORMAT-01: 説明文だけ元の単位のまま「113,685,917百万円」と書き、指標カードの「113.7兆円」と食い違っていた
+  test("桁の多い値は、同じ年の 47 都道府県の値から指標カードと同じ表示単位で書く", () => {
+    const big = {
+      indicatorDataMap: {
+        gdp: {
+          rankingItem: { unit: "百万円" },
+          rankingValues: [
+            { areaCode: NATIONAL_AREA_CODE, value: 600_000_000, unit: "百万円", yearName: "2021年" },
+            { areaCode: "13000", value: 113_685_917, unit: "百万円", yearName: "2021年", rank: 1 },
+            { areaCode: "31000", value: 1_900_000, unit: "百万円", yearName: "2021年", rank: 47 },
+          ],
+        },
+      },
+    };
+    const [highlight] = getAreaThemeHighlights(big, "13000", [{ rankingKey: "gdp", tabLabel: "県内総生産" }]);
+    expect(highlight.display?.displayScale).toBeDefined();
+    const text = areaThemeDescription("東京都", "説明。", [highlight]);
+    expect(text).not.toContain("113,685,917");
+    expect(text).not.toContain("百万円");
   });
 
   test("対象県の観測値が無ければ空配列", () => {

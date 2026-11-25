@@ -327,6 +327,8 @@ interface CountSnapshot {
 interface AuditReport {
   generatedAt: string;
   r2Base: string;
+  /** 取得できなかった path (違反とは数えない。多ければ判定の信頼が下がる) */
+  fetchFailures: Array<{ path: string; reason: string }>;
   totals: {
     activeKeys: number;
     itemMissing: number;
@@ -427,13 +429,25 @@ async function mapPool<T, R>(items: T[], limit: number, fn: (x: T) => Promise<R>
   return out;
 }
 
+/**
+ * 取得できなかった path (network 断・timeout・5xx・JSON の読み損ね)。中身の違反とは別に数えて出す。
+ * 2026-11-11 に同じコードで 1 回だけ「違反あり」になり、どの検査かが分からなかった
+ * (RANKING-INTEGRITY-AUDIT-FLAKE-01)。取得の失敗を欠落と数えていた箇所があったため、ここで区別する。
+ */
+const fetchFailures: Array<{ path: string; reason: string }> = [];
+
 async function fetchJson<T>(pathname: string): Promise<{ status: number; body: T | null }> {
   try {
     const res = await fetchR2(pathname);
+    if (res.status >= 500) {
+      fetchFailures.push({ path: pathname, reason: `HTTP ${res.status}` });
+      return { status: 0, body: null };
+    }
     if (!res.ok) return { status: res.status, body: null };
     return { status: res.status, body: (await res.json()) as T };
-  } catch {
+  } catch (err) {
     // network エラー (timeout / DNS / proxy 断) は 0 として区別する (404 と混同しない)
+    fetchFailures.push({ path: pathname, reason: err instanceof Error ? err.message : String(err) });
     return { status: 0, body: null };
   }
 }
@@ -677,6 +691,8 @@ async function main() {
       }
     }
 
+    // 取得の失敗 (status 0) は欠落と数えない。判定できないので、この key の以降の検査もしない
+    if (itemRes.status === 0 || valuesRes.status === 0) return;
     if (itemRes.status !== 200 || !itemRes.body) {
       itemMissing.push(key);
     }
@@ -715,7 +731,7 @@ async function main() {
       normalized.stale.push(
         ...checkFreshness(key, "national-trend.json", baseGeneratedAt, trendRes.body?.generatedAt, now),
       );
-    } else {
+    } else if (trendRes.status !== 0) {
       normalized.missing.push({ key, artifact: "national-trend.json" });
     }
 
@@ -724,6 +740,7 @@ async function main() {
       const res = normRes[i];
       const artifact = `values-${normType.replace(/_/g, "-")}.json`;
 
+      if (res.status === 0) return; // 取得の失敗は欠落と数えない (fetchFailures に出る)
       if (res.status !== 200 || !res.body || (res.body.partitions?.length ?? 0) === 0) {
         normalized.missing.push({ key, artifact });
         return;
@@ -779,10 +796,11 @@ async function main() {
     }
     calculated.checked++;
 
-    const yearsOf = async (depKey: string): Promise<Set<string> | null> => {
+    const yearsOf = async (depKey: string): Promise<Set<string> | null | "unreachable"> => {
       const cached = statsYearSets.get(depKey);
       if (cached) return cached;
       const res = await fetchJson<StatsValuesJson>(statsR2Key(depKey, "prefecture"));
+      if (res.status === 0) return "unreachable";
       if (res.status !== 200 || !res.body?.rows) return null;
       const set = yearCodesOf(res.body.rows);
       statsYearSets.set(depKey, set);
@@ -790,6 +808,7 @@ async function main() {
     };
 
     const [numYears, denYears] = await Promise.all([yearsOf(numeratorKey), yearsOf(denominatorKey)]);
+    if (numYears === "unreachable" || denYears === "unreachable") continue; // 取得の失敗は判定しない
     if (!numYears) calculated.depsMissing.push({ key: config.key, dep: numeratorKey });
     if (!denYears) calculated.depsMissing.push({ key: config.key, dep: denominatorKey });
     if (!numYears || !denYears) continue;
@@ -812,16 +831,18 @@ async function main() {
   const homeRes = await fetchJson<{ count: number }>("app/home/featured.json");
   const homeCount = homeRes.body?.count ?? 0;
   const homeExpected = HOME_FEATURED_PROMINENCE.length;
-  const homeOk = homeRes.status === 200 && homeCount >= homeExpected;
+  const homeOk = homeRes.status === 0 || (homeRes.status === 200 && homeCount >= homeExpected);
 
   // --- (e) survey / category 件数下限 ---
   const surveyRes = await fetchJson<{ count: number }>("app/survey/all.json");
   const surveyCount = surveyRes.body?.count ?? 0;
   // 絶対フロア: master (surveys.json, 75件) の半数を下回れば明確に異常。
   const surveyFloor = Math.floor((surveysMaster as unknown[]).length / 2);
-  const surveyAbsOk = surveyRes.status === 200 && surveyCount >= surveyFloor;
+  const surveyAbsOk = surveyRes.status === 0 || (surveyRes.status === 200 && surveyCount >= surveyFloor);
   const surveyDriftOk =
-    previous === null || previous.survey === 0 ? true : surveyCount >= previous.survey * DRIFT_RATIO_THRESHOLD;
+    surveyRes.status === 0 || previous === null || previous.survey === 0
+      ? true
+      : surveyCount >= previous.survey * DRIFT_RATIO_THRESHOLD;
 
   const categoryChecks: AuditReport["countChecks"]["categories"] = {};
   // 件数が足りていても、入っているはずの指標が欠けていないかをキー単位で見るために一覧のキーも集める
@@ -837,9 +858,11 @@ async function main() {
         new Set(res.body.items.map((i) => i.rankingKey).filter((k): k is string => typeof k === "string")),
       );
     }
-    const absOk = res.status === 200 && count > 0; // 絶対フロア: 0 件は無条件で異常
+    const unreachable = res.status === 0; // 取得の失敗は件数の違反と数えない (fetchFailures に出る)
+    const absOk = unreachable || (res.status === 200 && count > 0); // 絶対フロア: 0 件は無条件で異常
     const prevCount = previous?.categories[catKey];
-    const driftOk = prevCount === undefined || prevCount === 0 ? true : count >= prevCount * DRIFT_RATIO_THRESHOLD;
+    const driftOk =
+      unreachable || prevCount === undefined || prevCount === 0 ? true : count >= prevCount * DRIFT_RATIO_THRESHOLD;
     categoryChecks[catKey] = { count, ok: absOk, driftOk, ...(prevCount !== undefined ? { previous: prevCount } : {}) };
   });
 
@@ -869,6 +892,7 @@ async function main() {
   const report: AuditReport = {
     generatedAt: new Date().toISOString(),
     r2Base: R2_BASE,
+    fetchFailures,
     totals: {
       activeKeys: activeItems.length,
       itemMissing: itemMissing.length,
@@ -1088,7 +1112,27 @@ async function main() {
     );
   }
 
+  console.log(`\n## 取得の失敗 (違反とは数えない): ${fetchFailures.length} 件`);
+  for (const f of fetchFailures.slice(0, 10)) console.log(`      ${f.path} — ${f.reason}`);
+  if (fetchFailures.length > 10) console.log(`      … 他 ${fetchFailures.length - 10} 件 (--json で全件)`);
+
   console.log(`\n## 総合判定: ${report.ok ? "✓ OK" : "✗ 違反あり"}`);
+  if (!report.ok) {
+    // どの検査が落ちたかを 1 行で残す (2026-11-11 の 1 回だけの失敗は、どの検査か分からなかった)
+    const failed = [
+      itemMissing.length > 0 && "item.json の欠落",
+      valuesMissing.length > 0 && "values.json の欠落",
+      yearMismatch.length > 0 && "年の不一致",
+      !countChecksOk && "件数 (home / survey / category)",
+      !normalized.ok && "正規化の派生物 (g)(h)",
+      !stats.ok && "正典 app/stats (i)",
+      !shape.ok && "形 (j)",
+      !recipe.ok && "レシピ (k)",
+      !valueVerification.ok && "値の検証 (l)",
+      !calculated.ok && "計算型の年 (m)",
+    ].filter(Boolean);
+    console.log(`  落ちた検査: ${failed.join(" / ")}`);
+  }
 
   if (jsonOutPath) {
     fs.mkdirSync(path.dirname(jsonOutPath), { recursive: true });

@@ -1,1 +1,0 @@
-../../../../../.claude/skills/management/weekly-review/reference/runbook.md

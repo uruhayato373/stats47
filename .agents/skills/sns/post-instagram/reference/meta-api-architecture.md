@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/post-instagram/reference/meta-api-architecture.md

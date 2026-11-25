@@ -11,7 +11,6 @@ import { useBuzzMapFonts } from '@/features/buzz-map/useBuzzMapFonts';
 import type { RankingEntry } from '@/shared';
 
 import { GEO_X_LAYOUT, GEO_X_MAP_TRANSFORMS } from './layout';
-import { SITE } from '@stats47/types';
 import { to5DigitPrefCode } from '@stats47/area';
 
 export type GeoInsightRole =
@@ -633,12 +632,10 @@ export const GeoInsightCard: React.FC<GeoInsightCardProps> = ({
           letterSpacing: '.04em',
         }}
       >
-        <span style={{ color: COLORS.ink, fontSize: 24, fontWeight: 700 }}>
-          {SITE.domain}
-        </span>
+        {/* 発行元 (stats47.jp) は画像に入れず投稿文で名乗る (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01) */}
         <span>地図で重ねて、地域の選択肢を読む。</span>
         <span style={{ marginLeft: 'auto', fontSize: 14 }}>
-          公式データを{SITE.domain}で加工
+          公式データを加工
         </span>
       </footer>
     </AbsoluteFill>

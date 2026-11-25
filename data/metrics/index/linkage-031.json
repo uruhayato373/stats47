@@ -8277,6 +8277,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:birth-death-gap-decline",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:unmarried-ratio-male-45-49",
           "kind": "ranking"
         }

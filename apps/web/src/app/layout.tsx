@@ -23,7 +23,7 @@
  * - ヘッダーとフッターをルートに置くので、画面遷移で再マウントされない
  * - SidebarProvider の defaultOpen は true 固定。開閉状態を cookies() で読まない (SSG 維持)
  * - SidebarInset は overflow-hidden ではなく overflow-clip にする (sticky ヘッダーと右レールの追従を壊さない)
- * - AppSidebar は variant="inset"。SidebarInset はテンプレートの layout.tsx と同じ outline + m-2 + 角丸なしにする
+ * - AppSidebar は variant="inset"。SidebarInset は sm 以上でテンプレートの layout.tsx と同じ outline + m-2 + 角丸なし。スマホは外の余白と線を持たず画面の端まで広げる (2026-11-20 オーナー決定)
  * - Cookie 同意は SidebarInset の最後の子に置く画面下端の帯 (sticky bottom-0)。流れの中に高さを持つので、
  *   ページの末尾が帯に隠れない
  * - サイドバー部品と AdSenseScript は sidebar-shell.tsx (1 つの client モジュール) から import する
@@ -162,7 +162,7 @@ export default function RootLayout({
           {/* サイドバー型の骨組み (lg 未満では AppSidebar が Sheet に替わる) */}
           <SidebarProvider defaultOpen>
             <AppSidebar />
-            <SidebarInset className="m-2 min-w-0 overflow-clip rounded-none! outline outline-border">
+            <SidebarInset className="min-w-0 overflow-clip rounded-none! sm:m-2 sm:outline sm:outline-border">
               {/* ヘッダー（全ページ共通） */}
               <SiteHeader />
               {/* メインコンテンツエリア（ページで唯一の main。各ページが PageShell で幅を制御） */}

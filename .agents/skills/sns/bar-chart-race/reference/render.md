@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/bar-chart-race/reference/render.md

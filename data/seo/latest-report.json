@@ -1,75 +1,75 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-21",
+  "date": "2026-11-24",
   "period": {
-    "periodStart": "2026-11-12",
-    "periodEnd": "2026-11-18",
+    "periodStart": "2026-11-15",
+    "periodEnd": "2026-11-21",
     "windowDays": 7
   },
-  "inputHash": "8b8544ffcce636a38883601a9f8764d3daba1db863d10a2559a2292b80d32be7",
+  "inputHash": "f155d34727df6b4bec651befa6496f9d7e4c2714bdfcbb5be01437354d9b2dbb",
   "movements": [
     {
-      "keyword": "高校の数",
-      "targetPath": "/municipalities/ranking/high-school-count",
-      "before": 8.25,
-      "after": 107,
-      "beforeImpressions": 4,
+      "keyword": "長崎県 平均年収",
+      "targetPath": "/areas/42000/labor-wages",
+      "before": 100,
+      "after": 6,
+      "beforeImpressions": 1,
       "impressions": 1,
-      "change": -98.75
+      "change": 94
     },
     {
       "keyword": "津山 人口",
       "targetPath": "/areas/33000/cities/33203",
-      "before": 5,
-      "after": 91,
+      "before": 91,
+      "after": 7,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": -86
+      "change": 84
     },
     {
-      "keyword": "広島県 人口",
-      "targetPath": "/areas/34000/population-dynamics",
-      "before": 92,
-      "after": 9.5,
+      "keyword": "可処分所得",
+      "targetPath": "/ranking/real-disposable-income",
+      "before": 3,
+      "after": 85,
       "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 82.5
+      "impressions": 1,
+      "change": -82
     },
     {
-      "keyword": "県庁 公務員 年収",
-      "targetPath": "/blog/avg-salary-admin-prefecture-prefecture-gap",
-      "before": 14.5,
-      "after": 91,
+      "keyword": "警察官人口",
+      "targetPath": "/ranking/police-officer-count",
+      "before": 4,
+      "after": 86,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -82
+    },
+    {
+      "keyword": "佐賀県 平均年収",
+      "targetPath": "/areas/41000/labor-wages",
+      "before": 85,
+      "after": 5.5,
+      "beforeImpressions": 2,
+      "impressions": 4,
+      "change": 79.5
+    },
+    {
+      "keyword": "鹿児島 人口推移",
+      "targetPath": "/areas/46000/cities/46201",
+      "before": 98,
+      "after": 23,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 75
+    },
+    {
+      "keyword": "下水道の普及率",
+      "targetPath": "/ranking/sewerage-coverage-rate",
+      "before": 11,
+      "after": 82,
       "beforeImpressions": 2,
       "impressions": 1,
-      "change": -76.5
-    },
-    {
-      "keyword": "神奈川県平均年収",
-      "targetPath": "/areas/14000/labor-wages",
-      "before": 84.5,
-      "after": 10,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": 74.5
-    },
-    {
-      "keyword": "広島県 人口",
-      "targetPath": "/areas/34000/cities/34100",
-      "before": 81,
-      "after": 9,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 72
-    },
-    {
-      "keyword": "鳥取県 人口",
-      "targetPath": "/areas/31000/population-dynamics",
-      "before": 81,
-      "after": 9,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 72
+      "change": -71
     },
     {
       "keyword": "豊田市人口",
@@ -77,34 +77,34 @@
       "before": 82,
       "after": 11,
       "beforeImpressions": 1,
-      "impressions": 1,
+      "impressions": 2,
       "change": 71
     },
     {
-      "keyword": "群馬県人口",
-      "targetPath": "/areas/10000/population-dynamics",
-      "before": 97,
-      "after": 28,
-      "beforeImpressions": 1,
+      "keyword": "高崎市人口",
+      "targetPath": "/areas/10000/cities/10202",
+      "before": 7.459016393442623,
+      "after": 78,
+      "beforeImpressions": 61,
       "impressions": 1,
-      "change": 69
+      "change": -70.54098360655738
     },
     {
-      "keyword": "福島県平均年収",
-      "targetPath": "/areas/07000/labor-wages",
-      "before": 75,
-      "after": 8,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 67
+      "keyword": "出雲市 人口",
+      "targetPath": "/areas/32000/cities/32203",
+      "before": 10.093023255813954,
+      "after": 80,
+      "beforeImpressions": 43,
+      "impressions": 1,
+      "change": -69.90697674418604
     }
   ],
   "verdicts": [],
   "selected": {
     "keyword": "鳥取市 人口",
     "targetPath": "/areas/31000/cities/31201",
-    "rank": 7.735449735449736,
-    "impressions": 189,
+    "rank": 7.759615384615385,
+    "impressions": 104,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,

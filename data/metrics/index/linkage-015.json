@@ -7083,10 +7083,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:traffic-accident-deaths-regional-risk",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:main-road-paving-rate",
           "kind": "ranking"
         },
@@ -13882,6 +13878,10 @@
         {
           "pageId": "area-theme:47000:aging-society",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:birth-death-gap-decline",
+          "kind": "blog"
         },
         {
           "pageId": "blog:divorces-per-total-population",

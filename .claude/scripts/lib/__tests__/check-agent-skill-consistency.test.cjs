@@ -486,40 +486,72 @@ test("[E3] .codex/hooks.json の command が指す hook も存在検査する", 
   assert.match(result.stdout, /\[E3\].*missing-hook\.js/);
 });
 
-test("mirror はログ・コード・指示の実体を共有し、誤リンクと壊れたリンクを検出する", (t) => {
+test("mirror は skill のフォルダを相対リンクで共有し、複製・誤リンク・壊れたリンクを検出する", (t) => {
+  // CODEX-MIRROR-SLIM-01: SKILL.md の複製をやめ、skill のフォルダごとの symlink にした
+  // (Codex は symlink の skill フォルダを辿る。https://learn.chatgpt.com/docs/build-skills、2026-11-24 取得)。
   const root = fixture({
     ".claude/agents/worker.md": VALID_AGENT,
     ".claude/skills/dev/probe/SKILL.md": "probe",
     ".claude/skills/dev/probe/reference/improvement-log.md": "before",
     ".claude/skills/dev/probe/scripts/run.ts": "export {};",
+    ".claude/skills/dev/other/SKILL.md": "other",
+    ".claude/skills/learned/note.md": "learned",
     ".agents/skills/dev/probe/SKILL.md": "old",
   });
   t.after(() => fs.rmSync(root, { recursive: true }));
   const invoke = (...args) => spawnSync(process.execPath, [MIRROR, ...args, "--root", root], { cwd: root, encoding: "utf8" });
+  assert.equal(invoke("--check").status, 1, "古い複製のフォルダは不一致");
   assert.equal(invoke().status, 0);
-  const target = path.join(root, ".agents/skills/dev/probe/reference/improvement-log.md");
-  const skill = path.join(root, ".agents/skills/dev/probe/SKILL.md");
-  assert.ok(fs.lstatSync(skill).isFile(), "Codex discovers regular SKILL.md files");
-  fs.unlinkSync(skill);
-  fs.symlinkSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), skill, "file");
-  assert.equal(invoke("--check").status, 1, "file links must be repaired for discovery");
-  assert.equal(invoke().status, 0);
-  assert.ok(fs.lstatSync(skill).isFile());
-  assert.ok(fs.lstatSync(target).isSymbolicLink());
-  assert.ok(!path.isAbsolute(fs.readlinkSync(target)), "別PCでも使える相対リンク");
-  fs.writeFileSync(target, "after");
+  const folder = path.join(root, ".agents/skills/dev/probe");
+  const learned = path.join(root, ".agents/skills/learned/note.md");
+  assert.ok(fs.lstatSync(folder).isSymbolicLink(), "skill のフォルダはリンク");
+  assert.ok(!path.isAbsolute(fs.readlinkSync(folder)), "別PCでも使える相対リンク");
+  assert.equal(fs.readFileSync(path.join(folder, "SKILL.md"), "utf8"), "probe", "リンク越しに SKILL.md が読める");
+  assert.equal(fs.readFileSync(path.join(root, ".claude/skills/dev/probe/scripts/run.ts"), "utf8"), "export {};", "複製を消しても原本は残る");
+  assert.ok(fs.lstatSync(learned).isSymbolicLink(), "skill の外のファイルはファイルごとのリンク");
+  fs.writeFileSync(path.join(folder, "reference/improvement-log.md"), "after");
   assert.equal(fs.readFileSync(path.join(root, ".claude/skills/dev/probe/reference/improvement-log.md"), "utf8"), "after");
-  assert.equal(invoke("--check").status, 0, "原本更新後もコピーの再生成は不要");
-  fs.unlinkSync(target);
-  fs.symlinkSync(path.join(root, ".claude/skills/dev/probe/SKILL.md"), target, "file");
-  assert.equal(invoke("--check").status, 1, "別の原本を指す誤リンクは不一致");
+  assert.equal(invoke("--check").status, 0, "原本更新後も再生成は不要");
+  fs.unlinkSync(folder);
+  fs.symlinkSync("../../../.claude/skills/dev/other", folder, "dir");
+  assert.equal(invoke("--check").status, 1, "別の skill を指す誤リンクは不一致");
   assert.equal(invoke().status, 0);
-  assert.equal(fs.readFileSync(target, "utf8"), "after");
-  fs.unlinkSync(target);
-  fs.symlinkSync("missing", target, "file");
-  assert.equal(invoke("--check").status, 1);
+  assert.equal(fs.readFileSync(path.join(folder, "SKILL.md"), "utf8"), "probe");
+  fs.unlinkSync(folder);
+  fs.symlinkSync("missing", folder, "dir");
+  assert.equal(invoke("--check").status, 1, "壊れたリンクは不一致");
   assert.equal(invoke().status, 0);
-  assert.equal(fs.readFileSync(target, "utf8"), "after");
+  assert.equal(fs.readFileSync(path.join(folder, "SKILL.md"), "utf8"), "probe");
+});
+
+test("mirror は .codex/hooks.json を settings.json から生成し、Codex で動かない hook を除く", (t) => {
+  const settings = {
+    hooks: {
+      PreToolUse: [
+        { matcher: "Bash", hooks: [{ type: "command", command: 'node "$CLAUDE_PROJECT_DIR"/.claude/hooks/pre-bash-safety.js' }] },
+        { matcher: "mcp__Claude_Browser__.*", hooks: [{ type: "command", command: 'node "$CLAUDE_PROJECT_DIR"/.claude/hooks/pre-browser-admin-read.mjs' }] },
+      ],
+      Stop: [
+        { hooks: [{ type: "command", command: 'node "$CLAUDE_PROJECT_DIR"/.claude/hooks/check-docs-on-stop.js --flag' }] },
+        { hooks: [{ type: "command", command: 'node "$CLAUDE_PROJECT_DIR"/.claude/hooks/check-findings-on-stop.js' }] },
+      ],
+    },
+  };
+  const root = fixture({
+    ".claude/agents/worker.md": VALID_AGENT,
+    ".claude/settings.json": JSON.stringify(settings),
+    ".claude/skills/dev/probe/SKILL.md": "probe",
+    ".codex/agents/worker.toml": 'name = "worker"\n',
+    ".codex/hooks.json": "{}\n",
+  });
+  t.after(() => fs.rmSync(root, { recursive: true }));
+  const invoke = (...args) => spawnSync(process.execPath, [MIRROR, ...args, "--root", root], { cwd: root, encoding: "utf8" });
+  assert.equal(invoke("--check").status, 1, "手で書いた hooks.json は不一致");
+  assert.equal(invoke().status, 0);
+  const hooks = JSON.parse(fs.readFileSync(path.join(root, ".codex/hooks.json"), "utf8")).hooks;
+  assert.deepEqual(hooks.PreToolUse, [{ matcher: "Bash", hooks: [{ type: "command", command: "node '.claude/hooks/pre-bash-safety.js'" }] }]);
+  assert.deepEqual(hooks.Stop, [{ hooks: [{ type: "command", command: "node '.claude/hooks/check-docs-on-stop.js' --flag" }] }]);
+  assert.equal(invoke("--check").status, 0);
 });
 
 test("E13: 4 体以上の agent に同じ方針の行を写すと止め、正典 rule への 1 行参照は通す", (t) => {

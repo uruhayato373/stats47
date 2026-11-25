@@ -62,6 +62,11 @@ interface StatTileProps {
   action?: ReactNode;
   /** 値の下に全幅で置く小さなチャートなど。出すかどうかは呼び出し側が決める */
   children?: ReactNode;
+  /**
+   * 推移の線のように、タイルの左右の端 (footer が無ければ下端も) まで広げて置く図。
+   * 余白を持たない図 (MiniLineChart) を渡す。出すかどうかは呼び出し側が決める (2026-11-24)
+   */
+  chart?: ReactNode;
   /** 下端に寄せるリンク行 (出典・ランキングへの導線)。並べたタイルの高さがそろっても下端の位置がそろう */
   footer?: ReactNode;
   className?: string;
@@ -76,6 +81,7 @@ export function StatTile({
   icon,
   action,
   children,
+  chart,
   footer,
   className,
 }: StatTileProps) {
@@ -111,6 +117,13 @@ export function StatTile({
       </div>
       {action ? <div className="absolute top-3 right-3">{action}</div> : null}
       {children}
+      {chart ? (
+        // カードの左右の余白 (px-4) と、footer が無ければ下の余白 (py-4) を打ち消して端まで描く。
+        // 高さのそろった格子の中でも図が下端に付くよう mt-auto で寄せる
+        <div data-slot="stat-tile-chart" className={cn("-mx-4", footer ? undefined : "mt-auto -mb-4")}>
+          {chart}
+        </div>
+      ) : null}
       {footer ? (
         <div data-slot="stat-tile-footer" className="mt-auto">
           {footer}

@@ -12,7 +12,6 @@ import {
   type ThemeName,
 } from "@/shared/themes/brand";
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
-import { SITE } from "@stats47/types";
 import { to2DigitPrefCode } from "@stats47/area";
 import { prefectureShortName } from "@stats47/area/short-name";
 import { prefectureEntries, renderTileMapBody } from "../data-cards/all47-svg";
@@ -287,17 +286,7 @@ export const CoverSlide: React.FC<CoverSlideProps> = ({
           zIndex: 10,
         }}
       >
-        <div
-          style={{
-            fontSize: 22,
-            fontWeight: FONT.weight.black,
-            color: BRAND.primary,
-            letterSpacing: 1,
-          }}
-        >
-          {SITE.domain}
-        </div>
-        <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
+        {/* 発行元 (stats47.jp・サイト名) は画像に入れず投稿文で名乗る (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01) */}
         <div
           style={{
             fontSize: 20,
@@ -306,7 +295,7 @@ export const CoverSlide: React.FC<CoverSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          {meta.sourceLabel ? `出典：${meta.sourceLabel}` : SITE.name}
+          {meta.sourceLabel ? `出典：${meta.sourceLabel}` : null}
         </div>
       </div>
     </AbsoluteFill>

@@ -1,1 +1,0 @@
-../../../../../.claude/skills/theme/design-theme-charts/reference/component-props-examples.md

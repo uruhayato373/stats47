@@ -33,6 +33,7 @@ test("AdSense・GA4・アフィリエイトの通信を種類つきで判定す�
     ["https://www.googletagmanager.com/gtag/js?id=G-TEST", "analytics"],
     ["https://region1.google-analytics.com/g/collect?v=2&en=page_view", "analytics"],
     ["https://analytics.google.com/g/collect?v=2", "analytics"],
+    ["https://static.cloudflareinsights.com/beacon.min.js", "analytics"],
     ["https://www.google.co.jp/ads/ga-audiences?v=1", "adsense"],
     ["https://statics.a8.net/a8link/a8linkmgr.js", "affiliate"],
     ["https://www19.a8.net/0.gif?a8mat=XXXX", "affiliate"],

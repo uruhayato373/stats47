@@ -9195,6 +9195,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:waiting-children-progress",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:nursery-waiting-children-count",
           "kind": "ranking"
         },

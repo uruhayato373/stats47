@@ -1,1 +1,0 @@
-../../../../.claude/skills/image-prompt/reference/catalog.md

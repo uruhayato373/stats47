@@ -1,1 +1,0 @@
-../../../../../.claude/skills/sns/post-x-batch/scripts/lint-x-captions.cjs

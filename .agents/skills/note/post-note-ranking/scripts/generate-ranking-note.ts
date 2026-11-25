@@ -1,1 +1,0 @@
-../../../../../.claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts

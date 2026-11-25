@@ -9,8 +9,11 @@
  *   → 該当ルートのキャッシュエントリを消すと、次アクセスで R2 から再レンダリングされる。
  *
  * キャッシュの所在 (open-next.config.ts / wrangler.toml):
- *   バケット stats47 の `incremental-cache/<buildId>/<sha256(route)>.cache`
- *   (r2-incremental-cache override の computeCacheKey。route は先頭スラッシュ付きパス)
+ *   バケット stats47 の `incremental-cache/<buildId>/<sha256(key)>.cache`
+ *   (r2-incremental-cache override の computeCacheKey)。key は Next.js 16.3.8 以上では
+ *   `/route-cache/APP_PAGE/<sha256(app の項目名)>/$<パス>`、それより前はパスそのもの。
+ *   両方の形を `lib/utils/isr-route-cache-key.ts` が求め、置かれているほうを消す
+ *   (旧形式だけを探して 2026-11-25 の公開で「どの buildId にもない」で止まった)。
  *
  * 使い方:
  *   npx tsx packages/r2-storage/src/scripts/purge-isr-routes.ts --routes /blog/foo /blog/bar
@@ -32,11 +35,11 @@ import {
   type S3Client,
 } from "@aws-sdk/client-s3";
 import { config } from "dotenv";
-import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
 
 import { createR2S3Client } from "../lib/clients/r2-s3-client.mjs";
+import { candidateIsrObjectKeys, listAppEntries } from "../lib/utils/isr-route-cache-key";
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import { SITE } from "@stats47/types";
 
@@ -61,10 +64,21 @@ function getClient(): S3Client {
   return client;
 }
 
-/** OpenNext の computeCacheKey と同じ導出 (sha256(route) を buildId 配下に置く) */
-function cacheKey(buildId: string, route: string, type: "cache" | "fetch" = "cache"): string {
-  const hash = crypto.createHash("sha256").update(route).digest("hex");
-  return `${CACHE_PREFIX}/${buildId}/${hash}.${type}`;
+/** ページの描画を持つ app ディレクトリ (キーの元になる app の項目名をここから作る) */
+const APP_DIR = path.resolve(__dirname, "..", "..", "..", "..", "apps", "web", "src", "app");
+const APP_ENTRIES = listAppEntries(APP_DIR);
+
+async function existingKeys(client: S3Client, buildId: string, route: string): Promise<string[]> {
+  const found: string[] = [];
+  for (const key of candidateIsrObjectKeys(buildId, route, APP_ENTRIES)) {
+    try {
+      await client.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
+      found.push(key);
+    } catch {
+      /* この形では置かれていない */
+    }
+  }
+  return found;
 }
 
 /** プローブルートのエントリが最も新しい buildId を現行ビルドとみなす */
@@ -81,13 +95,13 @@ async function detectCurrentBuildId(client: S3Client, probeRoutes: string[]): Pr
   await Promise.all(
     buildIds.map(async (buildId) => {
       for (const route of probeRoutes) {
-        try {
-          const head = await client.send(
-            new HeadObjectCommand({ Bucket: BUCKET, Key: cacheKey(buildId, route) }),
-          );
-          found.push({ buildId, mtime: head.LastModified?.getTime() ?? 0 });
-        } catch {
-          /* この buildId には無い */
+        for (const key of candidateIsrObjectKeys(buildId, route, APP_ENTRIES)) {
+          try {
+            const head = await client.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
+            found.push({ buildId, mtime: head.LastModified?.getTime() ?? 0 });
+          } catch {
+            /* この buildId のこの形には無い */
+          }
         }
       }
     }),
@@ -142,10 +156,8 @@ async function main() {
     Array.from({ length: Math.min(CONCURRENCY, routes.length) }, async () => {
       while (i < routes.length) {
         const route = routes[i++];
-        const key = cacheKey(buildId, route);
-        try {
-          await client.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
-        } catch {
+        const keys = await existingKeys(client, buildId, route);
+        if (keys.length === 0) {
           missing++;
           continue; // 元々キャッシュされていない (= 次アクセスで render される) ので何もしない
         }
@@ -154,7 +166,7 @@ async function main() {
           continue;
         }
         try {
-          await client.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }));
+          for (const key of keys) await client.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }));
           deleted++;
           if (deleted % 25 === 0) console.log(`  ${deleted} 件削除 …`);
         } catch (e) {

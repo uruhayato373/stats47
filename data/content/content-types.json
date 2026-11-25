@@ -505,11 +505,6 @@
       "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
-      "id": "blog:general-hospital-bed-occupancy-rate",
-      "type": "type:reference",
-      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
-    },
-    {
       "id": "blog:golf-green-fee-consumption-ranking",
       "type": "type:reference",
       "reason": "題名が順位・地域差の紹介を中心とする"
@@ -711,11 +706,6 @@
     },
     {
       "id": "blog:information-communication-coefficient-ranking",
-      "type": "type:reference",
-      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
-    },
-    {
-      "id": "blog:inpatient-rate-aging-burden",
       "type": "type:reference",
       "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
@@ -1040,11 +1030,6 @@
       "reason": "題名が順位・地域差の紹介を中心とする"
     },
     {
-      "id": "blog:software-engineer-income-gap",
-      "type": "type:reference",
-      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
-    },
-    {
       "id": "blog:spinach-consumption-ranking",
       "type": "type:reference",
       "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
@@ -1070,11 +1055,6 @@
       "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
     {
-      "id": "blog:telework-gap-tokyo-6x",
-      "type": "type:reference",
-      "reason": "題名が順位・地域差の紹介を中心とする"
-    },
-    {
       "id": "blog:telework-income-correlation",
       "type": "type:reference",
       "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
@@ -1091,11 +1071,6 @@
     },
     {
       "id": "blog:tokyo-real-income-after-rent",
-      "type": "type:reference",
-      "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
-    },
-    {
-      "id": "blog:total-fertility-rate",
       "type": "type:reference",
       "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
     },
@@ -1173,11 +1148,6 @@
       "id": "blog:welfare-expenses-squeeze",
       "type": "type:reference",
       "reason": "問いの台帳に結びつかない。問いを足したら論文型へ戻す"
-    },
-    {
-      "id": "blog:wheat-flour-consumption-food-culture-gap",
-      "type": "type:reference",
-      "reason": "題名が順位・地域差の紹介を中心とする"
     },
     {
       "id": "blog:white-bread-price-up-quantity-up",

@@ -13,6 +13,9 @@ import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
+import { BOOK_BY_ID } from "./book-catalog";
+import type { KindleBook } from "./types";
+import { assertEpubMatchesCurrentBook } from "./revision-evidence";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const LEDGER_PATH = join(REPO_ROOT, KDP_LISTINGS);
@@ -141,6 +144,21 @@ export function prepareFirst(current: JsonRecord | undefined, candidate: JsonRec
   };
 }
 
+/**
+ * 提案を写す前に、今の書籍の台帳・原稿から計算した authoredBookSha256 が、EPUB の metadata.json と提案の両方と一致することを確かめる。
+ * 書き出し (export-kdp-listings) が止まる状況で、同じ版名の古い提案が出品台帳へ写るのを防ぐ (2026-11-14 K-S3-08)。
+ * 提案が照合値を持たない (この検査より前に書き出した) ときも、確かめられないので止める。
+ */
+export function assertProposalMatchesCurrentBook(
+  proposal: JsonRecord, book: KindleBook, version: string, booksRoot: string, factoryRoot: string,
+): void {
+  const current = assertEpubMatchesCurrentBook(book, version, join(booksRoot, book.id, version), factoryRoot);
+  const recorded = record(proposal.authoredSha256ByBook ?? {}, "proposal authoredSha256ByBook")[book.id];
+  if (recorded !== current) {
+    throw new Error(`${book.id}: proposal is stale or has no authoredSha256 (re-run export-kdp-listings for the current book)`);
+  }
+}
+
 function arg(name: string): string {
   const index = process.argv.indexOf(`--${name}`);
   const value = index >= 0 ? process.argv[index + 1] : "";
@@ -172,6 +190,9 @@ function main(): void {
   if (candidate.epubPath !== expectedEpub || candidate.coverPath !== expectedCover) {
     throw new Error("proposal assets do not match the requested edition");
   }
+  const book = BOOK_BY_ID.get(id);
+  if (!book) throw new Error(`unknown book id: ${id}`);
+  assertProposalMatchesCurrentBook(proposal, book, version, join(REPO_ROOT, ".local/kindle-books"), join(REPO_ROOT, "packages/product-factory"));
   const now = new Date().toISOString();
   if (mode !== "first" && !current) throw new Error(`${mode} requires a ledger row (use first for a book without one)`);
   const next =

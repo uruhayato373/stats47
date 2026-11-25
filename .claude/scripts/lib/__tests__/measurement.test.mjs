@@ -117,7 +117,7 @@ test('KDP collects short-lived Reports before the long bookshelf scan and retain
   const identity = code.indexOf('if (!identity.found');
   const preflight = code.indexOf('await openKdpReports(reportsPage)');
   const report = code.indexOf('sales = await collectKdpReport');
-  const verified = code.indexOf('markMeasurementAuthenticated(source)');
+  const verified = code.indexOf("throw new Error('publication_status_incomplete')");
   const scan = code.indexOf('for (const [id, entry]');
   const monthly = code.indexOf('monthlyRoyalties = await collectKdpMonthlyReport(reportsPage');
   assert.ok(identity > 0 && identity < preflight && preflight < report && report < monthly && monthly < scan && scan < verified, '13-minute bookshelf scans must not consume the Reports session before revenue collection');

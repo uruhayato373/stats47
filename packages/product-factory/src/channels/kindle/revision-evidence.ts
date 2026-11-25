@@ -1,7 +1,7 @@
 /** Bind a generated edition to its authored recipe and the chapters actually reviewed. */
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, realpathSync } from "node:fs";
-import { isAbsolute, relative, resolve } from "node:path";
+import { isAbsolute, join, relative, resolve } from "node:path";
 import type { KindleBook } from "./types";
 import { KINDLE_EDITORIAL_CORRECTIONS } from "./editorial-corrections";
 
@@ -28,6 +28,20 @@ export function authoredBookSha256(book: KindleBook, factoryRoot: string): strin
     slug: ch.blogSlug, corrections: KINDLE_EDITORIAL_CORRECTIONS[ch.blogSlug!] ?? [],
   }));
   return hash(JSON.stringify({ book, fresh, corrections, editorIds: revisionEditorIds(book.id) }));
+}
+
+/**
+ * EPUB の metadata.json が、今の書籍の台帳・原稿と同じ版を指すことを確かめ、今の authoredBookSha256 を返す。
+ * 提案の書き出し (export-kdp-listings) と出品台帳への反映 (promote-kdp-listing) が同じ照合を使う。
+ * `bookDir` は `.local/kindle-books/<ID>/<版>`。
+ */
+export function assertEpubMatchesCurrentBook(book: KindleBook, version: string, bookDir: string, factoryRoot: string): string {
+  const metadata = JSON.parse(readFileSync(join(bookDir, "metadata.json"), "utf8"));
+  const current = authoredBookSha256(book, factoryRoot);
+  if (metadata.version !== version || metadata.title !== book.title || metadata.authoredSha256 !== current) {
+    throw new Error(`${book.id}: current manuscript/catalog differs from the requested EPUB edition`);
+  }
+  return current;
 }
 
 export interface ReviewedChapter { fileName: string; sha256: string }

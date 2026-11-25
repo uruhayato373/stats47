@@ -202,9 +202,12 @@ export function parseMoshimoDetailStatus(body, anchor = "プロモーション�
   return { ok: true, status: statusMap[rawStatus], rawStatus, reason: null };
 }
 
-/** 一覧不在でも、詳細で確定済みの負状態は再び review に戻さない。 */
+/**
+ * 一覧不在でも、詳細で確定済みの負状態は再び review に戻さない。
+ * `rejected` は afb の「提携却下」(申請ボタンが出ず、申請し直せない。AFF-AFB-REJECTED-STATUS-01) で、none と同じく負状態として扱う。
+ */
 export function shouldReviewAbsentStatus(status) {
-  return !["none", "unavailable"].includes(status);
+  return !["none", "unavailable", "rejected"].includes(status);
 }
 
 /** カタログの name が実質未補完か (null / 空 / 【PID:N】カテゴリ 形式)。 */

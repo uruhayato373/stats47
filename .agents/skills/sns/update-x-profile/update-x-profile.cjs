@@ -1,1 +1,0 @@
-../../../../.claude/skills/sns/update-x-profile/update-x-profile.cjs

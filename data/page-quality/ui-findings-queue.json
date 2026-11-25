@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T23:53:07.268Z",
+  "generatedAt": "2026-11-24T12:29:22.415Z",
   "auditAt": "2026-11-20T22:41:51.639Z",
   "findings": [
     {
@@ -44,14 +44,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[tablet-768/medium] タブレット1枚目、「調べたい問いから選ぶ」3枚の地図サムネイルの右端(駅×人口): 右のカードの地図は黒い塊でほぼ塗りつぶされ、形も駅の位置も読み取れない。左の2枚が淡い塗りなのに対し1枚だけ濃く、見た目が揃っていない。 → 駅メッシュの描画を淡色にするか、サムネイル用に濃度を下げて3枚の見た目を揃える。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:59.678Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "2026-11-03 の再設計 (d62967ff1) で、サムネイルは左の小枠でなくカード上端の全幅 SVG (375px 幅で 373x195) になり、駅名ラベルは重なりを検出して優先順に間引く。2026-11-24 に localhost の /geo で 375px 幅の 3 枚とも駅名 3 つが重ならず描かれることを確認 (未デプロイ分あり)"
     },
     {
       "key": "agent|geo-analysis--analysis",
@@ -61,14 +61,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、見出し下のメタ情報行(「データ生成 2026/09/05・coverage 47/47」「47都道府県・2020-2050・%」): 「coverage 47/47」のような運用用語が読者向けの画面に出ている。「・%」だけの単位表記も何の値か分からない。 → 「47都道府県すべてを収録」のような平易な表現に置き換え、単位は指標名と併記する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-18",
       "last_seen": "2026-11-14",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:35.895Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "修正の本番反映後も 2026-11-14 の週次で再検出 (前回: GeoSpatialEvidenceExplorer で地図をタブの直下に置き、凡例の説明・距離帯の凡例を地図の後ろへ移した。本番の 375x812 で同じ並べ替えを当てると地図の上端が 765px→640px (最初の画面に地図が 172px 入る)。未デプロイ)"
+      "note": "同上 (GeoCrossAnalysisArticle): coverage を「47都道府県すべて収録」に、単位は指標名と併記「<指標名>（単位: %）」に変更 (未デプロイ)"
     },
     {
       "key": "agent|geo-analysis--analysis-pref",
@@ -78,14 +78,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ 1 枚目、タイトル下のメタ行「データ生成 2026/09/05 ・ coverage 47/47 ・ 47都道府県 ・ 2020-2050 ・ %」: 「coverage 47/47」という英語の運用用語と、単位だけの「%」が読者向けの説明なしに並んでいる。何の % か、coverage が何を数えているかが画面から分からない。 → 「coverage 47/47」は「47 都道府県すべて対応」のように日本語で言い換え、「%」は「単位: %(人口割合)」など何の値かが分かる形にする。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-21",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:29.000Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "GeoCrossAnalysisArticle のメタ行を日本語化: 「coverage 47/47」を「47都道府県すべて収録」に、単位だけの「%」を「<指標名>（単位: %）」に変更 (未デプロイ)"
     },
     {
       "key": "agent|geo-analysis--layer",
@@ -112,14 +112,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[desktop-1440/medium] デスクトップ1枚目、右レールの「広告」カード(「詳細を見る」「地図を見る」「データ管理を比較」「統計ソフトを試す」): 見出しの「広告」が小さく、リンクは本文のサイト内ナビより大きな文字で青系の背景を使っている。サイト内の導線に見え、広告とサイト内リンクを取り違えやすい。 → 広告の表記をカード上部に目立つ形で付け、リンク文字をサイト内リンクと同程度の大きさ・色に抑える。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-31",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "修正の本番反映後も 2026-10-11 の週次で再検出 (前回: カード横スクロールの右端に続きを示すフェードを追加 (HorizontalCardCarousel)。タイル地図の県名を折り返さない (whitespace-nowrap)。左上の空白はタイル配置が列島の形を写すため現状維持)"
+      "note": "右レールの該当カードは AdSense の枠 (RailAdSlot → AdCell)。「詳細を見る」等のリンクの文字・青系の地は Google が配信する広告の原稿でサイト側から変えられない。左上の小さな「広告」表記は 2026-10-30 オーナー決定 (AdCell 案 A・全ての広告の枠で共通) で、ホームだけ大きくしない"
     },
     {
       "key": "agent|municipality",
@@ -129,14 +129,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目の「千代田区の主な指標」、「65歳以上人口割合」の「2020年度」: 同じ一覧で総人口・世帯数は「2025年」「2020年」なのに、国勢調査の時点統計である65歳以上人口割合だけ「2020年度」と表記され、年と年度が混在している。 → 時点統計(国勢調査由来)の指標は「年度」ではなく「年」で表記を統一する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:06:43.350Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "65歳以上人口割合の年は e21739f37c (SSDS-YEARFORMAT-SOURCE-01) で elderly-population-ratio を yearFormat calendar にした後の再取り込みで直っている。2026-11-24 に公開 R2 の app/stats/elderly-population-ratio/cities.json と app/areas/13000/cities/13101/databook.json が「2020年」であることを確認。指摘の観測 (10-31) は直す前"
     },
     {
       "key": "agent|municipality--village",
@@ -180,14 +180,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、各指標カードの灰色ヒストグラム(「65歳以上人口割合」「高齢夫婦のみの世帯数」): ヒストグラムに軸の数値も最大・最小のラベルもなく、何の分布か分からない。「高齢夫婦のみの世帯数」は左端1本だけ高く残りは線に見え、図の意味が読み取れない。 → 横軸の最小値と最大値、または「多くの自治体は〇〇付近」のような一言をヒストグラムの下に添える。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:35:31.541Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "市区町村テーマの指標カードの分布の棒 (MiniDistributionBars) の下に横軸の最小・最大を単位つきで添えた (裾を畳んだビンは「未満」「以上」)。端の値の書式はランキングのヒストグラムと共通の distribution-edge-labels"
     },
     {
       "key": "agent|prefecture-detail",
@@ -197,14 +197,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目、「東京都が全国上位」の4項目の年表記: 「警察官数(2024年度)」だけ年度で、他の3項目は「2024年」「2023年」と年表記。「教養娯楽費割合 11%」は何に対する割合か分からず、「平均初婚年齢（妻）（妻の年齢）」は括弧が重複して意味が取りにくい。 → 年／年度の表記を指標の性質に合わせて統一し、割合には分母(例: 消費支出に占める)を添え、重複した括弧を整理する。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-31",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:05:18.904Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "① buildQualifiedLabel が label の括弧と重なる修飾語を付けないようにした (平均初婚年齢（妻）（妻の年齢）→平均初婚年齢（妻）。databook.json の再生成で反映) ② 教養娯楽費割合に subtitle「二人以上の世帯の消費支出に占める割合」を足した (item.json・databook の再生成で反映) ③ 年と年度の混在は by-design: 警察官数は年度の統計で、出典の期間 (yearFormat) どおりに表記している"
     },
     {
       "key": "agent|prefecture-detail--hokkaido",
@@ -214,14 +214,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ 1 枚目と 2 枚目、「北海道が全国下位」表の「年間収入(1世帯当たり) 448.8万円 / 2019年」の行: 同じ表の他の行が 2024〜2025 年の中で、この行だけ 2019 年で、年が小さな灰色文字のため古さに気づきにくい。順位 44 位が現在の比較に見えてしまう。 → 他の行と年が離れている指標は、年を目立たせるか「2019年(古い調査)」のように注記する。\n[mobile-390/low] スマホ 1 枚目、「北海道の特徴」上のカテゴリ一覧(人口・世帯 / 暮らし / 世帯 / 学校・施設 など): 「人口・世帯」と「世帯」が別カテゴリとして並んでおり、違いが分からない。また各項目が枠なしの灰色テキストで、押せるリンクに見えない。 → 「世帯」の重複を整理し、リンクだと分かるようにチップ形状や下線を付ける。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-14",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T06:56:41.521Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "修正の本番反映後も 2026-11-21 の週次で再検出 (前回: AreaHighlightList の指標名の列から min-w-40 を外し ValueTable 既定 (min-w-24) に。390px で表 308px に収まり全国順位の列が見出し・数字とも読める (360px も収まる)。未デプロイ)"
+      "note": "AreaHighlightList.tsx の指標列の min-w-40 (160px) を外し、390px 幅で順位列が収まる形に修正済み (2026-11-16 main 反映)。コードが現状その形であることを 2026-11-24 に確認"
     },
     {
       "key": "agent|prefecture-detail--theme-geo",
@@ -248,14 +248,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ 2 枚目、「総人口」カードの推移グラフ: グラフの軸の年ラベル (1975 / 2025) が極小で、縦軸の目盛りもありません。値の範囲が分かりません。 → 軸ラベルを読めるサイズにし、最小値と最大値を添える。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-10-11",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "2026-11-24 オーナー決定: 推移は線と面だけで、年と値はホバーで読む"
     },
     {
       "key": "agent|prefecture-list",
@@ -282,14 +282,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目の最下部、「都道府県別ランキング」の節見出しと右隣の年選択(2025年): 見出しが「都道府県別ランキン/グ」のように途中で折り返され、年の選択ボックスに幅を取られて窮屈に見える。 → 見出しを1行に収めるか、年の選択を見出しの下の行へ回す。",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-11-14",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T11:09:48.175Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-11 の週次で再検出)"
+      "note": "ChartPanel の見出しを、操作があり説明が無いときは折り返す横並び (flex-wrap) にし、入りきらない年の選択を次の行の右へ回す。題名を語の途中で折らない。ChartPanel.test に回帰テスト。見た目は手元で未確認 (dev サーバー不使用)"
     },
     {
       "key": "agent|ranking--index",
@@ -350,14 +350,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ 1 枚目、見出し直下の「出典・指標の定義」ボタン左のアイコン: アイコンの左上に黒い丸が重なっており、通知バッジのように見えて意図が分からない。 → 黒い点の重なりが意図したものか確認し、不要なら取り除くか、バッジなら意味が分かる表示にする。",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-11-21",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "SourcesSheet の右上の小さな点は、シートに「読むときの注意」が入っていることを示す意図した印 (hasNotes のとき data-sources-notes-marker)。通知バッジではない"
     },
     {
       "key": "agent|theme",
@@ -384,14 +384,14 @@
       "metric_key": "abnormal_value_strings",
       "severity": "warning",
       "detail": "abnormal_value_strings: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/cc-estat-12-housing-treemap",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": ""
+      "note": "cc-estat-12-housing-treemap の undefined は Claude Code で D3 の集計を説明する技術記事の地の文 (sum((d) => d.value ?? 0) で undefined を 0 に倒す)。描画の失敗ではなく code 要素の外に書かれた語。本文を直すなら R2 の記事の改稿 (承認が要る)"
     },
     {
       "key": "machine|blog-article|internal_jargon_terms",
@@ -401,14 +401,14 @@
       "metric_key": "internal_jargon_terms",
       "severity": "warning",
       "detail": "internal_jargon_terms: 3 URL (最大 8、閾値 <= 0)。例: https://stats47.jp/blog/2050-population-flood-exposure / https://stats47.jp/blog/2050-population-map-reading / https://stats47.jp/blog/2050-station-access-population",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "CONTENT-FOLLOWUP-01",
+      "note": "公開記事の本文と図の書き直しが要る (R2 の article.md の改稿と再公開)。2050 の Geo 記事の「保存則」、child-height-regional-gap の図のデータ欠け、cc-estat-04-aging-heatmap の図の文字は CONTENT-FOLLOWUP-01 で是正する"
     },
     {
       "key": "machine|blog-article|same_shop_ad_duplicates",
@@ -435,14 +435,14 @@
       "metric_key": "title_changed",
       "severity": "warning",
       "detail": "title_changed: 31 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/aichi-food-culture / https://stats47.jp/blog/air-conditioner-consumption-quantity-prefecture-gap / https://stats47.jp/blog/banana-consumption-quantity",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-14 の週次で再検出)"
+      "note": "2026-11-20 の週次の 31 URL はすべて記事の書き直し (2024→2025 の家計調査の取り直しと本文の改稿) で題を変えたもの。選定入力 (データ年・本文) が変わっており、規約の「入力が変わらないのに変わった」に当たらない"
     },
     {
       "key": "machine|blog-article|unit_symbol_mixing",
@@ -452,14 +452,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 2 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/blog/main-road-paving-rate-vs-apple-consumption-quantity / https://stats47.jp/blog/traffic-accident-deaths-regional-risk",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T12:10:00.645Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "2 URL の ％ は右レール「よく読まれている記事」の他記事の題 (主要道路舗装率100％…)。readPopularArticlesFromR2 が題を normalizeUnitsInText で半角にそろえるようにした (テスト追加)"
     },
     {
       "key": "machine|blog|unit_symbol_mixing",
@@ -1353,14 +1353,14 @@
       "metric_key": "mobile_page_height",
       "severity": "warning",
       "detail": "mobile_page_height = 2906 (閾値 <= 2600)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:33:03.607Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "地図の下の都道府県一覧 (AreaDirectoryList の comfortable) を一覧の幅 320px 以上で 2 列から 3 列にした (26 行 → 19 行、1 行 50px で約 350px 縮む見込み = 2906 → 約 2556)。描いた高さの実測は未確認で、週次の監査が確かめる"
     },
     {
       "key": "machine|https://stats47.jp/blog/2050-population-flood-exposure|broken_images",
@@ -2067,14 +2067,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "CONTENT-FOLLOWUP-01",
+      "note": "公開記事の本文と図の書き直しが要る (R2 の article.md の改稿と再公開)。2050 の Geo 記事の「保存則」、child-height-regional-gap の図のデータ欠け、cc-estat-04-aging-heatmap の図の文字は CONTENT-FOLLOWUP-01 で是正する"
     },
     {
       "key": "machine|https://stats47.jp/blog/cc-estat-07-birthrate-line|blog_svg_text_issues",
@@ -2237,14 +2237,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "CONTENT-FOLLOWUP-01",
+      "note": "公開記事の本文と図の書き直しが要る (R2 の article.md の改稿と再公開)。2050 の Geo 記事の「保存則」、child-height-regional-gap の図のデータ欠け、cc-estat-04-aging-heatmap の図の文字は CONTENT-FOLLOWUP-01 で是正する"
     },
     {
       "key": "machine|https://stats47.jp/blog/childrens-socks-consumption-expenditure-prefecture-gap|blog_svg_text_issues",
@@ -2356,14 +2356,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-11-24",
+      "resolved_by": "owner",
+      "card": "BLOG-FIGURE-REDRAW-REGRESSION-01",
+      "note": "plan-svg-text-fix で regen-fixes (題が右に 208px はみ出す。今の生成器で作り直すと直る)。regenerate-blog-svgs.yml の R2 への反映は同カードの描き直し (オーナーの指示) で行う"
     },
     {
       "key": "machine|https://stats47.jp/blog/commercial-sales-productivity-gap|blog_svg_text_issues",
@@ -9054,14 +9054,14 @@
       "metric_key": "small_text_count",
       "severity": "warning",
       "detail": "small_text_count = 49 (閾値 <= 18)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-11-14",
       "last_seen": "2026-11-21",
-      "fixed_at": null,
+      "fixed_at": "2026-11-24T10:29:06.698Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "タイル地図 (AreaTileMap) のマスの文字をスマホの幅で固定 9px にしていたのを clamp(9px,3.4cqw,11px) にし、本文 324px 以上では 11px (検査の基準以上) にした。47 マスが小さすぎる文字に数えられていた"
     },
     {
       "key": "machine|https://stats47.jp/category/population|a11y_violations",
@@ -9343,14 +9343,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/ranking/junior-high-school-count|a11y_violations",
@@ -9394,14 +9394,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/municipalities/ranking/manufacturing-shipment-amount/23000|clipped_text",
@@ -9496,14 +9496,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 2 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/municipalities|a11y_violations",
@@ -9513,14 +9513,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-31",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "自前の要素では違反なし。2026-11-24 に本番の同じ URL を 390px・1440px で axe (wcag2a/2aa の serious・critical) にかけ、広告・計測の外部リクエスト (googlesyndication・doubleclick・GTM・GA・A8・楽天・もしも等) を止めると 0 件。週次の image-alt・link-name・frame-title・color-contrast は AdSense などが差し込む第三者の iframe・画像・リンクで、サイトのコードでは直せない。/privacy も同じ 3 種が出て、止めると 0 件。検査側で広告の枠を axe の対象から外すのは packages/ops 側の別作業"
     },
     {
       "key": "machine|https://stats47.jp/privacy|a11y_violations",
@@ -10244,14 +10244,14 @@
       "metric_key": "title_changed",
       "severity": "warning",
       "detail": "title_changed: 103 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/municipalities/ranking/crime-rate-per-1k / https://stats47.jp/municipalities/ranking/elderly-population-ratio / https://stats47.jp/municipalities/ranking/elderly-population-ratio/01000",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-10-31 の週次で再検出)"
+      "note": "選定入力の変化による変更で、選び方の非決定ではない。2026-11-20 の週次の 103 URL は、市区町村ランキングの年の名前が観測値の yearName で「年度」→「年」に変わったもの、指標の題の改名 (製造品出荷額等（総額）→製造品出荷額等、納税義務者1人当たり課税所得→課税対象所得（所得割の納税義務者1人当たり）) の 3 種だけ。題は municipality-page-meta.ts が観測値から決定的に作る"
     },
     {
       "key": "machine|other|unit_symbol_mixing",
@@ -10363,14 +10363,14 @@
       "metric_key": "title_changed",
       "severity": "warning",
       "detail": "title_changed: 2 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/ranking/convenience-store-sales / https://stats47.jp/ranking/electricity-generation-capacity",
-      "status": "pending",
+      "status": "by-design",
       "first_seen": "2026-10-11",
       "last_seen": "2026-11-21",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
+      "resolved_at": "2026-11-24",
+      "resolved_by": "by-design",
       "card": null,
-      "note": "再発 (2026-11-21 の週次で再検出)"
+      "note": "選定入力の変化による変更で、選び方の非決定ではない。convenience-store-sales は指標を年計に限った修正 (3d5c87fd93) で定義の手書きの題を外したため、electricity-generation-capacity は単位の Ｍｗｈ→MWh 表記統一による。2026-11-23 以降の題は最新年の観測値から決定的に作る (a6f7537f00・buildRankingSeoText)"
     },
     {
       "key": "machine|ranking|unit_symbol_mixing",

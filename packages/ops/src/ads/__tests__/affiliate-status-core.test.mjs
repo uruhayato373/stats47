@@ -195,9 +195,11 @@ test("もしも詳細の見出し・状態が不明または曖昧なら fail-cl
   assert.equal(parseMoshimoDetailStatus("プロモーション詳細\n提携中\n申請中").ok, false);
 });
 
-test("詳細で確定した none / unavailable は一覧不在レビューへ戻さない", () => {
+test("詳細で確定した none / unavailable / rejected は一覧不在レビューへ戻さない", () => {
   assert.equal(shouldReviewAbsentStatus("none"), false);
   assert.equal(shouldReviewAbsentStatus("unavailable"), false);
+  // afb の「提携却下」は申請し直せない負状態 (AFF-AFB-REJECTED-STATUS-01)
+  assert.equal(shouldReviewAbsentStatus("rejected"), false);
   assert.equal(shouldReviewAbsentStatus("applying"), true);
   assert.equal(shouldReviewAbsentStatus("approved"), true);
 });

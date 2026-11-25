@@ -1,1 +1,0 @@
-../../../../../.claude/skills/management/goal/scripts/create-goal.cjs

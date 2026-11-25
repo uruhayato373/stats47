@@ -30,6 +30,8 @@ export const AD_TRAFFIC_HOST_RULES = [
   { suffix: "googletagmanager.com", kind: "analytics" },
   { suffix: "google-analytics.com", kind: "analytics" },
   { suffix: "analytics.google.com", kind: "analytics" },
+  // Cloudflare Web Analytics の beacon (2026-11-24 の本番の撮影で「一覧に無い外部の host」に出た。AD-LAYOUT-WEEKLY-CAPTURE-01)
+  { suffix: "cloudflareinsights.com", kind: "analytics" },
   { suffix: "a8.net", kind: "affiliate" },
   { suffix: "moshimo.com", kind: "affiliate" },
   { suffix: "afi-b.com", kind: "affiliate" },

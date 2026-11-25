@@ -4,7 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { assessCheckpoint, observeCheckpoint, recordCheckpoint, launchBaselineCandidate } from "../evaluate-theme-experiments.mjs";
 
@@ -146,10 +146,11 @@ function cliFixture(t, experiments = [experiment()], portfolioTheme = theme()) {
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
   fs.writeFileSync(path.join(dir, "experiments.json"), JSON.stringify({ schemaVersion: 1, experiments }));
   fs.writeFileSync(path.join(dir, "portfolio.json"), JSON.stringify({ themes: [portfolioTheme] }));
+  // --import は URL を取る。Windows の絶対パス (C:\\…) を渡すと ERR_UNSUPPORTED_ESM_URL_SCHEME になる (WINDOWS-LOCAL-GATES-01)
   const clock = path.join(dir, "clock.mjs");
   fs.writeFileSync(clock, `Date.now = () => Date.parse('${NOW}T12:00:00Z');`);
   return {
-    run: (...args) => spawnSync(process.execPath, ["--import", clock, SCRIPT, ...args], { env: { ...process.env, STATE_DIR: dir }, encoding: "utf8" }),
+    run: (...args) => spawnSync(process.execPath, ["--import", pathToFileURL(clock).href, SCRIPT, ...args], { env: { ...process.env, STATE_DIR: dir }, encoding: "utf8" }),
     read: () => JSON.parse(fs.readFileSync(path.join(dir, "experiments.json"), "utf8")),
   };
 }

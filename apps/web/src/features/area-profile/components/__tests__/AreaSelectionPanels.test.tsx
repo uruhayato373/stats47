@@ -1,6 +1,5 @@
 import { fetchPrefectures } from '@stats47/area';
 import { fireEvent, render, screen, within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, it, expect, vi } from 'vitest';
 
 const { trackMock } = vi.hoisted(() => ({ trackMock: vi.fn() }));
@@ -9,8 +8,6 @@ vi.mock('@/lib/analytics/events', () => ({
 }));
 
 import { buildAreaDirectoryData } from '../../utils/build-area-directory-data';
-import { AreaDirectoryRegionProvider } from '../AreaDirectoryRegionContext';
-import { AreaDirectoryRegionNav } from '../AreaDirectoryRegionNav';
 import { AreaSelectionPanels } from '../AreaSelectionPanels';
 
 const data = buildAreaDirectoryData(fetchPrefectures());
@@ -20,16 +17,15 @@ beforeEach(() => {
 });
 
 describe('AreaSelectionPanels', () => {
-  it('既定タブが『一覧から探す』(list) である', () => {
+  it('full は地図と一覧をタブなしで最初から両方描く (地図をタブの裏に隠さない)', () => {
     render(<AreaSelectionPanels {...data} surface="areas" />);
-    expect(screen.getByRole('tab', { name: '一覧から探す' })).toHaveAttribute(
-      'aria-selected',
-      'true'
-    );
-    expect(screen.getByRole('tab', { name: '地図から探す' })).toHaveAttribute(
-      'aria-selected',
-      'false'
-    );
+    expect(screen.queryAllByRole('tab')).toHaveLength(0);
+    expect(
+      screen.getByRole('group', { name: '地図から都道府県を選ぶ' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('navigation', { name: '都道府県一覧' })
+    ).toBeInTheDocument();
   });
 
   it('一覧リンククリックで areas_list を計測する', () => {
@@ -44,10 +40,8 @@ describe('AreaSelectionPanels', () => {
     );
   });
 
-  it('地図タイルクリックで areas_map を計測する', async () => {
-    const user = userEvent.setup();
+  it('地図タイルクリックで areas_map を計測する', () => {
     render(<AreaSelectionPanels {...data} surface="areas" />);
-    await user.click(screen.getByRole('tab', { name: '地図から探す' }));
     const mapGroup = screen.getByRole('group', {
       name: '地図から都道府県を選ぶ',
     });
@@ -59,50 +53,9 @@ describe('AreaSelectionPanels', () => {
     );
   });
 
-  it('モバイル用に一覧/地図の2タブを備える', () => {
+  it('地図と一覧に 47 県のリンクを 1 組ずつ描く', () => {
     render(<AreaSelectionPanels {...data} surface="areas" />);
-    const tabs = screen.getAllByRole('tab');
-    expect(tabs).toHaveLength(2);
-    expect(
-      screen.getByRole('tab', { name: '一覧から探す' })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('tab', { name: '地図から探す' })
-    ).toBeInTheDocument();
-  });
-
-  it('初期表示の都道府県リンクを47件の1組だけ描画する', () => {
-    render(<AreaSelectionPanels {...data} surface="areas" />);
-    expect(screen.getAllByRole('link')).toHaveLength(47);
-  });
-
-  it('左レールの地方選択をデスクトップ一覧へ反映する (view state)', () => {
-    render(
-      <AreaDirectoryRegionProvider>
-        <AreaDirectoryRegionNav regions={data.regionGroups} />
-        <AreaSelectionPanels {...data} surface="areas" />
-      </AreaDirectoryRegionProvider>
-    );
-    const regionNav = screen.getByRole('navigation', {
-      name: '地方で絞り込む',
-    });
-    const kanto = within(regionNav).getByRole('button', { name: '関東' });
-    expect(kanto).toHaveAttribute('aria-pressed', 'false');
-    fireEvent.click(kanto);
-    expect(kanto).toHaveAttribute('aria-pressed', 'true');
-
-    const desktopDirectory = screen.getByRole('navigation', {
-      name: '都道府県一覧',
-    });
-    expect(
-      within(desktopDirectory).getByRole('region', {
-        name: '北海道・東北',
-        hidden: true,
-      })
-    ).toHaveClass('hidden');
-    expect(
-      within(desktopDirectory).getByRole('region', { name: '関東' })
-    ).not.toHaveClass('hidden');
+    expect(screen.getAllByRole('link')).toHaveLength(94);
   });
 
   it('embedded の地図・一覧クリックを配置別に計測する', () => {

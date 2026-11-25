@@ -61,7 +61,8 @@ describe("buildRankingItemFromMetric", () => {
     const config = getMetricConfig(`${prefix}-expenditure-total`)!;
     expect(config.source.kind).toBe("kakei-chousa");
     expect(config.unit).toBe("円");
-    expect(config.subtitle).toContain("1世帯当たり");
+    // 1 世帯当たりの印は subtitle ではなく description に置く (subtitle に調査方法の定型文を書かない。a3c942343)
+    expect(config.description).toContain("1世帯当たり");
     expect(config.calculation?.normalizationOptions).toBeUndefined();
     const item = buildRankingItemFromMetric(config, { values: { yearCodes: ["2024"] }, now: NOW });
     expect(item.calculation?.normalizationOptions).toBeUndefined();

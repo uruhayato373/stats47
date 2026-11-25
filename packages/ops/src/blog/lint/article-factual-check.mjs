@@ -37,6 +37,18 @@ export const PREF_NAMES = OFFICIAL_PREF_NAMES.map((name) => name.replace(/[都�
 // rank-gap/change 表現 (絶対 rank ではない) — 「28位もの乖離」「N位転落」等は skip
 export const RANK_CONTEXT_SKIP = /(?:もの)?(?:乖離|差(?:が|を|に|は|の|・|、|\s)|の差|格差|落ち|下落|転落|上昇|アップ|ダウン|上昇分|低下分|改善|悪化)/;
 
+// その県の順位ではない順位の書き方 (BLOG-GATE-RANK-CONTEXT-01)。順位の直後に続く形で判定する。
+// 「11位以内」「10位台」は範囲、「2位を大きく引き離し」は他県の順位、「静岡の20位から愛知の30位へ」は移り変わり。
+export const RANK_NOT_OWN_TAIL =
+  /^\s*(?:以内|以上|以下|圏内|台|を[^。、\n]{0,6}引き離|から[^。\n]{0,20}?\d+\s*位\s*(?:へ|に|まで))/;
+
+// 移り変わりの行き先 (「…の20位から愛知の30位へ」の愛知の側)。県名の直前が「N位から」で、順位の直後が「へ・に・まで」。
+const RANK_TRANSITION_LEAD = /\d+\s*位\s*から\s*$/;
+const RANK_TRANSITION_TAIL = /^\s*(?:へ|に|まで)/;
+
+// data に無い過去の年の順位 (「熊本は前年も11位」)。data は 1 つの年なので照合できない
+export const PAST_YEAR_RANK_RE = /(?:前年|昨年|前回|前の年|去年)/;
+
 // 一人当たり (per capita) は derived ranking で data に直接含まれない → skip
 export const PER_CAPITA_SKIP = /(?:一人当たり|1人当たり|1人あたり|人口当たり|人口あたり|per\s*capita|人口比)/i;
 
@@ -420,6 +432,12 @@ export function checkRankClaims(content, gt) {
 
     const tailContext = body.slice(m.index + m[0].length, m.index + m[0].length + 30);
     if (RANK_CONTEXT_SKIP.test(tailContext)) continue;
+    if (RANK_NOT_OWN_TAIL.test(tailContext)) continue;
+    if (PAST_YEAR_RANK_RE.test(beforeRank)) continue;
+    if (
+      RANK_TRANSITION_LEAD.test(body.slice(Math.max(0, m.index - 12), m.index)) &&
+      RANK_TRANSITION_TAIL.test(tailContext)
+    ) continue;
     const nextPrefRe = new RegExp(`^[・、の/\\s]{0,3}(${prefPattern})(?:都|府|県)?`);
     if (nextPrefRe.test(tailContext)) continue;
     const leadContext = body.slice(Math.max(0, m.index - 300), m.index);
@@ -502,6 +520,8 @@ export function checkInverseRankClaims(content, gt) {
       PER_CAPITA_SKIP.test(m[0]) ||
       PER_CAPITA_SKIP.test(leadContext)
     ) continue;
+    // 「前年11位の熊本」は data に無い年の順位 (BLOG-GATE-RANK-CONTEXT-01)
+    if (PAST_YEAR_RANK_RE.test(body.slice(Math.max(0, m.index - 6), m.index))) continue;
     if (isCitingUnknownRanking(m[0], gt)) continue;
     // 平均順位 (「平均5位の京都府」) は順位そのものではない
     if (AVERAGE_RANK_RE.test(body.slice(Math.max(0, m.index - 12), m.index))) continue;

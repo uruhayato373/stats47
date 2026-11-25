@@ -8,7 +8,7 @@ name: 🗂️ Sync Snapshots → R2
 #
 # 使い方: Actions タブ → この workflow → Run workflow。
 #   only=<task>   で 1 task だけ再生成 (例: page-components / blog / master)。空なら全 task。
-#   dry_run=true  で生成のみ (R2 push しない) — 初回や確認時に推奨。
+#   dry_run=true  で実行する task と順序を表示するだけ (生成も R2 反映もしない) — 初回や確認時に推奨。
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ on:
         required: false
         default: ''
       dry_run:
-        description: 'true: 生成のみ (R2 push しない)'
+        description: 'true: 実行する task と順序を表示するだけ (生成も R2 反映もしない)'
         required: false
         default: 'false'
       ranking_keys:
@@ -75,7 +75,21 @@ jobs:
           node-version: "22"
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-NPM-CACHE-01: npm ci (実測 42〜83 秒) を lockfile hash キーの node_modules 復元 (9〜14 秒) で置き換える。
+        # key は cache-node-modules.yml / develop-quality-gate.yml と同一。restore だけで save しない
+        # (build 中に node_modules へ書かれた生成物を共有キャッシュへ混ぜないため。温めるのは cache-node-modules.yml)。
+        id: node-modules-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🔎 Validate explicit ranking scope
@@ -189,8 +203,10 @@ jobs:
 
       - name: ✅ Verify published git-TS snapshots
         if: inputs.dry_run != 'true'
+        env:
+          # inputs は run: へ直接展開せず env 経由で渡す (式インジェクション対策)
+          ONLY: ${{ inputs.only }}
         run: |
-          ONLY="${{ inputs.only }}"
           if [ -z "$ONLY" ] || [ "$ONLY" = "page-components" ] || [ "$ONLY" = "ranking-page-cards" ]; then
             npx tsx apps/web/scripts/verify-page-components-snapshot.ts
           fi
@@ -230,7 +246,21 @@ jobs:
           node-version: "22"
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-NPM-CACHE-01: npm ci (実測 42〜83 秒) を lockfile hash キーの node_modules 復元 (9〜14 秒) で置き換える。
+        # key は cache-node-modules.yml / develop-quality-gate.yml と同一。restore だけで save しない
+        # (build 中に node_modules へ書かれた生成物を共有キャッシュへ混ぜないため。温めるのは cache-node-modules.yml)。
+        id: node-modules-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       # generate-known-ranking-keys: R2 item.json が 200 の isActive metric を KNOWN に登録。

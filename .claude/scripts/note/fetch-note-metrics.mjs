@@ -8,7 +8,7 @@ import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { extractDashboardDom, collectDashboardPages } from "../../../packages/ops/src/note/lib/dashboard-dom.mjs";
 import { buildDashboardSnapshot, buildCoverMetricsReport, coverMetricsCsv, defaultPeriod, validatePeriod } from "../../../packages/ops/src/note/lib/dashboard-metrics.mjs";
-import { measurementContext, unattended, markMeasurementAuthenticated } from '../../../packages/ops/src/measurement/browser-session.mjs';
+import { measurementContext, unattended } from '../../../packages/ops/src/measurement/browser-session.mjs';
 import { acceptedNoteGap, noteMetricsExitCode } from '../../../packages/ops/src/measurement/note-inventory.mjs';
 import { datasetDir } from "../../../config/datasets.mjs";
 
@@ -113,7 +113,6 @@ try {
   await browser("open", "https://note.com/settings/account");
   await until(() => evaluate('JSON.stringify({account:/note ID\\s*stats47\\b/.test(document.body.innerText),login:location.pathname.includes("login")})'),
     state => { if (state.login) throw new Error("login_required"); return state.account; }, "stats47 account");
-  markMeasurementAuthenticated('note');
   // URL parameters were observed after selecting this custom period in the live UI.
   const url = new URL("https://note.com/dashboard");
   url.search = new URLSearchParams({ period: "CUSTOM", date: period.start, to: period.end }).toString();

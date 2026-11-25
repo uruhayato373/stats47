@@ -1,1 +1,0 @@
-../../../../../.claude/skills/management/nsm-experiment/reference/definition.md

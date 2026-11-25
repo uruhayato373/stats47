@@ -51,4 +51,27 @@ describe('ChartPanel', () => {
       'theme-x-chart-a-title'
     );
   });
+
+  // UI-FIX-RANKING-20261011: スマホで題名が年の選択に押されて「都道府県別ランキン/グ」と語の途中で折れていた。
+  // 説明の無い見出しは折り返す横並びにして、入りきらない操作を次の行へ回す (grid の 1fr_auto だと題名の列が縮む)
+  it('操作があり説明が無い見出しは折り返す横並びで、操作を右へ寄せる', () => {
+    const { container } = render(
+      <ChartPanel title="都道府県別ランキング" action={<select aria-label="年" />}>
+        <div>chart</div>
+      </ChartPanel>
+    );
+    const header = container.querySelector('[data-slot="card-header"]');
+    expect(header).toHaveClass('flex', 'flex-wrap');
+    expect(header).not.toHaveClass('grid');
+    expect(container.querySelector('[data-slot="card-action"]')).toHaveClass('ml-auto');
+  });
+
+  it('説明があるときは題名・説明・操作の格子のまま', () => {
+    const { container } = render(
+      <ChartPanel title="推移" description="注記" action={<button type="button">切替</button>}>
+        <div>chart</div>
+      </ChartPanel>
+    );
+    expect(container.querySelector('[data-slot="card-header"]')).toHaveClass('grid');
+  });
 });

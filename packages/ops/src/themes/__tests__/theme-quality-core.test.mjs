@@ -19,6 +19,16 @@ test("同年のcoverage減少・履歴消失を検出する", () => {
   assert.deepEqual(compareThemeObservation(before, after).map((f) => f.code), ["history-loss", "coverage-regression"]);
 });
 
+test("値を持つ県が 0 だった年が消えても履歴消失にしない (THEME-URBAN-PARKS-HISTORY-LOSS-01)", () => {
+  // urban-parks の 1976・1977 年は、47 県とも値が空の年だった。e-Stat の取り直しで年ごと消えても失った観測は無い
+  const before = inspect([row("01000", "1976", null), row("02000", "1976", null), row("01000", "2024")]);
+  const after = inspect([row("01000", "2024")]);
+  assert.deepEqual(compareThemeObservation(before, after), []);
+  // 値のある年が消えたときは今までどおり error にする
+  const withValue = inspect([row("01000", "1976"), row("01000", "2024")]);
+  assert.deepEqual(compareThemeObservation(withValue, after).map((f) => f.code), ["history-loss"]);
+});
+
 test("単年の推移と、相手だけに長期系列がある場合を分ける", () => {
   const refs = [{ metricKey: "salary" }, { metricKey: "jobs" }];
   const observations = new Map([["salary", inspect([row("01000", "2022")])], ["jobs", inspect([row("01000", "2022")])]]);

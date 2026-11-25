@@ -23,7 +23,11 @@ function parseJson(value: unknown): unknown {
   }
 }
 
-function yearCodeOf(value: unknown): string | null {
+/**
+ * 指標の latestYear (JSON 文字列またはオブジェクト) から 4 桁の年を読む。読めなければ null。
+ * 読めないときに決まった年 (旧: '2024') を返すと、その年の観測値を読みにいき、一覧に実在しない年を出していた (SURVEY-PAGES-01)
+ */
+export function yearCodeOf(value: unknown): string | null {
   const parsed = parseJson(value);
   if (typeof parsed !== 'object' || parsed === null || !('yearCode' in parsed)) return null;
   const { yearCode } = parsed;

@@ -43,7 +43,7 @@
     "minResolvedMetricGroups": 478,
     "minMetricGroupCoveragePct": 100,
     "maxMissingLineageMetricGroups": 0,
-    "minResolvedCharts": 79,
+    "minResolvedCharts": 73,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
@@ -934,6 +934,20 @@
         "waste-recycling/waste-disposal-2",
         "water-services/water-sewerage-coverage-3"
       ]
+    },
+    {
+      "date": "2026-11-24",
+      "reason": "METRIC-GATE-FOLLOWUP-02 (5d5f55539): six line charts whose metrics have fewer than MIN_TREND_YEARS (5) observed years were replaced with metricGroups tiles, because a line through 2 points reads as a trend that the data cannot support (gender-wage-gap declares 2021-2022, the 14 occupation salary metrics declare 2020 and 2023). The same metrics stay resolved through the new tile cards, so survey coverage stays 100% with zero missing lineage. validateChartTemporalFit now warns on any line chart below MIN_TREND_YEARS.",
+      "previousResolvedCharts": 79,
+      "removedResolvedChartKeys": [
+        "labor-wages/labor-wages-gender-gap",
+        "occupation-salary/theme-occ-medical-trend",
+        "occupation-salary/theme-occ-it-trend",
+        "occupation-salary/theme-occ-edu-trend",
+        "occupation-salary/theme-occ-transport-trend",
+        "occupation-salary/theme-occ-service-trend"
+      ],
+      "addedResolvedChartKeys": []
     }
   ]
 }

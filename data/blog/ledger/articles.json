@@ -464,6 +464,18 @@
       "r2Path": "blog/allocation-tax-area/article.md"
     },
     {
+      "slug": "ambulance-hospital-arrival-time-prefecture-gap",
+      "title": "119番から病院収容まで、東京は富山の1.83倍",
+      "status": "published",
+      "publishedAt": "2026-11-25",
+      "updatedAt": null,
+      "rankingKeys": [
+        "ambulance-hospital-arrival-time"
+      ],
+      "tagIds": [],
+      "r2Path": "blog/ambulance-hospital-arrival-time-prefecture-gap/article.md"
+    },
+    {
       "slug": "annual-precipitation-rainy-season-gap",
       "title": "降水量トップは静岡だが雨の日数トップは富山｜梅雨で分かれる47都道府県の雨タイプ (2024)",
       "status": "published",
@@ -600,8 +612,10 @@
       "title": "公務員が ChatGPT で議会答弁を 10 倍早く書く 5 ステップ",
       "status": "published",
       "publishedAt": "2026-05-25",
-      "updatedAt": "2026-06-04",
-      "rankingKeys": [],
+      "updatedAt": "2026-11-25",
+      "rankingKeys": [
+        "fiscal-strength-index-prefecture"
+      ],
       "tagIds": [
         "tag:t-0b26e7475aee",
         "tag:t-50a412294327",
@@ -625,17 +639,17 @@
     },
     {
       "slug": "automotive-industry-transformation-map",
-      "title": "自動車産業の県別勢力図",
+      "title": "製造業の県別勢力図、愛知は2位の2.9倍",
       "status": "published",
       "publishedAt": "2026-06-07",
-      "updatedAt": "2026-10-23",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "manufacturing-employees",
         "manufacturing-industry-added-value",
         "manufacturing-shipment-amount"
       ],
       "tagIds": [
-        "tag:automobiles",
+        "tag:manufacturing",
         "tag:industrial-structural-change"
       ],
       "r2Path": "blog/automotive-industry-transformation-map/article.md"
@@ -1052,15 +1066,19 @@
     },
     {
       "slug": "birth-death-gap-decline",
-      "title": "東京は婚姻率トップなのに出生率最下位──「結婚→子ども」が成立しない都市の構造",
+      "title": "東京は婚姻率1位なのに出生率は最下位",
       "status": "published",
       "publishedAt": "2026-03-04",
-      "updatedAt": "2026-10-23",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "births",
+        "dependent-population-index",
+        "marriages-per-total-population",
+        "mothers-age-at-first-birth",
         "natural-increase-rate",
         "population-growth-rate",
-        "total-fertility-rate"
+        "total-fertility-rate",
+        "unmarried-ratio-male-45-49"
       ],
       "tagIds": [
         "tag:population-decline",
@@ -1075,7 +1093,7 @@
       "title": "紅茶は大都市の飲み物か?",
       "status": "published",
       "publishedAt": "2026-07-10",
-      "updatedAt": "2026-11-13",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "black-tea-consumption-expenditure",
         "green-tea-consumption-expenditure"
@@ -1094,20 +1112,18 @@
       "title": "紅茶を飲む県ほど年収も高いのか",
       "status": "published",
       "publishedAt": "2026-07-20",
-      "updatedAt": "2026-11-09",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "annual-income-per-household",
         "black-tea-consumption-expenditure",
-        "black-tea-consumption-quantity",
-        "coffee-consumption-expenditure",
-        "green-tea-consumption-expenditure"
+        "black-tea-consumption-quantity"
       ],
       "tagIds": [
         "tag:t-dbc55ac10a59",
         "tag:t-ba8e4beb69bf",
         "tag:t-14fd9d310d3f",
         "tag:consumption-expenditure",
-        "tag:t-bb782cf87667"
+        "tag:income"
       ],
       "r2Path": "blog/black-tea-income-gap/article.md"
     },
@@ -1807,7 +1823,7 @@
       "title": "電力消費の積み上げ面｜stack 系列の順序を会話で決める Claude Code",
       "status": "published",
       "publishedAt": "2026-05-17",
-      "updatedAt": "2026-10-08",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "electricity-demand"
       ],
@@ -2665,10 +2681,10 @@
     },
     {
       "slug": "croquette-consumption-expenditure-prefecture-gap",
-      "title": "コロッケ支出額、なぜ北陸勢が上位独占なのか",
+      "title": "コロッケ支出、富山市は札幌市の2.4倍",
       "status": "published",
       "publishedAt": "2026-08-31",
-      "updatedAt": null,
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "croquette-consumption-expenditure"
       ],
@@ -3891,10 +3907,10 @@
     },
     {
       "slug": "engineer-telework-prefecture",
-      "title": "エンジニアがリモートで働ける県・働けない県、テレワーク率は最大6倍差｜なぜ地方ほど在宅勤務が広がらないのか (2022)",
+      "title": "リモートしやすい県はエンジニアも稼げるか",
       "status": "published",
       "publishedAt": "2026-06-02",
-      "updatedAt": "2026-06-02",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "software-engineer-annual-income",
         "telework-rate"
@@ -12111,10 +12127,10 @@
     },
     {
       "slug": "school-nonattendance-pattern",
-      "title": "不登校が最少の福井、最多の宮城──小中一貫して「低不登校県」になる条件とは",
+      "title": "不登校、宮城と福井で1.7倍の差",
       "status": "published",
       "publishedAt": "2026-03-09",
-      "updatedAt": "2026-05-28",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
         "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
@@ -13799,17 +13815,16 @@
     },
     {
       "slug": "traffic-accident-deaths-regional-risk",
-      "title": "交通事故死者数、東京は徳島の4.8倍安全──なぜ田舎ほど命を落とすのか",
+      "title": "事故が多い県と、死者が多い県は違う",
       "status": "published",
       "publishedAt": "2025-03-01",
-      "updatedAt": "2026-05-28",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "average-road-traffic-volume",
-        "main-road-paving-rate",
         "private-auto-insurance-penetration-rate-vehicle",
         "ratio-65-plus",
         "road-length-per-km2",
-        "traffic-accident-count-per-population",
+        "traffic-accident-casualties-per-population",
         "traffic-accident-deaths-per-100-accidents",
         "traffic-accident-deaths-per-100k"
       ],
@@ -14091,10 +14106,10 @@
     },
     {
       "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
-      "title": "まぐろ消費が多い県ほど入院が少ないのはなぜ",
+      "title": "まぐろをよく買う県ほど入院は少ない?",
       "status": "published",
       "publishedAt": "2026-08-03",
-      "updatedAt": null,
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
         "annual-new-inpatients-general-hospital-per-100k",
         "tuna-consumption-quantity"
@@ -14646,9 +14661,10 @@
       "title": "16県がゼロ達成、残る待機児童",
       "status": "published",
       "publishedAt": "2026-03-04",
-      "updatedAt": "2026-05-28",
+      "updatedAt": "2026-11-25",
       "rankingKeys": [
-        "nursery-utilization-rate"
+        "nursery-utilization-rate",
+        "nursery-waiting-children-count"
       ],
       "tagIds": [
         "tag:t-c5df6550e8af",

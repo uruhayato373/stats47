@@ -13,6 +13,8 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision } from '@stats47/utils';
 import { estimateTextWidth, useD3Tooltip, useReadableFontSize } from '@stats47/visualization';
 
+import { distributionEdgeLabels, formatDistributionValue } from './distribution-edge-labels';
+
 export interface DistributionHistogramBin {
   x0: number;
   x1: number;
@@ -67,9 +69,6 @@ const MEDIAN_STROKE = 'hsl(var(--foreground))';
 const LABEL_FILL = 'hsl(var(--muted-foreground))';
 const AXIS_STROKE = 'hsl(var(--border))';
 
-// 軸端・ビン範囲のスケールラベル。既定丸め (有効 2 桁: 46万 / 2.3万) で十分
-const compactFormat = new Intl.NumberFormat('ja-JP', { notation: 'compact' });
-
 /** 値 → x 座標。ビンは等幅スロットで並べ、overflow ビン内は中央に置く */
 function valueToX(value: number, bins: DistributionHistogramBin[]): number {
   const slot = PLOT_WIDTH / bins.length;
@@ -91,9 +90,9 @@ function valueToX(value: number, bins: DistributionHistogramBin[]): number {
 }
 
 function binRangeLabel(bin: DistributionHistogramBin, unit: string): string {
-  if (bin.isOverflow) return `${compactFormat.format(bin.x0)}${unit} 以上`;
-  if (bin.isUnderflow) return `${compactFormat.format(bin.x1)}${unit} 未満`;
-  return `${compactFormat.format(bin.x0)}〜${compactFormat.format(bin.x1)}${unit}`;
+  if (bin.isOverflow) return `${formatDistributionValue(bin.x0)}${unit} 以上`;
+  if (bin.isUnderflow) return `${formatDistributionValue(bin.x1)}${unit} 未満`;
+  return `${formatDistributionValue(bin.x0)}〜${formatDistributionValue(bin.x1)}${unit}`;
 }
 
 export function DistributionHistogram({
@@ -142,7 +141,8 @@ export function DistributionHistogram({
     [bins, slot, unit, prefLabel, showStackedTooltip]
   );
 
-  if (bins.length === 0) return null;
+  const edges = distributionEdgeLabels(bins, unit);
+  if (!edges) return null;
 
   const medianLabel = `中央値 ${formatValueWithPrecision(median, precision)}${unit}`;
   // 中央値が右寄りのときはラベルを線の左へ回す (右端で切らない)
@@ -218,9 +218,7 @@ export function DistributionHistogram({
         stroke={AXIS_STROKE}
       />
       <text x={PAD_X} y={edgeLabelY} fontSize={fontSize} fill={LABEL_FILL} textAnchor="start">
-        {bins[0].isUnderflow
-          ? `${compactFormat.format(bins[0].x1)}${unit} 未満`
-          : `${compactFormat.format(bins[0].x0)}${unit}`}
+        {edges.min}
       </text>
       <text
         x={PAD_X + PLOT_WIDTH}
@@ -229,9 +227,7 @@ export function DistributionHistogram({
         fill={LABEL_FILL}
         textAnchor="end"
       >
-        {bins.at(-1)!.isOverflow
-          ? `${compactFormat.format(bins.at(-1)!.x0)}${unit} 以上`
-          : `${compactFormat.format(bins.at(-1)!.x1)}${unit}`}
+        {edges.max}
       </text>
     </svg>
   );

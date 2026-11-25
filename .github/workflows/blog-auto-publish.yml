@@ -66,7 +66,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
-          fetch-depth: 2 # 差分検出フォールバック (HEAD~1..HEAD) のため
+          # push の全コミット (github.event.before..github.sha) を見るため深めに取る。浅いままだと before が
+          # 祖先と確かめられず HEAD~1..HEAD に戻る。100 を超える push も同じフォールバックで 1 コミット分に戻る。
+          fetch-depth: 100
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -74,21 +76,53 @@ jobs:
           node-version: "22"
           cache: 'npm'
 
+      - name: 📦 Restore node_modules cache
+        # CI-NPM-CACHE-01: npm ci (実測 42〜83 秒) を lockfile hash キーの node_modules 復元 (9〜14 秒) で置き換える。
+        # key は cache-node-modules.yml / develop-quality-gate.yml と同一。restore だけで save しない
+        # (build 中に node_modules へ書かれた生成物を共有キャッシュへ混ぜないため。温めるのは cache-node-modules.yml)。
+        id: node-modules-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: node-modules-${{ runner.os }}-node20-${{ hashFiles('package-lock.json') }}
+
       - name: 📦 Install dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: 🔍 Resolve target published drafts
         id: detect
+        env:
+          # ${{ }} を run: に直接書かず env 経由で渡す (ACTIONS-EXPRESSION-INJECTION-01)
+          INPUT_SLUGS: ${{ inputs.slugs }}
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
         run: |
-          INPUT_SLUGS="${{ inputs.slugs }}"
           if [ -n "$INPUT_SLUGS" ]; then
             # 明示指定: そのまま採用 (存在 + published:true は次ステップのゲートで担保)
             CANDIDATES=$(echo "$INPUT_SLUGS" | tr ', ' '\n' | sed '/^$/d')
           else
-            # フォールバック: develop 最新コミットで変更された article.md を検出。
+            # フォールバック: develop への push で変更された article.md を検出。
+            # push イベントでは push の全コミット (before..sha) を見る。複数コミットを 1 回で push したとき、
+            # 最後の 1 コミットだけを見ると、それ以前のコミットで変えた記事が公開対象から漏れる。
+            # before が全 0 (新しいブランチ)・取得できない・sha の祖先でない (force push) とき、
+            # push 以外 (手動起動で slugs 空) のときは従来どおり HEAD~1..HEAD。
+            BASE="HEAD~1"; TIP="HEAD"
+            if [ "$EVENT_NAME" = "push" ] \
+              && [ -n "$BEFORE_SHA" ] && ! echo "$BEFORE_SHA" | grep -qE '^0+$' \
+              && git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null \
+              && git cat-file -e "${AFTER_SHA}^{commit}" 2>/dev/null \
+              && git merge-base --is-ancestor "$BEFORE_SHA" "$AFTER_SHA" 2>/dev/null; then
+              BASE="$BEFORE_SHA"; TIP="$AFTER_SHA"
+            fi
+            echo "差分検出: $BASE..$TIP"
             # ★ core.quotepath=false で日本語パスをエスケープせず出力 (既定 true だと
             #    "docs/21_\343\203..." とエスケープされ grep に一致せず 0 件になる既知バグ)。
-            CHANGED=$(git -c core.quotepath=false diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
+            CHANGED=$(git -c core.quotepath=false diff --name-only --diff-filter=ACM "$BASE" "$TIP" \
               | grep -E '^contents/blog/[^/]+/article\.md$' || true)
             CANDIDATES=""
             for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$(dirname "$f")")"; done
@@ -200,14 +234,17 @@ jobs:
             echo "SKIPPED=$SKIPPED"
           } >> "$GITHUB_ENV"
 
+      # 全件が skip (ゲート未達・背景未生成) の run は R2 に何も書いていないので、索引を作り直さない。
+      # 作り直しは公開中の全記事 (約 870 件) を読み、1 回 13 分かかる (run 45378329880 は PUBLISHED が空のまま 827 秒。
+      # CI-TOOLING-FOLLOWUP-04)。CDN の purge も同じ理由で公開があった run だけにする
       - name: 🧮 Regenerate blog index (all.json) + push
-        if: ${{ steps.detect.outputs.slugs != '' }}
+        if: ${{ steps.detect.outputs.slugs != '' && env.PUBLISHED != '' }}
         run: |
           NODE_OPTIONS='--conditions react-server' npx tsx apps/web/scripts/export-blog-snapshot.ts
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
 
-      - name: 🧹 Purge CDN (公開記事URL + 一覧/ホーム/sitemap のみ)
-        if: ${{ steps.detect.outputs.slugs != '' }}
+      - name: 🧹 Purge ISR + CDN (公開記事URL + 一覧/ホーム/sitemap のみ)
+        if: ${{ steps.detect.outputs.slugs != '' && env.PUBLISHED != '' }}
         run: |
           # 公開された記事だけをピンポイントパージ (全ゾーンパージは避ける)。
           # URLS は配列で組む ("$URLS" 単一引数渡しは purge-cache の URL filter が 0 件になり fail — ARG_VECTOR_QUOTED)
@@ -216,6 +253,12 @@ jobs:
           if [ ${#URLS[@]} -eq 0 ]; then
             echo "公開0件のため purge skip"; exit 0
           fi
+          # 改稿版の公開では、公開前に開かれた記事の ISR のエントリ (incremental-cache/<buildId>/) が旧版のまま残り、
+          # CDN を消しても Worker が旧版を返し続けた (2026-11-13 の 96 本のうち 18 本。BLOG-ISR-STALE-ON-REVISE-01)。
+          # 記事の ISR のエントリを消してから CDN を消す。エントリの無い新規の記事は「キャッシュ無し」で数えるだけ
+          ROUTES=()
+          for SLUG in $PUBLISHED; do ROUTES+=("/blog/$SLUG"); done
+          npx tsx packages/r2-storage/src/scripts/purge-isr-routes.ts --routes "${ROUTES[@]}" --apply
           # 記事追加で内容が変わる索引系もパージ
           URLS+=(https://stats47.jp/blog https://stats47.jp/ https://stats47.jp/sitemap.xml)
           echo "purge: ${URLS[*]}"

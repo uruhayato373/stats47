@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const clothingFootwearExpenditureTotal: MetricConfig = {
   "key": "clothing-footwear-expenditure-total",
   "title": "被服及び履物費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間被服及び履物費（衣類・下着・履物・洗濯代などへの支出総額）",
-  "description": "家計調査（二人以上世帯）における年間の被服及び履物への支出総額。和洋服、シャツ・セーター類、下着類、履物類、被服関連サービスを含む。",
+  "subtitle": "衣類・下着・履物・洗濯代などへの支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
+  "description": "家計調査（二人以上世帯）における1世帯当たり年間の被服及び履物への支出総額。和洋服、シャツ・セーター類、下着類、履物類、被服関連サービスを含む。",
   "unit": "円",
   "category": "economy",
   "source": {

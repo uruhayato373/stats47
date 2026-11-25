@@ -5,7 +5,7 @@
  * セッションを渡し、その直後の収集で読む。切れていれば verification_required を書いて終わる (値は作らない)。
  */
 import { writeFileSync } from 'node:fs';
-import { measurementContext, markMeasurementAuthenticated } from '../../../packages/ops/src/measurement/browser-session.mjs';
+import { measurementContext } from '../../../packages/ops/src/measurement/browser-session.mjs';
 import { parseNoteSales, parseNoteSalesHistory } from '../../../packages/ops/src/measurement/report-parsers.mjs';
 
 const output = process.argv[2];
@@ -65,7 +65,7 @@ try {
     return { status: res.status, body: await res.json().catch(() => null) };
   });
   const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' });
-  try { result = { status: 'pass', revenue: parseNoteSales(response.body, today) }; markMeasurementAuthenticated('note'); }
+  try { result = { status: 'pass', revenue: parseNoteSales(response.body, today) }; }
   catch (error) { result = { status: 'failed', code: error.message === 'verification_required' ? 'verification_required' : 'report_schema_changed' }; }
   // 販売履歴 (購入 1 件ごと) から、日 × 記事の明細を作る。前月の 1 日〜昨日を毎回取り直す。
   // 読めなくても月の合計 (上) の成否は変えず、daily を null にして理由を dailyCode に残す (値は作らない)。

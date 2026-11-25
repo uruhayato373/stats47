@@ -338,11 +338,14 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
 | 認証 | `gh auth login; codex login` (設定ファイルに token を書かない) | 同左 |
 | Codex mirror | `node .claude/scripts/lib/sync-codex-mirror.cjs --check` | 同左 |
 
-- `.agents/skills` の補助ファイルは **`.claude/skills` の同名原本への相対 symlink**。`SKILL.md` だけは Codex の検出に必要な通常ファイルとして自動生成する（ファイル symlink は検出されない）。原本は `.claude/skills` のみ。既存のフォルダー symlink は利用可能。
-  `.codex/agents/*.toml` は `.claude/agents/*.md` を形式変換した生成物。
+- `.agents/skills` の skill は **skill のフォルダごとの `.claude/skills` への相対 symlink** (2026-11-24 CODEX-MIRROR-SLIM-01 で
+  SKILL.md の複製をやめた。SKILL.md 単体のファイル symlink は Codex に検出されないが、フォルダの symlink は辿る。出典
+  https://learn.chatgpt.com/docs/build-skills 、2026-11-24 取得)。skill の外のファイル (`learned/*.md` など) はファイルごとの相対 symlink。
+  原本は `.claude/skills` のみ。`.codex/agents/*.toml` は `.claude/agents/*.md` を形式変換した生成物。
   手で直さず `node .claude/scripts/lib/sync-codex-mirror.cjs` で再生成する (E12 が CI と pre-commit で
   ドリフトを止める)。skills の本文更新はリンクへ即時反映され、ファイル追加・削除時だけ再生成する。
-  `type-check:scripts` はリンク一致確認後に原本だけを型検査する。`.codex/hooks.json` は `.claude/hooks/*.js` を直接指す (複製は 2026-09-14 に廃止)。
+  `type-check:scripts` はリンク一致確認後に原本だけを型検査する。`.codex/hooks.json` は `.claude/settings.json` の hooks から同じスクリプトで生成する (`.claude/hooks/*.js` を直接指す。
+  Codex で動かない hook は `sync-codex-mirror.cjs` の `CODEX_EXCLUDED_HOOKS` に理由付きで除く)。
 - `~/.claude/settings.json` は dotfiles への symlink、`~/.codex/config.toml` は dotfiles の
   `codex/base.toml` + `host.<os>.toml` を**セクション単位でマージ** (Codex デスクトップが書く
   `[projects.*]` / `[plugins.*]` / runtime パスを壊さない)。マシン固有の許可と `additionalDirectories` は
@@ -407,7 +410,7 @@ skill には詳細を複製せず本節への参照だけを置く。
 | 小規模 UI 変更 | 対象テスト または `npm run type-check --workspace apps/web`。両方が同じ事実を重複検査する場合は片方でよい |
 | ロジック変更・変換処理・共通ユーティリティ | 対象テスト + 影響 workspace の型検査 |
 | route / metadata / generateStaticParams / SSG / R2 snapshot 参照 | 対象 route と関連契約テストを検査 (`nextjs-ssg-preservation.md` のチェックリスト参照) |
-| 生成テンプレート変更 (git TS → R2 反映スクリプト等) | 生成 dry-run または差分確認 + validator (実例: `sync-snapshots.yml` の `dry_run=true` 入力、`npm run page-quality:validate`) |
+| 生成テンプレート変更 (git TS → R2 反映スクリプト等) | 生成 dry-run または差分確認 + validator (実例: `npm run page-quality:validate`。`sync-snapshots.yml` の `dry_run=true` は task の表示だけで生成しないので、生成の確認には使えない) |
 | リリース (develop→main) | CI (`pr-quality-check.yml`) を権威とし、ローカルで同じ全体検査を重複実行しない |
 | ブラウザ実測 | ユーザーが求めた場合・視覚的な判断が必要な場合・静的検査では判定できない場合に限定する |
 

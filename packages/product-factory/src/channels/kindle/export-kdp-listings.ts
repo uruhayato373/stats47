@@ -13,7 +13,7 @@ import { KDP_AUTHOR, KDP_READINGS, KDP_READING_SOURCES } from "./kdp-reading";
 import { kdpCategoriesFor } from "./kdp-category";
 import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
 import { assertBookVersion } from "./build-book";
-import { authoredBookSha256 } from "./revision-evidence";
+import { assertEpubMatchesCurrentBook } from "./revision-evidence";
 import { KDP_LISTING_COPY, KDP_LISTINGS } from "../../../../../config/paths.mjs";
 import { datasetPath } from "../../../../../config/datasets.mjs";
 import { renderListingDescription } from "./kdp-listing-copy.mjs";
@@ -188,6 +188,7 @@ function main(): void {
   if (onlyId && !KINDLE_BOOKS.some((b) => b.id === onlyId)) throw new Error(`unknown book id: ${onlyId}`);
   const existing = readExisting();
   const listings: Record<string, KdpListing> = {};
+  const authoredSha256ByBook: Record<string, string> = {};
   let generatedCount = 0;
   let missingEpub = 0;
 
@@ -201,10 +202,8 @@ function main(): void {
       missingEpub += 1;
       continue;
     }
-    const metadata = JSON.parse(readFileSync(join(BOOKS_ROOT, b.id, version, "metadata.json"), "utf8"));
-    if (metadata.version !== version || metadata.title !== b.title || metadata.authoredSha256 !== authoredBookSha256(b, join(REPO_ROOT, "packages/product-factory"))) {
-      throw new Error(`${b.id}: current manuscript/catalog differs from the requested EPUB edition`);
-    }
+    // promote-kdp-listing も同じ関数で照合する (写しを作らない)。提案には照合した値を残し、promote が古い提案を弾けるようにする
+    authoredSha256ByBook[b.id] = assertEpubMatchesCurrentBook(b, version, join(BOOKS_ROOT, b.id, version), join(REPO_ROOT, "packages/product-factory"));
     const prev = existing[b.id];
     const approvedCopy = readApprovedCopy(b.id);
     listings[b.id] = {
@@ -271,6 +270,7 @@ function main(): void {
       "未公開の入稿提案。listings 内の公開属性は旧台帳から引き継いだ履歴で、この改訂版の公開証明ではありません。" +
       "独立レビュー・Previewer・保全確認・オーナー承認後のみ対象IDを公開台帳へ反映します。" +
       "ログイン・税務/銀行情報の入力は人間工程です。書籍設計の正典は KINDLE_BOOKS、対象EPUBは明示した version のものです。",
+    authoredSha256ByBook,
     listings,
     previousPublicationRecords: existing,
   };

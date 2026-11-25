@@ -147,8 +147,19 @@ export function buildSubtitleQualifier(subtitle: string | undefined, isKakei: bo
   return s;
 }
 
+const TRAILING_PAREN_RE = /[（(]([^（）()]+)[）)]$/;
+
+/**
+ * label に修飾語を括弧で付ける。修飾語が label に既に書かれている
+ * (例: 「平均初婚年齢（妻）」に「妻の年齢」) ときは付けない。括弧が二重になって意味が取りにくいため
+ * (UI-FIX-PREFECTURE-DETAIL-20261011)。
+ */
 export function buildQualifiedLabel(label: string, qualifier: string | undefined): string {
-  return qualifier ? `${label}（${qualifier}）` : label;
+  if (!qualifier) return label;
+  if (label.includes(qualifier)) return label;
+  const trailing = TRAILING_PAREN_RE.exec(label)?.[1]?.trim();
+  if (trailing && qualifier.includes(trailing)) return label;
+  return `${label}（${qualifier}）`;
 }
 
 /* ------------------------------------------------------------------ */

@@ -1,5 +1,5 @@
 import { Separator } from "@stats47/components";
-import { List } from "lucide-react";
+import { ChevronDown, List } from "lucide-react";
 
 import { extractHeadings } from "../lib/heading-slug";
 
@@ -9,17 +9,40 @@ export const TOC_COLLAPSE_FROM = 5;
 export const TOC_VISIBLE_WHEN_COLLAPSED = 3;
 
 type Heading = ReturnType<typeof extractHeadings>[number];
+type NumberedHeading = Heading & { number?: number };
 
-function TocItem({ heading: h }: { heading: Heading }) {
+/** h2 だけに通し番号を付ける (畳んだ続きも番号を引き継ぐ) */
+function numberHeadings(headings: Heading[]): NumberedHeading[] {
+  let count = 0;
+  return headings.map((h) => (h.level === 2 ? { ...h, number: ++count } : h));
+}
+
+function TocItem({ heading: h }: { heading: NumberedHeading }) {
+  if (h.level === 3) {
+    return (
+      <li className="pb-1.5 pl-7">
+        <a
+          href={`#${h.id}`}
+          data-nav-label={h.text}
+          className="block text-xs leading-snug text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+        >
+          {h.text}
+        </a>
+      </li>
+    );
+  }
   return (
-    <li className={h.level === 3 ? "pl-4" : undefined}>
+    <li className="flex gap-2 border-t border-border py-1.5 first:border-t-0">
+      <span
+        aria-hidden="true"
+        className="w-5 shrink-0 text-right tabular-nums text-muted-foreground"
+      >
+        {h.number}
+      </span>
       <a
         href={`#${h.id}`}
         data-nav-label={h.text}
-        className={
-          "block leading-snug text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline " +
-          (h.level === 3 ? "text-xs" : "")
-        }
+        className="leading-snug text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
       >
         {h.text}
       </a>
@@ -47,12 +70,14 @@ interface ArticleTableOfContentsProps {
  * スマホで目次が本文の始まりを押し下げていた)。残りも HTML には全件を出す (details。検索エンジンとページ内検索に見える)。
  * 右レールがある幅では、追従する目次 (RailArticleToc) が読み進めた後も現在の節を示す。目次の下の余白は区切り線の上下とも 16px (Card の gap-4) にし、
  * 本文の最初の段落の上余白は globals.css の .blog-news-article > :first-child が 0 にする (余白を重ねない)。
+ * 見た目 (2026-11-24): h2 に通し番号と本文色、h3 は番号なしの muted 字下げ、h2 の行の間を細い罫線で区切る (h3 は親の h2 と同じ段に置き線を引かない)。
+ * 「すべての見出しを表示」は primary 色 + 矢印にして、見出しの 1 行と見分けられるようにする。
  * 導線名 `blog_toc` を付け、目次からのクリックを nav_click で数えられるようにする。
  */
 export function ArticleTableOfContents({
   content,
 }: ArticleTableOfContentsProps) {
-  const headings = extractHeadings(content);
+  const headings = numberHeadings(extractHeadings(content));
 
   // 短い記事 (見出し 1 件以下) は TOC 不要
   if (headings.length < 2) return null;
@@ -69,18 +94,18 @@ export function ArticleTableOfContents({
         <List className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
         目次
       </p>
-      {/* 項目は muted 色 + hover の下線 (リンクの色を本文に揃えない)。h3 は字下げして h2 と区別する */}
-      <ol className="space-y-1.5 text-sm">
+      <ol className="text-sm">
         {visible.map((h, idx) => (
           <TocItem key={`${h.id}-${idx}`} heading={h} />
         ))}
       </ol>
       {rest.length > 0 && (
-        <details className="group mt-1.5">
-          <summary className="cursor-pointer list-none text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline group-open:hidden">
+        <details className="group">
+          <summary className="mt-1.5 flex cursor-pointer list-none items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline group-open:hidden [&::-webkit-details-marker]:hidden">
+            <ChevronDown className="h-4 w-4" aria-hidden="true" />
             すべての見出しを表示 (残り {rest.length} 件)
           </summary>
-          <ol start={visible.length + 1} className="space-y-1.5 text-sm">
+          <ol className="border-t border-border text-sm">
             {rest.map((h, idx) => (
               <TocItem key={`${h.id}-${idx}`} heading={h} />
             ))}

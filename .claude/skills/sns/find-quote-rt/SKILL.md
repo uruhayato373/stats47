@@ -28,7 +28,6 @@ X の**直近3日以内**のバズツイートを全テーマ並列検索し、s
 |---|---|---|---|
 | **テーマ** | - | 全テーマ並列検索 | 明示的にテーマを絞りたい時のみ指定（通常は省略） |
 | **--post** | - | false | 指定すると候補選択後に `publish-x --quote-url` で引用RT投稿まで実行 |
-| **--with-media** | - | false | 指定時のみ、マッチした県の動画 (station-passengers / migration-flow) を引用RTに添付。デフォルトはテキストのみ |
 
 ## テーマカタログ
 
@@ -194,19 +193,9 @@ node -e 'const s=require("./packages/ops/src/sns/sns-posts-store.cjs");
   console.log(JSON.stringify([...new Set(used)]))'
 ```
 
-#### 4d. 動画アセット照合（`--with-media` 指定時のみ）
+#### 4d. 添付は無い (テキストのみ)
 
-`--with-media` が指定された場合、ツイートの話題が **station-passengers（駅乗降客数）** または **migration-flow（人口移動）** に合致するか判定し、合致した県の **既存レンダ済み動画** を引用RTに添付する。レンダリングは不要（ストック消化）。
-
-| 話題キーワード | アセット種別 | 動画パス (X / landscape) | 遷移先 URL |
-|---|---|---|---|
-| 駅, 鉄道, 通勤, 満員電車, 乗降, 路線 | station-passengers | `.local/r2/sns/station-passengers/landscape/<NN>.mp4` | `https://stats47.jp/ranking/<station-passengers の ranking_key>` |
-| 引っ越し, 転入, 転出, 転出超過, 移住, 上京, 人口流出 | migration-flow | `.local/r2/sns/migration-flow/<romaji>/x/stills/reel.mp4`（無ければ `migration-flow/landscape/<NN>.mp4`） | `https://stats47.jp/gis-cross/migration-flow?pref=<NN>` |
-
-- `<NN>` = 県コード（01=北海道 … 13=東京 … 23=愛知 … 47=沖縄）、`<romaji>` = 県ローマ字（`tokyo`, `aichi` 等）。対応表は `reference/keyword-mapping.md` の「動画アセット対応」を参照
-- **県の選び方**: ツイートが特定県に言及していればその県。汎用的（県名なし）なら話題インパクトの大きい県（駅→東京13、移動→転出超過の話題県）を選ぶ
-- 上記いずれにも合致しない場合は `--with-media` でも添付せず **テキストのみ** にフォールバック（無理に添付しない）
-- migration-flow の遷移先 URL は `/ranking/` ではなく **`/gis-cross/migration-flow?pref=<NN>`** である点に注意
+引用RT に動画は添付しない。人の移動と駅の動画は撤去した (`.claude/rules/sns-content-standards.md` §2-2・§2-4。旧 `--with-media` の手順は削除した)。
 
 ### Phase 4 補足: e-Stat フォールバック（DB に指標が無い場合）
 
@@ -248,9 +237,9 @@ e-Stat で良いデータが見つかった場合は TS-config (`data/metrics/<k
 - 1〜2行で簡潔に（200文字以内）
 - 「ちなみに」「データで見ると」等の補足スタンス
 - 具体的な数値（1位/47位）を含める
-- **stats47 URL を毎回含める**（`https://stats47.jp/ranking/<ranking_key>`、migration-flow は `https://stats47.jp/gis-cross/migration-flow?pref=<NN>`）。UTM パラメータは不要
+- **stats47 URL を毎回含める**（`https://stats47.jp/ranking/<ranking_key>`）。UTM パラメータは不要
 - ハッシュタグは不要
-- **添付は opt-in**: デフォルトはテキストのみ（宣伝臭を避け元ツイの文脈に自然に乗る）。`--with-media` 指定かつ station-passengers / migration-flow に合致した時のみ、Phase 4d で選んだ県の動画を 1 本添付する
+- **添付しない**: テキストのみ（宣伝臭を避け元ツイの文脈に自然に乗る。sns-content-standards §2-2）
 
 ### Phase 6: 投稿（--post 指定時のみ）
 
@@ -271,21 +260,14 @@ EOF
 #### 6b. publish-x に委譲して投稿
 
 ```bash
-# テキストのみ（デフォルト） — 即時投稿
+# テキストのみ — 即時投稿
 npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
   --quote-url "https://x.com/xxx/status/123456" \
   --caption /tmp/quote-rt-caption.txt \
   --domain ranking
-
-# --with-media 指定かつ Phase 4d で県動画が選ばれた場合は --media を追加
-npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
-  --quote-url "https://x.com/xxx/status/123456" \
-  --caption /tmp/quote-rt-caption.txt \
-  --media .local/r2/sns/migration-flow/aichi/x/stills/reel.mp4 \
-  --domain gis-cross
 ```
 
-- `<content_key>` はマッチした ranking_key（または migration-flow の場合は県スラッグ等の識別子）。`--domain` は遷移先に合わせる（ranking / gis-cross）
+- `<content_key>` はマッチした ranking_key。`--domain` は遷移先に合わせる（ranking）
 - 日時を渡さなければ即時投稿（引用RT は鮮度ファースト）。予約したい場合は `<content_key>` の直後に `YYYY-MM-DDTHH:MM` を渡す
 - **初回 / セレクタ更新後は `--dry-run` を先に通すこと**（publish-x の fail-safe 規約。誤即時投稿事故の再発防止）
 - 本番はオーナーが投稿を指示したときだけ `--approve` を付けて実行する (台帳に承認として記録される。§3-1)
@@ -302,7 +284,7 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
 | 多様性 | 直近2件の category_key は避ける（ソフト制約） |
 | 比率 | 引用RT 3 : オリジナル投稿 7 |
 | URL | 3回に1回程度 stats47.jp リンクを含める |
-| 添付 | デフォルトはテキストのみ。`--with-media` かつ station-passengers / migration-flow 合致時のみ県動画を 1 本添付（opt-in） |
+| 添付 | テキストのみ（動画は添付しない。sns-content-standards §2-2） |
 | スタンス | データで補足・検証する立場。議論に加担しない |
 
 ## 避けるべきパターン

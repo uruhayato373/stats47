@@ -1,1 +1,0 @@
-../../../../../.claude/skills/dev/create-skill/reference/project-conventions.md

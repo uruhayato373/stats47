@@ -3,6 +3,7 @@ import 'server-only';
 import { cache } from 'react';
 
 import { resolveContentTag } from '@stats47/data-configs/content';
+import { normalizeUnitsInText } from '@stats47/data-configs/unit';
 import { createSnapshotReader } from '@stats47/r2-storage/server';
 
 import { BLOG_SLUG_REDIRECTS } from '../../../config/blog-redirects';
@@ -186,7 +187,8 @@ export async function readPopularArticlesFromR2(
   const bySlug = new Map(snapshot.articles.filter((a) => a.published === true).map((a) => [a.slug, a]));
   return POPULAR_BLOG_ARTICLE_SLUGS.flatMap((slug) => {
     const article = slug === excludeSlug ? undefined : bySlug.get(slug);
-    return article ? [{ slug: article.slug, title: article.title }] : [];
+    // 題はほかの記事カードと同じく表示時に単位を半角へそろえる (右レールで「100％」が残り unit_symbol_mixing になった。UI-FIX-BLOG-ARTICLE-20261011)
+    return article ? [{ slug: article.slug, title: normalizeUnitsInText(article.title) }] : [];
   }).slice(0, limit);
 }
 

@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const educationExpenditureTotal: MetricConfig = {
   "key": "education-expenditure-total",
   "title": "教育費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間教育費（授業料等・教科書・補習教育への支出総額）",
-  "description": "家計調査（二人以上世帯）における年間の教育への支出総額。授業料等、教科書・学習参考教材、補習教育を含む。世帯の子どもの人数と学齢に強く依存する。",
+  "subtitle": "授業料等・教科書・補習教育への支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
+  "description": "家計調査（二人以上世帯）における1世帯当たり年間の教育への支出総額。授業料等、教科書・学習参考教材、補習教育を含む。世帯の子どもの人数と学齢に強く依存する。",
   "unit": "円",
   "category": "economy",
   "source": {

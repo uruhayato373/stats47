@@ -1,1 +1,0 @@
-../../../../../.claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md

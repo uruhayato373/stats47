@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 import { scopedState } from './sources.mjs';
 
@@ -6,13 +6,11 @@ export function unattended() {
   return Boolean(process.env.MEASUREMENT_BROWSER_SOURCE);
 }
 
-export function markMeasurementAuthenticated(source) {
-  if (!unattended()) return;
-  if (source !== process.env.MEASUREMENT_BROWSER_SOURCE) throw new Error('session_source_mismatch');
-  writeFileSync(`${process.env.MEASUREMENT_BROWSER_OUTPUT_STATE_PATH}.verified`, source, { mode: 0o600 });
-}
-
-/** A fresh browser per collector; credentials are supplied only as an ephemeral file. */
+/**
+ * A fresh browser per collector; credentials are supplied only as an ephemeral file.
+ * 取得後のセッションの書き出し (refreshed.json) と認証済みの印 (.verified) は 2026-11-24 に外した。
+ * collect.mjs がどちらも読まず、書くだけだったため (DOCS-DRIFT-FOLLOWUP-01)。
+ */
 export async function measurementContext(source, { acceptDownloads = true } = {}) {
   if (!unattended()) return null;
   if (source !== process.env.MEASUREMENT_BROWSER_SOURCE) throw new Error('session_source_mismatch');
@@ -27,10 +25,7 @@ export async function measurementContext(source, { acceptDownloads = true } = {}
   context.close = async () => {
     if (closed) return;
     closed = true;
-    try {
-      const next = scopedState(source, await context.storageState({ indexedDB: true }));
-      writeFileSync(process.env.MEASUREMENT_BROWSER_OUTPUT_STATE_PATH, JSON.stringify(next), { mode: 0o600 });
-    } finally { await close(); await browser.close(); }
+    try { await close(); } finally { await browser.close(); }
   };
   return context;
 }

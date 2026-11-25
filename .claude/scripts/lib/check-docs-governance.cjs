@@ -292,19 +292,26 @@ function checkAlwaysLoadedInstructions(root, config, add) {
     );
   }
 
-  // 入口 ⇄ rules の参照整合。入口が案内板として全 rule への入口を持つことと、
-  // 入口が指す rule 名が実在することの両方向を見る
-  const referenced = new Set(
-    [...entryText.matchAll(/`([A-Za-z0-9._-]+\.md)`/g)].map((m) => m[1]),
-  );
-  for (const name of ruleNames) {
-    if (!referenced.has(name)) {
-      add("error", "DG072", `${policy.rulesDir}/${name}`, `${entryFile} から参照されていない rule (規約・ルール表に 1 行足す)`);
+  // 入口 ⇄ rules の参照整合。案内板 (入口と rules の一覧) が全 rule への入口を持つことと、
+  // 案内板が指す rule 名が実在することの両方向を見る。
+  // rules の一覧は 2026-11-24 に入口 (常時読み込み) から paths: 付きの docs-vs-issues.md へ移した
+  // (ALWAYS-LOADED-TRIM-01)。一覧のファイルは policy.rulesIndexFile で変えられる
+  const indexFile = policy.rulesIndexFile ?? `${policy.rulesDir}/docs-vs-issues.md`;
+  const boards = [[entryFile, entryText]];
+  if (fs.existsSync(path.join(root, indexFile))) boards.push([indexFile, readText(path.join(root, indexFile))]);
+  const referenced = new Set();
+  for (const [file, text] of boards) {
+    const names = [...text.matchAll(/`([A-Za-z0-9._-]+\.md)`/g)].map((m) => m[1]);
+    for (const name of names) referenced.add(name);
+    for (const name of new Set(names)) {
+      if (!ruleNames.has(name) && name !== path.basename(entryFile) && /-(standards|workflow|loop|protocol|api|placement|cleanup|mcp|storage|ssot|judgment|contract|prompting|issues|data|components|environment|preservation|design|schema)\.md$/.test(name)) {
+        add("error", "DG072", file, `参照している rule \`${name}\` が ${policy.rulesDir} に存在しない`);
+      }
     }
   }
-  for (const name of referenced) {
-    if (!ruleNames.has(name) && name !== path.basename(entryFile) && /-(standards|workflow|loop|protocol|api|placement|cleanup|mcp|storage|ssot|judgment|contract|prompting|issues|data|components|environment|preservation|design|schema)\.md$/.test(name)) {
-      add("error", "DG072", entryFile, `参照している rule \`${name}\` が ${policy.rulesDir} に存在しない`);
+  for (const name of ruleNames) {
+    if (!referenced.has(name)) {
+      add("error", "DG072", `${policy.rulesDir}/${name}`, `${entryFile} と rules の一覧 (${indexFile}) のどちらからも参照されていない rule (rules の一覧の表に 1 行足す)`);
     }
   }
 }

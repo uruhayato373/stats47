@@ -21,7 +21,7 @@ export const taxableIncomeTotal: MetricConfig = {
     "from": 1985,
     "to": 2024,
   },
-  "yearFormat": "calendar",
+  "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolatePurples",

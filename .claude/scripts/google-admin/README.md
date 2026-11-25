@@ -100,7 +100,7 @@ status、期日、実測件数を本READMEへ複製しない。
 | `GOOGLE_ADSENSE_REFRESH_TOKEN` | `adsense.readonly` | GitHub repository secret |
 | `GOOGLE_ADSENSE_ACCOUNT_ID` | account assert | GitHub repository variable |
 
-AdSense の週次取得に書き込みscopeを与えない。`.claude/scripts/adsense/oauth-setup.js` は
+AdSense の週次取得に書き込みscopeを与えない。`.claude/scripts/google-admin/oauth-setup.js` は
 旧前提で `https://www.googleapis.com/auth/adsense` を要求していたが、Phase 0 で既定を
 `adsense.readonly` へ戻した（実装済）。認証復旧はこの read-only scope で行う。
 

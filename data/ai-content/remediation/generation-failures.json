@@ -138,6 +138,12 @@
       "lastReason": "gemini-daily",
       "lastFailedAt": "2026-11-22",
       "firstFailedAt": "2026-11-20"
+    },
+    "pig-count": {
+      "failCount": 1,
+      "lastReason": "gemini-daily",
+      "lastFailedAt": "2026-11-24",
+      "firstFailedAt": "2026-11-24"
     }
   }
 }

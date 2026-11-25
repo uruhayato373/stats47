@@ -7,7 +7,7 @@
  *   stats47-*.json を読む。鍵を一時ファイルへ書かない (CI の公開 repo へ push するジョブでも読める場所に秘密を残さない)。
  *   探す場所は実行ディレクトリではなくこのファイルの位置から決める。
  * - AdSense: OAuth リフレッシュトークン (env GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN)。
- *   スコープは発行時 (.claude/scripts/adsense/oauth-setup.js) に付けた adsense.readonly で決まる。
+ *   スコープは発行時 (.claude/scripts/google-admin/oauth-setup.js) に付けた adsense.readonly で決まる。
  *
  * 再試行: googleapis は既定で 408・429・5xx を最大 3 回再試行するが、対象メソッドは GET・HEAD・PUT・OPTIONS・DELETE で
  * POST を含まない (googleapis-common 8.0.3 apirequest.js / gaxios 7.1.3 retry.js で確認)。GA4 の runReport、

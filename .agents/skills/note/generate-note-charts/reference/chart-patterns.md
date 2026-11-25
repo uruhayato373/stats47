@@ -1,1 +1,0 @@
-../../../../../.claude/skills/note/generate-note-charts/reference/chart-patterns.md

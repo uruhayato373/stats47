@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const transportCommunicationExpenditureTotal: MetricConfig = {
   "key": "transport-communication-expenditure-total",
   "title": "交通・通信費",
-  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間交通・通信費（交通・自動車等関係費・通信への支出総額）",
-  "description": "家計調査（二人以上世帯）における年間の交通・通信への支出総額。鉄道・バス等の交通費、自動車等関係費、通信費を含む。自動車保有率と公共交通の整備状況で構成が大きく変わる。",
+  "subtitle": "交通・自動車等関係費・通信への支出総額",
+  "note": "値は都道府県庁所在市（二人以上世帯）の年間値で、県全体の値ではない。",
+  "description": "家計調査（二人以上世帯）における1世帯当たり年間の交通・通信への支出総額。鉄道・バス等の交通費、自動車等関係費、通信費を含む。自動車保有率と公共交通の整備状況で構成が大きく変わる。",
   "unit": "円",
   "category": "economy",
   "source": {

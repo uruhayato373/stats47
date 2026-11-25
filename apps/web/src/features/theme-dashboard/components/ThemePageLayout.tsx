@@ -51,6 +51,7 @@ import {
   generateThemePageStructuredData,
 } from '../utils';
 
+import { resolveMetricValueDisplay } from './metric-kpi';
 import { ThemeAreaHeader } from './ThemeAreaHeader';
 import { ThemeChapterLinks } from './ThemeChapterLinks';
 import { ThemeCorrelatedMetrics } from './ThemeCorrelatedMetrics';
@@ -136,6 +137,11 @@ export async function ThemePageLayout({
             value: row.value,
             rank: row.rank,
             total: finite.length,
+            // 指標カードの数値タイルと同じ単位・倍率・小数桁で書く (UNIT-NOTATION-FORMAT-01)
+            display: resolveMetricValueDisplay(
+              { unit: d.rankingItem.unit, valueDisplay: d.rankingItem.valueDisplay },
+              finite.flatMap((v) => (typeof v.value === 'number' ? [v.value] : [])),
+            ),
           }];
         }),
       )
