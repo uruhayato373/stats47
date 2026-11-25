@@ -16,7 +16,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
-import { PREF_NAMES } from '../../../../area/mirror/prefectures.cjs';
+import { PREF_NAMES, PREFECTURE_COUNT } from '../../../../area/mirror/prefectures.cjs';
 
 const SECTION_HEAD = '都道府県別相談件数';
 const COLUMNS = ['centers', 'total', 'visit', 'phone', 'otherMethod', 'totalBySex', 'female', 'male', 'otherSex', 'perCenter'];
@@ -72,7 +72,7 @@ export function parseDvConsultations(text, opts = {}) {
     byPref.set(prefName, row.values);
   }
   if (!national) throw new Error('全国の行がありません');
-  if (byPref.size !== 47) throw new Error(`県数 ${byPref.size} != 47`);
+  if (byPref.size !== PREFECTURE_COUNT) throw new Error(`県数 ${byPref.size} != ${PREFECTURE_COUNT}`);
   for (const n of PREF_NAMES) if (!byPref.has(n)) throw new Error(`${n} の行がありません`);
 
   const check = (label, v) => {

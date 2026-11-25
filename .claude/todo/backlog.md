@@ -224,6 +224,7 @@ updated: 2026-11-01
 - **残り 5 (main 反映後の確認)**: `550309b88` が main に入ったら `sns-weekly-report.yml` を手動で起動し、レポートが `data/sns/weekly-reports/` に書き戻されることを確かめる。日曜 21:00 (JST) の定期実行は main の workflow 定義で develop のスクリプトを動かすので、develop だけ先に進んだ状態で日曜を挟むと、main の定義が旧置き場を `git add` して「変更なし」で抜け、その週のレポートが残らない。挟んだ場合は、反映後に対象の週を指定して手動で起動して補う。
 - **残り 6 (判断)**: `data/blog/winning-pattern-reports/` と `data/sns/` の定期レポートの保持期間が未決である。今は prune-state-snapshots のテストに「消さない置き場」として宣言してある。選択肢は、消さずに残す (今のまま) か、RETENTION_POLICIES に件数の上限を足すかの 2 つ。推奨は今のままで、根拠は、週次レポートが 1 件 2 KB 前後で年 52 件にとどまり、週次レビューが前回との比較に過去分を読むことである。
 - **完了条件**: 残り 1・2・4・5 が済み、残り 3 と残り 6 の判断が入っていて、`npm run docs:check` と `npm run check-datasets` が通る。
+- **進捗 (2026-11-25・f2e1f7303)**: 残り 2 は済み。`.claude/design-system/` の 4 文書を `04_デザインシステム.md` へ統合して消し、参照 (agents・skills・rules・README・検査の文言) を直した。残り 1・3・4・5・6 は未着手。
 
 ### [DOCS-DRIFT-FOLLOWUP-01] 規約・文書・設定が現物とずれている箇所 (第 4 波の実行で見つけた分)
 タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [起票:2026-11-14]
@@ -1509,6 +1510,7 @@ updated: 2026-11-01
   - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
   - **完了条件**: blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 - **headless 執筆への接続案 (2026-10-28)**: 企画の「問い」を topic-queue の lane として流し、`write-blog-headless.ts` の prompt に渡せば、型B の機械的な指標の組 (`BLOG-TOPIC-PAIR-PER-CAPITA-01`) より題材の質を上げられる。内訳は kakei-marketing 74・capital-city-guide 47 (県ごとの名物を統計で確かめる 47 本)・prefecture-ranking-consumption 42・prefecture-deviation 24 ほか。
+- **進捗 (2026-11-25・dece35bc1)**: `average-income-ranking` の 3 企画を記録した (a06 は `real-disposable-income-reversal` に結び、a05・a55 は理由つきで見送り)。残り: ほかの教材の未着手。
 
 ### [REFERENCE-EXPANSION-SNS-01] 教材の分析企画のうち X (153 件)・Instagram (130 件) が展開先のものを、投稿にする・結ぶ・見送るに振り分ける
 タグ: [SNS・マーケ] [種類:制作] [実行:対話] [検証:npm run reference:expansion -- status --channel x] [起票:2026-10-13] [領域:SNS]
@@ -1523,6 +1525,7 @@ updated: 2026-11-01
 - **停止条件**: 一次資料・R2 観測値で年度・単位・母集団を再検証できない企画は公開しない。書籍の本文・数値・図を使わない。
   指標が重なるだけの公開物を、問いを読まずに済みとして結ばない。
 - **完了条件**: `status --channel x` と `status --channel instagram` の未着手が 0。
+- **進捗 (2026-11-25・8a1ed3140)**: X 向けの `average-income-ranking` の 3 企画を記録した (a06 は `sns:854` に planned、a05・a55 は見送り)。`sns:854`・`sns:847` は予約日を過ぎても status が scheduled のままなので、`sns:trace:check` で投稿台帳への反映を確かめる。残り: ほかの教材の X・Instagram の未着手。
 
 ### [ACADEMIC-TEST-YEARS-01] 全国学力テストの都道府県別平均正答率が 2025 年の 1 年分しか無い
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-13] [領域:データ]
@@ -1534,6 +1537,7 @@ updated: 2026-11-01
 - **調べたこと (2026-11-23)**: 都道府県別 (公立) の平均正答率は、2022・2023・2024 年度は国立教育政策研究所の「実施概況」の全国の PDF (例 https://www.nier.go.jp/24chousakekkahoukoku/factsheet/24P_101.pdf と 24m_101.pdf) の中の表にある。県別の xlsx は国会図書館のアーカイブに移っていて取れない。2025 年度は全国の PDF に県別の表が無く、県ごとの xlsx (今の取り込みと同じ) にある。2021 年度はアーカイブ経由で 403 になり確かめられなかった (2020 年度は中止)。国語と算数・数学は 2022〜2025 年度で同じ「平均正答率」だが、2025 年度の中学校の理科は IRT スコアで、平均正答率の系列とは別物。年ごとに問題が違うので、水準を年をまたいで比べてよいかの公式の注記はまだ確かめていない。
 - **次の手順**: ① 年をまたいだ比較について公式の注記を確かめる (比べられないなら、複数年は「その年の全国平均との差」で並べる)。② 2022〜2024 年度の全国の PDF から県別の表を抜く取り込みを作る (`national-assessment-*` の 4 教科と、4 教科を平均した `academic-achievement-test-average-rate`)。
 - **引き継ぎ (2026-11-23・旧 REFERENCE-EXPANSION-SITE-01 の追補)**: 家計調査の本 (kakei-marketing/2015) の台帳 `inventory.json` で、企画 a01-01 (学力テスト) のページ p0011〜p0014 が `new-metric` のまま指標に結ばれていない。指標 `academic-achievement-test-average-rate` ができたので、authored mapping に結んで `npm run source-vault:inventory -- build --profile <profile>` で作り直す (`analyses.json` との指標のずれはこの 1 件だけ。11-14 の 80 件から減った)。
+- **進捗 (2026-11-25・53309db8d)**: 2022〜2024 年度の小・中の 6 表から 47 県と全国 (公立) を抜くパーサ `parse-nier-achievement.mjs` を足した。出題が年度で違い過年度と単純に比べるのは適当でない、という公式の注記は令和 5・6 年度の概要にある (令和 4 年度の概要には見つからなかった)。年を並べるときは全国との差を使う。国立教育政策研究所には令和 8 年度の公表ページもある。残り: 3 年分の取り込み、記事の複数年化。
 
 ### [NOTE-LEDGER-FOLLOWUP-01] note 記事台帳への移行の後片付けと、private R2 を含む照合の定期実行
 タグ: [エージェント・SSOT] [種類:改善] [実行:別環境] [検証:npm run note:article -- verify --deep] [起票:2026-10-13] [領域:商品]
@@ -2012,6 +2016,7 @@ updated: 2026-11-01
 - **追補 (2026-11-14)**: `fetch-metrics-weekly.yml` の psi job は「📤 Publish to develop branch」が失敗すると後続の [PSI Alert] の起票 step が飛ばされる並びになっていて、commit-back の失敗が閾値アラートを止めうる。psi-alert ラベルの説明文が「PSI 日次計測の閾値違反」のままで、2026-10-26 からの週次化と食い違う。
 - **完了条件**: 4 domain とも生 snapshot の commit-back が消え、`npm run state:pull -- <domain>` が 4 domain で動き、各 domain の index.json が公開 URL で 200 を返す。
 - **追記 (2026-11-16)**: psi の週次 snapshot は `PSI_API_KEY` が未設定で取れていない (W45 のレビューの申し送りで、受け皿のカードが無かった)。psi の domain を閉じる前に、キーの登録先 (CI の secret) と取得が通ることを確かめる。
+- **進捗 (2026-11-25・998f3f74b)**: `state-publish.mjs` と `state:pull` は domain を列挙しない作りで、`cloudflare/snapshots` はコードの変更なしに動くことをテストで固定した。残り (cloudflare): `cloudflare-usage-daily.yml` に prepare → `diff-push-r2.ts --prefix "state/cloudflare/snapshots/"` → verify を入れて `git add` を history.csv と LATEST.md に絞る、`prune-state-snapshots` の cloudflare を消す、`config/datasets.mjs` の行を `live/` と `r2State` に直す、`r2-key-classes.ts` に行を足す、digest の読み先を直す。url-inspection・search-growth は未着手。
 
 ### [STATE-R2-LIFECYCLE-01] R2 `state/` prefix の object lifecycle rule (400 日) をオーナーが設定する
 
@@ -2326,6 +2331,7 @@ updated: 2026-11-01
 - **停止条件**: 全国住宅の原典が確保できない間は未充足を維持する。人口・一般世帯・建物棟数を住宅戸数の代用にしない。PLATEAU等の部分カバレッジを全国値にしない。原典未発見を全国に存在しないという断定にしない。
 - **完了条件**: 住宅部分を原典から再現でき、定義・時点・空間集計・配信値の整合を検証し、候補105のdecisionと全体実装記録へ証拠を反映する。公開後の計測と品質観測は `THEME-EXPANSION-EFFECT-01` へ接続する。
 - **オーナー決定 (2026-11-24)**: 推奨どおり 住宅戸数の原典が見つかるまで候補 105 の住宅部分を未充足のままにする を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: 残りの原典探索の ① (e-Stat 統計GIS のメッシュ区画の確認) から始める
+- **進捗 (2026-11-25・7042be608)**: J-SHIS の個別 API 13 件とダウンロードのページ (2026-11-25 取得) に住宅・建物の項目は見つからず、曝露の項目は人口だけだった (各 CSV の列そのものと Map R・Labs は未確認)。証拠の JSON に URL と取得日つきで記録した。残り: e-Stat 統計 GIS の画面確認、外部への照会 (オーナーの許可が要る)。
 
 ### [NOTE-BODY-QUALITY-PILOT-01] スマホで読める本文画像・配置・導入・出典・導線を6記事で試作する
 
@@ -2617,6 +2623,7 @@ updated: 2026-11-01
 - **次**: ① 年度ごとの PDF の県別の表の列がそろうかを確かめる。② 県の行の定義 (設置主体の合計か) を確かめる。③ オープンデータの台帳に登録し、人口 10 万人当たりの計算型の指標と合わせて作る (`data-provenance-standards.md` の 9 点セット)。
 - **停止条件**: 相談件数は相談窓口の数と周知に左右される。県の比較で「DV が多い県」と書かない (指標の note に書く)。
 - **完了条件**: 3 年度以上の 47 県の値が R2 に入り、ランキングページが公開されている。
+- **進捗 (2026-11-25・64940742a)**: 内閣府の PDF (令和 4〜6 年度) から 47 県の施設数と相談件数を抜くパーサ `parse-dv-consultations.mjs` を足した (47 県の和が全国と一致。令和 6 年度は 317 か所・127,796 件)。県の行が県設置だけか市町村設置を含むかは PDF から読めない。残り: 設置主体の確認、取り込み、人口 10 万人当たりの指標、R2 への投入と公開。
 
 ### [SNS-LEDGER-ID-RACE-01] 投稿台帳の id を CI とローカルが同時に採番して衝突する経路を塞ぐ
 タグ: [SNS・マーケ] [種類:不具合] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-10] [領域:SNS] [待ち:判断]

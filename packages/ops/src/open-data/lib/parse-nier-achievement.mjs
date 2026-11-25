@@ -27,7 +27,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
-import { PREF_NAMES } from '../../../../area/mirror/prefectures.cjs';
+import { PREF_NAMES, PREFECTURE_COUNT } from '../../../../area/mirror/prefectures.cjs';
 
 export function pdfToText(pdfPath) {
   return execFileSync('pdftotext', ['-layout', '-f', '1', '-l', '1', pdfPath, '-'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
@@ -104,7 +104,7 @@ export function parseNierAchievement(text) {
   }
   if (!nationalPublic) throw new Error('全国（公立）の行がありません');
   if (!nationalAll) throw new Error('全国（国公私立）の行がありません');
-  if (byPref.size !== 47) throw new Error(`県数 ${byPref.size} != 47`);
+  if (byPref.size !== PREFECTURE_COUNT) throw new Error(`県数 ${byPref.size} != ${PREFECTURE_COUNT}`);
   for (const n of PREF_NAMES) if (!byPref.has(n)) throw new Error(`${n} の行がありません`);
 
   for (const s of subjects) {
