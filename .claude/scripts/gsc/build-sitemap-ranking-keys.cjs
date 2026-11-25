@@ -20,7 +20,7 @@
  *
  * ## キーごとの lastmod (GSC-SITEMAP-LASTMOD-01・2026-11-25)
  * 出力には SITEMAP_RANKING_LASTMOD (key → YYYY-MM-DD) も別ファイルへ出す。値は R2 の
- * `app/stats/<key>/values.json` の Last-Modified (R2_PUBLIC_FETCH_URL 経由の HEAD)。
+ * 観測値の values.json (キーは `statsR2Key(key, "prefecture")`) の Last-Modified (R2_PUBLIC_FETCH_URL 経由の HEAD)。
  * 差分 push (packages/r2-storage/src/scripts/diff-push-r2.ts) は R2 上の size と ETag(md5) が
  * 同じ object を送り直さないため、この日付は「values.json の中身が最後に変わった日」を指す。
  * 判定できないキー (404・5xx・Last-Modified 無し) は前回の値を残し、前回も無ければ載せない
@@ -127,7 +127,8 @@ function toIsoDay(header) {
 
 /** values.json の Last-Modified を 1 キー分取る。判定できなければ null (呼び出し側が前回値を残す) */
 async function fetchValuesLastmod(baseUrl, key) {
-  const url = `${baseUrl.replace(/\/$/, "")}/app/stats/${encodeURIComponent(key)}/values.json`;
+  const { statsR2Key } = await import("../../../packages/r2-storage/mirror/r2-keys.mjs");
+  const url = `${baseUrl.replace(/\/$/, "")}/${statsR2Key(key, "prefecture")}`;
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
       const res = await fetch(url, { method: "HEAD" });

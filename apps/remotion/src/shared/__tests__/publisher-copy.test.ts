@@ -2,15 +2,17 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
+import { PREFECTURE_AREA_CODES } from "@stats47/area";
+
 import { ThumbHookMap } from "../../features/ranking-youtube/ThumbHookMap";
 import { RankingTable } from "../components/tables/RankingTable";
 
 // ランキング表 (ショート・リールの 47 県の表) と YouTube のサムネイル地図の可視テキストに、
 // 発行元 (stats47・stats47.jp・サイト名) を入れない (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01)。
 // 値は架空の固定値で、通信もしない。
-const entries = Array.from({ length: 47 }, (_, i) => ({
+const entries = PREFECTURE_AREA_CODES.map((areaCode, i) => ({
   rank: i + 1,
-  areaCode: `${String(i + 1).padStart(2, "0")}000`,
+  areaCode,
   areaName: `県${i + 1}`,
   value: 1000 - i,
 }));
