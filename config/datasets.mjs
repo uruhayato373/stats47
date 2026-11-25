@@ -915,7 +915,7 @@ export const DATASETS = [
   d("estat.monthly-ledger", "data/estat/monthly/ledger.json", "state", "data", "data", "e-Stat カタログから作る調査ごとの月次の表の数 (build-monthly-ledger.mjs の生成物)", { schema: "data/estat/monthly/ledger.schema.json" }),
   d("estat.monthly-ledger-schema", "data/estat/monthly/ledger.schema.json", "schema", "data", "data", "上の台帳の JSON Schema"),
   d("estat.availability", "data/estat/availability/{**}", "state", "data", "data", "e-Stat の表・取り出し条件ごとの実在年 (年ごとの値のある県の数) と、metric config の years との差分"),
-  d("geo.sources", "data/geo/{name}", "state", "data", "data", "Geo 分析の出典ページとサムネイルの監査・公開"),
+  d("geo.sources", "data/geo/source-{name}.json","state", "data", "data", "Geo 分析の出典ページとサムネイルの監査・公開"),
   d("geo.scope", "data/geo/scope/{name}", "evidence", "data", "data", "Geo の対象範囲の棚卸しと拡充の検証"),
   d("geo.subjects", "data/geo/subjects/subjects.json", "master", "data", "data", "主題の台帳 (主題 = 原典のデータ 1 つを地図にどう描くかの定義。英語 subject)。交通網の変遷・単体 GIS ページ・重ね合わせ (/geo/map?subjects=) が参照し、表示名・区分のまとめ方・色を揃える (2026-10-29 オーナー決定)", {
     schema: "data/geo/subjects/subjects.schema.json",
@@ -958,6 +958,10 @@ export const DATASETS = [
       { field: "dataId", to: "geo.ksj-datasets", key: "datasets.$keys" },
       { field: "featureTypes[].attributes[].codeTable", to: "geo.ksj-classifications", key: "codeTables.$keys" },
     ],
+  }),
+  d("geo.ksj-attribute-inventory", "data/geo/attribute-inventory.json", "state", "data", "data", "国土数値情報の取り込みが観測した属性名の記録 (データ × 地物の種類ごとの属性名・原典の版・観測日の和集合。取り込みが足し算で書く生成物で手で編集しない。属性の原典台帳 geo.ksj-attributes と突き合わせて未整理の属性を数える)。書き手は packages/gis/src/mlit-ksj/attribute-inventory.ts", {
+    schema: "config/schema/geo.ksj-attribute-inventory.schema.json",
+    refs: [{ field: "datasets.$keys", to: "geo.ksj-datasets", key: "datasets.$keys" }],
   }),
   d("geo.ksj-license-retention", "data/geo/ksj/license-retention-20260905.json", "evidence", "data", "data", "利用条件の是正 (2026-09-05) で撤去を承認した R2 の KSJ オブジェクトの記録 (対象ごとの prefix とキー・バイト数・ETag。撤去の前に全件の一致を求める)。読み込みは packages/r2-storage/src/scripts/lib/license-retention.ts"),
   d("geo.infra-history-networks", "data/geo/infra-history/networks.json", "ledger", "data", "data", "交通網の変遷ページ (/geo/history/<key>) の台帳 (原典の版・SHA-256・使い方・公開の状態と了承の根拠・年の範囲・注意書き。並びがページの順。利用条件と公式ページの URL は geo.ksj-datasets、種別と色は geo.ksj-classifications、属性名は geo.ksj-attributes の役割から結ぶ。notes は判断の記録)。読み込みは packages/gis/src/infra-history/networks.ts", {

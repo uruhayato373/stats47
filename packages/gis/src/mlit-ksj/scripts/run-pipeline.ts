@@ -9,11 +9,28 @@
  *   npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts --list
  */
 
-import { runKsjPipeline } from "../pipeline";
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { datasetPath } from "../../../../../config/datasets.mjs";
+import { recordObservedAttributes } from "../attribute-inventory";
+import { runKsjPipeline as runPipelineOnly } from "../pipeline";
 import { GIS_DATASETS, GIS_DATASETS_BY_ID } from "../datasets";
 import { discoverMeshCodes } from "../mesh-discovery";
 import type { KsjPipelineResult } from "../types";
 import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
+
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../..");
+const ATTRIBUTE_INVENTORY_PATH = path.join(PROJECT_ROOT, datasetPath("geo.ksj-attribute-inventory"));
+
+/** 取り込みに加えて、観測した属性名を data/geo/attribute-inventory.json に足す (GIS-ATTRIBUTE-LEDGER-01) */
+const runKsjPipeline: typeof runPipelineOnly = async (options) => {
+  const result = await runPipelineOnly(options);
+  if (recordObservedAttributes(ATTRIBUTE_INVENTORY_PATH, result.observedAttributes)) {
+    console.log(`  属性の観測を記録: ${ATTRIBUTE_INVENTORY_PATH}`);
+  }
+  return result;
+};
 
 interface DatasetMeta {
   dataId: string;
