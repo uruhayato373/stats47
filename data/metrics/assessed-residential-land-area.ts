@@ -21,7 +21,7 @@ export const assessedResidentialLandArea: MetricConfig = {
     "from": 2000,
     "to": 2023,
   },
-  "yearFormat": "calendar",
+  "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,
     "colorScheme": "interpolateGreens",
