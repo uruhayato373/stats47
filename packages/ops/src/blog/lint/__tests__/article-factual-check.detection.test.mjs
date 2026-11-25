@@ -643,3 +643,35 @@ describe("複数県の列挙と過去年の順位を、最新年の 1 県の順�
     );
   });
 });
+
+describe("1 文に 2 つの指標の順位が出るとき、対象指標でない側の順位を照合しない", () => {
+  const CATCH_ROWS = [
+    ["東京都", 4],
+    ["静岡県", 1],
+    ["宮城県", 2],
+  ].map(([areaName, rank]) => ({ areaName, rank, value: 1000 - rank, label: "カツオ漁獲量", unit: "t" }));
+  const META = { kind: "ranking", rankingKey: "bonito-catch", year: "2025", label: "カツオ漁獲量", unit: "t" };
+
+  it("★「漁獲量4位の東京都は868グラムで19位」の 19位 (購入数量の順位) を漁獲量の順位として照合しない", () => {
+    withGroundTruth(
+      CATCH_ROWS,
+      (gt) => {
+        assert.deepEqual(checkRankClaims("漁獲量4位の東京都は868グラムで19位でした。", gt), []);
+        assert.deepEqual(checkInverseRankClaims("漁獲量4位の東京都は868グラムで19位でした。", gt), []);
+      },
+      META,
+    );
+  });
+
+  it("★対象指標の順位違いは従来どおり検出する (先頭の順位の誤り・名指しの無い順位の誤り・名指しした指標の再掲)", () => {
+    withGroundTruth(
+      CATCH_ROWS,
+      (gt) => {
+        assert.equal(checkInverseRankClaims("漁獲量9位の東京都は868グラムで19位でした。", gt).length, 1);
+        assert.equal(checkRankClaims("東京都は868グラムで19位でした。", gt).length, 1);
+        assert.equal(checkRankClaims("4位の東京都はカツオ漁獲量が19位でした。", gt).length, 1);
+      },
+      META,
+    );
+  });
+});
