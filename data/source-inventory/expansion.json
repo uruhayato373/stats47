@@ -34,6 +34,14 @@
       "decidedBy": "theme-designer"
     },
     {
+      "analysis": "average-income-ranking-unknown-a05",
+      "channel": "x",
+      "status": "declined",
+      "reason": "3 指標 (所定内給与・県民所得・納税者当たり課税対象所得) の順位と開きを比べる問いは、最新年が揃わない (所定内給与 2022・県民所得 2021 年度・納税者当たり課税対象所得 2024、data/metrics の years) 年の注記が要り、X の 1 投稿に収まらない。単一指標の投稿は既にある (sns:11 世帯年収・sns:451 課税対象所得) ので、3 指標を並べる投稿は作らない",
+      "decidedAt": "2026-11-25",
+      "decidedBy": "x-strategist"
+    },
+    {
       "analysis": "average-income-ranking-unknown-a06",
       "channel": "area",
       "status": "declined",
@@ -74,6 +82,15 @@
       "decidedBy": "theme-designer"
     },
     {
+      "analysis": "average-income-ranking-unknown-a06",
+      "channel": "x",
+      "status": "planned",
+      "target": "sns:854",
+      "reason": "予約済みの実質収入テーマの投稿 (sns:854、/themes/real-income へ誘導。名目収入を消費者物価地域差指数で補正して比べる) に結ぶ。投稿は予約表の登録のみで、この問い専用の投稿はまだ無い。投稿済み (posted) になった時点で done に直す",
+      "decidedAt": "2026-11-25",
+      "decidedBy": "x-strategist"
+    },
+    {
       "analysis": "average-income-ranking-unknown-a55",
       "channel": "blog",
       "status": "declined",
@@ -104,6 +121,14 @@
       "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
       "decidedAt": "2026-11-23",
       "decidedBy": "theme-designer"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a55",
+      "channel": "x",
+      "status": "declined",
+      "reason": "賃金・家賃・灯油・実質可処分所得の 4 指標で県を分け、書籍の 4 類型が現れるかを問う企画で、類型名と県の割当は出典のない総括 (resolutionReason) のため、投稿の主題にすると書籍の主張を前提にしてしまう。1 投稿に 4 指標のクラスタ結果と例外県を収められない。家賃の単一指標の投稿は既にある (sns:224・sns:399・sns:463)。クラスタリングは Geo / ランキング系の企画で扱う",
+      "decidedAt": "2026-11-25",
+      "decidedBy": "x-strategist"
     },
     {
       "analysis": "capital-city-guide-unknown-a05",
