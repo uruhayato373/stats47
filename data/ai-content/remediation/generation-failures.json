@@ -127,23 +127,17 @@
       "lastFailedAt": "2026-11-18",
       "firstFailedAt": "2026-11-16"
     },
-    "designated-difficult-disease": {
-      "failCount": 1,
-      "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-20",
-      "firstFailedAt": "2026-11-20"
-    },
     "icecream-consumption-expenditure": {
       "failCount": 3,
       "lastReason": "gemini-daily",
       "lastFailedAt": "2026-11-22",
       "firstFailedAt": "2026-11-20"
     },
-    "pig-count": {
+    "general-hospital-count": {
       "failCount": 1,
       "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-24",
-      "firstFailedAt": "2026-11-24"
+      "lastFailedAt": "2026-11-25",
+      "firstFailedAt": "2026-11-25"
     }
   }
 }

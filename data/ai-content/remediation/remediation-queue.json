@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-11-24T06:01:27.720Z",
+  "generatedAt": "2026-11-25T04:56:26.876Z",
   "gscSnapshot": "2026-W46",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
   "summary": {
     "total": 2624,
-    "done": 1357,
-    "needsRegen": 1267,
+    "done": 1359,
+    "needsRegen": 1265,
     "needsByReason": {
-      "stale-year": 810,
+      "stale-year": 808,
       "missing": 456,
       "incomplete": 1
     },
     "notEligible": 0,
     "notEligibleByCode": {},
     "doneButUnhealthy": 0,
-    "doneImpressions": 137223,
-    "needsImpressions": 105772,
+    "doneImpressions": 139149,
+    "needsImpressions": 103846,
     "manualEscalationTier": 30,
     "geminiDailyLimit": 3
   },
@@ -484,17 +484,16 @@
       "impressions": 1008,
       "clicks": 53,
       "position": 4.35,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
       "warns": [
-        "length-long"
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "lastModified": "Mon, 23 Nov 2026 01:00:57 GMT",
-      "updatedAt": "2026-11-22T23:59:57.204Z",
-      "contentYear": "2024",
-      "dataYear": "2025",
-      "reviewTier": "manual-escalation"
+      "lastModified": "Tue, 24 Nov 2026 06:04:13 GMT",
+      "updatedAt": "2026-11-24T06:02:01.419Z"
     },
     {
       "rankingKey": "employed-people-ratio-primary",
@@ -527,21 +526,19 @@
       "impressions": 918,
       "clicks": 8,
       "position": 6.83,
-      "status": "needs-regen",
-      "reason": "stale-year",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
       "warns": [
-        "causal-insights",
-        "pref-count"
+        "length-short",
+        "length-short",
+        "pref-len"
       ],
-      "lastModified": "Mon, 23 Nov 2026 00:58:21 GMT",
-      "updatedAt": "2026-11-22T23:59:56.869Z",
-      "contentYear": "2015",
-      "dataYear": "2023",
+      "lastModified": "Tue, 24 Nov 2026 06:04:13 GMT",
+      "updatedAt": "2026-11-24T06:02:33.202Z",
       "dataWarns": [
         "thin-coverage"
-      ],
-      "reviewTier": "manual-escalation"
+      ]
     },
     {
       "rankingKey": "retail-store-count",
@@ -1017,7 +1014,7 @@
       "updatedAt": "2026-11-22T23:59:57.247Z",
       "contentYear": "2024",
       "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "nuclear-family-household-count",
@@ -1044,7 +1041,7 @@
       "updatedAt": "2026-11-22T23:59:56.911Z",
       "contentYear": "2024",
       "dataYear": "2025",
-      "reviewTier": "gemini-auto"
+      "reviewTier": "manual-escalation"
     },
     {
       "rankingKey": "miso-consumption-quantity",
