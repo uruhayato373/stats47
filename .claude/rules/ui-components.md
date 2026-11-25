@@ -102,7 +102,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 
 ## melta-ui デザインシステム準拠
 
-詳細は `.claude/design-system/prohibited.md` を参照。以下は特に重要な禁止項目:
+詳細は `docs/01_技術設計/04_デザインシステム.md`「禁止パターン」を参照。以下は特に重要な禁止項目:
 
 - `text-black` 禁止 → `text-foreground`
 - `shadow-lg` / `shadow-2xl` 禁止 → `shadow-xs`（デフォルト。v4 の名前で、v3 の `shadow-sm` に当たる）/ `shadow-md`（hover）
@@ -136,4 +136,4 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 ## ダッシュボードコンポーネント
 
 - **KPI・チャート等は git 管理の `apps/web/scripts/data/page-components/` で管理する。** コード内にチャート定義をハードコードしない。専用 exporter で R2 snapshot へ反映する。
-- 詳細は `.claude/design-system/page-components.md` を参照。
+- 詳細は `docs/01_技術設計/04_デザインシステム.md`「page_components の設計契約」を参照。

@@ -28,8 +28,8 @@ $ARGUMENTS — レビュー対象のファイルパスまたはディレクト�
 
 以下を読み込む:
 
-1. `.claude/design-system/prohibited.md` — 禁止パターン一覧（SSOT）
-2. `.claude/design-system/quick-reference.md` — 正しいパターンのリファレンス
+1. `docs/01_技術設計/04_デザインシステム.md`「禁止パターン」— 禁止パターン一覧（SSOT）
+2. `docs/01_技術設計/04_デザインシステム.md`「部品の書き方の早見」— 正しいパターンのリファレンス
 
 ### Step 3: 機械ゲート実行 (rail-* contract)
 

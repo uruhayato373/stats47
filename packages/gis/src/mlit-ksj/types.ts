@@ -89,6 +89,8 @@ export interface KsjPipelineOptions {
   skipDownload?: boolean;
 }
 
+import type { ObservedAttributes } from "./attribute-inventory";
+
 export interface KsjPipelineResult {
   dataId: string;
   version: string;
@@ -100,4 +102,6 @@ export interface KsjPipelineResult {
     featureCount: number;
   }>;
   totalDurationMs: number;
+  /** 公式の GeoJSON から読んだ属性名 (GeoJSON ファイルごと)。記録するのは呼び出し側 (attribute-inventory.ts) */
+  observedAttributes: ObservedAttributes[];
 }

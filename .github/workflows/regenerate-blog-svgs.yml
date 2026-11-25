@@ -107,8 +107,10 @@ jobs:
       - name: 🔎 Resolve target slugs
         if: ${{ github.event.inputs.mode == 'all' }}
         id: targets
+        env:
+          SLUGS_INPUT: ${{ github.event.inputs.slugs }}
         run: |
-          SLUGS="${{ github.event.inputs.slugs }}"
+          SLUGS="$SLUGS_INPUT"
           if [ -z "$SLUGS" ]; then
             # all.json から slug を抽出 (配列 or {articles:[]})
             SLUGS=$(node -e '
@@ -284,10 +286,12 @@ jobs:
 
       - name: 📤 Push regenerated/repaired assets to R2 (本番時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}
+        env:
+          MODE_INPUT: ${{ github.event.inputs.mode }}
         run: |
           KEY_FILE=".local/generated-blog-svg-keys.txt"
           if [ ! -s "$KEY_FILE" ]; then
-            if [ "${{ github.event.inputs.mode }}" = "scatter-canonical" ]; then
+            if [ "$MODE_INPUT" = "scatter-canonical" ]; then
               echo "散布図はすでに正規化済みです（R2更新なし）"
               exit 0
             fi
@@ -331,15 +335,19 @@ jobs:
         run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --data
 
       - name: 📝 Summary
+        env:
+          MODE_INPUT: ${{ github.event.inputs.mode }}
+          DRY_RUN_INPUT: ${{ github.event.inputs.dry_run }}
+          SLUGS_INPUT: ${{ github.event.inputs.slugs }}
         run: |
           {
             echo "### 🎨 Regenerate Blog SVGs"
-            echo "- mode: \`${{ github.event.inputs.mode }}\`"
-            echo "- dry_run: \`${{ github.event.inputs.dry_run }}\`"
-            echo "- 対象 slug: \`${{ github.event.inputs.slugs || 'all' }}\`"
+            echo "- mode: \`$MODE_INPUT\`"
+            echo "- dry_run: \`$DRY_RUN_INPUT\`"
+            echo "- 対象 slug: \`${SLUGS_INPUT:-all}\`"
             echo "- ギャラリー: artifact \`blog-svg-gallery\` をダウンロードして視覚確認"
           } >> "$GITHUB_STEP_SUMMARY"
-          if [ "${{ github.event.inputs.dry_run }}" != "false" ]; then
+          if [ "$DRY_RUN_INPUT" != "false" ]; then
             echo "- ⚠️ dry-run のため R2 へは push していません" >> "$GITHUB_STEP_SUMMARY"
           fi
           if [ -s .local/regen-failed-slugs.txt ]; then

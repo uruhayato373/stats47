@@ -117,6 +117,16 @@ export function bookQuality(input: {
   };
 }
 
+/**
+ * 記録 (--write) の前に、今回 EPUB が読めなかった本の前回の測定を残す。EPUB は Mac の .local にしか無いので、
+ * ほかの PC や CI で書くと全冊が epub-missing に上書きされて測定を失う (KINDLE-QUALITY-LOOP-01)。
+ * 前回も測っていない本は欠測のまま (0 で埋めない)。今回測れた本は今回の値。
+ */
+export function carryOverMissing(current: readonly BookQuality[], previous: readonly BookQuality[]): BookQuality[] {
+  const measuredBefore = new Map(previous.filter((book) => book.status === "measured").map((book) => [book.id, book]));
+  return current.map((book) => (book.status === "epub-missing" ? (measuredBefore.get(book.id) ?? book) : book));
+}
+
 /** 全冊のまとめ。基準の本 (売れた K-S1-02) と並べて読めるよう、印の数を冊ごとと種類ごとに出す。 */
 export function qualitySummary(books: readonly BookQuality[], baselineBookId: string) {
   const byCode: Partial<Record<QualityFlagCode, number>> = {};

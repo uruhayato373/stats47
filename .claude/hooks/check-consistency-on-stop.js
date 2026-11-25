@@ -5,7 +5,8 @@
  * 動作:
  *   - 標準入力で Claude Code が渡す JSON を読む (stop_hook_active を含む)。
  *   - stop_hook_active が true (既に本フックの block で再開された後) なら何もしない → 無限ループ防止。
- *   - check-agent-skill-consistency.cjs --gate を実行:
+ *   - check-agent-skill-consistency.cjs --gate --transcript <transcript_path> を実行
+ *     (数える範囲は、この会話の transcript で Edit/Write したファイルだけ。他セッションの変更では差し戻さない):
  *       exit 0 → 関連変更なし or 監査済み → 黙って通す。
  *       exit 2 → この会話で agent/skill/script/hook を変更し、かつ未監査 → block して reminder を返す。
  *   - block は {"decision":"block","reason": <gate 出力>} を stdout に出すことで実現 (Claude は reason を見て継続)。
@@ -43,7 +44,9 @@ function main() {
   let gateOut = "";
   let exitCode = 0;
   try {
-    gateOut = execFileSync("node", [checker, "--gate"], {
+    const gateArgs = [checker, "--gate"];
+    if (input.transcript_path) gateArgs.push("--transcript", String(input.transcript_path));
+    gateOut = execFileSync("node", gateArgs, {
       cwd: projectDir,
       encoding: "utf8",
       timeout: 20000,

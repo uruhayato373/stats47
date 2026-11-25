@@ -124,7 +124,7 @@ export function GeoLandslideLeafletMap({
         onEachFeature={(f, l) => {
           const p = f.properties,
             n = document.createElement('span');
-          n.textContent = `メッシュ ${p.meshCode}｜2020年基準人口 ${Number(p.population2020).toLocaleString('ja-JP', { maximumFractionDigits: 4 })}人｜${LANDSLIDE_CLASS_LABELS[Number(p.centerClass)]}${p.boundaryCell ? '｜境界と交差する格子' : ''}`;
+          n.textContent = `メッシュ ${p.meshCode}｜2020年基準人口 ${Number(p.population2020).toLocaleString('ja-JP', { maximumFractionDigits: 0 })}人｜${LANDSLIDE_CLASS_LABELS[Number(p.centerClass)]}${p.boundaryCell ? '｜境界と交差する格子' : ''}`;
           l.bindTooltip(n, { sticky: true });
           l.bindPopup(n.cloneNode(true) as HTMLElement);
         }}

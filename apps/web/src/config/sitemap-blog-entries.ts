@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-11-24
- * 件数: blog 862 / tag 73 / survey 149
+ * 最終生成日: 2026-11-25
+ * 件数: blog 863 / tag 73 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -739,6 +739,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "sleep-avg-time-male-prefecture-gap", lastModified: "2026-10-28" },
   { slug: "small-business-dominance-map", lastModified: "2026-03-09" },
   { slug: "smartphone-ownership-prefecture-gap", lastModified: "2026-05-31" },
+  { slug: "sme-business-sentiment-regional-gap", lastModified: "2026-11-25" },
   { slug: "soba-udon-dining-consumption-expenditure-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "social-expenses-group-consumption-expenditure-prefecture-gap", lastModified: "2026-11-04" },
   { slug: "software-engineer-salary-prefecture-gap", lastModified: "2026-06-02" },
@@ -910,7 +911,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "医療費", lastModified: "2026-09-05" },
   { tagKey: "国勢調査", lastModified: "2026-10-23" },
   { tagKey: "地名", lastModified: "2026-07-17" },
-  { tagKey: "地域差", lastModified: "2026-11-09" },
+  { tagKey: "地域差", lastModified: "2026-11-25" },
   { tagKey: "地域格差", lastModified: "2026-11-23" },
   { tagKey: "地方財政", lastModified: "2026-08-28" },
   { tagKey: "子育て", lastModified: "2026-11-23" },
@@ -943,8 +944,8 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "社会保障", lastModified: "2026-11-23" },
   { tagKey: "福祉", lastModified: "2026-11-23" },
   { tagKey: "空き家率", lastModified: "2026-11-23" },
-  { tagKey: "経済", lastModified: "2026-06-21" },
-  { tagKey: "製造業", lastModified: "2026-11-07" },
+  { tagKey: "経済", lastModified: "2026-11-25" },
+  { tagKey: "製造業", lastModified: "2026-11-25" },
   { tagKey: "観光", lastModified: "2026-08-30" },
   { tagKey: "財政", lastModified: "2026-08-28" },
   { tagKey: "賃金", lastModified: "2026-06-15" },

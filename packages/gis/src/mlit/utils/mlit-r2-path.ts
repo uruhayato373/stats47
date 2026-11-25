@@ -47,9 +47,12 @@ export function buildMlitR2Path(options: MlitR2PathOptions): string {
   }
 
   if (type === "allCities") {
-    const filename =
-      wardMode === "merged" ? "jp_city_dc.topojson" : "jp_city.topojson";
-    return `${R2_MLIT_PREFIX}${MLIT_VERSION}/${filename}`;
+    // 全国の統合版 (jp_city_dc) の読み手は無くなった。政令指定都市のまとめは分割版から作る (ward-mode-topology.ts)。
+    // 既定値の "merged" と区別するため、呼び出しが明示した値だけを見る。
+    if (options.wardMode === "merged") {
+      throw new Error("allCities の統合版 (jp_city_dc) は読まない。wardMode: \"split\" の分割版から作る");
+    }
+    return `${R2_MLIT_PREFIX}${MLIT_VERSION}/jp_city.topojson`;
   }
 
   // type === "city"

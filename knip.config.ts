@@ -15,7 +15,34 @@ const config: KnipConfig = {
         "*.config.{js,cjs,mjs,ts}!",
       ],
       project: ["src/**/*.{ts,tsx}", "scripts/**/*.{ts,tsx}", "*.{ts,mjs}"],
-      ignore: ["**/__tests__/**", "**/*.test.{ts,tsx}", "vitest.shims.{ts,d.ts}"],
+      ignore: [
+        "**/__tests__/**",
+        "**/*.test.{ts,tsx}",
+        "vitest.shims.{ts,d.ts}",
+        // 参照の無いまま残す 6 本 (APPS-KNIP-UNUSED-01・2026-11-25 に呼び出し元を検索して確かめた)。消さない理由:
+        // - features/ads/server.ts・components/AreaBannerAd.tsx: アフィリエイト停止中 (2026-11-12) の入口。
+        //   ads/README.md に記録があり、広告の配置表 (.claude/rules/affiliate-ads-standards.md) が AreaBannerAd を前提にする
+        // - features/ogp/{RankingOgp,JapanMapSvg,ProductOgp}.tsx: OGP の再生成の判定 (scripts/data/image-generator-registry.ts) が
+        //   ファイルの中身の hash を取る対象。消すと registry のパスが切れる
+        // - features/ogp/AreaOgp.tsx: packages/area-profile の area-highlights-contract.test.ts が参照する
+        "src/features/ads/server.ts",
+        "src/features/ads/components/AreaBannerAd.tsx",
+        "src/features/ogp/{RankingOgp,JapanMapSvg,ProductOgp,AreaOgp}.tsx",
+      ],
+    },
+    // Remotion の入口は package.json の scripts (remotion studio / bundle) と、.claude/scripts の
+    // render-*.ts が bundle する features/*/entry.tsx。knip は後者を知らず、設定ファイルと scripts を
+    // 「未使用」と報告していた (2026-11-25 実測 12 本)
+    "apps/remotion": {
+      entry: [
+        "src/index.ts!",
+        "src/features/*/entry.tsx",
+        "scripts/**/*.ts",
+        "remotion.config.ts",
+        "vitest.config.mts",
+        "src/**/__tests__/**/*.test.ts",
+      ],
+      project: ["src/**/*.{ts,tsx}", "scripts/**/*.ts", "*.{ts,mts}"],
     },
     // package.json の exports / main は knip が自動で入口に足す。ここで足すのは、exports を通らずに
     // 直接実行される CLI (scripts・src/**/scripts)・mirror (.claude/scripts が相対パスで読む)・テスト。

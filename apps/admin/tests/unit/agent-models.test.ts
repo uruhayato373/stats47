@@ -103,6 +103,8 @@ describe("agentModelCatalog", () => {
     const { agentModelCatalog } = await load();
     const v = agentModelCatalog();
     if ("error" in v) throw new Error(v.error);
-    expect(v.errors).toEqual([{ file: `${AGENTS}/broken.md`, error: "frontmatter が無い" }]);
+    // path.relative は Windows で `\` 区切りを返すので、期待値の `/` 区切りにそろえて比べる
+    const posixErrors = v.errors.map((e) => ({ ...e, file: e.file.split(path.sep).join("/") }));
+    expect(posixErrors).toEqual([{ file: `${AGENTS}/broken.md`, error: "frontmatter が無い" }]);
   });
 });

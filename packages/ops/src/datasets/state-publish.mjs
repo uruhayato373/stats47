@@ -7,6 +7,12 @@
  *   npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix "state/psi/"
  *   node .claude/scripts/lib/state-publish.mjs verify psi
  *
+ * domain は列挙せず、`^[a-z0-9][a-z0-9/_-]*$` の名前ならどれでも受ける (入れ子は `ads/ga4-affiliate` のように `/` で区切る)。
+ * 日付ファイル名 (`<YYYY-MM-DD>.json`) の domain は名前の昇順の最後が latest.json になる。使い方の例:
+ *   psi (週次・`psi-batch-<ts>.json`)・cloudflare/snapshots (日次・`<date>.json`。
+ *   `prepare cloudflare/snapshots data/cloudflare/live/snapshots/*.json` → push `state/cloudflare/snapshots/` → `verify cloudflare/snapshots`。
+ *   読み手は `npm run state:pull -- cloudflare/snapshots` で `data/cloudflare/live/snapshots/` へ取る)
+ *
  * prepare: `.local/r2/state/<domain>/` に生 snapshot を同じ名前で置き、名前の新しいものを latest.json にし、
  *          公開 URL の既存 index.json (無ければ空) に今回の key を足した index.json を書く
  *          (公開 R2 は list できないため index.json が object 一覧の代わり)。

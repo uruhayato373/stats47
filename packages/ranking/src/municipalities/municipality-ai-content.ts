@@ -115,6 +115,11 @@ export interface MunicipalityAiAudit {
 }
 
 const SPECULATIVE = ['のはず', 'と思われる', 'だろう', 'と考えられる', '壊滅', '致命的'];
+/** 値の単位が率・割合か。この指標の「最も増えた」は件数でなく率の大小を指す。 */
+const RATE_UNIT_PATTERN = /[％%‰]/;
+/** 値そのものの極値を聞く言い方 (「最も増えた」「一番減った」)。自治体の数を聞く「増えたのはどれくらい」は含まない。 */
+const EXTREME_QUESTION_PATTERN = /(?:最も|一番)(?:増え|減っ|増加|減少|多|少な)/;
+const RATE_WORD_PATTERN = /率|割合|比|パーセント|％|%/;
 const NUMBER_PATTERN = /[-−]?\d[\d,]*(?:\.\d+)?/g;
 
 function collectNumbers(value: unknown, out: number[]): void {
@@ -170,6 +175,12 @@ export function auditMunicipalityAiContent(
   ] as const) {
     const length = content[field].length;
     if (length < min || length > max) blockers.push(`${field} の長さ ${length} 字が ${min}〜${max} 字の外`);
+  }
+  if (RATE_UNIT_PATTERN.test(values.unit)) {
+    content.faq.forEach((entry, index) => {
+      if (EXTREME_QUESTION_PATTERN.test(entry.question) && !RATE_WORD_PATTERN.test(entry.question))
+        blockers.push(`faq[${index}].question: 率の指標なのに率を言わず件数の言い方で聞いている (「増加率が最も高い」のように率で聞く)`);
+    });
   }
   if (content.faq.length < 3 || content.faq.length > 5) blockers.push(`faq は 3〜5 問 (現在 ${content.faq.length})`);
 

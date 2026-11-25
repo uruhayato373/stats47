@@ -41,8 +41,9 @@ jobs:
 
       - name: 🔎 Extract low-CTR queries
         id: extract
+        env:
+          MAX: ${{ inputs.max || '10' }}
         run: |
-          MAX="${{ inputs.max || '10' }}"
           mkdir -p /tmp/ctr
           node .claude/scripts/gsc/extract-low-ctr-queries.mjs \
             --format markdown \
@@ -60,14 +61,16 @@ jobs:
 
       - name: 📝 Compose issue body
         if: steps.extract.outputs.skipped == 'false'
+        env:
+          MONTH: ${{ steps.month.outputs.month }}
+          REPOSITORY: ${{ github.repository }}
         run: |
-          MONTH="${{ steps.month.outputs.month }}"
           {
             echo "# CTR Improvement Candidates ${MONTH}"
             echo
             echo "GSC snapshot から position 5-15 帯 × CTR < 業界平均 (Backlinko 2023) のクエリを抽出。"
             echo "上位クエリの seoTitle / description 改訂で CTR 改善余地が大きい。"
-            echo "実証ベース判定ルール ([.claude/rules/evidence-based-judgment.md](https://github.com/${{ github.repository }}/blob/develop/.claude/rules/evidence-based-judgment.md)) に従い、改訂後は次月の本 Issue で再計測すること。"
+            echo "実証ベース判定ルール ([.claude/rules/evidence-based-judgment.md](https://github.com/${REPOSITORY}/blob/develop/.claude/rules/evidence-based-judgment.md)) に従い、改訂後は次月の本 Issue で再計測すること。"
             echo
             cat /tmp/ctr/body.md
             echo
@@ -83,10 +86,12 @@ jobs:
       # 失敗した回も failed として残す。読み手: packages/ops/src/management/review-cadence.mjs
       - name: 🗂️ Record monthly job result
         if: always()
+        env:
+          STATUS: ${{ job.status == 'success' && (steps.extract.outputs.skipped == 'true' && 'skipped' || 'ok') || 'failed' }}
+          MAX: ${{ inputs.max || '10' }}
         run: |
-          STATUS="${{ job.status == 'success' && (steps.extract.outputs.skipped == 'true' && 'skipped' || 'ok') || 'failed' }}"
           node .claude/scripts/metrics/record-monthly-job.mjs --job ctr-improvement --status "$STATUS" \
-            --summary-file /tmp/ctr/body.md --field max="${{ inputs.max || '10' }}"
+            --summary-file /tmp/ctr/body.md --field max="$MAX"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/ci/monthly-jobs/ctr-improvement.json

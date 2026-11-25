@@ -3,7 +3,7 @@ import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { METRICS_REGISTRY } from "@stats47/data-configs";
 import { BOOK_RANKING_KEYS } from "../book-ranking-keys";
-import { checkFreshCautions, requiredCautionTerms, type CautionMetric } from "../fresh-caution-check";
+import { checkFreshCautions, findDuplicateSentences, requiredCautionTerms, type CautionMetric } from "../fresh-caution-check";
 
 const DIR = resolve(__dirname, "../manuscripts/K-S3-08");
 const files = readdirSync(DIR)
@@ -64,5 +64,26 @@ describe("書き下ろし原稿の注記と年の書き分け (KINDLE-FRESH-CAUT
         (t) => t.term,
       ),
     ).toEqual(["帰属家賃"]);
+  });
+});
+
+describe("本の中の同じ文 (KINDLE-FRESH-CAUTION-CHECK-01)", () => {
+  it("[mutation] 別の章に同じ長い文を書くと 2 章の組として数える", () => {
+    const sentence = "物価の地域差指数は全国平均を100とした指数で、住居は持家の帰属家賃を含みません。";
+    const found = findDuplicateSentences([
+      { file: "21-a.md", text: `# 見出し\n\n${sentence}別の文です。` },
+      { file: "22-b.md", text: `# 見出し\n\n${sentence}` },
+    ]);
+    expect(found).toEqual([{ sentence, files: ["21-a.md", "22-b.md"] }]);
+  });
+
+  it("短い文・見出し・同じ章の中の繰り返しは数えない", () => {
+    const long = "物価の地域差指数は全国平均を100とした指数で、住居は持家の帰属家賃を含みません。";
+    expect(
+      findDuplicateSentences([
+        { file: "21-a.md", text: `# ${long}\n次に見ます。${long}${long}` },
+        { file: "22-b.md", text: "次に見ます。" },
+      ]),
+    ).toEqual([]);
   });
 });

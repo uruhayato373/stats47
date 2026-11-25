@@ -611,7 +611,7 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 
 ### 型ポートフォリオ (月次ミックス・2026-07-05 改訂)
 
-月 15-20 本ペースでの型配分。**配分比率の SSOT は `data/blog/seo-strategy.json` の `typeMix`**
+月 25-30 本ペース (2026-11-25 オーナー決定で 15-20 本から引き上げ) での型配分。**配分比率の SSOT は `data/blog/seo-strategy.json` の `typeMix`**
 (blog-seo-strategist が winning-patterns 実測で四半期ごとに見直す)。人間向け戦略・入力データは
 `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト。**比率の数値はここに再掲しない** (二重管理=ドリフトの元)。
 このルールは各型の「どう書くか」(下記の記事アーキタイプ) を持ち、「何本ずつ張るか」は上記 SSOT が持つ。

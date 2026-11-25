@@ -115,3 +115,17 @@ test("取得不能・空payload・未観測でも、namespaceごとにbaseline�
   const findings = [{ severity: "error", namespace: "stats", metricKey: "population", code: "payload-unavailable" }];
   assert.deepEqual(selectLastGoodObservations(previous, [failed, updatedRanking], findings), [updatedRanking, good]);
 });
+
+test("推計人数が少なく順位から外した県 (referenceValues) は、観測値のある県として数える (THEME-URBAN-PARKS-HISTORY-LOSS-01)", () => {
+  // 職業別賃金は、推計 10 人未満の県年が values から referenceValues へ移る (DATA-WAGE-TEACHER-COVERAGE-01)。
+  // 値は残っているので、移っただけで coverage-regression にしない
+  const ranked = (areaCode) => ({ ...row(areaCode, "2023"), rank: 1 });
+  const before = inspectThemePayload({ partitions: { "2023": { values: [ranked("01000"), ranked("02000")] } } }, "ranking");
+  const after = inspectThemePayload({ partitions: { "2023": { values: [ranked("01000")], referenceValues: [{ ...row("02000", "2023"), sampleCount: 0 }] } } }, "ranking");
+  assert.equal(after.coverageByYear["2023"], 2);
+  assert.equal(after.latestMissingCodes.includes("02000"), false);
+  assert.deepEqual(compareThemeObservation(before, after), []);
+  // 値そのものが消えたとき (参考値にも無い) は今までどおり error にする
+  const lost = inspectThemePayload({ partitions: { "2023": { values: [ranked("01000")] } } }, "ranking");
+  assert.deepEqual(compareThemeObservation(before, lost).map((f) => f.code), ["coverage-regression"]);
+});

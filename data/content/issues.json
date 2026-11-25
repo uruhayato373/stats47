@@ -4567,7 +4567,12 @@
         },
         "outcome": {
           "label": "1人あたりごみ排出量",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "waste-per-capita-per-day"
+            }
+          ]
         }
       }
     },
@@ -10616,6 +10621,306 @@
             },
             {
               "metric": "total-overnight-guests-foreign"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K01-6",
+      "level": "minor",
+      "question": "昆布の産地の北海道は、なぜ昆布の消費が少ないのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる。産地の自家消費やもらい物は支出に出ない",
+      "queries": [
+        "昆布消費量 日本一",
+        "昆布消費量 沖縄",
+        "昆布産地ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "昆布の消費量",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "konbu-consumption-quantity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K01-7",
+      "level": "minor",
+      "question": "鶏肉を一番食べる県は、なぜ産地の宮崎ではないのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる",
+      "queries": [
+        "鶏肉消費量日本一",
+        "鶏肉購入量 ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "鶏肉の消費量",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "chicken-consumption-quantity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K01-8",
+      "level": "minor",
+      "question": "こんにゃくの産地の群馬は、消費でも上位なのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる",
+      "queries": [
+        "こんにゃく消費量 日本一",
+        "こんにゃく 産地 ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "こんにゃくの消費支出額",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "konnyaku-consumption-expenditure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K01-9",
+      "level": "minor",
+      "question": "米どころの新潟は、なぜ米の消費量の首位に届かないのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる。米は産地の自家消費や縁故米が支出に出ない",
+      "queries": [
+        "米 消費量 都道府県",
+        "米 消費量 ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "米の消費量",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "rice-consumption-quantity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K02-3",
+      "level": "minor",
+      "question": "豆腐の消費の首位は、なぜ宮城から富山へ変わるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる",
+      "queries": [
+        "豆腐消費量日本一",
+        "豆腐消費量ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "豆腐の消費量",
+          "pattern": "change",
+          "data": [
+            {
+              "metric": "tofu-consumption-quantity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K02-4",
+      "level": "minor",
+      "question": "納豆をよく食べる県と食べない県の境目は、東西で分かれるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる。東西の境目は購入量の差で、嗜好の理由までは集計から断定できない",
+      "queries": [
+        "納豆 消費量 ランキング",
+        "納豆消費量 ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "納豆の消費支出額",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "natto-consumption-expenditure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K02-5",
+      "level": "minor",
+      "question": "小麦粉の購入量は、なぜ長野と福井で 4 倍以上も違うのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる。粉の購入量は家庭での調理の仕方に左右され、外食や冷凍食品の利用は含まない",
+      "queries": [
+        "小麦粉 消費量 都道府県"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "小麦粉の消費量",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "wheat-flour-consumption-quantity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K02-6",
+      "level": "minor",
+      "question": "アイスクリームをよく買う県はどこで、暑い県と一致するのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる。気温の高い県と一致するかは別の統計で確かめる必要がある",
+      "queries": [
+        "アイス消費量 都道府県",
+        "アイス消費量ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "アイスクリーム・シャーベットの消費支出額",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "icecream-consumption-expenditure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K02-7",
+      "level": "minor",
+      "question": "食パンの消費は、なぜ関西の県が上位を占めるのか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる",
+      "queries": [
+        "パン 消費量 都道府県",
+        "パン 消費量 ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "食パンの消費量",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "white-bread-consumption-quantity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "issue:K03-5",
+      "level": "minor",
+      "question": "食費の重さ (エンゲル係数) が最も大きい県はどこか",
+      "unit": "prefecture",
+      "answerability": "caveat",
+      "dataNote": "家計調査",
+      "pitfall": "家計調査は県庁所在市の世帯の値で、県全体の値ではない。標本調査なので小さな順位差は誤差の範囲でありうる。食費の割合は収入や世帯の構成にも左右される",
+      "queries": [
+        "エンゲル係数 ランキング",
+        "エンゲル係数 都道府県ランキング"
+      ],
+      "revenue": [
+        "広告"
+      ],
+      "sensitive": false,
+      "status": "active",
+      "axes": {
+        "explanatory": null,
+        "outcome": {
+          "label": "エンゲル係数",
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "engel-coefficient"
             }
           ]
         }

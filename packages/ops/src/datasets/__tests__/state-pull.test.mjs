@@ -10,6 +10,8 @@ test("domain の先頭 segment の直下に live/ を切り、残りをその中
   const root = "/r";
   assert.equal(localDirFor("ads/ga4-affiliate", root).split(/[\\/]/).slice(-4).join("/"), "data/affiliate/live/ga4-affiliate");
   assert.equal(localDirFor("search-growth", root).split(/[\\/]/).slice(-3).join("/"), "data/search-growth/live");
+  // cloudflare の日次 snapshot (R2 state/cloudflare/snapshots/) は data/cloudflare/live/snapshots/ へ取る
+  assert.equal(localDirFor("cloudflare/snapshots", root).split(/[\\/]/).slice(-4).join("/"), "data/cloudflare/live/snapshots");
   assert.throws(() => localDirFor("", root));
 });
 

@@ -61,7 +61,7 @@ developer_instructions = '''
 
 ### 現在地と目標 (2026-07-05 起点)
 - 実測 (2026-W26): 週 1,947 clicks / 73,661 imp / CTR 2.64% / position 9.14 (11 週で clicks +450%・公開 290 記事)
-- 目標 (1 四半期): 週 2,500 clicks (+28%)・生産ペース 月 15-20 本 (週 4-5 本)
+- 目標 (1 四半期): 週 2,500 clicks (+28%)・生産ペース 月 25-30 本 (週 6-7 本。2026-11-25 オーナー決定)
 - KPI: ①新規記事4週後 clicks 中央値 ②topic-queue must-write 消化率 ③/ranking index 率 43%→70% ④B型(相関) position
 - 構造化値の SSOT = seo-strategy.json `quarterTarget` (reviewDue で四半期レビュー)
 

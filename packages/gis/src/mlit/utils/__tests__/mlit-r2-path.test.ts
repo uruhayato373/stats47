@@ -23,13 +23,14 @@ describe("buildMlitR2Path", () => {
     );
   });
 
-  it("allCities は wardMode でファイル名が変わる", () => {
-    expect(buildMlitR2Path({ type: "allCities", wardMode: "merged" })).toBe(
-      `gis/mlit/${MLIT_VERSION}/jp_city_dc.topojson`,
-    );
+  it("allCities は分割版だけを返し、統合版 (jp_city_dc) の指定は拒む", () => {
     expect(buildMlitR2Path({ type: "allCities", wardMode: "split" })).toBe(
       `gis/mlit/${MLIT_VERSION}/jp_city.topojson`,
     );
+    expect(buildMlitR2Path({ type: "allCities" })).toBe(
+      `gis/mlit/${MLIT_VERSION}/jp_city.topojson`,
+    );
+    expect(() => buildMlitR2Path({ type: "allCities", wardMode: "merged" })).toThrow(/jp_city_dc/);
   });
 
   // ★是正前後でここが変わってはいけない (既存の呼び出しを壊していないことの担保)

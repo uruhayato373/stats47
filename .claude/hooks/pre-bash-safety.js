@@ -60,6 +60,7 @@ const DANGEROUS_PATTERNS = [
  */
 const ADVISORY_PATTERNS = [
   {
+    id: "branch-workflow",
     pattern: /\bgit\s+push\b|\bgh\s+pr\s+(create|merge)\b|\bgh\s+workflow\s+run\b.*deploy/,
     context: [
       "[branch-workflow] develop→main は PR 経由のみ。main 直 push 禁止。",
@@ -69,6 +70,7 @@ const ADVISORY_PATTERNS = [
     ].join("\n"),
   },
   {
+    id: "r2-storage-design",
     // スクリプト経由に加えて、区分表の止めを通らない直接コマンド (wrangler / aws s3) と、削除を伴う workflow の起動も拾う
     pattern:
       /\b(diff-push-r2|push-r2-wrangler|push-generated-image-set|push-exact-r2-assets|delete-r2-prefix|r2-retention|r2-cleanup-orphans|purge-cache-r2)\b|\bwrangler\s+r2\s+object\s+(put|delete)\b|\baws\s+s3\s+(cp|mv|rm|sync)\b|\bgh\s+workflow\s+run\b.*\b(r2-maintenance|cleanup-r2-sns-videos|r2-isr-gc)\b/,
@@ -81,6 +83,7 @@ const ADVISORY_PATTERNS = [
     ].join("\n"),
   },
   {
+    id: "sns-content-standards",
     pattern: /\b(publish-x|post-instagram|post-from-schedule|publish-note)\b/,
     context: [
       "[sns-content-standards] 頻度上限 (X 1日3本・IG 25/24h)、TikTok 投稿禁止、posts.json は store 経由のみ。",
@@ -90,6 +93,70 @@ const ADVISORY_PATTERNS = [
   },
 ];
 
+/**
+ * advisory は「実行するコマンドの先頭」に当たったときだけ出す (HOOK-BASH-ADVISORY-NOISE-01)。
+ * DANGEROUS_PATTERNS が git add / push をコマンド先頭に限るのと同じ考え方で、パスや文字列にだけ語を含む
+ * コマンド (grep・git add <path>・commit メッセージ・heredoc の本文) では出さない。
+ *   - 引用符の中と heredoc の本文は捨てる
+ *   - ; && || | 改行で区切った各段の先頭語 (env 代入・time/nohup 等を除く) で判定する
+ *   - git push / gh pr / gh workflow は先頭がそのコマンドのときだけ。R2・SNS のスクリプトは先頭が実行系
+ *     (node / npx / tsx / npm / bash / ./ など) か wrangler / aws / gh のときだけ。*.test.* は実行でないので除く
+ */
+const EXEC_LAUNCHER = /^(?:node|nodejs|npx|tsx|ts-node|bun|deno|npm|pnpm|yarn|bash|sh|zsh|python3?|wrangler|aws|gh|\.{0,2}\/\S+|[\w.-]+\/\S+)(?=\s|$)/;
+const COMMAND_PREFIX = /^(?:\(\s*|(?:[A-Za-z_][A-Za-z0-9_]*=\S*\s+)|(?:time|nohup|env|sudo|command|exec)\s+)+/;
+
+function stripQuotedAndHeredoc(command) {
+  const withoutHeredoc = command.replace(/<<-?\s*(['"]?)([A-Za-z_][A-Za-z0-9_]*)\1[^\n]*\n[\s\S]*?(?:\n\s*\2\s*(?=\n|$)|$)/g, "\n");
+  return withoutHeredoc
+    .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+    .replace(/'[^']*'/g, "''");
+}
+
+function commandSegments(command) {
+  return stripQuotedAndHeredoc(command)
+    .split(/&&|\|\||[;|\n]/)
+    .map((segment) => segment.trim().replace(COMMAND_PREFIX, ""))
+    .filter(Boolean);
+}
+
+function advisoryMatches(advisory, segment) {
+  if (advisory.id === "branch-workflow") {
+    return /^(?:git\s+(?:-[Cc]\s+\S+\s+)*push\b|gh\s+pr\s+(?:create|merge)\b|gh\s+workflow\s+run\b.*deploy)/.test(segment);
+  }
+  if (!advisory.pattern.test(segment)) return false;
+  return EXEC_LAUNCHER.test(segment) && !/\.test\.[cm]?[jt]sx?\b/.test(segment);
+}
+
+function matchedAdvisories(command) {
+  const segments = commandSegments(command);
+  return ADVISORY_PATTERNS.filter((advisory) => segments.some((segment) => advisoryMatches(advisory, segment)));
+}
+
+/** 同じ advisory は 1 会話 1 回。session_id が無ければ重複を抑えない (毎回出す側に倒す)。 */
+function newAdvisoriesForSession(advisories, sessionId) {
+  if (!sessionId || advisories.length === 0) return advisories;
+  const fs = require("node:fs");
+  const path = require("node:path");
+  const dir = require("node:os").tmpdir();
+  const file = path.join(dir, `stats47-bash-advisory-${String(sessionId).replace(/[^\w-]/g, "_")}.json`);
+  let shown = [];
+  try {
+    shown = JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch {
+    shown = [];
+  }
+  const fresh = advisories.filter((a) => !shown.includes(a.id));
+  if (fresh.length > 0) {
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(file, JSON.stringify([...shown, ...fresh.map((a) => a.id)]));
+    } catch {
+      // 記録できなければ毎回出す側に倒す
+    }
+  }
+  return fresh;
+}
+
 async function main() {
   let input = "";
   for await (const chunk of process.stdin) {
@@ -97,7 +164,7 @@ async function main() {
   }
 
   try {
-    const { tool_input } = JSON.parse(input);
+    const { tool_input, session_id } = JSON.parse(input);
     const command = tool_input?.command || "";
 
     for (const { pattern, allow, reason } of DANGEROUS_PATTERNS) {
@@ -133,7 +200,7 @@ async function main() {
       return;
     }
 
-    const advisories = ADVISORY_PATTERNS.filter(({ pattern }) => pattern.test(command));
+    const advisories = newAdvisoriesForSession(matchedAdvisories(command), session_id);
     if (advisories.length > 0) {
       console.log(
         JSON.stringify({

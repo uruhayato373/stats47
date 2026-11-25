@@ -73,3 +73,23 @@ test("verify は公開 URL の bytes と index 登録が stage と一致した�
   });
   await assert.rejects(() => verifyState("psi", { root, attempts: 1, log: () => {} }), /read-back/);
 });
+
+test("cloudflare/snapshots (日次の日付ファイル名) は名前の昇順の最後が latest.json になり、既存 index に足される", async (t) => {
+  const root = mkdtempSync(join(tmpdir(), "stats47-state-publish-"));
+  mkdirSync(join(root, "data/cloudflare/live/snapshots"), { recursive: true });
+  const dates = ["2026-11-22", "2026-11-24", "2026-11-23"];
+  const days = dates.map((d) => join(root, `data/cloudflare/live/snapshots/${d}.json`));
+  days.forEach((file, i) => writeFileSync(file, JSON.stringify({ date: dates[i] })));
+  serve(t, { "/state/cloudflare/snapshots/index.json": JSON.stringify(["2026-11-21.json", "latest.json"]) });
+
+  const staged = await prepareState("cloudflare/snapshots", days, { root, log: () => {} });
+  const dir = stageDirFor("cloudflare/snapshots", root);
+  assert.deepEqual(staged.keys, ["2026-11-21.json", "2026-11-22.json", "2026-11-23.json", "2026-11-24.json", "latest.json"]);
+  assert.equal(JSON.parse(readFileSync(join(dir, "latest.json"), "utf8")).date, "2026-11-24");
+  assert.ok(dir.split(/[\\/]/).join("/").endsWith(".local/r2/state/cloudflare/snapshots"));
+  // 同じ日の snapshot が 2 つ渡されると同じ key が重なるので止まる (R2 の上書きを黙って起こさない)
+  mkdirSync(join(root, "dup"), { recursive: true });
+  const dup = join(root, "dup/2026-11-24.json");
+  writeFileSync(dup, "{}");
+  await assert.rejects(() => prepareState("cloudflare/snapshots", [days[1], dup], { root, log: () => {} }), /同じ名前/);
+});

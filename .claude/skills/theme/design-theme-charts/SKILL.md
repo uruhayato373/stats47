@@ -152,5 +152,5 @@ WebSearch: "{テーマキーワード} site:resas.go.jp"
 - `/search-estat` — e-Stat 統計表検索
 - `/audit-theme-components` — テーマ監査
 - `/insert-theme-components` — DB 投入
-- `.claude/design-system/page-components.md` — 設計原則（1データ1コンポーネント）
+- `docs/01_技術設計/04_デザインシステム.md`「page_components の設計契約」— 設計原則（1データ1コンポーネント）
 - `${CLAUDE_SKILL_DIR}/reference/chart-patterns.md` — チャート決定木

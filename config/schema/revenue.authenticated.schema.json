@@ -207,23 +207,6 @@
             },
             "description": "取得元が書いた品質の記録 (取得元ごとに項目が変わるので閉じない)"
           },
-          "recovery": {
-            "type": [
-              "null",
-              "object"
-            ],
-            "properties": {
-              "blockedSince": {},
-              "state": {}
-            },
-            "additionalProperties": false
-          },
-          "relogin": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
           "remaining": {
             "type": [
               "null",

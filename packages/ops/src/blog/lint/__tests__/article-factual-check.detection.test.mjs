@@ -21,6 +21,15 @@ import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 
+import {
+  articleSourceReferences,
+  checkUrlsPerHost,
+  compareTagToDerived,
+  extractDataSourceTags,
+  figureSourceReferences,
+  normalizeLabel,
+  normalizeUrl,
+} from "../data-source-mismatch.mjs";
 import { buildGroundTruth, checkInverseRankClaims, checkRankClaims, checkValueClaims } from "../article-factual-check.mjs";
 
 /** flat 配列 (blog-data-schema §1 の統一 schema) で ground truth を作る。 */
@@ -584,5 +593,204 @@ describe("県の順位ではない順位の書き方を照合しない (BLOG-GAT
       assert.equal(checkRankClaims("福島県は11位です。", gt).length, 1);
       assert.equal(checkRankClaims("愛知は30位へ下がりました。", gt).length, 1);
     });
+  });
+});
+
+// CONTENT-FOLLOWUP-01 (2026-11-25): 正しい文を RANK_MISMATCH にする誤検知 2 点と、本当の誤りを見逃さない固定
+describe("複数県の列挙と過去年の順位を、最新年の 1 県の順位と取り違えない", () => {
+  const rows = (year) =>
+    [
+      ["東京都", 1],
+      ["神奈川県", 3],
+      ["千葉県", 5],
+      ["埼玉県", 6],
+      ["愛知県", 2],
+    ].map(([areaName, rank]) => ({ areaName, rank, value: 100 - rank, label: "平均年収", unit: "万円", year }));
+  const META = { kind: "ranking", rankingKey: "avg-income", year: "2025", label: "平均年収", unit: "万円" };
+
+  it("★(a) 「東京・千葉・埼玉・神奈川の4都県がそろって上位10位」を、東京の 10 位とは読まない", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.deepEqual(checkRankClaims("東京・千葉・埼玉・神奈川の4都県がそろって上位10位に入った。", gt), []);
+        assert.deepEqual(checkRankClaims("東京都と神奈川県が上位10位にそろって入った。", gt), []);
+      },
+      META,
+    );
+  });
+
+  it("★(a) 単独の県の順位違いは従来どおり検出する", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.equal(checkRankClaims("東京は10位だった。", gt).length, 1);
+        assert.equal(checkRankClaims("千葉・埼玉は上位だが、東京は10位だった。", gt).length, 1);
+      },
+      META,
+    );
+  });
+
+  it("★(b) 過去年 (2024年) の順位を、最新年 (2025年) の data と照らさない", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.deepEqual(checkInverseRankClaims("2024年の1位は愛知県だった。", gt), []);
+        assert.deepEqual(checkRankClaims("2024年の調査では、愛知県は1位だった。", gt), []);
+      },
+      META,
+    );
+  });
+
+  it("★(b) 最新年の順位違いは従来どおり検出する", () => {
+    withGroundTruth(
+      rows("2025"),
+      (gt) => {
+        assert.equal(checkInverseRankClaims("2025年の1位は愛知県だった。", gt).length, 1);
+        assert.equal(checkRankClaims("2025年の調査では、愛知県は1位だった。", gt).length, 1);
+      },
+      META,
+    );
+  });
+});
+
+describe("1 文に 2 つの指標の順位が出るとき、対象指標でない側の順位を照合しない", () => {
+  const CATCH_ROWS = [
+    ["東京都", 4],
+    ["静岡県", 1],
+    ["宮城県", 2],
+  ].map(([areaName, rank]) => ({ areaName, rank, value: 1000 - rank, label: "カツオ漁獲量", unit: "t" }));
+  const META = { kind: "ranking", rankingKey: "bonito-catch", year: "2025", label: "カツオ漁獲量", unit: "t" };
+
+  it("★「漁獲量4位の東京都は868グラムで19位」の 19位 (購入数量の順位) を漁獲量の順位として照合しない", () => {
+    withGroundTruth(
+      CATCH_ROWS,
+      (gt) => {
+        assert.deepEqual(checkRankClaims("漁獲量4位の東京都は868グラムで19位でした。", gt), []);
+        assert.deepEqual(checkInverseRankClaims("漁獲量4位の東京都は868グラムで19位でした。", gt), []);
+      },
+      META,
+    );
+  });
+
+  it("★対象指標の順位違いは従来どおり検出する (先頭の順位の誤り・名指しの無い順位の誤り・名指しした指標の再掲)", () => {
+    withGroundTruth(
+      CATCH_ROWS,
+      (gt) => {
+        assert.equal(checkInverseRankClaims("漁獲量9位の東京都は868グラムで19位でした。", gt).length, 1);
+        assert.equal(checkRankClaims("東京都は868グラムで19位でした。", gt).length, 1);
+        assert.equal(checkRankClaims("4位の東京都はカツオ漁獲量が19位でした。", gt).length, 1);
+      },
+      META,
+    );
+  });
+});
+
+// ============================================================================
+// data-source タグと導出した出典の食い違い (CHART-SOURCE-DERIVE-01)
+// 別ファイルにすると packages/ops の vitest 登録・CI の配線 (package.json / workflow) が要るため、配線済みのこのファイルに置く
+// ============================================================================
+
+const MD = [
+  "## ランキング",
+  "",
+  "![ひとり暮らし率](data/aging-solo-ranking.svg)",
+  "",
+  '<data-source url="https://www.e-stat.go.jp/dbview?sid=0000010201" label="e-Stat 社会生活統計指標"></data-source>',
+  "",
+  "本文の途中の出典 (図の直後ではない)。",
+  '<data-source label="厚生労働省「賃金構造基本統計調査」" year="2023年"></data-source>',
+].join("\n");
+
+describe("extractDataSourceTags", () => {
+  it("図の直後のタグには図の base を付け、図の直後でないタグには付けない", () => {
+    const tags = extractDataSourceTags(MD);
+    assert.equal(tags.length, 2);
+    assert.deepEqual(
+      { figureBase: tags[0].figureBase, label: tags[0].label, url: tags[0].url, line: tags[0].line },
+      { figureBase: "aging-solo-ranking", label: "e-Stat 社会生活統計指標", url: "https://www.e-stat.go.jp/dbview?sid=0000010201", line: 5 },
+    );
+    assert.equal(tags[1].figureBase, null);
+    assert.equal(tags[1].year, "2023年");
+    assert.equal(tags[1].url, "");
+  });
+});
+
+describe("正規化", () => {
+  it("URL は http・末尾スラッシュ・フラグメントの違いを無視し、ラベルは e-Stat の接頭辞と括弧書きを落とす", () => {
+    assert.equal(normalizeUrl("http://example.go.jp/a/#x"), "https://example.go.jp/a");
+    assert.equal(normalizeUrl(undefined), "");
+    assert.equal(normalizeLabel("e-Stat 社会・人口統計体系（教育）"), "社会・人口統計体系");
+    assert.equal(normalizeLabel("厚生労働省「賃金構造基本統計調査」"), "厚生労働省賃金構造基本統計調査");
+  });
+});
+
+describe("compareTagToDerived", () => {
+  const derived = articleSourceReferences([
+    {
+      label: "社会・人口統計体系",
+      url: "https://www.stat.go.jp/data/ssds/index.htm",
+      tables: [{ label: "社会・人口統計体系", url: "https://www.e-stat.go.jp/dbview?sid=0000010201" }],
+    },
+  ]);
+  const none = { labels: [], urls: [] };
+
+  it("導出した名前と URL に合うタグは食い違いにしない", () => {
+    const tag = { label: "e-Stat 社会・人口統計体系（教育）", url: "https://www.e-stat.go.jp/dbview?sid=0000010201/" };
+    assert.deepEqual(compareTagToDerived(tag, none, derived), []);
+  });
+
+  it("★別の調査の名前と URL を書いたタグは LABEL_MISMATCH と URL_MISMATCH にする", () => {
+    const tag = { label: "e-Stat 家計調査", url: "https://www.e-stat.go.jp/dbview?sid=0000999999" };
+    assert.deepEqual(compareTagToDerived(tag, none, derived), ["LABEL_MISMATCH", "URL_MISMATCH"]);
+  });
+
+  it("URL が無いタグは名前だけを照らす", () => {
+    assert.deepEqual(compareTagToDerived({ label: "社会・人口統計体系", url: "" }, none, derived), []);
+    assert.deepEqual(compareTagToDerived({ label: "家計調査", url: "" }, none, derived), ["LABEL_MISMATCH"]);
+  });
+
+  it("図の source.json が直接持つ出典 (displaySources) とも照らす", () => {
+    const figure = figureSourceReferences({ displaySources: [{ label: "国土地理院『電子国土基本図（地名情報）』", url: "https://maps.gsi.go.jp/" }] });
+    const tag = { label: "国土地理院 地名情報", url: "https://maps.gsi.go.jp" };
+    assert.deepEqual(compareTagToDerived(tag, figure, none), []);
+  });
+
+  it("★名前の共通部分が 4 字 (「社会生活」) だけの別の調査は同じ出典とみなさない", () => {
+    const refs = articleSourceReferences([{ label: "社会生活基本調査", tables: [] }]);
+    assert.deepEqual(compareTagToDerived({ label: "e-Stat 社会生活統計指標", url: "" }, { labels: [], urls: [] }, refs), ["LABEL_MISMATCH"]);
+  });
+
+  it("照らす先が無ければ食い違いではなく NO_DERIVED_SOURCE にする", () => {
+    assert.deepEqual(compareTagToDerived({ label: "何か", url: "https://example.com" }, none, none), ["NO_DERIVED_SOURCE"]);
+  });
+});
+
+describe("checkUrlsPerHost", () => {
+  it("★同じホストへの同時リクエストは 2 本までで、別のホストは並行して進める", async () => {
+    let active = 0;
+    let maxSameHost = 0;
+    const activeByHost = new Map();
+    const head = async (url) => {
+      const host = new URL(url).host;
+      activeByHost.set(host, (activeByHost.get(host) ?? 0) + 1);
+      active += 1;
+      maxSameHost = Math.max(maxSameHost, activeByHost.get(host));
+      await new Promise((r) => setTimeout(r, 10));
+      activeByHost.set(host, activeByHost.get(host) - 1);
+      active -= 1;
+      return url.endsWith("/gone") ? 404 : 200;
+    };
+    const urls = [
+      ...Array.from({ length: 6 }, (_, i) => `https://a.example/${i}`),
+      "https://a.example/gone",
+      ...Array.from({ length: 3 }, (_, i) => `https://b.example/${i}`),
+      "https://a.example/0",
+    ];
+    const result = await checkUrlsPerHost(urls, head);
+    assert.equal(maxSameHost, 2);
+    assert.equal(active, 0);
+    assert.equal(result.size, 10);
+    assert.equal(result.get("https://a.example/gone"), 404);
+    assert.equal(result.get("https://b.example/2"), 200);
   });
 });

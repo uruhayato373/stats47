@@ -56,8 +56,10 @@ error はすべて潰す。warn (orphan) は意図的なら無視可 (新規追�
 ### Step 3 — マーカー記録 (ゲート解除)
 床と天井の確認が済んだら:
 ```bash
-node .claude/scripts/lib/check-agent-skill-consistency.cjs --mark-audited
+node .claude/scripts/lib/check-agent-skill-consistency.cjs --mark-audited --transcript <この会話の transcript の JSONL>
 ```
+Stop hook が差し戻すときの文面の「3) 解除」に、transcript のパスまで入ったコマンドが出るので、それをそのまま実行する。
+Stop hook は、この会話で Edit / Write したファイルだけを数える。`--transcript` を付けずに記録すると作業ツリー全体の指紋になり、hook の指紋と合わない。
 現在の関連変更ファイル集合のハッシュを `.claude/state/consistency/audited.json` に記録する。
 これにより Stop hook は次回以降 (同じ変更集合なら) 黙る。**さらにファイルを編集すると集合が変わり再度ゲートが立つ** (それが正しい動作)。
 

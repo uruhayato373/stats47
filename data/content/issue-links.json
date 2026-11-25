@@ -1245,6 +1245,56 @@
       "issue": "issue:K10",
       "page": "blog:capital-city-buying-patterns-47",
       "role": "answers"
+    },
+    {
+      "issue": "issue:K01-6",
+      "page": "blog:konbu-consumption-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-7",
+      "page": "blog:chicken-consumption-quantity",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-8",
+      "page": "blog:konnyaku-expenditure-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K01-9",
+      "page": "blog:rice-consumption-quantity-ranking",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-3",
+      "page": "blog:tofu-consumption-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-4",
+      "page": "blog:natto-consumption-east-west-divide",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-5",
+      "page": "blog:wheat-flour-consumption-prefecture",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-6",
+      "page": "blog:icecream-consumption-expenditure",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K02-7",
+      "page": "blog:white-bread-consumption-quantity-prefecture-gap",
+      "role": "answers"
+    },
+    {
+      "issue": "issue:K03-5",
+      "page": "blog:engel-coefficient-prefecture-ranking",
+      "role": "answers"
     }
   ]
 }

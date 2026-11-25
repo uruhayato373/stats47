@@ -85,6 +85,16 @@ function score(title, unit) {
 
 function buildQueue() {
   const cands = JSON.parse(fs.readFileSync(CAND_FILE, "utf8"));
+  // ssds-candidates.json は enumerate-ssds-indicators.mjs の生成物 (手で編集しない)。同じ run が書く要約の件数と
+  // 食い違えば手編集か書きかけなので、キューを作らずに止める (ESTAT-CATALOG-SSDS-DERIVE-01)
+  const sumFile = CAND_FILE.replace(/ssds-candidates\.json$/, "ssds-candidates-summary.json");
+  if (fs.existsSync(sumFile)) {
+    const n = JSON.parse(fs.readFileSync(sumFile, "utf8")).newCandidates;
+    if (typeof n === "number" && n !== cands.length) {
+      console.error(`❌ ssds-candidates.json は ${cands.length} 件、要約は ${n} 件。手編集の疑い: node .claude/scripts/estat/enumerate-ssds-indicators.mjs で作り直す`);
+      process.exit(1);
+    }
+  }
   const ex = loadExisting();
   const known = loadKnown();
   const prev = fs.existsSync(QUEUE_FILE) ? JSON.parse(fs.readFileSync(QUEUE_FILE, "utf8")) : { queue: [] };

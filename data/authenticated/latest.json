@@ -15,8 +15,6 @@
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
-      "relogin": null,
-      "recovery": null,
       "evidence": {
         "sha256": "9da2b7dccb66782cc800e2e4dbf8d196eb8c9a8c8b179e6ca60eebfea7493189",
         "bytes": 311887
@@ -37,8 +35,6 @@
       "metricsAvailable": true,
       "inventoryAvailable": true,
       "collectionAttempted": true,
-      "relogin": null,
-      "recovery": null,
       "evidence": {
         "sha256": "0893f60d5ff5b6bafe8b2f9885fc51eeff3253f5bec6a5797bd558b035f2bde8",
         "bytes": 2623254
@@ -73,8 +69,6 @@
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
-      "relogin": null,
-      "recovery": null,
       "evidence": {
         "sha256": "d66171173fcce1c832da45f9e02f0b35164f6dabbf9953fa4c077e5d09f8b5b4",
         "bytes": 4246672
@@ -95,8 +89,6 @@
       "metricsAvailable": false,
       "inventoryAvailable": false,
       "collectionAttempted": true,
-      "relogin": null,
-      "recovery": null,
       "evidence": {
         "sha256": "64ecb87e777bec9fe3781f3a21be868b182f9bbaefd523bf0660711ff87cb4b8",
         "bytes": 1460
@@ -117,8 +109,6 @@
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
-      "relogin": null,
-      "recovery": null,
       "evidence": {
         "sha256": "40c6e903124aa371e9f7e6cd77eb4a8ad0999f4a94274b6227c009071be2b60d",
         "bytes": 1377

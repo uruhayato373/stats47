@@ -1,7 +1,7 @@
 import "server-only";
 
 export {
-    fetchAllCitiesTopology, fetchMunicipalityTopology, fetchPrefectureTopology, type Logger
+    fetchMunicipalityTopology, fetchPrefectureTopology, type Logger
 } from "./geoshape/services";
 
 export {

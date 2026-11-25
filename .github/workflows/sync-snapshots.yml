@@ -328,6 +328,7 @@ jobs:
           KEY_FILES=(
             packages/ranking/src/config/known-ranking-keys.ts
             apps/web/src/config/sitemap-ranking-keys.ts
+            apps/web/src/config/sitemap-ranking-lastmod.ts
             apps/web/src/config/known-tag-keys.ts
             apps/web/src/config/unpublished-blog-slugs.ts
             apps/web/src/config/sitemap-blog-entries.ts

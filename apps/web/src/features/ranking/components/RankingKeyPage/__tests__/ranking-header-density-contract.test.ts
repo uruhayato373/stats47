@@ -4,38 +4,41 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
+// テストファイルの位置から src を決める。process.cwd() だとルートからの実行で落ちる (CI-TOOLING-FOLLOWUP-03)
+const WEB_SRC = path.resolve(import.meta.dirname, '../../../../..');
+
 const HEADER = readFileSync(
   path.resolve(
-    process.cwd(),
-    'src/features/ranking/components/RankingHeader/RankingHeaderPanel.tsx'
+    WEB_SRC,
+    'features/ranking/components/RankingHeader/RankingHeaderPanel.tsx'
   ),
   'utf8'
 );
 const PAGE_CLIENT = readFileSync(
   path.resolve(
-    process.cwd(),
-    'src/features/ranking/components/RankingKeyPage/RankingKeyPageClient.tsx'
+    WEB_SRC,
+    'features/ranking/components/RankingKeyPage/RankingKeyPageClient.tsx'
   ),
   'utf8'
 );
 const PAGE_SHELL = readFileSync(
   path.resolve(
-    process.cwd(),
-    'src/features/ranking/components/RankingKeyPage/RankingPageClientShell.tsx'
+    WEB_SRC,
+    'features/ranking/components/RankingKeyPage/RankingPageClientShell.tsx'
   ),
   'utf8'
 );
 const PAGE_MODEL = readFileSync(
   path.resolve(
-    process.cwd(),
-    'src/features/ranking/services/load-ranking-page-model.ts'
+    WEB_SRC,
+    'features/ranking/services/load-ranking-page-model.ts'
   ),
   'utf8'
 );
 const NATIONAL_AVERAGE_STAT = readFileSync(
   path.resolve(
-    process.cwd(),
-    'src/features/ranking/components/RankingHeader/RankingNationalAverageStat.tsx'
+    WEB_SRC,
+    'features/ranking/components/RankingHeader/RankingNationalAverageStat.tsx'
   ),
   'utf8'
 );
@@ -50,8 +53,8 @@ function findRankingComponentFiles(directory: string): string[] {
 }
 
 const RANKING_COMPONENT_ROOT = path.resolve(
-  process.cwd(),
-  'src/features/ranking/components'
+  WEB_SRC,
+  'features/ranking/components'
 );
 
 describe('ranking header density contract', () => {

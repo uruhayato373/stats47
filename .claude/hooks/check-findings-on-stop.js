@@ -114,11 +114,18 @@ function deferredIn(text) {
     });
 }
 
-function unrecordedCandidates(transcriptText) {
-  const agentToolIds = new Set();
-  const taskCreateIds = new Map(); // tool_use id → 件名
-  const openTasks = new Map(); // タスク番号 → 件名 (記録済み・完了で消す)
-  const pending = [];
+function newScanState() {
+  return {
+    agentToolIds: new Set(),
+    taskCreateIds: new Map(), // tool_use id → 件名
+    openTasks: new Map(), // タスク番号 → 件名 (記録済み・完了で消す)
+    pending: [],
+  };
+}
+
+/** transcript の追加分 (JSONL の行の並び) を state に畳み込む。続きから読んでも全部読んでも同じ結果になる。 */
+function scanTranscript(transcriptText, state) {
+  const { agentToolIds, taskCreateIds, openTasks, pending } = state;
   for (const line of transcriptText.split("\n")) {
     const mayReport = line.includes("起票候補") && (line.includes("handback") || line.includes("tool_result"));
     const mayTask = line.includes("TaskCreate") || line.includes("TaskUpdate") || (line.includes("tool_result") && line.includes("Task #"));
@@ -166,20 +173,128 @@ function unrecordedCandidates(transcriptText) {
       }
     }
   }
-  const tasks = [...openTasks.values()].map((subject) => `タスク: ${subject}`);
-  return [...new Set([...pending, ...tasks])];
+}
+
+function candidatesOf(state) {
+  const tasks = [...state.openTasks.values()].map((subject) => `タスク: ${subject}`);
+  return [...new Set([...state.pending, ...tasks])];
+}
+
+function unrecordedCandidates(transcriptText) {
+  const state = newScanState();
+  scanTranscript(transcriptText, state);
+  return candidatesOf(state);
+}
+
+/**
+ * 前回の Stop で読んだ位置から続きだけを読む (HARNESS-SMALL-COSTS-01)。80MB 級の transcript を毎ターン全部読むと
+ * 数秒かかる。状態 (読んだ位置・未記録の候補・開いているタスク) は os.tmpdir() に transcript ごとに置く。
+ * 状態が壊れている・transcript が縮んだ・読めないときは最初から全部読む (結果は全部読んだときと同じ)。
+ */
+const crypto = require("crypto");
+const os = require("os");
+const path = require("path");
+
+function stateFileFor(transcriptPath) {
+  const key = crypto.createHash("sha1").update(path.resolve(transcriptPath)).digest("hex").slice(0, 16);
+  return path.join(os.tmpdir(), `stats47-findings-scan-${key}.json`);
+}
+
+/** 先頭 length バイト (最大 1KB) の指紋。同じパスに別の内容が置かれたとき (作り直し) に古い状態を使わないため。 */
+function headFingerprint(transcriptPath, length) {
+  return crypto.createHash("sha1").update(readRange(transcriptPath, 0, length)).digest("hex");
+}
+
+function loadScanState(transcriptPath, file, size) {
+  try {
+    const saved = JSON.parse(fs.readFileSync(file, "utf8"));
+    if (saved.version !== 1 || !(saved.offset <= size) || saved.headLength > size) return null;
+    if (headFingerprint(transcriptPath, saved.headLength) !== saved.head) return null;
+    return {
+      offset: saved.offset,
+      state: {
+        agentToolIds: new Set(saved.agentToolIds),
+        taskCreateIds: new Map(saved.taskCreateIds),
+        openTasks: new Map(saved.openTasks),
+        pending: saved.pending,
+      },
+    };
+  } catch {
+    return null;
+  }
+}
+
+function saveScanState(transcriptPath, file, offset, state) {
+  const headLength = Math.min(offset, 1024);
+  try {
+    fs.writeFileSync(
+      file,
+      JSON.stringify({
+        version: 1,
+        headLength,
+        head: headFingerprint(transcriptPath, headLength),
+        offset,
+        agentToolIds: [...state.agentToolIds],
+        taskCreateIds: [...state.taskCreateIds],
+        openTasks: [...state.openTasks],
+        pending: state.pending,
+      }),
+    );
+  } catch {
+    // 保存できなければ次回は最初から読むだけ
+  }
+}
+
+function readRange(transcriptPath, start, end) {
+  const fd = fs.openSync(transcriptPath, "r");
+  try {
+    const buffer = Buffer.alloc(end - start);
+    let read = 0;
+    while (read < buffer.length) {
+      const n = fs.readSync(fd, buffer, read, buffer.length - read, start + read);
+      if (n === 0) break;
+      read += n;
+    }
+    return buffer.subarray(0, read);
+  } finally {
+    fs.closeSync(fd);
+  }
+}
+
+function unrecordedCandidatesIncremental(transcriptPath) {
+  const size = fs.statSync(transcriptPath).size;
+  const file = stateFileFor(transcriptPath);
+  const resumed = loadScanState(transcriptPath, file, size);
+  const state = resumed ? resumed.state : newScanState();
+  const start = resumed ? resumed.offset : 0;
+  const chunk = readRange(transcriptPath, start, size);
+  // 書きかけの最後の行は次回に回す (改行までを読んだ位置とする)
+  const lastNewline = chunk.lastIndexOf(0x0a);
+  const complete = lastNewline < 0 ? Buffer.alloc(0) : chunk.subarray(0, lastNewline + 1);
+  scanTranscript(complete.toString("utf8"), state);
+  saveScanState(transcriptPath, file, start + complete.length, state);
+  // 書きかけの行 (まだ改行が無い最後の行) も、今回の判定には含める。state には積まない。
+  const rest = chunk.subarray(complete.length).toString("utf8");
+  if (!rest.trim()) return candidatesOf(state);
+  const preview = {
+    agentToolIds: new Set(state.agentToolIds),
+    taskCreateIds: new Map(state.taskCreateIds),
+    openTasks: new Map(state.openTasks),
+    pending: [...state.pending],
+  };
+  scanTranscript(rest, preview);
+  return candidatesOf(preview);
 }
 
 function main() {
   const input = readStdin();
   if (input.stop_hook_active || !input.transcript_path) process.exit(0);
-  let transcript;
+  let candidates;
   try {
-    transcript = fs.readFileSync(input.transcript_path, "utf8");
+    candidates = unrecordedCandidatesIncremental(input.transcript_path);
   } catch {
     process.exit(0); // 読めなければ作業は止めない
   }
-  const candidates = unrecordedCandidates(transcript);
   if (candidates.length === 0) process.exit(0);
 
   const listed = candidates.slice(0, MAX_LISTED).map((c) => `  - ${c}`).join("\n");
@@ -198,4 +313,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { candidatesIn, unrecordedCandidates };
+module.exports = { candidatesIn, unrecordedCandidates, unrecordedCandidatesIncremental };

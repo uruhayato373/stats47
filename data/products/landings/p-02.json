@@ -77,8 +77,8 @@
       {
         "metricKey": "total-population",
         "scope": "municipality",
-        "decision": "investigate",
-        "reason": "採用対象となる地域規模の補助候補。総人口をそのまま労働供給とみなさず、年齢・就業との整合を調べる。"
+        "decision": "exclude",
+        "reason": "この商品の分析は他市区町村への通勤者数の分布と推移で、居住人口や就業者総数を分母にした率には加工しない設計のため、総人口は入力に使わない。総人口を労働供給とみなす根拠もなく、年齢・就業の整合を取る分析は商品の問いの外。"
       }
     ],
     "analysisRefs": [],

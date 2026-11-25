@@ -44,11 +44,6 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     inventoryAvailable: source === 'note' && value.inventoryAvailable === true
       && (value.status === 'pass' || (value.status === 'failed' && value.code === 'report_incomplete')),
     collectionAttempted: value.collectionAttempted ?? null,
-    // relogin・recovery は CI の取得 (2026-10-20 撤去) だけが書いていた。Mac の取得は書かないので常に null。
-    // 記録の形 (schema と読み手) を変えないために欄だけ残す。
-    relogin: value.relogin ?? null,
-    recovery: value.recovery?.state === 'awaiting_reauthentication'
-      ? { state: 'awaiting_reauthentication', blockedSince: value.recovery.blockedSince } : null,
     evidence: value.evidence ?? null,
     quality: value.quality ?? null,
     knownIncomplete: value.status === 'pass' ? value.knownIncomplete ?? null : null,

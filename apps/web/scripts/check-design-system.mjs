@@ -258,7 +258,7 @@ const rules = [
   {
     id: 'no-text-black',
     message:
-      'Avoid text-black. Use text-foreground (see .claude/design-system/prohibited.md).',
+      'Avoid text-black. Use text-foreground (see docs/01_技術設計/04_デザインシステム.md「禁止パターン」).',
     pattern: /\btext-black\b/,
   },
   {
@@ -275,7 +275,7 @@ const rules = [
     // 4px アクセントバー (カラーバー) は melta-ui で禁止 (全周 border / 余白 / 背景差で表現する)。
     // 例外は Markdown 散文中の引用の左バーのみ (ブランドアクセントではなく typography)。
     // callout は 2026-09-25 に左バーをやめ、地の色 + アイコン + ラベルで種類を示す (Callout.tsx)。
-    // 正典: .claude/design-system/prohibited.md
+    // 正典: docs/01_技術設計/04_デザインシステム.md「禁止パターン」
     id: 'no-thick-accent-border',
     message:
       'Do not hand-add 4px accent borders (border-t/l/r/b-4). Use SurfaceCard border or spacing/background contrast.',
