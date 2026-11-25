@@ -88,13 +88,16 @@ jobs:
       - name: 📚 Run catalog crawl
         env:
           META_STAT_CODES: ${{ github.event.inputs.meta_stat_codes || '00200561' }}
+          META_SCOPE: ${{ github.event.inputs.meta_scope || '2,3' }}
+          TIME_BUDGET_MIN: ${{ github.event.inputs.time_budget_min || '120' }}
+          MAX_META: ${{ github.event.inputs.max_meta }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
-          ARGS=(run --meta-scope "${{ github.event.inputs.meta_scope || '2,3' }}" \
+          ARGS=(run --meta-scope "$META_SCOPE" \
                      --meta-stat-codes "$META_STAT_CODES" \
-                     --time-budget-min "${{ github.event.inputs.time_budget_min || '120' }}")
-          MAX_META="${{ github.event.inputs.max_meta }}"
+                     --time-budget-min "$TIME_BUDGET_MIN")
           if [ -n "$MAX_META" ]; then ARGS+=(--max-meta "$MAX_META"); fi
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
+          if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
           node --import tsx .claude/scripts/estat/catalog.mjs "${ARGS[@]}"
 
       - name: 📤 Push to R2
@@ -105,10 +108,12 @@ jobs:
       # 失敗した回も failed として残す。読み手: packages/ops/src/management/review-cadence.mjs
       - name: 🗂️ Record monthly job result
         if: always()
+        env:
+          STATUS: ${{ job.status == 'success' && (github.event.inputs.dry_run == 'true' && 'skipped' || 'ok') || 'failed' }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          STATUS="${{ job.status == 'success' && (github.event.inputs.dry_run == 'true' && 'skipped' || 'ok') || 'failed' }}"
           node .claude/scripts/metrics/record-monthly-job.mjs --job estat-catalog --status "$STATUS" \
-            --field trigger="${{ github.event_name }}"
+            --field trigger="$EVENT_NAME"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/ci/monthly-jobs/estat-catalog.json
