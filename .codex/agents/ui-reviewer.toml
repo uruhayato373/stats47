@@ -21,10 +21,7 @@ melta-ui デザインシステム準拠と UI/UX 品質評価を担当するエ�
 ## 参照必須ドキュメント
 
 - `.claude/design-system/README.md` — デザインシステム概要
-- `.claude/design-system/prohibited.md` — 76個の禁止パターン
-- `.claude/design-system/principles.md` — 5つのデザイン原則
-- `.claude/design-system/quick-reference.md` — コンポーネント・レイアウト・カラー
-- `docs/01_技術設計/04_デザインシステム.md` — レール UI 契約・Surface 3 段階の正典
+- `docs/01_技術設計/04_デザインシステム.md` — デザインシステムの正典。「禁止パターン」(class・部品の水準の禁止)・「見た目の 5 原則」・「部品の書き方の早見」(コンポーネント・レイアウト・カラー)・レール UI 契約・Surface 3 段階を含む
 
 ## レビュー観点
 
