@@ -551,6 +551,7 @@ updated: 2026-11-01
 - **起点**: `npm run issues:coverage`（2026-W40〜W43 の GSC と突き合わせ）。公開 4,372 ページのうち、紐づかないが読まれている 1,550
 - **進み具合 (2026-11-05)**: 検索語と読まれているページから 20 本、白書 (NotebookLM の引用つき) から 6 本を足し、重なる 4 本は `C12`・`D13`・`F17`・`B12` へ検索語と根拠を移した。問いは 204 本、読まれているのに紐づかないページは 1,502。検索語の残りは `npm run issues:candidates` で見る。
 - **次**: ① 読まれているのに紐づかないページの上位から、GSC の検索語を `queries` に持つ小さな問いを足す（最大のまとまりは家計調査の品目で、大きな問い K01〜K03 の下に入る） ② 上からの大きな問いを NotebookLM で白書から拾う（クラウドの環境は gh の認証が無く呼べないので Mac で） ③ 読まれていない 1,808 ページ（ranking 890・municipality-ranking 643・blog 226 ほか）を、統合・転送・検索除外・そのままのどれにするか本人が決める。自動では消さない
+- **進捗 (2026-11-25・8bdd5e223)**: ① 家計調査の品目に小さな問い 10 本 (K01〜K03 の下。検索語は GSC 2026-W43〜W46 の実在文字列だけ) と記事への関係を足した。問い 292→302、紐づかないが読まれている 1,900→1,889。残り: ① の続き、②、③。
 
 ### [CONTENT-PUBLIC-WORKS-FISCAL-01] 「公共事業は無駄か」を、都道府県の土木費・普通建設事業費と財政指標の関係で確かめて記事にする
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-11-07] [領域:サイト]
@@ -1602,6 +1603,7 @@ updated: 2026-11-01
 - **移した残り (2026-11-24・旧 PRODUCT-SALES-READINESS-01)**: Kindle S2-01 旧版のレビューで、ランキングの公開本文に誤りが見つかったまま残る (DID 可住地分母、死亡率と件数、従属人口指数と就労者、都道府県率の合算、単純平均と全国値、相関からの因果・算術の誤り)。原典で計算し直し、ランキングの解説の担当 (ranking-content-author) へ直しを渡す。
 - **UI-FIX-BLOG-ARTICLE-20261011 から受けた 3 件 (2026-11-24・週次 UI の指摘の owner)**: ① 2050 年の Geo 記事の本文に出る運用用語「保存則」を読者向けの言葉にする ② child-height-regional-gap の図のデータの欠け ③ cc-estat-04-aging-heatmap の図の文字。どれも R2 の article.md の改稿と再公開が要る。
 - **進捗 (2026-11-25・c0e99dfd1)**: `article-factual-check` の誤検知 2 点 (複数県の列挙・過去年の順位) を直し、本当の誤りを検出するテストも足した (63 件通過)。残り: 別指標の順位の誤検知 (「漁獲量4位の東京都は…19位」)、quality-gate の VALUE_MISMATCH の別年・別指標、リンク検査の穴。
+- **進捗 (2026-11-25・b8624d157)**: 1 文の 2 つ目の指標の順位を対象指標の順位と取り違える誤検知 (「漁獲量4位の東京都は…19位」) を直した (detection テスト 65 件通過)。残り: quality-gate の VALUE_MISMATCH の別年・別指標、リンク検査の穴。
 
 ### [CI-TOOLING-FOLLOWUP-02] CI と検査の道具に残る穴 (第 3 波の実行で見つけた分)
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [待ち:承認]
@@ -1978,6 +1980,7 @@ updated: 2026-11-01
 - **置換の前から止まっている 18 件 (作り直しが要る)**: `freelance-count`・`non-regular-employment-rate`・`convenience-store-sales`・`gini-coefficient-disposable-income`・`treatment-rate-mental-disorder-inpatient`・`treatment-rate-asthma-outpatient`・`vacant-housing-rate`・`telework-rate`・`convenience-store-count-commercial`・`municipal-general-administration-staff`・`designated-difficult-disease`・`fiscal-strength-index-prefecture`・`actual-income-worker-households-per-month`・`treatment-rate-schizophrenia-inpatient`・`physical-therapist-annual-income`・`dairy-cattle-count`・`wooden-housing-ratio`・`doctor-annual-income`。多くは観測値の更新で県別解説の順位・値が合わない (`pref-data-mismatch`)。
 - **完了条件の確認**: 送り箱が空になった後、R2 の ai-content を全件読み、「全国平均」が 18 件の分だけになっていることを確かめる。
 - **済み (2026-11-23)**: 2,145 件を publish-ai-content で 54 回に分けて公開し終えた。R2 の 2,167 件を読み直すと、「全国平均」が残るのは置換の前から止まっていた 18 件だけ。残りはこの 18 件を作り直すこと (観測値の更新で県別解説が合わないので、置換ではなく作り直しの経路で直す)。
+- **進捗 (2026-11-25・bdbc1cf24)**: 置換できる文脈の判定と公開 R2 を数える dry-run を足した。R2 の 2,169 件で「全国平均」が残るのは 18 件、うち置換できる 17・作り直しが要る 1 (`wooden-housing-ratio`)。置換後の 17 件のうち 16 件は `audit-ai-content.mjs` を通り、1 件は置換前から落ちる。次: 16 件を送り箱に出して publish-ai-content で公開 (2026-11-23 のオーナー判断「機械置換で出し直す」の範囲)、残り 2 件を作り直しの経路へ。
 
 ### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
 
@@ -2665,6 +2668,7 @@ updated: 2026-11-01
   ③ 機能別の固定値を metric config / attribution 由来に置き換える。④ 系譜 URL の到達性を定期監査に入れるか検討する。
 - **trigger**: 出典リンク切れ・誤表記の指摘、または図の出典の書式を変えるとき。
 - **完了条件**: 図ごとの出典がデータから導出され、手書きの出典 URL が監査対象になっている。
+- **進捗 (2026-11-25・722e81e15)**: ① の突き合わせスクリプトを足した。公開記事の data-source タグ 246 件のうち 63 件が食い違う (名前 28・URL 36・リンク切れ 1。リンク切れは通信失敗で本物か未確認)。照らす先は記事全体の導出出典で、図 1 枚ごとではない。スクリプトはまだどの skill・workflow からも呼ばれていない。テストは配線済みの detection テストに同居させた (`packages/ops/src/blog/lint/__tests__/` に新しいファイルを足すと `check-workspace-contract` が package.json か workflow への配線を求めるため)。②で入口を決めるときに独立ファイルへ分けて配線する。残り: 63 件の是正、②〜④。
 
 ### [BLOG-MUNI-SOURCE-LINK-01] ブログの図の直下カードから市区町村ランキングへ張れない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-23] [領域:サイト] [待ち:承認]
