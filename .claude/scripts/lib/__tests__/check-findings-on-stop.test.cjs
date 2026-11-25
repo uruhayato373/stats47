@@ -128,3 +128,40 @@ test("残作業という語の説明文は拾わず、見出しと「残作業:�
   assert.equal(unrecordedCandidates(assistantText("**ほかの残作業**\n- outbox の移行")).length, 1);
   assert.equal(unrecordedCandidates(assistantText("ほかの残作業: outbox の移行")).length, 1);
 });
+
+test("前回の位置から続きだけを読んでも、全部読んだときと同じ候補になる (HARNESS-SMALL-COSTS-01)", (t) => {
+  const { unrecordedCandidatesIncremental } = require(HOOK);
+  const file = path.join(os.tmpdir(), `stats47-findings-incremental-${process.pid}-${Date.now()}.jsonl`);
+  const crypto = require("node:crypto");
+  const stateFile = path.join(
+    os.tmpdir(),
+    `stats47-findings-scan-${crypto.createHash("sha1").update(path.resolve(file)).digest("hex").slice(0, 16)}.json`,
+  );
+  t.after(() => {
+    fs.rmSync(file, { force: true });
+    fs.rmSync(stateFile, { force: true });
+  });
+  const lines = [
+    handback(report("A が壊れている")),
+    assistantTool("TaskCreate", { subject: "後始末" }, "c1"),
+    toolResult("c1", "Task #7 created successfully: 後始末"),
+    assistantText("残作業: B を後で確認する。"),
+    assistantTool("Edit", { file_path: ".claude/todo/backlog.md" }, "e1"),
+    handback(report("C が再現する")),
+    assistantTool("TaskUpdate", { taskId: "7", status: "completed" }, "u1"),
+  ];
+  // 1 行ずつ足していき、毎回「続きから」と「全部」の結果が一致することを見る。最後の行は書きかけ (改行なし) の状態も通す。
+  let written = "";
+  for (const line of lines) {
+    fs.writeFileSync(file, written + line.slice(0, 10));
+    assert.deepEqual(unrecordedCandidatesIncremental(file), unrecordedCandidates(written));
+    written += `${line}\n`;
+    fs.writeFileSync(file, written);
+    assert.deepEqual(unrecordedCandidatesIncremental(file), unrecordedCandidates(written));
+  }
+  assert.deepEqual(unrecordedCandidatesIncremental(file), ["C が再現する"]);
+
+  // 同じパスに別の内容が置かれたら、古い状態を捨てて最初から読む
+  fs.writeFileSync(file, `${handback(report("D だけ"))}\n`);
+  assert.deepEqual(unrecordedCandidatesIncremental(file), ["D だけ"]);
+});
