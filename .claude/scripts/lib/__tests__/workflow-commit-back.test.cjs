@@ -273,6 +273,7 @@ test('sync-snapshots: ページの索引を作り直した後に指標の逆引�
   const keyFiles = [
     'packages/ranking/src/config/known-ranking-keys.ts',
     'apps/web/src/config/sitemap-ranking-keys.ts',
+    'apps/web/src/config/sitemap-ranking-lastmod.ts',
     TAG_KEYS,
     UNPUBLISHED_SLUGS,
     SITEMAP_BLOG,
