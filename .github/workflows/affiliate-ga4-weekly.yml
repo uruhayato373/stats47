@@ -79,13 +79,15 @@ jobs:
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          INPUT_START_DATE: ${{ github.event.inputs.start_date || '' }}
+          INPUT_END_DATE: ${{ github.event.inputs.end_date || '' }}
         run: |
           set -euo pipefail
           if [ -z "${GOOGLE_SERVICE_ACCOUNT_KEY_JSON:-}" ]; then
             echo "::error::GOOGLE_SERVICE_ACCOUNT_KEY_JSON secret 未設定"; exit 1
           fi
-          START_DATE="${{ github.event.inputs.start_date || '' }}"
-          END_DATE="${{ github.event.inputs.end_date || '' }}"
+          START_DATE="$INPUT_START_DATE"
+          END_DATE="$INPUT_END_DATE"
           if [ -n "$START_DATE" ] || [ -n "$END_DATE" ]; then
             ARGS=(--start-date "$START_DATE" --end-date "$END_DATE")
           else
@@ -108,10 +110,13 @@ jobs:
       - name: 📤 Publish raw snapshot to R2 state/ads/ga4-affiliate/
         id: publish
         if: steps.ga4.outcome == 'success'
+        env:
+          GA4_SNAPSHOT_FILE: ${{ steps.ga4.outputs.snapshot_file }}
+          GA4_SNAPSHOT_DATE: ${{ steps.ga4.outputs.snapshot_date }}
         run: |
           set -euo pipefail
-          FILE="${{ steps.ga4.outputs.snapshot_file }}"
-          DATE="${{ steps.ga4.outputs.snapshot_date }}"
+          FILE="$GA4_SNAPSHOT_FILE"
+          DATE="$GA4_SNAPSHOT_DATE"
           [ -n "$FILE" ] || { echo "::error::snapshot が無い"; exit 1; }
           [ -f "$FILE" ] || { echo "::error::snapshot が無い: $FILE"; exit 1; }
           STAGE=.local/r2/state/ads/ga4-affiliate
@@ -169,16 +174,19 @@ jobs:
       - name: 📝 Append weekly aggregate and commit back
         id: history
         if: steps.ga4.outcome == 'success'
+        env:
+          PUBLISH_FILE: ${{ steps.publish.outputs.file }}
+          PUBLISH_DATE: ${{ steps.publish.outputs.date }}
         run: |
           set -euo pipefail
-          node .claude/scripts/ads/append-ga4-affiliate-history.mjs "${{ steps.publish.outputs.file }}"
+          node .claude/scripts/ads/append-ga4-affiliate-history.mjs "$PUBLISH_FILE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/affiliate/ga4-affiliate-history.csv data/affiliate/affiliate-experiment-history.csv
           if git diff --cached --quiet; then
             echo "No aggregate changes"
           else
-            git commit -m "chore(ads): ga4 affiliate weekly aggregate ${{ steps.publish.outputs.date }} [skip ci]"
+            git commit -m "chore(ads): ga4 affiliate weekly aggregate $PUBLISH_DATE [skip ci]"
             # API取得とR2 pushを挟むのでdevelopが進みうる。push直前に取り直す。
             PUSHED=false
             for ATTEMPT in 1 2 3; do
@@ -194,7 +202,7 @@ jobs:
           git fetch --depth=1 origin develop
           git show FETCH_HEAD:data/affiliate/ga4-affiliate-history.csv > /tmp/remote-affiliate-history.csv
           git show FETCH_HEAD:data/affiliate/affiliate-experiment-history.csv > /tmp/remote-affiliate-experiment-history.csv
-          DATE="${{ steps.publish.outputs.date }}"
+          DATE="$PUBLISH_DATE"
           node -e '
             const fs=require("fs");
             const date=process.argv[2];
@@ -249,13 +257,18 @@ jobs:
       - name: 🚦 計測ゲート (GA4 失敗 / measurementGate blocked なら run を落とす)
         id: measurement_gate
         if: always()
+        env:
+          GA4_OUTCOME: ${{ steps.ga4.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          HISTORY_OUTCOME: ${{ steps.history.outcome }}
+          OPERATIONS_OUTCOME: ${{ steps.operations.outcome }}
         run: |
           set -euo pipefail
           for STEP in \
-            "ga4=${{ steps.ga4.outcome }}" \
-            "publish=${{ steps.publish.outcome }}" \
-            "history=${{ steps.history.outcome }}" \
-            "operations=${{ steps.operations.outcome }}"; do
+            "ga4=$GA4_OUTCOME" \
+            "publish=$PUBLISH_OUTCOME" \
+            "history=$HISTORY_OUTCOME" \
+            "operations=$OPERATIONS_OUTCOME"; do
             [ "${STEP#*=}" = "success" ] || { echo "::error::${STEP%%=*} step outcome=${STEP#*=}"; exit 1; }
           done
           node <<'NODE'
@@ -347,17 +360,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GA4_OUTCOME: ${{ steps.ga4.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          HISTORY_OUTCOME: ${{ steps.history.outcome }}
+          OPERATIONS_OUTCOME: ${{ steps.operations.outcome }}
+          GATE_OUTCOME: ${{ steps.measurement_gate.outcome }}
         run: |
           TITLE="[Affiliate Measurement Alert] 週次の収益計測・pilot運用経路に異常がある"
           {
             echo "確定7日の取得・R2 read-back・履歴commit-back・GA4/ASP成果/pilotゲートのいずれかが失敗しました。"
             echo
             echo "- run: ${RUN_URL}"
-            echo "- ga4: ${{ steps.ga4.outcome }}"
-            echo "- publish/read-back: ${{ steps.publish.outcome }}"
-            echo "- history commit-back: ${{ steps.history.outcome }}"
-            echo "- operations state: ${{ steps.operations.outcome }}"
-            echo "- measurement gate: ${{ steps.measurement_gate.outcome }}"
+            echo "- ga4: $GA4_OUTCOME"
+            echo "- publish/read-back: $PUBLISH_OUTCOME"
+            echo "- history commit-back: $HISTORY_OUTCOME"
+            echo "- operations state: $OPERATIONS_OUTCOME"
+            echo "- measurement gate: $GATE_OUTCOME"
             if [ -f data/affiliate/affiliate-operations-latest.json ]; then
               echo
               node -e '
@@ -396,9 +414,10 @@ jobs:
         if: always() && github.event_name == 'schedule' && steps.measurement_gate.outcome == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.run_id }}
         run: |
           gh issue list --state open --label affiliate-measurement-alert --limit 20 --json number --jq '.[].number' |
             while read -r NUMBER; do
               gh issue close "$NUMBER" --reason completed \
-                --comment "確定7日の取得・R2 read-back・履歴commit-back・GA4/ASP成果/pilotゲートが全て復旧しました (run ${{ github.run_id }})。"
+                --comment "確定7日の取得・R2 read-back・履歴commit-back・GA4/ASP成果/pilotゲートが全て復旧しました (run ${RUN_ID})。"
             done

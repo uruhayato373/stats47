@@ -4567,7 +4567,12 @@
         },
         "outcome": {
           "label": "1人あたりごみ排出量",
-          "pattern": "compare"
+          "pattern": "compare",
+          "data": [
+            {
+              "metric": "waste-per-capita-per-day"
+            }
+          ]
         }
       }
     },

@@ -44,6 +44,10 @@ env:
   CLOUDFLARE_R2_BUCKET_NAME: stats47
   R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
   WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
+  # workflow_dispatch の入力は run: へ直接展開せず env 経由で渡す (式インジェクション対策。ACTIONS-EXPRESSION-INJECTION-01)
+  INPUT_SLUG: ${{ github.event.inputs.slug }}
+  INPUT_PUBLISHED_AT: ${{ github.event.inputs.published_at }}
+  INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
 
 jobs:
   publish:
@@ -67,19 +71,19 @@ jobs:
 
       - name: ✅ Validate draft exists
         run: |
-          SLUG="${{ github.event.inputs.slug }}"
+          SLUG="$INPUT_SLUG"
           test -f "contents/blog/$SLUG/article.md" \
             || { echo "❌ ドラフトが無い: contents/blog/$SLUG/article.md"; exit 1; }
           # 既に公開済みなら二重公開しない (R2 に既存)
           echo "draft OK: $SLUG"
 
       - name: 🔎 Factual gate (数値捏造・rank 不整合の検出)
-        run: node .claude/scripts/blog/ci-factual-gate.mjs "${{ github.event.inputs.slug }}"
+        run: node .claude/scripts/blog/ci-factual-gate.mjs "$INPUT_SLUG"
 
       - name: 🗓 Stage draft → app/blog + set publishedAt
         run: |
-          SLUG="${{ github.event.inputs.slug }}"
-          PD="${{ github.event.inputs.published_at }}"
+          SLUG="$INPUT_SLUG"
+          PD="$INPUT_PUBLISHED_AT"
           [ -z "$PD" ] && PD="$(date -u +%Y-%m-%d)"
           mkdir -p ".local/r2/app/blog/$SLUG"
           cp -R "contents/blog/$SLUG/." ".local/r2/app/blog/$SLUG/"
@@ -101,7 +105,7 @@ jobs:
       # 素通りしていた (GSC高インプレ10記事の再発防止)。push 前に R2 公開をブロックする。
       - name: 🧱 Quality gate (構造・薄さ — 公開ブロック)
         run: |
-          SLUG="${{ github.event.inputs.slug }}"
+          SLUG="$INPUT_SLUG"
           # ゲートは写した先の記事の隣の review.md (blog-critic の PASS) を読む。消すのはゲートの後
           # (2026-11-14 に消す処理を写しの直後へ置き、審査済みの記事も必ず止まった。run 43857204363・43860072376)
           node .claude/scripts/blog/quality-gate.mjs "$SLUG"
@@ -112,13 +116,13 @@ jobs:
         run: |
           # article.md から semantic fingerprint を作り、変更時だけ
           # .local/image-staging/blog に bundle + exact plan を生成する。
-          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-blog-thumbnails.ts --slug "${{ github.event.inputs.slug }}"
+          npx tsx --tsconfig apps/web/scripts/tsconfig.ogp.json apps/web/scripts/generate-blog-thumbnails.ts --slug "$INPUT_SLUG"
 
       - name: 🖼️ Publish exact blog image set
         run: |
           PLAN=".local/image-generation-publish-plan-blog.json"
           test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
-          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+          if [ "$INPUT_DRY_RUN" = "false" ]; then
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
           else
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN" --dry-run
@@ -129,8 +133,8 @@ jobs:
       # prefix 内にもあるため、exact plan の楽観ロックを壊さないよう画像セット確定後に同期する。
       - name: 📤 Push article files to R2 (画像セット確定後)
         run: |
-          SLUG="${{ github.event.inputs.slug }}"
-          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+          SLUG="$INPUT_SLUG"
+          if [ "$INPUT_DRY_RUN" = "false" ]; then
             echo "本番: 記事ファイルを cloud へ push (app/blog/$SLUG)"
             # 上書きの前後で本文の版を private R2 に退避する (blog-auto-publish.yml と同じ)
             node .claude/scripts/blog/archive-blog-articles.mjs --slugs "$SLUG"
@@ -147,7 +151,7 @@ jobs:
 
       - name: 📤 Push all.json index to R2 (再生成した index を cloud へ)
         run: |
-          if [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+          if [ "$INPUT_DRY_RUN" = "false" ]; then
             echo "本番: index (all.json) を push"
             npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/blog
           else
@@ -158,7 +162,7 @@ jobs:
       - name: 🧹 Purge Workers Cache (本番公開時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
-          SLUG="${{ github.event.inputs.slug }}"
+          SLUG="$INPUT_SLUG"
           # 改稿版の公開で旧版の ISR のエントリが残らないよう、先に記事のエントリを消す (BLOG-ISR-STALE-ON-REVISE-01)
           npx tsx packages/r2-storage/src/scripts/purge-isr-routes.ts --routes "/blog/$SLUG" --apply
           npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --urls \
@@ -174,7 +178,7 @@ jobs:
       - name: ✅ Verify live (本番公開時のみ)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
-          SLUG="${{ github.event.inputs.slug }}"
+          SLUG="$INPUT_SLUG"
           sleep 5
           code=$(curl -s -o /dev/null -w "%{http_code}" -A "Mozilla/5.0 (compatible; Googlebot/2.1)" "https://stats47.jp/blog/$SLUG")
           echo "live: https://stats47.jp/blog/$SLUG → HTTP $code"
@@ -188,7 +192,7 @@ jobs:
       - name: 🧹 Remove published draft from contents/blog (ephemeral outbox)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
-          SLUG="${{ github.event.inputs.slug }}"
+          SLUG="$INPUT_SLUG"
           # outbox ごと消える前に、最後の review.md の指摘を台帳に残す (二重に記録しても行は増えない。
           # blog-auto-publish.yml の同じ step と同じ呼び出し)
           if [ -f "contents/blog/$SLUG/review.md" ]; then
@@ -251,8 +255,8 @@ jobs:
       - name: 📝 Summary
         run: |
           {
-            echo "### Publish Blog: ${{ github.event.inputs.slug }}"
-            echo "- dry_run: ${{ github.event.inputs.dry_run }}"
+            echo "### Publish Blog: $INPUT_SLUG"
+            echo "- dry_run: $INPUT_DRY_RUN"
             echo "- factual gate: passed"
             echo "- 🧹 contents/blog outbox: 公開後にドラフトを自動削除 (ephemeral)"
           } >> "$GITHUB_STEP_SUMMARY"

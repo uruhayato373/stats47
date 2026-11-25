@@ -7,7 +7,6 @@
 export {
   fetchPrefectureTopology,
   fetchMunicipalityTopology,
-  fetchAllCitiesTopology,
   type Logger,
 } from "./services";
 
