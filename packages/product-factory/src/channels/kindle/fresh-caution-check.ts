@@ -116,3 +116,37 @@ export function checkFreshCautions(
   }
   return out;
 }
+
+/** 同じ本の中で、別々の章に同じ文が現れた組。 */
+export interface DuplicateSentence {
+  readonly sentence: string;
+  readonly files: readonly string[];
+}
+
+/** これより短い文は定型の相づち (「次に見ます。」など) として数えない。 */
+const DUP_MIN_CHARS = 30;
+
+/**
+ * 1 冊の中で、2 つ以上の章に一字一句同じ文があるかを数える (KINDLE-FRESH-CAUTION-CHECK-01)。
+ * ブリーフの「⚠ の注意を本文にも書く」は、県の章ごとに同じ注記の文を生みやすい。第1章にまとめた注記は
+ * 県の章で省略してよい (ブリーフ側に書いた)。見出し行と表の行は文として数えない。
+ */
+export function findDuplicateSentences(files: readonly ManuscriptFile[]): DuplicateSentence[] {
+  const seen = new Map<string, Set<string>>();
+  for (const f of files) {
+    const prose = f.text
+      .split("\n")
+      .filter((line) => !/^\s*(#|\||[-*]\s*\|)/.test(line))
+      .join("\n");
+    for (const raw of prose.split(/(?<=。)/)) {
+      const sentence = raw.replace(/\s+/g, "");
+      if (sentence.length < DUP_MIN_CHARS) continue;
+      const set = seen.get(sentence) ?? new Set<string>();
+      set.add(f.file);
+      seen.set(sentence, set);
+    }
+  }
+  return [...seen]
+    .filter(([, set]) => set.size >= 2)
+    .map(([sentence, set]) => ({ sentence, files: [...set] }));
+}

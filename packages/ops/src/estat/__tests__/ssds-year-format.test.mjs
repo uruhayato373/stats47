@@ -176,10 +176,10 @@ test("判定: 年度で呼ぶ調査 (学校基本調査・学校保健統計調�
 });
 
 test("判定: 期間が年度でも暦年でもなく、調査の呼び方も確かめられていない項目は決めない", () => {
-  // 固定資産の価格等の概要調書 (1月1日) は、表題での年の呼び方をまだ確かめていない
-  const verdict = decide("0000010102", "B1201");
+  // 耕地及び作付面積統計 (7月15日) は、表題での年の呼び方をまだ確かめていない
+  const verdict = decide("0000010103", "C3107");
   assert.equal(verdict.yearFormat, null);
-  assert.match(verdict.reason, /1月1日/);
+  assert.match(verdict.reason, /7月15日/);
   // 軽自動車数 (7月1日) は期間では決まらないが、市町村税課税状況等の調の表題が「令和６年度」なので年度に決まる
   assert.equal(decide("0000010108", "H7207").yearFormat, "fiscal");
   const unnamed = buildRules({ ...decisions, surveyNaming: decisions.surveyNaming.filter((row) => row.survey !== "市町村税課税状況等の調") });
@@ -230,7 +230,7 @@ test("判定: 定義ページの期間が誤っている項目は、理由付き
 
 test("判定: 複数の符号から計算する指標は、全部の符号で決める", () => {
   assert.equal(decide("0000010101", ["A811105", "A1303"]).yearFormat, "calendar");
-  assert.equal(decide("0000010101", ["A1101", "B1201"]).yearFormat, null);
+  assert.equal(decide("0000010101", ["A1101", "C3107"]).yearFormat, null);
 });
 
 const METRICS = [
@@ -268,9 +268,9 @@ test("検査: 逆向きの誤り (年度の指標を暦年にする) と yearFor
 });
 
 test("検査: 判定できない指標は、理由付きの一覧に無ければ落とす (どちらかへ黙って倒さない)", () => {
-  const metrics = [...METRICS, { key: "land-area-fixed-asset", statsDataId: "0000010102", cdCat01: "B1201", yearFormat: "calendar" }];
+  const metrics = [...METRICS, { key: "land-area-fixed-asset", statsDataId: "0000010103", cdCat01: "C3107", yearFormat: "calendar" }];
   assert.deepEqual(checkSsdsYearFormats(metrics, index, NO_UNDETERMINED).errors.map((error) => [error.code, error.key]), [["UNDETERMINED_UNLISTED", "land-area-fixed-asset"]]);
-  const listed = { ...decisions, undetermined: [{ key: "land-area-fixed-asset", reason: "期間「1月1日」は年度か暦年か決まらない" }] };
+  const listed = { ...decisions, undetermined: [{ key: "land-area-fixed-asset", reason: "期間「7月15日」は年度か暦年か決まらない" }] };
   const result = checkSsdsYearFormats(metrics, index, listed);
   assert.deepEqual(result.errors, []);
   assert.deepEqual(result.undetermined.map((row) => row.key), ["land-area-fixed-asset"]);
@@ -281,8 +281,8 @@ test("検査: 一覧は縮小専用。決まるようになった指標・消え
   assert.deepEqual(checkSsdsYearFormats(METRICS, index, stale).errors.map((error) => [error.code, error.key]), [["STALE_UNDETERMINED", "total-population"]]);
   const unknown = { ...decisions, undetermined: [{ key: "no-such-metric", reason: "消えた指標" }] };
   assert.deepEqual(checkSsdsYearFormats(METRICS, index, unknown).errors.map((error) => [error.code, error.key]), [["UNKNOWN_KEY", "no-such-metric"]]);
-  const metrics = [...METRICS, { key: "land-area-fixed-asset", statsDataId: "0000010102", cdCat01: "B1201", yearFormat: "calendar" }];
-  const listed = { ...decisions, undetermined: [{ key: "land-area-fixed-asset", reason: "期間「1月1日」は年度か暦年か決まらない" }] };
+  const metrics = [...METRICS, { key: "land-area-fixed-asset", statsDataId: "0000010103", cdCat01: "C3107", yearFormat: "calendar" }];
+  const listed = { ...decisions, undetermined: [{ key: "land-area-fixed-asset", reason: "期間「7月15日」は年度か暦年か決まらない" }] };
   assert.deepEqual(checkSsdsYearFormats(metrics, index, listed, { ceiling: 0 }).errors.map((error) => error.code), ["OVER_CEILING"]);
 });
 
@@ -322,11 +322,11 @@ test("生成器: 年の区切りを固定の fiscal ではなく、出典の期�
 test("生成器: 年の区切りが決まらない指標は書かずに止まる", () => {
   const result = runGenerator([
     spec({ statsDataId: "0000010101", cdCat01: "A1101", key: "zz-year-format-probe-census", title: "年の区切りの検査用の指標その一" }),
-    spec({ statsDataId: "0000010102", cdCat01: "B1201", key: "zz-year-format-probe-unknown", title: "年の区切りの検査用の指標その三" }),
+    spec({ statsDataId: "0000010103", cdCat01: "C3107", key: "zz-year-format-probe-unknown", title: "年の区切りの検査用の指標その三" }),
   ]);
   assert.equal(result.status, 1);
   assert.equal(yearFormatOf(result.stdout, "zz-year-format-probe-unknown"), null);
-  assert.match(result.stdout + result.stderr, /zz-year-format-probe-unknown[\s\S]*1月1日/);
+  assert.match(result.stdout + result.stderr, /zz-year-format-probe-unknown[\s\S]*7月15日/);
   // 決まる指標まで巻き添えで止めない
   assert.equal(yearFormatOf(result.stdout, "zz-year-format-probe-census"), "calendar");
 });

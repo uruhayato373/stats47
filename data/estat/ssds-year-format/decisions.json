@@ -105,6 +105,16 @@
       "survey": "参議院議員通常選挙結果調",
       "yearFormat": "calendar",
       "evidence": "2026-11-24 に e-Stat の統計表一覧ページで表題「令和４年7月１０日執行参議院議員通常選挙結果調」(執行の年月日で呼ぶ) を確認 (https://www.e-stat.go.jp/stat-search/files?toukei=00200236)"
+    },
+    {
+      "survey": "固定資産の価格等の概要調書（土地）",
+      "yearFormat": "fiscal",
+      "evidence": "2026-11-25 に総務省の地方税制度のページで表題「令和4年度　固定資産の価格等の概要調書」「令和3年度　固定資産の価格等の概要調書」「平成30年度　固定資産の価格等の概要調書」(年度で呼ぶ) を確認 (https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/ichiran08.html)。表題の「（土地）」は概要調書の区分で、年の呼び方は同じ調査の表題による。期間は 1月1日"
+    },
+    {
+      "survey": "農業経営統計調査",
+      "yearFormat": "calendar",
+      "evidence": "2026-11-25 に農林水産省のページで表題「令和6年農業経営統計調査（営農類型別経営統計）の民間委託による調査実施状況等」(年で呼ぶ) と、営農類型別経営統計の公表の一覧が「令和2年」「令和3年」「令和4年」(年) で並ぶことを確認 (https://www.maff.go.jp/j/tokei/kouhyou/noukei/index.html、https://www.maff.go.jp/j/tokei/kouhyou/noukei/einou/index.html)。期間は 年計。農産物生産費統計 (同じ調査の別の統計) の年の呼び方は確かめていない"
     }
   ],
   "itemOverrides": [
@@ -246,20 +256,12 @@
       "reason": "C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
     },
     {
-      "key": "agricultural-income-ratio",
-      "reason": "L210101 期間「年計」(農業経営統計調査) は年度か暦年か決まらない、L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
-    },
-    {
       "key": "agricultural-output-per-employed-person",
       "reason": "C310410 期間「センサス 実施年の 2月1日」(農林業センサス、農業センサス) は年度か暦年か決まらない"
     },
     {
       "key": "annual-minimum-relative-humidity",
       "reason": "B4112 期間「年間」(過去の気象データ) は年度か暦年か決まらない"
-    },
-    {
-      "key": "assessed-residential-land-area",
-      "reason": "B120103 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
     },
     {
       "key": "average-life-expectancy-female-20",
@@ -272,10 +274,6 @@
     {
       "key": "average-life-expectancy-male",
       "reason": "I1201 期間「─」(完全生命表、都道府県別生命表、市区町村別生命表) は年度か暦年か決まらない"
-    },
-    {
-      "key": "average-propensity-to-consume-of-farm-households",
-      "reason": "L2203 期間「年間」(農業経営統計調査) は年度か暦年か決まらない"
     },
     {
       "key": "average-road-traffic-volume",
@@ -300,10 +298,6 @@
     {
       "key": "elderly-on-public-assistance-per-1000-65plus",
       "reason": "J110702 期間「7月31日」(被保護者調査) は年度か暦年か決まらない"
-    },
-    {
-      "key": "farm-household-expenditure-per-month",
-      "reason": "L2201 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
     },
     {
       "key": "fire-department-branch-count-per-100-km2",
@@ -418,10 +412,6 @@
       "reason": "H5509 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
     },
     {
-      "key": "non-agricultural-income-ratio",
-      "reason": "L210102 期間「年計」(農業経営統計調査) は年度か暦年か決まらない、L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
-    },
-    {
       "key": "non-flush-toilet-population-city",
       "reason": "H550701 期間「―」(一般廃棄物処理事業実態調査) は年度か暦年か決まらない"
     },
@@ -484,30 +474,6 @@
     {
       "key": "total-area-prefecture-ratio",
       "reason": "市区町村の指標 #B01101 の項目名は「総面積（都道府県面積に占める割合）」で、同じ符号の都道府県の指標「面積割合（全国面積に占める割合）」と分母が違う (2026-11-14 に https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000020302 で確認)。市区町村の指標の計算式は公開されていないので、都道府県の計算式を当てはめず、cityIndicators にも足さない"
-    },
-    {
-      "key": "total-assessed-land-area",
-      "reason": "B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
-    },
-    {
-      "key": "total-assessed-land-area-ratio",
-      "reason": "B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
-    },
-    {
-      "key": "total-assessed-land-area-ratio-field",
-      "reason": "B120102 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
-    },
-    {
-      "key": "total-assessed-land-area-ratio-paddy",
-      "reason": "B120101 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
-    },
-    {
-      "key": "total-assessed-land-area-ratio-residential",
-      "reason": "B120103 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない、B1201 期間「1月1日」(固定資産の価格等の概要調書（土地）) は年度か暦年か決まらない"
-    },
-    {
-      "key": "total-farm-household-income",
-      "reason": "L2100 期間「年計」(農業経営統計調査) は年度か暦年か決まらない"
     },
     {
       "key": "vehicle-kilometers-traveled",

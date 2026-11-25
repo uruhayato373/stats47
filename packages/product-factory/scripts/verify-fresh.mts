@@ -30,7 +30,7 @@ import { fetchRankingValues } from "../src/data/load-ranking-values";
 import { PREFECTURE_BY_CODE5 } from "../src/data/prefectures";
 import { extractKanjiClaims } from "../src/text/kanji-numeral";
 import { judgeField, type ValueRow } from "../src/channels/kindle/ai-content-composer";
-import { checkFreshCautions, type CautionMetric } from "../src/channels/kindle/fresh-caution-check";
+import { checkFreshCautions, findDuplicateSentences, type CautionMetric } from "../src/channels/kindle/fresh-caution-check";
 import { METRICS_REGISTRY } from "@stats47/data-configs";
 
 const PF_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -152,6 +152,14 @@ async function verifyBook(bookId: string): Promise<Finding[]> {
     const manuscripts = files.map((file) => ({ file, text: readFileSync(join(dir, file), "utf8") }));
     for (const c of checkFreshCautions(manuscripts, metrics)) {
       out.push({ file: `${bookId}/${c.file}`, level: c.level, msg: `[${c.code}] ${c.msg}` });
+    }
+    // 本の中の同じ文 (章をまたぐ一字一句の重複)。注記は第1章にまとめ、県の章では省略してよい
+    for (const d of findDuplicateSentences(manuscripts)) {
+      out.push({
+        file: `${bookId}/${d.files[0]}`,
+        level: "warn",
+        msg: `[dup-sentences] ${d.files.length} 章に同じ文: 「${d.sentence.slice(0, 40)}…」 (${d.files.join(", ")})`,
+      });
     }
   }
 

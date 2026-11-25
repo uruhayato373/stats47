@@ -15,7 +15,10 @@ export function inspectThemePayload(payload, namespace) {
     rows = Object.values(payload.partitions).flatMap((part) => {
       const values = Array.isArray(part) ? part : part?.values ?? part?.rows;
       if (!Array.isArray(values)) throw new Error("ranking partition must contain rows");
-      return values;
+      // 推計人数が少なく順位から外した県年 (referenceValues) も値は残っている。観測値のある県として数える
+      // (DATA-WAGE-TEACHER-COVERAGE-01 で values から移っただけの県を coverage-regression にしない)
+      const reference = !Array.isArray(part) && Array.isArray(part?.referenceValues) ? part.referenceValues : [];
+      return [...values, ...reference];
     });
   }
   const byYear = new Map();
