@@ -6,7 +6,6 @@ import { formatValueWithPrecision, getMaxDecimalPlaces } from "@stats47/utils";
 import { BRAND, COLOR_SCHEMES, FONT, RADIUS, SPACING, type ThemeName } from "../../themes/brand";
 import type { RankingEntry, RankingMeta } from "../../types/ranking";
 import { SafetyZoneOverlay } from "../utils/SafetyZoneOverlay";
-import { SITE } from "@stats47/types";
 import { DARK_PAPER_RGB } from "../../themes/brand";
 
 /** テーブルの表示スタイル */
@@ -149,7 +148,7 @@ export const RankingTable: React.FC<RankingTableProps> = ({
           isDark={isDark}
           themeColors={colors}
         />
-        {/* 右列 25-47 + ウォーターマーク行（24枠目）で左列と行高を統一 */}
+        {/* 右列 25-47 + 空き枠（24枠目）で左列と行高を統一 */}
         <Column
           entries={rightEntries}
           unit={meta.unit}
@@ -157,7 +156,7 @@ export const RankingTable: React.FC<RankingTableProps> = ({
           isNeon={isNeon}
           isDark={isDark}
           themeColors={colors}
-          footer={<WatermarkRow isNeon={isNeon} isDark={isDark} themeColors={colors} />}
+          footer={<SpacerRow />}
         />
       </div>
 
@@ -214,40 +213,8 @@ const Column: React.FC<ColumnProps> = ({
   </div>
 );
 
-interface WatermarkRowProps {
-  isNeon: boolean;
-  isDark: boolean;
-  themeColors: (typeof COLOR_SCHEMES)[ThemeName];
-}
-
-const WatermarkRow: React.FC<WatermarkRowProps> = ({ isNeon, isDark, themeColors }) => {
-  const cardBg = isNeon
-    ? isDark ? `rgba(${DARK_PAPER_RGB}, 0.4)` : "rgba(255, 255, 255, 0.6)"
-    : themeColors.card;
-
-  return (
-    <div
-      style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: cardBg,
-        borderRadius: 8,
-        border: `1px solid ${isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.03)"}`,
-      }}
-    >
-      <span style={{
-        fontSize: 22,
-        fontWeight: FONT.weight.bold,
-        color: isDark ? "rgba(71, 85, 105, 0.7)" : "rgba(148, 163, 184, 0.8)",
-        letterSpacing: 2,
-      }}>
-        {SITE.domain}
-      </span>
-    </div>
-  );
-};
+/** 右列の 24 枠目。左列と行高をそろえる空き枠 (発行元は画像に入れず投稿文で名乗る: .claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01) */
+const SpacerRow: React.FC = () => <div style={{ flex: 1 }} />;
 
 interface CardRowProps {
   entry: RankingEntry;

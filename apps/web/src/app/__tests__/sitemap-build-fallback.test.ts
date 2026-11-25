@@ -20,6 +20,7 @@ import { describe, it, expect, vi } from "vitest";
 import { PUBLISHABLE_CITIES } from "@/features/area-profile/constants/publishable-cities";
 
 import { SITEMAP_BLOG_ENTRIES, SITEMAP_SURVEY_IDS, SITEMAP_TAG_ENTRIES } from "@/config/sitemap-blog-entries";
+import { SITEMAP_RANKING_LASTMOD } from "@/config/sitemap-ranking-lastmod";
 import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
 
 import sitemap from "../sitemap";
@@ -134,6 +135,17 @@ describe("sitemap ビルド時フォールバック (R2 が空でも空にしな
       const entries = await sitemap({ id: SEGMENT_ID.ranking });
       expect(entries).toHaveLength(n);
       expect(entries.every((e) => e.url.includes("/ranking/"))).toBe(true);
+    });
+
+    it("lastmod は SITEMAP_RANKING_LASTMOD から出て、全件が同じ日付にならない (日付の無いキーは出さない)", async () => {
+      const entries = await sitemap({ id: SEGMENT_ID.ranking });
+      const days = new Set(
+        entries.flatMap((e) => (e.lastModified ? [new Date(e.lastModified).toISOString().slice(0, 10)] : [])),
+      );
+      expect(days.size).toBeGreaterThan(1);
+      const [key, day] = [...SITEMAP_RANKING_LASTMOD].find(([k]) => KNOWN_RANKING_KEYS.has(k)) ?? [];
+      const sample = entries.find((e) => e.url.endsWith(`/ranking/${key}`));
+      expect(sample?.lastModified).toEqual(new Date(`${day}T00:00:00.000Z`));
     });
 
     it("err のとき", async () => {

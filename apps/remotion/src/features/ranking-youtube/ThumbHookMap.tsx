@@ -6,7 +6,6 @@ import type { TileGridCell } from "@stats47/visualization";
 
 import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared/themes/brand";
 import type { RankingEntry } from "@/shared/types/ranking";
-import { SITE } from "@stats47/types";
 import { LANDSCAPE_TILE_LAYOUT } from "../../shared/utils/video-tile-layout";
 import { to2DigitPrefCode } from "@stats47/area";
 
@@ -198,39 +197,7 @@ export const ThumbHookMap: React.FC<ThumbHookMapProps> = ({
           zIndex: 10,
         }}
       >
-        {/* stats47 バッジ */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            marginBottom: 24,
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: BRAND.primary,
-              color: "#FFFFFF",
-              padding: "4px 14px",
-              borderRadius: 6,
-              fontSize: 16,
-              fontWeight: FONT.weight.black,
-              letterSpacing: 0.5,
-            }}
-          >
-            stats47
-          </div>
-          <span
-            style={{
-              fontSize: 15,
-              fontWeight: FONT.weight.bold,
-              color: colors.muted,
-              letterSpacing: 1,
-            }}
-          >
-            {SITE.name}
-          </span>
-        </div>
+        {/* 発行元 (stats47・サイト名) は画像に入れず投稿文で名乗る (.claude/rules/chart-image-copy.md・IMAGE-PUBLISHER-REMOVAL-01) */}
 
         {/* hookText — メインの大きな文字 */}
         <div
