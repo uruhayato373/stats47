@@ -20,9 +20,11 @@ const japan = step('Regenerate official national series');
 const ranking = step('Regenerate scoped ranking');
 const full = step('Regenerate derived');
 const municipality = step('Regenerate scoped municipality');
-const tsx = path.join(root, 'node_modules/.bin/tsx');
+// node_modules/.bin/tsx は Windows では tsx.cmd で spawnSync から直接起動できない (status: null)。
+// node に tsx を読み込ませる形にして、どの OS でも同じ起動にする。
+const tsxNodeArgs = ['--import', 'tsx'];
 const keys = 'annual-clear-days,annual-precipitation';
-const registryResult = spawnSync(tsx, ['-r', './packages/ranking/src/scripts/setup-cli.js', '-e', `
+const registryResult = spawnSync(process.execPath, [...tsxNodeArgs, '-r', './packages/ranking/src/scripts/setup-cli.js', '-e', `
   const { listAllMetrics } = require('@stats47/data-configs');
   const { GONE_RANKING_KEYS } = require('./packages/ranking/src/config/gone-ranking-keys.ts');
   const { activeNormalizationOptions } = require('./packages/ranking/src/scripts/generate-ranking-normalized-values.ts');
@@ -51,7 +53,7 @@ const fixture = JSON.parse(fs.readFileSync('fixture.json', 'utf8'));
 const keys = process.env.REFRESH_METRIC.split(',');
 fs.appendFileSync(process.env.CALL_LOG, JSON.stringify(args) + '\\n');
 if (args.includes('-e') || args.some(arg => arg.endsWith('resolve-refresh-scope.ts'))) {
-  const result = spawnSync(process.env.REAL_TSX, args.slice(1), { env: process.env, stdio: 'inherit' });
+  const result = spawnSync(process.execPath, ['--import', 'tsx', ...args.slice(1)], { env: process.env, stdio: 'inherit' });
   process.exit(result.status ?? 1);
 }
 const has = file => args.some(arg => arg.endsWith(file));
@@ -124,7 +126,6 @@ if (has('diff-push-r2.ts') && fixture.pushFails) process.exit(1);
         ...process.env,
         PATH: `${bin}:${process.env.PATH}`,
         CALL_LOG: path.join(dir, 'calls.jsonl'),
-        REAL_TSX: tsx,
         NODE_ENV: 'production',
         SNAPSHOT_SCOPE: 'ranking',
         REFRESH_METRIC: keys,
