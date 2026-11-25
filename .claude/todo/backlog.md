@@ -973,7 +973,7 @@ updated: 2026-11-01
 - **完了条件**: 救急の下書きが審査 PASS で outbox にあり、交通事故死傷者と保育の待機の扱いが決まって実行され、放課後児童クラブの待機児童の指標が取り込まれているか、取り込みのカードが起票されている。
 - **オーナー決定 (2026-11-24)**: 推奨どおり (b) 新記事は書かず既存 2 記事の brushup でランキングへのリンクと図を足す を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: traffic-accident-deaths-regional-risk と waiting-children-progress の brushup を起こす
 - **済み (2026-11-25)**: 救急の下書きを blog-critic で審査し、因果の断定を弱めて PASS にした (`3928e4f86`)。(b) を実行し、`traffic-accident-deaths-regional-risk` に死傷者数のランキングの図とリンク・交通量×死者数の散布図を足し、出典を確かめられない記述を外した (`f85633c9f`)。`waiting-children-progress` に待機児童数のランキングの図とリンクを足し、元データを失った図を R2 から作り直した (`3880d313a`)。3 本とも published:false で送り箱にあり、quality-gate blocker 0・ci-factual-gate 通過・critic PASS。
-- **公開 (2026-11-25)**: 2 本の再公開は本番の h1 が新版になった。救急の新記事は R2 に公開し sitemap の一覧にも入れた (`b928413dc`) が、middleware の `isKnownPublished` はビルド時の一覧を読むので、本番は次の main へのデプロイまで 410 を返す。**次**: デプロイの後に `curl -sI https://stats47.jp/blog/ambulance-hospital-arrival-time-prefecture-gap` が 200 になることを確かめる。
+- **公開 (2026-11-25)**: 2 本の再公開は本番の h1 が新版になった。救急の新記事は R2 に公開し sitemap の一覧にも入れた (`b928413dc`) が、middleware の `isKnownPublished` はビルド時の一覧を読むので、本番は次の main へのデプロイまで 410 を返す。2026-11-25 のデプロイ (PR #1301・run 45516018452) の後に本番 200 と h1 を確かめた。残りは下の放課後児童クラブの取り込みだけ。
 - **残り**: 放課後児童クラブの待機児童の指標の取り込み (上の「取り込み」の項)。
 
 ### [BLOG-RELEASE-CALENDAR-FOLLOWUP-01] 公表暦で見つかった年次更新待ちの取り込みと、国勢調査の集計ごとの公表
