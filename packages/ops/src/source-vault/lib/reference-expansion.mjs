@@ -66,6 +66,13 @@ export function loadChannelIndex(root = EXPANSION_ROOT) {
     for (const p of readJson(path.join(pagesDir, file)).pages ?? [])
       pages.set(p.id, { kind: p.kind, published: p.published === true, rankingKeys: p.rankingKeys ?? [] });
   }
+  // 同じ指標の見方違いのページは親のページの計算方法へ統合した (2026-11-25)。転送の台帳で norm を持つキーは、
+  // 指標が親のページの見方として公開されているので、親が公開中なら公開中とみなす
+  for (const r of readJson(path.join(root, datasetPath('site.ranking-redirects'))).redirects ?? []) {
+    if (!r.norm) continue;
+    const parent = pages.get(`ranking:${r.to}`);
+    if (parent?.published) pages.set(`ranking:${r.from}`, { kind: 'ranking', published: true, rankingKeys: [r.from], viewOf: r.to });
+  }
   for (const a of readJson(path.join(root, datasetPath('note.articles'))).articles) {
     const rankingKeys = (a.stats47Targets ?? []).map((t) => t.match(/^\/ranking\/([^/?#]+)/)?.[1]).filter(Boolean);
     pages.set(`note:${a.key}`, { kind: 'note', published: a.status === 'published', rankingKeys, title: a.title });

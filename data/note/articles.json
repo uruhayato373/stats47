@@ -6002,7 +6002,7 @@
       },
       "stats47Targets": [
         "/ranking/healthcare-expenditure-ratio-multi-person-households",
-        "/ranking/physicians-in-medical-facilities-per-100k",
+        "/ranking/physicians-in-medical-facilities?norm=per_population",
         "/ranking/ratio-65-plus"
       ],
       "nextBestArticle": "a-kakei-fukuoka"
@@ -10035,7 +10035,7 @@
       },
       "stats47Targets": [
         "/ranking/suicide-count",
-        "/ranking/traffic-accident-deaths-per-100k"
+        "/ranking/traffic-accident-deaths-per-100-accidents?norm=traffic-accident-deaths-per-100k"
       ],
       "noteUrl": "https://note.com/stats47/n/n5443898bbe1c",
       "publishedAt": "2026-10-13"
@@ -12040,7 +12040,7 @@
         "verifiedAt": "2026-11-05T00:40:46.991Z"
       },
       "stats47Targets": [
-        "/ranking/dental-clinic-count-per-100k",
+        "/ranking/dental-clinic-count?norm=per_population",
         "/ranking/dental-fee-consumption-expenditure",
         "/ranking/health-medical-expenditure-total"
       ],
