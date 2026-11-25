@@ -6,6 +6,7 @@
 // - mixed-cell: パネルを含むセルが文章・見出しも直に持つ (パネルを含むセルは余白を持たないので、文章が線に接する)
 // - own-border: 格子の段 (格子の直下の要素) が自分でも枠を持つ。格子の線のすぐ内側にもう 1 本の線が出て 2 重に見える
 //   (2026-11-18 市区町村ランキングの「分布の要点」と商品の案内の段)。段の内側に余白を空けて置いた枠付きの表は数えない
+// - edge-double: 外枠の線 (ヘッダー下線・フッター上線・SidebarInset の outline) と本文の格子・右レールのカードの線が 1px ずれて並ぶ
 // 静的な検査 (design-system:check の panels-in-line-grid) は書き方を止め、こちらは描いた結果を見る。
 
 /**
@@ -70,6 +71,64 @@ export function collectLineGridIssues() {
         (side) => parseFloat(st[`border${side}Width`]) > 0 && st[`border${side}Style`] !== "none"
       );
       if (sides.length >= 2) issues.push(`own-border    ${label(cell)}`);
+    }
+  }
+  // (4) 外枠の線 (ヘッダーの下線・フッターの上線・SidebarInset の outline) と、本文の格子のセルの影・右レールのカードの線が
+  // 1px ずれて並ぶ (2026-11-25。本文の余白をなくした後も格子が外枠の p-px を持ち、4 辺が 2 重に見えた)
+  const inset = column.closest("[data-slot=sidebar-inset]");
+  if (inset) {
+    const box = inset.getBoundingClientRect();
+    const shellLines = [];
+    const header = inset.querySelector(":scope > header");
+    if (header && parseFloat(getComputedStyle(header).borderBottomWidth) > 0) {
+      const r = header.getBoundingClientRect();
+      shellLines.push({ name: "header", o: "H", pos: r.bottom - 1, a: r.left, b: r.right });
+    }
+    const footer = inset.querySelector(":scope > footer");
+    if (footer && parseFloat(getComputedStyle(footer).borderTopWidth) > 0) {
+      const r = footer.getBoundingClientRect();
+      shellLines.push({ name: "footer", o: "H", pos: r.top, a: r.left, b: r.right });
+    }
+    const ist = getComputedStyle(inset);
+    const ow = parseFloat(ist.outlineWidth);
+    if (ist.outlineStyle !== "none" && ow > 0) {
+      const off = (parseFloat(ist.outlineOffset) || 0) + ow;
+      shellLines.push({ name: "outline-left", o: "V", pos: box.left - off, a: box.top, b: box.bottom });
+      shellLines.push({ name: "outline-right", o: "V", pos: box.right + off - ow, a: box.top, b: box.bottom });
+    }
+    // 中の線は SidebarInset の overflow-clip で切られる位置にあれば見えない
+    const inside = (o, pos) => (o === "H" ? pos >= box.top && pos < box.bottom : pos >= box.left && pos < box.right);
+    const contentLines = [];
+    for (const cell of outer.children) {
+      if (!visible(cell)) continue;
+      const r = cell.getBoundingClientRect();
+      contentLines.push(
+        { el: cell, o: "H", pos: r.top - 1, a: r.left, b: r.right },
+        { el: cell, o: "H", pos: r.bottom, a: r.left, b: r.right },
+        { el: cell, o: "V", pos: r.left - 1, a: r.top, b: r.bottom },
+        { el: cell, o: "V", pos: r.right, a: r.top, b: r.bottom }
+      );
+    }
+    for (const card of inset.querySelectorAll("[data-slot=shell-rail] [data-slot=card]")) {
+      if (!visible(card)) continue;
+      const r = card.getBoundingClientRect();
+      contentLines.push(
+        { el: card, o: "H", pos: r.top, a: r.left, b: r.right },
+        { el: card, o: "H", pos: r.bottom - 1, a: r.left, b: r.right },
+        { el: card, o: "V", pos: r.left, a: r.top, b: r.bottom },
+        { el: card, o: "V", pos: r.right - 1, a: r.top, b: r.bottom }
+      );
+    }
+    const seen = new Set();
+    for (const s of shellLines) {
+      for (const c of contentLines) {
+        if (c.o !== s.o || !inside(c.o, c.pos)) continue;
+        if (Math.abs(Math.round(c.pos) - Math.round(s.pos)) !== 1) continue;
+        if (Math.min(c.b, s.b) - Math.max(c.a, s.a) <= 0) continue;
+        if (seen.has(s.name)) continue;
+        seen.add(s.name);
+        issues.push(`edge-double   ${s.name} ${label(c.el)}`);
+      }
     }
   }
   return { issues };

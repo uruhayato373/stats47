@@ -46,7 +46,8 @@ export function SingleSelectToggleGroup<Value extends string>({
           value={option.value}
           title={option.title}
           disabled={option.disabled}
-          className="min-h-11 sm:min-h-0"
+          // 隣り合う項目の線を 1px 重ねて 1 本にする (spacing=0 の線を畳む指定がテンプレートの写しに無い。2026-11-25)
+          className="-ml-px min-h-11 first:ml-0 sm:min-h-0"
         >
           {option.label}
         </ToggleGroupItem>

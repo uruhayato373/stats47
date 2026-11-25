@@ -47,6 +47,41 @@ test("格子の段が自分でも枠を持つと own-border として数え、�
   });
 });
 
+// 実物の骨組み (SidebarInset の outline・ヘッダーの下線・フッターの上線) の中に本文の格子と右レールを置く
+const shell = ({ columnPadding, railMargin }) => {
+  const line = "#e5e5e5";
+  return `<body style="margin:0"><div class="relative" style="padding:8px">
+    <div data-slot="sidebar-inset" style="outline:1px solid ${line};overflow:clip;width:800px">
+      <header style="height:56px;border-bottom:1px solid ${line};box-sizing:border-box"></header>
+      <div style="display:grid;grid-template-columns:1fr 200px;gap:16px;align-items:start">
+        <div data-slot="panel-grid" style="display:grid;gap:1px;padding:${columnPadding}">
+          <div data-slot="shell-main" style="display:contents"></div>
+          <section style="box-shadow:0 0 0 1px ${line};padding:16px">見出し</section>
+          <section style="box-shadow:0 0 0 1px ${line};padding:16px">本文</section>
+        </div>
+        <aside data-slot="shell-rail" style="margin:${railMargin}">
+          <div data-slot="card" style="border:1px solid ${line};height:80px">レール</div>
+        </aside>
+      </div>
+      <footer style="border-top:1px solid ${line};height:40px"></footer>
+    </div></div></body>`;
+};
+
+test("外枠の線と本文の格子・右レールのカードの線が 1px ずれて並ぶと edge-double として辺ごとに数える", async (t) => {
+  // 2026-11-25 の実例: 本文の余白をなくした後も一番外側の格子が p-px を持ち、4 辺が 2 重に見えた
+  await withPage(t, shell({ columnPadding: "1px", railMargin: "0" }), async (page) => {
+    const { issues } = await evaluateLineGridIssues(page);
+    const sides = issues.filter((i) => i.startsWith("edge-double")).map((i) => i.split(/\s+/)[1]).sort();
+    assert.deepEqual(sides, ["footer", "header", "outline-left", "outline-right"], JSON.stringify(issues));
+  });
+});
+
+test("一番外側の格子が外枠を持たず、レールを上と右に 1px 出すと edge-double は 0 件", async (t) => {
+  await withPage(t, shell({ columnPadding: "0", railMargin: "-1px -1px 0 0" }), async (page) => {
+    assert.deepEqual(await evaluateLineGridIssues(page), { issues: [] });
+  });
+});
+
 test("格子の直下に並んだパネルは違反に数えない", async (t) => {
   await withPage(t, column(card("人口") + card("面積")), async (page) => {
     assert.deepEqual(await evaluateLineGridIssues(page), { issues: [] });

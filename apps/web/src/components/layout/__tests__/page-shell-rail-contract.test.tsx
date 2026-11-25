@@ -91,7 +91,7 @@ describe('PageShell — rightRail', () => {
     expect(rail).toHaveLength(1);
     expect(rail[0].parentElement).toHaveClass(
       'mt-4',
-      'rail:mt-0'
+      '-mx-px -mb-px rail:-mt-px rail:ml-0'
     );
   });
 

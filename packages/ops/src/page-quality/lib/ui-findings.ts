@@ -330,6 +330,7 @@ export function lineGridFixGuide(findings: readonly UiFinding[], refs: UiCardRef
   return [
     "- **線の格子 (パネルの並べ方を直す)**: 指摘の `outside-grid` はパネルが格子の外にある (`gap-*`・`space-y-*` で空けて並べている等)、`mixed-cell` はパネルを含むセルが文章・見出しも直に持つ。" +
       "パネルを並べる所は `PanelGrid` / `PageSections` (`@/components/layout`) にし、文章・見出しはパネルと別のセルにする。右レールは格子の外で対象外。" +
+      "`edge-double` は外枠の線 (ヘッダー下線・フッター上線・SidebarInset の outline) と本文の格子・右レールのカードの線が 1px ずれて 2 重に見える。`ShellColumn` の外枠 (p-0) と、Shell のレールが外枠の線に接する辺を 1px 外へ出しているか (`-mx-px -mb-px rail:-mt-px rail:ml-0`) を確かめる。" +
       `規約は \`${refs.uiComponentsRule}\` の「本文の列は 1 本の線の格子」。直したあと \`npm run ui-theme:line-grid -- <baseUrl>\` で描いた結果を確かめる。`,
   ];
 }
