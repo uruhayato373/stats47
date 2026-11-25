@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-25T02:26:37.037Z",
+  "updatedAt": "2026-11-25T02:41:07.181Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -14794,6 +14794,237 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-11-25T02:26:37.037Z"
+    },
+    "HOOK-STOP-AUDIT-SCOPE-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:41:06.846Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs"
+            ],
+            "pass": true
+          },
+          "evidence": "6305ebd5d。24 件 pass (統合側で再実行)。他セッションだけが変えた状態で差し戻さないことをテストで固定",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:41:06.846Z"
+    },
+    "HOOK-BASH-ADVISORY-NOISE-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:41:06.902Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/lib/__tests__/pre-bash-safety-git-pipe.test.cjs .claude/scripts/lib/__tests__/pre-bash-safety-release.test.cjs .claude/scripts/lib/__tests__/admin-read-guard.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "90e341148。16 件 pass (統合側で再実行)。advisory はコマンド先頭の一致に限り 1 会話 1 回",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:41:06.902Z"
+    },
+    "ESTAT-CATALOG-SSDS-DERIVE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:41:06.957Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/sns/find-metrics.mjs 人口 --unregistered"
+            ],
+            "pass": true
+          },
+          "evidence": "fe89f34ef。未登録候補を引けた (exit 0)。ssds-candidates.json の手編集は要約の件数の不一致で止まる",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:41:06.957Z"
+    },
+    "APPS-KNIP-UNUSED-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:41:07.015Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx knip --workspace apps/web --include files"
+            ],
+            "pass": true
+          },
+          "evidence": "adba36558。web の未使用ファイル 0 (exit 0)。残す 6 本は理由付きで knip.config.ts の ignore に入れた。type-check exit 0",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:41:07.015Z"
+    },
+    "THEME-URBAN-PARKS-HISTORY-LOSS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:41:07.069Z",
+          "runId": null,
+          "model": "sonnet",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/themes/audit-theme-quality.ts --json <tmp> --previous data/themes/quality.json"
+            ],
+            "pass": true
+          },
+          "evidence": "77aa6447b。統合側の再実行で errors 0 / warnings 78。職業別賃金の 18 件は referenceValues へ移った県年を数えていなかった監査側の不具合",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:41:07.069Z"
+    },
+    "BLOG-MONTHLY-CAP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:41:07.126Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run check-datasets"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: 今月から上げる。data/blog/seo-strategy.json の perMonth を 25〜30 本へ、domain-stances・blog-quality-standards・blog-seo-strategist の記述を同じ差分で直した",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:41:07.126Z"
+    },
+    "GSC-PRODUCT-SCHEMA-POLICY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-11-25T02:41:07.181Z",
+          "runId": null,
+          "model": "fable",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-11-25 オーナー決定: 現状を維持。gsc の improvement-log に決定と根拠を記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-11-25T02:41:07.181Z"
     }
   }
 }
