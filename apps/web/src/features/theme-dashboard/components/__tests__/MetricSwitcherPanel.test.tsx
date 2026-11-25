@@ -1,7 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-
 /**
  * MetricSwitcherPanel の契約。
  *
@@ -38,6 +37,7 @@ vi.mock(
   }),
 );
 
+import { totalFertilityRate } from "../../../../../../../data/metrics/total-fertility-rate";
 import { MetricSwitcherPanel } from "../MetricSwitcherPanel";
 
 import type { MetricKpi, MultiMetricGroup } from "../metric-kpi";
@@ -275,6 +275,45 @@ describe("MetricSwitcherPanel — 2 軸 (単位が混在するグループ)", ()
     expect(data.rightUnit).toBe("倍");
     expect(data.lines[0].yAxis).toBe("left");
     expect(data.lines[1].yAxis).toBe("right");
+  });
+
+  it("合計特殊出生率は出生数と別の軸に載る (単位が率の型で、同じ「人」ではない)", async () => {
+    // 2026-11-24 オーナー決定 A: 単位を「人」から率の型へ直した。「人」のままだと出生数と同じ左軸に載り、
+    // 1.4 前後の線が 70 万前後の線の下で 0 に張り付いていた (/areas/13000/population-dynamics)。
+    // 単位は指標の定義から読み、テストに文字列を写さない。
+    expect(totalFertilityRate.unit).not.toBe("人");
+    render(
+      <MetricSwitcherPanel
+        metrics={[
+          kpi("births", { unit: "人" }),
+          kpi("total-fertility-rate", { unit: totalFertilityRate.unit }),
+        ]}
+        tabLabels={{ births: "出生数", "total-fertility-rate": "合計特殊出生率" }}
+        selectedPrefectureCode="13000"
+        areaName="東京都"
+        defaultCheckedKeys={["births", "total-fertility-rate"]}
+      />,
+    );
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    const data = readChartData();
+    expect(data.unit).toBe("人");
+    expect(data.rightUnit).toBe(totalFertilityRate.unit);
+    expect(data.lines[0].yAxis).toBe("left");
+    expect(data.lines[1].yAxis).toBe("right");
+  });
+
+  it("出生数と単位が同じ「人」の指標は同じ軸に載る (率の型へ直した理由の対照)", async () => {
+    render(
+      <MetricSwitcherPanel
+        metrics={[kpi("births", { unit: "人" }), kpi("deaths", { unit: "人" })]}
+        tabLabels={{ births: "出生数", deaths: "死亡数" }}
+        selectedPrefectureCode="13000"
+        areaName="東京都"
+        defaultCheckedKeys={["births", "deaths"]}
+      />,
+    );
+    await waitFor(() => expect(readChartData().lines).toHaveLength(2));
+    expect(readChartData().rightUnit).toBeUndefined();
   });
 
   it("単位が 1 種なら右軸を作らない (単軸のまま)", async () => {
