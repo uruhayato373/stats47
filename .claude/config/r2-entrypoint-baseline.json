@@ -625,13 +625,6 @@
       "s3Client": 0,
       "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
     },
-    "apps/web/scripts/export-yoy-timeseries.ts": {
-      "stats": 0,
-      "ranking": 1,
-      "origin": 0,
-      "s3Client": 0,
-      "reason": "コメント・操作例・データ出典の説明に記したパスや URL"
-    },
     "apps/web/scripts/generate-finance-flow.ts": {
       "stats": 0,
       "ranking": 0,
