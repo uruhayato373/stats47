@@ -58,9 +58,11 @@ jobs:
         run: npx tsx packages/gis/src/mlit-ksj/scripts/run-pipeline.ts P12
 
       - name: 🧮 Build prefecture aggregate (unresolved=0 gate)
+        env:
+          METRIC: ${{ inputs.metric }}
         run: |
           npx tsx packages/gis/src/mlit-ksj/scripts/generate-ksj-stats-values.ts \
-            --metric "${{ inputs.metric }}" --compare
+            --metric "$METRIC" --compare
 
       - name: ✅ Verify exact aggregate payload
         run: |
@@ -83,10 +85,12 @@ jobs:
 
       - name: 📤 Publish aggregate only (never raw GIS)
         if: inputs.dry_run != 'true'
+        env:
+          METRIC: ${{ inputs.metric }}
         run: |
           # app/stats は観測値の唯一の正本。KSJ から集計し直した 47 県の値で更新するのが目的なので上書きを許す
           npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --allow-authoritative-overwrite \
-            --prefix "app/stats/${{ inputs.metric }}"
+            --prefix "app/stats/$METRIC"
 
       - name: 📝 Summary
         if: always()

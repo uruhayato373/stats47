@@ -44,13 +44,15 @@ jobs:
       - name: ☁️ Run monthly snapshot
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYCLE: ${{ inputs.cycle }}
+          NO_ISSUE: ${{ inputs.no_issue }}
         run: |
           # FLAGS は配列で組む ("$FLAGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           FLAGS=()
-          if [ -n "${{ inputs.cycle }}" ]; then
-            FLAGS+=(--cycle "${{ inputs.cycle }}")
+          if [ -n "$CYCLE" ]; then
+            FLAGS+=(--cycle "$CYCLE")
           fi
-          if [ "${{ inputs.no_issue }}" = "true" ]; then
+          if [ "$NO_ISSUE" = "true" ]; then
             FLAGS+=(--no-issue)
           fi
           node .claude/scripts/cloudflare/monthly-snapshot.mjs "${FLAGS[@]}"
@@ -72,8 +74,9 @@ jobs:
       # 月次レビューが他の月次処理と同じ形で読めるよう、実行結果を state に残す (2026-10-01)。失敗した回も failed で残す
       - name: 🗂️ Record monthly job result
         if: always()
+        env:
+          STATUS: ${{ job.status == 'success' && 'ok' || 'failed' }}
         run: |
-          STATUS="${{ job.status == 'success' && 'ok' || 'failed' }}"
           node .claude/scripts/metrics/record-monthly-job.mjs --job cloudflare-snapshot --status "$STATUS"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
