@@ -12633,6 +12633,25 @@
       "r2Path": "blog/smartphone-ownership-prefecture-gap/article.md"
     },
     {
+      "slug": "sme-business-sentiment-regional-gap",
+      "title": "中小企業の景況感、製造業だけ地域差が開いた",
+      "status": "published",
+      "publishedAt": "2026-11-25",
+      "updatedAt": null,
+      "rankingKeys": [
+        "active-job-opening-ratio",
+        "manufacturing-shipment-amount"
+      ],
+      "tagIds": [
+        "tag:economy",
+        "tag:smes",
+        "tag:manufacturing",
+        "tag:regional-economy",
+        "tag:t-6f414497615e"
+      ],
+      "r2Path": "blog/sme-business-sentiment-regional-gap/article.md"
+    },
+    {
       "slug": "soba-udon-dining-consumption-expenditure-prefecture-gap",
       "title": "香川のそば・うどん外食費は沖縄の6倍",
       "status": "published",
