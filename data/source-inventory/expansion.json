@@ -3,6 +3,14 @@
   "records": [
     {
       "analysis": "average-income-ranking-unknown-a05",
+      "channel": "blog",
+      "status": "declined",
+      "reason": "公開中の記事に同じ問いは無い。per-capita-income-gap・prefectural-income-gdp-ranking・real-disposable-income-reversal は県民所得を軸にし、所定内給与と納税者当たり課税対象所得の 3 指標の順位と開きを並べた記事は無い。ただし 3 指標の最新年が揃わず (所定内給与 2022・県民所得 2021 年度・納税者当たり課税対象所得 2024・世帯の年収 2019、data/metrics の years)、年の違いが順位と開きの差に混ざるため、記事で同じ順序かを断定しない。順位相関と最大最小比の計算は ranking / theme 側の企画が受け持ち、ブログでは書かない",
+      "decidedAt": "2026-11-25",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a05",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-inc-a05",
@@ -35,6 +43,14 @@
     },
     {
       "analysis": "average-income-ranking-unknown-a06",
+      "channel": "blog",
+      "status": "done",
+      "target": "blog:real-disposable-income-reversal",
+      "decidedAt": "2026-11-25",
+      "decidedBy": "blog-seo-strategist"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a06",
       "channel": "note",
       "status": "planned",
       "target": "note:b-ref-inc-a06",
@@ -56,6 +72,14 @@
       "reason": "テーマのページは 1 つの地域 (全国・県) の値と推移を見せ、47 都道府県の比較・相関・並べ替え・類型分けは置かない (2026-10-31 オーナー決定)。この問いは 47 県を並べて答える問いなので、テーマの展開先では扱わない",
       "decidedAt": "2026-11-23",
       "decidedBy": "theme-designer"
+    },
+    {
+      "analysis": "average-income-ranking-unknown-a55",
+      "channel": "blog",
+      "status": "declined",
+      "reason": "公開中の記事に同じ問いは無い。low-cost-low-income-prefectures は可処分所得と物価の 2 軸を平均で 4 つに区切り、heating-cost-vs-disposable-income は暖房費の負担率を見るもので、賃金・家賃・灯油・実質可処分所得の 4 指標で県を分け、書籍の 4 類型が現れるかを確かめる記事は無い。この問いは書籍の類型を検証対象にしていて、類型名と県の割当は出典のない総括 (resolutionReason) のため、記事の主題にすると書籍の主張を前提にしてしまう。計算結果から類型を決めるクラスタリングは企画の nextAction どおり Geo / ランキング系で扱い、ブログでは書かない",
+      "decidedAt": "2026-11-25",
+      "decidedBy": "blog-seo-strategist"
     },
     {
       "analysis": "average-income-ranking-unknown-a55",
