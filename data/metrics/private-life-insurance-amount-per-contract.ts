@@ -34,6 +34,13 @@ export const privateLifeInsuranceAmountPerContract: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "private-life-insurance-contract-amount-per-household",
+        "label": "1世帯当たり",
+      },
+    ],
   },
   "groupKey": "private-life-insurance-amount-per-contract",
   "isActive": true,

@@ -44,8 +44,8 @@ export interface AdSlotProps {
   className?: string;
 
   /**
-   * 広告のラベルを表示するか
-   * @default true
+   * 広告のラベルを表示するか (2026-11-25 オーナー決定で既定は出さない)
+   * @default false
    */
   showLabel?: boolean;
 

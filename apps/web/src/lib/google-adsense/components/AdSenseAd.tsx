@@ -47,7 +47,7 @@ export function AdSenseAd({
   format,
   slotId,
   className = "",
-  showLabel = true,
+  showLabel = false,
   lazyLoad = true,
   rootMargin,
   slotBox,

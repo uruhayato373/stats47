@@ -109,11 +109,14 @@ export function useRankingPageState({
       );
       return;
     }
+    // 別の指標の見方 (series) は、選んだ年の値が無いとその系列の直近の年を返す。表示する年を値の年に合わせる
+    const valuesYear = valuesResult.data[0]?.yearCode;
+    const shownYear = norm && valuesYear && valuesYear.slice(0, 4) !== year.slice(0, 4) ? valuesYear : year;
     // Values, labels and scale policy become visible as one committed result.
     setDisplay((previous) => ({
       rankingValues: valuesResult.data,
       nationalAverageSeries: series ?? previous.nationalAverageSeries,
-      currentYear: year,
+      currentYear: shownYear,
       currentAreaType: area,
       normalizationType: norm,
     }));

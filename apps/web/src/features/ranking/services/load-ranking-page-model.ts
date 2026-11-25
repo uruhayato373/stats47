@@ -5,9 +5,7 @@ import { shouldShowMetricTotal } from "@stats47/data-configs/metric-summary-disp
 import { getRankingTitle } from "@stats47/ranking";
 import {
   readAllYearsRankingValuesWithReferencesFromR2,
-  readRankingItemsByGroupKeyFromR2,
   readRankingItemsBySurveyFromR2,
-  type GroupRankingItem,
 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 
@@ -105,12 +103,6 @@ export async function loadRankingPageModel(rankingKey: string) {
         .catch(() => [] as { rankingKey: string; title: string }[])
     : Promise.resolve([] as { rankingKey: string; title: string }[]);
 
-  const groupMembersPromise = rankingItem.groupKey
-    ? readRankingItemsByGroupKeyFromR2(rankingItem.groupKey, AREA_TYPE)
-        .then((r) => (isOk(r) && r.data.length > 1 ? r.data : []))
-        .catch(() => [] as GroupRankingItem[])
-    : Promise.resolve([] as GroupRankingItem[]);
-
   const categoryPromise = rankingItem.categoryKey
     ? findCategoryByKey(rankingItem.categoryKey)
         .then((r) => (isOk(r) ? r.data : null))
@@ -122,14 +114,12 @@ export async function loadRankingPageModel(rankingKey: string) {
     aiContent,
     cityRankingItem,
     surveyRelatedItems,
-    groupMembers,
     category,
   ] = await Promise.all([
     allYearsPromise,
     aiContentPromise,
     cityRankingItemPromise,
     surveyRelatedItemsPromise,
-    groupMembersPromise,
     categoryPromise,
   ]);
   // 観測値の年を更新した直後に旧年の考察を表示すると、順位・数値の説明が誤る。
@@ -171,7 +161,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     cityRankingItem,
     originalSurveys,
     surveyRelatedItems,
-    groupMembers,
     category,
     breadcrumbCategory,
     structuredData,

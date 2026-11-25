@@ -97,6 +97,11 @@ export const miscellaneousSchoolStudents: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "miscellaneous-school-students-per-1000",
+        "label": "人口1000人当たり",
+      },
     ],
   },
   "groupKey": "miscellaneous-school-students",

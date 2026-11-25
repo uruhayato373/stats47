@@ -34,6 +34,13 @@ export const trafficAccidentDeathsPer100Accidents: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "traffic-accident-deaths-per-100k",
+        "label": "人口10万人当たり",
+      },
+    ],
   },
   "groupKey": "traffic-accident-deaths-per-100-accidents",
   "seoTitle": "交通事故死者数（交通事故100件当たり）ランキング都道府県",

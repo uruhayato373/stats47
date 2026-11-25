@@ -3523,7 +3523,9 @@
         "configHash": "1dace0603203503b"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "outpatient-rate-per-1000"
+      ],
       "consumers": [
         {
           "pageId": "ranking:outpatient-count",
@@ -3534,7 +3536,7 @@
     },
     {
       "metricKey": "outpatient-rate-per-1000",
-      "pageId": "ranking:outpatient-rate-per-1000",
+      "pageId": null,
       "title": "通院者率",
       "sources": [
         {

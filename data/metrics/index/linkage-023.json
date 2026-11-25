@@ -1000,6 +1000,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "post-office-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -1017,7 +1018,7 @@
     },
     {
       "metricKey": "post-office-count-per-100km2",
-      "pageId": "ranking:post-office-count-per-100km2",
+      "pageId": null,
       "title": "郵便局数",
       "sources": [
         {
@@ -1313,7 +1314,7 @@
     },
     {
       "metricKey": "postal-savings-balance-per-capita",
-      "pageId": "ranking:postal-savings-balance-per-capita",
+      "pageId": null,
       "title": "郵便貯金残高",
       "sources": [
         {
@@ -7769,7 +7770,9 @@
         "configHash": "e86b06cbd1c4d270"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "private-life-insurance-contract-amount-per-household"
+      ],
       "consumers": [
         {
           "pageId": "ranking:private-life-insurance-amount-per-contract",
@@ -7780,7 +7783,7 @@
     },
     {
       "metricKey": "private-life-insurance-contract-amount-per-household",
-      "pageId": "ranking:private-life-insurance-contract-amount-per-household",
+      "pageId": null,
       "title": "民間生命保険保険金額",
       "sources": [
         {
@@ -7847,7 +7850,7 @@
     },
     {
       "metricKey": "private-life-insurance-contracts-per-1000",
-      "pageId": "ranking:private-life-insurance-contracts-per-1000",
+      "pageId": null,
       "title": "民間生命保険保有契約件数",
       "sources": [
         {

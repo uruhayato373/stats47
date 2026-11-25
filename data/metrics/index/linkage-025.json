@@ -1127,6 +1127,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "per-capita-public-works-expenditure-pref-municipal",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -11247,6 +11248,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "planned-construction-cost-per-m2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],

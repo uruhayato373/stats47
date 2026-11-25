@@ -11,6 +11,7 @@ import type { AreaType } from "@stats47/types";
 import { err, ok, type Result } from "@stats47/types";
 
 import { GONE_RANKING_KEYS } from "../../config/gone-ranking-keys";
+import { REDIRECTED_RANKING_KEYS } from "../../config/redirected-ranking-keys";
 import { KNOWN_RANKING_KEYS } from "../../config/known-ranking-keys";
 import type { FeaturedRankingItem, RankingItem } from "../../types/ranking-item";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
@@ -82,7 +83,9 @@ function isNextProductionBuild(): boolean {
  * GONE ∩ KNOWN = ∅ は `ranking-key-consistency.test.ts` が CI で恒久検証する。
  */
 function excludeGone<T extends { rankingKey: string }>(items: T[]): T[] {
-  return items.filter((it) => !GONE_RANKING_KEYS.has(it.rankingKey));
+  // 転送したキー (REDIRECTED_RANKING_KEYS) もページを持たないので一覧に出さない。理由は上と同じで、
+  // R2 の all.json が後から追いつくのを待たずに、middleware と同じコードの台帳でリンクを消す (2026-11-25)
+  return items.filter((it) => !GONE_RANKING_KEYS.has(it.rankingKey) && !REDIRECTED_RANKING_KEYS.has(it.rankingKey));
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -246,7 +249,7 @@ export async function listRankingItemsWithTagsFromR2(options?: {
       const snapshot = await readValidatedSnapshot(key, parseTaggedRankingItemSnapshot);
       const item = snapshot?.item;
       if (!item) continue;
-      if (GONE_RANKING_KEYS.has(item.rankingKey)) continue;
+      if (GONE_RANKING_KEYS.has(item.rankingKey) || REDIRECTED_RANKING_KEYS.has(item.rankingKey)) continue;
       if (options?.areaType && item.areaType !== options.areaType) continue;
       if (options?.isActive != null && item.isActive !== options.isActive) {
         continue;

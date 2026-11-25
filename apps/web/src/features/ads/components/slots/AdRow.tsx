@@ -35,13 +35,15 @@ interface AdRowProps {
  * (608px 未満 1 枠 / 608px 以上 2 枠 / 916px 以上 3 枠。PR の列と同じ境界)。入らない枠は折り返さずに出さない
  * (広告が縦に続かないように)。モバイルは先頭の 1 枠だけが出るので、段ごとに先頭の種類を変えて上下で交互にする。
  *
- * 表記は枠ごと (AdSense は「広告」、アフィリエイトは「PR」。景品表示法のステマ告示の表示を兼ねる)。
+ * 表記はアフィリエイトの枠だけ (「PR」。景品表示法のステマ告示の表示)。AdSense は表記を出さない (2026-11-25 オーナー決定)。
  * 出していない枠の AdSense は display:none なので遅延読み込みが発火せず、広告のリクエストも飛ばない
  * (manual-ad-policy.ts と同じ仕組み)。モバイルの先頭の枠にも AdSense を出す (2026-11-03 オーナー決定。自動広告は 2026-11-04 からオン)。
  */
 export function AdRow({ cells, position, trackingCategory, wide = false }: AdRowProps) {
   const visible = wide ? cells.filter((cell) => cell.kind === "adsense").slice(0, 1) : cells.slice(0, 3);
   if (visible.length === 0) return null;
+  // PR と並ぶ段では、AdSense の側に表記と同じ高さの空きを置いてバナーの上端をそろえる
+  const hasAffiliate = visible.some((cell) => cell.kind === "affiliate");
   return (
     <div data-ad-row={position} className="@container w-full p-4">
       <div className={`grid items-start justify-center gap-2 ${wide ? "grid-cols-1" : COLUMN_CLASS[visible.length]}`}>
@@ -55,7 +57,11 @@ export function AdRow({ cells, position, trackingCategory, wide = false }: AdRow
               data-ad-slot-id={cell.kind === "adsense" ? cell.slot.slotId : undefined}
               className={cn("flex min-w-0 flex-col gap-2", ITEM_VISIBILITY_CLASS[index])}
             >
-              <span className="text-xs font-medium leading-none text-muted-foreground">{label}</span>
+              {cell.kind === "affiliate" ? (
+                <span className="text-xs font-medium leading-none text-muted-foreground">{label}</span>
+              ) : (
+                hasAffiliate && <span aria-hidden className="h-3" />
+              )}
               {cell.kind === "adsense" ? (
                 <div className="flex w-full justify-center">
                   <AdSenseAd

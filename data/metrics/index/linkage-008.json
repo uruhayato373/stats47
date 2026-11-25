@@ -4603,7 +4603,9 @@
         "configHash": "8d8a8d34cf6783e7"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "fire-damage-casualties-per-population"
+      ],
       "consumers": [
         {
           "pageId": "ranking:fire-damage-casualties-per-accident",
@@ -4614,7 +4616,7 @@
     },
     {
       "metricKey": "fire-damage-casualties-per-population",
-      "pageId": "ranking:fire-damage-casualties-per-population",
+      "pageId": null,
       "title": "火災死傷者数",
       "sources": [
         {
@@ -6745,6 +6747,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "per-capita-firefighting-expenditure-tokyo-municipal",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],

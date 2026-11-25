@@ -31,7 +31,6 @@ import { RankingYearSelector } from "../RankingPageHeader/RankingYearSelector";
 
 
 
-import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
 import { RankingSampleCountNote } from "./RankingSampleCountNote";
 import { RankingVisualizationDetails } from "./RankingVisualizationDetails";
@@ -58,7 +57,6 @@ interface RankingKeyPageClientProps {
     /** 市区町村ランキング定義（存在する場合にトグルを表示） */
     cityRankingItem?: RankingItem;
     /** グループメンバー（normalization_basis トグル用） */
-    groupMembers?: RankingBasisMember[];
     /** ArticleShell の breadcrumb slot に描画するパンくず */
     breadcrumb?: React.ReactNode;
     /** 同じ指標の市区町村ページへのリンク (既存の関連付けからサーバーで解決) */
@@ -78,7 +76,6 @@ export function RankingKeyPageClient({
     sections = {},
     parentAreaCode,
     cityRankingItem,
-    groupMembers = [],
     breadcrumb,
     municipalityLink,
     nowYear,
@@ -217,13 +214,17 @@ export function RankingKeyPageClient({
             <RankingHeaderControls
                 normalizationOptions={rankingItem.calculation?.normalizationOptions}
                 normalizationValue={normalizationType ?? "original"}
+                originalLabel={
+                    rankingItem.calculation?.normalizationOptions?.some((option) => option.type === "series")
+                        ? rankingItem.subtitle ?? "総数"
+                        : "総数"
+                }
                 onNormalizationChange={handleNormalizationChange}
                 normalizationDisabled={isPending}
                 shareButton={
                     <ShareButtons title={displayInfo.title} shareText={shareText} variant="menu" />
                 }
             />
-            <RankingBasisSwitcher rankingKey={rankingKey} members={groupMembers} />
         </div>
     );
 

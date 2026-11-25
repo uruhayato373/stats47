@@ -21,6 +21,8 @@ export function RailStack({ children, className, ...props }: RailStackProps) {
         'flex flex-col gap-4',
         // 本文の列 (線の格子) の中に置いたときは、パネルの間を空けずに 1px の線を共有する
         'in-data-[slot=panel-grid]:gap-px in-data-[slot=panel-grid]:bg-border',
+        // Shell の右レールの中でも間を空けない (カードが下と右の線を持つ。2026-11-25)
+        'in-data-[slot=shell-rail]:gap-0',
         className,
       )}
       {...props}

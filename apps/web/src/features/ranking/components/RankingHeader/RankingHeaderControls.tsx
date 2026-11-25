@@ -3,16 +3,20 @@
 import { type ReactNode } from "react";
 
 import { LazySelect } from "@stats47/components/molecules/lazy-select";
+import { normalizationOptionId } from "@stats47/types";
 
 import { SingleSelectToggleGroup } from "@/components/molecules/SingleSelectToggleGroup";
+
 
 import type { NormalizationOption } from "@stats47/ranking";
 
 interface RankingHeaderControlsProps {
   /** 正規化オプション（無い場合はピル群を非表示） */
   normalizationOptions?: NormalizationOption[];
-  /** 現在の正規化タイプ（"original" or option.type） */
+  /** 現在の見方（"original" か、選択肢の識別子 normalizationOptionId） */
   normalizationValue: string;
+  /** 元の値のボタンの名前。別の指標の見方 (series) と並ぶときは指標の副題 (例: 総額)。既定は「総数」 */
+  originalLabel?: string;
   onNormalizationChange: (value: string) => void;
   normalizationDisabled?: boolean;
   /** 共有ボタン */
@@ -31,11 +35,13 @@ export function RankingHeaderControls({
   onNormalizationChange,
   normalizationDisabled,
   shareButton,
+  originalLabel = "総数",
 }: RankingHeaderControlsProps) {
+  // 同じ指標の見方はこの 1 列だけに並べる (2026-11-25 オーナー決定。見方違いの別ページと下段のボタンはやめた)
   const pills = [
-    { value: "original", label: "総数" },
+    { value: "original", label: originalLabel },
     ...(normalizationOptions ?? []).map((opt) => ({
-      value: opt.type,
+      value: normalizationOptionId(opt),
       label: opt.label,
     })),
   ];

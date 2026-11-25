@@ -7522,6 +7522,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "per-capita-welfare-expenditure-pref-municipal",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -7642,7 +7643,7 @@
     },
     {
       "metricKey": "welfare-office-intellectual-disability-consultations-per-100k",
-      "pageId": "ranking:welfare-office-intellectual-disability-consultations-per-100k",
+      "pageId": null,
       "title": "福祉事務所知的障害者相談実人員",
       "sources": [
         {

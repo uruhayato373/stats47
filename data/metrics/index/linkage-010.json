@@ -4982,6 +4982,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "general-clinic-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -5007,7 +5008,7 @@
     },
     {
       "metricKey": "general-clinic-count-per-100k",
-      "pageId": "ranking:general-clinic-count-per-100k",
+      "pageId": null,
       "title": "一般診療所数",
       "sources": [
         {
@@ -5235,7 +5236,7 @@
     },
     {
       "metricKey": "general-clinic-count-per-100km2",
-      "pageId": "ranking:general-clinic-count-per-100km2",
+      "pageId": null,
       "title": "一般診療所数",
       "sources": [
         {
@@ -5713,7 +5714,7 @@
     },
     {
       "metricKey": "general-hospital-bed-count-per-100k",
-      "pageId": "ranking:general-hospital-bed-count-per-100k",
+      "pageId": null,
       "title": "一般病院病床数",
       "sources": [
         {
@@ -6416,6 +6417,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "general-hospital-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -6441,7 +6443,7 @@
     },
     {
       "metricKey": "general-hospital-count-per-100k",
-      "pageId": "ranking:general-hospital-count-per-100k",
+      "pageId": null,
       "title": "一般病院数",
       "sources": [
         {
@@ -6863,7 +6865,7 @@
     },
     {
       "metricKey": "general-hospital-count-per-100km2",
-      "pageId": "ranking:general-hospital-count-per-100km2",
+      "pageId": null,
       "title": "一般病院数",
       "sources": [
         {

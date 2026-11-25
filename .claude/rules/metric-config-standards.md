@@ -79,6 +79,21 @@ RankingItem は表示契約と取得レシピを snapshot へ焼き込み、旧�
 - category は「e-Stat 機械分類の内部 backbone」であり、ユーザー向け主要ナビは theme
   (`/themes/*`)。役割分担: `docs/01_技術設計/03_情報設計.md`。
 
+## 同じ指標の見方は 1 ページの計算方法だけに持つ (2026-11-25 オーナー決定)
+
+人口当たり・面積当たり・従業者 1 人当たりなどの「見方」は、親の指標の `calculation.normalizationOptions` だけに書く。
+見方ごとに別のランキングページを作らない (それまでは同じ `groupKey` の別ページとしても持てて、同じ見方が 2 か所にあった。
+下段のボタンの名前が SQLite の廃止で全部「総数」になって発覚した)。
+
+| 見方 | 書き方 | 値 |
+|---|---|---|
+| 人口・面積で割る | `{ "type": "per_population" \| "per_area", label, unit, scaleFactor, decimalPlaces }` | サイトが割った値 (R2 に事前生成) |
+| 分母がそれ以外 (従業者・事業所・日本人人口・別の統計) | `{ "type": "series", "metric": "<別の指標>", "label": "<その指標の副題>" }` | その指標の公表値をそのまま出す。単位・桁・色は配信の組み立てがその指標の定義から焼く |
+
+- series の指標は有効のまま残し、転送の台帳 `data/site/url-history/ranking-redirects.json` に `{ from, to: <親>, norm: <その指標のキー> }` を足す。台帳にあるキーはランキングのページを持たない (KNOWN・サイトマップ・一覧から外れる)
+- 同じ `groupKey`・同じ題の有効な指標が 2 件以上あるのに、親以外が転送の台帳に無いと `ranking-key-consistency.test.ts` が落とす。題の違う指標の `groupKey` (漁業の各指標など) は「関連する指標のまとまり」で、右レールの先頭に並ぶ
+- 人口で割っただけの公表値 (例: 人口10万人当たり) は series にしない。親の `per_population` と同じ見方なので、転送の `norm` を `per_population` にする
+
 ## UI 配置 (この型を前提にした描画)
 
 - `title` → h1 (名前のみ)
@@ -565,10 +580,10 @@ generator と同じ `expectedCalculatedYears` で導出するので、監査が�
 
 `MetricConfig.isActive` を `true` にしただけでは ranking は **本番公開されない**。本番アプリは R2 snapshot と
 派生リスト（`KNOWN_RANKING_KEYS` / `SITEMAP_RANKING_KEYS` / `INDEXABLE_RANKING_KEYS` / R2 `app/ranking-items/all.json`）
-と整合して初めて 200 を返す。**ranking の middleware は `isGone` のみ 410** を返し、未登録キー（`GONE_RANKING_KEYS`
-に無いが `KNOWN_RANKING_KEYS` にも無い）は middleware を素通りして page の `notFound()` で **404** になる
-（`apps/web/src/middleware.ts:146-154`、2026-06-06 `5d9afb24` で notFound 委譲に変更。tag/theme は `!isKnown→410` だが
-ranking は異なる）。いずれにせよ **200 にはならない**ので、`GONE_RANKING_KEYS` から外すだけでなく下記を整合させる必要がある。
+と整合して初めて 200 を返す。**ranking の middleware は、転送の台帳にあるキーを 301、`GONE_RANKING_KEYS` にあるキーと
+`KNOWN_RANKING_KEYS` に無いキーを 410 にする** (`apps/web/src/middleware.ts` の `/ranking/` の分岐。page の `notFound()` へ委譲すると
+OpenNext で 200 の soft-404 が固着しうるため。2026-11-25 にこの節の「未登録は 404」という古い記述を直した)。
+いずれにせよ **200 にはならない**ので、`GONE_RANKING_KEYS` から外すだけでなく下記を整合させる必要がある。
 
 公開には config(isActive) を起点に以下を整合再生成する（依存順・詳細手順は memory
 `project_ranking_publish_pipeline_gap` / `.claude/todo/backlog.md`「122 metric の本番公開」）:

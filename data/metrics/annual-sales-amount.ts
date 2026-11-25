@@ -70,6 +70,16 @@ export const annualSalesAmount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "annual-sales-amount-per-employee",
+        "label": "従業員当たり",
+      },
+      {
+        "type": "series",
+        "metric": "annual-sales-amount-per-establishment",
+        "label": "事業所当たり",
+      },
     ],
   },
   "groupKey": "annual-sales-amount",

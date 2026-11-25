@@ -133,7 +133,7 @@ const entries: MetricLinkageEntry[] = keys.map((key) => {
     errors.push(`${key}: ${String(error)}`);
   }
   for (const option of metric.calculation?.normalizationOptions ?? [])
-    if (option.visualization) {
+    if (option.type !== 'series' && option.visualization) {
       try {
         assertMetricPresentation(option.visualization);
       } catch (error) {

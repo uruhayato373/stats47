@@ -3687,6 +3687,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "food-business-facility-penalties-per-1000",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -3700,7 +3701,7 @@
     },
     {
       "metricKey": "food-business-facility-penalties-per-1000",
-      "pageId": "ranking:food-business-facility-penalties-per-1000",
+      "pageId": null,
       "title": "食品営業施設処分件数",
       "sources": [
         {
@@ -6054,7 +6055,7 @@
     },
     {
       "metricKey": "foreign-resident-count-china-per-100k",
-      "pageId": "ranking:foreign-resident-count-china-per-100k",
+      "pageId": null,
       "title": "外国人人口",
       "sources": [
         {
@@ -6513,7 +6514,7 @@
     },
     {
       "metricKey": "foreign-resident-count-korea-per-100k",
-      "pageId": "ranking:foreign-resident-count-korea-per-100k",
+      "pageId": null,
       "title": "外国人人口",
       "sources": [
         {
@@ -6739,7 +6740,7 @@
     },
     {
       "metricKey": "foreign-resident-count-per-100k",
-      "pageId": "ranking:foreign-resident-count-per-100k",
+      "pageId": null,
       "title": "外国人人口",
       "sources": [
         {
@@ -7402,7 +7403,7 @@
     },
     {
       "metricKey": "foreign-resident-count-usa-per-100k",
-      "pageId": "ranking:foreign-resident-count-usa-per-100k",
+      "pageId": null,
       "title": "外国人人口",
       "sources": [
         {

@@ -169,11 +169,37 @@ function resolveCalculationType(
   return raw && CALCULATION_TYPES.has(raw) ? (raw as CalculationConfig["type"]) : undefined;
 }
 
-function buildCalculation(config: MetricConfig): CalculationConfig | null {
+/**
+ * 計算方法の選択肢を配信の形にする。series (別の指標の公表値を出す見方) は、その指標の定義から単位・桁・色を焼く
+ * (定義には指標と名前だけを書く。単位を 2 か所に書くとずれるため)。指標が registry に無ければ例外にする。
+ */
+export function buildNormalizationOptions(
+  config: MetricConfig,
+  registry?: MetricRegistry,
+): NormalizationOption[] | undefined {
+  const authored = config.calculation?.normalizationOptions;
+  if (!authored) return undefined;
+  return authored.map((option): NormalizationOption => {
+    if (option.type !== "series") return option;
+    const target = registry?.[option.metric];
+    if (!target) {
+      throw new Error(`build-ranking-item(${config.key}): series の指標 ${option.metric} が registry に無い`);
+    }
+    return {
+      type: "series",
+      metric: option.metric,
+      label: option.label,
+      unit: target.display?.displayUnit ?? target.unit,
+      valueDisplay: buildValueDisplay(target),
+      visualization: buildVisualization(target),
+    };
+  });
+}
+
+function buildCalculation(config: MetricConfig, registry?: MetricRegistry): CalculationConfig | null {
   const c = config.calculation;
   // 正規化も calculation の型付き定義から生成する。
-  const normalizationOptions: NormalizationOption[] | undefined =
-    c?.normalizationOptions;
+  const normalizationOptions = buildNormalizationOptions(config, registry);
   if (!c && !normalizationOptions) return null;
 
   // ★`type` を焼く。焼かないと calculate-ranking-values.ts の
@@ -260,7 +286,7 @@ export function buildRankingItemFromMetric(
     isActive: config.isActive ?? false,
     valueDisplay: buildValueDisplay(config),
     visualization: buildVisualization(config),
-    calculation: buildCalculation(config),
+    calculation: buildCalculation(config, ctx.registry),
     surveyId: config.surveyId ?? surveyIds[0] ?? null,
     surveyIds,
     originalSurveys,

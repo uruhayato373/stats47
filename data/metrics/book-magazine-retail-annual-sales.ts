@@ -61,6 +61,11 @@ export const bookMagazineRetailAnnualSales: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "book-magazine-retail-annual-sales-per-capita",
+        "label": "1人当たり",
+      },
     ],
   },
   "groupKey": "book-magazine-retail-annual-sales",

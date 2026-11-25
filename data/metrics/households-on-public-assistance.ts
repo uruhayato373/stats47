@@ -48,6 +48,11 @@ export const householdsOnPublicAssistance: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "households-on-public-assistance-per-1000",
+        "label": "1000世帯当たり",
+      },
     ],
   },
   "groupKey": "households-on-public-assistance",

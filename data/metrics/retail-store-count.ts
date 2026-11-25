@@ -55,6 +55,11 @@ export const retailStoreCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "retail-store-count-per-1000",
+        "label": "1000人当たり（旧統計）",
+      },
     ],
   },
   "groupKey": "retail-store-count",

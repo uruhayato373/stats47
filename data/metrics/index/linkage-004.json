@@ -691,7 +691,9 @@
         "configHash": "69a87ad72678f0cc"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "complainant-rate-per-1000"
+      ],
       "consumers": [
         {
           "pageId": "blog:complainant-count-prefecture-gap",
@@ -706,7 +708,7 @@
     },
     {
       "metricKey": "complainant-rate-per-1000",
-      "pageId": "ranking:complainant-rate-per-1000",
+      "pageId": null,
       "title": "有訴者率",
       "sources": [
         {

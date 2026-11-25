@@ -222,8 +222,12 @@ describe('広告の枠の台帳 (data/ads/placements.json)', () => {
   it('右レールの AdSense は本文の横にあるときだけ出す', () => {
     expect(adSlotType('adsense-rail-rect')).toMatchObject({ devices: ['desktop'] });
     for (const rel of ['apps/web/src/features/ads/components/slots/RailAdSlot.tsx', 'apps/web/src/features/ads/components/AffiliateAdSlot.tsx']) {
-      expect(read(rel), rel).toContain('RAIL_AD_BESIDE_BODY_ONLY_CLASS');
+      // 右レールの AdSense のセルのクラス (四辺 8px の余白 + 本文の横にあるときだけ出す指定。2026-11-25)
+      expect(read(rel), rel).toContain('RAIL_AD_CELL_CLASS');
     }
+    const policy = read('apps/web/src/features/ads/constants/manual-ad-policy.ts');
+    const cellStart = policy.indexOf('export const RAIL_AD_CELL_CLASS');
+    expect(policy.slice(cellStart, policy.indexOf(';', cellStart))).toContain('${RAIL_AD_BESIDE_BODY_ONLY_CLASS}');
     expect(read('apps/web/src/features/ads/constants/manual-ad-policy.ts')).toContain(
       'export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden rail:block"',
     );

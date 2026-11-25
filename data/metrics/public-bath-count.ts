@@ -97,6 +97,11 @@ export const publicBathCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "public-bath-count-per-100k",
+        "label": "人口10万人当たり",
+      },
     ],
   },
   "groupKey": "public-bath-count",

@@ -33,6 +33,13 @@ export const disasterRecoveryExpensesPrefecture: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "per-capita-disaster-recovery-expenditure-pref-municipal",
+        "label": "都道府県・市町村財政合計",
+      },
+    ],
   },
   "groupKey": "disaster-recovery-expenses-prefecture",
   "isActive": true,

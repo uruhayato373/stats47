@@ -1604,6 +1604,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "cultivated-land-area-per-household",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -1839,7 +1840,7 @@
     },
     {
       "metricKey": "cultivated-land-area-per-household",
-      "pageId": "ranking:cultivated-land-area-per-household",
+      "pageId": null,
       "title": "耕地面積",
       "sources": [
         {
@@ -8081,7 +8082,7 @@
     },
     {
       "metricKey": "deaths-cerebrovascular-disease-per-100k",
-      "pageId": "ranking:deaths-cerebrovascular-disease-per-100k",
+      "pageId": null,
       "title": "脳血管疾患による死亡者数",
       "sources": [
         {
@@ -8342,7 +8343,7 @@
     },
     {
       "metricKey": "deaths-diabetes-per-100k",
-      "pageId": "ranking:deaths-diabetes-per-100k",
+      "pageId": null,
       "title": "糖尿病による死亡者数",
       "sources": [
         {
@@ -8833,7 +8834,7 @@
     },
     {
       "metricKey": "deaths-hypertensive-diseases-per-100k",
-      "pageId": "ranking:deaths-hypertensive-diseases-per-100k",
+      "pageId": null,
       "title": "高血圧性疾患による死亡者数",
       "sources": [
         {
@@ -9098,7 +9099,7 @@
     },
     {
       "metricKey": "deaths-lifestyle-diseases-per-100k",
-      "pageId": "ranking:deaths-lifestyle-diseases-per-100k",
+      "pageId": null,
       "title": "生活習慣病による死亡者数",
       "sources": [
         {
@@ -11106,7 +11107,7 @@
     },
     {
       "metricKey": "dental-checkup-guidance-persons-per-1000",
-      "pageId": "ranking:dental-checkup-guidance-persons-per-1000",
+      "pageId": null,
       "title": "歯科健診・保健指導延人員",
       "sources": [
         {
@@ -11173,7 +11174,7 @@
     },
     {
       "metricKey": "dental-checkup-persons-per-1000",
-      "pageId": "ranking:dental-checkup-persons-per-1000",
+      "pageId": null,
       "title": "歯科健診受診延人員",
       "sources": [
         {
@@ -11494,6 +11495,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "dental-clinic-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -11519,7 +11521,7 @@
     },
     {
       "metricKey": "dental-clinic-count-per-100k",
-      "pageId": "ranking:dental-clinic-count-per-100k",
+      "pageId": null,
       "title": "歯科診療所数",
       "sources": [
         {
@@ -11551,7 +11553,7 @@
     },
     {
       "metricKey": "dental-clinic-count-per-100km2",
-      "pageId": "ranking:dental-clinic-count-per-100km2",
+      "pageId": null,
       "title": "歯科診療所数",
       "sources": [
         {
@@ -11849,7 +11851,7 @@
     },
     {
       "metricKey": "dental-guidance-persons-per-1000",
-      "pageId": "ranking:dental-guidance-persons-per-1000",
+      "pageId": null,
       "title": "歯科保健指導延人員",
       "sources": [
         {
@@ -12532,7 +12534,7 @@
     },
     {
       "metricKey": "dentists-in-medical-facilities-per-100k",
-      "pageId": "ranking:dentists-in-medical-facilities-per-100k",
+      "pageId": null,
       "title": "歯科医師数",
       "sources": [
         {
@@ -12723,7 +12725,7 @@
     },
     {
       "metricKey": "department-supermarket-count-per-100k",
-      "pageId": "ranking:department-supermarket-count-per-100k",
+      "pageId": null,
       "title": "百貨店、総合スーパー数",
       "sources": [
         {
@@ -13281,7 +13283,7 @@
     },
     {
       "metricKey": "deposit-balance-per-person",
-      "pageId": "ranking:deposit-balance-per-person",
+      "pageId": null,
       "title": "預貯金残高",
       "sources": [
         {

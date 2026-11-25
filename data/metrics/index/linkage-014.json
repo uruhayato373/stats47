@@ -298,7 +298,7 @@
     },
     {
       "metricKey": "junior-college-count-per-100k",
-      "pageId": "ranking:junior-college-count-per-100k",
+      "pageId": null,
       "title": "短期大学数",
       "sources": [
         {
@@ -2643,6 +2643,8 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "junior-high-school-count-per-100k-12-14",
+        "junior-high-school-count-per-100km2-habitable",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -2858,7 +2860,7 @@
     },
     {
       "metricKey": "junior-high-school-count-per-100k-12-14",
-      "pageId": "ranking:junior-high-school-count-per-100k-12-14",
+      "pageId": null,
       "title": "中学校数",
       "sources": [
         {
@@ -2890,7 +2892,7 @@
     },
     {
       "metricKey": "junior-high-school-count-per-100km2-habitable",
-      "pageId": "ranking:junior-high-school-count-per-100km2-habitable",
+      "pageId": null,
       "title": "中学校数",
       "sources": [
         {
@@ -3741,6 +3743,8 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "junior-high-school-students-per-teacher",
+        "middle-school-students-1-per",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -3766,7 +3770,7 @@
     },
     {
       "metricKey": "junior-high-school-students-per-teacher",
-      "pageId": "ranking:junior-high-school-students-per-teacher",
+      "pageId": null,
       "title": "中学校生徒数",
       "sources": [
         {
@@ -3976,6 +3980,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "juvenile-criminal-arrest-person-per-population",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -3989,7 +3994,7 @@
     },
     {
       "metricKey": "juvenile-criminal-arrest-person-per-population",
-      "pageId": "ranking:juvenile-criminal-arrest-person-per-population",
+      "pageId": null,
       "title": "少年刑法犯検挙人員",
       "sources": [
         {
@@ -5915,7 +5920,7 @@
     },
     {
       "metricKey": "kidney-failure-death-rate",
-      "pageId": "ranking:kidney-failure-death-rate",
+      "pageId": null,
       "title": "腎不全による死亡者数",
       "sources": [
         {

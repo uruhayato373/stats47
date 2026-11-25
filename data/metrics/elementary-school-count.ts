@@ -45,6 +45,16 @@ export const elementarySchoolCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "elementary-school-count-per-100k-6-11",
+        "label": "6〜11歳人口当たり",
+      },
+      {
+        "type": "series",
+        "metric": "elementary-school-count-per-100km2-habitable",
+        "label": "可住地100km²当たり",
+      },
     ],
     "isCalculated": false,
   },

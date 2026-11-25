@@ -113,6 +113,46 @@ describe("ranking slug redirect の整合性", () => {
 
     expect(invalid).toEqual([]);
   });
+
+  it("転送元はランキングのページを持たない (KNOWN・SITEMAP・INDEXABLE に無い)", async () => {
+    // 公開中のページを転送で隠さない。転送の台帳にあるキーは指標とデータだけが残る (2026-11-25)
+    const { RANKING_SLUG_REDIRECTS } = await import("@/config/ranking-redirects");
+    const published = Object.keys(RANKING_SLUG_REDIRECTS).filter(
+      (source) => KNOWN_RANKING_KEYS.has(source) || SITEMAP_RANKING_KEYS.has(source) || INDEXABLE_RANKING_KEYS.has(source),
+    );
+    expect(published).toEqual([]);
+  });
+
+  it("転送先で開く計算方法 (norm) は、転送先の指標の計算方法に実在する", async () => {
+    const { RANKING_REDIRECT_NORMS, RANKING_SLUG_REDIRECTS } = await import("@/config/ranking-redirects");
+    const { normalizationOptionId } = await import("@stats47/types");
+    const metrics = new Map(listAllMetrics().map((m) => [m.key, m]));
+    const missing = Object.entries(RANKING_REDIRECT_NORMS).filter(([source, norm]) => {
+      const options = metrics.get(RANKING_SLUG_REDIRECTS[source])?.calculation?.normalizationOptions ?? [];
+      return !options.some((option) => normalizationOptionId(option) === norm);
+    });
+    expect(missing, "転送先のページでその見方が開けない").toEqual([]);
+  });
+});
+
+describe("同じ指標の見方は 1 ページの計算方法だけに持つ (2026-11-25 オーナー決定)", () => {
+  it("同じ groupKey・同じ題の有効な指標が 2 件以上あれば、親以外はページを持たない (転送の台帳にある)", async () => {
+    // 見方違いの別ページ (人口当たり・従業者1人当たり など) を新しく作らせない。見方は親の normalizationOptions に足す
+    // (人口・面積は per_population / per_area、それ以外は series)。題の違う指標のまとまり (漁業など) は対象外
+    const { RANKING_SLUG_REDIRECTS } = await import("@/config/ranking-redirects");
+    const groups = new Map<string, { key: string; title: string }[]>();
+    for (const m of listAllMetrics()) {
+      if (!m.isActive || !m.groupKey || !m.entities.includes("prefecture")) continue;
+      groups.set(m.groupKey, [...(groups.get(m.groupKey) ?? []), { key: m.key, title: m.title }]);
+    }
+    const violations: string[] = [];
+    for (const [groupKey, members] of groups) {
+      if (members.length < 2 || new Set(members.map((m) => m.title)).size > 1) continue;
+      const withPage = members.filter((m) => !(m.key in RANKING_SLUG_REDIRECTS)).map((m) => m.key);
+      if (withPage.length > 1) violations.push(`${groupKey}: ${withPage.join(", ")}`);
+    }
+    expect(violations, "見方違いのページが残っている。親以外を転送の台帳へ入れ、見方は親の計算方法に足す").toEqual([]);
+  });
 });
 
 describe("市区町村ランキングの slug redirect の整合性", () => {

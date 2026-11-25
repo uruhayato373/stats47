@@ -49,6 +49,11 @@ export const sportsParkCount: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "sports-park-count-per-100km2",
+        "label": "可住地面積100km²当たり",
+      },
     ],
   },
   "groupKey": "sports-park-count",

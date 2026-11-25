@@ -169,7 +169,7 @@ function main() {
       seoNote: metric.seoNote ?? null,
       normalizationUnitDash: (
         metric.calculation?.normalizationOptions ?? []
-      ).filter((option) => option.unit.startsWith('‐/')).length,
+      ).filter((option) => option.type !== 'series' && option.unit.startsWith('‐/')).length,
       sourceKind: source.kind,
       normalizationCount: metric.calculation?.normalizationOptions?.length ?? 0,
       surveyIds: resolveMetricProvenance(metric, METRICS_REGISTRY).map((s) => s.id),

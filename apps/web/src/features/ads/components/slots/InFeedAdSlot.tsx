@@ -11,9 +11,9 @@ interface InFeedAdSlotProps {
 }
 
 /**
- * 記事の一覧の中に 1 件だけ入れるインフィード広告 (2026-11-12 オーナー決定)。一覧の行と同じ幅で、上に小さな「広告」を出す。
- * Google の規約で広告は「広告」か「スポンサーリンク」と表記し、広告と分からないように見せない
- * (support.google.com/adsense/answer/1346295・2026-11-12 確認)。一覧の部品 (RailLinksCard) の insertAfter に渡す。
+ * 記事の一覧の中に 1 件だけ入れるインフィード広告 (2026-11-12 オーナー決定)。一覧の行と同じ幅。
+ * 「広告」の表記は 2026-11-25 のオーナー決定で外した (Google の規約は表記を義務づけていない:
+ * support.google.com/adsense/answer/1346295・2026-11-25 確認)。本番で Google 側の広告の印が出ているかは反映後に確かめる。一覧の部品 (RailLinksCard) の insertAfter に渡す。
  * 広告と広告の間にはコンテンツを 3 件以上挟む (Google の推奨。support.google.com/adsense/answer/9189037)。
  */
 export function InFeedAdSlot({ slot }: InFeedAdSlotProps) {

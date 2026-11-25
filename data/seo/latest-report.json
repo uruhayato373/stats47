@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "period": {
-    "periodStart": "2026-11-15",
-    "periodEnd": "2026-11-21",
+    "periodStart": "2026-11-16",
+    "periodEnd": "2026-11-22",
     "windowDays": 7
   },
-  "inputHash": "f155d34727df6b4bec651befa6496f9d7e4c2714bdfcbb5be01437354d9b2dbb",
+  "inputHash": "47280e55c870487490de94dabb15f36250c125a73342742d2bce89cb9753b628",
   "movements": [
     {
       "keyword": "長崎県 平均年収",
@@ -45,12 +45,21 @@
       "change": -82
     },
     {
+      "keyword": "豊田 市 人口",
+      "targetPath": "/areas/23000/cities/23211",
+      "before": 100,
+      "after": 20,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 80
+    },
+    {
       "keyword": "佐賀県 平均年収",
       "targetPath": "/areas/41000/labor-wages",
       "before": 85,
       "after": 5.5,
       "beforeImpressions": 2,
-      "impressions": 4,
+      "impressions": 6,
       "change": 79.5
     },
     {
@@ -72,39 +81,30 @@
       "change": -71
     },
     {
-      "keyword": "豊田市人口",
-      "targetPath": "/areas/23000/cities/23211",
-      "before": 82,
-      "after": 11,
+      "keyword": "埼玉県 最低賃金",
+      "targetPath": "/areas/11000/labor-wages",
+      "before": 6,
+      "after": 75,
       "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 71
+      "impressions": 1,
+      "change": -69
     },
     {
-      "keyword": "高崎市人口",
-      "targetPath": "/areas/10000/cities/10202",
-      "before": 7.459016393442623,
-      "after": 78,
-      "beforeImpressions": 61,
+      "keyword": "水戸 人流",
+      "targetPath": "/areas/08000/cities/08201",
+      "before": 8,
+      "after": 77,
+      "beforeImpressions": 2,
       "impressions": 1,
-      "change": -70.54098360655738
-    },
-    {
-      "keyword": "出雲市 人口",
-      "targetPath": "/areas/32000/cities/32203",
-      "before": 10.093023255813954,
-      "after": 80,
-      "beforeImpressions": 43,
-      "impressions": 1,
-      "change": -69.90697674418604
+      "change": -69
     }
   ],
   "verdicts": [],
   "selected": {
-    "keyword": "鳥取市 人口",
-    "targetPath": "/areas/31000/cities/31201",
-    "rank": 7.759615384615385,
-    "impressions": 104,
+    "keyword": "餃子消費量ランキング",
+    "targetPath": "/blog/frozen-gyoza-spending-prefecture-gap",
+    "rank": 4.184782608695652,
+    "impressions": 92,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
@@ -176,6 +176,11 @@
       "keyword": "阿波市 人口",
       "targetPath": "/areas/36000/cities/36206",
       "proposalId": "44442727274-1"
+    },
+    {
+      "keyword": "鳥取市 人口",
+      "targetPath": "/areas/31000/cities/31201",
+      "proposalId": "45351527681-1"
     }
   ]
 }

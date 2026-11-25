@@ -869,7 +869,9 @@
         "configHash": "4633ec9bd7419b76"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "per-capita-social-education-expenditure-pref-municipal"
+      ],
       "consumers": [
         {
           "pageId": "ranking:social-education-expenses-prefecture",
@@ -1548,7 +1550,9 @@
         "configHash": "e548ead264ef31e5"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "per-capita-social-welfare-expenditure-pref-municipal"
+      ],
       "consumers": [
         {
           "pageId": "ranking:social-welfare-expenses-prefecture",
@@ -2889,7 +2893,7 @@
     },
     {
       "metricKey": "special-law-criminal-arrest-count-per-population",
-      "pageId": "ranking:special-law-criminal-arrest-count-per-population",
+      "pageId": null,
       "title": "特別法犯検挙件数",
       "sources": [
         {
@@ -3038,7 +3042,9 @@
         "configHash": "acf825cd3bf84e78"
       },
       "dependencies": [],
-      "normalizationDependencies": [],
+      "normalizationDependencies": [
+        "per-child-student-special-support-school-expenditure-pref-municipal"
+      ],
       "consumers": [
         {
           "pageId": "ranking:special-support-school-expenses-prefecture",
@@ -3084,7 +3090,7 @@
     },
     {
       "metricKey": "specialized-school-count-per-100k",
-      "pageId": "ranking:specialized-school-count-per-100k",
+      "pageId": null,
       "title": "専修学校数",
       "sources": [
         {
@@ -3151,7 +3157,7 @@
     },
     {
       "metricKey": "specialized-school-students-per-1000",
-      "pageId": "ranking:specialized-school-students-per-1000",
+      "pageId": null,
       "title": "専修学校生徒数",
       "sources": [
         {
@@ -4804,6 +4810,7 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
+        "sports-park-count-per-100km2",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],
@@ -5011,7 +5018,7 @@
     },
     {
       "metricKey": "sports-park-count-per-100km2",
-      "pageId": "ranking:sports-park-count-per-100km2",
+      "pageId": null,
       "title": "運動公園数",
       "sources": [
         {

@@ -45,6 +45,13 @@ export const outpatientCount: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "outpatient-rate-per-1000",
+        "label": "人口千人当たり・国民生活基礎調査",
+      },
+    ],
   },
   "groupKey": "outpatient-count",
   "isActive": true,

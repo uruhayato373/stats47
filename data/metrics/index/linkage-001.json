@@ -8217,7 +8217,7 @@
     },
     {
       "metricKey": "bank-deposit-balance-per-person",
-      "pageId": "ranking:bank-deposit-balance-per-person",
+      "pageId": null,
       "title": "国内銀行預金残高",
       "sources": [
         {
@@ -8805,7 +8805,7 @@
     },
     {
       "metricKey": "barber-beauty-salon-count-per-100k",
-      "pageId": "ranking:barber-beauty-salon-count-per-100k",
+      "pageId": null,
       "title": "理容・美容所数",
       "sources": [
         {

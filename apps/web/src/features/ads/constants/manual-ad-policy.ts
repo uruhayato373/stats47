@@ -65,3 +65,9 @@ export const MANUAL_AD_DESKTOP_ONLY_CLASS = "hidden md:block";
  * display:none なので遅延読み込みが発火せず、広告のリクエストも飛ばない。境界は PageShell / ArticleShell の右レールと同じ
  */
 export const RAIL_AD_BESIDE_BODY_ONLY_CLASS = "hidden rail:block";
+
+/**
+ * 右レールの AdSense のセル (2026-11-25 オーナー決定)。右レールは余白を空けず線で区切るので、広告は四辺 8px の余白の中央に置く
+ * (300×250 → セル 316×266)。左右の余白 8px は在庫の幅 300px を残すための上限。下と右の線はカードと同じ (CARD_SURFACE_CLASS)
+ */
+export const RAIL_AD_CELL_CLASS = `overflow-hidden px-0 py-2 border-border in-data-[slot=shell-rail]:border-r in-data-[slot=shell-rail]:border-b ${RAIL_AD_BESIDE_BODY_ONLY_CLASS}`;

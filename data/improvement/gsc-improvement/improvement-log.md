@@ -13,6 +13,16 @@ GSC（Google Search Console）の継続的追跡と改善施策の記録。
 - **想定効果は必ず根拠を併記**（過去事例 / Google 公式ガイド / 計算式）
 - **実測値は取得コマンドへのリンク併記**
 
+## [RANKING-VIEW-CONSOLIDATE-01] 同じ指標の見方違いの 118 ページを親のページの計算方法へ統合 (2026-11-25 develop に commit・本番反映日は未定)
+
+- **変えたこと**: 同じ groupKey・同じ題の指標の、親以外のランキングページ 118 件 (親 106 件) を、親のページの計算方法 (`?norm=`) へ 301 で転送した。指標とデータは有効のまま (テーマ・県ページ・商品が使う)。KNOWN・サイトマップ・インデックス対象・一覧から外した。内訳は人口で割った見方 62 件 (dev の値で「親 ÷ 総人口」と全県で比例、比の変動係数 3% 未満) と、分母が人口・面積でない見方 56 件 (親の計算方法に series として公表値を出す)。オーナー決定 (2026-11-25): 見方は 1 ページの計算方法だけに持つ。
+- **baseline (GSC スナップショット 2026-W46・28 日 = `data/gsc/snapshots/2026-W46/pages.csv`)**: 転送した 118 ページは計 131 クリック・5,453 表示 (データのあったのは 54 ページ)。親 106 ページは計 903 クリック・17,563 表示。ランキングページ全体は 9,342 クリック。118 ページのうち 18 件は親より表示が多い (例: public-bath-count-per-100k 1,190 表示・8 クリック、middle-school-students-1-per 776 表示・19 クリック)。
+- **想定効果**: 置かない。転送で見方の中身が検索エンジンに渡る HTML に出なくなる (計算方法の切替はブラウザ側) ので減る可能性があるが、このログに同じ型の過去事例が無い。`[target]` も置かない (effect-verdict は insufficient-target で pending に留まる)。
+- **検証コマンド**: 反映から 28 日後の週次スナップショット `data/gsc/snapshots/<週>/pages.csv` で、親 106 ページ + 旧 118 ページの合計クリック・表示を baseline と比べる。旧 URL の転送は `curl -sI -A "Mozilla/5.0 (compatible; Googlebot/2.1)" https://stats47.jp/ranking/manufacturing-shipment-amount-per-employee` が `301` と `location: /ranking/manufacturing-shipment-amount?norm=manufacturing-shipment-amount-per-employee` を返すこと。
+- **実測**: 未取得 (本番未反映)。
+- **判定期日**: 本番反映日 + 28 日。合計クリックが baseline の 1,034 (903 + 131) から 10% 以上減っていれば、表示が多かった 18 件の見方を HTML に出す方法 (サーバーで描く見方の別 URL) を検討する。減っていなければ記録して終了。
+- **交絡**: 同じ週に 2 件の UI 変更 (fd8dee3ba の線の 2 重・c645f1159 の右レールと AdSense の表記) を develop に入れている。ページの見た目の変更で、検索結果の順位には直接効かない想定だが分けて測れない。
+
 ## [GSC-CRAWL-WASTE-01] テーマ・県×テーマの表示直後の POST の廃止 (2026-11-11 デプロイ)
 
 - **デプロイ日**: 2026-11-11 00:43Z (PR #1249、本番反映)。詳細は backlog `GSC-CRAWL-WASTE-01`。

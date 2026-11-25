@@ -55,9 +55,13 @@ export function hashString(s: string): number {
 }
 
 /**
- * 現在ページと同グループを除外し、各グループから代表1件のみ表示。
- * 同タイトル優先・安定ソートで関連アイテムを選別する。
- * 同グループのアイテムは RelatedGroupCard で表示するため、ここでは重複を避ける。
+ * 右レールの関連ランキングを選ぶ。
+ * - 同じ groupKey の指標 (関連する指標のまとまり。漁業の各指標・魚種別の漁獲量など) を先頭に置く
+ * - 続いて同じ題、その他の順。各段の中は安定ソート
+ *
+ * 2026-11-25: 同じ指標の見方違いのページは親のページの計算方法へ統合した (ページを持たないキーは一覧の
+ * 読み手 excludeGone が落とす)。それまでは同じグループを丸ごと除外し、グループから代表 1 件だけを残していた
+ * (表示するはずの部品 RelatedGroupCard は実在せず、関連する指標へ行く入口が右レールに無かった)。
  */
 export function selectSidebarItems<T extends SidebarRankingItem>(
     items: T[],
@@ -70,42 +74,9 @@ export function selectSidebarItems<T extends SidebarRankingItem>(
     );
     const currentGroupKey = currentItem?.groupKey;
 
-    // 現在ページ自身と、同グループのアイテムを除外
-    const filtered = items.filter((i) => {
-        if (i.rankingKey === rankingKey && i.areaType === areaType) return false;
-        if (currentGroupKey && i.groupKey === currentGroupKey) return false;
-        return true;
-    });
-
-    // 各グループから代表1件のみ残す（groupKey がないものはそのまま）
-    // 代表 = ranking_key が groupKey と一致するもの（総数）
-    // 代表がカテゴリ内に存在しない場合はグループごと非表示（別カテゴリに総数がある）
-    const groupMap = new Map<string, T>();
-    const rest: T[] = [];
-    for (const i of filtered) {
-        if (!i.groupKey) {
-            rest.push(i);
-            continue;
-        }
-        const existing = groupMap.get(i.groupKey);
-        if (!existing) {
-            groupMap.set(i.groupKey, i);
-        } else {
-            const iIsRepresentative = i.rankingKey === i.groupKey;
-            const existingIsRepresentative = existing.rankingKey === existing.groupKey;
-            if (iIsRepresentative && !existingIsRepresentative) {
-                groupMap.set(i.groupKey, i);
-            } else if (!existingIsRepresentative && !iIsRepresentative && !i.normalizationBasis && existing.normalizationBasis) {
-                groupMap.set(i.groupKey, i);
-            }
-        }
-    }
-    // 代表（normalizationBasis なし）のみ表示。非代表しかない場合は除外
-    for (const [, item] of groupMap) {
-        if (!item.normalizationBasis || item.rankingKey === item.groupKey) {
-            rest.push(item);
-        }
-    }
+    const others = items.filter((i) => !(i.rankingKey === rankingKey && i.areaType === areaType));
+    const sameGroup = currentGroupKey ? others.filter((i) => i.groupKey === currentGroupKey) : [];
+    const rest = currentGroupKey ? others.filter((i) => i.groupKey !== currentGroupKey) : others;
 
     const currentTitle = currentItem?.title;
     const sameTitle = currentTitle
@@ -118,8 +89,9 @@ export function selectSidebarItems<T extends SidebarRankingItem>(
     const seed = `${rankingKey}-${areaType}`;
     const sortByHash = (a: SidebarRankingItem, b: SidebarRankingItem) =>
         hashString(seed + a.rankingKey) - hashString(seed + b.rankingKey);
+    sameGroup.sort(sortByHash);
     sameTitle.sort(sortByHash);
     otherTitle.sort(sortByHash);
 
-    return [...sameTitle, ...otherTitle].slice(0, max);
+    return [...sameGroup, ...sameTitle, ...otherTitle].slice(0, max);
 }

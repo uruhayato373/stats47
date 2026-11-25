@@ -135,6 +135,7 @@
 - [workflow policy comment import](feedback_workflow_policy_comment_import.md) — コメント内の import も依存と数えられる
 - [help flag runs script](feedback_help_flag_runs_script.md) — 自作スクリプトは --help で本処理が走る
 - [check why removed](feedback_check_why_removed_before_reviving.md) — 復活の前に削除理由を確認
+- [removed source silent fallback](feedback_removed_source_silent_fallback.md) — 出どころを消すなら読み手も同じ差分で。代わりの文字で埋めない
 - [consistency audit](project_consistency_audit_mechanism.md) — agent/skill/script のドリフト検査
 - [delete branch on merge unsafe](feedback_delete_branch_on_merge_unsafe.md) — 自動削除をオンにすると develop が消える
 - [github actions pr creation](feedback_github_actions_pr_creation.md) — Actions の PR 作成には権限設定が要る

@@ -33,6 +33,13 @@ export const fireDamageCasualtiesPerAccident: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "series",
+        "metric": "fire-damage-casualties-per-population",
+        "label": "人口10万人当たり",
+      },
+    ],
   },
   "groupKey": "fire-damage-casualties-per-accident",
   "isActive": true,

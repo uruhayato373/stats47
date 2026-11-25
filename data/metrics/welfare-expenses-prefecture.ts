@@ -48,6 +48,11 @@ export const welfareExpensesPrefecture: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "per-capita-welfare-expenditure-pref-municipal",
+        "label": "都道府県・市町村財政合計",
+      },
     ],
   },
   "groupKey": "welfare-expenses-prefecture",

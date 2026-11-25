@@ -1187,412 +1187,437 @@
         "normalizationOptions": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "scaleFactor": {
-                "type": "number"
-              },
-              "decimalPlaces": {
-                "type": "number"
-              },
-              "type": {
-                "enum": [
-                  "per_population",
-                  "per_area"
-                ]
-              },
-              "label": {
-                "type": "string"
-              },
-              "unit": {
-                "type": "string"
-              },
-              "visualization": {
+            "anyOf": [
+              {
                 "type": "object",
                 "properties": {
-                  "colorScheme": {
-                    "enum": [
-                      "interpolateBlues",
-                      "interpolateGreens",
-                      "interpolateGreys",
-                      "interpolateOranges",
-                      "interpolatePurples",
-                      "interpolateReds",
-                      "interpolateBuGn",
-                      "interpolateBuPu",
-                      "interpolateGnBu",
-                      "interpolateOrRd",
-                      "interpolatePuBuGn",
-                      "interpolatePuBu",
-                      "interpolatePuRd",
-                      "interpolateRdPu",
-                      "interpolateYlGnBu",
-                      "interpolateYlGn",
-                      "interpolateYlOrBr",
-                      "interpolateYlOrRd",
-                      "interpolateViridis",
-                      "interpolatePlasma",
-                      "interpolateInferno",
-                      "interpolateMagma",
-                      "interpolateTurbo",
-                      "interpolateCool",
-                      "interpolateWarm",
-                      "interpolateCividis",
-                      "interpolateCubehelix",
-                      "interpolateBrBG",
-                      "interpolatePRGn",
-                      "interpolatePiYG",
-                      "interpolatePuOr",
-                      "interpolateRdBu",
-                      "interpolateRdGy",
-                      "interpolateRdYlBu",
-                      "interpolateRdYlGn",
-                      "interpolateSpectral",
-                      "schemeCategory10",
-                      "schemeAccent",
-                      "schemeDark2",
-                      "schemePaired",
-                      "schemePastel1",
-                      "schemePastel2",
-                      "schemeSet1",
-                      "schemeSet2",
-                      "schemeSet3",
-                      "schemeTableau10"
-                    ]
-                  },
-                  "colorSchemeType": {
-                    "enum": [
-                      "sequential",
-                      "diverging"
-                    ]
-                  },
-                  "domain": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "extent"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "zero"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "fixed"
-                          },
-                          "min": {
-                            "type": "number"
-                          },
-                          "max": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode",
-                          "min",
-                          "max"
-                        ],
-                        "additionalProperties": false
-                      }
-                    ]
-                  },
-                  "classification": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "method": {
-                            "type": "string",
-                            "const": "continuous"
-                          }
-                        },
-                        "required": [
-                          "method"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "method": {
-                            "enum": [
-                              "equal-interval",
-                              "quantile"
-                            ]
-                          },
-                          "classes": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "method",
-                          "classes"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "method": {
-                            "type": "string",
-                            "const": "threshold"
-                          },
-                          "thresholds": {
-                            "type": "array",
-                            "items": {
-                              "type": "number"
-                            }
-                          }
-                        },
-                        "required": [
-                          "method",
-                          "thresholds"
-                        ],
-                        "additionalProperties": false
-                      }
-                    ]
-                  },
-                  "trendDomain": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "extent"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "zero"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "fixed"
-                          },
-                          "min": {
-                            "type": "number"
-                          },
-                          "max": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode",
-                          "min",
-                          "max"
-                        ],
-                        "additionalProperties": false
-                      }
-                    ]
-                  },
-                  "comparisonDomain": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "extent"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "zero"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "fixed"
-                          },
-                          "min": {
-                            "type": "number"
-                          },
-                          "max": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode",
-                          "min",
-                          "max"
-                        ],
-                        "additionalProperties": false
-                      }
-                    ]
-                  },
-                  "barDomain": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "extent"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "zero"
-                          },
-                          "padding": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode"
-                        ],
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "mode": {
-                            "type": "string",
-                            "const": "fixed"
-                          },
-                          "min": {
-                            "type": "number"
-                          },
-                          "max": {
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "mode",
-                          "min",
-                          "max"
-                        ],
-                        "additionalProperties": false
-                      }
-                    ]
-                  },
-                  "divergingMidpoint": {
-                    "enum": [
-                      "zero",
-                      "mean",
-                      "median",
-                      "custom"
-                    ]
-                  },
-                  "divergingMidpointValue": {
+                  "scaleFactor": {
                     "type": "number"
                   },
-                  "isReversed": {
+                  "decimalPlaces": {
+                    "type": "number"
+                  },
+                  "type": {
                     "enum": [
-                      false,
-                      true
+                      "per_population",
+                      "per_area"
                     ]
                   },
-                  "isSymmetrized": {
-                    "enum": [
-                      false,
-                      true
-                    ]
+                  "label": {
+                    "type": "string"
+                  },
+                  "unit": {
+                    "type": "string"
+                  },
+                  "visualization": {
+                    "type": "object",
+                    "properties": {
+                      "colorScheme": {
+                        "enum": [
+                          "interpolateBlues",
+                          "interpolateGreens",
+                          "interpolateGreys",
+                          "interpolateOranges",
+                          "interpolatePurples",
+                          "interpolateReds",
+                          "interpolateBuGn",
+                          "interpolateBuPu",
+                          "interpolateGnBu",
+                          "interpolateOrRd",
+                          "interpolatePuBuGn",
+                          "interpolatePuBu",
+                          "interpolatePuRd",
+                          "interpolateRdPu",
+                          "interpolateYlGnBu",
+                          "interpolateYlGn",
+                          "interpolateYlOrBr",
+                          "interpolateYlOrRd",
+                          "interpolateViridis",
+                          "interpolatePlasma",
+                          "interpolateInferno",
+                          "interpolateMagma",
+                          "interpolateTurbo",
+                          "interpolateCool",
+                          "interpolateWarm",
+                          "interpolateCividis",
+                          "interpolateCubehelix",
+                          "interpolateBrBG",
+                          "interpolatePRGn",
+                          "interpolatePiYG",
+                          "interpolatePuOr",
+                          "interpolateRdBu",
+                          "interpolateRdGy",
+                          "interpolateRdYlBu",
+                          "interpolateRdYlGn",
+                          "interpolateSpectral",
+                          "schemeCategory10",
+                          "schemeAccent",
+                          "schemeDark2",
+                          "schemePaired",
+                          "schemePastel1",
+                          "schemePastel2",
+                          "schemeSet1",
+                          "schemeSet2",
+                          "schemeSet3",
+                          "schemeTableau10"
+                        ]
+                      },
+                      "colorSchemeType": {
+                        "enum": [
+                          "sequential",
+                          "diverging"
+                        ]
+                      },
+                      "domain": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "extent"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "zero"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "fixed"
+                              },
+                              "min": {
+                                "type": "number"
+                              },
+                              "max": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode",
+                              "min",
+                              "max"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "classification": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "const": "continuous"
+                              }
+                            },
+                            "required": [
+                              "method"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "method": {
+                                "enum": [
+                                  "equal-interval",
+                                  "quantile"
+                                ]
+                              },
+                              "classes": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "method",
+                              "classes"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "method": {
+                                "type": "string",
+                                "const": "threshold"
+                              },
+                              "thresholds": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "required": [
+                              "method",
+                              "thresholds"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "trendDomain": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "extent"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "zero"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "fixed"
+                              },
+                              "min": {
+                                "type": "number"
+                              },
+                              "max": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode",
+                              "min",
+                              "max"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "comparisonDomain": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "extent"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "zero"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "fixed"
+                              },
+                              "min": {
+                                "type": "number"
+                              },
+                              "max": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode",
+                              "min",
+                              "max"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "barDomain": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "extent"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "zero"
+                              },
+                              "padding": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string",
+                                "const": "fixed"
+                              },
+                              "min": {
+                                "type": "number"
+                              },
+                              "max": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "mode",
+                              "min",
+                              "max"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      "divergingMidpoint": {
+                        "enum": [
+                          "zero",
+                          "mean",
+                          "median",
+                          "custom"
+                        ]
+                      },
+                      "divergingMidpointValue": {
+                        "type": "number"
+                      },
+                      "isReversed": {
+                        "enum": [
+                          false,
+                          true
+                        ]
+                      },
+                      "isSymmetrized": {
+                        "enum": [
+                          false,
+                          true
+                        ]
+                      }
+                    },
+                    "required": [
+                      "colorScheme",
+                      "colorSchemeType",
+                      "domain",
+                      "classification",
+                      "trendDomain",
+                      "comparisonDomain"
+                    ],
+                    "additionalProperties": false
                   }
                 },
                 "required": [
-                  "colorScheme",
-                  "colorSchemeType",
-                  "domain",
-                  "classification",
-                  "trendDomain",
-                  "comparisonDomain"
+                  "scaleFactor",
+                  "decimalPlaces",
+                  "type",
+                  "label",
+                  "unit"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "series"
+                  },
+                  "metric": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "metric",
+                  "label"
                 ],
                 "additionalProperties": false
               }
-            },
-            "required": [
-              "scaleFactor",
-              "decimalPlaces",
-              "type",
-              "label",
-              "unit"
-            ],
-            "additionalProperties": false
+            ]
           }
         },
         "description": {

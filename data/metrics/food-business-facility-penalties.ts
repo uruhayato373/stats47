@@ -94,6 +94,11 @@ export const foodBusinessFacilityPenalties: MetricConfig = {
         "scaleFactor": 100,
         "decimalPlaces": 2,
       },
+      {
+        "type": "series",
+        "metric": "food-business-facility-penalties-per-1000",
+        "label": "施設1000件当たり",
+      },
     ],
   },
   "groupKey": "food-business-facility-penalties",

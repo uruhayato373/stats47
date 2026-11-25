@@ -3,7 +3,7 @@ import { type ReactNode } from 'react';
 import { cn } from '@stats47/components';
 
 import { LeftRailLayout } from './LeftRailLayout';
-import { RIGHT_RAIL_GRID_CLASS, SHELL_CONTAINER_CLASS } from './PageShell';
+import { RIGHT_RAIL_GRID_CLASS, SHELL_CONTAINER_CLASS, SHELL_RAIL_FRAME_CLASS } from './PageShell';
 
 interface ArticleShellProps {
   /** 記事本文 (共通グリッドの残り幅いっぱいに広がる) */
@@ -27,7 +27,7 @@ interface ArticleShellProps {
 }
 
 /**
- * 右レール。狭い幅は本文の下 (mt-4・間隔 16px) に積み、988px 以上は幅 316px の列 (間隔 12px)。
+ * 右レール。狭い幅は本文の下に積み、988px 以上は幅 316px の列。どちらも余白を空けず 1px の線で区切る (SHELL_RAIL_FRAME_CLASS。2026-11-25)。
  * 本文の下に積んだときは、2 つ入る幅 (640px 以上) で 2 列の格子にする (2026-10-29 オーナー決定。旧: 1 列のままで、
  * 300×250 の広告や PR が 1 枚ずつ縦に並び、右に 400〜500px の空きができていた)
  *
@@ -37,7 +37,7 @@ interface ArticleShellProps {
  * カードが中身の幅に縮んだ (2026-11-13 の本番のスモークテストで「この指標を使うテーマ」が 126px / 列 316px)
  */
 export const ARTICLE_RAIL_CLASS =
-  'mt-4 grid grid-cols-1 items-start gap-4 @min-[640px]/shell:grid-cols-2 rail:mt-0 rail:flex rail:flex-col rail:items-stretch rail:gap-3 rail:self-stretch';
+  `${SHELL_RAIL_FRAME_CLASS} grid grid-cols-1 items-stretch @min-[640px]/shell:grid-cols-2 rail:flex rail:flex-col rail:items-stretch`;
 
 /**
  * 記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) 専用の Shell。

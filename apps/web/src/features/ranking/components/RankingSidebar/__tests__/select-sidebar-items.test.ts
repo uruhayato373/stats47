@@ -69,39 +69,24 @@ describe("selectSidebarItems", () => {
 
   // ここから下は複製版テストに存在せず、実装だけが持っていた挙動
 
-  it("現在ページと同じ group のアイテムを除外する（RelatedGroupCard と重複させない）", () => {
+  it("同じ group の指標 (関連する指標のまとまり) を先頭に並べる", () => {
+    // 2026-11-25: 同じ指標の見方違いのページは統合したので、group は関連する別の指標のまとまりだけになった
     const items = [
-      makeItem("pop-total", { groupKey: "pop-total" }),
-      makeItem("pop-total-male", { groupKey: "pop-total" }),
-      makeItem("other", { groupKey: null }),
+      makeItem("other", { groupKey: null, title: "同じ題" }),
+      makeItem("fish-catch", { groupKey: "fishery" }),
+      makeItem("aquaculture-harvest", { groupKey: "fishery" }),
+      makeItem("fishery-workers", { groupKey: "fishery" }),
     ];
-    const result = selectSidebarItems(items, "pop-total", "prefecture", 10);
-    expect(result.map((i) => i.rankingKey)).toEqual(["other"]);
+    const result = selectSidebarItems(items, "fish-catch", "prefecture", 10);
+    expect(result.slice(0, 2).map((i) => i.rankingKey).sort()).toEqual(["aquaculture-harvest", "fishery-workers"]);
+    expect(result.map((i) => i.rankingKey)).not.toContain("fish-catch");
+    expect(result).toHaveLength(3);
   });
 
-  it("group からは代表 (rankingKey === groupKey) を 1 件だけ残す", () => {
-    const items = [
-      makeItem("current"),
-      makeItem("income-per-capita", {
-        groupKey: "income",
-        normalizationBasis: "per_capita",
-      }),
-      makeItem("income", { groupKey: "income" }),
-    ];
+  it("group を持たないページでは group の指標も通常の候補として並べる", () => {
+    const items = [makeItem("current"), makeItem("income", { groupKey: "income" }), makeItem("income-detail", { groupKey: "income" })];
     const result = selectSidebarItems(items, "current", "prefecture", 10);
-    expect(result.map((i) => i.rankingKey)).toEqual(["income"]);
-  });
-
-  it("代表が居ない group は丸ごと落とす（総数は別カテゴリにある）", () => {
-    const items = [
-      makeItem("current"),
-      makeItem("income-per-capita", {
-        groupKey: "income",
-        normalizationBasis: "per_capita",
-      }),
-    ];
-    const result = selectSidebarItems(items, "current", "prefecture", 10);
-    expect(result).toEqual([]);
+    expect(result.map((i) => i.rankingKey).sort()).toEqual(["income", "income-detail"]);
   });
 });
 

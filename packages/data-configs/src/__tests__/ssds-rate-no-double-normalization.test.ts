@@ -27,7 +27,8 @@ function ssdsRatesWithNormalization() {
     if (typeof code !== "string" || typeof statsDataId !== "string") continue;
     if (!isOfficialRate(REPO_ROOT, { statsDataId, cdCat01: code }, rateNameCache)) continue;
     checked.push(key);
-    const options = config.calculation?.normalizationOptions ?? [];
+    // series (別の指標の公表値を出す見方) は割り算をしないので対象外。人口・面積で割る選択肢だけを数える
+    const options = (config.calculation?.normalizationOptions ?? []).filter(({ type }) => type !== "series");
     if (options.length > 0) violations.push(`${key} (${statsDataId} ${code}): ${options.map(({ type }) => type).join(",")}`);
   }
   return { checked, violations };
