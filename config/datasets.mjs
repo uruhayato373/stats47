@@ -1042,6 +1042,13 @@ export const DATASETS = [
   d("open-data.prefecture-statistics", "data/open-data/prefecture-statistics/resources.json", "ledger", "data", "data", "都道府県が公式に公開する統計ポータル・ダッシュボード・年鑑のリンク (県名は持たず読み込み口が県のマスタで結ぶ)。読み込みは packages/data-configs/src/prefecture-statistics-catalog/index.ts", {
     schema: "config/schema/open-data.prefecture-statistics.schema.json",
   }),
+  d("open-data.prefecture-indicator-candidates", "data/open-data/prefecture-statistics/indicator-candidates.json", "ledger", "data", "data", "県の公式統計の入口から実ページをたどって拾った指標候補 (県・入口・統計名・指標候補・都道府県粒度の有無・重複する既存指標・確認日)。入口の台帳 open-data.prefecture-statistics の隣で、実ページを確かめた行だけを足す", {
+    schema: "config/schema/open-data.prefecture-indicator-candidates.schema.json",
+    refs: [
+      { field: "candidates[].resourceId", to: "open-data.prefecture-statistics", key: "resources[].id" },
+      { field: "candidates[].overlappingMetricKeys[]", to: "registry:metrics" },
+    ],
+  }),
   d("open-data.world-provider-evaluations", "data/open-data/world/provider-evaluations.json", "ledger", "data", "data", "/world (国際比較) の候補となる国際データ源の机上評価 (ライセンス・カバレッジ・アクセス日)。読み込みは packages/data-configs/src/geo-scope/world-types.ts", {
     schema: "config/schema/open-data.world-provider-evaluations.schema.json",
   }),
