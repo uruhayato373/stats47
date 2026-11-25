@@ -202,3 +202,22 @@ test('CI 記録スクリプトは job のブランチと作業ツリーに触れ
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+// 意図 (MODEL-USAGE-COVERAGE-01 ②): CI の無人 Claude の起動は、必ず同じ workflow の中でトークン実績の記録まで配線する。
+// 記録の無い起動が 1 つでもあると、モデル利用量の統計から CI の分だけ抜け、統合候補の判断が偏る。
+test('claude-code-base-action を使う workflow は、起動の数だけ record-claude-usage-ci.sh を呼ぶ', () => {
+  const dir = path.resolve(import.meta.dirname, '../../../../.github/workflows');
+  const count = (text, needle) => text.split(needle).length - 1;
+  let launches = 0;
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.yml'))) {
+    const text = fs.readFileSync(path.join(dir, file), 'utf8');
+    const used = count(text, 'uses: anthropics/claude-code-base-action@');
+    if (used === 0) continue;
+    launches += used;
+    assert.ok(
+      count(text, 'record-claude-usage-ci.sh') >= used,
+      `${file}: Claude の起動 ${used} 回に対して、record-claude-usage-ci.sh の呼び出しが足りない`,
+    );
+  }
+  assert.ok(launches >= 4, `CI の Claude の起動を ${launches} 件しか見つけられない (走査が壊れている)`);
+});
