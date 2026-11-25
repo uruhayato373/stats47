@@ -43,9 +43,11 @@ jobs:
 
       - name: Determine metric for today
         id: pick
+        env:
+          METRIC_INPUT: ${{ github.event.inputs.metric }}
         run: |
-          if [ -n "${{ github.event.inputs.metric }}" ]; then
-            METRIC="${{ github.event.inputs.metric }}"
+          if [ -n "$METRIC_INPUT" ]; then
+            METRIC="$METRIC_INPUT"
             echo "Using override metric: $METRIC"
           else
             START_DATE="2026-05-26"

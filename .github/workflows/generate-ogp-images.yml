@@ -135,8 +135,11 @@ jobs:
           fi
 
       - name: 📋 Summarize exact publish plan
+        env:
+          IMAGE_TYPE_INPUT: ${{ github.event.inputs.type }}
+          SLUGS_INPUT: ${{ github.event.inputs.slugs }}
         run: |
-          PLAN=".local/image-generation-publish-plan-${{ github.event.inputs.type }}.json"
+          PLAN=".local/image-generation-publish-plan-${IMAGE_TYPE_INPUT}.json"
           test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
           # shellcheck disable=SC2016
           node -e '
@@ -151,12 +154,14 @@ jobs:
               `- plan: ${process.argv[1]}`,
             ];
             fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\\n") + "\\n");
-          ' "$PLAN" "${{ github.event.inputs.slugs }}"
+          ' "$PLAN" "$SLUGS_INPUT"
 
       - name: ☁️ Publish exact image set to R2
         if: github.event.inputs.apply == 'true'
+        env:
+          IMAGE_TYPE_INPUT: ${{ github.event.inputs.type }}
         run: |
-          PLAN=".local/image-generation-publish-plan-${{ github.event.inputs.type }}.json"
+          PLAN=".local/image-generation-publish-plan-${IMAGE_TYPE_INPUT}.json"
           test -f "$PLAN" || { echo "exact publish plan が生成されませんでした"; exit 1; }
           npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
 
