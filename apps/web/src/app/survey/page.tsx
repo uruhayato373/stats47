@@ -139,35 +139,24 @@ export default async function SurveyIndexPage() {
                 return (
                   <Fragment key={survey.id}>
                     <article className="flex min-w-0 flex-col gap-3">
-                      <div className="flex items-start gap-3">
-                        <span
-                          aria-hidden="true"
-                          className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground"
-                        >
-                          <Icon className="size-5" />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-base font-semibold leading-snug">
-                            <Link href={hrefFor("survey", { surveyKey: survey.id })} className="hover:text-primary hover:underline">
-                              {survey.name}
-                            </Link>
-                          </h3>
-                          <p className="mt-0.5 text-xs text-muted-foreground">
-                            {survey.organization} ・ {count}件
-                          </p>
-                        </div>
-                      </div>
-                      {/* 説明はモバイルでは出さない (代表の指標で何が分かるかを示し、一覧の長さを抑える) */}
-                      {survey.description && (
-                        <p className="hidden text-xs leading-relaxed text-muted-foreground line-clamp-2 sm:block">
-                          {survey.description}
+                      {/* 題は 1 行 (入りきらない分は末尾を省き、全文は title で出す)。説明は出さず、カードの高さを揃える (2026-11-26 オーナー判断)。
+                          題がカードの全幅を使えるよう、分野のアイコンは府省庁の行に小さく置く */}
+                      <div className="min-w-0">
+                        <h3 className="truncate text-sm font-semibold leading-snug" title={survey.name}>
+                          <Link href={hrefFor("survey", { surveyKey: survey.id })} className="hover:text-primary hover:underline">
+                            {survey.name}
+                          </Link>
+                        </h3>
+                        <p className="mt-1 flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
+                          <Icon aria-hidden="true" className="size-3.5 shrink-0" />
+                          <span className="truncate">{survey.organization} ・ {count}件</span>
                         </p>
-                      )}
+                      </div>
                       {representatives.length > 0 && (
-                        // モバイルは「・」区切りの 1 行 (入りきらない分は末尾を省く。一覧の長さを今と同程度に保つ)、sm 以上は 1 行 1 指標
+                        // モバイルは「・」区切りの 1 行 (入りきらない分は末尾を省く。一覧の長さを今と同程度に保つ)、sm 以上は 1 行 1 指標で 3 行分の高さを確保する (指標が 3 つ未満の調査もカードの高さを揃える)
                         <ul
                           aria-label={`${survey.name}で分かる指標`}
-                          className="truncate border-t border-border pt-2 text-sm sm:flex sm:flex-col sm:gap-1 sm:whitespace-normal"
+                          className="truncate border-t border-border pt-2 text-sm sm:flex sm:min-h-[calc(4.75rem+1px)] sm:flex-col sm:gap-1 sm:whitespace-normal"
                         >
                           {representatives.map((representative, representativeIndex) => (
                             <li key={representative.rankingKey} className="inline min-w-0 sm:block sm:truncate">
