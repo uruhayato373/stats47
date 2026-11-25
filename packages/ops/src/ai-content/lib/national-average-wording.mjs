@@ -10,6 +10,8 @@
  *   regenerate  = 言い換えると文が崩れる、または言い換えで意味が曖昧になる。作り直しの経路へ回す
  *   official    = 公表の全国値を指している (行に公表の全国値がある、または文が公表値だと言っている)。対象外
  *
+ * 入口 (公開 R2 を読む dry-run): `.claude/scripts/ai-content/audit-national-average-wording.mjs`。
+ *
  * 置換そのものはここで行わない。`replaceReplaceable` は replaceable だけを置き換えた文字列を返す純関数で、
  * 書き込みは呼び出し側 (CLI は dry-run で書かない) が決める。
  */

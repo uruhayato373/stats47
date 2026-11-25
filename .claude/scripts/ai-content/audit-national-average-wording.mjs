@@ -2,7 +2,7 @@
 /**
  * audit-national-average-wording.mjs — 公開中の AI 解説の「全国平均」を数える dry-run (AI-CONTENT-NATIONAL-AVERAGE-WORDING-01)。
  *
- * 公開 R2 の `app/ranking/<key>/ai-content.json` を読み、行ごとに
+ * 公開 R2 の各ランキングの ai-content.json を読み、行ごとに
  *   置換できる (replaceable) / 再生成が要る (regenerate) / 公表の全国値なので対象外 (official) を数える。
  * outbox にも R2 にも何も書かない。判定は packages/ops/src/ai-content/lib/national-average-wording.mjs。
  *
@@ -66,7 +66,7 @@ function exampleSentence(text, label) {
   return { before: sentence, after: replaceReplaceable(sentence, label).text };
 }
 
-const items = await getJson(`${R2}/app/ranking-items/all.json`);
+const items = await getJson(`${R2}/${RANKING_R2_PREFIX}-items/all.json`);
 let keys = (items?.items ?? []).filter((it) => it.areaType === "prefecture" && it.isActive).map((it) => it.rankingKey);
 if (keys.length === 0) {
   console.error("ranking-items/all.json を読めない");
