@@ -6110,7 +6110,29 @@
             ],
             "coverage": "250mメッシュの地震ハザード、表層地盤、深部地下構造、断層、地すべり地形、被害地震検索、地震ハザードカルテ",
             "verdict": "no-housing-item-found",
-            "reason": "一覧の名称に建物・住宅・世帯の項目が無い。個別 API の詳細ページと、ダウンロード提供物は今回未確認"
+            "reason": "一覧の名称に建物・住宅・世帯の項目が無い。個別 API の詳細ページ 13 件とダウンロード提供物のページも 2026-11-25 に確認し、住宅・建物・世帯の項目は見つからなかった (下の detailVerification)",
+            "detailVerification": {
+              "verifiedAt": "2026-11-25",
+              "method": "各ページの HTML を取得してタグを除き、住宅・建物・建築・世帯・家屋・木造・戸数・耐震・棟の 9 語を検索した。13 の API 詳細ページとダウンロードのページで 9 語とも 0 件だった。出力項目の表 (例: 地震ハザード情報提供 API の T30_I45_PS ほか) は HTML にあり、取得できている",
+              "urls": [
+                "https://www.j-shis.bosai.go.jp/api-pshm-meshinfo",
+                "https://www.j-shis.bosai.go.jp/api-pshm-hzcv",
+                "https://www.j-shis.bosai.go.jp/api-pshm-fltinfo",
+                "https://www.j-shis.bosai.go.jp/api-avghzd-meshinfo",
+                "https://www.j-shis.bosai.go.jp/api-sstruct-meshinfo",
+                "https://www.j-shis.bosai.go.jp/api-sstruct-phys",
+                "https://www.j-shis.bosai.go.jp/api-dstruct-meshinfo",
+                "https://www.j-shis.bosai.go.jp/api-dstruct-phys",
+                "https://www.j-shis.bosai.go.jp/api-landslide-isContaining",
+                "https://www.j-shis.bosai.go.jp/api-fltsearch-mesh",
+                "https://www.j-shis.bosai.go.jp/api-fltsearch-area",
+                "https://www.j-shis.bosai.go.jp/api-meshsearch",
+                "https://www.j-shis.bosai.go.jp/api-karte",
+                "https://www.j-shis.bosai.go.jp/download"
+              ],
+              "exposureItems": "人口だけが曝露の項目として見つかった。自治体別被害地震検索 API の ecode は「人口コード 夜間人口 ALL_NT_A・昼間人口 ALL_DT_A」で、ダウンロードのページの「被災人口」は被災人口統計データ (CSV) である。どちらも住宅・建物・世帯ではない",
+              "scope": "上の 14 ページの範囲。ダウンロードのページが示す各データ (地図データ・ハザードカーブ・表層地盤・深部地盤・被災人口統計) の CSV の列そのものは開いていない。J-SHIS の他のサービス (Map R の画面・Labs) も未確認"
+            }
           }
         ],
         "notSubstituted": [
@@ -6121,7 +6143,6 @@
         ],
         "unverified": [
           "e-Stat 統計GIS の画面で、住宅・土地統計調査にメッシュ区画の選択肢があるか（動的画面で今回は確認できていない）",
-          "J-SHIS の個別 API・ダウンロード提供物に住宅・建物の項目があるか",
           "総務省統計局・防災科学技術研究所への提供有無の照会（外部への連絡は許可されていないため未実施）"
         ],
         "notClaimed": "住宅の全国メッシュデータがどこにも存在しないという断定ではない。確認した公式ページの範囲に見つからなかったという記録である。",
