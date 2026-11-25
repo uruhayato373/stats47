@@ -132,7 +132,7 @@ export function GeoSnowDesignationLeafletMap({
         onEachFeature={(f, layer) => {
           const p = f.properties,
             n = document.createElement('span');
-          n.textContent = `メッシュ ${p.meshCode}｜2020年基準人口 ${Number(p.population2020).toLocaleString('ja-JP', { maximumFractionDigits: 4 })}人｜${SNOW_CLASS_LABELS[Number(p.centerClass)]}${p.boundaryCell ? '｜指定境界を横切る格子' : ''}`;
+          n.textContent = `メッシュ ${p.meshCode}｜2020年基準人口 ${Number(p.population2020).toLocaleString('ja-JP', { maximumFractionDigits: 0 })}人｜${SNOW_CLASS_LABELS[Number(p.centerClass)]}${p.boundaryCell ? '｜指定境界を横切る格子' : ''}`;
           layer.bindTooltip(n, { sticky: true });
           layer.bindPopup(n.cloneNode(true) as HTMLElement);
         }}
