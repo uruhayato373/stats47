@@ -12389,6 +12389,25 @@
       ]
     },
     {
+      "id": "blog:sme-business-sentiment-regional-gap",
+      "kind": "blog",
+      "key": "sme-business-sentiment-regional-gap",
+      "title": "中小企業の景況感、製造業だけ地域差が開いた",
+      "href": "/blog/sme-business-sentiment-regional-gap",
+      "published": true,
+      "rankingKeys": [
+        "active-job-opening-ratio",
+        "manufacturing-shipment-amount"
+      ],
+      "tagIds": [
+        "tag:economy",
+        "tag:smes",
+        "tag:manufacturing",
+        "tag:regional-economy",
+        "tag:t-6f414497615e"
+      ]
+    },
+    {
       "id": "blog:soba-udon-dining-consumption-expenditure-prefecture-gap",
       "kind": "blog",
       "key": "soba-udon-dining-consumption-expenditure-prefecture-gap",

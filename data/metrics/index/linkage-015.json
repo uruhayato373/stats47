@@ -10689,6 +10689,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:sme-business-sentiment-regional-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:manufacturing-shipment-amount",
           "kind": "municipality-ranking"
         },
