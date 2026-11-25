@@ -116,7 +116,6 @@ export default async function AreaThemeCitiesPage({ params }: { params: Promise<
         />
         <PageHeader
           title={`${prefecture.prefName}の市区町村別の${theme.title}`}
-          stats={`${metrics.length} 指標`}
         />
 
         {metrics.length === 0 ? (

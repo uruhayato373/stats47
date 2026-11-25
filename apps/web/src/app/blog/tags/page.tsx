@@ -66,7 +66,7 @@ export default async function TagsIndexPage() {
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <PageHeader title="タグ一覧" description="タグから記事を探す" />
+            <PageHeader title="タグ一覧" />
 
             {tags.length === 0 ? (
                 <p className="py-12 text-center text-muted-foreground">

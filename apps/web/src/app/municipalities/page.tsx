@@ -1,11 +1,7 @@
 import { Fragment } from 'react';
 
 
-import {
-  buildMunicipalityEntityPolicy,
-  fetchPrefectures,
-  listPublishableMunicipalities,
-} from '@stats47/area';
+import { fetchPrefectures } from '@stats47/area';
 import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
@@ -81,8 +77,6 @@ export function generateMetadata(): Metadata {
 }
 
 export default async function MunicipalitiesHubPage() {
-  const policy = buildMunicipalityEntityPolicy();
-  const entityCount = listPublishableMunicipalities(policy).length;
   const themes = Object.values(MUNICIPALITY_THEME_CATALOGS);
   // 公開中のテーマは都道府県のテーマ名のページ (対応する市区町村テーマの指標をまとめる。2026-10-31 IA-REGION-THEME-01)
   // 並びは都道府県のテーマ一覧と同じ分野の順にする (HUB-LIST-FINDABILITY-01。手で書いた対応表の順に並んでいた)
@@ -173,10 +167,7 @@ export default async function MunicipalitiesHubPage() {
       />
       <StatisticsScopeNav current="municipalities" />
       <PageHeader
-        eyebrow="市区町村"
         title="市区町村の統計"
-        description="人口・暮らし・産業・財政など、市区町村の違いを同じ条件で比較できるテーマから探せます。"
-        stats={`${entityCount.toLocaleString('ja-JP')} 自治体を比較`}
       />
 
       <div className="mb-6 rail:hidden">

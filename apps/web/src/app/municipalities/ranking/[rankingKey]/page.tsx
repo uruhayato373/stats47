@@ -238,7 +238,6 @@ export default async function MunicipalityRankingPage({
             hrefs={scopeHrefsForMunicipalityRanking(item.rankingKey, (key) => KNOWN_RANKING_KEYS.has(key))}
           />
           <PageHeader
-            eyebrow="市区町村ランキング"
             title={municipalityRankingDisplayTitle(item)}
             description={item.description}
             stats={`${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}

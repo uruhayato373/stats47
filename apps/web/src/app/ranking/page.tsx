@@ -100,7 +100,6 @@ export default async function RankingIndexPage() {
       */}
       <PageHeader
         title="都道府県ランキング一覧"
-        stats={`全 ${RANKING_COUNT.toLocaleString()} ランキング ・ ${CATEGORY_COUNT} カテゴリ ・ 47 都道府県`}
       />
     </>
   );

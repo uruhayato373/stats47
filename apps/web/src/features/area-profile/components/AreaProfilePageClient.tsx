@@ -20,9 +20,7 @@ interface Props {
 export function AreaProfilePageClient({ profile }: Props) {
     return (
         <PageHeader
-            eyebrow="47都道府県データ"
             title={profile.areaName}
-            description={`${profile.areaName}の人口・経済・教育・医療など 17 カテゴリのデータを、47 都道府県で順位比較できます。`}
             actions={
                 <Link
                     href={`/category/population/compare?areas=${profile.areaCode}`}

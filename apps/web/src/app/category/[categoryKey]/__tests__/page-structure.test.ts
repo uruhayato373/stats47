@@ -57,9 +57,8 @@ describe('category page featured ranking cards', () => {
   it('パンくずと簡潔な見出しをメイン領域に置く', () => {
     expect(PAGE).toContain('<Breadcrumbs');
     expect(PAGE).toContain('<PageHeader');
-    expect(PAGE).toContain(
-      '`${category.categoryName}に関する都道府県ランキングを、地図やグラフで比較できます。`'
-    );
+    // 見出しは題名だけ。「〜を比較できます」のような案内文を置かない (2026-11-26 オーナー決定)
+    expect(PAGE).not.toContain('地図やグラフで比較できます');
     expect(PAGE).not.toContain('eyebrow="カテゴリ"');
     expect(PAGE).not.toContain(
       'stats={`全${rankingItems.length}件のランキング`}'

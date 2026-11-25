@@ -59,10 +59,8 @@ export default async function GeoComparePage({ searchParams }: PageProps) {
         ]}
       />
       <PageHeader
-        eyebrow="GeoAI 横断比較"
         title="1つの県を、4つの問いで読む"
         description="住宅地点と人口減少の重なり、浸水想定区域内人口、駅800m圏人口を一県ずつ確認し、県内の詳しい地図へ進みます。各分析の分母や判定条件は異なります。"
-        stats="47都道府県 ・ 4つの問い ・ 3つの空間演算"
       />
 
       <GeoDecisionExplorer rows={rows} initialAreaCode={pref} />

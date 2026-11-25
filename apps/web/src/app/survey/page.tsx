@@ -96,12 +96,8 @@ export default async function SurveyIndexPage() {
           { label: "調査別ランキング" },
         ]}
       />
-      <PageHeader
-        eyebrow="政府統計"
-        title="調査別ランキング一覧"
-        description="政府統計調査ごとに、都道府県別ランキングを分類しています。調査ごとに、その調査で分かる代表的な指標を 3 つまで示します。"
-        stats={`全 ${visibleSurveys.length} 調査 ・ 並び順: 作成した府省庁ごと、その中はランキングの多い順`}
-      />
+      {/* 見出しは題名だけ (2026-11-26 オーナー判断: 説明・件数・並び順は冗長。並びは府省庁の一覧が示す) */}
+      <PageHeader title="調査別ランキング一覧" />
     </>
   );
 

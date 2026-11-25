@@ -323,7 +323,6 @@ export default async function SurveyPage({ params }: PageProps) {
       // パンくずの直後のセルにだけ効く。本文 (shell-main) の中に置くと間に線が出ていた (2026-11-23)
       header={
         <PageHeader
-          eyebrow="政府統計"
           title={survey.name}
           description={
             <>

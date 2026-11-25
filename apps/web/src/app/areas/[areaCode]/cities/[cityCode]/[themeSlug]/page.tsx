@@ -125,7 +125,7 @@ export default async function CityThemePage({ params }: PageProps) {
           city={{ code: cityCode, name: context.cityShortName }}
           prefectureCities={prefectureCities}
         />
-        <PageHeader title={`${context.pref.areaName}${context.cityShortName}の${theme.title}`} stats={`${metrics.length} 指標`} />
+        <PageHeader title={`${context.pref.areaName}${context.cityShortName}の${theme.title}`} />
 
         {metrics.length === 0 ? (
           <p role="status" className="p-4 text-sm text-muted-foreground">

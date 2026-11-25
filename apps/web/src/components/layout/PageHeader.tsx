@@ -2,12 +2,13 @@ import { type ReactNode } from "react";
 
 import { cn } from "@stats47/components";
 
+/**
+ * 見出しは簡素にする (2026-11-26 オーナー決定)。題名の上の小見出し (eyebrow) は持たない
+ * (階層はパンくずとサイドバーの現在地が示す)。説明 (description) はそのページにしかない情報
+ * (読み違いの注意・問いの文・指標やデータの定義) だけに使い、「〜を比較できます」のような案内文を書かない。
+ * 補足 (stats) はデータの年と対象の数だけに使い、件数の宣伝と並び順の説明を書かない。
+ */
 interface PageHeaderProps {
-  /**
-   * 任意の小ラベル（例: "ランキング"）。h1 の上に控えめに表示。
-   * 文字列のほか、上位ページへのリンク (市区町村ページの「東京都」など) も渡せる。
-   */
-  eyebrow?: ReactNode;
   /** ページ見出し（h1）。テンプレートの breadcrumb-comp と同じ text-xl font-semibold */
   title: string;
   /** 1 行説明。本文の導入 */
@@ -48,7 +49,6 @@ interface PageHeaderProps {
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 export function PageHeader({
-  eyebrow,
   title,
   description,
   stats,
@@ -77,11 +77,6 @@ export function PageHeader({
 
   return (
     <header className={cn("mb-4", className)}>
-      {eyebrow && (
-        <p className="text-xs font-medium text-muted-foreground">
-          {eyebrow}
-        </p>
-      )}
       {aside ? (
         // 右カラム指定時のみ 2 カラム grid 化（lg 以上）。
         <div className="mt-1 grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2">

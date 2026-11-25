@@ -165,7 +165,6 @@ export default async function MunicipalityPrefectureRankingPage({
         }}
       />
       <PageHeader
-        eyebrow="市区町村ランキング"
         title={`${prefecture.prefName}の${areaLabel}${displayTitle}ランキング`}
         description={item.description}
         stats={`${snapshot.yearName}・${ranking.rows.length.toLocaleString('ja-JP')}${areaLabel}`}

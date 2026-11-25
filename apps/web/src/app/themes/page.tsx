@@ -35,10 +35,6 @@ export function generateMetadata(): Metadata {
 const THEMES_INDEX_INFEED_AFTER = [20, 40] as const;
 
 export default async function ThemesPage() {
-  const totalRankings = ALL_THEMES.reduce(
-    (acc, t) => acc + t.rankingKeys.length,
-    0
-  );
   // サイドバーと同じ分野に分けて並べる (HUB-LIST-FINDABILITY-01。55 テーマが分類なしの同形カードで並んでいた)
   const groups = groupThemesForListing(ALL_THEMES);
   // インフィード広告の位置は分野をまたいで数える (一覧全体の何件目か)
@@ -55,10 +51,7 @@ export default async function ThemesPage() {
       />
       <StatisticsScopeNav current="prefectures" />
       <PageHeader
-        eyebrow="指標の横断比較"
         title="テーマダッシュボード"
-        description={`テーマ別に複数の指標を横断して都道府県を比較できます。少子高齢化・労働・医療・観光・物価など、社会課題に直結するダッシュボードを ${ALL_THEMES.length} 種類。`}
-        stats={`全 ${ALL_THEMES.length} テーマ ・ 指標 ${totalRankings} 件 ・ 47 都道府県 ・ 並び順: ${groups.length} 分野ごと (サイドバーと同じ順)`}
       />
 
       <LinkRowNav

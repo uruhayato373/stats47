@@ -6,7 +6,6 @@ import { getMetricConfig } from "@stats47/data-configs";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { buildCityPageMeta } from "@stats47/ranking";
 
-import Link from "@/components/atoms/SiteLink";
 import { PageHeader, PageShell, PanelGrid } from "@/components/layout";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
@@ -132,13 +131,8 @@ export default async function CityPage({ params }: PageProps) {
         ]}
       />
       <PageHeader
-        eyebrow={
-          <Link href={hrefFor("area", { areaCode })} className="hover:text-foreground hover:underline">
-            {context.pref.areaName}
-          </Link>
-        }
         title={`${context.cityShortName}の${databook ? "人口・" : ""}統計データ`}
-        description={meta?.description ?? `${context.pref.areaName}の市区町村`}
+        description={meta?.description}
       />
 
       {/* main はルートレイアウトの main#main-content だけ (ページ内で入れ子にしない) */}
