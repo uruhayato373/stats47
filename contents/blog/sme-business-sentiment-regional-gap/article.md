@@ -12,7 +12,8 @@ tags:
   - 製造業
   - 地域経済
   - 地域差
-published: false
+publishedAt: 2026-11-25
+published: true
 ogImage: /blog/sme-business-sentiment-regional-gap/og.png
 ---
 
