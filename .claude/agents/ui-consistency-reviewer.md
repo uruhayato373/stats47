@@ -16,7 +16,7 @@ stats47 内のページ横断 UI 一貫性をレビューする agent。 code-re
 - ページ横断 UI 一貫性 review (見出し階層、 配色、 余白、 コンポーネント選択)
 - **デザイン SSOT 整合 + drift ゲート**: PR の UI 変更が `docs/01_技術設計/04_デザインシステム.md` と矛盾しないか。パターン (hero / レール / カード等) を変えたのに SSOT 文書を更新していない場合は BLOCK で指摘
 - **シェル/レイアウト統一**: 一般ページは `PageShell` / `PageHeader` 経由か。記事系ページ (blog 詳細 / ranking 詳細 / survey / terms / privacy) は `ArticleShell` (reading zone) が正。寸法・radius・shadow の実値は現在の component と global token を確認する。独自グリッド (`container mx-auto` / page.tsx での `max-w-[` 直書き)・右レール多系統・3 列化の検出は従来どおり。
-- melta-ui 準拠チェック (`.claude/design-system/prohibited.md` 違反検出)
+- melta-ui 準拠チェック (`docs/01_技術設計/04_デザインシステム.md`「禁止パターン」違反検出)
 - page_components 一貫性 (同 categoryKey 内のカード並び、 KPI 配置)
 - レスポンシブブレイクポイント (`lg:` vs `@lg:`) の正しい使い分け
 - `@stats47/components` (shadcn ベース) の優先利用チェック
@@ -56,11 +56,11 @@ stats47 内のページ横断 UI 一貫性をレビューする agent。 code-re
 - `docs/01_技術設計/04_デザインシステム.md` — **デザイン判断、横幅、レール、PageShell、PageHeader、カードの正典 (本 agent が番人)**
 - `.claude/rules/ui-components.md` — コンポーネント選択 / ブレイクポイント / melta-ui 準拠
 - `.claude/rules/coding-standards.md` — TypeScript / React / Next.js 規約
-- `.claude/design-system/prohibited.md` — 禁止項目 (text-black / shadow-lg 等)
+- `docs/01_技術設計/04_デザインシステム.md`「禁止パターン」の節 — 禁止項目 (text-black / shadow-lg 等)
 
 ## 触る state / files
 
-- 全 path read-only (`apps/web/src/`, `packages/components/src/`, `.claude/design-system/`)
+- 全 path read-only (`apps/web/src/`, `packages/components/src/`, `docs/01_技術設計/04_デザインシステム.md`)
 - git diff (read-only)
 - 出力は呼び元への report (file write なし)
 
