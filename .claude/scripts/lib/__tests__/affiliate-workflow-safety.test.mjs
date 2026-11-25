@@ -91,8 +91,11 @@ test("GA4週次はR2とdevelop履歴行をread-backし、全step outcomeを最�
   assert.match(source, /affiliate-index-readback\.json/);
   assert.match(source, /git show FETCH_HEAD:data\/affiliate\/ga4-affiliate-history\.csv/);
   assert.match(source, /line\.startsWith\(date \+ ",7,_all,_all,"\)/);
+  // 式は run: へ直接展開せず step の env 経由で渡す (ACTIONS-EXPRESSION-INJECTION-01)
   for (const id of ["ga4", "publish", "history", "operations"]) {
-    assert.match(source, new RegExp(`"${id}=\\$\\{\\{ steps\\.${id}\\.outcome \\}\\}"`));
+    const envName = `${id.toUpperCase()}_OUTCOME`;
+    assert.match(source, new RegExp(`${envName}: \\$\\{\\{ steps\\.${id}\\.outcome \\}\\}`));
+    assert.match(source, new RegExp(`"${id}=\\$${envName}"`));
   }
 });
 

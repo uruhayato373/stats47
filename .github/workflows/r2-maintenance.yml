@@ -74,23 +74,27 @@ jobs:
 
       - name: 📏 R2 du (容量計測)
         if: inputs.mode == 'du'
+        env:
+          INPUT_DEPTH: ${{ inputs.depth || '1' }}
         run: |
-          npx tsx packages/r2-storage/src/scripts/r2-du.ts --depth "${{ inputs.depth || '1' }}" 2>&1 \
+          npx tsx packages/r2-storage/src/scripts/r2-du.ts --depth "$INPUT_DEPTH" 2>&1 \
             | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: 🧹 Retention (移行済み旧 prefix)
         if: inputs.mode == 'retention-prefixes'
         env:
           NODE_ENV: production
+          INPUT_TARGET: ${{ inputs.target }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           # pipefail 必須: パイプ末尾 (tee) の exit code に隠れて削除エラーが success になるのを防ぐ
           set -o pipefail
           # ARGS は配列で組む ("$ARGS" 単一引数渡しは 1 トークン化する — ARG_VECTOR_QUOTED)
           ARGS=()
-          if [ -n "${{ inputs.target }}" ]; then
-            ARGS+=(--target "${{ inputs.target }}")
+          if [ -n "$INPUT_TARGET" ]; then
+            ARGS+=(--target "$INPUT_TARGET")
           fi
-          if [ "${{ inputs.dry_run }}" = "false" ]; then
+          if [ "$INPUT_DRY_RUN" = "false" ]; then
             ARGS+=(--apply)
           fi
           echo "r2-retention.ts ${ARGS[*]}"
@@ -99,10 +103,13 @@ jobs:
 
       - name: 🧹 ISR incremental-cache 世代 GC
         if: inputs.mode == 'isr-generations'
+        env:
+          INPUT_KEEP: ${{ inputs.keep || '3' }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -o pipefail
-          ARGS=(--keep "${{ inputs.keep || '3' }}")
-          if [ "${{ inputs.dry_run }}" = "false" ]; then
+          ARGS=(--keep "$INPUT_KEEP")
+          if [ "$INPUT_DRY_RUN" = "false" ]; then
             ARGS+=(--apply)
           fi
           echo "audit-incremental-cache.ts ${ARGS[*]}"
