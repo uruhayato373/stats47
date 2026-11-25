@@ -9,6 +9,9 @@
  *
  * 使い方:
  *   node .claude/scripts/sns/find-metrics.mjs <トピック語...> [--top N] [--json]
+ *   node .claude/scripts/sns/find-metrics.mjs <トピック語...> --unregistered [--top N] [--json]
+ *     未登録の候補 (e-Stat の SSDS 都道府県表に有って metric 定義が無い指標) を引く。索引は
+ *     data/estat/ssds-candidates.json (enumerate-ssds-indicators.mjs の生成物)。語はすべて名前に含まれるものだけ
  *
  * 索引が無い/古い場合は先に build-discovery-index.ts を実行するよう促す。
  *
@@ -47,13 +50,15 @@ const FIELD_WEIGHTS = {
 
 function parseArgs(argv) {
   const args = argv.slice(2);
-  const opts = { top: 10, json: false, terms: [] };
+  const opts = { top: 10, json: false, unregistered: false, terms: [] };
   for (let i = 0; i < args.length; i++) {
     const a = args[i];
     if (a === "--top") {
       opts.top = Number(args[++i]) || 10;
     } else if (a === "--json") {
       opts.json = true;
+    } else if (a === "--unregistered") {
+      opts.unregistered = true;
     } else {
       // クォート付き複合語 ("医師 年収") も個別トークンに分割し、
       // クォート無し (医師 年収) と同一挙動にする (空白は半角/全角の両方)
@@ -194,6 +199,33 @@ function extractHeadline(entry) {
   return entry.title;
 }
 
+// 未登録候補の索引 (e-Stat カタログから導出した ssds-candidates.json)。語は半角全角の違いを揃えず name への部分一致
+function findUnregistered(terms, top, json) {
+  const file = path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/ssds-candidates.json`);
+  if (!fs.existsSync(file)) {
+    console.error(
+      `[find-metrics] 未登録候補の索引が見つかりません: ${path.relative(PROJECT_ROOT, file)}\n` +
+        `先に実行してください: node .claude/scripts/estat/enumerate-ssds-indicators.mjs`,
+    );
+    process.exit(1);
+  }
+  const all = JSON.parse(fs.readFileSync(file, "utf-8"));
+  const hits = all.filter((c) => terms.every((t) => String(c.name ?? "").includes(t)));
+  const shown = hits.slice(0, top);
+  if (json) {
+    console.log(JSON.stringify({ query: terms, totalMatches: hits.length, indexSize: all.length, results: shown }, null, 2));
+    return;
+  }
+  if (shown.length === 0) {
+    console.log(`該当する未登録候補が見つかりませんでした: "${terms.join(" ")}" (索引 ${all.length} 件中)`);
+    return;
+  }
+  console.log(`未登録候補 "${terms.join(" ")}" (${hits.length} 件中上位 ${shown.length} 件, 索引 ${all.length} 件):\n`);
+  console.log("statsDataId | cdCat01 | name | unit");
+  console.log("-".repeat(100));
+  for (const c of shown) console.log(`${c.statsDataId} | ${c.cdCat01} | ${c.name} | ${c.unit ?? ""}`);
+}
+
 function main() {
   const opts = parseArgs(process.argv);
 
@@ -202,6 +234,11 @@ function main() {
       "使い方: node .claude/scripts/sns/find-metrics.mjs <トピック語...> [--top N] [--json]",
     );
     process.exit(1);
+  }
+
+  if (opts.unregistered) {
+    findUnregistered(opts.terms, opts.top, opts.json);
+    return;
   }
 
   const index = loadIndex();
