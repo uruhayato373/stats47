@@ -7,12 +7,12 @@ description: "大企業の製造業が改善した2026年秋、中小企業の�
 archetype: C
 category: economy
 tags:
-  - 景況感
+  - 経済
   - 中小企業
   - 製造業
   - 地域経済
-  - 日銀短観
-published: true
+  - 地域差
+published: false
 ogImage: /blog/sme-business-sentiment-regional-gap/og.png
 ---
 

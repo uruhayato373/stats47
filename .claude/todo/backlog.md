@@ -2901,7 +2901,7 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **次**: キーを `.env.local` に置くか、コマンド実行時の環境変数として渡す。`--author gemini-api --critic claude-sonnet` で3本試し、`headless-runs.csv` で Claude author と通過率を比べる。GitHub Secret だけでは手元の blog CLI は鍵を読めない。
 
 ### [BLOG-OUTBOX-PASS-PUBLISH-01] `contents/blog/` で審査 PASS のまま止まっている下書きを公開するか決める
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト]
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-28] [領域:サイト] [待ち:承認]
 
 - **状態 (2026-10-28)**: review.md が PASS の下書きは 7 本で、事実照合は 7 本とも通る。品質ゲートを今も通るのは `population-decline-land-price-divergence` だけ。5 本 (`elderly-welfare-expenditure-prefecture-gap`・`evacuation-plan-coverage-urban-prefecture-gap`・`intellectual-crime-tokyo-kagawa-gap`・`sme-business-sentiment-regional-gap`・`vacant-housing-rate-inherited-home-risk`) は未登録のタグ (UNREGISTERED_TAG)、`nursery-shortage-urban-prefecture` はスマホ用 SVG の欠落で落ちる。
 - **次**: ① 5 本のタグを登録済みのものに替えるか台帳に足す ② nursery は `generate-article-charts.ts --slug nursery-shortage-urban-prefecture` でスマホ用 SVG を作る ③ 通ったものを `generate-blog-article.ts --ingest <slug>` で確定し、オーナー承認後に develop へ push する (公開は `blog-auto-publish.yml`)。
@@ -2910,6 +2910,8 @@ Claude Design で検討済みの案がある。着手時に案の所在と範囲
 - **決めてほしいこと**: 7 本を公開するか (月の上限 BLOG-MONTHLY-CAP-01 の枠に入れるか)。
 - **BLOG-PUBLISH-AUDIT-KAKEI-01 から移した構造の問題 (2026-11-24)**: `blog-auto-publish.yml` の送り箱の掃除が、記事と関係の無いサイト全体の検査 (`audit:public-data-contract`) の成功を条件にしている。ランキングのデータの不備で落ちた run (10-28・11-01・11-05) では掃除が走らず、`contents/blog` に R2 と同じ原稿が 236 本たまった (11-24 に `prune-published-outbox.mjs --apply` で消した)。掃除を記事の公開の成否だけに結びつける。
 - **オーナー決定 (2026-11-25)**: 7 本は、タグと図を直して審査し直す。PASS した本を一覧で出し、公開はその一覧でもう一度承認を取る。月の本数の枠に数える。
+- **実態の確認 (2026-11-25)**: 7 本のうち 6 本はすでに本番で公開されていた (公開 R2 と本番がともに 200)。未公開は `sme-business-sentiment-regional-gap` の 1 本だけで、未登録のタグ 2 つ (景況感・日銀短観) を登録済みの「経済」「地域差」に替え、承認まで公開されないよう `published: false` にした (品質ゲートは blocker 0)。blog-critic で審査し直している。
+- **残り (2026-11-25)**: ① sme の審査の結果と公開の承認 ② 公開中の `vacant-housing-rate-inherited-home-risk` に、副題「上位5県は西日本に集中」(4 位は山梨県) と、人口の流出を原因と言い切る文が残っている。直すには再公開の承認が要る ③ 送り箱の `population-decline-land-price-divergence` は公開済みの記事の古い下書き (`published: false`) で、消してよいかを確かめる ④ 10-28 の headless の 3 本と、送り箱の掃除を公開の成否だけに結びつける件。
 
 ### [ADMIN-UI-DOBOKU-ALIGN-01] doboku-note の管理画面 (tools/admin-app) を stats47 と同じ Base UI (base-nova) の構成へ揃えるか決める
 タグ: [UI・UX] [種類:意思決定] [実行:対話] [起票:2026-10-27] [領域:管理]
