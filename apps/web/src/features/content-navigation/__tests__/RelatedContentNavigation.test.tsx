@@ -24,8 +24,9 @@ describe('関連付けから取得する短いリンク', () => {
     expect(link).toHaveAttribute('title', '対応先の指標名');
     expect(link).toHaveAttribute('data-nav-surface', 'ranking_municipality');
     expect(link).toHaveAttribute('data-content-id', 'municipality-ranking:example');
-    // 文字のリンクでは見落とされたので、塗りの色付きボタンで出す (2026-11-26 オーナー判断)
-    expect(link).toHaveClass('bg-primary', 'text-primary-foreground');
+    // 文字のリンクでは見落とされたので、青い塗りのボタンで出す (主色の黒は色として目立たなかった。2026-11-26 オーナー判断)
+    expect(link).toHaveClass('bg-blue-600', 'text-white');
+    expect(link).not.toHaveClass('bg-primary');
     expect(container.querySelector('[data-slot="card"]')).toBeNull();
     expect(readContentRecommendations).toHaveBeenCalledWith({ sourceId: 'ranking:example', kinds: ['municipality-ranking'], limit: 1 });
   });

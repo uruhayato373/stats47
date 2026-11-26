@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import { cn } from '@stats47/components';
 import { buttonVariants } from '@stats47/components/atoms/ui/button';
 import { ArrowRight } from 'lucide-react';
 
@@ -9,6 +10,7 @@ import { ContentNavigation } from '@/components/rail/ContentNavigation';
 import { navSurfaceProps, type NavSurface } from '@/lib/analytics/events';
 
 import { readContentRecommendations } from './server';
+import { SHORT_LINK_BUTTON_TONE } from './short-link-button.palette';
 
 import type { ContentContext, ContentRecommendation } from '@stats47/data-configs/content/navigation';
 
@@ -36,9 +38,9 @@ export async function RelatedContentNavigation({
       <Link
         href={item.href}
         title={item.title}
-        // 色付きのボタンにして目立たせる (2026-11-26 オーナー判断。文字のリンクでは見落とされやすく、
+        // 青い塗りのボタンにして目立たせる (2026-11-26 オーナー判断。文字のリンクでは見落とされやすく、
         // 行き先の市区町村ランキングは検索でも強いページなので回遊させたい)
-        className={`${buttonVariants({ variant: 'default', size: 'sm' })} min-h-11 sm:min-h-7`}
+        className={cn(buttonVariants({ variant: 'default', size: 'sm' }), SHORT_LINK_BUTTON_TONE, 'min-h-11 sm:min-h-7')}
         {...navSurfaceProps(surface)}
         data-nav-label={item.id}
         data-content-id={item.id}
