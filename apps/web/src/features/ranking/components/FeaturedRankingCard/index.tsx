@@ -14,6 +14,8 @@ export interface FeaturedRankingCardProps {
   rankingKey: string;
   year: string;
   model: FeaturedRankingCardModel;
+  /** 並べる側が足す表示の出し分け (幅による出し分けだけ。見た目の上書きには使わない) */
+  className?: string;
 }
 
 /**
@@ -27,14 +29,14 @@ export interface FeaturedRankingCardProps {
  * カードは整形し直さない。地図の SVG はブログのカードと API でも使うので、文字は SVG に焼かず HTML で重ねる。
  * 問いは省略しない。カルーセルのカード見出しの下では枠を外したセルになる (PORTAL_CARD_CELL_CLASS)。
  */
-export function FeaturedRankingCard({ rankingKey, year, model }: FeaturedRankingCardProps) {
+export function FeaturedRankingCard({ rankingKey, year, model, className }: FeaturedRankingCardProps) {
   const { unit, rows } = model.top;
   return (
     <SurfaceLinkCard
       href={hrefFor("ranking", { rankingKey: rankingKey })}
       // 線の格子 (CardGrid) はカード (data-slot="card") を余白なしのセルとして扱う。記事カードと同じ印 (2026-11-03)
       data-slot="card"
-      className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full flex-col gap-2 overflow-hidden`}
+      className={`${PORTAL_CARD_PADDING_CLASS} ${PORTAL_CARD_CELL_CLASS} group flex h-full flex-col gap-2 overflow-hidden ${className ?? ""}`}
     >
       <span className={`relative block ${PORTAL_CARD_ASPECT_CLASS} w-full overflow-hidden rounded-sm bg-muted`}>
         <span

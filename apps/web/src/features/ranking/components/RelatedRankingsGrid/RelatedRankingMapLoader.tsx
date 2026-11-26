@@ -14,6 +14,8 @@ interface RelatedRankingMapLoaderProps {
   hook: string;
   /** 最新年 (4 桁) */
   year: string;
+  /** 格子が 1 列 (スマホ) のときは出さない (1 枚が画面の半分ほどの高さで、9 枚並ぶと長すぎる) */
+  hiddenWhenSingleColumn?: boolean;
 }
 
 /**
@@ -22,7 +24,7 @@ interface RelatedRankingMapLoaderProps {
  * 地図をページの HTML に焼くと 9 枚分の SVG で描画とキャッシュが重くなるので、表示後に読む。
  * 読み込み中と、データが無い指標は、同じカードの地図の枠を空けたまま題だけを出す (高さを変えない)。
  */
-export function RelatedRankingMapLoader({ rankingKey, hook, year }: RelatedRankingMapLoaderProps) {
+export function RelatedRankingMapLoader({ rankingKey, hook, year, hiddenWhenSingleColumn = false }: RelatedRankingMapLoaderProps) {
   const [data, setData] = useState<RankingLinkCardData | null>(null);
 
   useEffect(() => {
@@ -43,5 +45,12 @@ export function RelatedRankingMapLoader({ rankingKey, hook, year }: RelatedRanki
     top: { unit: data?.unit ?? "", rows: data?.top ?? [] },
     mapSvg: data?.mapSvg ?? "",
   };
-  return <FeaturedRankingCard rankingKey={rankingKey} year={year} model={model} />;
+  return (
+    <FeaturedRankingCard
+      rankingKey={rankingKey}
+      year={year}
+      model={model}
+      className={hiddenWhenSingleColumn ? "@max-sm:hidden" : undefined}
+    />
+  );
 }

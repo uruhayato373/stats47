@@ -15,6 +15,9 @@ import { navSurfaceProps } from "@/lib/analytics/events";
 
 import { RelatedRankingMapLoader } from "./RelatedRankingMapLoader";
 
+/** 格子が 1 列 (スマホ) のときに出す枚数 (2026-11-26 オーナー判断。9 枚が縦に並ぶと長すぎた) */
+const SINGLE_COLUMN_LIMIT = 3;
+
 interface RelatedRankingsGridProps {
   /** 現在表示中の rankingKey (除外用) */
   rankingKey: string;
@@ -62,12 +65,13 @@ export async function RelatedRankingsGrid({
         hideRule
       />
       <CardGrid>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <RelatedRankingMapLoader
             key={item.rankingKey}
             rankingKey={item.rankingKey}
             hook={metricShortName(item)}
             year={yearCodeOf(item.latestYear) ?? ""}
+            hiddenWhenSingleColumn={index >= SINGLE_COLUMN_LIMIT}
           />
         ))}
       </CardGrid>
