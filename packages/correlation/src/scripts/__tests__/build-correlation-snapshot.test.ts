@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { compareCorrelation } from '../../selection-policy';
 import { AREA_CODES, buildYearSeries } from '../../utils/year-slices';
@@ -136,6 +136,12 @@ vi.mock('@stats47/stats-r2/readers', () => ({
 }));
 
 describe('候補保持の段階で正負の枠を確保する', () => {
+  // スクリプト本体の最初の読み込み (指標の定義を全部読むので数秒かかる) を、テストの制限時間 (5 秒) に数えない。
+  // 最初のテストに読み込みが乗り、CI で 5 秒を超えて落ちた (2026-11-26 の develop の検査。手元でも 4.2 秒)
+  beforeAll(async () => {
+    await import('../build-correlation-snapshot');
+  }, 60_000);
+
   it('絶対値上位を正が占めても負の候補10件を残す', async () => {
     const { TopByPopulationAdjusted } = await import('../build-correlation-snapshot');
     const top = new TopByPopulationAdjusted('self');
