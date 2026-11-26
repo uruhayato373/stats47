@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const elementarySchoolChildren1Per: MetricConfig = {
   "key": "elementary-school-children-1-per",
   "title": "小学校児童数",
-  "subtitle": "人口当たり",
+  "subtitle": "1学級当たり",
+  "denominator": { "kind": "other", "per": 1, "counter": "学級" },
   "unit": "人",
   "category": "educationsports",
   "source": {

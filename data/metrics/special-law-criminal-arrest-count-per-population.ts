@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const specialLawCriminalArrestCountPerPopulation: MetricConfig = {
   "key": "special-law-criminal-arrest-count-per-population",
   "title": "特別法犯検挙件数",
-  "subtitle": "人口当たり",
+  "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "件",
   "category": "safetyenvironment",
   "source": {
