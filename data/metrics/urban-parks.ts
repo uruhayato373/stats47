@@ -94,7 +94,6 @@ export const urbanParks: MetricConfig = {
       {
         "type": "series",
         "metric": "urban-park-count-per-100km2",
-        "label": "可住地面積100km²当たり",
       },
     ],
   },

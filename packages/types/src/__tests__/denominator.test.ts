@@ -4,6 +4,7 @@ import {
   authoredNormalizationType,
   denominatorLabel,
   isAuthoredRatioOption,
+  seriesOptionLabel,
   toRatioNormalizationOption,
 } from '../value-display';
 
@@ -50,6 +51,13 @@ describe('定義の選択肢を配信の形にする', () => {
       decimalPlaces: 1,
     });
     expect(toRatioNormalizationOption({ denominator: { kind: 'area', per: 100 }, unit: '人/100km²', decimalPlaces: 2 }).type).toBe('per_area');
+  });
+
+  it('series の名前は選んだ先の指標の分母から作り、分母の型が無いときだけ定義の label を使う', () => {
+    expect(seriesOptionLabel({ type: 'series', metric: 'x', label: '人口当たり' }, { kind: 'other', per: 1, counter: '学級' })).toBe('1学級当たり');
+    expect(seriesOptionLabel({ type: 'series', metric: 'x', label: '従業員当たり' }, undefined)).toBe('従業員当たり');
+    expect(seriesOptionLabel({ type: 'series', metric: 'x', label: '従業員当たり' }, 'population')).toBe('従業員当たり');
+    expect(seriesOptionLabel({ type: 'series', metric: 'x' }, undefined)).toBeNull();
   });
 
   it('series は割り算をしない選択肢として見分ける', () => {

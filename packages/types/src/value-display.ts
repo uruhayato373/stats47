@@ -97,11 +97,14 @@ export interface AuthoredRatioNormalizationOption {
   decimalPlaces: number;
   visualization?: MetricPresentation;
 }
-/** 定義に書く series は指標と名前だけ (単位・桁・色はその指標の定義が正本) */
+/**
+ * 定義に書く series は指標だけ (単位・桁・色・名前はその指標の定義が正本)。名前は指標の分母 (denominator) から作る。
+ * 分母を型で持たない指標 (従業員当たり・総額など) だけ label を書く (2026-11-26。手書きの名前は 56 件中 30 件が分母と食い違っていた)
+ */
 export interface AuthoredSeriesNormalizationOption {
   type: 'series';
   metric: string;
-  label: string;
+  label?: string;
 }
 export type AuthoredNormalizationOption = AuthoredRatioNormalizationOption | AuthoredSeriesNormalizationOption;
 
@@ -118,6 +121,18 @@ export function authoredNormalizationType(option: AuthoredNormalizationOption): 
 /** 定義の選択肢の URL 上の識別子 (?norm=)。配信の normalizationOptionId と同じ値 */
 export function authoredNormalizationOptionId(option: AuthoredNormalizationOption): string {
   return isAuthoredRatioOption(option) ? authoredNormalizationType(option) : option.metric;
+}
+
+/**
+ * series の選択肢の名前。選んだ先の指標が分母を型で持てばその文言、持たなければ定義に書いた label。
+ * どちらも無ければ null (配信の組み立てが例外にし、validate:config が定義の時点で止める)
+ */
+export function seriesOptionLabel(
+  option: AuthoredSeriesNormalizationOption,
+  targetDenominator: Denominator | string | undefined
+): string | null {
+  if (targetDenominator && typeof targetDenominator === 'object') return denominatorLabel(targetDenominator);
+  return option.label ?? null;
 }
 
 /** 定義の選択肢 (人口・面積で割るもの) を配信の形にする */

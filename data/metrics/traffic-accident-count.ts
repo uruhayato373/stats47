@@ -101,7 +101,6 @@ export const trafficAccidentCount: MetricConfig = {
       {
         "type": "series",
         "metric": "traffic-accident-count-per-1000-km",
-        "label": "道路1000km当たり",
       },
     ],
   },

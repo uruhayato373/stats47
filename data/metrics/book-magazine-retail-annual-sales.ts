@@ -60,7 +60,6 @@ export const bookMagazineRetailAnnualSales: MetricConfig = {
       {
         "type": "series",
         "metric": "book-magazine-retail-annual-sales-per-capita",
-        "label": "1人当たり",
       },
     ],
   },

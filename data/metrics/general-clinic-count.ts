@@ -58,7 +58,6 @@ export const generalClinicCount: MetricConfig = {
       {
         "type": "series",
         "metric": "general-clinic-count-per-100km2",
-        "label": "面積100km²当たり",
       },
     ],
     "isCalculated": false,

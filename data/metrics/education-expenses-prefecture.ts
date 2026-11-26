@@ -47,7 +47,6 @@ export const educationExpensesPrefecture: MetricConfig = {
       {
         "type": "series",
         "metric": "per-capita-education-expenditure-pref-municipal",
-        "label": "都道府県・市町村財政合計",
       },
     ],
   },

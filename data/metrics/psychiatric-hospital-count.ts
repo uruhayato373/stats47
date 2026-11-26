@@ -114,7 +114,6 @@ export const psychiatricHospitalCount: MetricConfig = {
       {
         "type": "series",
         "metric": "psychiatric-hospital-count-per-100k",
-        "label": "人口10万人当たり",
       },
     ],
   },

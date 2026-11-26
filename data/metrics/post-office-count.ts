@@ -97,7 +97,6 @@ export const postOfficeCount: MetricConfig = {
       {
         "type": "series",
         "metric": "post-office-count-per-100km2",
-        "label": "可住地面積100km²当たり",
       },
     ],
   },

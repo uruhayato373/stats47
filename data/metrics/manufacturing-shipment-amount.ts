@@ -52,7 +52,6 @@ export const manufacturingShipmentAmount: MetricConfig = {
       {
         "type": "series",
         "metric": "manufacturing-shipment-amount-per-employee",
-        "label": "従業者1人当たり",
       },
       {
         "type": "series",

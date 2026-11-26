@@ -27,7 +27,7 @@ import {
   resolveRankingReaderLabel,
   resolveRankingHook,
 } from "@stats47/data-configs/prominence";
-import { assertKnownColorScheme, isAuthoredRatioOption, toRatioNormalizationOption } from "@stats47/types";
+import { assertKnownColorScheme, isAuthoredRatioOption, seriesOptionLabel, toRatioNormalizationOption } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 
 import surveysMaster from "../../../../data/surveys/master/surveys.json";
@@ -170,8 +170,9 @@ function resolveCalculationType(
 }
 
 /**
- * 計算方法の選択肢を配信の形にする。series (別の指標の公表値を出す見方) は、その指標の定義から単位・桁・色を焼く
- * (定義には指標と名前だけを書く。単位を 2 か所に書くとずれるため)。指標が registry に無ければ例外にする。
+ * 計算方法の選択肢を配信の形にする。series (別の指標の公表値を出す見方) は、その指標の定義から単位・桁・色・名前を焼く
+ * (定義には指標だけを書く。2 か所に書くとずれるため)。指標が registry に無い・名前が決まらなければ例外にする。
+ * 公表値の名前がサイトで割った選択肢と同じ分母になる (値は比例しない) ときは「・公表値」を付けて見分ける。
  */
 export function buildNormalizationOptions(
   config: MetricConfig,
@@ -179,16 +180,21 @@ export function buildNormalizationOptions(
 ): NormalizationOption[] | undefined {
   const authored = config.calculation?.normalizationOptions;
   if (!authored) return undefined;
+  const ratioLabels = new Set(authored.filter(isAuthoredRatioOption).map((option) => toRatioNormalizationOption(option).label));
   return authored.map((option): NormalizationOption => {
     if (isAuthoredRatioOption(option)) return toRatioNormalizationOption(option);
     const target = registry?.[option.metric];
     if (!target) {
       throw new Error(`build-ranking-item(${config.key}): series の指標 ${option.metric} が registry に無い`);
     }
+    const label = seriesOptionLabel(option, target.denominator);
+    if (!label) {
+      throw new Error(`build-ranking-item(${config.key}): series ${option.metric} の名前が決まらない (指標に分母の型も label も無い)`);
+    }
     return {
       type: "series",
       metric: option.metric,
-      label: option.label,
+      label: ratioLabels.has(label) ? `${label}・公表値` : label,
       unit: target.display?.displayUnit ?? target.unit,
       valueDisplay: buildValueDisplay(target),
       visualization: buildVisualization(target),

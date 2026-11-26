@@ -37,7 +37,6 @@ export const elderlyWelfareExpensesPrefecture: MetricConfig = {
       {
         "type": "series",
         "metric": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
-        "label": "都道府県・市町村財政合計",
       },
     ],
   },

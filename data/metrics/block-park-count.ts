@@ -48,7 +48,6 @@ export const blockParkCount: MetricConfig = {
       {
         "type": "series",
         "metric": "block-park-count-per-100km2",
-        "label": "可住地面積100km²当たり",
       },
     ],
   },

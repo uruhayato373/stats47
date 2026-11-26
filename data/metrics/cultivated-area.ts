@@ -48,7 +48,6 @@ export const cultivatedArea: MetricConfig = {
       {
         "type": "series",
         "metric": "cultivated-land-area-per-household",
-        "label": "農家1戸当たり",
       },
     ],
   },

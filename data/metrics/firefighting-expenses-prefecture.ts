@@ -47,7 +47,6 @@ export const firefightingExpensesPrefecture: MetricConfig = {
       {
         "type": "series",
         "metric": "per-capita-firefighting-expenditure-tokyo-municipal",
-        "label": "東京都・市町村財政合計",
       },
     ],
   },

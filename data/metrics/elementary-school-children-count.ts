@@ -43,12 +43,10 @@ export const elementarySchoolChildrenCount: MetricConfig = {
       {
         "type": "series",
         "metric": "elementary-school-children-1-per",
-        "label": "人口当たり",
       },
       {
         "type": "series",
         "metric": "elementary-school-students-per-teacher",
-        "label": "教員1人当たり",
       },
     ],
     "isCalculated": false,

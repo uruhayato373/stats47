@@ -47,7 +47,6 @@ export const publicWorksExpensesPrefecture: MetricConfig = {
       {
         "type": "series",
         "metric": "per-capita-public-works-expenditure-pref-municipal",
-        "label": "都道府県・市町村財政合計",
       },
     ],
   },

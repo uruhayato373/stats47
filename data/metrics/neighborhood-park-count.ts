@@ -48,7 +48,6 @@ export const neighborhoodParkCount: MetricConfig = {
       {
         "type": "series",
         "metric": "neighborhood-park-count-per-100km2",
-        "label": "可住地面積100km²当たり",
       },
     ],
   },

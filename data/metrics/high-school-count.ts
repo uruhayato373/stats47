@@ -44,12 +44,10 @@ export const highSchoolCount: MetricConfig = {
       {
         "type": "series",
         "metric": "high-school-count-per-100k-15-17",
-        "label": "15〜17歳人口当たり",
       },
       {
         "type": "series",
         "metric": "high-school-count-per-100km2-habitable",
-        "label": "可住地100km²当たり",
       },
     ],
     "isCalculated": false,

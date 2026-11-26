@@ -1733,7 +1733,7 @@
       "id": "municipality-ranking:general-clinic-count-per-100km2",
       "kind": "municipality-ranking",
       "key": "general-clinic-count-per-100km2",
-      "title": "一般診療所数（面積100km²当たり）の市区町村ランキング",
+      "title": "一般診療所数（可住地面積100km²当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/general-clinic-count-per-100km2",
       "published": true
     },
@@ -1757,7 +1757,7 @@
       "id": "municipality-ranking:general-hospital-count-per-100km2",
       "kind": "municipality-ranking",
       "key": "general-hospital-count-per-100km2",
-      "title": "一般病院数（面積100km²当たり）の市区町村ランキング",
+      "title": "一般病院数（可住地面積100km²当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/general-hospital-count-per-100km2",
       "published": true
     },

@@ -56,11 +56,6 @@ export const selfServiceStoreCount: MetricConfig = {
         "unit": "所/100km²",
         "decimalPlaces": 2,
       },
-      {
-        "type": "series",
-        "metric": "self-service-store-count-per-100k",
-        "label": "人口10万人当たり",
-      },
     ],
   },
   "groupKey": "self-service-store-count",

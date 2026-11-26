@@ -29,7 +29,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { COLOR_SCHEME_CATALOG, denominatorLabel, isAuthoredRatioOption, isKnownColorScheme } from '@stats47/types';
+import { COLOR_SCHEME_CATALOG, denominatorLabel, isAuthoredRatioOption, isKnownColorScheme, seriesOptionLabel } from '@stats47/types';
 
 import { CATEGORY_KEYS } from '../src/types';
 import { metricDenominatorOf, metricDenominatorSpec } from '../src/metric-denominator';
@@ -616,6 +616,21 @@ function main() {
     }
     if (PER_WORDING.test(subtitle.replace(label, ''))) {
       errors.push(`[denominator-label] ${r.file}: 補足に分母の別の書き方が残っている (補足: ${subtitle})。分母の文言は「${label}」だけにする`);
+    }
+  }
+
+  // error: 計算方法の series の名前は、選んだ先の指標の分母から作る (2026-11-26)。分母の型を持つ指標に label を書くと
+  // 2 か所で管理することになる (手書きは 56 件中 30 件が分母と食い違っていた)。型を持たない指標だけ label を書く
+  for (const r of rows) {
+    const metric = r.key ? getMetricConfig(r.key) : undefined;
+    for (const option of metric?.calculation?.normalizationOptions ?? []) {
+      if (isAuthoredRatioOption(option)) continue;
+      const target = getMetricConfig(option.metric);
+      if (target && metricDenominatorSpec(target) && option.label !== undefined) {
+        errors.push(`[series-label] ${r.file}: series ${option.metric} に label がある。名前は ${option.metric} の分母から作るので消す`);
+      } else if (!seriesOptionLabel(option, target?.denominator)) {
+        errors.push(`[series-label] ${r.file}: series ${option.metric} の名前が決まらない。${option.metric} に分母の型を書くか、label を書く`);
+      }
     }
   }
 

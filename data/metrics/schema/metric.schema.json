@@ -1670,8 +1670,7 @@
                 },
                 "required": [
                   "type",
-                  "metric",
-                  "label"
+                  "metric"
                 ],
                 "additionalProperties": false
               }

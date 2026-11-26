@@ -2684,7 +2684,6 @@
       },
       "dependencies": [],
       "normalizationDependencies": [
-        "self-service-store-count-per-100k",
         "total-area-including-northern-territories-and-takeshima",
         "total-population"
       ],

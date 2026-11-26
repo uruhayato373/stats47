@@ -43,12 +43,10 @@ export const juniorHighSchoolStudentsCount: MetricConfig = {
       {
         "type": "series",
         "metric": "junior-high-school-students-per-teacher",
-        "label": "教員1人当たり",
       },
       {
         "type": "series",
         "metric": "middle-school-students-1-per",
-        "label": "人口当たり",
       },
     ],
     "isCalculated": false,

@@ -37,7 +37,6 @@ export const fireDamageCasualtiesPerAccident: MetricConfig = {
       {
         "type": "series",
         "metric": "fire-damage-casualties-per-population",
-        "label": "人口10万人当たり",
       },
     ],
   },

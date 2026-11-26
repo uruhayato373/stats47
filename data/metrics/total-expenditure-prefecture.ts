@@ -47,7 +47,6 @@ export const totalExpenditurePrefecture: MetricConfig = {
       {
         "type": "series",
         "metric": "per-capita-total-expenditure-pref-municipal",
-        "label": "都道府県・市町村財政合計（人口1人当たり）",
       },
     ],
   },

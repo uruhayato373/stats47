@@ -37,7 +37,6 @@ export const trafficAccidentCasualtiesPer100Accidents: MetricConfig = {
       {
         "type": "series",
         "metric": "traffic-accident-casualties-per-population",
-        "label": "人口当たり",
       },
     ],
   },

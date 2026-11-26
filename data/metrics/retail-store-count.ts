@@ -54,7 +54,6 @@ export const retailStoreCount: MetricConfig = {
       {
         "type": "series",
         "metric": "retail-store-count-per-1000",
-        "label": "1000人当たり（旧統計）",
       },
     ],
   },

@@ -96,7 +96,6 @@ export const publicBathCount: MetricConfig = {
       {
         "type": "series",
         "metric": "public-bath-count-per-100k",
-        "label": "人口10万人当たり",
       },
     ],
   },

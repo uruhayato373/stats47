@@ -96,7 +96,6 @@ export const miscellaneousSchoolStudents: MetricConfig = {
       {
         "type": "series",
         "metric": "miscellaneous-school-students-per-1000",
-        "label": "人口1000人当たり",
       },
     ],
   },

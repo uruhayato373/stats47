@@ -47,7 +47,6 @@ export const householdsOnPublicAssistance: MetricConfig = {
       {
         "type": "series",
         "metric": "households-on-public-assistance-per-1000",
-        "label": "1000世帯当たり",
       },
     ],
   },
