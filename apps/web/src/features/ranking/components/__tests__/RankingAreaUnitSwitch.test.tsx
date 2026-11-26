@@ -31,6 +31,16 @@ describe("RankingAreaUnitSwitch", () => {
     expect(screen.getByRole("link", { name: "市区町村" })).toHaveAttribute("href", PROPS.municipalityHref);
   });
 
+  // 灰色の文字では見落とされ、相手のページへの回遊が減る。押せる側だけを青い塗りにする (2026-11-26 オーナー判断)
+  it.each([
+    ["prefectures", "市区町村", "47都道府県"],
+    ["municipalities", "47都道府県", "市区町村"],
+  ] as const)("%s のページでは押せる側 (%s) だけを青い塗りにする", (current, there, here) => {
+    render(<RankingAreaUnitSwitch current={current} {...PROPS} />);
+    expect(screen.getByRole("link", { name: there })).toHaveClass("bg-blue-600", "text-white");
+    expect(screen.getByRole("link", { name: here })).not.toHaveClass("bg-blue-600");
+  });
+
   it("都道府県 → 市区町村の導線を測ってきた面とラベルで計測を続ける", () => {
     render(<RankingAreaUnitSwitch current="prefectures" {...PROPS} />);
     expect(screen.getByRole("navigation", { name: "統計の地域単位" })).toHaveAttribute("data-nav-surface", "ranking_municipality");

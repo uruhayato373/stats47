@@ -1,5 +1,7 @@
 import { StatisticsScopeNav, type StatisticsScope } from "@/components/navigation";
 
+import { AREA_UNIT_SWITCH_LINK_TONE } from "./ranking-area-unit-switch.palette";
+
 /** ランキングのページで切り替える地域の単位。同じ指標のページがあるのは都道府県と市区町村だけ */
 const RANKING_SCOPES: readonly StatisticsScope[] = ["prefectures", "municipalities"];
 
@@ -35,6 +37,8 @@ export function RankingAreaUnitSwitch({
       hrefs={{ prefectures: prefectureHref, municipalities: municipalityHref }}
       surface="ranking_municipality"
       navLabels={{ municipalities: municipalityNavLabel }}
+      // 押せる側 (相手のページ) は青い塗りで目立たせる
+      linkClassName={AREA_UNIT_SWITCH_LINK_TONE}
       // 枠の見出しの右に置くので、下の余白と全幅を外す
       className="mb-0 w-auto"
     />

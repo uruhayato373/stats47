@@ -20,6 +20,8 @@ export interface LinkRowNavItem {
   current?: boolean;
   /** クリックの計測に残すラベル (data-nav-label)。省略時は計測の既定 */
   navLabel?: string;
+  /** この項目だけに足す見た目 (押せる側を目立たせるなど) */
+  className?: string;
 }
 
 /**
@@ -108,7 +110,7 @@ export function LinkRowNav({
           aria-current={item.current ? 'page' : undefined}
           data-slot="button"
           data-nav-label={item.navLabel}
-          className={linkRowItemClass(item.current)}
+          className={cn(linkRowItemClass(item.current), item.className)}
         >
           {item.label}
         </Link>
@@ -133,6 +135,8 @@ interface StatisticsScopeNavProps {
   surface?: NavSurface;
   /** 主語ごとのクリックの計測ラベル (横タブだけ) */
   navLabels?: Partial<Record<StatisticsScope, string>>;
+  /** 現在地でない項目 (押せる側) に足す見た目 (横タブだけ) */
+  linkClassName?: string;
 }
 
 const ITEMS = [
@@ -155,6 +159,7 @@ export function StatisticsScopeNav({
   scopes,
   surface,
   navLabels,
+  linkClassName,
 }: StatisticsScopeNavProps) {
   const items = ITEMS.filter((item) => !scopes || scopes.includes(item.key)).map((item) => ({
     key: item.key,
@@ -163,6 +168,7 @@ export function StatisticsScopeNav({
     href: hrefs?.[item.key] || item.href,
     current: item.key === current,
     navLabel: navLabels?.[item.key],
+    className: item.key === current ? undefined : linkClassName,
   }));
 
   if (variant === 'horizontal') {
