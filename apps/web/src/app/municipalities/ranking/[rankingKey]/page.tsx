@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { fetchPrefectures } from '@stats47/area';
-import { cn } from '@stats47/components';
+import { ChartPanel, cn } from '@stats47/components';
 import { getMetricConfig } from '@stats47/data-configs';
 import { hrefFor } from "@stats47/data-configs/content/href";
 import {
@@ -13,15 +13,18 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
+  buildRankingPageTitle,
   isMunicipalityAiContentCurrent,
   formatMunicipalityValueText,
   municipalityAbsenceNote,
   municipalityRankingDisplayTitle,
 } from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
+import { Map as MapIcon } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
 import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
+import { MapTableSplit } from '@/components/charts/MapTableSplit';
 import { ArticleShell, Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
 import { StatisticsScopeNav } from '@/components/navigation';
@@ -177,7 +180,8 @@ export default async function MunicipalityRankingPage({
   });
 
   const dataProduct = findDataProductForMunicipalityRanking(item.rankingKey);
-  // 広告の段 (2026-11-12 オーナー決定): 順位の表の後・地図の後に、AdSense 1 つを本文の幅いっぱいで出す (PR は出さない。2026-11-26 に表を地図の前へ上げ、段の順も入れ替わった)。
+  // 広告の段 (2026-11-12 オーナー決定): AdSense 1 つを本文の幅いっぱいで 2 段出す (PR は出さない)。2026-11-26 に地図と表を 1 つの枠に並べたので、
+  // 1 段目は枠と要点の後、2 段目は分布・解説・出典の後に置く (2 つの段の間に内容を挟む)。
   // ページの最後の段は、同日に右レールを付けて関連の一覧が右レールへ移った結果、表の後の段と出典・注記だけを挟んで
   // 約 240〜280px で続いたので外した (PC は右レールの 2 枠が加わる)
   const [rowAfterMap, rowAfterTable] = composeAdRows(
@@ -239,14 +243,18 @@ export default async function MunicipalityRankingPage({
       }
       header={
         <>
-          <StatisticsScopeNav
-            current="municipalities"
-            hrefs={scopeHrefsForMunicipalityRanking(item.rankingKey, (key) => KNOWN_RANKING_KEYS.has(key))}
-          />
+          {/* 題の部分は題と 1 行の補足だけにする (2026-11-26 オーナー判断)。地域単位の切り替えは題の右 (狭い幅は題の下) に置き、
+              指標の説明は出典の前へ移した (題の上の切り替えと説明の 2 行で、表が 140px ほど下がっていた) */}
           <PageHeader
-            title={municipalityRankingDisplayTitle(item)}
-            description={item.description}
-            stats={`${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}
+            className="mb-0"
+            title={buildRankingPageTitle(municipalityRankingDisplayTitle(item), 'city')}
+            meta={`最新 ${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}
+            actions={
+              <StatisticsScopeNav
+                current="municipalities"
+                hrefs={scopeHrefsForMunicipalityRanking(item.rankingKey, (key) => KNOWN_RANKING_KEYS.has(key))}
+              />
+            }
           />
         </>
       }
@@ -262,60 +270,66 @@ export default async function MunicipalityRankingPage({
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
-      {/* 並びは「順位の表 → 広告 → 地図 → 要点と分布 → 広告」(2026-11-26 オーナー判断)。題が「ランキング」なのに、
-          表が分布・地図・広告の後ろ (PC で 1,711px、スマホで 1,801px の位置) にあり、最初の画面に順位が出なかった */}
-      <MunicipalityRankingExplorer
-        rankingKey={item.rankingKey}
-        yearCode={snapshot.yearCode}
-        unit={snapshot.unit}
-        precision={precision}
-        total={snapshot.values.length}
-        initialCount={topRows.length}
-        prefectures={prefectures.map(({ prefCode, prefName }) => ({ prefCode, prefName }))}
+      {/* 地図と表は、都道府県のランキングと同じ 1 つの枠に並べる (2026-11-26 オーナー判断)。本文が 640px 以上なら「地図 | 表」の横並び、
+          狭い幅はタブで切り替える。題が「ランキング」のページなので、タブの最初は表にする。
+          以前は 表 → 広告 → 地図 と縦に積み、都道府県のページと並びが違っていた */}
+      <ChartPanel
+        title="市区町村別ランキング"
+        icon={<MapIcon />}
+        footer={
+          <p className="-mx-4 border-t px-4 pt-3 text-xs text-muted-foreground">
+            全国は形を簡略化しています。都道府県で絞り込むと、県内の詳しい地図を表示します。灰色は比較対象外 (データなし) の地域です。
+          </p>
+        }
+        className="gap-0!"
+        contentClassName="px-0!"
       >
-        <ValueTable
-          // 上位 10 件だけ見せ、残りは「全件を見る」で開く (畳んだ行も HTML に残る)。
-          // 50 件を全部見せるとスマホで表だけで画面 2.5 枚分あり、下の関連リンクが遠かった (2026-11-18)
-          fold={{ head: 10, tail: 0 }}
-          columns={[
-            { key: 'rank', header: '順位', className: 'w-20' },
-            { key: 'area', header: '市区町村', rowHeader: true, align: 'left' },
-            { key: 'value', header: '値' },
-          ]}
-          rows={topRows.map((row) => ({
-            key: row.areaCode,
-            cells: [
-              `${row.rank}位`,
-              // 配信値の市区町村は市区町村ページの公開対象と同じ集合なので、全行をリンクにする
-              <Link key="area" href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}>
-                {listName(row.areaName)}
-              </Link>,
-              `${formatValue(row.value)} ${formatUnitForDisplay(snapshot.unit)}`,
-            ],
-          }))}
+        <MapTableSplit
+          defaultTab="table"
+          map={
+              <MunicipalityNationalMap
+                title={item.title}
+                visualization={item.visualization}
+                unit={snapshot.unit}
+                decimalPlaces={precision}
+                values={snapshot.values.map((v) => ({ areaCode: v.areaCode, value: v.value }))}
+              />
+          }
+          table={
+              <MunicipalityRankingExplorer
+                rankingKey={item.rankingKey}
+                yearCode={snapshot.yearCode}
+                unit={snapshot.unit}
+                precision={precision}
+                total={snapshot.values.length}
+                initialCount={topRows.length}
+                prefectures={prefectures.map(({ prefCode, prefName }) => ({ prefCode, prefName }))}
+              >
+                <ValueTable
+                  // 上位 10 件だけ見せ、残りは「全件を見る」で開く (畳んだ行も HTML に残る)。
+                  // 50 件を全部見せるとスマホで表だけで画面 2.5 枚分あり、下の関連リンクが遠かった (2026-11-18)
+                  fold={{ head: 10, tail: 0 }}
+                  columns={[
+                    { key: 'rank', header: '順位', className: 'w-20' },
+                    { key: 'area', header: '市区町村', rowHeader: true, align: 'left' },
+                    { key: 'value', header: '値' },
+                  ]}
+                  rows={topRows.map((row) => ({
+                    key: row.areaCode,
+                    cells: [
+                      `${row.rank}位`,
+                      // 配信値の市区町村は市区町村ページの公開対象と同じ集合なので、全行をリンクにする
+                      <Link key="area" href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}>
+                        {listName(row.areaName)}
+                      </Link>,
+                      `${formatValue(row.value)} ${formatUnitForDisplay(snapshot.unit)}`,
+                    ],
+                  }))}
+                />
+              </MunicipalityRankingExplorer>
+          }
         />
-      </MunicipalityRankingExplorer>
-
-      {rowAfterTable.length > 0 && (
-        <div className="mt-8">
-          <AdRow cells={rowAfterTable} position="municipality-row-2" trackingCategory={`municipality-${item.rankingKey}`} wide />
-        </div>
-      )}
-
-      {dataProduct && (
-        <section aria-label="この指標のデータ集">
-          <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
-          <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_product" />
-        </section>
-      )}
-
-      <MunicipalityNationalMap
-        title={item.title}
-        visualization={item.visualization}
-        unit={snapshot.unit}
-        decimalPlaces={precision}
-        values={snapshot.values.map((v) => ({ areaCode: v.areaCode, value: v.value }))}
-      />
+      </ChartPanel>
 
       {/* 1 位・中央値・最下位。値だけでなく、どの自治体かを書く (2026-11-26 オーナー指摘: 最小・最大の値だけでは意味が薄い)。
           本文が狭い幅 (480px 未満) では 3 列にせず、「名前 値」の組を 1 行に流す (入りきらない組は次の行へ送る)。
@@ -323,7 +337,7 @@ export default async function MunicipalityRankingPage({
           1 組 1 行では 3 行で 142〜202px を使っていた (2026-11-26 オーナー判断で 1 行にまとめる) */}
       <section
         aria-label="分布の要点"
-        className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1 px-3 py-2 @sm:grid @sm:grid-cols-3 @sm:gap-0 @sm:p-0"
+        className="flex flex-wrap items-baseline gap-x-4 gap-y-1 px-3 py-2 @sm:grid @sm:grid-cols-3 @sm:gap-0 @sm:p-0"
       >
         {summaryCells.map(({ label, row, value }) => (
           <div
@@ -351,6 +365,19 @@ export default async function MunicipalityRankingPage({
         ))}
       </section>
 
+      {rowAfterTable.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={rowAfterTable} position="municipality-row-2" trackingCategory={`municipality-${item.rankingKey}`} wide />
+        </div>
+      )}
+
+      {dataProduct && (
+        <section aria-label="この指標のデータ集">
+          <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
+          <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_product" />
+        </section>
+      )}
+
       {distribution && (
         <section aria-label="全国分布" className="mt-5">
           <SectionHeader title="全国分布" hideRule className="mb-0" />
@@ -366,14 +393,11 @@ export default async function MunicipalityRankingPage({
         </section>
       )}
 
-      {rowAfterMap.length > 0 && (
-        <div className="mt-8">
-          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
-        </div>
-      )}
-
       {commentary && <MunicipalityRankingCommentary content={commentary} />}
 
+      {item.description && (
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+      )}
       {/* 市区町村 snapshot に焼き込まれた出典 (都道府県 metric の統計表とは別の表を使う指標がある) */}
       <DataSourceList
         sources={[{ label: item.source.name, url: item.source.url, tables: [] }]}
@@ -385,6 +409,12 @@ export default async function MunicipalityRankingPage({
           比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>
       </footer>
+      {rowAfterMap.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
+        </div>
+      )}
+
     </ArticleShell>
   );
 }

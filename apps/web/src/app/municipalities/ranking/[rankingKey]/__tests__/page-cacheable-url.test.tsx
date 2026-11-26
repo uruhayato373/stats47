@@ -129,16 +129,33 @@ describe('市区町村ランキング全国版のページ', () => {
     expect(html).toContain('120件中 上位50件');
   });
 
-  // 題が「ランキング」のページなので、順位の表を地図・分布より前に出す (2026-11-26 オーナー指摘。以前は表が画面 2 枚目より下だった)
-  it('順位の表を地図と分布の要点より前に出す', async () => {
+  // 題が「ランキング」のページなので、地図と表を 1 つの枠で最初に出し、分布の要点はその後に置く
+  // (2026-11-26 オーナー指摘。以前は表が分布・地図・広告の後ろで、画面 2 枚目より下だった)
+  it('地図と表を同じ枠に並べ、分布の要点より前に出す。狭い幅のタブは表から始める', async () => {
     vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
     const html = await renderPage();
     const table = html.indexOf('<table');
     const map = html.indexOf('data-testid="national-map"');
     const summary = html.indexOf('aria-label="分布の要点"');
     expect(table).toBeGreaterThan(-1);
-    expect(table).toBeLessThan(map);
+    expect(map).toBeGreaterThan(-1);
+    expect(table).toBeLessThan(summary);
     expect(map).toBeLessThan(summary);
+    // 都道府県のランキングと同じ枠 (部品の幅 640px 以上で横並び、未満はタブ)
+    expect(html).toContain('@container/viz');
+    const selectedTab = html.match(/<button[^>]*aria-selected="true"[^>]*>[\s\S]*?<\/button>/)?.[0] ?? '';
+    expect(selectedTab).toContain('表');
+  });
+
+  // 題の部分は題と 1 行の補足だけ。説明文は出典の前に残す (検索エンジンと読者向けの本文)
+  it('題は「市区町村別 …ランキング」にし、指標の説明は表より後ろに出す', async () => {
+    vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
+    const html = await renderPage();
+    expect(html).toMatch(/<h1[^>]*>市区町村別 試験の指標ランキング<\/h1>/);
+    // 構造化データにも同じ文があるので、画面に出す側 (最後の出現) の位置で確かめる
+    expect(html.lastIndexOf(item.description)).toBeGreaterThan(html.indexOf('<table'));
+    // 題のブロック (header) の中には出さない
+    expect(html.match(/<header[\s\S]*?<\/header>/)?.[0] ?? '').not.toContain(item.description);
   });
 
   // 最小・最大の値だけでは、どの自治体かが分からなかった。1 位と最下位は名前を書き、市区町村のページへ結ぶ

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { SectionHeader } from '@/components/section';
 
 import { RankingMapChartClient } from '@/features/ranking/widgets';
 
@@ -79,29 +78,25 @@ export function MunicipalityNationalMap({ title, visualization, unit, decimalPla
 
   if (failed) return null;
 
+  // 枠・見出し・注記は持たない。都道府県のランキングと同じ「地図 | 表」の枠 (MapTableSplit) の地図の側に入り、
+  // 高さは枠に合わせて伸びる (2026-11-26 オーナー判断で縦積みの単独の節をやめた)
   return (
-    <section aria-label="全国の分布地図" className="mt-5">
-      <SectionHeader title="全国の分布地図" hideRule className="mb-0" />
-      <div ref={anchor} className="mt-2 min-h-[436px] border border-border p-2">
-        {topology ? (
-          <RankingMapChartClient
-            rankingItem={{ title, unit, visualization, valueDisplay: { decimalPlaces } }}
-            rankingValues={values}
-            areaType="city"
-            topology={topology}
-            fitExcludeCodes={TOKYO_ISLAND_EXCLUDE_CODES}
-            fitNationwide
-            bare
-            colorViewSwitch
-            mapClassName="h-[420px]"
-          />
-        ) : (
-          <div className="h-[420px] animate-pulse bg-muted/40" aria-hidden />
-        )}
-      </div>
-      <p className="mt-1 text-xs text-muted-foreground">
-        全国は形を簡略化しています。都道府県で絞り込むと、県内の詳しい地図を表示します。灰色は比較対象外 (データなし) の地域です。
-      </p>
-    </section>
+    <div ref={anchor} className="h-full min-h-[420px]">
+      {topology ? (
+        <RankingMapChartClient
+          rankingItem={{ title, unit, visualization, valueDisplay: { decimalPlaces } }}
+          rankingValues={values}
+          areaType="city"
+          topology={topology}
+          fitExcludeCodes={TOKYO_ISLAND_EXCLUDE_CODES}
+          fitNationwide
+          bare
+          colorViewSwitch
+          mapClassName="h-full min-h-[420px]"
+        />
+      ) : (
+        <div className="h-full min-h-[420px] animate-pulse bg-muted/40" aria-hidden />
+      )}
+    </div>
   );
 }
