@@ -8,6 +8,8 @@ export function buildRankingPageTitle(metricTitle: string, areaType: AreaType): 
     city: "市区町村別",
     port: "港湾別",
   } satisfies Record<AreaType, string>;
+  // 題名がすでに「都道府県別」を含む指標 (「訪日外国人の都道府県別訪問者数」など) は前置きを重ねない (2026-11-26)
+  if (metricTitle.includes(scope[areaType])) return `${metricTitle}ランキング`;
   return `${scope[areaType]} ${metricTitle}ランキング`;
 }
 
