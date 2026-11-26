@@ -5,6 +5,7 @@ export const deathsLifestyleDiseasesPer100k: MetricConfig = {
   "key": "deaths-lifestyle-diseases-per-100k",
   "title": "生活習慣病による死亡者数",
   "subtitle": "日本人人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "日本人" },
   "description": "人口動態調査の生活習慣病による死亡者数を日本人人口で除し、10万倍した値です。年齢調整死亡率ではありません。",
   "note": "死亡診断書に複数の死因が記載された場合も、統計表章では死亡を引き起こした一連の事象の起因となる原死因1つで分類する。",
   "unit": "人",

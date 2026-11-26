@@ -5,6 +5,7 @@ export const youthEducationFacilityCountPerMillion: MetricConfig = {
   "key": "youth-education-facility-count-per-million",
   "title": "青少年教育施設数",
   "subtitle": "人口100万人当たり",
+  "denominator": { "kind": "population", "per": 1000000 },
   "unit": "所",
   "category": "educationsports",
   "source": {

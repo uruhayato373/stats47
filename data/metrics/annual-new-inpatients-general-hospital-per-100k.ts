@@ -5,6 +5,7 @@ export const annualNewInpatientsGeneralHospitalPer100k: MetricConfig = {
   "key": "annual-new-inpatients-general-hospital-per-100k",
   "title": "一般病院年間新入院患者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

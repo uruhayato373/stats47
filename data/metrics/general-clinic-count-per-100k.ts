@@ -5,6 +5,7 @@ export const generalClinicCountPer100k: MetricConfig = {
   "key": "general-clinic-count-per-100k",
   "title": "一般診療所数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "description": "医療施設調査で一般診療所に区分された施設数を、総人口で除して人口10万人当たりに換算した値です。",
   "unit": "施設",
   "category": "socialsecurity",

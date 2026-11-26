@@ -5,6 +5,7 @@ export const fireDepartmentEmergencyCarCountPer100k: MetricConfig = {
   "key": "fire-department-emergency-car-count-per-100k",
   "title": "救急自動車数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "台",
   "category": "safetyenvironment",
   "source": {

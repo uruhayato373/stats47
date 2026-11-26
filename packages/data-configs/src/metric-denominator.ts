@@ -4,6 +4,8 @@
  * 明示の `denominator` を先に見て、無ければキーと題名から読む。2026-09-24 に人口10万対の 3 指標が
  * 実数の列を指す誤りがあり、分母が文字列にしか無いので機械は気づけなかった。
  */
+import type { Denominator } from '@stats47/types';
+
 import type { MetricConfig, MetricDenominator } from './types';
 
 const POPULATION_KEY = /(^|-)per-(100k|10k|1000|1k|capita|million|person|resident|taxpayer)(-|$)/;
@@ -35,9 +37,19 @@ const denominatorInText = ({ title, subtitle }: MetricLabels): MetricDenominator
   return hasPerWordAfter(text, ['世帯'], PER_WORDS) ? 'household' : null;
 };
 
-/** 指標の分母。分からなければ null */
+/** 書かれた分母の種類 (型でも、移行前の種類だけの文字列でも) */
+const declaredKind = (denominator: MetricLabels['denominator']): MetricDenominator | null =>
+  denominator == null ? null : typeof denominator === 'string' ? denominator : denominator.kind;
+
+/** 指標の分母の種類。分からなければ null */
 export function metricDenominatorOf(metric: MetricLabels): MetricDenominator | null {
-  return metric.denominator ?? denominatorInText(metric) ?? denominatorInKey(metric.key);
+  return declaredKind(metric.denominator) ?? denominatorInText(metric) ?? denominatorInKey(metric.key);
+}
+
+/** 規模まで書かれた分母 (型の Denominator)。種類だけの文字列・'none'・未記入は null */
+export function metricDenominatorSpec(metric: Pick<MetricConfig, 'denominator'>): Denominator | null {
+  const d = metric.denominator;
+  return d != null && typeof d === 'object' ? d : null;
 }
 
 /** キー名が分母を名乗るのに題名も明示も無い指標。中身が実数なのに per-100k を名乗る、といった食い違いを止める */

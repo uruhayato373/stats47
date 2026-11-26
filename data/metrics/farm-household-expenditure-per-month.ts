@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const farmHouseholdExpenditurePerMonth: MetricConfig = {
   "key": "farm-household-expenditure-per-month",
   "title": "農家世帯の家計費",
-  "subtitle": "1世帯当たり1か月間",
+  "subtitle": "1世帯当たり・1か月間",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "千円",
   "category": "population",
   "source": {

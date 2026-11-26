@@ -5,6 +5,7 @@ export const householdHeadAnnualIncomePerHousehold: MetricConfig = {
   "key": "household-head-annual-income-per-household",
   "title": "年間世帯主収入",
   "subtitle": "1世帯当たり",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "千円",
   "category": "population",
   "source": {

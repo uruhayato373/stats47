@@ -5,6 +5,7 @@ export const suicidesPer100k: MetricConfig = {
   "key": "suicides-per-100k",
   "title": "自殺者数",
   "subtitle": "日本人人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "日本人" },
   "unit": "人",
   "category": "safetyenvironment",
   "description": "人口動態調査の死因簡単分類で「自殺」に分類された死亡者数を日本人人口で除し、日本人人口10万人当たりに換算した値。",

@@ -5,6 +5,7 @@ export const microwaveOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "key": "microwave-ownership-multi-person-households-per-1000",
   "title": "電子レンジ所有数量",
   "subtitle": "千世帯当たり",
+  "denominator": { "kind": "household", "per": 1000 },
   "unit": "台",
   "category": "economy",
   "source": {

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const finalEnergyConsumptionPerCapita: MetricConfig = {
   "key": "final-energy-consumption-per-capita",
   "title": "1人当たり最終エネルギー消費量",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "GJ",
   "category": "energy",
   "source": {

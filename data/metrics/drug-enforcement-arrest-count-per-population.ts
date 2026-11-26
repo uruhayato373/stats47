@@ -5,6 +5,7 @@ export const drugEnforcementArrestCountPerPopulation: MetricConfig = {
   "key": "drug-enforcement-arrest-count-per-population",
   "title": "覚醒剤取締検挙件数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "件",
   "category": "safetyenvironment",
   "description": "覚醒剤取締検挙件数を総人口で除し、人口10万人当たりに換算した値。",

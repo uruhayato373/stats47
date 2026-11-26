@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { listCategories } from "@stats47/data-configs";
 import { canonicalSurveyHubKey, hrefFor } from "@stats47/data-configs/content/href";
 import { SURVEY_PROMINENCE } from "@stats47/data-configs/prominence/survey";
-import { metricDisplayName } from "@stats47/ranking";
+import { metricShortName } from "@stats47/ranking";
 import {
   readRankingItemsBySurveyFromR2,
   readSurveysFromR2,
@@ -165,7 +165,8 @@ export default async function SurveyIndexPage() {
                                 href={hrefFor("ranking", { rankingKey: representative.rankingKey })}
                                 className="text-foreground hover:text-primary hover:underline"
                               >
-                                {metricDisplayName(representative)}
+                                {/* 値を出さないリンクなので分母の補足 (括弧) は付けない。分母はランキングのページの題の下に出る (2026-11-26 オーナー判断) */}
+                                {metricShortName(representative)}
                               </Link>
                             </li>
                           ))}

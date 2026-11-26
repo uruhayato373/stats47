@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaChildWelfareExpenditureUnder17PrefMunicipal: MetricConfig = {
   "key": "per-capita-child-welfare-expenditure-under17-pref-municipal",
   "title": "児童福祉費",
-  "subtitle": "都道府県・市町村財政合計",
+  "subtitle": "都道府県・市町村財政合計・17歳以下人口1人当たり",
+  "denominator": { "kind": "population", "per": 1, "scope": "17歳以下" },
   "unit": "千円",
-  "denominator": "population",
   "category": "educationsports",
   "source": {
     "kind": "estat",

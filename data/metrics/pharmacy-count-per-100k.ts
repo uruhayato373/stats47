@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const pharmacyCountPer100k: MetricConfig = {
   "key": "pharmacy-count-per-100k",
   "title": "人口10万人あたり薬局数",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "所",
   "category": "socialsecurity",
   "source": {

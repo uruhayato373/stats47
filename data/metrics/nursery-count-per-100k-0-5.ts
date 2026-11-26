@@ -5,6 +5,7 @@ export const nurseryCountPer100k05: MetricConfig = {
   "key": "nursery-count-per-100k-0-5",
   "title": "保育所等数",
   "subtitle": "0～5歳人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "0～5歳" },
   "unit": "所",
   "category": "educationsports",
   "source": {

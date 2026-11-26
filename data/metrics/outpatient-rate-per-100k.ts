@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const outpatientRatePer100k: MetricConfig = {
   "key": "outpatient-rate-per-100k",
   "title": "外来受療率",
+  "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
-  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaElderlyWelfareExpenditure65plusPrefMunicipal: MetricConfig = {
   "key": "per-capita-elderly-welfare-expenditure-65plus-pref-municipal",
   "title": "老人福祉費",
-  "subtitle": "都道府県・市町村財政合計",
+  "subtitle": "都道府県・市町村財政合計・65歳以上人口1人当たり",
+  "denominator": { "kind": "population", "per": 1, "scope": "65歳以上" },
   "unit": "千円",
-  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

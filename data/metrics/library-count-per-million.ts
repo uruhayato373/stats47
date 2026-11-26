@@ -66,5 +66,6 @@ export const libraryCountPerMillion: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "人口100万人当たり"
+  "subtitle": "人口100万人当たり",
+  "denominator": { "kind": "population", "per": 1000000 },
 };

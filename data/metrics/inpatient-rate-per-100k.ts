@@ -5,6 +5,7 @@ export const inpatientRatePer100k: MetricConfig = {
   "key": "inpatient-rate-per-100k",
   "title": "入院受療率",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

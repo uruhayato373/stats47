@@ -5,6 +5,7 @@ export const fireDepartmentWaterCountPer100ThousandPeople: MetricConfig = {
   "key": "fire-department-water-count-per-100-thousand-people",
   "title": "消防水利数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "所",
   "category": "safetyenvironment",
   "source": {

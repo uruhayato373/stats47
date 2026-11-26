@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaEducationExpenditurePrefMunicipal: MetricConfig = {
   "key": "per-capita-education-expenditure-pref-municipal",
   "title": "教育費",
-  "subtitle": "都道府県・市町村財政合計",
+  "subtitle": "都道府県・市町村財政合計・人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
-  "denominator": "population",
   "category": "educationsports",
   "source": {
     "kind": "estat",

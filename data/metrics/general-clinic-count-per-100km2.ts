@@ -5,6 +5,7 @@ export const generalClinicCountPer100km2: MetricConfig = {
   "key": "general-clinic-count-per-100km2",
   "title": "一般診療所数",
   "subtitle": "面積100km²当たり",
+  "denominator": { "kind": "area", "per": 100 },
   "unit": "施設",
   "category": "socialsecurity",
   "source": {

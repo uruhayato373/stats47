@@ -5,6 +5,7 @@ export const municipalIntellectualDisabilityConsultationsPer100k: MetricConfig =
   "key": "municipal-intellectual-disability-consultations-per-100k",
   "title": "市町村における知的障害者相談実人員",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

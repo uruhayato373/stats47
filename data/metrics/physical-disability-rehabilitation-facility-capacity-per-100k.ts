@@ -5,6 +5,7 @@ export const physicalDisabilityRehabilitationFacilityCapacityPer100k: MetricConf
   "key": "physical-disability-rehabilitation-facility-capacity-per-100k",
   "title": "身体障害者更生援護施設定員数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

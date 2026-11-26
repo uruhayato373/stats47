@@ -5,6 +5,7 @@ export const perCapitaKenminShotokuH23: MetricConfig = {
   "key": "per-capita-kenmin-shotoku-h23",
   "title": "1人当たり県民所得",
   "subtitle": "H23年基準",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {

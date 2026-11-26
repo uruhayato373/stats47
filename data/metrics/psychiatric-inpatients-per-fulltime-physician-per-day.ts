@@ -5,6 +5,7 @@ export const psychiatricInpatientsPerFulltimePhysicianPerDay: MetricConfig = {
   "key": "psychiatric-inpatients-per-fulltime-physician-per-day",
   "title": "精神科病院在院患者数",
   "subtitle": "医師1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "医師" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

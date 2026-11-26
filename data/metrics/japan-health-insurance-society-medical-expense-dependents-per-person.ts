@@ -5,6 +5,7 @@ export const japanHealthInsuranceSocietyMedicalExpenseDependentsPerPerson: Metri
   "key": "japan-health-insurance-society-medical-expense-dependents-per-person",
   "title": "全国保険協会管掌健康保険医療費",
   "subtitle": "被扶養者1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "被扶養者" },
   "unit": "円",
   "category": "socialsecurity",
   "source": {

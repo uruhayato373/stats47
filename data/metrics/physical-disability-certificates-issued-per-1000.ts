@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const physicalDisabilityCertificatesIssuedPer1000: MetricConfig = {
   "key": "physical-disability-certificates-issued-per-1000",
   "title": "身体障害者手帳交付数",
-  "subtitle": "人口1000人当たり",
+  "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

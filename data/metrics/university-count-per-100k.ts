@@ -5,6 +5,7 @@ export const universityCountPer100k: MetricConfig = {
   "key": "university-count-per-100k",
   "title": "大学数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "校",
   "category": "educationsports",
   "source": {

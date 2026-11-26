@@ -35,5 +35,6 @@ export const deathsHeartDiseaseExclHypertensivePer100k: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "日本人人口10万人当たり"
+  "subtitle": "日本人人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "日本人" },
 };

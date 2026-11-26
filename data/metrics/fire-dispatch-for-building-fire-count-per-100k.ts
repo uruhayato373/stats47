@@ -5,6 +5,7 @@ export const fireDispatchForBuildingFireCountPer100k: MetricConfig = {
   "key": "fire-dispatch-for-building-fire-count-per-100k",
   "title": "火災のための消防機関出動回数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "回",
   "category": "safetyenvironment",
   "source": {

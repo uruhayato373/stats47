@@ -5,6 +5,7 @@ export const nationalPensionEnrolleesType3Per10002059: MetricConfig = {
   "key": "national-pension-enrollees-type3-per-1000-20-59",
   "title": "第3号国民年金被保険者数",
   "subtitle": "20～59歳人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000, "scope": "20～59歳" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

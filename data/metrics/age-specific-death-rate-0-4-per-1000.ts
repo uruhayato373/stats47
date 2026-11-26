@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const ageSpecificDeathRate04Per1000: MetricConfig = {
   "key": "age-specific-death-rate-0-4-per-1000",
   "title": "年齢別死亡率",
-  "subtitle": "0〜4歳（1000人当たり）",
+  "subtitle": "0〜4歳人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000, "scope": "0〜4歳" },
   "unit": "人口千対",
-  "denominator": "population",
   "category": "population",
   "source": {
     "kind": "estat",

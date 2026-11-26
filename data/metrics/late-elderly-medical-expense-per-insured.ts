@@ -35,5 +35,6 @@ export const lateElderlyMedicalExpensePerInsured: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "被保険者1人当たり"
+  "subtitle": "被保険者1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "被保険者" },
 };

@@ -5,6 +5,7 @@ export const welfareCommissionerCountPer100k: MetricConfig = {
   "key": "welfare-commissioner-count-per-100k",
   "title": "民生委員数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "educationsports",
   "source": {

@@ -623,7 +623,7 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "rankingKey": "restaurant-count-per-1000",
         "title": "飲食店数",
         "readerLabel": "飲食店数",
-        "subtitle": "1000人当たり"
+        "subtitle": "人口千人当たり"
       },
       {
         "rankingKey": "tertiary-industry-establishment-ratio-census",
@@ -924,13 +924,13 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "rankingKey": "japan-health-insurance-society-visit-rate-dependents-per-1000",
         "title": "全国保険協会管掌健康保険受診率",
         "readerLabel": "全国保険協会管掌健康保険受診率",
-        "subtitle": "被扶養者1000人当たり"
+        "subtitle": "被扶養者千人当たり"
       },
       {
         "rankingKey": "japan-health-insurance-society-visit-rate-insured-per-1000",
         "title": "全国保険協会管掌健康保険受診率",
         "readerLabel": "全国保険協会管掌健康保険受診率",
-        "subtitle": "被保険者1000人当たり"
+        "subtitle": "被保険者千人当たり"
       }
     ]
   },
@@ -1549,7 +1549,7 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "rankingKey": "per-capita-inhabitant-tax-pref-municipal",
         "title": "住民税",
         "readerLabel": "住民税",
-        "subtitle": "都道府県・市町村財政合計（人口1人当たり）"
+        "subtitle": "都道府県・市町村財政合計・人口1人当たり"
       },
       {
         "rankingKey": "per-child-public-elementary-school-expenditure-pref-municipal",
@@ -1561,7 +1561,7 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "rankingKey": "per-capita-fixed-asset-tax-pref-municipal",
         "title": "固定資産税",
         "readerLabel": "固定資産税",
-        "subtitle": "都道府県・市町村財政合計"
+        "subtitle": "都道府県・市町村財政合計・人口1人当たり"
       }
     ]
   },
@@ -1683,7 +1683,7 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "rankingKey": "financial-debt-balance",
         "title": "金融負債残高",
         "readerLabel": "金融負債残高",
-        "subtitle": "二人以上の世帯の1世帯当たり"
+        "subtitle": "二人以上の世帯・1世帯当たり"
       }
     ]
   },
@@ -1821,7 +1821,8 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
       {
         "rankingKey": "outpatient-rate-per-100k",
         "title": "外来受療率",
-        "readerLabel": "外来受療率"
+        "readerLabel": "外来受療率",
+        "subtitle": "人口10万人当たり"
       },
       {
         "rankingKey": "treatment-rate-cancer-inpatient",
@@ -2097,7 +2098,7 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "rankingKey": "public-assistance-medical-beneficiaries-per-1000",
         "title": "生活保護医療扶助人員",
         "readerLabel": "生活保護医療扶助人員",
-        "subtitle": "月平均人口千人当たり"
+        "subtitle": "月平均・人口千人当たり"
       },
       {
         "rankingKey": "elderly-on-public-assistance-per-1000-65plus",

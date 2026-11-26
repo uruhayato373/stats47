@@ -5,6 +5,7 @@ export const psychiatricInpatientsPerNursePerDay: MetricConfig = {
   "key": "psychiatric-inpatients-per-nurse-per-day",
   "title": "精神科病院在院患者数",
   "subtitle": "看護師1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "看護師" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

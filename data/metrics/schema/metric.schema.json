@@ -45,12 +45,51 @@
       "type": "string"
     },
     "denominator": {
-      "enum": [
-        "population",
-        "area",
-        "household",
-        "person",
-        "none"
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "population",
+                "area",
+                "household",
+                "person"
+              ]
+            },
+            "per": {
+              "type": "number"
+            },
+            "scope": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "per"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "string",
+          "const": "population"
+        },
+        {
+          "type": "string",
+          "const": "area"
+        },
+        {
+          "type": "string",
+          "const": "household"
+        },
+        {
+          "type": "string",
+          "const": "person"
+        },
+        {
+          "type": "string",
+          "const": "none"
+        }
       ]
     },
     "category": {

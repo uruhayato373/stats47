@@ -5,6 +5,7 @@ export const avgDailyInpatientsGeneralHospitalPer100k: MetricConfig = {
   "key": "avg-daily-inpatients-general-hospital-per-100k",
   "title": "一般病院の1日平均在院患者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

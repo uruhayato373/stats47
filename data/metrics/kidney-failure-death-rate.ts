@@ -5,6 +5,7 @@ export const kidneyFailureDeathRate: MetricConfig = {
   "key": "kidney-failure-death-rate",
   "title": "腎不全による死亡者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "population",
   "source": {

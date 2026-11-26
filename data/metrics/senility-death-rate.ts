@@ -5,6 +5,7 @@ export const senilityDeathRate: MetricConfig = {
   "key": "senility-death-rate",
   "title": "老衰による死亡者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "population",
   "source": {

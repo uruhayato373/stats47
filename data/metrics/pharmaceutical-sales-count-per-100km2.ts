@@ -5,6 +5,7 @@ export const pharmaceuticalSalesCountPer100km2: MetricConfig = {
   "key": "pharmaceutical-sales-count-per-100km2",
   "title": "医薬品販売業数",
   "subtitle": "面積100km²当たり",
+  "denominator": { "kind": "area", "per": 100 },
   "unit": "所",
   "category": "socialsecurity",
   "source": {

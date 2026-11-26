@@ -5,6 +5,7 @@ export const pneumoniaDeathRate: MetricConfig = {
   "key": "pneumonia-death-rate",
   "title": "肺炎による死亡者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "population",
   "source": {

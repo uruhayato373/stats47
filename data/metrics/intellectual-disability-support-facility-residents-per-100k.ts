@@ -5,6 +5,7 @@ export const intellectualDisabilitySupportFacilityResidentsPer100k: MetricConfig
   "key": "intellectual-disability-support-facility-residents-per-100k",
   "title": "知的障害者援護施設在所者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const snowWeatherTrafficAccidentsPer100k: MetricConfig = {
   "key": "snow-weather-traffic-accidents-per-100k",
   "title": "降雪時（雪・みぞれ・ひょう）の交通事故発生件数",
-  "subtitle": "総人口10万人当たり",
+  "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "件",
   "category": "safetyenvironment",
   "note": "2025年の交通事故オープンデータ本票から、天候が雪・みぞれ・ひょうの事故を、昼夜と事故類型の全区分で合算した件数。2025年総人口で除して10万倍した値であり、降雪日数や積雪量あたりの事故率ではない。沖縄県は該当する事故が0件のため0になる。",

@@ -5,6 +5,7 @@ export const heatstrokeDeathsPer100k: MetricConfig = {
   key: 'heatstroke-deaths-per-100k',
   title: '熱中症による死亡数',
   subtitle: '人口10万人当たり',
+  denominator: { kind: 'population', per: 100000 },
   description: '人口動態統計（確定数）の熱中症による死亡数（heatstroke-deaths）を、同じ年の総人口（total-population）で割り、人口10万人当たりに換算した値。',
   note: '人口の多い県ほど死亡数が大きくなる実数の見え方を補正した値。年ごとの猛暑の強さで大きく変動し、小さな県では1年の死亡数が数人の増減でも順位が大きく動く。死亡数は住所地別の確定数、人口は同じ年の総人口（国勢調査の年は国勢調査、それ以外は人口推計）を使う。',
   unit: '人',

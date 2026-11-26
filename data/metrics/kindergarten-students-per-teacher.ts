@@ -5,6 +5,7 @@ export const kindergartenStudentsPerTeacher: MetricConfig = {
   "key": "kindergarten-students-per-teacher",
   "title": "幼稚園在園者数",
   "subtitle": "教員1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "教員" },
   "unit": "人",
   "category": "educationsports",
   "source": {

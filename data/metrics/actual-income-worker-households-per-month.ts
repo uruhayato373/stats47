@@ -39,5 +39,6 @@ export const actualIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "seoTitle": "実収入のランキング｜県庁所在市の二人以上の勤労者世帯の月額",
   "seoDescription": "家計調査の二人以上の勤労者世帯について、県庁所在市ごとの 1 世帯当たり月額の実収入を比較。各都市の値、対象年、出典と集計上の注意を確認できます。",
   "isActive": true,
-  "subtitle": "二人以上の勤労者世帯・1世帯当たり月額"
+  "subtitle": "二人以上の勤労者世帯・1世帯当たり・月額",
+  "denominator": { "kind": "household", "per": 1 },
 };

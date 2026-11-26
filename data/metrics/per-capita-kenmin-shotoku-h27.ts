@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaKenminShotokuH27: MetricConfig = {
   "key": "per-capita-kenmin-shotoku-h27",
   "title": "１人当たり県民所得",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {

@@ -5,6 +5,7 @@ export const longTermCareMedicalFacilityCountPer100k65plus: MetricConfig = {
   "key": "long-term-care-medical-facility-count-per-100k-65plus",
   "title": "介護療養型医療施設数",
   "subtitle": "65歳以上人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "65歳以上" },
   "unit": "所",
   "category": "socialsecurity",
   "source": {

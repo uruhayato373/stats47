@@ -5,6 +5,7 @@ export const nursingHomeResidentsPer100065plus: MetricConfig = {
   "key": "nursing-home-residents-per-1000-65plus",
   "title": "老人ホーム在所者数",
   "subtitle": "65歳以上人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000, "scope": "65歳以上" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

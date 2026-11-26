@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const householdHeadIncomeWorkerHouseholdsPerMonth: MetricConfig = {
   "key": "household-head-income-worker-households-per-month",
   "title": "世帯主収入",
-  "subtitle": "1世帯当たり1か月間",
+  "subtitle": "1世帯当たり・1か月間",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {

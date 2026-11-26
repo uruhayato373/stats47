@@ -5,6 +5,7 @@ export const elderlyOnPublicAssistancePer100065plus: MetricConfig = {
   "key": "elderly-on-public-assistance-per-1000-65plus",
   "title": "生活保護被保護高齢者数",
   "subtitle": "65歳以上人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000, "scope": "65歳以上" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

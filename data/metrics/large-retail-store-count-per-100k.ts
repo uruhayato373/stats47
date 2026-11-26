@@ -5,6 +5,7 @@ export const largeRetailStoreCountPer100k: MetricConfig = {
   "key": "large-retail-store-count-per-100k",
   "title": "大型小売店数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "店",
   "category": "commercial",
   "source": {

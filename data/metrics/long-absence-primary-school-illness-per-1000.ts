@@ -5,6 +5,7 @@ export const longAbsencePrimarySchoolIllnessPer1000: MetricConfig = {
   "key": "long-absence-primary-school-illness-per-1000",
   "title": "病気による小学校長期欠席児童比率",
   "subtitle": "児童千人当たり",
+  "denominator": { "kind": "person", "per": 1000, "scope": "児童" },
   "unit": "児童千対",
   "category": "educationsports",
   "source": {

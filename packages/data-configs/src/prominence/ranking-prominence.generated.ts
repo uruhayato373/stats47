@@ -81,7 +81,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "road-length-per-km2",
         "title": "道路実延長",
         "readerLabel": "道路実延長",
-        "subtitle": "総面積1km²当たり",
+        "subtitle": "面積1km²当たり",
         "hook": "道路実延長が最も長い県は？"
       }
     ]

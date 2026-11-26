@@ -5,6 +5,7 @@ export const juniorHighSchoolLongAbsenceRatioNonattendanceOver30daysPer1000: Met
   "key": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
   "title": "不登校による中学校長期欠席生徒比率",
   "subtitle": "生徒千人当たり",
+  "denominator": { "kind": "person", "per": 1000, "scope": "生徒" },
   "unit": "生徒千対",
   "category": "educationsports",
   "source": {

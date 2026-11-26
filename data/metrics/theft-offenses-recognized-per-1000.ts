@@ -5,6 +5,7 @@ export const theftOffensesRecognizedPer1000: MetricConfig = {
   "key": "theft-offenses-recognized-per-1000",
   "title": "窃盗犯認知件数",
   "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "件",
   "category": "safetyenvironment",
   "description": "犯罪統計の窃盗犯認知件数を総人口で除し、人口千人当たりに換算した値。",

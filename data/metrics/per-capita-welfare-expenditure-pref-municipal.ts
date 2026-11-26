@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaWelfareExpenditurePrefMunicipal: MetricConfig = {
   "key": "per-capita-welfare-expenditure-pref-municipal",
   "title": "民生費",
-  "subtitle": "都道府県・市町村財政合計",
+  "subtitle": "都道府県・市町村財政合計・人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
-  "denominator": "population",
   "category": "administrativefinancial",
   "source": {
     "kind": "estat",

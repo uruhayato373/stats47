@@ -5,6 +5,7 @@ export const femaleClassLectureCountPerMillionFemale: MetricConfig = {
   "key": "female-class-lecture-count-per-million-female",
   "title": "女性学級・講座数",
   "subtitle": "女性人口100万人当たり",
+  "denominator": { "kind": "population", "per": 1000000, "scope": "女性" },
   "unit": "学級･講座",
   "category": "educationsports",
   "source": {

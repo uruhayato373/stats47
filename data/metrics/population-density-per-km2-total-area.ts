@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const populationDensityPerKm2TotalArea: MetricConfig = {
   "key": "population-density-per-km2-total-area",
   "title": "総面積１km2当たり人口密度",
+  "denominator": { "kind": "area", "per": 1, "scope": "総" },
   "unit": "人",
   "category": "population",
   "source": {

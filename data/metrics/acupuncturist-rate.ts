@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const acupuncturistRate: MetricConfig = {
   "key": "acupuncturist-rate",
   "title": "人口10万対はり師数",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

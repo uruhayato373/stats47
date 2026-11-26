@@ -29,9 +29,10 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { COLOR_SCHEME_CATALOG, isAuthoredRatioOption, isKnownColorScheme } from '@stats47/types';
+import { COLOR_SCHEME_CATALOG, denominatorLabel, isAuthoredRatioOption, isKnownColorScheme } from '@stats47/types';
 
 import { CATEGORY_KEYS } from '../src/types';
+import { metricDenominatorOf, metricDenominatorSpec } from '../src/metric-denominator';
 import { moneyUnitExponent } from '../src/money-unit';
 import { resolveMetricProvenance } from '../src/provenance/resolve-metric-provenance';
 import { METRICS_REGISTRY, getMetricConfig } from '../src/registry';
@@ -137,6 +138,9 @@ function tally(list: string[]): string {
     .map(([k, v]) => `${k}=${v}`)
     .join(' ');
 }
+
+/** 分母を型で書いていない分母つきの指標の上限 (縮小専用。カード METRIC-DENOMINATOR-TYPE-01) */
+const DENOMINATOR_SPEC_MISSING_CEILING = 56;
 
 function main() {
   const files = readdirSync(METRICS_DIR).filter(
@@ -590,6 +594,36 @@ function main() {
         );
       }
     }
+  }
+
+  // error: 分母の表記 (2026-11-26 METRIC-DENOMINATOR-TYPE-01)。分母は型 (種類・規模・対象) で持ち、補足の文言は
+  // denominatorLabel が作る 1 通りにそろえる。手書きは「人口10万対」「人口10万人あたり」「1000人当たり」に割れていた。
+  // 題名に分母を書いた指標は、題名を変えるかをオーナーが決めるまで補足の文言を求めない。
+  const PER_WORDING = /当たり|あたり|当り|万対|千対/;
+  let denominatorSpecMissing = 0;
+  for (const r of rows) {
+    const metric = r.key ? getMetricConfig(r.key) : undefined;
+    if (!metric) continue;
+    const spec = metricDenominatorSpec(metric);
+    if (!spec) {
+      const kind = metricDenominatorOf(metric);
+      if (kind && kind !== 'none') denominatorSpecMissing++;
+      continue;
+    }
+    const label = denominatorLabel(spec);
+    const subtitle = r.subtitle ?? '';
+    if (!subtitle.includes(label) && !PER_WORDING.test(r.title)) {
+      errors.push(`[denominator-label] ${r.file}: 補足に分母の文言「${label}」が無い (補足: ${r.subtitle ?? 'なし'})`);
+    }
+    if (PER_WORDING.test(subtitle.replace(label, ''))) {
+      errors.push(`[denominator-label] ${r.file}: 補足に分母の別の書き方が残っている (補足: ${subtitle})。分母の文言は「${label}」だけにする`);
+    }
+  }
+  // 分母を規模まで型で書いていない指標の数 (縮小専用。直したら下げる。2026-11-26 は 56 件: 4 種類で表せない分母と要判断の指標)
+  if (denominatorSpecMissing > DENOMINATOR_SPEC_MISSING_CEILING) {
+    errors.push(
+      `[denominator-spec] 分母を型 (denominator: { kind, per }) で書いていない分母つきの指標が ${denominatorSpecMissing} 件 (上限 ${DENOMINATOR_SPEC_MISSING_CEILING})。新しい指標は分母を型で書く`
+    );
   }
 
   // ── 出力 ──

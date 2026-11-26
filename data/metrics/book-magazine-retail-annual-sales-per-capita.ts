@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const bookMagazineRetailAnnualSalesPerCapita: MetricConfig = {
   "key": "book-magazine-retail-annual-sales-per-capita",
   "title": "書籍・雑誌小売業年間商品販売額",
-  "subtitle": "1人当たり",
+  "subtitle": "人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "円",
   "category": "commercial",
   "source": {

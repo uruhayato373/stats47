@@ -5,6 +5,7 @@ export const welfareOfficeIntellectualDisabilityConsultationsPer100k: MetricConf
   "key": "welfare-office-intellectual-disability-consultations-per-100k",
   "title": "福祉事務所知的障害者相談実人員",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

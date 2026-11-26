@@ -5,6 +5,7 @@ export const tatamiPerMainHouseholdRented: MetricConfig = {
   "key": "tatami-per-main-household-rented",
   "title": "1世帯当たり畳数",
   "subtitle": "借家・主世帯",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "畳",
   "category": "construction",
   "source": {

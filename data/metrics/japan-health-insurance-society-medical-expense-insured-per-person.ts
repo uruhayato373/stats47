@@ -5,6 +5,7 @@ export const japanHealthInsuranceSocietyMedicalExpenseInsuredPerPerson: MetricCo
   "key": "japan-health-insurance-society-medical-expense-insured-per-person",
   "title": "全国保険協会管掌健康保険医療費",
   "subtitle": "被保険者1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "被保険者" },
   "unit": "円",
   "category": "socialsecurity",
   "source": {

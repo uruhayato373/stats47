@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const dentalCheckupPersonsPer1000: MetricConfig = {
   "key": "dental-checkup-persons-per-1000",
   "title": "歯科健診受診延人員",
-  "subtitle": "人口1000人当たり",
+  "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

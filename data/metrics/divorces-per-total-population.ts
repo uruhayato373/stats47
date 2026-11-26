@@ -35,5 +35,6 @@ export const divorcesPerTotalPopulation: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "人口千人当たり"
+  "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
 };

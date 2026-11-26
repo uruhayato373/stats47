@@ -1,4 +1,4 @@
-import type { AuthoredPresentation, MetricPresentation } from "@stats47/types";
+import type { AuthoredPresentation, Denominator, DenominatorKind, MetricPresentation } from "@stats47/types";
 import type { CategoryKey } from './category-keys.generated';
 /**
  * MetricConfig 型定義 — page ごとの統計データ要件の真実源 (SSOT)
@@ -388,8 +388,8 @@ export interface CalculationOptions {
 export { CATEGORY_KEYS, type CategoryKey } from './category-keys.generated';
 
 /** Metric 1 つ分の全データ要件 */
-/** 値を割っている分母。none は実数 (キー名が分母を名乗っていても実数の指標に書く) */
-export type MetricDenominator = 'population' | 'area' | 'household' | 'person' | 'none';
+/** 値を割っている分母の種類。none は実数 (キー名が分母を名乗っていても実数の指標に書く) */
+export type MetricDenominator = DenominatorKind | 'none';
 
 export interface MetricConfig {
   /** kebab-case の一意キー。ファイル名と一致 */
@@ -426,10 +426,13 @@ export interface MetricConfig {
   /** 単位 (例: "人", "万円")。空文字・"‐" は禁止。 */
   unit: string;
   /**
-   * 分母。題名とキーから読めない指標に書く (読み方は metric-denominator.ts)。
+   * 分母 (種類・規模・対象。2026-11-26 から共通の型 Denominator)。実数の指標は 'none'。
+   * 補足 (subtitle) の分母の文言は denominatorLabel(denominator) と一致させる (validate:config が検査する)。
+   * 種類だけの文字列 ('population' など) は移行前の書き方で、規模が分からない指標に残っている。
+   * 読むときは metricDenominatorOf (metric-denominator.ts) を通す。
    * unit に分母を足さないのは、表示が「人口10万人当たり … 人（人口10万対）」と二重になるため。
    */
-  denominator?: MetricDenominator;
+  denominator?: Denominator | MetricDenominator;
   /** e-Stat 機械分類の category キー (17 軸のいずれか)。CategoryKey で型強制。 */
   category: CategoryKey;
   /** 観測値の取得元 */

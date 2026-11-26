@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireDepartmentCountPer100Km2: MetricConfig = {
   "key": "fire-department-count-per-100-km2",
   "title": "消防署数",
-  "subtitle": "可住地面積100km2当たり",
+  "subtitle": "可住地面積100km²当たり",
+  "denominator": { "kind": "area", "per": 100, "scope": "可住地" },
   "unit": "署",
   "category": "safetyenvironment",
   "source": {

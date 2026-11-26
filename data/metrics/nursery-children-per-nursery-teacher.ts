@@ -5,6 +5,7 @@ export const nurseryChildrenPerNurseryTeacher: MetricConfig = {
   "key": "nursery-children-per-nursery-teacher",
   "title": "保育所等在所児数",
   "subtitle": "保育士1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "保育士" },
   "unit": "人",
   "category": "educationsports",
   "source": {

@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const trafficAccidentsPartyAAge75PlusPer100k: MetricConfig = {
   "key": "traffic-accidents-party-a-age-75-plus-per-100k",
   "title": "第1当事者が75歳以上の交通事故発生件数",
-  "subtitle": "総人口10万人当たり",
+  "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "件",
   "category": "safetyenvironment",
   "note": "2025年の交通事故オープンデータ本票から、当事者A（第1当事者）の年齢が75歳以上の事故を集計する。第1当事者には歩行者も含む。2025年総人口で除して10万倍した値であり、75歳以上人口を分母にした事故率や高齢運転者の事故率ではない。",

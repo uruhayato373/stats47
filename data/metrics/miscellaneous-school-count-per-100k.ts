@@ -5,6 +5,7 @@ export const miscellaneousSchoolCountPer100k: MetricConfig = {
   "key": "miscellaneous-school-count-per-100k",
   "title": "各種学校数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "校",
   "category": "educationsports",
   "source": {

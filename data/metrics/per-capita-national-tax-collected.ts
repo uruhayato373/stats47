@@ -5,6 +5,7 @@ export const perCapitaNationalTaxCollected: MetricConfig = {
   "key": "per-capita-national-tax-collected",
   "title": "国税徴収決定済額",
   "subtitle": "人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {

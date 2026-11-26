@@ -5,6 +5,7 @@ export const currentSavingsBalanceMultiPersonHouseholds: MetricConfig = {
   "key": "current-savings-balance-multi-person-households",
   "title": "貯蓄現在高",
   "subtitle": "1世帯当たり・複数人世帯",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {

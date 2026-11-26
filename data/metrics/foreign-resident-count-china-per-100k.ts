@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const foreignResidentCountChinaPer100k: MetricConfig = {
   "key": "foreign-resident-count-china-per-100k",
   "title": "外国人人口",
-  "subtitle": "中国籍（人口10万人当たり）",
+  "subtitle": "中国籍・人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "description": "国勢調査の中国籍外国人人口を総人口で除し、人口10万人当たりに換算した人数です。",
   "unit": "人",
   "category": "population",

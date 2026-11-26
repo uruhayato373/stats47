@@ -1277,7 +1277,7 @@
       "id": "municipality-ranking:elementary-school-count-per-100km2-habitable",
       "kind": "municipality-ranking",
       "key": "elementary-school-count-per-100km2-habitable",
-      "title": "小学校数（可住地100km²当たり）の市区町村ランキング",
+      "title": "小学校数（可住地面積100km²当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/elementary-school-count-per-100km2-habitable",
       "published": true
     },
@@ -1909,7 +1909,7 @@
       "id": "municipality-ranking:high-school-count-per-100km2-habitable",
       "kind": "municipality-ranking",
       "key": "high-school-count-per-100km2-habitable",
-      "title": "高等学校数（可住地100km²当たり）の市区町村ランキング",
+      "title": "高等学校数（可住地面積100km²当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/high-school-count-per-100km2-habitable",
       "published": true
     },
@@ -2205,7 +2205,7 @@
       "id": "municipality-ranking:junior-high-school-count-per-100km2-habitable",
       "kind": "municipality-ranking",
       "key": "junior-high-school-count-per-100km2-habitable",
-      "title": "中学校数（可住地100km²当たり）の市区町村ランキング",
+      "title": "中学校数（可住地面積100km²当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/junior-high-school-count-per-100km2-habitable",
       "published": true
     },
@@ -4949,7 +4949,7 @@
       "id": "municipality-ranking:restaurant-count-per-1000",
       "kind": "municipality-ranking",
       "key": "restaurant-count-per-1000",
-      "title": "飲食店数（1000人当たり）の市区町村ランキング",
+      "title": "飲食店数（人口千人当たり）の市区町村ランキング",
       "href": "/municipalities/ranking/restaurant-count-per-1000",
       "published": true
     },
@@ -5021,7 +5021,7 @@
       "id": "municipality-ranking:retail-store-count-per-1000",
       "kind": "municipality-ranking",
       "key": "retail-store-count-per-1000",
-      "title": "小売店数（1000人当たり（旧統計））の市区町村ランキング",
+      "title": "小売店数（人口千人当たり・旧統計）の市区町村ランキング",
       "href": "/municipalities/ranking/retail-store-count-per-1000",
       "published": true
     },

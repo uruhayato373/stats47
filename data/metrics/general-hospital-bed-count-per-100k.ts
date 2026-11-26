@@ -5,6 +5,7 @@ export const generalHospitalBedCountPer100k: MetricConfig = {
   "key": "general-hospital-bed-count-per-100k",
   "title": "一般病院病床数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "床",
   "category": "socialsecurity",
   "source": {

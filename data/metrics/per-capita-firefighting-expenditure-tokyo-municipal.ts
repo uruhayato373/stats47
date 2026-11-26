@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaFirefightingExpenditureTokyoMunicipal: MetricConfig = {
   "key": "per-capita-firefighting-expenditure-tokyo-municipal",
   "title": "消防費",
-  "subtitle": "東京都・市町村財政合計",
+  "subtitle": "東京都・市町村財政合計・人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
-  "denominator": "population",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

@@ -5,6 +5,7 @@ export const nationalHealthInsuranceVisitRatePer1000: MetricConfig = {
   "key": "national-health-insurance-visit-rate-per-1000",
   "title": "国民健康保険受診率",
   "subtitle": "被保険者千人当たり",
+  "denominator": { "kind": "person", "per": 1000, "scope": "被保険者" },
   "unit": "被保険者千対",
   "category": "socialsecurity",
   "source": {

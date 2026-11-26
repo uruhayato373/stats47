@@ -5,6 +5,7 @@ export const trafficAccidentCountPerPopulation: MetricConfig = {
   "key": "traffic-accident-count-per-population",
   "title": "交通事故発生件数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "件",
   "category": "safetyenvironment",
   "description": "交通事故統計の交通事故発生件数を総人口で除し、人口10万人当たりに換算した値。",

@@ -5,6 +5,7 @@ export const privateLifeInsuranceContractAmountPerHousehold: MetricConfig = {
   "key": "private-life-insurance-contract-amount-per-household",
   "title": "民間生命保険保険金額",
   "subtitle": "1世帯当たり",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "万円",
   "category": "economy",
   "source": {

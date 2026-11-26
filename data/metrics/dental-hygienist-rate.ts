@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const dentalHygienistRate: MetricConfig = {
   "key": "dental-hygienist-rate",
   "title": "歯科衛生士率（人口10万対）",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

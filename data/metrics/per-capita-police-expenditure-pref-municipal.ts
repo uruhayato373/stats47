@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaPoliceExpenditurePrefMunicipal: MetricConfig = {
   "key": "per-capita-police-expenditure-pref-municipal",
   "title": "警察費",
-  "subtitle": "都道府県財政",
+  "subtitle": "都道府県財政・人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
-  "denominator": "population",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

@@ -5,6 +5,7 @@ export const elderlyClassLectureCountPerMillion: MetricConfig = {
   "key": "elderly-class-lecture-count-per-million",
   "title": "高齢者学級・講座数",
   "subtitle": "人口100万人当たり",
+  "denominator": { "kind": "population", "per": 1000000 },
   "unit": "学級･講座",
   "category": "educationsports",
   "source": {

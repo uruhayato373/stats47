@@ -5,6 +5,7 @@ export const buildingFireCountPer100k: MetricConfig = {
   "key": "building-fire-count-per-100k",
   "title": "建物火災出火件数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "件",
   "category": "safetyenvironment",
   "source": {
