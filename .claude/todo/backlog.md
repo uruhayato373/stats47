@@ -1599,6 +1599,7 @@ updated: 2026-11-01
 - **進捗 (2026-11-24・57dea1359)**: ランキングの「1位」の文字色 (color-contrast) と推移の図の役割 (nested-interactive) を直した。残り: 4・5 は R2 への書き込みと合計特殊出生率の単位の変更、7 は PSI の計測が要る。本番での axe の再確認と見た目の確認は反映後。
 - **進捗 (2026-11-25・70be041b3)**: Item 5 の単位を「人」から「人/女性」へ直し、出生数と別の軸に分かれることをテストで固定した (`metrics:regen-derived` の生成物に差分なし)。残り: Item 5 は本番反映後の 375/1280px の画像と `/ranking/*` の表記確認、週次 display-units 台帳の `unit-changed` 差分の確認。Item 4 (R2 書き込み) と Item 7 (PSI) は未着手。
 - **追加 (2026-11-25・線の 2 重の全ページ計測から)**: `/geo/layers` の本文は、検索欄 (データ名・分野の選択) と件数とカードの格子を 1 つの段に直に持ち、入力欄の左の線が外枠の線と、選択の右の線が右レールの線と 1px で並ぶ (dev・1440px で実測)。検索欄と件数をカードと別のセル (余白 16px) に分ける。ブログ詳細のタグの丸いピルの下端が区切り線に 1px で接する箇所も同じ計測で 1 件出た (`/blog/sme-business-sentiment-regional-gap`・y=1954)。
+- **追加 (2026-11-26・`/ranking/total-population` を dev で開いて観測)**: ブラウザのコンソールに React の「Each child in a list should have a unique "key" prop. Check the render method of `RankingKeyPageClient`. It was passed a child from RankingPageClientShell.」が出る。`RankingPageClientShell.tsx` の `sections` の要素はどれも key を持つので、配列で渡している所を `RankingKeyPageClient.tsx` 側で探す。再現: `npm run dev:web` で同じページを開き、コンソールのエラーを見る。
 
 ### [BLOG-FIGURE-FOLLOWUP-01] ブログの図の型に残る不具合 (第 3 波の実行で見つけた分)
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-11-14] [待ち:承認]

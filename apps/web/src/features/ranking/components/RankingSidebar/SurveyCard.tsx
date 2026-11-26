@@ -1,14 +1,10 @@
-import { createElement } from "react";
-
-import { listCategories } from "@stats47/data-configs";
 import { hrefFor } from "@stats47/data-configs/content/href";
-import { SURVEY_PROMINENCE } from "@stats47/data-configs/prominence/survey";
 import { ChevronDown, FileText } from "lucide-react";
 
+import { RailRowKindIcon } from "@/components/rail";
 import { RailCard, RailNavRow, railNavRowClassName } from "@/components/surface";
 
 import { navSurfaceProps } from "@/lib/analytics/events";
-import { getIcon } from "@/lib/icons";
 
 interface Survey {
   id: string;
@@ -20,13 +16,6 @@ interface RelatedItem {
   title: string;
   /** 「1位 東京都 1,424万人」。値の無いランキングは null */
   top1?: string | null;
-}
-
-const CATEGORY_ICON_NAME = new Map(listCategories().map((category) => [category.categoryKey, category.icon]));
-
-/** 調査の分野のアイコン (調査一覧 /survey と同じ)。部品を描画の途中で作らないよう、要素だけを返す */
-function surveyIcon(surveyId: string) {
-  return createElement(getIcon(CATEGORY_ICON_NAME.get(SURVEY_PROMINENCE[surveyId]?.categoryKey ?? "") ?? ""));
 }
 
 interface SurveyCardProps {
@@ -75,7 +64,7 @@ export function SurveyCard({
       key={survey.id}
       href={hrefFor("survey", { surveyKey: survey.id })}
       data-nav-label={survey.id}
-      leading={surveyIcon(survey.id)}
+      leading={<RailRowKindIcon kind="survey" />}
     >
       {survey.name}
     </RailNavRow>
@@ -123,6 +112,7 @@ export function SurveyCard({
               <RailNavRow
                 key={item.rankingKey}
                 href={hrefFor("ranking", { rankingKey: item.rankingKey })}
+                leading={<RailRowKindIcon kind="ranking" />}
                 detail={item.top1 ?? undefined}
               >
                 {item.title}

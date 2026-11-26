@@ -38,7 +38,7 @@ export function resolveRankingValueDisplay(
  * (注目カードと一覧の「1 位」の列。UNIT-NOTATION-FORMAT-01)。「656,171,677千円」を「6,562億円」と書く。
  * 決め方はランキングのページと同じ `resolveRankingValueDisplay` で、定義の表示単位があればそれ、無ければ図の規則。
  * 値は 1 位 (最大) の 1 つしか無いので、図の規則はその値が 5 桁に収まる単位を選ぶ。
- * 数として読めない文字と、単位を変えない指標は値をそのまま返す (単位の表記だけ半角にそろえる)。
+ * 数として読めない文字は値をそのまま返す。単位を変えない指標は、小数だけを表と同じ上限 (`resolveValuePrecision`) で丸める。
  */
 export function formatFeaturedValueDisplay(
   item: Pick<RankingItem, "unit" | "valueDisplay">,
@@ -49,7 +49,8 @@ export function formatFeaturedValueDisplay(
   if (!/^-?\d+(\.\d+)?$/.test(text)) return unchanged;
   const number = Number(text);
   const display = resolveRankingValueDisplay(item, [number]);
-  if (!display) return unchanged;
+  // 単位を変えない指標も、小数はランキングの表と同じ上限で丸める (R2 の 1 位の値は「40.107」のように元の桁で届く。2026-11-26)
+  if (!display) return { value: formatValueWithPrecision(number, resolveValuePrecision([number])), unit: unchanged.unit };
   return { value: formatChartValue(number, { factor: display.factor, decimals: display.precision }), unit: display.unit };
 }
 

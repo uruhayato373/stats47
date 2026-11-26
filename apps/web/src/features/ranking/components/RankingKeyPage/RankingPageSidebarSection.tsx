@@ -1,15 +1,13 @@
-import { createElement, Suspense } from "react";
+import { Suspense } from "react";
 
 import { LayoutGrid } from "lucide-react";
 
 
+import { RailRowKindIcon } from "@/components/rail";
+
 import { RailAdSlot } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
-import {
-  THEME_NAV_GROUP_ICONS,
-  themeNavGroupOf,
-} from "@/features/theme-dashboard/config/theme-navigation";
 
 import {
   RANKING_RAIL_MIDDLE,
@@ -22,13 +20,11 @@ import { RelatedArticlesCard } from "../RankingSidebar/RelatedArticlesCard";
 import { SurveyCard } from "../RankingSidebar/SurveyCard";
 
 import type { SurveyRelatedItem } from "../../services/load-ranking-page-model";
-import type { ContentRecommendation } from "@stats47/data-configs/content/navigation";
 import type { RankingItem } from "@stats47/ranking";
 
-/** テーマの行の左端に、そのテーマの分野のアイコン (左のサイドバーの 5 分野と同じ) を置く */
-function themeGroupIcon(item: ContentRecommendation) {
-  const group = themeNavGroupOf(item.key);
-  return createElement(group ? THEME_NAV_GROUP_ICONS[group.id] : LayoutGrid);
+/** テーマの行の左端に、種類 (テーマ) の色付きの四角を置く (調査・ランキングの行と見分ける) */
+function themeRowIcon() {
+  return <RailRowKindIcon kind="theme" />;
 }
 
 
@@ -69,7 +65,7 @@ export function RankingPageSidebarSection({
         <RelatedContentNavigation
           title="関連するテーマ"
           icon={<LayoutGrid />}
-          itemIcon={themeGroupIcon}
+          itemIcon={themeRowIcon}
           sourceId={`ranking:${rankingKey}`}
           kinds={['theme']}
           limit={3}
