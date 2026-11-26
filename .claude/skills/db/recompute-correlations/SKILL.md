@@ -2,7 +2,7 @@
 name: recompute-correlations
 domain: data
 description: >-
-  R2 観測値 (app/stats/<metric>/values.json) を入力に、使い捨て memory SQLite で指標間の
+  R2 観測値 (app/stats/<metric>/values.json) を入力に、メモリ上の計算で指標間の
   相関 (Pearson r / 偏相関 / effectiveR) を再計算し、R2 snapshot
   (app/correlation/*) に書き出す。完全DBレスの Derived 計算。Use when user says
   "相関再計算", "recompute-correlations".
@@ -11,13 +11,13 @@ primary_agent: snapshot-exporter
 ---
 
 R2 の `app/stats/<metric>/values.json` を入力に、指標ペアの相関を batch 計算 → R2 snapshot に書き出す。
-完全DBレス設計 (`.claude/rules/data-storage.md`) の Derived: 永続 DB を持たず、**使い捨て
-`:memory:` SQLite** で集計してプロセス終了とともに破棄する。
+完全DBレス設計 (`.claude/rules/data-storage.md`) の Derived: 永続 DB を持たず、**メモリ上の計算だけ**で集計する (2026-11-26 に使い捨ての `:memory:` SQLite をやめた)。
+結果が同じかは `--dry-run` の出力に出るハッシュ (`output=`) で比べる。
 
 > ✅ **実装済み (2026-06-14)** — 実体は `packages/correlation/src/scripts/build-correlation-snapshot.ts`。
 > `/sync-snapshots` の `correlation` task として配線済み (`.claude/skills/db/sync-snapshots/run.sh`)。
 > 単体実行も可能。旧 SKILL が予定していた `recompute.ts` / D1 temp 方式は採らず、R2 観測値を直接読み
-> `:memory:` better-sqlite3 で集計する方式で実装した。
+> メモリ上で集計する方式で実装した。
 
 ## 背景
 
@@ -45,7 +45,7 @@ R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
 - **偏相関**: 4 control variables — `total-population` / `total-area-excluding-northern-territories-and-takeshima`
   / `ratio-65-plus` / `population-density-per-km2-total-area`
 - **effectiveR** = sign(pearsonR) × min(|partial*| または |pearsonR|) — 旧 exporter SQL 準拠
-- **bound**: 選定台帳の正負別件数 (現在各10件) + global top-200 を JS 側で保持し、候補行のみ `:memory:` SQLite に INSERT
+- **bound**: 選定台帳の正負別件数 (現在各10件) + global top-200 を JS 側で保持し、候補だけから配信の形を作る
   (約 2000 指標² ≈ 2M ペアを全 materialize しない)
 
 ## 出力 R2 key
