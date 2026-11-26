@@ -5,6 +5,7 @@ export const tatamiPerPersonRented: MetricConfig = {
   "key": "tatami-per-person-rented",
   "title": "借家住宅の畳数",
   "subtitle": "1人当たり",
+  "denominator": { "kind": "person", "per": 1 },
   "unit": "畳",
   "category": "construction",
   "source": {

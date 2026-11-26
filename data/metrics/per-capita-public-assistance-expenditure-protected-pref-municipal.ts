@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaPublicAssistanceExpenditureProtectedPrefMunicipal: MetricConfig = {
   "key": "per-capita-public-assistance-expenditure-protected-pref-municipal",
   "title": "生活保護費",
-  "subtitle": "都道府県・市町村財政合計",
+  "subtitle": "都道府県・市町村財政合計・被保護実人員1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "被保護実人員" },
   "unit": "千円",
-  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",

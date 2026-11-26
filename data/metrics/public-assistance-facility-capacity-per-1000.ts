@@ -5,6 +5,7 @@ export const publicAssistanceFacilityCapacityPer1000: MetricConfig = {
   "key": "public-assistance-facility-capacity-per-1000",
   "title": "生活保護施設定員数",
   "subtitle": "被保護実人員千人当たり",
+  "denominator": { "kind": "person", "per": 1000, "scope": "被保護実人員" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

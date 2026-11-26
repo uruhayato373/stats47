@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const welfareCommissionerConsultationsPerPerson: MetricConfig = {
   "key": "welfare-commissioner-consultations-per-person",
   "title": "民生委員1人当たり相談・支援件数",
+  "denominator": { "kind": "person", "per": 1, "scope": "民生委員" },
   "unit": "件",
   "category": "educationsports",
   "source": {

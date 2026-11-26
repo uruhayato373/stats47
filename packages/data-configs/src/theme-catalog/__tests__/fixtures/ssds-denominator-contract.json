@@ -437,7 +437,7 @@
       "key": "population-density-per-km2-inhabitable-area",
       "code": "#A01202",
       "unit": "人",
-      "subtitle": "可住地1km²当たり",
+      "subtitle": "可住地面積1km²当たり",
       "requiredLabel": "人口密度（可住地1km²当たり）",
       "denominator": "可住地1km²",
       "formula": "A1101/B1103",

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const populationDensityHabitable: MetricConfig = {
   "key": "population-density-habitable",
   "title": "人口密度（可住地面積1km²当たり）",
+  "denominator": { "kind": "area", "per": 1, "scope": "可住地" },
   "unit": "人",
   "category": "population",
   "source": {

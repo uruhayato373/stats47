@@ -5,6 +5,7 @@ export const monthlyAverageActualWorkingHoursMale: MetricConfig = {
   "key": "monthly-average-actual-working-hours-male",
   "title": "月間平均実労働時間数",
   "subtitle": "男性・1人当たり月間平均",
+  "denominator": { "kind": "person", "per": 1 },
   "unit": "時間",
   "category": "laborwage",
   "source": {

@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const soleProprietorSalesPerWorker: MetricConfig = {
   "key": "sole-proprietor-sales-per-worker",
   "title": "個人企業の従業者1人当たり売上高",
+  "denominator": { "kind": "person", "per": 1, "scope": "従業者" },
   "unit": "万円",
   "category": "economy",
   "source": {

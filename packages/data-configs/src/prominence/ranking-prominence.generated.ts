@@ -108,7 +108,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "rankingKey": "population-density-per-km2-inhabitable-area",
         "title": "可住地面積１km2当たり人口密度",
         "readerLabel": "可住地面積１km2当たり人口密度",
-        "subtitle": "可住地1km²当たり",
+        "subtitle": "可住地面積1km²当たり",
         "hook": "可住地面積１km2当たり人口密度が最も高い県は？"
       },
       {

@@ -35,5 +35,6 @@ export const populationDensityPerKm2InhabitableArea: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "可住地1km²当たり"
+  "subtitle": "可住地面積1km²当たり",
+  "denominator": { "kind": "area", "per": 1, "scope": "可住地" },
 };

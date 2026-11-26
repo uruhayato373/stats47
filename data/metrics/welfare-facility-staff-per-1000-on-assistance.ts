@@ -5,6 +5,7 @@ export const welfareFacilityStaffPer1000OnAssistance: MetricConfig = {
   "key": "welfare-facility-staff-per-1000-on-assistance",
   "title": "保護施設従事者数",
   "subtitle": "生活保護被保護実人員千人当たり",
+  "denominator": { "kind": "person", "per": 1000, "scope": "生活保護被保護実人員" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

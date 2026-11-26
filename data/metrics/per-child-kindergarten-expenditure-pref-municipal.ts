@@ -5,6 +5,7 @@ export const perChildKindergartenExpenditurePrefMunicipal: MetricConfig = {
   "key": "per-child-kindergarten-expenditure-pref-municipal",
   "title": "児童1人当たり幼稚園費",
   "subtitle": "都道府県・市町村財政合計",
+  "denominator": { "kind": "person", "per": 1, "scope": "在園者" },
   "unit": "千円",
   "category": "educationsports",
   "source": {
