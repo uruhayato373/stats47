@@ -25,6 +25,13 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [DATA-REFRESH-PORT-DISPATCH-FAIL-01] 港湾の 9 指標のデータ更新 (手動起動) が、観測値を 1 件も作らずに落ちた
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-26] [領域:サイト]
+
+- **証拠 (2026-11-26)**: `data-refresh.yml` の workflow_dispatch (run 45820634459・12:32 UTC・main 837623d9c) が「Push observations to R2 (app/stats)」で落ちた。`REFRESH_METRIC` は `port-cargo-coastal-in` ほか港湾の 9 指標、`BATCH_OUTCOME: success` なのに「エラー: .local/r2/app/stats が見つかりません」で exit 1。起動した人・仕組みは確かめていない (本番デプロイ 45817142016 の 22 分後)
+- **次**: `gh run view 45820634459 --log` で取得の段が 9 指標に何を返したかを読み、取得 0 件を成功 (`BATCH_OUTCOME: success`) と扱った理由を切り分ける。指標の定義 (`data/metrics/port-*.ts`) の取得元が `data-refresh` の対象かも確かめる
+- **完了条件**: 9 指標の更新が成功するか、対象外なら起動側が呼ばないようになっている。取得 0 件は取得の段で失敗になる
+
 ### [RANKING-VIEW-CONSOLIDATE-FOLLOWUP-01] 見方違いのページの統合 (2026-11-25) で残した後片付けと、調査で見つけたランキングの不具合
 タグ: [サイト品質] [種類:改善] [実行:対話] [起票:2026-11-25] [領域:サイト]
 
@@ -1600,6 +1607,7 @@ updated: 2026-11-01
 - **進捗 (2026-11-25・70be041b3)**: Item 5 の単位を「人」から「人/女性」へ直し、出生数と別の軸に分かれることをテストで固定した (`metrics:regen-derived` の生成物に差分なし)。残り: Item 5 は本番反映後の 375/1280px の画像と `/ranking/*` の表記確認、週次 display-units 台帳の `unit-changed` 差分の確認。Item 4 (R2 書き込み) と Item 7 (PSI) は未着手。
 - **追加 (2026-11-25・線の 2 重の全ページ計測から)**: `/geo/layers` の本文は、検索欄 (データ名・分野の選択) と件数とカードの格子を 1 つの段に直に持ち、入力欄の左の線が外枠の線と、選択の右の線が右レールの線と 1px で並ぶ (dev・1440px で実測)。検索欄と件数をカードと別のセル (余白 16px) に分ける。ブログ詳細のタグの丸いピルの下端が区切り線に 1px で接する箇所も同じ計測で 1 件出た (`/blog/sme-business-sentiment-regional-gap`・y=1954)。
 - **追加 (2026-11-26・`/ranking/total-population` を dev で開いて観測)**: ブラウザのコンソールに React の「Each child in a list should have a unique "key" prop. Check the render method of `RankingKeyPageClient`. It was passed a child from RankingPageClientShell.」が出る。`RankingPageClientShell.tsx` の `sections` の要素はどれも key を持つので、配列で渡している所を `RankingKeyPageClient.tsx` 側で探す。再現: `npm run dev:web` で同じページを開き、コンソールのエラーを見る。
+- **追加 (2026-11-26・本番デプロイ 45817142016 の後のスモークテスト run 45820304500)**: 手元から本番に向けて回すと 75 通過・3 失敗・1 不安定 (`cd apps/web && npx playwright test --config playwright.smoke.config.ts`)。直したのは、右レールを線で区切る変更 (11-25) と題・切り替え・「当たり」の表記の変更 (11-26) にテストが追従していなかった分。残り: (1) `rail-layout.spec.ts` の `/geo/layers`・`/geo/datasets/L01` は、幅 375px で「GIS一覧（50種類）」のカードが本文の下 (右レール側・高さ約 2,700px) に出て、テストは狭い幅では上の開閉メニューだけ (レールのカード 0 枚) を期待する。意図した変更かを決めて、画面かテストのどちらかを直す。(2) `selection-controls.spec.ts` の `/areas` は `[data-slot="toggle-group"][aria-label="地方"]` が見つからない (11-25 から続く。LEDGER-DB-UNIFY-01 の「Playwright 1 件の切り分け」と同じ)。(3) `/themes/education-culture` は 1 回落ちて再実行で通った。
 
 ### [BLOG-FIGURE-FOLLOWUP-01] ブログの図の型に残る不具合 (第 3 波の実行で見つけた分)
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-11-14] [待ち:承認]
