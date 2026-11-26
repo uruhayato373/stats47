@@ -49,10 +49,7 @@ export default function JapanHubPage() {
       />
       <StatisticsScopeNav current="japan" />
       <PageHeader
-        eyebrow="日本"
         title="日本の統計"
-        description="都道府県同士を比べるのではなく、日本全国の公式統計値が時間とともにどう変化してきたかをテーマ別に見られます。"
-        stats={`${themes.length} テーマ`}
       />
 
       {themes.length === 0 ? (

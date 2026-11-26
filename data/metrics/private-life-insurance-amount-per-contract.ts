@@ -38,7 +38,6 @@ export const privateLifeInsuranceAmountPerContract: MetricConfig = {
       {
         "type": "series",
         "metric": "private-life-insurance-contract-amount-per-household",
-        "label": "1世帯当たり",
       },
     ],
   },

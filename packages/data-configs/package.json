@@ -106,6 +106,11 @@
       "import": "./src/prominence/index.ts",
       "require": "./src/prominence/index.ts"
     },
+    "./prominence/survey": {
+      "types": "./src/prominence/survey-prominence.generated.ts",
+      "import": "./src/prominence/survey-prominence.generated.ts",
+      "require": "./src/prominence/survey-prominence.generated.ts"
+    },
     "./ranking-prominence": {
       "types": "./src/prominence/ranking-prominence.generated.ts",
       "import": "./src/prominence/ranking-prominence.generated.ts",

@@ -5,6 +5,7 @@ export const certifiedChildcareCenterCountPer100k05: MetricConfig = {
   "key": "certified-childcare-center-count-per-100k-0-5",
   "title": "認定こども園数",
   "subtitle": "0～5歳人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "0～5歳" },
   "unit": "園",
   "category": "educationsports",
   "source": {

@@ -5,6 +5,7 @@ export const juniorHighSchoolStudentsPerTeacher: MetricConfig = {
   "key": "junior-high-school-students-per-teacher",
   "title": "中学校生徒数",
   "subtitle": "教員1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "教員" },
   "unit": "人",
   "category": "educationsports",
   "source": {

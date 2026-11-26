@@ -5,6 +5,7 @@ export const publicGymnasiumCountPerMillion: MetricConfig = {
   "key": "public-gymnasium-count-per-million",
   "title": "体育館数",
   "subtitle": "人口100万人当たり",
+  "denominator": { "kind": "population", "per": 1000000 },
   "unit": "施設",
   "category": "educationsports",
   "source": {

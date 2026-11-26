@@ -41,10 +41,8 @@ export default function GeoMethodPage() {
         ]}
       />
       <PageHeader
-        eyebrow="空間分析の読み方"
         title="地図の答えと、答えられないことを分ける"
         description="地点がメッシュに入るか、メッシュの中心が浸水区域に入るか、駅まで直線800m以内か。分析ごとの判定方法と、その近似が結果に与える影響を説明します。"
-        stats={`${crossAnalyses.length}空間分析 ・ 1kmメッシュ・地点・距離の判定`}
       />
 
       <SectionHeader

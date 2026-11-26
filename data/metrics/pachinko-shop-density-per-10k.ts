@@ -4,7 +4,8 @@ import type { MetricConfig } from '../../packages/data-configs/src/types';
 export const pachinkoShopDensityPer10k: MetricConfig = {
   key: 'pachinko-shop-density-per-10k',
   title: 'パチンコ店舗数',
-  subtitle: '人口1万人あたり',
+  subtitle: '人口1万人当たり',
+  denominator: { kind: 'population', per: 10000 },
   unit: '軒',
   category: 'commercial',
   note: '麻雀店・ゲームセンター等は含まずぱちんこ営業所のみ。原典は警察庁保安課、全日遊連が集計・公表',

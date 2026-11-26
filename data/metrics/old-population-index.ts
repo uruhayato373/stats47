@@ -35,5 +35,6 @@ export const oldPopulationIndex: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "15～64歳人口100人当たり"
+  "subtitle": "15～64歳人口100人当たり",
+  "denominator": { "kind": "population", "per": 100, "scope": "15～64歳" },
 };

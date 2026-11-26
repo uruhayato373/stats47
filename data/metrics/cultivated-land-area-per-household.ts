@@ -5,6 +5,7 @@ export const cultivatedLandAreaPerHousehold: MetricConfig = {
   "key": "cultivated-land-area-per-household",
   "title": "耕地面積",
   "subtitle": "農家1戸当たり",
+  "denominator": { "kind": "other", "per": 1, "scope": "農家", "counter": "戸" },
   "unit": "ｍ2",
   "category": "agriculture",
   "source": {

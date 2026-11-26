@@ -385,6 +385,23 @@ describe("buildNormalizationOptions — series (別の指標の公表値を出�
     expect(series && series.type === "series" ? series.valueDisplay?.decimalPlaces : null).toBe(child.display?.decimalPlaces ?? 0);
   });
 
+  it("名前は選んだ先の指標の分母から作り、サイトで割った選択肢と同じ名前なら「・公表値」で見分ける (2026-11-26)", () => {
+    const byMetric = (parentKey: string, childKey: string) =>
+      buildNormalizationOptions(METRICS_REGISTRY[parentKey], METRICS_REGISTRY)?.find(
+        (option) => option.type === "series" && option.metric === childKey,
+      )?.label;
+    // 手書きは「人口当たり」だった。計算式は児童数 ÷ 学級数
+    expect(byMetric("elementary-school-children-count", "elementary-school-children-1-per")).toBe("1学級当たり");
+    // 親はサイトで割った「人口10万人当たり」も持つ。公表値は比例しない (比の変動係数 17%) ので残し、名前で見分ける
+    expect(byMetric("public-bath-count", "public-bath-count-per-100k")).toBe("人口10万人当たり・公表値");
+  });
+
+  it("名前が決まらなければ例外にする (分母の型も label も無い)", () => {
+    const parent = { ...baseConfig, calculation: { isCalculated: false, normalizationOptions: [{ type: "series" as const, metric: "total-population" }] } };
+    const registry = { ...METRICS_REGISTRY, "total-population": { ...METRICS_REGISTRY["total-population"], denominator: undefined } };
+    expect(() => buildNormalizationOptions(parent, registry)).toThrow(/名前が決まらない/);
+  });
+
   it("series の指標が registry に無ければ例外にする (黙って空の見方を配信しない)", () => {
     const parent = {
       ...baseConfig,

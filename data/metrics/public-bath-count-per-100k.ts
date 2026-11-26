@@ -5,6 +5,7 @@ export const publicBathCountPer100k: MetricConfig = {
   "key": "public-bath-count-per-100k",
   "title": "公衆浴場数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "所",
   "category": "commercial",
   "source": {

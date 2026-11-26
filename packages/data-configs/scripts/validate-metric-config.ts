@@ -29,9 +29,10 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { COLOR_SCHEME_CATALOG, isKnownColorScheme } from '@stats47/types';
+import { COLOR_SCHEME_CATALOG, denominatorLabel, isAuthoredRatioOption, isKnownColorScheme, seriesOptionLabel } from '@stats47/types';
 
 import { CATEGORY_KEYS } from '../src/types';
+import { metricDenominatorOf, metricDenominatorSpec } from '../src/metric-denominator';
 import { moneyUnitExponent } from '../src/money-unit';
 import { resolveMetricProvenance } from '../src/provenance/resolve-metric-provenance';
 import { METRICS_REGISTRY, getMetricConfig } from '../src/registry';
@@ -169,7 +170,7 @@ function main() {
       seoNote: metric.seoNote ?? null,
       normalizationUnitDash: (
         metric.calculation?.normalizationOptions ?? []
-      ).filter((option) => option.type !== 'series' && option.unit.startsWith('‐/')).length,
+      ).filter((option) => isAuthoredRatioOption(option) && option.unit.startsWith('‐/')).length,
       sourceKind: source.kind,
       normalizationCount: metric.calculation?.normalizationOptions?.length ?? 0,
       surveyIds: resolveMetricProvenance(metric, METRICS_REGISTRY).map((s) => s.id),
@@ -588,6 +589,47 @@ function main() {
         errors.push(
           `[dup-title] ${r.file}: 同名 title が ${group.length} 件あるが区別子(subtitle)なし 「${r.title}」`
         );
+      }
+    }
+  }
+
+  // error: 分母の表記 (2026-11-26 METRIC-DENOMINATOR-TYPE-01)。分母は型 (種類・規模・対象) で持ち、補足の文言は
+  // denominatorLabel が作る 1 通りにそろえる。手書きは「人口10万対」「人口10万人あたり」「1000人当たり」に割れていた。
+  // 題名に分母を書いた指標は、題名を変えるかをオーナーが決めるまで補足の文言を求めない。
+  const PER_WORDING = /当たり|あたり|当り|万対|千対/;
+  for (const r of rows) {
+    const metric = r.key ? getMetricConfig(r.key) : undefined;
+    if (!metric) continue;
+    const spec = metricDenominatorSpec(metric);
+    if (!spec) {
+      // 分母つきの指標は分母を型で書く (2026-11-26 に全件を移した。それまでは件数の上限で縮めていた)
+      const kind = metricDenominatorOf(metric);
+      if (kind && kind !== 'none') {
+        errors.push(`[denominator-spec] ${r.file}: 分母 (${kind}) を型で書いていない。denominator: { kind, per, scope?, counter? } を書く (実数なら "none")`);
+      }
+      continue;
+    }
+    const label = denominatorLabel(spec);
+    const subtitle = r.subtitle ?? '';
+    if (!subtitle.includes(label) && !PER_WORDING.test(r.title)) {
+      errors.push(`[denominator-label] ${r.file}: 補足に分母の文言「${label}」が無い (補足: ${r.subtitle ?? 'なし'})`);
+    }
+    if (PER_WORDING.test(subtitle.replace(label, ''))) {
+      errors.push(`[denominator-label] ${r.file}: 補足に分母の別の書き方が残っている (補足: ${subtitle})。分母の文言は「${label}」だけにする`);
+    }
+  }
+
+  // error: 計算方法の series の名前は、選んだ先の指標の分母から作る (2026-11-26)。分母の型を持つ指標に label を書くと
+  // 2 か所で管理することになる (手書きは 56 件中 30 件が分母と食い違っていた)。型を持たない指標だけ label を書く
+  for (const r of rows) {
+    const metric = r.key ? getMetricConfig(r.key) : undefined;
+    for (const option of metric?.calculation?.normalizationOptions ?? []) {
+      if (isAuthoredRatioOption(option)) continue;
+      const target = getMetricConfig(option.metric);
+      if (target && metricDenominatorSpec(target) && option.label !== undefined) {
+        errors.push(`[series-label] ${r.file}: series ${option.metric} に label がある。名前は ${option.metric} の分母から作るので消す`);
+      } else if (!seriesOptionLabel(option, target?.denominator)) {
+        errors.push(`[series-label] ${r.file}: series ${option.metric} の名前が決まらない。${option.metric} に分母の型を書くか、label を書く`);
       }
     }
   }

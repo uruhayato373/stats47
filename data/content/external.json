@@ -870,7 +870,7 @@
       "published": true,
       "rankingKeys": [
         "healthcare-expenditure-ratio-multi-person-households",
-        "physicians-in-medical-facilities-per-100k",
+        "physicians-in-medical-facilities",
         "ratio-65-plus"
       ]
     },
@@ -1439,7 +1439,7 @@
       "href": "https://note.com/stats47/n/n611c1b73fb3f",
       "published": true,
       "rankingKeys": [
-        "dental-clinic-count-per-100k",
+        "dental-clinic-count",
         "dental-fee-consumption-expenditure",
         "health-medical-expenditure-total"
       ]
@@ -1838,7 +1838,7 @@
       "published": true,
       "rankingKeys": [
         "suicide-count",
-        "traffic-accident-deaths-per-100k"
+        "traffic-accident-deaths-per-100-accidents"
       ]
     },
     {
@@ -11440,7 +11440,7 @@
     },
     {
       "from": "note:a-kakei-niigata",
-      "to": "ranking:physicians-in-medical-facilities-per-100k",
+      "to": "ranking:physicians-in-medical-facilities",
       "relation": "uses"
     },
     {
@@ -11925,7 +11925,7 @@
     },
     {
       "from": "note:b-kakei-expense-health",
-      "to": "ranking:dental-clinic-count-per-100k",
+      "to": "ranking:dental-clinic-count",
       "relation": "uses"
     },
     {
@@ -12255,7 +12255,7 @@
     },
     {
       "from": "note:b-ref-dev-a51",
-      "to": "ranking:traffic-accident-deaths-per-100k",
+      "to": "ranking:traffic-accident-deaths-per-100-accidents",
       "relation": "uses"
     },
     {

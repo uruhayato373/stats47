@@ -5,6 +5,7 @@ export const cleaningShopCountPer100k: MetricConfig = {
   "key": "cleaning-shop-count-per-100k",
   "title": "クリーニング業数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "所",
   "category": "commercial",
   "source": {

@@ -140,7 +140,7 @@ export function MunicipalityRankingExplorer({
 
   const prefectureItems = useMemo(
     () => [
-      { value: ALL_PREFECTURES, label: 'すべて' },
+      { value: ALL_PREFECTURES, label: '全都道府県' },
       ...prefectures.map((prefecture) => ({
         value: prefecture.prefCode,
         label: prefecture.prefName,
@@ -161,42 +161,35 @@ export function MunicipalityRankingExplorer({
   }
 
   return (
-    <section aria-label="順位の一覧" className="mt-5">
-      <div className="grid gap-3 border-y border-border py-4 sm:grid-cols-[1fr_14rem]">
-        <label
-          htmlFor="municipality-query"
-          className="text-xs font-medium text-muted-foreground"
-        >
-          自治体名
-          <Input
-            id="municipality-query"
-            type="search"
-            value={query}
-            placeholder="例：神戸市"
-            className="mt-1"
-            onChange={(event) => {
-              setQuery(event.target.value);
-              if (event.target.value.trim()) load();
-            }}
-          />
-        </label>
-        <div className="text-xs font-medium text-muted-foreground">
-          都道府県
-          <LazySelect
-            value={prefectureCode || ALL_PREFECTURES}
-            items={prefectureItems}
-            aria-label="都道府県で絞り込む"
-            triggerClassName="mt-1 w-full"
-            onValueChange={(next) => {
-              const code = next === ALL_PREFECTURES ? '' : next;
-              setPrefectureCode(code);
-              if (code) load();
-            }}
-          />
-        </div>
+    <section aria-label="順位の一覧">
+      {/* 絞り込みは 1 行 (2026-11-26 オーナー判断)。ラベルと入力欄の 2 段・上下の線と余白で 147px を使い、表を下へ押していた。
+          名前は欄の中の文字と読み上げ用の名前で示す */}
+      <div className="grid grid-cols-[minmax(0,1fr)_9rem] gap-2">
+        <Input
+          id="municipality-query"
+          type="search"
+          value={query}
+          aria-label="自治体名で絞り込む"
+          placeholder="自治体名（例：神戸市）"
+          onChange={(event) => {
+            setQuery(event.target.value);
+            if (event.target.value.trim()) load();
+          }}
+        />
+        <LazySelect
+          value={prefectureCode || ALL_PREFECTURES}
+          items={prefectureItems}
+          aria-label="都道府県で絞り込む"
+          triggerClassName="w-full"
+          onValueChange={(next) => {
+            const code = next === ALL_PREFECTURES ? '' : next;
+            setPrefectureCode(code);
+            if (code) load();
+          }}
+        />
       </div>
 
-      <div className="mt-4 flex items-end justify-between gap-4">
+      <div className="mt-2 flex items-end justify-between gap-4">
         <p className="text-sm text-muted-foreground" role="status">
           {status}
         </p>
@@ -254,7 +247,7 @@ export function MunicipalityRankingExplorer({
       {!active && total > initialCount && (
         <Button
           variant="outline"
-          className="mt-4 w-full"
+          className="mt-2 w-full"
           onClick={() => {
             setShowAll(true);
             load();

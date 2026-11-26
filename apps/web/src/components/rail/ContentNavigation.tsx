@@ -15,6 +15,8 @@ interface Props {
   frame?: 'card' | 'inline';
   /** 見出しの左のアイコン。省略時は RailLinksCard の既定。 */
   icon?: ReactNode;
+  /** 各行の左端のアイコン (行の種類や分野を見分ける)。無ければ出さない */
+  itemIcon?: (item: ContentRecommendation) => ReactNode;
 }
 
 /**
@@ -33,6 +35,7 @@ export function ContentNavigation({
   columns = 1,
   frame = 'card',
   icon,
+  itemIcon,
 }: Props) {
   if (!items.length) return null;
   const showReason = new Set(items.map((item) => item.reason)).size > 1;
@@ -54,6 +57,7 @@ export function ContentNavigation({
         href: item.href,
         label: item.title,
         description: showReason ? item.reason : undefined,
+        icon: itemIcon?.(item),
         ...(item.kind === 'blog'
           ? {
               thumbnail: {

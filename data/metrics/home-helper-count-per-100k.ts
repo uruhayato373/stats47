@@ -5,6 +5,7 @@ export const homeHelperCountPer100k: MetricConfig = {
   "key": "home-helper-count-per-100k",
   "title": "訪問介護員数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

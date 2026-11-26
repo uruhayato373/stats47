@@ -62,7 +62,6 @@ export default async function GeoLayersPage() {
       />
       <PageHeader
         title="GISを探す"
-        description="地図からGISを探し、位置・形状・属性を確認できます。"
         className="mb-4"
       />
       <GeoSourceNavigation catalog={catalog} mobile />

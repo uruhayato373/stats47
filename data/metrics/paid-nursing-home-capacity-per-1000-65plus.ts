@@ -5,6 +5,7 @@ export const paidNursingHomeCapacityPer100065plus: MetricConfig = {
   "key": "paid-nursing-home-capacity-per-1000-65plus",
   "title": "有料老人ホーム定員数",
   "subtitle": "65歳以上人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000, "scope": "65歳以上" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

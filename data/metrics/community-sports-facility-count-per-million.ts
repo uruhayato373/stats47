@@ -5,6 +5,7 @@ export const communitySportsFacilityCountPerMillion: MetricConfig = {
   "key": "community-sports-facility-count-per-million",
   "title": "社会体育施設数",
   "subtitle": "人口100万人当たり",
+  "denominator": { "kind": "population", "per": 1000000 },
   "unit": "施設",
   "category": "educationsports",
   "source": {

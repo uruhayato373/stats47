@@ -971,7 +971,7 @@
       {
         "slot": "adsense-body-responsive",
         "region": "body",
-        "position": "全国・県の分布地図の後 (絞り込みの前)",
+        "position": "地図と表の枠と、分布の要点の後 (全国分布の前)",
         "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
         "marker": "position=\"municipality-row-1\"",
         "adsenseSlot": "MUNICIPALITY_AFTER_MAP",
@@ -980,7 +980,7 @@
       {
         "slot": "adsense-body-responsive",
         "region": "body",
-        "position": "順位の表とページ送りの後",
+        "position": "全国分布・解説・出典の後 (本文の最後)",
         "source": "apps/web/src/app/municipalities/ranking/[rankingKey]/page.tsx",
         "marker": "position=\"municipality-row-2\"",
         "adsenseSlot": "MUNICIPALITY_AFTER_TABLE",

@@ -2,7 +2,7 @@
 name: recompute-correlations
 domain: data
 description: >-
-  R2 観測値 (app/stats/<metric>/values.json) を入力に、使い捨て memory SQLite で指標間の
+  R2 観測値 (app/stats/<metric>/values.json) を入力に、メモリ上の計算で指標間の
   相関 (Pearson r / 偏相関 / effectiveR) を再計算し、R2 snapshot
   (app/correlation/*) に書き出す。完全DBレスの Derived 計算。Use when user says
   "相関再計算", "recompute-correlations".
@@ -11,13 +11,13 @@ primary_agent: snapshot-exporter
 ---
 
 R2 の `app/stats/<metric>/values.json` を入力に、指標ペアの相関を batch 計算 → R2 snapshot に書き出す。
-完全DBレス設計 (`.claude/rules/data-storage.md`) の Derived: 永続 DB を持たず、**使い捨て
-`:memory:` SQLite** で集計してプロセス終了とともに破棄する。
+完全DBレス設計 (`.claude/rules/data-storage.md`) の Derived: 永続 DB を持たず、**メモリ上の計算だけ**で集計する (2026-11-26 に使い捨ての `:memory:` SQLite をやめた)。
+結果が同じかは `--dry-run` の出力に出るハッシュ (`output=`) で比べる。
 
 > ✅ **実装済み (2026-06-14)** — 実体は `packages/correlation/src/scripts/build-correlation-snapshot.ts`。
 > `/sync-snapshots` の `correlation` task として配線済み (`.claude/skills/db/sync-snapshots/run.sh`)。
 > 単体実行も可能。旧 SKILL が予定していた `recompute.ts` / D1 temp 方式は採らず、R2 観測値を直接読み
-> `:memory:` better-sqlite3 で集計する方式で実装した。
+> メモリ上で集計する方式で実装した。
 
 ## 背景
 
@@ -45,7 +45,7 @@ R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
 - **偏相関**: 4 control variables — `total-population` / `total-area-excluding-northern-territories-and-takeshima`
   / `ratio-65-plus` / `population-density-per-km2-total-area`
 - **effectiveR** = sign(pearsonR) × min(|partial*| または |pearsonR|) — 旧 exporter SQL 準拠
-- **bound**: 選定台帳の正負別件数 (現在各10件) + global top-200 を JS 側で保持し、候補行のみ `:memory:` SQLite に INSERT
+- **bound**: 選定台帳の正負別件数 (現在各10件) + global top-200 を JS 側で保持し、候補だけから配信の形を作る
   (約 2000 指標² ≈ 2M ペアを全 materialize しない)
 
 ## 出力 R2 key
@@ -57,10 +57,10 @@ R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
 ## 関連
 
 - 実装: `packages/correlation/src/scripts/build-correlation-snapshot.ts` (+ `__tests__/`)
-- 再利用 util: `packages/correlation/src/utils/calculate-pearson.ts` (`calculatePearsonR` / `calculatePartialR` / `buildScatterData`) / `trivial-pairs.ts`
+- 再利用 util: `packages/correlation/src/utils/calculate-pearson.ts` (`calculatePearsonR` / `calculatePartialR` / `buildScatterData`) / `trivial-pairs.ts` (自明な相関の除外。一覧の正本は台帳 `data/correlation/exclusions.json` で、除外を足すときは台帳に理由付きで書く)
 - reader: `packages/correlation/src/repositories/read-correlation-{snapshot,by-key}.ts` (ranking 詳細の CorrelationSection が読む)
 - 旧 skill (Phase 6 で廃止): `/run-correlation-batch`
 
 ## 正負別の選定契約
 
-選定方針は `data/correlation/selection-policy.json` (台帳 `correlation.selection-policy`)。候補保持から正負を分け、表示側で再切断しない。0・自己参照・重複・不正値を出さず、同率は指標ID順。既存の自明ペア除外も継続する。生成後は `R2_STAGING_DIR=<生成先> npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/correlation/src/scripts/verify-correlation-by-key.ts` で全指標の件数・参照・符号・順序を検査する。旧 by-ranking-key は互換性のため上書きしない。
+選定方針は `data/correlation/selection-policy.json` (台帳 `correlation.selection-policy`)。意味の薄い組を外す規則も方針が持つ (2026-11-26): `excludeCrossGrain` (片方だけが県庁所在市の値の組。家計調査の品目が県全体の指標の一覧を埋めていた)・`dedupeByTitle` (同じ題名は強い 1 件)・`nearDuplicate.sameSurveyMinAbsR` (同じ主出典の調査で閾値以上の組)。規則の関数は `selection-policy.ts` の 1 か所で、コードに閾値を書かない。方針の `version` は配信の形の版で、規則を足しただけでは上げない (読み込みは版の違う配信を拒否するので、上げるとデプロイから作り直しまで相関の節が消える)。候補保持から正負を分け、表示側で再切断しない。0・自己参照・重複・不正値を出さず、同率は指標ID順。既存の自明ペア除外も継続する。生成後は `R2_STAGING_DIR=<生成先> npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/correlation/src/scripts/verify-correlation-by-key.ts` で全指標の件数・参照・符号・順序を検査する。旧 by-ranking-key は互換性のため上書きしない。

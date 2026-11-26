@@ -5,6 +5,7 @@ export const barberBeautySalonCountPer100k: MetricConfig = {
   "key": "barber-beauty-salon-count-per-100k",
   "title": "理容・美容所数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "所",
   "category": "commercial",
   "source": {

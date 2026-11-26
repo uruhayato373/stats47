@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const apparelRetailStoreCountPer1000: MetricConfig = {
   "key": "apparel-retail-store-count-per-1000",
   "title": "織物・衣服・身の回り品小売店数",
-  "subtitle": "1000人当たり",
+  "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "店",
-  "denominator": "population",
   "category": "commercial",
   "source": {
     "kind": "estat",

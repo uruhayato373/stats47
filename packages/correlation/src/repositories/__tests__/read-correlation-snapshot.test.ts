@@ -52,8 +52,6 @@ function makePair(rankingKeyX: string, rankingKeyY: string) {
     rankingKeyY,
     titleX: rankingKeyX,
     titleY: rankingKeyY,
-    normalizationBasisX: null,
-    normalizationBasisY: null,
     pearsonR: 0.5,
     effectiveR: 0.5,
     partialRPopulation: null,

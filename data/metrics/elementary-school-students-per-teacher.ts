@@ -5,6 +5,7 @@ export const elementarySchoolStudentsPerTeacher: MetricConfig = {
   "key": "elementary-school-students-per-teacher",
   "title": "小学校児童数",
   "subtitle": "教員1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "教員" },
   "description": "小学校児童数を小学校教員数で除した、教員1人当たりの児童数です。1学級の人数や教員の配置不足を直接示す指標ではありません。",
   "unit": "人",
   "category": "educationsports",

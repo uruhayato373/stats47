@@ -37,7 +37,6 @@ export const socialWelfareExpensesPrefecture: MetricConfig = {
       {
         "type": "series",
         "metric": "per-capita-social-welfare-expenditure-pref-municipal",
-        "label": "都道府県・市町村財政合計",
       },
     ],
   },

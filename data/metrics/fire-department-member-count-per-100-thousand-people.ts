@@ -5,6 +5,7 @@ export const fireDepartmentMemberCountPer100ThousandPeople: MetricConfig = {
   "key": "fire-department-member-count-per-100-thousand-people",
   "title": "消防吏員数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "safetyenvironment",
   "source": {

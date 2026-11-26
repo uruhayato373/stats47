@@ -103,7 +103,6 @@ export default async function MunicipalityThemePage({
       />
       <PageHeader
         title={`市区町村別の${theme.title}`}
-        stats={`${items.length} 指標`}
       />
 
       {items.length === 0 ? (

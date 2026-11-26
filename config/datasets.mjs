@@ -356,6 +356,15 @@ export const DATASETS = [
   d("metrics.summary-display-schema", `${P.METRIC_DEFINITIONS_DIR}/summary-display/ledger.schema.json`, "schema", "data", "data", "合計表示台帳の JSON Schema"),
   d("correlation.selection-policy", "data/correlation/selection-policy.json", "ledger", "data", "data", "相関の選定基準・正負別の件数・表示名。生成と読み込みとUIが共有", { schema: "data/correlation/selection-policy.schema.json" }),
   d("correlation.selection-policy-schema", "data/correlation/selection-policy.schema.json", "schema", "data", "data", "相関選定方針の JSON Schema"),
+  d("correlation.exclusions", "data/correlation/exclusions.json", "ledger", "data", "data", "自明な相関の除外 (特定の組・同じ現象のまとまり・人口に比例する絶対数の指標) と理由。相関の生成と SNS の相関カルーセルが読む", {
+    schema: "data/correlation/exclusions.schema.json",
+    refs: [
+      { field: "pairs[].keys[]", to: "registry:metrics" },
+      { field: "groups[].keys[]", to: "registry:metrics" },
+      { field: "keys[].key", to: "registry:metrics" },
+    ],
+  }),
+  d("correlation.exclusions-schema", "data/correlation/exclusions.schema.json", "schema", "data", "data", "相関の除外台帳の JSON Schema"),
   d("themes.catalogs", "data/themes/catalogs/{name}.json", "master", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)", {
     schema: "data/themes/schema/theme-catalog.schema.json",
     refs: [

@@ -333,7 +333,6 @@ export default async function CategoryPage({ params }: PageProps) {
       />
       <PageHeader
         title={category.categoryName}
-        description={`${category.categoryName}に関する都道府県ランキングを、地図やグラフで比較できます。`}
       />
     </>
   );

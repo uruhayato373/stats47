@@ -32,28 +32,22 @@ export const juniorHighSchoolCount: MetricConfig = {
   "calculation": {
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "校/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "校/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
       {
         "type": "series",
         "metric": "junior-high-school-count-per-100k-12-14",
-        "label": "12〜14歳人口当たり",
       },
       {
         "type": "series",
         "metric": "junior-high-school-count-per-100km2-habitable",
-        "label": "可住地100km²当たり",
       },
     ],
     "isCalculated": false,

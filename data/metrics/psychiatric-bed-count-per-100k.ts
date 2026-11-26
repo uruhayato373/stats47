@@ -5,6 +5,7 @@ export const psychiatricBedCountPer100k: MetricConfig = {
   "key": "psychiatric-bed-count-per-100k",
   "title": "精神病床数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "床",
   "category": "socialsecurity",
   "source": {

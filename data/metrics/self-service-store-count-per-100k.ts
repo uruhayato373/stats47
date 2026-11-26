@@ -5,6 +5,7 @@ export const selfServiceStoreCountPer100k: MetricConfig = {
   "key": "self-service-store-count-per-100k",
   "title": "セルフサービス事業所数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "所",
   "category": "commercial",
   "source": {

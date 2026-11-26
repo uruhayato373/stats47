@@ -12,3 +12,4 @@ export {
   selectSurveyRepresentativeRankings,
   type SurveyRepresentativeCandidate,
 } from './select-survey-representative-rankings';
+export { SurveyMinistryNav, type SurveyMinistryNavItem } from './components/SurveyMinistryNav';

@@ -5,6 +5,7 @@ export const juvenileCriminalArrestPersonPerPopulation: MetricConfig = {
   "key": "juvenile-criminal-arrest-person-per-population",
   "title": "少年刑法犯検挙人員",
   "subtitle": "14～19歳人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000, "scope": "14～19歳" },
   "unit": "人",
   "category": "safetyenvironment",
   "description": "少年刑法犯検挙人員を14～19歳の人口で除し、14～19歳人口千人当たりに換算した値。",

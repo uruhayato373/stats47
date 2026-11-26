@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const roadLengthPerKm2: MetricConfig = {
   "key": "road-length-per-km2",
   "title": "道路実延長",
-  "subtitle": "総面積1km²当たり",
+  "subtitle": "面積1km²当たり",
+  "denominator": { "kind": "area", "per": 1 },
   "unit": "km",
   "category": "landweather",
   "source": {

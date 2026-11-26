@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const householdsOnPublicAssistancePer1000: MetricConfig = {
   "key": "households-on-public-assistance-per-1000",
   "title": "生活保護被保護実世帯数",
-  "subtitle": "1000世帯当たり",
+  "subtitle": "月平均・一般世帯千世帯当たり",
+  "denominator": { "kind": "household", "per": 1000, "scope": "一般世帯" },
   "unit": "世帯",
   "category": "socialsecurity",
   "source": {

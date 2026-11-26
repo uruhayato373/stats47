@@ -5,6 +5,7 @@ export const mobilePhoneOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "key": "mobile-phone-ownership-multi-person-households-per-1000",
   "title": "携帯電話所有数量",
   "subtitle": "千世帯当たり",
+  "denominator": { "kind": "household", "per": 1000 },
   "unit": "台",
   "category": "ict",
   "source": {

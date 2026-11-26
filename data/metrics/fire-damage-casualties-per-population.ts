@@ -5,6 +5,7 @@ export const fireDamageCasualtiesPerPopulation: MetricConfig = {
   "key": "fire-damage-casualties-per-population",
   "title": "火災死傷者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "safetyenvironment",
   "description": "火災死傷者数を総人口で除し、人口10万人当たりに換算した値。",

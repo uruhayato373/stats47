@@ -45,12 +45,59 @@
       "type": "string"
     },
     "denominator": {
-      "enum": [
-        "population",
-        "area",
-        "household",
-        "person",
-        "none"
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "population",
+                "area",
+                "household",
+                "person",
+                "other"
+              ]
+            },
+            "per": {
+              "type": "number"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "counter": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "per"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "string",
+          "const": "population"
+        },
+        {
+          "type": "string",
+          "const": "area"
+        },
+        {
+          "type": "string",
+          "const": "household"
+        },
+        {
+          "type": "string",
+          "const": "person"
+        },
+        {
+          "type": "string",
+          "const": "other"
+        },
+        {
+          "type": "string",
+          "const": "none"
+        }
       ]
     },
     "category": {
@@ -1191,23 +1238,36 @@
               {
                 "type": "object",
                 "properties": {
-                  "scaleFactor": {
-                    "type": "number"
-                  },
-                  "decimalPlaces": {
-                    "type": "number"
-                  },
-                  "type": {
-                    "enum": [
-                      "per_population",
-                      "per_area"
-                    ]
-                  },
-                  "label": {
-                    "type": "string"
+                  "denominator": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "population",
+                          "area"
+                        ]
+                      },
+                      "per": {
+                        "type": "number"
+                      },
+                      "scope": {
+                        "type": "string"
+                      },
+                      "counter": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "per"
+                    ],
+                    "additionalProperties": false
                   },
                   "unit": {
                     "type": "string"
+                  },
+                  "decimalPlaces": {
+                    "type": "number"
                   },
                   "visualization": {
                     "type": "object",
@@ -1588,11 +1648,9 @@
                   }
                 },
                 "required": [
-                  "scaleFactor",
-                  "decimalPlaces",
-                  "type",
-                  "label",
-                  "unit"
+                  "denominator",
+                  "unit",
+                  "decimalPlaces"
                 ],
                 "additionalProperties": false
               },
@@ -1612,8 +1670,7 @@
                 },
                 "required": [
                   "type",
-                  "metric",
-                  "label"
+                  "metric"
                 ],
                 "additionalProperties": false
               }

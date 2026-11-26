@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const restaurantsPer: MetricConfig = {
   "key": "restaurants-per",
   "title": "飲食店数",
-  "subtitle": "市区町村・人口当たり",
+  "subtitle": "市区町村・人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "店",
   "category": "population",
   "source": {

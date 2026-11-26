@@ -129,6 +129,49 @@ describe('市区町村ランキング全国版のページ', () => {
     expect(html).toContain('120件中 上位50件');
   });
 
+  // 題が「ランキング」のページなので、地図と表を 1 つの枠で最初に出し、分布の要点はその後に置く
+  // (2026-11-26 オーナー指摘。以前は表が分布・地図・広告の後ろで、画面 2 枚目より下だった)
+  it('地図と表を同じ枠に並べ、分布の要点より前に出す。狭い幅のタブは表から始める', async () => {
+    vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
+    const html = await renderPage();
+    const table = html.indexOf('<table');
+    const map = html.indexOf('data-testid="national-map"');
+    const summary = html.indexOf('aria-label="分布の要点"');
+    expect(table).toBeGreaterThan(-1);
+    expect(map).toBeGreaterThan(-1);
+    expect(table).toBeLessThan(summary);
+    expect(map).toBeLessThan(summary);
+    // 都道府県のランキングと同じ枠 (部品の幅 640px 以上で横並び、未満はタブ)
+    expect(html).toContain('@container/viz');
+    const selectedTab = html.match(/<button[^>]*aria-selected="true"[^>]*>[\s\S]*?<\/button>/)?.[0] ?? '';
+    expect(selectedTab).toContain('表');
+  });
+
+  // 題は都道府県のランキングと同じ「◯◯ランキング」(地域の単位を重ねない)。説明文は出典の前に残す (検索エンジンと読者向けの本文)
+  it('題は都道府県と同じ「…ランキング」にし、指標の説明は表より後ろに出す', async () => {
+    vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
+    const html = await renderPage();
+    expect(html).toMatch(/<h1[^>]*>試験の指標ランキング<\/h1>/);
+    // 構造化データにも同じ文があるので、画面に出す側 (最後の出現) の位置で確かめる
+    expect(html.lastIndexOf(item.description)).toBeGreaterThan(html.indexOf('<table'));
+    // 題のブロック (header) の中には出さない
+    expect(html.match(/<header[\s\S]*?<\/header>/)?.[0] ?? '').not.toContain(item.description);
+  });
+
+  // 最小・最大の値だけでは、どの自治体かが分からなかった。1 位と最下位は名前を書き、市区町村のページへ結ぶ
+  it('分布の要点に 1 位と最下位の自治体名を書き、市区町村のページへ結ぶ', async () => {
+    vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
+    const html = await renderPage();
+    const summary = html.slice(html.indexOf('aria-label="分布の要点"'), html.indexOf('aria-label="全国分布"'));
+    expect(summary).toContain('1位');
+    expect(summary).toContain('自治体0');
+    expect(summary).toContain('120位');
+    expect(summary).toContain('自治体119');
+    expect(summary).toContain('中央値');
+    expect(summary).toContain('href="/areas/01000/cities/10000"');
+    expect(summary).toContain('href="/areas/02000/cities/10119"');
+  });
+
   it('県別ページがある指標だけ、右レールの県チップを県別のパスへ結ぶ', async () => {
     vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(true);
     const withChips = await renderPage();

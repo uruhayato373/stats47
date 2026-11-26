@@ -5,6 +5,7 @@ export const outpatientRatePer1000: MetricConfig = {
   "key": "outpatient-rate-per-1000",
   "title": "通院者率",
   "subtitle": "人口千人当たり・国民生活基礎調査",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "人口千対",
   "category": "socialsecurity",
   "source": {

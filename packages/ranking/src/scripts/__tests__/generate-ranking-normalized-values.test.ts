@@ -48,7 +48,7 @@ const config = {
   key: KEY,
   years: "all",
   unit: "人",
-  calculation: { normalizationOptions: [{ type: "per_population", unit: "人/10万人", scaleFactor: 100000, label: "人口10万人あたり" }] },
+  calculation: { normalizationOptions: [{ denominator: { kind: "population", per: 100000 }, unit: "人/10万人", decimalPlaces: 1 }] },
 } as unknown as MetricConfig;
 
 const population = resolveDenominator("per_population", "prefecture")!;

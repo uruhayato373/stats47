@@ -5,6 +5,7 @@ export const disasterDamageAmountPerPerson: MetricConfig = {
   "key": "disaster-damage-amount-per-person",
   "title": "災害被害額",
   "subtitle": "人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "円",
   "category": "safetyenvironment",
   "description": "災害被害額を総人口で除した、人口1人当たりの被害額。",

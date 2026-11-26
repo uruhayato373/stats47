@@ -5,6 +5,7 @@ export const fireDepartmentPumpCarCountPer100ThousandPeople: MetricConfig = {
   "key": "fire-department-pump-car-count-per-100-thousand-people",
   "title": "消防ポンプ自動車等現有数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "台",
   "category": "safetyenvironment",
   "source": {

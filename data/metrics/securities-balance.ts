@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const securitiesBalance: MetricConfig = {
   "key": "securities-balance",
   "title": "有価証券保有額",
-  "subtitle": "二人以上の世帯の1世帯当たり",
+  "subtitle": "二人以上の世帯・1世帯当たり",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {

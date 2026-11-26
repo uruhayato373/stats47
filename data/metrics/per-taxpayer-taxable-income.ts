@@ -37,5 +37,6 @@ export const perTaxpayerTaxableIncome: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "所得割の納税義務者1人当たり"
+  "subtitle": "所得割の納税義務者1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "所得割の納税義務者" },
 };

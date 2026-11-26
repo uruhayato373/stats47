@@ -157,17 +157,11 @@ export default async function CompareCategoryPage({ params, searchParams }: Page
                 ]}
             />
             <PageHeader
-                eyebrow={
-                    currentCategory
-                        ? `地域間比較 ・ ${currentCategory.categoryName}`
-                        : "地域間比較"
-                }
                 title={
                     regions
                         ? `${regions[0].areaName} vs ${regions[1].areaName}`
                         : "都道府県を比較"
                 }
-                description={`2 つの都道府県の${currentCategory?.categoryName ?? "統計データ"}を、KPI とチャートで横並びに比較できます。`}
             />
 
             <RegionComparisonClient

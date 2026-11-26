@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perTaxpayerIncome: MetricConfig = {
   "key": "per-taxpayer-income",
   "title": "納税義務者1人当たり課税所得",
+  "denominator": { "kind": "person", "per": 1, "scope": "納税義務者" },
   "unit": "千円",
   "category": "economy",
   "source": {

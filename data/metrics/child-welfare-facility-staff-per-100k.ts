@@ -5,6 +5,7 @@ export const childWelfareFacilityStaffPer100k: MetricConfig = {
   "key": "child-welfare-facility-staff-per-100k",
   "title": "児童福祉施設等従事者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "educationsports",
   "source": {

@@ -42,23 +42,18 @@ export const retailStoreCount: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "店/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "店/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
       {
         "type": "series",
         "metric": "retail-store-count-per-1000",
-        "label": "1000人当たり（旧統計）",
       },
     ],
   },

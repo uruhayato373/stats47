@@ -5,6 +5,7 @@ export const perCapitaKenminShotokuH23: MetricConfig = {
   "key": "per-capita-kenmin-shotoku-h23",
   "title": "1人当たり県民所得",
   "subtitle": "H23年基準",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {
@@ -35,17 +36,13 @@ export const perCapitaKenminShotokuH23: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "千円/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "千円/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],

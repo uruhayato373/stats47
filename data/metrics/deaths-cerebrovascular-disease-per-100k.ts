@@ -5,6 +5,7 @@ export const deathsCerebrovascularDiseasePer100k: MetricConfig = {
   "key": "deaths-cerebrovascular-disease-per-100k",
   "title": "脳血管疾患による死亡者数",
   "subtitle": "日本人人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "日本人" },
   "description": "人口動態調査の脳血管疾患による死亡者数を日本人人口で除し、10万倍した値です。年齢調整死亡率ではありません。",
   "unit": "人",
   "category": "socialsecurity",

@@ -52,10 +52,8 @@ export const totalPopulation: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "人/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],

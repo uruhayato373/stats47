@@ -10,6 +10,7 @@ export {
   type RailLinksCardLayout,
   RAIL_CHIP_CLASS,
 } from './RailLinksCard';
+export { RailRowKindIcon } from './RailRowKindIcon';
 export { RailPrefectureCard, type RailPrefecture } from './RailPrefectureCard';
 export { RailSearchCard } from './RailSearchCard';
 export { RailStack } from './RailStack';

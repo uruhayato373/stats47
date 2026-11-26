@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const heatstrokeEmergencyTransportsPer100k: MetricConfig = {
   "key": "heatstroke-emergency-transports-per-100k",
   "title": "熱中症救急搬送人員",
-  "subtitle": "総人口10万人当たり",
+  "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "safetyenvironment",
   "note": "2025年5〜9月（5月1日〜9月30日の153日間）の救急搬送人員を合計し、2025年総人口で除して10万倍した値。搬送地に基づく集計であり、住民の発症率ではない。既存の heatstroke-emergency-transports は搬送人員の実数であり、本指標は人口当たりに換算している。",

@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const ageAdjustedDeathRateMaleS60Per1000: MetricConfig = {
   "key": "age-adjusted-death-rate-male-s60-per-1000",
   "title": "年齢調整死亡率",
-  "subtitle": "男性（S60年基準）",
+  "subtitle": "男性（S60年基準）・人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "人口千対",
-  "denominator": "population",
   "category": "population",
   "source": {
     "kind": "estat",

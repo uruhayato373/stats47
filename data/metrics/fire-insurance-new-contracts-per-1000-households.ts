@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const fireInsuranceNewContractsPer1000Households: MetricConfig = {
   "key": "fire-insurance-new-contracts-per-1000-households",
   "title": "火災保険新契約件数",
+  "subtitle": "一般世帯千世帯当たり",
+  "denominator": { "kind": "household", "per": 1000, "scope": "一般世帯" },
   "unit": "件",
-  "denominator": "household",
   "category": "economy",
   "source": {
     "kind": "estat",

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { compareCorrelation } from '../../selection-policy';
 import { AREA_CODES, buildYearSeries } from '../../utils/year-slices';
@@ -136,6 +136,12 @@ vi.mock('@stats47/stats-r2/readers', () => ({
 }));
 
 describe('候補保持の段階で正負の枠を確保する', () => {
+  // スクリプト本体の最初の読み込み (指標の定義を全部読むので数秒かかる) を、テストの制限時間 (5 秒) に数えない。
+  // 最初のテストに読み込みが乗り、CI で 5 秒を超えて落ちた (2026-11-26 の develop の検査。手元でも 4.2 秒)
+  beforeAll(async () => {
+    await import('../build-correlation-snapshot');
+  }, 60_000);
+
   it('絶対値上位を正が占めても負の候補10件を残す', async () => {
     const { TopByPopulationAdjusted } = await import('../build-correlation-snapshot');
     const top = new TopByPopulationAdjusted('self');
@@ -149,12 +155,28 @@ describe('候補保持の段階で正負の枠を確保する', () => {
     expect(top.values().filter(item => item.populationAdjustedRankR > 0)).toHaveLength(10);
     expect(top.values().filter(item => item.populationAdjustedRankR < 0)).toHaveLength(10);
   });
+
+  // 上限で切った後に重複を落とすと枠が減るので、候補を保持する段階で同じ題名を 1 件にする (方針の dedupeByTitle)
+  it('同じ題名の相手は強い 1 件だけを残し、空いた枠は次の候補が埋める', async () => {
+    const { TopByPopulationAdjusted } = await import('../build-correlation-snapshot');
+    const titles: Record<string, string> = { 'dup-a': '警察費', 'dup-b': '警察費' };
+    const top = new TopByPopulationAdjusted('self', (key) => titles[key] ?? key);
+    const add = (keyY: string, r: number) => top.add({ keyX: 'self', keyY, pearsonR: r, populationAdjustedRankR: r,
+      effectiveAbsR: 0.5, partialRPopulation: null, partialRArea: null, partialRAging: null, partialRDensity: null });
+    add('dup-a', 0.58);
+    add('dup-b', 0.77);
+    for (let i = 0; i < 12; i++) add(`other-${i}`, 0.5 - i / 100);
+    const keys = top.values().map(item => item.keyY);
+    expect(keys).toContain('dup-b');
+    expect(keys).not.toContain('dup-a');
+    expect(keys).toHaveLength(10);
+  });
 });
 
 describe('buildCorrelationSnapshot shape', () => {
   beforeEach(() => {
     saved.clear();
-    // all.json メタ (title/subtitle/unit/normalizationBasis)
+    // all.json メタ (title/subtitle/unit)
     fetchFromR2AsJsonMock.mockReset();
     fetchFromR2AsJsonMock.mockImplementation((key: string) => {
       if (key === 'app/ranking-items/all.json') {
@@ -166,7 +188,6 @@ describe('buildCorrelationSnapshot shape', () => {
             title: m.title,
             subtitle: null,
             unit: m.unit,
-            normalizationBasis: null,
           })),
         };
       }
@@ -196,8 +217,6 @@ describe('buildCorrelationSnapshot shape', () => {
       'rankingKeyY',
       'titleX',
       'titleY',
-      'normalizationBasisX',
-      'normalizationBasisY',
       'pearsonR',
       'effectiveR',
       'partialRPopulation',
@@ -308,7 +327,6 @@ describe('buildCorrelationSnapshot --skip-if-unchanged', () => {
         title: m.title,
         subtitle: null,
         unit: m.unit,
-        normalizationBasis: null,
       })),
     };
     fetchFromR2AsJsonMock.mockImplementation((key: string) =>
@@ -370,7 +388,7 @@ describe('computeInputFingerprint', () => {
     buildYearSeries(values.map((value, i) => ({ areaCode: AREA_CODES[i], yearCode: year, value })), () => true, 1);
   const names = (name = 'pref') => new Map(AREA_CODES.slice(0, 3).map((code, i) => [code, `${name}-${i + 1}`]));
   const meta = (title: string) =>
-    new Map([['metric-a', { title, subtitle: null, unit: '件', normalizationBasis: null }]]);
+    new Map([['metric-a', { title, subtitle: null, unit: '件' }]]);
 
   it('並列 fetch の完了順 (Map の挿入順) に依存しない', async () => {
     const { computeInputFingerprint } = await import('../build-correlation-snapshot');
@@ -534,7 +552,7 @@ describe('buildThemeLinks', () => {
     effectiveAbsR: Math.abs(pearsonR),
     populationAdjustedRankR,
   });
-  const meta = (title: string) => ({ title, subtitle: null, unit: '', normalizationBasis: null });
+  const meta = (title: string) => ({ title, subtitle: null, unit: '' });
 
   it('|pearsonR| が 0.99 以上の組は同じデータの別名とみなして出さず、それ未満は残す', async () => {
     const { buildThemeLinks } = await import('../build-correlation-snapshot');

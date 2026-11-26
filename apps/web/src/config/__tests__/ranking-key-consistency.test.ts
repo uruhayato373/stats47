@@ -125,11 +125,11 @@ describe("ranking slug redirect の整合性", () => {
 
   it("転送先で開く計算方法 (norm) は、転送先の指標の計算方法に実在する", async () => {
     const { RANKING_REDIRECT_NORMS, RANKING_SLUG_REDIRECTS } = await import("@/config/ranking-redirects");
-    const { normalizationOptionId } = await import("@stats47/types");
+    const { authoredNormalizationOptionId } = await import("@stats47/types");
     const metrics = new Map(listAllMetrics().map((m) => [m.key, m]));
     const missing = Object.entries(RANKING_REDIRECT_NORMS).filter(([source, norm]) => {
       const options = metrics.get(RANKING_SLUG_REDIRECTS[source])?.calculation?.normalizationOptions ?? [];
-      return !options.some((option) => normalizationOptionId(option) === norm);
+      return !options.some((option) => authoredNormalizationOptionId(option) === norm);
     });
     expect(missing, "転送先のページでその見方が開けない").toEqual([]);
   });

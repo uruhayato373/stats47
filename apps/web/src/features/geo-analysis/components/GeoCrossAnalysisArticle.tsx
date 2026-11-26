@@ -107,7 +107,6 @@ export async function GeoCrossAnalysisArticle({
         ]}
       />
       <PageHeader
-        eyebrow={config.eyebrow}
         title={snapshot.title}
         description={snapshot.question}
         stats={`${snapshot.rows.length}都道府県 ・ ${snapshot.dataVersion} ・ ${primaryMetric.label}（単位: ${formatUnitForDisplay(primaryMetric.unit)}）`}

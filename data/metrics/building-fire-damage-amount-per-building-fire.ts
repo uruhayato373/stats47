@@ -37,7 +37,6 @@ export const buildingFireDamageAmountPerBuildingFire: MetricConfig = {
       {
         "type": "series",
         "metric": "building-fire-damage-amount-per-person",
-        "label": "人口当たり",
       },
     ],
   },

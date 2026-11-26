@@ -8,7 +8,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { DataSourceList } from "@/components/molecules/DataSourceList";
 
 import { AdRow, composeAdRows } from "@/features/ads";
-import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
+import { readContentRecommendations } from "@/features/content-navigation/server";
 
 import {
   RANKING_INCONTENT_MOBILE,
@@ -16,6 +16,7 @@ import {
   RANKING_PAGE_FOOTER,
 } from "@/lib/google-adsense";
 
+import { RankingAreaUnitSwitch } from "../RankingAreaUnitSwitch";
 import { RelatedArticlesCard } from '../RankingSidebar/RelatedArticlesCard';
 
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
@@ -33,6 +34,27 @@ import type { RankingPageModel } from "../../services/load-ranking-page-model";
 interface RankingPageClientShellProps {
   rankingKey: string;
   model: RankingPageModel;
+}
+
+/**
+ * 地図と表の枠の見出しの右に出す「都道府県 | 市区町村」の切り替え。同じ指標の市区町村ランキングは既存の関連付けから
+ * サーバーで解決し (キーが都道府県と違う指標がある)、公開ページが無ければ何も出さない。
+ */
+async function PrefectureAreaUnitSwitch({ rankingKey }: { rankingKey: string }) {
+  const [item] = await readContentRecommendations({
+    sourceId: `ranking:${rankingKey}`,
+    kinds: ["municipality-ranking"],
+    limit: 1,
+  });
+  if (!item) return null;
+  return (
+    <RankingAreaUnitSwitch
+      current="prefectures"
+      prefectureHref={hrefFor("ranking", { rankingKey })}
+      municipalityHref={item.href}
+      municipalityNavLabel={item.id}
+    />
+  );
 }
 
 export function RankingPageClientShell({
@@ -63,14 +85,7 @@ export function RankingPageClientShell({
       nowYear={new Date().getFullYear()}
       municipalityLink={model.areaType === "prefecture" ? (
         <Suspense fallback={null}>
-          <RelatedContentNavigation
-            title="市区町村別のランキング"
-            linkLabel="市区町村別を見る"
-            sourceId={`ranking:${rankingKey}`}
-            kinds={['municipality-ranking']}
-            limit={1}
-            surface="ranking_municipality"
-          />
+          <PrefectureAreaUnitSwitch rankingKey={rankingKey} />
         </Suspense>
       ) : undefined}
       breadcrumb={

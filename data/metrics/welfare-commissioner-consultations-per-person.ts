@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const welfareCommissionerConsultationsPerPerson: MetricConfig = {
   "key": "welfare-commissioner-consultations-per-person",
   "title": "民生委員1人当たり相談・支援件数",
+  "denominator": { "kind": "person", "per": 1, "scope": "民生委員" },
   "unit": "件",
   "category": "educationsports",
   "source": {
@@ -34,17 +35,13 @@ export const welfareCommissionerConsultationsPerPerson: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "件/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "件/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],

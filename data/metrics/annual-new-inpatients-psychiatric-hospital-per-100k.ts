@@ -5,6 +5,7 @@ export const annualNewInpatientsPsychiatricHospitalPer100k: MetricConfig = {
   "key": "annual-new-inpatients-psychiatric-hospital-per-100k",
   "title": "精神科病院年間新入院患者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

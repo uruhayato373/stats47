@@ -80,14 +80,8 @@ export default async function SearchPage({ searchParams }: PageProps) {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="検索"
         title={q ? `「${q}」の検索結果` : "サイト内検索"}
         description={buildResultsSummary(q, initialResults.length)}
-        stats={
-          q && initialResults.length > 0
-            ? `${initialResults.length} 件`
-            : undefined
-        }
       />
 
       <SearchPageClient

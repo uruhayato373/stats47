@@ -1,6 +1,7 @@
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { ChevronDown, FileText } from "lucide-react";
 
+import { RailRowKindIcon } from "@/components/rail";
 import { RailCard, RailNavRow, railNavRowClassName } from "@/components/surface";
 
 import { navSurfaceProps } from "@/lib/analytics/events";
@@ -13,6 +14,8 @@ interface Survey {
 interface RelatedItem {
   rankingKey: string;
   title: string;
+  /** 「1位 東京都 1,424万人」。値の無いランキングは null */
+  top1?: string | null;
 }
 
 interface SurveyCardProps {
@@ -61,6 +64,7 @@ export function SurveyCard({
       key={survey.id}
       href={hrefFor("survey", { surveyKey: survey.id })}
       data-nav-label={survey.id}
+      leading={<RailRowKindIcon kind="survey" />}
     >
       {survey.name}
     </RailNavRow>
@@ -98,14 +102,18 @@ export function SurveyCard({
       )}
       {relatedItems.length > 0 && (
         <>
+          {/* 調査が 2 つ並ぶと、どちらの調査のランキングか分からなかった (2026-11-26 オーナー指摘)。
+              一覧は主の出典 (先頭の調査) のランキングなので、その名前を小見出しに入れる */}
           <p className="mt-3 border-t border-border pt-3 text-xs text-muted-foreground">
-            同じ調査のランキング
+            {surveys[0].name}のほかのランキング
           </p>
-          <nav aria-label="同じ調査のランキング" className={`mt-1 ${ROW_LIST_CLASS}`} {...navSurfaceProps("ranking_same_survey")}>
+          <nav aria-label={`${surveys[0].name}のほかのランキング`} className={`mt-1 ${ROW_LIST_CLASS}`} {...navSurfaceProps("ranking_same_survey")}>
             {relatedItems.map((item) => (
               <RailNavRow
                 key={item.rankingKey}
                 href={hrefFor("ranking", { rankingKey: item.rankingKey })}
+                leading={<RailRowKindIcon kind="ranking" />}
+                detail={item.top1 ?? undefined}
               >
                 {item.title}
               </RailNavRow>

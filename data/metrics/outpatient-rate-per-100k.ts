@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const outpatientRatePer100k: MetricConfig = {
   "key": "outpatient-rate-per-100k",
   "title": "外来受療率",
+  "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
-  "denominator": "population",
   "category": "socialsecurity",
   "source": {
     "kind": "estat",
@@ -42,17 +43,13 @@ export const outpatientRatePer100k: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "人/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "人/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],

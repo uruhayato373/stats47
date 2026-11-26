@@ -5,6 +5,7 @@ export const passportIssuanceCountPerThousand: MetricConfig = {
   "key": "passport-issuance-count-per-thousand",
   "title": "一般旅券発行件数",
   "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "件",
   "category": "commercial",
   "source": {

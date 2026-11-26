@@ -50,6 +50,8 @@ interface RankingPageContentSectionsProps {
     displayInfo: RankingPageDisplayInfo;
     normalizationType?: string;
     dataNote?: string | null;
+    /** 集計条件 (指標の補足・属性。「2025年・全目的・一般客」など) */
+    definitionDetail?: string | null;
     sections: RankingPageSections;
 }
 
@@ -61,16 +63,11 @@ export function RankingPageContentSections({
     displayInfo,
     normalizationType,
     dataNote,
+    definitionDetail,
     sections,
 }: RankingPageContentSectionsProps) {
     return (
         <>
-            {dataNote && (
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                    {normalizeUnitsInText(dataNote)}
-                </p>
-            )}
-
             <DataUsageCard
                 rankingKey={rankingKey}
                 areaType={areaType}
@@ -90,9 +87,11 @@ export function RankingPageContentSections({
             {sections.correlation}
             {sections.rankingPageCards}
 
-            {displayInfo.description && (
+            {(displayInfo.description || dataNote || definitionDetail) && (
                 <RankingDefinitionCard
+                    condition={definitionDetail}
                     definition={displayInfo.description}
+                    note={dataNote ? normalizeUnitsInText(dataNote) : null}
                 />
             )}
 

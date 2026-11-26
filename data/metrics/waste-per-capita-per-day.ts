@@ -4,8 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const wastePerCapitaPerDay: MetricConfig = {
   "key": "waste-per-capita-per-day",
   "title": "1人1日当たりのごみ排出量",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "g",
-  "denominator": "population",
   "category": "safetyenvironment",
   "source": {
     "kind": "estat",

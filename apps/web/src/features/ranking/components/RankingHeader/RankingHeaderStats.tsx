@@ -78,14 +78,16 @@ export function RankingHeaderStats({
 
   // 市区町村モードでは全国の基準値を出さない。1,700 超の市区町村の単純平均は
   // 都道府県平均とも全国値とも別の量で、同じラベルで見せると誤読になる。
-  const showNationalAverage = areaType === "prefecture";
+  // 年が 1 つの指標は推移が無く、枠が平均値と「単年データです」だけになっていたので出さない (2026-11-26 オーナー決定)。
+  // 上位・下位の枠が全幅になる
+  const showNationalAverage = areaType === "prefecture" && nationalAverageSeries.length > 1;
 
   return (
     <div className={cn("@container", className)}>
       {/* 2 枚は線の格子で並べ、隣り合う線を共有する (見本の grid gap-px bg-border)。
           本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。 */}
       <PanelGrid className={cn("grid-cols-1", showNationalAverage && "@min-[40rem]:grid-cols-2")}>
-        <RankingTopThreeList stats={stats} unit={shownUnit} precision={precision} factor={factor} presentation={presentation} />
+        <RankingTopThreeList stats={stats} unit={shownUnit} precision={precision} factor={factor} presentation={presentation} split={!showNationalAverage} />
         {showNationalAverage && (
           <RankingNationalAverageStat
             metricTitle={metricTitle}

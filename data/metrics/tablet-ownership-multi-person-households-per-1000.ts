@@ -5,6 +5,7 @@ export const tabletOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
   "key": "tablet-ownership-multi-person-households-per-1000",
   "title": "タブレット端末所有数量",
   "subtitle": "千世帯当たり",
+  "denominator": { "kind": "household", "per": 1000 },
   "unit": "台",
   "category": "economy",
   "source": {

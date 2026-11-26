@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const personsOnPublicAssistancePer1000: MetricConfig = {
   "key": "persons-on-public-assistance-per-1000",
   "title": "生活保護被保護実人員",
-  "subtitle": "人口1000人当たり",
+  "subtitle": "月平均・人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

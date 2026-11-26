@@ -5,6 +5,7 @@ export const sportsParkCountPer100km2: MetricConfig = {
   "key": "sports-park-count-per-100km2",
   "title": "運動公園数",
   "subtitle": "可住地面積100km²当たり",
+  "denominator": { "kind": "area", "per": 100, "scope": "可住地" },
   "unit": "所",
   "category": "infrastructure",
   "source": {

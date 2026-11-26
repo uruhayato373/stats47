@@ -67,7 +67,7 @@ test("電力需要量の定義シートは単位が半角の MWh で、対象と
   assert.equal(cells[6], "電気事業便覧", row);
   // 単位は補正の選択肢と検索結果の題名・説明にも出るので、全角の英数字を残さない
   const c = METRICS_REGISTRY["electricity-demand"];
-  const shown = [c.unit, ...(c.calculation?.normalizationOptions ?? []).flatMap((o) => (o.type === "series" ? [] : [o.unit])), c.seoTitle ?? "", c.seoDescription ?? ""];
+  const shown = [c.unit, ...(c.calculation?.normalizationOptions ?? []).flatMap((o) => ("denominator" in o ? [o.unit] : [])), c.seoTitle ?? "", c.seoDescription ?? ""];
   for (const s of shown) assert.doesNotMatch(s, /[Ａ-Ｚａ-ｚ]/, s);
 });
 

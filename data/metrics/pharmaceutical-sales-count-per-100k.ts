@@ -5,6 +5,7 @@ export const pharmaceuticalSalesCountPer100k: MetricConfig = {
   "key": "pharmaceutical-sales-count-per-100k",
   "title": "医薬品販売業数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "所",
   "category": "socialsecurity",
   "source": {

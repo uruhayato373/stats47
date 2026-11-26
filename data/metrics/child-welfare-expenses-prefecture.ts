@@ -37,7 +37,6 @@ export const childWelfareExpensesPrefecture: MetricConfig = {
       {
         "type": "series",
         "metric": "per-capita-child-welfare-expenditure-under17-pref-municipal",
-        "label": "都道府県・市町村財政合計",
       },
     ],
   },

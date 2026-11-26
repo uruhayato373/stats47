@@ -5,6 +5,7 @@ export const highSchoolStudentsPerTeacher: MetricConfig = {
   "key": "high-school-students-per-teacher",
   "title": "高等学校生徒数",
   "subtitle": "教員1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "教員" },
   "unit": "人",
   "category": "educationsports",
   "source": {

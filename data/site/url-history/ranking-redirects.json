@@ -705,9 +705,9 @@
     {
       "from": "self-service-store-count-per-100k",
       "to": "self-service-store-count",
-      "norm": "self-service-store-count-per-100k",
+      "norm": "per_population",
       "since": "2026-11-25",
-      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。分母が人口・面積でないので、親の計算方法の series として公表値をそのまま出す。"
+      "reason": "同じ指標の見方違いのページを、親のページの計算方法へ統合した (2026-11-25 オーナー決定)。値は人口で割った見方と全県で比例することを確かめた (2026-11-26 に R2 の値で比の変動係数 0.03%)。"
     },
     {
       "from": "senility-death-rate",

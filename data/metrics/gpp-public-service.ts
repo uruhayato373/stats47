@@ -32,11 +32,9 @@ export const gppPublicService: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口1人あたり",
+        "denominator": { "kind": "population", "per": 1 },
         "unit": "百万円/人",
-        "scaleFactor": 1,
-        "decimalPlaces": 2
+        "decimalPlaces": 2,
       }
     ]
   },

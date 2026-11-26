@@ -5,6 +5,7 @@ export const elementarySchoolEducationCostPerStudent: MetricConfig = {
   "key": "elementary-school-education-cost-per-student",
   "title": "小学校教育費",
   "subtitle": "児童1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "児童" },
   "unit": "円",
   "category": "educationsports",
   "source": {

@@ -49,7 +49,6 @@ export const complainantCount: MetricConfig = {
       {
         "type": "series",
         "metric": "complainant-rate-per-1000",
-        "label": "人口1000人当たり",
       },
     ],
   },

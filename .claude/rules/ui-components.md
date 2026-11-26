@@ -97,7 +97,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 新規チャートが必要な場合は `chart-component-builder` agent に設計を依頼する。
 規約違反の検出は `/audit-chart-components` スキルで実行する。
 
-- **ページ見出し（h1）は `PageHeader`（`@/components/layout`）で描き、`text-xl font-semibold`（テンプレートの breadcrumb-comp と同じ）に統一する**（2026-10-27 にテンプレートへ寄せた。それ以前は `text-2xl font-bold`）。ページや feature に別の大きさの h1 を書かない。
+- **ページ見出し（h1）は `PageHeader`（`@/components/layout`）で描き、`text-xl font-semibold`（テンプレートの breadcrumb-comp と同じ）に統一する**（2026-10-27 にテンプレートへ寄せた。それ以前は `text-2xl font-bold`）。ページや feature に別の大きさの h1 を書かない。見出しは題名だけを基本にし、小見出しは置かない (属性ごと外した)。説明は読み違いの注意・問いの文・定義だけ、補足は年と対象の数だけに使う (2026-11-26 オーナー決定。正典は 04「PageHeader」)。
   - **例外**: 記事本文のタイトル（blog 詳細の `.article-title`。読み物の見出しとして `globals.css` が大きさを持つ）と `not-found` の大見出し。`HeroBanner`（`text-2xl sm:text-3xl`）は現在どのページからも使われていない（使うときはこの例外に足す）。
 
 ## melta-ui デザインシステム準拠

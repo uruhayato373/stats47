@@ -5,6 +5,7 @@ export const pollutionComplaintsReceivedPer100k: MetricConfig = {
   "key": "pollution-complaints-received-per-100k",
   "title": "公害苦情受付件数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "件",
   "category": "safetyenvironment",
   "source": {

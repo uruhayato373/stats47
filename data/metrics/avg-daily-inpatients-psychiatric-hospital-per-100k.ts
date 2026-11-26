@@ -5,6 +5,7 @@ export const avgDailyInpatientsPsychiatricHospitalPer100k: MetricConfig = {
   "key": "avg-daily-inpatients-psychiatric-hospital-per-100k",
   "title": "精神科病院の1日平均在院患者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

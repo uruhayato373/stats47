@@ -81,7 +81,6 @@ export default function GeoPage() {
       />
       <PageHeader
         title="地図で見る地域の変化"
-        description="一つのGISで分布を知り、データを重ねて地域の変化を読む。"
       />
       <div className="mb-5">
         <CompareLink />

@@ -5,6 +5,7 @@ export const currentLiabilitiesBalanceMultiPersonHouseholdsPerHousehold: MetricC
   "key": "current-liabilities-balance-multi-person-households-per-household",
   "title": "負債現在高",
   "subtitle": "1世帯当たり",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "千円",
   "category": "economy",
   "source": {

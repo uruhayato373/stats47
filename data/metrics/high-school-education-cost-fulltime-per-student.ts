@@ -5,6 +5,7 @@ export const highSchoolEducationCostFulltimePerStudent: MetricConfig = {
   "key": "high-school-education-cost-fulltime-per-student",
   "title": "高等学校教育費",
   "subtitle": "生徒1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "生徒" },
   "unit": "円",
   "category": "educationsports",
   "source": {

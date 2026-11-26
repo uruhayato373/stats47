@@ -89,7 +89,8 @@ export function stripTrailingParenthetical(title: string): string {
 //
 // 「人口が多い県はどの実数も大きい」だけの相関 (人口比例の絶対数) を候補から除く。
 // 3 段の判定 (いずれか true で raw 扱い):
-//   1. normalizationBasis が snapshot 側で明示されていれば正規化済みとみなす (最優先)
+//   1. 指標の定義が分母を持てば (人口当たり・1世帯当たりなど) 正規化済みとみなす (最優先)。
+//      2026-11-26 までは配信の normalizationBasis を見ていたが、SQLite の廃止 (2026-11-21) で常に null だった
 //   2. trivial-pairs.ts の EXCLUDED_CORRELATION_KEYS (人が精査済みの絶対数キー一覧) に載っている
 //   3. キー名に正規化を示す語 (-ratio/-rate/-per-/-density/-index/-percentage/-share) が無く、
 //      unit が実数・総額の単位 (千円/人/世帯/所/件 等) である
@@ -143,11 +144,12 @@ const NORMALIZED_KEY_HINT_RE = /-(ratio|rate|per-|density|index|percentage|share
 export interface RawUnitCheckInput {
   key: string;
   unit: string | null;
-  normalizationBasis: string | null;
+  /** 指標の定義が分母を持つか (metricDenominatorOf が人口・面積・世帯・人数などを返す) */
+  hasDenominator: boolean;
 }
 
 export function isRawUnnormalizedKey(input: RawUnitCheckInput): boolean {
-  if (input.normalizationBasis) return false;
+  if (input.hasDenominator) return false;
   if (isExcludedCorrelationKey(input.key)) return true;
   if (NORMALIZED_KEY_HINT_RE.test(input.key)) return false;
   if (!input.unit) return false;
@@ -163,8 +165,8 @@ export interface CandidatePairMeta {
   titleY: string;
   unitX: string | null;
   unitY: string | null;
-  normalizationBasisX: string | null;
-  normalizationBasisY: string | null;
+  hasDenominatorX: boolean;
+  hasDenominatorY: boolean;
   /**
    * MetricConfig.source が `{kind:'external', fetcherKey:'calculated'}` (他指標からの算術導出) か。
    * 両側が算出値だと、同じ元系列 (例: 家計調査の可処分所得) を四則演算しただけで r が自明に
@@ -211,10 +213,10 @@ export function evaluateTautology(pair: CandidatePairMeta): TautologyVerdict {
     }
   }
 
-  if (isRawUnnormalizedKey({ key: pair.keyX, unit: pair.unitX, normalizationBasis: pair.normalizationBasisX })) {
+  if (isRawUnnormalizedKey({ key: pair.keyX, unit: pair.unitX, hasDenominator: pair.hasDenominatorX })) {
     return { tautological: true, reason: "raw-unnormalized-x" };
   }
-  if (isRawUnnormalizedKey({ key: pair.keyY, unit: pair.unitY, normalizationBasis: pair.normalizationBasisY })) {
+  if (isRawUnnormalizedKey({ key: pair.keyY, unit: pair.unitY, hasDenominator: pair.hasDenominatorY })) {
     return { tautological: true, reason: "raw-unnormalized-y" };
   }
 

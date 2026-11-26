@@ -5,6 +5,7 @@ export const policeOfficerCountPerPopulation: MetricConfig = {
   "key": "police-officer-count-per-population",
   "title": "警察官数",
   "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "人",
   "category": "safetyenvironment",
   "description": "警察官数を総人口で除し、人口千人当たりに換算した値。",

@@ -47,6 +47,12 @@ describe("a baked top value is written in the display unit", () => {
     expect(formatFeaturedValueDisplay({ unit: "時間", valueDisplay: null }, "2,309")).toEqual({ value: "2,309", unit: "時間" });
   });
 
+  it("caps the decimals at the ranking table's limit when the unit stays (65歳以上人口割合: 40.107 → 40.11, as the page title shows)", () => {
+    expect(formatFeaturedValueDisplay({ unit: "％", valueDisplay: null }, "40.107")).toEqual({ value: "40.11", unit: "%" });
+    // 1 未満の値は表と同じく 3 桁まで残す
+    expect(formatFeaturedValueDisplay({ unit: "人口千対", valueDisplay: null }, "0.6612")).toEqual({ value: "0.661", unit: "人口千対" });
+  });
+
   it("does not guess when the text is not a number", () => {
     expect(formatFeaturedValueDisplay({ unit: "千円", valueDisplay: null }, "—")).toEqual({ value: "—", unit: "千円" });
   });

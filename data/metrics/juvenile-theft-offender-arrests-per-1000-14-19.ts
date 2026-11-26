@@ -5,6 +5,7 @@ export const juvenileTheftOffenderArrestsPer10001419: MetricConfig = {
   "key": "juvenile-theft-offender-arrests-per-1000-14-19",
   "title": "少年窃盗犯検挙人員",
   "subtitle": "14～19歳人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000, "scope": "14～19歳" },
   "unit": "人",
   "category": "safetyenvironment",
   "source": {

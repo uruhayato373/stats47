@@ -40,5 +40,6 @@ export const denselyInhabitedDistrictPopulationDensity: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "人口集中地区面積1km²当たり"
+  "subtitle": "人口集中地区面積1km²当たり",
+  "denominator": { "kind": "area", "per": 1, "scope": "人口集中地区" },
 };

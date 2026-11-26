@@ -35,10 +35,8 @@ export const habitableArea: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "ｈａ/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
     ],

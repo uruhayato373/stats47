@@ -52,7 +52,8 @@ export function dropNormOptionsOfType(source: string, type: string): DropResult 
 
   const inner = source.slice(arrayStart + 1, arrayEnd);
   const chunks = splitTopLevelObjects(inner);
-  const kept = chunks.filter((c) => !new RegExp(`"type":\\s*"${type}"`).test(c));
+  // 定義は分母を denominator.kind で書く (type は配信の形)。per_population → "kind": "population"
+  const kept = chunks.filter((c) => !new RegExp(`"kind":\\s*"${type.replace(/^per_/, "")}"`).test(c));
   const dropped = chunks.length - kept.length;
   if (dropped === 0) return { source, dropped: 0, remaining: chunks.length };
 

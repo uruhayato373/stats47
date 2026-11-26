@@ -5,6 +5,7 @@ export const residentialTelephoneSubscriptionCountPer1000: MetricConfig = {
   "key": "residential-telephone-subscription-count-per-1000",
   "title": "住宅用電話加入数",
   "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "加入",
   "category": "construction",
   "source": {

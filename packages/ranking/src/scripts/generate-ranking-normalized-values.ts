@@ -44,9 +44,9 @@
 import {
   listAllMetrics,
   type MetricConfig,
-  type NormalizationOption,
   findExpectedEmpty,
 } from "@stats47/data-configs";
+import { isAuthoredRatioOption, toRatioNormalizationOption, type RatioNormalizationOption } from "@stats47/types";
 import { selectUnexpectedEmpties } from "./lib/empty-values-alarm";
 import {
   assertR2WriteAllowed,
@@ -132,15 +132,15 @@ async function withRetry<T>(fn: () => Promise<T>, attempts = 3): Promise<T> {
 }
 
 /** config から有効な正規化 option を取り出す (自己正規化は除外) */
-export function activeNormalizationOptions(config: MetricConfig): Extract<NormalizationOption, { type: NormType }>[] {
+export function activeNormalizationOptions(config: MetricConfig): RatioNormalizationOption[] {
   const options =
     config.calculation?.normalizationOptions ?? [];
   const invalidType = invalidNormTypeForKey(config.key);
   // series (別の指標の公表値を出す見方) は事前生成の対象外。値はその指標の values をそのまま読む
-  return options.filter(
-    (o): o is Extract<NormalizationOption, { type: NormType }> =>
-      (NORM_TYPES as readonly string[]).includes(o.type) && o.type !== invalidType,
-  );
+  return options
+    .filter(isAuthoredRatioOption)
+    .map(toRatioNormalizationOption)
+    .filter((o) => (NORM_TYPES as readonly string[]).includes(o.type) && o.type !== invalidType);
 }
 
 

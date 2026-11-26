@@ -4,9 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perCapitaFixedAssetTaxPrefMunicipal: MetricConfig = {
   "key": "per-capita-fixed-asset-tax-pref-municipal",
   "title": "固定資産税",
-  "subtitle": "都道府県・市町村財政合計",
+  "subtitle": "都道府県・市町村財政合計・人口1人当たり",
+  "denominator": { "kind": "population", "per": 1 },
   "unit": "千円",
-  "denominator": "population",
   "category": "economy",
   "source": {
     "kind": "estat",
@@ -36,17 +36,13 @@ export const perCapitaFixedAssetTaxPrefMunicipal: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "千円/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "千円/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],

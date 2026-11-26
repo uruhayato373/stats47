@@ -58,12 +58,13 @@ const RANKING_COMPONENT_ROOT = path.resolve(
 );
 
 describe('ranking header density contract', () => {
-  it('見出しは共通生成し、表示中の指標名・地域粒度・更新日を配線する', () => {
-    expect(HEADER).toContain('buildRankingPageTitle(metricTitle, areaType)');
+  it('見出しは共通生成し、表示中の指標名・更新日を配線する (題に地域の単位を重ねない)', () => {
+    expect(HEADER).toContain('buildRankingPageTitle(metricTitle)');
     expect(HEADER).not.toContain('description=');
     const header = PAGE_CLIENT.match(/<RankingHeaderPanel\b[\s\S]*?\/>/)?.[0];
     expect(header).toContain('metricTitle={displayInfo.title}');
-    expect(header).toContain('areaType={currentAreaType}');
+    // 題は都道府県と市区町村で同じ。地域の単位は枠の見出しと切り替えが示す (2026-11-26 オーナー決定)
+    expect(header).not.toContain('areaType=');
     expect(header).toContain('updatedAt={activeRankingItem.updatedAt}');
   });
 
@@ -77,17 +78,20 @@ describe('ranking header density contract', () => {
     expect(PAGE_SHELL).toContain('nowYear={new Date().getFullYear()}');
   });
 
-  it('集計条件だけを可視化直下に置き、更新日の重複を防ぐ', () => {
-    const visualizationIndex = PAGE_CLIENT.indexOf(
-      '<RankingVisualizationSection'
-    );
-    const detailsIndex = PAGE_CLIENT.indexOf('<RankingVisualizationDetails');
-
+  // 2026-11-26 オーナー決定: 地図と表を一番上に置き、上位・下位の 3 件はその下。集計条件と読み違いを防ぐ注意は
+  // 地図の下・本文の先頭に常に出さず、「統計の定義」(開閉式) の中に畳む
+  it('地図と表を上位・下位の 3 件より先に置き、集計条件と注意は統計の定義の中に畳む', () => {
+    const visualizationIndex = PAGE_CLIENT.indexOf('<RankingVisualizationSection');
+    const statsIndex = PAGE_CLIENT.indexOf('<RankingHeaderStats');
     expect(visualizationIndex).toBeGreaterThan(-1);
-    expect(detailsIndex).toBeGreaterThan(visualizationIndex);
-    const details = readFileSync(path.join(RANKING_COMPONENT_ROOT, 'RankingKeyPage/RankingVisualizationDetails.tsx'), 'utf8');
-    expect(details).not.toContain('updatedAt');
-    expect(details).not.toContain('最終更新');
+    expect(statsIndex).toBeGreaterThan(visualizationIndex);
+    expect(PAGE_CLIENT).not.toContain('RankingVisualizationDetails');
+    expect(PAGE_CLIENT).toContain('definitionDetail={definitionDetail}');
+
+    const sections = readFileSync(path.join(RANKING_COMPONENT_ROOT, 'RankingKeyPage/RankingPageContentSections.tsx'), 'utf8');
+    expect(sections).toMatch(/<RankingDefinitionCard[\s\S]*condition=\{definitionDetail\}[\s\S]*note=/);
+    // 注意を本文の先頭に段落として出さない
+    expect(sections).not.toMatch(/\{dataNote && \(\s*<p/);
   });
 
   it('全国の基準値 (全国値 / 単純平均) と推移は共通ヘッダーカードだけで一度表示する', () => {

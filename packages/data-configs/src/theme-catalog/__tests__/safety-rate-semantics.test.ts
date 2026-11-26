@@ -1,3 +1,4 @@
+import { authoredNormalizationType, isAuthoredRatioOption } from '@stats47/types';
 import { describe, expect, it } from 'vitest';
 
 import { getMetricConfig } from '../../registry';
@@ -46,7 +47,7 @@ const chapterExtensionKeys = [
 
 /** 人口・面積で割る選択肢だけ (series は割り算をしないので除く) */
 const ratioOptions = (metric: NonNullable<ReturnType<typeof getMetricConfig>>) =>
-  (metric.calculation?.normalizationOptions ?? []).filter(({ type }) => type !== 'series');
+  (metric.calculation?.normalizationOptions ?? []).filter(isAuthoredRatioOption);
 
 describe('安全テーマの人口当たり指標', () => {
   it.each(rates.map(([key, code, denominator, unit]) => ({ metric: getMetricConfig(key)!, code, denominator, unit })))('$metric.key は公式の分母をラベルへ保持し、再び人口や面積で割らない', ({ metric, code, denominator, unit }) => {
@@ -68,7 +69,7 @@ describe('安全テーマの人口当たり指標', () => {
     expect(SAFETY_CATALOG.metrics.map(({ rankingKey }) => rankingKey).sort()).toEqual([...reviewedKeys, ...chapterExtensionKeys].sort());
     for (const key of rawKeys) {
       const metric = getMetricConfig(key)!;
-      expect(ratioOptions(metric).map(({ type }) => type), key).toEqual(['per_population', 'per_area']);
+      expect(ratioOptions(metric).map(authoredNormalizationType), key).toEqual(['per_population', 'per_area']);
       expect(metric.description, key).not.toMatch(/人口.*当たり/);
     }
     for (const key of otherRates) expect(ratioOptions(getMetricConfig(key)!), key).toEqual([]);

@@ -5,6 +5,7 @@ export const kindergartenCountPer100k35: MetricConfig = {
   "key": "kindergarten-count-per-100k-3-5",
   "title": "幼稚園数",
   "subtitle": "3～5歳人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "3～5歳" },
   "unit": "園",
   "category": "educationsports",
   "source": {

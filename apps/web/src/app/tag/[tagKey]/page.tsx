@@ -106,10 +106,7 @@ export default async function TagArticlesPage({ params }: PageProps) {
       />
 
       <PageHeader
-        eyebrow="タグ"
         title={tag}
-        description={`「${tag}」タグが付いた都道府県統計ブログの記事 ${articles.length} 本を掲載しています。`}
-        stats={`全 ${articles.length} 記事 ・ 並び順: 公開日の新しい順`}
       />
 
       <PanelGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

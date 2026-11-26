@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import { LayoutGrid } from "lucide-react";
 
 
+import { RailRowKindIcon } from "@/components/rail";
+
 import { RailAdSlot } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
@@ -17,7 +19,13 @@ import { PortStatisticsMapCard } from "../RankingSidebar/PortStatisticsMapCard";
 import { RelatedArticlesCard } from "../RankingSidebar/RelatedArticlesCard";
 import { SurveyCard } from "../RankingSidebar/SurveyCard";
 
+import type { SurveyRelatedItem } from "../../services/load-ranking-page-model";
 import type { RankingItem } from "@stats47/ranking";
+
+/** テーマの行の左端に、種類 (テーマ) の色付きの四角を置く (調査・ランキングの行と見分ける) */
+function themeRowIcon() {
+  return <RailRowKindIcon kind="theme" />;
+}
 
 
 interface RankingPageSidebarSectionProps {
@@ -27,7 +35,7 @@ interface RankingPageSidebarSectionProps {
   /** この統計の出典調査 (originalSurveys 焼き込み、1-2 件) */
   surveys: { id: string; name: string }[];
   /** 同じ調査の関連ランキング (上位 5 件) */
-  surveyRelatedItems?: { rankingKey: string; title: string }[];
+  surveyRelatedItems?: SurveyRelatedItem[];
 }
 
 function RankingPageSidebarSkeleton() {
@@ -55,8 +63,9 @@ export function RankingPageSidebarSection({
       </div>
       {areaType === "prefecture" && (
         <RelatedContentNavigation
-          title="この指標を使うテーマ"
+          title="関連するテーマ"
           icon={<LayoutGrid />}
+          itemIcon={themeRowIcon}
           sourceId={`ranking:${rankingKey}`}
           kinds={['theme']}
           limit={3}
@@ -77,6 +86,7 @@ export function RankingPageSidebarSection({
       <SurveyCard
         surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
         relatedItems={surveyRelatedItems}
+        title="データの出どころ"
       />
       {/* 中段の AdSense (2026-11-12 オーナー決定: アフィリエイトを止め、PR の枠 (労働系の固定のバナーと文脈のバナー) から替えた) */}
       <RailAdSlot slot={RANKING_RAIL_MIDDLE} />

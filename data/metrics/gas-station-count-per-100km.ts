@@ -5,6 +5,7 @@ export const gasStationCountPer100km: MetricConfig = {
   "key": "gas-station-count-per-100km",
   "title": "給油所数",
   "subtitle": "道路実延長100km当たり",
+  "denominator": { "kind": "other", "per": 100, "scope": "道路実延長", "counter": "km" },
   "unit": "箇所",
   "category": "infrastructure",
   "source": {

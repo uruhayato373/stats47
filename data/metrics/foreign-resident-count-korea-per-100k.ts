@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const foreignResidentCountKoreaPer100k: MetricConfig = {
   "key": "foreign-resident-count-korea-per-100k",
   "title": "外国人人口",
-  "subtitle": "韓国・朝鮮籍（人口10万人当たり）",
+  "subtitle": "韓国・朝鮮籍・人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "description": "国勢調査の韓国・朝鮮籍外国人人口を総人口で除し、人口10万人当たりに換算した人数です。",
   "unit": "人",
   "category": "population",

@@ -5,6 +5,7 @@ export const deathsHypertensiveDiseasesPer100k: MetricConfig = {
   "key": "deaths-hypertensive-diseases-per-100k",
   "title": "高血圧性疾患による死亡者数",
   "subtitle": "日本人人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000, "scope": "日本人" },
   "description": "人口動態調査の高血圧性疾患による死亡者数を日本人人口で除し、10万倍した値です。年齢調整死亡率ではありません。",
   "unit": "人",
   "category": "population",

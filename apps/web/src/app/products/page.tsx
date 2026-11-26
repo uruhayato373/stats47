@@ -30,10 +30,8 @@ export default function ProductsPage() {
         items={[{ label: "ホーム", href: "/" }, { label: "商品・書籍" }]}
       />
       <PageHeader
-        eyebrow="stats47の商品"
         title="読む本と、仕事で使える編集データ"
         description="サイトのランキングや統計値は引き続き無料です。商品では、テーマごとの編集・整理、図表、加工済みファイルによる時間短縮を提供します。"
-        stats={`${kindleProducts.length}冊のKindle本 ・ ${dataProducts.length}点の編集可能データ`}
       />
 
       <PanelGrid className="mb-10 md:grid-cols-2">

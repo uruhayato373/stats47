@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const nursesPer100kPopulation: MetricConfig = {
   "key": "nurses-per-100k-population",
   "title": "人口10万対看護師数",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

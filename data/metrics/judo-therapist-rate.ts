@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const judoTherapistRate: MetricConfig = {
   "key": "judo-therapist-rate",
   "title": "人口10万対柔道整復師数",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

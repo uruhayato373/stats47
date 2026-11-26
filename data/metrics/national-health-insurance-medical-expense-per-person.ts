@@ -5,6 +5,7 @@ export const nationalHealthInsuranceMedicalExpensePerPerson: MetricConfig = {
   "key": "national-health-insurance-medical-expense-per-person",
   "title": "国民健康保険診療費",
   "subtitle": "被保険者1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "被保険者" },
   "unit": "円",
   "category": "socialsecurity",
   "source": {

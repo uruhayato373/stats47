@@ -5,6 +5,7 @@ export const annualEmergencyDispatchesPer1000: MetricConfig = {
   "key": "annual-emergency-dispatches-per-1000",
   "title": "年間救急出動件数",
   "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "件",
   "category": "safetyenvironment",
   "description": "救急自動車による年間の救急出動件数を総人口で除し、人口千人当たりに換算した値。",

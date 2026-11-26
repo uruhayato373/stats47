@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const inpatientsPerNursePerDay: MetricConfig = {
   "key": "inpatients-per-nurse-per-day",
   "title": "一般病院在院患者数",
-  "subtitle": "看護師1人当たり",
+  "subtitle": "看護師・准看護師1人当たり・1日",
+  "denominator": { "kind": "person", "per": 1, "scope": "看護師・准看護師" },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

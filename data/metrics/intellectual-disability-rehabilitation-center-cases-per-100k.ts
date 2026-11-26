@@ -5,6 +5,7 @@ export const intellectualDisabilityRehabilitationCenterCasesPer100k: MetricConfi
   "key": "intellectual-disability-rehabilitation-center-cases-per-100k",
   "title": "知的障害者更生相談所取扱実人員",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

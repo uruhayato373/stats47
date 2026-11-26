@@ -5,6 +5,7 @@ export const publicHallCountPerMillion: MetricConfig = {
   "key": "public-hall-count-per-million",
   "title": "公民館数",
   "subtitle": "人口100万人当たり",
+  "denominator": { "kind": "population", "per": 1000000 },
   "unit": "館",
   "category": "educationsports",
   "source": {

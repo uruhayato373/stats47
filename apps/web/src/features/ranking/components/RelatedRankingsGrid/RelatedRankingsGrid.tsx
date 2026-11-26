@@ -1,18 +1,22 @@
 
+import { PanelGrid } from "@stats47/components";
 import { hrefFor } from "@stats47/data-configs/content/href";
 import { metricShortName } from "@stats47/ranking";
 import { isOk, type AreaType } from "@stats47/types";
-import { ArrowRight, ListOrdered } from "lucide-react";
+import { ListOrdered } from "lucide-react";
 
-import Link from "@/components/atoms/SiteLink";
-import { SectionCard } from "@/components/surface";
+import { SectionHeader, SectionIndexLink } from "@/components/section";
+import { CardGrid } from "@/components/surface";
 
-import { rankingTop1Value, readRankingItemsByCategory } from "@/features/ranking/server";
+import { readRankingItemsByCategory } from "@/features/ranking/server";
+import { yearCodeOf } from "@/features/survey";
 
 import { navSurfaceProps } from "@/lib/analytics/events";
 
-import { RANK_GOLD_TEXT } from "../../utils/rank-medal.palette";
-import { getSidebarDetail } from "../RankingSidebar/select-sidebar-items";
+import { RelatedRankingMapLoader } from "./RelatedRankingMapLoader";
+
+/** 格子が 1 列 (スマホ) のときに出す枚数 (2026-11-26 オーナー判断。9 枚が縦に並ぶと長すぎた) */
+const SINGLE_COLUMN_LIMIT = 3;
 
 interface RelatedRankingsGridProps {
   /** 現在表示中の rankingKey (除外用) */
@@ -26,7 +30,7 @@ interface RelatedRankingsGridProps {
 }
 
 /**
- * 同カテゴリの関連ランキング grid (本文中段用)
+ * 同カテゴリの関連ランキング grid (本文中段用)。注目ランキングと同じ地図付きのカードを記事と同じ格子 (CardGrid) に並べる (2026-11-26 オーナー判断)
  *
  * /ranking 詳細ページの AI 考察セクション直後に配置し、内部リンク密度を上げる。
  * sidebar (RankingItemsSidebar) と重複するが、本文中段にも展開することで:
@@ -44,70 +48,33 @@ export async function RelatedRankingsGrid({
   const result = await readRankingItemsByCategory(categoryKey);
   if (!isOk(result)) return null;
 
-  // 現在のランキングを除いた上位 limit 件
+  // 現在のランキングを除いた上位 limit 件 (最新年の無い指標は地図を作れないので出さない)
   const items = result.data
-    .filter((item) => item.rankingKey !== rankingKey)
+    .filter((item) => item.rankingKey !== rankingKey && yearCodeOf(item.latestYear))
     .slice(0, limit);
 
   if (items.length === 0) return null;
 
+  // カードの格子を含むセルは余白を持たないので、SectionCard に入れず、見出しと格子を別のセルにした格子の節にする (調査ハブと同じ)
   return (
-    <SectionCard
-      title="同カテゴリの関連ランキング"
-      icon={<ListOrdered className="h-4 w-4 text-muted-foreground" />}
-      headerAction={
-        categoryKey ? (
-          <Link
-            {...navSurfaceProps("ranking_related")}
-            href={hrefFor("category", { categoryKey })}
-            className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
-          >
-            すべて見る
-            <ArrowRight className="h-3 w-3" />
-          </Link>
-        ) : undefined
-      }
-    >
-      <div
-        className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
-        {...navSurfaceProps("ranking_related")}
-      >
-        {items.map((item) => {
-          const readerLabel = metricShortName(item);
-          const detail = getSidebarDetail(item);
-          // 1 位の値はランキングのページと同じ表示単位で書く (「270,584,874千円」でなく「2,706億円」。2026-11-14)
-          const top1Value = rankingTop1Value(item);
-          return (
-            <Link
-              key={item.rankingKey}
-              href={hrefFor("ranking", { rankingKey: item.rankingKey })}
-              className="group flex flex-col gap-1 rounded-none px-3 py-2.5 transition-colors hover:bg-accent/40"
-            >
-              <span className="line-clamp-2 text-sm font-medium leading-snug text-foreground group-hover:text-primary">
-                {readerLabel}
-              </span>
-              {detail && (
-                <span className="line-clamp-1 text-xs text-muted-foreground">
-                  {detail}
-                </span>
-              )}
-              {item.top1 && (
-                <span className="line-clamp-1 text-xs text-muted-foreground">
-                  <span className={`font-semibold ${RANK_GOLD_TEXT}`}>
-                    {item.top1.rank ?? 1}位
-                  </span>{" "}
-                  {item.top1.areaName}{" "}
-                  {top1Value ? (
-                    <span className="font-semibold text-foreground">
-                      {top1Value.value}{top1Value.unit}
-                    </span>
-                  ) : null}
-                </span>
-              )}
-            </Link>
-          );
-        })}
-      </div>
-    </SectionCard>
+    <PanelGrid as="section" aria-labelledby="related-rankings-title" {...navSurfaceProps("ranking_related")}>
+      <SectionHeader
+        title={<span id="related-rankings-title">同カテゴリの関連ランキング</span>}
+        icon={<ListOrdered />}
+        action={<SectionIndexLink href={hrefFor("category", { categoryKey })}>すべて見る</SectionIndexLink>}
+        hideRule
+      />
+      <CardGrid>
+        {items.map((item, index) => (
+          <RelatedRankingMapLoader
+            key={item.rankingKey}
+            rankingKey={item.rankingKey}
+            hook={metricShortName(item)}
+            year={yearCodeOf(item.latestYear) ?? ""}
+            hiddenWhenSingleColumn={index >= SINGLE_COLUMN_LIMIT}
+          />
+        ))}
+      </CardGrid>
+    </PanelGrid>
   );
 }

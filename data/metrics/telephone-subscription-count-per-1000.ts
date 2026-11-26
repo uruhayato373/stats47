@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const telephoneSubscriptionCountPer1000: MetricConfig = {
   "key": "telephone-subscription-count-per-1000",
   "title": "電話加入数",
-  "subtitle": "人口1000人当たり",
+  "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "加入",
   "category": "ict",
   "source": {

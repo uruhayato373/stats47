@@ -5,6 +5,7 @@ export const roomsPerMainHouseholdOwner: MetricConfig = {
   "key": "rooms-per-main-household-owner",
   "title": "1世帯当たり居住室数",
   "subtitle": "持ち家・主世帯",
+  "denominator": { "kind": "household", "per": 1 },
   "unit": "室",
   "category": "construction",
   "source": {

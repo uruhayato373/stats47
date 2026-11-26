@@ -151,9 +151,7 @@ export default async function HomePage() {
   // パンくずの無いトップでは、h1 の上の小ラベルでサイトの役割を示す
   const header = (
     <PageHeader
-      eyebrow="地域のデータアトラス"
       title="日本の地域データを探す"
-      description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
     />
   );
 

@@ -35,5 +35,6 @@ export const agingIndex: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "15歳未満人口100人当たり"
+  "subtitle": "15歳未満人口100人当たり",
+  "denominator": { "kind": "population", "per": 100, "scope": "15歳未満" },
 };

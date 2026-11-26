@@ -5,8 +5,8 @@ export const neonatalMortalityRatePer1000Births: MetricConfig = {
   "key": "neonatal-mortality-rate-per-1000-births",
   "title": "新生児死亡率",
   "subtitle": "出生数千当たり",
+  "denominator": { "kind": "other", "per": 1000, "scope": "出生数" },
   "unit": "出生千対",
-  "denominator": "person",
   "category": "population",
   "source": {
     "kind": "estat",

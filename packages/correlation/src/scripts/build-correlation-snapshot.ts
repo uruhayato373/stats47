@@ -8,7 +8,7 @@
  * 後継。永続 D1 を一切持たず、以下のフローで R2 snapshot を再生成する:
  *
  *   入力 : R2 `app/stats/<metric>/values.json` (公開 URL read) + git TS (data-configs)
- *   集計 : 使い捨て :memory: better-sqlite3 (旧 correlations schema 同等の temp table)
+ *   集計 : メモリ上の計算だけ (2026-11-26 に使い捨ての :memory: SQLite をやめた)
  *   出力 : R2 `app/correlation/top-pairs.json` / `stats.json` / `by-ranking-key-v2/<key>.json`
  *
  * 計算量: ~2,000 active 指標² ≈ 2M ペア。全ペアでscatter object/配列を作ると
@@ -16,9 +16,7 @@
  *   - per-key 正負各10件 (人口補正後の順位相関の絶対値降順。populationAdjustedRankR)
  *   - global top-200 候補 (effectiveR 降順)
  *   - 走行中の total / strong(|r|>=0.7) カウント
- * だけを保持する。scatterは候補集合が確定してから候補分だけ作り、
- * 最終的に「候補行のみ」を :memory: correlations に INSERT して
- * 旧 exporter SQL (effectiveR / ORDER BY / strong 集計) を厳密に再現する。
+ * だけを保持する。scatterは候補集合が確定してから、配信する分だけ作る。
  *
  * 生成先は R2 staging。remote への反映は既存 publisher が行う。
  *
@@ -36,14 +34,13 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import DatabaseConstructor from 'better-sqlite3';
-
 import {
   listAllMetrics,
   getMetricConfig,
   yearInSpec,
 } from '@stats47/data-configs';
 import type { MetricConfig } from '@stats47/data-configs';
+import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   assertR2WriteAllowed,
@@ -51,7 +48,8 @@ import {
   writeR2Staging,
 } from '@stats47/r2-storage/server';
 import { readStatsValues } from '@stats47/stats-r2/readers';
-import { CORRELATION_SELECTION_POLICY, compareCorrelation, correlationDirection, selectCorrelationGroups, type CorrelationGroups } from '../selection-policy';
+import { isCapitalCityValueMetric, resolveMetricPrimaryProvenance } from '@stats47/data-configs/provenance';
+import { CORRELATION_SELECTION_POLICY, compareCorrelation, correlationDirection, correlationIdentity, isCrossGrainPair, isNearDuplicatePair, selectCorrelationGroups, type CorrelationGroups } from '../selection-policy';
 
 import {
   isExcludedCorrelationKey,
@@ -202,13 +200,12 @@ COMPLEMENTARY_GROUPS.forEach((group, idx) => {
   for (const key of group) complementaryGroupMap.set(key, idx);
 });
 
-// ─── 軽量メタ (title / subtitle / unit / normalizationBasis) ──────────────────
+// ─── 軽量メタ (title / subtitle / unit) ──────────────────────────────────────
 
 interface MetricDisplayMeta {
   title: string | null;
   subtitle: string | null;
   unit: string;
-  normalizationBasis: string | null;
 }
 
 interface RankingItemsAllSnapshot {
@@ -219,14 +216,11 @@ interface RankingItemsAllSnapshot {
     title?: string;
     subtitle?: string | null;
     unit?: string;
-    normalizationBasis?: string | null;
   }>;
 }
 
 /**
- * 旧 D1 ranking_items 列 (title / subtitle / unit / normalizationBasis) の代替を
- * R2 `app/ranking-items/all.json` から取得し、無い場合は MetricConfig へフォールバック。
- * 旧 list-top-correlations.ts は metrics.title / metrics.normalizationBasis を JOIN していた。
+ * 表示に使う題名・補足・単位を R2 `app/ranking-items/all.json` から取得し、無い場合は MetricConfig へフォールバック。
  */
 async function loadDisplayMeta(): Promise<Map<string, MetricDisplayMeta>> {
   const map = new Map<string, MetricDisplayMeta>();
@@ -239,7 +233,6 @@ async function loadDisplayMeta(): Promise<Map<string, MetricDisplayMeta>> {
         title: it.title ?? null,
         subtitle: it.subtitle ?? null,
         unit: it.unit ?? '',
-        normalizationBasis: it.normalizationBasis ?? null,
       });
     }
   }
@@ -257,7 +250,6 @@ function displayMetaFor(
     title: config?.title ?? null,
     subtitle: config?.subtitle ?? null,
     unit: config?.unit ?? '',
-    normalizationBasis: null, // builder は normalizationBasis を焼かないため snapshot 由来のみ
   };
 }
 
@@ -475,18 +467,25 @@ function effectiveAbsROf(p: {
  */
 export class TopByPopulationAdjusted {
   private groups: CorrelationGroups<CandidateScore> = { positive: [], negative: [] };
-  constructor(private readonly rankingKey: string) {}
+  /** titleOf を渡すと、同じ題名の相手は強い 1 件だけを残す (方針の dedupeByTitle。上限で切る前に重複を落とし、枠を減らさない) */
+  constructor(private readonly rankingKey: string, private readonly titleOf: (key: string) => string | null = () => null) {}
+  private counterpart(p: CandidateScore) {
+    const rankingKey = p.keyX === this.rankingKey ? p.keyY : p.keyX;
+    return { rankingKey, populationAdjustedR: p.populationAdjustedRankR, title: this.titleOf(rankingKey) };
+  }
   add(p: CandidateScore) {
     const direction = correlationDirection(p.populationAdjustedRankR);
     if (!direction) return;
-    const items = this.groups[direction];
-    items.push(p);
-    items.sort((a, b) => compareCorrelation(
-      { rankingKey: a.keyX === this.rankingKey ? a.keyY : a.keyX, populationAdjustedR: a.populationAdjustedRankR },
-      { rankingKey: b.keyX === this.rankingKey ? b.keyY : b.keyX, populationAdjustedR: b.populationAdjustedRankR },
-    ));
+    const sorted = [...this.groups[direction], p].sort((a, b) => compareCorrelation(this.counterpart(a), this.counterpart(b)));
+    const seen = new Set<string>();
+    const items = sorted.filter((candidate) => {
+      const identity = correlationIdentity(this.counterpart(candidate));
+      if (seen.has(identity)) return false;
+      seen.add(identity);
+      return true;
+    });
     const limit = CORRELATION_SELECTION_POLICY.groups[direction].limit;
-    if (items.length > limit) items.length = limit;
+    this.groups[direction] = items.slice(0, limit);
   }
   values(): CandidateScore[] {
     return [...this.groups.positive, ...this.groups.negative];
@@ -575,259 +574,89 @@ class GlobalTopByEffective {
   }
 }
 
-// ─── :memory: SQLite (旧 correlations schema 同等の temp table) ────────────────
+// ─── 候補から配信の形を作る ────────────────────────────────────────────────────
+//
+// 2026-11-26 まで、候補を旧 D1 の表と同じ形の :memory: SQLite に入れ、SQL で引いていた (D1 時代の SQL を
+// そのまま再現するため)。候補は指標あたり正負各 10 件 + 全体の上位だけなので、Map と並べ替えで足りる。
+// 置き換えの前後で、全 2,548 指標の出力のハッシュが一致することを確かめている。
 
-/**
- * 旧 D1 correlations schema を :memory: に再現し、候補行のみ INSERT。
- * 旧 exporter SQL (effectiveR / ORDER BY / strong 集計 / per-key) を厳密に流用する。
- *
- * schema 出典: packages/database/src/schema/correlations.ts は Phase 7 で削除済みのため
- * 旧 upsert-correlation.ts (git show 70758ac0^) が書いていた列を最小再現:
- *   metric_key_x, metric_key_y, pearson_r, partial_r_population, partial_r_area,
- *   partial_r_aging, partial_r_density, scatter_data_json
- * (+ join 用に metrics(key, title, normalization_basis) も temp 化)
- */
-function buildMemoryDb(
+/** 候補の組を、含まれる指標から引けるようにする */
+function indexCandidatesByKey(candidates: Iterable<CandidateScore>): Map<string, CandidateScore[]> {
+  const index = new Map<string, CandidateScore[]>();
+  for (const candidate of candidates) {
+    for (const key of [candidate.keyX, candidate.keyY]) {
+      const rows = index.get(key);
+      if (rows) rows.push(candidate);
+      else index.set(key, [candidate]);
+    }
+  }
+  return index;
+}
+
+/** 全体の上位の組 (SNS の相関カルーセルが読む)。実効の相関 (偏相関 4 種と r の絶対値の最小) の強い順 */
+function selectTopPairs(
   candidates: Iterable<CandidateScore>,
-  loaded: ReadonlyMap<string, LoadedMetric>,
   metaMap: Map<string, MetricDisplayMeta>,
-  allKeys: Set<string>
-): DatabaseConstructor.Database {
-  const db = new DatabaseConstructor(':memory:');
-  db.pragma('journal_mode = MEMORY');
-
-  db.exec(`
-    CREATE TABLE correlations (
-      metric_key_x TEXT NOT NULL,
-      metric_key_y TEXT NOT NULL,
-      pearson_r REAL NOT NULL,
-      partial_r_population REAL,
-      partial_r_area REAL,
-      partial_r_aging REAL,
-      partial_r_density REAL,
-      pop_adj_rank_r REAL NOT NULL,
-      year TEXT NOT NULL,
-      scatter_data_json TEXT NOT NULL
-    );
-    CREATE TABLE metrics (
-      key TEXT PRIMARY KEY,
-      title TEXT,
-      normalization_basis TEXT
-    );
-    CREATE INDEX idx_corr_x ON correlations(metric_key_x);
-    CREATE INDEX idx_corr_y ON correlations(metric_key_y);
-  `);
-
-  const insMetric = db.prepare(
-    'INSERT OR IGNORE INTO metrics (key, title, normalization_basis) VALUES (?, ?, ?)'
-  );
-  const insMetricsTx = db.transaction(() => {
-    for (const key of allKeys) {
-      const m = displayMetaFor(key, metaMap);
-      insMetric.run(key, m.title, m.normalizationBasis);
-    }
-  });
-  insMetricsTx();
-
-  const insCorr = db.prepare(`
-    INSERT INTO correlations
-      (metric_key_x, metric_key_y, pearson_r,
-       partial_r_population, partial_r_area, partial_r_aging, partial_r_density,
-       pop_adj_rank_r, year, scatter_data_json)
-    VALUES (@keyX, @keyY, @pearsonR, @prPop, @prArea, @prAging, @prDensity, @popAdjRankR, @year, @scatter)
-  `);
-  const insCorrTx = db.transaction(() => {
-    for (const c of candidates) {
-      const x = loaded.get(c.keyX);
-      const y = loaded.get(c.keyY);
-      if (!x || !y) {
-        throw new Error(
-          `correlation candidate の観測値がありません: ${c.keyX}/${c.keyY}`
-        );
-      }
-      insCorr.run({
-        keyX: c.keyX,
-        keyY: c.keyY,
-        pearsonR: c.pearsonR,
-        prPop: c.partialRPopulation,
-        prArea: c.partialRArea,
-        prAging: c.partialRAging,
-        prDensity: c.partialRDensity,
-        popAdjRankR: c.populationAdjustedRankR,
-        year: c.year,
-        // 候補ごとに生成・直ちに INSERT し、JS 配列と SQLite の二重保持を避ける。
-        scatter: JSON.stringify(scatterAt(x, y, c.year)),
-      });
-    }
-  });
-  insCorrTx();
-
-  return db;
-}
-
-interface TopPairRow {
-  rankingKeyX: string;
-  rankingKeyY: string;
-  year: string;
-  pearsonR: number;
-  effectiveR: number;
-  partialRPopulation: number | null;
-  partialRArea: number | null;
-  partialRAging: number | null;
-  partialRDensity: number | null;
-  titleX: string | null;
-  titleY: string | null;
-  normalizationBasisX: string | null;
-  normalizationBasisY: string | null;
-}
-
-/** 旧 list-top-correlations.ts の SQL を SQLite 生クエリで厳密再現。 */
-function queryTopPairs(
-  db: DatabaseConstructor.Database,
   limit: number
 ): TopCorrelation[] {
-  const effectiveAbsR = `MIN(
-    COALESCE(ABS(c.partial_r_population), ABS(c.pearson_r)),
-    COALESCE(ABS(c.partial_r_area), ABS(c.pearson_r)),
-    COALESCE(ABS(c.partial_r_aging), ABS(c.pearson_r)),
-    COALESCE(ABS(c.partial_r_density), ABS(c.pearson_r))
-  )`;
-  const rows = db
-    .prepare(
-      `
-      SELECT
-        c.metric_key_x AS rankingKeyX,
-        c.metric_key_y AS rankingKeyY,
-        c.year AS year,
-        c.pearson_r AS pearsonR,
-        (CASE WHEN c.pearson_r >= 0 THEN 1 ELSE -1 END) * ${effectiveAbsR} AS effectiveR,
-        c.partial_r_population AS partialRPopulation,
-        c.partial_r_area AS partialRArea,
-        c.partial_r_aging AS partialRAging,
-        c.partial_r_density AS partialRDensity,
-        ix.title AS titleX,
-        iy.title AS titleY,
-        ix.normalization_basis AS normalizationBasisX,
-        iy.normalization_basis AS normalizationBasisY
-      FROM correlations c
-      INNER JOIN metrics ix ON c.metric_key_x = ix.key
-      INNER JOIN metrics iy ON c.metric_key_y = iy.key
-      WHERE ABS(c.pearson_r) < 0.99
-      ORDER BY ${effectiveAbsR} DESC
-      LIMIT ?
-    `
-    )
-    .all(limit * 10) as TopPairRow[];
-
-  // 旧 repo と同様、JS 側で除外キー/除外ペアを再フィルタしてから slice。
-  return rows
+  return [...candidates]
+    .filter((c) => Math.abs(c.pearsonR) < 0.99)
+    .sort((a, b) => b.effectiveAbsR - a.effectiveAbsR)
+    .slice(0, limit * 10)
     .filter(
-      (r) =>
-        !isExcludedCorrelationKey(r.rankingKeyX) &&
-        !isExcludedCorrelationKey(r.rankingKeyY) &&
-        !isExcludedCorrelationPair(r.rankingKeyX, r.rankingKeyY)
+      (c) =>
+        !isExcludedCorrelationKey(c.keyX) &&
+        !isExcludedCorrelationKey(c.keyY) &&
+        !isExcludedCorrelationPair(c.keyX, c.keyY)
     )
     .slice(0, limit)
-    .map((r) => ({
-      rankingKeyX: r.rankingKeyX,
-      rankingKeyY: r.rankingKeyY,
-      year: r.year,
-      titleX: r.titleX,
-      titleY: r.titleY,
-      normalizationBasisX: r.normalizationBasisX,
-      normalizationBasisY: r.normalizationBasisY,
-      pearsonR: r.pearsonR,
-      effectiveR: r.effectiveR,
-      partialRPopulation: r.partialRPopulation,
-      partialRArea: r.partialRArea,
-      partialRAging: r.partialRAging,
-      partialRDensity: r.partialRDensity,
+    .map((c) => ({
+      rankingKeyX: c.keyX,
+      rankingKeyY: c.keyY,
+      year: c.year,
+      titleX: displayMetaFor(c.keyX, metaMap).title,
+      titleY: displayMetaFor(c.keyY, metaMap).title,
+      pearsonR: c.pearsonR,
+      effectiveR: (c.pearsonR >= 0 ? 1 : -1) * c.effectiveAbsR,
+      partialRPopulation: c.partialRPopulation,
+      partialRArea: c.partialRArea,
+      partialRAging: c.partialRAging,
+      partialRDensity: c.partialRDensity,
     }));
 }
 
-interface ByKeyRawRow {
-  rankingKeyX: string;
-  rankingKeyY: string;
-  year: string;
-  pearsonR: number;
-  partialRPopulation: number | null;
-  partialRArea: number | null;
-  partialRAging: number | null;
-  partialRDensity: number | null;
-  populationAdjustedRankR: number;
-  scatterData: string;
-}
-
-const counterpartOf = (row: ByKeyRawRow, rankingKey: string): string =>
-  row.rankingKeyX === rankingKey ? row.rankingKeyY : row.rankingKeyX;
-
 /**
- * 対象 key を含む候補ペアを共通の選定規則で正負別に絞る。
- * 行数は候補集合 (per-key top-N ∪ global top) で上限がある。
- * scatter は X=自身になるよう必要なら x/y を swap。title/subtitle/unit を join。
+ * 対象の指標を含む候補を、共通の選定規則で正負別に絞る。散布図は X が対象の指標になる向きで作る。
  */
-function queryByKey(
-  db: DatabaseConstructor.Database,
+function selectByKey(
+  candidatesByKey: ReadonlyMap<string, CandidateScore[]>,
   rankingKey: string,
+  loaded: ReadonlyMap<string, LoadedMetric>,
   metaMap: Map<string, MetricDisplayMeta>
 ): CorrelationGroups<CorrelatedItem> {
-  const rows = db
-    .prepare(
-      `
-      SELECT
-        metric_key_x AS rankingKeyX,
-        metric_key_y AS rankingKeyY,
-        year,
-        pearson_r AS pearsonR,
-        partial_r_population AS partialRPopulation,
-        partial_r_area AS partialRArea,
-        partial_r_aging AS partialRAging,
-        partial_r_density AS partialRDensity,
-        pop_adj_rank_r AS populationAdjustedRankR,
-        scatter_data_json AS scatterData
-      FROM correlations
-      WHERE metric_key_x = ? OR metric_key_y = ?
-    `
-    )
-    .all(rankingKey, rankingKey) as ByKeyRawRow[];
-
+  const self = loaded.get(rankingKey);
   const results: CorrelatedItem[] = [];
-  for (const row of rows) {
-    const counterpartKey = counterpartOf(row, rankingKey);
+  for (const candidate of candidatesByKey.get(rankingKey) ?? []) {
+    const counterpartKey = candidate.keyX === rankingKey ? candidate.keyY : candidate.keyX;
+    const counterpart = loaded.get(counterpartKey);
+    if (!self || !counterpart) {
+      throw new Error(`correlation candidate の観測値がありません: ${candidate.keyX}/${candidate.keyY}`);
+    }
     const meta = displayMetaFor(counterpartKey, metaMap);
     if (meta.title === null) continue;
-
-    let scatter: CorrelatedItem['scatterData'];
-    try {
-      const parsed = JSON.parse(
-        row.scatterData
-      ) as CorrelatedItem['scatterData'];
-      scatter =
-        row.rankingKeyX === rankingKey
-          ? parsed
-          : parsed.map((p) => ({
-              areaCode: p.areaCode,
-              areaName: p.areaName,
-              x: p.y,
-              y: p.x,
-            }));
-    } catch {
-      scatter = [];
-    }
-
     results.push({
       rankingKey: counterpartKey,
       title: meta.title,
       subtitle: meta.subtitle,
       unit: meta.unit,
-      year: row.year,
-      pearsonR: row.pearsonR,
-      populationAdjustedR: row.populationAdjustedRankR,
-      partialRPopulation: row.partialRPopulation,
-      partialRArea: row.partialRArea,
-      partialRAging: row.partialRAging,
-      partialRDensity: row.partialRDensity,
-      scatterData: scatter,
+      year: candidate.year,
+      pearsonR: candidate.pearsonR,
+      populationAdjustedR: candidate.populationAdjustedRankR,
+      partialRPopulation: candidate.partialRPopulation,
+      partialRArea: candidate.partialRArea,
+      partialRAging: candidate.partialRAging,
+      partialRDensity: candidate.partialRDensity,
+      scatterData: scatterAt(self, counterpart, candidate.year),
     });
   }
   return selectCorrelationGroups(results);
@@ -863,6 +692,8 @@ export async function buildCorrelationSnapshot(
   themeFiles: number;
   consideredMetrics: number;
   durationMs: number;
+  /** 出力の中身のハッシュ (生成時刻を除く)。変更なしで飛ばしたときは無い */
+  outputDigest?: string;
 }> {
   const startedAt = Date.now();
   assertR2WriteAllowed({
@@ -945,7 +776,7 @@ export async function buildCorrelationSnapshot(
   // 3. ペア走査 (i<j)。per-key 正負各10件 と global top-200 候補のみ JS で保持し bound。
   const perKeyTop = new Map<string, TopByPopulationAdjusted>();
   for (const k of pairKeys)
-    perKeyTop.set(k, new TopByPopulationAdjusted(k));
+    perKeyTop.set(k, new TopByPopulationAdjusted(k, (key) => displayMetaFor(key, metaMap).title));
   const globalTop = new GlobalTopByEffective(
     CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT
   );
@@ -972,6 +803,15 @@ export async function buildCorrelationSnapshot(
     return rankPopulationCache.get(cacheKey)!;
   };
 
+  // 方針の規則に使う指標の性質は、組の走査の前に 1 回だけ求める (組は数百万あるので走査の中で出典を解決しない)
+  const capitalCityValueKeys = new Set(configs.filter((c) => isCapitalCityValueMetric(c, METRICS_REGISTRY)).map((c) => c.key));
+  const primarySurveyIds = new Map(configs.map((c) => [c.key, new Set(resolveMetricPrimaryProvenance(c, METRICS_REGISTRY).map((survey) => survey.id))]));
+  const sharesPrimarySurvey = (a: string, b: string): boolean => {
+    const other = primarySurveyIds.get(b);
+    return other !== undefined && [...(primarySurveyIds.get(a) ?? [])].some((id) => other.has(id));
+  };
+  let nearDuplicateSkipped = 0;
+
   for (let i = 0; i < pairKeys.length; i++) {
     const keyX = pairKeys[i];
     const mx = loaded.get(keyX)!;
@@ -979,7 +819,10 @@ export async function buildCorrelationSnapshot(
     for (let j = i + 1; j < pairKeys.length; j++) {
       const keyY = pairKeys[j];
       const titleY = displayMetaFor(keyY, metaMap).title;
-      if (titleX === null || titleY === null || isTrivialPair(keyX, keyY, titleX, titleY)) {
+      if (
+        titleX === null || titleY === null || isTrivialPair(keyX, keyY, titleX, titleY) ||
+        isCrossGrainPair(capitalCityValueKeys.has(keyX), capitalCityValueKeys.has(keyY))
+      ) {
         trivialSkipped++;
         continue;
       }
@@ -1038,6 +881,11 @@ export async function buildCorrelationSnapshot(
       cand.populationAdjustedRankR =
         rxp === null || ryp === null ? rankR : (calculatePartialR(rankR, rxp, ryp) ?? rankR);
 
+      if (isNearDuplicatePair(sharesPrimarySurvey(keyX, keyY), cand.populationAdjustedRankR)) {
+        nearDuplicateSkipped++;
+        continue;
+      }
+
       perKeyTop.get(keyX)!.add(cand);
       perKeyTop.get(keyY)!.add(cand);
       globalTop.add(cand);
@@ -1045,10 +893,10 @@ export async function buildCorrelationSnapshot(
   }
 
   console.log(
-    `[correlation] ペア total=${total} strong(|r|>=0.7)=${strong} 自明除外=${trivialSkipped}`
+    `[correlation] ペア total=${total} strong(|r|>=0.7)=${strong} 自明・単位違い除外=${trivialSkipped} ほぼ同じデータ除外=${nearDuplicateSkipped}`
   );
 
-  // 4. 候補集合 (per-key top union ∪ global top) のみ :memory: に INSERT。
+  // 4. 候補集合 (per-key top union ∪ global top)。
   const candidateSet = new Map<string, CandidateScore>();
   const addCandidate = (c: CandidateScore) => {
     const k = c.keyX < c.keyY ? `${c.keyX}\0${c.keyY}` : `${c.keyY}\0${c.keyX}`;
@@ -1058,15 +906,15 @@ export async function buildCorrelationSnapshot(
     for (const c of top.values()) addCandidate(c);
   for (const c of globalTop.values()) addCandidate(c);
   const allKeys = new Set<string>(pairKeys);
-  const db = buildMemoryDb(candidateSet.values(), loaded, metaMap, allKeys);
+  const candidatesByKey = indexCandidatesByKey(candidateSet.values());
 
-  // 5. 旧 exporter SQL で top-pairs / per-key を生成。stats は走行中カウントを使う
-  //    (候補集合は top-N のみで total/strong を正しく反映できないため JS 集計が正)。
+  // 5. 候補から top-pairs / per-key を作る。stats は走行中カウントを使う
+  //    (候補集合は top-N のみで total/strong を正しく反映できないため)。
   const generatedAt = new Date().toISOString();
 
   const topPairsSnapshot: CorrelationTopPairsSnapshot = {
     generatedAt,
-    pairs: queryTopPairs(db, CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT),
+    pairs: selectTopPairs(candidateSet.values(), metaMap, CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT),
   };
   const statsSnapshot: CorrelationStatsSnapshot = {
     generatedAt,
@@ -1087,6 +935,8 @@ export async function buildCorrelationSnapshot(
     await writeR2Staging(CORRELATION_STATS_KEY, JSON.stringify(statsSnapshot));
 
   }
+  // 出力の中身 (生成時刻を除く) のハッシュ。書き込まない dry-run でも出すので、生成の作り替えの前後で結果が同じかを比べられる
+  const outputHash = createHash('sha256').update(JSON.stringify(topPairsSnapshot.pairs));
   // dry-run でも全指標の候補・参照・形状を検査する。
   for (const key of pairKeys) {
     const snapshot: CorrelationByKeySnapshot = {
@@ -1094,12 +944,13 @@ export async function buildCorrelationSnapshot(
       rankingKey: key,
       latestYear: loaded.get(key)!.latestYear,
       selectionPolicyVersion: CORRELATION_SELECTION_POLICY.version,
-      groups: queryByKey(db, key, metaMap),
+      groups: selectByKey(candidatesByKey, key, loaded, metaMap),
     };
     parseCorrelationByKeySnapshot(snapshot);
     for (const item of [...snapshot.groups.positive, ...snapshot.groups.negative]) {
       if (!allKeys.has(item.rankingKey)) throw new Error(`Unknown correlation metric: ${item.rankingKey}`);
     }
+    outputHash.update(key).update(JSON.stringify(snapshot.groups));
     if (!opts.dryRun) await writeR2Staging(correlationByKeyPath(key), JSON.stringify(snapshot));
     perKeyFiles++;
   }
@@ -1126,7 +977,6 @@ export async function buildCorrelationSnapshot(
     }
   }
 
-  db.close();
   const durationMs = Date.now() - startedAt;
   return {
     skipped: false,
@@ -1139,6 +989,7 @@ export async function buildCorrelationSnapshot(
     themeFiles,
     consideredMetrics: pairKeys.length,
     durationMs,
+    outputDigest: outputHash.digest('hex'),
   };
 }
 
@@ -1159,7 +1010,7 @@ async function main() {
   console.log(
     `✅ correlation: top-pairs=${result.topPairs} total=${result.total} strong=${result.strong} ` +
       `per-key=${result.perKeyFiles} empty-key=${result.emptyKeyFiles} themes=${result.themeFiles} metrics=${result.consideredMetrics} ` +
-      `fingerprint=${result.inputFingerprint.slice(0, 12)} ${result.durationMs}ms`
+      `fingerprint=${result.inputFingerprint.slice(0, 12)} output=${result.outputDigest?.slice(0, 16)} ${result.durationMs}ms`
   );
 }
 

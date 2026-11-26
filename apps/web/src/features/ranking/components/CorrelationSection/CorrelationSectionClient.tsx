@@ -19,9 +19,6 @@ export function CorrelationSectionClient({ groups }: { groups: CorrelationGroups
 
   return (
     <SectionCard title="相関が高い指標">
-      <p className="mb-2 text-xs text-muted-foreground">
-        人口規模の影響を除いた順位相関（1県の極端な値に左右されにくい）
-      </p>
       <div {...navSurfaceProps("ranking_correlation")} className="@container">
         <div className={cn("grid grid-cols-1 gap-6", directions.length > 1 && "@md:grid-cols-2")}>
           {directions.map(direction => (

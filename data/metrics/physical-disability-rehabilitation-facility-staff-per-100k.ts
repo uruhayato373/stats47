@@ -5,6 +5,7 @@ export const physicalDisabilityRehabilitationFacilityStaffPer100k: MetricConfig 
   "key": "physical-disability-rehabilitation-facility-staff-per-100k",
   "title": "身体障害者更生援護施設従事者数",
   "subtitle": "人口10万人当たり",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

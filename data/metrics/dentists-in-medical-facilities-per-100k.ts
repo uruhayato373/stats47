@@ -5,6 +5,7 @@ export const dentistsInMedicalFacilitiesPer100k: MetricConfig = {
   "key": "dentists-in-medical-facilities-per-100k",
   "title": "歯科医師数",
   "subtitle": "人口10万人当たり・医療施設に従事する数",
+  "denominator": { "kind": "population", "per": 100000 },
   "unit": "人",
   "category": "socialsecurity",
   "source": {

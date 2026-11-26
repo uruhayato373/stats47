@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const specializedSchoolStudentsPer1000: MetricConfig = {
   "key": "specialized-school-students-per-1000",
   "title": "専修学校生徒数",
-  "subtitle": "人口1000人当たり",
+  "subtitle": "人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "人",
   "category": "educationsports",
   "source": {

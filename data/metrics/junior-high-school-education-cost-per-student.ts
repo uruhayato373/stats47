@@ -5,6 +5,7 @@ export const juniorHighSchoolEducationCostPerStudent: MetricConfig = {
   "key": "junior-high-school-education-cost-per-student",
   "title": "中学校教育費",
   "subtitle": "生徒1人当たり",
+  "denominator": { "kind": "person", "per": 1, "scope": "生徒" },
   "unit": "円",
   "category": "educationsports",
   "source": {

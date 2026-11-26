@@ -4,6 +4,7 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const populationDensityHabitable: MetricConfig = {
   "key": "population-density-habitable",
   "title": "人口密度（可住地面積1km²当たり）",
+  "denominator": { "kind": "area", "per": 1, "scope": "可住地" },
   "unit": "人",
   "category": "population",
   "source": {
@@ -42,17 +43,13 @@ export const populationDensityHabitable: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "人/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 1,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "人/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],

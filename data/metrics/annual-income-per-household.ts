@@ -34,5 +34,6 @@ export const annualIncomePerHousehold: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "1世帯当たり"
+  "subtitle": "1世帯当たり",
+  "denominator": { "kind": "household", "per": 1 },
 };

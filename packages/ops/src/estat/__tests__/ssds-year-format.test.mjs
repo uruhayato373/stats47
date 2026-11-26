@@ -348,5 +348,5 @@ test("生成器: 公式の項目名が「…当たり」の率には、spec が 
   ]);
   assert.equal(result.status, 0, result.stderr);
   assert.deepEqual(normalizationOf(result.stdout, "zz-rate-probe-clinic"), []);
-  assert.deepEqual(normalizationOf(result.stdout, "zz-rate-probe-foreign")?.map((option) => option.type), ["per_population", "per_area"]);
+  assert.deepEqual(normalizationOf(result.stdout, "zz-rate-probe-foreign")?.map((option) => option.denominator.kind), ["population", "area"]);
 });
