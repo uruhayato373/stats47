@@ -77,9 +77,10 @@ async function assertLayout(page: Page, hasRail: boolean) {
     expect(ad.width).toBeCloseTo(Math.min(ad.original, columnWidth), 0);
   }
   if (page.url().includes('/geo/')) {
-    // 本文上の開閉ナビと右レールは常に片方だけ。画面幅と本文幅の取り違えを検出する。
+    // GIS一覧はレールのカード 1 つだけが描き、レールが本文の下に回る幅でもそのまま 1 枚出す
+    // (2026-11-20。本文の先頭は一覧へのページ内リンクだけで、同じ 50 件のリンクを 2 回出さない)。
     await expect(page.getByRole('heading', { name: /^GIS一覧/ })).toHaveCount(1);
-    expect(layout.cards.length, `本文の幅 ${layout.shell.width}px (右レールが横: ${beside}) のレールのカード: ${layout.cards.map(card => card.title).join(' / ')}`).toBe(beside ? 1 : 0);
+    expect(layout.cards.length, `本文の幅 ${layout.shell.width}px (右レールが横: ${beside}) のレールのカード: ${layout.cards.map(card => card.title).join(' / ')}`).toBe(1);
   } else {
     expect(layout.cards.length, 'レール内のカードが消えていない').toBeGreaterThan(0);
   }

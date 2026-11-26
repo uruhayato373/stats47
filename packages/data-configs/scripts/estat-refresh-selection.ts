@@ -107,7 +107,11 @@ export interface RefreshSelection {
 export async function selectRefreshMetrics(metrics: readonly MetricConfig[], options: {
   ledger?: readonly SnapshotVersion[]; readJson?: ReadJson; tableUpdates?: TableUpdate[];
 } = {}): Promise<RefreshSelection> {
-  const active = metrics.filter((metric) => metric.isActive !== false);
+  // 都道府県も市区町村も持たない指標 (港・県間移動) は data-refresh が値を書けない (取得の段で必ず飛ばす)。
+  // 選ぶと取り込みが 0 件のまま次の段で落ちるので選ばない (2026-11-26 run 45820634459 で港の 9 指標が落ちた)
+  const active = metrics.filter(
+    (metric) => metric.isActive !== false && (metric.entities.includes("prefecture") || metric.entities.includes("city")),
+  );
   const readJson = options.readJson ?? publicJsonReader();
   const tableUpdates = options.tableUpdates ?? await checkTableUpdates(active, { ...options, readJson });
   const reasons: RefreshSelection["reasons"] = [];
@@ -117,8 +121,7 @@ export async function selectRefreshMetrics(metrics: readonly MetricConfig[], opt
       const metric = active[next++];
       // 都道府県の値を持たない指標 (市区町村だけ等) は、その指標が書く値のファイルの記録と比べる。
       // 2026-11-23 までは常に values.json を読み、市区町村だけの 562 件が毎回「記録なし」で選ばれていた
-      // 港・県間移動の値は記録の置き場が違うので、従来どおり都道府県のキーを読む (記録なし = 選ぶ)
-      const entity = metric.entities.includes("prefecture") || !metric.entities.includes("city") ? "prefecture" : "city";
+      const entity = metric.entities.includes("prefecture") ? "prefecture" : "city";
       const value = await readJson(statsR2Key(metric.key, entity));
       let storedConfigHash: string | null = null;
       if (value !== null) {

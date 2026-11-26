@@ -42,8 +42,8 @@ import { datasetDir } from "../../../config/datasets.mjs";
 import { listAllMetrics } from "../src/registry.js";
 import type { MetricConfig } from "../src/types.js";
 import { setAppIdReader, type Args } from "../src/ingest/batch-context.js";
-import { filterActiveRefreshTargets, getR2FileMtime, processOne } from "../src/ingest/process-one.js";
-export { classifyIngestShape, filterActiveRefreshTargets, processOne } from "../src/ingest/process-one.js";
+import { filterActiveRefreshTargets, getR2FileMtime, hasNothingToPublish, processOne } from "../src/ingest/process-one.js";
+export { classifyIngestShape, filterActiveRefreshTargets, hasNothingToPublish, processOne } from "../src/ingest/process-one.js";
 export { fetchEstatData } from "../src/ingest/estat-fetch.js";
 export { axisMembersFromMeta } from "../src/ingest/area-axis-fetch.js";
 export { stripCatCodePrefix, resolveCat01ByName, kakeiEstatSource, fetchPrefectureRowsAllYears,
@@ -150,6 +150,7 @@ async function main() {
   const failedKeys: string[] = [];
   const emptyKeys: string[] = [];
   const shapeKeys: string[] = [];
+  const results: Awaited<ReturnType<typeof processOne>>[] = [];
   // concurrency-limited execution
   const queue = [...targets];
   const workers = Array.from({ length: args.concurrency }, async () => {
@@ -157,6 +158,7 @@ async function main() {
       const c = queue.shift();
       if (!c) break;
       const result = await processOne(c, appId, args.dryRun, args.allowEmpty, args.allowShape);
+      results.push(result);
       // status で分岐する (旧実装の message.includes("skipped") は文言依存で脆く、
       // かつ 0 件を表す種別が無いため rows=0 が ok に紛れ込んでいた)
       switch (result.status) {
@@ -182,6 +184,7 @@ async function main() {
           break;
         case "skip":
           skip++;
+          if (isExplicitMetric) console.log(`  [skip] ${result.key}: ${result.message}`);
           break;
         default:
           fail++;
@@ -212,6 +215,13 @@ async function main() {
   // --metric 明示指定 (特定キーの復旧目的の実行) は 1 件でも fail したら exit 1。
   // 全量実行 (metric 未指定 = 月次 cron) は fail 比率が 10% を超えたら exit 1
   // (少数の恒常的失敗だけで毎月 cron を赤くしないための閾値)。
+  if (hasNothingToPublish(results, { isExplicitMetric, dryRun: args.dryRun })) {
+    console.error(
+      `[fatal] --metric 指定の ${results.length} 件をすべて飛ばし、R2 へ上げる値がありません (理由は上の [skip] 行)。\n` +
+        `        e-Stat 以外の指標は external-metric-ingest.yml、港・県間移動の指標はこの workflow の対象外です`,
+    );
+    process.exit(1);
+  }
   if (isExplicitMetric && fail > 0) {
     console.error(
       `[fatal] --metric 指定実行で ${fail} 件失敗しました (復旧対象キーが未完了です)`,

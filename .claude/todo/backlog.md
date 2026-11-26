@@ -25,13 +25,6 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [DATA-REFRESH-PORT-DISPATCH-FAIL-01] 港湾の 9 指標のデータ更新 (手動起動) が、観測値を 1 件も作らずに落ちた
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-11-26] [領域:サイト]
-
-- **証拠 (2026-11-26)**: `data-refresh.yml` の workflow_dispatch (run 45820634459・12:32 UTC・main 837623d9c) が「Push observations to R2 (app/stats)」で落ちた。`REFRESH_METRIC` は `port-cargo-coastal-in` ほか港湾の 9 指標、`BATCH_OUTCOME: success` なのに「エラー: .local/r2/app/stats が見つかりません」で exit 1。起動した人・仕組みは確かめていない (本番デプロイ 45817142016 の 22 分後)
-- **次**: `gh run view 45820634459 --log` で取得の段が 9 指標に何を返したかを読み、取得 0 件を成功 (`BATCH_OUTCOME: success`) と扱った理由を切り分ける。指標の定義 (`data/metrics/port-*.ts`) の取得元が `data-refresh` の対象かも確かめる
-- **完了条件**: 9 指標の更新が成功するか、対象外なら起動側が呼ばないようになっている。取得 0 件は取得の段で失敗になる
-
 ### [RANKING-VIEW-CONSOLIDATE-FOLLOWUP-01] 見方違いのページの統合 (2026-11-25) で残した後片付けと、調査で見つけたランキングの不具合
 タグ: [サイト品質] [種類:改善] [実行:対話] [起票:2026-11-25] [領域:サイト]
 
@@ -418,7 +411,7 @@ updated: 2026-11-01
 - **main へ入れるときの注意**: (1) 段 1 は `sync-snapshots.yml` の書き戻しのパスを変えたので、main へ入るまで `sync-snapshots` を起動しない。(2) 段 2 でブログの公開前検査 (`blog-publication-guard.ts`) の契約のパスが変わったので、保管してあるブログ索引の候補は作り直す。(5) 段 5 の読み込み口は middleware (Edge) が JSON を静的 import する。テストは通っているが、`next build` と本番での転送・410 は未確認なので、main へ入れた後にルートのスモークテスト (`.github/scripts/smoke-test-routes.sh`) で確かめる。(6) `apps/web/src/config/unpublished-blog-slugs.ts` (生成物) の見出しが、410 の一覧の正本を旧い TS と書いたままなので、`generate-unpublished-blog-slugs.ts` の文言を直して作り直す。(4) `data/products/catalog-status.json` の証跡の文字列に、移す前の KDP の出品台帳のパスが 33 件残る (`products:report` で作り直すと新しいパスになる)。(7) 段 6 で `packages/gis` と `packages/data-configs` の読み込み口が `data/geo/`・`data/open-data/` の JSON を静的 import する形になった。型検査と vitest は通っているが、`next build` と Remotion のバンドル、`/geo` 系ページの表示は未確認なので、main へ入れる前に `npm run dev:web` で `/geo` と `/geo/layers/<slug>` を開いて確かめる。(8) 段 10 で広告の台帳を足し `publish-affiliate-ads.yml` の起動条件を変えた。develop への push で広告の R2 への反映が走り、成功した (2026-11-12)。main へ入っても workflow は develop の push で起動するので、main では走らない
 - **完了条件**: ブランチ `ledger-db-unify` が develop と main に入り、上の注意 (1)〜(8) を確かめた
 - **進捗 (2026-11-24)**: 注意 (6) は生成スクリプトの見出しを台帳 `site.gone-blog-slugs` に直し (48d86e2e7)、`unpublished-blog-slugs.ts` を本体で作り直した (R2 と一致・10 件)。注意 (4) の `catalog-status.json` も本体の checkout で `products:report` から作り直した。1ca0cff25 は origin/main に入っている。残りは注意 (5) のルートのスモークテストなど、main へ入った後の確認。
-- **本番の確認 (2026-11-25)**: 段 0〜13 (`1ca0cff25`) は main に入った (PR #1301・Deploy 45516018452 success)。Post-Deploy Smoke は route 11/11 通過、Playwright は 78 通過・1 失敗 (areas の selection-controls の `toBeVisible`。run 45518411755)。残り: 注意 (1) main 反映後の `sync-snapshots` の起動、(7) `/geo` と `/geo/layers/<slug>` の本番表示、Playwright 1 件の切り分け。
+- **本番の確認 (2026-11-25)**: 段 0〜13 (`1ca0cff25`) は main に入った (PR #1301・Deploy 45516018452 success)。Post-Deploy Smoke は route 11/11 通過、Playwright は 78 通過・1 失敗 (areas の selection-controls の `toBeVisible`。run 45518411755)。残り: 注意 (1) main 反映後の `sync-snapshots` の起動、(7) `/geo` と `/geo/layers/<slug>` の本番表示。Playwright の 1 件は、`/areas` の地方の切り替えを 2026-11-20 に外した (6f21dfd084) のにテストが残っていたためで、2026-11-27 にテストの対象から外した。
 
 ### [SKILL-AGENT-RULES-TO-CHECKS-01] skill と agent の定義を、短い規則と機械の検査へ作り替える
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-11-10] [領域:管理]
@@ -1607,7 +1600,7 @@ updated: 2026-11-01
 - **進捗 (2026-11-25・70be041b3)**: Item 5 の単位を「人」から「人/女性」へ直し、出生数と別の軸に分かれることをテストで固定した (`metrics:regen-derived` の生成物に差分なし)。残り: Item 5 は本番反映後の 375/1280px の画像と `/ranking/*` の表記確認、週次 display-units 台帳の `unit-changed` 差分の確認。Item 4 (R2 書き込み) と Item 7 (PSI) は未着手。
 - **追加 (2026-11-25・線の 2 重の全ページ計測から)**: `/geo/layers` の本文は、検索欄 (データ名・分野の選択) と件数とカードの格子を 1 つの段に直に持ち、入力欄の左の線が外枠の線と、選択の右の線が右レールの線と 1px で並ぶ (dev・1440px で実測)。検索欄と件数をカードと別のセル (余白 16px) に分ける。ブログ詳細のタグの丸いピルの下端が区切り線に 1px で接する箇所も同じ計測で 1 件出た (`/blog/sme-business-sentiment-regional-gap`・y=1954)。
 - **追加 (2026-11-26・`/ranking/total-population` を dev で開いて観測)**: ブラウザのコンソールに React の「Each child in a list should have a unique "key" prop. Check the render method of `RankingKeyPageClient`. It was passed a child from RankingPageClientShell.」が出る。`RankingPageClientShell.tsx` の `sections` の要素はどれも key を持つので、配列で渡している所を `RankingKeyPageClient.tsx` 側で探す。再現: `npm run dev:web` で同じページを開き、コンソールのエラーを見る。
-- **追加 (2026-11-26・本番デプロイ 45817142016 の後のスモークテスト run 45820304500)**: 手元から本番に向けて回すと 75 通過・3 失敗・1 不安定 (`cd apps/web && npx playwright test --config playwright.smoke.config.ts`)。直したのは、右レールを線で区切る変更 (11-25) と題・切り替え・「当たり」の表記の変更 (11-26) にテストが追従していなかった分。残り: (1) `rail-layout.spec.ts` の `/geo/layers`・`/geo/datasets/L01` は、幅 375px で「GIS一覧（50種類）」のカードが本文の下 (右レール側・高さ約 2,700px) に出て、テストは狭い幅では上の開閉メニューだけ (レールのカード 0 枚) を期待する。意図した変更かを決めて、画面かテストのどちらかを直す。(2) `selection-controls.spec.ts` の `/areas` は `[data-slot="toggle-group"][aria-label="地方"]` が見つからない (11-25 から続く。LEDGER-DB-UNIFY-01 の「Playwright 1 件の切り分け」と同じ)。(3) `/themes/education-culture` は 1 回落ちて再実行で通った。
+- **追加 (2026-11-26・本番デプロイ 45817142016 の後のスモークテスト run 45820304500)**: `/themes/education-culture` の selection-controls が 1 回落ちて再実行で通った (不安定)。続けて落ちるなら原因を調べる。`/geo` のレールと `/areas` の失敗は、どちらも 11-20 の意図した変更にテストが追従していなかったので、2026-11-27 にテストを直した。
 
 ### [BLOG-FIGURE-FOLLOWUP-01] ブログの図の型に残る不具合 (第 3 波の実行で見つけた分)
 タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [起票:2026-11-14] [待ち:承認]
