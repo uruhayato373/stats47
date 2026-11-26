@@ -205,7 +205,6 @@ export function RankingKeyPageClient({
         <div className="mb-4 flex min-w-0 flex-col gap-4">
             <RankingHeaderPanel
                 metricTitle={displayInfo.title}
-                areaType={currentAreaType}
                 updatedAt={activeRankingItem.updatedAt}
                 latestYear={activeRankingItem.latestYear}
                 nowYear={nowYear}

@@ -7,13 +7,11 @@ import { hrefFor } from "@stats47/data-configs/content/href";
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   isMunicipalityPrefectureRankingKey,
-  scopeHrefsForMunicipalityRanking,
 } from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
-  buildRankingPageTitle,
   isMunicipalityAiContentCurrent,
   formatMunicipalityValueText,
   municipalityAbsenceNote,
@@ -25,9 +23,9 @@ import { Map as MapIcon } from 'lucide-react';
 import Link from '@/components/atoms/SiteLink';
 import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
 import { MapTableSplit } from '@/components/charts/MapTableSplit';
-import { ArticleShell, Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
+import { ArticleShell, Breadcrumbs, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
-import { StatisticsScopeNav } from '@/components/navigation';
+import { ShareButtons } from '@/components/molecules/ShareButtons';
 import { RailLinksCard } from '@/components/rail';
 import { SectionHeader } from '@/components/section';
 import { STAT_VALUE_CLASS, ValueTable } from '@/components/surface';
@@ -50,6 +48,7 @@ import {
   readMunicipalityRankingCommentary,
 } from '@/features/municipalities/server';
 import { findDataProductForMunicipalityRanking, ProductItem } from '@/features/products';
+import { RankingAreaUnitSwitch, RankingHeaderPanel } from '@/features/ranking/widgets';
 
 import {
   MUNICIPALITY_AFTER_MAP,
@@ -82,6 +81,9 @@ export async function generateStaticParams(): Promise<Array<{ rankingKey: string
 }
 
 export const revalidate = 86400;
+
+/** 計算方法を変えていない値に市区町村の定義が付ける補足 (都道府県のページでは計算方法の切り替えの「総数」) */
+const TOTAL_SUBTITLE = '総数';
 
 /** サーバーが HTML に出す上位の件数 (検索エンジンに読ませる一覧)。51 位以下は利用者の操作で読む */
 const INITIAL_ROWS = 50;
@@ -174,6 +176,9 @@ export default async function MunicipalityRankingPage({
     { label: '中央値', row: undefined, value: median },
     { label: lastRow ? `${lastRow.rank}位` : '最下位', row: lastRow, value: lastRow?.value },
   ];
+  // 題は都道府県のランキングと同じ指標名にする。市区町村の定義が付ける「総数」の補足は、都道府県では計算方法の切り替えが示す語で、
+  // 題に入れると同じ指標の 2 つのページで題が食い違う。ほかの補足 (事業所数の業種など) は指標を見分けるので残す
+  const headingTitle = item.subtitle === TOTAL_SUBTITLE ? item.title : municipalityRankingDisplayTitle(item);
   const structuredData = buildMunicipalityDatasetStructuredData({
     item,
     snapshot,
@@ -243,16 +248,18 @@ export default async function MunicipalityRankingPage({
       }
       header={
         <>
-          {/* 題の部分は題と 1 行の補足だけにする (2026-11-26 オーナー判断)。地域単位の切り替えは題の右 (狭い幅は題の下) に置き、
-              指標の説明は出典の前へ移した (題の上の切り替えと説明の 2 行で、表が 140px ほど下がっていた) */}
-          <PageHeader
-            className="mb-0"
-            title={buildRankingPageTitle(municipalityRankingDisplayTitle(item), 'city')}
-            meta={`最新 ${snapshot.yearName}・${snapshot.count.toLocaleString('ja-JP')}自治体`}
-            actions={
-              <StatisticsScopeNav
-                current="municipalities"
-                hrefs={scopeHrefsForMunicipalityRanking(item.rankingKey, (key) => KNOWN_RANKING_KEYS.has(key))}
+          {/* 題は都道府県のランキングと同じ部品・同じ文言 (「総人口ランキング」・最新年と最終更新・共有) にする (2026-11-26 オーナー決定)。
+              地域の単位の切り替えは、下の枠の見出しの右に都道府県と同じ部品で置く。指標の説明は出典の前に出す */}
+          <RankingHeaderPanel
+            metricTitle={headingTitle}
+            updatedAt={item.generatedAt}
+            latestYear={{ yearCode: snapshot.yearCode, yearName: snapshot.yearName }}
+            nowYear={new Date().getFullYear()}
+            shareButton={
+              <ShareButtons
+                title={headingTitle}
+                shareText={firstRow ? `${headingTitle}、1位は${listName(firstRow.areaName)}！ #stats47` : undefined}
+                variant="menu"
               />
             }
           />
@@ -276,6 +283,16 @@ export default async function MunicipalityRankingPage({
       <ChartPanel
         title="市区町村別ランキング"
         icon={<MapIcon />}
+        // 同じ指標の都道府県のランキングが公開中の指標だけ切り替えを出す (無い指標は相手のページが無い)
+        action={
+          KNOWN_RANKING_KEYS.has(item.rankingKey) && (
+            <RankingAreaUnitSwitch
+              current="municipalities"
+              prefectureHref={hrefFor('ranking', { rankingKey: item.rankingKey })}
+              municipalityHref={hrefFor('municipality-ranking', { rankingKey: item.rankingKey })}
+            />
+          )
+        }
         footer={
           <p className="-mx-4 border-t px-4 pt-3 text-xs text-muted-foreground">
             全国は形を簡略化しています。都道府県で絞り込むと、県内の詳しい地図を表示します。灰色は比較対象外 (データなし) の地域です。

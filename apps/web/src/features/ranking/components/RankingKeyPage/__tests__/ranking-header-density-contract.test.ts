@@ -58,12 +58,13 @@ const RANKING_COMPONENT_ROOT = path.resolve(
 );
 
 describe('ranking header density contract', () => {
-  it('見出しは共通生成し、表示中の指標名・地域粒度・更新日を配線する', () => {
-    expect(HEADER).toContain('buildRankingPageTitle(metricTitle, areaType)');
+  it('見出しは共通生成し、表示中の指標名・更新日を配線する (題に地域の単位を重ねない)', () => {
+    expect(HEADER).toContain('buildRankingPageTitle(metricTitle)');
     expect(HEADER).not.toContain('description=');
     const header = PAGE_CLIENT.match(/<RankingHeaderPanel\b[\s\S]*?\/>/)?.[0];
     expect(header).toContain('metricTitle={displayInfo.title}');
-    expect(header).toContain('areaType={currentAreaType}');
+    // 題は都道府県と市区町村で同じ。地域の単位は枠の見出しと切り替えが示す (2026-11-26 オーナー決定)
+    expect(header).not.toContain('areaType=');
     expect(header).toContain('updatedAt={activeRankingItem.updatedAt}');
   });
 

@@ -4,7 +4,7 @@ import { buttonVariants, cn } from '@stats47/components';
 
 import Link from '@/components/atoms/SiteLink';
 
-import { navSurfaceProps } from '@/lib/analytics/events';
+import { navSurfaceProps, type NavSurface } from '@/lib/analytics/events';
 
 
 export type StatisticsScope = 'prefectures' | 'municipalities' | 'japan';
@@ -18,6 +18,8 @@ export interface LinkRowNavItem {
   href: string;
   /** 現在のページ。aria-current="page" を付け、outline のボタンで示す */
   current?: boolean;
+  /** クリックの計測に残すラベル (data-nav-label)。省略時は計測の既定 */
+  navLabel?: string;
 }
 
 /**
@@ -51,6 +53,7 @@ export function LinkRowFrame({
   label,
   className,
   wrap = false,
+  surface = 'scope_nav',
   children,
 }: {
   /** nav の名前 (読み上げ用) */
@@ -58,17 +61,19 @@ export function LinkRowFrame({
   className?: string;
   /** 1 行に保たず折り返す (横スクロールとフェードを持たない)。項目の多い目次に使う */
   wrap?: boolean;
+  /** クリックの計測の面 (既定 scope_nav) */
+  surface?: NavSurface;
   children: ReactNode;
 }) {
   if (wrap) {
     return (
-      <nav aria-label={label} className={cn(LINK_ROW_WRAP_CLASS, className)} {...navSurfaceProps('scope_nav')}>
+      <nav aria-label={label} className={cn(LINK_ROW_WRAP_CLASS, className)} {...navSurfaceProps(surface)}>
         {children}
       </nav>
     );
   }
   return (
-    <nav aria-label={label} className={cn('relative w-full min-w-0', className)} {...navSurfaceProps('scope_nav')}>
+    <nav aria-label={label} className={cn('relative w-full min-w-0', className)} {...navSurfaceProps(surface)}>
       <div className={LINK_ROW_SCROLL_CLASS}>
         <div className={LINK_ROW_LIST_CLASS}>{children}</div>
       </div>
@@ -82,6 +87,7 @@ export function LinkRowNav({
   items,
   className,
   wrap,
+  surface,
 }: {
   /** nav の名前 (読み上げ用) */
   label: string;
@@ -89,16 +95,19 @@ export function LinkRowNav({
   className?: string;
   /** 1 行に保たず折り返す (LinkRowFrame の wrap) */
   wrap?: boolean;
+  /** クリックの計測の面 (LinkRowFrame の surface) */
+  surface?: NavSurface;
 }) {
   if (items.length === 0) return null;
   return (
-    <LinkRowFrame label={label} className={className} wrap={wrap}>
+    <LinkRowFrame label={label} className={className} wrap={wrap} surface={surface}>
       {items.map((item) => (
         <Link
           key={item.key}
           href={item.href}
           aria-current={item.current ? 'page' : undefined}
           data-slot="button"
+          data-nav-label={item.navLabel}
           className={linkRowItemClass(item.current)}
         >
           {item.label}
@@ -115,6 +124,15 @@ interface StatisticsScopeNavProps {
   className?: string;
   /** 同じ主題のページへのリンク先 (`scopeHrefsFor*Theme` の結果をサーバーで渡す)。 */
   hrefs?: StatisticsScopeHrefs;
+  /**
+   * 出す主語 (既定は 3 つ全部)。ランキングのページは同じ指標のページがある都道府県と市区町村だけを出す
+   * (「日本」は同じ指標のランキングが無く、別の種類のページへ飛ぶので出さない。2026-11-26 オーナー判断)
+   */
+  scopes?: readonly StatisticsScope[];
+  /** クリックの計測の面 (横タブだけ。既定 scope_nav) */
+  surface?: NavSurface;
+  /** 主語ごとのクリックの計測ラベル (横タブだけ) */
+  navLabels?: Partial<Record<StatisticsScope, string>>;
 }
 
 const ITEMS = [
@@ -134,17 +152,21 @@ export function StatisticsScopeNav({
   variant = 'horizontal',
   className,
   hrefs,
+  scopes,
+  surface,
+  navLabels,
 }: StatisticsScopeNavProps) {
-  const items = ITEMS.map((item) => ({
+  const items = ITEMS.filter((item) => !scopes || scopes.includes(item.key)).map((item) => ({
     key: item.key,
     label: item.label,
     // 現在地の項目も hrefs で上書きできる (/ranking の「47都道府県」は /themes ではなく /ranking 自身)
     href: hrefs?.[item.key] || item.href,
     current: item.key === current,
+    navLabel: navLabels?.[item.key],
   }));
 
   if (variant === 'horizontal') {
-    return <LinkRowNav label="統計の地域単位" items={items} className={cn('mb-4', className)} />;
+    return <LinkRowNav label="統計の地域単位" items={items} className={cn('mb-4', className)} surface={surface} />;
   }
 
   return (

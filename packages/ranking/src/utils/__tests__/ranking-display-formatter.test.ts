@@ -2,14 +2,13 @@ import { describe, expect, it } from "vitest";
 import { buildRankingDisplayContext, buildRankingPageTitle } from "../ranking-display-formatter";
 
 describe("buildRankingPageTitle", () => {
+  // 都道府県と市区町村のページで題を同じにする。地域の単位は枠の見出しと切り替えが示す (2026-11-26 オーナー決定)
   it.each([
-    ["年間日照時間", "prefecture", "都道府県別 年間日照時間ランキング"],
-    ["総人口", "city", "市区町村別 総人口ランキング"],
-    ["総人口（面積100km²あたり）", "prefecture", "都道府県別 総人口（面積100km²あたり）ランキング"],
-    ["輸出額", "port", "港湾別 輸出額ランキング"],
-    ["消費支出", "national", "全国 消費支出ランキング"],
-  ] as const)("指標 %s と地域粒度 %s から生成する", (metric, scope, expected) => {
-    expect(buildRankingPageTitle(metric, scope)).toBe(expected);
+    ["年間日照時間", "年間日照時間ランキング"],
+    ["総人口（面積100km²あたり）", "総人口（面積100km²あたり）ランキング"],
+  ] as const)("指標 %s の題に地域の単位を重ねない", (metric, expected) => {
+    expect(buildRankingPageTitle(metric)).toBe(expected);
+    expect(buildRankingPageTitle(metric)).not.toMatch(/都道府県別|市区町村別/);
   });
 });
 
@@ -99,14 +98,5 @@ describe("buildRankingDisplayContext", () => {
     const context = buildRankingDisplayContext(item);
     expect(context.decimalPlaces).toBe(2);
     expect(context.unit).toBe("倍");
-  });
-});
-
-describe("buildRankingPageTitle — 前置きの重なり", () => {
-  it("題名がすでに「都道府県別」を含むときは前置きを付けない (2026-11-26)", () => {
-    expect(buildRankingPageTitle("訪日外国人の都道府県別訪問者数", "prefecture")).toBe("訪日外国人の都道府県別訪問者数ランキング");
-    expect(buildRankingPageTitle("総人口", "prefecture")).toBe("都道府県別 総人口ランキング");
-    // 地域の単位が違えば前置きは付ける
-    expect(buildRankingPageTitle("訪日外国人の都道府県別訪問者数", "city")).toBe("市区町村別 訪日外国人の都道府県別訪問者数ランキング");
   });
 });

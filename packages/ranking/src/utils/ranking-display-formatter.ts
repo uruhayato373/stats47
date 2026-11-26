@@ -1,16 +1,10 @@
-import type { AreaType } from "@stats47/types";
 
-/** 短い指標名と表示中の地域粒度からページ見出しを作る。図表の短い題名とは分ける。 */
-export function buildRankingPageTitle(metricTitle: string, areaType: AreaType): string {
-  const scope = {
-    national: "全国",
-    prefecture: "都道府県別",
-    city: "市区町村別",
-    port: "港湾別",
-  } satisfies Record<AreaType, string>;
-  // 題名がすでに「都道府県別」を含む指標 (「訪日外国人の都道府県別訪問者数」など) は前置きを重ねない (2026-11-26)
-  if (metricTitle.includes(scope[areaType])) return `${metricTitle}ランキング`;
-  return `${scope[areaType]} ${metricTitle}ランキング`;
+/**
+ * ランキングのページの題 (h1)。都道府県と市区町村で同じ「総人口ランキング」にする (2026-11-26 オーナー決定)。
+ * 地域の単位は、すぐ下の枠の見出し (「都道府県別ランキング」「市区町村別ランキング」) と単位の切り替えが示すので、題に重ねない。
+ */
+export function buildRankingPageTitle(metricTitle: string): string {
+  return `${metricTitle}ランキング`;
 }
 
 /**

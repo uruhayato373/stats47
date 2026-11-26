@@ -147,11 +147,11 @@ describe('市区町村ランキング全国版のページ', () => {
     expect(selectedTab).toContain('表');
   });
 
-  // 題の部分は題と 1 行の補足だけ。説明文は出典の前に残す (検索エンジンと読者向けの本文)
-  it('題は「市区町村別 …ランキング」にし、指標の説明は表より後ろに出す', async () => {
+  // 題は都道府県のランキングと同じ「◯◯ランキング」(地域の単位を重ねない)。説明文は出典の前に残す (検索エンジンと読者向けの本文)
+  it('題は都道府県と同じ「…ランキング」にし、指標の説明は表より後ろに出す', async () => {
     vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
     const html = await renderPage();
-    expect(html).toMatch(/<h1[^>]*>市区町村別 試験の指標ランキング<\/h1>/);
+    expect(html).toMatch(/<h1[^>]*>試験の指標ランキング<\/h1>/);
     // 構造化データにも同じ文があるので、画面に出す側 (最後の出現) の位置で確かめる
     expect(html.lastIndexOf(item.description)).toBeGreaterThan(html.indexOf('<table'));
     // 題のブロック (header) の中には出さない
