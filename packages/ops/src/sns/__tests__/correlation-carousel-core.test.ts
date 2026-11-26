@@ -26,8 +26,8 @@ const shijimiPair: CandidatePairMeta = {
   titleY: "しじみ消費量",
   unitX: "円",
   unitY: "g",
-  normalizationBasisX: null,
-  normalizationBasisY: null,
+  hasDenominatorX: false,
+  hasDenominatorY: false,
 };
 
 test("しじみ消費支出額×しじみ消費量はキー stem 一致でタウトロジー判定される", () => {
@@ -45,8 +45,8 @@ test("タイトルの包含関係だけで stem が異なるペアも検出す�
     titleY: "舗装道路実延長",
     unitX: "km",
     unitY: "km",
-    normalizationBasisX: null,
-    normalizationBasisY: null,
+    hasDenominatorX: false,
+    hasDenominatorY: false,
   };
   const verdict = evaluateTautology(pair);
   assert.equal(verdict.tautological, true);
@@ -61,8 +61,8 @@ test("正規化されていない実数・総額のペアは raw-unnormalized �
     titleY: "都市計画費",
     unitX: "千円",
     unitY: "千円",
-    normalizationBasisX: null,
-    normalizationBasisY: null,
+    hasDenominatorX: false,
+    hasDenominatorY: false,
   };
   const verdict = evaluateTautology(pair);
   assert.equal(verdict.tautological, true);
@@ -77,8 +77,8 @@ test("末尾の丸括弧注記だけが違う同一現象ペアは title-parenth
     titleY: "風力発電導入量（設置基数）",
     unitX: "kW",
     unitY: "基",
-    normalizationBasisX: null,
-    normalizationBasisY: null,
+    hasDenominatorX: false,
+    hasDenominatorY: false,
   };
   const verdict = evaluateTautology(pair);
   assert.equal(verdict.tautological, true);
@@ -93,8 +93,8 @@ test("両側が他指標からの算術導出 (calculated) の場合は both-cal
     titleY: "実質可処分所得（物価補正後）",
     unitX: "円",
     unitY: "円",
-    normalizationBasisX: null,
-    normalizationBasisY: null,
+    hasDenominatorX: false,
+    hasDenominatorY: false,
     isCalculatedX: true,
     isCalculatedY: true,
   };
@@ -111,8 +111,8 @@ test("片側だけが calculated の場合は both-calculated-derivative を発�
     titleY: "実質可処分所得（物価補正後）",
     unitX: "千円",
     unitY: "円",
-    normalizationBasisX: null,
-    normalizationBasisY: null,
+    hasDenominatorX: false,
+    hasDenominatorY: false,
     isCalculatedX: false,
     isCalculatedY: true,
   };
@@ -128,15 +128,15 @@ test("正当な指標ペア（stem不一致・タイトル非包含・正規化�
     titleY: "食料費割合",
     unitX: "％",
     unitY: "％",
-    normalizationBasisX: null,
-    normalizationBasisY: null,
+    hasDenominatorX: false,
+    hasDenominatorY: false,
   };
   const verdict = evaluateTautology(pair);
   assert.equal(verdict.tautological, false);
   assert.equal(verdict.reason, null);
 });
 
-test("normalizationBasis が明示されていれば raw-unnormalized 判定をしない", () => {
+test("指標が分母を持てば raw-unnormalized 判定をしない", () => {
   const pair: CandidatePairMeta = {
     keyX: "some-count-key",
     keyY: "other-count-key",
@@ -144,8 +144,8 @@ test("normalizationBasis が明示されていれば raw-unnormalized 判定を�
     titleY: "別の件数",
     unitX: "件",
     unitY: "件",
-    normalizationBasisX: "人口10万人あたり",
-    normalizationBasisY: "人口10万人あたり",
+    hasDenominatorX: true,
+    hasDenominatorY: true,
   };
   const verdict = evaluateTautology(pair);
   assert.equal(verdict.tautological, false);

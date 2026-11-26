@@ -57,7 +57,7 @@ R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
 ## 関連
 
 - 実装: `packages/correlation/src/scripts/build-correlation-snapshot.ts` (+ `__tests__/`)
-- 再利用 util: `packages/correlation/src/utils/calculate-pearson.ts` (`calculatePearsonR` / `calculatePartialR` / `buildScatterData`) / `trivial-pairs.ts`
+- 再利用 util: `packages/correlation/src/utils/calculate-pearson.ts` (`calculatePearsonR` / `calculatePartialR` / `buildScatterData`) / `trivial-pairs.ts` (自明な相関の除外。一覧の正本は台帳 `data/correlation/exclusions.json` で、除外を足すときは台帳に理由付きで書く)
 - reader: `packages/correlation/src/repositories/read-correlation-{snapshot,by-key}.ts` (ranking 詳細の CorrelationSection が読む)
 - 旧 skill (Phase 6 で廃止): `/run-correlation-batch`
 

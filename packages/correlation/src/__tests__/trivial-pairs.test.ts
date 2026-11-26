@@ -20,8 +20,8 @@ describe("isExcludedCorrelationPair", () => {
   it("should detect excluded pair in forward order", () => {
     expect(
       isExcludedCorrelationPair(
-        "ssdse-f-elevation",
-        "ssdse-f-pressure-local"
+        "public-nursery-ratio",
+        "public-nursery-student-ratio"
       )
     ).toBe(true);
   });
@@ -29,8 +29,8 @@ describe("isExcludedCorrelationPair", () => {
   it("should detect excluded pair in reverse order", () => {
     expect(
       isExcludedCorrelationPair(
-        "ssdse-f-pressure-local",
-        "ssdse-f-elevation"
+        "public-nursery-student-ratio",
+        "public-nursery-ratio"
       )
     ).toBe(true);
   });
@@ -61,32 +61,13 @@ describe("isExcludedCorrelationPair", () => {
   it("should detect within-group pairs (temperature group)", () => {
     // Both are in the temperature group
     expect(
-      isExcludedCorrelationPair("average-temperature", "ssdse-f-avg-temp")
+      isExcludedCorrelationPair("average-temperature", "lowest-temperature")
     ).toBe(true);
   });
 
   it("should detect within-group pairs (temperature group, reverse)", () => {
     expect(
-      isExcludedCorrelationPair("ssdse-f-avg-temp", "average-temperature")
-    ).toBe(true);
-  });
-
-  it("should detect within-group pairs for non-adjacent group members", () => {
-    // First and last element of temperature group
-    expect(
-      isExcludedCorrelationPair(
-        "average-temperature",
-        "ssdse-f-vapor-pressure"
-      )
-    ).toBe(true);
-  });
-
-  it("should detect within-group pairs (snowfall group)", () => {
-    expect(
-      isExcludedCorrelationPair(
-        "ssdse-f-max-snow-depth",
-        "ssdse-f-snow-days"
-      )
+      isExcludedCorrelationPair("lowest-temperature", "average-temperature")
     ).toBe(true);
   });
 
@@ -100,11 +81,11 @@ describe("isExcludedCorrelationPair", () => {
   });
 
   it("should not exclude cross-group pairs", () => {
-    // One from temperature group, one from snowfall group
+    // 気温のまとまりと住宅のまとまりから 1 つずつ
     expect(
       isExcludedCorrelationPair(
         "average-temperature",
-        "ssdse-f-max-snow-depth"
+        "detached-house-ratio"
       )
     ).toBe(false);
   });
@@ -175,5 +156,19 @@ describe("isExcludedCorrelationKey", () => {
 
   it("should not exclude empty string", () => {
     expect(isExcludedCorrelationKey("")).toBe(false);
+  });
+});
+
+// 一覧は台帳 data/correlation/exclusions.json が正本 (2026-11-26)。指標の実在は check-datasets の refs が検査する
+describe("除外の台帳", () => {
+  it("まとまりの中の隣り合わない 2 指標も除外する", async () => {
+    const { default: exclusions } = await import("../../../../data/correlation/exclusions.json");
+    const group = exclusions.groups.find(({ keys }) => keys.length >= 3)!;
+    expect(isExcludedCorrelationPair(group.keys[0], group.keys[group.keys.length - 1])).toBe(true);
+  });
+
+  it("どの行にも理由がある", async () => {
+    const { default: exclusions } = await import("../../../../data/correlation/exclusions.json");
+    for (const row of [...exclusions.pairs, ...exclusions.groups, ...exclusions.keys]) expect(row.reason.length).toBeGreaterThan(0);
   });
 });

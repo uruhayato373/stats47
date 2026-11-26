@@ -39,7 +39,7 @@ import { rankingR2Key } from '../../../packages/r2-storage/mirror/r2-keys.mjs';
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-import { getMetricConfig } from "@stats47/data-configs";
+import { getMetricConfig, metricDenominatorOf } from "@stats47/data-configs";
 import type { MetricConfig } from "@stats47/data-configs";
 
 import { INDEXABLE_RANKING_KEYS } from "../../../apps/web/src/config/indexable-ranking-keys.ts";
@@ -126,8 +126,6 @@ interface TopCorrelationPair {
   rankingKeyY: string;
   titleX: string | null;
   titleY: string | null;
-  normalizationBasisX: string | null;
-  normalizationBasisY: string | null;
   pearsonR: number;
   effectiveR: number;
   partialRPopulation: number | null;
@@ -224,6 +222,12 @@ function pairKey(a: string, b: string): string {
   return a < b ? `${a}|${b}` : `${b}|${a}`;
 }
 
+/** 指標が分母を持つか (実数の指標・定義の無い指標は false) */
+function hasDenominator(config: ReturnType<typeof getMetricConfig>): boolean {
+  const kind = config ? metricDenominatorOf(config) : null;
+  return kind !== null && kind !== "none";
+}
+
 function tautologyVerdictFor(xKey: string, yKey: string, titleX: string, titleY: string) {
   const configX = getMetricConfig(xKey);
   const configY = getMetricConfig(yKey);
@@ -234,8 +238,8 @@ function tautologyVerdictFor(xKey: string, yKey: string, titleX: string, titleY:
     titleY,
     unitX: configX?.unit ?? null,
     unitY: configY?.unit ?? null,
-    normalizationBasisX: null,
-    normalizationBasisY: null,
+    hasDenominatorX: hasDenominator(configX),
+    hasDenominatorY: hasDenominator(configY),
     isCalculatedX: isCalculatedSource(configX),
     isCalculatedY: isCalculatedSource(configY),
   });

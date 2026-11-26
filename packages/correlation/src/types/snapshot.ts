@@ -62,8 +62,6 @@ export interface TopCorrelation {
   year?: string;
   titleX: string | null;
   titleY: string | null;
-  normalizationBasisX: string | null;
-  normalizationBasisY: string | null;
   pearsonR: number;
   effectiveR: number;
   partialRPopulation: number | null;
@@ -141,8 +139,6 @@ function parseTopCorrelation(value: unknown, index: number): TopCorrelation {
     ...(value.year === undefined ? {} : { year: assertString(value.year, `pairs[${index}].year`) }),
     titleX: assertNullableString(value.titleX, `pairs[${index}].titleX`),
     titleY: assertNullableString(value.titleY, `pairs[${index}].titleY`),
-    normalizationBasisX: assertNullableString(value.normalizationBasisX, `pairs[${index}].normalizationBasisX`),
-    normalizationBasisY: assertNullableString(value.normalizationBasisY, `pairs[${index}].normalizationBasisY`),
     pearsonR: assertNumber(value.pearsonR, `pairs[${index}].pearsonR`),
     effectiveR: assertNumber(value.effectiveR, `pairs[${index}].effectiveR`),
     partialRPopulation: assertNullableNumber(value.partialRPopulation, `pairs[${index}].partialRPopulation`),

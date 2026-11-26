@@ -202,13 +202,12 @@ COMPLEMENTARY_GROUPS.forEach((group, idx) => {
   for (const key of group) complementaryGroupMap.set(key, idx);
 });
 
-// ─── 軽量メタ (title / subtitle / unit / normalizationBasis) ──────────────────
+// ─── 軽量メタ (title / subtitle / unit) ──────────────────────────────────────
 
 interface MetricDisplayMeta {
   title: string | null;
   subtitle: string | null;
   unit: string;
-  normalizationBasis: string | null;
 }
 
 interface RankingItemsAllSnapshot {
@@ -219,14 +218,11 @@ interface RankingItemsAllSnapshot {
     title?: string;
     subtitle?: string | null;
     unit?: string;
-    normalizationBasis?: string | null;
   }>;
 }
 
 /**
- * 旧 D1 ranking_items 列 (title / subtitle / unit / normalizationBasis) の代替を
- * R2 `app/ranking-items/all.json` から取得し、無い場合は MetricConfig へフォールバック。
- * 旧 list-top-correlations.ts は metrics.title / metrics.normalizationBasis を JOIN していた。
+ * 表示に使う題名・補足・単位を R2 `app/ranking-items/all.json` から取得し、無い場合は MetricConfig へフォールバック。
  */
 async function loadDisplayMeta(): Promise<Map<string, MetricDisplayMeta>> {
   const map = new Map<string, MetricDisplayMeta>();
@@ -239,7 +235,6 @@ async function loadDisplayMeta(): Promise<Map<string, MetricDisplayMeta>> {
         title: it.title ?? null,
         subtitle: it.subtitle ?? null,
         unit: it.unit ?? '',
-        normalizationBasis: it.normalizationBasis ?? null,
       });
     }
   }
@@ -257,7 +252,6 @@ function displayMetaFor(
     title: config?.title ?? null,
     subtitle: config?.subtitle ?? null,
     unit: config?.unit ?? '',
-    normalizationBasis: null, // builder は normalizationBasis を焼かないため snapshot 由来のみ
   };
 }
 
@@ -611,20 +605,19 @@ function buildMemoryDb(
     );
     CREATE TABLE metrics (
       key TEXT PRIMARY KEY,
-      title TEXT,
-      normalization_basis TEXT
+      title TEXT
     );
     CREATE INDEX idx_corr_x ON correlations(metric_key_x);
     CREATE INDEX idx_corr_y ON correlations(metric_key_y);
   `);
 
   const insMetric = db.prepare(
-    'INSERT OR IGNORE INTO metrics (key, title, normalization_basis) VALUES (?, ?, ?)'
+    'INSERT OR IGNORE INTO metrics (key, title) VALUES (?, ?)'
   );
   const insMetricsTx = db.transaction(() => {
     for (const key of allKeys) {
       const m = displayMetaFor(key, metaMap);
-      insMetric.run(key, m.title, m.normalizationBasis);
+      insMetric.run(key, m.title);
     }
   });
   insMetricsTx();
@@ -677,8 +670,6 @@ interface TopPairRow {
   partialRDensity: number | null;
   titleX: string | null;
   titleY: string | null;
-  normalizationBasisX: string | null;
-  normalizationBasisY: string | null;
 }
 
 /** 旧 list-top-correlations.ts の SQL を SQLite 生クエリで厳密再現。 */
@@ -706,9 +697,7 @@ function queryTopPairs(
         c.partial_r_aging AS partialRAging,
         c.partial_r_density AS partialRDensity,
         ix.title AS titleX,
-        iy.title AS titleY,
-        ix.normalization_basis AS normalizationBasisX,
-        iy.normalization_basis AS normalizationBasisY
+        iy.title AS titleY
       FROM correlations c
       INNER JOIN metrics ix ON c.metric_key_x = ix.key
       INNER JOIN metrics iy ON c.metric_key_y = iy.key
@@ -734,8 +723,6 @@ function queryTopPairs(
       year: r.year,
       titleX: r.titleX,
       titleY: r.titleY,
-      normalizationBasisX: r.normalizationBasisX,
-      normalizationBasisY: r.normalizationBasisY,
       pearsonR: r.pearsonR,
       effectiveR: r.effectiveR,
       partialRPopulation: r.partialRPopulation,

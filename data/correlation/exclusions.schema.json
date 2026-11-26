@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "pairs",
+    "groups",
+    "keys"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "pairs": {
+      "description": "相関が高いことに発見がない 2 指標の組 (順序不問)",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "keys",
+          "reason"
+        ],
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/metricKey"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true
+          },
+          "reason": {
+            "$ref": "#/$defs/reason"
+          }
+        }
+      }
+    },
+    "groups": {
+      "description": "同じ現象を測る指標のまとまり。まとまりの中のどの 2 指標の組も除外する",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "keys",
+          "reason"
+        ],
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/metricKey"
+            },
+            "minItems": 2,
+            "uniqueItems": true
+          },
+          "reason": {
+            "$ref": "#/$defs/reason"
+          }
+        }
+      }
+    },
+    "keys": {
+      "description": "どの指標と組んでも自明な相関になる指標 (人口に比例する絶対数など)。相関の一覧から外す",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "reason"
+        ],
+        "properties": {
+          "key": {
+            "$ref": "#/$defs/metricKey"
+          },
+          "reason": {
+            "$ref": "#/$defs/reason"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "metricKey": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

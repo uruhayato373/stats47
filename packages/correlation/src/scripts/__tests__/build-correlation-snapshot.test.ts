@@ -154,7 +154,7 @@ describe('候補保持の段階で正負の枠を確保する', () => {
 describe('buildCorrelationSnapshot shape', () => {
   beforeEach(() => {
     saved.clear();
-    // all.json メタ (title/subtitle/unit/normalizationBasis)
+    // all.json メタ (title/subtitle/unit)
     fetchFromR2AsJsonMock.mockReset();
     fetchFromR2AsJsonMock.mockImplementation((key: string) => {
       if (key === 'app/ranking-items/all.json') {
@@ -166,7 +166,6 @@ describe('buildCorrelationSnapshot shape', () => {
             title: m.title,
             subtitle: null,
             unit: m.unit,
-            normalizationBasis: null,
           })),
         };
       }
@@ -196,8 +195,6 @@ describe('buildCorrelationSnapshot shape', () => {
       'rankingKeyY',
       'titleX',
       'titleY',
-      'normalizationBasisX',
-      'normalizationBasisY',
       'pearsonR',
       'effectiveR',
       'partialRPopulation',
@@ -308,7 +305,6 @@ describe('buildCorrelationSnapshot --skip-if-unchanged', () => {
         title: m.title,
         subtitle: null,
         unit: m.unit,
-        normalizationBasis: null,
       })),
     };
     fetchFromR2AsJsonMock.mockImplementation((key: string) =>
@@ -370,7 +366,7 @@ describe('computeInputFingerprint', () => {
     buildYearSeries(values.map((value, i) => ({ areaCode: AREA_CODES[i], yearCode: year, value })), () => true, 1);
   const names = (name = 'pref') => new Map(AREA_CODES.slice(0, 3).map((code, i) => [code, `${name}-${i + 1}`]));
   const meta = (title: string) =>
-    new Map([['metric-a', { title, subtitle: null, unit: '件', normalizationBasis: null }]]);
+    new Map([['metric-a', { title, subtitle: null, unit: '件' }]]);
 
   it('並列 fetch の完了順 (Map の挿入順) に依存しない', async () => {
     const { computeInputFingerprint } = await import('../build-correlation-snapshot');
@@ -534,7 +530,7 @@ describe('buildThemeLinks', () => {
     effectiveAbsR: Math.abs(pearsonR),
     populationAdjustedRankR,
   });
-  const meta = (title: string) => ({ title, subtitle: null, unit: '', normalizationBasis: null });
+  const meta = (title: string) => ({ title, subtitle: null, unit: '' });
 
   it('|pearsonR| が 0.99 以上の組は同じデータの別名とみなして出さず、それ未満は残す', async () => {
     const { buildThemeLinks } = await import('../build-correlation-snapshot');
