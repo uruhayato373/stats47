@@ -1440,7 +1440,7 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "rankingKey": "taxpayer-ratio-per-pref-resident",
         "title": "納税義務者割合",
         "readerLabel": "納税義務者割合",
-        "subtitle": "都道府県民1人当たり"
+        "subtitle": "人口100人当たり"
       },
       {
         "rankingKey": "taxpayer-count-income",

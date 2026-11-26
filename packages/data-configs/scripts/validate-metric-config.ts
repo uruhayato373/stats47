@@ -139,9 +139,6 @@ function tally(list: string[]): string {
     .join(' ');
 }
 
-/** 分母を型で書いていない分母つきの指標の上限 (縮小専用。カード METRIC-DENOMINATOR-TYPE-01) */
-const DENOMINATOR_SPEC_MISSING_CEILING = 4;
-
 function main() {
   const files = readdirSync(METRICS_DIR).filter(
     (f) => f.endsWith('.ts') && f !== 'index.ts'
@@ -600,14 +597,16 @@ function main() {
   // denominatorLabel が作る 1 通りにそろえる。手書きは「人口10万対」「人口10万人あたり」「1000人当たり」に割れていた。
   // 題名に分母を書いた指標は、題名を変えるかをオーナーが決めるまで補足の文言を求めない。
   const PER_WORDING = /当たり|あたり|当り|万対|千対/;
-  let denominatorSpecMissing = 0;
   for (const r of rows) {
     const metric = r.key ? getMetricConfig(r.key) : undefined;
     if (!metric) continue;
     const spec = metricDenominatorSpec(metric);
     if (!spec) {
+      // 分母つきの指標は分母を型で書く (2026-11-26 に全件を移した。それまでは件数の上限で縮めていた)
       const kind = metricDenominatorOf(metric);
-      if (kind && kind !== 'none') denominatorSpecMissing++;
+      if (kind && kind !== 'none') {
+        errors.push(`[denominator-spec] ${r.file}: 分母 (${kind}) を型で書いていない。denominator: { kind, per, scope?, counter? } を書く (実数なら "none")`);
+      }
       continue;
     }
     const label = denominatorLabel(spec);
@@ -618,12 +617,6 @@ function main() {
     if (PER_WORDING.test(subtitle.replace(label, ''))) {
       errors.push(`[denominator-label] ${r.file}: 補足に分母の別の書き方が残っている (補足: ${subtitle})。分母の文言は「${label}」だけにする`);
     }
-  }
-  // 分母を規模まで型で書いていない指標の数 (縮小専用。直したら下げる。2026-11-26 は 4 件: 題名に分母・1人1日当たり・割合)
-  if (denominatorSpecMissing > DENOMINATOR_SPEC_MISSING_CEILING) {
-    errors.push(
-      `[denominator-spec] 分母を型 (denominator: { kind, per }) で書いていない分母つきの指標が ${denominatorSpecMissing} 件 (上限 ${DENOMINATOR_SPEC_MISSING_CEILING})。新しい指標は分母を型で書く`
-    );
   }
 
   // ── 出力 ──

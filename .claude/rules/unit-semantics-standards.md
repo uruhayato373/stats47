@@ -183,7 +183,8 @@ Instagram の型の画像) は、**図ごとに 1 つ**の表示単位を選び�
 
 > **分母の型 (2026-11-26)**: 分母は `denominator: { kind, per, scope? }` (`@stats47/types` の `Denominator`) で持ち、補足の文言は
 > `denominatorLabel` が作る 1 通り (「人口10万人当たり」) にそろえる。`validate:config` の `[denominator-label]` が別の書き方
-> (あたり・1000人・万対) を止める。型で書けていない分母つきの指標はカード METRIC-DENOMINATOR-TYPE-01 にある。
+> (あたり・1000人・万対) を止め、`[denominator-spec]` が型の無い分母つきの指標を止める (2026-11-26 に全件を移した)。
+> 4 種類 (人口・面積・世帯・人数) で書けない分母は `kind: "other"` と数え方 `counter` で書く (「1住宅当たり」「道路実延長千km当たり」)。
 >
 > **機械の判定 (2026-11-04)**: 分母は `metricDenominatorOf` (`packages/data-configs/src/metric-denominator.ts`) で読む。キー名が分母を名乗るのに
 > 題名・補足・`denominator` のどれにも無ければ `check-metric-contract` が止める。実数の指標は `denominator: "none"` と書く。

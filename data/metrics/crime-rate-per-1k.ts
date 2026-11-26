@@ -4,7 +4,8 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const crimeRatePer1k: MetricConfig = {
   "key": "crime-rate-per-1k",
   "title": "刑法犯認知件数（人口千人当たり）",
-  "subtitle": "人口1000人当たり",
+  "subtitle": "市区町村・人口千人当たり",
+  "denominator": { "kind": "population", "per": 1000 },
   "unit": "件",
   "category": "safetyenvironment",
   "source": {
