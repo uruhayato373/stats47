@@ -4,8 +4,9 @@ import type { MetricConfig } from "../../packages/data-configs/src/types";
 export const perinatalMortalityRatePer1000Births: MetricConfig = {
   "key": "perinatal-mortality-rate-per-1000-births",
   "title": "周産期死亡率",
+  "subtitle": "出生数＋死産数（妊娠満22週以後）千当たり",
+  "denominator": { "kind": "other", "per": 1000, "scope": "出生数＋死産数（妊娠満22週以後）" },
   "unit": "出産千対",
-  "denominator": "person",
   "category": "population",
   "source": {
     "kind": "estat",

@@ -5,6 +5,7 @@ export const siteAreaPerDwelling: MetricConfig = {
   "key": "site-area-per-dwelling",
   "title": "住宅の敷地面積",
   "subtitle": "1住宅当たり",
+  "denominator": { "kind": "other", "per": 1, "counter": "住宅" },
   "unit": "ｍ2",
   "category": "construction",
   "source": {

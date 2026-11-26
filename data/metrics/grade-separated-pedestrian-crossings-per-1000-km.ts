@@ -5,6 +5,7 @@ export const gradeSeparatedPedestrianCrossingsPer1000Km: MetricConfig = {
   "key": "grade-separated-pedestrian-crossings-per-1000-km",
   "title": "立体横断施設数",
   "subtitle": "道路実延長千km当たり",
+  "denominator": { "kind": "other", "per": 1000, "scope": "道路実延長", "counter": "km" },
   "unit": "所",
   "category": "infrastructure",
   "source": {

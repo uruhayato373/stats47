@@ -54,5 +54,6 @@ export const floorAreaPerDwellingOwner: MetricConfig = {
     "isCalculated": false
   },
   "isActive": true,
-  "subtitle": "1住宅当たり"
+  "subtitle": "1住宅当たり",
+  "denominator": { "kind": "other", "per": 1, "counter": "住宅" },
 };

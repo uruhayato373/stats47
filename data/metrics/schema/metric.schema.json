@@ -54,13 +54,17 @@
                 "population",
                 "area",
                 "household",
-                "person"
+                "person",
+                "other"
               ]
             },
             "per": {
               "type": "number"
             },
             "scope": {
+              "type": "string"
+            },
+            "counter": {
               "type": "string"
             }
           },
@@ -85,6 +89,10 @@
         {
           "type": "string",
           "const": "person"
+        },
+        {
+          "type": "string",
+          "const": "other"
         },
         {
           "type": "string",
@@ -1243,6 +1251,9 @@
                         "type": "number"
                       },
                       "scope": {
+                        "type": "string"
+                      },
+                      "counter": {
                         "type": "string"
                       }
                     },

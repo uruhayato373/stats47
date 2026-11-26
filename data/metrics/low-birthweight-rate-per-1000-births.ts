@@ -5,8 +5,8 @@ export const lowBirthweightRatePer1000Births: MetricConfig = {
   "key": "low-birthweight-rate-per-1000-births",
   "title": "2,500g未満の出生率",
   "subtitle": "出生数千当たり",
+  "denominator": { "kind": "other", "per": 1000, "scope": "出生数" },
   "unit": "出生千対",
-  "denominator": "person",
   "category": "population",
   "source": {
     "kind": "estat",

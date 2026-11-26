@@ -140,7 +140,7 @@ function tally(list: string[]): string {
 }
 
 /** 分母を型で書いていない分母つきの指標の上限 (縮小専用。カード METRIC-DENOMINATOR-TYPE-01) */
-const DENOMINATOR_SPEC_MISSING_CEILING = 30;
+const DENOMINATOR_SPEC_MISSING_CEILING = 12;
 
 function main() {
   const files = readdirSync(METRICS_DIR).filter(
@@ -619,7 +619,7 @@ function main() {
       errors.push(`[denominator-label] ${r.file}: 補足に分母の別の書き方が残っている (補足: ${subtitle})。分母の文言は「${label}」だけにする`);
     }
   }
-  // 分母を規模まで型で書いていない指標の数 (縮小専用。直したら下げる。2026-11-26 は 30 件: 4 種類で表せない数え方・規模が文言に無い指標など)
+  // 分母を規模まで型で書いていない指標の数 (縮小専用。直したら下げる。2026-11-26 は 12 件: 規模が文言に無い指標・題名に分母・割合など)
   if (denominatorSpecMissing > DENOMINATOR_SPEC_MISSING_CEILING) {
     errors.push(
       `[denominator-spec] 分母を型 (denominator: { kind, per }) で書いていない分母つきの指標が ${denominatorSpecMissing} 件 (上限 ${DENOMINATOR_SPEC_MISSING_CEILING})。新しい指標は分母を型で書く`

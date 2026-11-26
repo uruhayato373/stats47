@@ -5,6 +5,7 @@ export const landProductivityPerHa: MetricConfig = {
   "key": "land-productivity-per-ha",
   "title": "土地生産性",
   "subtitle": "耕地面積1ヘクタール当たり",
+  "denominator": { "kind": "area", "per": 1, "scope": "耕地", "counter": "ヘクタール" },
   "unit": "万円",
   "category": "landweather",
   "source": {

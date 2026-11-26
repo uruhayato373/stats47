@@ -20,6 +20,17 @@ describe('denominatorLabel', () => {
     expect(denominatorLabel({ kind: 'person', per: 1 })).toBe('1人当たり');
   });
 
+  it('4 種類で書けない分母は other と数え方 (counter) で書く (公表資料の項目名と同じ文言になる)', () => {
+    expect(denominatorLabel({ kind: 'other', per: 1, counter: '住宅' })).toBe('1住宅当たり');
+    expect(denominatorLabel({ kind: 'other', per: 1000, scope: '道路実延長', counter: 'km' })).toBe('道路実延長千km当たり');
+    expect(denominatorLabel({ kind: 'other', per: 100, scope: '建物火災', counter: '件' })).toBe('建物火災100件当たり');
+    expect(denominatorLabel({ kind: 'other', per: 1000, counter: '施設' })).toBe('千施設当たり');
+    expect(denominatorLabel({ kind: 'other', per: 1000, scope: '出生数' })).toBe('出生数千当たり');
+    expect(denominatorLabel({ kind: 'other', per: 100000, scope: '出産数' })).toBe('出産数10万当たり');
+    expect(denominatorLabel({ kind: 'other', per: 1, scope: '農家', counter: '戸' })).toBe('農家1戸当たり');
+    expect(denominatorLabel({ kind: 'area', per: 1, scope: '耕地', counter: 'ヘクタール' })).toBe('耕地面積1ヘクタール当たり');
+  });
+
   it('対象を限る分母は scope を前に付ける', () => {
     expect(denominatorLabel({ kind: 'population', per: 100000, scope: '0〜5歳' })).toBe('0〜5歳人口10万人当たり');
     expect(denominatorLabel({ kind: 'area', per: 1, scope: '可住地' })).toBe('可住地面積1km²当たり');

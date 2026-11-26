@@ -5,6 +5,7 @@ export const fireDamageHouseholdCountPer100BuildingFires: MetricConfig = {
   "key": "fire-damage-household-count-per-100-building-fires",
   "title": "火災り災世帯数",
   "subtitle": "建物火災100件当たり",
+  "denominator": { "kind": "other", "per": 100, "scope": "建物火災", "counter": "件" },
   "unit": "世帯",
   "category": "population",
   "source": {

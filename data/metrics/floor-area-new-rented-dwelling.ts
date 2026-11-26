@@ -5,6 +5,7 @@ export const floorAreaNewRentedDwelling: MetricConfig = {
   "key": "floor-area-new-rented-dwelling",
   "title": "着工新設貸家住宅の床面積",
   "subtitle": "1住宅当たり",
+  "denominator": { "kind": "other", "per": 1, "counter": "住宅" },
   "unit": "ｍ2",
   "category": "construction",
   "source": {

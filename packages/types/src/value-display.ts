@@ -36,8 +36,11 @@ export interface SeriesNormalizationOption {
   visualization?: MetricPresentation;
 }
 
-/** 分母の種類。人口・面積・世帯・人 (従業者 1 人当たり など、人口ではない人数) */
-export type DenominatorKind = 'population' | 'area' | 'household' | 'person';
+/**
+ * 分母の種類。人口・面積・世帯・人 (従業者 1 人当たり など、人口ではない人数)・その他
+ * (住宅・道路の延長・件数・出生の数など。数え方は counter に書く。2026-11-26)
+ */
+export type DenominatorKind = 'population' | 'area' | 'household' | 'person' | 'other';
 
 /**
  * 値を割っている分母 (2026-11-26 オーナー決定)。指標そのものの分母にも「計算方法」の選択肢にも同じ形で書く。
@@ -48,8 +51,10 @@ export interface Denominator {
   kind: DenominatorKind;
   /** 分母の規模。100000 = 10 万人当たり、1 = 1 人当たり、面積は km² */
   per: number;
-  /** 対象を限るときだけ書く (「0〜5歳」「可住地」「従業者」) */
+  /** 対象を限るときだけ書く (「0〜5歳」「可住地」「従業者」「道路実延長」) */
   scope?: string;
+  /** 数え方の上書き (「住宅」「km」「件」「戸」「ヘクタール」)。種類の既定 (人・km²・世帯) で書けない分母に使う */
+  counter?: string;
 }
 
 const DENOMINATOR_NOUN: Record<DenominatorKind, { subject: string; counter: string }> = {
@@ -57,6 +62,7 @@ const DENOMINATOR_NOUN: Record<DenominatorKind, { subject: string; counter: stri
   area: { subject: '面積', counter: 'km²' },
   household: { subject: '', counter: '世帯' },
   person: { subject: '', counter: '人' },
+  other: { subject: '', counter: '' },
 };
 
 /** 規模の書き方。千・万の位は漢字 (公表資料の「人口千人当たり」「人口10万人当たり」に合わせる)。面積は数字のまま */
@@ -67,10 +73,13 @@ function denominatorScaleText(per: number, kind: DenominatorKind): string {
   return String(per);
 }
 
-/** 分母の文言。{ population, 100000 } → 「人口10万人当たり」、{ area, 100 } → 「面積100km²当たり」 */
-export function denominatorLabel({ kind, per, scope }: Denominator): string {
-  const { subject, counter } = DENOMINATOR_NOUN[kind];
-  return `${scope ?? ''}${subject}${denominatorScaleText(per, kind)}${counter}当たり`;
+/**
+ * 分母の文言。{ population, 100000 } → 「人口10万人当たり」、{ area, 100 } → 「面積100km²当たり」、
+ * { other, 1000, scope: "道路実延長", counter: "km" } → 「道路実延長千km当たり」
+ */
+export function denominatorLabel({ kind, per, scope, counter }: Denominator): string {
+  const noun = DENOMINATOR_NOUN[kind];
+  return `${scope ?? ''}${noun.subject}${denominatorScaleText(per, kind)}${counter ?? noun.counter}当たり`;
 }
 
 /** 「計算方法」の選択肢に書ける分母 (サイトが割る値を持っているのは人口と面積だけ) */
