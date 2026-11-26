@@ -26,6 +26,11 @@ interface RankingTopThreeListProps {
   /** 表示単位への倍率 (ページが決めた表示単位があるとき)。値は元の単位のまま受け取る */
   factor?: number;
   presentation: Pick<MetricPresentation, 'colorScheme' | 'comparisonDomain'>;
+  /**
+   * 上位と下位を左右に分けて並べる (横に推移の枠が無いとき。2026-11-26 オーナー決定)。
+   * 全幅の 1 列だと横長で空きが大きいので、幅のあるときだけ 2 列にして高さを半分にする。軸は 6 件の共通のまま
+   */
+  split?: boolean;
 }
 
 /**
@@ -39,6 +44,7 @@ export function RankingTopThreeList({
   precision,
   factor = 1,
   presentation,
+  split = false,
 }: RankingTopThreeListProps) {
   const { top3, bottom3 } = stats;
   if (top3.length === 0) return null;
@@ -61,23 +67,28 @@ export function RankingTopThreeList({
       }
       contentClassName="flex flex-1 flex-col gap-2"
     >
-      <ValueDotPlot
-        items={entries.map((entry) => ({
-          key: entry.areaCode,
-          label: entry.areaName,
-          rank: entry.rank,
-          value: entry.value,
-        }))}
-        values={entries.map((entry) => entry.value)}
-        reference={stats.average}
-        policy={presentation.comparisonDomain}
-        formatValue={formatValue}
-        color={getMetricChartColor(presentation)}
-        unit={formatUnitForDisplay(unit)}
-        showAxes={false}
-        showReferenceLine={false}
-        fillHeight
-      />
+      <div className={split && bottomEntries.length > 0 ? 'grid flex-1 grid-cols-1 gap-x-8 gap-y-2 @min-[40rem]:grid-cols-2' : 'flex flex-1 flex-col'}>
+        {(split && bottomEntries.length > 0 ? [top3, bottomEntries] : [entries]).map((group) => (
+          <ValueDotPlot
+            key={group[0].areaCode}
+            items={group.map((entry) => ({
+              key: entry.areaCode,
+              label: entry.areaName,
+              rank: entry.rank,
+              value: entry.value,
+            }))}
+            values={entries.map((entry) => entry.value)}
+            reference={stats.average}
+            policy={presentation.comparisonDomain}
+            formatValue={formatValue}
+            color={getMetricChartColor(presentation)}
+            unit={formatUnitForDisplay(unit)}
+            showAxes={false}
+            showReferenceLine={false}
+            fillHeight
+          />
+        ))}
+      </div>
     </ChartPanel>
   );
 }

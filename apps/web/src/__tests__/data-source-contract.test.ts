@@ -61,7 +61,6 @@ describe("data source contract", () => {
   it("ランキングの可視化直下でページ出典を重複描画しない", () => {
     const client = FILES.find(({ file }) => file.endsWith("/RankingKeyPageClient.tsx"))!.source;
     expect(client).not.toMatch(/SourceAttribution|\bsourceConfig\b|出典:/);
-    expect(client).toContain("<RankingVisualizationDetails");
   });
 
   it("「データ出典」見出しを描画するのは DataSourceList だけ", () => {

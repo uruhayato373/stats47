@@ -33,7 +33,6 @@ import { RankingYearSelector } from "../RankingPageHeader/RankingYearSelector";
 
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
 import { RankingSampleCountNote } from "./RankingSampleCountNote";
-import { RankingVisualizationDetails } from "./RankingVisualizationDetails";
 import { RankingVisualizationSection } from "./RankingVisualizationSection";
 import { useRankingPageState } from "./useRankingPageState";
 
@@ -156,8 +155,8 @@ export function RankingKeyPageClient({
         rankingItem.latestYear?.yearName ??
         null;
 
-    // subtitle を「定義補足」と「データ注釈(※)」に振り分ける。
-    // 定義 → 可視化直下 / 注釈 → 本文先頭のキャプション。
+    // subtitle を「定義補足」と「データ注釈(※)」に振り分ける。どちらも「統計の定義」(開閉式) の中に出す
+    // (2026-11-26 オーナー決定。地図の下と本文の先頭に常に出していた説明を畳んだ)。
     const { subtitle: definitionalSubtitle, note: subtitleNote } =
         classifyRankingSubtitle(displayInfo.subtitle);
     const definitionDetail = [definitionalSubtitle, displayInfo.demographicAttr]
@@ -234,9 +233,21 @@ export function RankingKeyPageClient({
               ページで唯一の <main> はルートレイアウトが持つため、ここは div (main 二重を避ける)。
             */}
             <PanelGrid>
-                {/* スタットと地図・表は 1 つの線の格子 (隣り合うパネルが 1px の線を共有する)。
-                    ここから下の本文・導線も同じ列の格子のセルとして続く。 */}
+                {/* 地図・表とスタットは 1 つの線の格子 (隣り合うパネルが 1px の線を共有する)。
+                    ここから下の本文・導線も同じ列の格子のセルとして続く。
+                    地図・表を一番上に置く (2026-11-26 オーナー決定)。上位・下位の 3 件は表の先頭と同じ内容の先出しで、
+                    地図と表が最初の画面から押し出されていた。 */}
                 <PanelGrid className="order-3">
+                    <RankingVisualizationSection
+                        rankingItem={presentedItem}
+                        activeRankingItem={presentedItem}
+                        rankingValues={rankingValues}
+                        areaType={currentAreaType}
+                        headerActions={headerActions}
+                        cardFooter={sampleCountNote}
+                        isPending={isPending}
+                        valueDisplay={valueDisplay}
+                    />
                     <RankingHeaderStats
                         metricTitle={displayInfo.title}
                         presentation={presentedItem.visualization}
@@ -245,23 +256,6 @@ export function RankingKeyPageClient({
                         nationalAverageSeries={nationalAverageSeries}
                         areaType={currentAreaType}
                         yearName={latestYearName}
-                        valueDisplay={valueDisplay}
-                    />
-                    <RankingVisualizationSection
-                        rankingItem={presentedItem}
-                        activeRankingItem={presentedItem}
-                        rankingValues={rankingValues}
-                        areaType={currentAreaType}
-                        headerActions={headerActions}
-                        cardFooter={
-                            (definitionDetail || sampleCountNote) && (
-                                <>
-                                    {definitionDetail && <RankingVisualizationDetails description={definitionDetail} />}
-                                    {sampleCountNote}
-                                </>
-                            )
-                        }
-                        isPending={isPending}
                         valueDisplay={valueDisplay}
                     />
                 </PanelGrid>
@@ -278,6 +272,7 @@ export function RankingKeyPageClient({
                         displayInfo={displayInfo}
                         normalizationType={normalizationType}
                         dataNote={dataNote}
+                        definitionDetail={definitionDetail}
                         sections={sections}
                     />
                 </PanelGrid>

@@ -98,8 +98,8 @@ RankingItem は表示契約と取得レシピを snapshot へ焼き込み、旧�
 ## UI 配置 (この型を前提にした描画)
 
 - `title` → h1 (名前のみ)
-- `subtitle` → h1 直下の控えめ 1 行 (`RankingHeaderPanel` titleDetail)
-- `note` → チャート直下の小キャプション (`RankingKeyPageClient`)
+- `subtitle` (定義の補足) と `note` (読み違いを防ぐ注意) → 「統計の定義」(開閉式の `RankingDefinitionCard`) の中。集計条件・定義・注意の順 (2026-11-26 オーナー決定。それまでは地図の下と本文の先頭に常に出していた)
+- ページの並び: 見出し → 地図と表 → 上位・下位の 3 件 (推移があれば横に並べ、無ければ上位と下位を左右に並べる) → 本文
 - `description` → 「統計の定義」カード (`RankingDefinitionCard`)
 - 一覧表 (`category`/`survey`) のタイトルは注釈(※)を連結しない (`isCaveatNote` で除外)
 

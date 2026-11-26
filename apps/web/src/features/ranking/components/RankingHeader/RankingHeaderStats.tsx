@@ -87,7 +87,7 @@ export function RankingHeaderStats({
       {/* 2 枚は線の格子で並べ、隣り合う線を共有する (見本の grid gap-px bg-border)。
           本文幅 730px (サイドバー + 右レールあり) でも 2 列にする。@md (768px) では効かなかった。 */}
       <PanelGrid className={cn("grid-cols-1", showNationalAverage && "@min-[40rem]:grid-cols-2")}>
-        <RankingTopThreeList stats={stats} unit={shownUnit} precision={precision} factor={factor} presentation={presentation} />
+        <RankingTopThreeList stats={stats} unit={shownUnit} precision={precision} factor={factor} presentation={presentation} split={!showNationalAverage} />
         {showNationalAverage && (
           <RankingNationalAverageStat
             metricTitle={metricTitle}
