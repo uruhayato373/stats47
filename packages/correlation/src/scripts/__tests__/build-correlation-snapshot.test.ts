@@ -149,6 +149,22 @@ describe('候補保持の段階で正負の枠を確保する', () => {
     expect(top.values().filter(item => item.populationAdjustedRankR > 0)).toHaveLength(10);
     expect(top.values().filter(item => item.populationAdjustedRankR < 0)).toHaveLength(10);
   });
+
+  // 上限で切った後に重複を落とすと枠が減るので、候補を保持する段階で同じ題名を 1 件にする (方針の dedupeByTitle)
+  it('同じ題名の相手は強い 1 件だけを残し、空いた枠は次の候補が埋める', async () => {
+    const { TopByPopulationAdjusted } = await import('../build-correlation-snapshot');
+    const titles: Record<string, string> = { 'dup-a': '警察費', 'dup-b': '警察費' };
+    const top = new TopByPopulationAdjusted('self', (key) => titles[key] ?? key);
+    const add = (keyY: string, r: number) => top.add({ keyX: 'self', keyY, pearsonR: r, populationAdjustedRankR: r,
+      effectiveAbsR: 0.5, partialRPopulation: null, partialRArea: null, partialRAging: null, partialRDensity: null });
+    add('dup-a', 0.58);
+    add('dup-b', 0.77);
+    for (let i = 0; i < 12; i++) add(`other-${i}`, 0.5 - i / 100);
+    const keys = top.values().map(item => item.keyY);
+    expect(keys).toContain('dup-b');
+    expect(keys).not.toContain('dup-a');
+    expect(keys).toHaveLength(10);
+  });
 });
 
 describe('buildCorrelationSnapshot shape', () => {

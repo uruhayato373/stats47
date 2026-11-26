@@ -63,4 +63,4 @@ R2_PUBLIC_FETCH_URL=https://storage.stats47.jp \
 
 ## 正負別の選定契約
 
-選定方針は `data/correlation/selection-policy.json` (台帳 `correlation.selection-policy`)。候補保持から正負を分け、表示側で再切断しない。0・自己参照・重複・不正値を出さず、同率は指標ID順。既存の自明ペア除外も継続する。生成後は `R2_STAGING_DIR=<生成先> npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/correlation/src/scripts/verify-correlation-by-key.ts` で全指標の件数・参照・符号・順序を検査する。旧 by-ranking-key は互換性のため上書きしない。
+選定方針は `data/correlation/selection-policy.json` (台帳 `correlation.selection-policy`)。意味の薄い組を外す規則も方針が持つ (2026-11-26): `excludeCrossGrain` (片方だけが県庁所在市の値の組。家計調査の品目が県全体の指標の一覧を埋めていた)・`dedupeByTitle` (同じ題名は強い 1 件)・`nearDuplicate.sameSurveyMinAbsR` (同じ主出典の調査で閾値以上の組)。規則の関数は `selection-policy.ts` の 1 か所で、コードに閾値を書かない。方針の `version` は配信の形の版で、規則を足しただけでは上げない (読み込みは版の違う配信を拒否するので、上げるとデプロイから作り直しまで相関の節が消える)。候補保持から正負を分け、表示側で再切断しない。0・自己参照・重複・不正値を出さず、同率は指標ID順。既存の自明ペア除外も継続する。生成後は `R2_STAGING_DIR=<生成先> npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/correlation/src/scripts/verify-correlation-by-key.ts` で全指標の件数・参照・符号・順序を検査する。旧 by-ranking-key は互換性のため上書きしない。

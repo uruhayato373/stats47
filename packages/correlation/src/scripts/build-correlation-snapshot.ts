@@ -44,6 +44,7 @@ import {
   yearInSpec,
 } from '@stats47/data-configs';
 import type { MetricConfig } from '@stats47/data-configs';
+import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 import {
   assertR2WriteAllowed,
@@ -51,7 +52,8 @@ import {
   writeR2Staging,
 } from '@stats47/r2-storage/server';
 import { readStatsValues } from '@stats47/stats-r2/readers';
-import { CORRELATION_SELECTION_POLICY, compareCorrelation, correlationDirection, selectCorrelationGroups, type CorrelationGroups } from '../selection-policy';
+import { isCapitalCityValueMetric, resolveMetricPrimaryProvenance } from '@stats47/data-configs/provenance';
+import { CORRELATION_SELECTION_POLICY, compareCorrelation, correlationDirection, correlationIdentity, isCrossGrainPair, isNearDuplicatePair, selectCorrelationGroups, type CorrelationGroups } from '../selection-policy';
 
 import {
   isExcludedCorrelationKey,
@@ -469,18 +471,25 @@ function effectiveAbsROf(p: {
  */
 export class TopByPopulationAdjusted {
   private groups: CorrelationGroups<CandidateScore> = { positive: [], negative: [] };
-  constructor(private readonly rankingKey: string) {}
+  /** titleOf を渡すと、同じ題名の相手は強い 1 件だけを残す (方針の dedupeByTitle。上限で切る前に重複を落とし、枠を減らさない) */
+  constructor(private readonly rankingKey: string, private readonly titleOf: (key: string) => string | null = () => null) {}
+  private counterpart(p: CandidateScore) {
+    const rankingKey = p.keyX === this.rankingKey ? p.keyY : p.keyX;
+    return { rankingKey, populationAdjustedR: p.populationAdjustedRankR, title: this.titleOf(rankingKey) };
+  }
   add(p: CandidateScore) {
     const direction = correlationDirection(p.populationAdjustedRankR);
     if (!direction) return;
-    const items = this.groups[direction];
-    items.push(p);
-    items.sort((a, b) => compareCorrelation(
-      { rankingKey: a.keyX === this.rankingKey ? a.keyY : a.keyX, populationAdjustedR: a.populationAdjustedRankR },
-      { rankingKey: b.keyX === this.rankingKey ? b.keyY : b.keyX, populationAdjustedR: b.populationAdjustedRankR },
-    ));
+    const sorted = [...this.groups[direction], p].sort((a, b) => compareCorrelation(this.counterpart(a), this.counterpart(b)));
+    const seen = new Set<string>();
+    const items = sorted.filter((candidate) => {
+      const identity = correlationIdentity(this.counterpart(candidate));
+      if (seen.has(identity)) return false;
+      seen.add(identity);
+      return true;
+    });
     const limit = CORRELATION_SELECTION_POLICY.groups[direction].limit;
-    if (items.length > limit) items.length = limit;
+    this.groups[direction] = items.slice(0, limit);
   }
   values(): CandidateScore[] {
     return [...this.groups.positive, ...this.groups.negative];
@@ -932,7 +941,7 @@ export async function buildCorrelationSnapshot(
   // 3. ペア走査 (i<j)。per-key 正負各10件 と global top-200 候補のみ JS で保持し bound。
   const perKeyTop = new Map<string, TopByPopulationAdjusted>();
   for (const k of pairKeys)
-    perKeyTop.set(k, new TopByPopulationAdjusted(k));
+    perKeyTop.set(k, new TopByPopulationAdjusted(k, (key) => displayMetaFor(key, metaMap).title));
   const globalTop = new GlobalTopByEffective(
     CORRELATION_TOP_PAIRS_SNAPSHOT_LIMIT
   );
@@ -959,6 +968,15 @@ export async function buildCorrelationSnapshot(
     return rankPopulationCache.get(cacheKey)!;
   };
 
+  // 方針の規則に使う指標の性質は、組の走査の前に 1 回だけ求める (組は数百万あるので走査の中で出典を解決しない)
+  const capitalCityValueKeys = new Set(configs.filter((c) => isCapitalCityValueMetric(c, METRICS_REGISTRY)).map((c) => c.key));
+  const primarySurveyIds = new Map(configs.map((c) => [c.key, new Set(resolveMetricPrimaryProvenance(c, METRICS_REGISTRY).map((survey) => survey.id))]));
+  const sharesPrimarySurvey = (a: string, b: string): boolean => {
+    const other = primarySurveyIds.get(b);
+    return other !== undefined && [...(primarySurveyIds.get(a) ?? [])].some((id) => other.has(id));
+  };
+  let nearDuplicateSkipped = 0;
+
   for (let i = 0; i < pairKeys.length; i++) {
     const keyX = pairKeys[i];
     const mx = loaded.get(keyX)!;
@@ -966,7 +984,10 @@ export async function buildCorrelationSnapshot(
     for (let j = i + 1; j < pairKeys.length; j++) {
       const keyY = pairKeys[j];
       const titleY = displayMetaFor(keyY, metaMap).title;
-      if (titleX === null || titleY === null || isTrivialPair(keyX, keyY, titleX, titleY)) {
+      if (
+        titleX === null || titleY === null || isTrivialPair(keyX, keyY, titleX, titleY) ||
+        isCrossGrainPair(capitalCityValueKeys.has(keyX), capitalCityValueKeys.has(keyY))
+      ) {
         trivialSkipped++;
         continue;
       }
@@ -1025,6 +1046,11 @@ export async function buildCorrelationSnapshot(
       cand.populationAdjustedRankR =
         rxp === null || ryp === null ? rankR : (calculatePartialR(rankR, rxp, ryp) ?? rankR);
 
+      if (isNearDuplicatePair(sharesPrimarySurvey(keyX, keyY), cand.populationAdjustedRankR)) {
+        nearDuplicateSkipped++;
+        continue;
+      }
+
       perKeyTop.get(keyX)!.add(cand);
       perKeyTop.get(keyY)!.add(cand);
       globalTop.add(cand);
@@ -1032,7 +1058,7 @@ export async function buildCorrelationSnapshot(
   }
 
   console.log(
-    `[correlation] ペア total=${total} strong(|r|>=0.7)=${strong} 自明除外=${trivialSkipped}`
+    `[correlation] ペア total=${total} strong(|r|>=0.7)=${strong} 自明・単位違い除外=${trivialSkipped} ほぼ同じデータ除外=${nearDuplicateSkipped}`
   );
 
   // 4. 候補集合 (per-key top union ∪ global top) のみ :memory: に INSERT。

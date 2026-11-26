@@ -2,29 +2,95 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "score", "minimumPairedAreas", "order", "excludeZero", "groups"],
+  "required": [
+    "version",
+    "score",
+    "minimumPairedAreas",
+    "order",
+    "excludeZero",
+    "groups",
+    "excludeCrossGrain",
+    "dedupeByTitle",
+    "nearDuplicate"
+  ],
   "properties": {
-    "version": { "const": 1 },
-    "score": { "const": "populationAdjustedR" },
-    "minimumPairedAreas": { "type": "integer", "minimum": 3, "maximum": 47 },
-    "order": { "const": "absolute-desc-key-asc" },
-    "excludeZero": { "const": true },
+    "version": {
+      "const": 1,
+      "description": "配信の形の版。読み込みは版が一致しない配信を拒否するので、選ぶ規則を足しただけでは上げない (上げると、デプロイから作り直しまで相関の節が消える)。配信の形・件数の上限の意味を変えるときだけ、新しいキーへ出す手順と一緒に上げる"
+    },
+    "score": {
+      "const": "populationAdjustedR"
+    },
+    "minimumPairedAreas": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 47
+    },
+    "order": {
+      "const": "absolute-desc-key-asc"
+    },
+    "excludeZero": {
+      "const": true
+    },
     "groups": {
-      "type": "object", "additionalProperties": false,
-      "required": ["positive", "negative"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive",
+        "negative"
+      ],
       "properties": {
-        "positive": { "$ref": "#/$defs/group" },
-        "negative": { "$ref": "#/$defs/group" }
+        "positive": {
+          "$ref": "#/$defs/group"
+        },
+        "negative": {
+          "$ref": "#/$defs/group"
+        }
+      }
+    },
+    "excludeCrossGrain": {
+      "type": "boolean",
+      "description": "片方だけが県庁所在市の値 (家計調査など) の組を外す。地域の単位が違い、東西・南北の地域差の代わりとして相関するだけのため"
+    },
+    "dedupeByTitle": {
+      "type": "boolean",
+      "description": "同じ題名の指標は、相関の強い 1 件だけを残す"
+    },
+    "nearDuplicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sameSurveyMinAbsR"
+      ],
+      "description": "ほぼ同じデータの組を外す",
+      "properties": {
+        "sameSurveyMinAbsR": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 1,
+          "description": "同じ主出典の調査で、score の絶対値がこの値以上の組を外す"
+        }
       }
     }
   },
   "$defs": {
     "group": {
-      "type": "object", "additionalProperties": false,
-      "required": ["label", "limit"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "limit"
+      ],
       "properties": {
-        "label": { "type": "string", "minLength": 1 },
-        "limit": { "type": "integer", "minimum": 1, "maximum": 50 }
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
       }
     }
   }
