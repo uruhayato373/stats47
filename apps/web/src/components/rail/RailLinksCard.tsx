@@ -26,6 +26,8 @@ export interface RailLinksCardItem {
   trackingLabel?: string;
   contentId?: string;
   description?: string;
+  /** list 行の左端のアイコン */
+  icon?: ReactNode;
   thumbnail?: {
     lightSrc: string;
     darkSrc: string;
@@ -226,6 +228,7 @@ function RailLinks({
             href={item.href}
             aria-label={item.ariaLabel}
             active={item.active}
+            leading={item.icon}
             {...trackingProps(item, trackingSurface)}
             trailing={
               item.count !== undefined

@@ -40,6 +40,10 @@ interface RailNavRowProps extends Omit<ComponentPropsWithoutRef<typeof Link>, "c
   trailing?: ReactNode;
   /** 右向き矢印を出す (既定: 出す) */
   chevron?: boolean;
+  /** 左端の小さなアイコン (行の種類を見分ける。テーマの分野・調査の分野など) */
+  leading?: ReactNode;
+  /** 名前の下に添える 1 行 (「1位 東京都 1,424万人」など) */
+  detail?: ReactNode;
 }
 
 /** レール内のリンク行 1 本。`RailLinkList` / `RailCategoryList` の中で使う */
@@ -49,6 +53,8 @@ export function RailNavRow({
   active = false,
   trailing,
   chevron = true,
+  leading,
+  detail,
   ...props
 }: RailNavRowProps) {
   return (
@@ -57,7 +63,19 @@ export function RailNavRow({
       className={railNavRowClassName({ active, className })}
       {...props}
     >
-      <span className="min-w-0 flex-1 truncate">{children}</span>
+      {leading && (
+        <span aria-hidden="true" className="flex shrink-0 text-muted-foreground [&_svg]:size-4">
+          {leading}
+        </span>
+      )}
+      {detail ? (
+        <span className="flex min-w-0 flex-1 flex-col">
+          <span className="truncate">{children}</span>
+          <span className="truncate text-xs text-muted-foreground">{detail}</span>
+        </span>
+      ) : (
+        <span className="min-w-0 flex-1 truncate">{children}</span>
+      )}
       {trailing !== undefined && trailing !== null && (
         <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
           {trailing}

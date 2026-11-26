@@ -10,16 +10,24 @@ import { navSurfaceProps, type NavSurface } from '@/lib/analytics/events';
 
 import { readContentRecommendations } from './server';
 
-import type { ContentContext } from '@stats47/data-configs/content/navigation';
+import type { ContentContext, ContentRecommendation } from '@stats47/data-configs/content/navigation';
 
 /** `icon` は見出しの左のアイコン (RailLinksCard の icon)。省略時は RailLinksCard の既定。 */
 export async function RelatedContentNavigation({
   title,
   surface,
   icon,
+  itemIcon,
   linkLabel,
   ...context
-}: ContentContext & { title: string; surface: NavSurface; icon?: ReactNode; linkLabel?: string }) {
+}: ContentContext & {
+  title: string;
+  surface: NavSurface;
+  icon?: ReactNode;
+  /** 各行の左端のアイコン */
+  itemIcon?: (item: ContentRecommendation) => ReactNode;
+  linkLabel?: string;
+}) {
   const items = await readContentRecommendations(context);
   if (linkLabel) {
     const item = items[0];
@@ -37,5 +45,5 @@ export async function RelatedContentNavigation({
       </Link>
     );
   }
-  return <ContentNavigation title={title} surface={surface} icon={icon} items={items} />;
+  return <ContentNavigation title={title} surface={surface} icon={icon} itemIcon={itemIcon} items={items} />;
 }

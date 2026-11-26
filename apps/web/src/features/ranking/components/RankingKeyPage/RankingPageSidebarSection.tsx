@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { createElement, Suspense } from "react";
 
 import { LayoutGrid } from "lucide-react";
 
@@ -6,6 +6,10 @@ import { LayoutGrid } from "lucide-react";
 import { RailAdSlot } from "@/features/ads";
 import type { AreaType } from "@/features/area";
 import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
+import {
+  THEME_NAV_GROUP_ICONS,
+  themeNavGroupOf,
+} from "@/features/theme-dashboard/config/theme-navigation";
 
 import {
   RANKING_RAIL_MIDDLE,
@@ -17,7 +21,15 @@ import { PortStatisticsMapCard } from "../RankingSidebar/PortStatisticsMapCard";
 import { RelatedArticlesCard } from "../RankingSidebar/RelatedArticlesCard";
 import { SurveyCard } from "../RankingSidebar/SurveyCard";
 
+import type { SurveyRelatedItem } from "../../services/load-ranking-page-model";
+import type { ContentRecommendation } from "@stats47/data-configs/content/navigation";
 import type { RankingItem } from "@stats47/ranking";
+
+/** テーマの行の左端に、そのテーマの分野のアイコン (左のサイドバーの 5 分野と同じ) を置く */
+function themeGroupIcon(item: ContentRecommendation) {
+  const group = themeNavGroupOf(item.key);
+  return createElement(group ? THEME_NAV_GROUP_ICONS[group.id] : LayoutGrid);
+}
 
 
 interface RankingPageSidebarSectionProps {
@@ -27,7 +39,7 @@ interface RankingPageSidebarSectionProps {
   /** この統計の出典調査 (originalSurveys 焼き込み、1-2 件) */
   surveys: { id: string; name: string }[];
   /** 同じ調査の関連ランキング (上位 5 件) */
-  surveyRelatedItems?: { rankingKey: string; title: string }[];
+  surveyRelatedItems?: SurveyRelatedItem[];
 }
 
 function RankingPageSidebarSkeleton() {
@@ -55,8 +67,9 @@ export function RankingPageSidebarSection({
       </div>
       {areaType === "prefecture" && (
         <RelatedContentNavigation
-          title="この指標を使うテーマ"
+          title="関連するテーマ"
           icon={<LayoutGrid />}
+          itemIcon={themeGroupIcon}
           sourceId={`ranking:${rankingKey}`}
           kinds={['theme']}
           limit={3}
@@ -77,6 +90,7 @@ export function RankingPageSidebarSection({
       <SurveyCard
         surveys={surveys.map((survey) => ({ id: survey.id, name: survey.name }))}
         relatedItems={surveyRelatedItems}
+        title="データの出どころ"
       />
       {/* 中段の AdSense (2026-11-12 オーナー決定: アフィリエイトを止め、PR の枠 (労働系の固定のバナーと文脈のバナー) から替えた) */}
       <RailAdSlot slot={RANKING_RAIL_MIDDLE} />

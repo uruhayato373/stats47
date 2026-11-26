@@ -2,6 +2,7 @@ import "server-only";
 
 import { readRankingAiContentFromR2 } from "@stats47/ai-content/server";
 import { shouldShowMetricTotal } from "@stats47/data-configs/metric-summary-display";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { getRankingTitle } from "@stats47/ranking";
 import {
   readAllYearsRankingValuesWithReferencesFromR2,
@@ -24,6 +25,7 @@ import {
   type NationalAveragePoint,
 } from "../lib/build-national-average-series";
 import { cachedFindRankingItem } from "../lib/cached-ranking-item";
+import { rankingTop1Value } from "../lib/ranking-top1-label";
 import { selectCurrentAiContent } from "../lib/select-current-ai-content";
 
 const AREA_TYPE = "prefecture" as const;
@@ -31,6 +33,20 @@ const AREA_TYPE = "prefecture" as const;
 /** yearCode (4 桁 / 10 桁フルタイムコード) を 4 桁年に揃えて比較する */
 function sameYear(a: string, b: string): boolean {
   return String(a).slice(0, 4) === String(b).slice(0, 4);
+}
+
+
+/** 右レールの「同じ調査のほかのランキング」の 1 行。top1 は「1位 東京都 1,424万人」(値が無ければ null) */
+export interface SurveyRelatedItem {
+  rankingKey: string;
+  title: string;
+  top1: string | null;
+}
+
+function surveyRankingTop1(item: Parameters<typeof rankingTop1Value>[0]): string | null {
+  const shown = rankingTop1Value(item);
+  if (!item.top1 || !shown) return null;
+  return `${item.top1.rank ?? 1}位 ${item.top1.areaName} ${shown.value}${formatUnitForDisplay(shown.unit)}`;
 }
 
 export async function loadRankingPageModel(rankingKey: string) {
@@ -97,11 +113,11 @@ export async function loadRankingPageModel(rankingKey: string) {
             ? prioritizeSurveyRankings(r.data, surveyPreferredKeys)
                 .filter((it) => it.rankingKey !== rankingKey)
                 .slice(0, 5)
-                .map((it) => ({ rankingKey: it.rankingKey, title: it.title }))
+                .map((it) => ({ rankingKey: it.rankingKey, title: it.title, top1: surveyRankingTop1(it) }))
             : [],
         )
-        .catch(() => [] as { rankingKey: string; title: string }[])
-    : Promise.resolve([] as { rankingKey: string; title: string }[]);
+        .catch(() => [] as SurveyRelatedItem[])
+    : Promise.resolve([] as SurveyRelatedItem[]);
 
   const categoryPromise = rankingItem.categoryKey
     ? findCategoryByKey(rankingItem.categoryKey)
