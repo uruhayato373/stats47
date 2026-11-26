@@ -186,7 +186,8 @@ export default async function MunicipalityRankingPage({
 
   const dataProduct = findDataProductForMunicipalityRanking(item.rankingKey);
   // 広告の段 (2026-11-12 オーナー決定): AdSense 1 つを本文の幅いっぱいで 2 段出す (PR は出さない)。2026-11-26 に地図と表を 1 つの枠に並べたので、
-  // 1 段目は枠と要点の後、2 段目は分布・解説・出典の後に置く (2 つの段の間に内容を挟む)。
+  // 1 段目 (municipality-row-1) は地図と表の枠と要点の後、2 段目 (municipality-row-2) は分布・解説・出典の後に置く (2 つの段の間に内容を挟む)。
+  // 段の順は広告の枠の台帳 (data/ads/placements.json) の順と同じにする (ad-placements.test.ts が照合する)。
   // ページの最後の段は、同日に右レールを付けて関連の一覧が右レールへ移った結果、表の後の段と出典・注記だけを挟んで
   // 約 240〜280px で続いたので外した (PC は右レールの 2 枠が加わる)
   const [rowAfterMap, rowAfterTable] = composeAdRows(
@@ -382,9 +383,9 @@ export default async function MunicipalityRankingPage({
         ))}
       </section>
 
-      {rowAfterTable.length > 0 && (
+      {rowAfterMap.length > 0 && (
         <div className="mt-8">
-          <AdRow cells={rowAfterTable} position="municipality-row-2" trackingCategory={`municipality-${item.rankingKey}`} wide />
+          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
         </div>
       )}
 
@@ -426,9 +427,9 @@ export default async function MunicipalityRankingPage({
           比較対象は市・町・村と東京23区です。政令指定都市の行政区と「特別区部」の集約行は除外し、欠測値や比率を定義できない値は順位へ入れていません。
         </p>
       </footer>
-      {rowAfterMap.length > 0 && (
+      {rowAfterTable.length > 0 && (
         <div className="mt-8">
-          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
+          <AdRow cells={rowAfterTable} position="municipality-row-2" trackingCategory={`municipality-${item.rankingKey}`} wide />
         </div>
       )}
 
