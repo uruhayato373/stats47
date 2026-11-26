@@ -1,3 +1,5 @@
+import { type ReactNode } from "react";
+
 import { buildRankingPageTitle } from "@stats47/ranking";
 
 import { PageHeader } from "@/components/layout";
@@ -19,6 +21,8 @@ interface RankingHeaderPanelProps {
    * 年をまたいだ ISR キャッシュとブラウザで結果が食い違い、ハイドレーションが合わなくなる。
    */
   nowYear: number;
+  /** 共有ボタン。題の右 (スマホは題の下) に置く */
+  shareButton?: ReactNode;
 }
 
 /**
@@ -32,6 +36,9 @@ interface RankingHeaderPanelProps {
  * h1 は検索結果のタイトルにも関わるので文言を変えない。最新年が 10 年以上前の指標だけ、
  * 注意の色と「10年以上前のデータ」の語で示す (色だけで意味を伝えない)。
  *
+ * 最終更新は「最新」と同じ行に並べ、共有ボタンは題の横に置く (2026-11-26 オーナー決定)。スマホで最新・最終更新・共有が
+ * 1 行ずつ使い、地図が最初の画面の外に押し出されていた。
+ *
  * eyebrow は置かない。直上のパンくずが同じ `breadcrumbCategory.name` を
  * リンクとして既に出しており、eyebrow はその語をリンクでない形で繰り返すだけで
  * 情報も機能も増えなかった (2026-07-29 是正。/ranking 索引の eyebrow 撤去と同じ理由)。
@@ -42,6 +49,7 @@ export function RankingHeaderPanel({
   updatedAt,
   latestYear,
   nowYear,
+  shareButton,
 }: RankingHeaderPanelProps) {
   const updated = updatedAt ? new Date(updatedAt) : null;
   const date = updated && !Number.isNaN(updated.getTime())
@@ -56,21 +64,27 @@ export function RankingHeaderPanel({
     <PageHeader
       className="mb-0"
       title={buildRankingPageTitle(metricTitle, areaType)}
-      meta={latestYear && (
-        <span
-          data-latest-year
-          data-stale={isStale ? "true" : undefined}
-          className={isStale ? "font-medium text-warning" : undefined}
-        >
-          最新 {latestYear.yearName}
-          {isStale && "（10年以上前のデータ）"}
-        </span>
+      meta={(latestYear || date) && (
+        <>
+          {latestYear && (
+            <span
+              data-latest-year
+              data-stale={isStale ? "true" : undefined}
+              className={isStale ? "font-medium text-warning" : undefined}
+            >
+              最新 {latestYear.yearName}
+              {isStale && "（10年以上前のデータ）"}
+            </span>
+          )}
+          {latestYear && date && <span aria-hidden="true"> ・ </span>}
+          {date && (
+            <span className="whitespace-nowrap">
+              最終更新 <time dateTime={date}>{date}</time>
+            </span>
+          )}
+        </>
       )}
-      actions={date && (
-        <p className="whitespace-nowrap text-xs text-muted-foreground sm:leading-8">
-          最終更新 <time dateTime={date}>{date}</time>
-        </p>
-      )}
+      actions={shareButton}
     />
   );
 }

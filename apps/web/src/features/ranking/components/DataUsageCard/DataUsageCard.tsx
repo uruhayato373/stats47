@@ -61,7 +61,8 @@ export function DataUsageCard({
   const workProduct = findDataProductForRanking(rankingKey, categoryKey);
   const [survey, setSurvey] = useState<SurveyState>("hidden");
   const [answer, setAnswer] = useState<CsvDownloadPurpose | null>(null);
-  const yearText = yearCount && yearCount > 0 ? `${yearCount}年分の時系列を含む` : "";
+  // 年が 1 つの指標は時系列ではないので「1年分の時系列」と書かない (2026-11-26)
+  const yearText = yearCount && yearCount > 1 ? `${yearCount}年分の時系列を含む` : yearCount === 1 ? "1年分の" : "";
 
   // 全基準があればまとめてDL、なければ現在の基準でDL
   const basis = hasAllBases ? "all-bases" : (normalizationType ?? "original");

@@ -210,6 +210,7 @@ export function RankingKeyPageClient({
                 updatedAt={activeRankingItem.updatedAt}
                 latestYear={activeRankingItem.latestYear}
                 nowYear={nowYear}
+                shareButton={<ShareButtons title={displayInfo.title} shareText={shareText} variant="menu" />}
             />
             <RankingHeaderControls
                 normalizationOptions={rankingItem.calculation?.normalizationOptions}
@@ -221,9 +222,6 @@ export function RankingKeyPageClient({
                 }
                 onNormalizationChange={handleNormalizationChange}
                 normalizationDisabled={isPending}
-                shareButton={
-                    <ShareButtons title={displayInfo.title} shareText={shareText} variant="menu" />
-                }
             />
         </div>
     );
@@ -269,7 +267,8 @@ export function RankingKeyPageClient({
                 </PanelGrid>
 
                 {/* 関連記事は広い画面では右レールの先頭 (RankingPageSidebarSection)。同じシェル幅基準で出し分け、二重に出さない */}
-                <div className="order-5 rail:hidden">{sections.relatedArticles}</div>
+                {/* 関連記事が無い指標では中身が空になる。空の枠が格子の余白 (上下 16px) の空の行を作っていたので隠す (2026-11-26) */}
+                <div className="order-5 empty:hidden rail:hidden">{sections.relatedArticles}</div>
                 <PanelGrid className="order-6">
                     <RankingPageContentSections
                         rankingKey={rankingKey}

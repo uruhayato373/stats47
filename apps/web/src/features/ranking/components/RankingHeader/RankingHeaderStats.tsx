@@ -78,7 +78,9 @@ export function RankingHeaderStats({
 
   // 市区町村モードでは全国の基準値を出さない。1,700 超の市区町村の単純平均は
   // 都道府県平均とも全国値とも別の量で、同じラベルで見せると誤読になる。
-  const showNationalAverage = areaType === "prefecture";
+  // 年が 1 つの指標は推移が無く、枠が平均値と「単年データです」だけになっていたので出さない (2026-11-26 オーナー決定)。
+  // 上位・下位の枠が全幅になる
+  const showNationalAverage = areaType === "prefecture" && nationalAverageSeries.length > 1;
 
   return (
     <div className={cn("@container", className)}>

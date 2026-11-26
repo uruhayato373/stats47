@@ -18,6 +18,18 @@ describe('RankingHeaderPanel', () => {
     expect(container.textContent).not.toContain('2026-11-06');
   });
 
+  // スマホで最新・最終更新・共有が 1 行ずつ使い、地図が最初の画面の外に出ていた (2026-11-26)
+  it('最終更新は最新年と同じ行に並べ、共有ボタンは見出しの中に置く', () => {
+    render(<RankingHeaderPanel metricTitle="総人口" areaType="prefecture" updatedAt="2026-11-06"
+      latestYear={{ yearCode: '2025', yearName: '2025年' }} nowYear={2026}
+      shareButton={<button type="button">共有</button>} />);
+    const latest = screen.getByText(/最新/);
+    const time = screen.getByText('2026-11-06');
+    expect(latest.parentElement).toBe(time.closest('span')?.parentElement);
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading.closest('header')?.contains(screen.getByRole('button', { name: '共有' }))).toBe(true);
+  });
+
   it.each([undefined, null, '', 'invalid'])('更新日 %s は推測で補わず省略する', (updatedAt) => {
     const { container } = render(<RankingHeaderPanel metricTitle="総人口" areaType="prefecture" updatedAt={updatedAt} nowYear={2026} />);
     expect(container.querySelector('time')).toBeNull();
