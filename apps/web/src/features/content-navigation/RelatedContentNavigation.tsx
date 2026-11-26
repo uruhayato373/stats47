@@ -36,7 +36,9 @@ export async function RelatedContentNavigation({
       <Link
         href={item.href}
         title={item.title}
-        className={`${buttonVariants({ variant: 'link', size: 'sm' })} min-h-11 sm:min-h-7`}
+        // 色付きのボタンにして目立たせる (2026-11-26 オーナー判断。文字のリンクでは見落とされやすく、
+        // 行き先の市区町村ランキングは検索でも強いページなので回遊させたい)
+        className={`${buttonVariants({ variant: 'default', size: 'sm' })} min-h-11 sm:min-h-7`}
         {...navSurfaceProps(surface)}
         data-nav-label={item.id}
         data-content-id={item.id}

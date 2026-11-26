@@ -24,6 +24,8 @@ describe('関連付けから取得する短いリンク', () => {
     expect(link).toHaveAttribute('title', '対応先の指標名');
     expect(link).toHaveAttribute('data-nav-surface', 'ranking_municipality');
     expect(link).toHaveAttribute('data-content-id', 'municipality-ranking:example');
+    // 文字のリンクでは見落とされたので、塗りの色付きボタンで出す (2026-11-26 オーナー判断)
+    expect(link).toHaveClass('bg-primary', 'text-primary-foreground');
     expect(container.querySelector('[data-slot="card"]')).toBeNull();
     expect(readContentRecommendations).toHaveBeenCalledWith({ sourceId: 'ranking:example', kinds: ['municipality-ranking'], limit: 1 });
   });
