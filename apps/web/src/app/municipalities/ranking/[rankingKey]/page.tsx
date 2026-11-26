@@ -146,8 +146,6 @@ export default async function MunicipalityRankingPage({
   const prefectures = fetchPrefectures();
   const distribution = binMunicipalityValues(snapshot.values);
   const median = distribution?.median;
-  const minimum = distribution?.min;
-  const maximum = distribution?.max;
   // 小数桁はデータセット全体から 1 度だけ解決した precision で揃える
   // (max 単独指定だと 44.0 が 44 になり同じ表内で桁が混ざる。blog-svg-chart-standards §数値の桁揃え)
   const precision = distribution?.precision ?? 0;
@@ -165,13 +163,21 @@ export default async function MunicipalityRankingPage({
   };
   // 同じ名前の自治体 (府中市・伊達市など) だけ県名を添える
   const listName = buildMunicipalityListNames(snapshot.values.map((row) => row.areaName));
+  // 要点の 3 つ: 1 位と最下位は順位の順に並んだ配信値の先頭と末尾 (名前を書き、市区町村のページへ結ぶ)
+  const firstRow = snapshot.values[0];
+  const lastRow = snapshot.values.at(-1);
+  const summaryCells = [
+    { label: '1位', row: firstRow, value: firstRow?.value },
+    { label: '中央値', row: undefined, value: median },
+    { label: lastRow ? `${lastRow.rank}位` : '最下位', row: lastRow, value: lastRow?.value },
+  ];
   const structuredData = buildMunicipalityDatasetStructuredData({
     item,
     snapshot,
   });
 
   const dataProduct = findDataProductForMunicipalityRanking(item.rankingKey);
-  // 広告の段 (2026-11-12 オーナー決定): 地図の後・順位の表の後に、AdSense 1 つを本文の幅いっぱいで出す (PR は出さない)。
+  // 広告の段 (2026-11-12 オーナー決定): 順位の表の後・地図の後に、AdSense 1 つを本文の幅いっぱいで出す (PR は出さない。2026-11-26 に表を地図の前へ上げ、段の順も入れ替わった)。
   // ページの最後の段は、同日に右レールを付けて関連の一覧が右レールへ移った結果、表の後の段と出典・注記だけを挟んで
   // 約 240〜280px で続いたので外した (PC は右レールの 2 枠が加わる)
   const [rowAfterMap, rowAfterTable] = composeAdRows(
@@ -256,68 +262,8 @@ export default async function MunicipalityRankingPage({
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
-      {/* 本文が狭い幅 (480px 未満) では 3 列にせず、1 行に「名前…値」を並べる。3 列の 1 列は約 72px で、
-          「-34.57%」「2,765人」のような値も入らなかった (MUNI-RANKING-STAT-OVERFLOW-01) */}
-      <section
-        aria-label="分布の要点"
-        className="grid grid-cols-1 @sm:grid-cols-3"
-      >
-        {[
-          ['最小', minimum],
-          ['中央値', median],
-          ['最大', maximum],
-        ].map(([label, value]) => (
-          <div
-            key={String(label)}
-            className="flex items-baseline justify-between gap-3 border-b border-border p-3 last:border-b-0 @sm:block @sm:border-b-0 @sm:border-r @sm:last:border-r-0"
-          >
-            <p className="text-xs text-muted-foreground">{label}</p>
-            <p className={cn(STAT_VALUE_CLASS, "@sm:mt-1")}>
-              {typeof value === 'number' ? formatStat(value).value : '—'}
-              <span className="ml-0.5 inline-block text-xs font-normal text-muted-foreground">
-                {typeof value === 'number' ? formatStat(value).unit : displayUnit}
-              </span>
-            </p>
-          </div>
-        ))}
-      </section>
-
-      {dataProduct && (
-        <section aria-label="この指標のデータ集">
-          <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
-          <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_product" />
-        </section>
-      )}
-
-      {distribution && (
-        <section aria-label="全国分布" className="mt-5">
-          <SectionHeader title="全国分布" hideRule className="mb-0" />
-          <div className="mt-2 border border-border p-2">
-            <DistributionHistogram
-              bins={distribution.bins}
-              median={distribution.median}
-              precision={distribution.precision}
-              unit={snapshot.unit}
-              ariaLabel={`${municipalityRankingDisplayTitle(item)}の全国分布ヒストグラム`}
-            />
-          </div>
-        </section>
-      )}
-
-      <MunicipalityNationalMap
-        title={item.title}
-        visualization={item.visualization}
-        unit={snapshot.unit}
-        decimalPlaces={precision}
-        values={snapshot.values.map((v) => ({ areaCode: v.areaCode, value: v.value }))}
-      />
-
-      {rowAfterMap.length > 0 && (
-        <div className="mt-8">
-          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
-        </div>
-      )}
-
+      {/* 並びは「順位の表 → 広告 → 地図 → 要点と分布 → 広告」(2026-11-26 オーナー判断)。題が「ランキング」なのに、
+          表が分布・地図・広告の後ろ (PC で 1,711px、スマホで 1,801px の位置) にあり、最初の画面に順位が出なかった */}
       <MunicipalityRankingExplorer
         rankingKey={item.rankingKey}
         yearCode={snapshot.yearCode}
@@ -353,6 +299,76 @@ export default async function MunicipalityRankingPage({
       {rowAfterTable.length > 0 && (
         <div className="mt-8">
           <AdRow cells={rowAfterTable} position="municipality-row-2" trackingCategory={`municipality-${item.rankingKey}`} wide />
+        </div>
+      )}
+
+      {dataProduct && (
+        <section aria-label="この指標のデータ集">
+          <p className="text-sm text-foreground">この指標の長期の時系列と、地図に結合できる境界データを配布しています。</p>
+          <ProductItem product={dataProduct} layout="row" surface="ranking_product" placement="municipality_ranking_product" />
+        </section>
+      )}
+
+      <MunicipalityNationalMap
+        title={item.title}
+        visualization={item.visualization}
+        unit={snapshot.unit}
+        decimalPlaces={precision}
+        values={snapshot.values.map((v) => ({ areaCode: v.areaCode, value: v.value }))}
+      />
+
+      {/* 1 位・中央値・最下位。値だけでなく、どの自治体かを書く (2026-11-26 オーナー指摘: 最小・最大の値だけでは意味が薄い)。
+          本文が狭い幅 (480px 未満) では 3 列にせず、1 行に「名前…値」を並べる。3 列の 1 列は約 72px で、
+          「-34.57%」「2,765人」のような値も入らなかった (MUNI-RANKING-STAT-OVERFLOW-01)。
+          狭い幅では値を本文の大きさにして行を詰める (3 行で 202px あったのを約半分にする) */}
+      <section
+        aria-label="分布の要点"
+        className="mt-5 grid grid-cols-1 @sm:grid-cols-3"
+      >
+        {summaryCells.map(({ label, row, value }) => (
+          <div
+            key={label}
+            className="flex items-baseline justify-between gap-3 border-b border-border px-3 py-1.5 last:border-b-0 @sm:block @sm:border-b-0 @sm:border-r @sm:p-3 @sm:last:border-r-0"
+          >
+            <p className="min-w-0 truncate text-xs text-muted-foreground">
+              {label}
+              {row && (
+                <Link
+                  href={hrefFor('city', { areaCode: row.prefectureCode, cityCode: row.areaCode })}
+                  className="ml-1.5 text-sm font-medium text-foreground hover:text-primary hover:underline"
+                >
+                  {listName(row.areaName)}
+                </Link>
+              )}
+            </p>
+            <p className={cn(STAT_VALUE_CLASS, "shrink-0 text-sm leading-6 @sm:mt-1 @sm:text-2xl @sm:leading-8")}>
+              {typeof value === 'number' ? formatStat(value).value : '—'}
+              <span className="ml-0.5 inline-block text-xs font-normal text-muted-foreground">
+                {typeof value === 'number' ? formatStat(value).unit : displayUnit}
+              </span>
+            </p>
+          </div>
+        ))}
+      </section>
+
+      {distribution && (
+        <section aria-label="全国分布" className="mt-5">
+          <SectionHeader title="全国分布" hideRule className="mb-0" />
+          <div className="mt-2 border border-border p-2">
+            <DistributionHistogram
+              bins={distribution.bins}
+              median={distribution.median}
+              precision={distribution.precision}
+              unit={snapshot.unit}
+              ariaLabel={`${municipalityRankingDisplayTitle(item)}の全国分布ヒストグラム`}
+            />
+          </div>
+        </section>
+      )}
+
+      {rowAfterMap.length > 0 && (
+        <div className="mt-8">
+          <AdRow cells={rowAfterMap} position="municipality-row-1" trackingCategory={`municipality-${item.rankingKey}`} wide />
         </div>
       )}
 

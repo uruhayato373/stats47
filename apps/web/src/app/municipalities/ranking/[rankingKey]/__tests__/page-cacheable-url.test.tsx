@@ -129,6 +129,32 @@ describe('市区町村ランキング全国版のページ', () => {
     expect(html).toContain('120件中 上位50件');
   });
 
+  // 題が「ランキング」のページなので、順位の表を地図・分布より前に出す (2026-11-26 オーナー指摘。以前は表が画面 2 枚目より下だった)
+  it('順位の表を地図と分布の要点より前に出す', async () => {
+    vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
+    const html = await renderPage();
+    const table = html.indexOf('<table');
+    const map = html.indexOf('data-testid="national-map"');
+    const summary = html.indexOf('aria-label="分布の要点"');
+    expect(table).toBeGreaterThan(-1);
+    expect(table).toBeLessThan(map);
+    expect(map).toBeLessThan(summary);
+  });
+
+  // 最小・最大の値だけでは、どの自治体かが分からなかった。1 位と最下位は名前を書き、市区町村のページへ結ぶ
+  it('分布の要点に 1 位と最下位の自治体名を書き、市区町村のページへ結ぶ', async () => {
+    vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(false);
+    const html = await renderPage();
+    const summary = html.slice(html.indexOf('aria-label="分布の要点"'), html.indexOf('aria-label="全国分布"'));
+    expect(summary).toContain('1位');
+    expect(summary).toContain('自治体0');
+    expect(summary).toContain('120位');
+    expect(summary).toContain('自治体119');
+    expect(summary).toContain('中央値');
+    expect(summary).toContain('href="/areas/01000/cities/10000"');
+    expect(summary).toContain('href="/areas/02000/cities/10119"');
+  });
+
   it('県別ページがある指標だけ、右レールの県チップを県別のパスへ結ぶ', async () => {
     vi.mocked(isMunicipalityPrefectureRankingKey).mockReturnValue(true);
     const withChips = await renderPage();
