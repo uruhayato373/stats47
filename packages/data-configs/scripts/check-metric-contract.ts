@@ -26,7 +26,7 @@ import { METRICS_DIR, REPO_ROOT } from './_lib';
 import { checkMetricSchema, METRIC_SCHEMA_PATH } from './metric-schema';
 import { checkThemePropsSchema } from './theme-props-schema';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
-import { assertMetricPresentation, joinColorPolicy } from '@stats47/types';
+import { assertMetricPresentation, authoredNormalizationType, isAuthoredRatioOption, joinColorPolicy } from '@stats47/types';
 
 checkMetricSchema(true);
 checkThemePropsSchema(true);
@@ -133,11 +133,11 @@ const entries: MetricLinkageEntry[] = keys.map((key) => {
     errors.push(`${key}: ${String(error)}`);
   }
   for (const option of metric.calculation?.normalizationOptions ?? [])
-    if (option.type !== 'series' && option.visualization) {
+    if (isAuthoredRatioOption(option) && option.visualization) {
       try {
         assertMetricPresentation(option.visualization);
       } catch (error) {
-        errors.push(`${key}/${option.type}: ${String(error)}`);
+        errors.push(`${key}/${authoredNormalizationType(option)}: ${String(error)}`);
       }
     }
   const scheme = COLOR_SCHEME_CATALOG.find(

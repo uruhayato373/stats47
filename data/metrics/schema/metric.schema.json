@@ -1191,23 +1191,33 @@
               {
                 "type": "object",
                 "properties": {
-                  "scaleFactor": {
-                    "type": "number"
-                  },
-                  "decimalPlaces": {
-                    "type": "number"
-                  },
-                  "type": {
-                    "enum": [
-                      "per_population",
-                      "per_area"
-                    ]
-                  },
-                  "label": {
-                    "type": "string"
+                  "denominator": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "population",
+                          "area"
+                        ]
+                      },
+                      "per": {
+                        "type": "number"
+                      },
+                      "scope": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "per"
+                    ],
+                    "additionalProperties": false
                   },
                   "unit": {
                     "type": "string"
+                  },
+                  "decimalPlaces": {
+                    "type": "number"
                   },
                   "visualization": {
                     "type": "object",
@@ -1588,11 +1598,9 @@
                   }
                 },
                 "required": [
-                  "scaleFactor",
-                  "decimalPlaces",
-                  "type",
-                  "label",
-                  "unit"
+                  "denominator",
+                  "unit",
+                  "decimalPlaces"
                 ],
                 "additionalProperties": false
               },

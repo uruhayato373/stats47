@@ -63,11 +63,11 @@ function camel(key) {
 
 function normOptions(norm, unit) {
   if (norm === "count") return [
-    { type: "per_population", label: "人口10万人あたり", unit: `${unit}/10万人`, scaleFactor: 100000, decimalPlaces: 1 },
-    { type: "per_area", label: "面積100km²あたり", unit: `${unit}/100km²`, scaleFactor: 100, decimalPlaces: 2 },
+    { denominator: { kind: "population", per: 100000 }, unit: `${unit}/10万人`, decimalPlaces: 1 },
+    { denominator: { kind: "area", per: 100 }, unit: `${unit}/100km²`, decimalPlaces: 2 },
   ];
   if (norm === "money") return [
-    { type: "per_population", label: "人口1人あたり", unit: `${unit}/人`, scaleFactor: 1, decimalPlaces: 2 },
+    { denominator: { kind: "population", per: 1 }, unit: `${unit}/人`, decimalPlaces: 2 },
   ];
   return [];
 }

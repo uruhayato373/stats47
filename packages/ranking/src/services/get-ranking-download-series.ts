@@ -7,7 +7,11 @@ import {
   listRankingValuesAllYears,
   readAllYearsNormalizedRankingValuesFromR2,
 } from "../repositories/ranking-value";
+import { BASIS_LABELS as NORMALIZED_BASIS_LABELS } from "../scripts/lib/normalized-values-core";
 import type { RankingValue } from "../types";
+
+/** 基準の表示名 (事前生成と同じ表を使う。分母の文言は分母の型から作る) */
+const BASIS_LABELS: Record<string, string> = NORMALIZED_BASIS_LABELS;
 
 /** ダウンロード用の 1 基準系列 (CSV/JSON 整形の入力)。 */
 export interface RankingDownloadSeries {
@@ -18,11 +22,6 @@ export interface RankingDownloadSeries {
 
 const NORM_TYPES = ["per_population", "per_area"] as const;
 
-const BASIS_LABELS: Record<string, string> = {
-  original: "総数",
-  per_population: "人口10万人あたり",
-  per_area: "面積100km²あたり",
-};
 
 /**
  * ランキングのダウンロード用系列を **R2 観測値からオンザフライ生成**する

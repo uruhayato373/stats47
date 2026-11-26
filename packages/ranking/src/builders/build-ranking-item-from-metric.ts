@@ -27,7 +27,7 @@ import {
   resolveRankingReaderLabel,
   resolveRankingHook,
 } from "@stats47/data-configs/prominence";
-import { assertKnownColorScheme } from "@stats47/types";
+import { assertKnownColorScheme, isAuthoredRatioOption, toRatioNormalizationOption } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 
 import surveysMaster from "../../../../data/surveys/master/surveys.json";
@@ -180,7 +180,7 @@ export function buildNormalizationOptions(
   const authored = config.calculation?.normalizationOptions;
   if (!authored) return undefined;
   return authored.map((option): NormalizationOption => {
-    if (option.type !== "series") return option;
+    if (isAuthoredRatioOption(option)) return toRatioNormalizationOption(option);
     const target = registry?.[option.metric];
     if (!target) {
       throw new Error(`build-ranking-item(${config.key}): series の指標 ${option.metric} が registry に無い`);

@@ -1,4 +1,6 @@
 import { WELL_KNOWN_DENOMINATORS } from '../../../data/metrics/defaults/normalization';
+import { authoredNormalizationType, isAuthoredRatioOption } from '@stats47/types';
+
 import type { EstatSource, MetricConfig } from './types';
 import type { MetricRecipe } from './recipe';
 import { buildRecipe } from './recipe';
@@ -130,8 +132,8 @@ export function metricNormalizationDependencies(
     ...new Set(
       (metric.calculation?.normalizationOptions ?? []).flatMap((option) =>
         // series は別の指標の値をそのまま出す見方なので、その指標に依存する
-        option.type === 'series' ? [option.metric] : metric.entities.flatMap((entity) => {
-          const spec = WELL_KNOWN_DENOMINATORS[option.type]?.[entity];
+        !isAuthoredRatioOption(option) ? [option.metric] : metric.entities.flatMap((entity) => {
+          const spec = WELL_KNOWN_DENOMINATORS[authoredNormalizationType(option)]?.[entity];
           return spec ? [spec.key] : [];
         })
       )

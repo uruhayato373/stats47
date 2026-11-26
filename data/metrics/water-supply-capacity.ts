@@ -36,17 +36,13 @@ export const waterSupplyCapacity: MetricConfig = {
     "isCalculated": false,
     "normalizationOptions": [
       {
-        "type": "per_population",
-        "label": "人口10万人あたり",
+        "denominator": { "kind": "population", "per": 100000 },
         "unit": "m3/日/10万人",
-        "scaleFactor": 100000,
         "decimalPlaces": 2,
       },
       {
-        "type": "per_area",
-        "label": "面積100km²あたり",
+        "denominator": { "kind": "area", "per": 100 },
         "unit": "m3/日/100km²",
-        "scaleFactor": 100,
         "decimalPlaces": 2,
       },
     ],

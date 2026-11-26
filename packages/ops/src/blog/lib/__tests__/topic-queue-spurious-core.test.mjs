@@ -360,6 +360,6 @@ test("data/metrics: 1 世帯・1 戸当たり金額 4 指標は人口・面積�
   ]) {
     const source = fs.readFileSync(path.join(PROJECT_ROOT, "data/metrics", `${key}.ts`), "utf8");
     assert.match(source, /"normalizationOptions":\s*\[\s*\]/u, `${key} に換算の選択肢が残っている`);
-    assert.doesNotMatch(source, /per_population|per_area/u, `${key} に人口・面積の換算が残っている`);
+    assert.doesNotMatch(source, /per_population|per_area|"denominator":\s*\{/u, `${key} に人口・面積の換算が残っている`);
   }
 });

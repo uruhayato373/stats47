@@ -14,6 +14,7 @@ import type {
 } from "../../types/snapshot";
 import type { RankingValue } from "../../types";
 import { NATIONAL_AREA_CODE } from "@stats47/area";
+import { denominatorLabel } from "@stats47/types";
 
 /** 分母 1 年分 (areaCode → 値) */
 export type DenominatorYearMap = ReadonlyMap<string, number | null>;
@@ -157,6 +158,6 @@ export function buildNationalTrendSeries(
 /** 正規化 option の label が無い場合の既定表示名 */
 export const BASIS_LABELS: Record<NationalTrendBasis, string> = {
   original: "総数",
-  per_population: "人口10万人あたり",
-  per_area: "面積100km²あたり",
+  per_population: denominatorLabel({ kind: "population", per: 100000 }),
+  per_area: denominatorLabel({ kind: "area", per: 100 }),
 };
