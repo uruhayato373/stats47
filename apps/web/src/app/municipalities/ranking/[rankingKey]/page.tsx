@@ -318,17 +318,17 @@ export default async function MunicipalityRankingPage({
       />
 
       {/* 1 位・中央値・最下位。値だけでなく、どの自治体かを書く (2026-11-26 オーナー指摘: 最小・最大の値だけでは意味が薄い)。
-          本文が狭い幅 (480px 未満) では 3 列にせず、1 行に「名前…値」を並べる。3 列の 1 列は約 72px で、
-          「-34.57%」「2,765人」のような値も入らなかった (MUNI-RANKING-STAT-OVERFLOW-01)。
-          狭い幅では値を本文の大きさにして行を詰める (3 行で 202px あったのを約半分にする) */}
+          本文が狭い幅 (480px 未満) では 3 列にせず、「名前 値」の組を 1 行に流す (入りきらない組は次の行へ送る)。
+          3 列の 1 列は約 72px で「-34.57%」「2,765人」のような値も入らず (MUNI-RANKING-STAT-OVERFLOW-01)、
+          1 組 1 行では 3 行で 142〜202px を使っていた (2026-11-26 オーナー判断で 1 行にまとめる) */}
       <section
         aria-label="分布の要点"
-        className="mt-5 grid grid-cols-1 @sm:grid-cols-3"
+        className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1 px-3 py-2 @sm:grid @sm:grid-cols-3 @sm:gap-0 @sm:p-0"
       >
         {summaryCells.map(({ label, row, value }) => (
           <div
             key={label}
-            className="flex items-baseline justify-between gap-3 border-b border-border px-3 py-1.5 last:border-b-0 @sm:block @sm:border-b-0 @sm:border-r @sm:p-3 @sm:last:border-r-0"
+            className="flex min-w-0 items-baseline gap-1.5 border-border @sm:block @sm:border-r @sm:p-3 @sm:last:border-r-0"
           >
             <p className="min-w-0 truncate text-xs text-muted-foreground">
               {label}
