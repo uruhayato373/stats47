@@ -77,3 +77,4 @@ date,run_id,model,targets,passed,rejected,failed,skipped,author_requests,critic_
 2026-11-24,45337086558-1,gemini-3.5-flash-lite,3,2,0,1,0,4,3,35134,20200,0,55334,0,1,ok,0
 2026-11-25,45549794568-1,gemini-3.5-flash-lite,3,2,0,1,0,2,2,21179,9850,0,31029,0,1,ok,0
 2026-11-26,45753298060-1,gemini-3.5-flash-lite,3,0,0,3,0,0,0,14,9,0,23,0,1,ok,0
+2026-11-27,45938720818-1,gemini-3.5-flash-lite,3,3,0,0,0,4,4,41121,19581,0,60702,0,1,ok,0

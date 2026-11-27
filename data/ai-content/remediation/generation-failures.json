@@ -132,24 +132,6 @@
       "lastReason": "gemini-daily",
       "lastFailedAt": "2026-11-22",
       "firstFailedAt": "2026-11-20"
-    },
-    "general-hospital-count": {
-      "failCount": 2,
-      "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-26",
-      "firstFailedAt": "2026-11-25"
-    },
-    "pork-consumption-quantity": {
-      "failCount": 1,
-      "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-26",
-      "firstFailedAt": "2026-11-26"
-    },
-    "fishery-species-catch-sardine": {
-      "failCount": 1,
-      "lastReason": "gemini-daily",
-      "lastFailedAt": "2026-11-26",
-      "firstFailedAt": "2026-11-26"
     }
   }
 }
