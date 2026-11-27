@@ -107,13 +107,14 @@ export function RankingKeyPageClient({
     const presentedItem = useMemo(() => resolveRankingPresentation(activeRankingItem, normalizationType ?? null), [activeRankingItem, normalizationType]);
     const displayInfo = buildRankingDisplayInfo(presentedItem);
     // 表示単位 (万円・億円) はここで 1 回だけ決め、上位と下位・推移・地図・表・県の詳細へ同じ値を渡す。
-    // 人口あたり・面積あたりの値は選んだ計算方法の単位で配信されるので換算しない。市区町村は値の幅が広く、
-    // 都道府県向けに書いた表示単位では小さい町村が 0 に丸まるので、元の単位のまま出す。
+    // 人口あたり・面積あたりの値は、選んだ計算方法の表示 (換算なし・選択肢の小数の桁) を presentedItem が持つのでそれを使う
+    // (2026-11-27。それまでは null を渡し、選択肢の桁 1 の指標でも表と上位・下位が 2 桁で出ていた)。
+    // 市区町村は値の幅が広く、都道府県向けに書いた表示単位では小さい町村が 0 に丸まるので、元の単位のまま出す。
     const valueDisplay = useMemo(
-        () => normalizationType || currentAreaType !== "prefecture"
+        () => currentAreaType !== "prefecture"
             ? null
-            : resolveRankingValueDisplay(activeRankingItem, rankingValues.map((v) => v.value)),
-        [normalizationType, currentAreaType, activeRankingItem, rankingValues],
+            : resolveRankingValueDisplay(presentedItem, rankingValues.map((v) => v.value)),
+        [currentAreaType, presentedItem, rankingValues],
     );
 
     const shareText = useMemo(() => {

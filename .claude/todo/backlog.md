@@ -30,9 +30,9 @@ updated: 2026-11-01
 
 - **起点**: 同じ指標の見方違いの 118 ページを親のページの計算方法 (`?norm=`) へ統合した (gsc improvement-log `RANKING-VIEW-CONSOLIDATE-01`)。範囲を絞ったので次が残った。
 - **残り (統合の後片付け)**: ① 誰も書かない項目 `normalizationBasis`・`demographicAttr` を型 `RankingItem` から消し、読み手 (web・remotion・sns・correlation の約 42 ファイル) を直す。値は 2026-11-21 の SQLite 廃止で全件空になり、空のときの代わりの文字で黙って表示が壊れていた (下段のボタンの「総数・総数・総数」)。組み立ての横に `satisfies Record<keyof RankingItem, 出どころ>` を置き、誰も書かない項目を型検査で止める ② テーマ・県ページ (`data/areas/databook/template.json`)・調査ハブ (`data/surveys/editorial/editorial.json`)・ブログの台帳が転送したキーを直書きしていて、サイト内リンクが 301 を 1 回経由する。`hrefFor` はブラウザも読むので台帳を丸ごと import しない。小さな対応表を生成するか、参照を親 + 見方に書き換えるかを決める ③ R2 に残る転送したキーの AI 解説・OGP・ページカードの片付け (消す仕組みが無い) ④ CSV ダウンロードの「全ての見方」に series の列が無い
-- **残り (調査で見つけた既存の不具合)**: ⑤ 都道府県内の絞り込み (`parentAreaCode`) が常に値の大きい順に並べ直し、小さいほど上位の指標で順位が逆になる (`apps/web/src/features/ranking/actions/fetch-ranking-values.ts` の都道府県内フィルタ) ⑥ `cityRankingItem` は組み立てが常に `areaType: "prefecture"` で作るので必ず null で、都道府県/市区町村の切替 (`AreaTypeToggle`・`handleAreaTypeChange`) が届かないコードになっている ⑦ 人口・面積で割った見方では `valueDisplay` を null で渡すため、選択肢の `decimalPlaces` が表・地図・上位下位に効かない (`RankingKeyPageClient.tsx` の正規化中の分岐)
+- **残り (調査で見つけた既存の不具合)**: ⑦ は 2026-11-27 に直した (見方を選んだときも選択肢の小数の桁で表・地図・上位下位を書く)。⑤ ⑥ は画面に出ない死んだ経路だった (2026-11-27 にコードで確認): ページは `parentAreaCode` を渡さず、`cityRankingItem` は item.json の areaType が常に prefecture なので必ず null で、市区町村の切り替え (`AreaTypeToggle`・`handleAreaTypeChange`) も都道府県内の並べ直しも動かない。順位の向きの設定もサイトに無い (正典の順位は常に値の大きい順。`derive-ranks.ts`)。次: この経路 (`AreaTypeToggle`・`cityRankingItem` の R2 の読み取り・`parentAreaCode`) を消す。描画ごとの R2 の読み取りが 1 回減る
 - **停止条件**: ③ は R2 の削除なので、対象の一覧を出してオーナーの承認を取ってから CI で行う。
-- **完了条件**: ①〜⑦ がそれぞれ直ったか、見送りの理由が書かれている。
+- **完了条件**: ①〜④ と、⑤ ⑥ の死んだ経路の削除がそれぞれ済んだか、見送りの理由が書かれている。
 
 ### [CORRELATION-SELECTION-VERIFY-01] 相関の選び方の規則 (2026-11-26) を本番の作り直し後に確かめる
 タグ: [サイト品質] [種類:改善] [実行:対話] [起票:2026-11-26] [領域:サイト]
@@ -1599,7 +1599,7 @@ updated: 2026-11-01
 - **進捗 (2026-11-24・57dea1359)**: ランキングの「1位」の文字色 (color-contrast) と推移の図の役割 (nested-interactive) を直した。残り: 4・5 は R2 への書き込みと合計特殊出生率の単位の変更、7 は PSI の計測が要る。本番での axe の再確認と見た目の確認は反映後。
 - **進捗 (2026-11-25・70be041b3)**: Item 5 の単位を「人」から「人/女性」へ直し、出生数と別の軸に分かれることをテストで固定した (`metrics:regen-derived` の生成物に差分なし)。残り: Item 5 は本番反映後の 375/1280px の画像と `/ranking/*` の表記確認、週次 display-units 台帳の `unit-changed` 差分の確認。Item 4 (R2 書き込み) と Item 7 (PSI) は未着手。
 - **追加 (2026-11-25・線の 2 重の全ページ計測から)**: `/geo/layers` の本文は、検索欄 (データ名・分野の選択) と件数とカードの格子を 1 つの段に直に持ち、入力欄の左の線が外枠の線と、選択の右の線が右レールの線と 1px で並ぶ (dev・1440px で実測)。検索欄と件数をカードと別のセル (余白 16px) に分ける。ブログ詳細のタグの丸いピルの下端が区切り線に 1px で接する箇所も同じ計測で 1 件出た (`/blog/sme-business-sentiment-regional-gap`・y=1954)。
-- **追加 (2026-11-26・`/ranking/total-population` を dev で開いて観測)**: ブラウザのコンソールに React の「Each child in a list should have a unique "key" prop. Check the render method of `RankingKeyPageClient`. It was passed a child from RankingPageClientShell.」が出る。`RankingPageClientShell.tsx` の `sections` の要素はどれも key を持つので、配列で渡している所を `RankingKeyPageClient.tsx` 側で探す。再現: `npm run dev:web` で同じページを開き、コンソールのエラーを見る。
+- **確認 (2026-11-27)**: 11-26 に観測した React の key の警告 (`RankingKeyPageClient`) は、dev で `/ranking/total-population`・`/ranking/actual-overnight-guests` を開き直しても出なかった。11-26 に市区町村へのリンクを共通の切り替えに替えたときに消えたと見ている。再び出たら同じ手順で調べる。
 - **追加 (2026-11-26・本番デプロイ 45817142016 の後のスモークテスト run 45820304500)**: `/themes/education-culture` の selection-controls が 1 回落ちて再実行で通った (不安定)。続けて落ちるなら原因を調べる。`/geo` のレールと `/areas` の失敗は、どちらも 11-20 の意図した変更にテストが追従していなかったので、2026-11-27 にテストを直した。
 
 ### [BLOG-FIGURE-FOLLOWUP-01] ブログの図の型に残る不具合 (第 3 波の実行で見つけた分)
