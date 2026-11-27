@@ -21,7 +21,6 @@ import { RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
 
 import { classifyRankingSubtitle } from "../../utils/classify-subtitle";
 import { resolveRankingPresentation } from '../../utils/resolve-ranking-presentation';
-import { AreaTypeToggle } from "../AreaTypeToggle";
 import {
     RankingHeaderPanel,
     RankingHeaderControls,
@@ -51,10 +50,6 @@ interface RankingKeyPageClientProps {
     areaType?: AreaType;
     selectedYear?: string;
     sections?: RankingPageSections;
-    /** 都道府県コード（市区町村ランキング時のフィルタ用） */
-    parentAreaCode?: string;
-    /** 市区町村ランキング定義（存在する場合にトグルを表示） */
-    cityRankingItem?: RankingItem;
     /** グループメンバー（normalization_basis トグル用） */
     /** ArticleShell の breadcrumb slot に描画するパンくず */
     breadcrumb?: React.ReactNode;
@@ -73,8 +68,6 @@ export function RankingKeyPageClient({
     areaType = "prefecture",
     selectedYear,
     sections = {},
-    parentAreaCode,
-    cityRankingItem,
     breadcrumb,
     municipalityLink,
     nowYear,
@@ -83,7 +76,6 @@ export function RankingKeyPageClient({
         activeRankingItem,
         currentAreaType,
         currentYear,
-        handleAreaTypeChange,
         handleNormalizationChange,
         handleYearChange,
         isPending,
@@ -97,8 +89,6 @@ export function RankingKeyPageClient({
         initialNationalAverageSeries,
         areaType,
         selectedYear,
-        parentAreaCode,
-        cityRankingItem,
     });
     // NOTE: useBreakpoint removed for layout-gating usages — replaced with CSS-only
     // responsive classes to eliminate post-hydration CLS (desktop 0.264).
@@ -131,13 +121,6 @@ export function RankingKeyPageClient({
                     times={activeRankingItem.availableYears}
                     value={currentYear}
                     onChange={handleYearChange}
-                />
-            )}
-            {cityRankingItem && (
-                <AreaTypeToggle
-                    value={currentAreaType}
-                    onChange={handleAreaTypeChange}
-                    disabled={isPending}
                 />
             )}
         </>

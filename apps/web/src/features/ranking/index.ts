@@ -40,7 +40,6 @@ export { DataUsageCard } from "./components/DataUsageCard";
 export * from "./utils";
 
 // Additional client components
-export { AreaTypeToggle } from "./components/AreaTypeToggle";
 
 // Sidebar cards (client)
 export { SurveyCard } from "./components/RankingSidebar/SurveyCard";

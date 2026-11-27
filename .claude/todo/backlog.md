@@ -30,9 +30,9 @@ updated: 2026-11-01
 
 - **起点**: 同じ指標の見方違いの 118 ページを親のページの計算方法 (`?norm=`) へ統合した (gsc improvement-log `RANKING-VIEW-CONSOLIDATE-01`)。範囲を絞ったので次が残った。
 - **残り (統合の後片付け)**: ① 誰も書かない項目 `normalizationBasis`・`demographicAttr` を型 `RankingItem` から消し、読み手 (web・remotion・sns・correlation の約 42 ファイル) を直す。値は 2026-11-21 の SQLite 廃止で全件空になり、空のときの代わりの文字で黙って表示が壊れていた (下段のボタンの「総数・総数・総数」)。組み立ての横に `satisfies Record<keyof RankingItem, 出どころ>` を置き、誰も書かない項目を型検査で止める ② テーマ・県ページ (`data/areas/databook/template.json`)・調査ハブ (`data/surveys/editorial/editorial.json`)・ブログの台帳が転送したキーを直書きしていて、サイト内リンクが 301 を 1 回経由する。`hrefFor` はブラウザも読むので台帳を丸ごと import しない。小さな対応表を生成するか、参照を親 + 見方に書き換えるかを決める ③ R2 に残る転送したキーの AI 解説・OGP・ページカードの片付け (消す仕組みが無い) ④ CSV ダウンロードの「全ての見方」に series の列が無い
-- **残り (調査で見つけた既存の不具合)**: ⑦ は 2026-11-27 に直した (見方を選んだときも選択肢の小数の桁で表・地図・上位下位を書く)。⑤ ⑥ は画面に出ない死んだ経路だった (2026-11-27 にコードで確認): ページは `parentAreaCode` を渡さず、`cityRankingItem` は item.json の areaType が常に prefecture なので必ず null で、市区町村の切り替え (`AreaTypeToggle`・`handleAreaTypeChange`) も都道府県内の並べ直しも動かない。順位の向きの設定もサイトに無い (正典の順位は常に値の大きい順。`derive-ranks.ts`)。次: この経路 (`AreaTypeToggle`・`cityRankingItem` の R2 の読み取り・`parentAreaCode`) を消す。描画ごとの R2 の読み取りが 1 回減る
+- **済み (2026-11-27・調査で見つけた不具合)**: ⑦ 見方を選んだときも選択肢の小数の桁で書くようにした。⑤ ⑥ は画面に出ない死んだ経路だったので消した (都道府県のページの市区町村の切り替え `AreaTypeToggle`・都道府県内の絞り込み `parentAreaCode`・描画ごとの市区町村の定義の R2 の読み取り)。市区町村へは `RankingAreaUnitSwitch` のリンクで移る
 - **停止条件**: ③ は R2 の削除なので、対象の一覧を出してオーナーの承認を取ってから CI で行う。
-- **完了条件**: ①〜④ と、⑤ ⑥ の死んだ経路の削除がそれぞれ済んだか、見送りの理由が書かれている。
+- **完了条件**: ①〜④ がそれぞれ直ったか、見送りの理由が書かれている。
 
 ### [CORRELATION-SELECTION-VERIFY-01] 相関の選び方の規則 (2026-11-26) を本番の作り直し後に確かめる
 タグ: [サイト品質] [種類:改善] [実行:対話] [起票:2026-11-26] [領域:サイト]

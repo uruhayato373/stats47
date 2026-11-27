@@ -1,6 +1,5 @@
 "use server";
 
-import { to2DigitPrefCode, type AreaType } from "@stats47/area";
 import {
   computeNormalization,
   fetchRankingValuesOnDemand,
@@ -14,19 +13,17 @@ import { findSeriesOption } from "../utils";
 
 import { sanitizeNormalizationType } from "./normalization-types";
 
+import type { AreaType } from "@stats47/area";
 import type { RankingValue } from "@stats47/ranking";
 
 /**
  * ランキングデータを取得する（正規化対応）
- *
- * @param parentAreaCode 都道府県コード（市区町村フィルタ用、例: "13000"）
  */
 export async function fetchRankingValuesAction(
   rankingKey: string,
   areaType: AreaType,
   yearCode: string,
   normalizationType?: string,
-  parentAreaCode?: string,
 ): Promise<Result<RankingValue[], Error>> {
   try {
     // アイテム情報を取得
@@ -88,14 +85,6 @@ export async function fetchRankingValuesAction(
       if (values.length === 0) {
         values = await fetchRankingValuesOnDemand(rankingItem, yearCode);
       }
-    }
-
-    // 都道府県内フィルタ
-    if (parentAreaCode) {
-      const prefPrefix = to2DigitPrefCode(parentAreaCode);
-      values = values.filter((v) => v.areaCode.startsWith(prefPrefix));
-      values.sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
-      values = values.map((v, i) => ({ ...v, rank: i + 1 }));
     }
 
     return ok(values);

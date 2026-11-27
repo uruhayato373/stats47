@@ -90,10 +90,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     },
   );
 
-  const cityRankingItemPromise = cachedFindRankingItem(rankingKey, "city")
-    .then((r) => (isOk(r) ? r.data : null))
-    .catch(() => null);
-
   // この統計の出典調査 (builder が item.json に焼き込んだ originalSurveys)。
   // 旧実装は全調査リスト (readSurveysFromR2) をサイドバーに出しており、無関係な調査が
   // 並ぶ + surveyName を別 fetch していた。焼き込み済みデータで追加 fetch ゼロにする。
@@ -128,13 +124,11 @@ export async function loadRankingPageModel(rankingKey: string) {
   const [
     { values: allYearsValues, referenceValues },
     aiContent,
-    cityRankingItem,
     surveyRelatedItems,
     category,
   ] = await Promise.all([
     allYearsPromise,
     aiContentPromise,
-    cityRankingItemPromise,
     surveyRelatedItemsPromise,
     categoryPromise,
   ]);
@@ -174,7 +168,6 @@ export async function loadRankingPageModel(rankingKey: string) {
     referenceValues,
     nationalAverageSeries,
     aiContent: currentAiContent,
-    cityRankingItem,
     originalSurveys,
     surveyRelatedItems,
     category,
