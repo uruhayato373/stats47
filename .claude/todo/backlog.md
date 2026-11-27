@@ -634,6 +634,7 @@ updated: 2026-11-01
 - **停止条件・禁止**: 補正の定義の外で値を手で直さない。購入者がいる ZIP の差し替えは note への外部変更なので事前に確認する。
 - **完了条件**: 川崎市と空欄の原因が記録され、年の表記と注記がサイトと商品で一致している。
 - **観測 (2026-11-25)**: 月次の `data-refresh.yml` の最新 (11-05・run 42010655216) は cancelled。公開 R2 の `manufacturing-shipment-amount/cities.json` は 83,956 行で「年度」の行は 0、川崎市の 1986 年・1983 年は公表値と一致、札幌と特別区部の 1987 年の行は 0 件。全 3,201 ファイルの照合は未実施。
+- **全件の照合 (2026-11-27)**: 有効な暦年・書き方なしの指標 2,332 件の公開 R2 (`values.json`・`cities.json` 2,461 ファイル、404 は 4) で「YYYY年度」の行を数えた。残りは 9 ファイル・8 指標で、すべて地方公共団体定員管理調査の職員数 (education-department-staff・fire-department-employees・municipal-general-administration-staff (県と市区町村)・police-department-staff・police-officer-count・police-officer-count-per-population (非公開)・prefectural-general-administration-staff・public-enterprise-accounting-staff)。定義は `check-ssds-year-format.ts --explain` で暦年 (期間「4月1日」) と確かめた。本番の市区町村ランキング `/municipalities/ranking/municipal-general-administration-staff` の題が【2024年度】、県のランキングの題は item の年名で 2024年。次: この 8 指標を `data-refresh.yml` の名指しで取り込み直す (正本の上書きなのでオーナーの承認の後。設定の記録は変わらないのでデプロイ後の自動の取り込みには選ばれない)
 
 ### [BLOG-FIGURE-REDRAW-REGRESSION-01] ブログの図の一括の描き直しで出た型の不具合 (出典欄が空・題の右端が切れる・年度が「年」) をサイト側で直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-11-03] [領域:データ] [待ち:承認]
