@@ -218,6 +218,14 @@
       "published": true
     },
     {
+      "id": "survey:electric-power-survey-statistics",
+      "kind": "survey",
+      "key": "electric-power-survey-statistics",
+      "title": "電力調査統計",
+      "href": "/survey/electric-power-survey-statistics",
+      "published": true
+    },
+    {
       "id": "survey:electricity-business-statistics",
       "kind": "survey",
       "key": "electricity-business-statistics",
