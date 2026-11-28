@@ -19952,6 +19952,51 @@
               "constraints": [
                 "ga4.engagementRatePvWeighted: missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 90,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 747,
+                  "status": "measured",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample"
+              ],
+              "constraints": [
+                "ga4.engagementRatePvWeighted: missing-or-low-sample"
+              ]
             }
           ]
         }
@@ -20167,6 +20212,54 @@
                   "periodEnd": "2026-11-07",
                   "weeks": [
                     "2026-W45"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 14,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 133,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
                   ]
                 }
               },
@@ -20408,6 +20501,54 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 50,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 94,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         }
@@ -20625,6 +20766,55 @@
                   "periodEnd": "2026-11-07",
                   "weeks": [
                     "2026-W45"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 54,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 7,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
                   ]
                 }
               },
@@ -20870,6 +21060,55 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 31,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 8,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         }
@@ -21101,6 +21340,55 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 33,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 62,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         }
@@ -21318,6 +21606,55 @@
                   "periodEnd": "2026-11-07",
                   "weeks": [
                     "2026-W45"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 64,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 83,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
                   ]
                 }
               },
@@ -21782,6 +22119,55 @@
                 "ga4.engagementRatePvWeighted: missing-or-low-sample",
                 "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
               ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 44,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 109,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample",
+                "baseline-missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "gsc.impressions: baseline-missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+              ]
             }
           ]
         }
@@ -21993,6 +22379,52 @@
                   "periodEnd": "2026-11-07",
                   "weeks": [
                     "2026-W45"
+                  ]
+                }
+              },
+              "status": "insufficient-data",
+              "reasons": [
+                "missing-or-low-sample"
+              ],
+              "constraints": [
+                "gsc.impressions: missing-or-low-sample",
+                "ga4.engagementRatePvWeighted: missing-or-low-sample"
+              ]
+            },
+            {
+              "observedAt": "2026-11-28",
+              "values": {
+                "ga4.pageViews": {
+                  "value": 61,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "gsc.impressions": {
+                  "value": 60,
+                  "status": "measured-low",
+                  "scope": "search-console",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-16",
+                  "periodEnd": "2026-11-12",
+                  "weeks": [
+                    "2026-W46"
+                  ]
+                },
+                "ga4.engagementRatePvWeighted": {
+                  "value": null,
+                  "status": "measured-low",
+                  "scope": "Japan",
+                  "windowDays": 28,
+                  "periodStart": "2026-10-18",
+                  "periodEnd": "2026-11-14",
+                  "weeks": [
+                    "2026-W46"
                   ]
                 }
               },
