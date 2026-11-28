@@ -1,26 +1,8 @@
 {
-  "checked": 256,
+  "checked": 207,
   "threshold": 0.93,
   "flagged": [],
   "highest": [
-    {
-      "key": "population-density-per-km2-inhabitable-area",
-      "title": "可住地面積１km2当たり人口密度",
-      "year": "2024",
-      "r": 0.897
-    },
-    {
-      "key": "per-taxpayer-taxable-income",
-      "title": "課税対象所得",
-      "year": "2024",
-      "r": 0.879
-    },
-    {
-      "key": "densely-inhabited-district-population-density",
-      "title": "人口集中地区人口密度",
-      "year": "2020",
-      "r": 0.856
-    },
     {
       "key": "foreign-resident-count-china-per-100k",
       "title": "外国人人口",
@@ -32,12 +14,6 @@
       "title": "住民税",
       "year": "2022",
       "r": 0.84
-    },
-    {
-      "key": "elementary-school-children-1-per",
-      "title": "小学校児童数",
-      "year": "2024",
-      "r": 0.788
     },
     {
       "key": "passport-issuance-count-per-thousand",
@@ -52,16 +28,40 @@
       "r": 0.764
     },
     {
-      "key": "elementary-school-students-per-teacher",
-      "title": "小学校児童数",
-      "year": "2024",
-      "r": 0.754
+      "key": "per-capita-national-tax-collected",
+      "title": "国税徴収決定済額",
+      "year": "2023",
+      "r": 0.737
     },
     {
-      "key": "high-school-students-per-teacher",
-      "title": "高等学校生徒数",
+      "key": "per-capita-kenmin-shotoku-h23",
+      "title": "1人当たり県民所得",
+      "year": "2018",
+      "r": 0.667
+    },
+    {
+      "key": "bank-deposit-balance-per-person",
+      "title": "国内銀行預金残高",
       "year": "2024",
-      "r": 0.754
+      "r": 0.666
+    },
+    {
+      "key": "per-capita-prefectural-income-h27",
+      "title": "1人当たり県民所得",
+      "year": "2021",
+      "r": 0.657
+    },
+    {
+      "key": "mobile-phone-contract-count-per-1000",
+      "title": "携帯電話契約数",
+      "year": "2023",
+      "r": 0.645
+    },
+    {
+      "key": "foreign-resident-count-per-100k",
+      "title": "外国人人口",
+      "year": "2020",
+      "r": 0.638
     }
   ]
 }

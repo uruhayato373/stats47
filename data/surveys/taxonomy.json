@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T01:00:25.625Z",
+  "generatedAt": "2026-11-28T00:15:15.931Z",
   "masterSurveyCount": 152,
   "ranking": {
     "metrics": 2769,
@@ -784,22 +784,27 @@
     }
   },
   "blog": {
-    "articles": 853,
-    "charts": 2269,
-    "applicableCharts": 2121,
+    "articles": 863,
+    "charts": 2297,
+    "applicableCharts": 2142,
     "byStatus": {
-      "resolved": 2121,
-      "unresolved": 0,
-      "not-applicable": 148,
+      "resolved": 2141,
+      "unresolved": 1,
+      "not-applicable": 155,
       "missing-lineage": 0
     },
-    "coveragePct": 100,
-    "unresolvedCharts": [],
+    "coveragePct": 99.95,
+    "unresolvedCharts": [
+      {
+        "slug": "cc-estat-14-energy-area-chart",
+        "base": "energy-demand-stacked",
+        "status": "unresolved"
+      }
+    ],
     "snapshotSchemaVersion": 2,
     "dataSources": {
       "legacySectionArticles": [
         "aging-solo-living-crisis",
-        "assembly-answer-chatgpt-5steps",
         "cc-estat-17-edu-slope-graph",
         "commercial-land-price-trend",
         "communication-cost-burden",
@@ -920,6 +925,7 @@
         "area-ratio-prefecture-gap",
         "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
         "beef-unmarried-ratio",
+        "birth-death-gap-decline",
         "bread-consumption-expenditure-vs-final-education-university",
         "cc-estat-01-setup",
         "cc-estat-02-search-skill",
@@ -971,6 +977,7 @@
         "inbound-by-nationality-regional-preference",
         "inflow-population-ratio-prefecture-gap",
         "inpatient-rate-prefecture-gap",
+        "intellectual-crime-tokyo-kagawa-gap",
         "international-cooperation-volunteer-map",
         "it-industry-concentration",
         "library-museum-cultural-capital",
@@ -985,6 +992,7 @@
         "mobile-contracts-over-population",
         "municipality-population-change-census-2025",
         "municipality-population-decline-tiers",
+        "nursery-shortage-urban-prefecture",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "passport-issuance-prefecture-gap",
@@ -1018,6 +1026,9 @@
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-vs-aging",
         "welfare-expenses-squeeze"
+      ],
+      "childcare-related-status-report": [
+        "waiting-children-progress"
       ],
       "city-planning-survey": [
         "commercial-land-price-trend"
@@ -1080,6 +1091,7 @@
         "retail-store-count-vs-nurses-per-100k-population",
         "semiconductor-electronics-regional-map",
         "small-business-dominance-map",
+        "sme-business-sentiment-regional-gap",
         "wholesale-annual-sales-amount-prefecture-gap"
       ],
       "economic-census-basic": [
@@ -1110,6 +1122,7 @@
         "manufacturing-strength-factory-size",
         "pharma-medical-device-production-map",
         "semiconductor-electronics-regional-map",
+        "sme-business-sentiment-regional-gap",
         "wholesale-annual-sales-amount-prefecture-gap"
       ],
       "electricity-business-statistics": [
@@ -1233,6 +1246,7 @@
         "vacant-house-crisis",
         "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
+        "vacant-housing-rate-inherited-home-risk",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-vs-aging",
         "vacant-housing-vs-land-price",
@@ -1264,6 +1278,7 @@
       "job-placement-statistics": [
         "minimum-wage-1000yen-breakthrough",
         "minimum-wage-1000yen-prefecture",
+        "sme-business-sentiment-regional-gap",
         "unemployment-structure",
         "unemployment-tertiary-industry-link"
       ],
@@ -1472,6 +1487,7 @@
         "konnyaku-expenditure-ranking",
         "kumamoto-food-culture",
         "kyoto-food-culture",
+        "laundry-detergent-consumption-expenditure-prefecture-gap",
         "lettuce-consumption-quantity-prefecture-gap",
         "lipstick-consumption-expenditure-prefecture-gap",
         "local-production-local-consumption-meat",
@@ -1523,6 +1539,7 @@
         "other-meat-consumption-quantity-prefecture-gap",
         "other-mens-shirt-consumption-expenditure-prefecture-gap",
         "other-mushroom-consumption-expenditure-prefecture-gap",
+        "other-mushroom-consumption-quantity-prefecture-gap",
         "other-noodle-dining-consumption-expenditure-prefecture-gap",
         "other-processed-meat-consumption-expenditure-prefecture-gap",
         "other-stationery-consumption-expenditure-prefecture-gap",
@@ -1559,6 +1576,7 @@
         "recreational-services-group-consumption-expenditure",
         "refrigerator-expenditure-ranking",
         "remittances-group-consumption-expenditure-prefecture-gap",
+        "rent-group-consumption-expenditure-prefecture-gap",
         "rice-consumption-quantity-ranking",
         "rice-spending-quantity-gap-2025",
         "saga-food-culture",
@@ -1654,6 +1672,7 @@
       "labor-market-annual": [
         "minimum-wage-1000yen-breakthrough",
         "minimum-wage-1000yen-prefecture",
+        "sme-business-sentiment-regional-gap",
         "unemployment-structure",
         "unemployment-tertiary-industry-link"
       ],
@@ -1682,9 +1701,11 @@
       ],
       "local-finance": [
         "allocation-tax-area",
+        "assembly-answer-chatgpt-5steps",
         "childcare-friendly-prefecture-ranking",
         "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
+        "elderly-welfare-expenditure-prefecture-gap",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
         "fertility-fiscal-nexus",
@@ -1785,6 +1806,7 @@
         "childcare-friendly-prefecture-ranking",
         "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
+        "elderly-welfare-expenditure-prefecture-gap",
         "firefighting-capacity-gap",
         "local-tax-regional-gap",
         "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
@@ -1857,6 +1879,7 @@
         "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "crime-rate-regional-gap",
+        "intellectual-crime-tokyo-kagawa-gap",
         "livable-prefecture-composite-ranking",
         "police-officer-density-vs-crime-gap",
         "safe-driving-5-features"
@@ -1890,6 +1913,7 @@
         "household-structure-daytime-population-gap",
         "ict-digital-divide-composite-analysis",
         "inpatient-rate-prefecture-gap",
+        "intellectual-crime-tokyo-kagawa-gap",
         "it-industry-concentration",
         "library-museum-cultural-capital",
         "local-production-local-consumption-meat",
@@ -1897,6 +1921,7 @@
         "manufacturing-output-outlier-cities",
         "mobile-contracts-over-population",
         "natural-increase-rate-prefecture-gap",
+        "nursery-shortage-urban-prefecture",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "passport-issuance-prefecture-gap",
@@ -1960,9 +1985,11 @@
       ],
       "prefectural-settlement-survey": [
         "allocation-tax-area",
+        "assembly-answer-chatgpt-5steps",
         "childcare-friendly-prefecture-ranking",
         "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
+        "elderly-welfare-expenditure-prefecture-gap",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
         "fertility-fiscal-nexus",
@@ -2147,6 +2174,7 @@
         "airport-count-vs-physical-disability-rehabilitation",
         "childcare-friendly-prefecture-ranking",
         "elderly-population-care-capacity-gap",
+        "nursery-shortage-urban-prefecture",
         "nursing-care-shortage-2040",
         "waiting-children-progress"
       ],
@@ -2466,6 +2494,7 @@
         "area-ratio-prefecture-gap",
         "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
         "beef-unmarried-ratio",
+        "birth-death-gap-decline",
         "bread-consumption-expenditure-vs-final-education-university",
         "cc-estat-01-setup",
         "cc-estat-02-search-skill",
@@ -2517,6 +2546,7 @@
         "inbound-by-nationality-regional-preference",
         "inflow-population-ratio-prefecture-gap",
         "inpatient-rate-prefecture-gap",
+        "intellectual-crime-tokyo-kagawa-gap",
         "international-cooperation-volunteer-map",
         "it-industry-concentration",
         "library-museum-cultural-capital",
@@ -2531,6 +2561,7 @@
         "mobile-contracts-over-population",
         "municipality-population-change-census-2025",
         "municipality-population-decline-tiers",
+        "nursery-shortage-urban-prefecture",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "passport-issuance-prefecture-gap",
@@ -2572,7 +2603,9 @@
       "themeKeys": [
         "childcare-services"
       ],
-      "blogSlugs": []
+      "blogSlugs": [
+        "waiting-children-progress"
+      ]
     },
     {
       "surveyId": "city-planning-survey",
@@ -2712,6 +2745,7 @@
         "retail-store-count-vs-nurses-per-100k-population",
         "semiconductor-electronics-regional-map",
         "small-business-dominance-map",
+        "sme-business-sentiment-regional-gap",
         "wholesale-annual-sales-amount-prefecture-gap"
       ]
     },
@@ -2757,6 +2791,7 @@
         "manufacturing-strength-factory-size",
         "pharma-medical-device-production-map",
         "semiconductor-electronics-regional-map",
+        "sme-business-sentiment-regional-gap",
         "wholesale-annual-sales-amount-prefecture-gap"
       ]
     },
@@ -3060,6 +3095,7 @@
         "vacant-house-crisis",
         "vacant-houses-population-decline",
         "vacant-housing-aging-correlation",
+        "vacant-housing-rate-inherited-home-risk",
         "vacant-housing-rate-vs-dependent-population-index",
         "vacant-housing-vs-aging",
         "vacant-housing-vs-land-price",
@@ -3140,6 +3176,7 @@
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",
         "minimum-wage-1000yen-prefecture",
+        "sme-business-sentiment-regional-gap",
         "unemployment-structure",
         "unemployment-tertiary-industry-link"
       ]
@@ -3371,6 +3408,7 @@
         "konnyaku-expenditure-ranking",
         "kumamoto-food-culture",
         "kyoto-food-culture",
+        "laundry-detergent-consumption-expenditure-prefecture-gap",
         "lettuce-consumption-quantity-prefecture-gap",
         "lipstick-consumption-expenditure-prefecture-gap",
         "local-production-local-consumption-meat",
@@ -3422,6 +3460,7 @@
         "other-meat-consumption-quantity-prefecture-gap",
         "other-mens-shirt-consumption-expenditure-prefecture-gap",
         "other-mushroom-consumption-expenditure-prefecture-gap",
+        "other-mushroom-consumption-quantity-prefecture-gap",
         "other-noodle-dining-consumption-expenditure-prefecture-gap",
         "other-processed-meat-consumption-expenditure-prefecture-gap",
         "other-stationery-consumption-expenditure-prefecture-gap",
@@ -3458,6 +3497,7 @@
         "recreational-services-group-consumption-expenditure",
         "refrigerator-expenditure-ranking",
         "remittances-group-consumption-expenditure-prefecture-gap",
+        "rent-group-consumption-expenditure-prefecture-gap",
         "rice-consumption-quantity-ranking",
         "rice-spending-quantity-gap-2025",
         "saga-food-culture",
@@ -3562,6 +3602,7 @@
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",
         "minimum-wage-1000yen-prefecture",
+        "sme-business-sentiment-regional-gap",
         "unemployment-structure",
         "unemployment-tertiary-industry-link"
       ]
@@ -3664,9 +3705,11 @@
       ],
       "blogSlugs": [
         "allocation-tax-area",
+        "assembly-answer-chatgpt-5steps",
         "childcare-friendly-prefecture-ranking",
         "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
+        "elderly-welfare-expenditure-prefecture-gap",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
         "fertility-fiscal-nexus",
@@ -3864,6 +3907,7 @@
         "childcare-friendly-prefecture-ranking",
         "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
+        "elderly-welfare-expenditure-prefecture-gap",
         "firefighting-capacity-gap",
         "local-tax-regional-gap",
         "per-capita-fixed-asset-tax-pref-municipal-prefecture-gap",
@@ -4075,6 +4119,7 @@
         "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "crime-rate-regional-gap",
+        "intellectual-crime-tokyo-kagawa-gap",
         "livable-prefecture-composite-ranking",
         "police-officer-density-vs-crime-gap",
         "safe-driving-5-features"
@@ -4121,6 +4166,7 @@
         "household-structure-daytime-population-gap",
         "ict-digital-divide-composite-analysis",
         "inpatient-rate-prefecture-gap",
+        "intellectual-crime-tokyo-kagawa-gap",
         "it-industry-concentration",
         "library-museum-cultural-capital",
         "local-production-local-consumption-meat",
@@ -4128,6 +4174,7 @@
         "manufacturing-output-outlier-cities",
         "mobile-contracts-over-population",
         "natural-increase-rate-prefecture-gap",
+        "nursery-shortage-urban-prefecture",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",
         "passport-issuance-prefecture-gap",
@@ -4261,9 +4308,11 @@
       ],
       "blogSlugs": [
         "allocation-tax-area",
+        "assembly-answer-chatgpt-5steps",
         "childcare-friendly-prefecture-ranking",
         "consumption-expenditure-multi-person-households-per-month",
         "education-cost-per-child",
+        "elderly-welfare-expenditure-prefecture-gap",
         "estat-7-techniques-from-unusable-to-usable",
         "expenditure-structure-comparison",
         "fertility-fiscal-nexus",
@@ -4564,6 +4613,7 @@
         "airport-count-vs-physical-disability-rehabilitation",
         "childcare-friendly-prefecture-ranking",
         "elderly-population-care-capacity-gap",
+        "nursery-shortage-urban-prefecture",
         "nursing-care-shortage-2040",
         "waiting-children-progress"
       ]

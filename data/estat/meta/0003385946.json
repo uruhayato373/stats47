@@ -4,7 +4,7 @@
  "statName": "労働災害動向調査",
  "govOrg": "厚生労働省",
  "surveyDate": null,
- "overallTotalNumber": 131520,
+ "overallTotalNumber": 144960,
  "dimensions": [
   {
    "id": "tab",
@@ -476,8 +476,13 @@
   {
    "id": "time",
    "name": "時間軸（年次）",
-   "valueCount": 10,
+   "valueCount": 11,
    "sampleValues": [
+    {
+     "code": "2025000000",
+     "name": "2025年",
+     "unit": null
+    },
     {
      "code": "2024000000",
      "name": "2024年",

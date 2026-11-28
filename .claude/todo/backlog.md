@@ -25,6 +25,117 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CRITIC-PATTERN-REGION] critic の指摘「地域のくくり」が 3 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「地域のくくり」(`region`) の BLOCK/MAJOR を 3 本の記事で 3 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 croquette-consumption-expenditure-prefecture-gap: 「北海道、東北地方、九州地方、沖縄県では支出額が低めの傾向」の東北は、本文の値で支えられません。
+  - 2026-11-25 school-nonattendance-pattern: 地方のくくりが値と合いません。
+  - 2026-11-25 tuna-consumption-quantity-vs-annual-new-inpatients-general: 「埼玉県、千葉県、神奈川県、茨城県、静岡県はいずれも東京圏かその近郊にある県です」は、静岡県が誤りです (東海地方で、東京圏の近郊ではありません)。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `region` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-CHART-TEXT] critic の指摘「図と本文」が 3 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「図と本文」(`chart-text`) の BLOCK/MAJOR を 3 本の記事で 3 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 black-tea-expenditure-ranking: 緑茶と紅茶の散布図は、県名が付いているのが宮崎・佐賀・静岡・福岡の4県だけで、緑茶が多く紅茶も多い茨城・神奈川・奈良・京都には名前がありません。
+  - 2026-11-25 school-nonattendance-pattern: 「上位に並ぶのは宮城・北海道・島根・栃木といった地方県で、人口規模の大きい都市部は見当たりません」は、図の 5 位の福岡 (76.90、人口が全国 9 位の県) と食い違います。
+  - 2026-11-25 sme-business-sentiment-regional-gap: 節見出し「地域差は、製造業で広がり、非製造業で縮んだ」は、本文と data に合わない。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `chart-text` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-YEAR] critic の指摘「年の食い違い」が 3 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「年の食い違い」(`year`) の BLOCK/MAJOR を 3 本の記事で 4 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 automotive-industry-transformation-map: 図と本文は 2023 年に固定されていますが、R2 の公開データは製造品出荷額等と付加価値額が 2024 年、従業者数が 2025 年まで進んでいます。
+  - 2026-11-25 automotive-industry-transformation-map: 図と本文は 2023 年に固定されたままですが、R2 の製造品出荷額等 values.json は 2024 年 (愛知 59.3 兆円、2 位は大阪 19.8 兆円) まで公開されています (取得: https://storage.st…
+  - 2026-11-25 croquette-consumption-expenditure-prefecture-gap: 最新年 (2025 年) が R2 にあります。
+  - 2026-11-25 school-nonattendance-pattern: seoTitle は「不登校率比較 2024」ですが、データは 2023 年度 (調査の公表は 2024 年) で、本文は年度を WARNING の中でしか書いていません。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `year` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-STRUCTURE] critic の指摘「構成・冗長」が 3 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「構成・冗長」(`structure`) の BLOCK/MAJOR を 3 本の記事で 4 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 automotive-industry-transformation-map: 公開済みの /blog/manufacturing-aichi-dominance (愛知58兆円・最下位沖縄との約115倍・1人あたり6,826万円・総額と効率の対比) と、第 1 節の中身がほぼ重なります。
+  - 2026-11-25 automotive-industry-transformation-map: 第 1 節の 1 人あたり出荷額 (約 6,800 万円) と静岡・大阪との対比、愛知 58 兆円と最下位沖縄との約 115 倍は、公開済みの /blog/manufacturing-aichi-dominance と中身が重なります。
+  - 2026-11-25 black-tea-income-gap: 第 2 節の図「紅茶消費支出額 上位5・下位5」は、姉妹記事 black-tea-expenditure-ranking の図 (black-tea-ranking.svg、同じ指標・同じ上位5+下位5) と同じ内容で、年収の情報を持たな…
+  - 2026-11-25 black-tea-expenditure-ranking: 姉妹記事との重複が残っています。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `structure` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-VALUE] critic の指摘「数値・順位の食い違い」が 4 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「数値・順位の食い違い」(`value`) の BLOCK/MAJOR を 4 本の記事で 5 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 automotive-industry-transformation-map: seoTitle「1位愛知58.0兆円は2位静岡の2.9倍、2005年は2.0倍」と description「2位の静岡県19.8兆円の2.9倍、2005年は2.0倍でした」は、2005年の 2.0 倍も静岡との比に読めます。
+  - 2026-11-25 automotive-industry-transformation-map: 愛知の突出を示す比較で、比べる相手が揃っていません。
+  - 2026-11-25 black-tea-expenditure-ranking: 「緑茶を多く買う県の多くは、紅茶が中央値の859円以下に収まっています」は、数え方が示されていません。
+  - 2026-11-25 engineer-telework-prefecture: 「在宅は少ないのに年収は上位」の群に、テレワーク率が中央値 (10.5%) より高い県が混ざっている。
+  - 2026-11-25 waiting-children-progress: 新しい節は、滋賀県が上位3都県に入ったのは「滋賀県で待機児童が増えたからではなく」、7年前と「ほぼ同じ人数のまま残ったため」とし、滋賀と三重の線は「ほとんど動いていません」と書く。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `value` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-DEFINITION] critic の指摘「定義の取り違え」が 6 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「定義の取り違え」(`definition`) の BLOCK/MAJOR を 6 本の記事で 7 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 automotive-industry-transformation-map: 冒頭の NOTE が書き手の作業事情を読者に見せています。
+  - 2026-11-25 black-tea-expenditure-ranking: 「茶類全体への支出額に対する紅茶の比率」の段落は、分母の定義を取り違えて読ませています。
+  - 2026-11-25 croquette-consumption-expenditure-prefecture-gap: 値の対象が書かれていません。
+  - 2026-11-25 croquette-consumption-expenditure-prefecture-gap: 冒頭と補足が逆のことを言っています。
+  - 2026-11-25 school-nonattendance-pattern: 論文型の台帳 (E05) は「定義・計上の仕方が県で違いうる」を落とし穴としますが、本文にその断りがありません。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `definition` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-READER-VALUE] critic の指摘「読者価値」が 6 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「読者価値」(`reader-value`) の BLOCK/MAJOR を 6 本の記事で 8 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 black-tea-income-gap: 第 3 節末尾「年収の高い県が『たくさん買う』のか『高いものを買う』のかは、県によって違っている可能性があります」は問いに答えておらず、裏付けも無い。
+  - 2026-11-25 black-tea-expenditure-ranking: 「大都市なら上位とは限らない」節の結論が、記事自身のデータの全体像と逆向きです。
+  - 2026-11-25 traffic-accident-deaths-regional-risk: 記事の看板の主張「死者数と死傷者数の間にほとんど関係は見られませんでした」に数字が無い。
+  - 2026-11-25 traffic-accident-deaths-regional-risk: 「車社会の県ほど死者は多いか」への答えの向きが読者に伝わりにくい。
+  - 2026-11-25 waiting-children-progress: 利用率の節は「同じ向きに並ぶとは限りません」の例に、島根(利用率3位・待機0)、鹿児島(1位・12人)、愛知(43位・57人)だけを挙げている。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `reader-value` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-CAUSAL] critic の指摘「原因の断定」が 6 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「原因の断定」(`causal`) の BLOCK/MAJOR を 6 本の記事で 11 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 ambulance-hospital-arrival-time-prefecture-gap: 「長い県は首都圏と東北…」節の「救急の要請が多い地域では、受け入れを照会しても病院がすぐに応じられず、何度も照会を重ねる事案が起こりやすくなります」は、記事の指標 (所要時間の平均のみ) では裏付けが取れない一般論を断定で書いている。
+  - 2026-11-25 ambulance-hospital-arrival-time-prefecture-gap: 同節の「首都圏では県境を越えて病院を探すことも珍しくなく」も同様に出典の無い事実の断定。
+  - 2026-11-25 ambulance-hospital-arrival-time-prefecture-gap: 「短い県は…」節の「これらの県は、県の中心となる都市と主な病院の位置が比較的まとまっている点で共通していると考えられます」は、記事内のどのデータでも確認できない共通点を挙げている。
+  - 2026-11-25 ambulance-hospital-arrival-time-prefecture-gap: 結びの「…地域の病院と消防がどう連携しているかを映す数字だといえます」と「救急車の速さよりも」は、冒頭で「段階の内訳は切り分けられない」と認めた内容を超えた断定。
+  - 2026-11-25 ambulance-hospital-arrival-time-prefecture-gap: 「距離が効くのは主に現場への移動と病院への移動の部分で、全体の差を左右しているのは、それ以外の段階である可能性があります」は、北海道 (15 位) と東京 (1 位) の 2 例だけで距離の寄与を小さく見積もっている。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `causal` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
+### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 7 本の記事で繰り返した。writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
+
+- **事象**: 直近の窓で、blog-critic が型「タイトル・約束」(`title-promise`) の BLOCK/MAJOR を 7 本の記事で 7 件出した。critic の目視でしか見つかっていない。例:
+  - 2026-11-25 traffic-accident-deaths-regional-risk: 論文型 (issue:C07 の answers) の約束を満たさない。
+  - 2026-11-25 waiting-children-progress: 導入の「推移・ランキング・地図の順に、減り方と残り方の地域差を確かめます」のうち、都道府県ごとの「減り方」は一度も示されていない。
+  - 2026-11-25 assembly-answer-chatgpt-5steps: 「10 倍」と「12 分」の根拠が、筆者の記憶による見積もりのままです。
+  - 2026-11-25 croquette-consumption-expenditure-prefecture-gap: 題「なぜ北陸勢が上位独占なのか」と description「上位を占める理由を探ります」に、本文は答えません。
+  - 2026-11-25 school-nonattendance-pattern: 題の「小中一貫して『低不登校県』になる条件とは」、導入の「なぜ福井は小中ともに全国最低水準を達成できるのか」「なぜ東京は 30 位、大阪は 23 位なのか」に、本文は答えを持ちません。
+- **次**: 機械で判定できるなら quality-gate に検査を足す (公開済み記事で誤検知 0 件を確かめてから blocker にする)。できなければ `.claude/rules/blog-quality-standards.md` と article-writer の指示に書く。
+- **完了条件**: 検査か規約が入り、`.claude/config/critic-finding-types.json` の `title-promise` に `promotedAt: "<入れた日>"` を書いた。
+- 起票元: `critic-findings-digest.mjs` (台帳 `data/blog/critic-findings/`)
+
 ### [RANKING-VIEW-CONSOLIDATE-FOLLOWUP-01] 見方違いのページの統合 (2026-11-25) で残した後片付けと、調査で見つけたランキングの不具合
 タグ: [サイト品質] [種類:改善] [実行:対話] [起票:2026-11-25] [領域:サイト]
 
