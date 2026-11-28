@@ -1,10 +1,10 @@
 # ブログチャート出典 (source.json) 再取得可能性 (LATEST)
 
-検査対象: 2280 件 (source.json を持つチャート)
+検査対象: 2298 件 (source.json を持つチャート)
 
 ## 判定
-- `restorable`: **2220**
-- `out-of-scope`: **60**
+- `restorable`: **2242**
+- `out-of-scope`: **56**
 
 **欠陥計: 0 件**
 
@@ -16,7 +16,7 @@
 - `dead-reference` — 参照している rankingKey が R2 に存在しない (指標の廃止/改名)
 - `dead-r2-reference` — source が指す R2 object が存在しない
 - `dead-estat-reference` — 参照している statsDataId が e-Stat API で取得できない
-- `unknown-kind` — 語彙のドリフト。`.claude/scripts/lib/chart-provenance.mjs` の共有定義に追加する
+- `unknown-kind` — 語彙のドリフト。`packages/ops/src/blog/lint/chart-provenance.mjs` の共有定義に追加する
 
 ## 欠陥一覧
 なし

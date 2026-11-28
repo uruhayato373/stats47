@@ -41,6 +41,20 @@ export function filterActiveRefreshTargets(
 }
 
 /** R2 file 最終更新時刻を取得 (since フィルタ用) */
+/**
+ * 指標を名指しした書き込みありの実行で、R2 へ上げるものが 1 件も無かったか。
+ * 全部飛ばしたのに成功で終わると、次の push の段が「置き場が無い」で落ち、理由がログに残らない
+ * (2026-11-26 run 45820634459: 港の 9 指標が skip=9 のまま成功扱いになった)。
+ * 名指しなしの全量実行と dry-run は対象外 (全量は e-Stat 以外の年名の付け直しが乗る)。
+ */
+export function hasNothingToPublish(
+  results: readonly Pick<ProcessResult, "status" | "relabeled">[],
+  options: { isExplicitMetric: boolean; dryRun: boolean },
+): boolean {
+  if (!options.isExplicitMetric || options.dryRun || results.length === 0) return false;
+  return results.every((result) => result.status === "skip" && !result.relabeled);
+}
+
 export function getR2FileMtime(key: string): number | null {
   const filePath = resolve(R2_LOCAL, key);
   if (!existsSync(filePath)) return null;
@@ -71,6 +85,8 @@ interface ProcessResult {
   status: ProcessStatus;
   message: string;
   rows?: number;
+  /** skip した指標で、公開中の値の年名を定義にそろえて書いた行数 (取得はしないが R2 へ上げるものがある) */
+  relabeled?: number;
   /** 空だった artifact の説明 (ログ用) */
   emptyNotes?: string[];
   /** 形状違反の説明 (ログ用) */
@@ -167,7 +183,7 @@ export async function processOne(
   }
   if (!independentCity && (config.source.kind === "external" || config.source.kind === "mlit")) {
     const relabeled = dryRun ? 0 : await relabelPublishedYearNames(config);
-    return { key: config.key, ok: false, status: "skip", message: `${config.source.kind} source skipped (fetcher not implemented yet)${relabeled ? ` yearName=${relabeled}` : ""}` };
+    return { key: config.key, ok: false, status: "skip", relabeled, message: `${config.source.kind} source skipped (fetcher not implemented yet)${relabeled ? ` yearName=${relabeled}` : ""}` };
   }
   let src: Extract<SourceConfig, { kind: "estat" }>;
   if (config.source.kind === "kakei-chousa") {

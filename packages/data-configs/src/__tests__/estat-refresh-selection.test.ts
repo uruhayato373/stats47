@@ -66,6 +66,12 @@ describe("refresh union", () => {
     expect((await selectRefreshMetrics([city], { tableUpdates: [], readJson })).metricKeys).toEqual([]);
     expect(readJson.mock.calls).toEqual([[statsR2Key("city-only", "city")]]);
   });
+  it("都道府県も市区町村も持たない指標 (港など) は data-refresh が書けないので、記録が無くても選ばない", async () => {
+    const port = { ...metric("port-only"), entities: ["port"] } as MetricConfig;
+    const readJson = vi.fn(async () => null);
+    expect((await selectRefreshMetrics([port, metric("pref")], { tableUpdates: [], readJson })).metricKeys).toEqual(["pref"]);
+    expect(readJson.mock.calls).toEqual([[statsR2Key("pref", "prefecture")]]);
+  });
   it("does not default to all when no tables/hash changed", async () => {
     const config = metric("same");
     const result = await selectRefreshMetrics([config], { tableUpdates: [], readJson: async () => ({ meta: { recipe: buildRecipe(config) } }) });

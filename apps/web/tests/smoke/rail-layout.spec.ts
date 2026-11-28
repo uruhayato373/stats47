@@ -24,6 +24,8 @@ const SHELL_BREAKPOINTS = [640, 988];
 const SIDEBAR_BREAKPOINT = 1024;
 const RAIL_BREAKPOINT = 988;
 const RAIL_WIDTH = 316;
+/** 右レールの右の線を外枠の線に重ねるために外へ出す幅 (SHELL_RAIL_FRAME_CLASS の -mr-px) */
+const RAIL_OUTLINE_OVERLAP = 1;
 const around = (width: number) => [width - 1, width, width + 1];
 
 async function assertLayout(page: Page, hasRail: boolean) {
@@ -56,11 +58,14 @@ async function assertLayout(page: Page, hasRail: boolean) {
   if (!layout.rail) return;
   const beside = layout.shell.width >= RAIL_BREAKPOINT;
   if (beside) {
-    expect(layout.rail.width).toBeCloseTo(RAIL_WIDTH, 0);
-    expect(layout.rail.x - layout.main.right).toBeCloseTo(16, 0);
+    // 右レールは本文と余白を空けず 1px の線で区切る (2026-11-25 オーナー決定。SHELL_RAIL_FRAME_CLASS)。
+    // 列は 316px で、右の線を外枠の線に重ねるために 1px 外へ出す (-mr-px) ので、箱の幅は 317px になる
+    expect(layout.rail.width).toBeCloseTo(RAIL_WIDTH + RAIL_OUTLINE_OVERLAP, 0);
+    expect(layout.rail.x - layout.main.right).toBeCloseTo(0, 0);
   } else {
     expect(layout.main.width).toBeCloseTo(layout.shell.width, 0);
-    expect(layout.rail.width).toBeCloseTo(layout.shell.width, 0);
+    // 本文の下に積むときも、右の線を外枠の線に重ねる 1px だけ箱が広い
+    expect(layout.rail.width).toBeCloseTo(layout.shell.width + RAIL_OUTLINE_OVERLAP, 0);
   }
   expect(layout.columns).toBe(layout.article && !beside && layout.shell.width >= 640 ? 2 : 1);
   const columnWidth = (layout.rail.width - layout.gap * (layout.columns - 1)) / layout.columns;
@@ -72,9 +77,10 @@ async function assertLayout(page: Page, hasRail: boolean) {
     expect(ad.width).toBeCloseTo(Math.min(ad.original, columnWidth), 0);
   }
   if (page.url().includes('/geo/')) {
-    // 本文上の開閉ナビと右レールは常に片方だけ。画面幅と本文幅の取り違えを検出する。
+    // GIS一覧はレールのカード 1 つだけが描き、レールが本文の下に回る幅でもそのまま 1 枚出す
+    // (2026-11-20。本文の先頭は一覧へのページ内リンクだけで、同じ 50 件のリンクを 2 回出さない)。
     await expect(page.getByRole('heading', { name: /^GIS一覧/ })).toHaveCount(1);
-    expect(layout.cards.length).toBe(beside ? 1 : 0);
+    expect(layout.cards.length, `本文の幅 ${layout.shell.width}px (右レールが横: ${beside}) のレールのカード: ${layout.cards.map(card => card.title).join(' / ')}`).toBe(1);
   } else {
     expect(layout.cards.length, 'レール内のカードが消えていない').toBeGreaterThan(0);
   }

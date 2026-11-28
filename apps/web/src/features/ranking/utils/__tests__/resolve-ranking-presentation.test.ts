@@ -1,10 +1,9 @@
 // @vitest-environment node
+import {resolveRankingValueDisplay, type RankingItem} from '@stats47/ranking';
 import {describe,it,expect} from 'vitest';
 
 import {formatRankingValue} from '../compute-ranking-header-stats';
 import {resolveRankingPresentation,supportedRankingNormalization} from '../resolve-ranking-presentation';
-
-import type {RankingItem} from '@stats47/ranking';
 const item={title:'件数',unit:'件',valueDisplay:{conversionFactor:.001,displayUnit:'千件'},visualization:{colorScheme:'interpolateBlues',colorSchemeType:'sequential',classification:{method:'threshold',thresholds:[100,200]},domain:{mode:'fixed',min:0,max:1000},trendDomain:{mode:'fixed',min:0,max:1000},comparisonDomain:{mode:'extent'}},calculation:{normalizationOptions:[{type:'per_population',label:'人口10万人あたり',unit:'件/10万人',scaleFactor:100000,decimalPlaces:2}]}} as RankingItem;
 describe('All ranking views use the selected observation units',()=>{
  it('keeps original metadata and resets raw-unit boundaries and display multipliers for normalized values',()=>{expect(resolveRankingPresentation(item,undefined)).toBe(item);const normalized=resolveRankingPresentation(item,'per_population');expect(normalized.unit).toBe('件/10万人');expect(normalized.valueDisplay?.conversionFactor).toBe(1);expect(normalized.visualization.domain?.mode).toBe('extent');expect(normalized.visualization.classification.method).toBe('equal-interval');});
@@ -30,5 +29,14 @@ describe('Ranking values are written in the display unit the page resolved', () 
  it('formats unconverted values exactly as before', () => {
   expect(formatRankingValue(60.42, 2)).toBe('60.42');
   expect(formatRankingValue(1234.5)).toBe('1,234.5');
+ });
+});
+
+// 2026-11-27: 見方を選んだとき、ページは表示の桁を null で渡していて、選択肢の桁 1 の指標でも表と上位・下位が 2 桁で出ていた
+describe('A normalized view writes values with the precision of the selected option', () => {
+ it('resolves the display from the presented item: no conversion, the option decimals and unit', () => {
+  const oneDecimal = {...item, calculation: {normalizationOptions: [{...item.calculation!.normalizationOptions![0], decimalPlaces: 1}]}} as RankingItem;
+  const display = resolveRankingValueDisplay(resolveRankingPresentation(oneDecimal, 'per_population'), [912_032.06, 687_779.6]);
+  expect(display).toEqual({unit: '件/10万人', factor: 1, precision: 1});
  });
 });

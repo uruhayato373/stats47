@@ -5,7 +5,7 @@
     "ranking": 850,
     "theme": 850,
     "area": 233,
-    "blog": 393,
+    "blog": 397,
     "unreached": 0,
     "undecidedItems": 0,
     "plannedTables": 0
@@ -2544,7 +2544,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "konnyaku-consumption-expenditure",
@@ -2579,7 +2579,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "laundry-service-consumption-expenditure",
@@ -3720,7 +3720,7 @@
       "ranking": true,
       "theme": true,
       "area": true,
-      "blog": false
+      "blog": true
     },
     {
       "key": "other-non-savings-insurance-consumption-expenditure",
@@ -4588,7 +4588,7 @@
       "ranking": true,
       "theme": true,
       "area": false,
-      "blog": false
+      "blog": true
     },
     {
       "key": "rental-car-consumption-expenditure",

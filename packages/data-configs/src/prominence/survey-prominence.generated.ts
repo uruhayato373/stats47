@@ -1124,10 +1124,10 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "subtitle": "バドミントン部"
       },
       {
-        "rankingKey": "junior-high-club-per100-kendo",
+        "rankingKey": "junior-high-club-per100-track-and-field",
         "title": "中学部活動 100人あたり部員数",
         "readerLabel": "中学部活動100人あたり部員数",
-        "subtitle": "剣道部"
+        "subtitle": "陸上競技部"
       }
     ]
   },
@@ -1648,19 +1648,19 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
     "categoryKey": "socialsecurity",
     "representatives": [
       {
-        "rankingKey": "bmi-male-20to69-age-adjusted",
-        "title": "男性のBMI（20〜69歳・年齢調整値）",
-        "readerLabel": "男性のBMI（20〜69歳・年齢調整値）"
-      },
-      {
         "rankingKey": "salt-intake-female-age-adjusted",
         "title": "女性の食塩摂取量（年齢調整値）",
         "readerLabel": "女性の食塩摂取量（年齢調整値）"
       },
       {
-        "rankingKey": "smoking-rate-male-age-adjusted",
-        "title": "男性の習慣的喫煙者の割合（20歳以上・年齢調整値）",
-        "readerLabel": "男性の習慣的喫煙者の割合（20歳以上・年齢調整値）"
+        "rankingKey": "vegetable-intake-female-age-adjusted",
+        "title": "女性の野菜摂取量（年齢調整値）",
+        "readerLabel": "女性の野菜摂取量（年齢調整値）"
+      },
+      {
+        "rankingKey": "vegetable-intake-male-age-adjusted",
+        "title": "男性の野菜摂取量（年齢調整値）",
+        "readerLabel": "男性の野菜摂取量（年齢調整値）"
       }
     ]
   },
@@ -1900,9 +1900,9 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "readerLabel": "凶悪犯認知件数"
       },
       {
-        "rankingKey": "theft-offenses-recognized",
-        "title": "窃盗犯認知件数",
-        "readerLabel": "窃盗犯認知件数",
+        "rankingKey": "drug-enforcement-arrest-count",
+        "title": "覚醒剤取締検挙件数",
+        "readerLabel": "覚醒剤取締検挙件数",
         "subtitle": "総数"
       }
     ]
@@ -1950,15 +1950,15 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
     "categoryKey": "population",
     "representatives": [
       {
-        "rankingKey": "standardized-mortality-japanese",
-        "title": "標準化死亡率〔日本人〕",
-        "readerLabel": "標準化死亡率〔日本人〕"
-      },
-      {
         "rankingKey": "standardized-mortality-rate-per-1000",
         "title": "標準化死亡率",
         "readerLabel": "標準化死亡率",
         "subtitle": "人口千人当たり"
+      },
+      {
+        "rankingKey": "standardized-mortality-japanese",
+        "title": "標準化死亡率〔日本人〕",
+        "readerLabel": "標準化死亡率〔日本人〕"
       }
     ]
   },
@@ -2107,9 +2107,10 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "subtitle": "65歳以上人口千人当たり"
       },
       {
-        "rankingKey": "single-mother-public-assistance-households",
-        "title": "生活保護を受ける母子世帯数",
-        "readerLabel": "生活保護を受ける母子世帯数"
+        "rankingKey": "households-on-public-assistance",
+        "title": "生活保護被保護実世帯数",
+        "readerLabel": "生活保護被保護実世帯数",
+        "subtitle": "総数"
       }
     ]
   },
@@ -2133,16 +2134,16 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "readerLabel": "ＨＰＶワクチン定期予防接種者数"
       },
       {
-        "rankingKey": "dental-checkup-guidance-persons",
-        "title": "歯科健診・保健指導延人員",
-        "readerLabel": "歯科健診・保健指導延人員",
-        "subtitle": "総数（別統計）"
-      },
-      {
         "rankingKey": "maternal-health-guidance-per-100-births",
         "title": "妊産婦保健指導数",
         "readerLabel": "妊産婦保健指導数",
         "subtitle": "出産数100当たり"
+      },
+      {
+        "rankingKey": "dental-checkup-persons",
+        "title": "歯科健診受診延人員",
+        "readerLabel": "歯科健診受診延人員",
+        "subtitle": "総数"
       }
     ]
   },
@@ -2546,16 +2547,15 @@ export const SURVEY_PROMINENCE: Readonly<Record<string, SurveyProminence>> =
         "subtitle": "総数"
       },
       {
-        "rankingKey": "neighborhood-park-count",
-        "title": "近隣公園数",
-        "readerLabel": "近隣公園数",
-        "subtitle": "総数"
-      },
-      {
         "rankingKey": "sports-park-count",
         "title": "運動公園数",
         "readerLabel": "運動公園数",
         "subtitle": "総数"
+      },
+      {
+        "rankingKey": "large-scale-park-count",
+        "title": "大規模公園数",
+        "readerLabel": "大規模公園数"
       }
     ]
   },

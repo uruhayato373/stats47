@@ -8,8 +8,8 @@
       "unmapped": 1,
       "match": 104,
       "year-gone": 1,
-      "body-differs": 3,
-      "body-match": 103,
+      "body-differs": 2,
+      "body-match": 104,
       "no-year": 1,
       "product-sample": 2,
       "product-untyped": 14
@@ -3297,12 +3297,7 @@
           "kind": "chart"
         }
       ],
-      "valueCheck": "body-differs",
-      "bodyIssues": 2,
-      "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「石川...16位」 → data: academic-achievement-test-average-rate=2位",
-        "RANK_MISMATCH: 本文「福井...15位」 → data: academic-achievement-test-average-rate=3位"
-      ]
+      "valueCheck": "body-match"
     },
     {
       "key": "b-kakei-advancement-employment",
@@ -3326,13 +3321,13 @@
         }
       ],
       "valueCheck": "body-differs",
-      "bodyIssues": 17,
+      "bodyIssues": 16,
       "bodyIssueSample": [
-        "RANK_MISMATCH: 本文「山口...1位」 → data: high-school-advancement-rate=43位",
         "VALUE_MISMATCH (要確認): 本文「秋田...27.1%」 が data と 1.8倍 乖離 → data: high-school-advancement-rate=49.4％",
         "VALUE_MISMATCH (要確認): 本文「長崎...25.6%」 が data と 1.9倍 乖離 → data: high-school-advancement-rate=49.7％",
         "VALUE_MISMATCH (要確認): 本文「宮崎...25.4%」 が data と 1.9倍 乖離 → data: high-school-advancement-rate=48％",
-        "VALUE_MISMATCH (要確認): 本文「奈良...9.1%」 が data と 7.2倍 乖離 → data: high-school-advancement-rate=65.2％"
+        "VALUE_MISMATCH (要確認): 本文「奈良...9.1%」 が data と 7.2倍 乖離 → data: high-school-advancement-rate=65.2％",
+        "VALUE_MISMATCH (要確認): 本文「大阪...8.1%」 が data と 8.5倍 乖離 → data: high-school-advancement-rate=68.9％"
       ]
     },
     {

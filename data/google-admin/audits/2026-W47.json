@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-28T01:01:22.226Z",
+  "kind": "audit-api",
+  "audit": {
+    "propertyId": "463218070",
+    "gscProperty": "sc-domain:stats47.jp",
+    "property": {
+      "status": "credentials-missing",
+      "detail": "GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル鍵が無い"
+    },
+    "gsc": {
+      "status": "error",
+      "property": "sc-domain:stats47.jp",
+      "present": null,
+      "error": "Service account key not found. Set GOOGLE_SERVICE_ACCOUNT_KEY_JSON env or place one of stats47-f6b5dae19196.json, stats47-31b18ee67144.json at /Users/minamidaisuke/tmp/stats47-wr-W47"
+    },
+    "adsense": {
+      "account": {
+        "status": "credentials-missing",
+        "detail": "GOOGLE_ADSENSE_CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN が無い (.env.local か shell env に設定する)"
+      },
+      "adUnits": {
+        "status": "credentials-missing",
+        "source": "api",
+        "units": [],
+        "skippedClients": [],
+        "desired": [],
+        "codeSlots": [
+          {
+            "exportName": "RANKING_PAGE_TABLE_SIDE",
+            "slotId": "5182030050",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SIDEBAR_AFFILIATE_FALLBACK",
+            "slotId": "4607314986",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_SIDEBAR_TOP",
+            "slotId": "8897913786",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RAIL_RECT",
+            "slotId": "9435960671",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_PAGE_FOOTER",
+            "slotId": "3686603642",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_RAIL_MIDDLE",
+            "slotId": "2308454706",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_PAGE_END",
+            "slotId": "3452480564",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_ROW_2",
+            "slotId": "9307296688",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_ROW_3",
+            "slotId": "4897424179",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_END",
+            "slotId": "2394403971",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_RAIL",
+            "slotId": "1595814272",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_RAIL_STICKY",
+            "slotId": "6270069803",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_RAIL_MIDDLE",
+            "slotId": "4422635661",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_DATABOOK_ROW_1",
+            "slotId": "3776748345",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_DATABOOK_ROW_2",
+            "slotId": "3704450369",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_DATABOOK_ROW_3",
+            "slotId": "3540944628",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_AFTER_DATABOOK",
+            "slotId": "4929902121",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_END",
+            "slotId": "4738330430",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "AREA_INFEED",
+            "slotId": "9371196667",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_AFTER_MAP",
+            "slotId": "7607523006",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_AFTER_TABLE",
+            "slotId": "4981359660",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_RAIL",
+            "slotId": "3309698695",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITY_RAIL_STICKY",
+            "slotId": "5716370187",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_ARTICLE_INLINE",
+            "slotId": "6809797335",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "RANKING_INCONTENT_MOBILE",
+            "slotId": "2894688778",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEMES_CONTENT",
+            "slotId": "8298138821",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEME_ROW_2",
+            "slotId": "9630518288",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEME_END",
+            "slotId": "2430685118",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HOME_ROW_1",
+            "slotId": "6019089689",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HOME_ROW_2",
+            "slotId": "3189892156",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HOME_RAIL_STICKY",
+            "slotId": "3704063320",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CATEGORY_RAIL_STICKY",
+            "slotId": "5537009425",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HUB_ROW_2",
+            "slotId": "6020069625",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_ROW_1",
+            "slotId": "4024103858",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_ROW_2",
+            "slotId": "9112779000",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_ROW_3",
+            "slotId": "5121563102",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INARTICLE_1",
+            "slotId": "8714817044",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INARTICLE_2",
+            "slotId": "6088653702",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INARTICLE_3",
+            "slotId": "9836327027",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CITY_INFEED",
+            "slotId": "1957837004",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEMES_INDEX_INFEED_1",
+            "slotId": "2956058055",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "THEMES_INDEX_INFEED_2",
+            "slotId": "6929982144",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "MUNICIPALITIES_INDEX_INFEED",
+            "slotId": "7257285208",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SURVEY_INDEX_INFEED",
+            "slotId": "9691876858",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_INDEX_INFEED_1",
+            "slotId": "6024415380",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "BLOG_INDEX_INFEED_2",
+            "slotId": "4247978485",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "SEARCH_INFEED",
+            "slotId": "7824582218",
+            "format": "infeed",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "HUB_INCONTENT",
+            "slotId": "9995373035",
+            "format": "article",
+            "adUnitName": null,
+            "pending": false
+          },
+          {
+            "exportName": "CONTENT_FOOTER",
+            "slotId": "6994459114",
+            "format": "rectangle",
+            "adUnitName": null,
+            "pending": false
+          }
+        ]
+      },
+      "codeSlotsError": null,
+      "expected": "missing"
+    }
+  },
+  "problems": [
+    "property-assert:credentials-missing",
+    "stream-host:missing",
+    "gsc-property:present=null",
+    "custom-dimensions-unreadable:missing"
+  ]
+}

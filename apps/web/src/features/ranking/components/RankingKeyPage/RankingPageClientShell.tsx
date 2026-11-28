@@ -81,7 +81,6 @@ export function RankingPageClientShell({
       nationalAverageSeries={model.nationalAverageSeries}
       areaType={model.areaType}
       selectedYear={model.selectedYear}
-      cityRankingItem={model.cityRankingItem?.isActive ? model.cityRankingItem : undefined}
       nowYear={new Date().getFullYear()}
       municipalityLink={model.areaType === "prefecture" ? (
         <Suspense fallback={null}>

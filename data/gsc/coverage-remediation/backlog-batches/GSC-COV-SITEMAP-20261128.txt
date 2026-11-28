@@ -1,0 +1,10 @@
+https://stats47.jp/api/ranking/accessories-consumption-expenditure/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/accessories-consumption-expenditure/download?format=kml&basis=original
+https://stats47.jp/api/ranking/accident-death-30day/download?format=kml&basis=original
+https://stats47.jp/api/ranking/accommodation-consumption-expenditure/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/accommodation-consumption-expenditure/download?format=kml&basis=original
+https://stats47.jp/api/ranking/accountant-annual-income/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/accountant-annual-income/download?format=kml&basis=original
+https://stats47.jp/api/ranking/actual-income-worker-households-per-month/download?format=geojson&basis=original
+https://stats47.jp/api/ranking/actual-overnight-guests/download?format=kml&basis=original
+https://stats47.jp/api/ranking/adult-sneakers-consumption-expenditure/download?format=kml&basis=original

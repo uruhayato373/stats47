@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-14T04:33:19.112Z",
-  "published": 861,
-  "withRankingRefs": 816,
+  "generatedAt": "2026-11-28T00:27:08.006Z",
+  "published": 863,
+  "withRankingRefs": 819,
   "stale": [
     {
       "slug": "agriculture-output-employment-productivity-gap",
@@ -166,6 +166,17 @@
       ]
     },
     {
+      "slug": "intellectual-crime-tokyo-kagawa-gap",
+      "title": "知能犯トップは東京、人口比だと香川",
+      "stale": [
+        {
+          "rankingKey": "total-population",
+          "articleYear": "2023",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
       "slug": "safe-driving-5-features",
       "title": "交通事故が少ない県に共通する「5つの特徴」とは",
       "stale": [
@@ -198,17 +209,6 @@
       "stale": [
         {
           "rankingKey": "accommodation-consumption-expenditure",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
-      "slug": "air-conditioner-consumption-quantity-prefecture-gap",
-      "title": "エアコン購入、香川がなぜ全国1位なのか",
-      "stale": [
-        {
-          "rankingKey": "air-conditioner-consumption-quantity",
           "articleYear": "2024",
           "latestYear": "2025"
         }
@@ -303,7 +303,7 @@
     },
     {
       "slug": "automotive-industry-transformation-map",
-      "title": "自動車産業の県別勢力図",
+      "title": "製造業の県別勢力図、愛知は2位の2.9倍",
       "stale": [
         {
           "rankingKey": "manufacturing-shipment-amount",
@@ -406,6 +406,17 @@
       ]
     },
     {
+      "slug": "birth-death-gap-decline",
+      "title": "東京は婚姻率1位なのに出生率は最下位",
+      "stale": [
+        {
+          "rankingKey": "total-fertility-rate",
+          "articleYear": "2022",
+          "latestYear": "2023"
+        }
+      ]
+    },
+    {
       "slug": "blanket-consumption-expenditure-prefecture-gap",
       "title": "毛布への支出が最も多いのはどの県か？",
       "stale": [
@@ -444,22 +455,6 @@
       "stale": [
         {
           "rankingKey": "bread-consumption-expenditure",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
-      "slug": "bread-vs-rice-expenditure",
-      "title": "パン王国と米どころ、なぜ真逆?",
-      "stale": [
-        {
-          "rankingKey": "bread-consumption-expenditure",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        },
-        {
-          "rankingKey": "rice-consumption-expenditure",
           "articleYear": "2024",
           "latestYear": "2025"
         }
@@ -714,17 +709,6 @@
       ]
     },
     {
-      "slug": "croquette-consumption-expenditure-prefecture-gap",
-      "title": "コロッケ支出額、なぜ北陸勢が上位独占なのか",
-      "stale": [
-        {
-          "rankingKey": "croquette-consumption-expenditure",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
       "slug": "culture-recreation-expenditure-total-prefecture-gap",
       "title": "教養娯楽費の首位と最下位、差は何倍か？",
       "stale": [
@@ -802,6 +786,17 @@
       ]
     },
     {
+      "slug": "dental-clinic-count-prefecture-gap",
+      "title": "歯科診療所が最多の東京都は最少の何倍か？",
+      "stale": [
+        {
+          "rankingKey": "dental-clinic-count",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
       "slug": "designated-difficult-disease-prefecture-gap",
       "title": "指定難病の受給者数はなぜ都市に多いのか",
       "stale": [
@@ -845,6 +840,17 @@
       ]
     },
     {
+      "slug": "dual-income-reversal",
+      "title": "共働き率で逆転する世帯月収",
+      "stale": [
+        {
+          "rankingKey": "actual-income-worker-households-per-month",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
       "slug": "electricity-bill-hike-impact",
       "title": "電気代値上げで最も打撃を受ける県はどこか",
       "stale": [
@@ -863,6 +869,17 @@
           "rankingKey": "electricity-consumption-quantity",
           "articleYear": "2024",
           "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "engineer-telework-prefecture",
+      "title": "リモートしやすい県はエンジニアも稼げるか",
+      "stale": [
+        {
+          "rankingKey": "software-engineer-annual-income",
+          "articleYear": "2022",
+          "latestYear": "2023"
         }
       ]
     },
@@ -1337,11 +1354,11 @@
       ]
     },
     {
-      "slug": "household-consumption-expenditure-ranking",
-      "title": "生活費が高い県は埼玉・最下位は沖縄｜差はたった1.4倍の理由",
+      "slug": "household-income-tokyo-okinawa",
+      "title": "大阪が下位・奈良がトップ圏──「経済力のある都市」と「世帯収入の高い県」がなぜ逆転するか",
       "stale": [
         {
-          "rankingKey": "consumption-expenditure-total",
+          "rankingKey": "actual-income-worker-households-per-month",
           "articleYear": "2024",
           "latestYear": "2025"
         }
@@ -1500,17 +1517,6 @@
       ]
     },
     {
-      "slug": "manufacturing-shipment-prefecture-ranking",
-      "title": "製造品出荷額は愛知58兆円が別格──なぜ太平洋ベルトに集中するのか",
-      "stale": [
-        {
-          "rankingKey": "manufacturing-shipment-amount",
-          "articleYear": "2023",
-          "latestYear": "2024"
-        }
-      ]
-    },
-    {
       "slug": "mens-clothing-consumption-expenditure-prefecture-gap",
       "title": "男子用洋服の支出、愛知県は島根県の何倍か",
       "stale": [
@@ -1659,17 +1665,6 @@
       ]
     },
     {
-      "slug": "oyster-consumption-prefecture-gap",
-      "title": "牡蠣を一番食べる県は広島、なぜ海なし滋賀が僅差で追う?｜47都道府県2024",
-      "stale": [
-        {
-          "rankingKey": "oyster-consumption-quantity",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
       "slug": "peach-consumption-expenditure-prefecture-gap",
       "title": "桃への支出、福島県は岡山県の約何倍か",
       "stale": [
@@ -1719,17 +1714,6 @@
       "stale": [
         {
           "rankingKey": "persimmon-consumption-quantity",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
-      "slug": "pet-food-consumption-expenditure-prefecture-gap",
-      "title": "ペットフード代が福島と沖縄で3.7倍違う理由",
-      "stale": [
-        {
-          "rankingKey": "pet-food-consumption-expenditure",
           "articleYear": "2024",
           "latestYear": "2025"
         }
@@ -1791,6 +1775,50 @@
       ]
     },
     {
+      "slug": "psychiatric-bed-count-vs-elementary-school-count",
+      "title": "精神病床数と小学校数はなぜ似るのか",
+      "stale": [
+        {
+          "rankingKey": "psychiatric-bed-count",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-neighborhood-park-count",
+      "title": "精神病床が多い県は近隣公園も多い?",
+      "stale": [
+        {
+          "rankingKey": "psychiatric-bed-count",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
+      "title": "精神病床数はなぜ財政規模と連動するのか",
+      "stale": [
+        {
+          "rankingKey": "psychiatric-bed-count",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "psychiatric-hospital-count-prefecture-gap",
+      "title": "精神科病院が最も多い県はどこでしょうか？",
+      "stale": [
+        {
+          "rankingKey": "psychiatric-hospital-count",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
       "slug": "public-bath-consumption-expenditure-prefecture-gap",
       "title": "温泉・銭湯への支出が最も多い県はどこ？",
       "stale": [
@@ -1825,17 +1853,6 @@
           "rankingKey": "regular-cash-salary-male",
           "articleYear": "2023",
           "latestYear": "2024"
-        }
-      ]
-    },
-    {
-      "slug": "rice-consumption-quantity-ranking",
-      "title": "米どころ新潟、消費トップに届かず",
-      "stale": [
-        {
-          "rankingKey": "rice-consumption-quantity",
-          "articleYear": "2024",
-          "latestYear": "2025"
         }
       ]
     },
@@ -1933,17 +1950,6 @@
       ]
     },
     {
-      "slug": "tissue-paper-consumption-expenditure-prefecture-gap",
-      "title": "ティッシュ消費額、なぜ東北が上位を占めるのか",
-      "stale": [
-        {
-          "rankingKey": "tissue-paper-consumption-expenditure",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
       "slug": "tissue-paper-consumption-expenditure-vs-average-weight",
       "title": "ティッシュ消費が多い県はなぜ体重も重いのか",
       "stale": [
@@ -2004,17 +2010,6 @@
       "stale": [
         {
           "rankingKey": "tuition-consumption-expenditure",
-          "articleYear": "2024",
-          "latestYear": "2025"
-        }
-      ]
-    },
-    {
-      "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
-      "title": "まぐろ消費が多い県ほど入院が少ないのはなぜ",
-      "stale": [
-        {
-          "rankingKey": "tuna-consumption-quantity",
           "articleYear": "2024",
           "latestYear": "2025"
         }
@@ -2143,7 +2138,7 @@
     }
   ],
   "releaseDue": {
-    "asOf": "2026-11-14",
+    "asOf": "2026-11-28",
     "calendarSurveys": [
       "kakei-chousa",
       "household-survey",
@@ -2158,12 +2153,12 @@
       "prefectural-accounts"
     ],
     "ingestMetricKeys": [
-      "actual-income-worker-households-per-month",
       "annual-new-inpatients-general-hospital-per-100k",
       "average-age-of-first-marriage-wife",
       "average-height-middle-school-second-grade-male",
       "average-height-primary-school-fifth-grade-female",
       "average-height-primary-school-fifth-grade-male",
+      "average-persons-per-general-household",
       "average-weight-primary-school-fifth-grade-male",
       "avg-daily-inpatients-general-hospital-per-100k",
       "avg-height-high-school-2nd-male",
@@ -2203,13 +2198,13 @@
       "food-expenditure-ratio-multi-person-households",
       "foreign-resident-count-per-100k",
       "general-hospital-bed-occupancy-rate",
+      "general-households",
       "gross-prefectural-product-information-communication-h27",
       "high-school-advancement-rate",
       "high-school-graduates-job-ratio",
       "high-school-teacher-annual-income",
       "household-head-income-worker-households-per-month",
       "in-pref-university-entrance-ratio-by-highschool-origin",
-      "inflow-population-ratio",
       "junior-high-school-students-count",
       "junior-high-school-students-per-teacher",
       "junior-high-school-teachers",
@@ -2222,6 +2217,7 @@
       "necktie-consumption-expenditure",
       "new-graduate-scheduled-salary-university-male",
       "new-graduate-starting-salary-college-male",
+      "nuclear-family-households-ratio",
       "nurse-annual-income",
       "old-population-index",
       "per-capita-prefectural-income-h27",
@@ -2234,8 +2230,12 @@
       "psychiatric-hospital-bed-occupancy-rate",
       "psychiatric-hospital-count",
       "public-health-nurse-annual-income",
+      "ratio-of-general-households-to-national",
+      "real-disposable-income",
       "regular-cash-salary-male",
       "school-teacher-annual-income",
+      "single-person-household-old-population-ratio",
+      "single-person-household-ratio",
       "social-increase-rate",
       "software-engineer-annual-income",
       "starting-salary-university",
@@ -2248,8 +2248,6 @@
       "university-capacity-index",
       "university-new-graduates-unemployment-rate",
       "university-professor-annual-income",
-      "unmarried-ratio-male-30-34",
-      "unmarried-ratio-male-45-49",
       "utilities-expenditure-ratio-multi-person-households",
       "young-population-index"
     ],
@@ -2281,6 +2279,164 @@
         ]
       },
       {
+        "slug": "aging-solo-living-crisis",
+        "title": "高齢者の5人に1人がひとり暮らし",
+        "due": [
+          {
+            "rankingKey": "single-person-household-old-population-ratio",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "convenience-store-count-commercial-vs-ratio-of-general",
+        "title": "コンビニ店舗数は世帯集中と連動する?",
+        "due": [
+          {
+            "rankingKey": "ratio-of-general-households-to-national",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "foreign-population-growth-rate",
+        "title": "外国人比率トップは東京、でも次点以下は製造業県だらけ｜意外な国際化マップ",
+        "due": [
+          {
+            "rankingKey": "foreign-resident-count-per-100k",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "foreign-residents-diversity-map",
+        "title": "外国人が最も多い県、少ない県",
+        "due": [
+          {
+            "rankingKey": "foreign-resident-count-per-100k",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "general-households-prefecture-gap",
+        "title": "一般世帯数の県差は何を映すのか",
+        "due": [
+          {
+            "rankingKey": "general-households",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "household-solo-vs-dualincome",
+        "title": "都市は独居、地方は共働き",
+        "due": [
+          {
+            "rankingKey": "average-persons-per-general-household",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          },
+          {
+            "rankingKey": "nuclear-family-households-ratio",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          },
+          {
+            "rankingKey": "single-person-household-ratio",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "household-structure-daytime-population-gap",
+        "title": "核家族が多い県ほど、昼は人が減るのか",
+        "due": [
+          {
+            "rankingKey": "nuclear-family-households-ratio",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "household-structure-transformation",
+        "title": "日本の世帯は「小さく」なった",
+        "due": [
+          {
+            "rankingKey": "average-persons-per-general-household",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          },
+          {
+            "rankingKey": "single-person-household-ratio",
+            "surveyIds": [
+              "census"
+            ],
+            "articleYear": "2020",
+            "siteLatestYear": "2020",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
         "slug": "population-migration-tokyo-concentration",
         "title": "人口を集める首都圏3県が昼間人口では最下位──通勤帝国が作り出す二重構造",
         "due": [
@@ -2293,60 +2449,6 @@
             "siteLatestYear": "2019",
             "releasedYear": "2024",
             "action": "ingest-metric"
-          }
-        ]
-      },
-      {
-        "slug": "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
-        "title": "牛肉消費量と45〜49歳男性未婚者割合はなぜ重なる?",
-        "due": [
-          {
-            "rankingKey": "unmarried-ratio-male-45-49",
-            "surveyIds": [
-              "population-estimates",
-              "census"
-            ],
-            "articleYear": "2020",
-            "siteLatestYear": "2020",
-            "releasedYear": "2024",
-            "action": "ingest-metric"
-          },
-          {
-            "rankingKey": "beef-consumption-quantity",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          }
-        ]
-      },
-      {
-        "slug": "beef-unmarried-ratio",
-        "title": "牛肉を食べる県は未婚が少ない?",
-        "due": [
-          {
-            "rankingKey": "unmarried-ratio-male-45-49",
-            "surveyIds": [
-              "population-estimates",
-              "census"
-            ],
-            "articleYear": "2020",
-            "siteLatestYear": "2020",
-            "releasedYear": "2024",
-            "action": "ingest-metric"
-          },
-          {
-            "rankingKey": "beef-consumption-quantity",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
           }
         ]
       },
@@ -2387,57 +2489,6 @@
         ]
       },
       {
-        "slug": "foreign-population-growth-rate",
-        "title": "外国人比率トップは東京、でも次点以下は製造業県だらけ｜意外な国際化マップ",
-        "due": [
-          {
-            "rankingKey": "foreign-resident-count-per-100k",
-            "surveyIds": [
-              "population-estimates",
-              "census"
-            ],
-            "articleYear": "2020",
-            "siteLatestYear": "2020",
-            "releasedYear": "2024",
-            "action": "ingest-metric"
-          }
-        ]
-      },
-      {
-        "slug": "foreign-residents-diversity-map",
-        "title": "外国人が最も多い県、少ない県",
-        "due": [
-          {
-            "rankingKey": "foreign-resident-count-per-100k",
-            "surveyIds": [
-              "population-estimates",
-              "census"
-            ],
-            "articleYear": "2020",
-            "siteLatestYear": "2020",
-            "releasedYear": "2024",
-            "action": "ingest-metric"
-          }
-        ]
-      },
-      {
-        "slug": "inflow-population-ratio-prefecture-gap",
-        "title": "流入人口は東京19.67%vs北海道0.07%の281倍｜なぜ佐賀が上位? (2020)",
-        "due": [
-          {
-            "rankingKey": "inflow-population-ratio",
-            "surveyIds": [
-              "population-estimates",
-              "census"
-            ],
-            "articleYear": "2020",
-            "siteLatestYear": "2020",
-            "releasedYear": "2024",
-            "action": "ingest-metric"
-          }
-        ]
-      },
-      {
         "slug": "library-museum-cultural-capital",
         "title": "人口あたり図書館数は県で7倍違う",
         "due": [
@@ -2455,18 +2506,43 @@
         ]
       },
       {
-        "slug": "unmarried-rate-40years-crisis",
-        "title": "未婚率40年の推移",
+        "slug": "birth-death-gap-decline",
+        "title": "東京は婚姻率1位なのに出生率は最下位",
         "due": [
           {
-            "rankingKey": "unmarried-ratio-male-30-34",
+            "rankingKey": "marriages-per-total-population",
             "surveyIds": [
-              "population-estimates",
-              "census"
+              "vital-statistics"
             ],
-            "articleYear": "2020",
-            "siteLatestYear": "2020",
-            "releasedYear": "2024",
+            "articleYear": "2022",
+            "siteLatestYear": "2022",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          },
+          {
+            "rankingKey": "total-fertility-rate",
+            "surveyIds": [
+              "vital-statistics"
+            ],
+            "articleYear": "2022",
+            "siteLatestYear": "2023",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "engineer-telework-prefecture",
+        "title": "リモートしやすい県はエンジニアも稼げるか",
+        "due": [
+          {
+            "rankingKey": "software-engineer-annual-income",
+            "surveyIds": [
+              "wage-structure-survey"
+            ],
+            "articleYear": "2022",
+            "siteLatestYear": "2023",
+            "releasedYear": "2025",
             "action": "ingest-metric"
           }
         ]
@@ -2510,9 +2586,7 @@
           {
             "rankingKey": "divorces-per-total-population",
             "surveyIds": [
-              "vital-statistics",
-              "population-estimates",
-              "census"
+              "vital-statistics"
             ],
             "articleYear": "2022",
             "siteLatestYear": "2022",
@@ -2522,9 +2596,7 @@
           {
             "rankingKey": "marriages-per-total-population",
             "surveyIds": [
-              "vital-statistics",
-              "population-estimates",
-              "census"
+              "vital-statistics"
             ],
             "articleYear": "2022",
             "siteLatestYear": "2022",
@@ -2716,22 +2788,6 @@
             "siteLatestYear": "2025",
             "releasedYear": "2025",
             "action": "refresh-article"
-          }
-        ]
-      },
-      {
-        "slug": "birth-death-gap-decline",
-        "title": "東京は婚姻率トップなのに出生率最下位──「結婚→子ども」が成立しない都市の構造",
-        "due": [
-          {
-            "rankingKey": "total-fertility-rate",
-            "surveyIds": [
-              "vital-statistics"
-            ],
-            "articleYear": "2023",
-            "siteLatestYear": "2023",
-            "releasedYear": "2025",
-            "action": "ingest-metric"
           }
         ]
       },
@@ -2941,7 +2997,7 @@
               "medical-facility-survey"
             ],
             "articleYear": "2023",
-            "siteLatestYear": "2023",
+            "siteLatestYear": "2024",
             "releasedYear": "2025",
             "action": "ingest-metric"
           }
@@ -3034,9 +3090,7 @@
           {
             "rankingKey": "emergency-hospital-general-clinic-count-per-100k",
             "surveyIds": [
-              "population-estimates",
-              "medical-facility-survey",
-              "census"
+              "medical-facility-survey"
             ],
             "articleYear": "2023",
             "siteLatestYear": "2023",
@@ -3063,7 +3117,7 @@
       },
       {
         "slug": "fertility-rate-prefecture-gap",
-        "title": "出生率は沖縄1.60・東京0.99｜なぜ早婚の県ほど高い? 婚姻年齢が映す少子化の地域差 (2023)",
+        "title": "出生率は沖縄1.60・東京0.99｜早婚の県ほど高い? 婚姻年齢が映す少子化の地域差 (2023)",
         "due": [
           {
             "rankingKey": "total-fertility-rate",
@@ -3155,22 +3209,6 @@
         ]
       },
       {
-        "slug": "general-hospital-bed-occupancy-rate",
-        "title": "なぜ佐賀の病床は満床に近いのか——一般病院病床利用率の逆説 (2023年度)",
-        "due": [
-          {
-            "rankingKey": "general-hospital-bed-occupancy-rate",
-            "surveyIds": [
-              "medical-facility-survey"
-            ],
-            "articleYear": "2023",
-            "siteLatestYear": "2023",
-            "releasedYear": "2025",
-            "action": "ingest-metric"
-          }
-        ]
-      },
-      {
         "slug": "high-school-advancement-rate",
         "title": "進学率トップは東京・京都｜なぜ都市部ほど高いのか",
         "due": [
@@ -3209,9 +3247,7 @@
           {
             "rankingKey": "avg-daily-inpatients-general-hospital-per-100k",
             "surveyIds": [
-              "population-estimates",
-              "medical-facility-survey",
-              "census"
+              "medical-facility-survey"
             ],
             "articleYear": "2023",
             "siteLatestYear": "2023",
@@ -3590,7 +3626,7 @@
               "medical-facility-survey"
             ],
             "articleYear": "2023",
-            "siteLatestYear": "2023",
+            "siteLatestYear": "2024",
             "releasedYear": "2025",
             "action": "ingest-metric"
           },
@@ -3616,7 +3652,7 @@
               "medical-facility-survey"
             ],
             "articleYear": "2023",
-            "siteLatestYear": "2023",
+            "siteLatestYear": "2024",
             "releasedYear": "2025",
             "action": "ingest-metric"
           }
@@ -3632,7 +3668,7 @@
               "medical-facility-survey"
             ],
             "articleYear": "2023",
-            "siteLatestYear": "2023",
+            "siteLatestYear": "2024",
             "releasedYear": "2025",
             "action": "ingest-metric"
           }
@@ -3680,7 +3716,7 @@
               "medical-facility-survey"
             ],
             "articleYear": "2023",
-            "siteLatestYear": "2023",
+            "siteLatestYear": "2024",
             "releasedYear": "2025",
             "action": "ingest-metric"
           }
@@ -3755,24 +3791,8 @@
         ]
       },
       {
-        "slug": "software-engineer-income-gap",
-        "title": "ソフトウェアエンジニアの年収、最も高い県は東京じゃない？京都608万 vs 沖縄402万、1.5倍差の真因 (2023)",
-        "due": [
-          {
-            "rankingKey": "software-engineer-annual-income",
-            "surveyIds": [
-              "wage-structure-survey"
-            ],
-            "articleYear": "2023",
-            "siteLatestYear": "2023",
-            "releasedYear": "2025",
-            "action": "ingest-metric"
-          }
-        ]
-      },
-      {
         "slug": "software-engineer-salary-prefecture-gap",
-        "title": "SEの最高年収はなぜ京都?東京より高い地方の真因",
+        "title": "SEの年収1位は京都? 毎年入れ替わる首位と東京",
         "due": [
           {
             "rankingKey": "software-engineer-annual-income",
@@ -3809,9 +3829,7 @@
           {
             "rankingKey": "suicides-per-100k",
             "surveyIds": [
-              "vital-statistics",
-              "population-estimates",
-              "census"
+              "vital-statistics"
             ],
             "articleYear": "2023",
             "siteLatestYear": "2023",
@@ -3895,46 +3913,18 @@
         ]
       },
       {
-        "slug": "total-fertility-rate",
-        "title": "東京の出生率がついに1.0を割った｜沖縄1.60 vs 東京0.99、「都市ほど子が生まれない」逆説の構造 (2023)",
-        "due": [
-          {
-            "rankingKey": "total-fertility-rate",
-            "surveyIds": [
-              "vital-statistics"
-            ],
-            "articleYear": "2023",
-            "siteLatestYear": "2023",
-            "releasedYear": "2025",
-            "action": "ingest-metric"
-          }
-        ]
-      },
-      {
         "slug": "tuna-consumption-quantity-vs-annual-new-inpatients-general",
-        "title": "まぐろ消費が多い県ほど入院が少ないのはなぜ",
+        "title": "まぐろをよく買う県ほど入院は少ない?",
         "due": [
           {
             "rankingKey": "annual-new-inpatients-general-hospital-per-100k",
             "surveyIds": [
-              "population-estimates",
-              "medical-facility-survey",
-              "census"
+              "medical-facility-survey"
             ],
             "articleYear": "2023",
             "siteLatestYear": "2023",
             "releasedYear": "2025",
             "action": "ingest-metric"
-          },
-          {
-            "rankingKey": "tuna-consumption-quantity",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
           }
         ]
       },
@@ -4086,22 +4076,6 @@
             "siteLatestYear": "2021",
             "releasedYear": "2022",
             "action": "ingest-metric"
-          }
-        ]
-      },
-      {
-        "slug": "air-conditioner-consumption-quantity-prefecture-gap",
-        "title": "エアコン購入、香川がなぜ全国1位なのか",
-        "due": [
-          {
-            "rankingKey": "air-conditioner-consumption-quantity",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
           }
         ]
       },
@@ -4284,6 +4258,38 @@
         ]
       },
       {
+        "slug": "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
+        "title": "牛肉消費量と45〜49歳男性未婚者割合はなぜ重なる?",
+        "due": [
+          {
+            "rankingKey": "beef-consumption-quantity",
+            "surveyIds": [
+              "kakei-chousa"
+            ],
+            "articleYear": "2024",
+            "siteLatestYear": "2025",
+            "releasedYear": "2025",
+            "action": "refresh-article"
+          }
+        ]
+      },
+      {
+        "slug": "beef-unmarried-ratio",
+        "title": "牛肉を食べる県は未婚が少ない?",
+        "due": [
+          {
+            "rankingKey": "beef-consumption-quantity",
+            "surveyIds": [
+              "kakei-chousa"
+            ],
+            "articleYear": "2024",
+            "siteLatestYear": "2025",
+            "releasedYear": "2025",
+            "action": "refresh-article"
+          }
+        ]
+      },
+      {
         "slug": "beer-vs-happoshu-shift",
         "title": "ビールと発泡酒、県で首位はなぜ違う",
         "due": [
@@ -4347,32 +4353,6 @@
         "due": [
           {
             "rankingKey": "bread-consumption-expenditure",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          }
-        ]
-      },
-      {
-        "slug": "bread-vs-rice-expenditure",
-        "title": "パン王国と米どころ、なぜ真逆?",
-        "due": [
-          {
-            "rankingKey": "bread-consumption-expenditure",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          },
-          {
-            "rankingKey": "rice-consumption-expenditure",
             "surveyIds": [
               "kakei-chousa"
             ],
@@ -4672,22 +4652,6 @@
         ]
       },
       {
-        "slug": "croquette-consumption-expenditure-prefecture-gap",
-        "title": "コロッケ支出額、なぜ北陸勢が上位独占なのか",
-        "due": [
-          {
-            "rankingKey": "croquette-consumption-expenditure",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          }
-        ]
-      },
-      {
         "slug": "culture-recreation-expenditure-total-prefecture-gap",
         "title": "教養娯楽費の首位と最下位、差は何倍か？",
         "due": [
@@ -4842,9 +4806,7 @@
           {
             "rankingKey": "divorces-per-total-population",
             "surveyIds": [
-              "vital-statistics",
-              "population-estimates",
-              "census"
+              "vital-statistics"
             ],
             "articleYear": "2024",
             "siteLatestYear": "2022",
@@ -4879,9 +4841,9 @@
               "household-survey"
             ],
             "articleYear": "2024",
-            "siteLatestYear": "2024",
+            "siteLatestYear": "2025",
             "releasedYear": "2025",
-            "action": "ingest-metric"
+            "action": "refresh-article"
           },
           {
             "rankingKey": "household-head-income-worker-households-per-month",
@@ -5724,6 +5686,16 @@
             "siteLatestYear": "2025",
             "releasedYear": "2025",
             "action": "refresh-article"
+          },
+          {
+            "rankingKey": "real-disposable-income",
+            "surveyIds": [
+              "household-survey"
+            ],
+            "articleYear": "2024",
+            "siteLatestYear": "2024",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
           }
         ]
       },
@@ -5744,22 +5716,6 @@
         ]
       },
       {
-        "slug": "household-consumption-expenditure-ranking",
-        "title": "生活費が高い県は埼玉・最下位は沖縄｜差はたった1.4倍の理由",
-        "due": [
-          {
-            "rankingKey": "consumption-expenditure-total",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          }
-        ]
-      },
-      {
         "slug": "household-income-tokyo-okinawa",
         "title": "大阪が下位・奈良がトップ圏──「経済力のある都市」と「世帯収入の高い県」がなぜ逆転するか",
         "due": [
@@ -5769,9 +5725,9 @@
               "household-survey"
             ],
             "articleYear": "2024",
-            "siteLatestYear": "2024",
+            "siteLatestYear": "2025",
             "releasedYear": "2025",
-            "action": "ingest-metric"
+            "action": "refresh-article"
           }
         ]
       },
@@ -5916,6 +5872,23 @@
             "articleYear": "2024",
             "siteLatestYear": "2025",
             "releasedYear": "2025",
+            "action": "refresh-article"
+          }
+        ]
+      },
+      {
+        "slug": "intellectual-crime-tokyo-kagawa-gap",
+        "title": "知能犯トップは東京、人口比だと香川",
+        "due": [
+          {
+            "rankingKey": "total-population",
+            "surveyIds": [
+              "population-estimates",
+              "census"
+            ],
+            "articleYear": "2023",
+            "siteLatestYear": "2025",
+            "releasedYear": "2024",
             "action": "refresh-article"
           }
         ]
@@ -6320,22 +6293,6 @@
         ]
       },
       {
-        "slug": "oyster-consumption-prefecture-gap",
-        "title": "牡蠣を一番食べる県は広島、なぜ海なし滋賀が僅差で追う?｜47都道府県2024",
-        "due": [
-          {
-            "rankingKey": "oyster-consumption-quantity",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          }
-        ]
-      },
-      {
         "slug": "peach-consumption-expenditure-prefecture-gap",
         "title": "桃への支出、福島県は岡山県の約何倍か",
         "due": [
@@ -6437,22 +6394,6 @@
         "due": [
           {
             "rankingKey": "persimmon-consumption-quantity",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          }
-        ]
-      },
-      {
-        "slug": "pet-food-consumption-expenditure-prefecture-gap",
-        "title": "ペットフード代が福島と沖縄で3.7倍違う理由",
-        "due": [
-          {
-            "rankingKey": "pet-food-consumption-expenditure",
             "surveyIds": [
               "kakei-chousa"
             ],
@@ -6604,22 +6545,64 @@
             "siteLatestYear": "2021",
             "releasedYear": "2022",
             "action": "ingest-metric"
+          },
+          {
+            "rankingKey": "real-disposable-income",
+            "surveyIds": [
+              "household-survey"
+            ],
+            "articleYear": "2024",
+            "siteLatestYear": "2024",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
           }
         ]
       },
       {
-        "slug": "rice-consumption-quantity-ranking",
-        "title": "米どころ新潟、消費トップに届かず",
+        "slug": "real-disposable-income-vs-per-capita-social-welfare",
+        "title": "所得が低い県ほど福祉費が高いのはなぜ?",
         "due": [
           {
-            "rankingKey": "rice-consumption-quantity",
+            "rankingKey": "real-disposable-income",
             "surveyIds": [
-              "kakei-chousa"
+              "household-survey"
             ],
             "articleYear": "2024",
-            "siteLatestYear": "2025",
+            "siteLatestYear": "2024",
             "releasedYear": "2025",
-            "action": "refresh-article"
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+        "title": "手取りが多い県ほど納税者も多いのか",
+        "due": [
+          {
+            "rankingKey": "real-disposable-income",
+            "surveyIds": [
+              "household-survey"
+            ],
+            "articleYear": "2024",
+            "siteLatestYear": "2024",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
+          }
+        ]
+      },
+      {
+        "slug": "real-income-taxpayer",
+        "title": "実質の手取り日本一はどこ?",
+        "due": [
+          {
+            "rankingKey": "real-disposable-income",
+            "surveyIds": [
+              "household-survey"
+            ],
+            "articleYear": "2024",
+            "siteLatestYear": "2024",
+            "releasedYear": "2025",
+            "action": "ingest-metric"
           }
         ]
       },
@@ -6784,22 +6767,6 @@
         "due": [
           {
             "rankingKey": "taxi-fare-consumption-expenditure",
-            "surveyIds": [
-              "kakei-chousa"
-            ],
-            "articleYear": "2024",
-            "siteLatestYear": "2025",
-            "releasedYear": "2025",
-            "action": "refresh-article"
-          }
-        ]
-      },
-      {
-        "slug": "tissue-paper-consumption-expenditure-prefecture-gap",
-        "title": "ティッシュ消費額、なぜ東北が上位を占めるのか",
-        "due": [
-          {
-            "rankingKey": "tissue-paper-consumption-expenditure",
             "surveyIds": [
               "kakei-chousa"
             ],

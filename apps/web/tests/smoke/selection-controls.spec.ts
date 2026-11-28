@@ -1,7 +1,7 @@
 import { expect, test } from './fixtures';
 
+// /areas の地方の切り替えは 2026-11-20 に外した (一覧が地方ごとに分かれ、地図が地方を色で示す)
 for (const target of [
-  { path: '/areas', label: '地方' },
   { path: '/themes/freight-logistics', label: '輸送機関' },
   { path: '/themes/education-culture', label: '文化財の種類で絞り込み' },
 ]) {

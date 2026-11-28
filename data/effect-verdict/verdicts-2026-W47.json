@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "week": "2026-W47",
+  "decidedAt": "2026-11-28T00:58:17.807Z",
+  "assessmentContractVersion": 1,
+  "thresholdsVersion": "1.0.0",
+  "thresholdsPath": "packages/ops/src/effect-verdict/thresholds.mjs",
+  "note": "閾値エンジンによる effect ラベルの確定記録。ガード hit は effect/pending に留まる。backlog の status 反映は improvement-triage が行う (本 CLI は書かない)。",
+  "summary": {
+    "total": 2,
+    "byLabel": {
+      "effect/pending": 2
+    },
+    "byGuard": {
+      "insufficient-window": 1,
+      "insufficient-target": 1,
+      "insufficient-sample": 1
+    }
+  },
+  "verdicts": [
+    {
+      "domainId": "gsc-blog-wave",
+      "subjectId": "BLOG-WAVE-2026-11-16-manual",
+      "assessment": {
+        "kind": "effect-experiment"
+      },
+      "label": "effect/pending",
+      "reason": "ガード insufficient-window, insufficient-target, insufficient-sample により判定不能",
+      "thresholdsVersion": "1.0.0",
+      "guards": [
+        {
+          "code": "insufficient-window",
+          "detail": "判定窓が不足 (経過 0 週 < window.minWeeks 2)"
+        },
+        {
+          "code": "insufficient-target",
+          "detail": "想定効果値 (target delta) が機械可読な形で登録されていない"
+        },
+        {
+          "code": "insufficient-sample",
+          "detail": "相対変化 4.7% < sample.minRelativeDelta 5.0%"
+        }
+      ],
+      "before": {
+        "value": 85,
+        "impressions": 1039
+      },
+      "after": {
+        "value": 89,
+        "impressions": 1224
+      },
+      "delta": 4,
+      "relativeDelta": 0.047059,
+      "target": null,
+      "attainment": null,
+      "boundaries": {
+        "attainmentFull": 0.8,
+        "attainmentPartial": 0.3,
+        "adverseRelativeDrop": -0.1
+      },
+      "window": {
+        "beforeWeek": "2026-W46",
+        "afterWeek": "2026-W47",
+        "elapsedWeeks": 0,
+        "minWeeks": 2
+      },
+      "sources": [
+        {
+          "name": "gsc:snapshots/2026-W47/pages.csv",
+          "observedAt": "2026-11-22",
+          "freshness": "fresh"
+        }
+      ],
+      "confounders": {
+        "coDeployed": [],
+        "laterContaminators": []
+      },
+      "pastEffectKeys": [
+        "/blog/konbu-consumption-prefecture-gap"
+      ],
+      "logPath": "data/improvement/gsc-improvement/improvement-log.md",
+      "reproduceCommand": "node .claude/scripts/blog/measure-gsc-impact.mjs --wave 2026-11-16-manual",
+      "skipped": false
+    },
+    {
+      "domainId": "adsense",
+      "subjectId": "ADSENSE-PLACEMENT-01",
+      "assessment": {
+        "kind": "baseline-observation",
+        "subjectId": "ADSENSE-PLACEMENT-01",
+        "domainId": "adsense",
+        "accountId": "pub-9055416085403520",
+        "deployWeek": "2026-W41",
+        "firstWeek": "2026-W42",
+        "weeks": [
+          "2026-W42",
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "reviewDate": "2026-11-13"
+      },
+      "observation": {
+        "status": "ready",
+        "observedWeeks": [
+          "2026-W42",
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "missingWeeks": [],
+        "overdue": false
+      },
+      "label": "effect/pending",
+      "reason": "baseline ready: 4/4週 / review 2026-11-13",
+      "guards": [],
+      "target": null,
+      "before": null,
+      "after": null,
+      "delta": null,
+      "attainment": null,
+      "sources": [
+        {
+          "name": "adsense:data/adsense/history.csv",
+          "accountId": "pub-9055416085403520",
+          "firstWeek": "2026-W42",
+          "identityBasis": "restart-cohort; explicit accountId checked when available"
+        }
+      ],
+      "window": {
+        "weeks": [
+          "2026-W42",
+          "2026-W43",
+          "2026-W44",
+          "2026-W45"
+        ],
+        "reviewDate": "2026-11-13"
+      },
+      "reproduceCommand": "node .claude/scripts/metrics/measure-adsense-impact.mjs --deployed 2026-10-11 --label ADSENSE-PLACEMENT-01",
+      "skipped": false
+    }
+  ]
+}

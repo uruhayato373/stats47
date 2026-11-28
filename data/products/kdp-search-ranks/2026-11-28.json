@@ -1,0 +1,439 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-28T00:27:07.185Z",
+  "scope": "kindle-search-first-page",
+  "rows": [
+    {
+      "query": "ご当地 食卓",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "インバウンド",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "エネルギー 都道府県",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "スポーツ 都道府県",
+      "status": "ok",
+      "resultCount": 12,
+      "ranks": []
+    },
+    {
+      "query": "テレワーク",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "デジタル 都道府県",
+      "status": "ok",
+      "resultCount": 20,
+      "ranks": []
+    },
+    {
+      "query": "中国 物価",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "中国 移住",
+      "status": "ok",
+      "resultCount": 17,
+      "ranks": []
+    },
+    {
+      "query": "中部 物価",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "中部 移住",
+      "status": "ok",
+      "resultCount": 3,
+      "ranks": []
+    },
+    {
+      "query": "九州 物価",
+      "status": "ok",
+      "resultCount": 7,
+      "ranks": []
+    },
+    {
+      "query": "九州 移住",
+      "status": "ok",
+      "resultCount": 11,
+      "ranks": []
+    },
+    {
+      "query": "人口減少",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "介護 都道府県",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "住みやすい県",
+      "status": "ok",
+      "resultCount": 23,
+      "ranks": []
+    },
+    {
+      "query": "健康寿命",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "再生可能エネルギー",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "四国 物価",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "四国 移住",
+      "status": "ok",
+      "resultCount": 1,
+      "ranks": []
+    },
+    {
+      "query": "図書館 統計",
+      "status": "ok",
+      "resultCount": 19,
+      "ranks": []
+    },
+    {
+      "query": "地価 都道府県",
+      "status": "ok",
+      "resultCount": 17,
+      "ranks": []
+    },
+    {
+      "query": "地域経済",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "地方財政",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": [
+        {
+          "id": "K-S1-06",
+          "asin": "B0HF1XFXBY",
+          "rank": 16
+        }
+      ]
+    },
+    {
+      "query": "大学進学率 都道府県",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "子育て 都道府県",
+      "status": "ok",
+      "resultCount": 7,
+      "ranks": []
+    },
+    {
+      "query": "家計調査",
+      "status": "ok",
+      "resultCount": 19,
+      "ranks": [
+        {
+          "id": "K-S1-02",
+          "asin": "B0HKF4NLDV",
+          "rank": 3
+        }
+      ]
+    },
+    {
+      "query": "家計調査 県庁所在市",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "宿泊 都道府県",
+      "status": "ok",
+      "resultCount": 4,
+      "ranks": []
+    },
+    {
+      "query": "平均寿命 都道府県",
+      "status": "ok",
+      "resultCount": 1,
+      "ranks": []
+    },
+    {
+      "query": "手取り 都道府県",
+      "status": "ok",
+      "resultCount": 2,
+      "ranks": []
+    },
+    {
+      "query": "携帯 都道府県",
+      "status": "ok",
+      "resultCount": 18,
+      "ranks": []
+    },
+    {
+      "query": "教育費",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": [
+        {
+          "id": "K-S1-05",
+          "asin": "B0HKF5MMF9",
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query": "文化 都道府県",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "未婚率",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "東京一極集中",
+      "status": "ok",
+      "resultCount": 24,
+      "ranks": []
+    },
+    {
+      "query": "東北 物価",
+      "status": "ok",
+      "resultCount": 3,
+      "ranks": []
+    },
+    {
+      "query": "東北 移住",
+      "status": "ok",
+      "resultCount": 12,
+      "ranks": []
+    },
+    {
+      "query": "沖縄 移住",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "治安 都道府県",
+      "status": "ok",
+      "resultCount": 2,
+      "ranks": []
+    },
+    {
+      "query": "消費量 ランキング 都道府県",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "犯罪 統計",
+      "status": "ok",
+      "resultCount": 17,
+      "ranks": []
+    },
+    {
+      "query": "県民性",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "県民性 食べ物",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "県民所得",
+      "status": "ok",
+      "resultCount": 9,
+      "ranks": []
+    },
+    {
+      "query": "移住",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "移住 ランキング",
+      "status": "ok",
+      "resultCount": 20,
+      "ranks": []
+    },
+    {
+      "query": "自治体 財政",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": [
+        {
+          "id": "K-S1-06",
+          "asin": "B0HF1XFXBY",
+          "rank": 16
+        }
+      ]
+    },
+    {
+      "query": "製造業 都道府県",
+      "status": "ok",
+      "resultCount": 7,
+      "ranks": []
+    },
+    {
+      "query": "観光統計",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "財政力指数",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "転勤 中国",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "転勤 中部",
+      "status": "ok",
+      "resultCount": 1,
+      "ranks": []
+    },
+    {
+      "query": "転勤 九州",
+      "status": "ok",
+      "resultCount": 12,
+      "ranks": []
+    },
+    {
+      "query": "転勤 四国",
+      "status": "ok",
+      "resultCount": 4,
+      "ranks": []
+    },
+    {
+      "query": "転勤 東北",
+      "status": "ok",
+      "resultCount": 14,
+      "ranks": []
+    },
+    {
+      "query": "転勤 近畿",
+      "status": "ok",
+      "resultCount": 1,
+      "ranks": []
+    },
+    {
+      "query": "転勤 関東",
+      "status": "ok",
+      "resultCount": 2,
+      "ranks": []
+    },
+    {
+      "query": "近畿 物価",
+      "status": "unreadable",
+      "resultCount": 0,
+      "ranks": []
+    },
+    {
+      "query": "近畿 移住",
+      "status": "ok",
+      "resultCount": 1,
+      "ranks": []
+    },
+    {
+      "query": "都道府県 年収",
+      "status": "ok",
+      "resultCount": 4,
+      "ranks": [
+        {
+          "id": "K-S1-01",
+          "asin": "B0HKFB434W",
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "query": "関東 物価",
+      "status": "ok",
+      "resultCount": 3,
+      "ranks": []
+    },
+    {
+      "query": "関東 移住",
+      "status": "ok",
+      "resultCount": 16,
+      "ranks": []
+    },
+    {
+      "query": "防災 都道府県",
+      "status": "ok",
+      "resultCount": 19,
+      "ranks": []
+    },
+    {
+      "query": "電気代 都道府県",
+      "status": "ok",
+      "resultCount": 1,
+      "ranks": []
+    },
+    {
+      "query": "食卓 地域差",
+      "status": "ok",
+      "resultCount": 5,
+      "ranks": [
+        {
+          "id": "K-S1-02",
+          "asin": "B0HKF4NLDV",
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "query": "食文化 都道府県",
+      "status": "ok",
+      "resultCount": 24,
+      "ranks": []
+    }
+  ]
+}

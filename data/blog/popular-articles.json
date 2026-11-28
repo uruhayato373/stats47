@@ -1,51 +1,51 @@
 {
-  "generatedAt": "2026-11-20T23:37:11.346Z",
+  "generatedAt": "2026-11-28T00:55:52.749Z",
   "source": "ga4",
   "windowDays": 28,
   "period": {
-    "start": "2026-10-23",
-    "end": "2026-11-19"
+    "start": "2026-10-31",
+    "end": "2026-11-27"
   },
   "articles": [
     {
       "slug": "automotive-industry-transformation-map",
-      "pageViews": 534
+      "pageViews": 441
     },
     {
       "slug": "childcare-friendly-prefecture-ranking",
-      "pageViews": 390
-    },
-    {
-      "slug": "livable-prefecture-composite-ranking",
-      "pageViews": 365
+      "pageViews": 321
     },
     {
       "slug": "noodle-consumption-prefecture-character",
-      "pageViews": 314
+      "pageViews": 307
+    },
+    {
+      "slug": "livable-prefecture-composite-ranking",
+      "pageViews": 225
     },
     {
       "slug": "academic-achievement-test-prefecture-ranking",
-      "pageViews": 206
+      "pageViews": 182
     },
     {
       "slug": "household-spending-prefecture-gap",
-      "pageViews": 202
+      "pageViews": 173
     },
     {
       "slug": "alcohol-prefecture-map",
-      "pageViews": 201
+      "pageViews": 160
     },
     {
       "slug": "annual-precipitation-rainy-season-gap",
-      "pageViews": 171
+      "pageViews": 150
     },
     {
-      "slug": "sports-urban-paradox",
-      "pageViews": 164
+      "slug": "konbu-consumption-prefecture-gap",
+      "pageViews": 147
     },
     {
       "slug": "suicide-rate-aging-nexus",
-      "pageViews": 162
+      "pageViews": 138
     }
   ]
 }

@@ -12,16 +12,20 @@ import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   buildMunicipalityListNames,
   buildMunicipalityRankingMeta,
+  buildPrefectureStripGroups,
+  formatPowerOfTenTick,
   isMunicipalityAiContentCurrent,
   formatMunicipalityValueText,
   municipalityAbsenceNote,
   municipalityRankingDisplayTitle,
+  resolveStripScale,
 } from '@stats47/ranking';
 import { formatValueWithPrecision } from '@stats47/utils';
 import { Map as MapIcon } from 'lucide-react';
 
 import Link from '@/components/atoms/SiteLink';
-import { DistributionHistogram } from '@/components/charts/DistributionHistogram';
+import { getMetricChartColor } from '@/components/charts/ChartPalette';
+import { GroupedStripPlot } from '@/components/charts/GroupedStripPlot';
 import { MapTableSplit } from '@/components/charts/MapTableSplit';
 import { ArticleShell, Breadcrumbs, PageShell } from '@/components/layout';
 import { DataSourceList } from '@/components/molecules/DataSourceList';
@@ -212,6 +216,14 @@ export default async function MunicipalityRankingPage({
         })
       : hrefFor('area', { areaCode: prefecture.prefCode }),
   }));
+  // 都道府県別の分布: 県名は文字だけにする (同じ 47 県のリンクは右レールのチップが持つ。本文にも置くと重複リンクの割合が 0.05 → 0.23 になった)
+  const stripGroups = buildPrefectureStripGroups(snapshot.values, prefectures, getSpecialWardCodes()).map((group) => ({
+    key: group.prefectureCode,
+    label: group.prefectureName,
+    values: group.values,
+    median: group.median,
+  }));
+  const stripScale = resolveStripScale(snapshot.values.map((row) => row.value));
   const rail = (
     <>
       <RelatedContentNavigation
@@ -396,16 +408,20 @@ export default async function MunicipalityRankingPage({
         </section>
       )}
 
-      {distribution && (
-        <section aria-label="全国分布" className="mt-5">
-          <SectionHeader title="全国分布" hideRule className="mb-0" />
+      {stripScale && stripGroups.length > 0 && (
+        <section aria-label="都道府県別の分布" className="mt-5">
+          {/* 県ごとに県内の市区町村を点で並べる (2026-11-27 オーナー決定。全国分布のヒストグラムから替えた。人口のように偏る指標は左端の 1 本だけが高く、伝わることが少なかった) */}
+          <SectionHeader title="都道府県別の分布" hideRule className="mb-0" />
+          <p className="mt-1 text-xs text-muted-foreground">細い印は県内の市区町村、太い線は県内の中央値。県内の中央値が大きい順に並べています。</p>
           <div className="mt-2 border border-border p-2">
-            <DistributionHistogram
-              bins={distribution.bins}
-              median={distribution.median}
-              precision={distribution.precision}
-              unit={snapshot.unit}
-              ariaLabel={`${municipalityRankingDisplayTitle(item)}の全国分布ヒストグラム`}
+            <GroupedStripPlot
+              groups={stripGroups}
+              scale={stripScale}
+              formatTick={stripScale.kind === 'log' ? formatPowerOfTenTick : (value) => value.toLocaleString('ja-JP', { maximumFractionDigits: 2 })}
+              unit={displayUnit}
+              formatValue={(value) => { const stat = formatStat(value); return `${stat.value}${stat.unit}`; }}
+              color={getMetricChartColor(item.visualization)}
+              ariaLabel={`${municipalityRankingDisplayTitle(item)}の都道府県別の分布`}
             />
           </div>
         </section>

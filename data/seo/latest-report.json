@@ -1,13 +1,31 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-25",
+  "date": "2026-11-28",
   "period": {
-    "periodStart": "2026-11-16",
-    "periodEnd": "2026-11-22",
+    "periodStart": "2026-11-19",
+    "periodEnd": "2026-11-25",
     "windowDays": 7
   },
-  "inputHash": "47280e55c870487490de94dabb15f36250c125a73342742d2bce89cb9753b628",
+  "inputHash": "fb9a2636491c4238b6fc148599993ee699b6467c0faaa9d241c90863ab2355c4",
   "movements": [
+    {
+      "keyword": "実質可処分所得",
+      "targetPath": "/ranking/real-disposable-income",
+      "before": 124,
+      "after": 25,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 99
+    },
+    {
+      "keyword": "高校の数",
+      "targetPath": "/municipalities/ranking/high-school-count",
+      "before": 107,
+      "after": 11,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 96
+    },
     {
       "keyword": "長崎県 平均年収",
       "targetPath": "/areas/42000/labor-wages",
@@ -27,40 +45,22 @@
       "change": 84
     },
     {
-      "keyword": "可処分所得",
-      "targetPath": "/ranking/real-disposable-income",
+      "keyword": "下水道普及率",
+      "targetPath": "/ranking/sewerage-coverage-rate",
       "before": 3,
-      "after": 85,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -82
-    },
-    {
-      "keyword": "警察官人口",
-      "targetPath": "/ranking/police-officer-count",
-      "before": 4,
-      "after": 86,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -82
-    },
-    {
-      "keyword": "豊田 市 人口",
-      "targetPath": "/areas/23000/cities/23211",
-      "before": 100,
-      "after": 20,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 80
-    },
-    {
-      "keyword": "佐賀県 平均年収",
-      "targetPath": "/areas/41000/labor-wages",
-      "before": 85,
-      "after": 5.5,
+      "after": 79,
       "beforeImpressions": 2,
-      "impressions": 6,
-      "change": 79.5
+      "impressions": 1,
+      "change": -76
+    },
+    {
+      "keyword": "下水道 普及率",
+      "targetPath": "/ranking/sewerage-coverage-rate",
+      "before": 3,
+      "after": 78,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -75
     },
     {
       "keyword": "鹿児島 人口推移",
@@ -72,43 +72,43 @@
       "change": 75
     },
     {
-      "keyword": "下水道の普及率",
-      "targetPath": "/ranking/sewerage-coverage-rate",
-      "before": 11,
-      "after": 82,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -71
-    },
-    {
-      "keyword": "埼玉県 最低賃金",
-      "targetPath": "/areas/11000/labor-wages",
-      "before": 6,
-      "after": 75,
+      "keyword": "宮崎 最低賃金",
+      "targetPath": "/areas/45000/labor-wages",
+      "before": 75,
+      "after": 10,
       "beforeImpressions": 1,
       "impressions": 1,
-      "change": -69
+      "change": 65
     },
     {
-      "keyword": "水戸 人流",
-      "targetPath": "/areas/08000/cities/08201",
-      "before": 8,
-      "after": 77,
-      "beforeImpressions": 2,
+      "keyword": "徳島県 平均年収",
+      "targetPath": "/areas/36000/labor-wages",
+      "before": 74,
+      "after": 9,
+      "beforeImpressions": 1,
       "impressions": 1,
-      "change": -69
+      "change": 65
+    },
+    {
+      "keyword": "空き家 割合",
+      "targetPath": "/municipalities/ranking/vacant-housing-ratio",
+      "before": 69,
+      "after": 4.75,
+      "beforeImpressions": 1,
+      "impressions": 4,
+      "change": 64.25
     }
   ],
   "verdicts": [],
   "selected": {
-    "keyword": "餃子消費量ランキング",
-    "targetPath": "/blog/frozen-gyoza-spending-prefecture-gap",
-    "rank": 4.184782608695652,
-    "impressions": 92,
-    "clicks": 0,
+    "keyword": "豚肉購入量 ランキング",
+    "targetPath": "/ranking/pork-consumption-quantity",
+    "rank": 3.44375,
+    "impressions": 320,
+    "clicks": 1,
     "group": 5,
     "previousMethod": null,
-    "editableFile": null
+    "editableFile": "data/metrics/pork-consumption-quantity.ts"
   },
   "observing": [],
   "pendingPublication": [

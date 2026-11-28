@@ -1,35 +1,34 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W46",
-  "asOf": "2026-11-15",
-  "generatedAt": "2026-11-20T23:45:39.766Z",
+  "week": "2026-W47",
+  "asOf": "2026-11-22",
+  "generatedAt": "2026-11-28T01:01:22.528Z",
   "sources": {
     "ga4": {
       "status": "ok",
-      "periodStart": "2026-10-18",
-      "periodEnd": "2026-11-14",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-11-21",
       "detail": "transitions=ok landing=ok events=ok pages-clean=ok"
     },
     "customDimensions": {
-      "status": "ok",
-      "detail": "登録済み 36 件"
+      "status": "unreadable",
+      "detail": "customDimensions を読めない"
     },
     "ga4Settings": {
-      "status": "ok",
-      "detail": "keyEvents=affiliate_click|contact_click|cta_click|file_download|product_click|purchase bigQueryLinks=1 warnings=none",
-      "warnings": []
+      "status": "missing",
+      "detail": "audit に settings が無い"
     },
     "improvements": {
       "status": "ok",
-      "detail": "active 9 件"
+      "detail": "active 11 件"
     },
     "effectVerdicts": {
       "status": "ok",
-      "detail": "verdicts-2026-W46.json"
+      "detail": "verdicts-2026-W47.json"
     }
   },
   "kpiTree": {
-    "compareWeek": "2026-W42",
+    "compareWeek": "2026-W43",
     "nodes": [
       {
         "id": "weekly-revenue",
@@ -43,7 +42,7 @@
         "status": "partial",
         "value": null,
         "previous": null,
-        "note": "判定できた分 ¥858。note 判定不能 (最終観測 2026-10-17 が週より前) / Kindle 判定不能 (日別の観測 1/7 日)",
+        "note": "判定できた分 ¥784。note 判定不能 (最終観測 2026-10-17 が週より前) / Kindle 判定不能 (日別の観測 0/7 日)",
         "improvements": []
       },
       {
@@ -58,10 +57,12 @@
         "status": "unmeasurable",
         "value": null,
         "previous": null,
-        "note": "KDP 判定不能（日別の観測 1/7 日） / note 判定不能（最終観測 2026-10-17 が週より前）",
+        "note": "KDP 判定不能（日別の観測 0/7 日） / note 判定不能（最終観測 2026-10-17 が週より前）",
         "improvements": [
           "NOTE-FISCAL-PEER-SALES-01",
-          "MUNI-PRODUCT-CARD-EFFECT-01"
+          "MUNI-PRODUCT-CARD-EFFECT-01",
+          "PRODUCT-REFERRAL-OBS-01",
+          "KDP-LISTING-COPY-OBS-01"
         ]
       },
       {
@@ -79,13 +80,13 @@
         },
         "focus": true,
         "status": "ok",
-        "value": "19931",
-        "previous": "13207",
+        "value": "19196",
+        "previous": "14733",
         "improvements": [
           "MUNI-PREF-RANKING-OBS-01",
-          "MUNI-PAGE-SEO-01",
           "OPENDATA-RANKING-EFFECT-01",
-          "OPENDATA-NDB-EFFECT-01"
+          "OPENDATA-NDB-EFFECT-01",
+          "KAKEI-REFLECT-EFFECT-01"
         ]
       },
       {
@@ -103,8 +104,8 @@
         },
         "focus": true,
         "status": "ok",
-        "value": "60944",
-        "previous": "44550",
+        "value": "60437",
+        "previous": "48338",
         "improvements": []
       },
       {
@@ -117,9 +118,9 @@
         "source": "data/adsense/history.csv + data/ga4/history-finalized7d.csv",
         "focus": false,
         "status": "ok",
-        "value": "30.2",
+        "value": "40",
         "previous": null,
-        "note": "28 日の AdSense 収益 ¥1,842",
+        "note": "28 日の AdSense 収益 ¥2,416",
         "improvements": [
           "ADSENSE-PLACEMENT-01"
         ]
@@ -134,8 +135,8 @@
         "source": "GA4 internal-transitions.csv (referrer 集計)",
         "focus": true,
         "status": "ok",
-        "value": "8.4%",
-        "previous": "9.3%",
+        "value": "7.8%",
+        "previous": "9.7%",
         "improvements": [
           "RELATED-ARTICLES-EFFECT-01"
         ]
@@ -150,9 +151,9 @@
         "source": "GA4 ga4-affiliate-history.csv + ASP 確定成果",
         "focus": false,
         "status": "partial",
-        "value": "GA4 7日 imp 4676・click 3",
+        "value": "GA4 7日 imp 46・click 0",
         "previous": null,
-        "note": "最終観測 2026-11-14。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する",
+        "note": "最終観測 2026-11-21。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する",
         "improvements": []
       },
       {
@@ -165,8 +166,8 @@
         "source": "GA4 landing-context.csv",
         "focus": true,
         "status": "ok",
-        "value": "5872",
-        "previous": "4250",
+        "value": "5229",
+        "previous": "4555",
         "improvements": []
       },
       {
@@ -179,9 +180,9 @@
         "source": "data/ranking/integrity-audit.json",
         "focus": false,
         "status": "ok",
-        "value": "100.0% (2595/2596)",
-        "previous": "99.2%",
-        "note": "監査 2026-11-14・不合格 recipe.drift 1",
+        "value": "100.0% (2623/2624)",
+        "previous": "100.0%",
+        "note": "監査 2026-11-28・不合格 recipe.drift 1",
         "improvements": []
       },
       {
@@ -194,7 +195,7 @@
         "source": "data/{psi,cloudflare}/history.csv",
         "focus": false,
         "status": "ok",
-        "value": "PSI モバイル中央値 64・Workers error 0.1%",
+        "value": "PSI モバイル中央値 73・Workers error 0.2%",
         "previous": null,
         "improvements": []
       },
@@ -208,7 +209,7 @@
         "source": "data/cloudflare/ + claude-usage/history.csv",
         "focus": false,
         "status": "ok",
-        "value": "閾値違反 27 件・R2 保存 52.478 GB",
+        "value": "閾値違反 20 件・R2 保存 65.693 GB",
         "previous": null,
         "improvements": [
           "CF-CPU-URL-01"
@@ -223,10 +224,10 @@
         "unit": "%",
         "source": "GSC 送信済みページの週次記録 (gsc.coverage-submitted)",
         "focus": false,
-        "status": "missing",
-        "value": null,
+        "status": "ok",
+        "value": "84.6%",
         "previous": null,
-        "note": "coverage-submitted-history.csv に 2026-W46 以前の行が無い",
+        "note": "2026-W47・登録済み 7,967・未登録 1,448",
         "improvements": []
       },
       {
@@ -239,14 +240,14 @@
         "source": "data/measurement-cycle/latest.json",
         "focus": false,
         "status": "degraded",
-        "value": "10/11",
+        "value": "8/11",
         "previous": null,
-        "note": "欠測・古い・認証切れ: kdp(auth_required)",
+        "note": "欠測・古い・認証切れ: note(runner_failed), gsc(runner_failed), kdp(runner_failed)",
         "improvements": []
       }
     ],
     "improvements": {
-      "active": 4,
+      "active": 3,
       "maxActive": 5,
       "unlinked": [],
       "noTarget": [
@@ -254,10 +255,12 @@
         "MUNI-PREF-RANKING-OBS-01",
         "RELATED-ARTICLES-EFFECT-01",
         "NOTE-FISCAL-PEER-SALES-01",
-        "MUNI-PAGE-SEO-01",
         "OPENDATA-RANKING-EFFECT-01",
         "OPENDATA-NDB-EFFECT-01",
-        "MUNI-PRODUCT-CARD-EFFECT-01"
+        "KAKEI-REFLECT-EFFECT-01",
+        "MUNI-PRODUCT-CARD-EFFECT-01",
+        "PRODUCT-REFERRAL-OBS-01",
+        "KDP-LISTING-COPY-OBS-01"
       ]
     },
     "focusWithoutImprovements": [
@@ -266,8 +269,14 @@
     ]
   },
   "engine": {
-    "verdictsWeek": "2026-W46",
+    "verdictsWeek": "2026-W47",
     "byDomain": {
+      "gsc-blog-wave": {
+        "subjects": 1,
+        "byLabel": {
+          "effect/pending": 1
+        }
+      },
       "adsense": {
         "subjects": 1,
         "byLabel": {
@@ -276,99 +285,79 @@
       }
     },
     "gsc": {
-      "active": 3,
+      "active": 0,
       "judgeable": 0,
-      "missing": [
-        {
-          "id": "MUNI-PAGE-SEO-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "OPENDATA-RANKING-EFFECT-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "OPENDATA-NDB-EFFECT-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        }
-      ],
+      "missing": [],
       "outOfScope": [
-        "MUNI-PREF-RANKING-OBS-01"
+        "MUNI-PREF-RANKING-OBS-01",
+        "OPENDATA-RANKING-EFFECT-01",
+        "OPENDATA-NDB-EFFECT-01",
+        "KAKEI-REFLECT-EFFECT-01"
       ]
     }
   },
   "operations": {
     "psi": {
       "status": "ok",
-      "latestDate": "2026-11-13",
+      "latestDate": "2026-11-20",
       "daysInWindow": 1,
-      "mobileMedianScore": 64,
-      "urlsWithErrors": 23,
+      "mobileMedianScore": 73,
+      "urlsWithErrors": 21,
       "urlsMeasured": 38,
       "measurementFailures": 0,
       "worstMobile": [
         {
           "url": "https://stats47.jp/areas/01000",
-          "score": 42,
-          "lcpMs": 3603
+          "score": 50,
+          "lcpMs": 3533
         },
         {
           "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
-          "score": 47,
-          "lcpMs": 4276
+          "score": 57,
+          "lcpMs": 4052
         },
         {
-          "url": "https://stats47.jp/ranking/total-population",
-          "score": 52,
-          "lcpMs": 4051
+          "url": "https://stats47.jp/",
+          "score": 60,
+          "lcpMs": 10489
         }
       ]
     },
     "cloudflare": {
       "status": "ok",
-      "latestDate": "2026-11-14",
+      "latestDate": "2026-11-21",
       "daysInWindow": 6,
-      "workersRequests": 599301,
-      "workersErrorRate": 0.0006,
-      "r2ClassAOps": 72696,
-      "r2ClassBOps": 6481057,
-      "r2EgressMb": 1111900,
-      "r2StorageGb": 52.478,
+      "workersRequests": 595776,
+      "workersErrorRate": 0.0016,
+      "r2ClassAOps": 29891,
+      "r2ClassBOps": 5632494,
+      "r2EgressMb": 884558,
+      "r2StorageGb": 65.693,
+      "workersCpuMsPerDay": 36822945,
+      "workersCpuMonthlyUsd": 26.49,
+      "topRoutes": null,
       "violationsBySeverity": {
-        "warning": 8,
         "info": 18,
-        "critical": 1
+        "warning": 2
       },
       "violationTitles": [
-        "Workers CPU 時間が 4,500 万 ms/日を超過",
         "R2 account storage > 18GB",
         "stats47 bucket storage > 12.5GB",
         "R2 egress > 5GB/日",
-        "R2 Class B ops > 1M/日",
-        "Workers CPU 時間が 8,000 万 ms/日を超過"
+        "Workers CPU 時間が 4,500 万 ms/日を超過",
+        "R2 Class B ops > 1M/日"
       ]
     },
     "sns": {
       "status": "ok",
-      "latestDate": "2026-11-13",
+      "latestDate": "2026-11-20",
       "platforms": {
         "instagram": {
           "posts": 245,
           "impressions": 0,
-          "reach": 23249,
-          "views": 27426,
-          "engagements": 104
+          "reach": 23289,
+          "views": 27468,
+          "engagements": 106
         }
       },
       "topPosts": [
@@ -402,196 +391,184 @@
   },
   "journey": {
     "blogToRanking": {
-      "pageViews": 1020,
-      "fromPageViews": 12131,
-      "rate": 0.0841
+      "pageViews": 876,
+      "fromPageViews": 11272,
+      "rate": 0.0777
     },
     "themesToRanking": {
-      "pageViews": 242,
-      "fromPageViews": 1357,
-      "rate": 0.1783
+      "pageViews": 239,
+      "fromPageViews": 1438,
+      "rate": 0.1662
     },
     "themesToBlog": {
-      "pageViews": 30,
-      "fromPageViews": 1357,
-      "rate": 0.0221
+      "pageViews": 38,
+      "fromPageViews": 1438,
+      "rate": 0.0264
     },
     "topCrossSection": [
       {
-        "from": "blog",
+        "from": "search",
         "to": "ranking",
-        "pageViews": 1020
+        "pageViews": 923
       },
       {
         "from": "ranking",
         "to": "category",
-        "pageViews": 908
+        "pageViews": 879
       },
       {
-        "from": "category",
+        "from": "blog",
         "to": "ranking",
-        "pageViews": 768
-      },
-      {
-        "from": "search",
-        "to": "ranking",
-        "pageViews": 745
-      },
-      {
-        "from": "ranking",
-        "to": "blog",
-        "pageViews": 714
-      },
-      {
-        "from": "ranking",
-        "to": "areas",
-        "pageViews": 667
+        "pageViews": 876
       },
       {
         "from": "ranking",
         "to": "search",
-        "pageViews": 642
+        "pageViews": 824
+      },
+      {
+        "from": "category",
+        "to": "ranking",
+        "pageViews": 717
+      },
+      {
+        "from": "ranking",
+        "to": "areas",
+        "pageViews": 703
       },
       {
         "from": "areas",
         "to": "ranking",
-        "pageViews": 620
+        "pageViews": 626
+      },
+      {
+        "from": "ranking",
+        "to": "blog",
+        "pageViews": 616
       }
     ]
   },
   "navCoverage": {
-    "internalTransitions": 24414,
-    "navClicks": 20945,
-    "labeledClicks": 10807,
-    "coverage": 0.4427,
-    "unlabeledShare": 0.484,
+    "internalTransitions": 24233,
+    "navClicks": 20185,
+    "labeledClicks": 11597,
+    "coverage": 0.4786,
+    "unlabeledShare": 0.4255,
     "topUnlabeled": [
       {
         "label": "ranking",
-        "clicks": 2402
+        "clicks": 2292
       },
       {
         "label": "municipalities",
-        "clicks": 2358
+        "clicks": 1993
       },
       {
         "label": "geo",
-        "clicks": 2321
-      },
-      {
-        "label": "api",
-        "clicks": 719
+        "clicks": 1621
       },
       {
         "label": "areas",
-        "clicks": 615
-      },
-      {
-        "label": "home",
-        "clicks": 461
+        "clicks": 612
       },
       {
         "label": "themes",
-        "clicks": 445
+        "clicks": 519
+      },
+      {
+        "label": "home",
+        "clicks": 457
+      },
+      {
+        "label": "api",
+        "clicks": 437
       },
       {
         "label": "blog",
-        "clicks": 300
+        "clicks": 287
       }
     ]
   },
   "workContext": {
     "baseline": {
-      "sessions": 20837,
-      "desktopShare": 0.537,
-      "workdayHoursShare": 0.501
+      "sessions": 19802,
+      "desktopShare": 0.545,
+      "workdayHoursShare": 0.505
     },
-    "qualifyingSessions": 5872,
+    "qualifyingSessions": 5229,
     "top": [
       {
-        "landingPage": "/blog/automotive-industry-transformation-map",
-        "sessions": 501,
-        "desktopShare": 0.818,
-        "workdayHoursShare": 0.73,
-        "avgEngagementSec": 59.6
+        "landingPage": "/ranking/habitable-area-ratio",
+        "sessions": 365,
+        "desktopShare": 0.838,
+        "workdayHoursShare": 0.971,
+        "avgEngagementSec": 45.6
       },
       {
         "landingPage": "/",
-        "sessions": 650,
-        "desktopShare": 0.8,
-        "workdayHoursShare": 0.562,
-        "avgEngagementSec": 128.7
+        "sessions": 603,
+        "desktopShare": 0.808,
+        "workdayHoursShare": 0.534,
+        "avgEngagementSec": 136.5
       },
       {
-        "landingPage": "/ranking/habitable-area-ratio",
-        "sessions": 251,
-        "desktopShare": 0.833,
-        "workdayHoursShare": 0.967,
-        "avgEngagementSec": 48.7
-      },
-      {
-        "landingPage": "/geo/datasets/A52",
-        "sessions": 165,
-        "desktopShare": 0.988,
-        "workdayHoursShare": 0.786,
-        "avgEngagementSec": 88.5
-      },
-      {
-        "landingPage": "/ranking/specific-health-checkup-participation-rate",
-        "sessions": 206,
-        "desktopShare": 0.767,
-        "workdayHoursShare": 0.708,
-        "avgEngagementSec": 46.3
+        "landingPage": "/blog/automotive-industry-transformation-map",
+        "sessions": 389,
+        "desktopShare": 0.812,
+        "workdayHoursShare": 0.72,
+        "avgEngagementSec": 59.5
       },
       {
         "landingPage": "/ranking/inbound-visitors-by-destination",
-        "sessions": 339,
-        "desktopShare": 0.602,
-        "workdayHoursShare": 0.54,
-        "avgEngagementSec": 50.3
+        "sessions": 371,
+        "desktopShare": 0.662,
+        "workdayHoursShare": 0.599,
+        "avgEngagementSec": 58.5
+      },
+      {
+        "landingPage": "/geo/datasets/A52",
+        "sessions": 164,
+        "desktopShare": 0.994,
+        "workdayHoursShare": 0.794,
+        "avgEngagementSec": 73.7
+      },
+      {
+        "landingPage": "/ranking/specific-health-checkup-participation-rate",
+        "sessions": 184,
+        "desktopShare": 0.745,
+        "workdayHoursShare": 0.701,
+        "avgEngagementSec": 43.5
       },
       {
         "landingPage": "/blog/rice-harvest-volume-prefecture-gap",
-        "sessions": 152,
-        "desktopShare": 0.803,
-        "workdayHoursShare": 0.696,
-        "avgEngagementSec": 81.1
+        "sessions": 135,
+        "desktopShare": 0.815,
+        "workdayHoursShare": 0.694,
+        "avgEngagementSec": 68.8
       },
       {
-        "landingPage": "/ranking/annual-sunshine-duration",
-        "sessions": 210,
-        "desktopShare": 0.586,
-        "workdayHoursShare": 0.534,
-        "avgEngagementSec": 69.9
+        "landingPage": "/ranking",
+        "sessions": 107,
+        "desktopShare": 0.953,
+        "workdayHoursShare": 0.64,
+        "avgEngagementSec": 177.5
       }
     ]
   },
-  "dimensionGaps": {
-    "absentParams": 0,
-    "groups": []
-  },
+  "dimensionGaps": null,
   "adminAudit": {
-    "previousWeek": "2026-W45",
-    "customDimensions": {
-      "added": [],
-      "removed": []
-    },
-    "keyEvents": {
-      "added": [],
-      "removed": []
-    },
-    "problems": []
+    "previousWeek": "2026-W46",
+    "customDimensions": null,
+    "keyEvents": null,
+    "problems": [
+      "property-assert:credentials-missing",
+      "stream-host:missing",
+      "gsc-property:present=null",
+      "custom-dimensions-unreadable:missing"
+    ]
   },
   "improvements": {
-    "active": 9,
-    "overdue": [
-      {
-        "id": "ADSENSE-PLACEMENT-01",
-        "status": "pending",
-        "due": "2026-11-14",
-        "metric": "adsense",
-        "owner": "claude"
-      }
-    ]
+    "active": 11,
+    "overdue": []
   }
 }

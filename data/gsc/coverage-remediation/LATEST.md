@@ -1,7 +1,7 @@
-# GSC カバレッジ是正 — 2026-W47 (2026-11-21)
+# GSC カバレッジ是正 — 2026-W47 (2026-11-28)
 
 > SSOT: `data/gsc/coverage-remediation/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
-> 入力観測日: 2026-11-21 / 入力週齢: 0 週
+> 入力観測日: 2026-11-21 / 入力週齢: 1 週
 
 ## GSC カテゴリ別総件数 (UI export)
 
@@ -24,17 +24,16 @@
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **2914** / 要対応 pending: **1694**
+- 追跡 URL: **2914** / 要対応 pending: **1609**
 - URL Inspection で登録を確認して done にした URL: **0** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
 
 | action | 分類総数 | pending | 意味 |
 |---|---:|---:|---|
-| observe-after-fix | 735 | 735 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
-| sitemap-gap | 957 | 957 | 現在200で未登録なのに sitemap に無い→sitemap へ載せるか noindex にするかを決める |
-| recheck | 2 | 2 | timeout=再測定 |
-| none | 1220 | 0 | 意図的/解消済=放置 |
+| observe-after-fix | 682 | 682 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| sitemap-gap | 927 | 927 | 現在200で未登録なのに sitemap に無い→sitemap へ載せるか noindex にするかを決める |
+| none | 1305 | 0 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**735 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**682 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 

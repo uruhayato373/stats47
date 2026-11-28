@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { filterActiveRefreshTargets, isIngestableCityCode, parseBatchArgs } from "../../scripts/page-data-batch";
+import { filterActiveRefreshTargets, hasNothingToPublish, isIngestableCityCode, parseBatchArgs } from "../../scripts/page-data-batch";
 import type { MetricConfig } from "../types";
 
 const active = { key: "active", isActive: true } as MetricConfig;
@@ -17,6 +17,22 @@ describe("page-data-batch の全量更新対象", () => {
 
   it("--metric 明示時は退役済み metric も個別診断できる", () => {
     expect(filterActiveRefreshTargets([inactive], true).map((c) => c.key)).toEqual(["inactive"]);
+  });
+});
+
+describe("page-data-batch の名指し実行で上げるものが無いときは失敗にする", () => {
+  const named = { isExplicitMetric: true, dryRun: false };
+  it("名指しした指標をすべて飛ばしたら失敗にする (港の 9 指標が成功扱いで次の段で落ちた)", () => {
+    expect(hasNothingToPublish([{ status: "skip" }, { status: "skip" }], named)).toBe(true);
+  });
+  it("1 件でも取り込むか、年名を付け直して上げるものがあれば失敗にしない", () => {
+    expect(hasNothingToPublish([{ status: "skip" }, { status: "ok" }], named)).toBe(false);
+    expect(hasNothingToPublish([{ status: "skip", relabeled: 3 }], named)).toBe(false);
+  });
+  it("全量実行・dry-run・対象 0 件は判定しない", () => {
+    expect(hasNothingToPublish([{ status: "skip" }], { isExplicitMetric: false, dryRun: false })).toBe(false);
+    expect(hasNothingToPublish([{ status: "skip" }], { isExplicitMetric: true, dryRun: true })).toBe(false);
+    expect(hasNothingToPublish([], named)).toBe(false);
   });
 });
 

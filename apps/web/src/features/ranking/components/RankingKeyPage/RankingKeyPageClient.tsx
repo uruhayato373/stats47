@@ -21,7 +21,6 @@ import { RANKING_PAGE_TABLE_SIDE } from "@/lib/google-adsense";
 
 import { classifyRankingSubtitle } from "../../utils/classify-subtitle";
 import { resolveRankingPresentation } from '../../utils/resolve-ranking-presentation';
-import { AreaTypeToggle } from "../AreaTypeToggle";
 import {
     RankingHeaderPanel,
     RankingHeaderControls,
@@ -51,10 +50,6 @@ interface RankingKeyPageClientProps {
     areaType?: AreaType;
     selectedYear?: string;
     sections?: RankingPageSections;
-    /** 都道府県コード（市区町村ランキング時のフィルタ用） */
-    parentAreaCode?: string;
-    /** 市区町村ランキング定義（存在する場合にトグルを表示） */
-    cityRankingItem?: RankingItem;
     /** グループメンバー（normalization_basis トグル用） */
     /** ArticleShell の breadcrumb slot に描画するパンくず */
     breadcrumb?: React.ReactNode;
@@ -73,8 +68,6 @@ export function RankingKeyPageClient({
     areaType = "prefecture",
     selectedYear,
     sections = {},
-    parentAreaCode,
-    cityRankingItem,
     breadcrumb,
     municipalityLink,
     nowYear,
@@ -83,7 +76,6 @@ export function RankingKeyPageClient({
         activeRankingItem,
         currentAreaType,
         currentYear,
-        handleAreaTypeChange,
         handleNormalizationChange,
         handleYearChange,
         isPending,
@@ -97,8 +89,6 @@ export function RankingKeyPageClient({
         initialNationalAverageSeries,
         areaType,
         selectedYear,
-        parentAreaCode,
-        cityRankingItem,
     });
     // NOTE: useBreakpoint removed for layout-gating usages — replaced with CSS-only
     // responsive classes to eliminate post-hydration CLS (desktop 0.264).
@@ -107,13 +97,14 @@ export function RankingKeyPageClient({
     const presentedItem = useMemo(() => resolveRankingPresentation(activeRankingItem, normalizationType ?? null), [activeRankingItem, normalizationType]);
     const displayInfo = buildRankingDisplayInfo(presentedItem);
     // 表示単位 (万円・億円) はここで 1 回だけ決め、上位と下位・推移・地図・表・県の詳細へ同じ値を渡す。
-    // 人口あたり・面積あたりの値は選んだ計算方法の単位で配信されるので換算しない。市区町村は値の幅が広く、
-    // 都道府県向けに書いた表示単位では小さい町村が 0 に丸まるので、元の単位のまま出す。
+    // 人口あたり・面積あたりの値は、選んだ計算方法の表示 (換算なし・選択肢の小数の桁) を presentedItem が持つのでそれを使う
+    // (2026-11-27。それまでは null を渡し、選択肢の桁 1 の指標でも表と上位・下位が 2 桁で出ていた)。
+    // 市区町村は値の幅が広く、都道府県向けに書いた表示単位では小さい町村が 0 に丸まるので、元の単位のまま出す。
     const valueDisplay = useMemo(
-        () => normalizationType || currentAreaType !== "prefecture"
+        () => currentAreaType !== "prefecture"
             ? null
-            : resolveRankingValueDisplay(activeRankingItem, rankingValues.map((v) => v.value)),
-        [normalizationType, currentAreaType, activeRankingItem, rankingValues],
+            : resolveRankingValueDisplay(presentedItem, rankingValues.map((v) => v.value)),
+        [currentAreaType, presentedItem, rankingValues],
     );
 
     const shareText = useMemo(() => {
@@ -130,13 +121,6 @@ export function RankingKeyPageClient({
                     times={activeRankingItem.availableYears}
                     value={currentYear}
                     onChange={handleYearChange}
-                />
-            )}
-            {cityRankingItem && (
-                <AreaTypeToggle
-                    value={currentAreaType}
-                    onChange={handleAreaTypeChange}
-                    disabled={isPending}
                 />
             )}
         </>

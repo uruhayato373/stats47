@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-20T23:42:55.152Z",
+ "generatedAt": "2026-11-28T00:58:37.827Z",
  "doctrine": "計測ゲート付き需要ファースト。公開→GSC実測→流入が付いたカテゴリのみ深掘り (thin-content回避)。",
  "summary": {
   "totalCandidates": 3786,
@@ -5201,21 +5201,6 @@
    "priority": 5
   },
   {
-   "id": "0000010112|L3110",
-   "statsDataId": "0000010112",
-   "cdCat01": "L3110",
-   "title": "実収入（二人以上の世帯のうち勤労者世帯）（家計調査結果）",
-   "subtitleHint": "家計調査結果",
-   "category": "economy",
-   "unit": "円",
-   "key": null,
-   "status": "candidate",
-   "score": 5,
-   "fine": false,
-   "gsc": null,
-   "priority": 5
-  },
-  {
    "id": "0000010112|L3111",
    "statsDataId": "0000010112",
    "cdCat01": "L3111",
@@ -7457,6 +7442,21 @@
    "title": "事業・内職収入（年間収入）",
    "subtitleHint": "年間収入",
    "category": "economy",
+   "unit": "千円",
+   "key": null,
+   "status": "candidate",
+   "score": 5,
+   "fine": false,
+   "gsc": null,
+   "priority": 5
+  },
+  {
+   "id": "0000010212|#L01201",
+   "statsDataId": "0000010212",
+   "cdCat01": "#L01201",
+   "title": "#L01201_実収入（二人以上の世帯のうち勤労者世帯）（1世帯当たり1か月間）",
+   "subtitleHint": "1世帯当たり1か月間",
+   "category": "population",
    "unit": "千円",
    "key": null,
    "status": "candidate",

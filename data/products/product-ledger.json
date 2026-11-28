@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-11-21",
+  "asOf": "2026-11-28",
   "notePeriod": {
     "start": "2026-10-24",
     "end": "2026-11-20"
@@ -883,7 +883,7 @@
     {
       "channel": "note",
       "key": "d-kakei-category-dataset",
-      "title": "教育費は8.7倍違う ── 47都道府県×十大費目の家計データセット（2007-2024・8,460行）",
+      "title": "教育費の県差は5年平均で4.2倍 ── 47都道府県×十大費目の家計データセット（2007-2024・8,460行）",
       "line": "note-howto",
       "status": "published",
       "priceYen": 2980,

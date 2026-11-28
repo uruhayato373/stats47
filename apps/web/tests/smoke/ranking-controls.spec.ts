@@ -1,8 +1,8 @@
 import { expect, test } from './fixtures';
 
 for (const target of [
-  { path: '/ranking/total-population', title: '都道府県別 総人口ランキング', municipality: true, calculation: true },
-  { path: '/ranking/annual-sunshine-duration', title: '都道府県別 年間日照時間ランキング', municipality: false, calculation: false },
+  { path: '/ranking/total-population', title: '総人口ランキング', municipality: true, calculation: true },
+  { path: '/ranking/annual-sunshine-duration', title: '年間日照時間ランキング', municipality: false, calculation: false },
 ]) {
   test(`ランキングの操作と市区町村への導線 ${target.path}`, async ({ page }) => {
     test.setTimeout(180_000);
@@ -25,11 +25,17 @@ for (const target of [
     await expect(chart.getByText(/^最終更新/)).toHaveCount(0);
     await expect(page.getByText('計算方法を切替', { exact: true })).toHaveCount(0);
     await expect(page.getByText('この指標を市区町村で見る', { exact: true })).toHaveCount(0);
-    const link = page.getByRole('link', { name: '市区町村別を見る', exact: true });
-    await expect(link).toHaveCount(target.municipality ? 1 : 0);
+    // 市区町村への導線は、枠の見出しの右の地域の単位の切り替え (都道府県と市区町村のページで共用。2026-11-26 オーナー決定)。
+    // 題は両方のページで同じ「◯◯ランキング」で、同じ指標の市区町村ランキングが無い指標では切り替えを出さない
+    await expect(page.getByRole('link', { name: '市区町村別を見る', exact: true })).toHaveCount(0);
+    const unitSwitch = chart.getByRole('navigation', { name: '統計の地域単位' });
+    await expect(unitSwitch).toHaveCount(target.municipality ? 1 : 0);
+    const link = unitSwitch.getByRole('link', { name: '市区町村', exact: true });
     if (target.municipality) {
-      await expect(chart.getByRole('link', { name: '市区町村別を見る' })).toBeVisible();
+      await expect(link).toBeVisible();
       await expect(link).toHaveAttribute('href', /\/municipalities\/ranking\//);
+      await expect(unitSwitch.getByRole('link', { name: '47都道府県', exact: true })).toHaveAttribute('aria-current', 'page');
+      await expect(unitSwitch.getByRole('link', { name: '日本', exact: true })).toHaveCount(0);
     }
 
     // 操作の出し分け、左メニュー、右レールの境界前後を走査する。
@@ -42,11 +48,8 @@ for (const target of [
         expect(headingBox.x).toBeGreaterThanOrEqual(0);
         expect(headingBox.x + headingBox.width).toBeLessThanOrEqual(width);
         expect(dateBox.x + dateBox.width).toBeLessThanOrEqual(width);
-        if (width < 640) {
-          expect(dateBox.y).toBeGreaterThanOrEqual(headingBox.y + headingBox.height);
-        } else {
-          expect(dateBox.x).toBeGreaterThanOrEqual(headingBox.x + headingBox.width);
-        }
+        // 最終更新は、どの幅でも題の下の「最新 年・最終更新」の行に出す (2026-11-26 オーナー決定。以前は広い幅で題の右にあった)
+        expect(dateBox.y).toBeGreaterThanOrEqual(headingBox.y + headingBox.height);
         const sourceLayout = await sources.evaluate(el => {
           const style = getComputedStyle(el);
           const box = el.getBoundingClientRect();
@@ -62,14 +65,15 @@ for (const target of [
             return {
               fits: box.x >= panel.x && box.right <= panel.right,
               headerWidth: el.closest('[data-slot="card-header"]')!.getBoundingClientRect().width,
-              direction: getComputedStyle(el.parentElement!).flexDirection,
+              // 年の選択と切り替えを並べる行 (切り替えの nav の親)
+              direction: getComputedStyle(el.closest('nav')!.parentElement!).flexDirection,
             };
           });
           expect(layout.fits).toBe(true);
           expect(layout.direction).toBe(layout.headerWidth >= 480 ? 'row' : 'column');
         }
         if (target.calculation) {
-          const toggle = page.getByRole('button', { name: '面積100km²あたり', exact: true });
+          const toggle = page.getByRole('button', { name: '面積100km²当たり', exact: true });
           if (width < 640) {
             await expect(page.getByRole('combobox', { name: '計算方法' })).toBeVisible();
             await expect(toggle).toBeHidden();
@@ -119,10 +123,10 @@ for (const target of [
 
     // 表示だけでなくPC/モバイル双方の計算切替が動くこと。
     if (target.calculation) {
-      const option = page.getByRole('button', { name: '面積100km²あたり', exact: true });
+      const option = page.getByRole('button', { name: '面積100km²当たり', exact: true });
       await option.click();
       await expect(option).toHaveAttribute('aria-pressed', 'true', { timeout: 30_000 });
-      await expect(heading).toHaveText('都道府県別 総人口（面積100km²あたり）ランキング');
+      await expect(heading).toHaveText('総人口（面積100km²当たり）ランキング');
       await page.setViewportSize({ width: 375, height: 1000 });
       await page.getByRole('combobox', { name: '計算方法' }).click();
       await page.getByRole('option', { name: '総数', exact: true }).click();

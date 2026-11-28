@@ -9,7 +9,6 @@ import { isOk } from '@stats47/types';
 import type { AreaType } from '@/features/area';
 
 import {
-  trackAreaTypeChange,
   trackRankingView,
   trackUiInteraction,
   trackYearChange,
@@ -30,8 +29,6 @@ interface UseRankingPageStateParams {
   initialNationalAverageSeries: NationalAveragePoint[];
   areaType: AreaType;
   selectedYear?: string;
-  parentAreaCode?: string;
-  cityRankingItem?: RankingItem;
 }
 
 export function useRankingPageState({
@@ -41,45 +38,37 @@ export function useRankingPageState({
   initialNationalAverageSeries,
   areaType,
   selectedYear,
-  parentAreaCode,
-  cityRankingItem,
 }: UseRankingPageStateParams) {
   const [display, setDisplay] = useState({
     rankingValues: initialRankingValues,
     nationalAverageSeries: initialNationalAverageSeries,
     currentYear: selectedYear ?? '',
     normalizationType: undefined as string | undefined,
-    currentAreaType: areaType,
   });
   const {
     rankingValues,
     nationalAverageSeries,
     currentYear,
     normalizationType,
-    currentAreaType,
   } = display;
   const latestRequest = useRef(0);
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
 
-  const activeRankingItem =
-    currentAreaType === 'city' && cityRankingItem
-      ? cityRankingItem
-      : rankingItem;
+  // 地域の単位はページが決める (都道府県と市区町村は別のページ。切り替えは RankingAreaUnitSwitch のリンク)
+  const currentAreaType = areaType;
+  const activeRankingItem = rankingItem;
 
   /**
    * 計算方法に対応した全国平均系列を解決する。
    * 総数はサーバー seed をそのまま使い再取得しない (系列は年度非依存)。
    * 正規化版スナップショットが無い指標は空配列 = 推移非表示に degrade する。
    */
-  const resolveSeries = async (
-    area: AreaType,
-    norm?: string
-  ): Promise<NationalAveragePoint[]> => {
-    if (!norm) return area === areaType ? initialNationalAverageSeries : [];
+  const resolveSeries = async (norm?: string): Promise<NationalAveragePoint[]> => {
+    if (!norm) return initialNationalAverageSeries;
     const result = await fetchNationalAverageSeriesAction(
       rankingKey,
-      area,
+      areaType,
       norm
     );
     return isOk(result) ? result.data : [];
@@ -90,22 +79,21 @@ export function useRankingPageState({
    * 別々に setState すると「数値=10万人あたり / 線=総数」の中間フレームが出る。
    */
   const applyValuesAndSeries = async (
-    area: AreaType,
     year: string,
     norm: string | undefined,
     { syncSeries }: { syncSeries: boolean }
   ) => {
     const request = ++latestRequest.current;
     const [valuesResult, series] = await Promise.all([
-      fetchRankingValuesAction(rankingKey, area, year, norm, parentAreaCode),
-      syncSeries ? resolveSeries(area, norm) : Promise.resolve(null),
+      fetchRankingValuesAction(rankingKey, areaType, year, norm),
+      syncSeries ? resolveSeries(norm) : Promise.resolve(null),
     ]);
     if (request !== latestRequest.current) return;
     if (!isOk(valuesResult)) {
       window.history.replaceState(
         null,
         '',
-        buildUrl(currentYear, currentAreaType, normalizationType)
+        buildUrl(currentYear, normalizationType)
       );
       return;
     }
@@ -117,15 +105,13 @@ export function useRankingPageState({
       rankingValues: valuesResult.data,
       nationalAverageSeries: series ?? previous.nationalAverageSeries,
       currentYear: shownYear,
-      currentAreaType: area,
       normalizationType: norm,
     }));
   };
 
-  const buildUrl = (year: string, area: AreaType, norm?: string) => {
+  const buildUrl = (year: string, norm?: string) => {
     const params = new URLSearchParams();
     if (year) params.set('year', year);
-    if (area !== 'prefecture') params.set('areaType', area);
     if (norm) params.set('norm', norm);
     const qs = params.toString();
     return qs ? `${pathname}?${qs}` : pathname;
@@ -147,40 +133,12 @@ export function useRankingPageState({
     window.history.replaceState(
       null,
       '',
-      buildUrl(newYear, currentAreaType, normalizationType)
+      buildUrl(newYear, normalizationType)
     );
     startTransition(async () => {
       // 系列は年度非依存なので再取得しない
-      await applyValuesAndSeries(currentAreaType, newYear, normalizationType, {
+      await applyValuesAndSeries(newYear, normalizationType, {
         syncSeries: false,
-      });
-    });
-  };
-
-  const handleAreaTypeChange = (newAreaType: AreaType) => {
-    trackAreaTypeChange({ rankingKey, areaType: newAreaType });
-    trackUiInteraction({ action: 'area_type_change', target: 'chart' });
-
-    const targetItem =
-      newAreaType === 'city' && cityRankingItem ? cityRankingItem : rankingItem;
-    const targetYears = targetItem.availableYears || [];
-    const yearExists = targetYears.some((y) => y.yearCode === currentYear);
-    const newYear = yearExists
-      ? currentYear
-      : targetYears[0]?.yearCode || currentYear;
-
-    const nextNormalization = supportedRankingNormalization(
-      targetItem,
-      normalizationType
-    );
-    window.history.replaceState(
-      null,
-      '',
-      buildUrl(newYear, newAreaType, nextNormalization)
-    );
-    startTransition(async () => {
-      await applyValuesAndSeries(newAreaType, newYear, nextNormalization, {
-        syncSeries: true,
       });
     });
   };
@@ -188,11 +146,8 @@ export function useRankingPageState({
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const urlYear = params.get('year');
-    const urlAreaType = params.get('areaType') as AreaType | null;
-    const targetItem =
-      urlAreaType === 'city' && cityRankingItem ? cityRankingItem : rankingItem;
     const urlNorm = supportedRankingNormalization(
-      targetItem,
+      rankingItem,
       params.get('norm') ?? undefined
     );
     if (params.has('norm') && !urlNorm) {
@@ -205,20 +160,10 @@ export function useRankingPageState({
       );
     }
 
-    const nextArea: AreaType =
-      urlAreaType === 'city' && cityRankingItem ? 'city' : areaType;
-    const nextYear =
-      urlYear ||
-      (nextArea !== areaType
-        ? targetItem.availableYears?.[0]?.yearCode
-        : selectedYear) ||
-      currentYear;
-    if (
-      nextYear &&
-      (nextYear !== currentYear || nextArea !== currentAreaType || urlNorm)
-    ) {
+    const nextYear = urlYear || selectedYear || currentYear;
+    if (nextYear && (nextYear !== currentYear || urlNorm)) {
       startTransition(async () => {
-        await applyValuesAndSeries(nextArea, nextYear, urlNorm, {
+        await applyValuesAndSeries(nextYear, urlNorm, {
           syncSeries: true,
         });
       });
@@ -241,7 +186,7 @@ export function useRankingPageState({
 
     startTransition(async () => {
       if (!currentYear) return;
-      await applyValuesAndSeries(currentAreaType, currentYear, nextType, {
+      await applyValuesAndSeries(currentYear, nextType, {
         syncSeries: true,
       });
     });
@@ -251,7 +196,6 @@ export function useRankingPageState({
     activeRankingItem,
     currentAreaType,
     currentYear,
-    handleAreaTypeChange,
     handleNormalizationChange,
     handleYearChange,
     isPending,
