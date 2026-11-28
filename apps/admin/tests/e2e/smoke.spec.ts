@@ -177,6 +177,10 @@ test.describe("smoke: 管理画面の疎通", () => {
     await expect(page.getByRole("heading", { name: "実行", exact: true })).toHaveCount(0);
     await expect(page.getByText(/^実行:/)).toHaveCount(0);
     await expect(page.getByText("確認が必要", { exact: true }).first()).toBeVisible();
+    // 外部作業のカードが 1 ページ目 (20 件) に来るかは実物の backlog の並びで変わる
+    // (2026-11-28 に週次レビューのカードが前に入り、最初の外部作業のカードが 12 番目から 23 番目へずれて落ちた)。
+    // 表示件数を最大にして、並びに依らず「外部作業あり」が表示に使われることを確かめる
+    await page.getByLabel("表示件数", { exact: true }).selectOption("100");
     await expect(page.getByText("外部作業あり", { exact: true }).first()).toBeVisible();
   });
 });
