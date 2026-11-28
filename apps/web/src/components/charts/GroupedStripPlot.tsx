@@ -12,6 +12,8 @@ export interface StripGroup {
 /** 行の SVG の座標の幅。行は preserveAspectRatio="none" で横に伸ばし、線の太さは non-scaling-stroke で保つ */
 const ROW_WIDTH = 1000;
 const ROW_HEIGHT = 20;
+/** 目盛りがこの数以上あるとき、狭い画面では目盛りの文字を 1 つおきに出す */
+const NARROW_TICK_LABEL_LIMIT = 5;
 
 /**
  * まとまり (都道府県など) ごとに 1 行、中の値を 1 つずつ縦の短い印で並べる帯 (ストリッププロット)。
@@ -50,8 +52,15 @@ export function GroupedStripPlot({
     <>
       <span aria-hidden="true" />
       <span aria-hidden="true" className="relative h-4 text-[11px] text-muted-foreground tabular-nums">
-        {scale.ticks.map((tick) => (
-          <span key={tick} className="absolute top-0 -translate-x-1/2 whitespace-nowrap" style={{ left: `${stripPosition(scale, tick)}%` }}>
+        {scale.ticks.map((tick, index) => (
+          <span
+            key={tick}
+            // 狭い画面 (帯の幅 約 180px) で目盛りが 5 つ以上あると文字がくっつく (390px で「100万」と「1,000万」が接した)。
+            // 文字だけを 1 つおきに出し、目盛りの点線は全部残す
+            className={`absolute top-0 -translate-x-1/2 whitespace-nowrap${scale.ticks.length >= NARROW_TICK_LABEL_LIMIT && index % 2 === 1 ? ' max-sm:hidden' : ''}`}
+            data-tick-thinned={scale.ticks.length >= NARROW_TICK_LABEL_LIMIT && index % 2 === 1 ? '' : undefined}
+            style={{ left: `${stripPosition(scale, tick)}%` }}
+          >
             {formatTick(tick)}
           </span>
         ))}

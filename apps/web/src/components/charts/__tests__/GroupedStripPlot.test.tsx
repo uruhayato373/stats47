@@ -48,4 +48,13 @@ describe('GroupedStripPlot: 県ごとの印の帯', () => {
     const clipped = [-15, ...Array.from({ length: 98 }, (_, index) => index * 0.05), 3.2];
     expect(renderPlot(clipped).container.querySelector('figcaption')?.textContent).toContain('端に寄せて表示');
   });
+
+  it('目盛りが 5 つ以上なら、狭い画面では目盛りの文字を 1 つおきに隠す (100・1万・100万 を残す)', () => {
+    const { container } = renderPlot([168, 3_750_000]);
+    const labels = [...container.querySelectorAll('[data-chart="grouped-strip-plot"] > span:nth-child(2) > span')];
+    expect(labels.map((label) => label.textContent)).toEqual(['100', '1000', '10000', '100000', '1000000', '10000000']);
+    expect(labels.filter((label) => label.hasAttribute('data-tick-thinned')).map((label) => label.textContent)).toEqual(['1000', '100000', '10000000']);
+    // 目盛りが 5 つ未満 (全部同じ値で 1 つ) なら間引かない
+    expect(renderPlot([5, 5]).container.querySelector('[data-tick-thinned]')).toBeNull();
+  });
 });
