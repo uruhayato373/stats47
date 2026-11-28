@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-28T00:59:59.521Z",
+  "generatedAt": "2026-11-28T02:35:29.628Z",
   "week": "2026-W48",
   "sourceHealth": {
     "gsc": {
@@ -386037,6 +386037,7 @@
       "limitations": [
         "単一 source (GSC) のみ",
         "過去 title rewrite に effect/none 実績あり — CTR のみを根拠に大量 rewrite しない",
+        "今週の観測では再検出されず (evidence 更新なし) — WIP 追跡のため carry forward",
         "今週の観測では再検出されず (evidence 更新なし) — WIP 追跡のため carry forward",
         "今週の観測では再検出されず (evidence 更新なし) — WIP 追跡のため carry forward",
         "今週の観測では再検出されず (evidence 更新なし) — WIP 追跡のため carry forward"
