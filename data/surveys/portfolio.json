@@ -9,7 +9,7 @@
     "coveragePct": 100,
     "unresolvedByReason": {},
     "uncoveredStatsDataIds": 0,
-    "orphanSurveys": 1,
+    "orphanSurveys": 2,
     "badOverrides": 0
   },
   "surveys": [
@@ -1463,6 +1463,40 @@
             "2026-W46"
           ],
           "rankingOutboundClicks": 3
+        }
+      },
+      "currentHypothesis": null,
+      "evidenceRefs": [],
+      "lastReviewedAt": null,
+      "nextReviewAt": "2026-10-01"
+    },
+    {
+      "surveyId": "electric-power-survey-statistics",
+      "name": "電力調査統計",
+      "organization": "資源エネルギー庁",
+      "lifecycleStatus": "observe",
+      "linkageStatus": "orphan",
+      "editorialStatus": "fallback",
+      "itemCount": 0,
+      "activeItemCount": 0,
+      "liveItemCount": null,
+      "latestDataYear": null,
+      "unresolvedItemCount": null,
+      "orphanStatus": true,
+      "editorialContentExists": false,
+      "readerQuestionCount": null,
+      "relatedArticleCount": null,
+      "gscSnapshotRef": null,
+      "ga4SnapshotRef": null,
+      "metrics": {
+        "gsc": {
+          "status": "insufficient-data"
+        },
+        "ga4": {
+          "status": "insufficient-data"
+        },
+        "internalNav": {
+          "status": "insufficient-data"
         }
       },
       "currentHypothesis": null,

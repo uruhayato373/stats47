@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-28T00:15:15.931Z",
-  "masterSurveyCount": 152,
+  "generatedAt": "2026-11-28T07:32:51.706Z",
+  "masterSurveyCount": 153,
   "ranking": {
     "metrics": 2769,
     "activeMetrics": 2624,
@@ -788,19 +788,13 @@
     "charts": 2297,
     "applicableCharts": 2142,
     "byStatus": {
-      "resolved": 2141,
-      "unresolved": 1,
+      "resolved": 2142,
+      "unresolved": 0,
       "not-applicable": 155,
       "missing-lineage": 0
     },
-    "coveragePct": 99.95,
-    "unresolvedCharts": [
-      {
-        "slug": "cc-estat-14-energy-area-chart",
-        "base": "energy-demand-stacked",
-        "status": "unresolved"
-      }
-    ],
+    "coveragePct": 100,
+    "unresolvedCharts": [],
     "snapshotSchemaVersion": 2,
     "dataSources": {
       "legacySectionArticles": [
@@ -855,8 +849,22 @@
       "sourcelessChartArticles": [],
       "snapshotSourcesMissingArticles": []
     },
-    "snapshotLineageMissingArticles": [],
-    "snapshotIndexMissingArticles": [],
+    "snapshotLineageMissingArticles": [
+      {
+        "slug": "cc-estat-14-energy-area-chart",
+        "surveyIds": [
+          "electric-power-survey-statistics"
+        ]
+      }
+    ],
+    "snapshotIndexMissingArticles": [
+      {
+        "slug": "cc-estat-14-energy-area-chart",
+        "surveyIds": [
+          "electric-power-survey-statistics"
+        ]
+      }
+    ],
     "perSurveyBlogs": {
       "academic-achievement-survey": [
         "academic-achievement-lifestyle-habits",
@@ -1124,6 +1132,9 @@
         "semiconductor-electronics-regional-map",
         "sme-business-sentiment-regional-gap",
         "wholesale-annual-sales-amount-prefecture-gap"
+      ],
+      "electric-power-survey-statistics": [
+        "cc-estat-14-energy-area-chart"
       ],
       "electricity-business-statistics": [
         "cc-estat-14-energy-area-chart",
@@ -2793,6 +2804,14 @@
         "semiconductor-electronics-regional-map",
         "sme-business-sentiment-regional-gap",
         "wholesale-annual-sales-amount-prefecture-gap"
+      ]
+    },
+    {
+      "surveyId": "electric-power-survey-statistics",
+      "rankingCount": 0,
+      "themeKeys": [],
+      "blogSlugs": [
+        "cc-estat-14-energy-area-chart"
       ]
     },
     {

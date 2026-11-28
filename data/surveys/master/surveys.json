@@ -2886,5 +2886,24 @@
     "isActive": true,
     "createdAt": "2026-11-12 00:00:00",
     "updatedAt": "2026-11-12 00:00:00"
+  },
+  {
+    "id": "electric-power-survey-statistics",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": "estat",
+    "name": "電力調査統計",
+    "organization": "資源エネルギー庁",
+    "url": null,
+    "description": null,
+    "attributionText": null,
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 0,
+    "isActive": true,
+    "createdAt": "2026-11-28 00:00:00",
+    "updatedAt": "2026-11-28 00:00:00"
   }
 ]
