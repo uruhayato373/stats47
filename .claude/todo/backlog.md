@@ -25,6 +25,27 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [GSC-COV-SITEMAP-20261128] GSC 是正: sitemap に無い未登録ページ 10 件を sitemap へ載せるか noindex にする
+
+タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261128.txt] [起票:2026-11-28] [領域:サイト]
+
+- **自動起票**: `sync-coverage-backlog.mjs` が是正キュー (`data/gsc/coverage-remediation/coverage-remediation-queue.json`) の pending から作った。対象 URL の一覧は `data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261128.txt`。手順の正典は `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` Phase 4。
+- **対象**:
+  - https://stats47.jp/api/ranking/accessories-consumption-expenditure/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-16)
+  - https://stats47.jp/api/ranking/accessories-consumption-expenditure/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-16)
+  - https://stats47.jp/api/ranking/accident-death-30day/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-15)
+  - https://stats47.jp/api/ranking/accommodation-consumption-expenditure/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-15)
+  - https://stats47.jp/api/ranking/accommodation-consumption-expenditure/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-16)
+  - https://stats47.jp/api/ranking/accountant-annual-income/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-16)
+  - https://stats47.jp/api/ranking/accountant-annual-income/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-16)
+  - https://stats47.jp/api/ranking/actual-income-worker-households-per-month/download?format=geojson&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-15)
+  - https://stats47.jp/api/ranking/actual-overnight-guests/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-16)
+  - https://stats47.jp/api/ranking/adult-sneakers-consumption-expenditure/download?format=kml&basis=original (HTTP 200 / GSC: crawled-not-indexed / sitemap 未掲載 / 最終クロール 2026-11-15)
+- **次**: 200 を返すが sitemap に無く、Google も登録していない。sitemap の生成元 (`apps/web/src/app/sitemap.ts` と参照している config) で除外している理由を読み、`--probe <url>` で本文量を見て、検索に出す価値があれば sitemap へ載せ、薄い・重複なら noindex にする。同じ種類の URL は同じ規則で揃える。
+- **記録**: 直した URL は `node .claude/scripts/gsc/build-coverage-queue.mjs --mark-in-progress <url> --note "<何を変えたか>"`、対応不要と判断した URL は `--mark-by-design <url> --note "<理由>"`。まとめて付けるときは `@data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261128.txt` を渡す。本番反映後は日次の URL Inspection が登録を確かめて done にする。
+- **停止条件**: Indexing API を使わない。本番 deploy・R2 push をしない。判断できない URL は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全 URL が pending でなく、done 以外は理由 note 付き)。
+
 ### [CRITIC-PATTERN-REGION] critic の指摘「地域のくくり」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-11-28] [領域:サイト]
 

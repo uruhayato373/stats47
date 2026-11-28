@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "source": "gsc",
+  "weekId": "2026-W47",
+  "anchor": "2026-11-22",
+  "delayDays": 3,
+  "generatedAt": "2026-11-28T00:55:18.290Z",
+  "finalized7d": {
+    "periodStart": "2026-11-13",
+    "periodEnd": "2026-11-19",
+    "windowDays": 7,
+    "isFinalized": true,
+    "generatedAt": "2026-11-28T00:55:18.290Z",
+    "source": "gsc",
+    "limitations": [
+      "取得遅延 3 日を考慮 (anchor=2026-11-22)",
+      "position は日別 impressions 加重平均 (GSC API の期間集計と ±0.01 程度ずれうる)"
+    ],
+    "kpis": {
+      "clicks": 3401,
+      "impressions": 99473,
+      "ctr": 0.0342,
+      "position": 7.39
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    }
+  },
+  "previous7d": {
+    "periodStart": "2026-11-06",
+    "periodEnd": "2026-11-12",
+    "windowDays": 7,
+    "isFinalized": true,
+    "generatedAt": "2026-11-28T00:55:18.290Z",
+    "source": "gsc",
+    "limitations": [
+      "取得遅延 3 日を考慮 (anchor=2026-11-22)",
+      "position は日別 impressions 加重平均 (GSC API の期間集計と ±0.01 程度ずれうる)"
+    ],
+    "kpis": {
+      "clicks": 5241,
+      "impressions": 208092,
+      "ctr": 0.0252,
+      "position": 7.21
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    }
+  },
+  "rolling28d": {
+    "periodStart": "2026-10-23",
+    "periodEnd": "2026-11-19",
+    "windowDays": 28,
+    "isFinalized": true,
+    "generatedAt": "2026-11-28T00:55:18.290Z",
+    "source": "gsc",
+    "limitations": [
+      "取得遅延 3 日を考慮 (anchor=2026-11-22)",
+      "position は日別 impressions 加重平均 (GSC API の期間集計と ±0.01 程度ずれうる)",
+      "機会発見用。前回 snapshot と 21 日重複するため WoW 比較禁止"
+    ],
+    "kpis": {
+      "clicks": 19196,
+      "impressions": 681779,
+      "ctr": 0.0282,
+      "position": 7.15
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 28,
+      "expectedCount": 28
+    }
+  },
+  "wow": {
+    "clicks": {
+      "delta": -1840,
+      "pct": -35.1
+    },
+    "impressions": {
+      "delta": -108619,
+      "pct": -52.2
+    },
+    "ctr": {
+      "delta": 0.009,
+      "pct": 35.7
+    },
+    "position": {
+      "delta": 0.18,
+      "pct": 2.5
+    }
+  },
+  "wowBlockedReason": null,
+  "details": {
+    "rolling28d": {
+      "periodStart": "2026-10-23",
+      "periodEnd": "2026-11-19",
+      "siteClicks": 19196,
+      "queryClicks": 3693,
+      "pageClicks": 19468,
+      "queryRows": 22661,
+      "pageRows": 8712,
+      "queryCaptureRate": 0.1924,
+      "pageCaptureRate": 1.0142
+    },
+    "finalized7d": {
+      "periodStart": "2026-11-13",
+      "periodEnd": "2026-11-19",
+      "siteClicks": 3401,
+      "queryClicks": 629,
+      "pageClicks": 3443,
+      "queryRows": 8710,
+      "pageRows": 7081,
+      "queryCaptureRate": 0.1849,
+      "pageCaptureRate": 1.0123
+    }
+  }
+}
