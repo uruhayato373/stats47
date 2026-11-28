@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-27",
+  "fetched_at": "2026-11-28T00:38:40.495Z",
+  "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
+  "d1": {
+    "readQueries": 0,
+    "writeQueries": 0,
+    "rowsRead": 0,
+    "rowsWritten": 0,
+    "databases": []
+  },
+  "workers": {
+    "totalRequests": 103537,
+    "totalErrors": 38,
+    "totalSubrequests": 4594,
+    "byScript": {
+      "stats47": {
+        "requests": 103537,
+        "errors": 38,
+        "subrequests": 4594,
+        "cpu_p50_us": 1068,
+        "cpu_p99_us": 2290026,
+        "wall_p50_us": 651008,
+        "wall_p99_us": 9411700
+      }
+    },
+    "totalCpuTimeUs": 21174170014,
+    "cpuTimeError": null
+  },
+  "r2_operations": {
+    "classA": 12792,
+    "classB": 501633,
+    "otherOps": 0,
+    "totalEgressBytes": 91805287244,
+    "byBucket": {
+      "doboku-note-archive": {
+        "classA": 20,
+        "classB": 2489,
+        "other": 0,
+        "egressBytes": 1798801750
+      },
+      "stats47": {
+        "classA": 12766,
+        "classB": 489018,
+        "other": 0,
+        "egressBytes": 89718939184
+      },
+      "stats47-private": {
+        "classA": 6,
+        "classB": 20,
+        "other": 0,
+        "egressBytes": 2639619
+      },
+      "doboku-note": {
+        "classA": 0,
+        "classB": 10106,
+        "other": 0,
+        "egressBytes": 284906691
+      }
+    }
+  },
+  "r2_storage": {
+    "totalBytes": 87160145230,
+    "totalObjects": 202906,
+    "byBucket": {
+      "stats47-private": {
+        "bytes": 7966499261,
+        "objects": 35536,
+        "uploads": 0
+      },
+      "stats47": {
+        "bytes": 68217978098,
+        "objects": 146609,
+        "uploads": 0
+      },
+      "doboku-note": {
+        "bytes": 1990746588,
+        "objects": 16282,
+        "uploads": 0
+      },
+      "stats47-cache": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      },
+      "doboku-note-archive": {
+        "bytes": 8984921283,
+        "objects": 4479,
+        "uploads": 0
+      }
+    }
+  },
+  "googlebot": {
+    "status": "unavailable",
+    "reason": "GraphQL error: [{\"message\":\"Actor 'com.cloudflare.api.token.e2eb322c6ca11a0db09b74ea50a83720' does not have permission 'com.cloudflare.api.account.zone.analytics.read' for zone 4caf2866b609a964805ec6a78298ca24\",\"path\":null,\"extensions\":{\"code\":\"authz\",\"timestamp\":\"2026-11-28T00:38:39.529759572Z\",\"ra"
+  },
+  "routeCpu": {
+    "status": "unavailable",
+    "reason": "telemetry query total: HTTP 403 [{\"message\":\"Forbidden\"}]"
+  }
+}
