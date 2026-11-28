@@ -25,6 +25,15 @@ updated: 2026-11-01
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [AFFILIATE-MEASUREMENT-GATE-A8-01] アフィリエイト計測ゲートが A8 の当月成果の欠けと突合不足で止まっている (#1207)
+
+タグ: [アフィリエイト] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/management/check-alert-triage.mjs] [起票:2026-11-28] [領域:アフィリエイト]
+
+- **事象**: 自動アラート #1207 (2026-11-01 起票、11-24 更新) の measurement gate が failure。outcome・portfolio・pilot の全段が `a8-cross-check-shortfall` と `a8-results-month-missing` で blocked。2026-11-28 時点の `data/affiliate/a8-results.json` の月は 2026-08・09・10 だけで、2026-11 の行が無い (updatedAt 2026-11-20T22:35Z)。
+- **判定箇所**: `packages/ops/src/ads/lib/a8-report-period-core.mjs` の 148 行 (`reportLog.crossCheck.hasShortfall`) と 154 行 (当月の結果が無い)。
+- **次**: ① `data/affiliate/a8-report-log.json` の `crossCheck` を読み、不足が収集の取りこぼしか、月替わり直後で当月の行がまだ無いだけかを切り分ける ② 当月の行が無いのが仕様 (成果 0 の月は行を作らない等) なら、ゲートが「当月 0 件」と「当月未取得」を区別するよう直す ③ 取りこぼしなら `a8-report-collector` の収集範囲を直す。
+- **完了条件**: 次の affiliate measurement の run で measurement gate が success になるか、blocked の理由が実測で説明できる別の理由に変わり、#1207 が閉じる。
+
 ### [GSC-COV-SITEMAP-20261128] GSC 是正: sitemap に無い未登録ページ 10 件を sitemap へ載せるか noindex にする
 
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --assert-handled data/gsc/coverage-remediation/backlog-batches/GSC-COV-SITEMAP-20261128.txt] [起票:2026-11-28] [領域:サイト]
@@ -1775,6 +1784,7 @@ updated: 2026-11-01
 - **UI-FIX-BLOG-ARTICLE-20261011 から受けた 3 件 (2026-11-24・週次 UI の指摘の owner)**: ① 2050 年の Geo 記事の本文に出る運用用語「保存則」を読者向けの言葉にする ② child-height-regional-gap の図のデータの欠け ③ cc-estat-04-aging-heatmap の図の文字。どれも R2 の article.md の改稿と再公開が要る。
 - **進捗 (2026-11-25・c0e99dfd1)**: `article-factual-check` の誤検知 2 点 (複数県の列挙・過去年の順位) を直し、本当の誤りを検出するテストも足した (63 件通過)。残り: 別指標の順位の誤検知 (「漁獲量4位の東京都は…19位」)、quality-gate の VALUE_MISMATCH の別年・別指標、リンク検査の穴。
 - **進捗 (2026-11-25・b8624d157)**: 1 文の 2 つ目の指標の順位を対象指標の順位と取り違える誤検知 (「漁獲量4位の東京都は…19位」) を直した (detection テスト 65 件通過)。残り: quality-gate の VALUE_MISMATCH の別年・別指標、リンク検査の穴。
+- **追補 (2026-11-28・W47 週次レビューで見つけた分)**: ① 施策 `BLOG-WAVE-2026-11-16-manual` に `[target: ±N 単位]` が無く、audit-operations-cycle の effect-target-ratchet が FAIL する。想定効果を根拠つきで書くか、target を持たない施策として扱う ② 週次監査 survey-taxonomy でブログの未解決が 1 件 (`energy-demand-stacked`) 残る。記事を調査に紐付けるか、対象外にする。
 
 ### [CI-TOOLING-FOLLOWUP-02] CI と検査の道具に残る穴 (第 3 波の実行で見つけた分)
 タグ: [インフラ・計測] [種類:改善] [実行:sweep] [起票:2026-11-14] [待ち:承認]
@@ -1831,6 +1841,7 @@ updated: 2026-11-01
 - **完了条件**: 前提が `skill-code-placement.md` か skills の README に 1 段落で書かれ、8 本と重なる組の残す・統合・削除が決まって反映された。
 - **オーナー決定 (2026-11-24)**: 推奨どおり 「Read する文書」の前提を明文化する (平坦にして登録しない) を採る (判断待ちのカードは推奨どおりで進めてよいとの指示)。次: skill-code-placement.md か skills の README に前提を 1 段落書き、8 本と重なる組の残す・統合・削除を洗う
 - **進捗 (2026-11-24・0d40b31fb)**: 前提の段落 (skill は Skill ツールに登録しない「Read する手順書」) を `skill-code-placement.md` に書いた。残りの「使われていない 8 本」はカードに名前が無く、静的な参照が 0 本なのは `dev/strategic-compact` と `ges/render-ges-ports` の 2 本だけ。`/名前` で呼ぶ使い方は参照に残らないので、消してよい証拠にならない。どれを消すかを決める。
+- **追補 (2026-11-28・W47 週次レビューで見つけた分)**: ① `fetch-metrics-weekly` run 46085381744 の job「GSC URL Inspection」は、step「💾 Commit results」の rebase が `could not apply 8e6bbbd9... chore(gsc): URL Inspection daily snapshot 2026-11-28` で衝突して落ちた (fetch・PSI は成功)。同じ run の別 job の commit と同じファイルを書いていないかを確かめ、衝突しない書き戻しにする ② `refresh-measurement-cycle.sh` の google-admin audit-api が `property-assert:credentials-missing` で非 0 終了し、GA4 設定監査 (`data/google-admin/audits/2026-W47.json`) が読めない。この Mac で使う認証情報の置き場を確かめる ③ `AD-LAYOUT-WEEKLY-CAPTURE-01` は `.claude/todo/annual.md` 280 行にあり `backlog:waits` にも出るが、`check-review-cadence.mjs` の `loadIdIndex` (parseAnnual) が ID として拾わず、レビューの振り分け先に使えない。
 
 ### [WEB-PUBLIC-UNUSED-ASSETS-01] apps/web/public に、参照の無い土木の画像 19 枚 (36.3MB) がデプロイのたびに送られている
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-11-22] [領域:サイト]

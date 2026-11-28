@@ -5,8 +5,8 @@
 | 入力 | 状態 |
 |---|---|
 | ga4 | ok（transitions=ok landing=ok events=ok pages-clean=ok） |
-| customDimensions | ok（登録済み 36 件） |
-| ga4Settings | ok（keyEvents=affiliate_click|contact_click|cta_click|file_download|product_click|purchase bigQueryLinks=1 warnings=none） |
+| customDimensions | unreadable（customDimensions を読めない） |
+| ga4Settings | missing（audit に settings が無い） |
 | improvements | ok（active 11 件） |
 | effectVerdicts | ok（verdicts-2026-W47.json） |
 
@@ -63,14 +63,11 @@
 - `/blog/rice-harvest-volume-prefecture-gap` — 135 セッション・PC 81.5%・平日業務時間 69.4%
 - `/ranking` — 107 セッション・PC 95.3%・平日業務時間 64.0%
 
-**未登録の custom dimension**（0 パラメータ。登録はオーナー作業・遡及しない）
-
-
 **GA4 の設定の変化**（比較元: 2026-W46。意図しない変化と問題はバックログへ起票する）
 
-- custom dimension: 変化なし
-- キーイベント: 変化なし
-- 監査の問題: なし
+- custom dimension: 比べられない (どちらかの週の監査で読めていない)
+- キーイベント: 比べられない (どちらかの週の監査で読めていない)
+- 監査の問題: property-assert:credentials-missing / stream-host:missing / gsc-property:present=null / custom-dimensions-unreadable:missing
 
 **効果判定エンジン**（2026-W47）: gsc-blog-wave 1 件 {"effect/pending":1} / adsense 1 件 {"effect/pending":1}
 

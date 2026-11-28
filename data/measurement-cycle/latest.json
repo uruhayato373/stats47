@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W47",
   "asOf": "2026-11-22",
-  "generatedAt": "2026-11-28T00:58:20.975Z",
+  "generatedAt": "2026-11-28T01:01:22.528Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -11,13 +11,12 @@
       "detail": "transitions=ok landing=ok events=ok pages-clean=ok"
     },
     "customDimensions": {
-      "status": "ok",
-      "detail": "登録済み 36 件"
+      "status": "unreadable",
+      "detail": "customDimensions を読めない"
     },
     "ga4Settings": {
-      "status": "ok",
-      "detail": "keyEvents=affiliate_click|contact_click|cta_click|file_download|product_click|purchase bigQueryLinks=1 warnings=none",
-      "warnings": []
+      "status": "missing",
+      "detail": "audit に settings が無い"
     },
     "improvements": {
       "status": "ok",
@@ -556,21 +555,17 @@
       }
     ]
   },
-  "dimensionGaps": {
-    "absentParams": 0,
-    "groups": []
-  },
+  "dimensionGaps": null,
   "adminAudit": {
     "previousWeek": "2026-W46",
-    "customDimensions": {
-      "added": [],
-      "removed": []
-    },
-    "keyEvents": {
-      "added": [],
-      "removed": []
-    },
-    "problems": []
+    "customDimensions": null,
+    "keyEvents": null,
+    "problems": [
+      "property-assert:credentials-missing",
+      "stream-host:missing",
+      "gsc-property:present=null",
+      "custom-dimensions-unreadable:missing"
+    ]
   },
   "improvements": {
     "active": 11,
