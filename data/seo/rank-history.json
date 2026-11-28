@@ -310,6 +310,11 @@
       "date": "2026-11-25",
       "file": "data/seo/rank-history/2026-11-25.json",
       "sha256": "e28381f939daa58f5383f3c9314e56d8329be32bfa7f6772493805de9ead1114"
+    },
+    {
+      "date": "2026-11-28",
+      "file": "data/seo/rank-history/2026-11-28.json",
+      "sha256": "8df63449c5b6f4318a20d5f52d9b333b4971e602dac6efbc3b05f8580f0248f0"
     }
   ]
 }
