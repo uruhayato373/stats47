@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-28T07:32:51.706Z",
+  "generatedAt": "2026-11-28T07:49:50.421Z",
   "masterSurveyCount": 153,
   "ranking": {
     "metrics": 2769,
@@ -849,22 +849,8 @@
       "sourcelessChartArticles": [],
       "snapshotSourcesMissingArticles": []
     },
-    "snapshotLineageMissingArticles": [
-      {
-        "slug": "cc-estat-14-energy-area-chart",
-        "surveyIds": [
-          "electric-power-survey-statistics"
-        ]
-      }
-    ],
-    "snapshotIndexMissingArticles": [
-      {
-        "slug": "cc-estat-14-energy-area-chart",
-        "surveyIds": [
-          "electric-power-survey-statistics"
-        ]
-      }
-    ],
+    "snapshotLineageMissingArticles": [],
+    "snapshotIndexMissingArticles": [],
     "perSurveyBlogs": {
       "academic-achievement-survey": [
         "academic-achievement-lifestyle-habits",
